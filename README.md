@@ -1,2 +1,2 @@
-# azaria-mod
+# Azaria-Mod
 Added more new content
