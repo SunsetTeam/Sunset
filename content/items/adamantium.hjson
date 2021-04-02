@@ -1,0 +1,7 @@
+type: item
+name: Adamantium
+description: Very strong metal
+hardness: 5
+cost: 2
+color: FA4747FF
+research: cesium

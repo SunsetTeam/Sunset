@@ -1,0 +1,88 @@
+name: Vyzron
+description: Shots laser and heal him
+type: naval
+health: 890
+speed: 0.8
+drag: 0.2
+hitSize: 26
+armor: 5
+accel: 0.3
+rotateSpeed: 1.7
+buildSpeed: 1.9
+rotateShooting: false
+trailLength: 46
+trailX: 10
+trailY: -10
+trailScl: 2.9
+weapons: [
+{
+ name: vyzron-weapon
+   reload: 100
+    rotate: true
+    mirror: false
+    inaccuracy: 3
+    rotateSpeed: 1.0
+    x: 0
+    y: -7
+    shootSound: laser
+    alternate: false
+    bullet: {
+    type: LaserBulletType
+    length: 180
+    damage: 30
+    width: 30
+    lifeTime: 100
+    shootSound: laser
+    healPercent: 10
+    collidesTeam: true
+    recoil: 0.3
+    colors: [
+      98ffa9, 98ffa9, ffffff
+]
+}
+}
+{
+ name: vyzin-weapon2
+  x: 7.0
+  y: 5
+  reload: 12
+  ejectEffect: none
+  recoil: 0
+  rotate: true
+  mriror: true
+  alternate: true
+  shootSound: missile
+  bullet: {
+    type: MissileBulletType
+    homingPower: 1.0
+    weaveMag: 4
+    weaveScale: 3
+    keepVelocity: true
+    shootEffect: shootHeal
+    smokeEffect: hitLaser
+    hitEffect: none
+    damage: 30
+    speed: 3
+    width: 9
+    height: 15
+    lifetime: 80
+    frontColor: 98ffa9
+    backColor: ffffff
+    color: 98ffa9
+    trailColor: ffffff
+    healPercent: 10
+    collidesTeam: true
+    hitSound: none
+}
+}
+]
+abilities: [ 
+{
+ type: "mindustry.entities.abilities.ForceFieldAbility"
+radius: 100
+regen: 3
+max: 500
+cooldown: 1200
+}
+]
+research: vyzin

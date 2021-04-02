@@ -1,0 +1,10 @@
+type: item
+name: Crimslex
+description: A rare mineral
+hardness: 4
+cost: 3
+flammability: 0.1
+explosiveness: 0
+radioactivity: 0
+color: A71414FF
+research: cesium

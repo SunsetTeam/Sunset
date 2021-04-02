@@ -1,0 +1,73 @@
+type: mech
+name: Cryzlys
+description: Shots rockets and artillery
+speed: 0.55
+drag: 0.005
+hitSize: 30
+rotateSpeed: 2.5
+health: 800
+armor: 5
+mechFrontSway: 0.1
+weapons: [
+  {
+    name: cryzlys-weapon
+    reload: 40
+    rotate: true
+    mirror: true
+    rotateSpeed: 0.9
+    inaccuracy: 10
+    x: -15
+    y: -4
+    shootSound: laser
+    alternate: true
+    bullet: {
+    type: LaserBulletType
+    damage: 30
+    lifeTime: 40
+    sideAngle: 45
+    sideWidth: 1
+    sideLength: 70
+    colors: [
+      f0e4a864, B755C4FF, ffffff
+      ]
+    }
+  }
+  {
+  name: cryzlys-weapon2
+  reload: 70
+  ejectEffect: none
+  recoil: 1
+  shots: 4
+  shotDelay: 7
+  inaccuracy: 4
+  x:  0
+  y: -3
+  ejectEffect: none
+  recoil: 1
+  rotate: true
+  mirror: false
+  shootSound: missile
+  bullet: {
+    type: MissleBulletType
+    damage: 25
+    speed: 3
+    rotateSpeed: 0.50
+    width: 10
+    height: 15
+    shootEffect: shootSmall
+    splashDamageRadius: 30
+    splashDamage: 22
+    hitEffect: blastExplosion
+    despawnEffect: blastExplosion
+    trailColor: 772AB1FF
+    backColor: ffffff
+    frontColor: BF97CFFF
+    despawnEffect: none
+    lifetime: 90
+    knockback: 1.3
+    weaveMag: 5
+    weaveScale: 4
+}
+}
+]
+research: crystol

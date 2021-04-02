@@ -1,0 +1,44 @@
+type: flying
+name: Fures Copter
+health: 700
+accel: 0.06
+drag: 0.007
+speed: 2.0
+flying: true
+lowAltitude: true
+rotateShooting: true
+faceTarget: true
+circleTarget: false
+visualElevation: 0.30
+rotateSpeed: 3.6
+hitSize: 28
+engineSize: 0
+armor: 3
+commandLimit: 4
+weapons: [
+{
+    name: fures_copter-weapon
+    reload: 5
+    rotate: false
+    mirror: true
+    inaccuracy: 3
+    x: 3
+    y: 5
+    shootSound: boom
+    alternate: false
+    bullet: {
+    type: BasicBulletType
+    damage: 18
+    speed: 5
+    width: 8
+    height: 14
+    splashDamageRadius: 6
+    splashDamage: 1
+    shootEffect: shootSmall
+    smokeEffect: hitBulletBig
+    backColor: FEB380
+	frontColor: EA8878
+    lifetime: 59
+    }
+    }
+]

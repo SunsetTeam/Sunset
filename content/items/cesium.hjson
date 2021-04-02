@@ -1,0 +1,10 @@
+type: item
+name: Cesium
+description: A highly explosive mineral
+hardness: 3
+cost: 3
+flammability: 0
+explosiveness: 1
+radioactivity: 0
+color: 4B2803FF
+research: cobalt

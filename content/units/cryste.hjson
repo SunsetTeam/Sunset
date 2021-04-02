@@ -1,0 +1,37 @@
+type: mech
+name: Cryste
+description: A small unit
+speed: 0.88
+drag: 0.002
+hitSize: 10
+rotateSpeed: 8.4
+health: 140
+armor: 2
+mechFrontSway: 0.1
+weapons: [
+  {
+    name: cryste-weapon
+    reload: 20
+    rotate: true
+    mirror: true
+    altarnate: true
+    inaccuracy: 10
+    x: -1
+    y: -1
+    shootSound: pew
+    alternate: true
+    bullet: {
+      type: BasicBulletType
+      damage: 13
+      speed: 2
+      width: 10
+      height: 10
+      splashDamageRadius: 10
+      splashDamage: 2
+      backColor: ffffff
+	  frontColor: B755C4FF
+      lifetime: 50
+    }
+  }
+]
+research: crystal-factory

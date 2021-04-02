@@ -1,0 +1,100 @@
+type: naval
+name: Wongry
+description: -
+health: 22000
+speed: 0.6
+accel: 0.12
+rotateSpeed: 1.0
+drag: 0.2
+hitSize: 56
+armor: 8
+buildSpeed: 4.5
+rotateShooting: false
+trailLength: 43
+trailX: 26
+trailY: 24
+trailScl: 0.8
+weapons: [
+{
+    name: wongry-weapon
+    reload: 30
+    x: 18
+    y: 24
+    shadow: 7
+    rotateSpeed: 0.8
+    rotate: true
+    mirror: true
+    alternate: true
+    shots: 2
+    shotDelay: 4
+    inaccuracy: 1.2
+    shootSound: boom
+    bullet: {
+    type: BasicBulletType
+    width: 18
+    height: 25
+    shrinkY: 0.3
+    speed: 6
+    hitShake: 5
+    splashDamageRadius: 15
+    splashDamage: 30
+    hitEffect: blastExplosion
+    despawnEffect: blastExplosion
+    lightningDamage: 10
+    lightning: 4
+    healPercent: 17
+    collidesTeam: true
+    lightningLength: 10
+    lightningColor: 98ffa9
+    makeFire: true
+    hitEffect: blastExplosion
+    status: burning
+    lifetime: 90
+    trailColor: ffffff
+    backColor: ffffff
+    frontColor: 98ffa9
+}
+}
+{
+  	name: wongry-weapon2
+    x: 0
+    y: -27
+    shootY: -3
+    reload: 125
+    recoil: 5
+    rotate : true
+    mirror: false
+    rotateSpeed: 0.5
+    shootSound: rail
+    alternate: true
+  	bullet: {
+    type: RailBulletType
+    shootEffect: instShoot
+    length: 300
+    updateEffectSeg: 60
+    pierceEffect: instHit
+	hitEffect: instHit
+    updateEffect: instTrail
+	trailEffect: instTrail
+    hitEffect: massiveExplosion
+    smokeEffect: shootBig2
+    damage: 1250
+    healPercent: 20
+    collidesTeam: true
+    pierceDamageFactor: 0.5
+    despawnEffect: instBomb
+    buildingDamageMultiplier: 0.4
+    speed: 1
+    hitShake: 7
+}
+}
+]
+ abilities: [ 
+{
+type: "mindustry.entities.abilities.RepairFieldAbility"
+range: 400
+amount: 1000
+reload: 500
+}
+]
+research: wendry

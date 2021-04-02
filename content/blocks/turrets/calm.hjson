@@ -1,0 +1,74 @@
+type: ItemTurret
+name: Calm
+rotateSpeed: 3.0
+reloadTime: 150
+restitution: 0.2
+ammoUseEffect: casing4
+recoilAmount: 0.5
+cooldown: 0.009
+shootShake: 4
+shots: 1
+maxAmmo: 5
+size: 3
+range: 390
+shootCone: 2
+shootSound: railshoot1
+health: 1900
+powerUse: 7.8
+liquidBoostIntensity: 0.2
+ammoTypes: {
+    adamantium: {
+    type: PointBulletType
+    shootEffect: sparkShoot
+    hitEffect: pointHit
+    smokeEffect: smokeCloud
+    beamEffect: beamPoint
+    trailEffect: instTrail
+    despawnEffect: instBomb
+    trailSpacing: 20
+    damage: 500
+    tileDamageMultiplier: 0.6
+    speed: 500
+    hitShake: 6
+    ammoMultiplier: 2
+  }
+  crimslex: {
+    type: PointBulletType
+    shootEffect: instShoot
+    hitEffect: instHit
+    smokeEffect: smokeCloud
+    trailEffect: instTrail
+    despawnEffect: instBomb
+    trailSpacing: 20
+    damage: 350
+    tileDamageMultiplier: 0.6
+    speed: 500
+    hitShake: 6
+    ammoMultiplier: 1
+}
+}
+consumes: {
+power: 4
+}
+requirements: [
+	cobalt/300
+	silicon/200
+	graphite/170
+	titanium/400
+	thorium/100
+	crimslex/100
+	adamantium/20
+]
+category: turret
+research: {
+  parent: blastex
+  requirements: [
+    cobalt/3000
+    silicon/2000
+    graphite/1500
+    titanium/4000
+    thorium/1000
+    crimslex/1000
+    adamantium/200
+  ]
+}

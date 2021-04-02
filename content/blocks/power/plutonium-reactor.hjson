@@ -1,0 +1,44 @@
+type: ImpactReactor
+name: Plutonium Reactor
+description: Atomic fission and collision reactor.Need Plutonium and Liquid cryofluid
+size: 5
+explosionRadius: 45
+explosionDamage: 3500
+hasPower: true
+hasLiquids: true
+hasItems: true
+itemCapacity: 30
+liquidCapacity: 30
+itemDuration: 90
+powerProduction: 296
+consumes: {
+ power: 11
+ liquid: cryofluid/0.5
+  items: {
+   items: [
+    plutonium/1
+    ]
+  }
+}
+requirements: [
+  metaglass/500
+  cobalt/700
+  silicon/400
+  cesium/200
+  surge-alloy/200
+  thorium/300
+  plastanium/200
+]
+category: power
+research: {
+  parent: uranium-reactor
+  requirements: [
+    metaglass/2300
+    plastanium/1750
+    surge-alloy/1200
+    cesium/2010
+    thorium/3000
+    cobalt/6000
+    silicon/5000
+  ]
+}

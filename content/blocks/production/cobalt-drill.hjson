@@ -1,0 +1,26 @@
+name: Cobalt Drill
+description: -
+type: Drill
+size: 3
+drillTime: 300
+tier: 4
+consumes: {
+power: 0.9
+}
+rotateSpeed: 2
+requirements: [
+	titanium/30
+	cobalt/35
+	silicon/ 20
+	graphite/20
+]
+category: production
+research: {
+  parent: titanium-drill
+  requirements: [
+    cobalt/1400
+    graphite/1100
+    titanium/1200
+    silicon/1300
+  ]
+}

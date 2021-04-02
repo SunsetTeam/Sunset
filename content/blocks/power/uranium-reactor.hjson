@@ -1,0 +1,46 @@
+type: NuclearReactor
+name: Uranium Reactor
+description: Upgraded Thorium Reactor
+size: 3
+hasPower: true
+hasLiquids: true
+hasItems: true
+itemCapacity: 30
+liquidCapacity: 30
+itemDuration: 100
+powerProduction: 80
+heating: 0.07
+smokeThreshold: 0.46
+explosionRadius: 90
+explosionDamage: 1900
+flashThreshold: 0.32 
+coolantPower: 0.7
+consumes: {
+ power: 3
+ liquid: cryofluid/0.1
+  items: {
+   items: [
+    purified-uranium/3
+    ]
+  }
+}
+requirements: [
+  metaglass/300
+  graphite/100
+  silicon/210
+  cobalt/270
+  thorium/200
+  titanium/140
+]
+category: power
+research: {
+  parent: thorium-reactor
+  requirements: [
+    cobalt/2800
+    graphite/1200
+    silicon/2400
+    thorium/2100
+    titanium/1600
+    metaglass/3400
+  ]
+}

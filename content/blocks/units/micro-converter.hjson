@@ -1,0 +1,32 @@
+name: Micro Converter
+type: Reconstructor
+size: 3
+consumes: {
+  power: 3.5
+  items: {
+    items: [
+    silicon/35
+    cobalt/15
+    cesium/20
+    titanium/20
+    ]
+  }
+}
+constructTime: 900
+requirements: [
+  copper/200
+  lead/100
+  titanium/120
+  silicon/90
+  cobalt/80
+]
+upgrades: [
+  [
+    vexy, vyzin
+  ]
+  [
+    cryste, crystol
+  ]
+]
+category: units
+research: additive-reconstructor

@@ -1,0 +1,92 @@
+type: flying
+name: Shyreng Copter
+health: 21000
+accel: 0.15
+drag: 0.007
+speed: 0.7
+flying: true
+lowAltitude: true
+rotateShooting: true
+visualElevation: 0.30
+rotateSpeed: 1.0
+hitSize: 75
+engineSize: 0
+range: 100
+armor: 6
+commandLimit: 3
+weapons: [
+{
+    name: shyreng_copter-weapon
+    rotate: false
+    mirror: true
+    inaccuracy: 8
+    x: 38
+    y: 0
+    shootY: -1
+    shootCone: 90
+    reload: 70
+    shootDelay: 20
+    shots: 4
+    shootSound: missile
+    ejectEffect: casing2Double
+    recoil: 2.5
+    bullet: {
+    type: MissileBulletType
+    damage: 200
+    splashDamage: 30
+    splashDamageRadius: 20
+    height: 34
+    width: 13
+    speed: 5
+    lifetime: 125
+    status: burning
+    statusDuration: 360
+    pierce: false
+    homingPower: 0.7
+    homingRange: 90
+    hitShake: 3
+    frontColor: FEB380
+    backColor: EA8878
+    hitEffect: plasticExplosion
+    shootEffect: shootBig2
+    smokeEffect: hitBulletBig
+    weaveScale: 20
+    magScale: 4
+} 
+}
+{
+    name: shyreng_copter-weapon2
+    rotate: false
+    mirror: true
+    inaccuracy: 0
+    x: 5
+    y: 35
+    shootY: -1
+    shootCone: 90
+    reload: 8
+    shootDelay: 0
+    shots: 1
+    shootSound: boom
+    ejectEffect: casing2Double
+    recoil: 2.5
+    bullet: {
+    type: BasicBulletType
+    damage: 37
+    splashDamage: 30
+    splashDamageRadius: 20
+    height: 25
+    width: 14
+    speed: 5
+    lifetime: 91
+    status: burning
+    statusDuration: 360
+    pierce: false
+    hitShake: 3
+    frontColor: FEB380
+    backColor: EA8878
+    hitEffect: plasticExplosion
+    shootEffect: shootBig2
+    smokeEffect: hitBulletBig
+} 
+}
+]

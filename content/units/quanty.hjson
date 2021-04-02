@@ -1,0 +1,16 @@
+type: flying
+name: Quanty
+controller: MinerAI
+speed: 3
+accel: 0.08
+drag: 0.01
+rotateSpeed: 5.0
+accel: 0.2
+flying: true
+engineOffset: 5.5
+mineTier: 1
+mineSpeed: 1.6
+lowAltitude: true
+payloadCapacity: 20
+visualElevation: 0.20
+weapons: []

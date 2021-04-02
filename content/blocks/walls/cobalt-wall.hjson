@@ -1,0 +1,10 @@
+name: Cobalt Wall
+description: A little better than Titanium Wall
+type: Wall
+health: 550
+size: 1
+requirements: [
+  cobalt/6
+]
+category: defense
+research: titanium-wall

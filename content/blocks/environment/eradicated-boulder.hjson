@@ -1,0 +1,6 @@
+name: Eradicated Boulder
+type: Boulder
+breakable: true
+alwaysReplace: false
+solid: false
+variants: 2

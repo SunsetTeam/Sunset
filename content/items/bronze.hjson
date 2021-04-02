@@ -1,0 +1,8 @@
+type: item
+name: Bronze
+description: Coopper and Lead 
+flammability: 0
+explosiveness: 0
+radioactivity: 0
+color: CD7E1DFF
+research: metaglass

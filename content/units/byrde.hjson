@@ -1,0 +1,18 @@
+type: legs
+name: Byrde
+itemCapacity: 35
+speed: 0.4
+drag: 0.4
+hitSize: 14
+rotateSpeed: 3.0
+health: 350
+immunities: [
+  burning, freezing
+  ]
+legCount: 4
+legLength: 8
+armor: 3
+buildSpeed: 0.5
+allowLegStep: true
+visualElevation: 0.5
+weapons: []

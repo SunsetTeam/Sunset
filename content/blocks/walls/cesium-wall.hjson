@@ -1,0 +1,11 @@
+name: Cesium Wall
+description: A little better than Cobalt Wall
+type: Wall
+health: 700
+size: 1
+requirements: [
+  cesium/6
+  metaglass/2
+]
+category: defense
+research: cobalt-wall

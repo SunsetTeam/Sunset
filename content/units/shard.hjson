@@ -1,0 +1,97 @@
+type: legs
+name: Shard
+description: A giant unit with 6 legs
+speed: 0.40
+drag: 0.007
+hitSize: 40
+hovering: true
+rotateSpeed: 1.0
+health: 9000
+armor: 6
+canBoost: false
+commandLimit: 8
+legCount: 6
+legLength: 20
+allowLegStep: true
+visualElevation: 1.3
+mechStepShake: 1.0
+mechStepParticles: true
+weapons: [
+{
+
+name: shard-weapon
+  reload: 20
+  rotate: true
+  x: 11
+  y: 7
+  shots: 3
+  shootSound: sap
+  alternate: true
+  mirror: true
+  bullet: {
+    type: SapBulletType
+    sapStrength: 0.5
+    length: 230
+    damage: 40
+    shootEffect: shootSmall
+    hitColor: A76DBEFF
+    color: BF97CFFF
+    despawnEffect: none
+    width: 1.5
+    lifetime: 25
+    knockback: -0.65
+
+}
+}
+{
+
+name: shard-weapon2
+  reload: 20
+  rotate: true
+  x: -11
+  y: -7
+  shots: 3
+  alternate: true
+  shootSound: sap
+  mirror: true
+  bullet: {
+    type: SapBulletType
+    sapStrength: 0.5
+    length: 230
+    damage: 40
+    shootEffect: shootSmall
+    hitColor: A76DBEFF
+    color: BF97CFFF
+    despawnEffect: none
+    width: 1.5
+    lifetime: 25
+    knockback: -0.65
+}
+}
+{
+
+   name: shard-weapon3
+    reload: 120
+    rotate: false
+    mirror: false
+    inaccuracy: 3
+    x: 0
+    y: -6
+    shootSound: laser
+    alternate: false
+    bullet: {
+    type: LaserBulletType
+    damage: 195
+    length: 400
+    width: 40
+    lifeTime: 70
+    chargeTime: 120
+    shootSound: laser
+    recoil: 1
+    colors: [
+      f0e4a864, B755C4FF, ffffff
+      ]
+}
+}
+]
+research: cryzlys

@@ -1,0 +1,88 @@
+name: Vyzin
+description: First naval unit,but wants a support
+type: naval
+health: 500
+speed: 1.0
+drag: 0.2
+hitSize: 16
+armor: 3
+accel: 0.3
+rotateSpeed: 2.0
+buildSpeed: 1
+rotateShooting: false
+trailLength: 35
+trailX: 8
+trailY: -7
+trailScl: 2.3
+weapons: [
+{
+ name: vyzin-weapon
+  x: 3
+  y: 6
+  reload: 8
+  ejectEffect: none
+  recoil: 0
+  rotate: true
+  mriror: true
+  alternate: true
+  shootSound: lasershoot
+  bullet: {
+    type: LaserBoltBulletType
+    damage: 10
+    speed: 4
+    width: 2
+    height: 5
+    lifetime: 40
+    pierce: true
+    pierceBuilding: true
+    pierceCap: 2
+    frontColor: 98ffa9
+    backColor: ffffff
+    healPercent: 0.5
+    collidesTeam: true
+}
+}
+{
+ name: vyzin-weapon2
+  x: 5.5
+  y: -4
+  reload: 12
+  ejectEffect: none
+  recoil: 0
+  rotate: true
+  mriror: true
+  alternate: true
+  shootSound: missile
+  bullet: {
+    type: MissileBulletType
+    homingPower: 0.3
+    weaveMag: 5
+    weaveScale: 5
+    keepVelocity: true
+    shootEffect: shootHeal
+    smokeEffect: hitLaser
+    hitEffect: none
+    damage: 20
+    speed: 3
+    width: 7
+    height: 12
+    lifetime: 60
+    frontColor: 98ffa9
+    backColor: ffffff
+    color: 98ffa9
+    trailColor: ffffff
+    healPercent: 1.8
+    collidesTeam: true
+    hitSound: none
+}
+}
+]
+abilities: [
+{
+type: "mindustry.entities.abilities.RepairFieldAbility"
+range: 120
+amount: 25
+reload: 120
+}
+]
+research: vexy

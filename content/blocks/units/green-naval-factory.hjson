@@ -1,0 +1,27 @@
+name: Green Naval Factory
+type: UnitFactory
+size: 3
+consumes: {
+  power: 2.2
+}
+plans: [
+  {
+    unit: vexy
+    requirements: [
+      silicon/15
+      cobalt/5
+      lead/5
+      metaglass/20
+    ] 
+    time: 530
+  }
+]
+requirements: [
+  copper/50
+  metaglass/150
+  lead/70
+  silicon/70
+  cobalt/40
+]
+category: units
+research: naval-factory

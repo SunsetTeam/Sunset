@@ -1,0 +1,37 @@
+type: PowerTurret
+name: Static
+description: Shoot Lighting
+size: 2
+health: 960
+reloadTime: 30
+range: 120
+shots: 2
+shootSound: spark
+shootCone: 180
+restitution: 0.1
+shootEffect: lightningShoot
+powerUse: 2
+targetAir: true 
+targetGround: false
+shootShake: 2
+shootType: {
+type: LightningBulletType
+damage: 20
+lightningLengtht: 36
+	}
+requirements: [
+	cobalt/100
+	silicon/40
+	titanium/60
+	graphite/50
+]
+category: turret
+research: {
+  parent: stenger
+  requirements: [
+    cobalt/1350
+    silicon/1240
+    graphite/1100
+    titanium/1300
+  ]
+}
