@@ -1,6 +1,0 @@
-type: StaticWall
-name: Crimson Dirt Wall
-breakable: false
-alwaysReplace: false
-solid: true
-variants: 2
