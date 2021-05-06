@@ -1,5 +1,5 @@
-# Sunset-Mod
-// Adds a lot of new content on type:
+## Sunset-Mod
+Adds a lot of new content on type:
 3 planets.
 New and upgraded turrets,
 Factories
@@ -9,7 +9,7 @@ Embodiment and more.....
 
 
 
-# Devs
+## Devs
 Coding: Slish
 Spites: Vervalamis,Exolothreftis(XJegaQuanty),Snake.
 Ost: Vervalamis.
