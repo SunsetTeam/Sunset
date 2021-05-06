@@ -1,5 +1,5 @@
 # Sunset-Mod
-Adds a lot of new content on type:
+// Adds a lot of new content on type:
 3 planets.
 New and upgraded turrets,
 Factories
