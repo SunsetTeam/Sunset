@@ -16,8 +16,6 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 14
-    - name: Grant execute permission for gradlew
-      run: chmod +x gradlew
     
     - name: Build with Gradle
       run: ./gradlew deploy
@@ -25,5 +23,5 @@ jobs:
     - name: Upload built jar file
       uses: actions/upload-artifact@v2
       with:
-        name: NewHorizon
+        name: Sunset
         path: build/libs
