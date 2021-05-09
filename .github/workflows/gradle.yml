@@ -1,46 +1,30 @@
-name: Java CI with Gradle
 
-on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+name: Java CI
+
+on: [push, pull_request]
 
 jobs:
-  build:
+  buildJar:
 
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up JDK 1.8
+    - uses: actions/checkout@v1
+    - name: Set up PATH
+      run: echo "${ANDROID_HOME}/build-tools/30.0.1" >> $GITHUB_PATH
+      
+    - name: Set up JDK 14
       uses: actions/setup-java@v1
       with:
-        java-version: 1.8
-    - name: Setup Android SDK Tools
-      uses: android-actions/setup-android@v2.0.1
-      env:
-        ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
-    - name: build-tools
-      run: sdkmanager "build-tools;29.0.3"
-    - name: Add Android SDK to PATH
-      run: echo "${ANDROID_HOME}/build-tools/29.0.3" >> $GITHUB_PATH
-
+        java-version: 14
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
-      
-    - name: Build with Gradle (dex)
-      run: ./gradlew buildDex
-    - name: Upload a Build Artifact
-      uses: actions/upload-artifact@v2.2.1
+    
+    - name: Build with Gradle
+      run: ./gradlew deploy
+         
+    - name: Upload built jar file
+      uses: actions/upload-artifact@v2
       with:
-        name:  dexed
-        path: build/libs/dexed-sunset.jar
-        
-    - name: Build with Gradle (regular)
-      run: ./gradlew build
-    - name: Upload a Build Artifact
-      uses: actions/upload-artifact@v2.2.1
-      with:
-        name:  regular
-        path: build/libs/mindustry-sunset.jar
+        name: Sunset
+        path: build/libs
