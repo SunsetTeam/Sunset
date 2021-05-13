@@ -1,4 +1,4 @@
-package sunsetmod;
+package sunset;
 
 import arc.*;
 import arc.util.*;
@@ -8,13 +8,8 @@ import sunset.content.*;
 import arc.util.Log;
 import mindustry.ctype.*;
 
-    public class SunsetMod extends Mod{
-	public static final String MOD_NAME = "sunsetmod";
-	
-	public static String configName(String name){
-		return MOD_NAME + name;
-        
-	}
+    public class sunsetmod extends Mod{
+
 
     private static final ContentList[] content = {
     new Snitems(),
