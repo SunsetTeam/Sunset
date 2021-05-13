@@ -24,7 +24,7 @@ import mindustry.ctype.*;
     
     @Override
     public void loadContent(){
-        for(ContentList list : sunsetContent){
+        for(ContentList list : sunsetmodContent){
             list.load();
 
             Log.info("@: Loaded content list: @", getClass().getSimpleName(), list.getClass().getSimpleName());
