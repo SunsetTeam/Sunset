@@ -1,4 +1,4 @@
-package sunset;
+package sunsetmod;
 
 import arc.*;
 import arc.util.*;
@@ -9,8 +9,7 @@ import arc.util.Log;
 import mindustry.ctype.*;
 
     public class SunsetMod extends Mod{
-	public static final String MOD_NAME = "sunset";
-	public static Links.LinkEntry[] links;
+	public static final String MOD_NAME = "sunsetmod";
 	
 	public static String configName(String name){
 		return MOD_NAME + name;
