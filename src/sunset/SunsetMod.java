@@ -8,7 +8,7 @@ import sunset.content.*;
 import arc.util.Log;
 import mindustry.ctype.*;
 
-    public class NewHorizon extends Mod{
+    public class SunsetMod extends Mod{
 	public static final String MOD_NAME = "sunset";
 	public static Links.LinkEntry[] links;
 	
