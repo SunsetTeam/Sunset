@@ -8,7 +8,7 @@ import sunset.content.*;
 import arc.util.Log;
 import mindustry.ctype.*;
 
-    public class sunsetmod extends Mod{
+    public class SunsetMod extends Mod{
 
 
     private static final ContentList[] content = {
