@@ -10,7 +10,7 @@ public class Snblocks implements ContentList{
 //envoriment
 
 //ores
-    oreAdamantium, orePlanatrium, oreFlameid;
+    oreFors, orePlanatrium, oreFlameid;
 
 //floors crimsondirt;
 
@@ -20,7 +20,7 @@ public class Snblocks implements ContentList{
     public void load(){
 //ore
 
-        oreAdamantium = new OreBlock(Snitems.adamantium){{
+        oreFors = new OreBlock(Snitems.fors){{
             oreDefault = false;
             oreThreshold = 0.921f;
             oreScale = 26.1234f;
