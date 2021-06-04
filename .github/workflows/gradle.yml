@@ -2,7 +2,7 @@ name: Java CI with Gradle
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
 
 jobs:
   build:
@@ -31,5 +31,5 @@ jobs:
     - name: Upload build artifact
       uses: actions/upload-artifact@v2.2.1
       with:
-        name: Sunset
+        name: dexed
         path: build/libs/dexed-*.jar
