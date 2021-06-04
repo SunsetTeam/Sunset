@@ -11,8 +11,8 @@ The second planet in the mod, has a smaller size from azaria,as it is already mo
  
 
 # Devs
-Coder's Slish,RePoweRED,KirillAldashkin\
-Spites: Vervalamis,Exolothreftis,Snake\
-Sounds: Ghoust-Antibug
+Coder's Slish, RePoweRED,KirillAldashkin\
+Spites: Vervalamis, Exolothreftis, Snake\
+Sounds: Ghoust-Antibug\
 Ost: Vervalamis\
 Maps: Vervalamis\
