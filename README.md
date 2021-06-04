@@ -1,16 +1,19 @@
-## Sunset
-Adds a lot of new content on type:\
-3 planets\
+## Sunset is a one of biggest mod for Mindustry
+
+## Planets\
+
+Azaria,first planet in Sunset.He has a lot of content units,turrets and more\
+
 New and upgraded turrets\
 Factories\
 A lot of units\
 Items\
-Embodiment and more.....\
+Embodiment and more.....
 
 
 
 ## Devs
-Coding: Slish\
+Coder's Slish,RePoweRED,KirillAldashkin\
 Spites: Vervalamis,Exolothreftis,Snake\
 Ost: Vervalamis\
 Maps: Vervalamis\
