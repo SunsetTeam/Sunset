@@ -3,12 +3,12 @@
 ## Planets
 
 ### Azaria:
-First planet in Sunset.He has a lot of content units,turrets and more\
+First planet in Sunset.He has a lot of content units,turrets and more
 
 ### Vulcanius 
-The second planet in the mod, has a smaller size from azaria,as it is already more complex and has less content\
+The second planet in the mod, has a smaller size from azaria,as it is already more complex and has less content
 
-
+ 
 
 # Devs
 Coder's Slish,RePoweRED,KirillAldashkin\
