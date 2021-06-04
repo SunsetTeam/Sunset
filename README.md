@@ -15,4 +15,4 @@ Coder's Slish, RePoweRED,KirillAldashkin\
 Spites: Vervalamis, Exolothreftis, Snake\
 Sounds: Ghoust-Antibug\
 Ost: Vervalamis\
-Maps: Vervalamis\
+Maps: Vervalamis
