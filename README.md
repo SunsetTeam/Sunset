@@ -10,7 +10,7 @@ Embodiment and more.....
 
 
 ## Devs
-Coding: Slish.\
-Spites: Vervalamis,Exolothreftis(XJegaQuanty),Snake.
-Ost: Vervalamis./
-Maps: .
+Coding: Slish\
+Spites: Vervalamis,Exolothreftis(XJegaQuanty),Snake\
+Ost: Vervalamis\
+Maps: Vervalamis
