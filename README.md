@@ -6,10 +6,10 @@
 First planet in Sunset.He has a lot of content units,turrets and more
 
 ### Burnout
-The second planet in the mod, has a smaller size from azaria,as it is already more complex and has less content
+The second planet in the mod, the smallest planet, it is already more complex and has the least content
 
 ###Rime 
-The third planet in the mod, the most difficult, has a little less content than Burnout
+The third planet in the mod, the most difficult,has more content and size than Burnout
 
 # Devs
 Coder's Slish, RePoweRED,KirillAldashkin\
