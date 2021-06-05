@@ -1,6 +1,10 @@
 name: sunset
 displayName: Sunset
-author: Coding: Slish, RePoweRED, CaHuTaP. Sprites: Saint-Axolotl, Vervalamis, Snake.
+author:
+'''
+Coding: Slish, RePoweRED, CaHuTaP.
+Sprites: Saint-Axolotl, Vervalamis, Snake.
+'''
 description: Adds a lot of new content on type: 3 planets, new and upgraded turrets, factories, 50+ units, items, embodiment and more.....
 version: 0.1.4A
 repo: SunsetTeam/Sunset
