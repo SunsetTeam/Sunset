@@ -1,4 +1,5 @@
 # Sunset,is a one of biggest mod for Mindustry
+![icon](https://user-images.githubusercontent.com/81778048/121011056-db200100-c79e-11eb-862d-c8c8bff0fca8.png)
 
 ## Planets
 ### Azaria:
