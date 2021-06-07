@@ -7,6 +7,7 @@ import mindustry.gen.*;
 import mindustry.type.*;
 import mindustry.type.weather.*;
 import mindustry.world.meta.*;
+import sunset.content.SnSounds;
 
 public class SnWeathers implements ContentList{
     public static Weather
@@ -28,7 +29,7 @@ public class SnWeathers implements ContentList{
             attrs.set(Attribute.light, -0.40f);
             attrs.set(Attribute.water, -0.1f);
             status = SnStatusEffects.frostbite;
-            sound = SnSounds.BlizzardWind;
+            sound = Sounds.windhowl;
             soundVol = 0.8f;
             opacityMultiplier = 0.35f;
             force = 0.3f;
