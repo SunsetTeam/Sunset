@@ -46,7 +46,7 @@ public class SnDefense implements ContentList {
 
         naturitWallLarge = new Wall("naturit-wall-large"){{
             requirements(Category.defense, with(SnItems.naturit, 24));
-            health = 3250;
+            health = 3000;
             size = 2;
         }};
 
@@ -59,7 +59,7 @@ public class SnDefense implements ContentList {
         forsWallLarge = new Wall("fors-wall-large"){{
             requirements(Category.defense, with(SnItems.fors, 24));
             size = 1;
-            health = 4200;
+            health = 4800;
             size = 2;
         }};
         
@@ -74,7 +74,7 @@ public class SnDefense implements ContentList {
 
         enojieWallLarge = new Wall("enojie-wall-large"){{
             requirements(Category.defense, with(SnItems.enojie, 24));
-            health = 5000;
+            health = 5800;
             size = 2;
             insulated = true;
             absorbLasers = true;
