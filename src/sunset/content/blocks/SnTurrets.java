@@ -72,7 +72,7 @@ public class SnTurrets implements ContentList {
             ammoUseEffect = Fx.casing1;
             targetAir = true;
         }};
-//3x3
+// 3x3
         major = new MultiBarrelItemTurret("major") {{
             requirements(Category.turret, with(Items.plastanium, 175, Items.titanium, 75, Items.metaglass, 50));
             ammo(
