@@ -47,28 +47,30 @@ public class ChainLightningTurret extends BaseTurret {
     public float laserWidth = 0.7f;
     public float powerUse;
     public Color laserColor;
-    public ChainLightningTurret(String name, int size, float powerUse, float liquidUse) {
+    public ChainLightningTurret(String name) {
         super(name);
         category = Category.turret;
         buildVisibility = BuildVisibility.shown;
-        this.size = size;
-        baseRegion = Core.atlas.find("block-"+size);
+        hasLiquids = true;
+    }
+
+    @Override
+    public void load() {
+        super.load();
         laser = Core.atlas.find("parallax-laser");
         laserEnd = Core.atlas.find("parallax-laser-end");
-        this.powerUse = powerUse;
+        baseRegion = Core.atlas.find("block-" + size);
         consumes.add(new AdjustableConsumePower(powerUse, e -> {
             ChainLightningTurretBuild t = (ChainLightningTurretBuild)e;
             return t.shouldShoot ? t.getBoost() : 0f;
         }));
-        this.liquidUse = liquidUse;
-        hasLiquids = true;
         consumes.add(new ConsumeLiquidFilter(liquid -> liquid.temperature <= 0.5f && liquid.flammability < 0.1f, liquidUse)).update(false).boost();
         liquidCapacity = liquidUse * 60f;
     }
 
     @Override
     public TextureRegion[] icons(){
-        return new TextureRegion[]{baseRegion, region};
+        return new TextureRegion[] { baseRegion, region };
     }
 
     @Override

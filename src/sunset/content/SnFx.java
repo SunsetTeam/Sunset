@@ -121,6 +121,13 @@ public class SnFx{
         Drawf.light(e.x, e.y, circleRad * 1.5f, SnPal.redBomb, e.fout());
     }),
 
+    heavyFlame = new Effect(64, 80, e -> {
+        Draw.color(Pal.lightFlame, Pal.darkFlame, Color.gray, e.fin());
+        Angles.randLenVectors(e.id, 8, e.finpow() * 60, e.rotation, 10, (x, y) -> {
+            Fill.circle(e.x + x, e.y + y, 0.65f + e.fout() * 1.9f);
+        });
+    }),
+
     tridenCharge = new Effect(210, e -> {
         color(Pal.surge, Color.white, e.fout());
         Draw.z(Layer.block);

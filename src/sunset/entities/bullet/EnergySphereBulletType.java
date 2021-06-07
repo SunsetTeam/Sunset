@@ -14,8 +14,8 @@ import sunset.graphics.SnPal;
 
 public class EnergySphereBulletType extends BasicBulletType {
     public float lightningPeriod = 1f;
-    public EnergySphereBulletType(String sprite, float speed, float damage) {
-        super(speed, damage, sprite);
+    public EnergySphereBulletType(float speed, float damage) {
+        super(speed, damage);
     }
 
     @Override

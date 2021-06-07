@@ -24,8 +24,7 @@ public class SnBullets implements ContentList{
 //artillery
     artilleryForsFrag, artilleryFors, artilleryBlastFrag, artilleryBlast, 
 //burner 
-    heavycoalFlame, heavypyraFlame, blastFlame, flameidFlame,
-    
+    heavyCoalFlame, heavyPyraFlame, blastFlame, flameidFlame,
 //liquid
     typhoonWaterShot, typhoonCryoShot, typhoonSlagShot, typhoonOilShot;
   
@@ -34,8 +33,8 @@ public class SnBullets implements ContentList{
 
 //artillery
         artilleryForsFrag = new BasicBulletType(2.9f, 23, "bullet"){{
-            width = 12f;
-            height = 13f;
+            width = 10f;
+            height = 12f;
             shrinkY = 1f;
             lifetime = 15f;
             backColor = SnPal.redBomb;
@@ -44,16 +43,15 @@ public class SnBullets implements ContentList{
             collidesAir = false;
         }};
 
-        artilleryFors = new ArtilleryBulletType(4.0f, 70, "shell"){{
+        artilleryFors = new ArtilleryBulletType(3.0f, 70, "shell"){{
             hitEffect = SnFx.redBomb;
             knockback = 1f;
-            width = 15f;
-            height = 17f;
+            width = height = 19f;
             lifetime = 90f;
             width = height = 13f;
             collidesTiles = false;
-            splashDamageRadius = 43f * 0.75f;
-            splashDamage = 50f;
+            splashDamageRadius = 58f * 0.75f;
+            splashDamage = 70f;
             fragBullet = artilleryForsFrag;
             fragBullets = 10;
             backColor = SnPal.redBomb;
@@ -71,16 +69,14 @@ public class SnBullets implements ContentList{
             collidesAir = false;
         }};
 
-        artilleryBlast = new ArtilleryBulletType(4.0f, 75, "shell"){{
+        artilleryBlast = new ArtilleryBulletType(3.0f, 75, "shell"){{
             hitEffect = SnFx.redBomb;
             knockback = 1f;
             lifetime = 90f;
-            width = 15f;
-            height = 17f;
-            width = height = 13f;
+            width = height = 21f;
             collidesTiles = false;
-            splashDamageRadius = 45f * 0.75f;
-            splashDamage = 54f;
+            splashDamageRadius = 65f * 0.75f;
+            splashDamage = 60f;
             fragBullet = artilleryForsFrag;
             fragBullets = 11;
             makeFire = true;
@@ -90,14 +86,15 @@ public class SnBullets implements ContentList{
 
     
 //burner
-        heavycoalFlame = new BulletType(3.60f, 7f){{
+        heavyCoalFlame = new BulletType(12f, 30f){{
             ammoMultiplier = 3f;
             hitSize = 7f;
-            lifetime = 18f;
+	        pierce = true;
+	        collidesAir = true;
+            lifetime = 9f;
             pierce = true;
-            collidesAir = false;
             statusDuration = 60f * 4;
-            shootEffect = Fx.shootSmallFlame;
+            shootEffect = SnFx.heavyFlame;
             hitEffect = Fx.hitFlameSmall;
             despawnEffect = Fx.none;
             status = StatusEffects.burning;
@@ -105,28 +102,31 @@ public class SnBullets implements ContentList{
             hittable = false;
         }};
 
-        heavypyraFlame = new BulletType(3.60f, 10f){{
-            ammoMultiplier = 4f;
+        heavyPyraFlame = new BulletType(12f, 33f){{
+            ammoMultiplier = 3f;
             hitSize = 7f;
-            lifetime = 18f;
+	        pierce = true;
+	        collidesAir = true;
+            lifetime = 9f;
             pierce = true;
-            collidesAir = false;
-            statusDuration = 60f * 6;
-            shootEffect = Fx.shootPyraFlame;
+            statusDuration = 60f * 4;
+            shootEffect = SnFx.heavyFlame;
             hitEffect = Fx.hitFlameSmall;
             despawnEffect = Fx.none;
             status = StatusEffects.burning;
+            keepVelocity = false;
             hittable = false;
         }};
         
-        blastFlame = new BulletType(3.60f, 13f){{
-            ammoMultiplier = 4f;
-            hitSize = 8f;
-            lifetime = 19f;
+        blastFlame = new BulletType(12f, 36f){{
+            ammoMultiplier = 3f;
+            hitSize = 7f;
+	        pierce = true;
+	        collidesAir = true;
+            lifetime = 9f;
             pierce = true;
-            collidesAir = true;
             statusDuration = 60f * 4;
-            shootEffect = Fx.shootSmallFlame;
+            shootEffect = SnFx.heavyFlame;
             hitEffect = Fx.hitFlameSmall;
             despawnEffect = Fx.none;
             status = StatusEffects.burning;
@@ -134,17 +134,19 @@ public class SnBullets implements ContentList{
             hittable = false;
         }};
 
-        flameidFlame = new BulletType(3.60f, 17f){{
-            ammoMultiplier = 4f;
-            hitSize = 8f;
-            lifetime = 20f;
+        flameidFlame = new BulletType(12f, 38f){{
+            ammoMultiplier = 3f;
+            hitSize = 7f;
+	        pierce = true;
+	        collidesAir = true;
+            lifetime = 9f;
             pierce = true;
-            collidesAir = true;
-            statusDuration = 60f * 6;
-            shootEffect = Fx.shootPyraFlame;
+            statusDuration = 60f * 4;
+            shootEffect = SnFx.heavyFlame;
             hitEffect = Fx.hitFlameSmall;
             despawnEffect = Fx.none;
             status = StatusEffects.burning;
+            keepVelocity = false;
             hittable = false;
         }};
 //liquid

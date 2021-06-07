@@ -3,7 +3,6 @@ package sunset.world.meta.values;
 import arc.Core;
 import arc.scene.ui.layout.Table;
 import arc.util.Strings;
-import mindustry.gen.Tex;
 import mindustry.world.meta.StatValue;
 
 import static mindustry.Vars.tilesize;
@@ -24,7 +23,7 @@ public class MinMaxRangeValues implements StatValue {
             bt.add(Core.bundle.format("missile.rangerange",
                     Strings.fixed(minRange / tilesize, 1),
                     Strings.fixed(maxRange / tilesize, 1)));
-        }).padTop(-9).left();
+        }).left();
 
         table.row();
     }

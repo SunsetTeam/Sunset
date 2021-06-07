@@ -2,18 +2,13 @@ package sunset.world.blocks.turrets;
 
 import arc.Core;
 import arc.Events;
-import arc.func.Func;
-import arc.graphics.Color;
 import arc.graphics.g2d.Draw;
 import arc.graphics.g2d.TextureRegion;
 import arc.math.Mathf;
 import arc.math.geom.Vec2;
 import arc.struct.Seq;
-import arc.util.Time;
 import arc.util.io.Reads;
 import arc.util.io.Writes;
-import mindustry.Vars;
-import mindustry.entities.Effect;
 import mindustry.game.Team;
 import mindustry.gen.Building;
 import mindustry.gen.Player;
@@ -26,7 +21,6 @@ import mindustry.ui.Bar;
 import mindustry.world.Tile;
 import mindustry.world.blocks.production.GenericCrafter;
 import mindustry.world.meta.Stat;
-import sunset.content.SnFx;
 import sunset.world.MissileLogic;
 import sunset.world.meta.values.MinMaxRangeValues;
 import sunset.world.meta.values.SplashDamageValue;
@@ -40,7 +34,6 @@ public class MissileSiloTurret extends GenericCrafter {
     public float minRange;
     /** Положение ракет в шахте относительно размеров блока. От (0, 0) до (1, 1). */
     public Seq<Vec2> rockets = new Seq(new Vec2[]{new Vec2(0.5f, 0.5f)});
-
     public TextureRegion baseRegion;
 
     public MissileSiloTurret(String name) {
@@ -86,9 +79,11 @@ public class MissileSiloTurret extends GenericCrafter {
         Drawf.dashCircle(x * tilesize + offset, y * tilesize + offset, minRange, Pal.placing);
         Drawf.dashCircle(x * tilesize + offset, y * tilesize + offset, maxRange, Pal.placing);
     }
-    public static Seq<Player> selected = new Seq(false);
+
+    public static MissileSiloTurretBuild selected = null;
     {
-        Events.on(WorldLoadEvent.class, (e) -> selected.clear());
+        Events.on(WorldLoadEvent.class, (e) -> selected = null);
+        Events.on(GameOverEvent.class, (e) -> selected = null);
     }
 
     public class MissileSiloTurretBuild extends GenericCrafterBuild {
@@ -103,15 +98,10 @@ public class MissileSiloTurret extends GenericCrafter {
         }
 
         private void drawSelectIf(Trigger t) {
-            if (isSelecting) {
+            if (selected == this) {
                 Draw.z(Layer.overlayUI);
                 drawSelect();
             }
-        }
-
-        @Override
-        public boolean consValid() {
-            return super.consValid();
         }
 
         @Override
@@ -123,16 +113,12 @@ public class MissileSiloTurret extends GenericCrafter {
             return res*(rockets.size+1);
         }
 
-        public boolean isSelecting = false;
-
         @Override
         public void tapped() {
-            if(selected.contains(Vars.player) && isSelecting) {
-                isSelecting = false;
-                selected.remove(Vars.player);
-            } else if(!selected.contains(Vars.player) && !isSelecting) {
-                isSelecting = true;
-                selected.add(Vars.player);
+            if(selected == this) {
+                selected = null;
+            } else {
+                selected = this;
             }
         }
 
@@ -141,13 +127,13 @@ public class MissileSiloTurret extends GenericCrafter {
             super.onRemoved();
             Events.remove(TapEvent.class, this::tapTile);
             Events.remove(Trigger.uiDrawEnd.getClass(), this::drawSelectIf);
-            if(isSelecting) selected.remove(Vars.player);
+            if(selected == this) selected = null;
         }
 
         private void tapTile(TapEvent te) {
             Player p = te.player;
             if(p.team() != team) return;
-            if(loaded == 0 || !isSelecting) return;
+            if(loaded == 0 || selected != this) return;
             Vec2 v = Core.input.mouseWorld();
             float dst = v.dst(x, y);
             if(dst > maxRange || dst < minRange) return;

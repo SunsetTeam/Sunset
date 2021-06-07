@@ -16,16 +16,16 @@ public class Sunset extends Mod {
             new SnItems(),
             new SnEnvironment(),
             new SnStatusEffects(),
+            new SnBullets(),
             new SnWeathers(),
             new SnDefense(),
             new SnOther(),
             new SnPower(),
-            new SnBullets(),
             new SnTurrets(),
             new SnProduction()
-            
     };
     
+
     @Override
     public void init(){
         MissileLogic.init();

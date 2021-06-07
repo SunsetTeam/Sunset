@@ -33,26 +33,25 @@ public class SnTurrets implements ContentList {
     public void load() {
 
 //3 on 3
-        burner = new ItemTurret("burner"){{
-            requirements(Category.turret, with(Items.copper, 70, Items.graphite, 40, SnItems.fors, 36));
+        burner = new ItemTurret("burner") {{
+            requirements(Category.turret, with(Items.metaglass, 50, Items.lead, 175, Items.graphite, 25));
             ammo(
-                Items.coal, SnBullets.heavycoalFlame,
-                Items.pyratite, SnBullets.heavypyraFlame,
-                Items.blastCompound, SnBullets.blastFlame,
-                SnItems.flameid, SnBullets.flameidFlame
+              Items.coal, SnBullets.heavyCoalFlame,
+              Items.pyratite, SnBullets.heavyPyraFlame,
+              Items.blastCompound, SnBullets.blastFlame,
+              SnItems.flameid, SnBullets.flameidFlame
             );
-            recoilAmount = 0f;
-            reloadTime = 5f;
-            coolantMultiplier = 1.5f;
-            range = 90f;
-            itemCapacity = 20;
-            size = 3;
-            shootCone = 53f;
-            targetAir = true;
-            ammoUseEffect = Fx.none;
             health = 140 * size * size;
-            shootSound = Sounds.flame;
-        }};
+            size = 3;
+            range = 100f;
+	        reloadTime = 5f;
+	        recoilAmount = 2f;
+            inaccuracy = 3f;
+	        rotateSpeed = 7.5f;
+            shootCone = 25f;
+            targetAir = true;
+	        shootSound = Sounds.flame;
+    }};
 
         tetramite = new TractorBeamTurret("tetramite"){{
             requirements(Category.turret, with(Items.silicon, 120, Items.titanium, 90, Items.graphite, 30));
@@ -93,7 +92,7 @@ public class SnTurrets implements ContentList {
             flags = EnumSet.of(BlockFlag.turret, BlockFlag.extinguisher);
         }};
 
-        chain = new ChainLightningTurret("chain",4,16f,0.5f){{
+        chain = new ChainLightningTurret("chain"){{
             range = 168.0f;
             damage = 8.75f;
             health = 2800;
@@ -102,8 +101,10 @@ public class SnTurrets implements ContentList {
             damageMultiplier = 0.85f;
             coolantMultiplier = 1.2f;
             rotateSpeed = 6.75f;
+            powerUse = 16f;
+            liquidUse = 0.5f;
             laserColor = SnPal.chainLaser;
-
+        }};
 //5 on 5
        field = new ItemTurret("field"){{
         requirements(Category.turret, with(Items.copper, 1200, Items.lead, 800, Items.plastanium, 350, Items.thorium, 400, SnItems.fors, 400));
@@ -120,8 +121,6 @@ public class SnTurrets implements ContentList {
             reloadTime = 50f;
             ammoEjectBack = 4f;
             ammoUseEffect = Fx.casing3Double;
-            alternate = true;
-            spread = 3f;
             cooldown = 0.06f;
             velocityInaccuracy = 0.2f;
             restitution = 0.02f;
@@ -134,7 +133,6 @@ public class SnTurrets implements ContentList {
        }};
 
 //6 on 6
-        }};
         triden = new PowerTurret("triden"){{
             health = 5400;
             range = 247f;
@@ -148,7 +146,7 @@ public class SnTurrets implements ContentList {
             chargeEffect = SnFx.tridenCharge;
             category = Category.turret;
             buildVisibility = BuildVisibility.shown;
-            shootType = new EnergySphereBulletType("triden-bullets", 1.75f, 240f){{
+            shootType = new EnergySphereBulletType(1.75f, 240f){{
                 hitSize = 8f;
                 splashDamage = 1280f;
                 splashDamageRadius = 112f;
