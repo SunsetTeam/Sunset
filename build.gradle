@@ -43,3 +43,4 @@ task dexify(type: Jar) {
 }
 
 task buildDex dependsOn "build", "dexify"
+
