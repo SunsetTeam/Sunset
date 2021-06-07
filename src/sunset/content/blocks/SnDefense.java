@@ -41,33 +41,32 @@ public class SnDefense implements ContentList {
         naturitWall = new Wall("naturit-wall"){{
             requirements(Category.defense, with(SnItems.naturit, 6));
             size = 1;
-            health = 610;
+            health = 750;
         }};
 
         naturitWallLarge = new Wall("naturit-wall-large"){{
             requirements(Category.defense, with(SnItems.naturit, 24));
-            size = 1;
-            health = 610;
+            health = 3250;
             size = 2;
         }};
 
         forsWall = new Wall("fors-wall"){{
             requirements(Category.defense, with(SnItems.fors, 6));
             size = 1;
-            health = 610;
+            health = 1200;
         }};
 
         forsWallLarge = new Wall("fors-wall-large"){{
             requirements(Category.defense, with(SnItems.fors, 24));
             size = 1;
-            health = 610;
+            health = 4200;
             size = 2;
         }};
         
         enojiewall = new Wall("enojie-wall"){{
             requirements(Category.defense, with(SnItems.enojie, 6));
             size = 1;
-            health = 610;
+            health = 1450;
             insulated = true;
             absorbLasers = true;
             schematicPriority = 10;
@@ -75,7 +74,7 @@ public class SnDefense implements ContentList {
 
         enojieWallLarge = new Wall("enojie-wall-large"){{
             requirements(Category.defense, with(SnItems.enojie, 24));
-            health = 610;
+            health = 5000;
             size = 2;
             insulated = true;
             absorbLasers = true;
