@@ -13,8 +13,8 @@ The third planet in the mod, the most difficult,has more content and size than B
 `[Data Deleted]`
 
 # Devs
-Coder's Slish, RePoweRED ,KirillAldashkin\
-Spites: Vervalamis, Exolothreftis, Snake\
+Coder's Slish, RePoweRED ,CaHuTaP\
+Spites: Vervalamis, Saint-Axolotl, Snake\
 Sounds: King-Silicon\
 Ost: Vervalamis\
 Maps: Vervalamis
