@@ -4,12 +4,15 @@ import arc.*;
 import arc.func.*;
 import arc.util.*;
 import mindustry.ctype.*;
+import mindustry.Vars;
 import mindustry.game.EventType.*;
 import mindustry.mod.*;
 import mindustry.mod.Mods.*;
 import sunset.content.*;
 import sunset.content.blocks.*;
+import mindustry.game.EventType.FileTreeInitEvent;
 import sunset.world.MissileLogic;
+
 
 public class Sunset extends Mod {
     private final ContentList[] SnContent = {
@@ -25,6 +28,16 @@ public class Sunset extends Mod {
             new SnProduction()
     };
     
+
+    public Sunset() {
+        if (Vars.headless) {
+            Events.on(FileTreeInitEvent.class, e -> {
+                SnSounds.load();
+            });
+        } else {
+            SnSounds.load();
+        }
+    }
 
     @Override
     public void init(){
