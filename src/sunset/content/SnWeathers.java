@@ -7,6 +7,7 @@ import mindustry.gen.*;
 import mindustry.type.*;
 import mindustry.type.weather.*;
 import mindustry.world.meta.*;
+import sunset.content.SnSounds;
 
 public class SnWeathers implements ContentList{
     public static Weather

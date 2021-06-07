@@ -190,9 +190,9 @@ public class SnTurrets implements ContentList {
             restitution = 0.05f;
             shootCone = 46f;
             liquidCapacity = 70f;
-            shootEffect = Fx.shootLiquid;
-            range = 230f;
-            health = 200 * size * size;
+            shootEffect = SnFx.typhoonShootLiquid;
+            range = 260f;
+            health = 220 * size * size;
             flags = EnumSet.of(BlockFlag.turret, BlockFlag.extinguisher);
         }};
 
@@ -230,8 +230,8 @@ public class SnTurrets implements ContentList {
             restitution = 0.02f;
             recoilAmount = 4f;
             shootShake = 2f;
-            range = 270f;
-            minRange = 30f;
+            range = 370f;
+            minRange = 55f;
 
         health = 160 * size * size;
        }};

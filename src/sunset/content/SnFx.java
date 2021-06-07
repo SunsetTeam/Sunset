@@ -127,6 +127,15 @@ public class SnFx{
             Fill.circle(e.x + x, e.y + y, 0.65f + e.fout() * 1.9f);
         });
     }),
+    
+    typhoonShootLiquid = new Effect(15f, 80f, e -> {
+        color(e.color);
+
+        randLenVectors(e.id, 2, e.finpow() * 15f, e.rotation, 11f, (x, y) -> {
+            Fill.circle(e.x + x, e.y + y, 0.5f + e.fout() * 2.5f);
+        });
+    }),
+
 
     tridenCharge = new Effect(210, e -> {
         color(Pal.surge, Color.white, e.fout());

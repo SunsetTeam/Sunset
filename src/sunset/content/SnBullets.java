@@ -41,8 +41,8 @@ public class SnBullets implements ContentList{
             hitEffect = SnFx.redBomb;
             knockback = 1f;
             width = height = 19f;
-            lifetime = 90f;
-            width = height = 13f;
+            lifetime = 110f;
+            width = height = 25f;
             collidesTiles = false;
             splashDamageRadius = 58f * 0.75f;
             splashDamage = 70f;
@@ -66,8 +66,8 @@ public class SnBullets implements ContentList{
         artilleryBlast = new ArtilleryBulletType(3.0f, 75, "shell"){{
             hitEffect = SnFx.redBomb;
             knockback = 1f;
-            lifetime = 90f;
-            width = height = 21f;
+            lifetime = 110f;
+            width = height = 25f;
             collidesTiles = false;
             splashDamageRadius = 65f * 0.75f;
             splashDamage = 60f;
@@ -147,36 +147,35 @@ public class SnBullets implements ContentList{
         typhoonWaterShot = new LiquidBulletType(Liquids.water){{
             lifetime = 70f;
             speed = 4f;
-            knockback = 1.8f;
-            puddleSize = 10f;
+            knockback = 2.5f;
+            puddleSize = 11f;
             orbSize = 6f;
             drag = 0.001f;
             ammoMultiplier = 0.5f;
             statusDuration = 60f * 4f;
-            damage = 0.1f;
+            damage = 0.3f;
         }};
 
         typhoonCryoShot = new LiquidBulletType(Liquids.cryofluid){{
             lifetime = 70f;
             speed = 4f;
             knockback = 1.8f;
-            puddleSize = 10f;
+            puddleSize = 11f;
             orbSize = 6f;
             drag = 0.001f;
             ammoMultiplier = 0.5f;
             statusDuration = 60f * 4f;
-            damage = 0.2f;
+            damage = 0.4f;
         }};
 
         typhoonSlagShot = new LiquidBulletType(Liquids.slag){{
-            lifetime = 70f;
+            lifetime = 49f;
             speed = 4f;
             knockback = 1.8f;
-            puddleSize = 10f;
-            orbSize = 6f;
+            puddleSize = 8f;
+            orbSize = 4f;
+            damage = 4.95f;
             drag = 0.001f;
-            ammoMultiplier = 0.5f;
-            statusDuration = 60f * 4f;
             ammoMultiplier = 0.4f;
             statusDuration = 60f * 4f;
         }};
@@ -185,12 +184,12 @@ public class SnBullets implements ContentList{
             lifetime = 70f;
             speed = 4f;
             knockback = 1.8f;
-            puddleSize = 10f;
+            puddleSize = 11f;
             orbSize = 6f;
             drag = 0.001f;
             ammoMultiplier = 0.5f;
             statusDuration = 60f * 4f;
-            damage = 0.2f;
+            damage = 0.3f;
         }};
 //blast
         lightBlastGraphite = new BasicBulletType(14, 16){{
