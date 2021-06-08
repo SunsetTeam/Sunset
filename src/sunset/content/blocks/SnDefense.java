@@ -59,7 +59,7 @@ public class SnDefense implements ContentList {
         forsWallLarge = new Wall("fors-wall-large"){{
             requirements(Category.defense, with(SnItems.fors, 24));
             size = 1;
-            health = 4800;
+            health = 3800;
             size = 2;
         }};
         
