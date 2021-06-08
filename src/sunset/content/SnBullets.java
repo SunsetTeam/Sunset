@@ -37,10 +37,11 @@ public class SnBullets implements ContentList{
             height = 12f;
             shrinkY = 1f;
             lifetime = 15f;
+            damage = 24f;
             backColor = SnPal.redBomb;
             frontColor = SnPal.redBombBack;
             despawnEffect = Fx.none;
-            collidesAir = false;
+            collidesAir = true;
         }};
 
         artilleryFors = new ArtilleryBulletType(3.0f, 70, "shell"){{
@@ -50,8 +51,9 @@ public class SnBullets implements ContentList{
             lifetime = 110f;
             width = height = 25f;
             collidesTiles = false;
-            splashDamageRadius = 58f * 0.75f;
-            splashDamage = 70f;
+            collidesAir = true;
+            splashDamageRadius = 60f * 0.75f;
+            splashDamage = 120f;
             fragBullet = artilleryForsFrag;
             fragBullets = 10;
             backColor = SnPal.redBomb;
@@ -62,11 +64,12 @@ public class SnBullets implements ContentList{
             width = 10f;
             height = 12f;
             shrinkY = 1f;
+            damage = 20f;
             lifetime = 15f;
             backColor = SnPal.redBomb;
             frontColor = SnPal.redBombBack;
             despawnEffect = Fx.none;
-            collidesAir = false;
+            collidesAir = true;
         }};
 
         artilleryBlast = new ArtilleryBulletType(3.0f, 75, "shell"){{
@@ -75,15 +78,15 @@ public class SnBullets implements ContentList{
             lifetime = 110f;
             width = height = 25f;
             collidesTiles = false;
-            splashDamageRadius = 65f * 0.75f;
-            splashDamage = 60f;
+            collidesAir = true;
+            splashDamageRadius = 68f * 0.75f;
+            splashDamage = 90f;
             fragBullet = artilleryForsFrag;
             fragBullets = 11;
             makeFire = true;
             backColor = SnPal.redBomb;
             frontColor = SnPal.redBombBack;
         }};
-
     
 //burner
         heavyCoalFlame = new BulletType(12f, 30f){{
