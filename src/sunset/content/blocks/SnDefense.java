@@ -66,7 +66,7 @@ public class SnDefense implements ContentList {
         enojiewall = new Wall("enojie-wall"){{
             requirements(Category.defense, with(SnItems.enojie, 6));
             size = 1;
-            health = 1350;
+            health = 1225;
             insulated = true;
             absorbLasers = true;
             schematicPriority = 10;
@@ -74,7 +74,7 @@ public class SnDefense implements ContentList {
 
         enojieWallLarge = new Wall("enojie-wall-large"){{
             requirements(Category.defense, with(SnItems.enojie, 24));
-            health = 5400;
+            health = 4900;
             size = 2;
             insulated = true;
             absorbLasers = true;
