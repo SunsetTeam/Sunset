@@ -9,6 +9,7 @@ import mindustry.type.Category;
 import mindustry.world.Block;
 import mindustry.world.blocks.defense.ForceProjector;
 import sunset.content.SnItems;
+import sunset.world.blocks.SelfhealWall;
 
 public class SnDefense implements ContentList {
     public static Block
@@ -38,15 +39,17 @@ public class SnDefense implements ContentList {
 
 //walls
 
-        naturitWall = new Wall("naturit-wall"){{
+        naturitWall = new SelfhealWall("naturit-wall"){{
             requirements(Category.defense, with(SnItems.naturit, 6));
             size = 1;
             health = 750;
+            heal = 0.5f;
         }};
 
-        naturitWallLarge = new Wall("naturit-wall-large"){{
+        naturitWallLarge = new SelfhealWall("naturit-wall-large"){{
             requirements(Category.defense, with(SnItems.naturit, 24));
-            health = 3000;
+            health = naturitWall.health * 4;
+            heal = 2f;
             size = 2;
         }};
 
@@ -58,8 +61,7 @@ public class SnDefense implements ContentList {
 
         forsWallLarge = new Wall("fors-wall-large"){{
             requirements(Category.defense, with(SnItems.fors, 24));
-            size = 1;
-            health = 3800;
+            health = forsWall.health * 4;
             size = 2;
         }};
         
@@ -74,7 +76,7 @@ public class SnDefense implements ContentList {
 
         enojieWallLarge = new Wall("enojie-wall-large"){{
             requirements(Category.defense, with(SnItems.enojie, 24));
-            health = 4900;
+            health = enojiewall.health * 4;
             size = 2;
             insulated = true;
             absorbLasers = true;

@@ -1,22 +1,12 @@
 package sunset.content;
 
 import arc.graphics.*;
-import arc.graphics.g2d.*;
-import arc.math.*;
-import arc.util.*;
 import mindustry.content.*;
 import mindustry.ctype.*;
-import mindustry.entities.*;
 import mindustry.entities.bullet.*;
-import mindustry.gen.*;
-import mindustry.graphics.*;
-import mindustry.io.*;
-import mindustry.world.*;
-import mindustry.type.*;
+import mindustry.gen.Sounds;
+import mindustry.graphics.Pal;
 import sunset.graphics.*;
-import mindustry.world.blocks.power.BurnerGenerator;
-
-import static mindustry.Vars.*;
 
 public class SnBullets implements ContentList{
     public static BulletType 
@@ -26,8 +16,12 @@ public class SnBullets implements ContentList{
 //burner 
     heavyCoalFlame, heavyPyraFlame, blastFlame, flameidFlame,
 //liquid
-    typhoonWaterShot, typhoonCryoShot, typhoonSlagShot, typhoonOilShot;
-  
+    typhoonWaterShot, typhoonCryoShot, typhoonSlagShot, typhoonOilShot,
+//blast
+    lightBlastGraphite, lightBlastSilicon, mediumBlastGraphite, mediumBlastSilicon, mediumBlastBlast,
+    bigBlastPlastanium, bigBlastBlast, bigBlastPyratite, maxBlastPlastanium, maxBlastBlast, maxBlastSurge,
+    maxBlastPlastaniumFrag;
+
     @Override
     public void load(){
 
@@ -200,7 +194,159 @@ public class SnBullets implements ContentList{
             statusDuration = 60f * 4f;
             damage = 0.3f;
         }};
+//blast
+        lightBlastGraphite = new BasicBulletType(14, 16){{
+            lifetime = 11f;
+            splashDamage = 34f;
+            splashDamageRadius = 13f;
+            width = 4f;
+            height = 8f;
+            frontColor = Color.valueOf("ccccdd");
+            backColor = Color.valueOf("888888");
+            collidesAir = true;
+        }};
 
-        
+        lightBlastSilicon = new BasicBulletType(9, 29){{
+            lifetime = 19f;
+            splashDamage = 11f;
+            splashDamageRadius = 7.4f;
+            homingPower = 0.033f;
+            homingRange = 154f;
+            reloadMultiplier = 1.1f;
+            width = 4f;
+            height = 8f;
+            frontColor = Color.valueOf("ccccdd");
+            backColor = Color.valueOf("888888");
+            collidesAir = true;
+        }};
+
+        mediumBlastGraphite = new BasicBulletType(9,28){{
+            lifetime = 21f;
+            splashDamage = 47f;
+            splashDamageRadius = 21f;
+            width = 8f;
+            height = 12f;
+            frontColor = Color.valueOf("ccccdd");
+            backColor = Color.valueOf("888888");
+            collidesAir = true;
+        }};
+
+        mediumBlastSilicon = new BasicBulletType(){{
+            lifetime = 21f;
+            speed = 9f;
+            damage = 46f;
+            splashDamage = 16f;
+            splashDamageRadius = 11f;
+            homingPower = 0.05f;
+            homingRange = 197f;
+            ammoMultiplier = 3f;
+            reloadMultiplier = 1.2f;
+            width = 8f;
+            height = 12f;
+            frontColor = Color.valueOf("ccccdd");
+            backColor = Color.valueOf("888888");
+            collidesAir = true;
+        }};
+
+        mediumBlastBlast = new BasicBulletType(9, 23) {{
+            lifetime = 21f;
+            splashDamage = 49f;
+            splashDamageRadius = 35f;
+            ammoMultiplier = 1f;
+            reloadMultiplier = 0.9f;
+            width = 8f;
+            height = 12f;
+            frontColor = Pal.lightFlame;
+            backColor = Pal.darkFlame;
+            collidesAir = true;
+        }};
+
+        bigBlastPlastanium = new BasicBulletType(12, 76){{
+            lifetime = 20f;
+            splashDamage = 14f;
+            splashDamageRadius = 14f;
+            width = 12f;
+            height = 16f;
+            frontColor = Pal.plastaniumFront;
+            backColor = Pal.plastaniumBack;
+            collidesAir = false;
+        }};
+
+        bigBlastBlast = new BasicBulletType(12, 53){{
+            lifetime = 20f;
+            splashDamage = 67f;
+            splashDamageRadius = 58f;
+            width = 12f;
+            height = 16f;
+            frontColor = Pal.lightFlame;
+            backColor = Pal.darkFlame;
+            collidesAir = false;
+        }};
+
+        bigBlastPyratite = new BasicBulletType(12, 49){{
+            lifetime = 20f;
+            splashDamage = 51f;
+            splashDamageRadius = 58f;
+            width = 12f;
+            height = 16f;
+            frontColor = Pal.lightishOrange;
+            backColor = Pal.lightOrange;
+            status = StatusEffects.burning;
+            reloadMultiplier = 1.1f;
+            makeFire =true;
+            collidesAir = false;
+        }};
+
+        maxBlastPlastaniumFrag = new BasicBulletType(18, 29) {{
+            lifetime = 2;
+            collidesAir = false;
+            frontColor = Pal.plastaniumFront;
+            backColor = Pal.plastaniumBack;
+            width = 2f;
+            height = 3f;
+        }};
+
+        maxBlastPlastanium = new BasicBulletType(16, 109){{
+            lifetime = 22;
+            splashDamage = 57;
+            splashDamageRadius = 34;
+            fragBullets = 9;
+            fragBullet = maxBlastPlastaniumFrag;
+            hitSound = Sounds.explosion;
+            width = 16f;
+            height = 20f;
+            frontColor = Pal.plastaniumFront;
+            backColor = Pal.plastaniumBack;
+            collidesAir = false;
+        }};
+
+        maxBlastBlast = new BasicBulletType(16, 72){{
+            lifetime = 22f;
+            splashDamage = 127f;
+            splashDamageRadius = 127f;
+            hitSound = Sounds.explosion;
+            width = 16f;
+            height = 20f;
+            frontColor = Pal.lightFlame;
+            backColor = Pal.darkFlame;
+            collidesAir = false;
+        }};
+
+        maxBlastSurge = new BasicBulletType(16,107) {{
+            lifetime = 22f;
+            splashDamage = 125f;
+            splashDamageRadius = 94f;
+            hitSound = Sounds.explosion;
+            width = 16f;
+            height = 20f;
+            frontColor = Pal.surge;
+            lightningDamage = 8f;
+            lightning = 4;
+            lightningLength = 12;
+            reloadMultiplier = 0.9f;
+            ammoMultiplier = 3f;
+            makeFire = true;
+            collidesAir = false;
+        }};
     }
 }
