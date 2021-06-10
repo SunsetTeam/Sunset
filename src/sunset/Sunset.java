@@ -27,28 +27,23 @@ public class Sunset extends Mod {
             new SnTurrets(),
             new SnProduction()
     };
-    
-
-    public Sunset() {
-        if (Vars.headless) {
-            Events.on(FileTreeInitEvent.class, e -> {
-                SnSounds.load();
-            });
-        } else {
-            SnSounds.load();
-        }
-    }
 
     @Override
-    public void init(){
-        MissileLogic.init();
-    }
+    public void init() { MissileLogic.init(); }
     
     @Override
     public void loadContent(){
         for(ContentList list : SnContent){
             list.load();
             Log.info("@: Loaded content list: @", getClass().getSimpleName(), list.getClass().getSimpleName());
+        }
+        if (Vars.headless) {
+            Events.on(FileTreeInitEvent.class, e -> {
+                SnSounds.load();
+            });
+        } else {
+            SnSounds.load();
+            Log.info("@: Loaded content list: SnSounds", getClass().getSimpleName());
         }
     }
 }
