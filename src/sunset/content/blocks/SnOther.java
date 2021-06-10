@@ -2,10 +2,14 @@ package sunset.content.blocks;
 
 import static mindustry.type.ItemStack.with;
 
+import arc.graphics.g2d.Draw;
 import mindustry.content.Items;
 import mindustry.ctype.ContentList;
+import mindustry.entities.TargetPriority;
+import mindustry.game.Team;
 import mindustry.type.Category;
 import mindustry.world.Block;
+import mindustry.world.Tile;
 import mindustry.world.blocks.distribution.MassDriver;
 import mindustry.world.blocks.liquid.Conduit;
 import mindustry.world.blocks.production.Pump;
@@ -38,7 +42,13 @@ public class SnOther implements ContentList {
             liquidCapacity = 18f;
             liquidPressure = 1.035f;
             health = 110;
-        }};
+            placeableLiquid = true;
+        }
+            @Override
+            public boolean canPlaceOn(Tile tile, Team team) {
+                return tile.floor().isLiquid;
+            }
+        };
 
         naturitPump = new Pump("naturit-pump"){{
             requirements(Category.liquid, with(Items.copper, 120, Items.metaglass, 110, Items.silicon, 40, Items.titanium, 70, SnItems.naturit, 60));
