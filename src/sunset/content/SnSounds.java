@@ -23,7 +23,7 @@ public class SnSounds {
         }
     }
     public static Sound
-        blizzardWind = new Sound();
+        blizzardWind;
 
     public static void load() {
         blizzardWind = loadSound("blizzardWind");
