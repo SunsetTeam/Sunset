@@ -17,7 +17,7 @@ public class SnPal{
 
     //yellowtrail
     YellowTrailBack = Color.valueOf("FDF59A62"),
-    YellowTrail = Colir.valueOf("FDF59AFF"),
+    YellowTrail = Color.valueOf("FDF59AFF"),
 
     //bombs
     redBomb = Color.valueOf("F78D87"),
