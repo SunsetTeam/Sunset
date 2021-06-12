@@ -1,37 +1,29 @@
-package Sunset.content; 
+package sunset.content; 
 
-import arc.func.Prov;
-import arc.graphics.Color;
-import arc.math.geom.Geometry;
-import arc.math.geom.Point2;
-import arc.math.geom.Vec2;
-import arc.struct.ObjectSet;
-import arc.struct.Seq;
-import Sunset.ai.types.BUFFerAI;
-import Sunset.entities.abilities.YellowUnitBuff;
-import Sunset.gen.ModSounds;
-import Sunset.gen.SpecialMechUnit;
-import Sunset.graphics.ModPal;
-import Sunset.type.ModUnitType;
-import Snunset.type.ModWeapon;
-import mindustry.content.Bullets;
-import mindustry.content.Fx;
-import mindustry.content.StatusEffects;
-import mindustry.content.UnitTypes;
-import mindustry.ctype.ContentList;
-import mindustry.entities.abilities.ForceFieldAbility;
-import mindustry.entities.abilities.RepairFieldAbility;
-import mindustry.entities.abilities.UnitSpawnAbility;
+import arc.graphics.*;
+import arc.graphics.g2d.*;
+import arc.math.*;
+import arc.struct.*;
+import mindustry.ai.types.*;
+import mindustry.annotations.Annotations.*;
+import mindustry.ctype.*;
+import mindustry.entities.*;
+import mindustry.entities.abilities.*;
 import mindustry.entities.bullet.*;
+import mindustry.entities.effect.*;
 import mindustry.gen.*;
-import mindustry.graphics.Layer;
-import mindustry.graphics.Pal;
-import mindustry.type.AmmoTypes;
-import mindustry.type.ItemStack;
-import mindustry.type.Weapon;
+import mindustry.graphics.*;
+import mindustry.type.*;
+import mindustry.type.weapons.*;
+import mindustry.world.meta.*;
+
+import static arc.graphics.g2d.Draw.*;
+import static arc.graphics.g2d.Lines.*;
+import static arc.math.Angles.*;
+import static mindustry.Vars.*;
 
 
-public class ModUnitTypes implements ContentList {
+public class SnUnitTypes implements ContentList {
     public static ModUnitType
        //flying
        comet, satellite, planet, star, galaxy, eternity,
