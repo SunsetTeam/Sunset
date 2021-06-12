@@ -15,6 +15,10 @@ public class SnPal{
     lightningHeal = Color.green,
     lightningDamage = Color.red,
 
+    //yellowtrail
+    YellowTrailBack = Color.valueOf("FDF59A62"),
+    YellowTrail = Colir.valueOf("FDF59AFF"),
+
     //bombs
     redBomb = Color.valueOf("F78D87"),
     redBombBack = Color.valueOf("EF9F9A"),
