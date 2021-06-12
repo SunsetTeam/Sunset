@@ -27,11 +27,6 @@ public class SnUnitTypes implements ContentList {
     public static ModUnitType
        //flying
        comet, satellite, planet, star, galaxy, eternity,
-
-
-  public ModUnitTypes(){
-    UnitTypes.class.isArray();
-  }
   
   @Override
   public void load(){
