@@ -1,20 +1,41 @@
 package sunset.content.blocks;
 
-import mindustry.ctype.ContentList;
-import mindustry.content;
-import mindustry.world.Block;
-import mindustry.world.blocks.environment.Floor;
-import mindustry.world.blocks.environment.OreBlock;
-import mindustry.world.blocks.environment.StaticWall;
-import mindustry.world.blocks.environment.TreeBlock;
-import mindustry.world.meta.BuildVisibility;
+import arc.graphics.*;
+import arc.math.*;
+import arc.struct.*;
+import mindustry.*;
+import mindustry.ctype.*;
+import mindustry.content.*;
+import mindustry.entities.bullet.*;
+import mindustry.gen.*;
+import mindustry.graphics.*;
+import mindustry.type.*;
+import mindustry.world.*;
+import mindustry.world.blocks.*;
+import mindustry.world.blocks.campaign.*;
+import mindustry.world.blocks.defense.*;
+import mindustry.world.blocks.defense.turrets.*;
+import mindustry.world.blocks.distribution.*;
+import mindustry.world.blocks.environment.*;
+import mindustry.world.blocks.legacy.*;
+import mindustry.world.blocks.liquid.*;
+import mindustry.world.blocks.logic.*;
+import mindustry.world.blocks.payloads.*;
+import mindustry.world.blocks.power.*;
+import mindustry.world.blocks.production.*;
+import mindustry.world.blocks.sandbox.*;
+import mindustry.world.blocks.storage.*;
+import mindustry.world.blocks.units.*;
+import mindustry.world.consumers.*;
+import mindustry.world.draw.*;
+import mindustry.world.meta.*;
 import sunset.content.SnItems;
 
 public class SnEnvironment implements ContentList{
     public static Block
     
     //ores
-    oreFors, orePlanatrium, oreFlameid,
+    oreFors, orePlanatrium, oreFlameid, oreColdent,
     
     //floors 
     crimsondirt, crimsonswamp, crimsonsand, crimsonsandwater, crimsonwater, crimsondeepwater,
@@ -46,7 +67,12 @@ public class SnEnvironment implements ContentList{
         oreThreshold = 0.921f;
         oreScale = 26.1234f;
       }};
-      
+    
+    oreColdent= new OreBlock(SnItems.coldent){{
+        oreDefault = false;
+        oreThreshold = 0.921f;
+        oreScale = 26.1234f;
+      }};
     //floors
     crimsondirt = new Floor("crimson-dirt"){{
         variants = 3;
