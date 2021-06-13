@@ -86,6 +86,7 @@ public class SnUnitTypes implements ContentList {
                   speed = 1.59f;
                   accel = 0.4f;
                   drag = 0.16f;
+                  flying = true;
                   range = 140f;
                   hitSize = 18.9f;
                   lowAltitude = true
