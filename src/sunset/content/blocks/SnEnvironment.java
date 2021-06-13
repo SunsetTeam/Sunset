@@ -5,6 +5,7 @@ import mindustry.world.Block;
 import mindustry.world.blocks.environment.Floor;
 import mindustry.world.blocks.environment.OreBlock;
 import mindustry.world.blocks.environment.StaticWall;
+import mindustry.world.meta.BuildVisibility;
 import sunset.content.SnItems;
 
 public class SnEnvironment implements ContentList{
@@ -17,7 +18,10 @@ public class SnEnvironment implements ContentList{
         crimsondirt,
     
     //static walls 
-        crimsonwall;
+        crimsonwall,
+
+    //hidden
+    hotSlag1, hotSlag2, hotSlag3, greenMoss, darkMud, glacier1, glacier2, glacier3;
         
   @Override
   public void load(){
@@ -48,6 +52,47 @@ public class SnEnvironment implements ContentList{
     //static walls
       crimsonwall = new StaticWall("crimson-wall"){{
           variants = 2;
+      }};
+
+      //hidden
+      hotSlag1 = new Floor("hotSlag1"){{
+          buildVisibility = BuildVisibility.hidden;
+          //only for burnout planet generator
+      }};
+
+      hotSlag2 = new Floor("hotSlag2"){{
+          buildVisibility = BuildVisibility.hidden;
+          //only for burnout planet generator
+      }};
+
+      hotSlag3 = new Floor("hotSlag3"){{
+          buildVisibility = BuildVisibility.hidden;
+          //only for burnout planet generator
+      }};
+
+      greenMoss = new Floor("greenMoss"){{
+          buildVisibility = BuildVisibility.hidden;
+          //only for azaria planet generator
+      }};
+
+      darkMud = new Floor("darkMud"){{
+          buildVisibility = BuildVisibility.hidden;
+          //only for azaria planet generator
+      }};
+
+      glacier1 = new Floor("glacier1"){{
+          buildVisibility = BuildVisibility.hidden;
+          //only for rime planet generator
+      }};
+
+      glacier2 = new Floor("glacier2"){{
+          buildVisibility = BuildVisibility.hidden;
+          //only for rime planet generator
+      }};
+
+      glacier3 = new Floor("glacier3"){{
+          buildVisibility = BuildVisibility.hidden;
+          //only for rime planet generator
       }};
   }
 }

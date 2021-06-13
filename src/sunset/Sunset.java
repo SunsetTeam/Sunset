@@ -1,16 +1,14 @@
 package sunset;
 
-import arc.*;
-import arc.func.*;
-import arc.util.*;
-import mindustry.ctype.*;
+import arc.Events;
+import arc.util.Log;
 import mindustry.Vars;
-import mindustry.game.EventType.*;
-import mindustry.mod.*;
-import mindustry.mod.Mods.*;
+import mindustry.ctype.ContentList;
+import mindustry.game.EventType.FileTreeInitEvent;
+import mindustry.mod.Mod;
+//import mindustry.ui.dialogs.BaseDialog;
 import sunset.content.*;
 import sunset.content.blocks.*;
-import mindustry.game.EventType.FileTreeInitEvent;
 import sunset.world.MissileLogic;
 
 
@@ -25,11 +23,24 @@ public class Sunset extends Mod {
             new SnOther(),
             new SnPower(),
             new SnTurrets(),
-            new SnProduction()
+            new SnProduction(),
+            new SnPlanets()
     };
 
     @Override
-    public void init() { MissileLogic.init(); }
+    public void init() {
+        MissileLogic.init();
+        /*Log.info("startUp");
+        Events.on(ClientLoadEvent.class, e -> {
+            Time.runTask(10f, () -> {
+                BaseDialog dialog = new BaseDialog("Start up");
+                dialog.cont.add("Start up").row();
+                dialog.cont.image(Core.atlas.find("sunset-startUpImage")).pad(20f).row();
+                dialog.cont.button("OK", dialog::hide).size(500f, 50f);
+                dialog.show();
+            });
+        });*/
+    }
     
     @Override
     public void loadContent(){
