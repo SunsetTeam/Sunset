@@ -32,7 +32,6 @@ public class SnUnitTypes implements ContentList {
   public void load(){
     //flying
         comet = new UnitType("comet"){{
-            defaultController = BUFFerAI::new;
             speed = 3.1f;
             accel = 0.08f;
             drag = 0.01f;
@@ -43,15 +42,11 @@ public class SnUnitTypes implements ContentList {
             commandLimit = 0f;
             circleTarget = true;
             hitSize = 6.7f;
-            
-            abilities.add(new YellowUnitBuff(0f, 109f, 110f, 115f, 102f, 106f, 40f)), new YellowUnitBuff(0f, 109f, 110f, 115f, 102f, 106f, 40f));
-          //AbilityInfo, 1th is HP, 2th is DMG, 3th is speed, 4th is armor, 5th is regeneration, 6th is attack speed, 7th os range of ability, ALL NUMBERS IS PENECERATE!!!
               }};
        }});
   }};
         
                 satellite = new UnitType("sattelite"){{
-                    defaultController = BUFFerAI::new;
                     speed = 2.86f;
                     accel = 0.08f;
                     drag = 0.015f;
@@ -61,12 +56,7 @@ public class SnUnitTypes implements ContentList {
                     rotateShoting = true;
                     commandLimit = 14f;
                     circleTarget = true;
-                    hitSize = 8.79f;
-                    
-                    
-                    abilities.add(new YellowUnitBuff(0f, 109f, 110f, 115f, 102f, 106f, 40f)), new YellowUnitBuff(0f, 109f, 110f, 115f, 102f, 106f, 40f));
-                    
-                    
+                    hitSize = 8.79f;               
                     
                   weapons.add(new Weapon("staelitte-wp"){{
                     mirror = false;
@@ -82,13 +72,10 @@ public class SnUnitTypes implements ContentList {
                       ArmorAdd = 10f;
                       ArmorAddLimit = 105f;
                       speed = 4.25f;
-                      trailColor = Pal.BuffYelow;
+                      // trailColor = Pal.BuffYelow;
                       trailWidth = 2.26f;
                       trailLength = 16f;
                       trailChance = -2f
-                      
-                      
-                      abilities.add(new YellowUnitBuff(0f, 109f, 110f, 115f, 102f, 106f, 40f)), new YellowUnitBuff(0f, 109f, 110f, 115f, 102f, 106f, 40f));
                     }};
            }});
     }},
@@ -116,24 +103,21 @@ public class SnUnitTypes implements ContentList {
                   reload = 55f;
                   minShootVelocity = 0.01f
                   
-                  soundPitchMin = 1f;
-                  shootSound = Sounds.plasmadropSmall;
+                  // soundPitchMin = 1f;
+                  // shootSound = Sounds.plasmadropSmall;
                   
                   bullet = new BasicBulletType(){{
                   sprite = "large-bomb";
-                  //we can draw other sprite
-                  width = heigh = 90/3.5f;
-                  
+                  hieght = 40f;
+                  width = 28f;
                   maxRange = 21.7f;
                   ignoreRotation = true;
                   
-                  backColor = pal.buff;
+                  // backColor = pal.buff;
                   frontColor = Color.white;
                   mixColorTo = Color.white;
                   
                   hitSound = Sounds.plasmaboom;
-                  
-                  //we can use other effect, maybe "yellowPlasmaboomSmall"
                   
                   shootCone = 144f;
                   ejectEffect = Fx.none;
@@ -144,7 +128,7 @@ public class SnUnitTypes implements ContentList {
                   lifetime = 66f;
                   
                   despawnEffect = Fx.yelowBomb;
-                  hitEffect = Fx.YLmassiveExplosion;
+                  // hitEffect = Fx.YLmassiveExplosion;
                   keepVelocity = false;
                   spin = 2.5f;
                   
@@ -153,10 +137,9 @@ public class SnUnitTypes implements ContentList {
                   speed = 0f;
                   colliders = false;
                   
-                  the next, is a buff, what can be used in blocks, it's regen/add armor
                   
-                  regenDuration = 360f;
-                  regenPercentInSec = 4f;
+                  // regenDuration = 360f;
+                  // regenPercentInSec = 4f;
                   
                   splashDamage = 25f;
                   splashDamageRadius = 66f;
