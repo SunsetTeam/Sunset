@@ -1,44 +1,46 @@
+//Я за всіма слідкую! Вам справді нічим зайнятися, що й справді зайшли у файли перекладу на українську? Підіть краще книжку почитайте)
+
 #items
     item.sunset-naturit.name = Натуріт
-    item.sunset-naturit.description = /TODO
-    item.sunset-naturit.details =  /TODO
+    item.sunset-naturit.description = Мінерал органічного походження, який подібний сталі, добувається штучно.
+    item.sunset-naturit.details =  залізний банан у формі гітари
     item.sunset-nobium.name = Нобіум
-    item.sunset-nobium.description = /TODO
-    item.sunset-nobium.details = /TODO
+    item.sunset-nobium.description = Радіоактивний, та стійкий до пошкоджень, основний матеріал для будівництва.
+    item.sunset-nobium.details = Схожий на мило, але радіоактивний... Будьте Обережні!
     item.sunset-flameid.name = Флаймід
-    item.sunset-flameid.description = /TODO
-    item.sunset-flameid.details = /TODO
+    item.sunset-flameid.description = Мінерал який можна знайти у залежах його руди, горюча речовина яка здатна віддавати ДУЖЕ багато тепла.
+    item.sunset-flameid.details = Пофарбований прох на максималках, з нього виходять чудові боєприпаси. 
     item.sunset-fors.name = Форс
-    item.sunset-fors.description = /TODO
-    item.sunset-fors.details = /TODO
+    item.sunset-fors.description = Металл який можна легко знайти у його залежах. Досить міцний.
+    item.sunset-fors.details = Цікаво, якою буде пружина з нього?
     item.sunset-enojie.name = Вігоріум
-    item.sunset-enojie.description = /TODO
-    item.sunset-enojie.details = /TODO
+    item.sunset-enojie.description = Радіоактивний, та склалний у виготовленні матеріал, його досить складно отримати. Досить непоганий для стрільби ним...
+    item.sunset-enojie.details = Що буде якщо з нього зробити батарею старій нокії?
     item.sunset-planatrium.name = Планатрій
-    item.sunset-planatrium.description = /TODO
-    item.sunset-planatrium.details = /TODO
+    item.sunset-planatrium.description = Радіоактивний метал, який можна знайти у своїх залежах, по своїм властивостям, лужний, м'який, та небезпечний!
+    item.sunset-planatrium.details = Вам не варто бачити ціну на батареї з неї...
 
 #blocks
     #environment
         #ores
             block.sunset-fors.name = Форс
-            block.sunset-fors.description = /TODO
-            block.sunset-fors.details = /TODO
+            block.sunset-fors.description = Форсова Руда
+            block.sunset-fors.details = який сенс цієї стрічки?
             block.sunset-planatrium.name = Планатрій
-            block.sunset-planatrium.description = /TODO
-            block.sunset-planatrium.details = /TODO
+            block.sunset-planatrium.description = Паланатрієва руда
+            block.sunset-planatrium.details = О ні! Знову планатрій!
             block.sunset-flameid.name = Флаймід
-            block.sunset-flameid.description = /TODO
-            block.sunset-flameid.details = /TODO
+            block.sunset-flameid.description = Флеймідова руда
+            block.sunset-flameid.details = так так так...
 
         #floors
             block.sunset-crimson-dirt.name = Багровий пісок
-            block.sunset-crimson-dirt.description = /TODO
-            block.sunset-crimson-dirt.details = /TODO
+            block.sunset-crimson-dirt.description = Багровий пісок
+            block.sunset-crimson-dirt.details = Файний таки пісочок...
         #static walls
             block.sunset-crimson-wall.name = Багрова стіна
-            block.sunset-crimson-wall.description = /TODO
-            block.sunset-crimson-wall.details = /TODO
+            block.sunset-crimson-wall.description = Багрова стіна
+            block.sunset-crimson-wall.details = Ого Стіна!!!!!
 
 #planets
     planet.sunset-magma.name = Magma
