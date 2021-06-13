@@ -18,7 +18,7 @@ public class SnPlanets implements ContentList{
     public void load(){
         magma = new Planet("magma", Planets.sun, 0, 3.6f){{
             bloom = true;
-            accessible = true;
+            accessible = false;
             hasAtmosphere = true;
             orbitRadius = 54;
             meshLoader = () -> new SunMesh(
