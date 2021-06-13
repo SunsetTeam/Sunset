@@ -29,7 +29,6 @@ public class SnWeathers implements ContentList{
             attrs.set(Attribute.light, -0.40f);
             attrs.set(Attribute.water, -0.1f);
             status = SnStatusEffects.frostbite;
-            sound = Sounds.windhowl;
             soundVol = 0.8f;
             opacityMultiplier = 0.35f;
             force = 0.3f;

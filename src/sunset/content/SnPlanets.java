@@ -56,7 +56,7 @@ public class SnPlanets implements ContentList{
         azaria = new Planet("azaria", SnPlanets.magma, 3, 1f){{
             meshLoader = () -> new HexMesh(this, 6);
             generator = new AzariaGenerator();
-            radius = 1.05f;
+            radius = 1.03f;
             atmosphereRadIn = 0;
             atmosphereRadOut = 0.4f;
             orbitRadius = 21.3f;
