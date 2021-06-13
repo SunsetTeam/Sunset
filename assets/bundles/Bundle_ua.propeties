@@ -1,0 +1,51 @@
+#items
+    item.sunset-naturit.name = Натуріт
+    item.sunset-naturit.description = /TODO
+    item.sunset-naturit.details =  /TODO
+    item.sunset-nobium.name = Нобіум
+    item.sunset-nobium.description = /TODO
+    item.sunset-nobium.details = /TODO
+    item.sunset-flameid.name = Флаймід
+    item.sunset-flameid.description = /TODO
+    item.sunset-flameid.details = /TODO
+    item.sunset-fors.name = Форс
+    item.sunset-fors.description = /TODO
+    item.sunset-fors.details = /TODO
+    item.sunset-enojie.name = Вігоріум
+    item.sunset-enojie.description = /TODO
+    item.sunset-enojie.details = /TODO
+    item.sunset-planatrium.name = Планатрій
+    item.sunset-planatrium.description = /TODO
+    item.sunset-planatrium.details = /TODO
+
+#blocks
+    #environment
+        #ores
+            block.sunset-fors.name = Форс
+            block.sunset-fors.description = /TODO
+            block.sunset-fors.details = /TODO
+            block.sunset-planatrium.name = Планатрій
+            block.sunset-planatrium.description = /TODO
+            block.sunset-planatrium.details = /TODO
+            block.sunset-flameid.name = Флаймід
+            block.sunset-flameid.description = /TODO
+            block.sunset-flameid.details = /TODO
+
+        #floors
+            block.sunset-crimson-dirt.name = Багровий пісок
+            block.sunset-crimson-dirt.description = /TODO
+            block.sunset-crimson-dirt.details = /TODO
+        #static walls
+            block.sunset-crimson-wall.name = Багрова стіна
+            block.sunset-crimson-wall.description = /TODO
+            block.sunset-crimson-wall.details = /TODO
+
+#planets
+    planet.sunset-magma.name = Magma
+    planet.sunset-burnout.name = Burnout
+    planet.sunset-azaria.name = Azaria
+    planet.sunset-rime.name = Rime
+
+#stats
+    missile.rangerange = [lightgray]від [stat]{0}[lightgray] до [stat]{1}[lightgray] блоків
+    bar.missilecount = Ракет: {0}/{1}
