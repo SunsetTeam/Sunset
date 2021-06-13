@@ -21,6 +21,8 @@ public class SnBullets implements ContentList{
     lightBlastGraphite, lightBlastSilicon, mediumBlastGraphite, mediumBlastSilicon, mediumBlastBlast,
     bigBlastPlastanium, bigBlastBlast, bigBlastPyratite, maxBlastPlastanium, maxBlastBlast, maxBlastSurge,
     maxBlastPlastaniumFrag;
+//exoticBullets (new) i will make it later... i must make more bulets (soulBullet, iceSpike, and more)
+// spiralPllastanium, spiralSurge, SpiralFors, SpiralThorium, SpiralSmall;
 
     @Override
     public void load(){
