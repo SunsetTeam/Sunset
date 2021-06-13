@@ -43,8 +43,6 @@ public class SnUnitTypes implements ContentList {
             circleTarget = true;
             hitSize = 6.7f;
               }};
-       }});
-  }};
         
                 satellite = new UnitType("sattelite"){{
                     speed = 2.86f;
@@ -143,4 +141,6 @@ public class SnUnitTypes implements ContentList {
                   
                   splashDamage = 25f;
                   splashDamageRadius = 66f;
-                  
+             }};
+          }});
+       }};
