@@ -38,7 +38,7 @@ public class SnPlanets implements ContentList{
         burnout = new Planet("burnout", SnPlanets.magma, 2, 0.7f){{
             meshLoader = () -> new HexMesh(this, 6);
             generator = new BurnoutGenerator();
-            radius = 0.8f;
+            radius = 0.87f;
             atmosphereRadIn = 0.019f;
             atmosphereRadOut = 0.19f;
             sectorApproxRadius = 3;
@@ -82,7 +82,7 @@ public class SnPlanets implements ContentList{
             accessible = true;
             startSector = 1;
             //lightColor = Color.valueOf("B3DDE3");
-            atmosphereColor = Color.valueOf("96D8D4");
+            atmosphereColor = Color.valueOf("59C2BBFF");
             hasAtmosphere = true;
             alwaysUnlocked = true;
         }};
