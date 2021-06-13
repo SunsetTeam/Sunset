@@ -42,6 +42,7 @@ public class SnEnvironment implements ContentList{
     
     //static walls 
     crimsonwall, crimsonsandwall,
+    
     //trees
     crimsontree,
     //hidden
@@ -83,7 +84,7 @@ public class SnEnvironment implements ContentList{
       }};  
 
     crimsonswamp = new Floor("crimson-swamp"){{
-        speedMultiplier = -0.1f;
+        speedMultiplier = 0.4f;
         variants = 3;
         liquidDrop = Liquids.water;
         liquidMultiplier = 0.4f;
@@ -95,7 +96,7 @@ public class SnEnvironment implements ContentList{
     }};
     
     crimsonsandwater = new Floor("crimson-sand-water"){{
-        speedMultiplier = 0.2f;
+        speedMultiplier = 0.9f;
         variants = 0;
         liquidDrop = Liquids.water;
         liquidMultiplier = 0.7f;
@@ -107,7 +108,7 @@ public class SnEnvironment implements ContentList{
 }};
 
     crimsonwater = new Floor("crimson-water"){{
-        speedMultiplier = 0.1f;
+        speedMultiplier = 0.8f;
         variants = 0;
         liquidDrop = Liquids.water;
         liquidMultiplier = 1.1f;
@@ -119,7 +120,7 @@ public class SnEnvironment implements ContentList{
 }};
 
     crimsondeepwater = new Floor("crimson-deep-water"){{
-        speedMultiplier = 0.2f;
+        speedMultiplier = 0.5f;
         variants = 0;
         liquidDrop = Liquids.water;
         liquidMultiplier = 1.1f;
@@ -141,8 +142,8 @@ public class SnEnvironment implements ContentList{
       }};
 
 //trees
-    crimsontree = new TreeBlock("crimson-tree");
-
+    crimsontree = new StaticTree("crimson-tree");
+        variants = 0;
 //hidden
       hotSlag1 = new Floor("hotSlag1"){{
           buildVisibility = BuildVisibility.debugOnly;
