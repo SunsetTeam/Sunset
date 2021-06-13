@@ -92,3 +92,72 @@ public class SnUnitTypes implements ContentList {
                     }};
            }});
     }},
+
+
+
+
+                  planet = new UnitTtpe("Planet"){{
+                  health = 590f;
+                  speed = 1.59f;
+                  accel = 0.4f;
+                  drag = 0.16f;
+                  range = 140f;
+                  hitSize = 18.9f;
+                  lowAltitude = true
+                  rotateSpeed = 2f;
+                  armor = 5f;
+                  
+                  engineOffset = 12f;
+                  engineSize = 3f;
+                  
+                  weapons.add(new Weapon(){{
+                  x = y = 0f;
+                  mirror = false;
+                  reload = 55f;
+                  minShootVelocity = 0.01f
+                  
+                  soundPitchMin = 1f;
+                  shootSound = Sounds.plasmadropSmall;
+                  
+                  bullet = new BasicBulletType(){{
+                  sprite = "large-bomb";
+                  //we can draw other sprite
+                  width = heigh = 90/3.5f;
+                  
+                  maxRange = 21.7f;
+                  ignoreRotation = true;
+                  
+                  backColor = pal.buff;
+                  frontColor = Color.white;
+                  mixColorTo = Color.white;
+                  
+                  hitSound = Sounds.plasmaboom;
+                  
+                  //we can use other effect, maybe "yellowPlasmaboomSmall"
+                  
+                  shootCone = 144f;
+                  ejectEffect = Fx.none;
+                  hitShake = 1.9f;
+                  
+                  colidersAir = false;
+                  
+                  lifetime = 66f;
+                  
+                  despawnEffect = Fx.yelowBomb;
+                  hitEffect = Fx.YLmassiveExplosion;
+                  keepVelocity = false;
+                  spin = 2.5f;
+                  
+                  shrinkX = shrinkY = 0.55f;
+                  
+                  speed = 0f;
+                  colliders = false;
+                  
+                  the next, is a buff, what can be used in blocks, it's regen/add armor
+                  
+                  regenDuration = 360f;
+                  regenPercentInSec = 4f;
+                  
+                  splashDamage = 25f;
+                  splashDamageRadius = 66f;
+                  
