@@ -142,8 +142,9 @@ public class SnEnvironment implements ContentList{
       }};
 
 //trees
-    crimsontree = new StaticTree("crimson-tree");
+    crimsontree = new StaticTree("crimson-tree"){{
         variants = 0;
+      }};
 //hidden
       hotSlag1 = new Floor("hotSlag1"){{
           buildVisibility = BuildVisibility.debugOnly;
