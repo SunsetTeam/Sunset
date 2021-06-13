@@ -1,10 +1,12 @@
 package sunset.content.blocks;
 
 import mindustry.ctype.ContentList;
+import mindustry.content;
 import mindustry.world.Block;
 import mindustry.world.blocks.environment.Floor;
 import mindustry.world.blocks.environment.OreBlock;
 import mindustry.world.blocks.environment.StaticWall;
+import mindustry.world.blocks.environment.TreeBlock;
 import mindustry.world.meta.BuildVisibility;
 import sunset.content.SnItems;
 
