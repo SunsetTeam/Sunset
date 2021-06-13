@@ -39,7 +39,7 @@ public class SnPlanets implements ContentList{
             meshLoader = () -> new HexMesh(this, 6);
             generator = new BurnoutGenerator();
             radius = 0.8f;
-            atmosphereRadIn = 0;
+            atmosphereRadIn = 0.019f;
             atmosphereRadOut = 0.19f;
             sectorApproxRadius = 3;
             orbitRadius = 16;
@@ -57,7 +57,7 @@ public class SnPlanets implements ContentList{
             meshLoader = () -> new HexMesh(this, 6);
             generator = new AzariaGenerator();
             radius = 1.03f;
-            atmosphereRadIn = 0;
+            atmosphereRadIn = 0.010f;
             atmosphereRadOut = 0.4f;
             orbitRadius = 21.3f;
             orbitTime = 24.1f;
@@ -74,7 +74,7 @@ public class SnPlanets implements ContentList{
             meshLoader = () -> new HexMesh(this, 6);
             generator = new RimeGenerator();
             radius = 1;
-            atmosphereRadIn = 0;
+            atmosphereRadIn = 0.016f;
             atmosphereRadOut = 0.28f;
             orbitRadius = 29;
             orbitTime = 36f;
@@ -82,7 +82,7 @@ public class SnPlanets implements ContentList{
             accessible = true;
             startSector = 1;
             //lightColor = Color.valueOf("B3DDE3");
-            atmosphereColor = Color.valueOf("CFF7F5");
+            atmosphereColor = Color.valueOf("96D8D4");
             hasAtmosphere = true;
             alwaysUnlocked = true;
         }};
