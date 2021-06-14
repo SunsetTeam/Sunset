@@ -52,7 +52,7 @@ public class SnOther implements ContentList {
 
         naturitePump = new Pump("naturite-pump"){{
             requirements(Category.liquid, with(Items.copper, 120, Items.metaglass, 110, Items.silicon, 40, Items.titanium, 70, SnItems.naturite, 60));
-            pumpAmount = 0.18f;
+            pumpAmount = 0.22f;
             consumes.power(6.9f);
             liquidCapacity = 100f;
             hasPower = true;
