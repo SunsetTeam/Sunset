@@ -80,7 +80,9 @@ public class SnEnvironment implements ContentList{
       }};  
     
     crimsonsand = new Floor("crimson-sand"){{
-        variants = 3;
+      itemDrop = Items.sand;
+      playerUnmineable = true;
+      variants = 3;
       }};  
 
     crimsonswamp = new Floor("crimson-swamp"){{

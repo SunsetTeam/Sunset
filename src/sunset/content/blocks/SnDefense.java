@@ -15,7 +15,7 @@ public class SnDefense implements ContentList {
     public static Block
 
 //wall
-    forsWall, forsWallLarge, naturitWall, naturitWallLarge, enojiewall, enojieWallLarge,
+    forsWall, forsWallLarge, naturiteWall, naturiteWallLarge, enojiewall, enojieWallLarge,
     
 //projector   
    forcedome;
@@ -24,7 +24,7 @@ public class SnDefense implements ContentList {
     public void load() {
 
         forcedome = new ForceProjector("force-dome"){{
-            requirements(Category.effect, with(Items.titanium, 600, Items.thorium, 480, Items.silicon, 300, SnItems.naturit, 250, SnItems.nobium, 240, SnItems.enojie, 210));
+            requirements(Category.effect, with(Items.titanium, 600, Items.thorium, 480, Items.silicon, 300, SnItems.naturite, 250, SnItems.nobium, 240, SnItems.enojie, 210));
             size = 5;
             phaseRadiusBoost = 65f;
             radius = 153.6f;
@@ -39,16 +39,16 @@ public class SnDefense implements ContentList {
 
 //walls
 
-        naturitWall = new SelfhealWall("naturit-wall"){{
-            requirements(Category.defense, with(SnItems.naturit, 6));
+        naturiteWall = new SelfhealWall("naturite-wall"){{
+            requirements(Category.defense, with(SnItems.naturite, 6));
             size = 1;
             health = 750;
             heal = 0.5f;
         }};
 
-        naturitWallLarge = new SelfhealWall("naturit-wall-large"){{
-            requirements(Category.defense, with(SnItems.naturit, 24));
-            health = naturitWall.health * 4;
+        naturiteWallLarge = new SelfhealWall("naturite-wall-large"){{
+            requirements(Category.defense, with(SnItems.naturite, 24));
+            health = naturiteWall.health * 4;
             heal = 2f;
             size = 2;
         }};

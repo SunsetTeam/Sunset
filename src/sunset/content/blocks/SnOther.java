@@ -20,25 +20,25 @@ public class SnOther implements ContentList {
     public static Block
 
 //storage
-    naturitcontainer,
+    naturiteContainer,
 
 //mass-driver
-      enojieDriver,
+    enojieDriver,
 //liquid
-    naturitConduit, naturitPump;
+    naturiteConduit, naturitePump;
 
     @Override
     public void load() {
 
-        naturitcontainer = new StorageBlock("naturit-container"){{
-            requirements(Category.effect, with(Items.titanium, 350, SnItems.naturit, 200));
+        naturiteContainer = new StorageBlock("naturite-container"){{
+            requirements(Category.effect, with(Items.titanium, 350, SnItems.naturite, 200));
             size = 5;
             itemCapacity = 3500;
         }};
 
 //liquid
-        naturitConduit = new Conduit("naturit-conduit"){{
-            requirements(Category.liquid, with(Items.titanium, 2, Items.metaglass, 1, SnItems.naturit, 2));
+        naturiteConduit = new Conduit("naturite-conduit"){{
+            requirements(Category.liquid, with(Items.titanium, 2, Items.metaglass, 1, SnItems.naturite, 2));
             liquidCapacity = 18f;
             liquidPressure = 1.035f;
             health = 110;
@@ -50,15 +50,16 @@ public class SnOther implements ContentList {
             }
         };
 
-        naturitPump = new Pump("naturit-pump"){{
-            requirements(Category.liquid, with(Items.copper, 120, Items.metaglass, 110, Items.silicon, 40, Items.titanium, 70, SnItems.naturit, 60));
-            pumpAmount = 0.28f;
+        naturitePump = new Pump("naturite-pump"){{
+            requirements(Category.liquid, with(Items.copper, 120, Items.metaglass, 110, Items.silicon, 40, Items.titanium, 70, SnItems.naturite, 60));
+            pumpAmount = 0.18f;
             consumes.power(6.9f);
             liquidCapacity = 100f;
             hasPower = true;
             size = 5;
         }};
 
+//drivers
         enojieDriver = new MassDriver("enojiemass-driver"){{
             requirements(Category.distribution, with(Items.titanium, 450, Items.thorium, 200, SnItems.nobium, 100, SnItems.enojie, 75));
             size = 5;

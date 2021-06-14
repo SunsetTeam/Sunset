@@ -27,10 +27,10 @@ public class SnProduction implements ContentList{
     public static Block
 
   //standart
-    crystalyze, purifier, enojiekiln,
+    crystalyze, purifier, enojieKiln,
 
     //advanced
-      advancedSurge, advancedCompressor, advancedKiln, advancedWeaver, advancedCultivator;
+    advancedSurge, advancedCompressor, advancedKiln, advancedWeaver, advancedCultivator;
 
   @Override
   public void load(){
@@ -44,7 +44,7 @@ public class SnProduction implements ContentList{
         hasItems = true;
         itemCapacity = 30;
         liquidCapacity = 30f;
-        outputItem = new ItemStack(SnItems.naturit, 2);
+        outputItem = new ItemStack(SnItems.naturite, 2);
         craftTime = 34f;
         size = 4;
         hasPower = hasItems = true;
@@ -74,8 +74,8 @@ public class SnProduction implements ContentList{
     }};
 
 
-    enojiekiln = new GenericCrafter("enojie-kiln"){{
-        requirements(Category.crafting, with(Items.lead, 200, Items.graphite, 140, Items.silicon, 100, Items.surgeAlloy, 55));
+    enojieKiln = new GenericCrafter("enojie-kiln"){{
+        requirements(Category.crafting, with(Items.lead, 200, SnItems.nobium, 150, Items.graphite, 140, Items.silicon, 120, Items.surgeAlloy, 80));
 
        outputItem = new ItemStack(SnItems.enojie, 1);
        craftTime = 36f;
@@ -85,13 +85,13 @@ public class SnProduction implements ContentList{
        craftEffect = SnFx.enojiecraft;
        updateEffect = SnFx.enojieburn;
 
-        consumes.items(with(SnItems.nobium, 2, SnItems.planatrium, 3, Items.metaglass, 1));
+       consumes.items(with(SnItems.nobium, 2, SnItems.planatrium, 3, Items.metaglass, 1));
        consumes.power(5.3f);
     }};
 
     //advanced
     advancedSurge = new StaticTopSmelter("advancedSurge"){{
-        requirements(Category.crafting, with(Items.lead, 130, Items.metaglass, 100, Items.silicon, 150, Items.thorium, 110, Items.surgeAlloy, 75, SnItems.naturit, 75));
+        requirements(Category.crafting, with(Items.lead, 130, Items.metaglass, 100, Items.silicon, 150, Items.thorium, 110, Items.surgeAlloy, 75, SnItems.naturite, 75));
 
         size = 5;
         craftEffect = SnFx.modSmokeCloud;
@@ -107,7 +107,7 @@ public class SnProduction implements ContentList{
     }};
 
     advancedCompressor = new GenericSmelter("advancedCompressor"){{
-        requirements(Category.crafting, with(Items.lead, 150, Items.graphite, 120, Items.silicon, 210, Items.titanium, 110, Items.thorium, 200, Items.phaseFabric, 110, SnItems.naturit, 95));
+        requirements(Category.crafting, with(Items.lead, 150, Items.graphite, 120, Items.silicon, 210, Items.titanium, 110, Items.thorium, 200, Items.phaseFabric, 110, SnItems.naturite, 95));
 
         size = 3;
         craftEffect = SnFx.modPlasticburn;
