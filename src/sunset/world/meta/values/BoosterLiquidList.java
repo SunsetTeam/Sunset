@@ -37,8 +37,7 @@ public class BoosterLiquidList implements StatValue {
                 c.add(liquid.localizedName).padRight(10).left().top();
                 c.table(Tex.underline, bt -> {
                     bt.left().defaults().padRight(3).left();
-                    //TODO: это - костыль. Необходимо перенести в bundle файлы
-                    bt.add(Core.bundle.get(bundle) + " x" + Strings.autoFixed(factorGen.get(liquid), 2));
+                    bt.add(Core.bundle.format(bundle, Strings.autoFixed(factorGen.get(liquid), 2)));
                 }).left().padTop(-9);
                 c.row();
             }

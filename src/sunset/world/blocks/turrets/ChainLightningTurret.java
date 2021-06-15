@@ -22,7 +22,7 @@ import sunset.world.consumers.AdjustableConsumePower;
 import sunset.world.meta.values.BoosterLiquidList;
 
 /**
- * Представляет турель, которая атакует врагов постоянной
+ * Турель, которая атакует врагов постоянной
  * цепной молнией, "перепрыгивающей" от одного врага к другому,
  * постепенно теряя урон.
  * @see sunset.world.blocks.turrets.ChainLightningTurret.ChainLightningTurretBuild
@@ -86,7 +86,7 @@ public class ChainLightningTurret extends BaseTurret {
                 liquid -> {
                     float used = Math.min(liquidUse, Math.max(0, (1f / coolantMultiplier) / liquid.heatCapacity));
                     return 1f + (used * liquid.heatCapacity * coolantMultiplier);
-                }, "stat.damage"));
+                }, "bullet.damagefactor"));
     }
     /** @see sunset.world.blocks.turrets.ChainLightningTurret */
     public class ChainLightningTurretBuild extends BaseTurretBuild {
