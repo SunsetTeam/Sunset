@@ -1,11 +1,15 @@
 package sunset.content;
 
 import arc.graphics.*;
+import arc.math.Angles;
+import arc.math.Mathf;
 import mindustry.content.*;
 import mindustry.ctype.*;
 import mindustry.entities.bullet.*;
+import mindustry.gen.Bullet;
 import mindustry.gen.Sounds;
 import mindustry.graphics.Pal;
+import sunset.entities.bullet.ArtilleryLiquidBulletType;
 import sunset.graphics.*;
 
 public class SnBullets implements ContentList{
@@ -17,7 +21,8 @@ public class SnBullets implements ContentList{
     heavyCoalFlame, heavyPyraFlame, blastFlame, flameidFlame,
 //liquid
     typhoonWaterShot, typhoonCryoShot, typhoonSlagShot, typhoonOilShot,
-//blast
+    floodWaterShot, floodCryoShot, floodSlagShot, floodOilShot,
+    //blast
     lightBlastGraphite, lightBlastSilicon, mediumBlastGraphite, mediumBlastSilicon, mediumBlastBlast,
     bigBlastPlastanium, bigBlastBlast, bigBlastPyratite, maxBlastPlastanium, maxBlastBlast, maxBlastSurge,
     maxBlastPlastaniumFrag;
@@ -195,6 +200,58 @@ public class SnBullets implements ContentList{
             ammoMultiplier = 0.5f;
             statusDuration = 60f * 4f;
             damage = 0.3f;
+        }};
+
+        floodWaterShot = new ArtilleryLiquidBulletType(Liquids.water) {{
+            lifetime = 130f;
+            speed = 3f;
+            knockback = 10f;
+            puddleSize = 18f;
+            orbSize = 9f;
+            drag = 0.001f;
+            statusDuration = 60f * 4f;
+            damage = 2.1f;
+            fragBullets = 36;
+            fragBullet = Bullets.waterShot;
+        }};
+
+        floodCryoShot = new ArtilleryLiquidBulletType(Liquids.cryofluid){{
+            lifetime = 130f;
+            speed = 3f;
+            knockback = 7.2f;
+            puddleSize = 18f;
+            orbSize = 9f;
+            drag = 0.001f;
+            statusDuration = 60f * 4f;
+            damage = 2.8f;
+            fragBullets = 36;
+            fragBullet = Bullets.cryoShot;
+        }};
+
+        floodSlagShot = new ArtilleryLiquidBulletType(Liquids.slag){{
+            lifetime = 130f;
+            speed = 3f;
+            knockback = 7.2f;
+            puddleSize = 18f;
+            orbSize = 9f;
+            drag = 0.001f;
+            statusDuration = 60f * 4f;
+            damage = 31f;
+            fragBullets = 36;
+            fragBullet = Bullets.slagShot;
+        }};
+
+        floodOilShot = new ArtilleryLiquidBulletType(Liquids.oil){{
+            lifetime = 130f;
+            speed = 3f;
+            knockback = 7.2f;
+            puddleSize = 18f;
+            orbSize = 9f;
+            drag = 0.001f;
+            statusDuration = 60f * 4f;
+            damage = 2.8f;
+            fragBullets = 36;
+            fragBullet = Bullets.oilShot;
         }};
 //blast
         lightBlastGraphite = new BasicBulletType(14, 16){{

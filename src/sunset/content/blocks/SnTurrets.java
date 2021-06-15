@@ -22,6 +22,7 @@ import sunset.entities.bullet.EnergySphereBulletType;
 import sunset.graphics.SnPal;
 import sunset.world.MissileLogic;
 import sunset.world.blocks.turrets.ChainLightningTurret;
+import sunset.world.blocks.turrets.LiquidTurretExt;
 import sunset.world.blocks.turrets.MissileSiloTurret;
 import sunset.world.blocks.turrets.MultiBarrelItemTurret;
 
@@ -29,7 +30,7 @@ public class SnTurrets implements ContentList {
     public static Block
 
     //turrets
-    burner, tetramite, typhoon, chain, field, triden, galebard,
+    burner, tetramite, typhoon, flood, chain, field, triden, galebard,
     sunrise, spark, dissector, art,
     spine, partisan, major, admiral;
     @Override
@@ -194,6 +195,30 @@ public class SnTurrets implements ContentList {
             range = 260f;
             health = 220 * size * size;
             flags = EnumSet.of(BlockFlag.turret, BlockFlag.extinguisher);
+        }};
+
+        flood = new LiquidTurretExt("flood"){{
+            requirements(Category.turret, with(Items.metaglass, 200, Items.lead, 530, Items.titanium, 340, Items.thorium, 170));
+            ammo(
+                    Liquids.water, SnBullets.floodWaterShot,
+                    Liquids.slag, SnBullets.floodSlagShot,
+                    Liquids.cryofluid, SnBullets.floodCryoShot,
+                    Liquids.oil, SnBullets.floodOilShot
+            );
+            size = 4;
+            reloadTime = 45f;
+            liquidCapacity = 60;
+            velocityInaccuracy = 0.025f;
+            inaccuracy = 3f;
+            recoilAmount = 4f;
+            restitution = 0.05f;
+            shootCone = 8f;
+            liquidCapacity = 60f;
+            shootEffect = SnFx.typhoonShootLiquid;
+            range = 390f;
+            health = 200 * size * size;
+            flags = EnumSet.of(BlockFlag.turret, BlockFlag.extinguisher);
+            ammoPerShot = 15;
         }};
 
         chain = new ChainLightningTurret("chain"){{
