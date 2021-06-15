@@ -43,6 +43,7 @@ public class SnOther implements ContentList {
             liquidPressure = 1.035f;
             health = 110;
             placeableLiquid = true;
+            hasShadow = false;
         }
             @Override
             public boolean canPlaceOn(Tile tile, Team team) {
