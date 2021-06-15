@@ -39,21 +39,3 @@ public class SnStatusEffects implements ContentList{
     }
 }
 
-Heal = new StatusEffect("heal"){{
-            color = Pal.heal
-            damage = -20f;
-            speedMultiplier = 1f;
-            healthMultiplier = 1f;
-            //effect = Fx.heal
-            transitionDamage = 18f;
-
-        init(() -> {
-                opposite(StatusEffects.blasted);
-                affinity(StatusEffects.overlock, ((unit, time, newTime, result) -> {
-                    unit.damagePierce(transitionDamage);
-                    result.set(frostbite, time);
-                }));
-            });
-        }};
-    }
-}
