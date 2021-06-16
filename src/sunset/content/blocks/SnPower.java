@@ -25,8 +25,12 @@ public class SnPower implements ContentList{
             ambientSound = Sounds.hum;
             ambientSoundVolume = 0.24f;
             size = 5;
-            health = 700;
-            itemDuration = 400f;
+            explosionRadius = 29f;
+            explosionDamage = 3200f;
+            health = 2500;
+            itemCapacity = 50;
+            liquidCapacity = 80;
+            itemDuration = 280f;
             powerProduction = 38f;
             consumes.item(SnItems.planatrium);
             heating = 0.07f;
