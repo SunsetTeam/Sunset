@@ -33,7 +33,7 @@ public class SnWeathers implements ContentList{
             opacityMultiplier = 0.35f;
             force = 0.3f;
             duration = 3f * Time.toMinutes;
-            sound = Sounds.windhowl;
+            sound = SnSounds.blizzardWind;
         }};
     }
 }
