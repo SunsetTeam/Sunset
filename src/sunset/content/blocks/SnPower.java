@@ -25,8 +25,8 @@ public class SnPower implements ContentList{
             ambientSound = Sounds.hum;
             ambientSoundVolume = 0.24f;
             size = 5;
-            explosionRadius = 29f;
-            explosionDamage = 3200f;
+            explosionRadius = 29;
+            explosionDamage = 3200;
             health = 2500;
             itemCapacity = 50;
             liquidCapacity = 80;
