@@ -150,41 +150,49 @@ public class SnEnvironment implements ContentList{
 //hidden
       hotSlag1 = new Floor("hotSlag1"){{
           buildVisibility = BuildVisibility.debugOnly;
+          inEditor = false;
           //only for burnout planet generator
       }};
 
       hotSlag2 = new Floor("hotSlag2"){{
           buildVisibility = BuildVisibility.debugOnly;
+          inEditor = false;
           //only for burnout planet generator
       }};
 
       hotSlag3 = new Floor("hotSlag3"){{
           buildVisibility = BuildVisibility.debugOnly;
+          inEditor = false;
           //only for burnout planet generator
       }};
 
       greenMoss = new Floor("greenMoss"){{
           buildVisibility = BuildVisibility.debugOnly;
+          inEditor = false;
           //only for azaria planet generator
       }};
 
       darkMud = new Floor("darkMud"){{
           buildVisibility = BuildVisibility.debugOnly;
+          inEditor = false;
           //only for azaria planet generator
       }};
 
       glacier1 = new Floor("glacier1"){{
           buildVisibility = BuildVisibility.debugOnly;
+          inEditor = false;
           //only for rime planet generator
       }};
 
       glacier2 = new Floor("glacier2"){{
           buildVisibility = BuildVisibility.debugOnly;
+          inEditor = false;
           //only for rime planet generator
       }};
 
       glacier3 = new Floor("glacier3"){{
           buildVisibility = BuildVisibility.debugOnly;
+          inEditor = false;
           //only for rime planet generator
       }};
   }
