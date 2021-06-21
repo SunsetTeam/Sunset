@@ -80,7 +80,7 @@ public class SnProduction implements ContentList{
     advancedCultivator = new Cultivator("advancedCultivator"){{
         requirements(Category.production, with(Items.copper, 200, Items.lead, 200, Items.silicon, 180, Items.metaglass, 140, Items.titanium, 170, Items.phaseFabric, 155));
 
-        size = 3;
+        size = 4;
         health = 990;
         craftEffect = SnFx.modSmeltsmoke;
         craftTime = 200f;
