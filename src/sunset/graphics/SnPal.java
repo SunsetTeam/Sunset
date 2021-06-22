@@ -19,6 +19,9 @@ public class SnPal{
     YellowTrailBack = Color.valueOf("FDF59A62"),
     YellowTrail = Color.valueOf("FDF59AFF"),
 
+    BlastBullet = Color.valueOf("FA5050"),
+    BlastBulletBack = Color.valueOf("F74646"),
+
     //bombs
     redBomb = Color.valueOf("F78D87"),
     redBombBack = Color.valueOf("EF9F9A"),
