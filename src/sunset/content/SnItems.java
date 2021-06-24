@@ -25,19 +25,20 @@ public class SnItems implements ContentList{
 
         nobium = new Item("nobium", Color.valueOf("ffffff")){{
             cost = 4f;
-            flammability = 0f;
-            radioactivity = 0.2f;
+            radioactivity = 0.1f;
         }};
         
         planatrium = new Item("planatrium", Color.valueOf("bc65d4ff")){{
-            cost = 3f;
+            cost = 5f;
             hardness = 4;
-            radioactivity = 1.0f;
+            explosiveness = 0.8f;
+            radioactivity = 1f;
         }};
 
         enojie = new Item("enojie", Color.valueOf("99f2c7")){{
             radioactivity = 0.8f;
-            cost = 5f;
+            explosiveness = 0.1f;
+            cost = 6f;
         }};
         
 
