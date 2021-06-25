@@ -1,21 +1,13 @@
 package sunset.content;
 
 import arc.graphics.*;
-import arc.graphics.g2d.*;
-import arc.math.*;
-import arc.util.*;
 import mindustry.ctype.*;
 import mindustry.content.*;
-import mindustry.entities.*;
 import mindustry.entities.bullet.*;
 import mindustry.gen.*;
 import mindustry.graphics.*;
-import mindustry.world.*;
 import sunset.entities.bullet.ArtilleryLiquidBulletType;
 import sunset.graphics.*;
-
-import static mindustry.Vars.*;
-
 
 
 public class SnBullets implements ContentList{
@@ -38,7 +30,7 @@ public class SnBullets implements ContentList{
     bigBlastPlastanium, bigBlastBlast, bigBlastPyratite, maxBlastPlastanium, maxBlastBlast, maxBlastSurge,
     maxBlastPlastaniumFrag,
 //units
-    BasicHelicopterGun, HelicopterShootgun;
+    BasicHelicopterGun, HelicopterShootgun, cometWaterShot;
 //exoticBullets (new) i will make it later... i must make more bulets (soulBullet, iceSpike, and more)
 // spiralPllastanium, spiralSurge, SpiralFors, SpiralThorium, SpiralSmall;
 
@@ -569,8 +561,6 @@ public class SnBullets implements ContentList{
             collidesAir = false;
         }};
 
-
-
 //units
         BasicHelicopterGun = new BasicBulletType(3f, 12){{
             width = 8f;
@@ -587,5 +577,21 @@ public class SnBullets implements ContentList{
             shootEffect = Fx.shootSmall;
             smokeEffect = Fx.shootSmallSmoke;
         }};
+
+        cometWaterShot = new LiquidBulletType(Liquids.water){{
+            lifetime = 30f;
+            speed = 2.5f;
+            knockback = 2.1f;
+            puddleSize = 4f;
+            orbSize = 2f;
+            drag = 0.001f;
+            statusDuration = 60f * 2f;
+            damage = 0.2f;
+        }
+            @Override
+            public float range() {
+                return lifetime * speed;
+            }
+        };
     }
 }
