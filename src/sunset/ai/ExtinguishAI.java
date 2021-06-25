@@ -3,42 +3,43 @@ package sunset.ai;
 import arc.math.Angles;
 import arc.math.Mathf;
 import arc.math.geom.Vec2;
-import arc.util.Log;
 import mindustry.Vars;
 import mindustry.ai.types.FlyingAI;
 import mindustry.content.StatusEffects;
+import mindustry.ctype.ContentType;
 import mindustry.entities.Fires;
 import mindustry.entities.Predict;
 import mindustry.entities.Units;
+import mindustry.entities.bullet.LiquidBulletType;
 import mindustry.entities.units.WeaponMount;
 import mindustry.gen.Building;
 import mindustry.gen.Teamc;
+import mindustry.gen.Unit;
+import mindustry.type.StatusEffect;
 import mindustry.type.Weapon;
-import mindustry.world.Tile;
-import sunset.type.ExtinguishWeapon;
-
-import java.util.concurrent.atomic.AtomicReference;
+import sunset.type.LiquidWeapon;
 
 import static mindustry.Vars.tilesize;
 import static mindustry.Vars.world;
 
 /** AI, которое пытается тушить горящие союзные пострйки или боевые единицы, если таковые есть. */
 public class ExtinguishAI extends FlyingAI {
-    protected static boolean hasFires(Building b) {
-        boolean ret = false;
-        for (int x = 0; x < b.block.size && !ret; x++)
-            for (int y = 0; y < b.block.size && !ret; y++)
-                ret = Fires.has(b.tileX() + x, b.tileY() + y);
-        return ret;
+    protected static boolean isUnitBurning(Unit u) {
+        // Считаем, что эффект - горение, если он наносит урон и
+        // среди его противоположностей есть вода. Такой подход позволит
+        // тушить "пожары" из других модов.
+        return Vars.content.getBy(ContentType.status).find(content -> {
+            StatusEffect s = (StatusEffect)content;
+            return u.hasEffect(s) && s.damage > 0 && s.opposites.contains(StatusEffects.wet);
+        }) != null;
     }
+
     protected Teamc findTargetExt(float x, float y, float range, boolean air, boolean ground) {
-        final AtomicReference<Teamc> ret = new AtomicReference<>(null);
+        final Teamc[] ret = new Teamc[] { null };
         // Ищем горящих юнитов
-        Log.info(unit.team.name + " " + x + "/" + y);
         Units.nearby(unit.team, x, y, range, u -> {
-            //Log.info(u.toString() + " " + u.hasEffect(StatusEffects.burning) + " " + u.x + "/" + u.y);
-            if(u != unit && u.hasEffect(StatusEffects.burning) && ret.get() == null) {
-                ret.set(u);
+            if(u != unit && ret[0] == null && isUnitBurning(u)) {
+                ret[0] = u;
             }
         });
         // Ищем горящие постройки
@@ -46,17 +47,15 @@ public class ExtinguishAI extends FlyingAI {
         int bx = (int)(x / tilesize), by = (int)(y / tilesize);
         for(int fx = -tr; fx < tr; fx++)
             for(int fy = -tr; fy < tr; fy++)
-                if(Mathf.dst(fx, fy) <= tr && ret.get() == null)
+                if(Mathf.dst(fx, fy) <= tr && ret[0] == null)
                 {
                     Building b = world.build(bx + fx, by + fy);
-                    Log.info(b + "->" + fx + ":" + fy);
                     if(b != null && Fires.has(bx + fx, by + fy) && b.team == unit.team) {
-                        ret.set(b);
+                        ret[0] = b;
                     }
                 }
-        Log.info(ret.get());
-        if(ret.get() != null) {
-            return ret.get();
+        if(ret[0] != null) {
+            return ret[0];
         }
         // Ищем врагов
         return super.findTarget(x, y, range, air, ground);
@@ -69,10 +68,6 @@ public class ExtinguishAI extends FlyingAI {
         float rotation = unit.rotation - 90;
         boolean ret = retarget();
 
-        if(ret) {
-            Log.info("Update weapons");
-        }
-
         unit.isShooting = false;
 
         for(int i = 0; i < targets.length; i++){
@@ -83,7 +78,9 @@ public class ExtinguishAI extends FlyingAI {
                     mountY = unit.y + Angles.trnsy(rotation, weapon.x, weapon.y);
 
             if(ret){
-                if(weapon instanceof ExtinguishWeapon)
+                if(weapon instanceof LiquidWeapon
+                        && weapon.bullet instanceof LiquidBulletType
+                        && ((LiquidBulletType)weapon.bullet).liquid.canExtinguish())
                     targets[i] = findTargetExt(mountX, mountY, weapon.bullet.range(), weapon.bullet.collidesAir, weapon.bullet.collidesGround);
                 else
                     targets[i] = findTarget(mountX, mountY, weapon.bullet.range(), weapon.bullet.collidesAir, weapon.bullet.collidesGround);

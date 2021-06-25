@@ -7,6 +7,7 @@ import mindustry.entities.bullet.*;
 import mindustry.gen.*;
 import mindustry.graphics.*;
 import sunset.entities.bullet.ArtilleryLiquidBulletType;
+import sunset.entities.bullet.ExtinguishBulletType;
 import sunset.graphics.*;
 
 
@@ -578,7 +579,7 @@ public class SnBullets implements ContentList{
             smokeEffect = Fx.shootSmallSmoke;
         }};
 
-        cometWaterShot = new LiquidBulletType(Liquids.water){{
+        cometWaterShot = new ExtinguishBulletType(Liquids.water){{
             lifetime = 30f;
             speed = 2.5f;
             knockback = 2.1f;

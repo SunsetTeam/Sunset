@@ -5,7 +5,7 @@ import mindustry.gen.*;
 import mindustry.type.*;
 import sunset.ai.ExtinguishAI;
 import sunset.type.CopterUnitType;
-import sunset.type.ExtinguishWeapon;
+import sunset.type.LiquidWeapon;
 
 public class SnUnitTypes implements ContentList{
     public static UnitType
@@ -88,15 +88,15 @@ public class SnUnitTypes implements ContentList{
 
             constructor = UnitEntity::create;
 
-            weapons.add(new ExtinguishWeapon("comet-cell"){{
+            weapons.add(new LiquidWeapon("comet"){{
                 rotate = true;
                 mirror = false;
                 x = 0;
                 top = true;
                 inaccuracy = 4;
                 alternate = false;
-                reload = 2f;
-                shootSound = Sounds.wave;
+                reload = 2.5f;
+                shootSound = Sounds.spray;
                 bullet = SnBullets.cometWaterShot;
             }});
         }};
