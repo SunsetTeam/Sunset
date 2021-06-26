@@ -54,7 +54,7 @@ public class SnProduction implements ContentList{
         absorbLasers = true;
 
         consumes.items(with(Items.titanium, 9));
-        consumes.liquid(Liquids.oil, 0.6f);
+        consumes.liquid(Liquids.oil, 0.4f);
         consumes.power(5.3f);
     }};
    
@@ -84,9 +84,10 @@ public class SnProduction implements ContentList{
         health = 990;
         craftEffect = SnFx.modSmeltsmoke;
         craftTime = 200f;
+        drawer = new DrawRotatorTop();
         outputItem = new ItemStack(Items.sporePod, 5);
         itemCapacity = 30;
-        liquidCapacity = 1f;
+        liquidCapacity = 40f;
 
         consumes.liquid(Liquids.water, 0.7f);
         consumes.power(2f);

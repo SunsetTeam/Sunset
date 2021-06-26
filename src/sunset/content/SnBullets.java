@@ -1,14 +1,22 @@
 package sunset.content;
 
 import arc.graphics.*;
+import arc.graphics.g2d.*;
+import arc.math.*;
+import arc.util.*;
 import mindustry.ctype.*;
 import mindustry.content.*;
+import mindustry.entities.*;
 import mindustry.entities.bullet.*;
 import mindustry.gen.*;
 import mindustry.graphics.*;
+import mindustry.world.*;
 import sunset.entities.bullet.ArtilleryLiquidBulletType;
 import sunset.entities.bullet.ExtinguishBulletType;
 import sunset.graphics.*;
+
+import static mindustry.Vars.*;
+
 
 
 public class SnBullets implements ContentList{
@@ -562,19 +570,21 @@ public class SnBullets implements ContentList{
             collidesAir = false;
         }};
 
+
+
 //units
-        BasicHelicopterGun = new BasicBulletType(3f, 12){{
+        BasicHelicopterGun = new BasicBulletType(5.6f, 9){{
             width = 8f;
-            height = 10f;
-            lifetime = 60f;
+            height = 11f;
+            lifetime = 35f;
             shootEffect = Fx.shootSmall;
             smokeEffect = Fx.shootSmallSmoke;
         }};
 
-        HelicopterShootgun = new BasicBulletType(2.9f, 18){{
-            width = 9f;
-            height = 10f;
-            lifetime = 90f;
+        HelicopterShootgun = new BasicBulletType(5f, 13){{
+            width = 10f;
+            height = 13f;
+            lifetime = 45f;
             shootEffect = Fx.shootSmall;
             smokeEffect = Fx.shootSmallSmoke;
         }};

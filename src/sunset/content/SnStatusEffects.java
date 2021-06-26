@@ -38,4 +38,3 @@ public class SnStatusEffects implements ContentList{
         }};
     }
 }
-

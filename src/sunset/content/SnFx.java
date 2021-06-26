@@ -121,13 +121,13 @@ public class SnFx{
         Drawf.light(e.x, e.y, circleRad * 1.5f, SnPal.redBomb, e.fout());
     }),
 
-    heavyFlame = new Effect(64, 80, e -> {
+    heavyFlame = new Effect(64f, 80f, e -> {
         Draw.color(Pal.lightFlame, Pal.darkFlame, Color.gray, e.fin());
-        Angles.randLenVectors(e.id, 8, e.finpow() * 60, e.rotation, 10, (x, y) -> {
-            Fill.circle(e.x + x, e.y + y, 0.65f + e.fout() * 1.9f);
+
+        randLenVectors(e.id, 8, e.finpow() * 60f, e.rotation, 10f, (x, y) -> {
+            Fill.circle(e.x + x*2, e.y + y*2, 0.65f + e.fout() * 1.9f);
         });
     }),
-    
     typhoonShootLiquid = new Effect(15f, 80f, e -> {
         color(e.color);
 
