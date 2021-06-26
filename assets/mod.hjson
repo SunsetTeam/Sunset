@@ -2,13 +2,13 @@ name: sunset
 displayName: "[#FF5500]S[#FF7700]u[#FFB514]n[#FFD738]s[#F5EA58]e[#F5F187]t[]"
 author:
 "
-\nCoding: Slish, RePowe[red]R[scarlet]E[crimson]D[], CaHuTaP.
+\nCoding: Slish, RePoweRED, CaHuTaP.
 \nSprites: Saint-Axolotl, Vervalamis, Snake.
 \nOst: Vervalamis
 \nSounds: King-Silicon
 "
 description: Adds a lot of new content on type: 3 planets, new and upgraded turrets, factories, 50+ units, items, embodiment and more.....
-version: 0.1.6A Beta 1
+version: 0.1.6A (Beta 1)
 repo: SunsetTeam/Sunset
 main: sunset.Sunset
 minGameVersion: 126.2
