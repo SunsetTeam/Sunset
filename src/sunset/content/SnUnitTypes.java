@@ -15,8 +15,10 @@ import mindustry.gen.*;
 import mindustry.graphics.*;
 import mindustry.type.*;
 import mindustry.world.meta.*;
+import sunset.ai.weapon.ExtinguishWeaponAI;
 import sunset.content.*;
 import sunset.ai.ExtinguishAI;
+import sunset.type.AutoWeapon;
 import sunset.type.CopterUnitType;
 import sunset.type.LiquidWeapon;
 
@@ -114,7 +116,8 @@ public void load() {
 
             constructor = UnitEntity::create;
 
-            weapons.add(new LiquidWeapon("comet"){{
+            weapons.add(new AutoWeapon("comet"){{
+                ai = new ExtinguishWeaponAI();
                 rotate = true;
                 mirror = false;
                 x = 0;
@@ -126,6 +129,5 @@ public void load() {
                 bullet = SnBullets.cometWaterShot;
             }});
         }};
-
-}
+    }
 }
