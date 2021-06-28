@@ -25,6 +25,6 @@ public class SnSounds {
                 desc.errored = Throwable::printStackTrace;
                 return sound;
             }else return new Sound();
-        }
     }
+}
 
