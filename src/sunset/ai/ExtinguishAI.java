@@ -47,19 +47,23 @@ public class ExtinguishAI extends FlyingAI {
     protected Teamc findTargetExt(float x, float y, float range, boolean air, boolean ground) {
         final Teamc[] ret = new Teamc[] { null };
         // Ищем горящих юнитов
-        Units.nearby(unit.team, x, y, range, u -> {
-            if(u != unit && ret[0] == null && isUnitBurning(u)) {
-                ret[0] = u;
+        ret[0] = Units.closest(unit.team, unit.x, unit.y,
+                range, un -> un != unit && isUnitBurning(un),
+                (unit1, xx, yy) -> Mathf.pow(unit1.health / unit1.maxHealth, 2f));
+        if(ret[0] != null) return ret[0];
+        // Ищем горящие постройки
+        float[] cost = new float[] { Float.MAX_VALUE };
+        Vars.indexer.eachBlock(unit.team, unit.x, unit.y, range, bld -> ret[0] == null, building -> {
+            Fire fire = getBuildingFire(building);
+            if(fire == null) return;
+            float cs = Mathf.pow(building.health / building.maxHealth, 2f)
+                    * Mathf.dst(unit.x, unit.y, building.x, building.y);
+            if(cs < cost[0]) {
+                cost[0] = cs;
+                ret[0] = building;
             }
         });
-        // Ищем горящие постройки
-        Vars.indexer.eachBlock(unit.team, unit.x, unit.y, range, bld -> true, building -> {
-            Fire fire = getBuildingFire(building);
-            if(ret[0] == null && fire != null) ret[0] = building;
-        });
-        if(ret[0] != null) {
-            return ret[0];
-        }
+        if(ret[0] != null) return ret[0];
         // Ищем врагов
         return super.findTarget(x, y, range, air, ground);
     }
