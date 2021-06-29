@@ -10,6 +10,8 @@ import mindustry.ctype.ContentList;
 import mindustry.gen.Sounds;
 import mindustry.type.Category;
 import mindustry.type.ItemStack;
+import mindustry.world.blocks.production.*;
+import mindustry.world.blocks.production.Drill;
 import mindustry.world.Block;
 import mindustry.world.blocks.production.Cultivator;
 import mindustry.world.blocks.production.GenericCrafter;
@@ -30,7 +32,11 @@ public class SnProduction implements ContentList{
     advancedCompressor, advancedWeaver, advancedCultivator, advancedKiln, advancedSurge,
 
     //standart
-    crystalyze, purifier, enojieKiln;
+    crystalyze, purifier, enojieKiln,
+    
+    //drills
+    percussionDrill;
+
 
   @Override
   public void load(){
@@ -101,8 +107,8 @@ public class SnProduction implements ContentList{
         craftEffect = SnFx.modSmokeCloud;
         craftTime = 95f;
         outputItem = new ItemStack(Items.metaglass, 9);
-        drawer = new DrawRotatorTop();
         itemCapacity = 15;
+        flameColor = Color.valueOf("ffc099");
         liquidCapacity = 100f;
 
         consumes.items(with(Items.lead, 7, Items.sand, 5));
@@ -179,5 +185,26 @@ public class SnProduction implements ContentList{
        consumes.items(with(SnItems.nobium, 2, SnItems.planatrium, 3, Items.metaglass, 1));
        consumes.power(5.3f);
     }};
+
+//drills
+        percussionDrill = new Drill("percussion-drill"){{
+            requirements(Category.production, with(Items.copper, 100, Items.silicon, 90, Items.titanium, 90, Items.thorium, 85, SnItems.nobium, 80, SnItems.naturite, 70));
+            drillTime = 235;
+            size = 5;
+            drawRim = true;
+            hasPower = true;
+            tier = 6;
+            updateEffect = Fx.pulverizeRed;
+            updateEffectChance = 0.04f;
+            drillEffect = Fx.mineHuge;
+            rotateSpeed = 8f;
+            warmupSpeed = 0.01f;
+
+            //more than the laser drill
+            liquidBoostIntensity = 1.9f;
+
+            consumes.power(5f);
+            consumes.liquid(Liquids.water, 0.3f).boost();
+        }};
   }
 }

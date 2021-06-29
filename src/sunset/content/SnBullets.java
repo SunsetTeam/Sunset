@@ -8,8 +8,12 @@ import mindustry.ctype.*;
 import mindustry.content.*;
 import mindustry.entities.*;
 import mindustry.entities.bullet.*;
+import mindustry.entities.effect.*;
+import mindustry.world.meta.*;
 import mindustry.gen.*;
 import mindustry.graphics.*;
+import mindustry.type.*;
+import mindustry.world.meta.*;
 import mindustry.world.*;
 import sunset.entities.bullet.ArtilleryLiquidBulletType;
 import sunset.entities.bullet.ExtinguishBulletType;
@@ -39,7 +43,7 @@ public class SnBullets implements ContentList{
     bigBlastPlastanium, bigBlastBlast, bigBlastPyratite, maxBlastPlastanium, maxBlastBlast, maxBlastSurge,
     maxBlastPlastaniumFrag,
 //units
-    BasicHelicopterGun, HelicopterShootgun, cometWaterShot;
+    BasicHelicopterGun, HelicopterShootgun, HelicopterMissile, HelicopterBomb, cometWaterShot;
 //exoticBullets (new) i will make it later... i must make more bulets (soulBullet, iceSpike, and more)
 // spiralPllastanium, spiralSurge, SpiralFors, SpiralThorium, SpiralSmall;
 
@@ -587,6 +591,56 @@ public class SnBullets implements ContentList{
             lifetime = 45f;
             shootEffect = Fx.shootSmall;
             smokeEffect = Fx.shootSmallSmoke;
+        }};
+        
+        HelicopterMissile = new BasicBulletType(4.3f, 16){{
+            width = 8f;
+            height = 8f;
+            shrinkY = 0f;
+            drag = -0.003f;
+            homingRange = 50f;
+            keepVelocity = false;
+            splashDamageRadius = 25f;
+            splashDamage = 19f;
+            lifetime = 45f;
+            trailColor = Pal.unitBack;
+            backColor = Pal.unitBack;
+            frontColor = Pal.unitFront;
+            hitEffect = Fx.blastExplosion;
+            despawnEffect = Fx.blastExplosion;
+            weaveScale = 5f;
+            weaveMag = 2f;
+        }};
+        
+        HelicopterBomb = new BasicBulletType(){{
+            sprite = "copter-bomb";
+            width = height = 70/2f;
+
+            maxRange = 20f;
+
+            backColor = SnPal.copterBomb;
+            frontColor = Color.white;
+            mixColorTo = Color.white;
+
+            hitSound = Sounds.plasmaboom;
+            hitShake = 2f;
+
+            collidesAir = false;
+
+            lifetime = 40f;
+
+            despawnEffect = SnFx.CopterBomb;
+            hitEffect = Fx.massiveExplosion;
+            keepVelocity = false;
+            spin = 2f;
+
+            shrinkX = shrinkY = 0.7f;
+
+            speed = 0f;
+            collides = false;
+
+            splashDamage = 25f;
+            splashDamageRadius = 30f;
         }};
 
         cometWaterShot = new ExtinguishBulletType(Liquids.water){{

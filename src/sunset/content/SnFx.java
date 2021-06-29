@@ -121,6 +121,25 @@ public class SnFx{
         Drawf.light(e.x, e.y, circleRad * 1.5f, SnPal.redBomb, e.fout());
     }),
 
+    CopterBomb = new Effect(25f, 60f, e -> {
+        color(SnPal.copterBomb);
+        stroke(e.fout() * 2f);
+        float circleRad = 2f + e.finpow() * 30f;
+        Lines.circle(e.x, e.y, circleRad);
+
+        color(SnPal.copterBomb);
+        for(int i = 0; i < 3; i++){
+            Drawf.tri(e.x, e.y, 5f, 80f * e.fout(), i*90);
+        }
+
+        color();
+        for(int i = 0; i < 3; i++){
+            Drawf.tri(e.x, e.y, 2f, 25f * e.fout(), i*90);
+        }
+
+        Drawf.light(e.x, e.y, circleRad * 1.5f, SnPal.copterBomb, e.fout());
+    }),
+
     heavyFlame = new Effect(64f, 80f, e -> {
         Draw.color(Pal.lightFlame, Pal.darkFlame, Color.gray, e.fin());
 
