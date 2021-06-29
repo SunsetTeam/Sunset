@@ -38,18 +38,22 @@ public class SnEnvironment implements ContentList{
     oreFors, orePlanatrium, oreFlameid, oreColdent,
     
     //floors 
-    crimsondirt, crimsonswamp, crimsonsand, crimsonsandwater, crimsonwater, crimsondeepwater,
+    crimsongrass, crimsondirt, crimsonswamp, crimsonsand, crimsonsandwater, crimsonwater, crimsondeepwater,
+    orangesand, obsidian, ash, burningash,
     
     //static walls 
-    crimsonwall, crimsonsandwall,
+    crimsondirtwall, crimsongrasswall, crimsonsandwall, 
+    stonesandwall, stonesand, orangesandwall, obsidianwall, ashwall,
     
     //trees
     crimsontree,
+
     //hidden
     hotSlag1, hotSlag2, hotSlag3, greenMoss, darkMud, glacier1, glacier2, glacier3;
         
   @Override
   public void load(){
+    
     //ores
     oreFors = new OreBlock(SnItems.fors){{
         oreDefault = false;
@@ -75,6 +79,10 @@ public class SnEnvironment implements ContentList{
         oreScale = 26.1234f;
       }};
     //floors
+    crimsongrass = new Floor("crimson-grass"){{
+      variants = 3;
+    }};  
+
     crimsondirt = new Floor("crimson-dirt"){{
         variants = 3;
       }};  
@@ -134,12 +142,60 @@ public class SnEnvironment implements ContentList{
         albedo = 0.5f;
 }};
 
+    stonesand = new Floor("stone-sand"){{
+        variants = 3;
+        }};
+
+    orangesand = new Floor("orange-sand"){{
+      itemDrop = Items.sand;
+      playerUnmineable = true;
+      variants = 3;
+      }};      
+
+      obsidian = new Floor("obsidian"){{
+          variants = 3;
+        }};
+
+      ash = new Floor("ash"){{
+          variants = 3;
+        }};
+
+      burningash = new Floor("burning-ash"){{
+          variants = 2;
+          attributes.set(Attribute.heat, 0.55f);
+          attributes.set(Attribute.water, -0.55f);
+          
+          emitLight = true;
+          lightRadius = 28f;
+          lightColor = Color.orange.cpy().a(0.15f);
+        }}; 
+
 //static walls
-    crimsonwall = new StaticWall("crimson-wall"){{
+    crimsondirtwall = new StaticWall("crimson-dirt-wall"){{
+        variants = 2;
+      }};
+
+    crimsongrasswall = new StaticWall("crimson-grass-wall"){{
         variants = 2;
       }};
 
     crimsonsandwall = new StaticWall("crimson-sand-wall"){{
+        variants = 2;
+      }};
+    
+    stonesandwall = new StaticWall("stone-sand-wall"){{
+        variants = 2;
+      }};
+    
+    orangesandwall = new StaticWall("orange-sand-wall"){{
+        variants = 2;
+      }};
+
+    obsidianwall = new StaticWall("obsidian-wall"){{
+        variants = 2;
+      }};
+
+    ashwall = new StaticWall("ash-wall"){{
         variants = 2;
       }};
 
@@ -147,6 +203,7 @@ public class SnEnvironment implements ContentList{
     crimsontree = new StaticTree("crimson-tree"){{
         variants = 0;
       }};
+      
 //hidden
       hotSlag1 = new Floor("hotSlag1"){{
           buildVisibility = BuildVisibility.debugOnly;

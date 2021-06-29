@@ -4,12 +4,14 @@ import static mindustry.type.ItemStack.with;
 
 import arc.graphics.g2d.Draw;
 import mindustry.content.Items;
+import mindustry.content.*;
 import mindustry.ctype.ContentList;
 import mindustry.entities.TargetPriority;
 import mindustry.game.Team;
 import mindustry.type.Category;
 import mindustry.world.Block;
 import mindustry.world.Tile;
+import mindustry.type.ItemStack;
 import mindustry.world.blocks.distribution.MassDriver;
 import mindustry.world.blocks.liquid.Conduit;
 import mindustry.world.blocks.production.Pump;
@@ -24,6 +26,7 @@ public class SnOther implements ContentList {
 
 //mass-driver
     enojieDriver,
+
 //liquid
     naturiteConduit, naturitePump;
 
@@ -62,7 +65,7 @@ public class SnOther implements ContentList {
 
 //drivers
         enojieDriver = new MassDriver("enojiemass-driver"){{
-            requirements(Category.distribution, with(Items.titanium, 450, Items.thorium, 200, SnItems.nobium, 100, SnItems.enojie, 75));
+            requirements(Category.distribution, with(Items.titanium, 450, Items.thorium, 200, Items.surgeAlloy, 180, SnItems.nobium, 150, SnItems.enojie, 130));
             size = 5;
             itemCapacity = 210;
             reloadTime = 250f;

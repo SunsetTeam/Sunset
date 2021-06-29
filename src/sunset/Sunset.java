@@ -23,6 +23,7 @@ public class Sunset extends Mod {
             new SnOther(),
             new SnPower(),
             new SnTurrets(),
+            new SnUnitTypes(),
             new SnProduction(),
             new SnPlanets()
     };
