@@ -15,7 +15,6 @@ public class BaseWeaponAI extends WeaponAI {
         aim(target);
     }
 
-    @Override
     protected void aim(Position target) {
         if(target == null) {
             mount.shoot = false;

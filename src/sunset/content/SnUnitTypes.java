@@ -1,31 +1,23 @@
-package sunset.content; 
+package sunset.content;
 
-import arc.graphics.*;
-import arc.graphics.g2d.*;
-import arc.math.*;
-import arc.struct.*;
-import mindustry.ai.types.*;
-import mindustry.ctype.*;
-import mindustry.content.*;
-import mindustry.entities.*;
-import mindustry.entities.abilities.*;
-import mindustry.entities.bullet.*;
-import mindustry.entities.effect.*;
-import mindustry.gen.*;
-import mindustry.graphics.*;
-import mindustry.type.*;
-import mindustry.world.meta.*;
-import sunset.ai.weapon.ExtinguishWeaponAI;
-import sunset.content.*;
+import mindustry.Vars;
+import mindustry.content.UnitTypes;
+import mindustry.ctype.Content;
+import mindustry.ctype.ContentList;
+import mindustry.entities.bullet.BasicBulletType;
+import mindustry.game.Team;
+import mindustry.gen.Sounds;
+import mindustry.gen.UnitEntity;
+import mindustry.type.UnitType;
+import mindustry.type.Weapon;
 import sunset.ai.ExtinguishAI;
+import sunset.ai.FlyingUnitWeaponAI;
+import sunset.ai.weapon.EmptyWeaponAI;
+import sunset.ai.weapon.ExtinguishWeaponAI;
 import sunset.type.AutoWeapon;
+import sunset.type.ChainWeapon;
 import sunset.type.CopterUnitType;
-import sunset.type.LiquidWeapon;
-
-import static arc.graphics.g2d.Draw.*;
-import static arc.graphics.g2d.Lines.*;
-import static arc.math.Angles.*;
-import static mindustry.Vars.*;
+import sunset.type.UnitTypeExt;
 
 public class SnUnitTypes implements ContentList{
    public static UnitType
@@ -33,7 +25,7 @@ public class SnUnitTypes implements ContentList{
     //flying
     guardcopter, bladecopter, //attacks copters
     
-      comet; //buffers
+      comet, satelite; //buffers
 
 @Override
 public void load() {
@@ -129,5 +121,37 @@ public void load() {
                 bullet = SnBullets.cometWaterShot;
             }});
         }};
+
+         satelite = new UnitTypeExt("satellite"){{
+             health = 470;
+             hitSize = 16;
+             speed = 2.8f;
+             accel = 0.2f;
+             drag = 0.15f;
+
+             flying = true;
+             circleTarget = false;
+             range = 180;
+
+             itemCapacity = 20;
+             commandLimit = 4;
+
+             defaultController = FlyingUnitWeaponAI::new;
+
+             constructor = UnitEntity::create;
+
+             weapons.add(new ChainWeapon("satellite"){{
+                 ai = new EmptyWeaponAI();
+                 damageTick = 1f;
+                 healTick = 2f;
+                 alternate = false;
+                 mirror = false;
+                 rotate = false;
+                 x = 0;
+                 maxChainLength = 2;
+                 shootCone = 2f;
+                 range = 180;
+             }});
+         }};
     }
 }

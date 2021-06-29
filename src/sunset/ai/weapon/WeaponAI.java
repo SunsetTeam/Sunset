@@ -1,6 +1,5 @@
 package sunset.ai.weapon;
 
-import arc.math.geom.Position;
 import mindustry.entities.units.WeaponMount;
 import mindustry.gen.Unit;
 
@@ -28,5 +27,4 @@ public abstract class WeaponAI {
     }
 
     public abstract void update();
-    protected abstract void aim(Position target);
 }

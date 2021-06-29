@@ -2,14 +2,11 @@ package sunset.ai.weapon;
 
 import arc.math.Mathf;
 import arc.math.geom.Position;
-import arc.util.Log;
 import mindustry.Vars;
-import mindustry.content.StatusEffects;
-import mindustry.ctype.ContentType;
-import mindustry.entities.Fires;
 import mindustry.entities.Units;
 import mindustry.gen.*;
-import mindustry.type.StatusEffect;
+
+import static sunset.Utils.*;
 
 public class ExtinguishWeaponAI extends BaseWeaponAI {
     @Override
@@ -48,27 +45,6 @@ public class ExtinguishWeaponAI extends BaseWeaponAI {
             }
         });
         if(ret[0] != null) return ret[0];
-        return null;
-    }
-
-    //TODO - DRY: "Ну да ну да пошёл я ... "
-
-    protected static boolean isUnitBurning(Unit u) {
-        // Считаем, что эффект - горение, если он наносит урон и
-        // среди его противоположностей есть вода. Такой подход позволит
-        // тушить "пожары" из других модов.
-        return Vars.content.getBy(ContentType.status).find(content -> {
-            StatusEffect s = (StatusEffect)content;
-            return u.hasEffect(s) && s.damage > 0 && s.opposites.contains(StatusEffects.wet);
-        }) != null;
-    }
-
-    protected static Fire getBuildingFire(Building b) {
-        Log.info(b.tileX() + " " + b.tileY());
-        for(int dx = 0; dx < b.block.size; dx++)
-            for(int dy = 0; dy < b.block.size; dy++)
-                if(Fires.has(b.tileX() + dx, b.tileY() + dy))
-                    return Fires.get(b.tileX() + dx, b.tileY() + dy);
         return null;
     }
 }
