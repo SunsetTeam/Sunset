@@ -35,20 +35,21 @@ public class AzariaGenerator extends ModGenerator{
     public AzariaGenerator() {
 
         arr = new Block[][]{
-                {SnEnvironment.crimsonwater, SnEnvironment.crimsonswamp, SnEnvironment.crimsongrass, SnEnvironment.crimsonsand, Blocks.mud, Blocks.mud, SnEnvironment.crimsondirt, SnEnvironment.crimsondirt, Blocks.mud, SnEnvironment.crimsongrass, Blocks.stone, Blocks.stone},
-                {SnEnvironment.crimsonwater, SnEnvironment.crimsonswamp, SnEnvironment.crimsongrass, SnEnvironment.crimsonsand, Blocks.mud, Blocks.mud, Blocks.mud, Blocks.mud, SnEnvironment.crimsonwater, Blocks.stone, Blocks.stone, Blocks.stone},
-                {SnEnvironment.crimsonwater, SnEnvironment.crimsonswamp, SnEnvironment.crimsonwater, SnEnvironment.crimsonsand, Blocks.mud, SnEnvironment.crimsondirt, Blocks.mud, SnEnvironment.crimsongrass, SnEnvironment.crimsongrass, Blocks.stone, Blocks.stone, Blocks.stone},
-                {SnEnvironment.crimsonwater, SnEnvironment.crimsonswamp, SnEnvironment.crimsondirt, SnEnvironment.crimsongrass, SnEnvironment.crimsongrass, SnEnvironment.crimsondirt, SnEnvironment.crimsondirt, Blocks.stone, Blocks.stone, Blocks.stone, SnEnvironment.crimsondirt, SnEnvironment.crimsongrass, SnEnvironment.crimsongrass},
-                {SnEnvironment.crimsondeepwater, SnEnvironment.crimsondirt, SnEnvironment.crimsonsandwater, SnEnvironment.crimsongrass, Blocks.mud, Blocks.mud, SnEnvironment.crimsongrass, SnEnvironment.crimsongrass, SnEnvironment.crimsondirt, SnEnvironment.crimsonswamp, SnEnvironment.crimsondirt, SnEnvironment.crimsondirt, SnEnvironment.crimsongrass},
-                {SnEnvironment.crimsondeepwater, SnEnvironment.crimsondirt, SnEnvironment.crimsonsandwater, SnEnvironment.crimsongrass, Blocks.mud, Blocks.mud, SnEnvironment.crimsongrass, SnEnvironment.crimsondirt, SnEnvironment.crimsondirt, SnEnvironment.crimsondirt, Blocks.mud, SnEnvironment.crimsondirt, Blocks.mud},
-                {SnEnvironment.crimsondeepwater, SnEnvironment.crimsondirt, SnEnvironment.crimsonsand, SnEnvironment.crimsongrass, SnEnvironment.crimsongrass, SnEnvironment.crimsongrass, SnEnvironment.crimsonsand, SnEnvironment.crimsonswamp, Blocks.mud, SnEnvironment.crimsonsand, Blocks.mud, SnEnvironment.crimsondirt, SnEnvironment.crimsongrass},
-                {SnEnvironment.crimsonwater, SnEnvironment.crimsonwater, SnEnvironment.crimsonsand, SnEnvironment.crimsongrass, SnEnvironment.crimsongrass, SnEnvironment.crimsongrass, Blocks.mud, Blocks.hotrock, SnEnvironment.crimsongrass,SnEnvironment.crimsondirt, SnEnvironment.crimsondirt, SnEnvironment.crimsongrass, SnEnvironment.crimsongrass},
-                {SnEnvironment.crimsonsand, SnEnvironment.crimsonsand, SnEnvironment.crimsonsand, Blocks.mud, SnEnvironment.crimsongrass, SnEnvironment.crimsondirt, SnEnvironment.crimsondirt, SnEnvironment.crimsondirt, SnEnvironment.crimsongrass, SnEnvironment.crimsondirt, SnEnvironment.crimsongrass, Blocks.mud, Blocks.mud},
-                {SnEnvironment.crimsongrass, SnEnvironment.crimsongrass, Blocks.mud, SnEnvironment.crimsondirt, SnEnvironment.crimsongrass, SnEnvironment.crimsongrass, SnEnvironment.crimsondirt, SnEnvironment.crimsondirt, SnEnvironment.crimsonsand, SnEnvironment.crimsondirt, SnEnvironment.crimsongrass, SnEnvironment.crimsonswamp, Blocks.mud},
-                {SnEnvironment.crimsongrass, SnEnvironment.crimsondeepwater, Blocks.mud, SnEnvironment.crimsondirt, SnEnvironment.crimsondirt, SnEnvironment.crimsongrass, SnEnvironment.crimsongrass, SnEnvironment.crimsondirt, SnEnvironment.crimsondirt, Blocks.mud, SnEnvironment.crimsongrass, Blocks.mud, Blocks.mud},
-                {SnEnvironment.crimsonwater, SnEnvironment.crimsondeepwater, Blocks.mud, SnEnvironment.crimsondirt, SnEnvironment.crimsongrass, SnEnvironment.crimsondirt, SnEnvironment.crimsongrass, SnEnvironment.crimsondirt, SnEnvironment.crimsondirt, Blocks.mud, Blocks.mud, Blocks.mud, Blocks.mud},
-                {SnEnvironment.crimsongrass, SnEnvironment.crimsongrass, SnEnvironment.crimsondirt, SnEnvironment.crimsonswamp, Blocks.mud, SnEnvironment.crimsondirt, SnEnvironment.crimsondirt, SnEnvironment.crimsondirt, SnEnvironment.crimsondirt, SnEnvironment.crimsonswamp, Blocks.mud, Blocks.mud, Blocks.mud}
+            {SnEnvironment.crimsonwater, SnEnvironment.darkMud, Blocks.mud, Blocks.mud, SnEnvironment.crimsonswamp, SnEnvironment.crimsongrass, Blocks.mud, Blocks.mud, Blocks.mud, Blocks.mud, SnEnvironment.crimsonwater, Blocks.stone, Blocks.stone},
+            {SnEnvironment.crimsonwater, SnEnvironment.darkMud, Blocks.mud, Blocks.mud, Blocks.mud, SnEnvironment.crimsongrass, Blocks.mud, Blocks.mud,SnEnvironment.crimsondirt, SnEnvironment.crimsonwater, Blocks.stone, Blocks.stone, Blocks.stone},
+            {SnEnvironment.crimsonwater, SnEnvironment.darkMud, Blocks.mud, Blocks.mud, Blocks.mud, Blocks.mud, Blocks.mud, Blocks.mud, SnEnvironment.crimsongrass, SnEnvironment.crimsonwater, Blocks.stone, Blocks.stone, Blocks.stone},
+            {SnEnvironment.crimsonwater, SnEnvironment.darkMud, Blocks.mud, SnEnvironment.crimsonswamp, Blocks.mud, Blocks.mud, Blocks.mud, Blocks.stone, Blocks.stone, Blocks.stone, SnEnvironment.crimsondirt, SnEnvironment.crimsonswamp, SnEnvironment.crimsongrass},
+            {SnEnvironment.crimsondeepwater, SnEnvironment.crimsonwater, SnEnvironment.crimsonsandwater, SnEnvironment.crimsondirt, Blocks.mud, Blocks.mud, Blocks.mud, Blocks.mud, SnEnvironment.crimsondirt, SnEnvironment.crimsondirt, SnEnvironment.crimsondirt, SnEnvironment.crimsondirt, SnEnvironment.crimsongrass},
+            {SnEnvironment.crimsondeepwater, SnEnvironment.crimsonwater, SnEnvironment.crimsonsandwater, SnEnvironment.crimsondirt, Blocks.mud, Blocks.mud, SnEnvironment.crimsondirt, Blocks.mud, SnEnvironment.crimsondirt, SnEnvironment.crimsondirt, SnEnvironment.crimsongrass, SnEnvironment.crimsondirt, Blocks.mud},
+            {SnEnvironment.crimsondeepwater, SnEnvironment.crimsonsandwater, Blocks.mud, SnEnvironment.crimsonswamp, SnEnvironment.crimsondirt, SnEnvironment.crimsongrass, SnEnvironment.crimsondirt, SnEnvironment.crimsonswamp, SnEnvironment.crimsonswamp, SnEnvironment.crimsongrass, Blocks.mud, SnEnvironment.crimsondirt, SnEnvironment.crimsongrass},
+            {SnEnvironment.crimsonwater, SnEnvironment.crimsonwater, Blocks.mud, Blocks.mud, SnEnvironment.crimsondirt, SnEnvironment.crimsondirt, SnEnvironment.crimsondirt, Blocks.hotrock, SnEnvironment.crimsonswamp, SnEnvironment.crimsonswamp, SnEnvironment.crimsondirt, SnEnvironment.crimsongrass, SnEnvironment.crimsongrass},
+            {SnEnvironment.darkMud, Blocks.mud, Blocks.mud, Blocks.mud, SnEnvironment.crimsongrass, SnEnvironment.crimsondirt, SnEnvironment.crimsondirt, Blocks.mud, Blocks.mud, Blocks.mud, SnEnvironment.crimsondirt, Blocks.mud, Blocks.mud},
+            {SnEnvironment.darkMud, Blocks.mud, Blocks.mud, SnEnvironment.crimsondirt, SnEnvironment.crimsongrass, SnEnvironment.crimsongrass, SnEnvironment.crimsondirt, SnEnvironment.crimsondirt, SnEnvironment.crimsondirt, SnEnvironment.crimsondirt, Blocks.mud, Blocks.mud, Blocks.mud},
+            {SnEnvironment.crimsongrass, SnEnvironment.crimsondeepwater, Blocks.mud, SnEnvironment.crimsondirt, SnEnvironment.crimsondirt, SnEnvironment.crimsondirt, SnEnvironment.crimsondirt, SnEnvironment.crimsondirt, SnEnvironment.crimsondirt, Blocks.mud, SnEnvironment.crimsongrass, Blocks.mud, Blocks.mud},
+            {SnEnvironment.crimsonwater, SnEnvironment.crimsondeepwater, Blocks.mud, SnEnvironment.crimsondirt, SnEnvironment.crimsongrass, SnEnvironment.crimsondirt, SnEnvironment.crimsongrass, SnEnvironment.crimsondirt, SnEnvironment.crimsondirt, Blocks.mud, Blocks.mud, Blocks.mud, Blocks.mud},
+            {SnEnvironment.crimsondirt, SnEnvironment.crimsongrass, SnEnvironment.crimsondirt, SnEnvironment.crimsonswamp, SnEnvironment.crimsondirt, SnEnvironment.crimsondirt, SnEnvironment.crimsondirt, SnEnvironment.crimsondirt, SnEnvironment.crimsondirt, SnEnvironment.crimsonswamp, Blocks.mud, Blocks.mud, Blocks.mud}
         };
+
         tars = ObjectMap.of(
                 Blocks.mud, Blocks.mud,
                 Blocks.stone, Blocks.stone
@@ -56,9 +57,9 @@ public class AzariaGenerator extends ModGenerator{
 
         dec = ObjectMap.of(
                 SnEnvironment.crimsondirt, Blocks.mud,
-                SnEnvironment.crimsongrass, SnEnvironment.crimsongrass,
+                SnEnvironment.crimsongrass, SnEnvironment.crimsondirt,
                 SnEnvironment.crimsonwater, SnEnvironment.crimsonwater,
-                SnEnvironment.crimsondirt, SnEnvironment.crimsonswamp
+                SnEnvironment.crimsondirt, SnEnvironment.crimsondirt
         );
 
         water = 0.05f;
