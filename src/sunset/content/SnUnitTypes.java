@@ -17,8 +17,6 @@ import sunset.ai.weapon.ExtinguishWeaponAI;
 import sunset.type.AutoWeapon;
 import sunset.type.ChainWeapon;
 import sunset.type.CopterUnitType;
-import sunset.type.LiquidWeapon;
-
 import static arc.graphics.g2d.Draw.*;
 import static arc.graphics.g2d.Lines.*;
 import static arc.math.Angles.*;
