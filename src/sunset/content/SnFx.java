@@ -6,6 +6,7 @@ import arc.graphics.g2d.*;
 import arc.math.*;
 import arc.math.geom.*;
 import arc.struct.*;
+import arc.util.Log;
 import mindustry.content.Fx;
 import mindustry.entities.*;
 import mindustry.graphics.*;
@@ -191,6 +192,16 @@ public class SnFx{
         Lines.line(e.x + cos*18f, e.y - sin*18f, e.x + cos*24f, e.y - sin*24f);
         Lines.line(e.x - sin*18f, e.y - cos*18f, e.x - sin*24f, e.y - cos*24f);
         Lines.line(e.x - cos*18f, e.y + sin*18f, e.x - cos*24f, e.y + sin*24f);
+    }),
+
+    stuff = new Effect(75, e -> {
+        float s = (float)e.data;
+        float f = s * 2 * Mathf.sin(Mathf.pow(e.fin(),0.5f) * Mathf.PI2 * 4);
+        float sin = Mathf.sinDeg(e.rotation + 90) * f;
+        float cos = Mathf.cosDeg(e.rotation + 90) * f;
+        Draw.color(e.color, e.fout());
+        Fill.circle(e.x + cos, e.y + sin, s * e.fout());
+        Fill.circle(e.x - cos, e.y - sin, s * e.fout());
     }),
 
     lightningFast = new Effect(6, Fx.lightning.renderer);
