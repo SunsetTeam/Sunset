@@ -1,11 +1,6 @@
 package sunset.content;
 
-import mindustry.Vars;
-import mindustry.content.UnitTypes;
-import mindustry.ctype.Content;
 import mindustry.ctype.ContentList;
-import mindustry.entities.bullet.BasicBulletType;
-import mindustry.game.Team;
 import mindustry.gen.Sounds;
 import mindustry.gen.UnitEntity;
 import mindustry.type.UnitType;

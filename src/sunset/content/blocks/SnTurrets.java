@@ -4,6 +4,7 @@ import static mindustry.type.ItemStack.with;
 
 
 import arc.graphics.*;
+import arc.math.Mathf;
 import arc.struct.*;
 import mindustry.content.*;
 import mindustry.ctype.*;
@@ -32,7 +33,9 @@ public class SnTurrets implements ContentList {
     //turrets
     pulsion, titrum, burner, tetramite, typhoon, flood, chain, field, undulation, triden, radius, galebard,
     sunrise, spark, dissector, art,
-    spine, partisan, major, admiral;
+    spine, partisan, major, admiral,
+
+    devturret;
     @Override
     public void load() {
 //1x1
@@ -516,6 +519,31 @@ public class SnTurrets implements ContentList {
             minRange = 276.0f;
             category = Category.turret;
             buildVisibility = BuildVisibility.shown;
+        }};
+
+        devturret = new PowerTurret("devturret"){{
+            size = 2;
+            health = 100000;
+            powerUse = 0.1f;
+            range = 1000f;
+            shootCone = 4f;
+            reloadTime = 60f;
+            shootSound = Sounds.laser;
+            category = Category.turret;
+            buildVisibility = BuildVisibility.sandboxOnly;
+            shootType = new BasicBulletType(9, 32000){{
+                trailEffect = SnFx.stuff;
+                width = 16;
+                height = 20;
+                lifetime = 100;
+            }
+                @Override
+                public void update(Bullet b){
+                    if(b.timer(0, 0.75f)){
+                        trailEffect.at(b.x, b.y, b.rotation(), trailColor, 2.5f);
+                    }
+                }
+            };
         }};
     }
 }
