@@ -21,7 +21,7 @@ public class SnUnitTypes implements ContentList{
 
     guardcopter, bladecopter, swordcopter, //attacks copters
     
-    comet, satelite; //buffers
+    comet, satelite, planet; //buffers
 
 @Override
 public void load() {
@@ -137,7 +137,7 @@ public void load() {
             range = 75;
 
             itemCapacity = 20;
-            commandLimit = 4;
+            commandLimit = 6;
 
             defaultController = ExtinguishAI::new;
 
@@ -168,24 +168,53 @@ public void load() {
             circleTarget = false;
             range = 180;
 
-            itemCapacity = 20;
-            commandLimit = 4;
+            itemCapacity = 30;
+            commandLimit = 6;
 
             defaultController = FlyingUnitWeaponAI::new;
 
             constructor = UnitEntity::create;
 
             weapons.add(new ChainWeapon("satellite"){{
-                ai = new EmptyWeaponAI();
-                damageTick = 1f;
-                healTick = 2f;
+                damageTick = 0.2f;
+                healTick = 0.7f;
                 alternate = false;
                 mirror = false;
                 rotate = false;
                 x = 0;
-                maxChainLength = 2;
                 shootCone = 2f;
                 range = 180;
+            }});
+        }};
+
+        planet = new UnitTypeExt("planet"){{
+            health = 980;
+            hitSize = 20;
+            speed = 3.2f;
+            accel = 0.25f;
+            drag = 0.1f;
+
+            flying = true;
+            circleTarget = false;
+            range = 310;
+
+            itemCapacity = 60;
+            commandLimit = 6;
+
+            defaultController = FlyingUnitWeaponAI::new;
+
+            constructor = UnitEntity::create;
+
+            weapons.add(new ChainWeapon("planet"){{
+                damageTick = 0.7f;
+                healTick = 1.8f;
+                maxChainLength = 8;
+                alternate = false;
+                mirror = false;
+                rotate = false;
+                x = 0;
+                shootCone = 2f;
+                range = 310;
             }});
         }};
     }

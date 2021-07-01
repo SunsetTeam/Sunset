@@ -9,11 +9,23 @@ import mindustry.gen.Unit;
 import mindustry.graphics.Drawf;
 import mindustry.type.UnitType;
 import mindustry.type.Weapon;
+import mindustry.world.meta.Stat;
+import mindustry.world.meta.values.WeaponListValue;
+import sunset.world.meta.values.WeaponListValueExt;
 
 /** UnitType, который вызывает update() и draw() у орудий, если таковые есть. */
 public class UnitTypeExt extends UnitType {
     public UnitTypeExt(String name) {
         super(name);
+    }
+
+    @Override
+    public void setStats() {
+        super.setStats();
+        if(weapons.any()) {
+            stats.remove(Stat.weapons);
+            stats.add(Stat.weapons, new WeaponListValueExt(this, weapons));
+        }
     }
 
     @Override

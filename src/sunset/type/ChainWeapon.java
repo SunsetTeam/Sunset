@@ -4,20 +4,26 @@ import arc.Core;
 import arc.graphics.Color;
 import arc.graphics.g2d.Draw;
 import arc.graphics.g2d.TextureRegion;
+import arc.math.Angles;
 import arc.math.Mathf;
 import arc.math.geom.Vec2;
+import arc.scene.ui.layout.Table;
 import arc.struct.Seq;
+import arc.util.Strings;
 import arc.util.Time;
+import mindustry.content.Fx;
 import mindustry.entities.bullet.BasicBulletType;
 import mindustry.entities.units.WeaponMount;
 import mindustry.gen.*;
 import mindustry.graphics.Drawf;
 import mindustry.graphics.Layer;
+import mindustry.world.meta.StatValue;
+import sunset.ai.weapon.EmptyWeaponAI;
 
 import static arc.graphics.Color.coral;
 import static sunset.Utils.*;
 
-public class ChainWeapon extends AutoWeapon implements UpdateDrawWeapon {
+public class ChainWeapon extends AutoWeapon implements UpdateDrawWeapon, StatValue {
     public int maxChainLength = 1;
     public float range = 120f;
     public float damageTick = 1f;
@@ -31,7 +37,14 @@ public class ChainWeapon extends AutoWeapon implements UpdateDrawWeapon {
         laser = Core.atlas.find("parallax-laser");
         laserEnd = Core.atlas.find("parallax-laser-end");
         /** Никогда не должно стрелять стандартным методом. */
-        bullet = new BasicBulletType();
+        ai = new EmptyWeaponAI();
+        bullet = new BasicBulletType(){{
+            shootEffect = Fx.none;
+            ejectEffect = Fx.none;
+            lifetime = 0;
+            speed = 0;
+            damage = 0;
+        }};
         firstShotDelay = Float.MAX_VALUE;
         reload = Float.MAX_VALUE;
     }
@@ -56,20 +69,19 @@ public class ChainWeapon extends AutoWeapon implements UpdateDrawWeapon {
         units.clear();
         final float[] r = new float[] { range };
         final int[] d = new int[] { maxChainLength };
-        Vec2 wpos = new Vec2(mount.weapon.x, mount.weapon.y).rotate(mount.rotation).add(unit.x, unit.y);
+        Vec2 wpos = new Vec2(mount.weapon.x, mount.weapon.y).rotate(mount.rotation + unit.rotation).add(unit.x, unit.y);
         final Unit[] t = new Unit[] { unitClosest(wpos.x, wpos.y, u -> {
-            if(Mathf.dst(wpos.x, wpos.y, u.x, u.y) > r[0]) return false;
-            if((u.maxHealth <= u.health) && !unit.team.isEnemy(u.team)) return false;
-            float a1 = unit.rotation + mount.rotation;
-            float a2 = wpos.angleTo(u.x, u.y);
-            return Math.abs(a1 - a2) <= mount.weapon.shootCone;
+            if(unit == u || Mathf.dst(wpos.x, wpos.y, u.x, u.y) > r[0]) return false;
+            if((u.health >= u.maxHealth) && !unit.team.isEnemy(u.team)) return false;
+            return Angles.within(wpos.angleTo(u), unit.rotation + mount.rotation, mount.weapon.shootCone);
         })};
         while(t[0] != null) {
             d[0]--;
             r[0] *= rangeFactor;
             units.add(t[0]);
             t[0] = unitClosest(t[0].x, t[0].y, u -> {
-                if(units.contains(u)) return false;
+                if(u == unit || units.contains(u)) return false;
+                if((u.health >= u.maxHealth) && !unit.team.isEnemy(u.team)) return false;
                 return (Mathf.dst(t[0].x, t[0].y, u.x, u.y) <= r[0]) && (d[0] > 0);
             });
         }
@@ -91,4 +103,18 @@ public class ChainWeapon extends AutoWeapon implements UpdateDrawWeapon {
     }
     @Override
     public void postDraw(WeaponMount mount, Unit unit) { }
+
+    @Override
+    public void display(Table table) {
+        table.left().defaults().padRight(3).left();
+
+        table.row();
+        table.add(Core.bundle.format("bullet.damagesec", Strings.autoFixed(damageTick * 60, 1)));
+        table.row();
+        table.add(Core.bundle.format("bullet.healsec", Strings.autoFixed(healTick * 60, 1)));
+        if(maxChainLength != 1) {
+            table.row();
+            table.add(Core.bundle.format("bullet.maxchain", maxChainLength));
+        }
+    }
 }
