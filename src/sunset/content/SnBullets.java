@@ -12,6 +12,7 @@ import mindustry.entities.effect.*;
 import mindustry.world.meta.*;
 import mindustry.gen.*;
 import mindustry.graphics.*;
+import mindustry.graphics.Pal;
 import mindustry.type.*;
 import mindustry.world.meta.*;
 import mindustry.world.*;
@@ -593,30 +594,29 @@ public class SnBullets implements ContentList{
             smokeEffect = Fx.shootSmallSmoke;
         }};
         
-        HelicopterMissile = new BasicBulletType(4.3f, 16){{
-            width = 8f;
-            height = 8f;
+        HelicopterMissile = new MissileBulletType(6f, 29){{
+            width = 12f;
+            height = 15f;
             shrinkY = 0f;
             drag = -0.003f;
             homingRange = 50f;
             keepVelocity = false;
-            splashDamageRadius = 25f;
-            splashDamage = 19f;
-            lifetime = 45f;
-            trailColor = Pal.unitBack;
+            hitSound = Sounds.explosion;
+            trailChance = 0.4f;
+            lifetime = 55f;
             backColor = Pal.unitBack;
             frontColor = Pal.unitFront;
             hitEffect = Fx.blastExplosion;
             despawnEffect = Fx.blastExplosion;
-            weaveScale = 5f;
-            weaveMag = 2f;
+            weaveScale = 4f;
+            weaveMag = 1f;
         }};
         
         HelicopterBomb = new BasicBulletType(){{
-            sprite = "copter-bomb";
+            sprite = "sunset-copter-bomb";
             width = height = 70/2f;
 
-            maxRange = 20f;
+            maxRange = 25f;
 
             backColor = SnPal.copterBomb;
             frontColor = Color.white;
@@ -631,13 +631,13 @@ public class SnBullets implements ContentList{
 
             despawnEffect = SnFx.CopterBomb;
             hitEffect = Fx.massiveExplosion;
-            keepVelocity = false;
+            keepVelocity = true;
             spin = 2f;
 
             shrinkX = shrinkY = 0.7f;
 
-            speed = 0f;
-            collides = false;
+            speed = 2f;
+            collides = true;
 
             splashDamage = 25f;
             splashDamageRadius = 30f;

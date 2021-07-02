@@ -5,6 +5,7 @@ import mindustry.gen.Sounds;
 import mindustry.gen.UnitEntity;
 import mindustry.type.UnitType;
 import mindustry.type.Weapon;
+import sunset.type.UnitTypeExt;
 import sunset.ai.ExtinguishAI;
 import sunset.ai.FlyingUnitWeaponAI;
 import sunset.ai.weapon.EmptyWeaponAI;
@@ -13,7 +14,6 @@ import sunset.type.AutoWeapon;
 import sunset.type.ChainWeapon;
 import sunset.type.CopterUnitType;
 
-import sunset.type.UnitTypeExt;
 public class SnUnitTypes implements ContentList{
    public static UnitType
 
@@ -28,16 +28,20 @@ public void load() {
    
       guardcopter = new CopterUnitType("guard_copter"){{
          health = 170;
-         hitSize = 20;
+         hitSize = 24;
          speed = 3.3f;
          accel = 0.1f;
          drag = 0.02f;
+         fallRotateSpeed = 2.5f;
+         rotorDeathSlowdown = 0.01f;
          commandLimit = 3;
 
          flying = true;
          circleTarget = false;
          range = 130;
-
+        
+         rotorDeathSlowdown = 0.07f;
+         fallRotateSpeed = 4.0f;
          offsetY = 2.2f;
          weapons.add(
                 new Weapon("sunset-guard-gun"){{
@@ -56,7 +60,7 @@ public void load() {
 
       bladecopter = new CopterUnitType("blade_copter"){{
             health = 370;
-            hitSize = 31;
+            hitSize = 35;
             speed = 3.0f;
             accel = 0.1f;
             drag = 0.02f;
@@ -65,7 +69,9 @@ public void load() {
             flying = true;
             circleTarget = false;
             range = 170;
-   
+            
+            rotorDeathSlowdown = 0.09f;
+            fallRotateSpeed = 5.0f;
             offsetY = 2.5f;
             weapons.add(
                    new Weapon("sunset-blade-gun"){{
@@ -85,23 +91,26 @@ public void load() {
 
          swordcopter = new CopterUnitType("sword_copter"){{
             health = 630;
-            hitSize = 37;
-            speed = 2.9f;
-            accel = 0.11f;
-            drag = 0.03f;
+            hitSize = 42;
+            speed = 2.8f;
+            accel = 0.1f;
+            drag = 0.02f;
             commandLimit = 4;
             
             flying = true;
             circleTarget = false;
-            range = 170;
-   
-            offsetY = 2.5f;
+            range = 210;
+            
+            rotorDeathSlowdown = 0.1f;
+            fallRotateSpeed = 5.5f;
+            rotorRotateSpeed = 27f;
+            offsetY = 2.6f;
             weapons.add(
                    new Weapon("sunset-sword-gun"){{
                        rotate = false;
                        mirror = true;
                        top = true;
-                       x = 15f;
+                       x = -19f;
                        y = 5f;
                        spacing = 3f;
                        reload = 45f;
@@ -114,8 +123,10 @@ public void load() {
             }},
 
                    new Weapon(){{
-                       x = y = 0f;
+                       x = 0f;
+                       y = 10f;
                        reload = 50f;
+                       top = false;
                        minShootVelocity = 0.01f;
        
                        soundPitchMin = 1f;
@@ -137,7 +148,7 @@ public void load() {
             range = 75;
 
             itemCapacity = 20;
-            commandLimit = 6;
+            commandLimit = 4;
 
             defaultController = ExtinguishAI::new;
 
