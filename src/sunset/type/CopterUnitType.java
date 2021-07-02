@@ -2,8 +2,9 @@ package sunset.type;
 
 import arc.Core;
 import arc.graphics.g2d.Draw;
-import arc.graphics.g2d.TextureRegion;
 import arc.math.*;
+import arc.graphics.g2d.TextureRegion;
+import arc.math.Mathf;
 import arc.struct.*;
 import arc.util.*;
 import mindustry.gen.*;
@@ -14,8 +15,13 @@ public class CopterUnitType extends UnitType {
     public float offsetX = 0f;
     public float offsetY = 0f;
     public float rotorRotateSpeed = 28f;
+    public float rotorDeathSlowdown = 0.01f;
+    public float fallRotateSpeed = 2.5f;
+
 
     public int rotorCount = 1;
+    
+    float rotorSpeedScl;
 
     public TextureRegion rotorRegion;
 
@@ -50,6 +56,11 @@ public class CopterUnitType extends UnitType {
 
         for (int i = 0; i < rotorCount; i++){
             Draw.rect(rotorRegion,  rotorx,  rotory, Time.time * rotorRotateSpeed);
+
+            if(unit.dead() || unit.health() < 0f){
+                unit.rotation(unit.rotation() + fallRotateSpeed * Mathf.signs[unit.id() % 2]);
+                rotorSpeedScl = Mathf.lerpDelta(rotorSpeedScl, 0f, rotorDeathSlowdown);
+            }
             }
         }
 }
