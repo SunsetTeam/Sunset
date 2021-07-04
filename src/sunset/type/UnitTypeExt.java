@@ -10,7 +10,6 @@ import mindustry.graphics.Drawf;
 import mindustry.type.UnitType;
 import mindustry.type.Weapon;
 import mindustry.world.meta.Stat;
-import mindustry.world.meta.values.WeaponListValue;
 import sunset.world.meta.values.WeaponListValueExt;
 
 /** UnitType, который вызывает update() и draw() у орудий, если таковые есть. */
@@ -48,7 +47,7 @@ public class UnitTypeExt extends UnitType {
             if (weapon instanceof UpdateDrawWeapon) {
                 ((UpdateDrawWeapon) weapon).preDraw(mount, unit);
             }
-            if(((UpdateDrawWeapon)weapon).useDefaultDraw) {
+            if(!(weapon instanceof UpdateDrawWeapon) || ((UpdateDrawWeapon)weapon).useDefaultDraw) {
                 float rotation = unit.rotation - 90;
                 float weaponRotation = rotation + (weapon.rotate ? mount.rotation : 0);
                 float recoil = -((mount.reload) / weapon.reload * weapon.recoil);

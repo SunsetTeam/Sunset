@@ -1,14 +1,14 @@
 package sunset.content;
 
+import mindustry.ai.types.DefenderAI;
 import mindustry.ctype.ContentList;
 import mindustry.gen.Sounds;
 import mindustry.gen.UnitEntity;
 import mindustry.type.UnitType;
 import mindustry.type.Weapon;
+import sunset.ai.FlyingUnitWeaponAI;
 import sunset.type.UnitTypeExt;
 import sunset.ai.ExtinguishAI;
-import sunset.ai.FlyingUnitWeaponAI;
-import sunset.ai.weapon.EmptyWeaponAI;
 import sunset.ai.weapon.ExtinguishWeaponAI;
 import sunset.type.AutoWeapon;
 import sunset.type.ChainWeapon;
@@ -21,7 +21,7 @@ public class SnUnitTypes implements ContentList{
 
     guardcopter, bladecopter, swordcopter, //attacks copters
     
-    comet, satelite, planet; //buffers
+    comet, satelite, planet, star; //buffers
 
 @Override
 public void load() {
@@ -139,7 +139,7 @@ public void load() {
          comet = new UnitType("comet"){{
             health = 150;
             hitSize = 12;
-            speed = 3f;
+            speed = 3.1f;
             accel = 0.15f;
             drag = 0.1f;
 
@@ -171,7 +171,7 @@ public void load() {
         satelite = new UnitTypeExt("satellite"){{
             health = 470;
             hitSize = 16;
-            speed = 2.8f;
+            speed = 3f;
             accel = 0.2f;
             drag = 0.15f;
 
@@ -182,7 +182,7 @@ public void load() {
             itemCapacity = 30;
             commandLimit = 6;
 
-            defaultController = FlyingUnitWeaponAI::new;
+            defaultController =  FlyingUnitWeaponAI::new;
 
             constructor = UnitEntity::create;
 
@@ -201,7 +201,7 @@ public void load() {
         planet = new UnitTypeExt("planet"){{
             health = 980;
             hitSize = 20;
-            speed = 3.2f;
+            speed = 2.9f;
             accel = 0.25f;
             drag = 0.1f;
 
@@ -226,6 +226,42 @@ public void load() {
                 x = 0;
                 shootCone = 2f;
                 range = 310;
+            }});
+        }};
+
+        star = new UnitTypeExt("star"){{
+            health = 5800;
+            hitSize = 28;
+            speed = 2.7f;
+            accel = 0.2f;
+            drag = 0.1f;
+
+            flying = true;
+            circleTarget = false;
+            range = 380;
+
+            engineOffset = 18f;
+            engineSize = 4f;
+
+            itemCapacity = 100;
+            commandLimit = 6;
+
+            defaultController = FlyingUnitWeaponAI::new;
+
+            constructor = UnitEntity::create;
+
+            weapons.add(new Weapon("sunset-star-gun"){{
+                x = 0;
+                y = -12;
+                mirror = false;
+                faceTarget = true;
+                rotate = true;
+                shootCone = 2f;
+                inaccuracy = 1f;
+                range = 380;
+                reload = 287f;
+                recoil = 3.5f;
+                bullet = SnBullets.starStunBullet;
             }});
         }};
     }

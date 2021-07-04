@@ -16,6 +16,8 @@ import mindustry.gen.Groups;
 import mindustry.gen.Unit;
 import mindustry.type.StatusEffect;
 
+import java.util.Arrays;
+
 /** Набор различных static утилит. */
 public class Utils {
     /** Определяет, горит ли юнит. */

@@ -1,21 +1,13 @@
 package sunset.content;
 
-import arc.*;
 import arc.graphics.*;
-import arc.math.*;
 
 import mindustry.content.*;
 import mindustry.ctype.*;
-import mindustry.game.EventType.*;
 import mindustry.type.*;
-import mindustry.graphics.*;
-
-
-import static mindustry.Vars.*;
-
 
 public class SnStatusEffects implements ContentList{
-    public static StatusEffect frostbite;
+    public static StatusEffect frostbite, stun;
 
     @Override
     public void load(){
@@ -35,6 +27,12 @@ public class SnStatusEffects implements ContentList{
                     result.set(frostbite, time);
                 }));
             });
+        }};
+
+        stun = new StatusEffect("stun"){{
+            color = Color.valueOf("392f17");
+            speedMultiplier = 0f;
+            disarm = true;
         }};
     }
 }

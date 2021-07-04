@@ -6,7 +6,6 @@ import arc.graphics.g2d.*;
 import arc.math.*;
 import arc.math.geom.*;
 import arc.struct.*;
-import arc.util.Log;
 import mindustry.content.Fx;
 import mindustry.entities.*;
 import mindustry.graphics.*;
@@ -192,6 +191,20 @@ public class SnFx{
         Lines.line(e.x + cos*18f, e.y - sin*18f, e.x + cos*24f, e.y - sin*24f);
         Lines.line(e.x - sin*18f, e.y - cos*18f, e.x - sin*24f, e.y - cos*24f);
         Lines.line(e.x - cos*18f, e.y + sin*18f, e.x - cos*24f, e.y + sin*24f);
+    }),
+
+    stunTrail = new Effect(40, e -> {
+        Draw.z(Layer.flyingUnit + 1);
+        Draw.color(Color.white);
+        Fill.circle(e.x, e.y, 3 * e.fout());
+        Draw.color();
+    }),
+
+    stunExplode = new Effect(60 * 2.25f, e -> {
+        Draw.z(Layer.flyingUnit + 1);
+        Draw.color(Color.white, Mathf.pow(e.fout(), 3f));
+        Fill.circle(e.x, e.y, 59f);
+        Draw.color();
     }),
 
     stuff = new Effect(75, e -> {

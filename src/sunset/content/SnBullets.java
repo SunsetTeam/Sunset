@@ -2,27 +2,14 @@ package sunset.content;
 
 import arc.graphics.*;
 import arc.graphics.g2d.*;
-import arc.math.*;
-import arc.util.*;
 import mindustry.ctype.*;
 import mindustry.content.*;
-import mindustry.entities.*;
 import mindustry.entities.bullet.*;
-import mindustry.entities.effect.*;
-import mindustry.world.meta.*;
 import mindustry.gen.*;
-import mindustry.graphics.*;
 import mindustry.graphics.Pal;
-import mindustry.type.*;
-import mindustry.world.meta.*;
-import mindustry.world.*;
 import sunset.entities.bullet.ArtilleryLiquidBulletType;
 import sunset.entities.bullet.ExtinguishBulletType;
 import sunset.graphics.*;
-
-import static mindustry.Vars.*;
-
-
 
 public class SnBullets implements ContentList{
     public static BulletType 
@@ -44,7 +31,7 @@ public class SnBullets implements ContentList{
     bigBlastPlastanium, bigBlastBlast, bigBlastPyratite, maxBlastPlastanium, maxBlastBlast, maxBlastSurge,
     maxBlastPlastaniumFrag,
 //units
-    BasicHelicopterGun, HelicopterShootgun, HelicopterMissile, HelicopterBomb, cometWaterShot;
+    BasicHelicopterGun, HelicopterShootgun, HelicopterMissile, HelicopterBomb, cometWaterShot, starStunBullet;
 //exoticBullets (new) i will make it later... i must make more bulets (soulBullet, iceSpike, and more)
 // spiralPllastanium, spiralSurge, SpiralFors, SpiralThorium, SpiralSmall;
 
@@ -656,6 +643,31 @@ public class SnBullets implements ContentList{
             @Override
             public float range() {
                 return lifetime * speed;
+            }
+        };
+
+        starStunBullet = new BasicBulletType(){{
+            speed = 5f;
+            lifetime = 76f;
+            damage = 12f;
+            splashDamage = 17f;
+            splashDamageRadius = 59f;
+            statusDuration = 60f * 2.25f;
+            status = SnStatusEffects.stun;
+            trailEffect = SnFx.stunTrail;
+            hitEffect = SnFx.stunExplode;
+        }
+            @Override
+            public void draw(Bullet b) {
+                Draw.color(Color.white);
+                Fill.circle(b.x, b.y, 3);
+                Draw.color();
+            }
+            @Override
+            public void update(Bullet b){
+                if(b.timer(0, 3f)){
+                    trailEffect.at(b.x, b.y);
+                }
             }
         };
     }
