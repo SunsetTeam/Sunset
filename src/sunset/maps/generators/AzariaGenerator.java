@@ -35,19 +35,19 @@ public class AzariaGenerator extends ModGenerator{
     public AzariaGenerator() {
 
         arr = new Block[][]{
-            {SnEnvironment.crimsonwater, SnEnvironment.darkMud, Blocks.mud, Blocks.mud, SnEnvironment.crimsonswamp, SnEnvironment.crimsongrass, Blocks.mud, Blocks.mud, Blocks.mud, Blocks.mud, SnEnvironment.crimsonwater, Blocks.stone, Blocks.stone},
-            {SnEnvironment.crimsonwater, SnEnvironment.darkMud, Blocks.mud, Blocks.mud, Blocks.mud, SnEnvironment.crimsongrass, Blocks.mud, Blocks.mud,SnEnvironment.crimsondirt, SnEnvironment.crimsonwater, Blocks.stone, Blocks.stone, Blocks.stone},
-            {SnEnvironment.crimsonwater, SnEnvironment.darkMud, Blocks.mud, Blocks.mud, Blocks.mud, Blocks.mud, Blocks.mud, Blocks.mud, SnEnvironment.crimsongrass, SnEnvironment.crimsonwater, Blocks.stone, Blocks.stone, Blocks.stone},
-            {SnEnvironment.crimsonwater, SnEnvironment.darkMud, Blocks.mud, SnEnvironment.crimsonswamp, Blocks.mud, Blocks.mud, Blocks.mud, Blocks.stone, Blocks.stone, Blocks.stone, SnEnvironment.crimsondirt, SnEnvironment.crimsonswamp, SnEnvironment.crimsongrass},
-            {SnEnvironment.crimsondeepwater, SnEnvironment.crimsonwater, SnEnvironment.crimsonsandwater, SnEnvironment.crimsondirt, Blocks.mud, Blocks.mud, Blocks.mud, Blocks.mud, SnEnvironment.crimsondirt, SnEnvironment.crimsondirt, SnEnvironment.crimsondirt, SnEnvironment.crimsondirt, SnEnvironment.crimsongrass},
-            {SnEnvironment.crimsondeepwater, SnEnvironment.crimsonwater, SnEnvironment.crimsonsandwater, SnEnvironment.crimsondirt, Blocks.mud, Blocks.mud, SnEnvironment.crimsondirt, Blocks.mud, SnEnvironment.crimsondirt, SnEnvironment.crimsondirt, SnEnvironment.crimsongrass, SnEnvironment.crimsondirt, Blocks.mud},
-            {SnEnvironment.crimsondeepwater, SnEnvironment.crimsonsandwater, Blocks.mud, SnEnvironment.crimsonswamp, SnEnvironment.crimsondirt, SnEnvironment.crimsongrass, SnEnvironment.crimsondirt, SnEnvironment.crimsonswamp, SnEnvironment.crimsonswamp, SnEnvironment.crimsongrass, Blocks.mud, SnEnvironment.crimsondirt, SnEnvironment.crimsongrass},
-            {SnEnvironment.crimsonwater, SnEnvironment.crimsonwater, Blocks.mud, Blocks.mud, SnEnvironment.crimsondirt, SnEnvironment.crimsondirt, SnEnvironment.crimsondirt, Blocks.hotrock, SnEnvironment.crimsonswamp, SnEnvironment.crimsonswamp, SnEnvironment.crimsondirt, SnEnvironment.crimsongrass, SnEnvironment.crimsongrass},
-            {SnEnvironment.darkMud, Blocks.mud, Blocks.mud, Blocks.mud, SnEnvironment.crimsongrass, SnEnvironment.crimsondirt, SnEnvironment.crimsondirt, Blocks.mud, Blocks.mud, Blocks.mud, SnEnvironment.crimsondirt, Blocks.mud, Blocks.mud},
-            {SnEnvironment.darkMud, Blocks.mud, Blocks.mud, SnEnvironment.crimsondirt, SnEnvironment.crimsongrass, SnEnvironment.crimsongrass, SnEnvironment.crimsondirt, SnEnvironment.crimsondirt, SnEnvironment.crimsondirt, SnEnvironment.crimsondirt, Blocks.mud, Blocks.mud, Blocks.mud},
+            {SnEnvironment.crimsonwater, SnEnvironment.crimsondirt, Blocks.mud, Blocks.mud, SnEnvironment.crimsonswamp, SnEnvironment.crimsongrass, Blocks.mud, Blocks.mud, Blocks.mud, Blocks.mud, SnEnvironment.crimsonwater, Blocks.stone, Blocks.stone},
+            {SnEnvironment.crimsonwater, SnEnvironment.crimsondirt, Blocks.mud, Blocks.mud, Blocks.mud, SnEnvironment.crimsongrass, Blocks.mud, Blocks.mud,SnEnvironment.crimsondirt, SnEnvironment.crimsonwater, Blocks.stone, Blocks.stone, Blocks.stone},
+            {SnEnvironment.crimsonwater, SnEnvironment.crimsondirt, Blocks.mud, Blocks.mud, Blocks.mud, Blocks.mud, Blocks.mud, Blocks.mud, SnEnvironment.crimsongrass, SnEnvironment.crimsonwater, Blocks.stone, Blocks.stone, Blocks.stone},
+            {SnEnvironment.crimsonwater, SnEnvironment.crimsondirt, Blocks.mud, SnEnvironment.crimsonswamp, Blocks.mud, Blocks.mud, Blocks.mud, Blocks.stone, Blocks.stone, Blocks.stone, SnEnvironment.crimsondirt, SnEnvironment.crimsonswamp, SnEnvironment.crimsonswamp},
+            {SnEnvironment.crimsondeepwater, SnEnvironment.crimsonwater, SnEnvironment.crimsonsandwater, SnEnvironment.crimsonswamp, Blocks.mud, Blocks.mud, Blocks.mud, Blocks.mud, SnEnvironment.crimsondirt, SnEnvironment.crimsondirt, SnEnvironment.crimsondirt, SnEnvironment.crimsondirt, SnEnvironment.crimsongrass},
+            {SnEnvironment.crimsondeepwater, SnEnvironment.crimsonwater, SnEnvironment.crimsonsandwater, SnEnvironment.crimsonswamp, Blocks.mud, Blocks.mud, SnEnvironment.crimsondirt, Blocks.mud, SnEnvironment.crimsondirt, SnEnvironment.crimsondirt, SnEnvironment.crimsongrass, SnEnvironment.crimsondirt, Blocks.mud},
+            {SnEnvironment.crimsondeepwater, SnEnvironment.crimsonsandwater, Blocks.mud, SnEnvironment.crimsonswamp, SnEnvironment.crimsondirt, SnEnvironment.crimsongrass, SnEnvironment.crimsondirt, SnEnvironment.crimsonswamp, SnEnvironment.crimsonswamp, SnEnvironment.crimsonswamp, Blocks.mud, SnEnvironment.crimsondirt, SnEnvironment.crimsongrass},
+            {SnEnvironment.crimsonwater, SnEnvironment.crimsonwater, Blocks.mud, Blocks.mud, SnEnvironment.crimsondirt, SnEnvironment.crimsondirt, SnEnvironment.crimsondirt, Blocks.hotrock, SnEnvironment.crimsonswamp, SnEnvironment.crimsonswamp, SnEnvironment.crimsondirt, SnEnvironment.crimsonswamp, SnEnvironment.crimsongrass},
+            {SnEnvironment.crimsondirt, Blocks.mud, Blocks.mud, Blocks.mud, SnEnvironment.crimsongrass, SnEnvironment.crimsondirt, SnEnvironment.crimsondirt, Blocks.mud, Blocks.mud, Blocks.mud, SnEnvironment.crimsonswamp, SnEnvironment.crimsonswamp, Blocks.mud},
+            {SnEnvironment.crimsondirt, Blocks.mud, Blocks.mud, SnEnvironment.crimsondirt, SnEnvironment.crimsonswamp, SnEnvironment.crimsongrass, SnEnvironment.crimsondirt, SnEnvironment.crimsondirt, SnEnvironment.crimsondirt, SnEnvironment.crimsonswamp, Blocks.mud, Blocks.mud, Blocks.mud},
             {SnEnvironment.crimsongrass, SnEnvironment.crimsondeepwater, Blocks.mud, SnEnvironment.crimsondirt, SnEnvironment.crimsondirt, SnEnvironment.crimsondirt, SnEnvironment.crimsondirt, SnEnvironment.crimsondirt, SnEnvironment.crimsondirt, Blocks.mud, SnEnvironment.crimsongrass, Blocks.mud, Blocks.mud},
-            {SnEnvironment.crimsonwater, SnEnvironment.crimsondeepwater, Blocks.mud, SnEnvironment.crimsondirt, SnEnvironment.crimsongrass, SnEnvironment.crimsondirt, SnEnvironment.crimsongrass, SnEnvironment.crimsondirt, SnEnvironment.crimsondirt, Blocks.mud, Blocks.mud, Blocks.mud, Blocks.mud},
-            {SnEnvironment.crimsondirt, SnEnvironment.crimsongrass, SnEnvironment.crimsondirt, SnEnvironment.crimsonswamp, SnEnvironment.crimsondirt, SnEnvironment.crimsondirt, SnEnvironment.crimsondirt, SnEnvironment.crimsondirt, SnEnvironment.crimsondirt, SnEnvironment.crimsonswamp, Blocks.mud, Blocks.mud, Blocks.mud}
+            {SnEnvironment.crimsonwater, SnEnvironment.crimsondeepwater, Blocks.mud, SnEnvironment.crimsondirt, SnEnvironment.crimsonswamp, SnEnvironment.crimsondirt, SnEnvironment.crimsongrass, SnEnvironment.crimsondirt, SnEnvironment.crimsondirt, Blocks.mud, Blocks.mud, Blocks.mud, Blocks.mud},
+            {SnEnvironment.crimsondirt, SnEnvironment.crimsongrass, SnEnvironment.crimsonswamp, SnEnvironment.crimsonswamp, SnEnvironment.crimsondirt, SnEnvironment.crimsondirt, SnEnvironment.crimsondirt, SnEnvironment.crimsondirt, SnEnvironment.crimsondirt, SnEnvironment.crimsonswamp, Blocks.mud, Blocks.mud, Blocks.mud}
         };
 
         tars = ObjectMap.of(
@@ -259,9 +259,17 @@ public class AzariaGenerator extends ModGenerator{
         if(noise.octaveNoise3D(2, 0.5, scl, sector.tile.v.x + 1, sector.tile.v.y, sector.tile.v.z)*nmag + poles > 0.5f*addscl){
             ores.add(Blocks.oreTitanium);
         }
+        
+        if(noise.octaveNoise3D(2, 0.5, scl, sector.tile.v.x + 1, sector.tile.v.y, sector.tile.v.z)*nmag + poles > 0.55f*addscl){
+            ores.add(SnEnvironment.oreFors);
+        }
 
         if(noise.octaveNoise3D(2, 0.5, scl, sector.tile.v.x + 2, sector.tile.v.y, sector.tile.v.z)*nmag + poles > 0.7f*addscl){
             ores.add(Blocks.oreThorium);
+        }
+
+        if(noise.octaveNoise3D(2, 0.5, scl, sector.tile.v.x + 2, sector.tile.v.y, sector.tile.v.z)*nmag + poles > 0.8f*addscl){
+            ores.add(SnEnvironment.orePlanatrium);
         }
 
         if(rand.chance(0.25)){
@@ -299,7 +307,7 @@ public class AzariaGenerator extends ModGenerator{
         tech();
 
         pass((x, y) -> {
-            //random moss
+            //random swamp
             if(floor == SnEnvironment.crimsonswamp){
                 if(Math.abs(0.5f - noise(x - 90, y, 4, 0.8, 65)) > 0.02){
                     floor = Blocks.moss;
