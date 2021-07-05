@@ -18,14 +18,15 @@ public class Sunset extends Mod {
             new SnEnvironment(),
             new SnStatusEffects(),
             new SnBullets(),
-            new SnWeathers(),
             new SnDefense(),
             new SnOther(),
             new SnPower(),
             new SnTurrets(),
             new SnUnitTypes(),
+            new SnWeathers(),
             new SnProduction(),
-            new SnPlanets()
+            new SnPlanets(),
+            new SnSectorPresets()
     };
 
     @Override
