@@ -9,14 +9,11 @@ import mindustry.ctype.ContentType;
 import mindustry.entities.Fires;
 import mindustry.entities.Units;
 import mindustry.game.Team;
-import mindustry.game.Teams;
 import mindustry.gen.Building;
 import mindustry.gen.Fire;
 import mindustry.gen.Groups;
 import mindustry.gen.Unit;
 import mindustry.type.StatusEffect;
-
-import java.util.Arrays;
 
 /** Набор различных static утилит. */
 public class Utils {

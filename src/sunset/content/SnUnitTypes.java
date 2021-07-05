@@ -1,12 +1,13 @@
 package sunset.content;
 
-import mindustry.ai.types.DefenderAI;
+import mindustry.content.StatusEffects;
 import mindustry.ctype.ContentList;
 import mindustry.gen.Sounds;
 import mindustry.gen.UnitEntity;
 import mindustry.type.UnitType;
 import mindustry.type.Weapon;
 import sunset.ai.FlyingUnitWeaponAI;
+import sunset.entities.abilities.StatusFieldAbility;
 import sunset.type.UnitTypeExt;
 import sunset.ai.ExtinguishAI;
 import sunset.ai.weapon.ExtinguishWeaponAI;
@@ -250,6 +251,8 @@ public void load() {
 
             constructor = UnitEntity::create;
 
+            abilities.add(new StatusFieldAbility(SnStatusEffects.starBuff, StatusEffects.none, 20, 8 * 24));
+
             weapons.add(new Weapon("sunset-star-gun"){{
                 x = 0;
                 y = -12;
@@ -257,7 +260,7 @@ public void load() {
                 faceTarget = true;
                 rotate = true;
                 shootCone = 2f;
-                inaccuracy = 1f;
+                inaccuracy = 0f;
                 range = 380;
                 reload = 287f;
                 recoil = 3.5f;
