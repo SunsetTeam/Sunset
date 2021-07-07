@@ -1,6 +1,7 @@
 package sunset.content;
 
 import mindustry.content.StatusEffects;
+import mindustry.content.*;
 import mindustry.ctype.ContentList;
 import mindustry.gen.Sounds;
 import mindustry.gen.UnitEntity;
@@ -20,7 +21,7 @@ public class SnUnitTypes implements ContentList{
 
     //flying
 
-    guardcopter, bladecopter, swordcopter, //attacks copters
+    guardcopter, bladecopter, swordcopter, guardiancopter, //attacks copters
     
     comet, satelite, planet, star; //buffers
 
@@ -29,7 +30,7 @@ public void load() {
    
       guardcopter = new CopterUnitType("guard_copter"){{
          health = 170;
-         hitSize = 24;
+         hitSize = 27;
          speed = 3.3f;
          accel = 0.1f;
          drag = 0.02f;
@@ -41,8 +42,7 @@ public void load() {
          circleTarget = false;
          range = 130;
         
-         rotorDeathSlowdown = 0.07f;
-         fallRotateSpeed = 4.0f;
+         fallRotateSpeed = 6f;
          offsetY = 2.2f;
          weapons.add(
                 new Weapon("sunset-guard-gun"){{
@@ -61,7 +61,7 @@ public void load() {
 
       bladecopter = new CopterUnitType("blade_copter"){{
             health = 370;
-            hitSize = 35;
+            hitSize = 39;
             speed = 3.0f;
             accel = 0.1f;
             drag = 0.02f;
@@ -71,8 +71,7 @@ public void load() {
             circleTarget = false;
             range = 170;
             
-            rotorDeathSlowdown = 0.09f;
-            fallRotateSpeed = 5.0f;
+            fallRotateSpeed = 6f;
             offsetY = 2.5f;
             weapons.add(
                    new Weapon("sunset-blade-gun"){{
@@ -81,7 +80,9 @@ public void load() {
                        top = true;
                        x = -10f;
                        y = 4f;
+                       shootCone = 20f;
                        spacing = 4f;
+                       recoil = 2f;
                        shots = 3;
                        inaccuracy = 12;
                        reload = 15f;
@@ -92,7 +93,7 @@ public void load() {
 
          swordcopter = new CopterUnitType("sword_copter"){{
             health = 630;
-            hitSize = 42;
+            hitSize = 46;
             speed = 2.8f;
             accel = 0.1f;
             drag = 0.02f;
@@ -102,8 +103,7 @@ public void load() {
             circleTarget = false;
             range = 210;
             
-            rotorDeathSlowdown = 0.1f;
-            fallRotateSpeed = 5.5f;
+            fallRotateSpeed = 6f;
             rotorRotateSpeed = 27f;
             offsetY = 2.6f;
             weapons.add(
@@ -116,6 +116,7 @@ public void load() {
                        spacing = 3f;
                        reload = 45f;
                        shake = 1f;
+                       recoil = 3f;
                        inaccuracy = 5f;
                        velocityRnd = 0.2f;
                        shots = 3;
@@ -135,6 +136,56 @@ public void load() {
                        bullet = SnBullets.HelicopterBomb;
                }});
          }};
+
+
+         guardiancopter = new CopterUnitType("guardian_copter"){{
+            health = 4900;
+            hitSize = 59;
+            speed = 2.7f;
+            accel = 0.1f;
+            drag = 0.02f;
+            commandLimit = 4;
+            
+            flying = true;
+            circleTarget = false;
+            range = 290;
+            
+            fallRotateSpeed = 6f;
+            rotorRotateSpeed = 26f;
+            offsetY = 2.6f;
+            weapons.add(
+                   new Weapon("sunset-guardian-gun"){{
+                       rotate = false;
+                       mirror = true;
+                       top = true;
+                       x = -20f;
+                       y = 4f;
+                       shotDelay = 5f;
+                       reload = 50f;
+                       recoil = 5f;
+                       shake = 2f;
+                       ejectEffect = Fx.casing3;
+
+                       inaccuracy = 0.3f;
+                       velocityRnd = 0.2f;
+                       shots = 4;
+                       shootSound = Sounds.bang;
+                       bullet = SnBullets.bigHelicopterGun;
+            }},
+                       new Weapon(){{
+                        rotate = false;
+                        mirror = false;
+                        shake = 3f;
+                        x = 0f;
+                        y = 10f;
+                        reload = 120f;
+                        top = false;
+                        inaccuracy = 1f;
+                        velocityRnd = 0.2f;
+                        shootSound = Sounds.missile;
+                        bullet = SnBullets.HelicopterRocket;
+            }});
+        }};
 
 //buffers
          comet = new UnitType("comet"){{
@@ -183,7 +234,7 @@ public void load() {
             itemCapacity = 30;
             commandLimit = 6;
 
-            defaultController =  FlyingUnitWeaponAI::new;
+            defaultController = FlyingUnitWeaponAI::new;
 
             constructor = UnitEntity::create;
 

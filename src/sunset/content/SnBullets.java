@@ -582,7 +582,7 @@ public class SnBullets implements ContentList{
             keepVelocity = false;
             hitSound = Sounds.explosion;
             trailChance = 0.3f;
-            lifetime = 55f;
+            lifetime = 47f;
             backColor = Pal.unitBack;
             frontColor = Pal.unitFront;
             hitEffect = Fx.blastExplosion;
@@ -623,9 +623,9 @@ public class SnBullets implements ContentList{
         }};
         
         bigHelicopterGun = new BasicBulletType(9f, 45){{
-            width = 16f;
+            width = 17f;
             height = 23f;
-            lifetime = 45f;
+            lifetime = 35f;
             shootEffect = Fx.shootBig;
             smokeEffect = Fx.shootBigSmoke;
 
@@ -641,7 +641,7 @@ public class SnBullets implements ContentList{
             width = 13f;
             height = 20f;
             hitShake = 2f;
-            lifetime = 40f;                             
+            lifetime = 35f;                             
             despawnEffect = SnFx.heavyCopterBomb;
             hitEffect = Fx.massiveExplosion;
             keepVelocity = false;
