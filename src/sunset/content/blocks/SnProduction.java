@@ -201,9 +201,9 @@ public class SnProduction implements ContentList{
             warmupSpeed = 0.01f;
 
             //more than the laser drill
-            liquidBoostIntensity = 1.9f;
+            liquidBoostIntensity = 2.0f;
 
-            consumes.power(5f);
+            consumes.power(6f);
             consumes.liquid(Liquids.water, 0.3f).boost();
         }};
   }

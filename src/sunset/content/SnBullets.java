@@ -11,6 +11,8 @@ import sunset.entities.bullet.ArtilleryLiquidBulletType;
 import sunset.entities.bullet.ExtinguishBulletType;
 import sunset.graphics.*;
 
+
+
 public class SnBullets implements ContentList{
     public static BulletType 
 
@@ -22,7 +24,7 @@ public class SnBullets implements ContentList{
     heavyCopper, heavyDense, heavyThorium, heavyTitanium, standartBlast, heavyIncendiary, 
     heavystandardDense, heavystandardThorium, heavystandardIncendiary, standartBlastBig, standardForsBig,
 //burner 
-    heavyCoalFlame, heavyPyraFlame, blastFlame, flameidFlame,
+    heavyCoalFlame, heavyPyraFlame, flameidFlame,
 //liquid
     typhoonWaterShot, typhoonCryoShot, typhoonSlagShot, typhoonOilShot,
     floodWaterShot, floodCryoShot, floodSlagShot, floodOilShot,
@@ -31,7 +33,12 @@ public class SnBullets implements ContentList{
     bigBlastPlastanium, bigBlastBlast, bigBlastPyratite, maxBlastPlastanium, maxBlastBlast, maxBlastSurge,
     maxBlastPlastaniumFrag,
 //units
-    BasicHelicopterGun, HelicopterShootgun, HelicopterMissile, HelicopterBomb, cometWaterShot, starStunBullet;
+    BasicHelicopterGun, HelicopterShootgun, HelicopterMissile, HelicopterBomb, HelicopterRocket, bigHelicopterGun, 
+    cometWaterShot, starStunBullet,
+    
+//test
+    testbullet;
+
 //exoticBullets (new) i will make it later... i must make more bulets (soulBullet, iceSpike, and more)
 // spiralPllastanium, spiralSurge, SpiralFors, SpiralThorium, SpiralSmall;
 
@@ -42,7 +49,7 @@ public class SnBullets implements ContentList{
         leadSap = new SapBulletType(){{
         sapStrength = 0.30f;
         length = 137f;
-        damage = 7f;
+        damage = 10f;
         shootEffect = Fx.shootSmall;
         despawnEffect = Fx.none;
         width = 1f;
@@ -53,7 +60,7 @@ public class SnBullets implements ContentList{
         sporeSap = new SapBulletType(){{
         sapStrength = 0.50f;
         length = 137f;
-        damage = 10f;
+        damage = 14f;
         shootEffect = Fx.shootSmall;
         despawnEffect = Fx.none;
         width = 1f;
@@ -64,7 +71,7 @@ public class SnBullets implements ContentList{
         planatriumSap = new SapBulletType(){{
         sapStrength = 0.85f;
         length = 137f;
-        damage = 15f;
+        damage = 17f;
         shootEffect = Fx.shootSmall;
         despawnEffect = Fx.none;
         width = 1f;
@@ -244,7 +251,7 @@ public class SnBullets implements ContentList{
         }};
 
 //burn
-        heavyCoalFlame = new BulletType(12f, 30f){{
+        heavyCoalFlame = new BulletType(12f, 28f){{
             ammoMultiplier = 3f;
             hitSize = 7f;
 	        pierce = true;
@@ -260,23 +267,7 @@ public class SnBullets implements ContentList{
             hittable = false;
         }};
 
-        heavyPyraFlame = new BulletType(12f, 33f){{
-            ammoMultiplier = 3f;
-            hitSize = 7f;
-	        pierce = true;
-	        collidesAir = true;
-            lifetime = 9f;
-            pierce = true;
-            statusDuration = 60f * 4;
-            shootEffect = SnFx.heavyFlame;
-            hitEffect = Fx.hitFlameSmall;
-            despawnEffect = Fx.none;
-            status = StatusEffects.burning;
-            keepVelocity = false;
-            hittable = false;
-        }};
-        
-        blastFlame = new BulletType(12f, 36f){{
+        heavyPyraFlame = new BulletType(12f, 35f){{
             ammoMultiplier = 3f;
             hitSize = 7f;
 	        pierce = true;
@@ -292,7 +283,7 @@ public class SnBullets implements ContentList{
             hittable = false;
         }};
 
-        flameidFlame = new BulletType(12f, 38f){{
+        flameidFlame = new BulletType(12f, 41f){{
             ammoMultiplier = 3f;
             hitSize = 7f;
 	        pierce = true;
@@ -565,7 +556,7 @@ public class SnBullets implements ContentList{
 
 
 //units
-        BasicHelicopterGun = new BasicBulletType(5.6f, 9){{
+        BasicHelicopterGun = new BasicBulletType(5.6f, 11){{
             width = 8f;
             height = 11f;
             lifetime = 35f;
@@ -573,7 +564,7 @@ public class SnBullets implements ContentList{
             smokeEffect = Fx.shootSmallSmoke;
         }};
 
-        HelicopterShootgun = new BasicBulletType(5f, 13){{
+        HelicopterShootgun = new BasicBulletType(5f, 16){{
             width = 10f;
             height = 13f;
             lifetime = 45f;
@@ -581,29 +572,30 @@ public class SnBullets implements ContentList{
             smokeEffect = Fx.shootSmallSmoke;
         }};
         
-        HelicopterMissile = new MissileBulletType(6f, 29){{
-            width = 12f;
-            height = 15f;
+        HelicopterMissile = new MissileBulletType(6f, 31){{
+            width = 14f;
+            height = 17f;
             shrinkY = 0f;
             drag = -0.003f;
-            homingRange = 50f;
+            homingRange = 30f;
+            homingPower = 0.2f;
             keepVelocity = false;
             hitSound = Sounds.explosion;
-            trailChance = 0.4f;
+            trailChance = 0.3f;
             lifetime = 55f;
             backColor = Pal.unitBack;
             frontColor = Pal.unitFront;
             hitEffect = Fx.blastExplosion;
             despawnEffect = Fx.blastExplosion;
-            weaveScale = 4f;
-            weaveMag = 1f;
+            weaveScale = 5f;
+            weaveMag = 2f;
         }};
         
         HelicopterBomb = new BasicBulletType(){{
             sprite = "sunset-copter-bomb";
             width = height = 70/2f;
 
-            maxRange = 25f;
+            maxRange = 30f;
 
             backColor = SnPal.copterBomb;
             frontColor = Color.white;
@@ -626,8 +618,41 @@ public class SnBullets implements ContentList{
             speed = 2f;
             collides = true;
 
-            splashDamage = 25f;
-            splashDamageRadius = 30f;
+            splashDamage = 120f;
+            splashDamageRadius = 45f;
+        }};
+        
+        bigHelicopterGun = new BasicBulletType(9f, 45){{
+            width = 16f;
+            height = 23f;
+            lifetime = 45f;
+            shootEffect = Fx.shootBig;
+            smokeEffect = Fx.shootBigSmoke;
+
+            lightning = 4;
+            lightningLength = 7;
+            lightningColor = Pal.surge;
+            lightningDamage = 18;
+
+        }};
+
+        HelicopterRocket = new MissileBulletType(5.0f, 50){{
+            sprite = "sunset-guardian-rocket";
+            width = 13f;
+            height = 20f;
+            hitShake = 2f;
+            lifetime = 40f;                             
+            despawnEffect = SnFx.heavyCopterBomb;
+            hitEffect = Fx.massiveExplosion;
+            keepVelocity = false;
+            hitSound = Sounds.explosion;
+            trailChance = 0.3f;
+            shrinkY = 0f;
+            drag = -0.003f;
+            homingRange = 30f;
+            homingPower = 0.2f;
+            splashDamage = 350f;
+            splashDamageRadius = 50f;
         }};
 
         cometWaterShot = new ExtinguishBulletType(Liquids.water){{
@@ -670,5 +695,20 @@ public class SnBullets implements ContentList{
                 }
             }
         };
+
+
+        testbullet = new MissileBulletType(2.7f, 14){{
+            sprite = "sunset-guardian-rocket";
+            width = 9f;
+            height = 11f;
+            lifetime = 67f;
+            shrinkY = 0f;
+            drag = -0.003f;
+            homingRange = 30f;
+            homingPower = 0.2f;
+            despawnEffect = SnFx.heavyCopterBomb;
+            hitEffect = Fx.massiveExplosion;
+            ammoMultiplier = 2;
+        }};
     }
 }

@@ -4,7 +4,6 @@ import static mindustry.type.ItemStack.with;
 
 
 import arc.graphics.*;
-import arc.math.Mathf;
 import arc.struct.*;
 import mindustry.content.*;
 import mindustry.ctype.*;
@@ -34,8 +33,8 @@ public class SnTurrets implements ContentList {
     pulsion, titrum, burner, tetramite, typhoon, flood, chain, field, undulation, triden, radius, galebard,
     sunrise, spark, dissector, art,
     spine, partisan, major, admiral,
-
-    devturret;
+    
+    testturret;
     @Override
     public void load() {
 //1x1
@@ -87,7 +86,7 @@ public class SnTurrets implements ContentList {
             range = 130f;
             health = 780;
             size = 2;
-            reloadTime = 8f;
+            reloadTime = 7f;
             range = 140f;
             recoilAmount = 0.3f;
             inaccuracy = 1.1f;
@@ -133,7 +132,6 @@ public class SnTurrets implements ContentList {
             ammo(
               Items.coal, SnBullets.heavyCoalFlame,
               Items.pyratite, SnBullets.heavyPyraFlame,
-              Items.blastCompound, SnBullets.blastFlame,
               SnItems.flameid, SnBullets.flameidFlame
             );
             health = 140 * size * size;
@@ -168,23 +166,24 @@ public class SnTurrets implements ContentList {
             recoilAmount = 3.4f;
             shootShake = 1.6f;
             burstSpacing = 4f;
-            shots = 4;
+            shots = 5;
             ammoUseEffect = Fx.casing2;
             health = 240 * size * size;
             shootSound = Sounds.shootBig;
         }};
 
         tetramite = new TractorBeamTurret("tetramite"){{
-            requirements(Category.turret, with(Items.silicon, 120, Items.lead, 100, Items.titanium, 90, Items.graphite, 30));
+            requirements(Category.turret, with(Items.silicon, 140, Items.lead, 100, Items.titanium, 90, Items.graphite, 60));
 
             hasPower = true;
+            laserWidth = 0.5f;
             size = 3;
-            force = 8f;
+            force = 14f;
             scaledForce = 7f;
-            range = 300f;
-            damage = 0.4f;
-            health = 150 * size * size;
-            rotateSpeed = 8;
+            range = 320f;
+            damage = 0.47f;
+            health = 160 * size * size;
+            rotateSpeed = 9;
 
             consumes.powerCond(5f, (TractorBeamBuild e) -> e.target != null);
         }};
@@ -521,29 +520,22 @@ public class SnTurrets implements ContentList {
             buildVisibility = BuildVisibility.shown;
         }};
 
-        devturret = new PowerTurret("devturret"){{
+        testturret = new ItemTurret("test-turret") {{
+            requirements(Category.turret, with(Items.copper, 1));
+            ammo(
+                    Items.copper, SnBullets.testbullet
+            );
+            range = 130f;
+            health = 780;
             size = 2;
-            health = 100000;
-            powerUse = 0.1f;
-            range = 1000f;
-            shootCone = 4f;
-            reloadTime = 60f;
-            shootSound = Sounds.laser;
-            category = Category.turret;
-            buildVisibility = BuildVisibility.sandboxOnly;
-            shootType = new BasicBulletType(9, 32000){{
-                trailEffect = SnFx.stuff;
-                width = 16;
-                height = 20;
-                lifetime = 100;
-            }
-                @Override
-                public void update(Bullet b){
-                    if(b.timer(0, 0.75f)){
-                        trailEffect.at(b.x, b.y, b.rotation(), trailColor, 2.5f);
-                    }
-                }
-            };
+            reloadTime = 7f;
+            range = 140f;
+            recoilAmount = 0.3f;
+            inaccuracy = 1.1f;
+            rotateSpeed = 7f;
+            shootSound = Sounds.pew;
+            targetAir = true;
         }};
+
     }
 }

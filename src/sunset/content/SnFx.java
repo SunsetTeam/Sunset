@@ -18,10 +18,15 @@ import static arc.math.Angles.*;
 public class SnFx{
     public static final Effect
 
-    enojiecraft = new Effect(30, e -> {
+    enojiecraft = new Effect(35, e -> {
         randLenVectors(e.id, 6, 4f + e.fin() * 8f, (x, y) -> {
             color(Pal.heal);
             Fill.square(e.x + x, e.y + y, e.fout() + 0.5f, 45);
+            float squareRad = 1f + e.finpow() * 7f;
+            float circleRad = 1f + e.finpow() * 7f;
+            Lines.square(e.x, e.y, e.fin() * 20F, 110);
+            Lines.square(e.x, e.y, e.fin() * 15F, 50);
+            Lines.circle(e.x, e.y, circleRad);
         });
     }),
 
@@ -128,16 +133,39 @@ public class SnFx{
         Lines.circle(e.x, e.y, circleRad);
 
         color(SnPal.copterBomb);
-        for(int i = 0; i < 3; i++){
+        for(int i = 0; i < 4; i++){
             Drawf.tri(e.x, e.y, 5f, 80f * e.fout(), i*90);
         }
 
         color();
-        for(int i = 0; i < 3; i++){
+        for(int i = 0; i < 4; i++){
             Drawf.tri(e.x, e.y, 2f, 25f * e.fout(), i*90);
         }
 
         Drawf.light(e.x, e.y, circleRad * 1.5f, SnPal.copterBomb, e.fout());
+    }),
+
+
+    heavyCopterBomb = new Effect(23f, 55f, e -> {
+        color(SnPal.copterBomb);
+        stroke(e.fout() * 2f);
+        float squareRad = 2f + e.finpow() * 25f;
+        float circleRad = 2f + e.finpow() * 30f;
+        Lines.square(e.x, e.y, e.fin() * 50.0F, 90 * e.rotation);
+        Lines.square(e.x, e.y, e.fin() * 40.0F, 45 * e.rotation);
+        Lines.circle(e.x, e.y, circleRad);
+
+        color(SnPal.copterBomb);
+        for(int i = 0; i < 4; i++){
+            Drawf.tri(e.x, e.y, 4f, 60f * e.fout(), i*90);
+        }
+
+        color();
+        for(int i = 0; i < 4; i++){
+            Drawf.tri(e.x, e.y, 2f, 20f * e.fout(), i*90);
+        }
+
+        Drawf.light(e.x, e.y, squareRad * 1.5f, SnPal.copterBomb, e.fout());
     }),
 
     heavyFlame = new Effect(64f, 80f, e -> {
@@ -147,6 +175,7 @@ public class SnFx{
             Fill.circle(e.x + x*2, e.y + y*2, 0.65f + e.fout() * 1.9f);
         });
     }),
+
     typhoonShootLiquid = new Effect(15f, 80f, e -> {
         color(e.color);
 
@@ -154,7 +183,6 @@ public class SnFx{
             Fill.circle(e.x + x, e.y + y, 0.5f + e.fout() * 2.5f);
         });
     }),
-
 
     tridenCharge = new Effect(210, e -> {
         color(Pal.surge, Color.white, e.fout());
