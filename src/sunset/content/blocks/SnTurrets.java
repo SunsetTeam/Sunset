@@ -520,15 +520,15 @@ public class SnTurrets implements ContentList {
             buildVisibility = BuildVisibility.shown;
         }};
 
-       jaguar = new ItemTurret(jaguar") {{
+        testturret = new ItemTurret("test-turret") {{
             requirements(Category.turret, with(Items.copper, 1));
             ammo(
                     Items.copper, SnBullets.testbullet
             );
             range = 130f;
             health = 780;
-            size = 3;
-            reloadTime = 7f;
+            size = 2;
+            reloadTime = 40f;
             range = 140f;
             recoilAmount = 0.3f;
             inaccuracy = 1.1f;
