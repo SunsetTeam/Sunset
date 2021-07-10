@@ -21,7 +21,7 @@ public class SnUnitTypes implements ContentList{
 
     //flying
 
-    guardcopter, bladecopter, swordcopter, guardiancopter, //attacks copters
+    guardcopter, bladecopter, swordcopter, guardiancopter, crusadercopter, //attacks copters
     
     comet, satelite, planet, star; //buffers
 
@@ -65,7 +65,7 @@ public void load() {
             speed = 3.0f;
             accel = 0.1f;
             drag = 0.02f;
-            commandLimit = 4;
+            commandLimit = 3;
             
             flying = true;
             circleTarget = false;
@@ -83,7 +83,8 @@ public void load() {
                        shootCone = 20f;
                        spacing = 4f;
                        recoil = 2f;
-                       shots = 3;
+                       shots = 6;
+                       shootCone = 0.01f;
                        inaccuracy = 12;
                        reload = 15f;
                        shootSound = Sounds.shoot;
@@ -116,7 +117,7 @@ public void load() {
                        spacing = 3f;
                        reload = 45f;
                        shake = 1f;
-                       recoil = 3f;
+                       recoil = 4f;
                        inaccuracy = 5f;
                        velocityRnd = 0.2f;
                        shots = 3;
@@ -139,8 +140,8 @@ public void load() {
 
 
          guardiancopter = new CopterUnitType("guardian_copter"){{
-            health = 4900;
-            hitSize = 59;
+            health = 4600;
+            hitSize = 63;
             speed = 2.7f;
             accel = 0.1f;
             drag = 0.02f;
@@ -148,7 +149,7 @@ public void load() {
             
             flying = true;
             circleTarget = false;
-            range = 290;
+            range = 260;
             
             fallRotateSpeed = 6f;
             rotorRotateSpeed = 26f;
@@ -184,6 +185,78 @@ public void load() {
                         velocityRnd = 0.2f;
                         shootSound = Sounds.missile;
                         bullet = SnBullets.HelicopterRocket;
+            }});
+        }};
+
+         crusadercopter = new CopterUnitType("crusader_copter"){{
+            health = 16500;
+            hitSize = 77;
+            speed = 2.6f;
+            accel = 0.1f;
+            drag = 0.02f;
+            commandLimit = 3;
+            
+            flying = true;
+            circleTarget = false;
+            range = 260;
+            
+            fallRotateSpeed = 6f;
+            rotorRotateSpeed = 25f;
+            offsetY = 2.6f;
+            weapons.add(
+                   new Weapon("sunset-crusader-gun"){{
+                       rotate = false;
+                       mirror = true;
+                       top = true;
+                       x = -33f;
+                       y = 4f;
+                       shotDelay = 5f;
+                       reload = 55f;
+                       recoil = 6f;
+                       shake = 4f;
+                       ejectEffect = Fx.casing3;
+
+                       inaccuracy = 3f;
+                       velocityRnd = 0.2f;
+                       shots = 2;
+                       shootSound = Sounds.bang;
+                       bullet = SnBullets.largeHelicopterGun;
+                    }},
+
+                    new Weapon("sunset-crusader-rocket"){{
+                        rotate = false;
+                        mirror = true;
+                        top = true;
+                        x = -10f;
+                        y = -10f;
+                        reload = 31f;
+                        recoil = 1f;
+                        shotDelay = 1f;
+                        shake = 1f;
+                        ejectEffect = Fx.casing3;
+                        
+                        shots = 3;
+                        xRand = 5f;
+                        inaccuracy = 10f;
+                        velocityRnd = 0.2f;
+                        shootSound = Sounds.missile;
+                        bullet = SnBullets.HelicopterMissiles;
+                     }},
+
+                    new Weapon(){{
+                        rotate = false;
+                        mirror = false;
+                        shake = 3f;
+                        x = 0f;
+                        y = 16f;
+                        reload = 230f;
+                        top = false;
+                        shotDelay = 8f;
+                        inaccuracy = 2f;
+                        shots = 3;
+                        velocityRnd = 0.2f;
+                        shootSound = Sounds.missile;
+                        bullet = SnBullets.bigHelicopterRocket;
             }});
         }};
 

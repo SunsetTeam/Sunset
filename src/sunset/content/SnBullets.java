@@ -33,7 +33,7 @@ public class SnBullets implements ContentList{
     bigBlastPlastanium, bigBlastBlast, bigBlastPyratite, maxBlastPlastanium, maxBlastBlast, maxBlastSurge,
     maxBlastPlastaniumFrag,
 //units
-    BasicHelicopterGun, HelicopterShootgun, HelicopterMissile, HelicopterBomb, HelicopterRocket, bigHelicopterGun, 
+    BasicHelicopterGun, HelicopterShootgun, HelicopterMissile, HelicopterBomb, HelicopterRocket, bigHelicopterGun, laserHelicopterFrag, largeHelicopterGun, bigHelicopterRocket, HelicopterMissiles,
     cometWaterShot, starStunBullet,
     
 //test
@@ -564,7 +564,7 @@ public class SnBullets implements ContentList{
             smokeEffect = Fx.shootSmallSmoke;
         }};
 
-        HelicopterShootgun = new BasicBulletType(5f, 16){{
+        HelicopterShootgun = new BasicBulletType(5f, 9){{
             width = 10f;
             height = 13f;
             lifetime = 45f;
@@ -613,19 +613,19 @@ public class SnBullets implements ContentList{
             keepVelocity = true;
             spin = 2f;
 
-            shrinkX = shrinkY = 0.7f;
+            shrinkX = shrinkY = 0.55f;
 
             speed = 2f;
             collides = true;
 
-            splashDamage = 120f;
+            splashDamage = 140f;
             splashDamageRadius = 45f;
         }};
         
-        bigHelicopterGun = new BasicBulletType(9f, 45){{
+        bigHelicopterGun = new BasicBulletType(9f, 53){{
             width = 17f;
-            height = 23f;
-            lifetime = 35f;
+            height = 24f;
+            lifetime = 28f;
             shootEffect = Fx.shootBig;
             smokeEffect = Fx.shootBigSmoke;
 
@@ -641,7 +641,7 @@ public class SnBullets implements ContentList{
             width = 13f;
             height = 20f;
             hitShake = 2f;
-            lifetime = 35f;                             
+            lifetime = 38f;                             
             despawnEffect = SnFx.heavyCopterBomb;
             hitEffect = Fx.massiveExplosion;
             keepVelocity = false;
@@ -653,6 +653,59 @@ public class SnBullets implements ContentList{
             homingPower = 0.2f;
             splashDamage = 350f;
             splashDamageRadius = 50f;
+        }};
+        
+        laserHelicopterFrag = new LaserBulletType (40){{
+            colors = new Color[]{SnPal.copterLaser.cpy().a(0.4f), SnPal.copterLaser, Color.white};
+            width = 20f;
+            lifetime = 15f;
+            length = 50f;
+            laserEffect = Fx.lancerLaserShootSmoke;
+            collidesAir = true;
+        }};
+
+        largeHelicopterGun = new BasicBulletType(10f, 80){{
+            width = 17f;
+            height = 27f;
+            lifetime = 26f;
+            hitEffect = Fx.hitBulletBig;
+            shootEffect = Fx.shootBig2;
+            smokeEffect = Fx.shootBigSmoke;
+            fragBullet = laserHelicopterFrag;
+            fragBullets = 1;
+            fragCone = 0.0001f;
+        }};
+
+        bigHelicopterRocket = new MissileBulletType(6.3f, 70){{
+            sprite = "sunset-guardian-rocket";
+            width = 13f;
+            height = 23f;
+            hitShake = 3f;
+            lifetime = 34f;                             
+            despawnEffect = SnFx.bigCopterBomb;
+            hitEffect = Fx.massiveExplosion;
+            keepVelocity = false;
+            hitSound = Sounds.explosion;
+            trailChance = 0.5f;
+            shrinkY = 0f;
+            drag = -0.003f;
+            homingRange = 20f;
+            homingPower = 0.4f;
+            splashDamage = 350f;
+            splashDamageRadius = 78f;
+        }};
+        
+        HelicopterMissiles = new MissileBulletType(4.4f, 45){{
+            width = 11f;
+            height = 11f;
+            shrinkY = 0f;
+            lifetime = 58f;
+            splashDamageRadius = 35f;
+            splashDamage = 39f * 1.5f;
+            hitEffect = Fx.blastExplosion;
+            despawnEffect = Fx.blastExplosion;
+            weaveScale = 4f;
+            weaveMag = 2f;
         }};
 
         cometWaterShot = new ExtinguishBulletType(Liquids.water){{
