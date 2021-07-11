@@ -22,10 +22,10 @@ public class SnFx{
         randLenVectors(e.id, 6, 4f + e.fin() * 8f, (x, y) -> {
             color(Pal.heal);
             Fill.square(e.x + x, e.y + y, e.fout() + 0.5f, 45);
-            float squareRad = 1f + e.finpow() * 7f;
-            float circleRad = 1f + e.finpow() * 7f;
-            Lines.square(e.x, e.y, e.fin() * 20F, 110);
-            Lines.square(e.x, e.y, e.fin() * 15F, 50);
+            float squareRad = 1f + e.finpow() * 3f;
+            float circleRad = 1f + e.finpow() * 10f;
+            Lines.square(e.x, e.y, e.fin() * 30F, 110);
+            Lines.square(e.x, e.y, e.fin() * 25F, 50);
             Lines.circle(e.x, e.y, circleRad);
         });
     }),
@@ -163,6 +163,30 @@ public class SnFx{
         color();
         for(int i = 0; i < 4; i++){
             Drawf.tri(e.x, e.y, 2f, 20f * e.fout(), i*90);
+        }
+
+        Drawf.light(e.x, e.y, squareRad * 1.5f, SnPal.copterBomb, e.fout());
+    }),
+    
+    
+    bigCopterBomb = new Effect(30f, 65f, e -> {
+        color(SnPal.copterBomb);
+        stroke(e.fout() * 2f);
+        float squareRad = 2f + e.finpow() * 35f;
+        float circleRad = 2f + e.finpow() * 40f;
+        Lines.square(e.x, e.y, e.fin() * 60.0F, 90 * e.rotation);
+        Lines.square(e.x, e.y, e.fin() * 50.0F, 45 * e.rotation);
+
+        Lines.circle(e.x, e.y, circleRad);
+
+        color(SnPal.copterBomb);
+        for(int i = 0; i < 4; i++){
+            Drawf.tri(e.x, e.y, 5f, 70f * e.fout(), i*90);
+        }
+
+        color();
+        for(int i = 0; i < 4; i++){
+            Drawf.tri(e.x, e.y, 3f, 30f * e.fout(), i*90);
         }
 
         Drawf.light(e.x, e.y, squareRad * 1.5f, SnPal.copterBomb, e.fout());
