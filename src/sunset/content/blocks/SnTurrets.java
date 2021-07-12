@@ -30,9 +30,9 @@ public class SnTurrets implements ContentList {
     public static Block
 
     //turrets
-    pulsion, titrum, burner, tetramite, typhoon, flood, chain, field, undulation, triden, radius, galebard,
+    carabine, pulsion, titrum, burner, tetramite, typhoon, flood, chain, field, undulation, triden, radius, galebard,
     sunrise, spark, dissector, art,
-    spine, partisan, major, admiral,
+    spine, major, admiral,
     
     testturret;
     @Override
@@ -56,24 +56,19 @@ public class SnTurrets implements ContentList {
             targetAir = true;
         }};
 //2x2
-        partisan = new ItemTurret("partisan") {{
-            requirements(Category.turret, with(Items.copper, 100, Items.graphite, 80, Items.lead, 60));
-            ammo(
-                    Items.graphite, SnBullets.mediumBlastGraphite,
-                    Items.silicon, SnBullets.mediumBlastSilicon,
-                    Items.blastCompound, SnBullets.mediumBlastBlast
-            );
-            health = 920;
+        carabine = new ChainLightningTurret("carabine"){{
+            requirements(Category.turret, with(Items.copper, 150, Items.lead, 140, Items.surgeAlloy, 60, SnItems.nobium, 90, SnItems.naturite, 120));
+            range = 132.2f;
+            damage = 3.0f;
+            health = 900;
             size = 2;
-            reloadTime = 96f;
-            range = 187f;
-            recoilAmount = 2.5f;
-            inaccuracy = 1.5f;
-            rotateSpeed = 6f;
-            shootCone = 2f;
-            shootSound = Sounds.shootBig;
-            ammoUseEffect = Fx.casing1;
-            targetAir = true;
+            shootCone = 6f;
+            damageMultiplier = 0.45f;
+            coolantMultiplier = 1.0f;
+            rotateSpeed = 8.75f;
+            powerUse = 3.5f;
+            liquidUse = 0.3f;
+            laserColor = SnPal.chainLaser;
         }};
 
         pulsion = new ItemTurret("pulsion") {{

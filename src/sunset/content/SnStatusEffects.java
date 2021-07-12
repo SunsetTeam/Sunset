@@ -5,6 +5,7 @@ import arc.graphics.*;
 import mindustry.content.*;
 import mindustry.ctype.*;
 import mindustry.type.*;
+import mindustry.graphics.*;
 
 public class SnStatusEffects implements ContentList{
     public static StatusEffect frostbite, stun, starBuff;
@@ -33,13 +34,14 @@ public class SnStatusEffects implements ContentList{
             color = Color.valueOf("392f17");
             speedMultiplier = 0f;
             disarm = true;
-        }};
+       }};
 
-        starBuff = new StatusEffect("star-buff"){{
-            speedMultiplier = 1.3f;
-            healthMultiplier = 1.15f;
-            damageMultiplier = 1.1f;
-            reloadMultiplier = 1.1f;
-        }};
+       starBuff = new StatusEffect("star-buff"){{
+        speedMultiplier = 1.3f;
+        healthMultiplier = 1.15f;
+        damageMultiplier = 1.1f;
+        reloadMultiplier = 1.1f;
+    }};
+
     }
 }

@@ -19,7 +19,7 @@ public class SnBullets implements ContentList{
 //sap
     leadSap, sporeSap, planatriumSap,
 //artillery
-    artilleryForsFrag, artilleryFors, artilleryBlastFrag, artilleryBlast,
+    artilleryForsMine, artilleryFors, artilleryBlastMine, artilleryBlast,
 //heavy-standart
     heavyCopper, heavyDense, heavyThorium, heavyTitanium, standartBlast, heavyIncendiary, 
     heavystandardDense, heavystandardThorium, heavystandardIncendiary, standartBlastBig, standardForsBig,
@@ -29,7 +29,7 @@ public class SnBullets implements ContentList{
     typhoonWaterShot, typhoonCryoShot, typhoonSlagShot, typhoonOilShot,
     floodWaterShot, floodCryoShot, floodSlagShot, floodOilShot,
 //blast
-    lightBlastGraphite, lightBlastSilicon, mediumBlastGraphite, mediumBlastSilicon, mediumBlastBlast,
+    lightBlastGraphite, lightBlastSilicon,
     bigBlastPlastanium, bigBlastBlast, bigBlastPyratite, maxBlastPlastanium, maxBlastBlast, maxBlastSurge,
     maxBlastPlastaniumFrag,
 //units
@@ -80,16 +80,23 @@ public class SnBullets implements ContentList{
 }};
 
 //artillery
-        artilleryForsFrag = new BasicBulletType(2.9f, 23, "bullet"){{
-            width = 10f;
-            height = 12f;
-            shrinkY = 1f;
-            lifetime = 15f;
-            damage = 24f;
+        artilleryForsMine = new FlakBulletType(3f, 20){{
+            collidesGround = true;
+            collidesAir = false;
+            splashDamage = 120f;
+            splashDamageRadius = 100f;
+            sprite = "sunset-red-mine";
+            status = StatusEffects.melting;
+            hitEffect = Fx.blastExplosion;
             backColor = SnPal.redBomb;
             frontColor = SnPal.redBombBack;
-            despawnEffect = Fx.none;
-            collidesAir = true;
+            spin = 0.2f;
+            height = 10f;
+            width = 10f;
+            lifetime = 400f;
+            shrinkX = 0.2f;
+            shrinkY = 0.3f;
+            drag = 0.04f;
         }};
 
         artilleryFors = new ArtilleryBulletType(3.0f, 70, "shell"){{
@@ -102,22 +109,30 @@ public class SnBullets implements ContentList{
             collidesAir = true;
             splashDamageRadius = 60f * 0.75f;
             splashDamage = 120f;
-            fragBullet = artilleryForsFrag;
-            fragBullets = 10;
+            fragBullet = artilleryForsMine;
+            fragBullets = 2;
             backColor = SnPal.redBomb;
             frontColor = SnPal.redBombBack;
         }};
 
-        artilleryBlastFrag = new BasicBulletType(2.9f, 25, "bullet"){{
+        artilleryBlastMine = new FlakBulletType(2.9f, 25){{
+            sprite = "sunset-red-mine";
+            collidesGround = true;
+            collidesAir = false;
+            splashDamage = 100f;
+            splashDamageRadius = 120f;
+            status = StatusEffects.melting;
+            hitEffect = Fx.blastExplosion;
+            makeFire = true;
+            backColor = SnPal.redBomb;
+            frontColor = SnPal.redBombBack;
+            spin = 0.2f;
+            height = 10f;
             width = 10f;
-            height = 12f;
-            shrinkY = 1f;
-            damage = 20f;
-            lifetime = 15f;
-            backColor = SnPal.BlastBullet;
-            frontColor = SnPal.BlastBulletBack;
-            despawnEffect = Fx.none;
-            collidesAir = true;
+            lifetime = 440f;
+            shrinkX = 0.2f;
+            shrinkY = 0.3f;
+            drag = 0.04f;
         }};
 
         artilleryBlast = new ArtilleryBulletType(3.0f, 75, "shell"){{
@@ -129,8 +144,8 @@ public class SnBullets implements ContentList{
             collidesAir = true;
             splashDamageRadius = 68f * 0.75f;
             splashDamage = 90f;
-            fragBullet = artilleryForsFrag;
-            fragBullets = 11;
+            fragBullet = artilleryBlastMine;
+            fragBullets = 3;
             makeFire = true;
             backColor = SnPal.BlastBullet;
             frontColor = SnPal.BlastBulletBack;
@@ -424,47 +439,6 @@ public class SnBullets implements ContentList{
             collidesAir = true;
         }};
 
-        mediumBlastGraphite = new BasicBulletType(9, 32){{
-            lifetime = 21f;
-            splashDamage = 54f;
-            splashDamageRadius = 21f;
-            width = 8f;
-            height = 12f;
-            frontColor = Color.valueOf("ccccdd");
-            backColor = Color.valueOf("888888");
-            collidesAir = true;
-        }};
-
-        mediumBlastSilicon = new BasicBulletType(){{
-            lifetime = 21f;
-            speed = 9f;
-            damage = 51f;
-            splashDamage = 19f;
-            splashDamageRadius = 11f;
-            homingPower = 0.05f;
-            homingRange = 197f;
-            ammoMultiplier = 3f;
-            reloadMultiplier = 1.2f;
-            width = 8f;
-            height = 12f;
-            frontColor = Color.valueOf("ccccdd");
-            backColor = Color.valueOf("888888");
-            collidesAir = true;
-        }};
-
-        mediumBlastBlast = new BasicBulletType(9, 26) {{
-            lifetime = 21f;
-            splashDamage = 54f;
-            splashDamageRadius = 35f;
-            ammoMultiplier = 1f;
-            reloadMultiplier = 0.9f;
-            width = 8f;
-            height = 12f;
-            frontColor = Pal.lightFlame;
-            backColor = Pal.darkFlame;
-            collidesAir = true;
-        }};
-
         bigBlastPlastanium = new BasicBulletType(12, 81){{
             lifetime = 20f;
             splashDamage = 16f;
@@ -655,19 +629,20 @@ public class SnBullets implements ContentList{
             splashDamageRadius = 50f;
         }};
         
-        laserHelicopterFrag = new LaserBulletType (40){{
+        laserHelicopterFrag = new LaserBulletType (50){{
             colors = new Color[]{SnPal.copterLaser.cpy().a(0.4f), SnPal.copterLaser, Color.white};
             width = 20f;
             lifetime = 15f;
             length = 50f;
             laserEffect = Fx.lancerLaserShootSmoke;
             collidesAir = true;
+            collideGround = true;
         }};
 
         largeHelicopterGun = new BasicBulletType(10f, 80){{
             width = 17f;
-            height = 27f;
-            lifetime = 26f;
+            height = 27f;7
+            lifetime = 2f;
             hitEffect = Fx.hitBulletBig;
             shootEffect = Fx.shootBig2;
             smokeEffect = Fx.shootBigSmoke;

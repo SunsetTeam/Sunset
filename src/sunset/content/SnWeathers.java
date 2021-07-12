@@ -17,7 +17,7 @@ public class SnWeathers implements ContentList{
     @Override
     public void load(){
         blizzard = new ParticleWeather("blizzard"){{
-            color = noiseColor = Color.valueOf("F7F7F7");
+            color = noiseColor = Color.valueOf("F3F3F3");
             particleRegion = "particle";
             drawNoise = true;
             useWindVector = true;
@@ -34,8 +34,11 @@ public class SnWeathers implements ContentList{
             force = 0.3f;
             duration = 3f * Time.toMinutes;
 
-            sound = SnSounds.blizzardWind;
-            soundVol = 0.9f;
+            sound = Sounds.windhowl;
+            soundVol = 0f;
+            soundVolOscMag = 1.5f;
+            soundVolOscScl = 1100f;
+            soundVolMin = 0.02f;
         }};
     }
 }

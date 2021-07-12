@@ -18,14 +18,14 @@ import static arc.math.Angles.*;
 public class SnFx{
     public static final Effect
 
-    enojiecraft = new Effect(35, e -> {
+    enojiecraft = new Effect(60, e -> {
         randLenVectors(e.id, 6, 4f + e.fin() * 8f, (x, y) -> {
             color(Pal.heal);
             Fill.square(e.x + x, e.y + y, e.fout() + 0.5f, 45);
-            float squareRad = 1f + e.finpow() * 3f;
+            float squareRad = 1f + e.finpow() * 1f;
             float circleRad = 1f + e.finpow() * 10f;
-            Lines.square(e.x, e.y, e.fin() * 30F, 110);
-            Lines.square(e.x, e.y, e.fin() * 25F, 50);
+            Lines.square(e.x, e.y, squareRad + e.fin() * e.rotation * 20.0F, 110);
+            Lines.square(e.x, e.y, squareRad + e.fin() * e.rotation * 15.0F, 50);
             Lines.circle(e.x, e.y, circleRad);
         });
     }),
@@ -157,12 +157,12 @@ public class SnFx{
 
         color(SnPal.copterBomb);
         for(int i = 0; i < 4; i++){
-            Drawf.tri(e.x, e.y, 4f, 60f * e.fout(), i*90);
+            Drawf.tri(e.x, e.y, 6f, 100f * e.fout(), i*90);
         }
 
         color();
         for(int i = 0; i < 4; i++){
-            Drawf.tri(e.x, e.y, 2f, 20f * e.fout(), i*90);
+            Drawf.tri(e.x, e.y, 3f, 40f * e.fout(), i*90);
         }
 
         Drawf.light(e.x, e.y, squareRad * 1.5f, SnPal.copterBomb, e.fout());
