@@ -636,7 +636,7 @@ public class SnBullets implements ContentList{
             length = 50f;
             laserEffect = Fx.lancerLaserShootSmoke;
             collidesAir = true;
-            collideGround = true;
+            collidesGround = true;
         }};
 
         largeHelicopterGun = new BasicBulletType(10f, 80){{
