@@ -15,7 +15,7 @@ public class SnStatusEffects implements ContentList{
 
         frostbite = new StatusEffect("frostbite"){{
             color = Color.valueOf("6ecdec");
-            damage = 0.18f;
+            damage = 0.17f;
             speedMultiplier = 0.4f;
             healthMultiplier = 0.7f;
             effect = Fx.freezing;
