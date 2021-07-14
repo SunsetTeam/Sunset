@@ -29,7 +29,7 @@ public class Sunset extends Mod {
             new SnSectorPresets()
     };
 
-    @Overridee
+    @Override
     public void init() {
         MissileLogic.init();
         /*Log.info("startUp");
