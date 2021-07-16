@@ -126,7 +126,7 @@ public void load() {
                        bullet = SnBullets.HelicopterMissile;
             }},
 
-                   new WeaponExt(){{
+                   new Weapon(){{
                        x = 0f;
                        y = 10f;
                        reload = 50f;
@@ -174,7 +174,7 @@ public void load() {
                        shootSound = Sounds.bang;
                        bullet = SnBullets.bigHelicopterGun;
             }},
-                    new WeaponExt(){{
+                    new Weapon(){{
                        rotate = false;
                        mirror = false;
                        shake = 3f;
@@ -244,7 +244,7 @@ public void load() {
                         bullet = SnBullets.HelicopterMissiles;
                      }},
 
-                    new WeaponExt(){{
+                    new Weapon(){{
                         rotate = false;
                         mirror = false;
                         shake = 3f;
