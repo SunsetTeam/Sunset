@@ -46,7 +46,7 @@ public class SnPlanets implements ContentList{
             orbitTime = 17f;
             rotateTime = 15f*30f;
             accessible = true;
-            startSector = 1;
+            startSector = 20;
             //lightColor = Color.valueOf("E3B3E3");
             atmosphereColor = Color.valueOf("BB4E17");
             hasAtmosphere = true;

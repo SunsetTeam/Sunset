@@ -8,7 +8,7 @@ author:
 \nSounds: King-Silicon
 "
 description: Adds a lot of new content on type: 3 planets, new and upgraded turrets, factories, 50+ units, items, embodiment and more.....
-version: 0.1.6A (Beta 1)
+version: 0.1.7A
 repo: SunsetTeam/Sunset
 main: sunset.Sunset
 minGameVersion: 126.2

@@ -39,6 +39,18 @@ public class SnDefense implements ContentList {
 
 //walls
 
+        forsWall = new Wall("fors-wall"){{
+            requirements(Category.defense, with(SnItems.fors, 6));
+            size = 1;
+            health = 950;
+        }};
+
+        forsWallLarge = new Wall("fors-wall-large"){{
+            requirements(Category.defense, with(SnItems.fors, 24));
+            health = forsWall.health * 4;
+            size = 2;
+        }};
+
         naturiteWall = new SelfhealWall("naturite-wall"){{
             requirements(Category.defense, with(SnItems.naturite, 6));
             size = 1;
@@ -50,18 +62,6 @@ public class SnDefense implements ContentList {
             requirements(Category.defense, with(SnItems.naturite, 24));
             health = naturiteWall.health * 4;
             heal = 2f;
-            size = 2;
-        }};
-
-        forsWall = new Wall("fors-wall"){{
-            requirements(Category.defense, with(SnItems.fors, 6));
-            size = 1;
-            health = 950;
-        }};
-
-        forsWallLarge = new Wall("fors-wall-large"){{
-            requirements(Category.defense, with(SnItems.fors, 24));
-            health = forsWall.health * 4;
             size = 2;
         }};
         

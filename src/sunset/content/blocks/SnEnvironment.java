@@ -49,7 +49,7 @@ public class SnEnvironment implements ContentList{
     crimsontree,
 
     //hidden
-    hotSlag1, hotSlag2, hotSlag3, greenMoss, darkMud, glacier1, glacier2, glacier3;
+    hotSlag1, hotSlag2, hotSlag3, glacier1, glacier2, glacier3;
         
   @Override
   public void load(){
@@ -221,18 +221,6 @@ public class SnEnvironment implements ContentList{
           buildVisibility = BuildVisibility.debugOnly;
           inEditor = false;
           //only for burnout planet generator
-      }};
-
-      greenMoss = new Floor("greenMoss"){{
-          buildVisibility = BuildVisibility.debugOnly;
-          inEditor = false;
-          //only for azaria planet generator
-      }};
-
-      darkMud = new Floor("darkMud"){{
-          buildVisibility = BuildVisibility.debugOnly;
-          inEditor = false;
-          //only for azaria planet generator
       }};
 
       glacier1 = new Floor("glacier1"){{
