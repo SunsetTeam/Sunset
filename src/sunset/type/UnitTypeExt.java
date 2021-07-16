@@ -67,7 +67,7 @@ public class UnitTypeExt extends UnitType {
             if (weapon instanceof UpdateDrawWeapon) {
                 ((UpdateDrawWeapon) weapon).preDraw(mount, unit);
             }
-            if(!(weapon instanceof UpdateDrawWeapon) || ((UpdateDrawWeapon)weapon).useDefaultDraw) {
+            if(!(weapon instanceof UpdateDrawWeapon) || ((UpdateDrawWeapon)weapon).useDefaultDraw()) {
                 float rotation = unit.rotation - 90;
                 float weaponRotation = rotation + (weapon.rotate ? mount.rotation : 0);
                 float recoil = -((mount.reload) / weapon.reload * weapon.recoil);

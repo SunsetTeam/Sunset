@@ -31,13 +31,27 @@ public class SnBullets implements ContentList{
     bigBlastPlastanium, bigBlastBlast, bigBlastPyratite, maxBlastPlastanium, maxBlastBlast, maxBlastSurge,
     maxBlastPlastaniumFrag,
 //units
-    BasicHelicopterGun, HelicopterShootgun, HelicopterMissile, HelicopterBomb, cometWaterShot, starStunBullet;
+    BasicHelicopterGun, HelicopterShootgun, HelicopterMissile, HelicopterBomb, cometWaterShot, starStunBullet,
+    galaxyKnockbackBullet,
+//stuff
+    emptyBullet;
 //exoticBullets (new) i will make it later... i must make more bulets (soulBullet, iceSpike, and more)
 // spiralPllastanium, spiralSurge, SpiralFors, SpiralThorium, SpiralSmall;
 
     @Override
     public void load(){
-
+//stuff
+        emptyBullet = new BasicBulletType(0, 0, "error"){{
+            shootEffect = Fx.none;
+            hitEffect = Fx.none;
+            despawnEffect = Fx.none;
+            trailEffect = Fx.none;
+            smokeEffect = Fx.none;
+            instantDisappear = true;
+            width = 0;
+            height = 0;
+            lifetime = 0;
+        }};
 //sap
         leadSap = new SapBulletType(){{
         sapStrength = 0.30f;
@@ -670,5 +684,14 @@ public class SnBullets implements ContentList{
                 }
             }
         };
+
+        galaxyKnockbackBullet = new BasicBulletType(12, 79){{
+            lifetime = 36;
+            knockback = 384;
+            status = SnStatusEffects.stun;
+            statusDuration = 30;
+            height = 30;
+            width = 6;
+        }};
     }
 }

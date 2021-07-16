@@ -1,4 +1,4 @@
-package sunset.type;
+package sunset.type.weapons;
 
 import arc.Core;
 import arc.graphics.Color;
@@ -11,19 +11,19 @@ import arc.scene.ui.layout.Table;
 import arc.struct.Seq;
 import arc.util.Strings;
 import arc.util.Time;
-import mindustry.content.Fx;
-import mindustry.entities.bullet.BasicBulletType;
 import mindustry.entities.units.WeaponMount;
 import mindustry.gen.*;
 import mindustry.graphics.Drawf;
 import mindustry.graphics.Layer;
 import mindustry.world.meta.StatValue;
 import sunset.ai.weapon.EmptyWeaponAI;
+import sunset.content.SnBullets;
+import sunset.type.UpdateDrawWeapon;
 
 import static arc.graphics.Color.coral;
 import static sunset.Utils.*;
 
-public class ChainWeapon extends AutoWeapon implements UpdateDrawWeapon, StatValue {
+public class ChainWeapon extends WeaponExt implements UpdateDrawWeapon, StatValue {
     public int maxChainLength = 1;
     public float range = 120f;
     public float damageTick = 1f;
@@ -38,13 +38,7 @@ public class ChainWeapon extends AutoWeapon implements UpdateDrawWeapon, StatVal
         laserEnd = Core.atlas.find("parallax-laser-end");
         /** Никогда не должно стрелять стандартным методом. */
         ai = new EmptyWeaponAI();
-        bullet = new BasicBulletType(){{
-            shootEffect = Fx.none;
-            ejectEffect = Fx.none;
-            lifetime = 0;
-            speed = 0;
-            damage = 0;
-        }};
+        bullet = SnBullets.emptyBullet;
         firstShotDelay = Float.MAX_VALUE;
         reload = Float.MAX_VALUE;
     }
@@ -86,12 +80,13 @@ public class ChainWeapon extends AutoWeapon implements UpdateDrawWeapon, StatVal
             });
         }
     }
-
+    @Override
+    public boolean useDefaultDraw() { return false; }
     @Override
     public void preDraw(WeaponMount mount, Unit unit) {
         if(units.isEmpty()) return;
         Draw.z(Layer.bullet);
-        Draw.mixcol(coral.cpy(), 0.4f);
+        Draw.mixcol(chainColor, 0.4f);
         Vec2 wpos = new Vec2(mount.weapon.x, mount.weapon.y).rotate(mount.rotation).add(unit.x, unit.y);
         Drawf.laser(unit.team, laser, laserEnd, wpos.x, wpos.y, units.get(0).x, units.get(0).y);
         for(int i = 0; i < units.size - 1; i++) {
