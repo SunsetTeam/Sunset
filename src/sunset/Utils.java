@@ -27,7 +27,7 @@ public class Utils {
             return u.hasEffect(s) && s.damage > 0 && s.opposites.contains(StatusEffects.wet);
         }) != null;
     }
-    /** Возвращает один из огней на блоке или null, если блоки не горит. */
+    /** Возвращает один из огней на блоке или null, если блок не горит. */
     public static Fire getBuildingFire(Building b) {
         Log.info(b.tileX() + " " + b.tileY());
         for(int dx = 0; dx < b.block.size; dx++)

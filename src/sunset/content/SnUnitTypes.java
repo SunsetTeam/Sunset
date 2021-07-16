@@ -12,9 +12,10 @@ import sunset.entities.abilities.StatusFieldAbility;
 import sunset.type.UnitTypeExt;
 import sunset.ai.ExtinguishAI;
 import sunset.ai.weapon.ExtinguishWeaponAI;
-import sunset.type.AutoWeapon;
-import sunset.type.ChainWeapon;
+import sunset.type.weapons.WeaponExt;
+import sunset.type.weapons.ChainWeapon;
 import sunset.type.CopterUnitType;
+import sunset.type.weapons.PointDefenseWeapon;
 
 public class SnUnitTypes implements ContentList{
    public static UnitType
@@ -23,7 +24,7 @@ public class SnUnitTypes implements ContentList{
 
     guardcopter, bladecopter, swordcopter, guardiancopter, crusadercopter, //attacks copters
     
-    comet, satelite, planet, star; //buffers
+    comet, satelite, planet, star, galaxy; //buffers
 
 @Override
 public void load() {
@@ -279,7 +280,7 @@ public void load() {
 
             constructor = UnitEntity::create;
 
-            weapons.add(new AutoWeapon("comet"){{
+            weapons.add(new WeaponExt("comet"){{
                 ai = new ExtinguishWeaponAI();
                 rotate = true;
                 mirror = false;
@@ -329,6 +330,7 @@ public void load() {
             speed = 2.9f;
             accel = 0.25f;
             drag = 0.1f;
+            engineSize = 3.5f;
 
             flying = true;
             circleTarget = false;
@@ -381,7 +383,6 @@ public void load() {
                 x = 0;
                 y = -12;
                 mirror = false;
-                faceTarget = true;
                 rotate = true;
                 shootCone = 2f;
                 inaccuracy = 0f;
@@ -389,6 +390,53 @@ public void load() {
                 reload = 287f;
                 recoil = 3.5f;
                 bullet = SnBullets.starStunBullet;
+            }});
+        }};
+
+        galaxy = new UnitTypeExt("galaxy"){{
+            health = 20000;
+            hitSize = 42;
+            speed = 2.4f;
+            accel = 0.1f;
+            drag = 0.05f;
+
+            flying = true;
+            circleTarget = false;
+            range = 420;
+
+            engineOffset = 36f;
+            engineSize = 7f;
+
+            itemCapacity = 180;
+            commandLimit = 6;
+
+            defaultController = FlyingUnitWeaponAI::new;
+
+            constructor = UnitEntity::create;
+
+            abilities.add(new StatusFieldAbility(SnStatusEffects.starBuff, StatusEffects.freezing, 20, 8 * 24));
+
+            weapons.add(new WeaponExt("sunset-galaxy-segment"){{
+                mirror = true;
+                alternate = true;
+                rotate = true;
+                x = 18;
+                y = -6;
+                reload = 117;
+                inaccuracy = 0;
+                recoil = 7.5f;
+                bullet = SnBullets.galaxyKnockbackBullet;
+            }});
+
+            weapons.add(new PointDefenseWeapon("sunset-galaxy-weak"){{
+                mirror = true;
+                alternate = true;
+                rotate = true;
+                x = 36;
+                y = -6;
+                reload = 3;
+                range = 420;
+                damage = 80;
             }});
         }};
     }
