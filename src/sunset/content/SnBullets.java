@@ -33,18 +33,19 @@ public class SnBullets implements ContentList{
     bigBlastPlastanium, bigBlastBlast, bigBlastPyratite, maxBlastPlastanium, maxBlastBlast, maxBlastSurge,
     maxBlastPlastaniumFrag,
 //units
-    BasicHelicopterGun, HelicopterShootgun, HelicopterMissile, HelicopterBomb, cometWaterShot, starStunBullet,
-    galaxyKnockbackBullet, HelicopterRocket, bigHelicopterGun, laserHelicopterFrag, HelicopterMissiles,
-    bigHelicopterRocket, largeHelicopterGun,
+    BasicHelicopterGun, HelicopterShootgun, HelicopterMissile, HelicopterBomb, HelicopterRocket, bigHelicopterGun, laserHelicopterFrag, largeHelicopterGun, bigHelicopterRocket, HelicopterMissiles,
+    cometWaterShot, starStunBullet, galaxyKnockbackBullet,
 //stuff
     emptyBullet,
 //test
     testbullet;
+
 //exoticBullets (new) i will make it later... i must make more bulets (soulBullet, iceSpike, and more)
 // spiralPllastanium, spiralSurge, SpiralFors, SpiralThorium, SpiralSmall;
 
     @Override
     public void load(){
+
 //stuff
         emptyBullet = new BasicBulletType(0, 0, "error"){{
             shootEffect = Fx.none;
@@ -57,6 +58,7 @@ public class SnBullets implements ContentList{
             height = 0;
             lifetime = 0;
         }};
+
 //sap
         leadSap = new SapBulletType(){{
         sapStrength = 0.30f;
@@ -654,7 +656,7 @@ public class SnBullets implements ContentList{
         largeHelicopterGun = new BasicBulletType(10f, 80){{
             width = 17f;
             height = 27f;
-            lifetime = 2f;
+            lifetime = 27f;
             hitEffect = Fx.hitBulletBig;
             shootEffect = Fx.shootBig2;
             smokeEffect = Fx.shootBigSmoke;
@@ -735,7 +737,7 @@ public class SnBullets implements ContentList{
                 }
             }
         };
-
+        
         galaxyKnockbackBullet = new BasicBulletType(12, 79){{
             lifetime = 36;
             knockback = 384;

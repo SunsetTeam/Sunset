@@ -46,7 +46,7 @@ public void load() {
          fallRotateSpeed = 6f;
          offsetY = 2.2f;
          weapons.add(
-                new Weapon("sunset-guard-gun"){{
+                new WeaponExt("sunset-guard-gun"){{
                     rotate = false;
                     mirror = true;
                     top = true;
@@ -75,7 +75,7 @@ public void load() {
             fallRotateSpeed = 6f;
             offsetY = 2.5f;
             weapons.add(
-                   new Weapon("sunset-blade-gun"){{
+                   new WeaponExt("sunset-blade-gun"){{
                        rotate = false;
                        mirror = true;
                        top = true;
@@ -109,7 +109,7 @@ public void load() {
             rotorRotateSpeed = 27f;
             offsetY = 2.6f;
             weapons.add(
-                   new Weapon("sunset-sword-gun"){{
+                   new WeaponExt("sunset-sword-gun"){{
                        rotate = false;
                        mirror = true;
                        top = true;
@@ -126,7 +126,7 @@ public void load() {
                        bullet = SnBullets.HelicopterMissile;
             }},
 
-                   new Weapon(){{
+                   new WeaponExt(){{
                        x = 0f;
                        y = 10f;
                        reload = 50f;
@@ -150,13 +150,13 @@ public void load() {
             
             flying = true;
             circleTarget = false;
-            range = 260;
+            range = 235;
             
             fallRotateSpeed = 6f;
             rotorRotateSpeed = 26f;
             offsetY = 2.6f;
             weapons.add(
-                   new Weapon("sunset-guardian-gun"){{
+                   new WeaponExt("sunset-guardian-gun"){{
                        rotate = false;
                        mirror = true;
                        top = true;
@@ -174,18 +174,18 @@ public void load() {
                        shootSound = Sounds.bang;
                        bullet = SnBullets.bigHelicopterGun;
             }},
-                       new Weapon(){{
-                        rotate = false;
-                        mirror = false;
-                        shake = 3f;
-                        x = 0f;
-                        y = 10f;
-                        reload = 120f;
-                        top = false;
-                        inaccuracy = 1f;
-                        velocityRnd = 0.2f;
-                        shootSound = Sounds.missile;
-                        bullet = SnBullets.HelicopterRocket;
+                    new WeaponExt(){{
+                       rotate = false;
+                       mirror = false;
+                       shake = 3f;
+                       x = 0f;
+                       y = 10f;
+                       reload = 120f;
+                       top = false;
+                       inaccuracy = 1f;
+                       velocityRnd = 0.2f;
+                       shootSound = Sounds.missile;
+                       bullet = SnBullets.HelicopterRocket;
             }});
         }};
 
@@ -199,13 +199,13 @@ public void load() {
             
             flying = true;
             circleTarget = false;
-            range = 260;
+            range = 250;
             
             fallRotateSpeed = 6f;
             rotorRotateSpeed = 25f;
             offsetY = 2.6f;
             weapons.add(
-                   new Weapon("sunset-crusader-gun"){{
+                   new WeaponExt("sunset-crusader-gun"){{
                        rotate = false;
                        mirror = true;
                        top = true;
@@ -224,7 +224,7 @@ public void load() {
                        bullet = SnBullets.largeHelicopterGun;
                     }},
 
-                    new Weapon("sunset-crusader-rocket"){{
+                    new WeaponExt("sunset-crusader-rocket"){{
                         rotate = false;
                         mirror = true;
                         top = true;
@@ -244,7 +244,7 @@ public void load() {
                         bullet = SnBullets.HelicopterMissiles;
                      }},
 
-                    new Weapon(){{
+                    new WeaponExt(){{
                         rotate = false;
                         mirror = false;
                         shake = 3f;
