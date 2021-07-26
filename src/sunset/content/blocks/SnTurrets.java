@@ -54,6 +54,9 @@ public class SnTurrets implements ContentList {
             shootSound = Sounds.bang;
             ammoUseEffect = Fx.casing1;
             targetAir = true;
+            maxReloadMultiplier = 19f;
+            speedupPerShot = 0.08f;
+            slowReloadTime = 30f;
         }};
 //2x2
         carabine = new ChainLightningTurret("carabine"){{
