@@ -518,13 +518,13 @@ public class SnTurrets implements ContentList {
         testturret = new ItemTurret("test-turret") {{
             requirements(Category.turret, with(Items.copper, 1));
             ammo(
-                    Items.copper, SnBullets.testbullet
+                    Items.copper, SnBullets.overheatBullet
             );
             range = 130f;
             health = 780;
             size = 2;
-            reloadTime = 40f;
-            range = 140f;
+            reloadTime = 12f;
+            range = 370f;
             recoilAmount = 0.3f;
             inaccuracy = 1.1f;
             rotateSpeed = 7f;

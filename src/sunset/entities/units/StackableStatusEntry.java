@@ -17,13 +17,14 @@ public class StackableStatusEntry extends StatusEntry {
         this.baseEffect = baseEffect;
         this.stackCount = stackCount;
         this.duration = duration;
+        this.time = duration;
         effect = baseEffect.stacks.get(stackCount-1);
     }
     public void stack() {
         time = duration;
         stackCount++;
-        if(stackCount > ((StackableStatusEffect)effect).maxStacks) {
-            stackCount = ((StackableStatusEffect)effect).maxStacks;
+        if(stackCount > ((StackableStatusEffect)baseEffect).maxStacks) {
+            stackCount = ((StackableStatusEffect)baseEffect).maxStacks;
         }
         effect = baseEffect.stacks.get(stackCount-1);
     }

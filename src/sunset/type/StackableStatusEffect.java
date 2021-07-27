@@ -7,14 +7,16 @@ import mindustry.ui.Cicon;
 import arc.struct.BoolSeq;
 import arc.struct.FloatSeq;
 import arc.struct.Seq;
+import arc.util.Log;
 import arc.util.pooling.Pools;
 import mindustry.entities.units.StatusEntry;
 import mindustry.gen.Unit;
-import mindustry.gen.UnitEntity;
 import mindustry.type.StatusEffect;
 import sunset.entities.units.StackableStatusEntry;
 
 import static mindustry.Vars.state;
+
+import java.lang.reflect.Field;
 
 /** Накладываемый статус-эффект. Имеет различную силу на
  * каждой стадии наложения, как правило возрастающую.
@@ -29,23 +31,23 @@ public class StackableStatusEffect extends StatusEffect {
     /** Максимальное количество наложений. */
     public int maxStacks = 1;
     /** Множители наносимого урона для каждого уровня стака. */
-    public FloatSeq damageMultipliers;
+    public FloatSeq damageMultipliers = new FloatSeq();
     /** Множители здоровья для каждого уровня стака. */
-    public FloatSeq healthMultipliers;
+    public FloatSeq healthMultipliers = new FloatSeq();
     /** Множители скорости передвижения для каждого уровня стака. */
-    public FloatSeq speedMultipliers;
+    public FloatSeq speedMultipliers = new FloatSeq();
     /** Множители длительности перезарядки для каждого уровня стака. */
-    public FloatSeq reloadMultipliers;
+    public FloatSeq reloadMultipliers = new FloatSeq();
     /** Множители скорости строительства для каждого уровня стака. */
-    public FloatSeq buildSpeedMultipliers;
+    public FloatSeq buildSpeedMultipliers = new FloatSeq();
     /** Множители ускорения для каждого уровня стака. */
-    public FloatSeq dragMultipliers;
+    public FloatSeq dragMultipliers = new FloatSeq();
     /** Количества урона при взаимодействии с усиляющими эффектами для каждого уровня стака. */
-    public FloatSeq transitionDamages;
+    public FloatSeq transitionDamages = new FloatSeq();
     /** Неспособность стрелять для каждого уровня стака. */
-    public BoolSeq disarmedArray;
+    public BoolSeq disarmedArray = new BoolSeq();
     /** Урон за тик для каждого уровня стака. */
-    public FloatSeq damageArray;
+    public FloatSeq damageArray = new FloatSeq();
     /** Список отдельных наложение эффекта. */
     public Seq<StatusEffect> stacks;
 
@@ -141,23 +143,39 @@ public class StackableStatusEffect extends StatusEffect {
 
     /** Применяет эффект к юниту, если эффект ещё не был установлен, иначе
      *  увеличивает количество наложений данного эффекта на 1. */
-    public void apply(UnitEntity unit, float duration) {
-        boolean foundStandard = unit.statuses.remove(e -> e.effect == this && !(e instanceof StackableStatusEntry));
-        StackableStatusEntry prev = (StackableStatusEntry)unit.statuses.find(e -> e.effect == this && (e instanceof StackableStatusEntry));
+    public void apply(Unit unit, float duration) {
+        // Приходится использовать рекурсию, так как существуют несколько классов, описывающих
+        // юнитов (как минимум - UnitEntity и UnitMech), и эти классы не имеют никакого общего
+        // интерфейса, который бы имел поле statuses (ну или я слепой).
+        Field fieldStatuses = null;
+        Seq<StatusEntry> statuses = null;
+        try {
+            fieldStatuses = unit.getClass().getField("statuses");            
+            fieldStatuses.setAccessible(true);
+            statuses = (Seq<StatusEntry>)fieldStatuses.get(unit);
+        } catch (NoSuchFieldException e) {
+            // Поля может и не оказаться, тогда просто сичтаем, что юнит не поддерживает эффекты
+            return;
+        } catch (Throwable e) {
+            Log.err(e);
+        }
+        boolean foundStandard = statuses.remove(e -> e.effect == this);
+        StackableStatusEntry prev = (StackableStatusEntry)statuses.find(e -> 
+            (e instanceof StackableStatusEntry) && ((StackableStatusEntry)e).baseEffect == this);
         if(prev == null) {
-            applyEffect(unit, duration, foundStandard ? 2 : 1);
+            applyEffect(statuses, unit, duration, foundStandard ? 2 : 1);
         } else {
             prev.stack();
         }
     }
-    protected void applyEffect(UnitEntity unit, float duration, int stackCount) {
+    protected void applyEffect(Seq<StatusEntry> statuses, Unit unit, float duration, int stackCount) {
         if (unit.isImmune(this)) return;
         if (state.isCampaign()) {
             unlock();
         }
-        if (unit.statuses.size > 0) {
-            for (int i = 0; i < unit.statuses.size; i++) {
-                StatusEntry entry = unit.statuses.get(i);
+        if (statuses.size > 0) {
+            for (int i = 0; i < statuses.size; i++) {
+                StatusEntry entry = statuses.get(i);
                 if (entry.effect.reactsWith(this)) {
                     StatusEntry.tmp.effect = entry.effect;
                     entry.effect.getTransition(unit, this, entry.time, duration, StatusEntry.tmp);
@@ -169,8 +187,7 @@ public class StackableStatusEffect extends StatusEffect {
                 }
             }
         }
-        StatusEntry entry = Pools.obtain(StatusEntry.class, () -> new StackableStatusEntry(this, stackCount, duration));
-        entry.set(this, duration);
-        unit.statuses.add(entry);
+        StackableStatusEntry entry = Pools.obtain(StackableStatusEntry.class, () -> new StackableStatusEntry(this, stackCount, duration));
+        statuses.add(entry);
     }
 }

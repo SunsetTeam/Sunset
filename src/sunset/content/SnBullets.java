@@ -2,15 +2,18 @@ package sunset.content;
 
 import arc.graphics.*;
 import arc.graphics.g2d.*;
+import arc.math.Angles;
+import arc.math.geom.Vec2;
 import mindustry.ctype.*;
 import mindustry.content.*;
+import mindustry.entities.Units;
 import mindustry.entities.bullet.*;
 import mindustry.gen.*;
 import mindustry.graphics.Pal;
 import sunset.entities.bullet.ArtilleryLiquidBulletType;
 import sunset.entities.bullet.ExtinguishBulletType;
 import sunset.graphics.*;
-
+import sunset.type.StackableStatusEffect;
 
 
 public class SnBullets implements ContentList{
@@ -35,8 +38,8 @@ public class SnBullets implements ContentList{
 //units
     BasicHelicopterGun, HelicopterShootgun, HelicopterMissile, HelicopterBomb, HelicopterRocket, bigHelicopterGun, laserHelicopterFrag, largeHelicopterGun, bigHelicopterRocket, HelicopterMissiles,
     cometWaterShot, starStunBullet, galaxyKnockbackBullet,
-//stuff
-    emptyBullet,
+//misc
+    emptyBullet, overheatBullet,
 //test
     testbullet;
 
@@ -45,19 +48,6 @@ public class SnBullets implements ContentList{
 
     @Override
     public void load(){
-
-//stuff
-        emptyBullet = new BasicBulletType(0, 0, "error"){{
-            shootEffect = Fx.none;
-            hitEffect = Fx.none;
-            despawnEffect = Fx.none;
-            trailEffect = Fx.none;
-            smokeEffect = Fx.none;
-            instantDisappear = true;
-            width = 0;
-            height = 0;
-            lifetime = 0;
-        }};
 
 //sap
         leadSap = new SapBulletType(){{
@@ -746,7 +736,46 @@ public class SnBullets implements ContentList{
             height = 30;
             width = 6;
         }};
+//misc
+        overheatBullet = new BasicBulletType(0, 2){{
+            status = SnStatusEffects.overheat;
+            statusDuration = 120f;
+            shootEffect = Fx.pointBeam;
+            lightningColor = Color.red;
+            instantDisappear = true;
+        }
 
+            @Override
+            public void init(Bullet b) {
+                Unit u = Units.closestEnemy(b.team, b.x, b.y, range(),
+                    unit -> true || Angles.within(b.rotation(), b.angleTo(unit.x, unit.y), 10));
+                if(u != null) {
+                    shootEffect.at(b.x, b.y, b.rotation(), lightningColor, new Vec2().set(u.x, u.y));
+                    u.damagePierce(b.damage);
+                    ((StackableStatusEffect)status).apply(u, statusDuration);
+                } else {
+                    shootEffect.at(b.x, b.y, b.rotation(), lightningColor,
+                        new Vec2().setLength(range()).setAngle(b.rotation()));
+                }
+            }
+
+            @Override
+            public float range() { return 370; }
+        };
+
+        emptyBullet = new BasicBulletType(0, 0, "error"){{
+            shootEffect = Fx.none;
+            hitEffect = Fx.none;
+            despawnEffect = Fx.none;
+            trailEffect = Fx.none;
+            smokeEffect = Fx.none;
+            instantDisappear = true;
+            width = 0;
+            height = 0;
+            lifetime = 0;
+        }};
+
+//test
         testbullet = new MissileBulletType(2.7f, 14){{
             sprite = "sunset-guardian-rocket";
             width = 9f;
