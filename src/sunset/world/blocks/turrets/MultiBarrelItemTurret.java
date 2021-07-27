@@ -1,5 +1,6 @@
 package sunset.world.blocks.turrets;
 
+import arc.util.Time;
 import arc.func.Cons;
 import arc.func.Func;
 import arc.math.Angles;
@@ -15,6 +16,10 @@ import mindustry.world.blocks.defense.turrets.ItemTurret;
 public class MultiBarrelItemTurret extends ItemTurret {
     public Seq<Vec2> barrelPoints = new Seq<>();
     public Seq<Vec2> ejectPoints = new Seq<>();
+    
+    public float maxReloadMultiplier = 0.5f;
+	public float speedupPerShot = 0.075f;
+	public float slowReloadTime = 90f;
 
     public MultiBarrelItemTurret(String name) {
         super(name);
@@ -22,9 +27,38 @@ public class MultiBarrelItemTurret extends ItemTurret {
 
     public class MultiBarrelItemTurretBuild extends ItemTurretBuild {
         private int shotindex = 0; // для эффекта извлечения гильзы
+        public float speedupScl = 0f;
+		public float slowDownReload = 0f;
+		public float maxReloadTime = 0f;
+
+        @Override
+		public void updateTile(){
+			super.updateTile();
+			if(slowDownReload >= 1f){
+				slowDownReload -= Time.delta;
+			}else speedupScl = Mathf.lerpDelta(speedupScl, 0f, 0.05f);
+		}
+		
+		@Override
+		protected void updateShooting(){
+            if(reload >= reloadTime){
+                BulletType type = peekAmmo();
+                shoot(type);
+                reload = 0f;
+            }else{
+                reload += (1 + speedupScl) * delta() * peekAmmo().reloadMultiplier * baseReloadSpeed();
+            };
+        }
 
         @Override
         protected void shoot(BulletType type) {
+            super.shoot(type);
+			
+			slowDownReload = slowReloadTime;
+			if(speedupScl < maxReloadMultiplier){
+				speedupScl += speedupPerShot;
+			}else speedupScl = maxReloadMultiplier;
+
             // костыль с отдельной функцией нужен для сохранения индекса выстрела
             Func<Integer, Runnable> shootFunc = i -> () -> {
                 if(!isValid() || !hasAmmo()) return;
@@ -44,6 +78,7 @@ public class MultiBarrelItemTurret extends ItemTurret {
             };
             for(shotindex = 0; shotindex < barrelPoints.size; shotindex++) {
                 Time.run(burstSpacing * shotindex, shootFunc.get(shotindex));
+                
             }
         }
 
