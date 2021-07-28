@@ -2,10 +2,10 @@ package sunset.ui;
 
 import arc.scene.ui.ScrollPane;
 import arc.scene.ui.layout.Table;
-import arc.util.Align;
 import arc.util.Scaling;
 import mindustry.ctype.UnlockableContent;
 import mindustry.graphics.Pal;
+import mindustry.ui.Cicon;
 import mindustry.ui.dialogs.ContentInfoDialog;
 import sunset.type.ContentDisplayerType;
 
@@ -30,7 +30,7 @@ public class ContentInfoDialogExt extends ContentInfoDialog {
         content.checkStats();
 
         table.table(title1 -> {
-            var size = content.prefDatabaseIcon();
+            Cicon size = content.prefDatabaseIcon();
 
             title1.image(content.icon(size)).size(size.size).scaling(Scaling.fit);
             title1.add("[accent]" + content.localizedName).padLeft(5);
@@ -39,7 +39,7 @@ public class ContentInfoDialogExt extends ContentInfoDialog {
         table.row();
 
         if(content.description != null){
-            var any = content.stats.toMap().size > 0;
+            boolean any = content.stats.toMap().size > 0;
 
             if(any){
                 table.add("@category.purpose").color(Pal.accent).fillX().padTop(10);
