@@ -109,7 +109,7 @@ public class SnTurrets implements ContentList {
             });
             health = 1960;
             size = 3;
-            reloadTime = 141f;
+            reloadTime = 180f;
             range = 237f;
             recoilAmount = 3f;
             inaccuracy = 4f;
@@ -120,6 +120,10 @@ public class SnTurrets implements ContentList {
             shootSound = Sounds.shootBig;
             ammoUseEffect = Fx.casing2;
             targetAir = false;
+
+            maxReloadMultiplier = 100f;
+            speedupPerShot = 0.08f;
+            slowReloadTime = 140f;
         }};
 
         burner = new ItemTurret("burner") {{
@@ -203,7 +207,7 @@ public class SnTurrets implements ContentList {
             });
             health = 3200;
             size = 4;
-            reloadTime = 186f;
+            reloadTime = 200f;
             range = 342f;
             recoilAmount = 6f;
             inaccuracy = 3f;
@@ -214,6 +218,10 @@ public class SnTurrets implements ContentList {
             shootSound = Sounds.artillery;
             ammoUseEffect = Fx.casing2;
             targetAir = false;
+
+            maxReloadMultiplier = 130f;
+            speedupPerShot = 0.08f;
+            slowReloadTime = 160f;
         }};
 
         typhoon = new LiquidTurret("typhoon"){{
