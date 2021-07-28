@@ -2,8 +2,12 @@ package sunset.type;
 
 import arc.graphics.g2d.TextureRegion;
 import arc.scene.ui.layout.Table;
+import mindustry.Vars;
+import mindustry.content.Blocks;
 import mindustry.content.TechTree;
 import mindustry.ui.Cicon;
+import mindustry.world.blocks.defense.turrets.ItemTurret;
+import mindustry.world.meta.Stat;
 import arc.struct.BoolSeq;
 import arc.struct.FloatSeq;
 import arc.struct.Seq;
@@ -13,6 +17,7 @@ import mindustry.entities.units.StatusEntry;
 import mindustry.gen.Unit;
 import mindustry.type.StatusEffect;
 import sunset.entities.units.StackableStatusEntry;
+import sunset.world.meta.values.StackableStatusEffectValue;
 
 import static mindustry.Vars.state;
 
@@ -27,7 +32,7 @@ import java.lang.reflect.Field;
  * @apiNote Для установки статус эффекта используйте метод {@code apply(Unit, float)}. 
  * Вместо {@code update(Unit, float)} переопределяйте метод {@code updateStack(Unit, float, int)}.
  * Вместо {@code draw(Unit)} переопределяйте метод {@code drawStack(Unit, int)}.*/
-public class StackableStatusEffect extends StatusEffect {
+public class StackableStatusEffect extends StatusEffect implements ContentDisplayerType {
     /** Максимальное количество наложений. */
     public int maxStacks = 1;
     /** Множители наносимого урона для каждого уровня стака. */
@@ -50,6 +55,8 @@ public class StackableStatusEffect extends StatusEffect {
     public FloatSeq damageArray = new FloatSeq();
     /** Список отдельных наложение эффекта. */
     public Seq<StatusEffect> stacks;
+
+    private StackableStatusEffectValue displayer;
 
     public StackableStatusEffect(String name) {
         super(name);
@@ -132,6 +139,7 @@ public class StackableStatusEffect extends StatusEffect {
                 public void display(Table table) { base.display(table); }
             });
         }
+        displayer = new StackableStatusEffectValue(this);
     }
 
     /** Вызывается для обработки юнитов, на которых наложен эффект. Передаёт
@@ -189,5 +197,11 @@ public class StackableStatusEffect extends StatusEffect {
         }
         StackableStatusEntry entry = Pools.obtain(StackableStatusEntry.class, () -> new StackableStatusEntry(this, stackCount, duration));
         statuses.add(entry);
+    }
+    @Override
+    public boolean useStat() { return false; }
+    @Override
+    public void display(Table t) {
+        displayer.display(t);
     }
 }
