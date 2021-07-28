@@ -40,6 +40,16 @@ public class SnOther implements ContentList {
         }};
 
 //liquid
+
+        naturitePump = new Pump("naturite-pump"){{
+            requirements(Category.liquid, with(Items.copper, 120, Items.metaglass, 110, Items.silicon, 40, Items.titanium, 70, SnItems.naturite, 60));
+            pumpAmount = 0.24f;
+            consumes.power(6.9f);
+            liquidCapacity = 100f;
+            hasPower = true;
+            size = 5;
+        }};
+
         naturiteConduit = new Conduit("naturite-conduit"){{
             requirements(Category.liquid, with(Items.titanium, 2, Items.metaglass, 1, SnItems.naturite, 2));
             liquidCapacity = 18f;
@@ -53,16 +63,6 @@ public class SnOther implements ContentList {
                 return tile.floor().isLiquid;
             }
         };
-
-        naturitePump = new Pump("naturite-pump"){{
-            requirements(Category.liquid, with(Items.copper, 120, Items.metaglass, 110, Items.silicon, 40, Items.titanium, 70, SnItems.naturite, 60));
-            pumpAmount = 0.22f;
-            consumes.power(6.9f);
-            liquidCapacity = 100f;
-            hasPower = true;
-            size = 5;
-        }};
-
 //drivers
         enojieDriver = new MassDriver("enojiemass-driver"){{
             requirements(Category.distribution, with(Items.titanium, 450, Items.thorium, 200, Items.surgeAlloy, 180, SnItems.nobium, 150, SnItems.enojie, 130));

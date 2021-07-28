@@ -91,11 +91,11 @@ public class SnProduction implements ContentList{
         craftEffect = SnFx.modSmeltsmoke;
         craftTime = 200f;
         drawer = new DrawRotatorTop();
-        outputItem = new ItemStack(Items.sporePod, 5);
+        outputItem = new ItemStack(Items.sporePod, 6);
         itemCapacity = 30;
         liquidCapacity = 40f;
 
-        consumes.liquid(Liquids.water, 0.6f);
+        consumes.liquid(Liquids.water, 0.4f);
         consumes.power(2f);
     }};
     
@@ -175,7 +175,7 @@ public class SnProduction implements ContentList{
         requirements(Category.crafting, with(Items.lead, 200, SnItems.nobium, 150, Items.graphite, 140, Items.silicon, 120, Items.surgeAlloy, 80));
 
        outputItem = new ItemStack(SnItems.enojie, 1);
-       craftTime = 36f;
+       craftTime = 45f;
        size = 4;
        hasPower = true;
        hasLiquids = false;
@@ -189,7 +189,7 @@ public class SnProduction implements ContentList{
 //drills
         percussionDrill = new Drill("percussion-drill"){{
             requirements(Category.production, with(Items.copper, 100, Items.silicon, 90, Items.titanium, 90, Items.thorium, 85, SnItems.nobium, 80, SnItems.naturite, 70));
-            drillTime = 235;
+            drillTime = 230;
             size = 5;
             drawRim = true;
             hasPower = true;
@@ -201,7 +201,7 @@ public class SnProduction implements ContentList{
             warmupSpeed = 0.01f;
 
             //more than the laser drill
-            liquidBoostIntensity = 2.0f;
+            liquidBoostIntensity = 2.1f;
 
             consumes.power(6f);
             consumes.liquid(Liquids.water, 0.3f).boost();

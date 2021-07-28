@@ -28,11 +28,11 @@ public class SnPower implements ContentList{
     
     oilGenerator = new LiquidGenerator("oil-generator"){{
             requirements(Category.power, with(Items.copper, 110, Items.titanium, 70, Items.lead, 120, Items.silicon, 55, Items.metaglass, 70));
-            powerProduction = 18f;
+            powerProduction = 13f;
             itemDuration = 220f;
             minLiquidEfficiency = 0.2f;
             maxLiquidGenerate = 0.4f;
-            liquidCapacity = 15;
+            liquidCapacity = 20;
             hasLiquids = true;
             hasItems = false;
             size = 3;
