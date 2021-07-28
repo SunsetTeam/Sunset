@@ -59,14 +59,14 @@ public class SnTurrets implements ContentList {
         carabine = new ChainLightningTurret("carabine"){{
             requirements(Category.turret, with(Items.copper, 150, Items.lead, 140, Items.surgeAlloy, 60, SnItems.nobium, 90, SnItems.naturite, 120));
             range = 132.2f;
-            damage = 2.8f;
+            damage = 1.8f;
             health = 900;
             size = 2;
             shootCone = 6f;
-            damageMultiplier = 0.40f;
+            damageMultiplier = 0.30f;
             coolantMultiplier = 1.0f;
             rotateSpeed = 8.75f;
-            powerUse = 3.5f;
+            powerUse = 4f;
             liquidUse = 0.3f;
             laserColor = SnPal.chainLaser;
         }};
@@ -121,7 +121,7 @@ public class SnTurrets implements ContentList {
             ammoUseEffect = Fx.casing2;
             targetAir = false;
 
-            maxReloadMultiplier = 100f;
+            maxReloadMultiplier = 2f;
             speedupPerShot = 0.08f;
             slowReloadTime = 140f;
         }};
@@ -219,7 +219,6 @@ public class SnTurrets implements ContentList {
             ammoUseEffect = Fx.casing2;
             targetAir = false;
 
-            maxReloadMultiplier = 130f;
             speedupPerShot = 0.08f;
             slowReloadTime = 160f;
         }};
