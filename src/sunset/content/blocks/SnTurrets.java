@@ -59,14 +59,14 @@ public class SnTurrets implements ContentList {
         carabine = new ChainLightningTurret("carabine"){{
             requirements(Category.turret, with(Items.copper, 150, Items.lead, 140, Items.surgeAlloy, 60, SnItems.nobium, 90, SnItems.naturite, 120));
             range = 132.2f;
-            damage = 1.8f;
+            damage = 1.6f;
             health = 900;
             size = 2;
             shootCone = 6f;
             damageMultiplier = 0.30f;
             coolantMultiplier = 1.0f;
             rotateSpeed = 8.75f;
-            powerUse = 4f;
+            powerUse = 5f;
             liquidUse = 0.3f;
             laserColor = SnPal.chainLaser;
         }};
@@ -109,7 +109,7 @@ public class SnTurrets implements ContentList {
             });
             health = 1960;
             size = 3;
-            reloadTime = 180f;
+            reloadTime = 130f;
             range = 237f;
             recoilAmount = 3f;
             inaccuracy = 4f;
@@ -121,9 +121,8 @@ public class SnTurrets implements ContentList {
             ammoUseEffect = Fx.casing2;
             targetAir = false;
 
-            maxReloadMultiplier = 2f;
             speedupPerShot = 0.08f;
-            slowReloadTime = 140f;
+            slowReloadTime = 180f;
         }};
 
         burner = new ItemTurret("burner") {{
@@ -207,7 +206,7 @@ public class SnTurrets implements ContentList {
             });
             health = 3200;
             size = 4;
-            reloadTime = 200f;
+            reloadTime = 160f;
             range = 342f;
             recoilAmount = 6f;
             inaccuracy = 3f;
@@ -220,7 +219,7 @@ public class SnTurrets implements ContentList {
             targetAir = false;
 
             speedupPerShot = 0.08f;
-            slowReloadTime = 160f;
+            slowReloadTime = 210f;
         }};
 
         typhoon = new LiquidTurret("typhoon"){{
@@ -372,7 +371,7 @@ public class SnTurrets implements ContentList {
     
 
         radius = new ItemTurret("radius"){{
-            requirements(Category.turret, with(Items.copper, 1400, Items.graphite, 800, Items.surgeAlloy, 650, Items.plastanium, 555, Items.thorium, 480, SnItems.fors, 440, SnItems.enojie, 420));
+            requirements(Category.turret, with(Items.copper, 1400, Items.graphite, 800, Items.surgeAlloy, 650, Items.plastanium, 555, SnItems.fors, 520, Items.thorium, 480, SnItems.enojie, 420));
             ammo(
                 Items.graphite, SnBullets.heavystandardDense,
                 Items.pyratite, SnBullets.heavystandardIncendiary,
@@ -380,7 +379,7 @@ public class SnTurrets implements ContentList {
                 Items.blastCompound, SnBullets.standartBlastBig,
                 SnItems.fors, SnBullets.standardForsBig
             );
-            reloadTime = 5f;
+            reloadTime = 4f;
             coolantMultiplier = 0.5f;
             restitution = 0.15f;
             ammoUseEffect = Fx.casing3;
