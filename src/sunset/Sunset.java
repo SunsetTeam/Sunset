@@ -9,6 +9,7 @@ import mindustry.mod.Mod;
 //import mindustry.ui.dialogs.BaseDialog;
 import sunset.content.*;
 import sunset.content.blocks.*;
+import sunset.ui.ContentInfoDialogExt;
 import sunset.world.MissileLogic;
 
 
@@ -32,6 +33,7 @@ public class Sunset extends Mod {
     @Override
     public void init() {
         MissileLogic.init();
+        Vars.ui.content = new ContentInfoDialogExt();
         /*Log.info("startUp");
         Events.on(ClientLoadEvent.class, e -> {
             Time.runTask(10f, () -> {
