@@ -43,7 +43,7 @@ public class SnProduction implements ContentList{
 
     //advanced
     advancedCompressor = new GenericSmelter("advancedCompressor"){{
-        requirements(Category.crafting, with(Items.lead, 150, Items.graphite, 120, Items.silicon, 210, Items.titanium, 110, Items.thorium, 200, Items.phaseFabric, 110, SnItems.naturite, 95));
+        requirements(Category.crafting, with(Items.lead, 150, Items.graphite, 120, Items.silicon, 210, Items.titanium, 110, Items.thorium, 200, Items.phaseFabric, 110));
 
         size = 3;
         craftEffect = SnFx.modPlasticburn;
@@ -65,7 +65,7 @@ public class SnProduction implements ContentList{
     }};
    
     advancedWeaver = new GenericSmelter("advancedWeaver"){{
-        requirements(Category.crafting, with(Items.copper, 210, Items.metaglass, 90, Items.silicon, 190, Items.titanium, 100, Items.thorium, 185, Items.surgeAlloy, 110, SnItems.flameid, 100));
+        requirements(Category.crafting, with(Items.copper, 210, Items.metaglass, 90, Items.silicon, 190, Items.titanium, 100, Items.thorium, 185, Items.surgeAlloy, 110));
         size = 3;
         health = 890;
         craftEffect = SnFx.modSmeltsmoke;
@@ -95,12 +95,12 @@ public class SnProduction implements ContentList{
         itemCapacity = 30;
         liquidCapacity = 40f;
 
-        consumes.liquid(Liquids.water, 0.7f);
+        consumes.liquid(Liquids.water, 0.6f);
         consumes.power(2f);
     }};
     
     advancedKiln = new GenericSmelter("advancedKiln"){{
-        requirements(Category.crafting, with(Items.copper, 210, Items.lead, 220, Items.metaglass, 190, Items.graphite, 185, Items.silicon, 200, Items.titanium, 210, Items.thorium, 205, SnItems.flameid, 95));
+        requirements(Category.crafting, with(Items.copper, 210, Items.lead, 220, Items.metaglass, 190, Items.graphite, 185, Items.silicon, 200, Items.titanium, 210, Items.thorium, 205));
 
         size = 4;
         health = 1200;
@@ -112,13 +112,13 @@ public class SnProduction implements ContentList{
         liquidCapacity = 100f;
 
         consumes.items(with(Items.lead, 7, Items.sand, 5));
-        consumes.liquid(Liquids.water, 1f);
+        consumes.liquid(Liquids.water, 0.75f);
         consumes.power(7f);
     }};
 
 
     advancedSurge = new StaticTopSmelter("advancedSurge"){{
-        requirements(Category.crafting, with(Items.lead, 130, Items.metaglass, 100, Items.silicon, 150, Items.thorium, 110, Items.surgeAlloy, 75, SnItems.naturite, 75));
+        requirements(Category.crafting, with(Items.lead, 130, Items.metaglass, 100, Items.silicon, 150, Items.thorium, 110, Items.surgeAlloy, 75));
 
         size = 5;
         craftEffect = SnFx.modSmokeCloud;
@@ -129,7 +129,7 @@ public class SnProduction implements ContentList{
         drawer = new Draw360Rotator();
 
         consumes.items(with(Items.copper, 10, Items.lead, 12, Items.titanium, 8, Items.silicon, 10, Items.pyratite, 3));
-        consumes.liquid(Liquids.cryofluid, 0.9f);
+        consumes.liquid(Liquids.water, 0.87f);
         consumes.power(5.5f);
     }};
     
