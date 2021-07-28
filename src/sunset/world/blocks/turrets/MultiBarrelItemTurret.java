@@ -52,8 +52,7 @@ public class MultiBarrelItemTurret extends ItemTurret {
 
         @Override
         protected void shoot(BulletType type) {
-            super.shoot(type);
-			
+
 			slowDownReload = slowReloadTime;
 			if(speedupScl < maxReloadMultiplier){
 				speedupScl += speedupPerShot;
