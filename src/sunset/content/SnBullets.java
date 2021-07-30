@@ -89,10 +89,10 @@ public class SnBullets implements ContentList{
         heavyplanatriumSap = new SapBulletType(){{
         sapStrength = 0.95f;
         length = 240f;
-        damage = 50f;
+        damage = 60f;
         shootEffect = Fx.shootSmall;
         despawnEffect = Fx.none;
-        width = 4f;
+        width = 1.8f;
         hitColor = color = Color.valueOf("bf92f9");
         lifetime = 30f;
 }};
