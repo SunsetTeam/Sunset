@@ -21,6 +21,8 @@ public class SnBullets implements ContentList{
 
 //sap
     leadSap, sporeSap, planatriumSap,
+//heavy-sap
+    heavyplanatriumSap,
 //artillery
     artilleryForsMine, artilleryFors, artilleryBlastMine, artilleryBlast,
 //heavy-standart
@@ -81,6 +83,18 @@ public class SnBullets implements ContentList{
         width = 1f;
         hitColor = color = Color.valueOf("bf92f9");
         lifetime = 23f;
+}};
+
+//heavy-sap
+        heavyplanatriumSap = new SapBulletType(){{
+        sapStrength = 0.95f;
+        length = 240f;
+        damage = 50f;
+        shootEffect = Fx.shootSmall;
+        despawnEffect = Fx.none;
+        width = 4f;
+        hitColor = color = Color.valueOf("bf92f9");
+        lifetime = 30f;
 }};
 
 //artillery

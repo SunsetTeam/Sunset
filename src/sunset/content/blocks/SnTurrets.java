@@ -30,7 +30,7 @@ public class SnTurrets implements ContentList {
     public static Block
 
     //turrets
-    carabine, pulsion, titrum, burner, tetramite, typhoon, flood, chain, field, undulation, triden, radius, galebard,
+    carabine, pulsion, titrum, burner, tetramite, typhoon, flood, tentacle, chain, field, undulation, triden, radius, galebard,
     sunrise, spark, dissector, art,
     spine, major, admiral,
     
@@ -78,7 +78,6 @@ public class SnTurrets implements ContentList {
                     Items.sporePod, SnBullets.sporeSap,
                     SnItems.planatrium, SnBullets.planatriumSap
             );
-            range = 130f;
             health = 780;
             size = 2;
             reloadTime = 7f;
@@ -268,6 +267,22 @@ public class SnTurrets implements ContentList {
             health = 200 * size * size;
             flags = EnumSet.of(BlockFlag.turret, BlockFlag.extinguisher);
             ammoPerShot = 15;
+        }};
+
+        tentacle = new ItemTurret("tentacle") {{
+            requirements(Category.turret, with(Items.copper, 600, Items.graphite, 580, Items.lead, 550, SnItems.planatrium, 430, SnItems.nobium, 300));
+            ammo(
+                    SnItems.planatrium, SnBullets.heavyplanatriumSap
+            );
+            range = 290f;
+            health = 3400;
+            size = 4;
+            reloadTime = 15f;
+            recoilAmount = 0.4f;
+            inaccuracy = 2.5f;
+            rotateSpeed = 5f;
+            shootSound = Sounds.sap;
+            targetAir = true;
         }};
 
         chain = new ChainLightningTurret("chain"){{
