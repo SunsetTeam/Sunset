@@ -14,7 +14,7 @@ public class SnItems implements ContentList{
 
         fors = new Item("fors", Color.valueOf("F3A39F")){{
             cost = 2f;
-            hardness = 5f;
+            hardness = 3;
         }};
 
         naturite = new Item("naturite", Color.valueOf("f2e878")){{
