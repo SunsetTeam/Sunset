@@ -2,10 +2,13 @@ package sunset.content.blocks;
 
 import static mindustry.type.ItemStack.with;
 
+import mindustry.type.Item;
+import mindustry.type.Category;
+import mindustry.type.ItemStack;
+import mindustry.type.LiquidStack;
 import mindustry.content.Items;
 import mindustry.world.blocks.defense.*;
 import mindustry.ctype.ContentList;
-import mindustry.type.Category;
 import mindustry.world.Block;
 import mindustry.world.blocks.defense.ForceProjector;
 import sunset.content.SnItems;
@@ -26,15 +29,16 @@ public class SnDefense implements ContentList {
         forcedome = new ForceProjector("force-dome"){{
             requirements(Category.effect, with(Items.titanium, 600, Items.thorium, 480, Items.silicon, 300, SnItems.naturite, 250, SnItems.nobium, 240, SnItems.enojie, 210));
             size = 5;
-            phaseRadiusBoost = 65f;
-            radius = 153.6f;
+            phaseRadiusBoost = 200f;
+            phaseUseTime = 220f;
+            radius = 0f;
             shieldHealth = 2000f;
-            cooldownNormal = 4.8f;
-            cooldownLiquid = 3.8f;
-            cooldownBrokenBase = 1.0f;
+            cooldownNormal = 4f;
+            cooldownLiquid = 3f;
+            cooldownBrokenBase = 3f;
 
-            consumes.item(Items.phaseFabric).boost();
-            consumes.power(11f);
+            consumes.items(with(SnItems.enojie, 3, SnItems.nobium, 2, Items.phaseFabric, 2)).boost();
+            consumes.power(14f);
         }};
 
 //walls
