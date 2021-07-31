@@ -29,7 +29,7 @@ public class SnDefense implements ContentList {
             phaseRadiusBoost = 65f;
             radius = 153.6f;
             shieldHealth = 2000f;
-            cooldownNormal = 3.75f;
+            cooldownNormal = 4.8f;
             cooldownLiquid = 3.8f;
             cooldownBrokenBase = 1.0f;
 
