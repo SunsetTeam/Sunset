@@ -737,30 +737,37 @@ public class SnBullets implements ContentList{
             width = 6;
         }};
 //misc
-        overheatBullet = new BasicBulletType(0, 2){{
+        overheatBullet = new BasicBulletType(0.1f, 7, "error"){{
+            shootEffect = Fx.none;
+            hitEffect = Fx.none;
+            despawnEffect = Fx.none;
+            trailEffect = Fx.none;
+            smokeEffect = Fx.none;
             status = SnStatusEffects.overheat;
             statusDuration = 120f;
             shootEffect = Fx.pointBeam;
             lightningColor = Color.red;
             instantDisappear = true;
+            width = 0;
+            height = 0;
         }
 
             @Override
             public void init(Bullet b) {
                 Unit u = Units.closestEnemy(b.team, b.x, b.y, range(),
-                    unit -> true || Angles.within(b.rotation(), b.angleTo(unit.x, unit.y), 10));
+                    unit -> Angles.within(b.rotation(), b.angleTo(unit.x, unit.y), 10));
                 if(u != null) {
                     shootEffect.at(b.x, b.y, b.rotation(), lightningColor, new Vec2().set(u.x, u.y));
                     u.damagePierce(b.damage);
                     ((StackableStatusEffect)status).apply(u, statusDuration);
                 } else {
                     shootEffect.at(b.x, b.y, b.rotation(), lightningColor,
-                        new Vec2().setLength(range()).setAngle(b.rotation()));
+                        new Vec2().setLength(range()).setAngle(b.rotation()).add(b.x, b.y));
                 }
             }
 
             @Override
-            public float range() { return 370; }
+            public float range() { return 340; }
         };
 
         emptyBullet = new BasicBulletType(0, 0, "error"){{

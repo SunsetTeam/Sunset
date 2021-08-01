@@ -33,7 +33,7 @@ public class SnTurrets implements ContentList {
     carabine, pulsion, titrum, burner, tetramite, typhoon, flood, chain, field, undulation, triden, radius, galebard,
     sunrise, spark, dissector, art,
     spine, major, admiral,
-    
+    trigger,
     testturret;
     @Override
     public void load() {
@@ -185,6 +185,17 @@ public class SnTurrets implements ContentList {
             rotateSpeed = 9;
 
             consumes.powerCond(5f, (TractorBeamBuild e) -> e.target != null);
+        }};
+
+        trigger = new PowerTurret("trigger"){{
+            requirements(Category.turret, with(Items.silicon, 275, Items.titanium, 125, SnItems.enojie, 75));
+            size = 3;
+            powerUse = 9f;
+            range = 340f;
+            reloadTime = 18f;
+            recoilAmount = 0f;
+            targetAir = true;
+            shootType = SnBullets.overheatBullet;
         }};
 // 4x4
         admiral = new MultiBarrelItemTurret("admiral") {{
