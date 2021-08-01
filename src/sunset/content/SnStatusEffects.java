@@ -3,6 +3,8 @@ package sunset.content;
 import arc.graphics.*;
 
 import arc.graphics.g2d.Draw;
+import arc.graphics.g2d.Fill;
+import arc.graphics.g2d.TextureRegion;
 import mindustry.content.*;
 import mindustry.ctype.*;
 import mindustry.gen.Unit;
@@ -48,11 +50,11 @@ public class SnStatusEffects implements ContentList{
 
        overheat = new StackableStatusEffect("overheat"){{
            maxStacks = 20;
-           healthMultipliers.addAll(0.99f, 0.98f, 0.97f, 0.96f, 0.95f, 0.94f,
-                                    0.92f, 0.90f, 0.86f, 0.84f, 0.82f,
-                                    0.79f, 0.76f, 0.73f, 0.70f,
-                                    0.66f, 0.62f, 0.58f,
-                                    0.53f, 0.48f);
+           healthMultipliers.addAll(0.99f, 0.98f, 0.97f, 0.96f, 0.95f, 0.94f, //-0.01
+                                    0.92f, 0.90f, 0.86f, 0.84f, 0.82f, //-0.02
+                                    0.79f, 0.76f, 0.73f, 0.70f, //-0.03
+                                    0.65f, 0.60f, 0.55f, //-0.05
+                                    0.47f, 0.39f); //-0.08
            speedMultipliers.addAll(0.99f, 0.99f, 0.99f, 0.99f, 0.98f,
                                    0.98f, 0.98f, 0.98f, 0.97f, 0.96f,
                                    0.96f, 0.96f, 0.95f, 0.94f, 0.93f,
@@ -63,8 +65,11 @@ public class SnStatusEffects implements ContentList{
        }
            @Override
            public void drawStack(Unit unit, int stackCount) {
-               Draw.z(Layer.end);
-               Fonts.chat.draw(String.valueOf(unit.healthMultiplier()), unit.x, unit.y);
+               Draw.z((unit.isFlying() ? Layer.flyingUnit : Layer.groundUnit)+1);
+               TextureRegion text = unit.type.region;
+               Draw.color(color, (stackCount/2f)/maxStacks);
+               Draw.rect(text, unit.x, unit.y, unit.rotation - 90f);
+               Draw.color();
            }
        };
     }
