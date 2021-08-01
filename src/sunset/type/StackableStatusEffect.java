@@ -2,12 +2,8 @@ package sunset.type;
 
 import arc.graphics.g2d.TextureRegion;
 import arc.scene.ui.layout.Table;
-import mindustry.Vars;
-import mindustry.content.Blocks;
 import mindustry.content.TechTree;
 import mindustry.ui.Cicon;
-import mindustry.world.blocks.defense.turrets.ItemTurret;
-import mindustry.world.meta.Stat;
 import arc.struct.BoolSeq;
 import arc.struct.FloatSeq;
 import arc.struct.Seq;
@@ -195,7 +191,7 @@ public class StackableStatusEffect extends StatusEffect implements ContentDispla
                 }
             }
         }
-        StackableStatusEntry entry = Pools.obtain(StackableStatusEntry.class, () -> new StackableStatusEntry(this, stackCount, duration));
+        StackableStatusEntry entry = new StackableStatusEntry(this, stackCount, duration);
         statuses.add(entry);
     }
     @Override

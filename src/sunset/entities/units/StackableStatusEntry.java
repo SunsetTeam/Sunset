@@ -1,6 +1,7 @@
 package sunset.entities.units;
 
 import mindustry.entities.units.StatusEntry;
+import mindustry.type.StatusEffect;
 import sunset.type.StackableStatusEffect;
 
 /** Запись о накладываемом статус-эффекте. */
@@ -17,15 +18,13 @@ public class StackableStatusEntry extends StatusEntry {
         this.baseEffect = baseEffect;
         this.stackCount = stackCount;
         this.duration = duration;
-        this.time = duration;
-        effect = baseEffect.stacks.get(stackCount-1);
+        set(baseEffect.stacks.get(stackCount-1), duration);
     }
     public void stack() {
-        time = duration;
         stackCount++;
         if(stackCount > ((StackableStatusEffect)baseEffect).maxStacks) {
             stackCount = ((StackableStatusEffect)baseEffect).maxStacks;
         }
-        effect = baseEffect.stacks.get(stackCount-1);
+        set(baseEffect.stacks.get(stackCount-1), duration);
     }
 }
