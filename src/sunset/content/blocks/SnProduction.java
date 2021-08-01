@@ -144,7 +144,7 @@ public class SnProduction implements ContentList{
         size = 3;
         hasPower = true;
         hasLiquids = false;
-        drawer = new DrawRotator();
+        drawer = new DrawRotatorTop();
         ambientSound = Sounds.grinding;
         ambientSoundVolume = 0.025f;
 
@@ -193,6 +193,7 @@ public class SnProduction implements ContentList{
             size = 5;
             drawRim = true;
             hasPower = true;
+            drawMineItem = true;
             tier = 6;
             updateEffect = Fx.pulverizeRed;
             updateEffectChance = 0.04f;

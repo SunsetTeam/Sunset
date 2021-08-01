@@ -22,10 +22,8 @@ public class SnFx{
         randLenVectors(e.id, 6, 4f + e.fin() * 8f, (x, y) -> {
             color(Pal.heal);
             Fill.square(e.x + x, e.y + y, e.fout() + 0.5f, 45);
-            float squareRad = 1f + e.finpow() * 1f;
-            float circleRad = 1f + e.finpow() * 10f;
-            Lines.square(e.x, e.y, squareRad + e.fin() * e.rotation * 20.0F, 110);
-            Lines.square(e.x, e.y, squareRad + e.fin() * e.rotation * 15.0F, 50);
+            Lines.square(e.x, e.y, e.fin() + 4f, 45 + e.rotation * 90);
+            float circleRad = 1f + e.fin() * 10f;
             Lines.circle(e.x, e.y, circleRad);
         });
     }),

@@ -21,6 +21,8 @@ public class SnBullets implements ContentList{
 
 //sap
     leadSap, sporeSap, planatriumSap,
+//heavy-sap
+    heavyplanatriumSap,
 //artillery
     artilleryForsMine, artilleryFors, artilleryBlastMine, artilleryBlast,
 //heavy-standart
@@ -81,6 +83,18 @@ public class SnBullets implements ContentList{
         width = 1f;
         hitColor = color = Color.valueOf("bf92f9");
         lifetime = 23f;
+}};
+
+//heavy-sap
+        heavyplanatriumSap = new SapBulletType(){{
+        sapStrength = 0.95f;
+        length = 240f;
+        damage = 60f;
+        shootEffect = Fx.shootSmall;
+        despawnEffect = Fx.none;
+        width = 1.8f;
+        hitColor = color = Color.valueOf("bf92f9");
+        lifetime = 30f;
 }};
 
 //artillery
@@ -212,14 +226,14 @@ public class SnBullets implements ContentList{
         }};
 
 //big standart
-        heavystandardDense = new BasicBulletType(8f, 80, "bullet"){{
+        heavystandardDense = new BasicBulletType(8f, 100, "bullet"){{
             hitSize = 5;
             width = 19f;
             height = 24f;
             shootEffect = Fx.shootBig;
         }};
 
-        heavystandardThorium = new BasicBulletType(9.4f, 130, "bullet"){{
+        heavystandardThorium = new BasicBulletType(9.4f, 170, "bullet"){{
             hitSize = 7;
             width = 20f;
             height = 27f;
@@ -229,7 +243,7 @@ public class SnBullets implements ContentList{
             knockback = 0.7f;
         }};
 
-        heavystandardIncendiary = new BasicBulletType(7f, 90, "bullet"){{
+        heavystandardIncendiary = new BasicBulletType(7f, 110, "bullet"){{
             hitSize = 7;
             width = 19f;
             height = 24f;
@@ -243,7 +257,7 @@ public class SnBullets implements ContentList{
             knockback = 0.9f;
         }};
 
-        standartBlastBig = new BasicBulletType(9f, 85, "bullet"){{
+        standartBlastBig = new BasicBulletType(9f, 105, "bullet"){{
             hitSize = 5;
             width = 19f;
             height = 24f;
@@ -257,7 +271,7 @@ public class SnBullets implements ContentList{
             knockback = 0.7f;
         }};
 
-        standardForsBig = new BasicBulletType(7.8f, 100, "bullet"){{
+        standardForsBig = new BasicBulletType(7.8f, 150, "bullet"){{
             hitSize = 7;
             width = 19f;
             height = 24f;
@@ -530,8 +544,6 @@ public class SnBullets implements ContentList{
             makeFire = true;
             collidesAir = false;
         }};
-
-
 
 //units
         BasicHelicopterGun = new BasicBulletType(5.6f, 11){{
