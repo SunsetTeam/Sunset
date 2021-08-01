@@ -8,7 +8,6 @@ import arc.struct.BoolSeq;
 import arc.struct.FloatSeq;
 import arc.struct.Seq;
 import arc.util.Log;
-import arc.util.pooling.Pools;
 import mindustry.entities.units.StatusEntry;
 import mindustry.gen.Unit;
 import mindustry.type.StatusEffect;

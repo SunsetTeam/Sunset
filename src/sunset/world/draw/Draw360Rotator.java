@@ -1,15 +1,9 @@
 package sunset.world.draw;
 
-import arc.*;
 import arc.Core;
-import arc.math.Mathf;
-import arc.math.geom.Vec2;
 import arc.math.Interp;
-import arc.graphics.Color;
-import arc.graphics.g2d.*;
 import arc.graphics.g2d.Draw;
 import arc.graphics.g2d.TextureRegion;
-import mindustry.world.draw.*;
 import mindustry.world.Block;
 import mindustry.world.blocks.production.GenericCrafter;
 import mindustry.world.draw.DrawBlock;

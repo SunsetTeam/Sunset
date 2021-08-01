@@ -1,11 +1,7 @@
 package sunset.world.blocks.environment;
 
-import arc.*;
-import arc.graphics.*;
 import arc.graphics.g2d.TextureRegion;
-import mindustry.graphics.MultiPacker.*;
 import mindustry.type.*;
-import mindustry.world.*;
 import mindustry.world.blocks.environment.OreBlock;
 
 public class ModOreBlock extends OreBlock {

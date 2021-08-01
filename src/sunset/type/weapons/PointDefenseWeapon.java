@@ -11,7 +11,6 @@ import mindustry.content.Fx;
 import mindustry.entities.Effect;
 import mindustry.entities.units.*;
 import mindustry.gen.*;
-import mindustry.world.meta.Stat;
 import mindustry.world.meta.StatValue;
 import sunset.ai.weapon.EmptyWeaponAI;
 import sunset.content.SnBullets;

@@ -1,13 +1,10 @@
 package sunset.world.blocks.turrets;
 
 import arc.util.Time;
-import arc.func.Cons;
 import arc.func.Func;
-import arc.math.Angles;
 import arc.math.Mathf;
 import arc.math.geom.Vec2;
 import arc.struct.Seq;
-import arc.util.Time;
 import mindustry.Vars;
 import mindustry.entities.bullet.BulletType;
 import mindustry.world.blocks.defense.turrets.ItemTurret;

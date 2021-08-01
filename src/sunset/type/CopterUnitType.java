@@ -5,7 +5,6 @@ import arc.graphics.g2d.Draw;
 import arc.math.*;
 import arc.graphics.g2d.TextureRegion;
 import arc.math.Mathf;
-import arc.struct.*;
 import arc.util.*;
 import mindustry.gen.*;
 import mindustry.graphics.Layer;

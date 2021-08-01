@@ -3,14 +3,12 @@ package sunset.content;
 import arc.graphics.*;
 
 import arc.graphics.g2d.Draw;
-import arc.graphics.g2d.Fill;
 import arc.graphics.g2d.TextureRegion;
 import mindustry.content.*;
 import mindustry.ctype.*;
 import mindustry.gen.Unit;
 import mindustry.type.*;
 import mindustry.graphics.*;
-import mindustry.ui.Fonts;
 import sunset.type.StackableStatusEffect;
 
 public class SnStatusEffects implements ContentList{

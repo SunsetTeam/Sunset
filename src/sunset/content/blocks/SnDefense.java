@@ -2,10 +2,7 @@ package sunset.content.blocks;
 
 import static mindustry.type.ItemStack.with;
 
-import mindustry.type.Item;
 import mindustry.type.Category;
-import mindustry.type.ItemStack;
-import mindustry.type.LiquidStack;
 import mindustry.content.Items;
 import mindustry.world.blocks.defense.*;
 import mindustry.ctype.ContentList;

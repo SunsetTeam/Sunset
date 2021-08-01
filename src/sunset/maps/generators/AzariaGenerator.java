@@ -15,7 +15,6 @@ import arc.util.noise.Noise;
 import mindustry.ai.Astar;
 import mindustry.ai.BaseRegistry.BasePart;
 import mindustry.content.Blocks;
-import mindustry.content.*;
 import mindustry.game.Schematics;
 import mindustry.game.Team;
 import mindustry.game.Waves;

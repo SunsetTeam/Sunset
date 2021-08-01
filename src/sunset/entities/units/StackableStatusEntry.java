@@ -1,7 +1,6 @@
 package sunset.entities.units;
 
 import mindustry.entities.units.StatusEntry;
-import mindustry.type.StatusEffect;
 import sunset.type.StackableStatusEffect;
 
 /** Запись о накладываемом статус-эффекте. */

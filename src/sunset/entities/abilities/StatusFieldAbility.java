@@ -1,7 +1,6 @@
 package sunset.entities.abilities;
 
 import arc.Core;
-import arc.scene.ui.layout.Cell;
 import arc.scene.ui.layout.Table;
 import arc.util.Strings;
 import arc.util.Time;
@@ -10,7 +9,6 @@ import mindustry.content.StatusEffects;
 import mindustry.entities.abilities.Ability;
 import mindustry.gen.Unit;
 import mindustry.type.StatusEffect;
-import mindustry.ui.Cicon;
 import mindustry.world.meta.StatValue;
 import sunset.Utils;
 

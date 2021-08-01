@@ -4,7 +4,6 @@ import arc.Core;
 import arc.scene.Element;
 import arc.scene.ui.Label;
 import arc.scene.ui.TextButton;
-import arc.scene.ui.layout.Cell;
 import arc.scene.ui.layout.Table;
 import arc.util.Align;
 import arc.util.Strings;
