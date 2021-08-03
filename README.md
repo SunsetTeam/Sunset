@@ -14,7 +14,7 @@ The third planet in the mod, the most difficult,has more content and size than B
 
 # Devs
 Coder's: Slish, RePoweRED ,CaHuTaP\
-Spites: Saigo no-nozomi, MissionaryPoseBest, Snake\
+Spites: Saigo no-nozomi, MissionaryPoseBest, Snake, Mak\
 Sounds: King-Silicon\
 Ost: Saigo no-nozomi\
 Maps: Saigo no-nozomi
