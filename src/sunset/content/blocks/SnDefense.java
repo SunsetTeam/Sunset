@@ -26,15 +26,16 @@ public class SnDefense implements ContentList {
         forcedome = new ForceProjector("force-dome"){{
             requirements(Category.effect, with(Items.titanium, 600, Items.thorium, 480, Items.silicon, 300, SnItems.naturite, 250, SnItems.nobium, 240, SnItems.enojie, 210));
             size = 5;
-            phaseRadiusBoost = 65f;
-            radius = 153.6f;
+            phaseRadiusBoost = 200f;
+            phaseUseTime = 220f;
+            radius = 0f;
             shieldHealth = 2000f;
-            cooldownNormal = 5.0f;
-            cooldownLiquid = 3.8f;
-            cooldownBrokenBase = 1.0f;
+            cooldownNormal = 4f;
+            cooldownLiquid = 3f;
+            cooldownBrokenBase = 3f;
 
-            consumes.item(Items.phaseFabric).boost();
-            consumes.power(11f);
+            consumes.items(with(SnItems.enojie, 3, SnItems.nobium, 2, Items.phaseFabric, 2)).boost();
+            consumes.power(14f);
         }};
 
 //walls

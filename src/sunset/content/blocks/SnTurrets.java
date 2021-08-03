@@ -30,7 +30,7 @@ public class SnTurrets implements ContentList {
     public static Block
 
     //turrets
-    carabine, eagle, pulsion, titrum, burner, tetramite, typhoon, flood, tentacle, chain, field, undulation, triden, radius, galebard,
+    eagle, carabine, pulsion, titrum, reflection, burner, tetramite, typhoon, flood, tentacle, chain, field, undulation, triden, radius, galebard,
     sunrise, spark, dissector, art,
     spine, major, admiral,
     trigger,
@@ -112,7 +112,26 @@ public class SnTurrets implements ContentList {
             shootSound = Sounds.sap;
             targetAir = true;
         }};
-        
+
+        reflection = new ItemTurret("reflection") {{
+            requirements(Category.turret, with(Items.copper, 100, SnItems.fors, 60, SnItems.naturite, 55));
+            ammo(
+                    Items.sporePod, SnBullets.sporePodPoisonBullet,
+                    SnItems.naturite, SnBullets.naturitePoisonBullet
+            );
+            health = 780;
+            size = 2;
+            reloadTime = 30f;
+            range = 130f;
+            recoilAmount = 1f;
+            inaccuracy = 14f;
+            rotateSpeed = 8f;
+            shootCone = 2f;
+            shootSound = Sounds.flame;
+            ammoUseEffect = Fx.casing1;
+            targetAir = true;
+        }};
+
 // 3x3
         major = new MultiBarrelItemTurret("major") {{
             requirements(Category.turret, with(Items.plastanium, 175, Items.titanium, 75, Items.metaglass, 50, SnItems.naturite, 30));
