@@ -10,12 +10,14 @@ import mindustry.ctype.ContentList;
 import mindustry.gen.Sounds;
 import mindustry.type.Category;
 import mindustry.type.ItemStack;
+import mindustry.world.blocks.production.*;
 import mindustry.world.blocks.production.Drill;
 import mindustry.world.Block;
 import mindustry.world.blocks.production.Cultivator;
 import mindustry.world.blocks.production.GenericCrafter;
 import mindustry.world.blocks.production.GenericSmelter;
 import mindustry.world.draw.DrawAnimation;
+import mindustry.world.draw.DrawRotator;
 import sunset.content.SnFx;
 import sunset.content.SnItems;
 import sunset.world.blocks.production.StaticTopSmelter;
@@ -191,7 +193,6 @@ public class SnProduction implements ContentList{
             size = 5;
             drawRim = true;
             hasPower = true;
-            drawMineItem = true;
             tier = 6;
             updateEffect = Fx.pulverizeRed;
             updateEffectChance = 0.04f;
@@ -203,7 +204,7 @@ public class SnProduction implements ContentList{
             liquidBoostIntensity = 2.1f;
 
             consumes.power(6f);
-            consumes.liquid(Liquids.water, 0.3f).boost();
+            consumes.liquid(Liquids.cryofluid, 0.31f).boost();
         }};
   }
 }
