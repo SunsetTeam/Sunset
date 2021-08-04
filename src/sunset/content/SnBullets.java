@@ -557,7 +557,7 @@ public class SnBullets implements ContentList{
             height = 8f;
             hitEffect = Fx.flakExplosion;
             splashDamage = 9f * 1.5f;
-            splashDamageRadius = 18f;
+            splashDamageRadius = 16f;
             shrinkX = 0.3f;
             shrinkY = 0.3f;
             drag = 0.04f;
@@ -570,15 +570,15 @@ public class SnBullets implements ContentList{
             weaveMag = 1f;
         }};
 
-        naturitePoisonBullet = new FlakBulletType(4f, 14){{
+        naturitePoisonBullet = new FlakBulletType(4f, 12){{
             sprite = "sunset-circle-bullet";
             knockback = 0.6f;
             lifetime = 100f;
             width = 8f;
             height = 8f;
             hitEffect = Fx.flakExplosion;
-            splashDamage = 14f * 1.5f;
-            splashDamageRadius = 14f;
+            splashDamage = 13f * 1.5f;
+            splashDamageRadius = 10f;
             shrinkX = 0.3f;
             shrinkY = 0.3f;
             drag = 0.04f;
