@@ -18,7 +18,7 @@ public class SnOther implements ContentList {
     public static Block
 
 //storage
-    naturiteContainer,
+    crypt,
 
 //mass-driver
     enojieDriver,
@@ -29,7 +29,7 @@ public class SnOther implements ContentList {
     @Override
     public void load() {
 
-        naturiteContainer = new StorageBlock("crypt"){{
+        crypt = new StorageBlock("crypt"){{
             requirements(Category.effect, with(Items.titanium, 350, SnItems.naturite, 200));
             size = 5;
             itemCapacity = 3500;
