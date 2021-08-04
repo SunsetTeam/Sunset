@@ -558,8 +558,6 @@ public class SnBullets implements ContentList{
             hitEffect = Fx.flakExplosion;
             splashDamage = 9f * 1.5f;
             splashDamageRadius = 10f;
-            shrinkX = 0.2f;
-            shrinkY = 0.3f;
             drag = 0.04f;
             frontColor = SnPal.PoisonBullet;
             backColor = SnPal.PoisonBulletBack;
@@ -577,8 +575,6 @@ public class SnBullets implements ContentList{
             hitEffect = Fx.flakExplosion;
             splashDamage = 10f * 1.5f;
             splashDamageRadius = 13f;
-            shrinkX = 0.2f;
-            shrinkY = 0.3f;
             drag = 0.04f;
             frontColor = SnPal.PoisonBullet;
             backColor = SnPal.PoisonBulletBack;
