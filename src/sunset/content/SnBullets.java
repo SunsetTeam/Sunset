@@ -561,6 +561,8 @@ public class SnBullets implements ContentList{
             drag = 0.04f;
             frontColor = SnPal.PoisonBullet;
             backColor = SnPal.PoisonBulletBack;
+            collidesAir = true;
+            collidesGround = true;
 
             weaveScale = 8f;
             weaveMag = 1f;
@@ -578,6 +580,8 @@ public class SnBullets implements ContentList{
             drag = 0.04f;
             frontColor = SnPal.PoisonBullet;
             backColor = SnPal.PoisonBulletBack;
+            collidesAir = true;
+            collidesGround = true;
 
             weaveScale = 8f;
             weaveMag = 1f;
