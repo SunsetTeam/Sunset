@@ -549,7 +549,7 @@ public class SnBullets implements ContentList{
         }};
 
 //posion bullets
-        sporePodPoisonBullet = new FlakBulletType(4f, 11){{
+        sporePodPoisonBullet = new FlakBulletType(4f, 9){{
             sprite = "sunset-circle-bullet";
             knockback = 0.4f;
             lifetime = 100f;
@@ -557,7 +557,7 @@ public class SnBullets implements ContentList{
             height = 8f;
             hitEffect = Fx.flakExplosion;
             splashDamage = 9f * 1.5f;
-            splashDamageRadius = 16f;
+            splashDamageRadius = 24f;
             shrinkX = 0.3f;
             shrinkY = 0.3f;
             drag = 0.04f;
@@ -578,7 +578,7 @@ public class SnBullets implements ContentList{
             height = 8f;
             hitEffect = Fx.flakExplosion;
             splashDamage = 13f * 1.5f;
-            splashDamageRadius = 10f;
+            splashDamageRadius = 16f;
             shrinkX = 0.3f;
             shrinkY = 0.3f;
             drag = 0.04f;
