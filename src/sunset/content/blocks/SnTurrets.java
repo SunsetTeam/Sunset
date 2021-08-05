@@ -126,7 +126,7 @@ public class SnTurrets implements ContentList {
             size = 2;
             shots = 4;
             reloadTime = 40f;
-            range = 210f;
+            range = 170f;
             recoilAmount = 1.1f;
             cooldown = 0.02f;
             velocityInaccuracy = 0.2f;
