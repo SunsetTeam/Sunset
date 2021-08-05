@@ -608,6 +608,9 @@ public class SnBullets implements ContentList{
             shrinkX = 0.3f;
             shrinkY = 0.3f;
             drag = 0.04f;
+
+            weaveScale = 6f;
+            weaveMag = 1f;
         }};
 
         heavySporePodPoison = new FlakBulletType(3f, 17){{
@@ -648,6 +651,9 @@ public class SnBullets implements ContentList{
             shrinkX = 0.3f;
             shrinkY = 0.3f;
             drag = 0.04f;
+
+            weaveScale = 6f;
+            weaveMag = 1f;
         }};
 
         heavyNaturitePoison = new FlakBulletType(3f, 20){{
@@ -688,6 +694,9 @@ public class SnBullets implements ContentList{
             shrinkX = 0.3f;
             shrinkY = 0.3f;
             drag = 0.04f;
+
+            weaveScale = 6f;
+            weaveMag = 1f;
         }};
 
         heavySiliconPoison = new FlakBulletType(3f, 18){{
