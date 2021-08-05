@@ -702,7 +702,7 @@ public class SnBullets implements ContentList{
         heavySiliconPoison = new FlakBulletType(4f, 18){{
             sprite = "sunset-circle-bullet";
             knockback = 0.4f;
-            lifetime = 25s0f;
+            lifetime = 250f;
             width = 13;
             height = 13f;
             hitEffect = Fx.flakExplosion;
