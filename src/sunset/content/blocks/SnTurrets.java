@@ -131,7 +131,7 @@ public class SnTurrets implements ContentList {
             cooldown = 0.02f;
             velocityInaccuracy = 0.2f;
             restitution = 0.01f;
-            inaccuracy = 15f;
+            inaccuracy = 18f;
             rotateSpeed = 7f;
             shootCone = 3f;
             shootSound = Sounds.flame;

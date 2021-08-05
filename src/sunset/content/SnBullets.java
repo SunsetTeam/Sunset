@@ -594,9 +594,9 @@ public class SnBullets implements ContentList{
 
 //heavy-poison bullets
 
-        SporePodPoisonFrag = new FlakBulletType(1.8f, 6){{
+        SporePodPoisonFrag = new FlakBulletType(2f, 6){{
             sprite = "sunset-circle-bullet";
-            lifetime = 200f;
+            lifetime = 150f;
             splashDamage = 7f;
             splashDamageRadius = 14f;
             height = 6f;
@@ -613,10 +613,10 @@ public class SnBullets implements ContentList{
             weaveMag = 1f;
         }};
 
-        heavySporePodPoison = new FlakBulletType(3f, 17){{
+        heavySporePodPoison = new FlakBulletType(4f, 17){{
             sprite = "sunset-circle-bullet";
             knockback = 0.5f;
-            lifetime = 200f;
+            lifetime = 250f;
             width = 13;
             height = 13f;
             hitEffect = Fx.flakExplosion;
@@ -637,9 +637,9 @@ public class SnBullets implements ContentList{
             weaveMag = 1f;
         }};
 
-        NaturitePoisonFrag = new FlakBulletType(1.8f, 10){{
+        NaturitePoisonFrag = new FlakBulletType(2f, 10){{
             sprite = "sunset-circle-bullet";
-            lifetime = 200f;
+            lifetime = 150f;
             splashDamage = 13f;
             splashDamageRadius = 9f;
             height = 6f;
@@ -656,10 +656,10 @@ public class SnBullets implements ContentList{
             weaveMag = 1f;
         }};
 
-        heavyNaturitePoison = new FlakBulletType(3f, 20){{
+        heavyNaturitePoison = new FlakBulletType(4f, 20){{
             sprite = "sunset-circle-bullet";
             knockback = 0.6f;
-            lifetime = 200f;
+            lifetime = 250f;
             width = 13;
             height = 13f;
             hitEffect = Fx.flakExplosion;
@@ -680,9 +680,9 @@ public class SnBullets implements ContentList{
             weaveMag = 1f;
         }};
         
-        SiliconPoisonFrag = new FlakBulletType(1.8f, 8){{
+        SiliconPoisonFrag = new FlakBulletType(2f, 8){{
             sprite = "sunset-circle-bullet";
-            lifetime = 200f;
+            lifetime = 150f;
             splashDamage = 10f;
             splashDamageRadius = 11f;
             height = 6f;
@@ -699,10 +699,10 @@ public class SnBullets implements ContentList{
             weaveMag = 1f;
         }};
 
-        heavySiliconPoison = new FlakBulletType(3f, 18){{
+        heavySiliconPoison = new FlakBulletType(4f, 18){{
             sprite = "sunset-circle-bullet";
             knockback = 0.4f;
-            lifetime = 200f;
+            lifetime = 250f;
             width = 13;
             height = 13f;
             hitEffect = Fx.flakExplosion;
