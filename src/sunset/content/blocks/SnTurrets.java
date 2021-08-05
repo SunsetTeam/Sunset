@@ -64,9 +64,10 @@ public class SnTurrets implements ContentList {
                     SnItems.naturite, SnBullets.naturitePoisonBullet
             );
             health = 350;
+            size = 1;
             shots = 3;
             reloadTime = 30f;
-            range = 118f;
+            range = 115f;
             recoilAmount = 1f;
             cooldown = 0.02f;
             velocityInaccuracy = 0.2f;
@@ -117,20 +118,26 @@ public class SnTurrets implements ContentList {
         reflection = new ItemTurret("reflection") {{
             requirements(Category.turret, with(Items.copper, 100, SnItems.fors, 60, SnItems.naturite, 55));
             ammo(
-                    Items.sporePod, SnBullets.sporePodPoisonBullet,
-                    SnItems.naturite, SnBullets.naturitePoisonBullet
+                    Items.sporePod, SnBullets.heavySporePodPoison,
+                    SnItems.naturite, SnBullets.heavyNaturitePoison,
+                    Items.silicon, SnBullets.heavySiliconPoison
             );
             health = 780;
             size = 2;
-            reloadTime = 30f;
-            range = 130f;
-            recoilAmount = 1f;
-            inaccuracy = 14f;
-            rotateSpeed = 8f;
-            shootCone = 2f;
+            shots = 4;
+            reloadTime = 40f;
+            range = 210f;
+            recoilAmount = 1.1f;
+            cooldown = 0.02f;
+            velocityInaccuracy = 0.2f;
+            restitution = 0.01f;
+            inaccuracy = 15f;
+            rotateSpeed = 7f;
+            shootCone = 3f;
             shootSound = Sounds.flame;
             ammoUseEffect = Fx.casing1;
             targetAir = true;
+            targetGround = true;
         }};
 
 // 3x3

@@ -203,7 +203,7 @@ public class SnProduction implements ContentList{
             liquidBoostIntensity = 2.1f;
 
             consumes.power(6f);
-            consumes.liquid(Liquids.cryofluid, 0.31f).boost();
+            consumes.liquid(Liquids.cryofluid, 0.27f).boost();
         }};
   }
 }

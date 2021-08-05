@@ -34,7 +34,7 @@ public class SnDefense implements ContentList {
             cooldownLiquid = 3f;
             cooldownBrokenBase = 3f;
 
-            consumes.items(with(SnItems.enojie, 3, SnItems.nobium, 2, Items.phaseFabric, 2)).boost();
+            consumes.items(with(SnItems.enojie, 2, SnItems.nobium, 2, Items.phaseFabric, 2)).boost();
             consumes.power(14f);
         }};
 
