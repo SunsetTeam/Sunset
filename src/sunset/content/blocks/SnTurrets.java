@@ -120,20 +120,20 @@ public class SnTurrets implements ContentList {
             ammo(
                     Items.sporePod, SnBullets.heavySporePodPoison,
                     SnItems.naturite, SnBullets.heavyNaturitePoison,
-                    Items.silicon, SnBullets.heavySiliconPoison
+                    SnItems.nobium, SnBullets.heavyNobiumPoison
             );
             health = 780;
             size = 2;
             shots = 4;
             reloadTime = 40f;
-            range = 170f;
+            range = 160f;
             recoilAmount = 1.1f;
             cooldown = 0.02f;
             velocityInaccuracy = 0.2f;
             restitution = 0.01f;
-            inaccuracy = 18f;
+            inaccuracy = 20f;
             rotateSpeed = 7f;
-            shootCone = 3f;
+            shootCone = 2f;
             shootSound = Sounds.flame;
             ammoUseEffect = Fx.casing1;
             targetAir = true;

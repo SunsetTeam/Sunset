@@ -40,7 +40,7 @@ public class SnBullets implements ContentList{
     maxBlastPlastanium, maxBlastBlast, maxBlastSurge, maxBlastPlastaniumFrag,
 //poison
     sporePodPoisonBullet, naturitePoisonBullet, 
-    SporePodPoisonFrag, heavySporePodPoison, NaturitePoisonFrag, heavyNaturitePoison, SiliconPoisonFrag, heavySiliconPoison,
+    SporePodPoisonFrag, heavySporePodPoison, NaturitePoisonFrag, heavyNaturitePoison, NobiumPoisonFrag, heavyNobiumPoison,
 //units
     BasicHelicopterGun, HelicopterShootgun, HelicopterMissile, HelicopterBomb, HelicopterRocket, bigHelicopterGun, laserHelicopterFrag, largeHelicopterGun, bigHelicopterRocket, HelicopterMissiles,
     cometWaterShot, starStunBullet, galaxyKnockbackBullet,
@@ -622,9 +622,9 @@ public class SnBullets implements ContentList{
             hitEffect = Fx.flakExplosion;
             splashDamage = 16f * 1.5f;
             splashDamageRadius = 31f;
-            shrinkX = 0.4f;
-            shrinkY = 0.4f;
-            drag = 0.04f;
+            shrinkX = 0.3f;
+            shrinkY = 0.3f;
+            drag = 0.02f;
             frontColor = SnPal.PoisonBullet;
             backColor = SnPal.PoisonBulletBack;
             collidesAir = true;
@@ -665,9 +665,9 @@ public class SnBullets implements ContentList{
             hitEffect = Fx.flakExplosion;
             splashDamage = 21f * 1.5f;
             splashDamageRadius = 25f;
-            shrinkX = 0.4f;
-            shrinkY = 0.4f;
-            drag = 0.04f;
+            shrinkX = 0.3f;
+            shrinkY = 0.3f;
+            drag = 0.02f;
             frontColor = SnPal.PoisonBullet;
             backColor = SnPal.PoisonBulletBack;
             collidesAir = true;
@@ -680,7 +680,7 @@ public class SnBullets implements ContentList{
             weaveMag = 1f;
         }};
         
-        SiliconPoisonFrag = new FlakBulletType(2f, 8){{
+        NobiumPoisonFrag = new FlakBulletType(2f, 8){{
             sprite = "sunset-circle-bullet";
             lifetime = 150f;
             splashDamage = 10f;
@@ -699,7 +699,7 @@ public class SnBullets implements ContentList{
             weaveMag = 1f;
         }};
 
-        heavySiliconPoison = new FlakBulletType(4f, 18){{
+        heavyNobiumPoison = new FlakBulletType(4f, 18){{
             sprite = "sunset-circle-bullet";
             knockback = 0.4f;
             lifetime = 250f;
@@ -708,15 +708,15 @@ public class SnBullets implements ContentList{
             hitEffect = Fx.flakExplosion;
             splashDamage = 18f * 1.5f;
             splashDamageRadius = 27f;
-            shrinkX = 0.4f;
-            shrinkY = 0.4f;
-            drag = 0.04f;
+            shrinkX = 0.3f;
+            shrinkY = 0.3f;
+            drag = 0.02f;
             frontColor = SnPal.PoisonBullet;
             backColor = SnPal.PoisonBulletBack;
             collidesAir = true;
             collidesGround = true;
 
-            fragBullet = SiliconPoisonFrag;
+            fragBullet = NobiumPoisonFrag;
             fragBullets = 5;
 
             weaveScale = 9f;
