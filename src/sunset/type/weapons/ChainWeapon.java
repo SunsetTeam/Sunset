@@ -8,6 +8,7 @@ import arc.math.Angles;
 import arc.math.Mathf;
 import arc.math.geom.Vec2;
 import arc.scene.ui.layout.Table;
+import arc.struct.ObjectMap;
 import arc.struct.Seq;
 import arc.util.Strings;
 import arc.util.Time;
@@ -18,6 +19,7 @@ import mindustry.graphics.Layer;
 import mindustry.world.meta.StatValue;
 import sunset.ai.weapon.EmptyWeaponAI;
 import sunset.content.SnBullets;
+import sunset.type.UnitData;
 import sunset.type.UpdateDrawWeapon;
 
 import static arc.graphics.Color.coral;
@@ -42,10 +44,22 @@ public class ChainWeapon extends WeaponExt implements UpdateDrawWeapon, StatValu
         firstShotDelay = Float.MAX_VALUE;
         reload = Float.MAX_VALUE;
     }
-
-    Seq<Unit> units = new Seq<>();
+    Seq<Unit> units;
+    private void getUnits(WeaponMount mount, Unit unit) {
+        ObjectMap<WeaponMount, Seq<Unit>> data = UnitData.data(unit, "ChainWeapon");
+        if(data == null) {
+            data = new ObjectMap<>();
+            UnitData.data(unit, "ChainWeapon", data);
+        }
+        units = data.get(mount);
+        if(units == null) {
+            units = new Seq<>();
+            data.put(mount, units);
+        }
+    }
     @Override
     public void update(WeaponMount mount, Unit unit) {
+        getUnits(mount, unit);
         updateUnits(mount, unit);
         float[] p = new float[] { damageTick, healTick };
         units.each(u -> {
@@ -84,6 +98,7 @@ public class ChainWeapon extends WeaponExt implements UpdateDrawWeapon, StatValu
     public boolean useDefaultDraw() { return false; }
     @Override
     public void preDraw(WeaponMount mount, Unit unit) {
+        getUnits(mount, unit);
         if(units.isEmpty()) return;
         Draw.z(Layer.bullet);
         Draw.mixcol(chainColor, 0.4f);
