@@ -13,7 +13,13 @@ import mindustry.gen.Building;
 import mindustry.gen.Fire;
 import mindustry.gen.Groups;
 import mindustry.gen.Unit;
+import mindustry.graphics.MenuRenderer;
 import mindustry.type.StatusEffect;
+import mindustry.type.UnitType;
+import mindustry.ui.fragments.MenuFragment;
+
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 
 /** Набор различных static утилит. */
 public class Utils {
@@ -56,5 +62,21 @@ public class Utils {
         }
 
         return result;
+    }
+    /** Принудительно устанавлиывает юнита в меню. */
+    public static void setMenuUnit(UnitType type) {
+        try {
+            Field rendererF = MenuFragment.class.getDeclaredField("renderer");
+            rendererF.setAccessible(true);
+            MenuRenderer renderer = (MenuRenderer)rendererF.get(Vars.ui.menufrag);
+            Field flyerTypeF = MenuRenderer.class.getDeclaredField("flyerType");
+            flyerTypeF.setAccessible(true);
+            flyerTypeF.set(renderer, type);
+            Method generateM = MenuRenderer.class.getDeclaredMethod("generate");
+            generateM.setAccessible(true);
+            generateM.invoke(renderer);
+        } catch (Throwable e) {
+            Log.err(e);
+        }
     }
 }

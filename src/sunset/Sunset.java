@@ -34,6 +34,7 @@ public class Sunset extends Mod {
     public void init() {
         MissileLogic.init();
         Vars.ui.content = new ContentInfoDialogExt();
+        Utils.setMenuUnit(SnUnitTypes.router);
         /*Log.info("startUp");
         Events.on(ClientLoadEvent.class, e -> {
             Time.runTask(10f, () -> {

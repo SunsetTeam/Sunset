@@ -1,12 +1,16 @@
 package sunset.content;
 
+import arc.Core;
+import mindustry.Vars;
 import mindustry.content.StatusEffects;
 import mindustry.content.*;
 import mindustry.ctype.ContentList;
+import mindustry.game.Team;
 import mindustry.gen.Sounds;
 import mindustry.gen.UnitEntity;
 import mindustry.type.UnitType;
 import mindustry.type.Weapon;
+import sunset.Utils;
 import sunset.ai.FlyingUnitWeaponAI;
 import sunset.entities.abilities.StatusFieldAbility;
 import sunset.type.UnitTypeExt;
@@ -24,8 +28,9 @@ public class SnUnitTypes implements ContentList{
 
     guardcopter, bladecopter, swordcopter, guardiancopter, crusadercopter, //attacks copters
     
-    comet, satelite, planet, star, galaxy; //buffers
+    comet, satelite, planet, star, galaxy, //buffers
 
+    router;
 @Override
 public void load() {
    
@@ -439,5 +444,23 @@ public void load() {
                 damage = 80;
             }});
         }};
+
+        router = new UnitTypeExt("router"){{
+            health = 2000000;
+            speed = 2.85f;
+            hitSize = 16;
+            flying = true;
+            constructor = UnitEntity::create;
+            engineSize = 0;
+            drawCell = false;
+        }
+
+            @Override
+            public void load() {
+                super.load();
+            }
+        /*            @Override
+            public boolean isHidden() { return true; }*/
+        };
     }
 }
