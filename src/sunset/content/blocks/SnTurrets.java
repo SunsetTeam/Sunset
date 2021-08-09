@@ -30,11 +30,12 @@ public class SnTurrets implements ContentList {
     public static Block
 
     //turrets
-    carabine, pulsion, titrum, burner, tetramite, typhoon, flood, tentacle, chain, field, undulation, triden, radius, galebard,
+    carabine, eagle, pulsion, titrum, reflection, burner, tetramite, typhoon, flood, tentacle, chain, field, undulation, triden, radius, galebard,
     sunrise, spark, dissector, art,
     spine, major, admiral,
     trigger,
     testturret;
+    
     @Override
     public void load() {
 //1x1
@@ -55,6 +56,31 @@ public class SnTurrets implements ContentList {
             ammoUseEffect = Fx.casing1;
             targetAir = true;
         }};
+
+        eagle = new ItemTurret("eagle") {{
+            requirements(Category.turret, with(Items.copper, 60, Items.titanium, 40, SnItems.naturite, 25));
+            ammo(
+                    Items.sporePod, SnBullets.sporePodPoisonBullet,
+                    SnItems.naturite, SnBullets.naturitePoisonBullet
+            );
+            health = 350;
+            size = 1;
+            shots = 3;
+            reloadTime = 30f;
+            range = 115f;
+            recoilAmount = 1f;
+            cooldown = 0.02f;
+            velocityInaccuracy = 0.2f;
+            restitution = 0.01f;
+            inaccuracy = 14f;
+            rotateSpeed = 8f;
+            shootCone = 2f;
+            shootSound = Sounds.flame;
+            ammoUseEffect = Fx.casing1;
+            targetAir = true;
+            targetGround = true;
+        }};
+        
 //2x2
         carabine = new ChainLightningTurret("carabine"){{
             requirements(Category.turret, with(Items.copper, 150, Items.lead, 140, Items.surgeAlloy, 60, SnItems.nobium, 90, SnItems.naturite, 120));
@@ -87,6 +113,31 @@ public class SnTurrets implements ContentList {
             rotateSpeed = 7f;
             shootSound = Sounds.sap;
             targetAir = true;
+        }};
+
+        reflection = new ItemTurret("reflection") {{
+            requirements(Category.turret, with(Items.copper, 100, SnItems.fors, 60, SnItems.naturite, 55));
+            ammo(
+                    Items.sporePod, SnBullets.heavySporePodPoison,
+                    SnItems.naturite, SnBullets.heavyNaturitePoison,
+                    SnItems.nobium, SnBullets.heavyNobiumPoison
+            );
+            health = 780;
+            size = 2;
+            shots = 4;
+            reloadTime = 40f;
+            range = 160f;
+            recoilAmount = 1.1f;
+            cooldown = 0.02f;
+            velocityInaccuracy = 0.2f;
+            restitution = 0.01f;
+            inaccuracy = 20f;
+            rotateSpeed = 7f;
+            shootCone = 2f;
+            shootSound = Sounds.flame;
+            ammoUseEffect = Fx.casing1;
+            targetAir = true;
+            targetGround = true;
         }};
 
 // 3x3
@@ -243,17 +294,17 @@ public class SnTurrets implements ContentList {
             size = 4;
             reloadTime = 2f;
             shots = 2;
-            liquidCapacity = 60;
             velocityInaccuracy = 0.15f;
             inaccuracy = 6f;
             recoilAmount = 1f;
             restitution = 0.05f;
             shootCone = 46f;
-            liquidCapacity = 70f;
+            liquidCapacity = 90f;
             shootEffect = SnFx.typhoonShootLiquid;
             range = 260f;
             health = 220 * size * size;
             flags = EnumSet.of(BlockFlag.turret, BlockFlag.extinguisher);
+            ammoPerShot = 4;
         }};
 
         flood = new LiquidTurretExt("flood"){{

@@ -308,7 +308,7 @@ public void load() {
 
             flying = true;
             circleTarget = false;
-            range = 180;
+            range = 115;
 
             itemCapacity = 30;
             commandLimit = 6;
@@ -325,7 +325,7 @@ public void load() {
                 rotate = false;
                 x = 0;
                 shootCone = 2f;
-                range = 180;
+                range = 115;
             }});
         }};
 
@@ -339,7 +339,7 @@ public void load() {
 
             flying = true;
             circleTarget = false;
-            range = 310;
+            range = 155;
 
             itemCapacity = 60;
             commandLimit = 6;
@@ -357,7 +357,7 @@ public void load() {
                 rotate = false;
                 x = 0;
                 shootCone = 2f;
-                range = 310;
+                range = 155;
             }});
         }};
 
@@ -370,7 +370,7 @@ public void load() {
 
             flying = true;
             circleTarget = false;
-            range = 380;
+            range = 170;
 
             engineOffset = 18f;
             engineSize = 4f;
@@ -391,7 +391,7 @@ public void load() {
                 rotate = true;
                 shootCone = 2f;
                 inaccuracy = 0f;
-                range = 380;
+                range = 170;
                 reload = 287f;
                 recoil = 3.5f;
                 bullet = SnBullets.starStunBullet;
@@ -407,7 +407,7 @@ public void load() {
 
             flying = true;
             circleTarget = false;
-            range = 420;
+            range = 195;
 
             engineOffset = 36f;
             engineSize = 7f;
@@ -440,7 +440,7 @@ public void load() {
                 x = 36;
                 y = -6;
                 reload = 3;
-                range = 420;
+                range = 195;
                 damage = 80;
             }});
         }};

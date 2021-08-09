@@ -9,6 +9,7 @@ import mindustry.mod.Mod;
 //import mindustry.ui.dialogs.BaseDialog;
 import sunset.content.*;
 import sunset.content.blocks.*;
+import sunset.type.UnitData;
 import sunset.ui.ContentInfoDialogExt;
 import sunset.world.MissileLogic;
 
@@ -33,6 +34,7 @@ public class Sunset extends Mod {
     @Override
     public void init() {
         MissileLogic.init();
+        UnitData.init();
         Vars.ui.content = new ContentInfoDialogExt();
         Utils.setMenuUnit(SnUnitTypes.router);
         /*Log.info("startUp");

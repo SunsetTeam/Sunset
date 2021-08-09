@@ -32,7 +32,9 @@ public class SnPal{
     
     copterLaserBack = Color.valueOf("ea8878"),
     copterLaser = Color.valueOf("feb380"),
-
+    
+    PoisonBulletBack = Color.valueOf("D6E7A5"),
+    PoisonBullet = Color.valueOf("F2FCD2"),
     //other
     chainLaser = Pal.surge;
     

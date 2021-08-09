@@ -2,10 +2,10 @@ package sunset.content.blocks;
 
 import static mindustry.type.ItemStack.with;
 
-import mindustry.type.Category;
 import mindustry.content.Items;
 import mindustry.world.blocks.defense.*;
 import mindustry.ctype.ContentList;
+import mindustry.type.Category;
 import mindustry.world.Block;
 import mindustry.world.blocks.defense.ForceProjector;
 import sunset.content.SnItems;
@@ -34,7 +34,7 @@ public class SnDefense implements ContentList {
             cooldownLiquid = 3f;
             cooldownBrokenBase = 3f;
 
-            consumes.items(with(SnItems.enojie, 3, SnItems.nobium, 2, Items.phaseFabric, 2)).boost();
+            consumes.items(with(SnItems.enojie, 2, SnItems.nobium, 2, Items.phaseFabric, 2)).boost();
             consumes.power(14f);
         }};
 
