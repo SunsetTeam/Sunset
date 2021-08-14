@@ -30,7 +30,7 @@ public class SnTurrets implements ContentList {
     public static Block
 
     //turrets
-    carabine, eagle, pulsion, titrum, reflection, burner, tetramite, typhoon, flood, tentacle, chain, field, undulation, triden, radius, galebard,
+    carabine, eagle, pulsion, titrum, reflection, burner, tetramite, typhoon, flood, /*scorpio, */ tentacle, chain, field, undulation, triden, radius, galebard,
     sunrise, spark, dissector, art,
     spine, major, admiral,
     trigger,
@@ -282,6 +282,32 @@ public class SnTurrets implements ContentList {
             speedupPerShot = 0.08f;
             slowReloadTime = 210f;
         }};
+/*
+        scorpio = new ItemTurret("scorpio") {{
+            requirements(Category.turret, with(Items.copper, 600, SnItems.fors, 560, Items.plastanium, 480, SnItems.naturite, 400));
+            ammo(
+                    Items.sporePod, SnBullets.bigSporePodPoison,
+                    SnItems.naturite, SnBullets.bigNaturitePoison,
+                    SnItems.nobium, SnBullets.bigNobiumPoison
+                    Items.plastanium, SnBullets.bigPlastaniumPoison
+            );
+            health = 2900;
+            size = 2;
+            shots = 1;
+            reloadTime = 60f;
+            range = 210f;
+            recoilAmount = 2f;
+            cooldown = 0.03f;
+            velocityInaccuracy = 0.2f;
+            restitution = 0.02f;
+            inaccuracy = 3f;
+            rotateSpeed = 5f;
+            shootCone = 3f;
+            shootSound = Sounds.flame;
+            ammoUseEffect = Fx.casing1;
+            targetAir = true;
+            targetGround = true;
+        }};*/
 
         typhoon = new LiquidTurret("typhoon"){{
             requirements(Category.turret, with(Items.metaglass, 250, Items.lead, 530, Items.titanium, 340, Items.thorium, 170, SnItems.fors, 150));
