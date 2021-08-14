@@ -24,7 +24,7 @@ public class SnPower implements ContentList{
     
     oilGenerator = new LiquidGenerator("oil-generator"){{
             requirements(Category.power, with(Items.copper, 110, Items.titanium, 70, Items.lead, 120, Items.silicon, 55, Items.metaglass, 70));
-            powerProduction = 13f;
+            powerProduction = 8.3f;
             itemDuration = 220f;
             minLiquidEfficiency = 0.2f;
             maxLiquidGenerate = 0.4f;
@@ -41,7 +41,7 @@ public class SnPower implements ContentList{
     advrtgGenerator = new DecayGenerator("advance-rtg-generator"){{
             requirements(Category.power, with(Items.lead, 240, Items.silicon, 185, Items.phaseFabric, 75, Items.plastanium, 125, Items.thorium, 130, SnItems.planatrium, 100));
             size = 4;
-            powerProduction = 9.5f;
+            powerProduction = 13f;
             itemDuration = 55 * 12f;
         }};
      
