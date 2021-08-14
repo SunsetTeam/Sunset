@@ -44,7 +44,7 @@ public class SnItems implements ContentList{
 
         flameid = new Item("flameid", Color.valueOf("ea8878")){{
             cost = 4f;
-            flammability = 0.3f;
+            flammability = 0.6f;
             hardness = 4;
         }};
         
