@@ -116,7 +116,7 @@ public class SnTurrets implements ContentList {
         }};
 
         reflection = new ItemTurret("reflection") {{
-            requirements(Category.turret, with(Items.copper, 100, SnItems.fors, 60, SnItems.naturite, 55));
+            requirements(Category.turret, with(Items.copper, 100, SnItems.fors, 60, SnItems.naturite, 55, SnItems.nobium, 45));
             ammo(
                     Items.sporePod, SnBullets.heavySporePodPoison,
                     SnItems.naturite, SnBullets.heavyNaturitePoison,
@@ -284,7 +284,7 @@ public class SnTurrets implements ContentList {
         }};
 /*
         scorpio = new ItemTurret("scorpio") {{
-            requirements(Category.turret, with(Items.copper, 600, SnItems.fors, 560, Items.plastanium, 480, SnItems.naturite, 400));
+            requirements(Category.turret, with(Items.copper, 600, SnItems.fors, 560, Items.plastanium, 480, SnItems.nobium, 450, SnItems.naturite, 400));
             ammo(
                     Items.sporePod, SnBullets.bigSporePodPoison,
                     SnItems.naturite, SnBullets.bigNaturitePoison,
