@@ -282,7 +282,7 @@ public class SnTurrets implements ContentList {
             speedupPerShot = 0.08f;
             slowReloadTime = 210f;
         }};
-/*
+
         scorpio = new ItemTurret("scorpio") {{
             requirements(Category.turret, with(Items.copper, 600, SnItems.fors, 560, Items.plastanium, 480, SnItems.nobium, 450, SnItems.naturite, 400));
             ammo(
@@ -307,7 +307,7 @@ public class SnTurrets implements ContentList {
             ammoUseEffect = Fx.casing1;
             targetAir = true;
             targetGround = true;
-        }};*/
+        }};
 
         typhoon = new LiquidTurret("typhoon"){{
             requirements(Category.turret, with(Items.metaglass, 250, Items.lead, 530, Items.titanium, 340, Items.thorium, 170, SnItems.fors, 150));

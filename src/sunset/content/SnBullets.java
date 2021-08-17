@@ -41,6 +41,7 @@ public class SnBullets implements ContentList{
 //poison
     sporePodPoisonBullet, naturitePoisonBullet, 
     SporePodPoisonFrag, heavySporePodPoison, NaturitePoisonFrag, heavyNaturitePoison, NobiumPoisonFrag, heavyNobiumPoison,
+    bigSporePodPoisonFrag, bigSporePodPoison, bigNaturitePoisonFrag, bigNaturitePoison, bigNobiumPoisonFrag, bigNobiumPoison, bigPlastaniumPoisonFrag, bigPlastaniumPoison,
 //units
     BasicHelicopterGun, HelicopterShootgun, HelicopterMissile, HelicopterBomb, HelicopterRocket, bigHelicopterGun, laserHelicopterFrag, largeHelicopterGun, bigHelicopterRocket, HelicopterMissiles,
     cometWaterShot, starStunBullet, galaxyKnockbackBullet,
@@ -552,7 +553,7 @@ public class SnBullets implements ContentList{
 //posion bullets
         sporePodPoisonBullet = new FlakBulletType(4f, 5){{
             sprite = "sunset-circle-bullet";
-            knockback = 0.4f;
+            knockback = 0.2f;
             lifetime = 100f;
             width = 8f;
             height = 8f;
@@ -573,7 +574,7 @@ public class SnBullets implements ContentList{
 
         naturitePoisonBullet = new FlakBulletType(4f, 8){{
             sprite = "sunset-circle-bullet";
-            knockback = 0.4f;
+            knockback = 0.3f;
             lifetime = 100f;
             width = 8f;
             height = 8f;
@@ -593,7 +594,6 @@ public class SnBullets implements ContentList{
         }};
 
 //heavy-poison bullets
-
         SporePodPoisonFrag = new FlakBulletType(2f, 7){{
             sprite = "sunset-circle-bullet";
             lifetime = 150f;
@@ -613,7 +613,7 @@ public class SnBullets implements ContentList{
             weaveMag = 1f;
         }};
 
-        heavySporePodPoison = new FlakBulletType(4f, 14){{
+        heavySporePodPoison = new FlakBulletType(3f, 14){{
             sprite = "sunset-circle-bullet";
             knockback = 0.5f;
             lifetime = 250f;
@@ -656,7 +656,7 @@ public class SnBullets implements ContentList{
             weaveMag = 1f;
         }};
 
-        heavyNaturitePoison = new FlakBulletType(4f, 16){{
+        heavyNaturitePoison = new FlakBulletType(3f, 16){{
             sprite = "sunset-circle-bullet";
             knockback = 0.6f;
             lifetime = 250f;
@@ -699,7 +699,7 @@ public class SnBullets implements ContentList{
             weaveMag = 1f;
         }};
 
-        heavyNobiumPoison = new FlakBulletType(4f, 15){{
+        heavyNobiumPoison = new FlakBulletType(3f, 15){{
             sprite = "sunset-circle-bullet";
             knockback = 0.4f;
             lifetime = 250f;
@@ -718,6 +718,188 @@ public class SnBullets implements ContentList{
 
             fragBullet = NobiumPoisonFrag;
             fragBullets = 5;
+
+            weaveScale = 9f;
+            weaveMag = 1f;
+            homingRange = 15f;
+            homingPower = 0.1f;
+        }};
+
+//big-poison bullets
+
+        bigSporePodPoisonFrag = new FlakBulletType(2f, 8){{
+            sprite = "sunset-circle-bullet";
+            lifetime = 250f;
+            splashDamage = 10f;
+            splashDamageRadius = 19f;
+            height = 8f;
+            width = 8f;
+            hitEffect = Fx.flakExplosion;
+            frontColor = SnPal.PoisonBullet;
+            backColor = SnPal.PoisonBulletBack;
+            
+            shrinkX = 0.3f;
+            shrinkY = 0.3f;
+            drag = 0.04f;
+
+            weaveScale = 9f;
+            weaveMag = 1f;
+        }};
+
+        bigSporePodPoison = new FlakBulletType(3f, 16){{
+            sprite = "sunset-circle-bullet";
+            knockback = 0.5f;
+            lifetime = 250f;
+            width = 16;
+            height = 16;
+            hitEffect = Fx.flakExplosion;
+            splashDamage = 19f;
+            splashDamageRadius = 37f;
+            shrinkX = 0.3f;
+            shrinkY = 0.3f;
+            drag = 0.01f;
+            frontColor = SnPal.PoisonBullet;
+            backColor = SnPal.PoisonBulletBack;
+            collidesAir = true;
+            collidesGround = true;
+
+            fragBullet = bigSporePodPoisonFrag;
+            fragCone = 90f;
+            fragBullets = 2;
+
+            weaveScale = 9f;
+            weaveMag = 1f;
+        }};
+
+        bigNaturitePoisonFrag = new FlakBulletType(2f, 13){{
+            sprite = "sunset-circle-bullet";
+            lifetime = 250f;
+            splashDamage = 15f;
+            splashDamageRadius = 14f;
+            height = 8f;
+            width = 8f;
+            hitEffect = Fx.flakExplosion;
+            frontColor = SnPal.PoisonBullet;
+            backColor = SnPal.PoisonBulletBack;
+            
+            shrinkX = 0.3f;
+            shrinkY = 0.3f;
+            drag = 0.04f;
+
+            weaveScale = 9f;
+            weaveMag = 1f;
+        }};
+
+        bigNaturitePoison = new FlakBulletType(3f, 18){{
+            sprite = "sunset-circle-bullet";
+            knockback = 0.6f;
+            lifetime = 250f;
+            width = 16;
+            height = 16;
+            hitEffect = Fx.flakExplosion;
+            splashDamage = 24f;
+            splashDamageRadius = 30f;
+            shrinkX = 0.3f;
+            shrinkY = 0.3f;
+            drag = 0.01f;
+            frontColor = SnPal.PoisonBullet;
+            backColor = SnPal.PoisonBulletBack;
+            collidesAir = true;
+            collidesGround = true;
+
+            fragBullet = bigNaturitePoisonFrag;
+            fragCone = 90f;
+            fragBullets = 3;
+
+            weaveScale = 9f;
+            weaveMag = 1f;
+        }};
+        
+        bigNobiumPoisonFrag = new FlakBulletType(2f, 11){{
+            sprite = "sunset-circle-bullet";
+            lifetime = 150f;
+            splashDamage = 14f;
+            splashDamageRadius = 16f;
+            height = 6f;
+            width = 6f;
+            hitEffect = Fx.flakExplosion;
+            frontColor = SnPal.PoisonBullet;
+            backColor = SnPal.PoisonBulletBack;
+            
+            shrinkX = 0.3f;
+            shrinkY = 0.3f;
+            drag = 0.04f;
+
+            weaveScale = 9f;
+            weaveMag = 1f;
+        }};
+
+        bigNobiumPoison = new FlakBulletType(3f, 15){{
+            sprite = "sunset-circle-bullet";
+            knockback = 0.4f;
+            lifetime = 250f;
+            width = 13;
+            height = 13f;
+            hitEffect = Fx.flakExplosion;
+            splashDamage = 22f;
+            splashDamageRadius = 27f;
+            shrinkX = 0.3f;
+            shrinkY = 0.3f;
+            drag = 0.02f;
+            frontColor = SnPal.PoisonBullet;
+            backColor = SnPal.PoisonBulletBack;
+            collidesAir = true;
+            collidesGround = true;
+
+            fragBullet = bigNobiumPoisonFrag;
+            fragCone = 90f;
+            fragBullets = 4;
+
+            weaveScale = 9f;
+            weaveMag = 1f;
+            homingRange = 15f;
+            homingPower = 0.1f;
+        }};
+
+        bigPlastaniumPoisonFrag = new FlakBulletType(2f, 14){{
+            sprite = "sunset-circle-bullet";
+            lifetime = 150f;
+            splashDamage = 17f;
+            splashDamageRadius = 25f;
+            height = 6f;
+            width = 6f;
+            hitEffect = Fx.flakExplosion;
+            frontColor = SnPal.PoisonBullet;
+            backColor = SnPal.PoisonBulletBack;
+            
+            shrinkX = 0.3f;
+            shrinkY = 0.3f;
+            drag = 0.04f;
+
+            weaveScale = 9f;
+            weaveMag = 1f;
+        }};
+
+        bigPlastaniumPoison = new FlakBulletType(3f, 21){{
+            sprite = "sunset-circle-bullet";
+            knockback = 0.4f;
+            lifetime = 250f;
+            width = 13;
+            height = 13f;
+            hitEffect = Fx.flakExplosion;
+            splashDamage = 25f;
+            splashDamageRadius = 34f;
+            shrinkX = 0.3f;
+            shrinkY = 0.3f;
+            drag = 0.02f;
+            frontColor = SnPal.PoisonBullet;
+            backColor = SnPal.PoisonBulletBack;
+            collidesAir = true;
+            collidesGround = true;
+
+            fragBullet = bigNobiumPoisonFrag;
+            fragCone = 90f;
+            fragBullets = 4;
 
             weaveScale = 9f;
             weaveMag = 1f;

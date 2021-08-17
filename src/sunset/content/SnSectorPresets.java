@@ -3,6 +3,8 @@ package sunset.content;
 import mindustry.ctype.*;
 import mindustry.type.*;
 
+import static sunset.content.SnPlanets.*;
+
 public class SnSectorPresets implements ContentList{
     public static SectorPreset
     oilfactory;

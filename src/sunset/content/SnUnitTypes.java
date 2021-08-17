@@ -1,16 +1,12 @@
 package sunset.content;
 
-import arc.Core;
-import mindustry.Vars;
 import mindustry.content.StatusEffects;
 import mindustry.content.*;
 import mindustry.ctype.ContentList;
-import mindustry.game.Team;
 import mindustry.gen.Sounds;
 import mindustry.gen.UnitEntity;
 import mindustry.type.UnitType;
 import mindustry.type.Weapon;
-import sunset.Utils;
 import sunset.ai.FlyingUnitWeaponAI;
 import sunset.entities.abilities.StatusFieldAbility;
 import sunset.type.UnitTypeExt;
@@ -28,9 +24,8 @@ public class SnUnitTypes implements ContentList{
 
     guardcopter, bladecopter, swordcopter, guardiancopter, crusadercopter, //attacks copters
     
-    comet, satelite, planet, star, galaxy, //buffers
+    comet, satelite, planet, star, galaxy; //buffers
 
-    router;
 @Override
 public void load() {
    
@@ -155,7 +150,6 @@ public void load() {
             
             flying = true;
             circleTarget = false;
-            range = 235;
             
             fallRotateSpeed = 6f;
             rotorRotateSpeed = 26f;
@@ -204,7 +198,6 @@ public void load() {
             
             flying = true;
             circleTarget = false;
-            range = 250;
             
             fallRotateSpeed = 6f;
             rotorRotateSpeed = 25f;
@@ -308,7 +301,7 @@ public void load() {
 
             flying = true;
             circleTarget = false;
-            range = 115;
+            range = 180;
 
             itemCapacity = 30;
             commandLimit = 6;
@@ -325,7 +318,7 @@ public void load() {
                 rotate = false;
                 x = 0;
                 shootCone = 2f;
-                range = 115;
+                range = 180;
             }});
         }};
 
@@ -339,7 +332,7 @@ public void load() {
 
             flying = true;
             circleTarget = false;
-            range = 155;
+            range = 310;
 
             itemCapacity = 60;
             commandLimit = 6;
@@ -357,7 +350,7 @@ public void load() {
                 rotate = false;
                 x = 0;
                 shootCone = 2f;
-                range = 155;
+                range = 310;
             }});
         }};
 
@@ -370,7 +363,7 @@ public void load() {
 
             flying = true;
             circleTarget = false;
-            range = 170;
+            range = 380;
 
             engineOffset = 18f;
             engineSize = 4f;
@@ -391,7 +384,7 @@ public void load() {
                 rotate = true;
                 shootCone = 2f;
                 inaccuracy = 0f;
-                range = 170;
+                range = 380;
                 reload = 287f;
                 recoil = 3.5f;
                 bullet = SnBullets.starStunBullet;
@@ -407,7 +400,7 @@ public void load() {
 
             flying = true;
             circleTarget = false;
-            range = 195;
+            range = 420;
 
             engineOffset = 36f;
             engineSize = 7f;
@@ -440,27 +433,9 @@ public void load() {
                 x = 36;
                 y = -6;
                 reload = 3;
-                range = 195;
+                range = 420;
                 damage = 80;
             }});
         }};
-
-        router = new UnitTypeExt("router"){{
-            health = 2000000;
-            speed = 2.85f;
-            hitSize = 16;
-            flying = true;
-            constructor = UnitEntity::create;
-            engineSize = 0;
-            drawCell = false;
-        }
-
-            @Override
-            public void load() {
-                super.load();
-            }
-        /*            @Override
-            public boolean isHidden() { return true; }*/
-        };
     }
 }

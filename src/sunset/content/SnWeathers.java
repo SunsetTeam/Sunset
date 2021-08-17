@@ -3,10 +3,12 @@ package sunset.content;
 import arc.graphics.*;
 import arc.util.*;
 import mindustry.ctype.*;
+import mindustry.content.*;
 import mindustry.gen.*;
 import mindustry.type.*;
 import mindustry.type.weather.*;
 import mindustry.world.meta.*;
+import sunset.content.*;
 
 public class SnWeathers implements ContentList{
     public static Weather
