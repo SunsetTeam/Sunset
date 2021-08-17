@@ -288,7 +288,7 @@ public class SnTurrets implements ContentList {
             ammo(
                     Items.sporePod, SnBullets.bigSporePodPoison,
                     SnItems.naturite, SnBullets.bigNaturitePoison,
-                    SnItems.nobium, SnBullets.bigNobiumPoison
+                    SnItems.nobium, SnBullets.bigNobiumPoison,
                     Items.plastanium, SnBullets.bigPlastaniumPoison
             );
             health = 2900;
