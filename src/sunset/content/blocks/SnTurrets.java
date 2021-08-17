@@ -292,7 +292,7 @@ public class SnTurrets implements ContentList {
                     Items.plastanium, SnBullets.bigPlastaniumPoison
             );
             health = 2900;
-            size = 2;
+            size = 4;
             shots = 1;
             reloadTime = 60f;
             range = 210f;

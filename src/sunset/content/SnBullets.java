@@ -726,7 +726,6 @@ public class SnBullets implements ContentList{
         }};
 
 //big-poison bullets
-
         bigSporePodPoisonFrag = new FlakBulletType(2f, 8){{
             sprite = "sunset-circle-bullet";
             lifetime = 250f;
@@ -746,10 +745,10 @@ public class SnBullets implements ContentList{
             weaveMag = 1f;
         }};
 
-        bigSporePodPoison = new FlakBulletType(3f, 16){{
+        bigSporePodPoison = new FlakBulletType(4f, 16){{
             sprite = "sunset-circle-bullet";
             knockback = 0.5f;
-            lifetime = 250f;
+            lifetime = 200f;
             width = 16;
             height = 16;
             hitEffect = Fx.flakExplosion;
@@ -790,10 +789,10 @@ public class SnBullets implements ContentList{
             weaveMag = 1f;
         }};
 
-        bigNaturitePoison = new FlakBulletType(3f, 18){{
+        bigNaturitePoison = new FlakBulletType(4f, 18){{
             sprite = "sunset-circle-bullet";
             knockback = 0.6f;
-            lifetime = 250f;
+            lifetime = 200f;
             width = 16;
             height = 16;
             hitEffect = Fx.flakExplosion;
@@ -801,7 +800,7 @@ public class SnBullets implements ContentList{
             splashDamageRadius = 30f;
             shrinkX = 0.3f;
             shrinkY = 0.3f;
-            drag = 0.01f;
+            drag = 0.01;
             frontColor = SnPal.PoisonBullet;
             backColor = SnPal.PoisonBulletBack;
             collidesAir = true;
@@ -834,10 +833,10 @@ public class SnBullets implements ContentList{
             weaveMag = 1f;
         }};
 
-        bigNobiumPoison = new FlakBulletType(3f, 15){{
+        bigNobiumPoison = new FlakBulletType(4f, 15){{
             sprite = "sunset-circle-bullet";
             knockback = 0.4f;
-            lifetime = 250f;
+            lifetime = 200f;
             width = 13;
             height = 13f;
             hitEffect = Fx.flakExplosion;
@@ -845,7 +844,7 @@ public class SnBullets implements ContentList{
             splashDamageRadius = 27f;
             shrinkX = 0.3f;
             shrinkY = 0.3f;
-            drag = 0.02f;
+            drag = 0.01f;
             frontColor = SnPal.PoisonBullet;
             backColor = SnPal.PoisonBulletBack;
             collidesAir = true;
@@ -880,10 +879,10 @@ public class SnBullets implements ContentList{
             weaveMag = 1f;
         }};
 
-        bigPlastaniumPoison = new FlakBulletType(3f, 21){{
+        bigPlastaniumPoison = new FlakBulletType(4f, 21){{
             sprite = "sunset-circle-bullet";
             knockback = 0.4f;
-            lifetime = 250f;
+            lifetime = 200f;
             width = 13;
             height = 13f;
             hitEffect = Fx.flakExplosion;
@@ -891,7 +890,7 @@ public class SnBullets implements ContentList{
             splashDamageRadius = 34f;
             shrinkX = 0.3f;
             shrinkY = 0.3f;
-            drag = 0.02f;
+            drag = 0.01f;
             frontColor = SnPal.PoisonBullet;
             backColor = SnPal.PoisonBulletBack;
             collidesAir = true;
