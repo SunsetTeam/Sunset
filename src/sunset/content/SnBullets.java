@@ -800,7 +800,7 @@ public class SnBullets implements ContentList{
             splashDamageRadius = 30f;
             shrinkX = 0.3f;
             shrinkY = 0.3f;
-            drag = 0.01;
+            drag = 0.01f;
             frontColor = SnPal.PoisonBullet;
             backColor = SnPal.PoisonBulletBack;
             collidesAir = true;
