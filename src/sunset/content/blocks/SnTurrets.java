@@ -30,7 +30,7 @@ public class SnTurrets implements ContentList {
     public static Block
 
     //turrets
-    carabine, eagle, pulsion, titrum, reflection, burner, tetramite, typhoon, flood, /*scorpio, */ tentacle, chain, field, undulation, triden, radius, galebard,
+    carabine, eagle, pulsion, titrum, reflection, burner, tetramite, typhoon, flood, scorpio, tentacle, chain, field, undulation, triden, radius, galebard,
     sunrise, spark, dissector, art,
     spine, major, admiral,
     trigger,
