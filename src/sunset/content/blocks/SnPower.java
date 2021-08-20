@@ -41,7 +41,7 @@ public class SnPower implements ContentList{
     advrtgGenerator = new DecayGenerator("advance-rtg-generator"){{
             requirements(Category.power, with(Items.lead, 240, Items.silicon, 185, Items.phaseFabric, 75, Items.plastanium, 125, Items.thorium, 130, SnItems.planatrium, 100));
             size = 4;
-            powerProduction = 13f;
+            powerProduction = 13.2f;
             itemDuration = 55 * 12f;
         }};
      
