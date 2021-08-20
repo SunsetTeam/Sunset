@@ -18,7 +18,7 @@ public class CopterUnitType extends UnitType {
     public float rotorDeathSpeed = 0f;
     public float rotorDeathSlowdown = 0.01f;
 
-    public float unitFallRotateSpeed = 1f;
+    float unitFallRotateSpeed = 1f;
 
     public int rotorCount = 1;
     
@@ -47,7 +47,7 @@ public class CopterUnitType extends UnitType {
         super.update(unit);
         if(unit.health <= 0 || unit.dead()) {
             unit.rotation += Time.delta * (fallSpeed * 1000);
-            unitFallRotateSpeed = 0.4f;
+            unitFallRotateSpeed = 0.5f;
         }
     }
 
