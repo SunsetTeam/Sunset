@@ -42,9 +42,8 @@ public void load() {
          flying = true;
          circleTarget = false;
          range = 130;
-        
-        unitFallRotateSpeed = 1f;
-        rotorDeathSpeed = 0f;
+
+         rotorDeathSpeed = 0f;
          offsetY = 2.2f;
          weapons.add(
                 new WeaponExt("sunset-guard-gun"){{
@@ -72,8 +71,7 @@ public void load() {
             flying = true;
             circleTarget = false;
             range = 170;
-            
-            unitFallRotateSpeed = 1f;
+           
             rotorDeathSpeed = 0f;
             offsetY = 2.5f;
             weapons.add(
@@ -108,7 +106,6 @@ public void load() {
             range = 210;
             
             rotorRotateSpeed = 27f;
-            unitFallRotateSpeed = 1f;
             rotorDeathSpeed = 0f;
             offsetY = 2.6f;
             weapons.add(
@@ -155,7 +152,6 @@ public void load() {
             circleTarget = false;
             
             rotorRotateSpeed = 26f;
-            unitFallRotateSpeed = 1f;
             rotorDeathSpeed = 0f;
             offsetY = 2.6f;
             weapons.add(
@@ -204,7 +200,6 @@ public void load() {
             circleTarget = false;
             
             rotorRotateSpeed = 25f;
-            unitFallRotateSpeed = 1f;
             rotorDeathSpeed = 0f;
             offsetY = 2.6f;
             weapons.add(
