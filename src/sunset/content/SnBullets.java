@@ -789,7 +789,7 @@ public class SnBullets implements ContentList{
             weaveMag = 1f;
         }};
 
-        bigNaturitePoison = new FlakBulletType(3f, 18){{
+        bigNaturitePoison = new FlakBulletType(3f, 21){{
             sprite = "sunset-circle-bullet";
             knockback = 0.6f;
             lifetime = 200f;
@@ -833,12 +833,12 @@ public class SnBullets implements ContentList{
             weaveMag = 1f;
         }};
 
-        bigNobiumPoison = new FlakBulletType(3f, 15){{
+        bigNobiumPoison = new FlakBulletType(3f, 19){{
             sprite = "sunset-circle-bullet";
             knockback = 0.4f;
             lifetime = 200f;
-            width = 13;
-            height = 13f;
+            width = 16;
+            height = 16f;
             hitEffect = Fx.flakExplosion;
             splashDamage = 22f;
             splashDamageRadius = 27f;
@@ -879,12 +879,12 @@ public class SnBullets implements ContentList{
             weaveMag = 1f;
         }};
 
-        bigPlastaniumPoison = new FlakBulletType(3f, 21){{
+        bigPlastaniumPoison = new FlakBulletType(3f, 22){{
             sprite = "sunset-circle-bullet";
             knockback = 0.4f;
             lifetime = 200f;
-            width = 13;
-            height = 13f;
+            width = 16;
+            height = 16f;
             hitEffect = Fx.flakExplosion;
             splashDamage = 25f;
             splashDamageRadius = 34f;
