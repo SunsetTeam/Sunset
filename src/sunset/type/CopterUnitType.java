@@ -16,13 +16,11 @@ public class CopterUnitType extends UnitType {
     public float offsetY = 0f;
     public float rotorRotateSpeed = 28f;
     public float rotorDeathSpeed = 0f;
-    public float rotorDeathSlowdown = 0.01f;
+    public float rotorDeathSlowdown = 0.03f;
 
-    float unitFallRotateSpeed = 1f;
+    float unitFallRotateSpeed = 0.7f;
 
     public int rotorCount = 1;
-    
-    float rotorSpeedScl;
 
     public TextureRegion rotorRegion;
 
@@ -47,7 +45,7 @@ public class CopterUnitType extends UnitType {
         super.update(unit);
         if(unit.health <= 0 || unit.dead()) {
             unit.rotation += Time.delta * (fallSpeed * 1000);
-            unitFallRotateSpeed = 0.5f;
+            unitFallRotateSpeed = 0.6f;
         }
     }
 
@@ -72,7 +70,7 @@ public class CopterUnitType extends UnitType {
             if(unit.dead() || unit.health() < 0f){
             rotorDeathSpeed = Mathf.lerpDelta(rotorRotateSpeed, 0f, rotorDeathSlowdown);
                 }else{
-            rotorDeathSpeed = Mathf.lerpDelta(rotorSpeedScl, 1f, rotorDeathSlowdown);
+            rotorDeathSpeed = Mathf.lerpDelta(rotorRotateSpeed, 1f, rotorDeathSlowdown);
             
         }
         }
