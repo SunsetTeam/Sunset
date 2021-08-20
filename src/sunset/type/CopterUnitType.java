@@ -31,6 +31,7 @@ public class CopterUnitType extends UnitType {
         
         constructor = UnitEntity::create;
         flying = lowAltitude = true;
+        fallSpeed = 0.008f;
         engineSize = 0f;
     }
 
