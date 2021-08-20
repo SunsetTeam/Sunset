@@ -749,8 +749,8 @@ public class SnBullets implements ContentList{
             sprite = "sunset-circle-bullet";
             knockback = 0.5f;
             lifetime = 200f;
-            width = 16;
-            height = 16;
+            width = 16f;
+            height = 16f;
             hitEffect = Fx.flakExplosion;
             splashDamage = 19f;
             splashDamageRadius = 37f;
@@ -793,8 +793,8 @@ public class SnBullets implements ContentList{
             sprite = "sunset-circle-bullet";
             knockback = 0.6f;
             lifetime = 200f;
-            width = 16;
-            height = 16;
+            width = 16f;
+            height = 16f;
             hitEffect = Fx.flakExplosion;
             splashDamage = 24f;
             splashDamageRadius = 30f;
@@ -837,7 +837,7 @@ public class SnBullets implements ContentList{
             sprite = "sunset-circle-bullet";
             knockback = 0.4f;
             lifetime = 200f;
-            width = 16;
+            width = 16f;
             height = 16f;
             hitEffect = Fx.flakExplosion;
             splashDamage = 22f;
@@ -883,7 +883,7 @@ public class SnBullets implements ContentList{
             sprite = "sunset-circle-bullet";
             knockback = 0.4f;
             lifetime = 200f;
-            width = 16;
+            width = 16f;
             height = 16f;
             hitEffect = Fx.flakExplosion;
             splashDamage = 25f;
