@@ -14,8 +14,10 @@ public class CopterUnitType extends UnitType {
     public float offsetX = 0f;
     public float offsetY = 0f;
     public float rotorRotateSpeed = 28f;
+    public float rotorDeathSpeed = 0f;
     public float rotorDeathSlowdown = 0.01f;
-    public float fallRotateSpeed = 2.5f;
+
+    public float unitFallRotateSpeed = 1f;
 
 
     public int rotorCount = 1;
@@ -39,6 +41,16 @@ public class CopterUnitType extends UnitType {
     }
 
     @Override
+    public void update(Unit unit) {
+        unitFallRotateSpeed = 1f;
+        super.update(unit);
+        if(unit.health <= 0 || unit.dead()) {
+            unit.rotation += Time.delta * (fallSpeed * 1000);
+            unitFallRotateSpeed = 0.4f;
+        }
+    }
+
+    @Override
     public void draw(Unit unit) {
         Draw.z(Layer.flyingUnit + 0.01f);
         drawRotor(unit);
@@ -57,9 +69,12 @@ public class CopterUnitType extends UnitType {
             Draw.rect(rotorRegion,  rotorx,  rotory, Time.time * rotorRotateSpeed);
 
             if(unit.dead() || unit.health() < 0f){
-                unit.rotation(unit.rotation() + fallRotateSpeed * Mathf.signs[unit.id() % 2]);
-                rotorSpeedScl = Mathf.lerpDelta(rotorSpeedScl, 0f, rotorDeathSlowdown);
-            }
+            rotorDeathSpeed = Mathf.lerpDelta(rotorRotateSpeed, 0f, rotorDeathSlowdown);
+
+                }else{
+            rotorDeathSpeed = Mathf.lerpDelta(rotorSpeedScl, 1f, type.rotorDeathSlowdown);
             }
         }
+        }
+    }
 }
