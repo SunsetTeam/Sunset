@@ -1,13 +1,14 @@
 package sunset.type;
 
 import arc.Core;
+import arc.graphics.Color;
 import arc.graphics.g2d.Draw;
-import arc.math.*;
 import arc.graphics.g2d.TextureRegion;
-import arc.math.Mathf;
+import arc.math.*;
 import arc.util.*;
 import mindustry.gen.*;
 import mindustry.graphics.Layer;
+import mindustry.graphics.*;
 import mindustry.type.UnitType;
 
 public class CopterUnitType extends UnitType {
@@ -70,10 +71,9 @@ public class CopterUnitType extends UnitType {
 
             if(unit.dead() || unit.health() < 0f){
             rotorDeathSpeed = Mathf.lerpDelta(rotorRotateSpeed, 0f, rotorDeathSlowdown);
-
                 }else{
-            rotorDeathSpeed = Mathf.lerpDelta(rotorSpeedScl, 1f, type.rotorDeathSlowdown);
-            }
+            rotorDeathSpeed = Mathf.lerpDelta(rotorSpeedScl, 1f, rotorDeathSlowdown);
+            
         }
         }
     }
