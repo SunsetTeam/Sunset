@@ -30,7 +30,7 @@ public class SnTurrets implements ContentList {
     public static Block
 
     //turrets
-    carabine, eagle, pulsion, titrum, reflection, burner, tetramite, typhoon, flood, scorpio, tentacle, chain, field, undulation, triden, radius, galebard,
+    carabine, eagle, pulsion, reflection, typhoon, flood, scorpio, tentacle, chain, field, triden, radius, galebard,
     sunrise, spark, dissector, art,
     spine, major, admiral,
     trigger,
@@ -175,7 +175,7 @@ public class SnTurrets implements ContentList {
             slowReloadTime = 180f;
         }};
 
-        burner = new ItemTurret("burner") {{
+        /*burner = new ItemTurret("burner") {{
             requirements(Category.turret, with(Items.metaglass, 50, Items.lead, 175, Items.graphite, 85));
             ammo(
               Items.coal, SnBullets.heavyCoalFlame,
@@ -192,49 +192,7 @@ public class SnTurrets implements ContentList {
             shootCone = 25f;
             targetAir = true;
 	        shootSound = Sounds.flame;
-    }};
-
-        titrum = new ItemTurret("titrum"){{
-            requirements(Category.turret, with(Items.copper, 140, Items.graphite, 100, SnItems.fors, 90, Items.titanium, 80, Items.thorium, 60));
-            ammo(
-                Items.copper, SnBullets.heavyCopper,
-                Items.graphite, SnBullets.heavyDense,
-                Items.blastCompound, SnBullets.standartBlast,
-                Items.pyratite, SnBullets.heavyIncendiary,
-                Items.titanium, SnBullets.heavyTitanium,
-                Items.thorium, SnBullets.heavyThorium
-            );
-
-            size = 3;
-            range = 250f;
-            reloadTime = 48f;
-            restitution = 0.03f;
-            ammoEjectBack = 4f;
-            cooldown = 0.05f;
-            recoilAmount = 3.4f;
-            shootShake = 1.6f;
-            burstSpacing = 4f;
-            shots = 5;
-            ammoUseEffect = Fx.casing2;
-            health = 240 * size * size;
-            shootSound = Sounds.shootBig;
-        }};
-
-        tetramite = new TractorBeamTurret("tetramite"){{
-            requirements(Category.turret, with(Items.silicon, 140, Items.lead, 100, Items.titanium, 90, Items.graphite, 60));
-
-            hasPower = true;
-            laserWidth = 0.5f;
-            size = 3;
-            force = 14f;
-            scaledForce = 7f;
-            range = 320f;
-            damage = 0.47f;
-            health = 160 * size * size;
-            rotateSpeed = 9;
-
-            consumes.powerCond(5f, (TractorBeamBuild e) -> e.target != null);
-        }};
+    }};*/
 
         trigger = new PowerTurret("trigger"){{
             requirements(Category.turret, with(Items.silicon, 275, Items.titanium, 125, SnItems.enojie, 75));
@@ -414,36 +372,6 @@ public class SnTurrets implements ContentList {
         health = 160 * size * size;
        }};
 
-       undulation = new ItemTurret("undulation"){{
-        requirements(Category.turret, with(Items.copper, 800, Items.silicon, 700, Items.graphite, 600, Items.titanium, 560, Items.plastanium, 510, SnItems.naturite, 250));
-        ammo(
-            Items.graphite, Bullets.artilleryDense,
-            Items.silicon, Bullets.artilleryHoming,
-            Items.pyratite, Bullets.artilleryIncendiary,
-            Items.blastCompound, Bullets.artilleryExplosive,
-            Items.plastanium, Bullets.artilleryPlastic
-        );
-
-        targetAir = false;
-        size = 5;
-        shots = 6;
-        inaccuracy = 15f;
-        reloadTime = 50f;
-        ammoEjectBack = 6f;
-        ammoUseEffect = Fx.casing3Double;
-        ammoPerShot = 2;
-        cooldown = 0.07f;
-        velocityInaccuracy = 0.3f;
-        restitution = 0.04f;
-        recoilAmount = 7f;
-        shootShake = 3f;
-        range = 400f;
-        minRange = 60f;
-
-        health = 100 * size * size;
-        shootSound = Sounds.artillery;
-    }};
-
 //6x6
         triden = new PowerTurret("triden"){{
             requirements(Category.turret, with(Items.copper, 1000, Items.lead, 810, Items.silicon, 790, Items.plastanium, 780, Items.surgeAlloy, 670, SnItems.enojie, 600, SnItems.nobium, 400, SnItems.planatrium, 370));
@@ -504,6 +432,7 @@ public class SnTurrets implements ContentList {
         galebard = new PowerTurret("galebard"){{
             requirements(Category.turret, with(Items.copper, 2200,  Items.metaglass, 1200, Items.lead, 1120, Items.silicon, 1200, Items.plastanium, 980, SnItems.planatrium, 860, SnItems.nobium, 750, SnItems.fors, 710, SnItems.enojie, 690));
             range = 350f;
+            shots = 5;
             chargeTime = 145f;
             rotateSpeed = 1.6F;
             chargeMaxDelay = 140f;

@@ -21,9 +21,8 @@ public class SnFx{
     enojiecraft = new Effect(60, e -> {
         randLenVectors(e.id, 6, 4f + e.fin() * 8f, (x, y) -> {
             color(Pal.heal);
-            Fill.square(e.x + x, e.y + y, e.fout() + 0.5f, 45);
-            Lines.square(e.x, e.y, e.fin() + 4f, 45 + e.rotation * 90);
-            float circleRad = 1f + e.fin() * 10f;
+            Fill.square(e.x + x, e.y + y, e.fout() + 0.5f, 45);  
+            float circleRad = 2f + e.fin() * 15f;
             Lines.circle(e.x, e.y, circleRad);
         });
     }),
