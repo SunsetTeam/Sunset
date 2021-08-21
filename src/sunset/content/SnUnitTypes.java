@@ -42,8 +42,7 @@ public void load() {
          flying = true;
          circleTarget = false;
          range = 130;
-
-         rotorDeathSpeed = 0f;
+         
          offsetY = 2.2f;
          weapons.add(
                 new WeaponExt("sunset-guard-gun"){{
@@ -71,8 +70,7 @@ public void load() {
             flying = true;
             circleTarget = false;
             range = 170;
-           
-            rotorDeathSpeed = 0f;
+
             offsetY = 2.5f;
             weapons.add(
                    new WeaponExt("sunset-blade-gun"){{
@@ -106,7 +104,6 @@ public void load() {
             range = 210;
             
             rotorRotateSpeed = 27f;
-            rotorDeathSpeed = 0f;
             offsetY = 2.6f;
             weapons.add(
                    new WeaponExt("sunset-sword-gun"){{
@@ -152,7 +149,6 @@ public void load() {
             circleTarget = false;
             
             rotorRotateSpeed = 26f;
-            rotorDeathSpeed = 0f;
             offsetY = 2.6f;
             weapons.add(
                    new WeaponExt("sunset-guardian-gun"){{
@@ -200,7 +196,6 @@ public void load() {
             circleTarget = false;
             
             rotorRotateSpeed = 25f;
-            rotorDeathSpeed = 0f;
             offsetY = 2.6f;
             weapons.add(
                    new WeaponExt("sunset-crusader-gun"){{
