@@ -4,6 +4,7 @@ package sunset.content;
 import arc.graphics.*;
 import arc.graphics.g2d.*;
 import arc.math.*;
+import arc.math.Mathf;
 import arc.math.geom.*;
 import arc.struct.*;
 import mindustry.content.Fx;
@@ -14,6 +15,8 @@ import sunset.graphics.SnPal;
 import static arc.graphics.g2d.Draw.*;
 import static arc.graphics.g2d.Lines.*;
 import static arc.math.Angles.*;
+
+import static arc.math.Angles.randLenVectors;
 
 public class SnFx{
     public static final Effect
@@ -78,30 +81,40 @@ public class SnFx{
         });
     }),
     
-    galebardLaserCharge = new Effect(45f, e -> {
-        color(Pal.lancerLaser);
+    galebardLaserCharge = new Effect(40f, e -> {
+        color(Pal.meltdownHit);
 
         randLenVectors(e.id, 5, 3f + 9f * e.fout(), e.rotation, 100f, (x, y) -> {
             lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), e.fslope() * 6f + 4f);
         });
     }),
 
-    galebardLaserChargeBegin = new Effect(170f, e -> {
-        color(Pal.lancerLaser);
-        Fill.circle(e.x, e.y, e.fin() * 9f);
+    galebardLaserChargeBegin = new Effect(160f, e -> {
+        color(Pal.meltdownHit);
+        Fill.circle(e.x, e.y, e.fin() * 8f);
 
         color();
-        Fill.circle(e.x, e.y, e.fin() * 8f);
+        Fill.circle(e.x, e.y, e.fin() * 7f);
     }),
 
-    hitGalebard = new Effect(12, e -> {
-        color(Color.white);
+    hitGalebard = new Effect(50f, e -> {
+        color(Pal.meltdownHit);
         stroke(e.fout() * 7f);
+        Drawf.circles(e.x, e.y, 30);  
+    }),
 
-        randLenVectors(e.id, 20, e.finpow() * 27f, (x, y) -> {
-            float ang = Mathf.angle(x, y);
-            lineAngle(e.x + x, e.y + y, ang, e.fout() * 6 + 4f);
-        });
+    galebardShoot = new Effect(21f, e -> {
+        color(Pal.meltdownHit);
+    
+        Lines.circle(e.x, e.y, e.fin() * 50f);
+        Lines.square(e.x, e.y, e.fin() * 40f, 60); 
+
+        for(int i : Mathf.signs){
+            Drawf.tri(e.x, e.y, 13.0f * e.fout(), 80f, e.rotation + 90f * i);
+            Drawf.tri(e.x, e.y, 12.0f * e.fout(), 50f, e.rotation + 20f * i);
+            Drawf.tri(e.x, e.y, 6.0f * e.fout(), 70f, e.rotation + 12f * i);
+            Drawf.tri(e.x, e.y, 7.0f * e.fout(), 110f, e.rotation + 125f * i);
+            }
     }),
 
     redBomb = new Effect(30f, 70f, e -> {
@@ -148,8 +161,8 @@ public class SnFx{
         stroke(e.fout() * 2f);
         float squareRad = 2f + e.finpow() * 25f;
         float circleRad = 2f + e.finpow() * 30f;
-        Lines.square(e.x, e.y, e.fin() * 50.0F, 90 * e.rotation);
-        Lines.square(e.x, e.y, e.fin() * 40.0F, 45 * e.rotation);
+        Lines.square(e.x, e.y, e.fin() * 50.0F, 90);
+        Lines.square(e.x, e.y, e.fin() * 40.0F, 45);
         Lines.circle(e.x, e.y, circleRad);
 
         color(SnPal.copterBomb);

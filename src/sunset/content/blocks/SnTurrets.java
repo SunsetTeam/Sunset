@@ -442,7 +442,7 @@ public class SnTurrets implements ContentList {
             cooldown = 10f;
             powerUse = 24f;
             shootShake = 7f;
-            shootEffect = Fx.lancerLaserShoot;
+            shootEffect = SnFx.galebardShoot;
             smokeEffect = Fx.none;
             chargeEffect = SnFx.galebardLaserCharge;
             chargeBeginEffect = SnFx.galebardLaserChargeBegin;
