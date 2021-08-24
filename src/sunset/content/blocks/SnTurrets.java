@@ -454,7 +454,6 @@ public class SnTurrets implements ContentList {
 
             shootType = new LaserBulletType(1730){{
                 colors = new Color[]{Pal.meltdownHit.cpy().a(0.4f), Pal.meltdownHit, Color.white};
-                hitEffect = SnFx.hitGalebard;
                 despawnEffect = Fx.none;
                 lifetime = 60f;
                 drawSize = 440f;

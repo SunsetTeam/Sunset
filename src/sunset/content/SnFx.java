@@ -97,23 +97,17 @@ public class SnFx{
         Fill.circle(e.x, e.y, e.fin() * 7f);
     }),
 
-    hitGalebard = new Effect(50f, e -> {
+    galebardShoot = new Effect(70f, e -> {
         color(Pal.meltdownHit);
         stroke(e.fout() * 7f);
-        Drawf.circles(e.x, e.y, 30);  
-    }),
-
-    galebardShoot = new Effect(21f, e -> {
-        color(Pal.meltdownHit);
-    
         Lines.circle(e.x, e.y, e.fin() * 50f);
         Lines.square(e.x, e.y, e.fin() * 40f, 60); 
 
         for(int i : Mathf.signs){
-            Drawf.tri(e.x, e.y, 13.0f * e.fout(), 80f, e.rotation + 90f * i);
-            Drawf.tri(e.x, e.y, 12.0f * e.fout(), 50f, e.rotation + 20f * i);
-            Drawf.tri(e.x, e.y, 6.0f * e.fout(), 70f, e.rotation + 12f * i);
-            Drawf.tri(e.x, e.y, 7.0f * e.fout(), 110f, e.rotation + 125f * i);
+            Drawf.tri(e.x, e.y, 14.0f * e.fout(), 80f, e.rotation + 90f * i);
+            Drawf.tri(e.x, e.y, 13.0f * e.fout(), 50f, e.rotation + 20f * i);
+            Drawf.tri(e.x, e.y, 7.0f * e.fout(), 70f, e.rotation + 12f * i);
+            Drawf.tri(e.x, e.y, 8.0f * e.fout(), 110f, e.rotation + 125f * i);
             }
     }),
 
