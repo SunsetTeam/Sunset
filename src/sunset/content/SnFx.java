@@ -101,7 +101,7 @@ public class SnFx{
         color(Pal.meltdownHit);
         stroke(e.fout() * 7f);
         Lines.circle(e.x, e.y, e.fin() * 50f);
-        Lines.square(e.x, e.y, e.fin() * 40f, 60); 
+        Lines.square(e.x, e.y, e.fin() * 40f, 65); 
 
         for(int i : Mathf.signs){
             Drawf.tri(e.x, e.y, 14.0f * e.fout(), 80f, e.rotation + 90f * i);
