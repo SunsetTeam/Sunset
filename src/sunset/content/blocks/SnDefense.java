@@ -28,9 +28,9 @@ public class SnDefense implements ContentList {
             size = 5;
             radius = 220f;
             shieldHealth = 2000f;
-            cooldownNormal = 4f;
-            cooldownLiquid = 3f;
-            cooldownBrokenBase = 3;
+            cooldownNormal = 1f;
+            cooldownLiquid = 0.7f;
+            cooldownBrokenBase = 0.20f;
 
             consumes.items(with(SnItems.enojie, 2, SnItems.nobium, 2, Items.phaseFabric, 2));
             consumes.power(14f);
