@@ -594,7 +594,7 @@ public class SnBullets implements ContentList{
         }};
 
 //heavy-poison bullets
-        SporePodPoisonFrag = new FlakBulletType(2f, 7){{
+        SporePodPoisonFrag = new FlakBulletType(2f, 5){{
             sprite = "sunset-circle-bullet";
             lifetime = 150f;
             splashDamage = 7f;
@@ -631,16 +631,16 @@ public class SnBullets implements ContentList{
             collidesGround = true;
 
             fragBullet = SporePodPoisonFrag;
-            fragBullets = 4;
+            fragBullets = 3;
 
             weaveScale = 9f;
             weaveMag = 1f;
         }};
 
-        NaturitePoisonFrag = new FlakBulletType(2f, 8){{
+        NaturitePoisonFrag = new FlakBulletType(2f, 7){{
             sprite = "sunset-circle-bullet";
             lifetime = 150f;
-            splashDamage = 13f;
+            splashDamage = 12f;
             splashDamageRadius = 9f;
             height = 6f;
             width = 6f;
@@ -674,13 +674,13 @@ public class SnBullets implements ContentList{
             collidesGround = true;
 
             fragBullet = NaturitePoisonFrag;
-            fragBullets = 3;
+            fragBullets = 2;
 
             weaveScale = 9f;
             weaveMag = 1f;
         }};
         
-        NobiumPoisonFrag = new FlakBulletType(2f, 8){{
+        NobiumPoisonFrag = new FlakBulletType(2f, 6){{
             sprite = "sunset-circle-bullet";
             lifetime = 150f;
             splashDamage = 10f;
@@ -717,7 +717,7 @@ public class SnBullets implements ContentList{
             collidesGround = true;
 
             fragBullet = NobiumPoisonFrag;
-            fragBullets = 5;
+            fragBullets = 4;
 
             weaveScale = 9f;
             weaveMag = 1f;

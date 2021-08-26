@@ -81,7 +81,7 @@ public class SnFx{
         });
     }),
     
-    galebardLaserCharge = new Effect(40f, e -> {
+    galebardLaserCharge = new Effect(35f, e -> {
         color(Pal.meltdownHit);
 
         randLenVectors(e.id, 5, 3f + 9f * e.fout(), e.rotation, 100f, (x, y) -> {
