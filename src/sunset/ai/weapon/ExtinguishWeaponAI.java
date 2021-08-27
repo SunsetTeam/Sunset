@@ -12,19 +12,23 @@ public class ExtinguishWeaponAI extends BaseWeaponAI {
     @Override
     public void update() {
         Posc t = findTarget();
-        if(t == null) {
-            super.update();
-            return;
+        if (t != null) {
+            aim(new Pos(t));
+        } else {
+            aim(null);
         }
-        Position target = new Position() {
-            @Override
-            public float getX() { return t.getX(); }
-            @Override
-            public float getY() { return t.getY(); }
-        };
-        aim(target);
     }
-
+    private static class Pos implements Position {
+        public Pos(Posc c) {
+            this.x = c.getX();
+            this.y = c.getY();
+        }
+        float x, y;
+        @Override
+        public float getX() { return x; }
+        @Override
+        public float getY() { return y; }
+    }
     private Posc findTarget() {
         final Posc[] ret = new Posc[] { null };
         // Ищем горящих юнитов

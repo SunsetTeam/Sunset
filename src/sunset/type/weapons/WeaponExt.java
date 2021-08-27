@@ -13,7 +13,7 @@ public class WeaponExt extends Weapon {
     public WeaponExt(String name) {
         super(name);
     }
-    WeaponExt mirrorWeapon = this;
+    WeaponExt mirrorWeapon = this; //this - ещё не искалось, null - не было найдено
     /** Возвращает орудие, зеркальное данному. Если mirror==false, то вернёт null. */
     public WeaponExt mirrorWeapon(Unit unit) {
         if(mirrorWeapon == this) {

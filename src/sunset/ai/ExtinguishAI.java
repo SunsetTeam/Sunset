@@ -11,13 +11,23 @@ import static sunset.Utils.*;
 
 /** AI, которое преследует горящие союзные пострйки или боевые единицы, если таковые есть. */
 public class ExtinguishAI extends FlyingUnitWeaponAI {
+    private int tick = 0;
+    public int ticks = 30;
     @Override
     public void updateMovement() {
-        Unit u = Units.closest(unit.team, unit.x, unit.y,
-                Float.MAX_VALUE, un -> un != unit && isUnitBurning(un),
-                (unit1, x, y) -> Mathf.pow(unit1.health / unit1.maxHealth, 2f));
-        if(u != null) {
-            moveTo(u, unit.range());
+        if(++tick < ticks) return;
+        tick = 0;
+        final Unit[] u = {null};
+        final float[] f = {Float.MAX_VALUE};
+        unit.team.data().units.each(un -> {
+            if(un == unit || !isUnitBurning(un)) return;
+            float cost = 0; //Mathf.pow(un.health / un.maxHealth, 2f) * Mathf.len(unit.x - un.x, un.y - unit.y);
+            if(cost > f[0]) return;
+            f[0] = cost;
+            u[0] = un;
+        });
+        if(u[0] != null) {
+            moveTo(u[0], unit.range());
             return;
         }
         Fire[] b = new Fire[] { null };

@@ -40,7 +40,6 @@ public class Utils {
     }
     /** Возвращает один из огней на блоке или null, если блок не горит. */
     public static Fire getBuildingFire(Building b) {
-        Log.info(b.tileX() + " " + b.tileY());
         for(int dx = 0; dx < b.block.size; dx++)
             for(int dy = 0; dy < b.block.size; dy++)
                 if(Fires.has(b.tileX() + dx, b.tileY() + dy))
