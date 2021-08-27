@@ -22,7 +22,8 @@ public class SnUnitTypes implements ContentList {
     public static UnitType
             guardcopter, bladecopter, swordcopter, guardiancopter, crusadercopter, //attacks copters
             comet, satelite, planet, star, galaxy, //buffers
-            router;
+            router,
+            snowflake;
 
     @Override
     public void load() {
@@ -444,5 +445,38 @@ public class SnUnitTypes implements ContentList {
             public boolean isHidden() { return true; }
         };
         //endregion misc
+        //region freezing
+        snowflake = new UnitType("snowflake") {{
+            defaultController = SuicideAI::new;
+            constructor = EntityMapping.map(19);
+            speed = 1f;
+            hitSize = 8f;
+            health = 500;
+            mechSideSway = 0.25f;
+            range = 40f;
+
+            immunities.add(StatusEffects.freezing);
+
+            weapons.add(new Weapon(){{
+                reload = 20f;
+                shootCone = 180f;
+                ejectEffect = Fx.freezing;
+                shootSound = Sounds.explosion;
+                x = shootY = 0f;
+                mirror = false;
+                bullet = new BombBulletType(0f, 0f, "clear"){{
+                    hitEffect = Fx.pulverize;
+                    lifetime = 10f;
+                    speed = 1f;
+                    status = StatusEffects.freezing;
+                    splashDamageRadius = 90f;
+                    instantDisappear = true;
+                    splashDamage = 12f;
+                    killShooter = true;
+                    hittable = false;
+                    collidesAir = true;
+                }};
+            }});
+        }};
     }
 }
