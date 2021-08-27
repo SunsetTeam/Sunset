@@ -42,17 +42,10 @@ public class ExtinguishAI extends FlyingUnitWeaponAI {
 
     protected void moveTo(Posc target, float length){
         if(target == null) return;
-
         vec.set(target).sub(unit);
-
-        float scl = 1f;
-
-        if(vec.len() < length) {
-            scl = 0;
-        }
-
+        unit.rotation(vec.angle());
+        float scl = vec.len() < length ? 0 : 1f;
         vec.setLength(unit.realSpeed() * scl);
-
         unit.moveAt(vec);
     }
 }
