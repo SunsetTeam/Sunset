@@ -10,11 +10,11 @@ import arc.struct.*;
 import mindustry.content.Fx;
 import mindustry.entities.*;
 import mindustry.graphics.*;
+import sunset.Utils;
 import sunset.graphics.SnPal;
 
 import static arc.graphics.g2d.Draw.*;
 import static arc.graphics.g2d.Lines.*;
-import static arc.math.Angles.*;
 
 import static arc.math.Angles.randLenVectors;
 
@@ -273,7 +273,46 @@ public class SnFx{
         Fill.circle(e.x - cos, e.y - sin, s * e.fout());
     }),
 
-    lightningFast = new Effect(6, Fx.lightning.renderer);
+    lightningFast = new Effect(6, Fx.lightning.renderer),
+
+    missileLaunchSmall = new Effect(75, e -> {
+        Draw.z(Layer.groundUnit);
+        final int[] p = {0};
+        Utils.randVectors(e.id, 16, 16 * e.fin(), 52 * Mathf.pow(e.fin(), 0.55f), (x, y) -> {
+            float a = Mathf.pow(e.fout(), 0.35f);
+            if(p[0] == 0) Draw.color(Pal.lightishGray, a);
+            if(p[0] == 1) Draw.color(Pal.gray, a);
+            if(p[0] == 2) Draw.color(Pal.darkestGray, a);
+            Fill.circle(e.x + x, e.y + y, 0.75f+3.25f*Mathf.pow(e.fin(), 0.7f));
+            p[0] = (p[0] + 1) % 3;
+        });
+    }),
+
+    missileLaunchMedium = new Effect(90, e -> {
+        Draw.z(Layer.groundUnit);
+        final int[] p = {0};
+        Utils.randVectors(e.id, 24, 28 * e.fin(), 72 * Mathf.pow(e.fin(), 0.55f), (x, y) -> {
+            float a = Mathf.pow(e.fout(), 0.5f);
+            if(p[0] == 0) Draw.color(Pal.lightishGray, a);
+            if(p[0] == 1) Draw.color(Pal.gray, a);
+            if(p[0] == 2) Draw.color(Pal.darkestGray, a);
+            Fill.circle(e.x + x, e.y + y, 1.5f+4.5f*Mathf.pow(e.fin(), 0.7f));
+            p[0] = (p[0] + 1) % 3;
+        });
+    }),
+
+    missileLaunchLarge = new Effect(105, e -> {
+        Draw.z(Layer.groundUnit);
+        final int[] p = {0};
+        Utils.randVectors(e.id, 32, 36 * e.fin(), 86 * Mathf.pow(e.fin(), 0.55f), (x, y) -> {
+            float a = Mathf.pow(e.fout(), 0.7f);
+            if(p[0] == 0) Draw.color(Pal.lightishGray, a);
+            if(p[0] == 1) Draw.color(Pal.gray, a);
+            if(p[0] == 2) Draw.color(Pal.darkestGray, a);
+            Fill.circle(e.x + x, e.y + y, 2f+6f*Mathf.pow(e.fin(), 0.7f));
+            p[0] = (p[0] + 1) % 3;
+        });
+    });
 
     public static void lightning(float x1, float y1, float x2, float y2, Color c, int iterations, float rndScale, Effect e) {
         Seq<Vec2> lines = new Seq<>();

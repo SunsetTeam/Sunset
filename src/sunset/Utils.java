@@ -2,6 +2,9 @@ package sunset;
 
 import arc.func.Boolf;
 import arc.func.Cons;
+import arc.func.Floatc2;
+import arc.math.Rand;
+import arc.math.geom.Vec2;
 import arc.util.Log;
 import mindustry.Vars;
 import mindustry.content.StatusEffects;
@@ -23,6 +26,8 @@ import java.lang.reflect.Method;
 
 /** Набор различных static утилит. */
 public class Utils {
+    private static final Rand random = new Rand();
+    private static final Vec2 rv = new Vec2();
     /** Определяет, горит ли юнит. */
     public static boolean isUnitBurning(Unit u) {
         // Считаем, что эффект - горение, если он наносит урон и
@@ -78,5 +83,16 @@ public class Utils {
         } catch (Throwable e) {
             Log.err(e);
         }
+    }
+    /** Создаёт случайные векторы. */
+    public static void randVectors(long seed, int amount, float lengthFrom, float lengthTo, Floatc2 cons) {
+        random.setSeed(seed);
+
+        for(int i = 0; i < amount; ++i) {
+            float vang = random.nextFloat() * 360.0F;
+            rv.set(random.random(lengthFrom, lengthTo), 0.0F).rotate(vang);
+            cons.get(rv.x, rv.y);
+        }
+
     }
 }

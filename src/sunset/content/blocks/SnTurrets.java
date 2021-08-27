@@ -466,6 +466,7 @@ public class SnTurrets implements ContentList {
 //missle
         sunrise = new MissileSiloTurret("sunrise"){{
             requirements(Category.turret, with(Items.copper, 180, Items.lead, 175, Items.graphite, 165, Items.silicon, 150));
+            launchEffect = SnFx.missileLaunchSmall;
             size = 2;
             itemCapacity = 240;
             missile = new MissileLogic.MissileType(){{
@@ -486,6 +487,7 @@ public class SnTurrets implements ContentList {
         }};
         spark = new MissileSiloTurret("spark"){{
             requirements(Category.turret, with(Items.copper, 290, Items.lead, 280, Items.graphite, 275, Items.silicon, 260, Items.plastanium, 255, SnItems.fors, 230));
+            launchEffect = SnFx.missileLaunchMedium;
             size = 3;
             itemCapacity = 900;
             missile = new MissileLogic.MissileType(){{
@@ -506,6 +508,7 @@ public class SnTurrets implements ContentList {
         }};
         dissector = new MissileSiloTurret("dissector"){{
             requirements(Category.turret, with(Items.copper, 500, Items.lead, 510, Items.plastanium, 490, Items.silicon, 480, Items.graphite, 475, SnItems.fors, 430, SnItems.nobium, 400));
+            launchEffect = SnFx.missileLaunchLarge;
             size = 4;
             itemCapacity = 2400;
             missile = new MissileLogic.MissileType(){{
@@ -526,6 +529,7 @@ public class SnTurrets implements ContentList {
         }};
         art = new MissileSiloTurret("art"){{
             requirements(Category.turret, with(Items.copper, 1400, Items.lead, 1300, Items.plastanium, 1010, Items.silicon, 980, Items.graphite, 975, Items.surgeAlloy, 800, SnItems.enojie, 750));
+            launchEffect = SnFx.missileLaunchMedium;
             size = 5;
             itemCapacity = 2400;
             float p1 = 53f / 162f, p2 = 109f / 162f;
