@@ -4,12 +4,11 @@ import arc.Core;
 import arc.graphics.g2d.Draw;
 import arc.graphics.g2d.Lines;
 import arc.math.Mathf;
-import arc.struct.Seq;
-import arc.util.Log;
+import arc.struct.FloatSeq;
+import arc.struct.IntSeq;
 import arc.util.Time;
 import arc.util.io.Reads;
 import arc.util.io.Writes;
-import mindustry.entities.abilities.Ability;
 import mindustry.gen.*;
 import mindustry.graphics.Drawf;
 import mindustry.graphics.Pal;
@@ -17,6 +16,7 @@ import mindustry.type.ItemStack;
 import mindustry.type.UnitType;
 import mindustry.ui.Bar;
 import mindustry.world.blocks.storage.StorageBlock;
+import sunset.Utils;
 import sunset.ai.DeliverAI;
 import sunset.content.SnUnitTypes;
 
@@ -57,7 +57,8 @@ public class Airport extends StorageBlock {
         public int linkID = 0;
         public AirportBuild linked;
         public float construcionTime = 0f;
-        Seq<Integer> units = new Seq<>(false);
+        public boolean readen = false;
+        IntSeq units = new IntSeq();
 
         private void validateLink(){
             Building b = world.build(linkID);
@@ -68,10 +69,11 @@ public class Airport extends StorageBlock {
         }
         @Override
         public void updateTile() {
+            if(readen) firstUpdateAfterRead();
             validateLink();
             for (int i = units.size-1; i > -1; i--) {
                 Unit unit = Groups.unit.getByID(units.get(i));
-                if (unit == null || unit.dead()) units.remove(i);
+                if (unit == null || unit.dead()) units.removeIndex(i);
             }
             if (items.has(requirements) && units.size < maxUnitCount && linked != null) {
                 construcionTime += Time.delta;
@@ -120,21 +122,45 @@ public class Airport extends StorageBlock {
             write.f(construcionTime);
             write.i(units.size);
             for (int i = 0; i < units.size; i++) {
-                write.i(units.get(i));
+                Unit u = Groups.unit.getByID(units.get(i));
+                write.f(u.x);
+                write.f(u.y);
+                write.i(((DeliverAI)u.controller()).state);
             }
         }
 
+        IntSeq states = new IntSeq();
+        FloatSeq xs = new FloatSeq();
+        FloatSeq ys = new FloatSeq();
         @Override
         public void read(Reads read, byte revision) {
             super.read(read, revision);
             linkID = read.i();
-            validateLink();
             construcionTime = read.f();
+            states.clear();
+            xs.clear();
+            ys.clear();
             int unitsCount = read.i();
             for (int i = 0; i < unitsCount; i++) {
-                int id = read.i();
-                units.add(id);
+                xs.add(read.f());
+                ys.add(read.f());
+                states.add(read.i());
             }
+            readen = true;
+        }
+        public void firstUpdateAfterRead() {
+            units.clear();
+            for (int i = 0; i < states.size; i++) {
+                Unit u = Utils.unitClosest(xs.get(i), ys.get(i), (_u) -> true);
+                DeliverAI ai = (DeliverAI)u.controller();
+                ai.setup(this);
+                ai.state = states.get(i);
+                units.add(u.id);
+            }
+            states.clear();
+            xs.clear();
+            ys.clear();
+            readen = false;
         }
     }
 }
