@@ -79,6 +79,7 @@ public class SnOther implements ContentList {
             maxUnitCount = 6;
             unitBuildTime = 480;
             unitType = SnUnitTypes.deliveryUnit;
+            powerUse = 3.25f;
             itemCapacity = 1000;
             requirements = with(Items.thorium, 60, SnItems.naturite, 40);
         }};

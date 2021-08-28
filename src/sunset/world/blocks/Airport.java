@@ -22,6 +22,7 @@ import mindustry.world.meta.values.ItemListValue;
 import sunset.Utils;
 import sunset.ai.DeliverAI;
 import sunset.content.SnUnitTypes;
+import sunset.world.consumers.AdjustableConsumePower;
 
 import static mindustry.Vars.tilesize;
 import static mindustry.Vars.world;
@@ -30,12 +31,17 @@ public class Airport extends StorageBlock {
     public float unitBuildTime = 720f;
     public UnitType unitType;
     public ItemStack[] requirements;
+    public float powerUse;
     public int maxUnitCount;
 
     public Airport(String name) {
         super(name);
         update = true;
         configurable = true;
+        consumes.add(new AdjustableConsumePower(powerUse, b -> {
+            AirportBuild ab = (AirportBuild)b;
+            return ab.shouldBuild ? ab.getBoost() : 0f;
+        }));
     }
 
     @Override
@@ -59,6 +65,8 @@ public class Airport extends StorageBlock {
     @Override
     public void setStats() {
         super.setStats();
+        stats.remove(Stat.powerUse);
+        stats.add(Stat.powerUse, powerUse * 60f, StatUnit.powerSecond);
         stats.add(Stat.productionTime, unitBuildTime / 60f, StatUnit.seconds);
         stats.add(Stat.input, new ItemListValue(requirements));
         stats.add(Stat.maxUnits, maxUnitCount);
@@ -70,6 +78,7 @@ public class Airport extends StorageBlock {
         public float construcionTime = 0f;
         public boolean readen = false;
         IntSeq units = new IntSeq();
+        public boolean shouldBuild;
 
         private void validateLink(){
             Building b = world.build(linkID);
@@ -86,8 +95,9 @@ public class Airport extends StorageBlock {
                 Unit unit = Groups.unit.getByID(units.get(i));
                 if (unit == null || unit.dead()) units.removeIndex(i);
             }
-            if (items.has(requirements) && units.size < maxUnitCount && linked != null) {
-                construcionTime += Time.delta;
+            shouldBuild = items.has(requirements) && units.size < maxUnitCount && linked != null;
+            if (shouldBuild) {
+                construcionTime += Time.delta * getBoost() * efficiency();
                 if (construcionTime > unitBuildTime) {
                     items.remove(requirements);
                     construcionTime = 0;
@@ -96,6 +106,17 @@ public class Airport extends StorageBlock {
                     units.add(u.id);
                 }
             }
+        }
+
+        private long boostEndTime = 0;
+        private float boost = 0f;
+        public float getBoost(){
+            return Time.millis()<=boostEndTime ? Math.max(boost, 1) : 1;
+        }
+        @Override
+        public void applyBoost(float intensity, float duration) {
+            boostEndTime = Time.millis() + (long)(duration*1000f/60f);
+            boost = intensity;
         }
 
         @Override
