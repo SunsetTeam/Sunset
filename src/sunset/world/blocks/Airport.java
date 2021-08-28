@@ -16,6 +16,9 @@ import mindustry.type.ItemStack;
 import mindustry.type.UnitType;
 import mindustry.ui.Bar;
 import mindustry.world.blocks.storage.StorageBlock;
+import mindustry.world.meta.Stat;
+import mindustry.world.meta.StatUnit;
+import mindustry.world.meta.values.ItemListValue;
 import sunset.Utils;
 import sunset.ai.DeliverAI;
 import sunset.content.SnUnitTypes;
@@ -51,6 +54,14 @@ public class Airport extends StorageBlock {
                 () -> Pal.power,
                 () -> (float)e.units.size / maxUnitCount
             ));
+    }
+
+    @Override
+    public void setStats() {
+        super.setStats();
+        stats.add(Stat.productionTime, unitBuildTime / 60f, StatUnit.seconds);
+        stats.add(Stat.input, new ItemListValue(requirements));
+        stats.add(Stat.maxUnits, maxUnitCount);
     }
 
     public class AirportBuild extends StorageBuild {
