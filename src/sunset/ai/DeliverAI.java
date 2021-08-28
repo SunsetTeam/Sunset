@@ -1,7 +1,6 @@
 package sunset.ai;
 
 import arc.math.geom.Vec2;
-import arc.util.Log;
 import mindustry.ai.types.FlyingAI;
 import mindustry.content.Items;
 import sunset.world.blocks.Airport;
@@ -21,7 +20,7 @@ public class DeliverAI extends FlyingAI {
     @Override
     public void updateMovement() {
         if(!inited) return;
-        if(base == null) {
+        if(base == null || !base.added) {
             unit.killed();
         } else {
             if(state == 0) {
