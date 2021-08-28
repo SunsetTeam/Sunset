@@ -10,11 +10,9 @@ import mindustry.type.UnitType;
 import mindustry.type.Weapon;
 import mindustry.ai.types.SuicideAI;
 import mindustry.entities.bullet.BombBulletType;
-import sunset.ai.FlyingUnitWeaponAI;
-import sunset.ai.HealAI;
+import sunset.ai.*;
 import sunset.entities.abilities.StatusFieldAbility;
 import sunset.type.UnitTypeExt;
-import sunset.ai.ExtinguishAI;
 import sunset.ai.weapon.ExtinguishWeaponAI;
 import sunset.type.weapons.WeaponExt;
 import sunset.type.weapons.ChainWeapon;
@@ -25,7 +23,7 @@ public class SnUnitTypes implements ContentList {
     public static UnitType
             guardcopter, bladecopter, swordcopter, guardiancopter, crusadercopter, //attacks copters
             comet, satelite, planet, star, galaxy, //buffers
-            router,
+            router, deliveryUnit,
             snowflake;
 
     @Override
@@ -447,6 +445,15 @@ public class SnUnitTypes implements ContentList {
             @Override
             public boolean isHidden() { return true; }
         };
+        deliveryUnit = new UnitTypeExt("deliveryUnit"){{
+            speed = 5.6f;
+            flying = true;
+            itemCapacity = 120;
+            health = 50;
+            hitSize = 4;
+            defaultController = DeliverAI::new;
+            constructor = UnitEntity::create;
+        }};
         //endregion misc
         //region freezing
         snowflake = new UnitType("snowflake") {{
@@ -481,5 +488,6 @@ public class SnUnitTypes implements ContentList {
                 }};
             }});
         }};
+        //endregion freezing
     }
 }

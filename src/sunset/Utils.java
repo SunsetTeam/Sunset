@@ -92,6 +92,5 @@ public class Utils {
             rv.set(random.random(lengthFrom, lengthTo), 0.0F).rotate(vang);
             cons.get(rv.x, rv.y);
         }
-
     }
 }
