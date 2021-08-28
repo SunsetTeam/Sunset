@@ -4,6 +4,7 @@ import arc.Core;
 import arc.graphics.g2d.Draw;
 import arc.graphics.g2d.Lines;
 import arc.math.Mathf;
+import arc.scene.ui.layout.Table;
 import arc.struct.FloatSeq;
 import arc.struct.IntSeq;
 import arc.util.Time;
@@ -12,9 +13,11 @@ import arc.util.io.Writes;
 import mindustry.gen.*;
 import mindustry.graphics.Drawf;
 import mindustry.graphics.Pal;
+import mindustry.type.Item;
 import mindustry.type.ItemStack;
 import mindustry.type.UnitType;
 import mindustry.ui.Bar;
+import mindustry.world.blocks.ItemSelection;
 import mindustry.world.blocks.storage.StorageBlock;
 import mindustry.world.meta.Stat;
 import mindustry.world.meta.StatUnit;
@@ -24,8 +27,7 @@ import sunset.ai.DeliverAI;
 import sunset.content.SnUnitTypes;
 import sunset.world.consumers.AdjustableConsumePower;
 
-import static mindustry.Vars.tilesize;
-import static mindustry.Vars.world;
+import static mindustry.Vars.*;
 
 public class Airport extends StorageBlock {
     public float unitBuildTime = 720f;
@@ -79,13 +81,16 @@ public class Airport extends StorageBlock {
         public boolean readen = false;
         IntSeq units = new IntSeq();
         public boolean shouldBuild;
+        public Item takeItem;
 
         private void validateLink(){
+            AirportBuild prevLinked = linked;
             Building b = world.build(linkID);
             if(b instanceof AirportBuild) {
                 linked = (AirportBuild)b;
                 if(linked.dead) linked = null;
             } else linked = null;
+            if(linked != prevLinked) Call.tileConfig(player, this, linked);
         }
         @Override
         public void updateTile() {
@@ -120,10 +125,22 @@ public class Airport extends StorageBlock {
         }
 
         @Override
+        public void buildConfiguration(Table table){
+            ItemSelection.buildTable(table, content.items(), () -> takeItem, this::configure);
+        }
+
+        @Override
+        public void configure(Object value) {
+            takeItem = (Item)value;
+            Call.tileConfig(player, this, value);
+        }
+
+        @Override
         public boolean onConfigureTileTapped(Building other) {
             if (this == other || linked == other) {
                 linked = null;
                 linkID = 0;
+                Call.tileConfig(player, this, linked);
                 return false;
             } else if (other instanceof AirportBuild) {
                 linkID = other.pos();

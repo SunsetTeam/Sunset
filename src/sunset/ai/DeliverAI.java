@@ -31,13 +31,19 @@ public class DeliverAI extends FlyingAI {
                     state = 1;
                 }
             } else if(state == 1) {
-                int need = unit.itemCapacity() - unit.stack.amount;
-                if(need > 0) {
-                    int toMove = Math.min(need, base.items.get(Items.copper));
-                    base.items.remove(Items.copper, toMove);
-                    unit.addItem(Items.copper, toMove);
-                } else {
+                if(unit.stack.amount > 0 && (unit.stack.item != base.takeItem)) {
                     state = 2;
+                } else {
+                    if(base.takeItem != null) {
+                        int need = unit.itemCapacity() - unit.stack.amount;
+                        if (need > 0) {
+                            int toMove = Math.min(need, base.items.get(base.takeItem));
+                            base.items.remove(base.takeItem, toMove);
+                            unit.addItem(base.takeItem, toMove);
+                        } else {
+                            state = 2;
+                        }
+                    }
                 }
             } else if(state == 2) {
                 if(base.linked != null) {
@@ -50,15 +56,17 @@ public class DeliverAI extends FlyingAI {
                 }
             } else if(state == 3) {
                 if(base.linked != null) {
-                    int remains = base.linked.getMaximumAccepted(Items.copper) -
-                                  base.linked.items.get(Items.copper);
                     if(unit.stack.amount > 0) {
+                        int remains = base.linked.getMaximumAccepted(unit.stack.item) -
+                                base.linked.items.get(unit.stack.item);
                         int toMove = Math.min(unit.stack.amount, remains);
-                        base.linked.items.add(Items.copper, toMove);
+                        base.linked.items.add(unit.stack.item, toMove);
                         unit.stack.amount -= toMove;
                     } else {
                         state = 0;
                     }
+                } else {
+                    state = 2;
                 }
             }
         }
