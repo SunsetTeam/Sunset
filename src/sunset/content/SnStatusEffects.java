@@ -12,7 +12,7 @@ import mindustry.graphics.*;
 import sunset.type.StackableStatusEffect;
 
 public class SnStatusEffects implements ContentList{
-    public static StatusEffect frostbite, stun, starBuff, overheat;
+    public static StatusEffect frostbite, stun, starBuff, galaxyDebuff, overheat;
     @Override
     public void load(){
 
@@ -44,6 +44,12 @@ public class SnStatusEffects implements ContentList{
             healthMultiplier = 1.15f;
             damageMultiplier = 1.1f;
             reloadMultiplier = 1.1f;
+       }};
+
+       galaxyDebuff = new StatusEffect("galaxy-debuff"){{
+           speedMultiplier = 0.8f;
+           damageMultiplier = 0.9f;
+           reloadMultiplier = 0.8f;
        }};
 
        overheat = new StackableStatusEffect("overheat"){{
