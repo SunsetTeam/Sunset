@@ -6,6 +6,7 @@ import mindustry.ctype.ContentList;
 import mindustry.gen.Sounds;
 import mindustry.gen.EntityMapping;
 import mindustry.gen.UnitEntity;
+import mindustry.graphics.Layer;
 import mindustry.type.UnitType;
 import mindustry.type.Weapon;
 import mindustry.ai.types.SuicideAI;
@@ -369,7 +370,7 @@ public class SnUnitTypes implements ContentList {
 
             abilities.add(new StatusFieldAbility(SnStatusEffects.starBuff, StatusEffects.none, 20, 8 * 24));
 
-            weapons.add(new Weapon("sunset-star-gun") {{
+            weapons.add(new WeaponExt("sunset-star-gun") {{
                 x = 0;
                 y = -12;
                 mirror = false;
@@ -380,6 +381,19 @@ public class SnUnitTypes implements ContentList {
                 reload = 287f;
                 recoil = 3.5f;
                 bullet = SnBullets.starStunBullet;
+            }});
+            weapons.add(new ChainWeapon("sunset-galaxy-weak") {{
+                damageTick = 0f;
+                healTick = 2.2f;
+                maxChainLength = 3;
+                alternate = false;
+                mirror = true;
+                rotate = true;
+                x = 24;
+                shootCone = 2f;
+                range = 210;
+                draw = true;
+                laserLayer = Layer.flyingUnit;
             }});
         }};
 
