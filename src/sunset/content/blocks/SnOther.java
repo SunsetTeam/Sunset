@@ -78,7 +78,7 @@ public class SnOther implements ContentList {
             requirements(Category.distribution, with(Items.titanium, 600, Items.silicon, 300));
             maxUnitCount = 6;
             unitBuildTime = 480;
-            unitType = SnUnitTypes.deliveryUnit;
+            unitType = SnUnitTypes.courier;
             powerUse = 3.25f;
             itemCapacity = 1000;
             requirements = with(Items.thorium, 60, SnItems.naturite, 40);

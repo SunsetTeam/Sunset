@@ -23,7 +23,7 @@ public class SnUnitTypes implements ContentList {
     public static UnitType
             guardcopter, bladecopter, swordcopter, guardiancopter, crusadercopter, //attacks copters
             comet, satelite, planet, star, galaxy, //buffers
-            router, deliveryUnit,
+            router, courier,
             snowflake;
 
     @Override
@@ -445,7 +445,7 @@ public class SnUnitTypes implements ContentList {
             @Override
             public boolean isHidden() { return true; }
         };
-        deliveryUnit = new UnitTypeExt("deliveryUnit"){{
+        courier = new UnitTypeExt("courier"){{
             speed = 5.6f;
             flying = true;
             itemCapacity = 120;

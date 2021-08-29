@@ -106,7 +106,7 @@ public class Airport extends StorageBlock {
                 if (construcionTime > unitBuildTime) {
                     items.remove(requirements);
                     construcionTime = 0;
-                    Unit u = SnUnitTypes.deliveryUnit.spawn(team, x, y);
+                    Unit u = SnUnitTypes.courier.spawn(team, x, y);
                     ((DeliverAI)u.controller()).setup(this);
                     units.add(u.id);
                 }
