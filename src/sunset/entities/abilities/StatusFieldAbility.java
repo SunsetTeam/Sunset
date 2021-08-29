@@ -10,7 +10,7 @@ import mindustry.entities.abilities.Ability;
 import mindustry.gen.Unit;
 import mindustry.type.StatusEffect;
 import mindustry.world.meta.StatValue;
-import sunset.Utils;
+import sunset.utils.Utils;
 import sunset.content.SnFx;
 
 public class StatusFieldAbility extends Ability implements StatValue {

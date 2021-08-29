@@ -6,7 +6,7 @@ import mindustry.Vars;
 import mindustry.entities.Units;
 import mindustry.gen.*;
 
-import static sunset.Utils.*;
+import static sunset.utils.Utils.*;
 
 public class ExtinguishWeaponAI extends BaseWeaponAI {
     @Override

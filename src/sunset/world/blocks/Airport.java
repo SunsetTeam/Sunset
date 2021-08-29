@@ -22,7 +22,7 @@ import mindustry.world.blocks.storage.StorageBlock;
 import mindustry.world.meta.Stat;
 import mindustry.world.meta.StatUnit;
 import mindustry.world.meta.values.ItemListValue;
-import sunset.Utils;
+import sunset.utils.Utils;
 import sunset.ai.DeliverAI;
 import sunset.content.SnUnitTypes;
 import sunset.world.consumers.AdjustableConsumePower;

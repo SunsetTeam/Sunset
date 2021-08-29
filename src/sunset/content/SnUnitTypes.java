@@ -19,6 +19,10 @@ import sunset.type.weapons.WeaponExt;
 import sunset.type.weapons.ChainWeapon;
 import sunset.type.CopterUnitType;
 import sunset.type.weapons.PointDefenseWeapon;
+import sunset.utils.UnitsUtils;
+
+import static mindustry.type.ItemStack.with;
+import static sunset.utils.UnitsUtils.addUnitGroup;
 
 public class SnUnitTypes implements ContentList {
     public static UnitType
@@ -26,7 +30,14 @@ public class SnUnitTypes implements ContentList {
             comet, satelite, planet, star, galaxy, //buffers
             router, courier,
             snowflake;
-
+    public void loadFactoryRecipes()
+    {
+        UnitsUtils.init();
+        addUnitGroup(Blocks.airFactory, 60*20f, with(Items.silicon, 30, Items.metaglass, 20),
+            comet, satelite, planet, star, galaxy);
+        addUnitGroup(Blocks.airFactory, 60*15f, with(Items.silicon, 30, Items.graphite, 15),
+            guardcopter, bladecopter, swordcopter, guardiancopter, crusadercopter);
+    }
     @Override
     public void load() {
         // region copters
@@ -503,5 +514,6 @@ public class SnUnitTypes implements ContentList {
             }});
         }};
         //endregion freezing
+        loadFactoryRecipes();
     }
 }

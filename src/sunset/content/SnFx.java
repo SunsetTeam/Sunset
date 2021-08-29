@@ -10,7 +10,7 @@ import arc.struct.*;
 import mindustry.content.Fx;
 import mindustry.entities.*;
 import mindustry.graphics.*;
-import sunset.Utils;
+import sunset.utils.Utils;
 import sunset.graphics.SnPal;
 
 import static arc.graphics.g2d.Draw.*;

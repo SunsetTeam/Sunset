@@ -1,4 +1,4 @@
-package sunset;
+package sunset.utils;
 
 import arc.func.Boolf;
 import arc.func.Cons;

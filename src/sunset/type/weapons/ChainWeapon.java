@@ -26,7 +26,7 @@ import sunset.type.UnitData;
 import sunset.type.UpdateDrawWeapon;
 
 import static arc.graphics.Color.coral;
-import static sunset.Utils.*;
+import static sunset.utils.Utils.*;
 
 public class ChainWeapon extends WeaponExt implements UpdateDrawWeapon, StatValue {
     public int maxChainLength = 1;
