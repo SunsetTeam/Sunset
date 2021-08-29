@@ -368,7 +368,7 @@ public class SnUnitTypes implements ContentList {
 
             constructor = UnitEntity::create;
 
-            abilities.add(new StatusFieldAbility(SnStatusEffects.starBuff, StatusEffects.none, 20, 8 * 24));
+            abilities.add(new StatusFieldAbility(SnStatusEffects.starBuff, StatusEffects.none, 180, 8 * 24));
 
             weapons.add(new WeaponExt("sunset-star-gun") {{
                 x = 0;
@@ -418,7 +418,7 @@ public class SnUnitTypes implements ContentList {
 
             constructor = UnitEntity::create;
 
-            abilities.add(new StatusFieldAbility(SnStatusEffects.starBuff, StatusEffects.freezing, 20, 8 * 24));
+            abilities.add(new StatusFieldAbility(SnStatusEffects.starBuff, StatusEffects.freezing, 180, 8 * 24));
 
             weapons.add(new WeaponExt("sunset-galaxy-segment") {{
                 mirror = true;

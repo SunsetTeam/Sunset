@@ -37,7 +37,6 @@ public class SnFx{
         });
     }),
 
-
     crystalyze = new Effect(40, e -> {
         randLenVectors(e.id, 5, 3f + e.fin() * 8f, (x, y) -> {
             color(Pal.lightTrail);
@@ -149,7 +148,6 @@ public class SnFx{
         Drawf.light(e.x, e.y, circleRad * 1.5f, SnPal.copterBomb, e.fout());
     }),
 
-
     heavyCopterBomb = new Effect(23f, 55f, e -> {
         color(SnPal.copterBomb);
         stroke(e.fout() * 2f);
@@ -171,7 +169,6 @@ public class SnFx{
 
         Drawf.light(e.x, e.y, squareRad * 1.5f, SnPal.copterBomb, e.fout());
     }),
-    
     
     bigCopterBomb = new Effect(30f, 65f, e -> {
         color(SnPal.copterBomb);
@@ -312,6 +309,16 @@ public class SnFx{
             Fill.circle(e.x + x, e.y + y, 2f+6f*Mathf.pow(e.fin(), 0.7f));
             p[0] = (p[0] + 1) % 3;
         });
+    }),
+
+    statusField = new Effect(30, e -> {
+        Draw.z(Layer.flyingUnit);
+        float val = Mathf.pow(e.fin(), 0.3f);
+        Color c = Pal.boostFrom.cpy().lerp(Pal.boostTo, e.fout());
+        Draw.color(c, Mathf.pow(e.fout(), 2f));
+        Fill.circle(e.x, e.y, e.rotation * val);
+        stroke(1.5f, Pal.boostTo);
+        Lines.circle(e.x, e.y, e.rotation * val);
     });
 
     public static void lightning(float x1, float y1, float x2, float y2, Color c, int iterations, float rndScale, Effect e) {

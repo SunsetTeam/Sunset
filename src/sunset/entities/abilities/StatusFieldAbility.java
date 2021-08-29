@@ -11,6 +11,7 @@ import mindustry.gen.Unit;
 import mindustry.type.StatusEffect;
 import mindustry.world.meta.StatValue;
 import sunset.Utils;
+import sunset.content.SnFx;
 
 public class StatusFieldAbility extends Ability implements StatValue {
     public StatusEffect allyEffect, enemyEffect;
@@ -30,7 +31,7 @@ public class StatusFieldAbility extends Ability implements StatValue {
         timer += Time.delta;
 
         if(timer >= reload){
-            //TODO: эффект активации
+            SnFx.statusField.at(unit.x, unit.y, range);
             Utils.unitsNearby(unit.x, unit.y, range, other -> {
                 if (other.team.isEnemy(unit.team)) {
                     other.apply(enemyEffect, reload);
