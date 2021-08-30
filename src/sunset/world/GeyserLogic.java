@@ -94,7 +94,7 @@ public class GeyserLogic {
                                    g.eruptionDamage;
                 tiles.each(pos -> {
                     e.at(pos);
-                    if(d > 0 && pos.build != null) pos.build.damage(d);
+                    if(d > 0 && pos.build != null) pos.build.damage(d * 30);
                 });
             }
         }
