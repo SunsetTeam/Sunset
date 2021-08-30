@@ -474,7 +474,7 @@ public class SnTurrets implements ContentList {
                 splashDamage = 590f;
                 splashDamageRadius = 98f;
                 speed = 1.75f;
-                explodeEffect = Fx.massiveExplosion;
+                explodeEffect = SnFx.sunriseMissileExplosion;
             }};
             craftTime = 1200f;
             consumes.items(with(Items.silicon, 60, Items.graphite, 90, Items.pyratite, 120));
@@ -495,7 +495,7 @@ public class SnTurrets implements ContentList {
                 splashDamage = 4400f;
                 splashDamageRadius = 129f;
                 speed = 1.5f;
-                explodeEffect = Fx.massiveExplosion;
+                explodeEffect = SnFx.sparkMissileExplosion;
             }};
             craftTime = 4200f;
             consumes.items(with(Items.graphite, 270, Items.silicon, 360, Items.plastanium, 450, Items.blastCompound, 540));
@@ -516,7 +516,7 @@ public class SnTurrets implements ContentList {
                 splashDamage = 18600f;
                 splashDamageRadius = 154f;
                 speed = 1.25f;
-                explodeEffect = Fx.massiveExplosion;
+                explodeEffect = SnFx.dissectorMissileExplosion;
             }};
             craftTime = 16800f;
             consumes.items(with(Items.phaseFabric, 440, Items.silicon, 620, Items.surgeAlloy, 800, Items.thorium, 980, Items.plastanium, 1200));
@@ -544,7 +544,7 @@ public class SnTurrets implements ContentList {
                 splashDamage = 7200f;
                 splashDamageRadius = 137f;
                 speed = 1f;
-                explodeEffect = Fx.massiveExplosion;
+                explodeEffect = SnFx.artMissileExplosion;
             }};
             craftTime = 4500f;
             consumes.items(with(Items.plastanium, 180, Items.silicon, 270, Items.surgeAlloy, 90, Items.thorium, 330));
@@ -555,7 +555,6 @@ public class SnTurrets implements ContentList {
             category = Category.turret;
             buildVisibility = BuildVisibility.shown;
         }};
-
         testturret = new ItemTurret("test-turret") {{
             requirements(Category.turret, with(Items.copper, 1));
             ammo(
