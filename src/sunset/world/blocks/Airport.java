@@ -167,6 +167,7 @@ public class Airport extends StorageBlock {
         @Override
         public void write(Writes write) {
             super.write(write);
+            write.s(takeItem == null ? -1 : takeItem.id);
             write.i(linkID);
             write.f(construcionTime);
             write.i(units.size);
@@ -184,6 +185,7 @@ public class Airport extends StorageBlock {
         @Override
         public void read(Reads read, byte revision) {
             super.read(read, revision);
+            takeItem = content.item(read.s());
             linkID = read.i();
             construcionTime = read.f();
             states.clear();

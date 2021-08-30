@@ -40,6 +40,7 @@ public class SnStatusEffects implements ContentList{
         }};
 
        starBuff = new StatusEffect("star-buff"){{
+            color = Pal.surge;
             speedMultiplier = 1.3f;
             healthMultiplier = 1.15f;
             damageMultiplier = 1.1f;
@@ -53,6 +54,7 @@ public class SnStatusEffects implements ContentList{
        }};
 
        overheat = new StackableStatusEffect("overheat"){{
+           color = Color.valueOf("FF30000");
            maxStacks = 20;
            healthMultipliers.addAll(0.99f, 0.98f, 0.97f, 0.96f, 0.95f, 0.94f, //-0.01
                                     0.92f, 0.90f, 0.86f, 0.84f, 0.82f, //-0.02
