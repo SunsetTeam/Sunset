@@ -368,43 +368,8 @@ public class SnFx{
             lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 3f + e.fout() * 7f);
         });
     }),
-
+    
     dissectorMissileExplosion = new Effect(40, e -> {
-        color(Pal.missileYellow);
-
-        e.scaled(10, i -> {
-            stroke(6f * i.fout());
-            Lines.circle(e.x, e.y, 7f + i.fin() * 45f);
-        });
-
-        color(SnPal.aGray);
-
-        randLenVectors(e.id, 30, 7f + 55f * e.finpow(), (x, y) -> {
-            Fill.circle(e.x + x, e.y + y, e.fout() * 7f + 1.3f);
-            Fill.circle(e.x + x, e.y + y, e.fout() * 5f + 0.7f);
-        });
-
-        color(SnPal.aGray);
-
-        randLenVectors(e.id, 10, 3f + 25f * e.finpow(), (x, y) -> {
-            Fill.circle(e.x + x, e.y + y, e.fout() * 6f + 0.9f);
-        });
-
-        color(Pal.bulletYellow);
-
-        randLenVectors(e.id, 5, 2f + 20f * e.finpow(), (x, y) -> {
-            Fill.circle(e.x + x, e.y + y, e.fout() * 4f + 0.6f);
-        });
-
-        color(Pal.missileYellowBack);
-        stroke(e.fout());
-
-        randLenVectors(e.id + 3, 10, 3f + 40f * e.finpow(), (x, y) -> {
-            lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 4f + e.fout() * 8f);
-        });
-    }),
-
-    artMissileExplosion = new Effect(40, e -> {
         color(Pal.missileYellow);
 
         e.scaled(11, i -> {
@@ -437,6 +402,41 @@ public class SnFx{
 
         randLenVectors(e.id + 4, 13, 4f + 45f * e.finpow(), (x, y) -> {
             lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 5f + e.fout() * 10f);
+        });
+    }),
+    
+        artMissileExplosion = new Effect(40, e -> {
+        color(Pal.missileYellow);
+
+        e.scaled(10, i -> {
+            stroke(6f * i.fout());
+            Lines.circle(e.x, e.y, 7f + i.fin() * 45f);
+        });
+
+        color(SnPal.aGray);
+
+        randLenVectors(e.id, 30, 7f + 55f * e.finpow(), (x, y) -> {
+            Fill.circle(e.x + x, e.y + y, e.fout() * 7f + 1.3f);
+            Fill.circle(e.x + x, e.y + y, e.fout() * 5f + 0.7f);
+        });
+
+        color(SnPal.aGray);
+
+        randLenVectors(e.id, 10, 3f + 25f * e.finpow(), (x, y) -> {
+            Fill.circle(e.x + x, e.y + y, e.fout() * 6f + 0.9f);
+        });
+
+        color(Pal.bulletYellow);
+
+        randLenVectors(e.id, 5, 2f + 20f * e.finpow(), (x, y) -> {
+            Fill.circle(e.x + x, e.y + y, e.fout() * 4f + 0.6f);
+        });
+
+        color(Pal.missileYellowBack);
+        stroke(e.fout());
+
+        randLenVectors(e.id + 3, 10, 3f + 40f * e.finpow(), (x, y) -> {
+            lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 4f + e.fout() * 8f);
         });
     }),
 
