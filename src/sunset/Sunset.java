@@ -12,6 +12,7 @@ import sunset.content.blocks.*;
 import sunset.type.UnitData;
 import sunset.ui.ContentInfoDialogExt;
 import sunset.utils.Utils;
+import sunset.world.GeyserLogic;
 import sunset.world.MissileLogic;
 
 
@@ -36,6 +37,7 @@ public class Sunset extends Mod {
     public void init() {
         MissileLogic.init();
         UnitData.init();
+        GeyserLogic.init();
         Vars.ui.content = new ContentInfoDialogExt();
         Utils.setMenuUnit(SnUnitTypes.router);
         /*Log.info("startUp");
