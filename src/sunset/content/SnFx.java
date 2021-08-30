@@ -310,6 +310,135 @@ public class SnFx{
             p[0] = (p[0] + 1) % 3;
         });
     }),
+    
+        sunriseMissileExplosion = new Effect(40, e -> {
+        color(Pal.missileYellow);
+
+        e.scaled(8, i -> {
+            stroke(4f * i.fout());
+            Lines.circle(e.x, e.y, 5f + i.fin() * 35f);
+        });
+
+        color(SnPal.aGray);
+
+        randLenVectors(e.id, 20, 4f + 45f * e.finpow(), (x, y) -> {
+            Fill.circle(e.x + x, e.y + y, e.fout() * 5f + 0.8f);
+            Fill.circle(e.x + x, e.y + y, e.fout() * 3f + 0.3f);
+        });
+
+        color(SnPal.aGray);
+
+        randLenVectors(e.id, 10, 2f + 20f * e.finpow(), (x, y) -> {
+            Fill.circle(e.x + x, e.y + y, e.fout() * 4f + 0.4f);
+        });
+
+        color(Pal.missileYellowBack);
+        stroke(e.fout());
+
+        randLenVectors(e.id + 1, 6, 1f + 29f * e.finpow(), (x, y) -> {
+            lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 2f + e.fout() * 6f);
+        });
+    }),
+
+    sparkMissileExplosion = new Effect(40, e -> {
+        color(Pal.missileYellow);
+
+        e.scaled(9, i -> {
+            stroke(5f * i.fout());
+            Lines.circle(e.x, e.y, 6f + i.fin() * 40f);
+        });
+
+        color(SnPal.aGray);
+
+        randLenVectors(e.id, 24, 5f + 50f * e.finpow(), (x, y) -> {
+            Fill.circle(e.x + x, e.y + y, e.fout() * 6f + 1f);
+            Fill.circle(e.x + x, e.y + y, e.fout() * 4f + 0.6f);
+        });
+
+        color(SnPal.aGray);
+
+        randLenVectors(e.id, 10, 3f + 25f * e.finpow(), (x, y) -> {
+            Fill.circle(e.x + x, e.y + y, e.fout() * 5f + 0.7f);
+        });
+
+        color(Pal.missileYellowBack);
+        stroke(e.fout());
+
+        randLenVectors(e.id + 1, 8, 2f + 35f * e.finpow(), (x, y) -> {
+            lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 3f + e.fout() * 7f);
+        });
+    }),
+
+    dissectorMissileExplosion = new Effect(40, e -> {
+        color(Pal.missileYellow);
+
+        e.scaled(10, i -> {
+            stroke(6f * i.fout());
+            Lines.circle(e.x, e.y, 7f + i.fin() * 45f);
+        });
+
+        color(SnPal.aGray);
+
+        randLenVectors(e.id, 30, 7f + 55f * e.finpow(), (x, y) -> {
+            Fill.circle(e.x + x, e.y + y, e.fout() * 7f + 1.3f);
+            Fill.circle(e.x + x, e.y + y, e.fout() * 5f + 0.7f);
+        });
+
+        color(SnPal.aGray);
+
+        randLenVectors(e.id, 10, 3f + 25f * e.finpow(), (x, y) -> {
+            Fill.circle(e.x + x, e.y + y, e.fout() * 6f + 0.9f);
+        });
+
+        color(Pal.bulletYellow);
+
+        randLenVectors(e.id, 5, 2f + 20f * e.finpow(), (x, y) -> {
+            Fill.circle(e.x + x, e.y + y, e.fout() * 4f + 0.6f);
+        });
+
+        color(Pal.missileYellowBack);
+        stroke(e.fout());
+
+        randLenVectors(e.id + 3, 10, 3f + 40f * e.finpow(), (x, y) -> {
+            lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 4f + e.fout() * 8f);
+        });
+    }),
+
+    artMissileExplosion = new Effect(40, e -> {
+        color(Pal.missileYellow);
+
+        e.scaled(11, i -> {
+            stroke(7f * i.fout());
+            Lines.circle(e.x, e.y, 8f + i.fin() * 50f);
+        });
+
+        color(SnPal.aGray);
+
+        randLenVectors(e.id, 35, 8f + 60f * e.finpow(), (x, y) -> {
+            Fill.circle(e.x + x, e.y + y, e.fout() * 8f + 2f);
+            Fill.circle(e.x + x, e.y + y, e.fout() * 6f + 1f);
+        });
+
+        color(SnPal.aGray);
+
+        randLenVectors(e.id, 14, 4f + 30f * e.finpow(), (x, y) -> {
+            Fill.circle(e.x + x, e.y + y, e.fout() * 7f + 0.9f);
+        });
+
+        color(Pal.bulletYellow);
+
+        randLenVectors(e.id, 7, 3f + 25f * e.finpow(), (x, y) -> {
+            Fill.circle(e.x + x, e.y + y, e.fout() * 5f + 0.8f);
+        });
+
+
+        color(Pal.missileYellowBack);
+        stroke(e.fout());
+
+        randLenVectors(e.id + 4, 13, 4f + 45f * e.finpow(), (x, y) -> {
+            lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 5f + e.fout() * 10f);
+        });
+    }),
 
     statusField = new Effect(30, e -> {
         Draw.z(Layer.flyingUnit);
