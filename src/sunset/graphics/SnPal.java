@@ -10,6 +10,7 @@ public class SnPal{
     rGray = Color.valueOf("806262"),
     gGray = Color.valueOf("628062"),
     bGray = Color.valueOf("626680"),
+    aGray = Color.valueOf("808080 "),
 
     //triden-like
     lightningHeal = Color.green,
@@ -32,9 +33,11 @@ public class SnPal{
     
     copterLaserBack = Color.valueOf("ea8878"),
     copterLaser = Color.valueOf("feb380"),
-    
+
+    //Poison bullets
     PoisonBulletBack = Color.valueOf("D6E7A5"),
     PoisonBullet = Color.valueOf("F2FCD2"),
+
     //other
     chainLaser = Pal.surge;
     
