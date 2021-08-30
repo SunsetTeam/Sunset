@@ -3,6 +3,7 @@ package sunset.content.blocks;
 import arc.graphics.*;
 import mindustry.ctype.*;
 import mindustry.content.*;
+import mindustry.entities.Effect;
 import mindustry.graphics.*;
 import mindustry.world.*;
 import mindustry.world.blocks.environment.*;
@@ -230,6 +231,8 @@ public class SnEnvironment implements ContentList {
             speedMultiplier = 0.9f;
             variants = 0;
             liquidDrop = Liquids.water;
+            steamEffect = new Effect(30f, Fx.steam.renderer);
+            eruptionEffect = new Effect(30f, Fx.ballfire.renderer);
         }};
     }
 }
