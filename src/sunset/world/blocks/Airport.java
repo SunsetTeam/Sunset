@@ -40,6 +40,11 @@ public class Airport extends StorageBlock {
         super(name);
         update = true;
         configurable = true;
+    }
+
+    @Override
+    public void load() {
+        super.load();
         consumes.add(new AdjustableConsumePower(powerUse, b -> {
             AirportBuild ab = (AirportBuild)b;
             return ab.shouldBuild ? ab.getBoost() : 0f;
