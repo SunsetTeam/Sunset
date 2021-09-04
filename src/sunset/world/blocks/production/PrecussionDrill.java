@@ -5,6 +5,7 @@ import arc.graphics.Color;
 import arc.graphics.g2d.Draw;
 import arc.graphics.g2d.TextureRegion;
 import arc.math.Mathf;
+import arc.struct.Seq;
 import arc.util.Strings;
 import arc.util.Time;
 import mindustry.game.Team;
@@ -23,6 +24,7 @@ import mindustry.world.meta.Stat;
 import mindustry.world.meta.StatUnit;
 import mindustry.world.meta.values.BlockFilterValue;
 import sunset.world.consumers.AdjustableConsumePower;
+import sunset.world.meta.values.DrillItemsValue;
 
 import static mindustry.Vars.tilesize;
 import static mindustry.Vars.world;
@@ -36,6 +38,12 @@ public class PrecussionDrill extends Block {
     public float liquidBoostIntensity = 1.6f;
     /** Длительность добычи одной партии ресурсов. */
     public float drillTime = 540f;
+    /** Список ресурсов, используемых при добыче. */
+    public Seq<DrillItem> drillItems = new Seq<>();
+    /** Количество используемого ресурса за одну партию. */
+    public int drillItemCount = 2;
+    /** Вместимость используемого ресурса за одну партию. */
+    public int drillItemCapacity = 10;
     public int tier = 5;
     public float powerUse = 1f;
     public TextureRegion rimRegion;
@@ -73,20 +81,27 @@ public class PrecussionDrill extends Block {
     @Override
     public void setStats(){
         super.setStats();
-        stats.add(Stat.productionTime, drillTime / 60f, StatUnit.seconds);
         stats.remove(Stat.itemCapacity); //вместительность динаическая и равна размеру партии
+        stats.add(Stat.productionTime, drillTime / 60f, StatUnit.seconds);
         stats.remove(Stat.powerUse);
         stats.add(Stat.powerUse, powerUse * 60f, StatUnit.powerSecond);
         stats.add(Stat.drillTier, new BlockFilterValue(b -> b instanceof Floor && ((Floor)b).itemDrop != null && ((Floor)b).itemDrop.hardness <= tier));
         stats.add(Stat.drillSpeed, (hardnessDrillMultiplier * size * size * itemCountMultiplier) / (drillTime / 60f), StatUnit.itemsSecond);
-        if(liquidBoostIntensity != 1){
+        if(liquidBoostIntensity != 1) {
             stats.add(Stat.boostEffect, liquidBoostIntensity, StatUnit.timesSpeed);
+        }
+        if(!drillItems.isEmpty()) {
+            stats.add(Stat.input, new DrillItemsValue(drillItems, drillItemCount));
         }
     }
 
     @Override
     public void setBars(){
         super.setBars();
+        bars.add("progress", (PrecussionDrillBuild e) ->
+                new Bar(() -> Core.bundle.get("bar.drillprogress"),
+                        () -> Pal.surge,
+                        () -> e.progressTime / ((PrecussionDrill)e.block).drillTime));;
         bars.add("drillspeed", (PrecussionDrillBuild e) ->
             new Bar(() -> Core.bundle.format("bar.drillspeed",
                 Strings.fixed(e.displaySpeed, 2)),
@@ -94,14 +109,6 @@ public class PrecussionDrill extends Block {
                 () -> e.currentSpeed));
     }
 
-    @Override
-    public boolean outputsItems(){
-        return false;
-    }
-    // возможность мультидобычи ломает обычный вывод ресурсов,
-    // для стабильной работы нужно использовать разгрузчик
-
-    @Override
     public boolean canPlaceOn(Tile tile, Team team) {
         return updateOre(tile, items, tier, this) == State.OK;
     }
@@ -146,6 +153,14 @@ public class PrecussionDrill extends Block {
         });
         return ret[0];
     }
+    public static class DrillItem {
+        public Item item;
+        public float sizeMultiplier;
+        public DrillItem(Item item, float sizeMultiplier) {
+            this.item = item;
+            this.sizeMultiplier = sizeMultiplier;
+        }
+    }
     private enum State {
         NoOre, //нет руды под буром
         LowTier, //"Требуется бур получше"
@@ -159,6 +174,7 @@ public class PrecussionDrill extends Block {
         public float totalBoost;
         public float warmupSpeed = 0.02f;
         private int offloadSize; //размер партии = количество item'ов, выдаваемых за раз
+        private DrillItem currentDrillItem; //текущий предмет для бурения
 
         ItemSeq items = new ItemSeq(); //список руды, находящейся под буром
         @Override
@@ -173,27 +189,48 @@ public class PrecussionDrill extends Block {
 
         @Override
         public void updateTile() {
+            currentDrillItem = drillItems.find(di -> items().has(di.item, drillItemCount));
             //speed count
             baseSpeed = (power == null) ? 1f : power.status;
-            if(!working()) baseSpeed = 0;
+            if (!working()) baseSpeed = 0;
             currentSpeed = Mathf.lerpDelta(currentSpeed, baseSpeed, warmupSpeed);
             totalBoost = getBoost();
-            if(cons.optionalValid()) totalBoost *= liquidBoostIntensity;
+            if (cons.optionalValid()) totalBoost *= liquidBoostIntensity;
             totalSpeed = currentSpeed * totalBoost;
             //update display value
             displaySpeed = baseDisplaySpeed * totalSpeed;
+            if(currentDrillItem != null) displaySpeed *= currentDrillItem.sizeMultiplier;
             //updating
             progressTime += Time.delta * totalSpeed;
-            if(progressTime >= drillTime) {
+            if (progressTime >= drillTime && working()) {
                 progressTime %= drillTime;
                 items.each((item, amount) -> {
-                    float multiplier = (hardnessDrillMultiplier / Mathf.pow(item.hardness+1, 0.5f));
-                    for(int i = 0; i < (int)(amount * multiplier * itemCountMultiplier); i++) offload(item);
+                    float multiplier = hardnessDrillMultiplier / Mathf.pow(item.hardness + 1, 0.5f) * currentDrillItem.sizeMultiplier;
+                    for (int i = 0; i < (int) (amount * multiplier * itemCountMultiplier); i++) offload(item);
                 });
+                items().remove(currentDrillItem.item, drillItemCount);
             }
         }
+
+        @Override
+        public boolean acceptItem(Building source, Item item) {
+            boolean accept = currentDrillItem == null || currentDrillItem.item == item;
+            return accept && drillItems.contains(di -> di.item == item) && items().get(item) < drillItemCapacity;
+        }
+
+        @Override
+        public boolean canDump(Building to, Item item) { return false; }
+        // возможность мультидобычи ломает обычный вывод ресурсов,
+        // для стабильной работы нужно использовать разгрузчик
+
+        @Override
+        public int getMaximumAccepted(Item item) {
+            if(drillItems.contains(di -> di.item == item)) return drillItemCapacity;
+            return 0;
+        }
+
         private boolean working() {
-            return enabled && (items().total() < offloadSize);
+            return enabled && (items().total() < offloadSize) && (currentDrillItem != null);
         }
         private long boostEndTime = 0;
         private float boost = 0f;

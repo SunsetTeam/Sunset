@@ -191,8 +191,13 @@ public class SnProduction implements ContentList {
             powerUse = 4.25f;
             hardnessDrillMultiplier = 8;
             liquidBoostIntensity = 3.86f;
-            itemCountMultiplier = 0.55f;
+            itemCountMultiplier = 0.5f;
             consumes.liquid(Liquids.water, 0.15f).boost();
+            drillItems.addAll(
+                new DrillItem(Items.graphite, 1f),
+                new DrillItem(Items.surgeAlloy, 1.25f),
+                new DrillItem(SnItems.nobium, 1.6f)
+            );
         }};
     }
 }
