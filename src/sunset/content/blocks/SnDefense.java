@@ -9,16 +9,17 @@ import mindustry.type.Category;
 import mindustry.world.Block;
 import mindustry.world.blocks.defense.ForceProjector;
 import sunset.content.SnItems;
+import sunset.world.blocks.AntiPierceWall;
 import sunset.world.blocks.SelfhealWall;
 
 public class SnDefense implements ContentList {
     public static Block
 
-//wall
+    //wall
     forsWall, forsWallLarge, naturiteWall, naturiteWallLarge, enojiewall, enojieWallLarge,
     
-//projector   
-   forcedome;
+    //projector
+    forcedome;
 
     @Override
     public void load() {
@@ -36,14 +37,12 @@ public class SnDefense implements ContentList {
             consumes.power(14f);
         }};
 
-//walls
-
+        //region walls
         forsWall = new Wall("fors-wall"){{
             requirements(Category.defense, with(SnItems.fors, 6));
             size = 1;
             health = 950;
         }};
-
         forsWallLarge = new Wall("fors-wall-large"){{
             requirements(Category.defense, with(SnItems.fors, 24));
             health = forsWall.health * 4;
@@ -56,7 +55,6 @@ public class SnDefense implements ContentList {
             health = 750;
             heal = 0.5f;
         }};
-
         naturiteWallLarge = new SelfhealWall("naturite-wall-large"){{
             requirements(Category.defense, with(SnItems.naturite, 24));
             health = naturiteWall.health * 4;
@@ -64,22 +62,26 @@ public class SnDefense implements ContentList {
             size = 2;
         }};
         
-        enojiewall = new Wall("enojie-wall"){{
+        enojiewall = new AntiPierceWall("enojie-wall"){{
             requirements(Category.defense, with(SnItems.enojie, 6));
+            pierceDebuff = 2;
+            damageDebuff = 0.85f;
             size = 1;
             health = 1225;
             insulated = true;
             absorbLasers = true;
             schematicPriority = 10;
         }};
-
-        enojieWallLarge = new Wall("enojie-wall-large"){{
+        enojieWallLarge = new AntiPierceWall("enojie-wall-large"){{
             requirements(Category.defense, with(SnItems.enojie, 24));
+            pierceDebuff = 5;
+            damageDebuff = 0.7225f;
             health = enojiewall.health * 4;
             size = 2;
             insulated = true;
             absorbLasers = true;
             schematicPriority = 10;
         }};
+        //endregion walls
     }
 }
