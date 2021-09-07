@@ -194,7 +194,7 @@ public class StackableStatusEffect extends StatusEffect implements ContentDispla
         statuses.add(entry);
     }
     @Override
-    public boolean useStat() { return false; }
+    public boolean showStats() { return false; }
     @Override
     public void display(Table t) {
         displayer.display(t);

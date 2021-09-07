@@ -1,5 +1,5 @@
 package sunset.type;
 
 public interface ContentDisplayerType {
-    boolean useStat();
+    boolean showStats();
 }
