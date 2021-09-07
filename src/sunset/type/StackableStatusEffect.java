@@ -12,6 +12,7 @@ import mindustry.entities.units.StatusEntry;
 import mindustry.gen.Unit;
 import mindustry.type.StatusEffect;
 import sunset.entities.units.StackableStatusEntry;
+import sunset.world.meta.SnCustomStat;
 import sunset.world.meta.values.StackableStatusEffectValue;
 
 import static mindustry.Vars.state;
@@ -27,7 +28,7 @@ import java.lang.reflect.Field;
  * @apiNote Для установки статус эффекта используйте метод {@code apply(Unit, float)}. 
  * Вместо {@code update(Unit, float)} переопределяйте метод {@code updateStack(Unit, float, int)}.
  * Вместо {@code draw(Unit)} переопределяйте метод {@code drawStack(Unit, int)}.*/
-public class StackableStatusEffect extends StatusEffect implements ContentDisplayerType {
+public class StackableStatusEffect extends StatusEffect implements SnCustomStat {
     /** Максимальное количество наложений. */
     public int maxStacks = 1;
     /** Множители наносимого урона для каждого уровня стака. */
@@ -194,9 +195,5 @@ public class StackableStatusEffect extends StatusEffect implements ContentDispla
         statuses.add(entry);
     }
     @Override
-    public boolean showStats() { return false; }
-    @Override
-    public void display(Table t) {
-        displayer.display(t);
-    }
+    public void displayStats(Table t) { displayer.display(t); }
 }

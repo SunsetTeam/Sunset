@@ -1,13 +1,12 @@
 package sunset.world.blocks;
 
-import arc.Core;
-import arc.scene.ui.layout.Table;
 import mindustry.gen.Bullet;
 import mindustry.world.blocks.defense.Wall;
-import sunset.type.ContentDisplayerType;
+import sunset.world.meta.SnStats;
+import sunset.world.meta.SnStatsUser;
 
 /** Стена, которая снижает пробитие пуль. */
-public class AntiPierceWall extends Wall implements ContentDisplayerType {
+public class AntiPierceWall extends Wall implements SnStatsUser {
     /** Дополнительный штраф к пробитию. */
     public int pierceDebuff = 1;
     /** Множитель урона пули. */
@@ -15,25 +14,16 @@ public class AntiPierceWall extends Wall implements ContentDisplayerType {
     public AntiPierceWall(String name) {
         super(name);
     }
-    @Override
-    public boolean showStats() { return true; }
 
+    private SnStats snStats;
+    @Override
+    public SnStats snStats() { return snStats; }
     @Override
     public void setStats() {
         super.setStats();
-    }
-
-    @Override
-    public void display(Table table) {
-        if(pierceDebuff > 0) {
-            table.row();
-            table.add(Core.bundle.format("stat.piercedamagedebuff", (int)(100*(1-damageDebuff)))).left();
-        }
-        if(damageDebuff < 1) {
-            table.row();
-            table.add(Core.bundle.format("stat.piercedebuff", pierceDebuff)).left();
-        }
-        table.row();
+        snStats = new SnStats(stats);
+        if(pierceDebuff > 0) snStats.addU("piercedebuff", "durability", pierceDebuff);
+        if(damageDebuff < 1) snStats.addPercentU("piercedamagedebuff", "durability", 1-damageDebuff);
     }
 
     public class AntiPierceWallBuild extends WallBuild {
