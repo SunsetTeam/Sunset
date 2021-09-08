@@ -18,12 +18,15 @@ import sunset.world.blocks.power.ThermalGeneratorExt;
 public class SnPower implements ContentList{
     public static Block
 
+//generators
+    oilGenerator, advrtgGenerator, advThermalGenerator, gtGenerator,
+    
 //reactors
-    oilGenerator, advrtgGenerator, planatriumReactor, advThermalGenerator;
+    planatriumReactor;
 
     @Override
     public void load() {
-
+//generators
         oilGenerator = new LiquidGenerator("oil-generator"){{
             requirements(Category.power, with(Items.copper, 110, Items.titanium, 70, Items.lead, 120, Items.silicon, 55, Items.metaglass, 70));
             powerProduction = 8.3f;
@@ -47,24 +50,6 @@ public class SnPower implements ContentList{
             itemDuration = 55 * 12f;
         }};
 
-        planatriumReactor = new NuclearReactor("planatrium-reactor"){{
-            requirements(Category.power, with(Items.lead, 400, Items.silicon, 270, Items.graphite, 220, SnItems.planatrium, 200, SnItems.fors, 180, SnItems.nobium, 120));
-            ambientSound = Sounds.hum;
-            ambientSoundVolume = 0.24f;
-            size = 5;
-            explosionRadius = 21;
-            explosionDamage = 2100;
-            health = 4100;
-            itemCapacity = 50;
-            liquidCapacity = 80;
-            itemDuration = 280f;
-            powerProduction = 38f;
-    //latter            explodeEffect = Fx.reactorExplosion;
-            consumes.item(SnItems.planatrium);
-            heating = 0.07f;
-            consumes.liquid(Liquids.cryofluid, heating / coolantPower).update(false);
-        }};
-
         advThermalGenerator = new ThermalGeneratorExt("advancedThermalGenerator"){{
             requirements(Category.power, with(Items.copper, 140, Items.graphite, 90, SnItems.naturite, 80, Items.silicon, 40, Items.metaglass, 60));
             size = 3;
@@ -76,5 +61,34 @@ public class SnPower implements ContentList{
             ambientSoundVolume = 0.06f;
             consumes.liquid(Liquids.water, 0.35f);
         }};
+        
+        gtGenerator = new ThermalGenerator("gt-generator"){{
+          requirements(Category.power, with(Items.lead, 125, Items.metaglass, 80, Items.silicon, 100, Items.titanium, 120, SnItems.fors, 80));
+          size = 3;
+          powerProduction = 3.1f;
+          generateEffect = Fx.redgeneratespark;
+          //ambientSound = Sounds.hum;
+          //ambientSoundVolume = 0.06f;
+          consumes.liquid(Liquids.water, 0.5f);
+        }};
+
+//reactors
+        planatriumReactor = new NuclearReactor("planatrium-reactor"){{
+                    requirements(Category.power, with(Items.lead, 400, Items.silicon, 270, Items.graphite, 220, SnItems.planatrium, 200, SnItems.fors, 180, SnItems.nobium, 120));
+                    ambientSound = Sounds.hum;
+                    ambientSoundVolume = 0.24f;
+                    size = 5;
+                    explosionRadius = 21;
+                    explosionDamage = 2100;
+                    health = 4100;
+                    itemCapacity = 50;
+                    liquidCapacity = 80;
+                    itemDuration = 280f;
+                    powerProduction = 38f;
+            //latter            explodeEffect = Fx.reactorExplosion;
+                    consumes.item(SnItems.planatrium);
+                    heating = 0.07f;
+                    consumes.liquid(Liquids.cryofluid, heating / coolantPower).update(false);
+                }};
     }
 }
