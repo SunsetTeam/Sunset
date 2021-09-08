@@ -8,7 +8,7 @@ import mindustry.entities.units.WeaponMount;
 import mindustry.gen.Teamc;
 import mindustry.type.Weapon;
 import sunset.ai.weapon.WeaponAI;
-import sunset.type.AutoWeapon;
+import sunset.type.weapons.WeaponExt;
 
 /** AI, которое использует AI орудия, если таковое существует. */
 public class UnitWeaponAI extends AIController {
@@ -35,8 +35,8 @@ public class UnitWeaponAI extends AIController {
             float mountX = unit.x + Angles.trnsx(rotation, weapon.x, weapon.y),
                     mountY = unit.y + Angles.trnsy(rotation, weapon.x, weapon.y);
 
-            if (weapon instanceof AutoWeapon) {
-                WeaponAI ai = ((AutoWeapon)weapon).ai;
+            if (weapon instanceof WeaponExt) {
+                WeaponAI ai = ((WeaponExt)weapon).ai;
                 if(ai.isUnset()) ai.set(unit, mount);
                 ai.update();
                 unit.isShooting |= ai.isShooting();

@@ -9,6 +9,8 @@ import arc.math.geom.Vec2;
 import arc.struct.Seq;
 import arc.util.io.Reads;
 import arc.util.io.Writes;
+import mindustry.content.Fx;
+import mindustry.entities.Effect;
 import mindustry.game.Team;
 import mindustry.gen.Building;
 import mindustry.gen.Player;
@@ -30,10 +32,11 @@ import static mindustry.game.EventType.*;
 
 public class MissileSiloTurret extends GenericCrafter {
     public MissileLogic.MissileType missile;
+    public Effect launchEffect = Fx.none;
     public float maxRange;
     public float minRange;
     /** Положение ракет в шахте относительно размеров блока. От (0, 0) до (1, 1). */
-    public Seq<Vec2> rockets = new Seq(new Vec2[]{new Vec2(0.5f, 0.5f)});
+    public Seq<Vec2> rockets = new Seq<>(new Vec2[]{new Vec2(0.5f, 0.5f)});
     public TextureRegion baseRegion;
 
     public MissileSiloTurret(String name) {
@@ -81,7 +84,7 @@ public class MissileSiloTurret extends GenericCrafter {
     }
 
     public static MissileSiloTurretBuild selected = null;
-    {
+    static {
         Events.on(WorldLoadEvent.class, (e) -> selected = null);
         Events.on(GameOverEvent.class, (e) -> selected = null);
     }
@@ -137,8 +140,10 @@ public class MissileSiloTurret extends GenericCrafter {
             Vec2 v = Core.input.mouseWorld();
             float dst = v.dst(x, y);
             if(dst > maxRange || dst < minRange) return;
-            missile.launch(new Vec2(x + size * tilesize * (rockets.get(loaded-1).x - 0.5f),
-                    y + size * tilesize * (rockets.get(loaded-1).y - 0.5f)), v);
+            Vec2 from = new Vec2(x + size * tilesize * (rockets.get(loaded - 1).x - 0.5f),
+                    y + size * tilesize * (rockets.get(loaded - 1).y - 0.5f));
+            launchEffect.at(from);
+            missile.launch(from, v);
             loaded--;
         }
 

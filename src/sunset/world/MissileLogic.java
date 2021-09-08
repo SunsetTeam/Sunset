@@ -19,7 +19,7 @@ import mindustry.graphics.Layer;
 import sunset.content.SnFx;
 
 public class MissileLogic {
-    public static Seq<Missile> missiles = new Seq<>(false);
+    public static final Seq<Missile> missiles = new Seq<>(false);
 
     public static void init() {
         Events.on(EventType.Trigger.update.getClass(), MissileLogic::update);
@@ -49,8 +49,8 @@ public class MissileLogic {
     /** Описывает ракету в полёте.
      * @apiNote Реализация {@link arc.math.Scaled} предосавляет информацию о части пройденного пути. */
     public static class Missile implements Scaled {
-        public MissileType type;
-        public Vec2 from, to, current, speed;
+        public final MissileType type;
+        public final Vec2 from, to, current, speed;
         public float fligtLength, fligtTime;
         public final long launchTime;
         public Missile(MissileType type, Vec2 from, Vec2 to) {

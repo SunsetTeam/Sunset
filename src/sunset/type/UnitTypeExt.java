@@ -4,21 +4,52 @@ import arc.graphics.Blending;
 import arc.graphics.g2d.Draw;
 import arc.math.Angles;
 import arc.math.Mathf;
+import arc.struct.ObjectSet;
+import mindustry.entities.abilities.Ability;
 import mindustry.entities.units.WeaponMount;
 import mindustry.gen.Unit;
 import mindustry.graphics.Drawf;
 import mindustry.type.UnitType;
 import mindustry.type.Weapon;
+import mindustry.world.meta.Stat;
+import mindustry.world.meta.StatValue;
+import sunset.world.meta.values.WeaponListValueExt;
 
-/** UnitType, который вызывает update() и draw() у орудий, если таковые есть. */
+/** UnitType, который имеет некоторые изменения. */
 public class UnitTypeExt extends UnitType {
     public UnitTypeExt(String name) {
         super(name);
     }
 
     @Override
+    public void setStats() {
+        super.setStats();
+        // Передаём заполнение сведений об способностях самим способностям, если оно это поддерживает
+        if(abilities.any()){
+            stats.remove(Stat.abilities);
+            ObjectSet<String> unique = new ObjectSet<>();
+
+            for(Ability a : abilities){
+                if(unique.add(a.localized())){
+                    if(a instanceof StatValue) {
+                        stats.add(Stat.abilities, (StatValue)a);
+                    } else {
+                        stats.add(Stat.abilities, a.localized());
+                    }
+                }
+            }
+        }
+        // Передаём заполнение сведений об орудии самому орудию, если оно это поддерживает
+        if(weapons.any()) {
+            stats.remove(Stat.weapons);
+            stats.add(Stat.weapons, new WeaponListValueExt(this, weapons));
+        }
+    }
+
+    @Override
     public void update(Unit unit) {
         super.update(unit);
+        // Вызываем update() у поддерживающих это орудий
         for(WeaponMount mount : unit.mounts){
             Weapon weapon = mount.weapon;
             if(weapon instanceof UpdateDrawWeapon) {
@@ -30,13 +61,13 @@ public class UnitTypeExt extends UnitType {
     @Override
     public void drawWeapons(Unit unit) {
         applyColor(unit);
-
+        // Передаём отрисовку орудия самому орудию, если оно это поддерживает
         for(WeaponMount mount : unit.mounts) {
             Weapon weapon = mount.weapon;
             if (weapon instanceof UpdateDrawWeapon) {
                 ((UpdateDrawWeapon) weapon).preDraw(mount, unit);
             }
-            if(((UpdateDrawWeapon)weapon).useDefaultDraw) {
+            if(!(weapon instanceof UpdateDrawWeapon) || ((UpdateDrawWeapon)weapon).useDefaultDraw()) {
                 float rotation = unit.rotation - 90;
                 float weaponRotation = rotation + (weapon.rotate ? mount.rotation : 0);
                 float recoil = -((mount.reload) / weapon.reload * weapon.recoil);

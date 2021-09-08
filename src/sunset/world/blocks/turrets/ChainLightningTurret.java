@@ -90,7 +90,7 @@ public class ChainLightningTurret extends BaseTurret {
     }
     /** @see sunset.world.blocks.turrets.ChainLightningTurret */
     public class ChainLightningTurretBuild extends BaseTurretBuild {
-        public Seq<Unit> units = new Seq<>();
+        public final Seq<Unit> units = new Seq<>();
         public boolean shouldShoot = false;
         private float liquidBoost = 1f;
 

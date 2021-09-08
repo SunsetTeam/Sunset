@@ -4,12 +4,13 @@ import arc.graphics.*;
 import mindustry.graphics.Pal;
 
 public class SnPal{
-    public static Color
+    public static final Color
     
     //gray
     rGray = Color.valueOf("806262"),
     gGray = Color.valueOf("628062"),
     bGray = Color.valueOf("626680"),
+    aGray = Color.valueOf("808080 "),
 
     //triden-like
     lightningHeal = Color.green,
@@ -28,7 +29,14 @@ public class SnPal{
     redBomb = Color.valueOf("F78D87"),
     redBombBack = Color.valueOf("EF9F9A"),
 
-    copterBomb = Color.valueOf("F3B08B"),
+    copterBomb = Color.valueOf("feb380"),
+    
+    copterLaserBack = Color.valueOf("ea8878"),
+    copterLaser = Color.valueOf("feb380"),
+
+    //Poison bullets
+    PoisonBulletBack = Color.valueOf("D6E7A5"),
+    PoisonBullet = Color.valueOf("F2FCD2"),
 
     //other
     chainLaser = Pal.surge;

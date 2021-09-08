@@ -31,20 +31,20 @@ public class SnItems implements ContentList{
         planatrium = new Item("planatrium", Color.valueOf("bc65d4ff")){{
             cost = 5f;
             hardness = 4;
-            explosiveness = 0.8f;
+            explosiveness = 0.5f;
             radioactivity = 1f;
         }};
 
         enojie = new Item("enojie", Color.valueOf("99f2c7")){{
             radioactivity = 0.8f;
-            explosiveness = 0.1f;
+            explosiveness = 0.2f;
             cost = 6f;
         }};
         
 
         flameid = new Item("flameid", Color.valueOf("ea8878")){{
             cost = 4f;
-            flammability = 0.3f;
+            flammability = 0.6f;
             hardness = 4;
         }};
         

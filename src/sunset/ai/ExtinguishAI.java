@@ -2,22 +2,31 @@ package sunset.ai;
 
 import arc.math.Mathf;
 import mindustry.Vars;
-import mindustry.entities.Units;
 import mindustry.gen.*;
 
 import static mindustry.Vars.tilesize;
 import static mindustry.Vars.world;
-import static sunset.Utils.*;
+import static sunset.utils.Utils.*;
 
 /** AI, которое преследует горящие союзные пострйки или боевые единицы, если таковые есть. */
 public class ExtinguishAI extends FlyingUnitWeaponAI {
+    private int tick = 0;
+    public int ticks = 30;
     @Override
     public void updateMovement() {
-        Unit u = Units.closest(unit.team, unit.x, unit.y,
-                Float.MAX_VALUE, un -> un != unit && isUnitBurning(un),
-                (unit1, x, y) -> Mathf.pow(unit1.health / unit1.maxHealth, 2f));
-        if(u != null) {
-            moveTo(u, unit.range());
+        if(++tick < ticks) return;
+        tick = 0;
+        final Unit[] u = {null};
+        final float[] f = {Float.MAX_VALUE};
+        unit.team.data().units.each(un -> {
+            if(un == unit || !isUnitBurning(un)) return;
+            float cost = 0; //Mathf.pow(un.health / un.maxHealth, 2f) * Mathf.len(unit.x - un.x, un.y - unit.y);
+            if(cost > f[0]) return;
+            f[0] = cost;
+            u[0] = un;
+        });
+        if(u[0] != null) {
+            moveTo(u[0], unit.range());
             return;
         }
         Fire[] b = new Fire[] { null };
@@ -42,17 +51,10 @@ public class ExtinguishAI extends FlyingUnitWeaponAI {
 
     protected void moveTo(Posc target, float length){
         if(target == null) return;
-
         vec.set(target).sub(unit);
-
-        float scl = 1f;
-
-        if(vec.len() < length) {
-            scl = 0;
-        }
-
+        unit.rotation(vec.angle());
+        float scl = vec.len() < length ? 0 : 1f;
         vec.setLength(unit.realSpeed() * scl);
-
         unit.moveAt(vec);
     }
 }

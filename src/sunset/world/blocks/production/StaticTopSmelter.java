@@ -1,17 +1,13 @@
 package sunset.world.blocks.production;
 
-import arc.*;
 import arc.Core;
 import arc.graphics.*;
 import arc.graphics.g2d.*;
-import arc.graphics.g2d.Draw;
-import arc.graphics.g2d.TextureRegion;
 import arc.math.*;
 import arc.util.*;
 //import mindustry.annotations.Annotations.*;
 import mindustry.gen.*;
 import mindustry.graphics.*;
-import mindustry.world.draw.*;
 import mindustry.world.blocks.production.GenericCrafter;
 
 // A GenericCrafter with a static top region

@@ -4,7 +4,6 @@ import arc.Core;
 import arc.graphics.g2d.Draw;
 import arc.graphics.g2d.TextureRegion;
 import arc.math.*;
-import arc.struct.*;
 import arc.util.*;
 import mindustry.gen.*;
 import mindustry.graphics.Layer;
@@ -15,6 +14,8 @@ public class CopterUnitType extends UnitType {
     public float offsetY = 0f;
     public float rotorRotateSpeed = 28f;
 
+    float unitFallRotateSpeed = 1f;
+
     public int rotorCount = 1;
 
     public TextureRegion rotorRegion;
@@ -24,6 +25,7 @@ public class CopterUnitType extends UnitType {
         
         constructor = UnitEntity::create;
         flying = lowAltitude = true;
+        fallSpeed = 0.008f;
         engineSize = 0f;
     }
 
@@ -31,6 +33,14 @@ public class CopterUnitType extends UnitType {
     public void load() {
         super.load();
         rotorRegion = Core.atlas.find(name + "-rotor");
+    }
+
+    @Override
+    public void update(Unit unit) {
+        super.update(unit);
+        if(unit.health <= 0 || unit.dead()) {
+            unit.rotation += Time.delta *(fallSpeed * 1000);
+        }
     }
 
     @Override
@@ -50,6 +60,6 @@ public class CopterUnitType extends UnitType {
 
         for (int i = 0; i < rotorCount; i++){
             Draw.rect(rotorRegion,  rotorx,  rotory, Time.time * rotorRotateSpeed);
-            }
         }
+    }
 }

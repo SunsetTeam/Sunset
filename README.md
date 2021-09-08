@@ -1,5 +1,5 @@
 # Sunset,is a one of biggest mod for Mindustry
-![icon](https://user-images.githubusercontent.com/81778048/121011056-db200100-c79e-11eb-862d-c8c8bff0fca8.png)
+![icon](https://user-images.githubusercontent.com/81778048/127994157-6685149f-2437-4d28-8122-96ac39880966.png)
 
 ## Planets
 ### Azaria
@@ -13,8 +13,8 @@ The third planet in the mod, the most difficult,has more content and size than B
 `[Data Deleted]`
 
 # Devs
-Coder's Slish, RePoweRED ,CaHuTaP\
-Spites: Vervalamis, Saint-Axolotl, Snake\
+Coder's: Slish, Nukleer Bomb, RePoweRED, Darkness6030\
+Spites: Saigo no-nozomi, MissionaryPoseBest, Snake, Mak\
 Sounds: King-Silicon\
-Ost: Vervalamis\
-Maps: Vervalamis
+Ost: Saigo no-nozomi\
+Maps: Saigo no-nozomi

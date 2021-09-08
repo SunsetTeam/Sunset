@@ -3,12 +3,10 @@ package sunset.content;
 import arc.graphics.*;
 import arc.util.*;
 import mindustry.ctype.*;
-import mindustry.content.*;
 import mindustry.gen.*;
 import mindustry.type.*;
 import mindustry.type.weather.*;
 import mindustry.world.meta.*;
-import sunset.content.*;
 
 public class SnWeathers implements ContentList{
     public static Weather
@@ -17,7 +15,7 @@ public class SnWeathers implements ContentList{
     @Override
     public void load(){
         blizzard = new ParticleWeather("blizzard"){{
-            color = noiseColor = Color.valueOf("F7F7F7");
+            color = noiseColor = Color.valueOf("F3F3F3");
             particleRegion = "particle";
             drawNoise = true;
             useWindVector = true;
@@ -34,8 +32,11 @@ public class SnWeathers implements ContentList{
             force = 0.3f;
             duration = 3f * Time.toMinutes;
 
-            sound = SnSounds.blizzardWind;
-            soundVol = 0.9f;
+            sound = Sounds.windhowl;
+            soundVol = 0f;
+            soundVolOscMag = 1.5f;
+            soundVolOscScl = 1100f;
+            soundVolMin = 0.02f;
         }};
     }
 }
