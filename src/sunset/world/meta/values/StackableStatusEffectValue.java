@@ -36,15 +36,15 @@ public class StackableStatusEffectValue implements StatValue {
     private void updateTable() {
         topDescriptionLabel.setText(Core.bundle.format("stat.sse-description", currentStack+1, effect.maxStacks));
         topDescriptionLabel.setAlignment(Align.center);
-        String val = String.valueOf((int)(effect.stacks.get(currentStack).damageMultiplier * 100)) + "%";
+        String val = (int)(effect.stacks.get(currentStack).damageMultiplier * 100) + "%";
         damageMultLabel.setText(format("stat.damagemultiplier", val));
-        val = String.valueOf((int)(effect.stacks.get(currentStack).healthMultiplier * 100)) + "%";
+        val = (int)(effect.stacks.get(currentStack).healthMultiplier * 100) + "%";
         healthMultLabel.setText(format("stat.healthmultiplier", val));
-        val = String.valueOf((int)(effect.stacks.get(currentStack).speedMultiplier * 100)) + "%";
+        val = (int)(effect.stacks.get(currentStack).speedMultiplier * 100) + "%";
         speedMultLabel.setText(format("stat.speedmultiplier", val));
-        val = String.valueOf((int)(effect.stacks.get(currentStack).reloadMultiplier * 100)) + "%";
+        val = (int)(effect.stacks.get(currentStack).reloadMultiplier * 100) + "%";
         reloadMultLabel.setText(format("stat.reloadmultiplier", val));
-        val = String.valueOf((int)(effect.stacks.get(currentStack).buildSpeedMultiplier * 100)) + "%";
+        val = (int)(effect.stacks.get(currentStack).buildSpeedMultiplier * 100) + "%";
         buildSpeedMultLabel.setText(format("stat.buildspeedmultiplier", val));
         val = effect.stacks.get(currentStack).disarm ? Core.bundle.get("yes") : Core.bundle.get("no");
         disarmedLabel.setText(format("stat.disarm", val));
