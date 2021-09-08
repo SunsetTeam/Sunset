@@ -59,9 +59,9 @@ public class SnFx{
     }),
     
     modPlasticburn = new Effect(45, e -> {
-        randLenVectors(e.id, 7, 2.8f + e.fin() * 5f, 25, 30f, (x, y) -> {
+        randLenVectors(e.id, 7, 2.8f + e.fin() * 5f, 25, 30f,(x, y) -> {
             color((SnPal.gGray), Color.gray, e.fin());
-            Fill.rect(e.x + x, e.y + y, e.fout());
+            Fill.square(e.x + x, e.y + y, e.fout());
         });
     }),
     
