@@ -158,7 +158,7 @@ public class SnProduction implements ContentList {
             outputItem = new ItemStack(SnItems.naturite, 2);
             craftTime = 34f;
             size = 4;
-            hasPower = hasItems = true;
+            hasPower = true;
             flameColor = Color.valueOf("F9ECA3");
 
             consumes.item(Items.sand, 4);

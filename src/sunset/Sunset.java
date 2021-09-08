@@ -18,19 +18,19 @@ import sunset.world.MissileLogic;
 
 public class Sunset extends Mod {
     private final ContentList[] SnContent = {
-            new SnItems(),
-            new SnEnvironment(),
-            new SnStatusEffects(),
-            new SnBullets(),
-            new SnDefense(),
-            new SnOther(),
-            new SnPower(),
-            new SnTurrets(),
-            new SnUnitTypes(),
-            new SnWeathers(),
-            new SnProduction(),
-            new SnPlanets(),
-            new SnSectorPresets()
+        new SnItems(),
+        new SnEnvironment(),
+        new SnStatusEffects(),
+        new SnBullets(),
+        new SnDefense(),
+        new SnOther(),
+        new SnPower(),
+        new SnTurrets(),
+        new SnUnitTypes(),
+        new SnWeathers(),
+        new SnProduction(),
+        new SnPlanets(),
+        new SnSectorPresets()
     };
 
     @Override
@@ -59,9 +59,7 @@ public class Sunset extends Mod {
             Log.info("@: Loaded content list: @", getClass().getSimpleName(), list.getClass().getSimpleName());
         }
         if (Vars.headless) {
-            Events.on(FileTreeInitEvent.class, e -> {
-                SnSounds.load();
-            });
+            Events.on(FileTreeInitEvent.class, e -> SnSounds.load());
         } else {
             SnSounds.load();
             Log.info("@: Loaded content list: SnSounds", getClass().getSimpleName());

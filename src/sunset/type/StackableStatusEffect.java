@@ -151,7 +151,7 @@ public class StackableStatusEffect extends StatusEffect implements SnCustomStat 
         // Приходится использовать рефлексию, так как существуют несколько классов, описывающих
         // юнитов (как минимум - UnitEntity и UnitMech), и эти классы не имеют никакого общего
         // интерфейса, который бы имел поле statuses (ну или я слепой).
-        Field fieldStatuses = null;
+        Field fieldStatuses;
         Seq<StatusEntry> statuses = null;
         try {
             fieldStatuses = unit.getClass().getField("statuses");            

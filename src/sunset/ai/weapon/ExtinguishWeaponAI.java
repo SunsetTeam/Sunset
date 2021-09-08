@@ -23,7 +23,7 @@ public class ExtinguishWeaponAI extends BaseWeaponAI {
             this.x = c.getX();
             this.y = c.getY();
         }
-        float x, y;
+        final float x, y;
         @Override
         public float getX() { return x; }
         @Override

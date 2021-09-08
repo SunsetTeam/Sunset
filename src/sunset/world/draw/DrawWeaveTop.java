@@ -3,8 +3,6 @@ package sunset.world.draw;
 import arc.Core;
 import arc.math.Mathf;
 import arc.graphics.g2d.*;
-import arc.graphics.g2d.Draw;
-import arc.graphics.g2d.TextureRegion;
 import mindustry.world.Block;
 import mindustry.world.blocks.production.GenericCrafter;
 import mindustry.world.draw.DrawBlock;

@@ -21,9 +21,7 @@ public class StackableStatusEntry extends StatusEntry {
     }
     public void stack() {
         stackCount++;
-        if(stackCount > ((StackableStatusEffect)baseEffect).maxStacks) {
-            stackCount = ((StackableStatusEffect)baseEffect).maxStacks;
-        }
+        if(stackCount > baseEffect.maxStacks) stackCount = baseEffect.maxStacks;
         set(baseEffect.stacks.get(stackCount-1), duration);
     }
 }

@@ -8,8 +8,8 @@ import mindustry.world.meta.StatValue;
 import sunset.world.blocks.production.PrecussionDrill.DrillItem;
 
 public class DrillItemsValue implements StatValue {
-    protected Seq<DrillItem> items;
-    protected int count;
+    protected final Seq<DrillItem> items;
+    protected final int count;
     public DrillItemsValue(Seq<DrillItem> items, int count) {
         this.items = items;
         this.count = count;

@@ -1,6 +1,5 @@
 package sunset.content;
 
-import mindustry.content.StatusEffects;
 import mindustry.content.*;
 import mindustry.ctype.ContentList;
 import mindustry.gen.Sounds;
@@ -465,8 +464,6 @@ public class SnUnitTypes implements ContentList {
                 engineSize = 0;
                 drawCell = false;
             }
-            @Override
-            public void load() { super.load(); }
             @Override
             public boolean isHidden() { return true; }
         };

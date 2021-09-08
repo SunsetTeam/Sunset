@@ -3,9 +3,7 @@ package sunset.audio;
 import arc.Core;
 import arc.assets.AssetDescriptor;
 import arc.assets.loaders.MusicLoader;
-import arc.assets.loaders.SoundLoader;
 import arc.audio.Music;
-import arc.audio.Sound;
 import mindustry.Vars;
 
 public class SnMusicLoader {

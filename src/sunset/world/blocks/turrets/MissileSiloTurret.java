@@ -36,7 +36,7 @@ public class MissileSiloTurret extends GenericCrafter {
     public float maxRange;
     public float minRange;
     /** Положение ракет в шахте относительно размеров блока. От (0, 0) до (1, 1). */
-    public Seq<Vec2> rockets = new Seq(new Vec2[]{new Vec2(0.5f, 0.5f)});
+    public Seq<Vec2> rockets = new Seq<>(new Vec2[]{new Vec2(0.5f, 0.5f)});
     public TextureRegion baseRegion;
 
     public MissileSiloTurret(String name) {
@@ -84,7 +84,7 @@ public class MissileSiloTurret extends GenericCrafter {
     }
 
     public static MissileSiloTurretBuild selected = null;
-    {
+    static {
         Events.on(WorldLoadEvent.class, (e) -> selected = null);
         Events.on(GameOverEvent.class, (e) -> selected = null);
     }

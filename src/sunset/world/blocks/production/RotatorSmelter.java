@@ -3,9 +3,9 @@ package sunset.world.blocks.production;
 import arc.*;
 import arc.math.Interp;
 import arc.graphics.g2d.*;
-import arc.graphics.g2d.Draw;
 import mindustry.world.blocks.production.GenericSmelter;
 
+//TODO удалить?
 public class RotatorSmelter extends GenericSmelter{
   protected TextureRegion rotatorRegion;
   

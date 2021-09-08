@@ -60,10 +60,10 @@ public class Airport extends StorageBlock {
         bars.add("units", (AirportBuild e) ->
             new Bar(
                 () -> Core.bundle.format("bar.unitcap",
-                        "TODO: string",
-                        e.units.size,
-                        maxUnitCount
-                    ),
+                    "TODO: string",
+                    e.units.size,
+                    maxUnitCount
+                ),
                 () -> Pal.power,
                 () -> (float)e.units.size / maxUnitCount
             ));
@@ -84,7 +84,7 @@ public class Airport extends StorageBlock {
         public AirportBuild linked;
         public float construcionTime = 0f;
         public boolean readen = false;
-        IntSeq units = new IntSeq();
+        final IntSeq units = new IntSeq();
         public boolean shouldBuild;
         public Item takeItem;
 
@@ -111,7 +111,7 @@ public class Airport extends StorageBlock {
                 if (construcionTime > unitBuildTime) {
                     items.remove(requirements);
                     construcionTime = 0;
-                    Unit u = SnUnitTypes.courier.spawn(team, x, y);
+                    Unit u = SnUnitTypes.courier.spawn(team, x, y); //TODO починить тип юнита
                     ((DeliverAI)u.controller()).setup(this);
                     units.add(u.id);
                 }

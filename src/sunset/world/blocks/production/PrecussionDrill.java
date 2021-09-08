@@ -39,7 +39,7 @@ public class PrecussionDrill extends Block {
     /** Длительность добычи одной партии ресурсов. */
     public float drillTime = 540f;
     /** Список ресурсов, используемых при добыче. */
-    public Seq<DrillItem> drillItems = new Seq<>();
+    public final Seq<DrillItem> drillItems = new Seq<>();
     /** Количество используемого ресурса за одну партию. */
     public int drillItemCount = 2;
     /** Вместимость используемого ресурса за одну партию. */
@@ -101,7 +101,7 @@ public class PrecussionDrill extends Block {
         bars.add("progress", (PrecussionDrillBuild e) ->
                 new Bar(() -> Core.bundle.get("bar.drillprogress"),
                         () -> Pal.surge,
-                        () -> e.progressTime / ((PrecussionDrill)e.block).drillTime));;
+                        () -> e.progressTime / ((PrecussionDrill)e.block).drillTime));
         bars.add("drillspeed", (PrecussionDrillBuild e) ->
             new Bar(() -> Core.bundle.format("bar.drillspeed",
                 Strings.fixed(e.displaySpeed, 2)),
@@ -112,7 +112,7 @@ public class PrecussionDrill extends Block {
     public boolean canPlaceOn(Tile tile, Team team) {
         return updateOre(tile, items, tier, this) == State.OK;
     }
-    private ItemSeq items = new ItemSeq();
+    private final ItemSeq items = new ItemSeq();
     @Override
     public void drawPlace(int x, int y, int rotation, boolean valid){
         super.drawPlace(x, y, rotation, valid);
@@ -154,8 +154,8 @@ public class PrecussionDrill extends Block {
         return ret[0];
     }
     public static class DrillItem {
-        public Item item;
-        public float sizeMultiplier;
+        public final Item item;
+        public final float sizeMultiplier;
         public DrillItem(Item item, float sizeMultiplier) {
             this.item = item;
             this.sizeMultiplier = sizeMultiplier;
@@ -176,7 +176,7 @@ public class PrecussionDrill extends Block {
         private int offloadSize; //размер партии = количество item'ов, выдаваемых за раз
         private DrillItem currentDrillItem; //текущий предмет для бурения
 
-        ItemSeq items = new ItemSeq(); //список руды, находящейся под буром
+        final ItemSeq items = new ItemSeq(); //список руды, находящейся под буром
         @Override
         public void created() {
             updateOre(tile, items, tier, (PrecussionDrill)block);

@@ -3,8 +3,6 @@ package sunset.world.blocks.production;
 import arc.Core;
 import arc.graphics.*;
 import arc.graphics.g2d.*;
-import arc.graphics.g2d.Draw;
-import arc.graphics.g2d.TextureRegion;
 import arc.math.*;
 import arc.util.*;
 //import mindustry.annotations.Annotations.*;

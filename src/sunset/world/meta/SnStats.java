@@ -20,7 +20,7 @@ import mindustry.world.meta.values.*;
  * ключи для локализации. */
 public class SnStats {
     private OrderedMap<String, OrderedMap<String, Seq<Cons<Table>>>> map = new OrderedMap<>();
-    private boolean dirty = false;
+    private boolean dirty;
     public boolean useCategories = true;
 
     public SnStats(Stats stats) {

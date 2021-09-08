@@ -23,7 +23,6 @@ public class MultiBarrelItemTurret extends ItemTurret {
     }
 
     public class MultiBarrelItemTurretBuild extends ItemTurretBuild {
-        private int shotindex = 0; // для эффекта извлечения гильзы
         public float speedupScl = 0f;
 		public float slowDownReload = 0f;
 		public float maxReloadTime = 0f;
@@ -44,7 +43,7 @@ public class MultiBarrelItemTurret extends ItemTurret {
                 reload = 0f;
             }else{
                 reload += (1 + speedupScl) * delta() * peekAmmo().reloadMultiplier * baseReloadSpeed();
-            };
+            }
         }
 
         @Override
@@ -72,9 +71,8 @@ public class MultiBarrelItemTurret extends ItemTurret {
                 recoil = recoilAmount;
                 heat = 1;
             };
-            for(shotindex = 0; shotindex < barrelPoints.size; shotindex++) {
-                Time.run(burstSpacing * shotindex, shootFunc.get(shotindex));
-                
+            for(int i = 0; i < barrelPoints.size; i++) {
+                Time.run(burstSpacing * i, shootFunc.get(i));
             }
         }
 

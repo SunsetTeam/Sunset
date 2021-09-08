@@ -52,7 +52,7 @@ public class WeaponListValueExt implements StatValue {
                     }
                     sep(w, "[lightgray]" + Stat.reload.localized() + ": " + (weapon.mirror ? "2x " : "") + "[white]" + Strings.autoFixed(60f / weapon.reload * weapon.shots, 2));
 
-                    AmmoListValue<UnitType> bullet = new AmmoListValue<UnitType>(OrderedMap.of(unit, weapon.bullet));
+                    AmmoListValue<UnitType> bullet = new AmmoListValue<>(OrderedMap.of(unit, weapon.bullet));
                     bullet.display(w);
                 }).padTop(-9).left();
             }

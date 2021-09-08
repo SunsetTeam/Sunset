@@ -7,7 +7,6 @@ import mindustry.world.blocks.defense.*;
 import mindustry.ctype.ContentList;
 import mindustry.type.Category;
 import mindustry.world.Block;
-import mindustry.world.blocks.defense.ForceProjector;
 import sunset.content.SnItems;
 import sunset.world.blocks.AntiPierceWall;
 import sunset.world.blocks.SelfhealWall;

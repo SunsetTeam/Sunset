@@ -27,7 +27,7 @@ public class UnitTypeExt extends UnitType {
         // Передаём заполнение сведений об способностях самим способностям, если оно это поддерживает
         if(abilities.any()){
             stats.remove(Stat.abilities);
-            ObjectSet unique = new ObjectSet<String>();
+            ObjectSet<String> unique = new ObjectSet<>();
 
             for(Ability a : abilities){
                 if(unique.add(a.localized())){

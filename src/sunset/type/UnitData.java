@@ -28,8 +28,6 @@ public class UnitData {
     }
     public static void init() {
         data = new ObjectMap<>();
-        Events.on(UnitDestroyEvent.class, (e) -> {
-            data.remove(e.unit);
-        });
+        Events.on(UnitDestroyEvent.class, (e) -> data.remove(e.unit));
     }
 }

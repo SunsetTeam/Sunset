@@ -295,7 +295,6 @@ public class SnBullets implements ContentList{
 	        pierce = true;
 	        collidesAir = true;
             lifetime = 9f;
-            pierce = true;
             statusDuration = 60f * 4;
             shootEffect = SnFx.heavyFlame;
             hitEffect = Fx.hitFlameSmall;
@@ -311,7 +310,6 @@ public class SnBullets implements ContentList{
 	        pierce = true;
 	        collidesAir = true;
             lifetime = 9f;
-            pierce = true;
             statusDuration = 60f * 4;
             shootEffect = SnFx.heavyFlame;
             hitEffect = Fx.hitFlameSmall;
@@ -327,7 +325,6 @@ public class SnBullets implements ContentList{
 	        pierce = true;
 	        collidesAir = true;
             lifetime = 9f;
-            pierce = true;
             statusDuration = 60f * 4;
             shootEffect = SnFx.heavyFlame;
             hitEffect = Fx.hitFlameSmall;

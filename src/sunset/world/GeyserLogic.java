@@ -2,12 +2,10 @@ package sunset.world;
 
 import arc.Events;
 import arc.math.Mathf;
-import arc.math.Rand;
 import arc.struct.FloatSeq;
 import arc.struct.IntSeq;
 import arc.struct.Seq;
 import arc.util.Interval;
-import arc.util.Log;
 import mindustry.entities.Effect;
 import mindustry.game.EventType;
 import mindustry.world.Tile;
@@ -20,9 +18,9 @@ public class GeyserLogic {
         Events.on(EventType.WorldLoadEvent.class, (e) -> reloadData());
         Events.on(EventType.Trigger.update.getClass(), (t) -> update());
     }
-    private static Seq<Seq<Tile>> geysers = new Seq<>(), parts = new Seq<>();
-    private static IntSeq states = new IntSeq();
-    private static FloatSeq factors = new FloatSeq();
+    private static final Seq<Seq<Tile>> geysers = new Seq<>(), parts = new Seq<>();
+    private static final IntSeq states = new IntSeq();
+    private static final FloatSeq factors = new FloatSeq();
     private static float sumfactors;
     private static void reloadData() {
         //TODO оптимизировать???

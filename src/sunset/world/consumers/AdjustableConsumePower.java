@@ -11,8 +11,8 @@ import mindustry.world.consumers.ConsumePower;
  * тем самым итоговое потребление энергии.
  */
 public class AdjustableConsumePower extends ConsumePower {
-    public float baseUsage;
-    private Func<Building, Float> factorGen;
+    public final float baseUsage;
+    private final Func<Building, Float> factorGen;
     public AdjustableConsumePower(float baseUsage, Func<Building, Float> factorGen)
     {
         this.baseUsage = baseUsage;

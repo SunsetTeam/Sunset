@@ -4,7 +4,7 @@ import arc.graphics.*;
 import mindustry.graphics.Pal;
 
 public class SnPal{
-    public static Color
+    public static final Color
     
     //gray
     rGray = Color.valueOf("806262"),

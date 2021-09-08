@@ -3,7 +3,6 @@ package sunset.utils;
 import arc.func.Boolf;
 import arc.func.Cons;
 import arc.func.Floatc2;
-import arc.math.Mathf;
 import arc.math.Rand;
 import arc.math.geom.Vec2;
 import arc.util.Log;

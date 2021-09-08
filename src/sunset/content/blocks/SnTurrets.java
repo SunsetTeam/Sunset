@@ -307,7 +307,6 @@ public class SnTurrets implements ContentList {
             recoilAmount = 4f;
             restitution = 0.05f;
             shootCone = 8f;
-            liquidCapacity = 60f;
             shootEffect = SnFx.typhoonShootLiquid;
             range = 390f;
             health = 200 * size * size;

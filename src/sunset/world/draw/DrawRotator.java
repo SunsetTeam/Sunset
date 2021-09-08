@@ -11,7 +11,7 @@ import mindustry.world.draw.DrawBlock;
 public class DrawRotator extends DrawBlock {
     protected TextureRegion rotatorRegion;
     protected TextureRegion top;
-    protected float angle;
+    protected final float angle;
     public DrawRotator(float angle) {
         this.angle = angle;
     }

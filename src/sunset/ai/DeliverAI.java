@@ -2,7 +2,6 @@ package sunset.ai;
 
 import arc.math.geom.Vec2;
 import mindustry.ai.types.FlyingAI;
-import mindustry.content.Items;
 import sunset.world.blocks.Airport;
 
 public class DeliverAI extends FlyingAI {

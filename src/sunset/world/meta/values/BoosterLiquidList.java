@@ -16,9 +16,9 @@ import static mindustry.Vars.content;
  * жидкостей в параметрах блока.
  */
 public class BoosterLiquidList implements StatValue {
-    private Boolf<Liquid> filter;
-    private Func<Liquid, Float> factorGen;
-    private String bundle;
+    private final Boolf<Liquid> filter;
+    private final Func<Liquid, Float> factorGen;
+    private final String bundle;
 
     public BoosterLiquidList(Boolf<Liquid> filter, Func<Liquid, Float> factorGen, String bundle) {
         this.filter = filter;

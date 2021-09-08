@@ -12,9 +12,9 @@ import sunset.type.StackableStatusEffect;
 
 /** Создаёт интерактивный интерфейс, предоставляющий информацию о {@link StackableStatusEffect}. */
 public class StackableStatusEffectValue implements StatValue {
-    StackableStatusEffect effect;
-    TextButton prevStackButton, nextStackButton;
-    Label topDescriptionLabel, damageMultLabel, healthMultLabel, speedMultLabel,
+    final StackableStatusEffect effect;
+    final TextButton prevStackButton, nextStackButton;
+    final Label topDescriptionLabel, damageMultLabel, healthMultLabel, speedMultLabel,
         reloadMultLabel, disarmedLabel, damageLabel, buildSpeedMultLabel;
     private int currentStack = 0;
     public StackableStatusEffectValue(StackableStatusEffect effect) {
