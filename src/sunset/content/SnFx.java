@@ -53,7 +53,7 @@ public class SnFx{
     modSmokeCloud = new Effect(90, e -> {
         randLenVectors(e.id, 6, 4f + e.fin(), 30, 30f, (x, y) -> {
             color(SnPal.bGray);
-            alpha((0.5f - Math.abs(e.fin() - 0.5f)) * 2f);
+            //alpha((0.5f - Math.abs(e.fin() - 0.5f)) * 2f);
             Fill.circle(e.x + x, e.y + y, 0.5f + e.fout() * 4f);
         });
     }),
@@ -61,7 +61,7 @@ public class SnFx{
     modPlasticburn = new Effect(45, e -> {
         randLenVectors(e.id, 7, 2.8f + e.fin() * 5f, 25, 30f,(x, y) -> {
             color((SnPal.gGray), Color.gray, e.fin());
-            Fill.square(e.x + x, e.y + y, e.fout());
+            Fill.square(e.x + x, e.y + y, e.fout() * 3.1f, 45);
         });
     }),
     
