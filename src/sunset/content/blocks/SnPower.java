@@ -11,6 +11,7 @@ import mindustry.type.Category;
 import mindustry.world.Block;
 import mindustry.world.blocks.power.NuclearReactor;
 import mindustry.world.blocks.power.DecayGenerator;
+import mindustry.world.blocks.power.ThermalGenerator;
 import sunset.world.blocks.power.LiquidGenerator;
 import sunset.content.SnItems;
 import sunset.world.blocks.power.ThermalGeneratorExt;
