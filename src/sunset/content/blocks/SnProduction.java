@@ -10,18 +10,16 @@ import mindustry.ctype.ContentList;
 import mindustry.gen.Sounds;
 import mindustry.type.Category;
 import mindustry.type.ItemStack;
-import mindustry.world.blocks.production.Drill;
 import mindustry.world.Block;
 import mindustry.world.blocks.production.Cultivator;
 import mindustry.world.blocks.production.GenericCrafter;
 import mindustry.world.blocks.production.GenericSmelter;
 import mindustry.world.draw.DrawAnimation;
-import mindustry.world.draw.DrawRotator;
 import sunset.content.SnFx;
 import sunset.content.SnItems;
 import sunset.world.blocks.production.PrecussionDrill;
 import sunset.world.blocks.production.StaticTopSmelter;
-import sunset.world.draw.Draw360Rotator;
+import sunset.world.draw.DrawRotator;
 import sunset.world.draw.DrawRotatorTop;
 import sunset.world.draw.DrawWeaveTop;
 
@@ -123,7 +121,7 @@ public class SnProduction implements ContentList {
             outputItem = new ItemStack(Items.surgeAlloy, 7);
             itemCapacity = 50;
             liquidCapacity = 80f;
-            drawer = new Draw360Rotator();
+            drawer = new DrawRotator(360);
 
             consumes.items(with(Items.copper, 10, Items.lead, 12, Items.titanium, 8, Items.silicon, 10, Items.pyratite, 3));
             consumes.liquid(Liquids.water, 0.87f);
