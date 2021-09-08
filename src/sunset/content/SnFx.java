@@ -59,22 +59,29 @@ public class SnFx{
     }),
     
     modPlasticburn = new Effect(45, e -> {
-        randLenVectors(e.id, 7, 2.8f + e.fin() * 5f, (x, y) -> {
+        randLenVectors(e.id, 7, 2.8f + e.fin() * 5f, 25, 30f, (x, y) -> {
             color((SnPal.gGray), Color.gray, e.fin());
-            Fill.circle(e.x + x, e.y + y, e.fout());
+            Fill.rect(e.x + x, e.y + y, e.fout());
         });
     }),
     
     modFormsmoke = new Effect(50, e -> {
         randLenVectors(e.id, 8, 6f + e.fin() * 8f, (x, y) -> {
             color(Pal.plasticSmoke, Color.lightGray, e.fin());
-            Fill.square(e.x + x, e.y + y, 0.2f + e.fout() * 2f, 45);
+            Fill.rect(e.x + x, e.y + y, 0.2f + e.fout() * 2f, 45);
         });
     }),
     
-    modSmeltsmoke = new Effect(20f, e -> {
+    weaverSmeltsmoke = new Effect(20f, e -> {
         randLenVectors(e.id, 7, 6.8f + e.fin() * 5f, (x, y) -> {
-            color(SnPal.rGray, e.color, e.fin());
+            color(Color.valueOf("C78D04"), e.color, e.fin());
+            Fill.square(e.x + x, e.y + y, 0.5f + e.fout() * 2f, 45);
+        });
+    }),
+    
+    cultivatorSmeltsmoke = new Effect(20f, e -> {
+        randLenVectors(e.id, 7, 6.8f + e.fin() * 5f, (x, y) -> {
+            color(Color.valueOf("5841A6"), e.color, e.fin());
             Fill.square(e.x + x, e.y + y, 0.5f + e.fout() * 2f, 45);
         });
     }),
