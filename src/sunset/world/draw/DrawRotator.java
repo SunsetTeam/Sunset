@@ -29,5 +29,5 @@ public class DrawRotator extends DrawBlock {
     }
 
     @Override
-    public TextureRegion[] icons(Block block) { return new TextureRegion[]{block.region, rotatorRegion}; }
+    public TextureRegion[] icons(Block block) { return new TextureRegion[]{block.region, rotatorRegion, top}; }
 }
