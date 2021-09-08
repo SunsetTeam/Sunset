@@ -63,7 +63,7 @@ public class SnPower implements ContentList{
             consumes.liquid(Liquids.water, 0.35f);
         }};
         
-        gtGenerator = new ThermalGenerator("gt-generator"){{
+        gtGenerator = new ThermalGeneratorExt("gt-generator"){{
           requirements(Category.power, with(Items.lead, 125, Items.metaglass, 80, Items.silicon, 100, Items.titanium, 120, SnItems.fors, 80));
           size = 3;
           powerProduction = 3.1f;
