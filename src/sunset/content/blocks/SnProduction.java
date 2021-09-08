@@ -10,11 +10,14 @@ import mindustry.ctype.ContentList;
 import mindustry.gen.Sounds;
 import mindustry.type.Category;
 import mindustry.type.ItemStack;
+import mindustry.type.LiquidStack;
 import mindustry.world.Block;
 import mindustry.world.blocks.production.Cultivator;
 import mindustry.world.blocks.production.GenericCrafter;
 import mindustry.world.blocks.production.GenericSmelter;
+import mindustry.world.blocks.production.LiquidConverter;
 import mindustry.world.draw.DrawAnimation;
+import mindustry.world.draw.DrawMixer;
 import sunset.content.SnFx;
 import sunset.content.SnItems;
 import sunset.world.blocks.production.PrecussionDrill;
@@ -27,7 +30,7 @@ public class SnProduction implements ContentList {
     public static Block
 
     //advanced
-    advancedCompressor, advancedWeaver, advancedCultivator, advancedKiln, advancedSurge,
+    advancedCompressor, advancedWeaver, advancedCultivator, advancedKiln, advancedSurge, advancedCryomixer,
 
     //standart
     crystalyze, purifier, enojieKiln,
@@ -129,6 +132,23 @@ public class SnProduction implements ContentList {
         }};
         //endregion advanced
         //region standart
+        advancedCryomixer = new LiquidConverter("advancedCryomixer"){{
+            requirements(Category.crafting, with(Items.lead, 180, Items.graphite, 90, SnItems.coldent, 60, Items.metaglass, 40));
+            outputLiquid = new LiquidStack(Liquids.cryofluid, 1f);
+            craftTime = 40f;
+            size = 3;
+            hasPower = true;
+            hasItems = true;
+            hasLiquids = true;
+            rotate = false;
+            solid = true;
+            outputsLiquid = true;
+            drawer = new DrawMixer();
+
+            consumes.power(2.5f);
+            consumes.item(SnItems.coldent);
+            consumes.liquid(Liquids.water, 1f);
+        }};
         purifier = new GenericCrafter("purifier") {{
             requirements(Category.crafting, with(Items.copper, 120, Items.titanium, 95, Items.silicon, 80, Items.plastanium, 65));
 
