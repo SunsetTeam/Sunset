@@ -20,7 +20,7 @@ public class SnPower implements ContentList{
     public static Block
 
 //generators
-    oilGenerator, advrtgGenerator, advThermalGenerator, gtGenerator,
+    oilGenerator, advrtgGenerator, advThermalGenerator, //gtGenerator,
     
 //reactors
     planatriumReactor;
@@ -63,7 +63,7 @@ public class SnPower implements ContentList{
             consumes.liquid(Liquids.water, 0.35f);
         }};
         
-        gtGenerator = new ThermalGeneratorExt("gt-generator"){{
+        /*gtGenerator = new ThermalGeneratorExt("gt-generator"){{
           requirements(Category.power, with(Items.lead, 125, Items.metaglass, 80, Items.silicon, 100, Items.titanium, 120, SnItems.fors, 80));
           size = 3;
           powerProduction = 3.1f;
@@ -71,7 +71,7 @@ public class SnPower implements ContentList{
           //ambientSound = Sounds.hum;
           //ambientSoundVolume = 0.06f;
           consumes.liquid(Liquids.water, 0.5f);
-        }};
+        }};*/
 
 //reactors
         planatriumReactor = new NuclearReactor("planatrium-reactor"){{
