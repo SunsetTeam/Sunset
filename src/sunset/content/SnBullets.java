@@ -12,6 +12,7 @@ import mindustry.gen.*;
 import mindustry.graphics.Pal;
 import sunset.entities.bullet.ArtilleryLiquidBulletType;
 import sunset.entities.bullet.ExtinguishBulletType;
+import sunset.entities.bullet.TorpedoBulletType;
 import sunset.graphics.*;
 import sunset.type.StackableStatusEffect;
 
