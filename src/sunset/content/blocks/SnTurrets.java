@@ -557,11 +557,7 @@ public class SnTurrets implements ContentList {
         testturret = new ItemTurret("test-turret") {{
             requirements(Category.turret, with(Items.copper, 1));
             ammo(
-                Items.copper, new BasicBulletType(16, 16){{
-                    pierce = true;
-                    pierceBuilding = true;
-                    pierceCap = 12;
-                }}
+                Items.copper, SnBullets.testbullet
             );
             range = 130f;
             health = 780;
