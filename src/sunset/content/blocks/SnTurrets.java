@@ -555,7 +555,7 @@ public class SnTurrets implements ContentList {
             buildVisibility = BuildVisibility.shown;
         }};
         testturret = new ItemTurret("test-turret") {{
-            requirements(Category.turret, with(Items.copper, 1));
+            requirements(Category.turret, with(Items.copper, 2));
             ammo(
                 Items.copper, SnBullets.testbullet
             );
