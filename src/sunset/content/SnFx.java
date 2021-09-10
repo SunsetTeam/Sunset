@@ -454,6 +454,12 @@ public class SnFx{
         Fill.circle(e.x, e.y, e.rotation * val);
         stroke(1.5f, Pal.boostTo);
         Lines.circle(e.x, e.y, e.rotation * val);
+    }),
+        torpedoTrail = new Effect(30, e -> {
+       color(Color.lightGray);
+       randLenVectors(e.id, 15, 2 + e.fin() * 5, (x, y) -> {
+           Fill.circle(e.x+x, e.y+y, e.fin() * 2);
+       });
     });
 
     public static void lightning(float x1, float y1, float x2, float y2, Color c, int iterations, float rndScale, Effect e) {
