@@ -9,7 +9,6 @@ import java.awt.*;
 import java.lang.reflect.Array;
 
 public class BerserkLaserBulletType extends BasicBulletType {
-    public Color[] colors = new Color[]{Color.black, Color.blue, Color.white};
 
     @Override
     public void hit(Bullet b, float x, float y) {
