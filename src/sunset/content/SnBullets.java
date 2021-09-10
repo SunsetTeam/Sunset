@@ -1153,17 +1153,14 @@ public class SnBullets implements ContentList{
         }};
 
 //test
-        testbullet = new MissileBulletType(2.7f, 14){{
-            sprite = "sunset-guardian-rocket";
-            width = 9f;
-            height = 11f;
-            lifetime = 67f;
-            shrinkY = 0f;
+        testbullet = new TorpedoBulletType(){{
+            lifetime = 400f;
+            damage = 1;
+            speed = 1;
+            trailEffect = SnFx.torpedoTrail;
             drag = -0.003f;
             homingRange = 30f;
             homingPower = 0.2f;
-            despawnEffect = SnFx.heavyCopterBomb;
-            hitEffect = Fx.massiveExplosion;
             ammoMultiplier = 2;
         }};
     }
