@@ -27,13 +27,13 @@ public class SnDefense implements ContentList {
             requirements(Category.effect, with(Items.titanium, 600, Items.thorium, 480, Items.silicon, 300, SnItems.naturite, 250, SnItems.nobium, 240, SnItems.enojie, 210));
             size = 5;
             radius = 220f;
-            shieldHealth = 2000f;
+            shieldHealth = 2100f;
             cooldownNormal = 2f;
             cooldownLiquid = 3f;
             cooldownBrokenBase = 1;
 
             consumes.items(with(SnItems.enojie, 2, SnItems.nobium, 2, Items.phaseFabric, 2));
-            consumes.power(14f);
+            consumes.power(15f);
         }};
 
         //region walls
