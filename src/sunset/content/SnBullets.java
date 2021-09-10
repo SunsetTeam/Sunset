@@ -13,6 +13,7 @@ import mindustry.graphics.Pal;
 import sunset.entities.bullet.ArtilleryLiquidBulletType;
 import sunset.entities.bullet.ExtinguishBulletType;
 import sunset.entities.bullet.TorpedoBulletType;
+import sunset.entities.bullet.BerserkLaserBulletType;
 import sunset.graphics.*;
 import sunset.type.StackableStatusEffect;
 
@@ -1154,7 +1155,7 @@ public class SnBullets implements ContentList{
         }};
 
 //test
-        testbullet = new TorpedoBulletType(){{
+        testbullet = new BerserkLaserBulletType(){{
             lifetime = 400f;
             damage = 1;
             speed = 1;
