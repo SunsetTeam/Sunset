@@ -5,21 +5,20 @@ import arc.util.Log;
 import mindustry.entities.bullet.BasicBulletType;
 import mindustry.gen.Bullet;
 
-import java.awt.*;
-import java.lang.reflect.Array;
-
 public class BerserkLaserBulletType extends BasicBulletType {
 
     @Override
     public void hit(Bullet b, float x, float y) {
         if(b.data == null) {
             float lenght = Mathf.dst(b.x, b.y, x, y);
-            b.data = lenght;
+            float[] dst = new float[1];
+            b.data = dst;
+            ((float[])b.data)[0] = lenght;
         }
     }
 
     @Override
     public void update(Bullet b) {
-        if(b.data != null) Log.info((float)b.data);
+        if(b.data != null) Log.info(((float[])b.data)[0]);
     }
 }
