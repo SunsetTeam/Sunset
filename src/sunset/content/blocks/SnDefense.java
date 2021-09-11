@@ -3,13 +3,15 @@ package sunset.content.blocks;
 import static mindustry.type.ItemStack.with;
 
 import mindustry.content.Items;
+import mindustry.type.ItemStack;
 import mindustry.world.blocks.defense.*;
 import mindustry.ctype.ContentList;
 import mindustry.type.Category;
 import mindustry.world.Block;
 import sunset.content.SnItems;
-import sunset.world.blocks.AntiPierceWall;
-import sunset.world.blocks.SelfhealWall;
+import sunset.world.blocks.defense.projectors.DeflectorProjector;
+import sunset.world.blocks.defense.walls.AntiPierceWall;
+import sunset.world.blocks.defense.walls.SelfhealWall;
 
 public class SnDefense implements ContentList {
     public static Block
@@ -18,7 +20,7 @@ public class SnDefense implements ContentList {
     forsWall, forsWallLarge, naturiteWall, naturiteWallLarge, enojiewall, enojieWallLarge,
     
     //projector
-    forcedome;
+    forcedome, deflectorProjector;
 
     @Override
     public void load() {
@@ -34,6 +36,21 @@ public class SnDefense implements ContentList {
 
             consumes.items(with(SnItems.enojie, 2, SnItems.nobium, 2, Items.phaseFabric, 2));
             consumes.power(15f);
+        }};
+
+        deflectorProjector = new DeflectorProjector("deflector-projector"){{
+           requirements(Category.effect, with(Items.silicon, 100, Items.titanium, 250, Items.thorium, 200, Items.phaseFabric, 120, Items.surgeAlloy, 100, SnItems.enojie, 100, SnItems.coldent, 230));
+           size = 3;
+           health = 900;
+           radius = 150;
+           phaseRadiusBoost = 300;
+           phaseShieldBoost = 1200;
+           shieldHealth = 5000;
+           cooldownNormal = 3.1f;
+           cooldownLiquid = 4.7f;
+           cooldownBrokenBase = 2.1f;
+           consumes.items(with(Items.phaseFabric, 3, SnItems.coldent, 5));
+           consumes.power(25);
         }};
 
         //region walls

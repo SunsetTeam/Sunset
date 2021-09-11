@@ -9,7 +9,7 @@ import mindustry.world.*;
 import mindustry.world.blocks.environment.*;
 import mindustry.world.meta.*;
 import sunset.content.SnItems;
-import sunset.world.blocks.Geyser;
+import sunset.world.blocks.environment.Geyser;
 
 public class SnEnvironment implements ContentList {
     public static Block

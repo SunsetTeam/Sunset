@@ -9,7 +9,7 @@ import arc.util.Interval;
 import mindustry.entities.Effect;
 import mindustry.game.EventType;
 import mindustry.world.Tile;
-import sunset.world.blocks.Geyser;
+import sunset.world.blocks.environment.Geyser;
 
 import static mindustry.Vars.world;
 
