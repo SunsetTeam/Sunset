@@ -1,4 +1,4 @@
-package sunset.world.blocks;
+package sunset.world.blocks.units;
 
 import arc.Core;
 import arc.graphics.g2d.Draw;

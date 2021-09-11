@@ -10,7 +10,7 @@ import mindustry.graphics.Pal;
 
 import mindustry.Vars;
 
-public class DrawWeaveTop extends DrawBlock{
+public class DrawModWeave extends DrawBlock{
   protected TextureRegion bottom;
   protected TextureRegion weave;
   protected TextureRegion top;

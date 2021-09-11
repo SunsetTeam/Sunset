@@ -1,4 +1,4 @@
-package sunset.world.blocks.turrets;
+package sunset.world.blocks.defense.turrets;
 import arc.Core;
 import arc.graphics.Color;
 import arc.graphics.g2d.Draw;
@@ -25,7 +25,7 @@ import sunset.world.meta.values.BoosterLiquidList;
  * Турель, которая атакует врагов постоянной
  * цепной молнией, "перепрыгивающей" от одного врага к другому,
  * постепенно теряя урон.
- * @see sunset.world.blocks.turrets.ChainLightningTurret.ChainLightningTurretBuild
+ * @see sunset.world.blocks.defense.turrets.ChainLightningTurret.ChainLightningTurretBuild
  */
 public class ChainLightningTurret extends BaseTurret {
     public float damage = 0f;
@@ -88,7 +88,7 @@ public class ChainLightningTurret extends BaseTurret {
                     return 1f + (used * liquid.heatCapacity * coolantMultiplier);
                 }, "bullet.damagefactor"));
     }
-    /** @see sunset.world.blocks.turrets.ChainLightningTurret */
+    /** @see sunset.world.blocks.defense.turrets.ChainLightningTurret */
     public class ChainLightningTurretBuild extends BaseTurretBuild {
         public final Seq<Unit> units = new Seq<>();
         public boolean shouldShoot = false;

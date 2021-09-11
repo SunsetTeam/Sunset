@@ -1,4 +1,4 @@
-package sunset.world.blocks.turrets;
+package sunset.world.blocks.defense.turrets;
 
 import arc.util.Time;
 import arc.func.Func;

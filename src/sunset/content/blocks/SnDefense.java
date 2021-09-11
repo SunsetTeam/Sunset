@@ -8,8 +8,8 @@ import mindustry.ctype.ContentList;
 import mindustry.type.Category;
 import mindustry.world.Block;
 import sunset.content.SnItems;
-import sunset.world.blocks.AntiPierceWall;
-import sunset.world.blocks.SelfhealWall;
+import sunset.world.blocks.defense.walls.AntiPierceWall;
+import sunset.world.blocks.defense.walls.SelfhealWall;
 
 public class SnDefense implements ContentList {
     public static Block
