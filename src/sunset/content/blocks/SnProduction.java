@@ -67,7 +67,7 @@ public class SnProduction implements ContentList {
             requirements(Category.crafting, with(Items.copper, 210, Items.metaglass, 90, Items.silicon, 190, Items.titanium, 100, Items.thorium, 185, Items.surgeAlloy, 110));
             size = 3;
             health = 890;
-            craftEffect = SnFx.modSmeltsmoke;
+            craftEffect = SnFx.weaverSmeltsmoke;
             craftTime = 180f;
             outputItem = new ItemStack(Items.phaseFabric, 6);
             drawer = new DrawWeaveTop();
@@ -105,7 +105,7 @@ public class SnProduction implements ContentList {
 
             size = 4;
             health = 990;
-            craftEffect = SnFx.modSmeltsmoke;
+            craftEffect = SnFx.cultivatorSmeltsmoke;
             craftTime = 200f;
             drawer = new DrawRotatorTop();
             outputItem = new ItemStack(Items.sporePod, 6);
@@ -145,7 +145,7 @@ public class SnProduction implements ContentList {
             drawer = new DrawRotator(360);
 
             consumes.items(with(Items.copper, 10, Items.lead, 12, Items.titanium, 8, Items.silicon, 10, Items.pyratite, 3));
-            consumes.liquid(Liquids.water, 0.87f);
+            consumes.liquid(Liquids.cryofluid, 0.70f);
             consumes.power(5.5f);
         }};
         //endregion advanced
