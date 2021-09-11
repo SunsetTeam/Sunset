@@ -3,15 +3,14 @@ package sunset.content.blocks;
 import static mindustry.type.ItemStack.with;
 
 import mindustry.content.Items;
-import mindustry.type.ItemStack;
 import mindustry.world.blocks.defense.*;
 import mindustry.ctype.ContentList;
 import mindustry.type.Category;
 import mindustry.world.Block;
 import sunset.content.SnItems;
-import sunset.world.blocks.defense.projectors.DeflectorProjector;
 import sunset.world.blocks.defense.walls.AntiPierceWall;
 import sunset.world.blocks.defense.walls.SelfhealWall;
+import sunset.world.blocks.defense.projectors.DeflectorProjector;
 
 public class SnDefense implements ContentList {
     public static Block
