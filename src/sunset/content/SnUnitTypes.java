@@ -34,14 +34,14 @@ public class SnUnitTypes implements ContentList {
             comet, satelite, planet, star, galaxy, //buffers
             wheel1, wheel2, //wheel
             router, courier, //misc
-            snowflake;
+            snowflake, mirage;
     public void loadFactoryRecipes()
     {
         UnitsUtils.init();
         addUnitGroup(Blocks.airFactory, 60*20f, with(Items.silicon, 30, Items.metaglass, 20),
-            comet, satelite, planet, star, galaxy);
+                comet, satelite, planet, star, galaxy);
         addUnitGroup(Blocks.airFactory, 60*15f, with(Items.silicon, 30, Items.graphite, 15),
-            guardcopter, bladecopter, swordcopter, guardiancopter, crusadercopter);
+                guardcopter, bladecopter, swordcopter, guardiancopter, crusadercopter);
     }
     @Override
     public void load() {
@@ -492,14 +492,14 @@ public class SnUnitTypes implements ContentList {
         //endregion wheel
         //region misc
         router = new UnitTypeExt("router") {{
-                health = 2000000;
-                speed = 2.85f;
-                hitSize = 16;
-                flying = true;
-                constructor = UnitEntity::create;
-                engineSize = 0;
-                drawCell = false;
-            }
+            health = 2000000;
+            speed = 2.85f;
+            hitSize = 16;
+            flying = true;
+            constructor = UnitEntity::create;
+            engineSize = 0;
+            drawCell = false;
+        }
             @Override
             public boolean isHidden() { return true; }
         };
@@ -546,7 +546,7 @@ public class SnUnitTypes implements ContentList {
                 }};
             }});
         }};
-                mirage = new BerserkUnitType("mirage"){{
+        mirage = new BerserkUnitType("mirage"){{
             addRageMode(
                     BerserkAbility.dmg(600, 1.3f, 1.4f)
             );
