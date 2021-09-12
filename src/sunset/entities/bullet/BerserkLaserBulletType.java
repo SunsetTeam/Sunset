@@ -1,79 +1,53 @@
-package sunset.type;
+package sunset.entities.bullet;
 
-import arc.Core;
+import arc.graphics.Color;
 import arc.graphics.g2d.Draw;
-import arc.graphics.g2d.TextureRegion;
-import arc.math.*;
-import arc.struct.Seq;
-import arc.util.*;
-import mindustry.gen.*;
-import mindustry.graphics.Layer;
-import mindustry.type.UnitType;
-import mindustry.world.meta.Stat;
-import sunset.entities.abilities.BerserkAbility;
+import arc.graphics.g2d.Fill;
+import arc.graphics.g2d.Lines;
+import arc.math.Mathf;
+import arc.util.Time;
+import arc.util.Tmp;
+import mindustry.entities.Damage;
+import mindustry.entities.Effect;
+import mindustry.entities.Units;
+import mindustry.entities.bullet.BasicBulletType;
+import mindustry.gen.Bullet;
+import mindustry.graphics.Drawf;
 
-public class CopterUnitType extends UnitType {
-    public float offsetX = 0f;
-    public float offsetY = 0f;
-    public float rotorRotateSpeed = 28f;
-    public Seq<BerserkAbility> dmg = new Seq<>();
+public class BerserkLaserBulletType extends BasicBulletType {
+    private float laserLength;
+    public float maxLength = 100, width = 4;
+    public float lengthFallOf = 0.5f;
+    public Effect hitEffect;
+    public Color[] colors = {Color.yellow, Color.gray, Color.blue};
 
-    float unitFallRotateSpeed = 1f;
-
-    public int rotorCount = 1;
-
-    public TextureRegion rotorRegion;
-
-    public CopterUnitType(String name) {
-        super(name);
-        
-        constructor = UnitEntity::create;
-        flying = lowAltitude = true;
-        fallSpeed = 0.008f;
-        engineSize = 0f;
+    Color sColor = new Color();
+    @Override
+    public void update(Bullet b){
+        Units.nearbyEnemies(b.team, b.x, b.y, width, maxLength, u -> {
+            laserLength = Mathf.dst(b.x, b.y, u.x, u.y);
+        });
+        Damage.collideLine(b, b.team, hitEffect, b.x, b.y, b.rotation(), laserLength);
     }
 
     @Override
-    public void load() {
-        super.load();
-        rotorRegion = Core.atlas.find(name + "-rotor");
-    }
+    public void draw(Bullet b) {
+        float rLength = b.fdata;
 
-    @Override
-    public void update(Unit unit) {
-        super.update(unit);
-        if(unit.health <= 0 || unit.dead()) {
-            unit.rotation += Time.delta *(fallSpeed * 1000);
+        float f = Mathf.curve(b.fin(), 0f, 0.2f);
+        float baseLength = rLength * f;
+        float cwidth = width;
+
+        Lines.lineAngle(b.x, b.y, b.rotation(), baseLength);
+        for (Color color : colors){
+            Draw.color(color);
+            Lines.stroke((width *= lengthFallOf) * b.fout());
+            Lines.lineAngle(b.x, b.y, b.rotation(), laserLength, false);
+            Tmp.v1.trns(b.rotation(), baseLength);
+            Drawf.tri(b.x + Tmp.v1.x, b.y + Tmp.v1.y, Lines.getStroke() *1.22f, cwidth * 2f * width / 2f, b.rotation());
+
+            Fill.circle(b.x, b.y, 1f * cwidth * b.fout());
         }
-        if(dmg != null)
-            for(int i = 0; i> dmg.size; i++){
-                if (health < dmg.get(i).needHealth){
-                    stats.addPercent(Stat.damageMultiplier, dmg.get(i).damageMultiplier);
-                    stats.addPercent(Stat.speedMultiplier, dmg.get(i).speedMultiplier);
-                }
-            }
-    }
 
-    @Override
-    public void draw(Unit unit) {
-        Draw.z(Layer.flyingUnit + 0.01f);
-        drawRotor(unit);
-
-        Draw.z(Layer.flyingUnit);
-        super.draw(unit);
-    }
-
-    public void drawRotor(Unit unit){
-        if(!unit.isFlying()) return;
-
-        float rotorx = unit.x + Angles.trnsx(unit.rotation - 90, offsetX, offsetY);
-        float rotory = unit.y + Angles.trnsy(unit.rotation - 90, offsetX, offsetY);
-
-        for (int i = 0; i < rotorCount; i++){
-            Draw.rect(rotorRegion,  rotorx,  rotory, Time.time * rotorRotateSpeed);
-        }
-    }
-    public void addRageMode(BerserkAbility... berserkAbilities){
-        this.dmg = Seq.with(berserkAbilities);
     }
 }
