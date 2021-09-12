@@ -8,6 +8,7 @@ import sunset.entities.abilities.BerserkAbility;
 
 public class BerserkUnitType extends UnitType {
     public Seq<BerserkAbility> dmg = new Seq<>();
+public float a;
 
     public BerserkUnitType(String name) {
         super(name);
