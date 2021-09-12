@@ -13,6 +13,10 @@ import mindustry.entities.bullet.BombBulletType;
 import sunset.ai.*;
 import sunset.entities.abilities.StatusFieldAbility;
 import sunset.type.UnitTypeExt;
+import sunset.entities.abilities.BerserkAbility;
+import sunset.entities.abilities.StatusFieldAbility;
+import sunset.entities.bullet.BerserkLaserBulletType;
+import sunset.type.BerserkUnitType;
 import sunset.ai.weapon.ExtinguishWeaponAI;
 import sunset.type.WheelUnitType;
 import sunset.type.weapons.WeaponExt;
@@ -539,6 +543,16 @@ public class SnUnitTypes implements ContentList {
                     killShooter = true;
                     hittable = false;
                     collidesAir = true;
+                }};
+            }});
+        }};
+                mirage = new BerserkUnitType("mirage"){{
+            addRageMode(
+                    BerserkAbility.dmg(600, 1.3f, 1.4f)
+            );
+            weapons.add(new Weapon(){{
+                bullet = new BerserkLaserBulletType(){{
+                    damage = 60;
                 }};
             }});
         }};
