@@ -7,6 +7,7 @@ import arc.graphics.g2d.Lines;
 import arc.math.Mathf;
 import arc.util.Time;
 import arc.util.Tmp;
+import mindustry.content.Fx;
 import mindustry.entities.Damage;
 import mindustry.entities.Effect;
 import mindustry.entities.Units;
@@ -18,7 +19,7 @@ public class BerserkLaserBulletType extends BasicBulletType {
     private float laserLength;
     public float maxLength = 100, width = 4;
     public float lengthFallOf = 0.5f;
-    public Effect hitEffect;
+    public Effect hitEffect = Fx.none;
     public Color[] colors = {Color.yellow, Color.gray, Color.blue};
 
     Color sColor = new Color();
