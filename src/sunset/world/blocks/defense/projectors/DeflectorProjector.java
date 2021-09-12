@@ -9,7 +9,6 @@ import arc.graphics.g2d.Fill;
 import arc.graphics.g2d.Lines;
 import arc.math.Mathf;
 import arc.math.geom.Intersector;
-import arc.math.geom.Position;
 import arc.util.Time;
 import mindustry.content.Fx;
 import mindustry.gen.Bullet;
@@ -143,6 +142,7 @@ public class DeflectorProjector extends ForceProjector{
             float realRadius = realRadius();
 
             if(realRadius > 0 && !broken){
+                paramEntity = this;
                 Groups.bullet.intersect(x - realRadius, y - realRadius, realRadius * 2f, realRadius * 2f, shieldConsumer);
             }
         }

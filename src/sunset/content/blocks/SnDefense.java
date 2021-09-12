@@ -42,13 +42,13 @@ public class SnDefense implements ContentList {
            size = 3;
            health = 900;
            radius = 150;
-           phaseRadiusBoost = 150;
+           phaseRadiusBoost = 100;
            phaseShieldBoost = 1200;
            shieldHealth = 5000;
            cooldownNormal = 3.1f;
            cooldownLiquid = 4.7f;
            cooldownBrokenBase = 2.1f;
-           consumes.items(with(Items.phaseFabric, 3, SnItems.coldent, 5)).boost();
+           consumes.items(with(Items.phaseFabric, 3, SnItems.coldent, 5));
            consumes.power(25);
         }};
 
