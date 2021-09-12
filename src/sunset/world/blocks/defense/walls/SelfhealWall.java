@@ -1,4 +1,4 @@
-package sunset.world.blocks;
+package sunset.world.blocks.defense.walls;
 
 import mindustry.world.blocks.defense.Wall;
 import mindustry.world.meta.Stat;

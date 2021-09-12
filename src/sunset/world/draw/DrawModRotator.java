@@ -7,7 +7,7 @@ import mindustry.world.Block;
 import mindustry.world.blocks.production.GenericCrafter;
 import mindustry.world.draw.DrawBlock;
 
-public class DrawRotatorTop extends DrawBlock{
+public class DrawModRotator extends DrawBlock{
   protected TextureRegion rotatorRegion;
   protected TextureRegion top;
 

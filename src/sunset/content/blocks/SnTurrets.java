@@ -21,10 +21,10 @@ import sunset.content.SnItems;
 import sunset.entities.bullet.EnergySphereBulletType;
 import sunset.graphics.SnPal;
 import sunset.world.MissileLogic;
-import sunset.world.blocks.turrets.ChainLightningTurret;
-import sunset.world.blocks.turrets.LiquidTurretExt;
-import sunset.world.blocks.turrets.MissileSiloTurret;
-import sunset.world.blocks.turrets.MultiBarrelItemTurret;
+import sunset.world.blocks.defense.turrets.ChainLightningTurret;
+import sunset.world.blocks.defense.turrets.LiquidTurretExt;
+import sunset.world.blocks.defense.turrets.MissileSiloTurret;
+import sunset.world.blocks.defense.turrets.MultiBarrelItemTurret;
 
 public class SnTurrets implements ContentList {
     public static Block

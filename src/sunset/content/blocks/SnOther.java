@@ -14,7 +14,7 @@ import mindustry.world.blocks.production.Pump;
 import mindustry.world.blocks.storage.StorageBlock;
 import sunset.content.SnItems;
 import sunset.content.SnUnitTypes;
-import sunset.world.blocks.Airport;
+import sunset.world.blocks.units.Airport;
 
 public class SnOther implements ContentList {
     public static Block

@@ -8,11 +8,11 @@ import mindustry.world.Block;
 import mindustry.world.blocks.production.GenericCrafter;
 import mindustry.world.draw.DrawBlock;
 
-public class DrawRotator extends DrawBlock {
+public class DrawAngleRotator extends DrawBlock {
     protected TextureRegion rotatorRegion;
     protected TextureRegion top;
     protected final float angle;
-    public DrawRotator(float angle) {
+    public DrawAngleRotator(float angle) {
         this.angle = angle;
     }
     @Override
