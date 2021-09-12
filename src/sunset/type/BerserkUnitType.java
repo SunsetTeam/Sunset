@@ -2,13 +2,13 @@ package sunset.type;
 
 import arc.struct.Seq;
 import mindustry.gen.Unit;
+import mindustry.graphics.Layer;
 import mindustry.type.UnitType;
 import mindustry.world.meta.Stat;
 import sunset.entities.abilities.BerserkAbility;
 
 public class BerserkUnitType extends UnitType {
     public Seq<BerserkAbility> dmg = new Seq<>();
-public float a;
 
     public BerserkUnitType(String name) {
         super(name);
