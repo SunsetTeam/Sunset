@@ -549,11 +549,15 @@ public class SnUnitTypes implements ContentList {
         mirage = new BerserkUnitType("mirage"){{
             constructor = UnitEntity::create;
             groundLayer = Layer.legUnit;
+            legCount = 4;
+            legLength = 6f;
+            legTrns = 0.5f;
+            legMoveSpace = 1.5f;
 
             addRageMode(
                     BerserkAbility.dmg(600, 1.3f, 1.4f)
             );
-            weapons.add(new Weapon(){{
+            weapons.add(new Weapon("mirage-berlaser"){{
                 bullet = new BerserkLaserBulletType(){{
                 damage = 60;
                 }};
