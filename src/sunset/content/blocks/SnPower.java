@@ -29,7 +29,7 @@ public class SnPower implements ContentList{
     @Override
     public void load() {
 //generators
-        oilGenerator = new BurnerGenerator("oil-generator"){{
+        oilGenerator = new LiquidGenerator("oil-generator"){{
             requirements(Category.power, with(Items.copper, 110, Items.titanium, 70, Items.lead, 120, Items.silicon, 55, Items.metaglass, 70));
             powerProduction = 8.3f;
             itemDuration = 220f;
