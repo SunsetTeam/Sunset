@@ -31,25 +31,25 @@ public class SnDefense implements ContentList {
             shieldHealth = 2100f;
             cooldownNormal = 2f;
             cooldownLiquid = 3f;
-            cooldownBrokenBase = 1;
+            cooldownBrokenBase = 1.1f;
 
             consumes.items(with(SnItems.enojie, 2, SnItems.nobium, 2, Items.phaseFabric, 2));
             consumes.power(15f);
         }};
 
         deflectorProjector = new DeflectorProjector("deflector-projector"){{
-           requirements(Category.effect, with(Items.silicon, 100, Items.titanium, 250, Items.thorium, 200, Items.phaseFabric, 120, Items.surgeAlloy, 100, SnItems.enojie, 100, SnItems.coldent, 230));
+           requirements(Category.effect, with(Items.silicon, 1200, Items.titanium, 2500, Items.thorium, 1300, Items.phaseFabric, 900, Items.surgeAlloy, 1000, SnItems.enojie, 850, SnItems.coldent, 900));
            size = 3;
            health = 900;
            radius = 150;
            phaseRadiusBoost = 100;
            phaseShieldBoost = 1200;
-           shieldHealth = 5000;
+           shieldHealth = 3500;
            cooldownNormal = 3.1f;
            cooldownLiquid = 4.7f;
            cooldownBrokenBase = 2.1f;
            consumes.items(with(Items.phaseFabric, 3, SnItems.coldent, 5));
-           consumes.power(25);
+           consumes.power(20);
         }};
 
         //region walls

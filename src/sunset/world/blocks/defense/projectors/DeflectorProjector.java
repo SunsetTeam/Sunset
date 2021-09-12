@@ -20,6 +20,7 @@ import mindustry.logic.Ranged;
 import mindustry.world.blocks.defense.ForceProjector;
 import mindustry.world.consumers.ConsumeLiquidFilter;
 import mindustry.world.consumers.ConsumeType;
+import mindustry.world.meta.BlockStatus;
 import mindustry.world.meta.Stat;
 import mindustry.world.meta.StatUnit;
 
@@ -168,6 +169,12 @@ public class DeflectorProjector extends ForceProjector{
             }
 
             Draw.reset();
+        }
+
+        @Override
+        public BlockStatus status(){
+            if(!broken) return BlockStatus.active;
+            return BlockStatus.noInput;
         }
     }
 
