@@ -46,6 +46,7 @@ public class SnBullets implements ContentList{
 //units
     BasicHelicopterGun, HelicopterShootgun, HelicopterMissile, HelicopterBomb, HelicopterRocket, bigHelicopterGun, laserHelicopterFrag, largeHelicopterGun, bigHelicopterRocket, HelicopterMissiles,
     cometWaterShot, starStunBullet, galaxyKnockbackBullet,
+    wheel1bullet,
 //misc
     emptyBullet, overheatBullet,
 //test
@@ -1106,6 +1107,14 @@ public class SnBullets implements ContentList{
             statusDuration = 30;
             height = 30;
             width = 6;
+        }};
+        //wheel
+        wheel1bullet = new BasicBulletType(6.5f, 5f){{
+            width = 7f;
+            height = 9f;
+            lifetime = 25f;
+            shootEffect = Fx.shootSmall;
+            smokeEffect = Fx.shootSmallSmoke;
         }};
         
 //misc

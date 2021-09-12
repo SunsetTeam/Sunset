@@ -14,6 +14,7 @@ import sunset.ai.*;
 import sunset.entities.abilities.StatusFieldAbility;
 import sunset.type.UnitTypeExt;
 import sunset.ai.weapon.ExtinguishWeaponAI;
+import sunset.type.WheelUnitType;
 import sunset.type.weapons.WeaponExt;
 import sunset.type.weapons.ChainWeapon;
 import sunset.type.CopterUnitType;
@@ -27,7 +28,8 @@ public class SnUnitTypes implements ContentList {
     public static UnitType
             guardcopter, bladecopter, swordcopter, guardiancopter, crusadercopter, //attacks copters
             comet, satelite, planet, star, galaxy, //buffers
-            router, courier,
+            wheel1, //wheel
+            router, courier, //misc
             snowflake;
     public void loadFactoryRecipes()
     {
@@ -454,6 +456,23 @@ public class SnUnitTypes implements ContentList {
             }});
         }};
         //endregion buffers
+        //region wheel
+        wheel1 = new WheelUnitType("wheel1"){{
+            health = 80;
+            speed = 3.5f;
+            rotateSpeed = baseRotateSpeed = 2.75f;
+            drag = 0.075f;
+            weapons.add(new WeaponExt("wheel1-minigun"){{
+                reload = 5.5f;
+                inaccuracy = 4f;
+                rotate = true;
+                mirror = false;
+                bullet = SnBullets.wheel1bullet;
+                x = y = 0;
+            }});
+            defaultController = GroundUnitWeaponAI::new;
+        }};
+        //endregion wheel
         //region misc
         router = new UnitTypeExt("router") {{
                 health = 2000000;
