@@ -12,7 +12,6 @@ import arc.math.geom.Intersector;
 import arc.math.geom.Position;
 import arc.util.Time;
 import mindustry.content.Fx;
-import mindustry.game.Team;
 import mindustry.gen.Bullet;
 import mindustry.gen.Groups;
 import mindustry.gen.Sounds;
@@ -30,16 +29,12 @@ import static mindustry.Vars.tilesize;
 
 public class DeflectorProjector extends ForceProjector{
     public Color shieldColor = Color.valueOf("92a2dc");
-    private static Position tile;
-    private static Team team;
     public static float chanceDeflect = 10;
     public static int deflectAngle = 60;
     public static Sound deflectSound = Sounds.none;
     public static DeflectorBuild paramEntity;
-    public static final Cons<Bullet> shieldConsumer = trait -> {
-        if(trait.team != paramEntity.team
-                && trait.type.absorbable
-                && Intersector.isInsideHexagon(paramEntity.x, paramEntity.y, paramEntity.realRadius() * 2f, trait.x(), trait.y())){
+    static final Cons<Bullet> shieldConsumer = trait -> {
+        if(trait.team != paramEntity.team && trait.type.absorbable && Intersector.isInsideHexagon(paramEntity.x, paramEntity.y, paramEntity.realRadius() * 2f, trait.x(), trait.y())){
             if (!deflect(paramEntity, chanceDeflect, trait)){
                 trait.absorb();
                 Fx.absorb.at(trait);
@@ -55,20 +50,20 @@ public class DeflectorProjector extends ForceProjector{
 
     public static boolean deflect(DeflectorBuild building, float chanceDeflect, Bullet bullet){
         //deflect bullets if necessary
-        if (chanceDeflect > 0){
+        if (chanceDeflect > 0f){
             //slow bullets are not deflected
-            if (bullet.vel.len() <= 0.1 || !bullet.type.reflectable) return false;
+            if (bullet.vel().len() <= 0.1f || !bullet.type.reflectable) return false;
             //bullet reflection chance depends on bullet damage
-            if (!Mathf.chance(chanceDeflect / bullet.damage)) return false;
+            if (!Mathf.chance(chanceDeflect / bullet.damage())) return false;
             //make sound
-            deflectSound.at(tile, Mathf.random(0.9f, 1.1f));
+            deflectSound.at(building.tile, Mathf.random(0.9f, 1.1f));
             //translate bullet back to where it was upon collision
             bullet.vel.x *= -1;
             bullet.vel.y *= -1;
             // Add a random angle
             bullet.vel.setAngle(Mathf.random(deflectAngle) - deflectAngle / 2 + bullet.vel.angle());
             bullet.owner = building;
-            bullet.team = team;
+            bullet.team = building.team;
             bullet.time = (bullet.time + 1);
             return true;
         }
