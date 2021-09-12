@@ -500,9 +500,9 @@ public class SnUnitTypes implements ContentList {
             public boolean isHidden() { return true; }
         };
         courier = new UnitTypeExt("courier"){{
-            speed = 5.6f;
+            speed = 4.9f;
             flying = true;
-            itemCapacity = 120;
+            itemCapacity = 100;
             health = 50;
             hitSize = 4;
             defaultController = DeliverAI::new;
