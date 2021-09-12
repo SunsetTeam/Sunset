@@ -1184,7 +1184,7 @@ public class SnBullets implements ContentList{
             speed = 1;
             trailEffect = SnFx.torpedoTrail;
             drag = -0.003f;
-            homingRange = 30f;
+            homingRange = 10f;
             homingPower = 0.2f;
             ammoMultiplier = 2;
         }};
