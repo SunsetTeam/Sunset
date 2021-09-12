@@ -13,8 +13,6 @@ public class BerserkUnitType extends UnitType {
 
     public BerserkUnitType(String name) {
         super(name);
-        
-        constructor = UnitEntity::create;
     }
 
     @Override
