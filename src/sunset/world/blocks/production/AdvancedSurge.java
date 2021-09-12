@@ -11,11 +11,11 @@ import mindustry.graphics.*;
 import mindustry.world.blocks.production.GenericCrafter;
 
 // A GenericCrafter with a static top region
-public class StaticTopSmelter extends GenericCrafter{
+public class AdvancedSurge extends GenericCrafter{
     public Color flameColor = Color.valueOf("ffc999");
     public TextureRegion topRegion;
 
-    public StaticTopSmelter(String name){
+    public AdvancedSurge(String name){
         super(name);
         ambientSound = Sounds.smelter;
         ambientSoundVolume = 0.07f;

@@ -21,10 +21,10 @@ import mindustry.world.draw.DrawMixer;
 import sunset.content.SnFx;
 import sunset.content.SnItems;
 import sunset.world.blocks.production.PrecussionDrill;
-import sunset.world.blocks.production.StaticTopSmelter;
-import sunset.world.draw.DrawRotator;
-import sunset.world.draw.DrawRotatorTop;
-import sunset.world.draw.DrawWeaveTop;
+import sunset.world.blocks.production.AdvancedSurge;
+import sunset.world.draw.DrawAngleRotator;
+import sunset.world.draw.DrawModRotator;
+import sunset.world.draw.DrawModWeave;
 
 public class SnProduction implements ContentList {
     public static Block
@@ -70,7 +70,7 @@ public class SnProduction implements ContentList {
             craftEffect = SnFx.weaverSmeltsmoke;
             craftTime = 180f;
             outputItem = new ItemStack(Items.phaseFabric, 6);
-            drawer = new DrawWeaveTop();
+            drawer = new DrawModWeave();
             itemCapacity = 50;
             liquidCapacity = 30f;
 
@@ -82,6 +82,24 @@ public class SnProduction implements ContentList {
             consumes.power(6.1f);
         }};
 
+        advancedCryomixer = new LiquidConverter("advancedCryomixer"){{
+            requirements(Category.crafting, with(Items.lead, 180, Items.graphite, 90, SnItems.coldent, 60, Items.metaglass, 40));
+            outputLiquid = new LiquidStack(Liquids.cryofluid, 1f);
+            craftTime = 40f;
+            size = 3;
+            hasPower = true;
+            hasItems = true;
+            hasLiquids = true;
+            rotate = false;
+            solid = true;
+            outputsLiquid = true;
+            drawer = new DrawMixer();
+
+            consumes.power(2.5f);
+            consumes.item(SnItems.coldent);
+            consumes.liquid(Liquids.water, 1f);
+        }};
+
         advancedCultivator = new Cultivator("advancedCultivator") {{
             requirements(Category.production, with(Items.copper, 200, Items.lead, 200, Items.silicon, 180, Items.metaglass, 140, Items.titanium, 170, Items.phaseFabric, 155));
 
@@ -89,7 +107,7 @@ public class SnProduction implements ContentList {
             health = 990;
             craftEffect = SnFx.cultivatorSmeltsmoke;
             craftTime = 200f;
-            drawer = new DrawRotatorTop();
+            drawer = new DrawModRotator();
             outputItem = new ItemStack(Items.sporePod, 6);
             itemCapacity = 30;
             liquidCapacity = 40f;
@@ -115,7 +133,7 @@ public class SnProduction implements ContentList {
             consumes.power(7f);
         }};
 
-        advancedSurge = new StaticTopSmelter("advancedSurge") {{
+        advancedSurge = new AdvancedSurge("advancedSurge") {{
             requirements(Category.crafting, with(Items.lead, 130, Items.metaglass, 100, Items.silicon, 150, Items.thorium, 110, Items.surgeAlloy, 75));
 
             size = 5;
@@ -124,31 +142,14 @@ public class SnProduction implements ContentList {
             outputItem = new ItemStack(Items.surgeAlloy, 7);
             itemCapacity = 50;
             liquidCapacity = 80f;
-            drawer = new DrawRotator(360);
+            drawer = new DrawAngleRotator(360);
 
             consumes.items(with(Items.copper, 10, Items.lead, 12, Items.titanium, 8, Items.silicon, 10, Items.pyratite, 3));
-            consumes.liquid(Liquids.cryofluid, 0.87f);
+            consumes.liquid(Liquids.cryofluid, 0.70f);
             consumes.power(5.5f);
         }};
         //endregion advanced
         //region standart
-        advancedCryomixer = new LiquidConverter("advancedCryomixer"){{
-            requirements(Category.crafting, with(Items.lead, 180, Items.graphite, 90, SnItems.coldent, 60, Items.metaglass, 40));
-            outputLiquid = new LiquidStack(Liquids.cryofluid, 1f);
-            craftTime = 40f;
-            size = 3;
-            hasPower = true;
-            hasItems = true;
-            hasLiquids = true;
-            rotate = false;
-            solid = true;
-            outputsLiquid = true;
-            drawer = new DrawMixer();
-
-            consumes.power(2.5f);
-            consumes.item(SnItems.coldent);
-            consumes.liquid(Liquids.water, 1f);
-        }};
         purifier = new GenericCrafter("purifier") {{
             requirements(Category.crafting, with(Items.copper, 120, Items.titanium, 95, Items.silicon, 80, Items.plastanium, 65));
 
@@ -159,7 +160,7 @@ public class SnProduction implements ContentList {
             size = 3;
             hasPower = true;
             hasLiquids = false;
-            drawer = new DrawRotatorTop();
+            drawer = new DrawModRotator();
             ambientSound = Sounds.grinding;
             ambientSoundVolume = 0.025f;
 

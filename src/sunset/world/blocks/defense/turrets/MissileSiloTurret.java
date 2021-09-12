@@ -1,4 +1,4 @@
-package sunset.world.blocks.turrets;
+package sunset.world.blocks.defense.turrets;
 
 import arc.Core;
 import arc.Events;

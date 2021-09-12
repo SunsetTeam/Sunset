@@ -1,4 +1,4 @@
-package sunset.world.blocks;
+package sunset.world.blocks.defense.walls;
 
 import mindustry.gen.Bullet;
 import mindustry.world.blocks.defense.Wall;

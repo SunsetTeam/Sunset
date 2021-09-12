@@ -1,4 +1,4 @@
-package sunset.world.blocks.turrets;
+package sunset.world.blocks.defense.turrets;
 
 import mindustry.entities.bullet.BulletType;
 import mindustry.world.blocks.defense.turrets.LiquidTurret;

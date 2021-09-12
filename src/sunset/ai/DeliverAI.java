@@ -2,7 +2,7 @@ package sunset.ai;
 
 import arc.math.geom.Vec2;
 import mindustry.ai.types.FlyingAI;
-import sunset.world.blocks.Airport;
+import sunset.world.blocks.units.Airport;
 
 public class DeliverAI extends FlyingAI {
     public boolean inited = false;

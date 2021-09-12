@@ -1,4 +1,4 @@
-package sunset.world.blocks;
+package sunset.world.blocks.environment;
 
 import mindustry.content.Fx;
 import mindustry.entities.Effect;

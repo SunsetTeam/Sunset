@@ -14,6 +14,7 @@ import sunset.ai.*;
 import sunset.entities.abilities.StatusFieldAbility;
 import sunset.type.UnitTypeExt;
 import sunset.ai.weapon.ExtinguishWeaponAI;
+import sunset.type.WheelUnitType;
 import sunset.type.weapons.WeaponExt;
 import sunset.type.weapons.ChainWeapon;
 import sunset.type.CopterUnitType;
@@ -27,7 +28,8 @@ public class SnUnitTypes implements ContentList {
     public static UnitType
             guardcopter, bladecopter, swordcopter, guardiancopter, crusadercopter, //attacks copters
             comet, satelite, planet, star, galaxy, //buffers
-            router, courier,
+            wheel1, wheel2, //wheel
+            router, courier, //misc
             snowflake;
     public void loadFactoryRecipes()
     {
@@ -265,7 +267,7 @@ public class SnUnitTypes implements ContentList {
         // region buffers
         comet = new UnitType("comet") {{
             health = 150;
-            hitSize = 12;
+            hitSize = 15;
             speed = 3.1f;
             accel = 0.15f;
             drag = 0.1f;
@@ -297,7 +299,7 @@ public class SnUnitTypes implements ContentList {
 
         satelite = new UnitTypeExt("satellite") {{
             health = 470;
-            hitSize = 16;
+            hitSize = 23;
             speed = 3f;
             accel = 0.2f;
             drag = 0.15f;
@@ -327,7 +329,7 @@ public class SnUnitTypes implements ContentList {
 
         planet = new UnitTypeExt("planet") {{
             health = 980;
-            hitSize = 20;
+            hitSize = 26;
             speed = 2.9f;
             accel = 0.25f;
             drag = 0.1f;
@@ -359,7 +361,7 @@ public class SnUnitTypes implements ContentList {
 
         star = new UnitTypeExt("star") {{
             health = 5800;
-            hitSize = 28;
+            hitSize = 40;
             speed = 2.7f;
             accel = 0.2f;
             drag = 0.1f;
@@ -409,7 +411,7 @@ public class SnUnitTypes implements ContentList {
 
         galaxy = new UnitTypeExt("galaxy") {{
             health = 20000;
-            hitSize = 42;
+            hitSize = 60;
             speed = 2.4f;
             accel = 0.1f;
             drag = 0.05f;
@@ -454,6 +456,36 @@ public class SnUnitTypes implements ContentList {
             }});
         }};
         //endregion buffers
+        //region wheel
+        wheel1 = new WheelUnitType("wheel1"){{
+            health = 80;
+            speed = 3.5f;
+            rotateSpeed = baseRotateSpeed = 2.75f;
+            drag = 0.075f;
+            weapons.add(new WeaponExt("wheel1-minigun"){{
+                reload = 5.5f;
+                inaccuracy = 4f;
+                rotate = true;
+                mirror = false;
+                bullet = SnBullets.wheel1bullet;
+                x = y = 0;
+            }});
+        }};
+        wheel2 = new WheelUnitType("wheel2"){{
+            health = 420;
+            speed = 3.1f;
+            rotateSpeed = baseRotateSpeed = 2.66f;
+            drag = 0.075f;
+            weapons.add(new WeaponExt("wheel2-shotgun"){{
+                reload = 48f;
+                inaccuracy = 0f;
+                rotate = true;
+                mirror = false;
+                bullet = SnBullets.wheel2shotgun;
+                x = y = 0;
+            }});
+        }};
+        //endregion wheel
         //region misc
         router = new UnitTypeExt("router") {{
                 health = 2000000;
