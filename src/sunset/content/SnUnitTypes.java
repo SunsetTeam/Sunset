@@ -552,7 +552,7 @@ public class SnUnitTypes implements ContentList {
             );
             weapons.add(new Weapon(){{
                 bullet = new BerserkLaserBulletType(){{
-                    damage = 61;
+                    damage = 60;
                 }};
             }});
         }};
