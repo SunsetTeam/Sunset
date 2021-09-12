@@ -2,6 +2,7 @@ package sunset.type;
 
 import arc.struct.Seq;
 import mindustry.gen.Unit;
+import mindustry.gen.*;
 import mindustry.graphics.Layer;
 import mindustry.type.UnitType;
 import mindustry.world.meta.Stat;
