@@ -46,7 +46,7 @@ public class SnBullets implements ContentList{
 //units
     BasicHelicopterGun, HelicopterShootgun, HelicopterMissile, HelicopterBomb, HelicopterRocket, bigHelicopterGun, laserHelicopterFrag, largeHelicopterGun, bigHelicopterRocket, HelicopterMissiles,
     cometWaterShot, starStunBullet, galaxyKnockbackBullet,
-    wheel1bullet,
+    wheel1bullet, wheel2shotgun,
 //misc
     emptyBullet, overheatBullet,
 //test
@@ -1116,7 +1116,22 @@ public class SnBullets implements ContentList{
             shootEffect = Fx.shootSmall;
             smokeEffect = Fx.shootSmallSmoke;
         }};
-        
+        wheel2shotgun = new BasicBulletType(11f, 11f){{
+            hitEffect = despawnEffect = Fx.none;
+            instantDisappear = true;
+            lifetime = 11f;
+            fragBullets = 5;
+            keepVelocity = true;
+            fragBullet = new BasicBulletType(11f, 11f){{
+                lifetime = 11f;
+                keepVelocity = true;
+            }};
+            fragVelocityMin = 0.6f;
+            fragVelocityMax = 1f;
+            fragLifeMin = 0.6f;
+            fragLifeMax = 1f;
+            fragCone = 16f;
+        }};
 //misc
         overheatBullet = new BasicBulletType(0.1f, 7, "error"){{
             shootEffect = Fx.none;

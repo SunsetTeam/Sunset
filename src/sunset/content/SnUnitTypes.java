@@ -28,7 +28,7 @@ public class SnUnitTypes implements ContentList {
     public static UnitType
             guardcopter, bladecopter, swordcopter, guardiancopter, crusadercopter, //attacks copters
             comet, satelite, planet, star, galaxy, //buffers
-            wheel1, //wheel
+            wheel1, wheel2, //wheel
             router, courier, //misc
             snowflake;
     public void loadFactoryRecipes()
@@ -470,7 +470,20 @@ public class SnUnitTypes implements ContentList {
                 bullet = SnBullets.wheel1bullet;
                 x = y = 0;
             }});
-            defaultController = GroundUnitWeaponAI::new;
+        }};
+        wheel2 = new WheelUnitType("wheel2"){{
+            health = 420;
+            speed = 3.1f;
+            rotateSpeed = baseRotateSpeed = 2.66f;
+            drag = 0.075f;
+            weapons.add(new WeaponExt("wheel2-shotgun"){{
+                reload = 48f;
+                inaccuracy = 0f;
+                rotate = true;
+                mirror = false;
+                bullet = SnBullets.wheel2shotgun;
+                x = y = 0;
+            }});
         }};
         //endregion wheel
         //region misc

@@ -5,6 +5,7 @@ import arc.util.Time;
 import mindustry.gen.MechUnit;
 import mindustry.gen.Mechc;
 import mindustry.gen.Unit;
+import sunset.ai.GroundUnitWeaponAI;
 
 public class WheelUnitType extends UnitTypeExt {
     public WheelUnitType(String name) {
@@ -15,6 +16,7 @@ public class WheelUnitType extends UnitTypeExt {
 
     @Override
     public void init() {
+        defaultController = GroundUnitWeaponAI::new;
         constructor = MechUnit::create;
         rotateShooting = false;
         super.init();
