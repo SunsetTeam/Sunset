@@ -26,6 +26,19 @@ public class BerserkLaserBulletType extends BulletType {
         float dst = Mathf.dst(b.x, b.y, target.getX(), target.getY());
         b.data = dst;
         Damage.collideLine(b, b.team, hitEffect, b.x, b.y, b.rotation(), dst);
+        if(target instanceof Hitboxc){
+            Hitboxc hit = (Hitboxc)target;
+            hit.collision(b, hit.x(), hit.y());
+            b.collision(hit, hit.x(), hit.y());
+        } else if(target instanceof Building){
+            Building tile = (Building)target;
+            if(tile.collide(b)){
+                tile.collision(b);
+                hit(b, tile.x, tile.y);
+            }
+        } else {
+            b.data = new Vec2().trns(b.rotation(), maxLaserLength).add(b.x, b.y);
+        }
     }
 
     @Override
