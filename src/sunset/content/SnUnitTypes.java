@@ -547,23 +547,17 @@ public class SnUnitTypes implements ContentList {
             }});
         }};
         mirage = new BerserkUnitType("mirage"){{
-            
-            
             health = 140;
             speed = 1.8f;
             rotateSpeed = 3f;
             visualElevation = 0.2f;
             drag = 0.2f;
-            
-
             hitSize = 11f;
             legCount = 4;
             legLength = 8f;
             legTrns = 0.5f;
             legMoveSpace = 1.5f;
-            
             groundLayer = Layer.legUnit - 1f;
-            
             allowLegStep = true;
             hovering = true;
             addRageMode(
@@ -577,6 +571,8 @@ public class SnUnitTypes implements ContentList {
                 
             bullet = new BerserkLaserBulletType(){{
                 damage = 15;
+                maxLaserLength = 120f;
+                width = 5;
                 }};
             }});
         }};
