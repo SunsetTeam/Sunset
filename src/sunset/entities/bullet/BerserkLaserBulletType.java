@@ -26,7 +26,7 @@ public class BerserkLaserBulletType extends BulletType {
         float dst = maxLaserLength;
         Vec2 v = new Vec2().trns(b.rotation(), maxLaserLength).add(b.x, b.y);
         if(target != null) {
-            Mathf.dst(b.x, b.y, target.x(), target.y());
+            dst = Mathf.dst(b.x, b.y, target.x(), target.y());
         } else {
             dst = maxLaserLength;
         }
@@ -55,7 +55,7 @@ public class BerserkLaserBulletType extends BulletType {
             Tmp.v1.set(data).lerp(b, b.fin());
             float dst = (float)((Object[])b.data)[1];
             Draw.color(color);
-            Drawf.laser(b.team, Core.atlas.find("laser"), Core.atlas.find("laser-end"), b.x, b.y, Tmp.v1.x, Tmp.v1.y, dst);
+            Drawf.laser(b.team, Core.atlas.find("laser"), Core.atlas.find("laser-end"), b.x, b.y, Tmp.v1.x, Tmp.v1.y, 3);
             Drawf.light(b.team, b.x, b.y, Tmp.v1.x, Tmp.v1.y,15, lightColor, lightOpacity);
         }
     }
