@@ -552,7 +552,7 @@ public class SnUnitTypes implements ContentList {
             rotateSpeed = 3f;
             drag = 0.2f;
             allowLegStep = true;
-            visualElevation = 0.2f
+            visualElevation = 0.2f;
             health = 140;
             speed = 1.8f;
             hitSize = 11f;
@@ -567,7 +567,7 @@ public class SnUnitTypes implements ContentList {
             );
             weapons.add(new Weapon("mirage-berlaser"){{
                 reload = 30f;
-                inaccuracy = 0f;
+                inaccuracy = 2f;
                 rotate = false;
                 mirror = true;
                 
