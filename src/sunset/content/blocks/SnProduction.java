@@ -32,8 +32,8 @@ public class SnProduction implements ContentList {
     //advanced
     advancedCompressor, advancedWeaver, advancedCultivator, advancedKiln, advancedSurge, advancedCryomixer,
 
-    //standart
-    crystalyze, purifier, enojieKiln,
+    //standard
+    crystallizer, purifier, enojieKiln,
 
     //drills
     percussionDrill;
@@ -41,7 +41,7 @@ public class SnProduction implements ContentList {
     @Override
     public void load() {
         //region advanced
-        advancedCompressor = new GenericSmelter("advancedCompressor") {{
+        advancedCompressor = new GenericSmelter("advanced-compressor") {{
             requirements(Category.crafting, with(Items.lead, 150, Items.graphite, 120, Items.silicon, 210, Items.titanium, 110, Items.thorium, 200, Items.phaseFabric, 110));
 
             size = 3;
@@ -63,7 +63,7 @@ public class SnProduction implements ContentList {
             consumes.power(5.3f);
         }};
 
-        advancedWeaver = new GenericSmelter("advancedWeaver") {{
+        advancedWeaver = new GenericSmelter("advanced-weaver") {{
             requirements(Category.crafting, with(Items.copper, 210, Items.metaglass, 90, Items.silicon, 190, Items.titanium, 100, Items.thorium, 185, Items.surgeAlloy, 110));
             size = 3;
             health = 890;
@@ -82,7 +82,7 @@ public class SnProduction implements ContentList {
             consumes.power(6.1f);
         }};
 
-        advancedCryomixer = new LiquidConverter("advancedCryomixer"){{
+        advancedCryomixer = new LiquidConverter("advanced-cryomixer"){{
             requirements(Category.crafting, with(Items.lead, 180, Items.graphite, 90, SnItems.coldent, 60, Items.metaglass, 40));
             outputLiquid = new LiquidStack(Liquids.cryofluid, 1f);
             craftTime = 40f;
@@ -100,7 +100,7 @@ public class SnProduction implements ContentList {
             consumes.liquid(Liquids.water, 1f);
         }};
 
-        advancedCultivator = new Cultivator("advancedCultivator") {{
+        advancedCultivator = new Cultivator("advanced-cultivator") {{
             requirements(Category.production, with(Items.copper, 200, Items.lead, 200, Items.silicon, 180, Items.metaglass, 140, Items.titanium, 170, Items.phaseFabric, 155));
 
             size = 4;
@@ -116,7 +116,7 @@ public class SnProduction implements ContentList {
             consumes.power(2f);
         }};
 
-        advancedKiln = new GenericSmelter("advancedKiln") {{
+        advancedKiln = new GenericSmelter("advanced-kiln") {{
             requirements(Category.crafting, with(Items.copper, 210, Items.lead, 220, Items.metaglass, 190, Items.graphite, 185, Items.silicon, 200, Items.titanium, 210, Items.thorium, 205));
 
             size = 4;
@@ -133,7 +133,7 @@ public class SnProduction implements ContentList {
             consumes.power(7f);
         }};
 
-        advancedSurge = new AdvancedSurge("advancedSurge") {{
+        advancedSurge = new AdvancedSurge("advanced-surge") {{
             requirements(Category.crafting, with(Items.lead, 130, Items.metaglass, 100, Items.silicon, 150, Items.thorium, 110, Items.surgeAlloy, 75));
 
             size = 5;
@@ -149,7 +149,8 @@ public class SnProduction implements ContentList {
             consumes.power(5.5f);
         }};
         //endregion advanced
-        //region standart
+
+        //region standard
         purifier = new GenericCrafter("purifier") {{
             requirements(Category.crafting, with(Items.copper, 120, Items.titanium, 95, Items.silicon, 80, Items.plastanium, 65));
 
@@ -168,7 +169,7 @@ public class SnProduction implements ContentList {
             consumes.power(2.5f);
         }};
 
-        crystalyze = new GenericSmelter("crystalyze") {{
+        crystallizer = new GenericSmelter("crystallizer") {{
             requirements(Category.crafting, with(Items.lead, 130, Items.thorium, 110, Items.silicon, 120, SnItems.nobium, 90, Items.plastanium, 75));
 
             craftEffect = SnFx.crystalyze;
@@ -201,7 +202,8 @@ public class SnProduction implements ContentList {
             consumes.items(with(SnItems.nobium, 2, SnItems.planatrium, 3, Items.metaglass, 1));
             consumes.power(5.3f);
         }};
-        //endregion standart
+        //endregion standard
+
         //drills
         percussionDrill = new PrecussionDrill("percussion-drill") {{
             requirements(Category.production, with(Items.copper, 100, Items.silicon, 90, Items.titanium, 90, Items.thorium, 85, SnItems.nobium, 80, SnItems.naturite, 70));

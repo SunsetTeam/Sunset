@@ -26,16 +26,21 @@ import static sunset.utils.UnitsUtils.addUnitGroup;
 
 public class SnUnitTypes implements ContentList {
     public static UnitType
-            guardcopter, bladecopter, swordcopter, guardiancopter, crusadercopter, //attacks copters
-            comet, satelite, planet, star, galaxy, //buffers
-            wheel1, wheel2, wheel3, //wheel
-            router, courier, //misc
+            //attack copters
+            guardcopter, bladecopter, swordcopter, guardiancopter, crusadercopter,
+            //air-support (buffers)
+            comet, satellite, planet, star, galaxy,
+            //wheel
+            wheel1, wheel2, wheel3,
+            //delivery
+            router, courier,
+            //freezing
             snowflake;
     public void loadFactoryRecipes()
     {
         UnitsUtils.init();
         addUnitGroup(Blocks.airFactory, 60*20f, with(Items.silicon, 30, Items.metaglass, 20),
-            comet, satelite, planet, star, galaxy);
+            comet, satellite, planet, star, galaxy);
         addUnitGroup(Blocks.airFactory, 60*15f, with(Items.silicon, 30, Items.graphite, 15),
             guardcopter, bladecopter, swordcopter, guardiancopter, crusadercopter);
         addUnitGroup(Blocks.groundFactory, 60*10f, with(Items.silicon, 25f, Items.lead, 20),
@@ -43,8 +48,8 @@ public class SnUnitTypes implements ContentList {
     }
     @Override
     public void load() {
-        // region copters
-        guardcopter = new CopterUnitType("guard_copter") {{
+        //attack copters
+        guardcopter = new CopterUnitType("guard-copter") {{
             health = 170;
             hitSize = 27;
             speed = 3.3f;
@@ -72,7 +77,7 @@ public class SnUnitTypes implements ContentList {
                     }});
         }};
 
-        bladecopter = new CopterUnitType("blade_copter") {{
+        bladecopter = new CopterUnitType("blade-copter") {{
             health = 370;
             hitSize = 39;
             speed = 3.0f;
@@ -104,7 +109,7 @@ public class SnUnitTypes implements ContentList {
                     }});
         }};
 
-        swordcopter = new CopterUnitType("sword_copter") {{
+        swordcopter = new CopterUnitType("sword-copter") {{
             health = 630;
             hitSize = 46;
             speed = 2.8f;
@@ -149,7 +154,7 @@ public class SnUnitTypes implements ContentList {
                     }});
         }};
 
-        guardiancopter = new CopterUnitType("guardian_copter") {{
+        guardiancopter = new CopterUnitType("guardian-copter") {{
             health = 4600;
             hitSize = 63;
             speed = 2.7f;
@@ -196,7 +201,7 @@ public class SnUnitTypes implements ContentList {
                     }});
         }};
 
-        crusadercopter = new CopterUnitType("crusader_copter") {{
+        crusadercopter = new CopterUnitType("crusader-copter") {{
             health = 16500;
             hitSize = 77;
             speed = 2.6f;
@@ -265,8 +270,9 @@ public class SnUnitTypes implements ContentList {
                         bullet = SnBullets.bigHelicopterRocket;
                     }});
         }};
-        // endregion copters
-        // region buffers
+        //endregion attack copters
+
+        //region air-support (buffers)
         comet = new UnitType("comet") {{
             health = 150;
             hitSize = 15;
@@ -299,7 +305,7 @@ public class SnUnitTypes implements ContentList {
             }});
         }};
 
-        satelite = new UnitTypeExt("satellite") {{
+        satellite = new UnitTypeExt("satellite") {{
             health = 470;
             hitSize = 23;
             speed = 3f;
@@ -457,7 +463,8 @@ public class SnUnitTypes implements ContentList {
                 damage = 80;
             }});
         }};
-        //endregion buffers
+        //endregion air-support (buffers)
+
         //region wheel
         wheel1 = new WheelUnitType("wheel1"){{
             health = 80;
@@ -503,7 +510,8 @@ public class SnUnitTypes implements ContentList {
             }});
         }};
         //endregion wheel
-        //region misc
+
+        //region delivery
         router = new UnitTypeExt("router") {{
                 health = 2000000;
                 speed = 2.85f;
@@ -525,7 +533,8 @@ public class SnUnitTypes implements ContentList {
             defaultController = DeliverAI::new;
             constructor = UnitEntity::create;
         }};
-        //endregion misc
+        //endregion delivery
+
         //region freezing
         snowflake = new UnitType("snowflake") {{
             defaultController = SuicideAI::new;

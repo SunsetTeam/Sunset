@@ -9,6 +9,9 @@ import mindustry.mod.Mod;
 //import mindustry.ui.dialogs.BaseDialog;
 import sunset.content.*;
 import sunset.content.blocks.*;
+import sunset.content.blocks.defense.SnProjectors;
+import sunset.content.blocks.defense.SnTurrets;
+import sunset.content.blocks.defense.SnWalls;
 import sunset.type.UnitData;
 //import sunset.ui.ContentInfoDialogExt;
 import sunset.utils.Utils;
@@ -18,19 +21,20 @@ import sunset.world.MissileLogic;
 
 public class Sunset extends Mod {
     private final ContentList[] SnContent = {
-        new SnItems(),
-        new SnEnvironment(),
-        new SnStatusEffects(),
-        new SnBullets(),
-        new SnDefense(),
-        new SnOther(),
-        new SnPower(),
-        new SnTurrets(),
-        new SnUnitTypes(),
-        new SnWeathers(),
-        new SnProduction(),
-        new SnPlanets(),
-        new SnSectorPresets()
+            new SnItems(),
+            new SnProjectors(),
+            new SnTurrets(),
+            new SnWalls(),
+            new SnEnvironment(),
+            new SnDistribution(),
+            new SnPower(),
+            new SnProduction(),
+            new SnStatusEffects(),
+            new SnBullets(),
+            new SnUnitTypes(),
+            new SnWeathers(),
+            new SnPlanets(),
+            new SnSectorPresets()
     };
 
     @Override

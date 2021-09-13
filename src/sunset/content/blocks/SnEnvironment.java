@@ -18,18 +18,21 @@ public class SnEnvironment implements ContentList {
     oreFors, orePlanatrium, oreFlameid, oreColdent,
 
     //floors 
-    crimsongrass, crimsondirt, crimsonswamp, crimsonsand, crimsonsandwater, crimsonwater, crimsondeepwater,
-    orangesand, obsidian, ash, burningash,
+    crimsongrass, crimsondirt, crimsonswamp, crimsonsand, crimsonsandwater,
+    crimsonwater, crimsondeepwater, orangesand, obsidian, ash, burningash,
 
     //static walls 
-    crimsondirtwall, crimsongrasswall, crimsonsandwall,
-    stonesandwall, stonesand, orangesandwall, obsidianwall, ashwall,
+    crimsondirtwall, crimsongrasswall, crimsonsandwall, stonesandwall, stonesand,
+    orangesandwall, obsidianwall, ashwall,
 
     //trees
     crimsontree,
 
+    //special
+    geyser,
+
     //hidden
-    hotSlag1, hotSlag2, hotSlag3, glacier1, glacier2, glacier3, geyser;
+    hotSlag1, hotSlag2, hotSlag3, glacier1, glacier2, glacier3;
 
     @Override
     public void load() {
@@ -58,18 +61,13 @@ public class SnEnvironment implements ContentList {
             oreScale = 26.1234f;
         }};
         //endregion ores
+
         //region floors
         crimsongrass = new Floor("crimson-grass") {{
             variants = 3;
         }};
 
         crimsondirt = new Floor("crimson-dirt") {{
-            variants = 3;
-        }};
-
-        crimsonsand = new Floor("crimson-sand") {{
-            itemDrop = Items.sand;
-            playerUnmineable = true;
             variants = 3;
         }};
 
@@ -83,6 +81,12 @@ public class SnEnvironment implements ContentList {
             statusDuration = 120f;
             drownTime = 700f;
             albedo = 0.5f;
+        }};
+
+        crimsonsand = new Floor("crimson-sand") {{
+            itemDrop = Items.sand;
+            playerUnmineable = true;
+            variants = 3;
         }};
 
         crimsonsandwater = new Floor("crimson-sand-water") {{
@@ -122,10 +126,6 @@ public class SnEnvironment implements ContentList {
             albedo = 0.5f;
         }};
 
-        stonesand = new Floor("stone-sand") {{
-            variants = 3;
-        }};
-
         orangesand = new Floor("orange-sand") {{
             itemDrop = Items.sand;
             playerUnmineable = true;
@@ -150,6 +150,7 @@ public class SnEnvironment implements ContentList {
             lightColor = Color.orange.cpy().a(0.15f);
         }};
         //endregion floors
+
         //region static walls
         crimsondirtwall = new StaticWall("crimson-dirt-wall") {{
             variants = 2;
@@ -167,6 +168,10 @@ public class SnEnvironment implements ContentList {
             variants = 2;
         }};
 
+        stonesand = new Floor("stone-sand") {{
+            variants = 3;
+        }};
+
         orangesandwall = new StaticWall("orange-sand-wall") {{
             variants = 2;
         }};
@@ -179,11 +184,29 @@ public class SnEnvironment implements ContentList {
             variants = 2;
         }};
         //endregion static walls
+
         //region trees
         crimsontree = new StaticTree("crimson-tree") {{
             variants = 0;
         }};
         //endregion trees
+
+        //region special
+        geyser = new Geyser("geyser") {{
+            damageTaken = 0.2f;
+            drownTime = 180f;
+            isLiquid = true;
+            status = StatusEffects.wet;
+            statusDuration = 120f;
+            cacheLayer = CacheLayer.water;
+            speedMultiplier = 0.9f;
+            variants = 0;
+            liquidDrop = Liquids.water;
+            steamEffect = new Effect(30f, Fx.steam.renderer);
+            eruptionEffect = new Effect(30f, Fx.ballfire.renderer);
+        }};
+        //end region special
+
         //region hidden
         hotSlag1 = new Floor("hotSlag1") {{
             buildVisibility = BuildVisibility.debugOnly;
@@ -221,18 +244,5 @@ public class SnEnvironment implements ContentList {
             //only for rime planet generator
         }};
         //endregion hidden
-        geyser = new Geyser("geyser") {{
-            damageTaken = 0.2f;
-            drownTime = 180f;
-            isLiquid = true;
-            status = StatusEffects.wet;
-            statusDuration = 120f;
-            cacheLayer = CacheLayer.water;
-            speedMultiplier = 0.9f;
-            variants = 0;
-            liquidDrop = Liquids.water;
-            steamEffect = new Effect(30f, Fx.steam.renderer);
-            eruptionEffect = new Effect(30f, Fx.ballfire.renderer);
-        }};
     }
 }

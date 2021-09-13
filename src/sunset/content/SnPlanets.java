@@ -12,10 +12,14 @@ import sunset.maps.generators.RimeGenerator;
 
 public class SnPlanets implements ContentList{
     public static Planet
-    magma, burnout, azaria, rime;
+            //stars
+            magma,
+            //planets
+            burnout, azaria, rime;
 
     @Override
     public void load(){
+        //stars
         magma = new Planet("magma", Planets.sun, 0, 3.6f){{
             bloom = true;
             accessible = false;
@@ -35,6 +39,7 @@ public class SnPlanets implements ContentList{
             lightColor = Color.valueOf("F5E14E");
         }};
 
+        //planets
         burnout = new Planet("burnout", SnPlanets.magma, 2, 0.7f){{
             meshLoader = () -> new HexMesh(this, 6);
             generator = new BurnoutGenerator();

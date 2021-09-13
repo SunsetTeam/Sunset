@@ -12,7 +12,8 @@ import mindustry.graphics.*;
 import sunset.type.StackableStatusEffect;
 
 public class SnStatusEffects implements ContentList{
-    public static StatusEffect frostbite, stun, starBuff, galaxyDebuff, overheat;
+    public static StatusEffect
+            frostbite, stun, starBuff, galaxyDebuff, overheat;
     @Override
     public void load(){
 
