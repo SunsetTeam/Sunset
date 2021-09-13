@@ -44,7 +44,7 @@ public class SnBullets implements ContentList {
     //units
     BasicHelicopterGun, HelicopterShootgun, HelicopterMissile, HelicopterBomb, HelicopterRocket, bigHelicopterGun, laserHelicopterFrag, largeHelicopterGun, bigHelicopterRocket, HelicopterMissiles,
     cometWaterShot, starStunBullet, galaxyKnockbackBullet,
-    wheel1bullet, wheel2shotgun,
+    wheel1bullet, wheel2shotgun, wheel3burst,
     //misc
     emptyBullet, overheatBullet,
     //test
@@ -1078,11 +1078,19 @@ public class SnBullets implements ContentList {
                 lifetime = 11f;
                 keepVelocity = true;
             }};
-            fragVelocityMin = 0.6f;
-            fragVelocityMax = 1f;
-            fragLifeMin = 0.6f;
-            fragLifeMax = 1f;
+            fragVelocityMin = 0.7f;
+            fragVelocityMax = 1.3f;
+            fragLifeMin = 0.7f;
+            fragLifeMax = 1.3f;
             fragCone = 16f;
+        }};
+        wheel3burst = new BasicBulletType(9f, 43f){{
+            lifetime = 27f;
+            status = StatusEffects.blasted;
+            splashDamage = 37f;
+            splashDamageRadius = 17f;
+            width = 8f;
+            height = 12f;
         }};
         //endregion wheel
         //region misc

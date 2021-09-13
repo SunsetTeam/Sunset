@@ -28,7 +28,7 @@ public class SnUnitTypes implements ContentList {
     public static UnitType
             guardcopter, bladecopter, swordcopter, guardiancopter, crusadercopter, //attacks copters
             comet, satelite, planet, star, galaxy, //buffers
-            wheel1, wheel2, //wheel
+            wheel1, wheel2, wheel3, //wheel
             router, courier, //misc
             snowflake;
     public void loadFactoryRecipes()
@@ -38,6 +38,8 @@ public class SnUnitTypes implements ContentList {
             comet, satelite, planet, star, galaxy);
         addUnitGroup(Blocks.airFactory, 60*15f, with(Items.silicon, 30, Items.graphite, 15),
             guardcopter, bladecopter, swordcopter, guardiancopter, crusadercopter);
+        addUnitGroup(Blocks.groundFactory, 60*10f, with(Items.silicon, 25f, Items.lead, 20),
+            wheel1, wheel2, wheel3);
     }
     @Override
     public void load() {
@@ -473,7 +475,7 @@ public class SnUnitTypes implements ContentList {
         }};
         wheel2 = new WheelUnitType("wheel2"){{
             health = 420;
-            speed = 3.1f;
+            speed = 3.4f;
             rotateSpeed = baseRotateSpeed = 2.66f;
             drag = 0.075f;
             weapons.add(new WeaponExt("wheel2-shotgun"){{
@@ -482,6 +484,21 @@ public class SnUnitTypes implements ContentList {
                 rotate = true;
                 mirror = false;
                 bullet = SnBullets.wheel2shotgun;
+                x = y = 0;
+            }});
+        }};
+        wheel3 = new WheelUnitType("wheel3"){{
+            health = 890;
+            speed = 3.2f;
+            rotateSpeed = baseRotateSpeed = 2.33f;
+            drag = 0.075f;
+            weapons.add(new WeaponExt("wheel2-shotgun"){{
+                reload = 65f;
+                inaccuracy = 1f;
+                rotate = true;
+                mirror = false;
+                bullet = SnBullets.wheel3burst;
+                shootSound = Sounds.shootBig;
                 x = y = 0;
             }});
         }};
