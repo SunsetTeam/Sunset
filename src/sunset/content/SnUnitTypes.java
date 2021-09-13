@@ -548,7 +548,12 @@ public class SnUnitTypes implements ContentList {
         }};
         mirage = new BerserkUnitType("mirage"){{
             constructor = UnitEntity::create;
-            groundLayer = Layer.legUnit;
+            groundLayer = Layer.legUnit - 1f;
+            rotateSpeed = 3f;
+            drag = 0.2f;
+            allowLegStep = true;
+            visualElevation = 0.2f;
+            groundLaye
             health = 140;
             speed = 2f;
             hitSize = 11f;
@@ -556,6 +561,7 @@ public class SnUnitTypes implements ContentList {
             legLength = 8f;
             legTrns = 0.5f;
             legMoveSpace = 1.5f;
+            hovering = true;
 
             addRageMode(
                     BerserkAbility.dmg(70, 1.2f, 1.3f)
