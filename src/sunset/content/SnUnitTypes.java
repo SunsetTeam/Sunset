@@ -560,6 +560,8 @@ public class SnUnitTypes implements ContentList {
             weapons.add(new Weapon("mirage-berlaser"){{
                 bullet = new BerserkLaserBulletType(){{
                 damage = 60;
+width = 3;
+maxLength = 200;
                 }};
             }});
         }};
