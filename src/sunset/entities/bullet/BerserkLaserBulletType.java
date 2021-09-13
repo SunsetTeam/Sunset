@@ -23,7 +23,12 @@ public class BerserkLaserBulletType extends BulletType {
     @Override
     public void update(Bullet b){
         Healthc target = Damage.linecast(b, b.x, b.y, b.rotation(), maxLaserLength);
-        float dst = Mathf.dst(b.x, b.y, target.getX(), target.getY());
+        float dst = maxLaserLength;
+        if(target != null) { 
+            Mathf.dst(b.x, b.y, target.x(), target.y());
+        } else {
+            dst = maxLaserLength;
+        }
         Object[] obj = new Object[]{target, dst};
         b.data = obj;
         Damage.collideLine(b, b.team, hitEffect, b.x, b.y, b.rotation(), dst);
