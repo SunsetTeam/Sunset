@@ -552,10 +552,9 @@ public class SnUnitTypes implements ContentList {
             rotateSpeed = 3f;
             drag = 0.2f;
             allowLegStep = true;
-            visualElevation = 0.2f;
-            groundLaye
+            visualElevation = 0.2f
             health = 140;
-            speed = 2f;
+            speed = 1.8f;
             hitSize = 11f;
             legCount = 4;
             legLength = 8f;
