@@ -24,13 +24,13 @@ public class BerserkLaserBulletType extends BulletType {
     public void update(Bullet b){
         Healthc target = Damage.linecast(b, b.x, b.y, b.rotation(), maxLaserLength);
         float dst = maxLaserLength;
-        if(target != null) { 
+        Vec2 v = new Vec2().trns(b.rotation(), maxLaserLength).add(b.x, b.y);
+        if(target != null) {
             Mathf.dst(b.x, b.y, target.x(), target.y());
         } else {
             dst = maxLaserLength;
         }
-        Object[] obj = new Object[]{target, dst};
-        b.data = obj;
+        b.data = new Object[]{target, dst};
         Damage.collideLine(b, b.team, hitEffect, b.x, b.y, b.rotation(), dst);
         if(target instanceof Hitboxc){
             Hitboxc hit = (Hitboxc)target;
@@ -43,14 +43,15 @@ public class BerserkLaserBulletType extends BulletType {
                 hit(b, tile.x, tile.y);
             }
         } else {
-            b.data = new Vec2().trns(b.rotation(), maxLaserLength).add(b.x, b.y);
+
+            b.data = new Object[]{v, dst};
         }
     }
 
     @Override
     public void draw(Bullet b) {
         if(((Object[])b.data)[0] instanceof Position){
-            Position data = (Position)b.data;
+            Position data = (Position)((Object[])b.data)[0];
             Tmp.v1.set(data).lerp(b, b.fin());
             float dst = (float)((Object[])b.data)[1];
             Draw.color(color);
