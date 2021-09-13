@@ -1,54 +1,41 @@
 package sunset.entities.bullet;
 
-import arc.graphics.Color;
-import arc.graphics.g2d.Draw;
-import arc.graphics.g2d.Fill;
-import arc.graphics.g2d.Lines;
-import arc.math.Mathf;
-import arc.util.Time;
-import arc.util.Tmp;
-import mindustry.content.Fx;
-import mindustry.entities.Damage;
-import mindustry.entities.Effect;
-import mindustry.entities.Units;
-import mindustry.entities.bullet.BasicBulletType;
-import mindustry.gen.Bullet;
+import arc.Core;
+import arc.graphics.*;
+import arc.graphics.g2d.*;
+import arc.math.*;
+import arc.math.geom.*;
+import arc.util.*;
+import mindustry.content.*;
+import mindustry.entities.*;
+import mindustry.entities.bullet.*;
+import mindustry.gen.*;
 import mindustry.graphics.Drawf;
 
-public class BerserkLaserBulletType extends BasicBulletType {
-    private float laserLength;
-    public float maxLength = 100, width = 4;
-    public float lengthFallOf = 0.5f;
-    public Effect hitEffect = Fx.none;
-    public Color[] colors = {Color.yellow, Color.gray, Color.blue};
 
-    Color sColor = new Color();
+public class BerserkLaserBulletType extends BulletType {
+    public float maxLaserLength = 120f;
+    public float width = 3;
+    public Effect hitEffect = Fx.none;
+    public Color color = Color.gray;
+
+
     @Override
     public void update(Bullet b){
-        Units.nearbyEnemies(b.team, b.x, b.y, width, maxLength, u -> {
-            laserLength = Mathf.dst(b.x, b.y, u.x, u.y);
-        });
-        Damage.collideLine(b, b.team, hitEffect, b.x, b.y, b.rotation(), laserLength);
+        Healthc target = Damage.linecast(b, b.x, b.y, b.rotation(), maxLaserLength);
+        float dst = Mathf.dst(b.x, b.y, target.getX(), target.getY());
+        b.data = dst;
+        Damage.collideLine(b, b.team, hitEffect, b.x, b.y, b.rotation(), dst);
     }
 
     @Override
     public void draw(Bullet b) {
-        float rLength = b.fdata;
-
-        float f = Mathf.curve(b.fin(), 0f, 0.2f);
-        float baseLength = rLength * f;
-        float cwidth = width;
-
-        Lines.lineAngle(b.x, b.y, b.rotation(), baseLength);
-        for (Color color : colors){
+        if(b.data instanceof Position){
+            Position data = (Position)b.data;
+            Tmp.v1.set(data).lerp(b, b.fin());
             Draw.color(color);
-            Lines.stroke((width *= lengthFallOf) * b.fout());
-            Lines.lineAngle(b.x, b.y, b.rotation(), laserLength, false);
-            Tmp.v1.trns(b.rotation(), baseLength);
-            Drawf.tri(b.x + Tmp.v1.x, b.y + Tmp.v1.y, Lines.getStroke() *1.22f, cwidth * 2f * width / 2f, b.rotation());
-
-            Fill.circle(b.x, b.y, 1f * cwidth * b.fout());
+            Drawf.laser(b.team, Core.atlas.find("laser"), Core.atlas.find("laser-end"), b.x, b.y, Tmp.v1.x, Tmp.v1.y, width);
+            Drawf.light(b.team, b.x, b.y, Tmp.v1.x, Tmp.v1.y,15, lightColor, lightOpacity);
         }
-
     }
 }
