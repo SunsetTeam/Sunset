@@ -41,8 +41,8 @@ public class SnDefense implements ContentList {
            requirements(Category.effect, with(Items.silicon, 1200, Items.titanium, 2500, Items.thorium, 1300, Items.phaseFabric, 900, Items.surgeAlloy, 1000, SnItems.enojie, 850, SnItems.coldent, 900));
            size = 3;
            health = 900;
-           radius = 150;
-           phaseRadiusBoost = 100;
+           radius = 120;
+           phaseRadiusBoost = 90;
            phaseShieldBoost = 1200;
            shieldHealth = 3500;
            cooldownNormal = 3.1f;
