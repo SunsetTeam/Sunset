@@ -547,10 +547,10 @@ public class SnUnitTypes implements ContentList {
             }});
         }};
         mirage = new BerserkUnitType("mirage"){{
-            constructor = UnitEntity::legUnit;
+            constructor = UnitEntity::create;
             groundLayer = Layer.legUnit;
             legCount = 4;
-            legLength = 6f;
+            legLength = 8f;
             legTrns = 0.5f;
             legMoveSpace = 1.5f;
 
