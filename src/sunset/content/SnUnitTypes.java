@@ -517,7 +517,7 @@ public class SnUnitTypes implements ContentList {
             public boolean isHidden() { return true; }
         };
         courier = new UnitTypeExt("courier"){{
-            speed = 4.9f;
+            speed = 4.3f;
             flying = true;
             itemCapacity = 100;
             health = 50;
