@@ -4,6 +4,7 @@ import arc.struct.Seq;
 import mindustry.gen.Unit;
 import mindustry.gen.*;
 import mindustry.graphics.Layer;
+import mindustry.gen.UnitEntity;
 import mindustry.type.UnitType;
 import mindustry.world.meta.Stat;
 import sunset.entities.abilities.BerserkAbility;
@@ -13,6 +14,7 @@ public class BerserkUnitType extends UnitType {
 
     public BerserkUnitType(String name) {
         super(name);
+        constructor = UnitEntity::create;
     }
 
     @Override
