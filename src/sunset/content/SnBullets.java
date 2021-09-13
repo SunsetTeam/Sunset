@@ -1068,13 +1068,13 @@ public class SnBullets implements ContentList {
             shootEffect = Fx.shootSmall;
             smokeEffect = Fx.shootSmallSmoke;
         }};
-        wheel2shotgun = new BasicBulletType(11f, 11f) {{
+        wheel2shotgun = new BasicBulletType(11f, 7f) {{
             hitEffect = despawnEffect = Fx.none;
             instantDisappear = true;
             lifetime = 11f;
-            fragBullets = 5;
+            fragBullets = 9;
             keepVelocity = true;
-            fragBullet = new BasicBulletType(11f, 11f) {{
+            fragBullet = new BasicBulletType(11f, 7f) {{
                 lifetime = 11f;
                 keepVelocity = true;
             }};
@@ -1084,8 +1084,8 @@ public class SnBullets implements ContentList {
             fragLifeMax = 1.3f;
             fragCone = 16f;
         }};
-        wheel3burst = new BasicBulletType(9f, 43f){{
-            lifetime = 27f;
+        wheel3burst = new BasicBulletType(11f, 43f){{
+            lifetime = 24f;
             status = StatusEffects.blasted;
             splashDamage = 37f;
             splashDamageRadius = 17f;
