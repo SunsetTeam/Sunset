@@ -573,8 +573,6 @@ public class SnUnitTypes implements ContentList {
                 
             bullet = new BerserkLaserBulletType(){{
                 damage = 15;
-                width = 3;
-                maxLength = 200;
                 }};
             }});
         }};
