@@ -44,7 +44,7 @@ public class BerserkLaserBulletType extends BulletType {
             b.collision(hit, hit.x(), hit.y());
         } else if(target instanceof Building){
             Building tile = (Building)target;
-            b.data = dst - tile.block.size;
+            b.data = new Object[]{target, dst - tile.block.size};
             if(tile.collide(b)){
                 tile.collision(b);
                 hit(b, tile.x, tile.y);
