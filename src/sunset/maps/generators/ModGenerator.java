@@ -24,11 +24,11 @@ import mindustry.world.Tiles;
 public class ModGenerator extends PlanetGenerator {
     public final Simplex simplex = new Simplex();
     public final RidgedPerlin rid = new RidgedPerlin(1, 2);
-    public  Block[][] arr;
-    public  float scl = 0.f;
-    public  float waterOffset = 0.f;
-    public   BaseGenerator basegen = new BaseGenerator();
-    public float water = 0.f;
+    public Block[][] arr;
+    public float scl = 5f;
+    public float waterOffset = 0.07f;
+    public BaseGenerator basegen = new BaseGenerator();
+    public float water = 2f;
     ObjectMap<Block,Block> dec;
 
     ObjectMap<Block,Block> tars;
