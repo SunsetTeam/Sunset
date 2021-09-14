@@ -547,7 +547,7 @@ public class SnUnitTypes implements ContentList {
             }});
         }};
         mirage = new BerserkUnitType("mirage"){{
-            health = 200;
+            health = 130;
             speed = 1.8f;
             rotateSpeed = 3f;
             visualElevation = 0.2f;
@@ -576,7 +576,9 @@ public class SnUnitTypes implements ContentList {
                     lifetime = 20f;
                     maxLaserLength = 60f;
                     continuous = true;
+                    lifetime = 300;
                     speed = 0.001f;
+                    width = 2.4f;
                                     setWidth(
                             BerserkAbility.dmg(100f, 1.2f, 0f)
                     );
