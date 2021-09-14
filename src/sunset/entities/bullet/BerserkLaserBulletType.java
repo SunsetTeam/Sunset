@@ -60,13 +60,16 @@ public class BerserkLaserBulletType extends BulletType {
         if(((Object[])b.data)[0] instanceof Position){
             Position data = (Position)((Object[])b.data)[0];
             Tmp.v1.set(data).lerp(b, b.fin());
+            float realLength = Damage.findLaserLength(b, maxLaserLength);
+            float fout = Mathf.clamp(b.time > b.lifetime - 15 ? 1f - (b.time - (lifetime - 15)) / 15 : 1f);
+            float basLength = fout * realLength;
             float dst = (float)((Object[])b.data)[1];
             for(int i = 0; i < 4; i++){
                 Draw.color(Tmp.c1.set(colors[i]).mul(1f + Mathf.absin(Time.time, 1f, 0.1f)));
-                for(int j = 0; i < tskales.length; i++){
+                for(int j = 0; j < tskales.length; j++){
                     Tmp.v1.trns(b.rotation() + 180f, (lenscales[j] - 0.8f) * 55f);
                     Lines.stroke((7 + Mathf.absin(Time.time, 1.5f, 3f)) * b.fout() * strokes[i] * tskales[j]);
-                    Lines.lineAngle(b.x + Tmp.v1.x, b.y + Tmp.v1.y, b.rotation(), dst * lenscales[i] * 1.15f);
+                    Lines.lineAngle(b.x + Tmp.v1.x, b.y + Tmp.v1.y, b.rotation(),basLength * lenscales[j]);
                 }
             }
         }
