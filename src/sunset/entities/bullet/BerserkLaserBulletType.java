@@ -60,16 +60,14 @@ public class BerserkLaserBulletType extends BulletType {
         if(((Object[])b.data)[0] instanceof Position){
             Position data = (Position)((Object[])b.data)[0];
             Tmp.v1.set(data).lerp(b, b.fin());
-            float realLength = Damage.findLaserLength(b, maxLaserLength);
             float fout = Mathf.clamp(b.time > b.lifetime - 15 ? 1f - (b.time - (lifetime - 15)) / 15 : 1f);
-            float basLength = fout * realLength;
             float dst = (float)((Object[])b.data)[1];
             for(int i = 0; i < 4; i++){
                 Draw.color(Tmp.c1.set(colors[i]).mul(1f + Mathf.absin(Time.time, 1f, 0.1f)));
                 for(int j = 0; j < tskales.length; j++){
                     Tmp.v1.trns(b.rotation() + 180f, (lenscales[j] - 0.8f) * 55f);
-                    Lines.stroke((width + Mathf.absin(Time.time, 0.8f, 1.5f)) * fout * strokes[i] * tskales[i]);
-                    Lines.lineAngle(b.x + Tmp.v1.x, b.y + Tmp.v1.y, b.rotation(),basLength * lenscales[j]);
+                    Lines.stroke((swidth + Mathf.absin(Time.time, 0.8f, 1.5f)) * fout * strokes[i] * tskales[i]);
+                    Lines.lineAngle(b.x + Tmp.v1.x, b.y + Tmp.v1.y, b.rotation(),dst * lenscales[j]);
                 }
             }
         }
@@ -78,6 +76,8 @@ public class BerserkLaserBulletType extends BulletType {
                 Unit u = (Unit) b.owner;
                 if(u.health < bw.get(i).needHealth){
                     this.swidth = bw.get(i).damageMultiplier;
+                } else {
+                    swidth = 1;
                 }
             }
         }
