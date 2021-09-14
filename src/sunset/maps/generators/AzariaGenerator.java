@@ -33,7 +33,7 @@ import sunset.content.blocks.SnEnvironment;
 
 import static mindustry.Vars.*;
 
-public class AzariaGenerator extends PlanetGenerator{
+public class AzariaGenerator extends ModGenerator{
     public final Simplex simplex = new Simplex();
     public final RidgedPerlin rid = new RidgedPerlin(1, 2);
 
@@ -69,6 +69,7 @@ public class AzariaGenerator extends PlanetGenerator{
             SnEnvironment.crimsondirt, SnEnvironment.crimsondirt
     );
 
+    @Override
     public float rawHeight(Vec3 pos) {
         pos = Tmp.v33.set(pos);
         pos.scl(scl);
@@ -130,6 +131,7 @@ public class AzariaGenerator extends PlanetGenerator{
         }
     }
 
+    @Override
     public Color getColor(Vec3 position) {
         Block block = this.getBlock(position);
 
@@ -137,6 +139,7 @@ public class AzariaGenerator extends PlanetGenerator{
         return Tmp.c1;
     }
 
+    @Override
     public Block getBlock(Vec3 position){
         float height = rawHeight(position);
         Tmp.v31.set(position);
