@@ -91,14 +91,14 @@ public class ModGenerator extends PlanetGenerator {
             tile.block = Blocks.air;
         }
     }
-    
-    public abstract class PlanetGenerator extends BasicGenerator implements HexMesher {
-    protected IntSeq ints = new IntSeq();
-    protected Sector sector;
-    protected Simplex noise = new Simplex();
+
+    //public abstract class PlanetGenerator extends BasicGenerator implements HexMesher {
+    //protected IntSeq ints = new IntSeq();
+    //protected Sector sector;
+    //protected Simplex noise = new Simplex();
 
     /** Should generate sector bases for a planet. */
-    public void generateSector(Sector sector){
+    /*public void generateSector(Sector sector){
         PlanetGrid.Ptile tile = sector.tile;
 
         boolean any = false;
@@ -114,7 +114,7 @@ public class ModGenerator extends PlanetGenerator {
                 if(sector.planet.getSector(other).id == sector.planet.startSector){
                     return;
                 }
-                
+
                 if(sector.planet.getSector(other).generateEnemyBase){
                     any = false;
                     break;
@@ -152,6 +152,6 @@ public class ModGenerator extends PlanetGenerator {
         });
 
         generate(tiles);
-    }
-    }
+    }*/
+    //}
 }
