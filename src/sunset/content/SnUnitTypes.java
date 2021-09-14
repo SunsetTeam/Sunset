@@ -578,7 +578,7 @@ public class SnUnitTypes implements ContentList {
                     continuous = true;
                     lifetime = 300;
                     speed = 0.001f;
-                    heigth = 2.4f;
+                    width = 2.4f;
                                     setWidth(
                             BerserkAbility.dmg(100f, 1.2f, 0f)
                     );
