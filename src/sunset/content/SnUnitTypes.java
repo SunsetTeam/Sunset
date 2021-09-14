@@ -547,7 +547,7 @@ public class SnUnitTypes implements ContentList {
             }});
         }};
         mirage = new BerserkUnitType("mirage"){{
-            health = 140;
+            health = 300;
             speed = 1.8f;
             rotateSpeed = 3f;
             visualElevation = 0.2f;
