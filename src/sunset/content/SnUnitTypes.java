@@ -574,6 +574,7 @@ public class SnUnitTypes implements ContentList {
                     damage = 60;
                     maxLaserLength = 200f;
                     continuous = true;
+                    pierce = true;
                     speed = 0.001f;
                     lifetime = 300;
                     setWidth(
