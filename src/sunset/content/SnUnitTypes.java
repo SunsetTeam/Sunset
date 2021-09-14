@@ -551,15 +551,15 @@ public class SnUnitTypes implements ContentList {
             speed = 1.8f;
             rotateSpeed = 3f;
             visualElevation = 0.2f;
-            drag = 0.2f;
+            drag = 0.1f;
             hitSize = 11f;
             allowLegStep = true;
-            hovering = true;
+            hovering = false;
             groundLayer = Layer.legUnit - 1f;
             legCount = 4;
-            legLength = 8f;
-            legTrns = 0.5f;
-            legMoveSpace = 1.5f;
+            legLength = 7f;
+            legTrns = 0.4f;
+            legMoveSpace = 1.4f;
             
             addRageMode(
                     BerserkAbility.dmg(100, 1.2f, 1.3f)
@@ -571,8 +571,8 @@ public class SnUnitTypes implements ContentList {
                 rotate = false;
                 mirror = true;
                 bullet = new BerserkLaserBulletType(){{
-                    damage = 60;
-                    maxLaserLength = 200f;
+                    damage = 5;
+                    maxLaserLength = 90f;
                     continuous = true;
                     pierce = true;
                     speed = 0.001f;
