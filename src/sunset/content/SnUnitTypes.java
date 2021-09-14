@@ -555,7 +555,7 @@ public class SnUnitTypes implements ContentList {
             hitSize = 11f;
             allowLegStep = true;
             hovering = true;
-                        groundLayer = Layer.legUnit - 1f;
+            groundLayer = Layer.legUnit - 1f;
             legCount = 4;
             legLength = 8f;
             legTrns = 0.5f;
@@ -577,7 +577,7 @@ public class SnUnitTypes implements ContentList {
                     continuous = true;
                     speed = 0.001f;
                                     setWidth(
-                            BerserkAbility.dmg(600f, 1.3f, 0f)
+                            BerserkAbility.dmg(70f, 1.2f, 0f)
                     );
                 }};
             }});
