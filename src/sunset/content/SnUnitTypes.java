@@ -572,9 +572,13 @@ public class SnUnitTypes implements ContentList {
                 mirror = true;
                 
             bullet = new BerserkLaserBulletType(){{
-                damage = 15;
-                maxLaserLength = 120f;
-                width = 5;
+                    damage = 60;
+                    maxLaserLength = 200f;
+                    continuous = true;
+                    speed = 0.001f;
+                                    setWidth(
+                            BerserkAbility.dmg(600f, 1.3f, 0f)
+                    );
                 }};
             }});
         }};
