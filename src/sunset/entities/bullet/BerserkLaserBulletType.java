@@ -66,7 +66,7 @@ public class BerserkLaserBulletType extends BulletType {
                 for(int j = 0; i < tskales.length; i++){
                     Tmp.v1.trns(b.rotation() + 180f, (lenscales[j] - 0.8f) * 55f);
                     Lines.stroke((7 + Mathf.absin(Time.time, 1.5f, 3f)) * b.fout() * strokes[i] * tskales[j]);
-                    Lines.lineAngle(b.x + Tmp.v1.x, b.y + Tmp.v1.y, b.rotation(), (Math.min(maxLaserLength, dst * lenscales[i] * 1.15f)));
+                    Lines.lineAngle(b.x + Tmp.v1.x, b.y + Tmp.v1.y, b.rotation(), (maxLaserLength, dst * lenscales[i] * 1.15f));
                 }
             }
         }
