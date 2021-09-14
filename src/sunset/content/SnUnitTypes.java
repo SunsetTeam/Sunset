@@ -565,26 +565,22 @@ public class SnUnitTypes implements ContentList {
                     BerserkAbility.dmg(100, 1.2f, 1.3f)
             );
             
-            weapons.add(new Weapon("mirage-berlaser"){{
+            weapons.add(new Weapon(){{
                 reload = 30f;
                 inaccuracy = 2f;
                 rotate = false;
                 mirror = true;
-                
-            bullet = new BerserkLaserBulletType(){{
+                bullet = new BerserkLaserBulletType(){{
                     damage = 60;
-                    lifetime = 20f;
-                    maxLaserLength = 60f;
+                    maxLaserLength = 200f;
                     continuous = true;
-                    lifetime = 300;
                     speed = 0.001f;
-                    width = 2.4f;
-                                    setWidth(
-                            BerserkAbility.dmg(100f, 1.2f, 0f)
+                    lifetime = 300;
+                    setWidth(
+                            BerserkAbility.dmg(200f, 1.3f, 0f)
                     );
                 }};
             }});
-        }};
         //endregion freezing
         loadFactoryRecipes();
     }
