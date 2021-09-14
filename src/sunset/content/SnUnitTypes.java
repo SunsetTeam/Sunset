@@ -581,6 +581,7 @@ public class SnUnitTypes implements ContentList {
                     );
                 }};
             }});
+        }};
         //endregion freezing
         loadFactoryRecipes();
     }
