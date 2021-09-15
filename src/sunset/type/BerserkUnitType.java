@@ -5,12 +5,16 @@ import mindustry.gen.Unit;
 import mindustry.type.StatusEffect;
 import mindustry.type.UnitType;
 import sunset.entities.abilities.BerserkAbility;
+import mindustry.gen.*;
+import mindustry.graphics.Layer;
+import mindustry.gen.UnitEntity;
 
 public class BerserkUnitType extends UnitType {
     public Seq<BerserkAbility> dmg = new Seq<>();
 
     public BerserkUnitType(String name) {
         super(name);
+        constructor = LegsUnit::create;
     }
 
     @Override
