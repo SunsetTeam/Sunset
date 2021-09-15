@@ -20,9 +20,9 @@ public class BerserkLaserBulletType extends BulletType {
     public Effect hitEffect = Fx.none;
     public Seq<BerserkAbility> bw = new Seq<>();
     public Color[] colors = new Color[]{Color.valueOf("FFFFFF55"), Color.valueOf("CCCDDAaa"), Color.valueOf("9799A3"), Color.white};
-    public float[] tskales = {1f, 0.7f, 0.5f, 0.2f};
-    public float[] strokes = {2f, 1.5f, 1f, 0.3f};
-    public float[] lenscales = {1f, 1.12f, 1.15f, 1.17f};
+    public float[] tskales = {1f, 0.8f, 0.6f, 0.3f};
+    public float[] strokes = {1.6f, 1.3f, 1f, 0.3f};
+    public float[] lenscales = {1f, 1.2f, 1.24f, 1.30f};
 
 
     @Override
@@ -53,6 +53,8 @@ public class BerserkLaserBulletType extends BulletType {
 
             b.data = new Object[]{v, dst};
         }
+        Log.info("Длина лазера = "+dst);
+        Log.info("Ширина лазера = "+swidth);
     }
 
     @Override
@@ -76,8 +78,9 @@ public class BerserkLaserBulletType extends BulletType {
                 Unit u = (Unit) b.owner;
                 if(u.health < bw.get(i).needHealth){
                     this.swidth = bw.get(i).damageMultiplier;
+                    Log.info("Здоровье цели = "+u.health);
                 } else {
-                    swidth = 1;
+                    swidth = width;
                 }
             }
         }
