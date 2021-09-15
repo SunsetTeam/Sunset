@@ -97,11 +97,11 @@ public class Utils {
         }
     }
     /** Создаёт TileHueristic. Нужен для обхода бага AbstractMethodError на Android, когда runtime игнорирует реализацию методов по умолчанию в интерфейсах. */
-    public static Astar.TileHueristic tileHueristic(Func<Tile, Float> cost) {
+    public static Astar.TileHueristic tileHueristic(Func<Tile, Float> costFunc) {
         return new Astar.TileHueristic() {
             @Override
             public float cost(Tile tile) {
-                return cost(tile);
+                return costFunc.get(tile);
             }
             @Override
             public float cost(Tile from, Tile tile) { //само проблемное место. Runtime на Android почему-то не видит модификатор default и тело метода.
