@@ -55,6 +55,7 @@ public class BerserkLaserBulletType extends BulletType {
         }
         Log.info("Длина лазера = "+dst);
         Log.info("Ширина лазера = "+swidth);
+        Log.info("Длина массива = " + bw.size);
     }
 
     @Override
@@ -73,13 +74,12 @@ public class BerserkLaserBulletType extends BulletType {
                 }
             }
         }
-        for(int i = 0; i>bw.size; i++){
+        for(int i = 0; i<bw.size; i++){
             if(b.owner instanceof Unit){
                 Unit u = (Unit) b.owner;
                 Log.info("Здоровье цели = "+u.health);
                 if(u.health < bw.get(i).needHealth){
                     this.swidth = bw.get(i).damageMultiplier;
-                    Log.info("Здоровье цели = "+u.health);
                 } else {
                     swidth = width;
                 }
