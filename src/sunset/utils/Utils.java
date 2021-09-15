@@ -105,7 +105,7 @@ public class Utils {
             }
             @Override
             public float cost(Tile from, Tile tile) { //само проблемное место. Runtime на Android почему-то не видит модификатор default и тело метода.
-                return cost(from);
+                return cost(tile);
             }
         };
     }
