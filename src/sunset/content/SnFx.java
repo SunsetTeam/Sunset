@@ -49,7 +49,7 @@ public class SnFx{
             Fill.square(e.x + x, e.y + y, e.fout() + 0.5f, 45);
         });
     }),
-    
+
     modSmokeCloud = new Effect(90, e -> {
         randLenVectors(e.id, 6, 4f + e.fin() * 1.3f, 30, 30f, (x, y) -> {
             color(SnPal.bGray);
@@ -57,35 +57,35 @@ public class SnFx{
             Fill.square(e.x + x, e.y + y, 0.5f + e.fout() * 4f);
         });
     }),
-    
+
     modPlasticburn = new Effect(45, e -> {
         randLenVectors(e.id, 7, 2.8f + e.fin() * 5f, 25, 30f,(x, y) -> {
             color((SnPal.gGray), Color.gray, e.fin());
             Fill.square(e.x + x, e.y + y, e.fout() * 3.1f, 45);
         });
     }),
-    
+
     modFormsmoke = new Effect(50, e -> {
         randLenVectors(e.id, 8, 6f + e.fin() * 8f, (x, y) -> {
             color(Pal.plasticSmoke, Color.lightGray, e.fin());
             Fill.rect(e.x + x, e.y + y, 0.2f + e.fout() * 2f, 45);
         });
     }),
-    
+
     weaverSmeltsmoke = new Effect(20f, e -> {
         randLenVectors(e.id, 7, 6.8f + e.fin() * 5f, (x, y) -> {
             color(Color.valueOf("C78D04"), e.color, e.fin());
             Fill.square(e.x + x, e.y + y, 0.5f + e.fout() * 2f, 45);
         });
     }),
-    
+
     cultivatorSmeltsmoke = new Effect(20f, e -> {
         randLenVectors(e.id, 7, 6.8f + e.fin() * 5f, (x, y) -> {
             color(Color.valueOf("5841A6"), e.color, e.fin());
             Fill.square(e.x + x, e.y + y, 0.5f + e.fout() * 2f, 45);
         });
     }),
-    
+
     galebardLaserCharge = new Effect(35f, e -> {
         color(Pal.meltdownHit);
 
@@ -175,7 +175,7 @@ public class SnFx{
 
         Drawf.light(e.x, e.y, squareRad * 1.5f, SnPal.copterBomb, e.fout());
     }),
-    
+
     bigCopterBomb = new Effect(30f, 65f, e -> {
         color(SnPal.copterBomb);
         stroke(e.fout() * 2f);
@@ -216,21 +216,61 @@ public class SnFx{
     }),
 
     tridenCharge = new Effect(210, e -> {
-        color(Pal.surge, Color.white, e.fout());
-        Draw.z(Layer.block);
+        final float maxRad = 8f, maxSmallRad = 1.5f;
+        final Color c1 = Color.valueOf("eaecff"), c2 = Color.valueOf("ffeaec");
         float r = Mathf.degRad * e.rotation;
         float cx = e.x - Mathf.cos(r)*12f;
         float cy = e.y - Mathf.sin(r)*12f;
-        while(Mathf.chance(0.075f)) {
-            float a = Mathf.random(Mathf.pi);
-            float dx = cx + Mathf.sin(a) * 8f;
-            float dy = cy + Mathf.cos(a) * 8f;
-            lightning(cx, cy, dx, dy, Pal.surge, 3, 0.5f, SnFx.lightningFast.layer(Layer.block));
+        Draw.z(Layer.block);
+        enegrySphere(e.id, e.time, e.fin(), Mathf.PI / 120f, Mathf.PI / 30f, maxRad, maxSmallRad, c1, c2, cx, cy);
+    });
+    //region Energy sphere utils
+    public static void enegrySphere(long seed, float time, float fin,
+                                     float minSpeed, float maxSpeed, float mainRadius, float miniRadius,
+                                     Color c1, Color c2, float x, float y) {
+        Seq<Vec2> vecs = new Seq<>();
+        Utils.randVectors(seed, 8, minSpeed, maxSpeed, (xx, yy) -> vecs.add(new Vec2(xx, yy)));
+        vecs.each(vec -> {
+            float size = (vec.len() * time) % Mathf.PI2;
+            if(size < Mathf.PI) return;
+            miniEnergySphere(fin, mainRadius, miniRadius, c1, c2, x, y, vec.angleRad(), Mathf.PI2 - size);
+        });
+        color(Pal.surge, Color.white, 1 - fin);
+        Fill.circle(x, y, fin * mainRadius);
+        vecs.each(vec -> {
+            float size = (vec.len()* time) % Mathf.PI2;
+            if(size >= Mathf.PI) return;
+            miniEnergySphere(fin, mainRadius, miniRadius, c2, c1, x, y, vec.angleRad(), size);
+        });
+    }
+    private static void miniEnergySphere(float fin, float mainRadius, float miniRadius, Color c1, Color c2, float x, float y, float angle, float size) {
+        float _size = (Mathf.sin(size) * 0.15f + 0.85f) * fin;
+        float len = Mathf.cos(size) * fin * (mainRadius + miniRadius);
+        float bx = Mathf.sin(angle) * len;
+        float by = Mathf.cos(angle) * len;
+        color(c1, c2, Mathf.sin(size));
+        Fill.circle(x + bx, y + by, _size * miniRadius);
+    }
+    public static void lightning(float x1, float y1, float x2, float y2, Color c, int iterations, float rndScale, Effect e) {
+        Seq<Vec2> lines = new Seq<>();
+        lines.add(new Vec2(x1, y1));
+        lines.add(new Vec2(x2, y2));
+        for(int i = 0; i < iterations; i++) {
+            for(int j = 0; j < lines.size-1; j+=2) {
+                Vec2 v1 = lines.get(j), v2 = lines.get(j+1);
+                float ang = (Angles.angle(v1.x, v1.y, v2.x, v2.y) + 90f) * Mathf.degRad;
+                float sin = Mathf.sin(ang), cos = Mathf.cos(ang);
+                Vec2 v = new Vec2((v1.x + v2.x) / 2, ((v1.y + v2.y) / 2));
+                v.x += Mathf.random(rndScale)*sin;
+                v.y += Mathf.random(rndScale)*cos;
+                lines.insert(j+1, v);
+            }
         }
-        Fill.circle(cx, cy, e.fin() * 8f);
-    }),
+        e.at(x1, y1, 0f, c, lines);
 
-    tridenHit = new Effect(30, e -> {
+    }
+    //endregion Energy sphere utils
+    public static final Effect tridenHit = new Effect(30, e -> {
         Draw.z(Layer.effect);
         stroke(0);
         color(new Color(Pal.surge).a(Mathf.clamp(2*e.fout()-1)));
@@ -316,8 +356,8 @@ public class SnFx{
             p[0] = (p[0] + 1) % 3;
         });
     }),
-    
-        sunriseMissileExplosion = new Effect(40, e -> {
+
+    sunriseMissileExplosion = new Effect(40, e -> {
         color(Pal.missileYellow);
 
         e.scaled(8, i -> {
@@ -374,7 +414,7 @@ public class SnFx{
             lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 3f + e.fout() * 7f);
         });
     }),
-    
+
     dissectorMissileExplosion = new Effect(40, e -> {
         color(Pal.missileYellow);
 
@@ -410,8 +450,8 @@ public class SnFx{
             lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 5f + e.fout() * 10f);
         });
     }),
-    
-        artMissileExplosion = new Effect(40, e -> {
+
+    artMissileExplosion = new Effect(40, e -> {
         color(Pal.missileYellow);
 
         e.scaled(10, i -> {
@@ -455,29 +495,11 @@ public class SnFx{
         stroke(1.5f, Pal.boostTo);
         Lines.circle(e.x, e.y, e.rotation * val);
     }),
-        torpedoTrail = new Effect(30, e -> {
+
+    torpedoTrail = new Effect(30, e -> {
        color(Color.lightGray);
        randLenVectors(e.id, 15, 2 + e.fin() * 5, (x, y) -> {
            Fill.circle(e.x+x, e.y+y, e.fin() * 2);
        });
     });
-
-    public static void lightning(float x1, float y1, float x2, float y2, Color c, int iterations, float rndScale, Effect e) {
-        Seq<Vec2> lines = new Seq<>();
-        lines.add(new Vec2(x1, y1));
-        lines.add(new Vec2(x2, y2));
-        for(int i = 0; i < iterations; i++) {
-            for(int j = 0; j < lines.size-1; j+=2) {
-                Vec2 v1 = lines.get(j), v2 = lines.get(j+1);
-                float ang = (Angles.angle(v1.x, v1.y, v2.x, v2.y) + 90f) * Mathf.degRad;
-                float sin = Mathf.sin(ang), cos = Mathf.cos(ang);
-                Vec2 v = new Vec2((v1.x + v2.x) / 2, ((v1.y + v2.y) / 2));
-                v.x += Mathf.random(rndScale)*sin;
-                v.y += Mathf.random(rndScale)*cos;
-                lines.insert(j+1, v);
-            }
-        }
-        e.at(x1, y1, 0f, c, lines);
-
-    }
 }
