@@ -1,7 +1,7 @@
 package sunset.entities.bullet;
 
-import arc.graphics.g2d.Draw;
-import arc.graphics.g2d.Fill;
+import arc.graphics.Color;
+import arc.math.Mathf;
 import mindustry.Vars;
 import mindustry.content.Fx;
 import mindustry.entities.Units;
@@ -14,6 +14,9 @@ import sunset.graphics.SnPal;
 
 public class EnergySphereBulletType extends BasicBulletType {
     public float lightningPeriod = 1f;
+    public float minSpeed = Mathf.PI / 120f, maxSpeed = Mathf.PI / 30f;
+    public float mainRadius = 8f, miniRadius = 1.5f;
+    public Color c1 = Color.valueOf("eaecff"), c2 = Color.valueOf("ffeaec");
     public EnergySphereBulletType(float speed, float damage) {
         super(speed, damage);
     }
@@ -55,8 +58,7 @@ public class EnergySphereBulletType extends BasicBulletType {
 
     @Override
     public void draw(Bullet b) {
-        Draw.color(Pal.surge);
-        Fill.circle(b.x, b.y, hitSize);
+        SnFx.enegrySphere(b.id, b.time, 1f, minSpeed, maxSpeed, mainRadius, miniRadius, c1, c2, b.x, b.y);
     }
 
     @Override
