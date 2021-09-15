@@ -56,6 +56,7 @@ public class BerserkLaserBulletType extends BulletType {
         Log.info("Длина лазера = "+dst);
         Log.info("Ширина лазера = "+swidth);
         Log.info("Длина массива = " + bw.size);
+        Log.info(b.damage);
     }
 
     @Override
