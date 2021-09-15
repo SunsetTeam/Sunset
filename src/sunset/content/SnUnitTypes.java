@@ -547,7 +547,7 @@ public class SnUnitTypes implements ContentList {
             }});
         }};
         mirage = new BerserkUnitType("mirage"){{
-            health = 130;
+            health = 230;
             speed = 1.8f;
             rotateSpeed = 3f;
             visualElevation = 0.2f;
@@ -562,7 +562,7 @@ public class SnUnitTypes implements ContentList {
             legMoveSpace = 1.4f;
             
             addRageMode(
-                    BerserkAbility.dmg(100, 1.2f, 1.3f)
+                    BerserkAbility.dmg(200f, 1.2f, 1.3f)
             );
             
             weapons.add(new Weapon(){{
@@ -579,7 +579,7 @@ public class SnUnitTypes implements ContentList {
 width = 0.5f;
                     lifetime = 240f;
                     setWidth(
-                            BerserkAbility.dmg(100f, 10f, 0f)
+                            BerserkAbility.dmg(200f, 1.4f, 0f)
                     );
                 }};
             }});
