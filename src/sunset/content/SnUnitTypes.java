@@ -568,7 +568,7 @@ public class SnUnitTypes implements ContentList {
             weapons.add(new Weapon(){{
                 reload = 30f;
                 inaccuracy = 2f;
-                rotate = false;
+                rotate = true;
                 mirror = true;
                 bullet = new BerserkLaserBulletType(){{
                     damage = 5;
@@ -576,10 +576,10 @@ public class SnUnitTypes implements ContentList {
                     continuous = true;
                     pierce = true;
                     speed = 0.001f;
-width = 1f;
+width = 0.5f;
                     lifetime = 240f;
                     setWidth(
-                            BerserkAbility.dmg(200f, 10f, 0f)
+                            BerserkAbility.dmg(100f, 10f, 0f)
                     );
                 }};
             }});
