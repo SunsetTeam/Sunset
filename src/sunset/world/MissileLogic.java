@@ -79,8 +79,9 @@ public class MissileLogic {
         public float fin() {
             return (from.dst(current)) / fligtLength;
         }
-        // Непонятный баг на Android, реализация интерфейса по умолчанию всё крашит.
-        // Вручную реализовал весь интерфейс от греха подальше.
+        // Необходимо для обхода бага AbstractMethodError на Android, когда
+        // runtime игнорирует реализацию методов по умолчанию в интерфейсах.
+        // region Обход бага
         @Override
         public float fout() {
             return 1.0F - this.fin();
@@ -106,6 +107,7 @@ public class MissileLogic {
         public float fslope() {
             return (0.5F - Math.abs(this.fin() - 0.5F)) * 2.0F;
         }
+        //endregion Обход бага
     }
 
     /** Описывает харакеристики ракеты и её визуальную составляющую. */

@@ -23,13 +23,13 @@ import mindustry.game.Team;
 import mindustry.game.Waves;
 import mindustry.graphics.g3d.PlanetGrid.Ptile;
 import mindustry.maps.generators.BaseGenerator;
-import mindustry.maps.generators.PlanetGenerator;
 import mindustry.type.Sector;
 import mindustry.world.Block;
 import mindustry.world.Tile;
 import mindustry.world.TileGen;
 import mindustry.world.Tiles;
 import sunset.content.blocks.SnEnvironment;
+import sunset.utils.Utils;
 
 import static mindustry.Vars.*;
 
@@ -186,7 +186,8 @@ public class AzariaGenerator extends ModGenerator{
                 connected.add(to);
                 float nscl = rand.random(20f, 60f);
                 int stroke = rand.random(4, 12);
-                brush(pathfind(x, y, to.x, to.y, tile -> (tile.solid() ? 5f : 0f) + noise(tile.x, tile.y, 1, 1, 1f / nscl) * 60, Astar.manhattan), stroke);
+                Astar.TileHueristic th = Utils.tileHueristic(tile -> (tile.solid() ? 5f : 0f) + noise(tile.x, tile.y, 1, 1, 1f / nscl) * 60); //see implementation in "Utils" to understand
+                brush(pathfind(x, y, to.x, to.y, th, Astar.manhattan), stroke);
             }
         }
 

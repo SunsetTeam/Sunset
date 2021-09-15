@@ -3,10 +3,12 @@ package sunset.utils;
 import arc.func.Boolf;
 import arc.func.Cons;
 import arc.func.Floatc2;
+import arc.func.Func;
 import arc.math.Rand;
 import arc.math.geom.Vec2;
 import arc.util.Log;
 import mindustry.Vars;
+import mindustry.ai.Astar;
 import mindustry.content.StatusEffects;
 import mindustry.ctype.ContentType;
 import mindustry.entities.Fires;
@@ -20,6 +22,7 @@ import mindustry.graphics.MenuRenderer;
 import mindustry.type.StatusEffect;
 import mindustry.type.UnitType;
 import mindustry.ui.fragments.MenuFragment;
+import mindustry.world.Tile;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -92,5 +95,18 @@ public class Utils {
             rv.set(random.random(lengthFrom, lengthTo), 0.0F).rotate(vang);
             cons.get(rv.x, rv.y);
         }
+    }
+    /** Создаёт TileHueristic. Нужен для обхода бага AbstractMethodError на Android, когда runtime игнорирует реализацию методов по умолчанию в интерфейсах. */
+    public static Astar.TileHueristic tileHueristic(Func<Tile, Float> cost) {
+        return new Astar.TileHueristic() {
+            @Override
+            public float cost(Tile tile) {
+                return cost(tile);
+            }
+            @Override
+            public float cost(Tile from, Tile tile) { //само проблемное место. Runtime на Android почему-то не видит модификатор default и тело метода.
+                return cost(from);
+            }
+        };
     }
 }
