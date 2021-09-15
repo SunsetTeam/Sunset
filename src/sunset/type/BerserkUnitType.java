@@ -2,11 +2,8 @@ package sunset.type;
 
 import arc.struct.Seq;
 import mindustry.gen.Unit;
-import mindustry.gen.*;
-import mindustry.graphics.Layer;
-import mindustry.gen.UnitEntity;
+import mindustry.type.StatusEffect;
 import mindustry.type.UnitType;
-import mindustry.world.meta.Stat;
 import sunset.entities.abilities.BerserkAbility;
 
 public class BerserkUnitType extends UnitType {
@@ -14,17 +11,18 @@ public class BerserkUnitType extends UnitType {
 
     public BerserkUnitType(String name) {
         super(name);
-        constructor = LegsUnit::create;
     }
 
     @Override
     public void update(Unit unit) {
         super.update(unit);
         if(dmg != null){
-            for (int i = 0; i > dmg.size; i++) {
+            for (int i = 0; i < dmg.size; i++) {
+                StatusEffect se = new StatusEffect("se");
+                se.damageMultiplier = dmg.get(i).damageMultiplier;
+                se.speedMultiplier = dmg.get(i).speedMultiplier;
                 if (health < dmg.get(i).needHealth) {
-                    stats.addPercent(Stat.damageMultiplier, dmg.get(i).damageMultiplier);
-                    stats.addPercent(Stat.speedMultiplier, dmg.get(i).speedMultiplier);
+                    unit.apply(se);
                 }
             }
         }
