@@ -1,5 +1,6 @@
 package sunset.maps.generators;
 
+import arc.graphics.Color;
 import arc.math.Angles;
 import arc.math.Mathf;
 import arc.math.Rand;
@@ -12,6 +13,8 @@ import arc.struct.ObjectSet;
 import arc.struct.Seq;
 import arc.util.Tmp;
 import arc.util.noise.Noise;
+import arc.util.noise.RidgedPerlin;
+import arc.util.noise.Simplex;
 import mindustry.ai.Astar;
 import mindustry.ai.BaseRegistry.BasePart;
 import mindustry.content.Blocks;
@@ -26,51 +29,58 @@ import mindustry.world.Tile;
 import mindustry.world.TileGen;
 import mindustry.world.Tiles;
 import sunset.content.blocks.SnEnvironment;
+import sunset.utils.Utils;
 
 import static mindustry.Vars.*;
 
 public class RimeGenerator extends ModGenerator{
+    public final Simplex simplex = new Simplex();
+    public final RidgedPerlin rid = new RidgedPerlin(1, 2);
 
-    public RimeGenerator() {
+    BaseGenerator basegen = new BaseGenerator();
+    float scl = 4.5f;
+    float waterOffset = 0.04f;
+    float water = 0.05f;
+    Block[][] arr = {
+            {Blocks.ice, Blocks.ice, Blocks.ice, Blocks.ice, SnEnvironment.glacier1, SnEnvironment.glacier1, SnEnvironment.glacier1, SnEnvironment.glacier1, SnEnvironment.glacier1, Blocks.snow, Blocks.snow, Blocks.snow, Blocks.snow, Blocks.snow},
+            {Blocks.ice, Blocks.ice, Blocks.ice, Blocks.ice, SnEnvironment.glacier2, SnEnvironment.glacier2, SnEnvironment.glacier2, SnEnvironment.glacier3, Blocks.snow, Blocks.snow, Blocks.snow},
+            {Blocks.ice, SnEnvironment.glacier3, SnEnvironment.glacier3, SnEnvironment.glacier3, SnEnvironment.glacier3, SnEnvironment.glacier3, Blocks.snow, Blocks.snow, Blocks.ice, Blocks.ice, Blocks.iceSnow, Blocks.iceSnow},
+            {Blocks.ice, Blocks.ice, Blocks.ice, Blocks.ice, Blocks.ice, Blocks.ice, Blocks.ice, Blocks.ice, Blocks.ice, Blocks.iceSnow, Blocks.iceSnow},
+            {SnEnvironment.glacier3, SnEnvironment.glacier3, SnEnvironment.glacier3, SnEnvironment.glacier3, SnEnvironment.glacier3, SnEnvironment.glacier3, SnEnvironment.glacier3, Blocks.snow, Blocks.snow, Blocks.snow, Blocks.snow, Blocks.ice, Blocks.ice},
+            {Blocks.ice, Blocks.ice, SnEnvironment.glacier3, SnEnvironment.glacier3, Blocks.snow, Blocks.snow, Blocks.ice, Blocks.ice, Blocks.iceSnow, SnEnvironment.glacier2, SnEnvironment.glacier2, SnEnvironment.glacier3},
+            {SnEnvironment.glacier1, SnEnvironment.glacier1, SnEnvironment.glacier1, SnEnvironment.glacier1, Blocks.iceSnow, Blocks.iceSnow, Blocks.ice, Blocks.ice, SnEnvironment.glacier2, SnEnvironment.glacier3, SnEnvironment.glacier3, Blocks.iceSnow, Blocks.iceSnow},
+            {Blocks.iceSnow, Blocks.iceSnow, Blocks.iceSnow, Blocks.iceSnow, Blocks.ice, Blocks.ice, SnEnvironment.glacier1, SnEnvironment.glacier1, SnEnvironment.glacier1, SnEnvironment.glacier1, SnEnvironment.glacier2, SnEnvironment.glacier2, Blocks.ice},
+            {SnEnvironment.glacier1, SnEnvironment.glacier1, SnEnvironment.glacier1, Blocks.iceSnow, Blocks.iceSnow, SnEnvironment.glacier2, SnEnvironment.glacier2, SnEnvironment.glacier2, SnEnvironment.glacier2, SnEnvironment.glacier3, SnEnvironment.glacier3, Blocks.iceSnow, Blocks.iceSnow},
+            {SnEnvironment.glacier3, SnEnvironment.glacier3, SnEnvironment.glacier3, SnEnvironment.glacier3, SnEnvironment.glacier3, SnEnvironment.glacier3, SnEnvironment.glacier3, SnEnvironment.glacier2, SnEnvironment.glacier2, SnEnvironment.glacier1, Blocks.snow, Blocks.snow, Blocks.snow},
+            {SnEnvironment.glacier2, SnEnvironment.glacier3, SnEnvironment.glacier2, SnEnvironment.glacier2, SnEnvironment.glacier2, SnEnvironment.glacier1, Blocks.iceSnow, Blocks.ice, Blocks.ice, Blocks.ice, Blocks.ice, Blocks.ice, Blocks.ice},
+            {SnEnvironment.glacier2, SnEnvironment.glacier2, SnEnvironment.glacier3, Blocks.iceSnow, Blocks.iceSnow, Blocks.iceSnow, Blocks.iceSnow, Blocks.ice, Blocks.ice, Blocks.ice, Blocks.ice, Blocks.ice, Blocks.ice},
+            {SnEnvironment.glacier2, SnEnvironment.glacier2, SnEnvironment.glacier2, SnEnvironment.glacier2, SnEnvironment.glacier3, SnEnvironment.glacier3, SnEnvironment.glacier3, SnEnvironment.glacier3, SnEnvironment.glacier3, SnEnvironment.glacier3, SnEnvironment.glacier2, SnEnvironment.glacier2, SnEnvironment.glacier2}
+    };
 
-        arr = new Block[][]{
-                {Blocks.ice, Blocks.ice, Blocks.ice, Blocks.ice, SnEnvironment.glacier1, SnEnvironment.glacier1, SnEnvironment.glacier1, SnEnvironment.glacier1, SnEnvironment.glacier1, Blocks.snow, Blocks.snow, Blocks.snow, Blocks.snow, Blocks.snow},
-                {Blocks.ice, Blocks.ice, Blocks.ice, Blocks.ice, SnEnvironment.glacier2, SnEnvironment.glacier2, SnEnvironment.glacier2, SnEnvironment.glacier3, Blocks.snow, Blocks.snow, Blocks.snow},
-                {Blocks.ice, SnEnvironment.glacier3, SnEnvironment.glacier3, SnEnvironment.glacier3, SnEnvironment.glacier3, SnEnvironment.glacier3, Blocks.snow, Blocks.snow, Blocks.ice, Blocks.ice, Blocks.iceSnow, Blocks.iceSnow},
-                {Blocks.ice, Blocks.ice, Blocks.ice, Blocks.ice, Blocks.ice, Blocks.ice, Blocks.ice, Blocks.ice, Blocks.ice, Blocks.iceSnow, Blocks.iceSnow},
-                {SnEnvironment.glacier3, SnEnvironment.glacier3, SnEnvironment.glacier3, SnEnvironment.glacier3, SnEnvironment.glacier3, SnEnvironment.glacier3, SnEnvironment.glacier3, Blocks.snow, Blocks.snow, Blocks.snow, Blocks.snow, Blocks.ice, Blocks.ice},
-                {Blocks.ice, Blocks.ice, SnEnvironment.glacier3, SnEnvironment.glacier3, Blocks.snow, Blocks.snow, Blocks.ice, Blocks.ice, Blocks.iceSnow, SnEnvironment.glacier2, SnEnvironment.glacier2, SnEnvironment.glacier3},
-                {SnEnvironment.glacier1, SnEnvironment.glacier1, SnEnvironment.glacier1, SnEnvironment.glacier1, Blocks.iceSnow, Blocks.iceSnow, Blocks.ice, Blocks.ice, SnEnvironment.glacier2, SnEnvironment.glacier3, SnEnvironment.glacier3, Blocks.iceSnow, Blocks.iceSnow},
-                {Blocks.iceSnow, Blocks.iceSnow, Blocks.iceSnow, Blocks.iceSnow, Blocks.ice, Blocks.ice, SnEnvironment.glacier1, SnEnvironment.glacier1, SnEnvironment.glacier1, SnEnvironment.glacier1, SnEnvironment.glacier2, SnEnvironment.glacier2, Blocks.ice},
-                {SnEnvironment.glacier1, SnEnvironment.glacier1, SnEnvironment.glacier1, Blocks.iceSnow, Blocks.iceSnow, SnEnvironment.glacier2, SnEnvironment.glacier2, SnEnvironment.glacier2, SnEnvironment.glacier2, SnEnvironment.glacier3, SnEnvironment.glacier3, Blocks.iceSnow, Blocks.iceSnow},
-                {SnEnvironment.glacier3, SnEnvironment.glacier3, SnEnvironment.glacier3, SnEnvironment.glacier3, SnEnvironment.glacier3, SnEnvironment.glacier3, SnEnvironment.glacier3, SnEnvironment.glacier2, SnEnvironment.glacier2, SnEnvironment.glacier1, Blocks.snow, Blocks.snow, Blocks.snow},
-                {SnEnvironment.glacier2, SnEnvironment.glacier3, SnEnvironment.glacier2, SnEnvironment.glacier2, SnEnvironment.glacier2, SnEnvironment.glacier1, Blocks.iceSnow, Blocks.ice, Blocks.ice, Blocks.ice, Blocks.ice, Blocks.ice, Blocks.ice},
-                {SnEnvironment.glacier2, SnEnvironment.glacier2, SnEnvironment.glacier3, Blocks.iceSnow, Blocks.iceSnow, Blocks.iceSnow, Blocks.iceSnow, Blocks.ice, Blocks.ice, Blocks.ice, Blocks.ice, Blocks.ice, Blocks.ice},
-                {SnEnvironment.glacier2, SnEnvironment.glacier2, SnEnvironment.glacier2, SnEnvironment.glacier2, SnEnvironment.glacier3, SnEnvironment.glacier3, SnEnvironment.glacier3, SnEnvironment.glacier3, SnEnvironment.glacier3, SnEnvironment.glacier3, SnEnvironment.glacier2, SnEnvironment.glacier2, SnEnvironment.glacier2}
-        };
+    ObjectMap<Block, Block> tars = ObjectMap.of(
+            Blocks.snow, Blocks.snow,
+            Blocks.ice, Blocks.ice
+    );
 
-        tars = ObjectMap.of(
-                Blocks.snow, Blocks.snow,
-                Blocks.ice, Blocks.ice
-        );
+    ObjectMap<Block, Block> dec = ObjectMap.of(
+            Blocks.ice, Blocks.ice,
+            SnEnvironment.glacier3, SnEnvironment.glacier3,
+            Blocks.ice, Blocks.ice,
+            Blocks.iceSnow, Blocks.iceSnow
+    );
 
-        dec = ObjectMap.of(
-                Blocks.ice, Blocks.ice,
-                SnEnvironment.glacier3, SnEnvironment.glacier3,
-                Blocks.ice, Blocks.ice,
-                Blocks.iceSnow, Blocks.iceSnow
-        );
-
-        water = 0.05f;
-        waterOffset = 0.04f;
-        scl = 4.5f;
-    }
     @Override
+    public float rawHeight(Vec3 pos) {
+        pos = Tmp.v33.set(pos);
+        pos.scl(scl);
 
+        return (Mathf.pow((float) simplex.octaveNoise3D(7, 0.5, 1d / 3d, pos.x, pos.y, pos.z), 2.3f) + waterOffset) / (1 + waterOffset);
+    }
+
+    @Override
     public void generateSector(Sector sector){
 
         //these always have bases
-
         if(sector.id == 154 || sector.id == 0){
             sector.generateEnemyBase = true;
             return;
@@ -120,6 +130,16 @@ public class RimeGenerator extends ModGenerator{
             tile.block = Blocks.air;
         }
     }
+
+    @Override
+    public Color getColor(Vec3 position) {
+        Block block = this.getBlock(position);
+
+        Tmp.c1.set(block.mapColor).a = 1 - block.albedo;
+        return Tmp.c1;
+    }
+
+    @Override
     public Block getBlock(Vec3 position){
         float height = rawHeight(position);
         Tmp.v31.set(position);
@@ -166,7 +186,8 @@ public class RimeGenerator extends ModGenerator{
                 connected.add(to);
                 float nscl = rand.random(20f, 60f);
                 int stroke = rand.random(4, 12);
-                brush(pathfind(x, y, to.x, to.y, tile -> (tile.solid() ? 5f : 0f) + noise(tile.x, tile.y, 1, 1, 1f / nscl) * 60, Astar.manhattan), stroke);
+                Astar.TileHueristic th = Utils.tileHueristic(tile -> (tile.solid() ? 5f : 0f) + noise(tile.x, tile.y, 1, 1, 1f / nscl) * 60); //see implementation in "Utils" to understand
+                brush(pathfind(x, y, to.x, to.y, th, Astar.manhattan), stroke);
             }
         }
 

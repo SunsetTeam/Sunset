@@ -69,6 +69,7 @@ public class SnEnvironment implements ContentList {
 
         crimsondirt = new Floor("crimson-dirt") {{
             variants = 3;
+            wall = crimsondirtwall;
         }};
 
         crimsonswamp = new Floor("crimson-swamp") {{
@@ -87,6 +88,7 @@ public class SnEnvironment implements ContentList {
             itemDrop = Items.sand;
             playerUnmineable = true;
             variants = 3;
+            wall = crimsonsandwall;
         }};
 
         crimsonsandwater = new Floor("crimson-sand-water") {{
@@ -130,14 +132,17 @@ public class SnEnvironment implements ContentList {
             itemDrop = Items.sand;
             playerUnmineable = true;
             variants = 3;
+            wall = orangesandwall;
         }};
 
         obsidian = new Floor("obsidian") {{
             variants = 3;
+            wall = obsidianwall;
         }};
 
         ash = new Floor("ash") {{
             variants = 3;
+            wall = ashwall;
         }};
 
         burningash = new Floor("burning-ash") {{
