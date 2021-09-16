@@ -1178,10 +1178,8 @@ public class SnBullets implements ContentList {
             lifetime = 0;
         }};
         //endregion misc
-        testbullet = new TorpedoBulletType(){{
+        testbullet = new TorpedoBulletType(1, 1){{
             lifetime = 400f;
-            damage = 1;
-            speed = 1;
             trailEffect = SnFx.torpedoTrail;
             drag = -0.003f;
             homingRange = 10f;
