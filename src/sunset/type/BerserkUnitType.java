@@ -22,9 +22,6 @@ public class BerserkUnitType extends UnitType {
         super.update(unit);
         if(dmg != null){
             for (int i = 0; i < dmg.size; i++) {
-                StatusEffect se = new StatusEffect("se");
-                se.damageMultiplier = dmg.get(i).damageMultiplier;
-                se.speedMultiplier = dmg.get(i).speedMultiplier;
                 if (health < dmg.get(i).needHealth) {
                     unit.apply(se);
                 }
