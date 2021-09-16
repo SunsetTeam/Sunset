@@ -23,7 +23,6 @@ public class BerserkUnitType extends UnitType {
         if(dmg != null){
             for (int i = 0; i < dmg.size; i++) {
                 if (health < dmg.get(i).needHealth) {
-                    unit.apply(se);
                 }
             }
         }
