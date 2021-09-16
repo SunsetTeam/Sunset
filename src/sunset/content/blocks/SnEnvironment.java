@@ -65,6 +65,7 @@ public class SnEnvironment implements ContentList {
         //region floors
         crimsongrass = new Floor("crimson-grass") {{
             variants = 3;
+            wall = crimsongrasswall;
         }};
 
         crimsondirt = new Floor("crimson-dirt") {{
