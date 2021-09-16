@@ -13,45 +13,44 @@ import mindustry.graphics.Pal;
 import sunset.entities.bullet.ArtilleryLiquidBulletType;
 import sunset.entities.bullet.ExtinguishBulletType;
 import sunset.entities.bullet.TorpedoBulletType;
+import sunset.entities.bullet.BerserkLaserBulletType;
 import sunset.graphics.*;
 import sunset.type.StackableStatusEffect;
 
-
 public class SnBullets implements ContentList {
     public static BulletType
-    //sap
-    leadSap, sporeSap, planatriumSap,
-    //heavy-sap
-    heavyplanatriumSap,
-    //artillery
-    artilleryForsMine, artilleryFors, artilleryBlastMine, artilleryBlast,
-    //heavy-standart
-    heavyCopper, heavyDense, heavyThorium, heavyTitanium, standartBlast, heavyIncendiary,
-    heavystandardDense, heavystandardThorium, heavystandardIncendiary, standartBlastBig, standardForsBig,
-    //burner
-    heavyCoalFlame, heavyPyraFlame, flameidFlame,
-    //liquid
-    typhoonWaterShot, typhoonCryoShot, typhoonSlagShot, typhoonOilShot,
-    floodWaterShot, floodCryoShot, floodSlagShot, floodOilShot,
-    //blast
-    lightBlastGraphite, lightBlastSilicon,
-    bigBlastPlastanium, bigBlastBlast, bigBlastPyratite,
-    maxBlastPlastanium, maxBlastBlast, maxBlastSurge, maxBlastPlastaniumFrag,
-    //poison
-    sporePodPoisonBullet, naturitePoisonBullet,
-    SporePodPoisonFrag, heavySporePodPoison, NaturitePoisonFrag, heavyNaturitePoison, NobiumPoisonFrag, heavyNobiumPoison,
-    bigSporePodPoisonFrag, bigSporePodPoison, bigNaturitePoisonFrag, bigNaturitePoison, bigNobiumPoisonFrag, bigNobiumPoison, bigPlastaniumPoisonFrag, bigPlastaniumPoison,
-    //units
-    BasicHelicopterGun, HelicopterShootgun, HelicopterMissile, HelicopterBomb, HelicopterRocket, bigHelicopterGun, laserHelicopterFrag, largeHelicopterGun, bigHelicopterRocket, HelicopterMissiles,
-    cometWaterShot, starStunBullet, galaxyKnockbackBullet,
-    wheel1bullet, wheel2shotgun, wheel3burst, wheel4shotgun, wheel4artillery, wheel5flame, wheel5bullet,
-    //misc
-    emptyBullet, overheatBullet,
-    //test
-    testbullet;
-
-//exoticBullets (new) i will make it later... i must make more bulets (soulBullet, iceSpike, and more)
-// spiralPllastanium, spiralSurge, SpiralFors, SpiralThorium, SpiralSmall;
+        //sap
+        leadSap, sporeSap, planatriumSap,
+        //heavy-sap
+        heavyplanatriumSap,
+        //artillery
+        artilleryForsMine, artilleryFors, artilleryBlastMine, artilleryBlast,
+        //heavy-standart
+        heavyCopper, heavyDense, heavyThorium, heavyTitanium, standartBlast, heavyIncendiary,
+        heavystandardDense, heavystandardThorium, heavystandardIncendiary, standartBlastBig, standardForsBig,
+        //burner
+        heavyCoalFlame, heavyPyraFlame, flameidFlame,
+        //liquid
+        typhoonWaterShot, typhoonCryoShot, typhoonSlagShot, typhoonOilShot,
+        floodWaterShot, floodCryoShot, floodSlagShot, floodOilShot,
+        //blast
+        lightBlastGraphite, lightBlastSilicon,
+        bigBlastPlastanium, bigBlastBlast, bigBlastPyratite,
+        maxBlastPlastanium, maxBlastBlast, maxBlastSurge, maxBlastPlastaniumFrag,
+        //poison
+        sporePodPoisonBullet, naturitePoisonBullet,
+        SporePodPoisonFrag, heavySporePodPoison, NaturitePoisonFrag, heavyNaturitePoison, NobiumPoisonFrag, heavyNobiumPoison,
+        bigSporePodPoisonFrag, bigSporePodPoison, bigNaturitePoisonFrag, bigNaturitePoison, bigNobiumPoisonFrag, bigNobiumPoison, bigPlastaniumPoisonFrag, bigPlastaniumPoison,
+        //units
+        BasicHelicopterGun, HelicopterShootgun, HelicopterMissile, HelicopterBomb, HelicopterRocket, bigHelicopterGun, laserHelicopterFrag, largeHelicopterGun, bigHelicopterRocket, HelicopterMissiles,
+        cometWaterShot, starStunBullet, galaxyKnockbackBullet,
+        wheel1bullet, wheel2shotgun, wheel3burst, wheel4shotgun, wheel4artillery, wheel5flame, wheel5bullet,
+        //misc
+        emptyBullet, overheatBullet,
+        //test
+        testbullet;
+        //exoticBullets (new) i will make it later... i must make more bulets (soulBullet, iceSpike, and more)
+        // spiralPllastanium, spiralSurge, SpiralFors, SpiralThorium, SpiralSmall;
 
     @Override
     public void load() {
@@ -1007,36 +1006,32 @@ public class SnBullets implements ContentList {
         }};
         //endregion copter
         //region air-support
-        cometWaterShot = new ExtinguishBulletType(Liquids.water) {
-            {
-                lifetime = 30f;
-                speed = 2.5f;
-                knockback = 2.1f;
-                puddleSize = 4f;
-                orbSize = 2f;
-                drag = 0.001f;
-                statusDuration = 60f * 2f;
-                damage = 0.2f;
-            }
-
+        cometWaterShot = new ExtinguishBulletType(Liquids.water) {{
+            lifetime = 30f;
+            speed = 2.5f;
+            knockback = 2.1f;
+            puddleSize = 4f;
+            orbSize = 2f;
+            drag = 0.001f;
+            statusDuration = 60f * 2f;
+            damage = 0.2f;
+        }
             @Override
             public float range() {
                 return lifetime * speed;
             }
         };
-        starStunBullet = new BasicBulletType() {
-            {
-                speed = 5f;
-                lifetime = 76f;
-                damage = 12f;
-                splashDamage = 17f;
-                splashDamageRadius = 59f;
-                statusDuration = 60f * 2.25f;
-                status = SnStatusEffects.stun;
-                trailEffect = SnFx.stunTrail;
-                hitEffect = SnFx.stunExplode;
-            }
-
+        starStunBullet = new BasicBulletType() {{
+            speed = 5f;
+            lifetime = 76f;
+            damage = 12f;
+            splashDamage = 17f;
+            splashDamageRadius = 59f;
+            statusDuration = 60f * 2.25f;
+            status = SnStatusEffects.stun;
+            trailEffect = SnFx.stunTrail;
+            hitEffect = SnFx.stunExplode;
+        }
             @Override
             public void draw(Bullet b) {
                 Draw.color(Color.white);
@@ -1138,22 +1133,20 @@ public class SnBullets implements ContentList {
         }};
         //endregion wheel
         //region misc
-        overheatBullet = new BasicBulletType(0.1f, 7, "error") {
-            {
-                shootEffect = Fx.none;
-                hitEffect = Fx.none;
-                despawnEffect = Fx.none;
-                trailEffect = Fx.none;
-                smokeEffect = Fx.none;
-                status = SnStatusEffects.overheat;
-                statusDuration = 120f;
-                shootEffect = Fx.pointBeam;
-                lightningColor = Color.red;
-                instantDisappear = true;
-                width = 0;
-                height = 0;
-            }
-
+        overheatBullet = new BasicBulletType(0.1f, 7, "error") {{
+            shootEffect = Fx.none;
+            hitEffect = Fx.none;
+            despawnEffect = Fx.none;
+            trailEffect = Fx.none;
+            smokeEffect = Fx.none;
+            status = SnStatusEffects.overheat;
+            statusDuration = 120f;
+            shootEffect = Fx.pointBeam;
+            lightningColor = Color.red;
+            instantDisappear = true;
+            width = 0;
+            height = 0;
+        }
             @Override
             public void init(Bullet b) {
                 Unit u = Units.closestEnemy(b.team, b.x, b.y, range(),
@@ -1184,7 +1177,8 @@ public class SnBullets implements ContentList {
             height = 0;
             lifetime = 0;
         }};
-        testbullet = new TorpedoBulletType() {{
+        //endregion misc
+        testbullet = new BerserkLaserBulletType(){{
             lifetime = 400f;
             damage = 1;
             speed = 1;
@@ -1194,6 +1188,5 @@ public class SnBullets implements ContentList {
             homingPower = 0.2f;
             ammoMultiplier = 2;
         }};
-        //endregion misc
     }
 }
