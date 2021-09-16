@@ -14,6 +14,7 @@ import sunset.content.blocks.defense.SnTurrets;
 import sunset.content.blocks.defense.SnWalls;
 import sunset.type.UnitData;
 //import sunset.ui.ContentInfoDialogExt;
+import sunset.ui.ContentInfoDialogExt;
 import sunset.utils.Utils;
 import sunset.world.GeyserLogic;
 import sunset.world.MissileLogic;
@@ -21,17 +22,17 @@ import sunset.world.MissileLogic;
 
 public class Sunset extends Mod {
     private final ContentList[] SnContent = {
+            new SnStatusEffects(),
             new SnItems(),
-            new SnProjectors(),
+            new SnBullets(),
+            new SnUnitTypes(),
             new SnTurrets(),
-            new SnWalls(),
             new SnEnvironment(),
+            new SnProjectors(),
+            new SnWalls(),
             new SnDistribution(),
             new SnPower(),
             new SnProduction(),
-            new SnStatusEffects(),
-            new SnBullets(),
-            new SnUnitTypes(),
             new SnWeathers(),
             new SnPlanets(),
             new SnSectorPresets()
@@ -42,7 +43,7 @@ public class Sunset extends Mod {
         MissileLogic.init();
         UnitData.init();
         GeyserLogic.init();
-        //Vars.ui.content = new ContentInfoDialogExt();
+        Vars.ui.content = new ContentInfoDialogExt();
         Utils.setMenuUnit(SnUnitTypes.router);
         /*Log.info("startUp");
         Events.on(ClientLoadEvent.class, e -> {
