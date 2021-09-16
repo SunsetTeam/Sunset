@@ -1178,7 +1178,7 @@ public class SnBullets implements ContentList {
             lifetime = 0;
         }};
         //endregion misc
-        testbullet = new BerserkLaserBulletType(){{
+        testbullet = new TorpedoBulletType{{
             lifetime = 400f;
             damage = 1;
             speed = 1;
