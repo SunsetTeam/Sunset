@@ -1,6 +1,7 @@
 package sunset.content;
 
 
+import arc.func.Floatc2;
 import arc.graphics.*;
 import arc.graphics.g2d.*;
 import arc.math.*;
@@ -15,6 +16,7 @@ import sunset.graphics.SnPal;
 import static arc.graphics.g2d.Draw.*;
 import static arc.graphics.g2d.Lines.*;
 
+import static arc.math.Angles.angle;
 import static arc.math.Angles.randLenVectors;
 
 public class SnFx{
@@ -460,6 +462,24 @@ public class SnFx{
        randLenVectors(e.id, 15, 2 + e.fin() * 5, (x, y) -> {
            Fill.circle(e.x+x, e.y+y, e.fin() * 2);
        });
+    }),
+        berserkLaserHitSmall = new Effect(20, e -> {
+        Draw.color(Color.valueOf("CCCDDA"));
+        Floatc2 floatc2 = new Floatc2() {
+            @Override
+            public void get(float v, float v1) {
+                Fill.poly(e.x + v, e.y + v1, 2, e.fout() * 0.7f);
+            }
+        };
+        Draw.color(Color.valueOf("FFFFFF"));
+        Floatc2 floatc21 = new Floatc2() {
+            @Override
+            public void get(float v, float v1) {
+                float angl = Mathf.angle(v, v1);
+                Lines.lineAngle(e.x +v, e.y + v1, angl, e.fout() * 1.5f);
+            }
+        };
+        Angles.randLenVectors(e.id, 4, e.finpow() * 20, e.rotation, 360, floatc21);
     });
 
     public static void lightning(float x1, float y1, float x2, float y2, Color c, int iterations, float rndScale, Effect e) {
