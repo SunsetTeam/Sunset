@@ -30,11 +30,11 @@ public class BerserkLaserBulletType extends BulletType {
     public void update(Bullet b){
         Healthc target = Damage.linecast(b, b.x, b.y, b.rotation(), maxLaserLength);
         float dst = maxLaserLength;
+        Vec2 h = Tmp.v2;
         float bs = 0;
         Vec2 v = new Vec2().trns(b.rotation(), maxLaserLength).add(b.x, b.y);
         if(target != null) {
             dst = Mathf.dst(b.x, b.y, target.x(), target.y());
-            if(b.timer.get(10))laserHitEffect.at(target.x(), target.y());
         } else {
             dst = maxLaserLength;
         }
@@ -43,8 +43,12 @@ public class BerserkLaserBulletType extends BulletType {
             Hitboxc hit = (Hitboxc)target;
             hit.collision(b, hit.x(), hit.y());
             b.collision(hit, hit.x(), hit.y());
+            h.trns(b.rotation(), dst);
+            laserHitEffect.at(b.x+h.x,b.y+h.y);
         } else if(target instanceof Building){
             Building tile = (Building)target;
+            h.trns(b.rotation(), dst - tile.block.size);
+            laserHitEffect.at(b.x + h.x,b.y + h.y);
             b.data = new Object[]{target, dst - tile.block.size};
             if(tile.collide(b)){
                 tile.collision(b);
