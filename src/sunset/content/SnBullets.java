@@ -1179,7 +1179,10 @@ public class SnBullets implements ContentList {
         }};
         //endregion misc
         testbullet = new TorpedoBulletType(){{
+            sprite = "sunset-copter-bomb";
             lifetime = 400f;
+            width = 10;
+            height = 10;
             damage = 1;
             speed = 1;
             trailEffect = SnFx.torpedoTrail;
