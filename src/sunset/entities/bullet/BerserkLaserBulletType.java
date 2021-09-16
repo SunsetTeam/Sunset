@@ -17,7 +17,6 @@ public class BerserkLaserBulletType extends BulletType {
     public float maxLaserLength = 120f;
     public float width = 3;
     private float swidth = 1;
-    public Effect hitEffect = Fx.none;
     public Seq<BerserkAbility> bw = new Seq<>();
     public Color[] colors = new Color[]{Color.valueOf("FFFFFF55"), Color.valueOf("CCCDDAaa"), Color.valueOf("9799A3"), Color.white};
     public float[] tskales = {1f, 0.8f, 0.6f, 0.3f};
@@ -37,7 +36,6 @@ public class BerserkLaserBulletType extends BulletType {
             dst = maxLaserLength;
         }
         b.data = new Object[]{target, dst};
-        if(b.timer.get(5))Damage.collideLine(b, b.team, hitEffect, b.x, b.y, b.rotation(), dst);
         if(target instanceof Hitboxc){
             Hitboxc hit = (Hitboxc)target;
             hit.collision(b, hit.x(), hit.y());
