@@ -574,6 +574,7 @@ public class SnUnitTypes implements ContentList {
                     damage = 5;
                     maxLaserLength = 90f;
                     continuous = true;
+                    hitEffect = SnFx.berserkLaserHitSmall;
                     pierce = true;
                     speed = 0.001f;
 width = 0.5f;
