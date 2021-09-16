@@ -1,16 +1,12 @@
 package sunset.entities.bullet;
 
 import mindustry.Vars;
-import arc.*;
-import arc.graphics.*;
-import arc.graphics.g2d.*;
-import arc.math.*;
-import arc.util.*;
 import mindustry.entities.*;
 import mindustry.entities.bullet.*;
 import mindustry.entities.effect.*;
 import mindustry.entities.bullet.BulletType;
 import mindustry.gen.*;
+import mindustry.graphics.*;
 import mindustry.gen.Bullet;
 import sunset.content.*;
 
