@@ -519,6 +519,7 @@ public class SnFx{
                 Fill.poly(e.x + v, e.y + v1, 4, 1.5f + e.fout() * 6f);
             }
         };
+        Angles.randLenVectors(e.id, 4, e.finpow() * 20, e.rotation, 360, floatc2);
         Draw.color(Color.valueOf("FFFFFF"));
         Floatc2 floatc21 = new Floatc2() {
             @Override
