@@ -516,7 +516,7 @@ public class SnFx{
         Floatc2 floatc2 = new Floatc2() {
             @Override
             public void get(float v, float v1) {
-                Fill.poly(e.x + v, e.y + v1, 4, 1.5f + e.fout() * 6f);
+                Fill.poly(e.x + v, e.y + v1, 4, 1.5f + e.fout() * 2f);
             }
         };
         Angles.randLenVectors(e.id, 4, e.finpow() * 20, e.rotation, 360, floatc2);
