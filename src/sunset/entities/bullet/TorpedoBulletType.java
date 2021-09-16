@@ -7,7 +7,7 @@ import mindustry.gen.Bullet;
 import sunset.content.*;
 
 public class TorpedoBulletType extends BasicBulletType {
-public TorpedoBulletType speed, float damage) {
+public TorpedoBulletType (float speed, float damage) {
         super(speed, damage);
         layer = Layer.debris + 0.001f;
         collidesAir = absorbable = keepVelocity = false;
