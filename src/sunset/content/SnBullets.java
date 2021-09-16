@@ -44,7 +44,7 @@ public class SnBullets implements ContentList {
     //units
     BasicHelicopterGun, HelicopterShootgun, HelicopterMissile, HelicopterBomb, HelicopterRocket, bigHelicopterGun, laserHelicopterFrag, largeHelicopterGun, bigHelicopterRocket, HelicopterMissiles,
     cometWaterShot, starStunBullet, galaxyKnockbackBullet,
-    wheel1bullet, wheel2shotgun, wheel3burst,
+    wheel1bullet, wheel2shotgun, wheel3burst, wheel4shotgun, wheel4artillery, wheel5flame, wheel5bullet,
     //misc
     emptyBullet, overheatBullet,
     //test
@@ -1091,6 +1091,50 @@ public class SnBullets implements ContentList {
             splashDamageRadius = 17f;
             width = 8f;
             height = 12f;
+        }};
+        wheel4shotgun = new BasicBulletType(12f, 32f) {{
+            hitEffect = despawnEffect = Fx.none;
+            instantDisappear = true;
+            lifetime = 12f;
+            fragBullets = 12;
+            keepVelocity = true;
+            fragBullet = new BasicBulletType(12f, 32f) {{
+                lifetime = 12f;
+                keepVelocity = true;
+            }};
+            fragVelocityMin = 0.85f;
+            fragVelocityMax = 1.25f;
+            fragLifeMin = 0.85f;
+            fragLifeMax = 1.25f;
+            fragCone = 6f;
+        }};
+        wheel4artillery = new ArtilleryBulletType(3f, 67f){{
+            lifetime = 114f;
+            status = StatusEffects.blasted;
+            splashDamage = 79f;
+            splashDamageRadius = 29f;
+            width = 8f;
+            height = 12f;
+        }};
+        wheel5flame = new BulletType(20f, 120f){{
+            ammoMultiplier = 3f;
+            hitSize = 7f;
+            lifetime = 7f;
+            pierce = true;
+            statusDuration = 60f * 4;
+            shootEffect = SnFx.shootWheel5Flame;
+            hitEffect = Fx.hitFlameSmall;
+            despawnEffect = Fx.none;
+            status = StatusEffects.burning;
+            keepVelocity = false;
+            hittable = false;
+        }};
+        wheel5bullet = new BasicBulletType(8f, 62){{
+            width = 8f;
+            height = 14f;
+            shootEffect = Fx.shootBig;
+            pierceCap = 4;
+            pierceBuilding = true;
         }};
         //endregion wheel
         //region misc

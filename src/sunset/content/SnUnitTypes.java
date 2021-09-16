@@ -31,7 +31,7 @@ public class SnUnitTypes implements ContentList {
             //air-support (buffers)
             comet, satellite, planet, star, galaxy,
             //wheel
-            wheel1, wheel2, wheel3,
+            wheel1, wheel2, wheel3, wheel4, wheel5,
             //delivery
             router, courier,
             //freezing
@@ -44,11 +44,11 @@ public class SnUnitTypes implements ContentList {
         addUnitGroup(Blocks.airFactory, 60*15f, with(Items.silicon, 30, Items.graphite, 15),
             guardcopter, bladecopter, swordcopter, guardiancopter, crusadercopter);
         addUnitGroup(Blocks.groundFactory, 60*10f, with(Items.silicon, 25f, Items.lead, 20),
-            wheel1, wheel2, wheel3);
+            wheel1, wheel2, wheel3, wheel4, wheel5);
     }
     @Override
     public void load() {
-        //attack copters
+        //region attack copters
         guardcopter = new CopterUnitType("guard-copter") {{
             health = 170;
             hitSize = 27;
@@ -499,7 +499,7 @@ public class SnUnitTypes implements ContentList {
             speed = 3.2f;
             rotateSpeed = baseRotateSpeed = 2.33f;
             drag = 0.075f;
-            weapons.add(new WeaponExt("wheel2-shotgun"){{
+            weapons.add(new WeaponExt("wheel3-burst"){{
                 reload = 65f;
                 inaccuracy = 1f;
                 rotate = true;
@@ -507,6 +507,57 @@ public class SnUnitTypes implements ContentList {
                 bullet = SnBullets.wheel3burst;
                 shootSound = Sounds.shootBig;
                 x = y = 0;
+            }});
+        }};
+        wheel4 = new WheelUnitType("wheel4"){{
+            health = 6800;
+            speed = 3.1f;
+            rotateSpeed = baseRotateSpeed = 2.25f;
+            drag = 0.075f;
+            weapons.add(new WeaponExt("wheel4-shotgun"){{
+                reload = 92f;
+                rotate = true;
+                mirror = false;
+                bullet = SnBullets.wheel4shotgun;
+                shootSound = Sounds.shootBig;
+                x = y = 0;
+            }});
+            weapons.add(new WeaponExt("wheel4-burst"){{
+                reload = 56f;
+                inaccuracy = 3f;
+                alternate = true;
+                rotate = true;
+                bullet = SnBullets.wheel4artillery;
+                shootSound = Sounds.shootBig;
+                y = -6;
+                x = -3;
+            }});
+        }};
+        wheel5 = new WheelUnitType("wheel5"){{
+            health = 19400;
+            speed = 3f;
+            rotateSpeed = baseRotateSpeed = 2f;
+            drag = 0.075f;
+            weapons.add(new WeaponExt("wheel5-flame"){{
+                reload = 7f;
+                rotate = true;
+                mirror = false;
+                bullet = SnBullets.wheel5flame;
+                shootSound = Sounds.flame;
+                x = y = 0;
+            }});
+            weapons.add(new WeaponExt("wheel5-bullet"){{
+                reload = 149f;
+                inaccuracy = 1f;
+                alternate = true;
+                rotate = true;
+                rotateShooting = true;
+                shots = 9;
+                shotDelay = 5f;
+                bullet = SnBullets.wheel5bullet;
+                shootSound = Sounds.shootBig;
+                y = -12;
+                x = -6;
             }});
         }};
         //endregion wheel

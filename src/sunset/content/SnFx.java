@@ -216,19 +216,19 @@ public class SnFx{
     }),
 
     tridenCharge = new Effect(210, e -> {
-        final Color c1 = Color.valueOf("eaecff"), c2 = Color.valueOf("ffeaec");
+        final Color c1 = Color.valueOf("ccddff"), c2 = Color.valueOf("ffddcc");
         float r = Mathf.degRad * e.rotation;
         float cx = e.x - Mathf.cos(r)*12f;
         float cy = e.y - Mathf.sin(r)*12f;
         Draw.z(Layer.block);
-        enegrySphere(e.id, e.time, e.fin(), Mathf.PI / 120f, Mathf.PI / 30f, 8f, 1.5f, c1, c2, cx, cy);
+        enegrySphere(e.id, e.time, e.fin(), 8, Mathf.PI / 120f, Mathf.PI / 30f, 8f, 1.5f, c1, c2, cx, cy);
     });
     //region Energy sphere utils
-    public static void enegrySphere(long seed, float time, float fin,
+    public static void enegrySphere(long seed, float time, float fin, int amount,
                                      float minSpeed, float maxSpeed, float mainRadius, float miniRadius,
                                      Color c1, Color c2, float x, float y) {
         Seq<Vec2> vecs = new Seq<>();
-        Utils.randVectors(seed, 8, minSpeed, maxSpeed, (xx, yy) -> vecs.add(new Vec2(xx, yy)));
+        Utils.randVectors(seed, amount, minSpeed, maxSpeed, (xx, yy) -> vecs.add(new Vec2(xx, yy)));
         vecs.each(vec -> {
             float size = (vec.len() * time) % Mathf.PI2;
             if(size < Mathf.PI) return;
@@ -276,6 +276,14 @@ public class SnFx{
         Fill.circle(e.x, e.y, 112f);
         stroke(3, new Color(Pal.surge).a(Mathf.clamp(2*e.fout())));
         Lines.circle(e.x, e.y, 112f);
+    }),
+
+    shootWheel5Flame = new Effect(40f, 140f, e -> {
+        color(Pal.lightFlame, Pal.darkFlame, Color.gray, e.fin());
+
+        randLenVectors(e.id, 24, e.finpow() * 140f, e.rotation, 10f, (x, y) -> {
+            Fill.circle(e.x + x, e.y + y, 1.35f + e.fout() * 2.35f);
+        });
     }),
 
     missilePoint = new Effect(1, (e) -> {
