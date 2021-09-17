@@ -320,11 +320,11 @@ public class RimeGenerator extends ModGenerator{
 
         pass((x, y) -> {
             //random moss
-            if(floor == Blocks.sporeMoss){
+            /*if(floor == Blocks.sporeMoss){
                 if(Math.abs(0.5f - noise(x - 90, y, 4, 0.8, 65)) > 0.02){
                     floor = Blocks.moss;
                 }
-            }
+            }*/
 
             //tar
             if(floor == Blocks.darksand){

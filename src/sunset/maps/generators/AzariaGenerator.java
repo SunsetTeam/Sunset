@@ -29,6 +29,8 @@ import mindustry.world.Tile;
 import mindustry.world.TileGen;
 import mindustry.world.Tiles;
 import sunset.content.blocks.SnEnvironment;
+import sunset.maps.generators.util.RidgedFromV7;
+import sunset.maps.generators.util.SimplexFromV7;
 import sunset.utils.Utils;
 
 import static mindustry.Vars.*;
@@ -66,7 +68,7 @@ public class AzariaGenerator extends ModGenerator{
             SnEnvironment.crimsondirt, Blocks.mud,
             SnEnvironment.crimsongrass, SnEnvironment.crimsondirt,
             SnEnvironment.crimsonwater, SnEnvironment.crimsonwater,
-            SnEnvironment.crimsondirt, SnEnvironment.crimsondirt
+            SnEnvironment.crimsongrass, SnEnvironment.crimsongrass
     );
 
     @Override
@@ -191,8 +193,35 @@ public class AzariaGenerator extends ModGenerator{
             }
         }
 
+        Room spawn = null;
+        Room fspawn = spawn;
+
         cells(4);
         distort(10f, 12f);
+
+        //rivers
+        pass((x, y) -> {
+            if(block.solid) return;
+
+            Vec3 v = sector.rect.project(x, y);
+
+            float rr = SimplexFromV7.noise2d(sector.id, (float)2, 0.6f, 1 / 7, x, y) * 0.1f;
+            float value = RidgedFromV7.noise3d(2, v.x, v.y, v.z, 1, 1f / 53f) + rr - rawHeight(v) * 0f;
+            float rrscl = rr * 44 - 2;
+
+            if(value > 0.12f && !Mathf.within(x, y, fspawn.x, fspawn.y, 12 + rrscl)){
+                boolean deep = value > 0.12f + 0.1f && !Mathf.within(x, y, fspawn.x, fspawn.y, 15 + rrscl);
+                boolean spore = floor != SnEnvironment.crimsonsand && floor != Blocks.salt;
+                //do not place rivers on ice, they're frozen
+                //ignore pre-existing liquids
+                if(!(floor == SnEnvironment.crimsonice || floor == SnEnvironment.crimsonicesnow || floor == SnEnvironment.crimsonsnow || floor.asFloor().isLiquid)){
+                    floor = spore ?
+                            (deep ? SnEnvironment.crimsonwater : SnEnvironment.crimsonsandwater) :
+                            (deep ? SnEnvironment.crimsonwater :
+                                    (floor == SnEnvironment.crimsonsand ? SnEnvironment.crimsonsandwater : SnEnvironment.crimsonsandwater));
+                }
+            }
+        });
 
         float constraint = 1.3f;
         float radius = width / 2f / Mathf.sqrt3;
@@ -209,7 +238,6 @@ public class AzariaGenerator extends ModGenerator{
         }
 
         //check positions on the map to place the player spawn. this needs to be in the corner of the map
-        Room spawn = null;
         Seq<Room> enemies = new Seq<>();
         int enemySpawns = rand.random(1, Math.max((int)(sector.threat * 4), 1));
         int offset = rand.nextInt(360);
@@ -288,7 +316,7 @@ public class AzariaGenerator extends ModGenerator{
             ores.add(Blocks.oreScrap);
         }
 
-        if(noise.octaveNoise3D(2, 0.5, scl, sector.tile.v.x + 1, sector.tile.v.y, sector.tile.v.z)*nmag + poles > 0.55f*addscl){
+        if(noise.octaveNoise3D(3, 0.5, scl, sector.tile.v.x + 1, sector.tile.v.y, sector.tile.v.z)*nmag + poles > 0.55f*addscl){
             ores.add(SnEnvironment.oreFors);
         }
 
@@ -327,10 +355,11 @@ public class AzariaGenerator extends ModGenerator{
         tech();
 
         pass((x, y) -> {
+
             //random swamp
             if(floor == SnEnvironment.crimsonswamp){
                 if(Math.abs(0.5f - noise(x - 90, y, 4, 0.8, 65)) > 0.02){
-                    floor = Blocks.moss;
+                    floor = SnEnvironment.crimsonmoss;
                 }
             }
 
@@ -364,7 +393,7 @@ public class AzariaGenerator extends ModGenerator{
                 float noise = noise(x + 782, y, 5, 0.75f, 260f, 1f);
                 if(noise > 0.67f && !roomseq.contains(e -> Mathf.within(x, y, e.x, e.y, 14))){
                     if(noise > 0.72f){
-                        floor = noise > 0.78f ? Blocks.taintedWater : (floor == Blocks.sand ? Blocks.sandWater : Blocks.darksandTaintedWater);
+                        floor = noise > 0.78f ? SnEnvironment.crimsonwater : (floor == Blocks.sand ? SnEnvironment.crimsonsandwater : SnEnvironment.crimsondeepwater);
                     }else{
                         floor = (floor == Blocks.sand ? floor : Blocks.darksand);
                     }
@@ -385,7 +414,7 @@ public class AzariaGenerator extends ModGenerator{
                     }
                 }
                 if(any && ((block == Blocks.snowWall || block == Blocks.iceWall) || (all && block == Blocks.air && floor == Blocks.snow && rand.chance(0.03)))){
-                    block = rand.chance(0.5) ? Blocks.whiteTree : Blocks.whiteTreeDead;
+                    block = rand.chance(0.5) ? SnEnvironment.crimsontree : SnEnvironment.crimsontreedead;
                 }
             }
 
