@@ -872,6 +872,19 @@ public class SnBullets implements ContentList {
             width = 10f;
             height = 13f;
             lifetime = 45f;
+            hitEffect = despawnEffect = Fx.none;
+            instantDisappear = true;
+            fragBullets = 9;
+            keepVelocity = true;
+            fragBullet = new BasicBulletType(5f, 9f) {{
+                lifetime = 45f;
+                keepVelocity = true;
+            }};
+            fragVelocityMin = 0.8f;
+            fragVelocityMax = 1.5f;
+            fragLifeMin = 0.6f;
+            fragLifeMax = 1.5f;
+            fragCone = 18f;
             shootEffect = Fx.shootSmall;
             smokeEffect = Fx.shootSmallSmoke;
         }};

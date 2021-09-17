@@ -14,7 +14,7 @@ public class CopterUnitType extends UnitType {
     public float offsetY = 0f;
     public float rotorRotateSpeed = 28f;
 
-    float unitFallRotateSpeed = 1f;
+    public float unitFallRotateSpeed = 6f;
 
     public int rotorCount = 1;
 
@@ -25,7 +25,7 @@ public class CopterUnitType extends UnitType {
         
         constructor = UnitEntity::create;
         flying = lowAltitude = true;
-        fallSpeed = 0.008f;
+        fallSpeed = 0.005f;
         engineSize = 0f;
     }
 
@@ -39,7 +39,8 @@ public class CopterUnitType extends UnitType {
     public void update(Unit unit) {
         super.update(unit);
         if(unit.health <= 0 || unit.dead()) {
-            unit.rotation += Time.delta *(fallSpeed * 1000);
+            unit.rotation += Time.delta *(fallSpeed * 2000);
+            unit.rotation = Time.time * unitFallRotateSpeed;
         }
     }
 
