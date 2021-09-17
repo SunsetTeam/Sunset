@@ -11,10 +11,9 @@ import mindustry.type.Weapon;
 import mindustry.ai.types.SuicideAI;
 import mindustry.entities.bullet.BombBulletType;
 import sunset.ai.*;
+import sunset.entities.abilities.BerserkStage;
 import sunset.entities.abilities.StatusFieldAbility;
 import sunset.type.UnitTypeExt;
-import sunset.entities.abilities.BerserkAbility;
-import sunset.entities.abilities.StatusFieldAbility;
 import sunset.entities.bullet.BerserkLaserBulletType;
 import sunset.type.BerserkUnitType;
 import sunset.ai.weapon.ExtinguishWeaponAI;
@@ -610,10 +609,6 @@ public class SnUnitTypes implements ContentList {
             legTrns = 0.4f;
             legMoveSpace = 1.4f;
 
-            addRageMode(
-                BerserkAbility.dmg(200f, 1.2f, 1.3f)
-            );
-
             weapons.add(new Weapon(){{
                 reload = 30f;
                 inaccuracy = 2f;
@@ -632,11 +627,21 @@ public class SnUnitTypes implements ContentList {
                     speed = 0.001f;
                     width = 0.5f;
                     lifetime = 240f;
-                    setWidth(
-                        BerserkAbility.dmg(200f, 1.4f, 0f)
-                    );
                 }};
             }});
+
+            stages.add(
+                new BerserkStage(){{
+                    healthMaximum = 0.4f;
+                    bulletWidthMultiplier = 2f;
+                    effect = StatusEffects.overclock;
+                }},
+                new BerserkStage(){{
+                    healthMaximum = 0.15f;
+                    bulletWidthMultiplier = 3f;
+                    effect = StatusEffects.burning;
+                }}
+            );
         }};
         //endregion freezing
 

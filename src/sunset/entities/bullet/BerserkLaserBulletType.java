@@ -4,22 +4,19 @@ import arc.graphics.*;
 import arc.graphics.g2d.*;
 import arc.math.*;
 import arc.math.geom.*;
-import arc.struct.Seq;
 import arc.util.*;
 import mindustry.content.*;
 import mindustry.entities.*;
 import mindustry.entities.bullet.*;
 import mindustry.gen.*;
-import sunset.content.SnFx;
-import sunset.entities.abilities.BerserkAbility;
+import sunset.entities.abilities.BerserkStage;
+import sunset.type.BerserkUnitType;
 
 
 public class BerserkLaserBulletType extends BulletType {
     public float maxLaserLength = 120f;
     public float width = 3;
-    private float swidth = 1;
     public Effect laserHitEffect = Fx.none;
-    public Seq<BerserkAbility> bw = new Seq<>();
     public Color[] colors = new Color[]{Color.valueOf("FFFFFF55"), Color.valueOf("CCCDDAaa"), Color.valueOf("9799A3"), Color.white};
     public float[] tskales = {1f, 0.8f, 0.6f, 0.3f};
     public float[] strokes = {1.6f, 1.3f, 1f, 0.3f};
@@ -61,6 +58,12 @@ public class BerserkLaserBulletType extends BulletType {
 
     @Override
     public void draw(Bullet b) {
+        float swidth = width;
+        if(b.owner instanceof Unit) {
+            Unit u = (Unit)b.owner;
+            BerserkStage stage = BerserkUnitType.getStage(u);
+            if(stage != null) swidth = width * stage.bulletWidthMultiplier;
+        }
         if(((Object[])b.data)[0] instanceof Position){
             Position data = (Position)((Object[])b.data)[0];
             Tmp.v1.set(data).lerp(b, b.fin());
@@ -75,18 +78,5 @@ public class BerserkLaserBulletType extends BulletType {
                 }
             }
         }
-        for(int i = 0; i<bw.size; i++){
-            if(b.owner instanceof Unit){
-                Unit u = (Unit) b.owner;
-                if(u.health < bw.get(i).needHealth){
-                    this.swidth = bw.get(i).damageMultiplier;
-                } else {
-                    swidth = width;
-                }
-            }
-        }
-    }
-    public void setWidth(BerserkAbility... berserkAbilities){
-        this.bw = Seq.with(berserkAbilities);
     }
 }
