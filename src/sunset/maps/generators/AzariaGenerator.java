@@ -200,7 +200,7 @@ public class AzariaGenerator extends ModGenerator{
         distort(10f, 12f);
 
         //rivers
-        pass((x, y) -> {
+        /*pass((x, y) -> {
             if(block.solid) return;
 
             Vec3 v = sector.rect.project(x, y);
@@ -221,7 +221,7 @@ public class AzariaGenerator extends ModGenerator{
                                     (floor == SnEnvironment.crimsonsand ? SnEnvironment.crimsonsandwater : SnEnvironment.crimsonsandwater));
                 }
             }
-        });
+        });*/
 
         float constraint = 1.3f;
         float radius = width / 2f / Mathf.sqrt3;
