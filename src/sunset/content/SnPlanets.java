@@ -9,6 +9,7 @@ import mindustry.type.Planet;
 import sunset.maps.generators.BurnoutGenerator;
 import sunset.maps.generators.AzariaGenerator;
 import sunset.maps.generators.RimeGenerator;
+import sunset.type.SunsetPlanet;
 
 public class SnPlanets implements ContentList{
     public static Planet
@@ -40,7 +41,7 @@ public class SnPlanets implements ContentList{
         }};
 
         //planets
-        burnout = new Planet("burnout", SnPlanets.magma, 2, 0.7f){{
+        burnout = new SunsetPlanet("burnout", SnPlanets.magma, 2, 0.7f){{
             meshLoader = () -> new HexMesh(this, 6);
             generator = new BurnoutGenerator();
             radius = 0.87f;
@@ -58,7 +59,7 @@ public class SnPlanets implements ContentList{
             alwaysUnlocked = true;
         }};
 
-        azaria = new Planet("azaria", SnPlanets.magma, 3, 1f){{
+        azaria = new SunsetPlanet("azaria", SnPlanets.magma, 3, 1f){{
             meshLoader = () -> new HexMesh(this, 6);
             generator = new AzariaGenerator();
             radius = 1.03f;
@@ -75,7 +76,7 @@ public class SnPlanets implements ContentList{
             alwaysUnlocked = true;
         }};
 
-        rime = new Planet("rime", SnPlanets.magma, 3, 0.9f){{
+        rime = new SunsetPlanet("rime", SnPlanets.magma, 3, 0.9f){{
             meshLoader = () -> new HexMesh(this, 6);
             generator = new RimeGenerator();
             radius = 1;

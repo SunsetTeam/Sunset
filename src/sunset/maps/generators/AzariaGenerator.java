@@ -104,7 +104,7 @@ public class AzariaGenerator extends ModGenerator{
 
         if(noise < 0.16){
             for(Ptile other : tile.tiles){
-                var osec = sector.planet.getSector(other);
+                Sector osec = sector.planet.getSector(other);
 
                 //no sectors near start sector!
                 if(

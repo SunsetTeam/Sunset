@@ -219,7 +219,7 @@ public abstract class BasicGenerator implements WorldGenerator {
             read.set(write);
         }
 
-        for(var t : tiles){
+        for(Tile t : tiles){
             t.setBlock(!read.get(t.x, t.y) ? Blocks.air : t.floor().wall);
         }
     }
