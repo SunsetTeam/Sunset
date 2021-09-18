@@ -223,7 +223,7 @@ public class SnEnvironment implements ContentList {
         //region trees
         crimsontree = new StaticTree("crimson-tree") {{
             variants = 0;
-       
+        }};
         crimsontreedead = new StaticTree("crimson-tree-dead"){{
             variants = 0;
         }};
