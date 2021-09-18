@@ -1,12 +1,10 @@
 package sunset;
 
-import arc.assets.Loadable;
-import mindustry.Vars;
 import mindustry.core.Renderer;
 import mindustry.gen.Groups;
 import sunset.utils.V7.SunsetWaveSpawner;
 
-public class SunsetVars extends Vars implements Loadable{
+public class SunsetVars{
     public static SunsetWaveSpawner spawner;
 
     public static final int maxSchematicSize = 128;
