@@ -11,13 +11,16 @@ import arc.struct.FloatSeq;
 import arc.struct.ObjectMap;
 import arc.struct.ObjectSet;
 import arc.struct.Seq;
+import arc.util.Tmp;
 import arc.util.noise.Noise;
 import arc.util.noise.RidgedPerlin;
+import arc.util.noise.Simplex;
 import mindustry.ai.Astar;
 import mindustry.ai.BaseRegistry.BasePart;
 import mindustry.content.Blocks;
 import mindustry.game.Schematics;
 import mindustry.game.Team;
+import mindustry.game.Waves;
 import mindustry.graphics.g3d.PlanetGrid.Ptile;
 import mindustry.maps.generators.BaseGenerator;
 import mindustry.type.Sector;
@@ -25,28 +28,19 @@ import mindustry.world.Block;
 import mindustry.world.Tile;
 import mindustry.world.TileGen;
 import mindustry.world.Tiles;
-import sunset.SunsetVars;
 import sunset.content.blocks.SnEnvironment;
-import sunset.utils.V7.PlanetGenerator;
-import sunset.utils.V7.SunsetWaves;
-import sunset.utils.V7.arc.Ridged;
-import sunset.utils.V7.arc.Simplex;
-import sunset.utils.V7.arc.Tmp;
-import sunset.utils.V7.arc.Vec2;
+import sunset.utils.Utils;
 
 import static mindustry.Vars.*;
 
-public class RimeGenerator extends PlanetGenerator{
-    //alternate, less direct generation (wip)
-    public static boolean alt = false;
-    static final int seed = 0;
-    BaseGenerator basegen = new BaseGenerator();
-    float scl = 4.5f;
-    float waterOffset = 0.04f;
-    boolean genLakes = false;
+public class RimeGenerator extends ModGenerator{
     public final Simplex simplex = new Simplex();
     public final RidgedPerlin rid = new RidgedPerlin(1, 2);
 
+    BaseGenerator basegen = new BaseGenerator();
+    float scl = 4.5f;
+    float waterOffset = 0.04f;
+    float water = 0.05f;
     Block[][] arr = {
             {Blocks.ice, Blocks.ice, Blocks.ice, Blocks.ice, SnEnvironment.glacier1, SnEnvironment.glacier1, SnEnvironment.glacier1, SnEnvironment.glacier1, SnEnvironment.glacier1, Blocks.snow, Blocks.snow, Blocks.snow, Blocks.snow, Blocks.snow},
             {Blocks.ice, Blocks.ice, Blocks.ice, Blocks.ice, SnEnvironment.glacier2, SnEnvironment.glacier2, SnEnvironment.glacier2, SnEnvironment.glacier3, Blocks.snow, Blocks.snow, Blocks.snow},
@@ -75,12 +69,12 @@ public class RimeGenerator extends PlanetGenerator{
             Blocks.iceSnow, Blocks.iceSnow
     );
 
-    float water = 0.05f;
+    @Override
+    public float rawHeight(Vec3 pos) {
+        pos = Tmp.v33.set(pos);
+        pos.scl(scl);
 
-    public float rawHeight(Vec3 position){
-        position = Tmp.v33.set(position).scl(scl);
-
-        return (Mathf.pow(Simplex.noise3d(seed, 7, 0.5f, 1f/3f, position.x, position.y, position.z), 2.3f) + waterOffset) / (1f + waterOffset);
+        return (Mathf.pow((float) simplex.octaveNoise3D(7, 0.5, 1d / 3d, pos.x, pos.y, pos.z), 2.3f) + waterOffset) / (1 + waterOffset);
     }
 
     @Override
@@ -106,12 +100,9 @@ public class RimeGenerator extends PlanetGenerator{
             for(Ptile other : tile.tiles){
                 Sector osec = sector.planet.getSector(other);
 
-                //no sectors near start sector!
-                if(
-                        osec.id == sector.planet.startSector || //near starting sector
-                                osec.generateEnemyBase && poles < 0.85 || //near other base
-                                (sector.preset != null && noise < 0.11) //near preset
-                ){
+                //Enemy base doesnt spawn in start sector and other maps
+
+                if(osec.id == sector.planet.startSector || osec.generateEnemyBase && poles < 0.85 || (sector.preset != null && noise < 0.11)){
                     return;
                 }
             }
@@ -127,35 +118,40 @@ public class RimeGenerator extends PlanetGenerator{
     }
 
     @Override
-    public Color getColor(Vec3 position){
-        Block block = getBlock(position);
-        //replace salt with sand color
-        if(block == Blocks.salt) return Blocks.sand.mapColor;
-        return Tmp.c1.set(block.mapColor).a(1f - block.albedo);
-    }
-
-    @Override
     public void genTile(Vec3 position, TileGen tile){
         tile.floor = getBlock(position);
         tile.block = tile.floor.asFloor().wall;
 
-        if(Ridged.noise3d(1, position.x, position.y, position.z, 2, 22) > 0.31){
+        /*if(noise.octaveNoise3D(5, 0.6, 8.0, position.x, position.y, position.z) > 0.65){
+            tile.block = Blocks.air;
+        }*/
+
+        if(rid.getValue(position.x, position.y, position.z, 22) > 0.32){
             tile.block = Blocks.air;
         }
     }
 
+    @Override
+    public Color getColor(Vec3 position) {
+        Block block = this.getBlock(position);
+
+        Tmp.c1.set(block.mapColor).a = 1 - block.albedo;
+        return Tmp.c1;
+    }
+
+    @Override
     public Block getBlock(Vec3 position){
         float height = rawHeight(position);
         Tmp.v31.set(position);
         position = Tmp.v33.set(position).scl(scl);
         float rad = scl;
         float temp = Mathf.clamp(Math.abs(position.y * 2f) / (rad));
-        float tnoise = Simplex.noise3d(seed, 7, 0.56, 1f/3f, position.x, position.y + 999f, position.z);
+        float tnoise = (float)noise.octaveNoise3D(7, 0.56, 1f/3f, position.x, position.y + 999f, position.z);
         temp = Mathf.lerp(temp, tnoise, 0.5f);
         height *= 1.2f;
         height = Mathf.clamp(height);
 
-        float tar = Simplex.noise3d(seed, 4, 0.55f, 1f/2f, position.x, position.y + 999f, position.z) * 0.3f + Tmp.v31.dst(0, 0, 1f) * 0.2f;
+        float tar = (float)noise.octaveNoise3D(4, 0.55f, 1f/2f, position.x, position.y + 999f, position.z) * 0.3f + Tmp.v31.dst(0, 0, 1f) * 0.2f;
 
         Block res = arr[Mathf.clamp((int)(temp * arr.length), 0, arr[0].length - 1)][Mathf.clamp((int)(height * arr[0].length), 0, arr[0].length - 1)];
         if(tar > 0.5f){
@@ -167,7 +163,7 @@ public class RimeGenerator extends PlanetGenerator{
     @Override
     protected float noise(float x, float y, double octaves, double falloff, double scl, double mag){
         Vec3 v = sector.rect.project(x, y).scl(5f);
-        return Simplex.noise3d(seed, octaves, falloff, 1f / scl, v.x, v.y, v.z) * (float)mag;
+        return (float)noise.octaveNoise3D(octaves, falloff, 1f / scl, v.x, v.y, v.z) * (float)mag;
     }
 
     @Override
@@ -184,31 +180,14 @@ public class RimeGenerator extends PlanetGenerator{
                 connected.add(this);
             }
 
-            void con(int x1, int y1, int x2, int y2){
-                float nscl = rand.random(100f, 140f) * 6f;
-                int stroke = rand.random(3, 9);
-                brush(pathfind(x1, y1, x2, y2, tile -> (tile.solid() ? 50f : 0f) + noise(tile.x, tile.y, 2, 0.4f, 1f / nscl) * 500, Astar.manhattan), stroke);
-            }
-
             void connect(Room to){
-                if(!connected.add(to)) return;
+                if(connected.contains(to)) return;
 
-                Vec2 midpoint = Tmp.v1.set(to.x, to.y).add(x, y).scl(0.5f);
-                rand.nextFloat();
-
-                if(alt){
-                    midpoint.add(Tmp.v2.set(1, 0f).setAngle(Angles.angle(to.x, to.y, x, y) + 90f * (rand.chance(0.5) ? 1f : -1f)).scl(Tmp.v1.dst(x, y) * 2f));
-                }else{
-                    //add randomized offset to avoid straight lines
-                    midpoint.add(Tmp.v2.setToRandomDirection(rand).scl(Tmp.v1.dst(x, y)));
-                }
-
-                midpoint.sub(width/2f, height/2f).limit(width / 2f / Mathf.sqrt3).add(width/2f, height/2f);
-
-                int mx = (int)midpoint.x, my = (int)midpoint.y;
-
-                con(x, y, mx, my);
-                con(mx, my, to.x, to.y);
+                connected.add(to);
+                float nscl = rand.random(20f, 60f);
+                int stroke = rand.random(4, 12);
+                Astar.TileHueristic th = Utils.tileHueristic(tile -> (tile.solid() ? 5f : 0f) + noise(tile.x, tile.y, 1, 1, 1f / nscl) * 60); //see implementation in "Utils" to understand
+                brush(pathfind(x, y, to.x, to.y, th, Astar.manhattan), stroke);
             }
         }
 
@@ -260,7 +239,7 @@ public class RimeGenerator extends PlanetGenerator{
                 for(int j = 0; j < enemySpawns; j++){
                     float enemyOffset = rand.range(60f);
                     Tmp.v1.set(cx - width/2, cy - height/2).rotate(180f + enemyOffset).add(width/2, height/2);
-                    Room espawn = new Room((int) Tmp.v1.x, (int) Tmp.v1.y, rand.random(8, 16));
+                    Room espawn = new Room((int)Tmp.v1.x, (int)Tmp.v1.y, rand.random(8, 15));
                     roomseq.add(espawn);
                     enemies.add(espawn);
                 }
@@ -281,34 +260,11 @@ public class RimeGenerator extends PlanetGenerator{
         for(Room room : roomseq){
             spawn.connect(room);
         }
-        Room fspawn = spawn;
 
         cells(1);
         distort(10f, 6f);
 
-        //rivers
-        pass((x, y) -> {
-            if(block.solid) return;
-
-            Vec3 v = sector.rect.project(x, y);
-
-            float rr = Simplex.noise2d(sector.id, (float)2, 0.6f, 1f / 7f, x, y) * 0.1f;
-            float value = Ridged.noise3d(2, v.x, v.y, v.z, 1, 1f / 53f) + rr - rawHeight(v) * 0f;
-            float rrscl = rr * 44 - 2;
-
-            if(value > 0.12f && !Mathf.within(x, y, fspawn.x, fspawn.y, 12 + rrscl)){
-                boolean deep = value > 0.12f + 0.1f && !Mathf.within(x, y, fspawn.x, fspawn.y, 15 + rrscl);
-                boolean spore = floor != Blocks.sand && floor != Blocks.salt;
-                //do not place rivers on ice, they're frozen
-                //ignore pre-existing liquids
-                if(!(floor == Blocks.ice || floor == Blocks.iceSnow || floor == Blocks.snow || floor.asFloor().isLiquid)){
-                    floor = spore ?
-                            (deep ? Blocks.taintedWater : Blocks.darksandTaintedWater) :
-                            (deep ? Blocks.water :
-                                    (floor == Blocks.sand ? Blocks.sandWater : Blocks.sandWater));
-                }
-            }
-        });
+        inverseFloodFill(tiles.getn(spawn.x, spawn.y));
 
         Seq<Block> ores = Seq.with(Blocks.oreCopper, Blocks.oreLead);
         float poles = Math.abs(sector.tile.v.y);
@@ -316,24 +272,20 @@ public class RimeGenerator extends PlanetGenerator{
         float scl = 1f;
         float addscl = 1.3f;
 
-        if(Simplex.noise3d(seed, 2, 0.5, scl, sector.tile.v.x, sector.tile.v.y, sector.tile.v.z)*nmag + poles > 0.25f*addscl){
+        if(noise.octaveNoise3D(2, 0.5, scl, sector.tile.v.x, sector.tile.v.y, sector.tile.v.z)*nmag + poles > 0.25f*addscl){
             ores.add(Blocks.oreCoal);
         }
 
-        if(Simplex.noise3d(seed, 2, 0.5, scl, sector.tile.v.x + 1, sector.tile.v.y, sector.tile.v.z)*nmag + poles > 0.5f*addscl){
+        if(noise.octaveNoise3D(2, 0.5, scl, sector.tile.v.x + 1, sector.tile.v.y, sector.tile.v.z)*nmag + poles > 0.5f*addscl){
             ores.add(Blocks.oreTitanium);
         }
 
-        if(Simplex.noise3d(seed, 2, 0.5, scl, sector.tile.v.x + 2, sector.tile.v.y, sector.tile.v.z)*nmag + poles > 0.7f*addscl){
+        if(noise.octaveNoise3D(2, 0.5, scl, sector.tile.v.x + 2, sector.tile.v.y, sector.tile.v.z)*nmag + poles > 0.7f*addscl){
             ores.add(Blocks.oreThorium);
         }
 
         if(rand.chance(0.25)){
             ores.add(Blocks.oreScrap);
-        }
-
-        if(Simplex.noise3d(seed, 3, 0.5f, scl, sector.tile.v.x + 1, sector.tile.v.y, sector.tile.v.z)*nmag + poles > 0.55f*addscl){
-            ores.add(SnEnvironment.oreColdent);
         }
 
         FloatSeq frequencies = new FloatSeq();
@@ -364,25 +316,24 @@ public class RimeGenerator extends PlanetGenerator{
 
         median(2);
 
-        inverseFloodFill(tiles.getn(spawn.x, spawn.y));
-
         tech();
 
         pass((x, y) -> {
-            //random swamp
-            /*if(floor == SnEnvironment.crimsonswamp){
+            //random moss
+            /*if(floor == Blocks.sporeMoss){
                 if(Math.abs(0.5f - noise(x - 90, y, 4, 0.8, 65)) > 0.02){
-                    floor = SnEnvironment.crimsonmoss;
+                    floor = Blocks.moss;
                 }
             }*/
 
             //tar
-            /*if(floor == Blocks.darksand){
+            if(floor == Blocks.darksand){
                 if(Math.abs(0.5f - noise(x - 40, y, 2, 0.7, 80)) > 0.25f &&
                         Math.abs(0.5f - noise(x, y + sector.id*10, 1, 1, 60)) > 0.41f && !(roomseq.contains(r -> Mathf.within(x, y, r.x, r.y, 15)))){
                     floor = Blocks.tar;
+                    ore = Blocks.air;
                 }
-            }*/
+            }
 
             //hotrock tweaks
             if(floor == Blocks.hotrock){
@@ -401,7 +352,7 @@ public class RimeGenerator extends PlanetGenerator{
                         floor = Blocks.magmarock;
                     }
                 }
-            }else if(genLakes && floor != Blocks.basalt && floor != Blocks.ice && floor.asFloor().hasSurface()){
+            }else if(floor != Blocks.basalt && floor != Blocks.ice && floor.asFloor().hasSurface()){
                 float noise = noise(x + 782, y, 5, 0.75f, 260f, 1f);
                 if(noise > 0.67f && !roomseq.contains(e -> Mathf.within(x, y, e.x, e.y, 14))){
                     if(noise > 0.72f){
@@ -409,6 +360,7 @@ public class RimeGenerator extends PlanetGenerator{
                     }else{
                         floor = (floor == Blocks.sand ? floor : Blocks.darksand);
                     }
+                    ore = Blocks.air;
                 }
             }
 
@@ -430,7 +382,7 @@ public class RimeGenerator extends PlanetGenerator{
             }
 
             //random stuff
-            dec:{
+            dec: {
                 for(int i = 0; i < 4; i++){
                     Tile near = world.tile(x + Geometry.d4[i].x, y + Geometry.d4[i].y);
                     if(near != null && near.block() != Blocks.air){
@@ -523,13 +475,6 @@ public class RimeGenerator extends PlanetGenerator{
             }
         }
 
-        //remove invalid ores
-        for(Tile tile : tiles){
-            if(tile.overlay().needsSurface && !tile.floor().hasSurface()){
-                tile.setOverlay(Blocks.air);
-            }
-        }
-
         Schematics.placeLaunchLoadout(spawn.x, spawn.y);
 
         for(Room espawn : enemies){
@@ -546,12 +491,11 @@ public class RimeGenerator extends PlanetGenerator{
 
         float waveTimeDec = 0.4f;
 
-        state.rules.waveSpacing = Mathf.lerp(60 * 65 * 2, 60f * 60f * 1f, Math.max(difficulty - waveTimeDec, 0f));
+        state.rules.waveSpacing = Mathf.lerp(60 * 65 * 2, 60f * 60f * 1f, Math.max(difficulty - waveTimeDec, 0f) / 0.8f);
         state.rules.waves = sector.info.waves = true;
         state.rules.enemyCoreBuildRadius = 600f;
 
-        //spawn air only when spawn is blocked
-        state.rules.spawns = SunsetWaves.generate(difficulty, new Rand(sector.id), state.rules.attackMode, state.rules.attackMode && SunsetVars.spawner.countGroundSpawns() == 0);
+        state.rules.spawns = Waves.generate(difficulty, new Rand(), state.rules.attackMode);
     }
 
     @Override
