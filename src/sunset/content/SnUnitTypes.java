@@ -58,6 +58,7 @@ public class SnUnitTypes implements ContentList {
             flying = true;
             circleTarget = false;
             range = 130;
+            unitFallRotateSpeed = 6f;
 
             offsetY = 2.2f;
             weapons.add(
@@ -85,6 +86,7 @@ public class SnUnitTypes implements ContentList {
             flying = true;
             circleTarget = false;
             range = 170;
+            unitFallRotateSpeed = 5f;
 
             offsetY = 2.5f;
             weapons.add(
@@ -97,9 +99,9 @@ public class SnUnitTypes implements ContentList {
                     shootCone = 20f;
                     spacing = 4f;
                     recoil = 2f;
-                    shots = 6;
+                    shots = 1;
                     shootCone = 0.01f;
-                    inaccuracy = 12;
+                    inaccuracy = 0;
                     reload = 15f;
                     shootSound = Sounds.shoot;
                     bullet = SnBullets.HelicopterShootgun;
@@ -116,7 +118,8 @@ public class SnUnitTypes implements ContentList {
             flying = true;
             circleTarget = false;
             range = 210;
-
+           
+            unitFallRotateSpeed = 5f;
             rotorRotateSpeed = 27f;
             offsetY = 2.6f;
             weapons.add(
@@ -159,6 +162,7 @@ public class SnUnitTypes implements ContentList {
             flying = true;
             circleTarget = false;
 
+            unitFallRotateSpeed = 5f;
             rotorRotateSpeed = 26f;
             offsetY = 2.6f;
             weapons.add(
@@ -204,7 +208,8 @@ public class SnUnitTypes implements ContentList {
 
             flying = true;
             circleTarget = false;
-
+           
+            unitFallRotateSpeed = 5f;
             rotorRotateSpeed = 25f;
             offsetY = 2.6f;
             weapons.add(

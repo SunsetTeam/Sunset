@@ -13,13 +13,12 @@ public class TorpedoBulletType extends BasicBulletType {
         collidesAir = absorbable = keepVelocity = false;
         trailEffect = SnFx.torpedoTrail;
     }
+
     @Override
     public void draw(Bullet b){
         Draw.z(Layer.debris);
         super.draw(b);
-}
-
-
+    }
 
     @Override
     public void update(Bullet b) {

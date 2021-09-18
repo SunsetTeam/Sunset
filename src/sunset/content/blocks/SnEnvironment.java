@@ -19,20 +19,20 @@ public class SnEnvironment implements ContentList {
 
     //floors 
     crimsongrass, crimsondirt, crimsonswamp, crimsonsand, crimsonsandwater,
-    crimsonwater, crimsondeepwater, orangesand, obsidian, ash, burningash,
-    crimsonice, crimsonsnow, crimsonicesnow,
+    crimsonwater, crimsondeepwater, crimsonice, crimsonsnow, crimsonicesnow,
     crimsonmoss,
+    orangesand, obsidian, ash, burningash,
 
     //static walls 
     crimsondirtwall, crimsongrasswall, crimsonsandwall, stonesandwall, stonesand,
     orangesandwall, obsidianwall, ashwall,
-
-    //trees
-    crimsontree, crimsontreedead,
-
+    
     //pines
     crimsonpine,
-
+    
+    //trees
+    crimsontree, crimsontreedead,
+    
     //special
     geyser,
 
@@ -133,6 +133,30 @@ public class SnEnvironment implements ContentList {
             cacheLayer = CacheLayer.water;
             albedo = 0.5f;
         }};
+        
+        crimsonice = new Floor("crimson-ice"){{
+            variants = 3;
+            dragMultiplier = 0.25f;
+            speedMultiplier = 0.85f;
+            attributes.set(Attribute.water, 0.38f);
+        }};
+
+        crimsonsnow = new Floor("crimson-snow"){{
+            variants = 3;
+            attributes.set(Attribute.water, 0.2f);
+        }};
+
+        crimsonicesnow = new Floor("crimson-icesnow"){{
+            variants = 3;
+            dragMultiplier = 0.55f;
+            attributes.set(Attribute.water, 0.28f);
+        }};
+
+        crimsonmoss = new Floor("crimson-moss"){{
+            variants = 3;
+            attributes.set(Attribute.spores, 0.2f);
+            wall = crimsonpine;
+        }};
 
         orangesand = new Floor("orange-sand") {{
             itemDrop = Items.sand;
@@ -159,30 +183,6 @@ public class SnEnvironment implements ContentList {
             emitLight = true;
             lightRadius = 28f;
             lightColor = Color.orange.cpy().a(0.15f);
-        }};
-
-        crimsonice = new Floor("crimson-ice"){{
-            variants = 3;
-            dragMultiplier = 0.25f;
-            speedMultiplier = 0.85f;
-            attributes.set(Attribute.water, 0.38f);
-        }};
-
-        crimsonsnow = new Floor("crimson-snow"){{
-            variants = 3;
-            attributes.set(Attribute.water, 0.2f);
-        }};
-
-        crimsonicesnow = new Floor("crimson-icesnow"){{
-            variants = 3;
-            dragMultiplier = 0.55f;
-            attributes.set(Attribute.water, 0.28f);
-        }};
-
-        crimsonmoss = new Floor("crimson-moss"){{
-            variants = 3;
-            attributes.set(Attribute.spores, 0.2f);
-            wall = crimsonpine;
         }};
         //endregion floors
 
@@ -224,7 +224,6 @@ public class SnEnvironment implements ContentList {
         crimsontree = new StaticTree("crimson-tree") {{
             variants = 0;
         }};
-
         crimsontreedead = new StaticTree("crimson-tree-dead"){{
             variants = 0;
         }};
