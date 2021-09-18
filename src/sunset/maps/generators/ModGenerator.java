@@ -3,26 +3,33 @@ package sunset.maps.generators;
 import arc.graphics.Color;
 import arc.math.Mathf;
 import arc.math.geom.Vec3;
-import arc.struct.IntSeq;
-import arc.struct.ObjectMap;
+import arc.struct.*;
 import arc.util.Tmp;
 import arc.util.noise.Noise;
 import arc.util.noise.RidgedPerlin;
-import arc.util.noise.Simplex;
 import mindustry.content.Blocks;
+import mindustry.content.Liquids;
+import mindustry.content.Weathers;
+import mindustry.ctype.UnlockableContent;
+import mindustry.game.Rules;
 import mindustry.graphics.g3d.HexMesher;
 import mindustry.graphics.g3d.PlanetGrid;
 import mindustry.maps.generators.BaseGenerator;
 import mindustry.maps.generators.BasicGenerator;
-import mindustry.maps.generators.PlanetGenerator;
+import mindustry.type.Liquid;
 import mindustry.type.Sector;
+import mindustry.type.Weather;
 import mindustry.world.Block;
 import mindustry.world.Tile;
 import mindustry.world.TileGen;
 import mindustry.world.Tiles;
+import sunset.utils.V7.PlanetGenerator;
+import sunset.utils.V7.arc.Simplex;
 
-public class ModGenerator extends PlanetGenerator {
-    public final Simplex simplex = new Simplex();
+import static mindustry.Vars.world;
+
+public class ModGenerator extends PlanetGenerator{
+    public final arc.util.noise.Simplex simplex = new arc.util.noise.Simplex();
     public final RidgedPerlin rid = new RidgedPerlin(1, 2);
     public Block[][] arr;
     public float scl = 5f;
@@ -30,7 +37,6 @@ public class ModGenerator extends PlanetGenerator {
     public BaseGenerator basegen = new BaseGenerator();
     public float water = 2f;
     ObjectMap<Block,Block> dec;
-
     ObjectMap<Block,Block> tars;
 
     public ModGenerator() {
@@ -95,7 +101,7 @@ public class ModGenerator extends PlanetGenerator {
     public abstract class PlanetGenerator extends BasicGenerator implements HexMesher {
         protected IntSeq ints = new IntSeq();
         protected Sector sector;
-        protected Simplex noise = new Simplex();
+        protected arc.util.noise.Simplex noise = new arc.util.noise.Simplex();
 
         /** Should generate sector bases for a planet. */
         public void generateSector(Sector sector){
@@ -127,6 +133,65 @@ public class ModGenerator extends PlanetGenerator {
             }
         }
 
+        public void addWeather(Sector sector, Rules rules){
+
+            //apply weather based on terrain
+            ObjectIntMap<Block> floorc = new ObjectIntMap<>();
+            ObjectSet<UnlockableContent> content = new ObjectSet<>();
+
+            for(Tile tile : world.tiles){
+                if(world.getDarkness(tile.x, tile.y) >= 3){
+                    continue;
+                }
+
+                Liquid liquid = tile.floor().liquidDrop;
+                if(tile.floor().itemDrop != null) content.add(tile.floor().itemDrop);
+                if(tile.overlay().itemDrop != null) content.add(tile.overlay().itemDrop);
+                if(liquid != null) content.add(liquid);
+
+                if(!tile.block().isStatic()){
+                    floorc.increment(tile.floor());
+                    if(tile.overlay() != Blocks.air){
+                        floorc.increment(tile.overlay());
+                    }
+                }
+            }
+
+            //sort counts in descending order
+            Seq<ObjectIntMap.Entry<Block>> entries = floorc.entries().toArray();
+            entries.sort(e -> -e.value);
+            //remove all blocks occuring < 30 times - unimportant
+            entries.removeAll(e -> e.value < 30);
+
+            Block[] floors = new Block[entries.size];
+            for(int i = 0; i < entries.size; i++){
+                floors[i] = entries.get(i).key;
+            }
+
+            //TODO bad code
+            boolean hasSnow = floors.length > 0 && (floors[0].name.contains("ice") || floors[0].name.contains("snow"));
+            boolean hasRain = floors.length > 0 && !hasSnow && content.contains(Liquids.water) && !floors[0].name.contains("sand");
+            boolean hasDesert = floors.length > 0 && !hasSnow && !hasRain && floors[0] == Blocks.sand;
+            boolean hasSpores = floors.length > 0 && (floors[0].name.contains("spore") || floors[0].name.contains("moss") || floors[0].name.contains("tainted"));
+
+            if(hasSnow){
+                rules.weather.add(new Weather.WeatherEntry(Weathers.snow));
+            }
+
+            if(hasRain){
+                rules.weather.add(new Weather.WeatherEntry(Weathers.rain));
+                rules.weather.add(new Weather.WeatherEntry(Weathers.fog));
+            }
+
+            if(hasDesert){
+                rules.weather.add(new Weather.WeatherEntry(Weathers.sandstorm));
+            }
+
+            if(hasSpores){
+                rules.weather.add(new Weather.WeatherEntry(Weathers.sporestorm));
+            }
+        }
+
         protected void genTile(Vec3 position, TileGen tile){
 
         }
@@ -134,7 +199,12 @@ public class ModGenerator extends PlanetGenerator {
         @Override
         protected float noise(float x, float y, double octaves, double falloff, double scl, double mag){
             Vec3 v = sector.rect.project(x, y);
-            return (float)noise.octaveNoise3D(octaves, falloff, 1f / scl, v.x, v.y, v.z) * (float)mag;
+            return Simplex.noise3d(0, octaves, falloff, 1f / scl, v.x, v.y, v.z) * (float)mag;
+        }
+
+        /** @return the scaling factor for sector rects. */
+        public float getSizeScl(){
+            return 3200;
         }
 
         public void generate(Tiles tiles, Sector sec){

@@ -1,9 +1,9 @@
-package sunset.maps.generators.util;
+package sunset.utils.V7.arc;
 
 /** С помощью этого можно создать реки. */
 
 
-public class SimplexFromV7 {
+public class Simplex {
     static final int[][] grad3 = {
             {1, 1, 0}, {-1, 1, 0}, {1, -1, 0}, {-1, -1, 0},
             {1, 0, 1}, {-1, 0, 1}, {1, 0, -1}, {-1, 0, -1},
@@ -32,7 +32,7 @@ public class SimplexFromV7 {
     };
 
     //static only
-    private SimplexFromV7(){}
+    public Simplex(){}
 
     // 2D Multi-octave Simplex noise.
     //

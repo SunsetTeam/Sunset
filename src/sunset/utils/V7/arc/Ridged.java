@@ -1,9 +1,9 @@
-package sunset.maps.generators.util;
+package sunset.utils.V7.arc;
 
 /** С помощью этого можно создать реки. */
 
 /** Ridged perlin noise implementation. */
-public class RidgedFromV7 {
+public class Ridged {
     static final int X_NOISE_GEN = 1619;
     static final int Y_NOISE_GEN = 31337;
     static final int Z_NOISE_GEN = 6971;
@@ -11,7 +11,7 @@ public class RidgedFromV7 {
     static final int SHIFT_NOISE_GEN = 8;
     static final int quality = 2;
 
-    private RidgedFromV7(){}
+    private Ridged(){}
 
     public static float noise2d(int seed, double x, double y, double frequency){
         return noise2d(seed, x, y, 1, frequency);
@@ -241,9 +241,9 @@ public class RidgedFromV7 {
 
         vectorIndex *= 3;
 
-        double xvGradient = VectorTableFromV7.randomVectors[vectorIndex];
-        double yvGradient = VectorTableFromV7.randomVectors[vectorIndex + 1];
-        double zvGradient = VectorTableFromV7.randomVectors[vectorIndex + 2];
+        double xvGradient = VectorTable.randomVectors[vectorIndex];
+        double yvGradient = VectorTable.randomVectors[vectorIndex + 1];
+        double zvGradient = VectorTable.randomVectors[vectorIndex + 2];
 
 
         // Set up us another vector equal to the distance between the two
@@ -267,8 +267,8 @@ public class RidgedFromV7 {
 
         vectorIndex *= 3;
 
-        double xvGradient = VectorTableFromV7.randomVectors[vectorIndex];
-        double yvGradient = VectorTableFromV7.randomVectors[vectorIndex + 1];
+        double xvGradient = VectorTable.randomVectors[vectorIndex];
+        double yvGradient = VectorTable.randomVectors[vectorIndex + 1];
 
         // Set up us another vector equal to the distance between the two
         // vectors

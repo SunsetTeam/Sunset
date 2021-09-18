@@ -1,6 +1,6 @@
-package sunset.maps.generators.util;
+package sunset.utils.V7.arc;
 
-public class VectorTableFromV7 {
+public class VectorTable {
 
     static double[] randomVectors = {
             -0.763874, -0.596439, -0.246489,
