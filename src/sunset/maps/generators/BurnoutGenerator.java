@@ -27,6 +27,7 @@ import mindustry.world.TileGen;
 import mindustry.world.Tiles;
 import sunset.SunsetVars;
 import sunset.content.blocks.SnEnvironment;
+import sunset.utils.V7.PlanetGenerator;
 import sunset.utils.V7.SunsetWaves;
 import sunset.utils.V7.arc.Ridged;
 import sunset.utils.V7.arc.Simplex;
@@ -35,7 +36,7 @@ import sunset.utils.V7.arc.Vec2;
 
 import static mindustry.Vars.*;
 
-public class BurnoutGenerator extends ModGenerator{
+public class BurnoutGenerator extends PlanetGenerator{
     //alternate, less direct generation (wip)
     public static boolean alt = false;
     static final int seed = 0;
@@ -76,7 +77,6 @@ public class BurnoutGenerator extends ModGenerator{
 
     float water = 0f;
 
-    @Override
     public float rawHeight(Vec3 position){
         position = Tmp.v33.set(position).scl(scl);
 
@@ -144,7 +144,6 @@ public class BurnoutGenerator extends ModGenerator{
         }
     }
 
-    @Override
     public Block getBlock(Vec3 position){
         float height = rawHeight(position);
         Tmp.v31.set(position);

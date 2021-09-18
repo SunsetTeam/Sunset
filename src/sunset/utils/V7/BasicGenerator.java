@@ -14,7 +14,7 @@ import mindustry.world.*;
 
 import static mindustry.Vars.*;
 
-public abstract class BasicGenerator implements WorldGenerator {
+public abstract class BasicGenerator implements WorldGenerator{
     protected static final ShortSeq ints1 = new ShortSeq(), ints2 = new ShortSeq();
 
     protected Rand rand = new Rand();

@@ -1,7 +1,6 @@
 package sunset;
 
 import mindustry.core.Renderer;
-import mindustry.gen.Groups;
 import sunset.utils.V7.SunsetWaveSpawner;
 
 public class SunsetVars{
@@ -11,7 +10,6 @@ public class SunsetVars{
     public static Renderer renderer;
 
     public static void init() {
-        Groups.init();
         spawner = new SunsetWaveSpawner();
         renderer.minZoom = 0.5f;
         renderer.maxZoom = 25;
