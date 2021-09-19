@@ -70,7 +70,7 @@ public class Utils {
 
         return result;
     }
-    /** Принудительно устанавлиывает юнита в меню. */
+    /** Принудительно устанавливает юнита в меню. */
     public static void setMenuUnit(UnitType type) {
         try {
             Field rendererF = MenuFragment.class.getDeclaredField("renderer");

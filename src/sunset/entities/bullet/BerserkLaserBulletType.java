@@ -28,7 +28,6 @@ public class BerserkLaserBulletType extends BulletType {
         Healthc target = Damage.linecast(b, b.x, b.y, b.rotation(), maxLaserLength);
         float dst = maxLaserLength;
         Vec2 h = Tmp.v2;
-        float bs = 0;
         Vec2 v = new Vec2().trns(b.rotation(), maxLaserLength).add(b.x, b.y);
         if(target != null) {
             dst = Mathf.dst(b.x, b.y, target.x(), target.y());

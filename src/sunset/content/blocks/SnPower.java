@@ -1,7 +1,5 @@
 package sunset.content.blocks;
 
-import static mindustry.type.ItemStack.with;
-
 import mindustry.content.Fx;
 import mindustry.content.Items;
 import mindustry.content.Liquids;
@@ -9,13 +7,13 @@ import mindustry.ctype.ContentList;
 import mindustry.gen.Sounds;
 import mindustry.type.Category;
 import mindustry.world.Block;
-import mindustry.world.blocks.power.NuclearReactor;
 import mindustry.world.blocks.power.DecayGenerator;
-import mindustry.world.blocks.power.ThermalGenerator;
-import mindustry.world.blocks.power.BurnerGenerator;
-import sunset.world.blocks.power.LiquidGenerator;
+import mindustry.world.blocks.power.NuclearReactor;
 import sunset.content.SnItems;
+import sunset.world.blocks.power.LiquidGenerator;
 import sunset.world.blocks.power.ThermalGeneratorExt;
+
+import static mindustry.type.ItemStack.with;
 
 public class SnPower implements ContentList{
     public static Block

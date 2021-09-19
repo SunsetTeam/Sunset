@@ -35,7 +35,7 @@ public class EMPWaveBullet extends BasicBulletType{
         int number = r.nextInt(max + 1) + min;
 
         if(randomTime){
-            statusDuration = 0 + number;
+            statusDuration = number;
         }
         if(min > 0.0001f){
             randomTime = true;

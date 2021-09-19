@@ -2,22 +2,27 @@ package sunset.content;
 
 
 import arc.func.Floatc2;
-import arc.graphics.*;
-import arc.graphics.g2d.*;
-import arc.math.*;
-import arc.math.geom.*;
-import arc.struct.*;
+import arc.graphics.Color;
+import arc.graphics.g2d.Draw;
+import arc.graphics.g2d.Fill;
+import arc.graphics.g2d.Lines;
+import arc.math.Angles;
+import arc.math.Mathf;
+import arc.math.geom.Vec2;
+import arc.struct.Seq;
 import mindustry.content.Fx;
-import mindustry.entities.*;
+import mindustry.entities.Effect;
 import mindustry.entities.effect.WaveEffect;
-import mindustry.graphics.*;
-import sunset.utils.Utils;
+import mindustry.graphics.Drawf;
+import mindustry.graphics.Layer;
+import mindustry.graphics.Pal;
 import sunset.graphics.SnPal;
+import sunset.utils.Utils;
 
-import static arc.graphics.g2d.Draw.*;
-import static arc.graphics.g2d.Lines.*;
-
-import static arc.math.Angles.angle;
+import static arc.graphics.g2d.Draw.alpha;
+import static arc.graphics.g2d.Draw.color;
+import static arc.graphics.g2d.Lines.lineAngle;
+import static arc.graphics.g2d.Lines.stroke;
 import static arc.math.Angles.randLenVectors;
 
 public class SnFx{
@@ -26,7 +31,7 @@ public class SnFx{
     enojiecraft = new Effect(60, e -> {
         randLenVectors(e.id, 6, 4f + e.fin() * 8f, (x, y) -> {
             color(Pal.heal);
-            Fill.square(e.x + x, e.y + y, e.fout() + 0.5f, 45);  
+            Fill.square(e.x + x, e.y + y, e.fout() + 0.5f, 45);
             float circleRad = 2f + e.fin() * 15f;
             Lines.circle(e.x, e.y, circleRad);
         });
@@ -68,12 +73,10 @@ public class SnFx{
         });
     }),
 
-    modFormsmoke = new Effect(50, e -> {
-        randLenVectors(e.id, 8, 6f + e.fin() * 8f, (x, y) -> {
-            color(Pal.plasticSmoke, Color.lightGray, e.fin());
-            Fill.rect(e.x + x, e.y + y, 0.2f + e.fout() * 2f, 45);
-        });
-    }),
+    modFormsmoke = new Effect(50, e -> randLenVectors(e.id, 8, 6f + e.fin() * 8f, (x, y) -> {
+        color(Pal.plasticSmoke, Color.lightGray, e.fin());
+        Fill.rect(e.x + x, e.y + y, 0.2f + e.fout() * 2f, 45);
+    })),
 
     weaverSmeltsmoke = new Effect(20f, e -> {
         randLenVectors(e.id, 7, 6.8f + e.fin() * 5f, (x, y) -> {
@@ -224,14 +227,14 @@ public class SnFx{
         float cx = e.x - Mathf.cos(r)*12f;
         float cy = e.y - Mathf.sin(r)*12f;
         Draw.z(Layer.block);
-        enegrySphere(e.id, e.time, e.fin(), Mathf.PI / 120f, Mathf.PI / 30f, 8f, 1.5f, c1, c2, cx, cy);
+        enegrySphere(e.id, e.time, e.fin(), 8, Mathf.PI / 120f, Mathf.PI / 30f, 8f, 1.5f, c1, c2, cx, cy);
     });
     //region Energy sphere utils
-    public static void enegrySphere(long seed, float time, float fin,
+    public static void enegrySphere(long seed, float time, float fin, int amount,
                                      float minSpeed, float maxSpeed, float mainRadius, float miniRadius,
                                      Color c1, Color c2, float x, float y) {
         Seq<Vec2> vecs = new Seq<>();
-        Utils.randVectors(seed, 8, minSpeed, maxSpeed, (xx, yy) -> vecs.add(new Vec2(xx, yy)));
+        Utils.randVectors(seed, amount, minSpeed, maxSpeed, (xx, yy) -> vecs.add(new Vec2(xx, yy)));
         vecs.each(vec -> {
             float size = (vec.len() * time) % Mathf.PI2;
             if(size < Mathf.PI) return;

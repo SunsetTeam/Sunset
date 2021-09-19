@@ -170,8 +170,8 @@ public class RimeGenerator extends ModGenerator{
     protected void generate(){
 
         class Room{
-            int x, y, radius;
-            ObjectSet<Room> connected = new ObjectSet<>();
+            final int x, y, radius;
+            final ObjectSet<Room> connected = new ObjectSet<>();
 
             Room(int x, int y, int radius){
                 this.x = x;
