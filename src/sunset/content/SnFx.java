@@ -224,7 +224,7 @@ public class SnFx{
         float cx = e.x - Mathf.cos(r)*12f;
         float cy = e.y - Mathf.sin(r)*12f;
         Draw.z(Layer.block);
-        enegrySphere(e.id, e.time, e.fin(), Mathf.PI / 120f, Mathf.PI / 30f, 8f, 1.5f, c1, c2, cx, cy);
+        enegrySphere(e.id, e.time, e.fin(), 8, Mathf.PI / 120f, Mathf.PI / 30f, 8f, 1.5f, c1, c2, cx, cy);
     });
     //region Energy sphere utils
     public static void enegrySphere(long seed, float time, float fin,
