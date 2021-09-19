@@ -142,15 +142,6 @@ public class EMPFacility extends Turret{
         }
 
         @Override
-        public double sense(LAccess sensor){
-            return switch(sensor){
-                case ammo -> power.status;
-                case ammoCapacity -> 1;
-                default -> super.sense(sensor);
-            };
-        }
-
-        @Override
         public BulletType useAmmo(){
             return shootType;
         }
