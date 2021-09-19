@@ -6,19 +6,17 @@ import mindustry.Vars;
 import mindustry.ctype.ContentList;
 import mindustry.game.EventType.FileTreeInitEvent;
 import mindustry.mod.Mod;
-//import mindustry.ui.dialogs.BaseDialog;
 import sunset.content.*;
 import sunset.content.blocks.*;
 import sunset.content.blocks.defense.SnProjectors;
 import sunset.content.blocks.defense.SnTurrets;
 import sunset.content.blocks.defense.SnWalls;
 import sunset.type.UnitData;
-//import sunset.ui.ContentInfoDialogExt;
 import sunset.ui.ContentInfoDialogExt;
 import sunset.utils.Utils;
 import sunset.world.GeyserLogic;
 import sunset.world.MissileLogic;
-
+import static mindustry.Vars.headless;
 
 public class Sunset extends Mod {
     private final ContentList[] SnContent = {
@@ -58,12 +56,12 @@ public class Sunset extends Mod {
     }
     
     @Override
-    public void loadContent(){
-        for(ContentList list : SnContent){
+    public void loadContent() {
+        for(ContentList list : SnContent) {
             list.load();
             Log.info("@: Loaded content list: @", getClass().getSimpleName(), list.getClass().getSimpleName());
         }
-        if (Vars.headless) {
+        if (headless) {
             Events.on(FileTreeInitEvent.class, e -> SnSounds.load());
         } else {
             SnSounds.load();

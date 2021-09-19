@@ -158,12 +158,13 @@ public class StackableStatusEffect extends StatusEffect implements SnCustomStat 
             fieldStatuses.setAccessible(true);
             statuses = (Seq<StatusEntry>)fieldStatuses.get(unit);
         } catch (NoSuchFieldException e) {
-            // Поля может и не оказаться, тогда просто сичтаем, что юнит не поддерживает эффекты
+            // Поля может и не оказаться, тогда просто считаем, что юнит не поддерживает эффекты
             return;
         } catch (Throwable e) {
             Log.err(e);
         }
-        boolean foundStandard = statuses.remove(e -> e.effect == this);
+        boolean foundStandard = false;
+        if (statuses != null) foundStandard = statuses.remove(e -> e.effect == this);
         StackableStatusEntry prev = (StackableStatusEntry)statuses.find(e -> 
             (e instanceof StackableStatusEntry) && ((StackableStatusEntry)e).baseEffect == this);
         if(prev == null) {

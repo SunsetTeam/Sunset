@@ -12,11 +12,11 @@ public class SnPal{
     bGray = Color.valueOf("626680"),
     aGray = Color.valueOf("808080 "),
 
-    //triden-like
+    //trident-like
     lightningHeal = Color.green,
     lightningDamage = Color.red,
 
-    //yellowtrail
+    //yellow trail
     YellowTrailBack = Color.valueOf("FDF59A62"),
     YellowTrail = Color.valueOf("FDF59AFF"),
 
