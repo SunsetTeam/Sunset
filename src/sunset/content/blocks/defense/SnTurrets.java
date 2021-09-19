@@ -12,6 +12,7 @@ import mindustry.entities.bullet.LaserBulletType;
 import mindustry.gen.Sounds;
 import mindustry.graphics.Pal;
 import mindustry.type.Category;
+import mindustry.type.ItemStack;
 import mindustry.world.Block;
 import mindustry.world.blocks.defense.turrets.ItemTurret;
 import mindustry.world.blocks.defense.turrets.LiquidTurret;
@@ -21,13 +22,11 @@ import mindustry.world.meta.BuildVisibility;
 import sunset.content.SnBullets;
 import sunset.content.SnFx;
 import sunset.content.SnItems;
+import sunset.content.SnSounds;
 import sunset.entities.bullet.EnergySphereBulletType;
 import sunset.graphics.SnPal;
 import sunset.world.MissileLogic;
-import sunset.world.blocks.defense.turrets.ChainLightningTurret;
-import sunset.world.blocks.defense.turrets.LiquidTurretExt;
-import sunset.world.blocks.defense.turrets.MissileSiloTurret;
-import sunset.world.blocks.defense.turrets.MultiBarrelItemTurret;
+import sunset.world.blocks.defense.turrets.*;
 
 import static mindustry.type.ItemStack.with;
 
@@ -49,9 +48,11 @@ public class SnTurrets implements ContentList {
         halberd,
         //missile
         sunrise, spark, dissector, art,
+        //EMP
+        discharger, dischargerEvo,
         //testing
         testturret;
-    
+
     @Override
     public void load() {
         //1x1
@@ -111,6 +112,7 @@ public class SnTurrets implements ContentList {
             liquidUse = 0.3f;
             laserColor = SnPal.chainLaser;
         }};
+
         pulsation = new ItemTurret("pulsation") {{
             requirements(Category.turret, with(Items.copper, 95, Items.graphite, 85, Items.lead, 70, SnItems.planatrium, 35));
             ammo(
@@ -560,6 +562,31 @@ public class SnTurrets implements ContentList {
             minRange = 276.0f;
             category = Category.turret;
             buildVisibility = BuildVisibility.shown;
+        }};
+
+        //EMP
+        discharger = new EMPFacility("discharger"){{
+            requirements(Category.turret, with(Items.copper, 1600, Items.lead, 1500, Items.metaglass, 1000, Items.plastanium, 800, Items.silicon, 1300, Items.surgeAlloy, 900, Items.phaseFabric, 750, SnItems.flameid, 1000, SnItems.enojie, 900, SnItems.coldent, 300));
+            health = 980;
+            powerUse = 6.7f;
+            reloadTime = 720;
+            heatColor = Color.valueOf("7FFFD4");
+            chargeSound = Sounds.lasercharge2;
+            //shootSound = SnSounds.empShoot;
+            chargeTime = 180;
+            shootType = SnBullets.empBullet;
+        }};
+
+        dischargerEvo = new EMPFacility("discharger-evo"){{
+            requirements(Category.turret, ItemStack.mult(discharger.requirements, 1.5f));
+            size = 4;
+            health = 1200;
+            powerUse = 6.7f;
+            reloadTime = 720;
+            chargeSound = Sounds.lasercharge2;
+            //shootSound = SnSounds.empShoot;
+            chargeTime = 300;
+            shootType = SnBullets.empBulletEvo;
         }};
 
         //testing
