@@ -224,14 +224,14 @@ public class SnFx{
         float cx = e.x - Mathf.cos(r)*12f;
         float cy = e.y - Mathf.sin(r)*12f;
         Draw.z(Layer.block);
-        enegrySphere(e.id, e.time, e.fin(), Mathf.PI / 120f, Mathf.PI / 30f, 8f, 1.5f, c1, c2, cx, cy);
+        enegrySphere(e.id, e.time, e.fin(), 8, Mathf.PI / 120f, Mathf.PI / 30f, 8f, 1.5f, c1, c2, cx, cy);
     });
     //region Energy sphere utils
-    public static void enegrySphere(long seed, float time, float fin,
+    public static void enegrySphere(long seed, float time, float fin, int amount,
                                      float minSpeed, float maxSpeed, float mainRadius, float miniRadius,
                                      Color c1, Color c2, float x, float y) {
         Seq<Vec2> vecs = new Seq<>();
-        Utils.randVectors(seed, 8, minSpeed, maxSpeed, (xx, yy) -> vecs.add(new Vec2(xx, yy)));
+        Utils.randVectors(seed, amount, minSpeed, maxSpeed, (xx, yy) -> vecs.add(new Vec2(xx, yy)));
         vecs.each(vec -> {
             float size = (vec.len() * time) % Mathf.PI2;
             if(size < Mathf.PI) return;
