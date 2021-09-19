@@ -51,7 +51,7 @@ public class EMPFacility extends Turret{
         size = 3;
     }
 
-    @Override
+    /*@Override
     public void setBars(){
         super.setBars();
 
@@ -66,7 +66,7 @@ public class EMPFacility extends Turret{
                 () -> Color.gold,
                 () -> entity.charge
         ));
-    }
+    }*/
 
     @Override
     public void load(){
