@@ -189,8 +189,8 @@ public class SnTurrets implements ContentList {
             speedupPerShot = 0.08f;
             slowReloadTime = 180f;
         }};
-        /*burner = new ItemTurret("burner") {{
-            requirements(Category.turret, with(Items.metaglass, 50, Items.lead, 175, Items.graphite, 85));
+        burner = new ItemTurret("burner") {{
+            requirements(Category.turret, with(Items.metaglass, 75, Items.lead, 200, Items.graphite, 100));
             ammo(
               Items.coal, SnBullets.heavyCoalFlame,
               Items.pyratite, SnBullets.heavyPyraFlame,
@@ -198,7 +198,7 @@ public class SnTurrets implements ContentList {
             );
             health = 140 * size * size;
             size = 3;
-            range = 100f;
+            range = 50f;
 	        reloadTime = 5f;
 	        recoilAmount = 2f;
             inaccuracy = 3f;
@@ -206,7 +206,7 @@ public class SnTurrets implements ContentList {
             shootCone = 25f;
             targetAir = true;
 	        shootSound = Sounds.flame;
-        }};*/
+        }};
         trigger = new PowerTurret("trigger"){{
             requirements(Category.turret, with(Items.silicon, 275, Items.titanium, 125, SnItems.enojie, 75));
             size = 3;

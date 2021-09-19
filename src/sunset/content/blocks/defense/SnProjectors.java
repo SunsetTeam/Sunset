@@ -11,9 +11,7 @@ import sunset.world.blocks.defense.projectors.DeflectorProjector;
 import static mindustry.type.ItemStack.with;
 
 public class SnProjectors implements ContentList {
-    public static Block
-
-            forcedome, deflectorProjector;
+    public static Block forcedome, deflectorProjector;
 
     @Override
     public void load(){
@@ -42,7 +40,7 @@ public class SnProjectors implements ContentList {
             cooldownLiquid = 4.7f;
             cooldownBrokenBase = 2.1f;
             consumes.items(with(Items.phaseFabric, 3, SnItems.coldent, 5));
-            consumes.power(20);
+            consumes.power(20f);
         }};
     }
 }

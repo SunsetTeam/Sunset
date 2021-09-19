@@ -170,7 +170,7 @@ public class AzariaGenerator extends ModGenerator{
     protected void generate(){
 
         class Room{
-            int x, y, radius;
+            final int x, y, radius;
             ObjectSet<Room> connected = new ObjectSet<>();
 
             Room(int x, int y, int radius){
@@ -283,14 +283,12 @@ public class AzariaGenerator extends ModGenerator{
             roomseq.random(rand).connect(roomseq.random(rand));
         }
 
-        for(Room room : roomseq){
-            spawn.connect(room);
-        }
+        for(Room room : roomseq) spawn.connect(room);
 
         cells(1);
         distort(10f, 6f);
 
-        inverseFloodFill(tiles.getn(spawn.x, spawn.y));
+        if (spawn != null) inverseFloodFill(tiles.getn(spawn.x, spawn.y));
 
         Seq<Block> ores = Seq.with(Blocks.oreCopper, Blocks.oreLead);
         float poles = Math.abs(sector.tile.v.y);
