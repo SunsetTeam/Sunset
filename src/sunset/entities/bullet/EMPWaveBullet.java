@@ -1,6 +1,9 @@
 package sunset.entities.bullet;
 
+import arc.Core;
+import arc.graphics.g2d.TextureRegion;
 import mindustry.entities.bullet.BasicBulletType;
+import mindustry.entities.bullet.BulletType;
 import mindustry.gen.Bullet;
 
 import java.util.Random;
@@ -14,6 +17,23 @@ public class EMPWaveBullet extends BasicBulletType{
     public EMPWaveBullet(float speed, float damage, String bulletSprite, int min, int max){
         super(speed, damage);
         this.sprite = bulletSprite;
+        collidesTiles = true;
+        reflectable = false;
+        hittable = false;
+        absorbable = false;
+        speed = 5;
+        height = 5;
+        width = 3;
+        shrinkX = -18;
+        shrinkY = 0;
+        drawSize = 0;
+        collidesTeam = true;
+        hitSize = 36;
+        pierce = true;
+        pierceCap = 1;
+        lifetime = 50;
+        knockback = 0;
+        incendChance = 0;
     }
 
     public EMPWaveBullet(float speed, float damage, String bulletSprite){

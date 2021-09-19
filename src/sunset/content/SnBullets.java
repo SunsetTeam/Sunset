@@ -1145,19 +1145,15 @@ public class SnBullets implements ContentList {
         }};
         //endregion wheel
         //special
-        empBullet = new EMPWaveBullet(5, 15, "emp-bullet", 30, 120){{
-            pierce = true;
+        empBullet = new EMPWaveBullet(5, 15, "emp-wave", 30, 120){{
             lifetime = 50;
-            knockback = 0;
             hitEffect = SnFx.empWave;
             status = SnStatusEffects.electricalShort;
             randomTime = true;
         }};
 
-        empBulletEvo = new EMPWaveBullet(13, 30, "emp-bullet", 30, 120){{
-            pierce = true;
+        empBulletEvo = new EMPWaveBullet(13, 30, "emp-wave", 30, 120){{
             lifetime = 100;
-            knockback = 0;
             hitEffect = SnFx.empWave;
             status = SnStatusEffects.electricalShort;
             randomTime = true;

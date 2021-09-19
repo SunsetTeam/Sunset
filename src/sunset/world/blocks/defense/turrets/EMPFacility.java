@@ -9,6 +9,7 @@ import arc.graphics.g2d.TextureRegion;
 import arc.math.Mathf;
 import arc.util.Time;
 import mindustry.entities.bullet.BulletType;
+import mindustry.gen.Sounds;
 import mindustry.graphics.Drawf;
 import mindustry.graphics.Layer;
 import mindustry.logic.LAccess;
@@ -23,7 +24,6 @@ import static arc.Core.bundle;
  * You cannot control this block. Minimum size 3 tile.
  * */
 public class EMPFacility extends Turret{
-    public int multiplier = 1;
     public BulletType shootType;
     public float powerUse;
     public boolean logicConfigurable = false;
@@ -44,11 +44,17 @@ public class EMPFacility extends Turret{
     public EMPFacility(String name){
         super(name);
         shootCone = 720;
-        shots = 360 * multiplier;
+        shots = 360;
         rotateSpeed = 0;
         powerUse = 1;
         reloadTime = 300;
         size = 3;
+        recoilAmount = 0;
+        shootLength = 0;
+        cooldown = 0.03f;
+        shootSound = Sounds.release;
+        spread = 1;
+        inaccuracy = 0;
     }
 
     /*@Override
