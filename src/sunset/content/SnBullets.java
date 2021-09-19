@@ -1147,14 +1147,14 @@ public class SnBullets implements ContentList {
         //special
         empBullet = new EMPWaveBullet(5, 15, "emp-wave", 30, 120){{
             lifetime = 50;
-            hitEffect = SnFx.empWave;
+            shootEffect = SnFx.empWave;
             status = SnStatusEffects.electricalShort;
             randomTime = true;
         }};
 
         empBulletEvo = new EMPWaveBullet(13, 30, "emp-wave", 30, 120){{
             lifetime = 100;
-            hitEffect = SnFx.empWave;
+            shootEffect = SnFx.empWave;
             status = SnStatusEffects.electricalShort;
             randomTime = true;
         }};

@@ -1,9 +1,6 @@
 package sunset.entities.bullet;
 
-import arc.Core;
-import arc.graphics.g2d.TextureRegion;
 import mindustry.entities.bullet.BasicBulletType;
-import mindustry.entities.bullet.BulletType;
 import mindustry.gen.Bullet;
 
 import java.util.Random;
