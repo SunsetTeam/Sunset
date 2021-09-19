@@ -14,6 +14,7 @@ public class EMPWaveBullet extends BasicBulletType{
     public EMPWaveBullet(float speed, float damage, String bulletSprite, int min, int max){
         super(speed, damage);
         this.sprite = bulletSprite;
+        damage = 0;
         collidesTiles = true;
         reflectable = false;
         hittable = false;
