@@ -24,7 +24,7 @@ import static arc.Core.bundle;
 /**
  * You cannot control this block. Minimum size 3 tile.
  * */
-public class EMPFacility extends PowerTurret {
+public class EMPFacility extends PowerTurret{
     public BulletType shootType;
     public float powerUse;
     public boolean logicConfigurable = false;
@@ -100,10 +100,10 @@ public class EMPFacility extends PowerTurret {
         protected float charge;
         //protected float chargeTimer;
 
-        @Override
+        /*@Override
         public boolean canControl(){
             return false;
-        }
+        }*/
 
         @Override
         public void draw(){  //animation will be later
@@ -125,18 +125,14 @@ public class EMPFacility extends PowerTurret {
 
             Draw.z(Layer.turret);
 
-            //tr2.trns(rotation, -recoil);
-
-            Drawf.shadow(region, x - elevation, y - elevation);
-            drawer.get(this);
-
-            /*for(int i = 0; i < 2; i++){
-                Draw.rect(sideRegions[i], sX[i], sY[i], rotation - 90f);
-            }*/
-
             if(heatRegion != Core.atlas.find("error")){
                 heatDrawer.get(this);
             }
+
+            tr2.trns(rotation, -recoil);
+
+            Drawf.shadow(region, x + tr2.x - elevation, y + tr2.y - elevation, rotation - 90);
+            drawer.get(this);
         }
 
         @Override
