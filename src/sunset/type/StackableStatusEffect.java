@@ -163,8 +163,7 @@ public class StackableStatusEffect extends StatusEffect implements SnCustomStat 
         } catch (Throwable e) {
             Log.err(e);
         }
-        boolean foundStandard = false;
-        if (statuses != null) foundStandard = statuses.remove(e -> e.effect == this);
+        boolean foundStandard = statuses.remove(e -> e.effect == this);
         StackableStatusEntry prev = (StackableStatusEntry)statuses.find(e -> 
             (e instanceof StackableStatusEntry) && ((StackableStatusEntry)e).baseEffect == this);
         if(prev == null) {

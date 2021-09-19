@@ -1,29 +1,35 @@
 package sunset.content;
 
-import mindustry.content.*;
+import mindustry.ai.types.SuicideAI;
+import mindustry.content.Blocks;
+import mindustry.content.Fx;
+import mindustry.content.Items;
+import mindustry.content.StatusEffects;
 import mindustry.ctype.ContentList;
+import mindustry.entities.bullet.BombBulletType;
 import mindustry.gen.Sounds;
-import mindustry.gen.EntityMapping;
 import mindustry.gen.UnitEntity;
 import mindustry.graphics.Layer;
 import mindustry.type.UnitType;
 import mindustry.type.Weapon;
-import mindustry.ai.types.SuicideAI;
-import mindustry.entities.bullet.BombBulletType;
-import sunset.ai.*;
+import sunset.ai.DeliverAI;
+import sunset.ai.ExtinguishAI;
+import sunset.ai.FlyingUnitWeaponAI;
+import sunset.ai.HealAI;
+import sunset.ai.weapon.ExtinguishWeaponAI;
 import sunset.entities.abilities.BerserkStage;
 import sunset.entities.abilities.StatusFieldAbility;
-import sunset.type.UnitTypeExt;
 import sunset.entities.bullet.BerserkLaserBulletType;
 import sunset.type.BerserkUnitType;
-import sunset.ai.weapon.ExtinguishWeaponAI;
-import sunset.type.WheelUnitType;
-import sunset.type.weapons.WeaponExt;
-import sunset.type.weapons.ChainWeapon;
 import sunset.type.CopterUnitType;
+import sunset.type.UnitTypeExt;
+import sunset.type.WheelUnitType;
+import sunset.type.weapons.ChainWeapon;
 import sunset.type.weapons.PointDefenseWeapon;
+import sunset.type.weapons.WeaponExt;
 import sunset.utils.UnitsUtils;
 
+import static mindustry.gen.EntityMapping.map;
 import static mindustry.type.ItemStack.with;
 import static sunset.utils.UnitsUtils.addUnitGroup;
 
@@ -569,7 +575,7 @@ public class SnUnitTypes implements ContentList {
         //region freezing
         snowflake = new UnitType("snowflake") {{
             defaultController = SuicideAI::new;
-            constructor = EntityMapping.map(19);
+            constructor = map(19);
             speed = 1f;
             hitSize = 8f;
             health = 500;
