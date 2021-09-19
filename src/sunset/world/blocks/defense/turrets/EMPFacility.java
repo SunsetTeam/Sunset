@@ -32,22 +32,12 @@ public class EMPFacility extends PowerTurret{
     //public float pullTime = 60f, closeTime = 90f;
     //public float xOpen = 2f, yOpen = -3f;
 
-    public Cons<EMPBuild> heatDrawer = tile -> {
-        if(tile.heat <= 0.00001f) return;
-
-        Draw.color(heatColor, tile.heat);
-        Draw.blend(Blending.additive);
-        Draw.rect(heatRegion, tile.x, tile.y);
-        Draw.blend();
-        Draw.color();
-    };
-
     public EMPFacility(String name){
         super(name);
         reloadTime = 300;
         recoilAmount = 0;
         rotateSpeed = 0;
-        shootCone = 720;
+        //shootCone = 720;
         shootLength = 0;
         cooldown = 0.03f;
         size = 3;
@@ -77,24 +67,25 @@ public class EMPFacility extends PowerTurret{
         ));
     }*/
 
-    @Override
+    /*@Override
     public void load(){
         super.load();
-        /*for(int i = 0; i < 3; i++){
+        for(int i = 0; i < 3; i++){
             sideRegions[i] = atlas.find(name + "-side-" + i);
-        }*/
-    }
+        }
+    }*/
 
-    @Override
+    /*@Override
     public void init(){
         consumes.powerCond(powerUse, TurretBuild::isShooting);
         super.init();
-    }
+    }*/
 
     @Override
     public TextureRegion[] icons(){
-        return new TextureRegion[] {/*Core.atlas.find(name + "-icon")*/region};
+        return new TextureRegion[] {baseRegion, region};
     }
+    /*Core.atlas.find(name + "-icon")*/
 
     public class EMPBuild extends PowerTurretBuild implements ControlBlock{
         protected float charge;
@@ -133,32 +124,6 @@ public class EMPFacility extends PowerTurret{
 
             Drawf.shadow(region, x + tr2.x - elevation, y + tr2.y - elevation, rotation - 90);
             drawer.get(this);
-        }
-
-        @Override
-        public void updateTile(){
-            super.updateTile();
-            unit.ammo(power.status * unit.type().ammoCapacity);
-            if(charging){
-                charge = Mathf.clamp(charge + Time.delta / chargeTime);
-            }else{
-                charge = 0;
-            }
-        }
-
-        @Override
-        public BulletType useAmmo(){
-            return shootType;
-        }
-
-        @Override
-        public boolean hasAmmo(){
-            return true;
-        }
-
-        @Override
-        public BulletType peekAmmo(){
-            return shootType;
         }
 
         public int size(){

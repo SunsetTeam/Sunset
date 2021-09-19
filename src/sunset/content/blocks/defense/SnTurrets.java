@@ -569,7 +569,8 @@ public class SnTurrets implements ContentList {
             requirements(Category.turret, with(Items.copper, 1600, Items.lead, 1500, Items.metaglass, 1000, Items.plastanium, 800, Items.silicon, 1300, Items.surgeAlloy, 900, Items.phaseFabric, 750, SnItems.flameid, 1000, SnItems.enojie, 900, SnItems.coldent, 300));
             health = 980;
             powerUse = 6.7f;
-            reloadTime = 720;
+            reloadTime = 90;
+            //reloadTime = 720;
             heatColor = Color.valueOf("7FFFD4");
             chargeSound = Sounds.lasercharge2;
             //shootSound = SnSounds.empShoot;
@@ -583,7 +584,8 @@ public class SnTurrets implements ContentList {
             size = 4;
             health = 1200;
             powerUse = 6.7f;
-            reloadTime = 720;
+            reloadTime = 90;
+            //reloadTime = 720;
             chargeSound = Sounds.lasercharge2;
             //shootSound = SnSounds.empShoot;
             chargeTime = 300;
