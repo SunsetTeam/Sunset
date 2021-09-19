@@ -15,6 +15,7 @@ import mindustry.graphics.Layer;
 import mindustry.logic.LAccess;
 import mindustry.ui.Bar;
 import mindustry.world.blocks.ControlBlock;
+import mindustry.world.blocks.defense.turrets.PowerTurret;
 import mindustry.world.blocks.defense.turrets.Turret;
 import sunset.utils.Utils;
 
@@ -23,7 +24,7 @@ import static arc.Core.bundle;
 /**
  * You cannot control this block. Minimum size 3 tile.
  * */
-public class EMPFacility extends Turret{
+public class EMPFacility extends PowerTurret {
     public BulletType shootType;
     public float powerUse;
     public boolean logicConfigurable = false;
@@ -43,18 +44,20 @@ public class EMPFacility extends Turret{
 
     public EMPFacility(String name){
         super(name);
-        shootCone = 720;
-        shots = 360;
-        rotateSpeed = 0;
-        powerUse = 1;
         reloadTime = 300;
-        size = 3;
         recoilAmount = 0;
+        rotateSpeed = 0;
+        shootCone = 720;
         shootLength = 0;
         cooldown = 0.03f;
+        size = 3;
         shootSound = Sounds.release;
+        shots = 360;
         spread = 1;
         inaccuracy = 0;
+        targetAir = true;
+        targetGround = true;
+        powerUse = 1;
     }
 
     /*@Override
@@ -93,7 +96,7 @@ public class EMPFacility extends Turret{
         return new TextureRegion[] {/*Core.atlas.find(name + "-icon")*/region};
     }
 
-    public class EMPBuild extends TurretBuild implements ControlBlock{
+    public class EMPBuild extends PowerTurretBuild implements ControlBlock{
         protected float charge;
         //protected float chargeTimer;
 
