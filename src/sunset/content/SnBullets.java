@@ -10,10 +10,7 @@ import mindustry.entities.Units;
 import mindustry.entities.bullet.*;
 import mindustry.gen.*;
 import mindustry.graphics.Pal;
-import sunset.entities.bullet.ArtilleryLiquidBulletType;
-import sunset.entities.bullet.ExtinguishBulletType;
-import sunset.entities.bullet.TorpedoBulletType;
-import sunset.entities.bullet.BerserkLaserBulletType;
+import sunset.entities.bullet.*;
 import sunset.graphics.*;
 import sunset.type.StackableStatusEffect;
 
@@ -47,6 +44,8 @@ public class SnBullets implements ContentList {
         wheel1bullet, wheel2shotgun, wheel3burst, wheel4shotgun, wheel4artillery, wheel5flame, wheel5bullet,
         //misc
         emptyBullet, overheatBullet,
+        //special
+        empBullet, empBulletEvo,
         //test
         testbullet;
         //exoticBullets (new) i will make it later... i must make more bulets (soulBullet, iceSpike, and more)
@@ -1145,6 +1144,25 @@ public class SnBullets implements ContentList {
             pierceBuilding = true;
         }};
         //endregion wheel
+        //special
+        empBullet = new EMPWaveBullet(5, 15, "emp-bullet", 30, 120){{
+            pierce = true;
+            lifetime = 50;
+            knockback = 0;
+            hitEffect = SnFx.empWave;
+            status = SnStatusEffects.electricalShort;
+            randomTime = true;
+        }};
+
+        empBulletEvo = new EMPWaveBullet(13, 30, "emp-bullet", 30, 120){{
+            pierce = true;
+            lifetime = 100;
+            knockback = 0;
+            hitEffect = SnFx.empWave;
+            status = SnStatusEffects.electricalShort;
+            randomTime = true;
+        }};
+        //endregion special
         //region misc
         overheatBullet = new BasicBulletType(0.1f, 7, "error") {{
             shootEffect = Fx.none;

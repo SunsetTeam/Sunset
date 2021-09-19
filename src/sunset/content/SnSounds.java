@@ -9,10 +9,16 @@ import mindustry.Vars;
 public class SnSounds {
 
     public static Sound
-        blizzardWind = new Sound();
+        blizzardWind = new Sound()//,
+        //empCharge = new Sound(),
+        //empShoot = new Sound()
+        ;
+
 
     public static void load() {
         blizzardWind = loadSound("blizzardWind");
+        //empShoot = loadSound("emp-shoot");
+        //empCharge = loadSound("emp-charge");
 }
         private static Sound loadSound(String soundName){
             if(!Vars.headless){

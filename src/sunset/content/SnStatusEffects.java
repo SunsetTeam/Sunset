@@ -1,19 +1,20 @@
 package sunset.content;
 
-import arc.graphics.*;
-
+import arc.graphics.Color;
 import arc.graphics.g2d.Draw;
 import arc.graphics.g2d.TextureRegion;
-import mindustry.content.*;
-import mindustry.ctype.*;
+import mindustry.content.Fx;
+import mindustry.content.StatusEffects;
+import mindustry.ctype.ContentList;
 import mindustry.gen.Unit;
-import mindustry.type.*;
-import mindustry.graphics.*;
+import mindustry.graphics.Layer;
+import mindustry.graphics.Pal;
+import mindustry.type.StatusEffect;
 import sunset.type.StackableStatusEffect;
 
 public class SnStatusEffects implements ContentList{
     public static StatusEffect
-            frostbite, stun, starBuff, galaxyDebuff, overheat;
+            frostbite, stun, starBuff, galaxyDebuff, overheat, electricalShort, reloading;
     @Override
     public void load(){
 
@@ -79,5 +80,30 @@ public class SnStatusEffects implements ContentList{
                Draw.color();
            }
        };
+
+       electricalShort = new StatusEffect("electric-short"){{
+           speedMultiplier = 0;
+           disarm = true;
+           color = Color.valueOf("0AFEFF");
+           reloadMultiplier = 0.3f;
+           transitionDamage = 300; //TODO 50% of unit health
+           effect = Fx.freezing;
+           init(() -> {
+               affinity(StatusEffects.wet, ((unit, time, newTime, result) -> {
+                   unit.damagePierce(transitionDamage);
+                   result.set(reloading, 300);
+               }));
+               affinity(StatusEffects.freezing, ((unit, time, newTime, result) -> {
+                   unit.damagePierce(transitionDamage * 1.5f);
+                   result.set(reloading, 600);
+               }));
+           });
+       }};
+
+       reloading = new StatusEffect("reboot"){{
+           speedMultiplier = 0;
+           disarm = true;
+           color = Color.valueOf("047070");
+       }};
     }
 }
