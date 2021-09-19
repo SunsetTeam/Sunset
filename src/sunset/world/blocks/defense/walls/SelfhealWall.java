@@ -6,12 +6,11 @@ import mindustry.world.meta.StatUnit;
 
 /** Самовосстанавливающаяся стена. */
 public class SelfhealWall extends Wall {
-    public float heal;
+    public float heal = 0.1f;
 
     public SelfhealWall(String name) {
         super(name);
         update = true;
-        heal = 0.125f;
     }
 
     @Override
