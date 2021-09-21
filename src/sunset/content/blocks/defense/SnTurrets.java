@@ -575,7 +575,8 @@ public class SnTurrets implements ContentList {
             heatColor = Color.valueOf("7FFFD4");
             //chargeTime = 180;
             chargeTime = 90;
-            shootType = SnBullets.empBullet;
+            //shootType = SnBullets.empBullet;
+            shootType = Bullets.damageLightning;
             range = 120;
         }};
 
@@ -588,7 +589,8 @@ public class SnTurrets implements ContentList {
             //reloadTime = 720;
             //chargeTime = 300;
             chargeTime = 90;
-            shootType = SnBullets.empBulletEvo;
+            //shootType = SnBullets.empBulletEvo;
+            shootType = Bullets.damageLightning;
             range = 160;
         }};
 
