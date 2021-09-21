@@ -587,6 +587,7 @@ public class SnTurrets implements ContentList {
             powerUse = 6.7f;
             reloadTime = 90;
             //reloadTime = 720;
+            heatColor = Color.valueOf("7FFFD4");
             //chargeTime = 300;
             chargeTime = 90;
             //shootType = SnBullets.empBulletEvo;

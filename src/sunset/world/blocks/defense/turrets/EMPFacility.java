@@ -107,10 +107,9 @@ public class EMPFacility extends PowerTurret{
                 heatDrawer.get(this);
             }
 
-            tr2.trns(rotation, -recoil);
-
-            Drawf.shadow(region, x + tr2.x - elevation, y + tr2.y - elevation, rotation - 90);
+            Drawf.shadow(region, x - elevation, y - elevation);
             drawer.get(this);
+            super.draw();
         }
 
         public int size(){
