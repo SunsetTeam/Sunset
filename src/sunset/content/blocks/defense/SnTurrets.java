@@ -573,11 +573,9 @@ public class SnTurrets implements ContentList {
             reloadTime = 90;
             //reloadTime = 720;
             heatColor = Color.valueOf("7FFFD4");
-            chargeSound = Sounds.lasercharge2;
-            //shootSound = SnSounds.empShoot;
-            chargeTime = 180;
-            //shootType = SnBullets.empBullet;
-            shootType = SnBullets.laserHelicopterFrag;
+            //chargeTime = 180;
+            chargeTime = 90;
+            shootType = SnBullets.empBullet;
             range = 120;
         }};
 
@@ -588,9 +586,8 @@ public class SnTurrets implements ContentList {
             powerUse = 6.7f;
             reloadTime = 90;
             //reloadTime = 720;
-            chargeSound = Sounds.lasercharge2;
-            //shootSound = SnSounds.empShoot;
-            chargeTime = 300;
+            //chargeTime = 300;
+            chargeTime = 90;
             shootType = SnBullets.empBulletEvo;
             range = 160;
         }};

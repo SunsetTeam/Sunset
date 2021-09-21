@@ -1,33 +1,19 @@
 package sunset.world.blocks.defense.turrets;
 
 import arc.Core;
-import arc.func.Cons;
-import arc.graphics.Blending;
-import arc.graphics.Color;
 import arc.graphics.g2d.Draw;
 import arc.graphics.g2d.TextureRegion;
-import arc.math.Mathf;
-import arc.util.Time;
-import mindustry.entities.bullet.BulletType;
 import mindustry.gen.Sounds;
 import mindustry.graphics.Drawf;
 import mindustry.graphics.Layer;
-import mindustry.logic.LAccess;
-import mindustry.ui.Bar;
 import mindustry.world.blocks.ControlBlock;
 import mindustry.world.blocks.defense.turrets.PowerTurret;
-import mindustry.world.blocks.defense.turrets.Turret;
-import sunset.utils.Utils;
-
-import static arc.Core.bundle;
 
 /**
  * You cannot control this block. Minimum size 3 tile.
  * */
 public class EMPFacility extends PowerTurret{
-    //public BulletType shootType;
-    //public float powerUse;
-    public boolean logicConfigurable = false;
+    private final boolean logicConfigurable = false;
     //public TextureRegion[] sideRegions = new TextureRegion[4];
     //public float pullTime = 60f, closeTime = 90f;
     //public float xOpen = 2f, yOpen = -3f;
@@ -41,6 +27,7 @@ public class EMPFacility extends PowerTurret{
         shootLength = 0;
         cooldown = 0.03f;
         size = 3;
+        chargeSound = Sounds.lasercharge2;
         shootSound = Sounds.release;
         shots = 360;
         spread = 1;
@@ -75,11 +62,11 @@ public class EMPFacility extends PowerTurret{
         }
     }*/
 
-    /*@Override
+    @Override
     public void init(){
         consumes.powerCond(powerUse, TurretBuild::isShooting);
         super.init();
-    }*/
+    }
 
     @Override
     public TextureRegion[] icons(){
