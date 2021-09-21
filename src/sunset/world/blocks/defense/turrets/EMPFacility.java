@@ -25,8 +25,8 @@ import static arc.Core.bundle;
  * You cannot control this block. Minimum size 3 tile.
  * */
 public class EMPFacility extends PowerTurret{
-    public BulletType shootType;
-    public float powerUse;
+    //public BulletType shootType;
+    //public float powerUse;
     public boolean logicConfigurable = false;
     //public TextureRegion[] sideRegions = new TextureRegion[4];
     //public float pullTime = 60f, closeTime = 90f;

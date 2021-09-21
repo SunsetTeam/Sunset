@@ -4,6 +4,7 @@ import arc.graphics.Color;
 import arc.math.geom.Vec2;
 import arc.struct.EnumSet;
 import arc.struct.Seq;
+import mindustry.content.Bullets;
 import mindustry.content.Fx;
 import mindustry.content.Items;
 import mindustry.content.Liquids;
@@ -575,7 +576,8 @@ public class SnTurrets implements ContentList {
             chargeSound = Sounds.lasercharge2;
             //shootSound = SnSounds.empShoot;
             chargeTime = 180;
-            shootType = SnBullets.empBullet;
+            //shootType = SnBullets.empBullet;
+            shootType = SnBullets.laserHelicopterFrag;
             range = 120;
         }};
 
