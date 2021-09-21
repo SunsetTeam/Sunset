@@ -1,6 +1,8 @@
 package sunset.world.blocks.defense.turrets;
 
 import arc.Core;
+import arc.func.Cons;
+import arc.graphics.Blending;
 import arc.graphics.g2d.Draw;
 import arc.graphics.g2d.TextureRegion;
 import mindustry.gen.Sounds;
@@ -21,10 +23,11 @@ public class EMPFacility extends PowerTurret{
     public EMPFacility(String name){
         super(name);
         //reloadTime = 300;
+
         recoilAmount = 0;
         rotateSpeed = 2;
         //shootCone = 720;
-        //shootLength = 0;
+        shootLength = 20;
         cooldown = 0.03f;
         size = 3;
         chargeSound = Sounds.lasercharge2;
@@ -61,6 +64,16 @@ public class EMPFacility extends PowerTurret{
             sideRegions[i] = atlas.find(name + "-side-" + i);
         }
     }*/
+
+    public Cons<TurretBuild> heatDrawer = tile -> {
+        if(tile.heat <= 0.00001f) return;
+
+        Draw.color(heatColor, tile.heat);
+        Draw.blend(Blending.additive);
+        Draw.rect(heatRegion, tile.x, tile.y);
+        Draw.blend();
+        Draw.color();
+    };
 
     @Override
     public void init(){
