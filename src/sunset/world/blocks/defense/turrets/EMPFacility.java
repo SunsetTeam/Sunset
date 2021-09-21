@@ -20,11 +20,11 @@ public class EMPFacility extends PowerTurret{
 
     public EMPFacility(String name){
         super(name);
-        reloadTime = 300;
+        //reloadTime = 300;
         recoilAmount = 0;
-        rotateSpeed = 0;
+        rotateSpeed = 2;
         //shootCone = 720;
-        shootLength = 0;
+        //shootLength = 0;
         cooldown = 0.03f;
         size = 3;
         chargeSound = Sounds.lasercharge2;
