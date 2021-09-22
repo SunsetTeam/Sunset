@@ -577,7 +577,7 @@ public class SnTurrets implements ContentList {
             chargeTime = 90;
             shootType = SnBullets.empBullet;
             range = 120;
-            shots = 360;
+            shots = 5;
             shootCone = 30;
         }};
 
@@ -593,7 +593,7 @@ public class SnTurrets implements ContentList {
             chargeTime = 90;
             shootType = SnBullets.empBulletEvo;
             range = 160;
-            shots = 360;
+            shots = 5;
             shootCone = 60;
         }};
 
