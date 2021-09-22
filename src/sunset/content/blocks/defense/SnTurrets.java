@@ -578,7 +578,7 @@ public class SnTurrets implements ContentList {
             shootType = SnBullets.empBullet;
             range = 120;
             shots = 360;
-            shootCone = 360;
+            shootCone = 720;
         }};
 
         dischargerEvo = new EMPFacility("discharger-evo"){{
@@ -591,7 +591,7 @@ public class SnTurrets implements ContentList {
             heatColor = Color.valueOf("7FFFD4");
             //chargeTime = 300;
             chargeTime = 90;
-            shootType = SnBullets.empBulletEvo;
+            shootType = SnBullets.tempBullet;
             range = 160;
             shots = 360;
             shootCone = 360;
