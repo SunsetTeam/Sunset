@@ -12,7 +12,7 @@ import mindustry.world.blocks.ControlBlock;
 import mindustry.world.blocks.defense.turrets.PowerTurret;
 
 /**
- * You cannot control this block. Minimum size 3 tile.
+ * You cannot control this block. Minimum size is 3 tiles.
  * */
 public class EMPFacility extends PowerTurret{
     private final boolean logicConfigurable = false;
@@ -32,7 +32,7 @@ public class EMPFacility extends PowerTurret{
         size = 3;
         chargeSound = Sounds.lasercharge2;
         shootSound = Sounds.release;
-        shots = 360;
+        //shots = 360;
         spread = 1;
         inaccuracy = 0;
         targetAir = true;
@@ -65,6 +65,7 @@ public class EMPFacility extends PowerTurret{
         }
     }*/
 
+    public Cons<TurretBuild> drawer = tile -> Draw.rect(region, tile.x, tile.y);
     public Cons<TurretBuild> heatDrawer = tile -> {
         if(tile.heat <= 0.00001f) return;
 
