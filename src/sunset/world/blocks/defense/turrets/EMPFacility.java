@@ -23,7 +23,7 @@ public class EMPFacility extends PowerTurret{
     public EMPFacility(String name){
         super(name);
         recoilAmount = 0;
-        rotateSpeed = 2;
+        rotateSpeed = 0;
         //shootCone = 720;
         shootLength = 20;
         cooldown = 0.03f;
