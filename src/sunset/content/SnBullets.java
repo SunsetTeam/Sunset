@@ -1222,13 +1222,14 @@ public class SnBullets implements ContentList {
             ammoMultiplier = 2;
         }};
 
-        tempBullet = new LaserBulletType(10000){{
-            colors = new Color[]{Pal.meltdownHit.cpy().a(0.4f), Pal.meltdownHit, Color.white};
+        tempBullet = new BasicBulletType(){{
+            damage = 10000;
+            //colors = new Color[]{Pal.meltdownHit.cpy().a(0.4f), Pal.meltdownHit, Color.white};
             despawnEffect = Fx.none;
             lifetime = 60f;
             drawSize = 440f;
             collidesAir = false;
-            length = 370f;
+            //length = 370f;
             width = 50.0F;
         }};
     }
