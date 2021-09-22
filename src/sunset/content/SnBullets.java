@@ -46,8 +46,8 @@ public class SnBullets implements ContentList {
         emptyBullet, overheatBullet,
         //special
         empBullet, empBulletEvo,
-        //test
-        testbullet;
+        //test&temp
+        testbullet, tempBullet;
         //exoticBullets (new) i will make it later... i must make more bulets (soulBullet, iceSpike, and more)
         // spiralPllastanium, spiralSurge, SpiralFors, SpiralThorium, SpiralSmall;
 
@@ -1212,6 +1212,16 @@ public class SnBullets implements ContentList {
             homingRange = 10f;
             homingPower = 0.2f;
             ammoMultiplier = 2;
+        }};
+
+        tempBullet = new LaserBulletType(10000){{
+            colors = new Color[]{Pal.meltdownHit.cpy().a(0.4f), Pal.meltdownHit, Color.white};
+            despawnEffect = Fx.none;
+            lifetime = 60f;
+            drawSize = 440f;
+            collidesAir = false;
+            length = 370f;
+            width = 50.0F;
         }};
     }
 }
