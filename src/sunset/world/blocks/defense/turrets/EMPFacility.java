@@ -30,7 +30,7 @@ public class EMPFacility extends PowerTurret{
         size = 3;
         chargeSound = Sounds.lasercharge2;
         shootSound = Sounds.release;
-        shots = 360;
+        shots = 3;
         spread = 1;
         inaccuracy = 0;
         targetAir = true;
@@ -62,17 +62,6 @@ public class EMPFacility extends PowerTurret{
             sideRegions[i] = atlas.find(name + "-side-" + i);
         }
     }*/
-
-    public Cons<TurretBuild> drawer = tile -> Draw.rect(region, tile.x, tile.y);
-    public Cons<TurretBuild> heatDrawer = tile -> {
-        if(tile.heat <= 0.00001f) return;
-
-        Draw.color(heatColor, tile.heat);
-        Draw.blend(Blending.additive);
-        Draw.rect(heatRegion, tile.x, tile.y);
-        Draw.blend();
-        Draw.color();
-    };
 
     @Override
     public void init(){
@@ -109,17 +98,20 @@ public class EMPFacility extends PowerTurret{
             float[] sX = {sXPre[0] + x, sXPre[1] + x};
             float[] sY = {sYPre[0] + y, sYPre[1] + y};*/
 
+            Draw.z(Layer.turret);
             Draw.rect(baseRegion, x, y);
             Draw.color();
 
-            Draw.z(Layer.turret);
-
-            if(heatRegion != Core.atlas.find("error")){
-                heatDrawer.get(this);
+            if(this.heat <= 0.00001f) {
+                Draw.color(heatColor, this.heat);
+                Draw.blend(Blending.additive);
+                Draw.rect(heatRegion, x, y);
+                Draw.blend();
+                Draw.color();
             }
 
             Drawf.shadow(region, x - elevation, y - elevation);
-            drawer.get(this);
+            Draw.rect(region, x, y);
             super.draw();
         }
 
