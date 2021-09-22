@@ -576,8 +576,15 @@ public class SnTurrets implements ContentList {
             //chargeTime = 180;
             chargeTime = 90;
             //shootType = SnBullets.empBullet;
-            shootType = Bullets.damageLightning;
-            range = 120;
+            shootType = new LaserBulletType(10000){{
+                colors = new Color[]{Pal.meltdownHit.cpy().a(0.4f), Pal.meltdownHit, Color.white};
+                despawnEffect = Fx.none;
+                lifetime = 60f;
+                drawSize = 440f;
+                collidesAir = false;
+                length = 370f;
+                width = 50.0F;
+            }};            range = 120;
         }};
 
         dischargerEvo = new EMPFacility("discharger-evo"){{
@@ -591,7 +598,15 @@ public class SnTurrets implements ContentList {
             //chargeTime = 300;
             chargeTime = 90;
             //shootType = SnBullets.empBulletEvo;
-            shootType = Bullets.damageLightning;
+            shootType = new LaserBulletType(100000){{
+                colors = new Color[]{Pal.meltdownHit.cpy().a(0.4f), Pal.meltdownHit, Color.white};
+                despawnEffect = Fx.none;
+                lifetime = 60f;
+                drawSize = 440f;
+                collidesAir = false;
+                length = 370f;
+                width = 50.0F;
+            }};
             range = 160;
         }};
 

@@ -1,13 +1,10 @@
 package sunset.world.blocks.defense.turrets;
 
-import arc.Core;
 import arc.func.Cons;
 import arc.graphics.Blending;
 import arc.graphics.g2d.Draw;
 import arc.graphics.g2d.TextureRegion;
 import mindustry.gen.Sounds;
-import mindustry.graphics.Drawf;
-import mindustry.graphics.Layer;
 import mindustry.world.blocks.ControlBlock;
 import mindustry.world.blocks.defense.turrets.PowerTurret;
 
@@ -22,8 +19,6 @@ public class EMPFacility extends PowerTurret{
 
     public EMPFacility(String name){
         super(name);
-        //reloadTime = 300;
-
         recoilAmount = 0;
         rotateSpeed = 2;
         //shootCone = 720;
@@ -86,7 +81,6 @@ public class EMPFacility extends PowerTurret{
     public TextureRegion[] icons(){
         return new TextureRegion[] {baseRegion, region};
     }
-    /*Core.atlas.find(name + "-icon")*/
 
     public class EMPBuild extends PowerTurretBuild implements ControlBlock{
         protected float charge;
@@ -97,8 +91,8 @@ public class EMPFacility extends PowerTurret{
             return false;
         }*/
 
-        @Override
-        public void draw(){  //animation will be later
+        /*@Override
+        public void draw(){*/  //animation will be later
             /*float totalTime = chargeTime + closeTime;
             float openAmount = Mathf.curve(chargeTimer, 0f, pullTime);
             float closeAmount = Mathf.curve(chargeTimer, chargeTime, totalTime);
@@ -112,7 +106,7 @@ public class EMPFacility extends PowerTurret{
             float[] sX = {sXPre[0] + x, sXPre[1] + x};
             float[] sY = {sYPre[0] + y, sYPre[1] + y};*/
 
-            Draw.rect(baseRegion, x, y);
+            /*Draw.rect(baseRegion, x, y);
             Draw.color();
 
             Draw.z(Layer.turret);
@@ -124,7 +118,7 @@ public class EMPFacility extends PowerTurret{
             Drawf.shadow(region, x - elevation, y - elevation);
             drawer.get(this);
             super.draw();
-        }
+        }*/
 
         public int size(){
             if(size < 3) return size = 3;
