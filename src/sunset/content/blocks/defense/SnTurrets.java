@@ -577,6 +577,7 @@ public class SnTurrets implements ContentList {
             chargeTime = 90;
             shootType = SnBullets.empBullet;
             range = 120;
+            shots = 360;
         }};
 
         dischargerEvo = new EMPFacility("discharger-evo"){{
@@ -591,6 +592,8 @@ public class SnTurrets implements ContentList {
             chargeTime = 90;
             shootType = SnBullets.empBulletEvo;
             range = 160;
+            shots = 360;
+            shootCone = 720;
         }};
 
         //testing
