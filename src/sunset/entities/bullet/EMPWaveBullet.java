@@ -47,7 +47,7 @@ public class EMPWaveBullet extends BasicBulletType{
         this(1f, 1f, "bullet", 0, 0);
     }
 
-    /*@Override
+    @Override
     public void update(Bullet b){
         Random r = new Random();
         int number = r.nextInt(max + 1) + min;
@@ -61,5 +61,5 @@ public class EMPWaveBullet extends BasicBulletType{
         if(max > 0.0001f){
             randomTime = true;
         }
-    }*/
+    }
 }
