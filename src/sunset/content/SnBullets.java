@@ -1145,22 +1145,58 @@ public class SnBullets implements ContentList {
         }};
         //endregion wheel
         //special
-        empBullet = new EMPWaveBullet(4.9f, 15, "emp-wave", 30, 120){{
+        empBullet = new EMPWaveBullet(5, 15, "emp-wave", 30, 120){{
             lifetime = 50;
-            //shootEffect = SnFx.empWave;
+            hitEffect = SnFx.empWave;
             status = SnStatusEffects.electricalShort;
             //randomTime = true;
             despawnEffect = Fx.none;
             collidesAir = false;
+            collidesTiles = true;
+            reflectable = false;
+            hittable = false;
+            absorbable = false;
+            speed = 5;
+            height = 5;
+            width = 3;
+            shrinkX = -18;
+            shrinkY = 0;
+            drawSize = 0;
+            collidesTeam = true;
+            healPercent = 50;
+            hitSize = 36;
+            pierce = true;
+            pierceCap = 1;
+            pierceBuilding = true;
+            knockback = 0;
+            ammoMultiplier = 4;
         }};
 
-        empBulletEvo = new EMPWaveBullet(6, 30, "emp-wave", 30, 120){{
+        empBulletEvo = new EMPWaveBullet(5, 30, "emp-wave", 30, 120){{
             lifetime = 100;
-            //shootEffect = SnFx.empWave;
+            hitEffect = SnFx.empWave;
             status = SnStatusEffects.electricalShort;
             //randomTime = true;
             despawnEffect = Fx.none;
             collidesAir = false;
+            collidesTiles = true;
+            reflectable = false;
+            hittable = false;
+            absorbable = false;
+            speed = 5;
+            height = 5;
+            width = 3;
+            shrinkX = -18;
+            shrinkY = 0;
+            drawSize = 0;
+            collidesTeam = true;
+            healPercent = 50;
+            hitSize = 36;
+            pierce = true;
+            pierceCap = 1;
+            pierceBuilding = true;
+            knockback = 0;
+            ammoMultiplier = 4;
         }};
         //endregion special
         //region misc

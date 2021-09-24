@@ -537,9 +537,10 @@ public class SnFx{
     }),
 
     empWave = new Effect(35, e -> {
-        Draw.color(Color.valueOf("7FFFD4"), Color.valueOf("7FFFD4"), e.fin());
-        Lines.stroke(Interp.bounce.apply(0, 0, e.fin()));
-        float rad = Interp.bounce.apply(35, 0, e.fin());
-        Lines.poly(e.x, e.y, -1 <= 0 ? Lines.circleVertices(rad) : -1, rad, e.rotation);
+        randLenVectors(e.id, 6, 4f + e.fin() * 8f, (x, y) -> {
+            Draw.color(Color.valueOf("7FFFD4"), Color.valueOf("7FFFD4"), e.fin());
+            float circleRad = 2f + e.fin() * 15f;
+            Lines.circle(e.x, e.y, circleRad);
+        });
     });
 }

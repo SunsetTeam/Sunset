@@ -98,20 +98,18 @@ public class EMPFacility extends PowerTurret{
             float[] sX = {sXPre[0] + x, sXPre[1] + x};
             float[] sY = {sYPre[0] + y, sYPre[1] + y};*/
 
-            Draw.z(Layer.turret);
             Draw.rect(baseRegion, x, y);
             Draw.color();
 
-            if(this.heat <= 0.00001f) {
-                Draw.color(heatColor, this.heat);
-                Draw.blend(Blending.additive);
-                Draw.rect(heatRegion, x, y);
-                Draw.blend();
-                Draw.color();
-            }
+            Draw.z(Layer.turret);
 
-            Drawf.shadow(region, x - elevation, y - elevation);
-            Draw.rect(region, x, y);
+            tr2.trns(rotation, -recoil);
+
+            Drawf.shadow(region, x + tr2.x - elevation, y + tr2.y - elevation, rotation - 90);
+            if(heatRegion != Core.atlas.find("error")){
+                heatDrawer.get(this);
+            }
+            drawer.get(this);
             super.draw();
         }
 
