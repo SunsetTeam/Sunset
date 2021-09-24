@@ -277,7 +277,7 @@ public class SnUnitTypes implements ContentList {
         //region air-support (buffers)
         comet = new UnitType("comet") {{
             health = 150;
-            hitSize = 15;
+            hitSize = 20;
             speed = 3.1f;
             accel = 0.15f;
             drag = 0.1f;
@@ -308,7 +308,7 @@ public class SnUnitTypes implements ContentList {
         }};
         satelite = new UnitTypeExt("satellite") {{
             health = 470;
-            hitSize = 23;
+            hitSize = 29;
             speed = 3f;
             accel = 0.2f;
             drag = 0.15f;
@@ -337,7 +337,7 @@ public class SnUnitTypes implements ContentList {
         }};
         planet = new UnitTypeExt("planet") {{
             health = 980;
-            hitSize = 26;
+            hitSize = 32;
             speed = 2.9f;
             accel = 0.25f;
             drag = 0.1f;
@@ -368,7 +368,7 @@ public class SnUnitTypes implements ContentList {
         }};
         star = new UnitTypeExt("star") {{
             health = 5800;
-            hitSize = 40;
+            hitSize = 50;
             speed = 2.7f;
             accel = 0.2f;
             drag = 0.1f;
@@ -417,7 +417,7 @@ public class SnUnitTypes implements ContentList {
         }};
         galaxy = new UnitTypeExt("galaxy") {{
             health = 20000;
-            hitSize = 60;
+            hitSize = 75;
             speed = 2.4f;
             accel = 0.1f;
             drag = 0.05f;

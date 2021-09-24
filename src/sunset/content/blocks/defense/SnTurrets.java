@@ -427,7 +427,7 @@ public class SnTurrets implements ContentList {
             recoilAmount = 2.7f;
             spread = 16f;
             alternate = true;
-            shootShake = 3f;
+            shootShake = 4f;
             shots = 2;
             size = 6;
             shootCone = 24f;
@@ -439,7 +439,7 @@ public class SnTurrets implements ContentList {
 
         //7x7
         halberd = new PowerTurret("halberd"){{
-            requirements(Category.turret, with(Items.copper, 2200,  Items.metaglass, 1200, Items.lead, 1120, Items.silicon, 1200, Items.plastanium, 980, SnItems.planatrium, 860, SnItems.nobium, 750, SnItems.fors, 710, SnItems.enojie, 690));
+            requirements(Category.turret, with(Items.copper, 2400,  Items.metaglass, 1200, Items.lead, 1120, Items.silicon, 1200, Items.plastanium, 980, SnItems.planatrium, 860, SnItems.nobium, 750, SnItems.fors, 710, SnItems.enojie, 690));
             range = 350f;
             shots = 5;
             chargeTime = 145f;
@@ -450,7 +450,7 @@ public class SnTurrets implements ContentList {
             reloadTime = 345f;
             cooldown = 10f;
             powerUse = 24f;
-            shootShake = 7f;
+            shootShake = 8f;
             shootEffect = SnFx.galebardShoot;
             smokeEffect = Fx.none;
             chargeEffect = SnFx.galebardLaserCharge;
@@ -461,7 +461,7 @@ public class SnTurrets implements ContentList {
             targetGround = true;
             shootSound = Sounds.laser;
 
-            shootType = new LaserBulletType(1730){{
+            shootType = new LaserBulletType(2500){{
                 colors = new Color[]{Pal.meltdownHit.cpy().a(0.4f), Pal.meltdownHit, Color.white};
                 despawnEffect = Fx.none;
                 lifetime = 60f;

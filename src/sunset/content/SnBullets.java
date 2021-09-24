@@ -868,12 +868,12 @@ public class SnBullets implements ContentList {
             smokeEffect = Fx.shootSmallSmoke;
         }};
         HelicopterShootgun = new BasicBulletType(4.7f, 9) {{
-            width = 10f;
-            height = 13f;
+            width = 11f;
+            height = 15f;
             lifetime = 45f;
             hitEffect = despawnEffect = Fx.none;
             instantDisappear = true;
-            fragBullets = 3;
+            fragBullets = 5;
             keepVelocity = true;
             fragBullet = new BasicBulletType(4.7f, 9f) {{
                 lifetime = 45f;
