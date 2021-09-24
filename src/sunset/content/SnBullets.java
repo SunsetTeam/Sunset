@@ -1147,7 +1147,7 @@ public class SnBullets implements ContentList {
         //special
         empBullet = new EMPWaveBullet(5, 15, "emp-wave", 30, 120){{
             lifetime = 50;
-            hitEffect = SnFx.empWave;
+            shootEffect = SnFx.empWave;
             status = SnStatusEffects.electricalShort;
             //randomTime = true;
             despawnEffect = Fx.none;
@@ -1161,9 +1161,8 @@ public class SnBullets implements ContentList {
             width = 3;
             shrinkX = -18;
             shrinkY = 0;
-            drawSize = 0;
+            drawSize = 3;
             collidesTeam = true;
-            healPercent = 50;
             hitSize = 36;
             pierce = true;
             pierceCap = 1;
@@ -1174,7 +1173,7 @@ public class SnBullets implements ContentList {
 
         empBulletEvo = new EMPWaveBullet(5, 30, "emp-wave", 30, 120){{
             lifetime = 100;
-            hitEffect = SnFx.empWave;
+            shootEffect = SnFx.empWave;
             status = SnStatusEffects.electricalShort;
             //randomTime = true;
             despawnEffect = Fx.none;
@@ -1188,9 +1187,8 @@ public class SnBullets implements ContentList {
             width = 3;
             shrinkX = -18;
             shrinkY = 0;
-            drawSize = 0;
+            drawSize = 5.3f;
             collidesTeam = true;
-            healPercent = 50;
             hitSize = 36;
             pierce = true;
             pierceCap = 1;

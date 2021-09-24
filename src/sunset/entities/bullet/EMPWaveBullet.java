@@ -1,12 +1,18 @@
 package sunset.entities.bullet;
 
+import arc.Core;
+import arc.graphics.Color;
+import arc.graphics.g2d.Draw;
+import arc.graphics.g2d.Lines;
 import mindustry.entities.bullet.BasicBulletType;
+import mindustry.entities.bullet.LaserBoltBulletType;
+import mindustry.gen.Bullet;
 //import mindustry.gen.Bullet;
 
 //import java.util.Random;
 
 /** Wave bullet with optional random status duration. */
-public class EMPWaveBullet extends BasicBulletType{
+public class EMPWaveBullet extends LaserBoltBulletType {
     //public boolean randomTime = false;
     //public int min;
     //public int max;
@@ -45,6 +51,22 @@ public class EMPWaveBullet extends BasicBulletType{
 
     public EMPWaveBullet(){
         this(1f, 1f, "bullet", 0, 0);
+    }
+
+    @Override
+    public void draw(Bullet b){
+        Draw.color(Color.valueOf("52A388"));
+        Lines.stroke(width);
+        Lines.lineAngleCenter(b.x, b.y, b.rotation(), height);
+        Draw.color(Color.valueOf("7FFFD4"));
+        Lines.lineAngleCenter(b.x, b.y, b.rotation(), height / 2f);
+        Draw.reset();
+    }
+
+    @Override
+    public void load(){
+        backRegion = Core.atlas.find(sprite + "-back");
+        frontRegion = Core.atlas.find(sprite);
     }
 
     /*@Override
