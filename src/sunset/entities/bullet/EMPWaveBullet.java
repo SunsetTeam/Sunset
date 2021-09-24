@@ -5,15 +5,14 @@ import arc.graphics.g2d.Draw;
 import arc.graphics.g2d.Lines;
 import mindustry.entities.bullet.LaserBoltBulletType;
 import mindustry.gen.Bullet;
-//import mindustry.gen.Bullet;
 
-//import java.util.Random;
+import java.util.Random;
 
 /** Wave bullet with optional random status duration. */
-public class EMPWaveBullet extends LaserBoltBulletType {
-    //public boolean randomTime = false;
-    //public int min;
-    //public int max;
+public class EMPWaveBullet extends LaserBoltBulletType{
+    public boolean randomTime = false;
+    public int min;
+    public int max;
 
     public EMPWaveBullet(float speed, float damage, String bulletSprite, int min, int max){
         super(speed, damage);
@@ -61,7 +60,7 @@ public class EMPWaveBullet extends LaserBoltBulletType {
         Draw.reset();
     }
 
-    /*@Override
+    @Override
     public void update(Bullet b){
         Random r = new Random();
         int number = r.nextInt(max + 1) + min;
@@ -75,5 +74,5 @@ public class EMPWaveBullet extends LaserBoltBulletType {
         if(max > 0.0001f){
             randomTime = true;
         }
-    }*/
+    }
 }

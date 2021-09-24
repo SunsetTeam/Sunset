@@ -10,14 +10,12 @@ import arc.util.Log;
 import mindustry.Vars;
 import mindustry.ai.Astar;
 import mindustry.content.StatusEffects;
+import mindustry.core.World;
 import mindustry.ctype.ContentType;
 import mindustry.entities.Fires;
 import mindustry.entities.Units;
 import mindustry.game.Team;
-import mindustry.gen.Building;
-import mindustry.gen.Fire;
-import mindustry.gen.Groups;
-import mindustry.gen.Unit;
+import mindustry.gen.*;
 import mindustry.graphics.MenuRenderer;
 import mindustry.type.StatusEffect;
 import mindustry.type.UnitType;
@@ -31,6 +29,8 @@ import java.lang.reflect.Method;
 public class Utils {
     private static final Rand random = new Rand();
     private static final Vec2 rv = new Vec2();
+    private static IntSet collidedBlocks = new IntSet();
+
     /** Определяет, горит ли юнит. */
     public static boolean isUnitBurning(Unit u) {
         // Считаем, что эффект - горение, если он наносит урон и

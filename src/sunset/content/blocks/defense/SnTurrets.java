@@ -608,7 +608,7 @@ public class SnTurrets implements ContentList {
             shootCone = 720;
         }};
 
-        /*dischargerEvo = new EMPFacility("discharger-evo"){{
+        dischargerEvo = new EMPFacility("discharger-evo"){{
             requirements(Category.turret, ItemStack.mult(discharger.requirements, 1.5f));
             size = 4;
             health = 1200;
@@ -649,7 +649,7 @@ public class SnTurrets implements ContentList {
             range = 160;
             shots = 15;
             shootCone = 15;
-        }};*/
+        }};
 
         //testing
         testturret = new ItemTurret("test-turret") {{

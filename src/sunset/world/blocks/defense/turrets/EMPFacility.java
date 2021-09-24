@@ -1,116 +1,161 @@
 package sunset.world.blocks.defense.turrets;
 
 import arc.Core;
-import arc.func.Cons;
 import arc.graphics.Blending;
+import arc.graphics.Color;
 import arc.graphics.g2d.Draw;
 import arc.graphics.g2d.TextureRegion;
+import arc.math.Angles;
+import arc.math.Mathf;
+import arc.struct.Seq;
+import arc.util.Time;
+import arc.util.Tmp;
+import mindustry.Vars;
+import mindustry.content.Fx;
+import mindustry.content.StatusEffects;
+import mindustry.entities.Effect;
+import mindustry.entities.bullet.BulletType;
 import mindustry.gen.Sounds;
-import mindustry.graphics.Drawf;
+import mindustry.gen.Teamc;
+import mindustry.gen.Tex;
 import mindustry.graphics.Layer;
-import mindustry.world.blocks.ControlBlock;
+import mindustry.graphics.Pal;
+import mindustry.type.Liquid;
 import mindustry.world.blocks.defense.turrets.PowerTurret;
+import mindustry.world.meta.Stat;
+import mindustry.world.meta.StatUnit;
+import sunset.content.SnFx;
+import sunset.utils.Utils;
 
-/**
- * You cannot control this block. Minimum size is 3 tiles.
- * */
 public class EMPFacility extends PowerTurret{
-    private final boolean logicConfigurable = false;
-    //public TextureRegion[] sideRegions = new TextureRegion[4];
-    //public float pullTime = 60f, closeTime = 90f;
-    //public float xOpen = 2f, yOpen = -3f;
+    public Color lightningColor;
+    public float shotAngleRand, spinUp, spinDown, rangeExtention, lightningStroke = 3.5f;
+    public int shotss;
+
+    public TextureRegion heatRegion, bottomRegion, topRegion;
 
     public EMPFacility(String name){
         super(name);
-        recoilAmount = 0;
-        rotateSpeed = 0;
-        //shootCone = 720;
-        shootLength = 20;
-        cooldown = 0.03f;
-        size = 3;
-        chargeSound = Sounds.lasercharge2;
-        shootSound = Sounds.release;
-        shots = 3;
-        spread = 1;
-        inaccuracy = 0;
-        targetAir = true;
-        targetGround = true;
-        powerUse = 1;
+        shootCone = 306f;
+        lightningColor = Pal.surge;
+        shootSound = Sounds.spark;
+        shootEffect = Fx.sparkShoot;
+        cooldown = 0.04f;
     }
 
-    /*@Override
-    public void setBars(){
-        super.setBars();
+    @Override
+    public void setStats(){
+        super.setStats();
 
-        bars.add("sunset-reload", (EMPBuild entity) -> new Bar(
-                () -> bundle.format("bar.sunset-reload", Utils.stringsFixed(Mathf.clamp(entity.reload / reloadTime) * 100f)),
-                () -> entity.team.color,
-                () -> Mathf.clamp(entity.reload / reloadTime)
-        ));
+        stats.remove(Stat.inaccuracy);
+        if(inaccuracy > 0f) stats.add(Stat.inaccuracy, inaccuracy / Vars.tilesize, StatUnit.blocks);
 
-        bars.add("sunset-charge", (EMPBuild entity) -> new Bar(
-                () -> bundle.format("bar.sunset-charge", Utils.stringsFixed(Mathf.clamp(entity.charge) * 100f)),
-                () -> Color.gold,
-                () -> entity.charge
-        ));
-    }*/
+        stats.remove(Stat.ammo);
+        stats.add(Stat.ammo, stat -> {
+            stat.row();
+            stat.table(t -> {
+                t.left().defaults().padRight(3).left();
 
-    /*@Override
+                t.add(Core.bundle.format("bullet.lightning", shotss, shootType.damage));
+                t.row();
+
+                if(shootType.status != StatusEffects.none){
+                    t.add((shootType.minfo.mod == null ? shootType.status.emoji() : "") + "[stat]" + shootType.status.localizedName);
+                }
+            }).padTop(-9).left().get().background(Tex.underline);
+        });
+    }
+
+    @Override
     public void load(){
         super.load();
-        for(int i = 0; i < 3; i++){
-            sideRegions[i] = atlas.find(name + "-side-" + i);
-        }
-    }*/
+        heatRegion = Core.atlas.find(name + "-heat");
+        bottomRegion = Core.atlas.find(name + "-bottom");
+        topRegion = Core.atlas.find(name + "-top");
+    }
 
     @Override
     public void init(){
+        super.init();
         consumes.powerCond(powerUse, TurretBuild::isShooting);
         super.init();
     }
 
-    @Override
-    public TextureRegion[] icons(){
-        return new TextureRegion[] {baseRegion, region};
-    }
-
-    public class EMPBuild extends PowerTurretBuild implements ControlBlock{
-        protected float charge;
-        //protected float chargeTimer;
-
-        /*@Override
-        public boolean canControl(){
-            return false;
-        }*/
+    public class EMPFacilityBuild extends PowerTurretBuild{
+        protected Seq<Teamc> targets = new Seq<>();
+        protected float speedScl;
 
         @Override
-        public void draw(){  //animation will be later
-            /*float totalTime = chargeTime + closeTime;
-            float openAmount = Mathf.curve(chargeTimer, 0f, pullTime);
-            float closeAmount = Mathf.curve(chargeTimer, chargeTime, totalTime);
-            float openX = xOpen * Interp.pow2Out.apply(openAmount) - xOpen * Interp.pow2In.apply(closeAmount);
-            float openY = yOpen * Interp.pow5In.apply(openAmount) - yOpen * Interp.pow5Out.apply(closeAmount);
-
-            Tmp.v1.trns(rotation - 90, -openX, openY - recoil);
-            Tmp.v2.trns(rotation - 90, openX, openY - recoil);
-            float[] sXPre = {Tmp.v1.x, Tmp.v2.x};
-            float[] sYPre = {Tmp.v1.y, Tmp.v2.y};
-            float[] sX = {sXPre[0] + x, sXPre[1] + x};
-            float[] sY = {sYPre[0] + y, sYPre[1] + y};*/
-
+        public void draw(){
             Draw.rect(baseRegion, x, y);
-            Draw.color();
 
             Draw.z(Layer.turret);
+            if(heat > 0.00001f){
+                        Draw.color(heatColor, heat);
+                        Draw.blend(Blending.additive);
+                        Draw.rect(heatRegion, x, y, rotation - 90f);
+                        Draw.blend();
+                        Draw.color();
+                    }
+            Draw.rect(topRegion, x, y);
+        }
 
-            tr2.trns(rotation, -recoil);
+        @Override
+        public void updateTile(){
+                heat = Mathf.lerpDelta(heat, 0f, cooldown);
 
-            Drawf.shadow(region, x + tr2.x - elevation, y + tr2.y - elevation, rotation - 90);
-            if(heatRegion != Core.atlas.find("error")){
-                heatDrawer.get(this);
+            if(!hasAmmo() || !isShooting() || !isActive() || !cons.valid()){
+                speedScl = Mathf.lerpDelta(speedScl, 0, spinDown);
             }
-            drawer.get(this);
-            super.draw();
+            if(hasAmmo() && isShooting() && isActive() && cons.valid()){
+                Liquid liquid = liquids.current();
+                speedScl = Mathf.lerpDelta(speedScl, 1, spinUp * peekAmmo().reloadMultiplier * liquid.heatCapacity * coolantMultiplier * edelta());
+            }
+
+            rotation -= speedScl * Time.delta;
+
+            super.updateTile();
+        }
+
+        @Override
+        protected void shoot(BulletType type){
+            targets.clear();
+
+            targets = Utils.allNearbyEnemies(team, x, y, range + rangeExtention);
+
+            if(targets.size > 0){
+                for(int i = 0; i < shots; i++){
+                    Teamc target = targets.random();
+
+                    float shootX = x + Tmp.v1.x + Tmp.v2.x, shootY = y + Tmp.v1.y + Tmp.v2.y;
+                    float sX = target.x() + Tmp.v3.x, sY = target.y() + Tmp.v3.y;
+
+                    float shootAngle = Angles.angle(shootX, shootY, sX, sY);
+                    float dist = Mathf.dst(shootX, shootY, sX, sY);
+
+                    SnFx.fakeLightning.at(shootX, shootY, shootAngle, lightningColor, new Object[]{dist, lightningStroke, team});
+                    shootSound.at(shootX, shootY, Mathf.random(0.9f, 1.1f));
+                    shootEffect.at(shootX, shootY, shootAngle, lightningColor);
+                    if(shootShake > 0f){
+                        Effect.shake(shootShake, shootShake, this);
+                    }
+                    final float spawnX = sX, spawnY = sY;
+                    Time.run(3f, () -> {
+                        for(int j = 0; j < shotss; j++){
+                            shootType.create(this, team, spawnX, spawnY, ((360f / shotss) * j) + Mathf.range(shotAngleRand));
+                        }
+                    });
+                }
+            }
+        }
+
+        @Override
+        protected void turnToTarget(float targetRot){
+        }
+
+        @Override
+        public boolean canControl(){
+            return false;
         }
 
         public int size(){

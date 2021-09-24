@@ -7,13 +7,13 @@ import arc.graphics.g2d.Draw;
 import arc.graphics.g2d.Fill;
 import arc.graphics.g2d.Lines;
 import arc.math.Angles;
-import arc.math.Interp;
 import arc.math.Mathf;
 import arc.math.geom.Vec2;
 import arc.struct.Seq;
+import arc.util.Tmp;
 import mindustry.content.Fx;
 import mindustry.entities.Effect;
-import mindustry.entities.effect.WaveEffect;
+import mindustry.game.Team;
 import mindustry.graphics.Drawf;
 import mindustry.graphics.Layer;
 import mindustry.graphics.Pal;
@@ -25,6 +25,7 @@ import static arc.graphics.g2d.Draw.color;
 import static arc.graphics.g2d.Lines.lineAngle;
 import static arc.graphics.g2d.Lines.stroke;
 import static arc.math.Angles.randLenVectors;
+import static mindustry.Vars.tilesize;
 
 public class SnFx{
     public static final Effect
@@ -542,5 +543,38 @@ public class SnFx{
             float circleRad = 2f + e.fin() * 15f;
             Lines.circle(e.x, e.y, circleRad);
         });
-    });
+    }),
+
+    fakeLightning = new Effect(10f, 500f, e -> {
+        Object[] data = (Object[])e.data;
+
+        float length = (float)data[0];
+        int tileLength = Mathf.round(length / tilesize);
+
+        Lines.stroke((float)data[1] * e.fout());
+        Draw.color(e.color, Color.white, e.fin());
+
+        for(int i = 0; i < tileLength; i++){
+            float offsetXA = i == 0 ? 0f : Mathf.randomSeed(e.id + (i * 6413), -4.5f, 4.5f);
+            float offsetYA = (length / tileLength) * i;
+
+            int f = i + 1;
+
+            float offsetXB = f == tileLength ? 0f : Mathf.randomSeed(e.id + (f * 6413), -4.5f, 4.5f);
+            float offsetYB = (length / tileLength) * f;
+
+            Tmp.v1.trns(e.rotation, offsetYA, offsetXA);
+            Tmp.v1.add(e.x, e.y);
+
+            Tmp.v2.trns(e.rotation, offsetYB, offsetXB);
+            Tmp.v2.add(e.x, e.y);
+
+            Lines.line(Tmp.v1.x, Tmp.v1.y, Tmp.v2.x, Tmp.v2.y, false);
+            Fill.circle(Tmp.v1.x, Tmp.v1.y, Lines.getStroke() / 2f);
+            Drawf.light((Team)data[2], Tmp.v1.x, Tmp.v1.y, Tmp.v2.x, Tmp.v2.y, (float)data[1] * 3f, e.color, 0.4f);
+        }
+
+        Fill.circle(Tmp.v2.x, Tmp.v2.y, Lines.getStroke() / 2);
+    }).layer(Layer.bullet + 0.01f);
+
 }
