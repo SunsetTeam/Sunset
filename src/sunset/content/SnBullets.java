@@ -1149,7 +1149,7 @@ public class SnBullets implements ContentList {
             lifetime = 50;
             shootEffect = SnFx.empWave;
             status = SnStatusEffects.electricalShort;
-            //randomTime = true;
+            randomTime = true;
             despawnEffect = Fx.none;
             collidesAir = false;
             collidesTiles = true;
@@ -1169,13 +1169,18 @@ public class SnBullets implements ContentList {
             pierceBuilding = true;
             knockback = 0;
             ammoMultiplier = 4;
+            shootEffect = Fx.none;
+            hitEffect = SnFx.empWave;
+            smokeEffect = Fx.none;
+            shrinkY = 0;
+            knockback = 0;
         }};
 
         empBulletEvo = new EMPWaveBullet(5, 30, "emp-wave", 30, 120){{
             lifetime = 100;
             shootEffect = SnFx.empWave;
             status = SnStatusEffects.electricalShort;
-            //randomTime = true;
+            randomTime = true;
             despawnEffect = Fx.none;
             collidesAir = false;
             collidesTiles = true;
@@ -1195,6 +1200,11 @@ public class SnBullets implements ContentList {
             pierceBuilding = true;
             knockback = 0;
             ammoMultiplier = 4;
+            shootEffect = Fx.none;
+            hitEffect = SnFx.empWave;
+            smokeEffect = Fx.none;
+            shrinkY = 0;
+            knockback = 0;
         }};
         //endregion special
         //region misc
