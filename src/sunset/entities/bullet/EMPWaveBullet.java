@@ -1,10 +1,8 @@
 package sunset.entities.bullet;
 
-import arc.Core;
 import arc.graphics.Color;
 import arc.graphics.g2d.Draw;
 import arc.graphics.g2d.Lines;
-import mindustry.entities.bullet.BasicBulletType;
 import mindustry.entities.bullet.LaserBoltBulletType;
 import mindustry.gen.Bullet;
 //import mindustry.gen.Bullet;
@@ -61,12 +59,6 @@ public class EMPWaveBullet extends LaserBoltBulletType {
         Draw.color(Color.valueOf("7FFFD4"));
         Lines.lineAngleCenter(b.x, b.y, b.rotation(), height / 2f);
         Draw.reset();
-    }
-
-    @Override
-    public void load(){
-        backRegion = Core.atlas.find(sprite + "-back");
-        frontRegion = Core.atlas.find(sprite);
     }
 
     /*@Override
