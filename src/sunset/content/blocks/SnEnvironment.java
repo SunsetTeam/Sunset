@@ -20,11 +20,11 @@ public class SnEnvironment implements ContentList {
     //floors 
     crimsongrass, crimsondirt, crimsonswamp, crimsonsand, crimsonsandwater,
     crimsonwater, crimsondeepwater, crimsonice, crimsonsnow, crimsonicesnow,
-    crimsonmoss,
+    crimsonmoss, granite,
     orangesand, obsidian, ash, burningash,
 
     //static walls 
-    crimsondirtwall, crimsongrasswall, crimsonsandwall, stonesandwall, stonesand,
+    crimsondirtwall, crimsongrasswall, crimsonsandwall, granitewall, stonesandwall, stonesand,
     orangesandwall, obsidianwall, ashwall,
     
     //pines
@@ -158,6 +158,12 @@ public class SnEnvironment implements ContentList {
             wall = crimsonpine;
         }};
 
+        granite = new Floor("granite"){{
+            variants = 3;
+            attributes.set(Attribute.spores, 0.2f);
+            wall = crimsonpine;
+        }};
+
         orangesand = new Floor("orange-sand") {{
             itemDrop = Items.sand;
             playerUnmineable = true;
@@ -197,6 +203,10 @@ public class SnEnvironment implements ContentList {
 
         crimsonsandwall = new StaticWall("crimson-sand-wall") {{
             variants = 2;
+        }};
+
+        granitewall = new StaticWall("granite-wall") {{
+            variants = 3;
         }};
 
         stonesandwall = new StaticWall("stone-sand-wall") {{
