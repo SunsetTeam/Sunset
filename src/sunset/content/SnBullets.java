@@ -1159,7 +1159,7 @@ public class SnBullets implements ContentList {
         }};
         //endregion wheel
         //region special
-        empBullet = new EMPWaveBullet(5, 15, "emp-wave"){{
+        empBullet = new BulletType(5, 15){{
             lifetime = 50;
             shootEffect = SnFx.empWave;
             status = SnStatusEffects.electricalShort;
@@ -1168,7 +1168,7 @@ public class SnBullets implements ContentList {
             hitSize = 36;
             hitEffect = SnFx.empWave;
         }};
-        empBulletEvo = new EMPWaveBullet(5, 30, "emp-wave"){{
+        empBulletEvo = new BulletType(5, 30){{
             lifetime = 100;
             shootEffect = SnFx.empWave;
             status = SnStatusEffects.electricalShort;

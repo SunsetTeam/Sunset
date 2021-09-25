@@ -10,7 +10,6 @@ import arc.struct.Seq;
 import arc.util.Time;
 import arc.util.Tmp;
 import mindustry.Vars;
-import mindustry.content.Fx;
 import mindustry.content.StatusEffects;
 import mindustry.entities.Effect;
 import mindustry.entities.bullet.BulletType;
@@ -19,7 +18,6 @@ import mindustry.gen.Teamc;
 import mindustry.gen.Tex;
 import mindustry.graphics.Drawf;
 import mindustry.graphics.Layer;
-import mindustry.graphics.Pal;
 import mindustry.type.Liquid;
 import mindustry.world.blocks.defense.turrets.PowerTurret;
 import mindustry.world.meta.Stat;
@@ -39,10 +37,10 @@ public class EMPFacility extends PowerTurret{
     public EMPFacility(String name){
         super(name);
         shootCone = 306f;
-        lightningColor = Pal.surge;
-        shootSound = Sounds.spark;
-        shootEffect = Fx.sparkShoot;
-        cooldown = 0.04f;
+        lightningColor = Color.valueOf("7FFFD4");
+        shootSound = Sounds.release;
+        shootEffect = SnFx.empWave;
+        cooldown = 0.5f;
     }
 
     @Override
