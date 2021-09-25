@@ -35,11 +35,18 @@ import static sunset.utils.UnitsUtils.addUnitGroup;
 
 public class SnUnitTypes implements ContentList {
     public static UnitType
-        guardcopter, bladecopter, swordcopter, guardiancopter, crusadercopter, //attacks copters
-        comet, satelite, planet, star, galaxy, //buffers
-        wheel1, wheel2, wheel3, wheel4, wheel5, //wheel
-        router, courier, //misc
-        snowflake, mirage;
+            //attack copters
+            guardcopter, bladecopter, swordcopter, guardiancopter, crusadercopter,
+            //air-support (buffers)
+            comet, satelite, planet, star, galaxy,
+            //wheel units
+            wheel1, wheel2, wheel3, wheel4, wheel5,
+            //delivery
+            router, courier,
+            //freezing
+            snowflake,
+            //berserk
+            mirage;
     public void loadFactoryRecipes()
     {
         UnitsUtils.init();
@@ -605,6 +612,8 @@ public class SnUnitTypes implements ContentList {
                 }};
             }});
         }};
+        //endregion freezing
+        //region berserk
         mirage = new BerserkUnitType("mirage"){{
             health = 230;
             speed = 1.8f;
@@ -654,7 +663,7 @@ public class SnUnitTypes implements ContentList {
                 }}
             );
         }};
-        //endregion freezing
+        //endregion berserk
 
         router = new UnitTypeExt("router") {{
             health = 2000000;

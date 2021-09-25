@@ -7,6 +7,7 @@ import arc.graphics.g2d.Draw;
 import arc.graphics.g2d.Fill;
 import arc.graphics.g2d.Lines;
 import arc.math.Angles;
+import arc.math.Interp;
 import arc.math.Mathf;
 import arc.math.geom.Vec2;
 import arc.struct.Seq;
@@ -548,11 +549,20 @@ public class SnFx{
         Angles.randLenVectors(e.id, 4, e.finpow() * 20, e.rotation, 360, floatc21);
     }),
 
-    empWave = new Effect(35, e -> {
+    empHit = new Effect(75, e -> {
         randLenVectors(e.id, 6, 4f + e.fin() * 8f, (x, y) -> {
             Draw.color(Color.valueOf("7FFFD4"), Color.valueOf("7FFFD4"), e.fin());
             float circleRad = 2f + e.fin() * 15f;
             Lines.circle(e.x, e.y, circleRad);
+        });
+    }),
+
+    empShoot = new Effect(60, e -> {
+        randLenVectors(e.id, 35, 7f + e.fin() * 9, (x, y) -> {
+            Draw.color(Color.valueOf("7FFFD4"), Color.valueOf("7FFFD4"), e.fin());
+            Lines.stroke(Interp.bounce.apply(0, 0, e.fin()));
+            float rad = Interp.bounce.apply(35, 0, e.fin());
+            Lines.poly(e.x, e.y, -1 <= 0 ? Lines.circleVertices(rad) : -1, rad, e.rotation);
         });
     }),
 

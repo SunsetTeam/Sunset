@@ -26,7 +26,7 @@ public class SnDistribution implements ContentList {
     @Override
     public void load() {
         //transportation
-        enojieDriver = new MassDriver("enojiemass-driver") {{
+        enojieDriver = new MassDriver("enojie-driver") {{
             requirements(Category.distribution, with(Items.titanium, 450, Items.thorium, 200, Items.surgeAlloy, 180, SnItems.nobium, 150, SnItems.enojie, 130));
             size = 5;
             itemCapacity = 210;

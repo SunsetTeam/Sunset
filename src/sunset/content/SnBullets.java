@@ -1159,23 +1159,23 @@ public class SnBullets implements ContentList {
         }};
         //endregion wheel
         //region special
-        empBullet = new BulletType(5, 15){{
+        empBullet = new BulletType(5, 150){{
             lifetime = 50;
-            shootEffect = SnFx.empWave;
+            shootEffect = SnFx.empShoot;
             status = SnStatusEffects.electricalShort;
             drawSize = 3;
             collidesTeam = true;
             hitSize = 36;
-            hitEffect = SnFx.empWave;
+            hitEffect = SnFx.empHit;
         }};
-        empBulletEvo = new BulletType(5, 30){{
+        empBulletEvo = new BulletType(5, 300){{
             lifetime = 100;
-            shootEffect = SnFx.empWave;
+            shootEffect = SnFx.empShoot;
             status = SnStatusEffects.electricalShort;
             drawSize = 5.3f;
             collidesTeam = true;
             hitSize = 36;
-            hitEffect = SnFx.empWave;
+            hitEffect = SnFx.empHit;
         }};
         //endregion special
         //region misc

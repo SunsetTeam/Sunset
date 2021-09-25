@@ -590,7 +590,7 @@ public class SnTurrets implements ContentList {
 
         //EMP
         discharger = new EMPFacility("discharger"){{
-            requirements(Category.turret, with(Items.copper, 1600, Items.lead, 1500, Items.metaglass, 1000, Items.plastanium, 800, Items.silicon, 1300, Items.surgeAlloy, 900, Items.phaseFabric, 750, SnItems.flameid, 1000, SnItems.enojie, 900, SnItems.coldent, 300));
+            requirements(Category.turret, with(Items.copper, 1600, Items.lead, 1500, Items.metaglass, 1000, Items.plastanium, 850, Items.silicon, 1300, Items.surgeAlloy, 910, Items.phaseFabric, 780, SnItems.flameid, 1000, SnItems.enojie, 1100, SnItems.coldent, 670));
             size = 3;
             health = 980;
             powerUse = 9.3f;
@@ -605,7 +605,7 @@ public class SnTurrets implements ContentList {
             parts.add(new EMPPart(1.2f));
         }};
         dischargerEvo = new EMPFacility("discharger-evo"){{
-            requirements(Category.turret, ItemStack.mult(discharger.requirements, 1.5f));
+            requirements(Category.turret, ItemStack.mult(discharger.requirements, 2));
             size = 4;
             health = 1200;
             powerUse = 17f;
