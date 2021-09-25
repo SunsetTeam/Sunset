@@ -563,7 +563,7 @@ public class SnFx{
             float circleRad = 2f + e.fin() * 10f;
             Lines.spikes(e.x, e.y, circleRad, 4.9f, 10);
             Draw.color(Color.valueOf("32D0DC"), e.fin());
-            Lines.swirl(e.x, e.y, circleRad, 4.9f, 10);
+            Lines.swirl(e.x, e.y, circleRad, 2.1f, 10);
         });
     }),
 
