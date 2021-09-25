@@ -9,6 +9,8 @@ import arc.math.Rand;
 import arc.math.geom.Geometry;
 import arc.math.geom.Rect;
 import arc.math.geom.Vec2;
+import arc.struct.IntSet;
+import arc.struct.Seq;
 import arc.util.Log;
 import mindustry.Vars;
 import mindustry.ai.Astar;
@@ -27,6 +29,8 @@ import mindustry.world.Tile;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+
+import static mindustry.Vars.tilesize;
 
 import static mindustry.Vars.world;
 
@@ -116,13 +120,13 @@ public class Utils {
         };
     }
     /** Ищет коллизию, игнорируя некоторые цели. */
-    public static Healthc linecast(Bullet hitter, float x, float y, float angle, float length, Boolf<Healthc> predicate){
-        final Building[] tmpBuilding = new Building[] {null};
-        final Unit[] tmpUnit = new Unit[] {null};
+    public static Healthc linecast(Bullet hitter, float x, float y, float angle, float length, Boolf<Healthc> predicate) {
+        final Building[] tmpBuilding = new Building[]{null};
+        final Unit[] tmpUnit = new Unit[]{null};
 
         tr.trns(angle, length);
 
-        if(hitter.type.collidesGround){
+        if (hitter.type.collidesGround) {
             world.raycastEachWorld(x, y, x + tr.x, y + tr.y, (cx, cy) -> {
                 Building tile = world.build(cx, cy);
                 if (tile == null || tile.team == hitter.team || !predicate.get(tile)) return false;
@@ -134,11 +138,11 @@ public class Utils {
         rect.setPosition(x, y).setSize(tr.x, tr.y);
         float x2 = tr.x + x, y2 = tr.y + y;
 
-        if(rect.width < 0){
+        if (rect.width < 0) {
             rect.x += rect.width;
             rect.width *= -1;
         }
-        if(rect.height < 0){
+        if (rect.height < 0) {
             rect.y += rect.height;
             rect.height *= -1;
         }
@@ -150,7 +154,8 @@ public class Utils {
         rect.height += expand * 2;
 
         Units.nearbyEnemies(hitter.team, rect, e -> {
-            if((tmpUnit[0] != null && e.dst2(x, y) > tmpUnit[0].dst2(x, y)) || !e.checkTarget(hitter.type.collidesAir, hitter.type.collidesGround) || !predicate.get(e)) return;
+            if ((tmpUnit[0] != null && e.dst2(x, y) > tmpUnit[0].dst2(x, y)) || !e.checkTarget(hitter.type.collidesAir, hitter.type.collidesGround) || !predicate.get(e))
+                return;
 
             e.hitbox(hitrect);
             Rect other = hitrect;
@@ -159,13 +164,54 @@ public class Utils {
             other.width += expand * 2;
             other.height += expand * 2;
 
-            if(Geometry.raycastRect(x, y, x2, y2, other) != null) tmpUnit[0] = e;
+            if (Geometry.raycastRect(x, y, x2, y2, other) != null) tmpUnit[0] = e;
         });
 
-        if(tmpBuilding[0] != null && tmpUnit[0] != null) {
-            if(Mathf.dst2(x, y, tmpUnit[0].getX(), tmpUnit[0].getY()) <= Mathf.dst2(x, y, tmpBuilding[0].getX(), tmpBuilding[0].getY())) return tmpUnit[0];
+        if (tmpBuilding[0] != null && tmpUnit[0] != null) {
+            if (Mathf.dst2(x, y, tmpUnit[0].getX(), tmpUnit[0].getY()) <= Mathf.dst2(x, y, tmpBuilding[0].getX(), tmpBuilding[0].getY()))
+                return tmpUnit[0];
         } else if (tmpBuilding[0] != null) return tmpBuilding[0];
 
         return tmpUnit[0];
+    }
+
+    /** for EMP */
+    public static void trueEachBlock(float wx, float wy, float range, Cons<Building> cons){
+        collidedBlocks.clear();
+        int tx = World.toTile(wx);
+        int ty = World.toTile(wy);
+
+        int tileRange = Mathf.floorPositive(range / tilesize);
+
+        for(int x = -tileRange + tx; x <= tileRange + tx; x++){
+            for(int y = -tileRange + ty; y <= tileRange + ty; y++){
+                if(Mathf.within(x * tilesize, y * tilesize, wx, wy, range)){
+                    Building other = world.build(x, y);
+                    if(other != null && !collidedBlocks.contains(other.pos())){
+                        cons.get(other);
+                        collidedBlocks.add(other.pos());
+                    }
+                }
+            }
+        }
+    }
+
+    /** for EMP */
+    public static Seq<Teamc> allNearbyEnemies(Team team, float x, float y, float radius){
+        Seq<Teamc> targets = new Seq<>();
+
+        Units.nearbyEnemies(team, x - radius, y - radius, radius * 2f, radius * 2f, unit -> {
+            if(Mathf.within(x, y, unit.x, unit.y, radius) && !unit.dead){
+                targets.add(unit);
+            }
+        });
+
+        trueEachBlock(x, y, radius, build -> {
+            if(build.team != team && !build.dead && build.block != null){
+                targets.add(build);
+            }
+        });
+
+        return targets;
     }
 }

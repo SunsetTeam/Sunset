@@ -49,7 +49,7 @@ public class SnBullets implements ContentList {
         //special
         empBullet, empBulletEvo,
         //test&temp
-        testbullet, tempBullet;
+        testbullet, tempBullet1, tempBullet2;
         //exoticBullets (new) i will make it later... i must make more bulets (soulBullet, iceSpike, and more)
         // spiralPllastanium, spiralSurge, SpiralFors, SpiralThorium, SpiralSmall;
 
@@ -920,7 +920,7 @@ public class SnBullets implements ContentList {
             weaveScale = 5f;
             weaveMag = 2f;
         }};
-        HelicopterBomb = new BasicBulletType() {{
+        HelicopterBomb = new CopterRocketBulletType(2f, 5) {{
             sprite = "sunset-copter-bomb";
             width = height = 70 / 2f;
 
@@ -944,7 +944,6 @@ public class SnBullets implements ContentList {
 
             shrinkX = shrinkY = 0.55f;
 
-            speed = 2f;
             collides = true;
 
             splashDamage = 140f;
@@ -963,7 +962,7 @@ public class SnBullets implements ContentList {
             lightningDamage = 18;
 
         }};
-        HelicopterRocket = new MissileBulletType(5.0f, 50) {{
+        HelicopterRocket = new CopterRocketBulletType(5.0f, 50) {{
             sprite = "sunset-guardian-rocket";
             width = 13f;
             height = 20f;
@@ -1001,7 +1000,7 @@ public class SnBullets implements ContentList {
             fragBullets = 1;
             fragCone = 0.0001f;
         }};
-        bigHelicopterRocket = new MissileBulletType(6.3f, 70) {{
+        bigHelicopterRocket = new CopterRocketBulletType(6.3f, 70) {{
             sprite = "sunset-guardian-rocket";
             width = 13f;
             height = 23f;
@@ -1274,15 +1273,59 @@ public class SnBullets implements ContentList {
             homingPower = 0.2f;
             ammoMultiplier = 2;
         }};
-        tempBullet = new BasicBulletType(){{
-            damage = 10000;
-            //colors = new Color[]{Pal.meltdownHit.cpy().a(0.4f), Pal.meltdownHit, Color.white};
+        tempBullet1 = new LaserBoltBulletType(5, 15){{
+            lifetime = 50;
+            shootEffect = Fx.none;
+            hitEffect = SnFx.empWave;
+            smokeEffect = Fx.none;
+            status = SnStatusEffects.electricalShort;
+            //randomTime = true;
             despawnEffect = Fx.none;
-            lifetime = 60f;
-            drawSize = 440f;
             collidesAir = false;
-            //length = 370f;
-            width = 50.0F;
+            collidesTiles = true;
+            reflectable = false;
+            hittable = false;
+            absorbable = false;
+            speed = 5;
+            height = 5;
+            width = 3;
+            shrinkX = -18;
+            shrinkY = 0;
+            drawSize = 3;
+            collidesTeam = true;
+            hitSize = 36;
+            pierce = true;
+            pierceCap = 1;
+            pierceBuilding = true;
+            knockback = 0;
+            ammoMultiplier = 4;
+        }};
+        tempBullet2 = new LaserBoltBulletType(5, 30){{
+            lifetime = 100;
+            shootEffect = Fx.none;
+            hitEffect = SnFx.empWave;
+            smokeEffect = Fx.none;
+            status = SnStatusEffects.electricalShort;
+            //randomTime = true;
+            despawnEffect = Fx.none;
+            collidesAir = false;
+            collidesTiles = true;
+            reflectable = false;
+            hittable = false;
+            absorbable = false;
+            speed = 5;
+            height = 5;
+            width = 3;
+            shrinkX = -18;
+            shrinkY = 0;
+            drawSize = 5.3f;
+            collidesTeam = true;
+            hitSize = 36;
+            pierce = true;
+            pierceCap = 1;
+            pierceBuilding = true;
+            knockback = 0;
+            ammoMultiplier = 4;
         }};
         //endregion misc
     }
