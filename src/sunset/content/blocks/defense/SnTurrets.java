@@ -42,7 +42,7 @@ public class SnTurrets implements ContentList {
         //4x4
         admiral, scorpio, typhoon, flood, tentacle, chain,
         //5x5
-        field,
+        field, somesniper,
         //6x6
         trident, radius,
         //7x7
@@ -113,7 +113,6 @@ public class SnTurrets implements ContentList {
             liquidUse = 0.3f;
             laserColor = SnPal.chainLaser;
         }};
-
         pulsation = new ItemTurret("pulsation") {{
             requirements(Category.turret, with(Items.copper, 95, Items.graphite, 85, Items.lead, 70, SnItems.planatrium, 35));
             ammo(
@@ -381,6 +380,30 @@ public class SnTurrets implements ContentList {
 
         health = 160 * size * size;
        }};
+        somesniper = new ItemTurret("somesniper"){{
+            requirements(Category.turret, with(Items.copper, 1200, Items.surgeAlloy, 600, SnItems.naturite, 500, Items.silicon, 400));
+            ammo(Items.surgeAlloy, SnBullets.somesnipersurge);
+
+            ammoPerShot = 6;
+            rotateSpeed = 1.5f;
+            reloadTime = 370f;
+            recoilAmount = 12f;
+            restitution = 0.02f;
+            range = 768.0f;
+            cooldown = 0.02f;
+            shootShake = 4f;
+            size = 5;
+            shootCone = 2f;
+            shootSound = Sounds.railgun;
+            unitSort = (u, x, y) -> -u.maxHealth;
+
+            coolantMultiplier = 0.4f;
+
+            health = 4200;
+            coolantUsage = 2f;
+
+            consumes.powerCond(21f, TurretBuild::isActive);
+        }};
 
         //6x6
         trident = new PowerTurret("trident"){{
@@ -607,7 +630,6 @@ public class SnTurrets implements ContentList {
             shots = 360;
             shootCone = 720;
         }};
-
         dischargerEvo = new EMPFacility("discharger-evo"){{
             requirements(Category.turret, ItemStack.mult(discharger.requirements, 1.5f));
             size = 4;
