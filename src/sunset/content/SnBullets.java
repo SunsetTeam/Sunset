@@ -1159,7 +1159,9 @@ public class SnBullets implements ContentList {
         }};
         //endregion wheel
         //region special
-        empBullet = new BulletType(5, 150){{
+        empBullet = new LightningBulletType(){{
+            //speed = 5;
+            damage = 150;
             lifetime = 50;
             shootEffect = SnFx.empShoot;
             status = SnStatusEffects.electricalShort;
@@ -1168,7 +1170,9 @@ public class SnBullets implements ContentList {
             hitSize = 36;
             hitEffect = SnFx.empHit;
         }};
-        empBulletEvo = new BulletType(5, 300){{
+        empBulletEvo = new LightningBulletType(){{
+            //speed = 5;
+            damage = 300;
             lifetime = 100;
             shootEffect = SnFx.empShoot;
             status = SnStatusEffects.electricalShort;
