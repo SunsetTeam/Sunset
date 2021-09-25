@@ -580,6 +580,7 @@ public class SnTurrets implements ContentList {
             range = 120;
             shots = 360;
             shootCone = 720;
+            parts.add(new EMPPart(1.2f));
         }};
 
         dischargerEvo = new EMPFacility("discharger-evo"){{
@@ -596,6 +597,7 @@ public class SnTurrets implements ContentList {
             range = 160;
             shots = 15;
             shootCone = 15;
+            parts.add(new EMPPart(5));
         }};
 
         //testing
