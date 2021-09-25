@@ -80,7 +80,10 @@ public class EMPFacility extends PowerTurret{
     }
 
     public static class EMPPart{
-        public float rotationMul, radius, xOffset, yOffset;
+        public float rotationMul = 12f;
+        public float radius = 4.25f;
+        public float xOffset = -8.625f;
+        public float yOffset = -8.625f;
 
         public EMPPart(float radius){
             this.radius = radius;
