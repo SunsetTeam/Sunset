@@ -1,7 +1,6 @@
 package sunset.world.blocks.defense.turrets;
 
 import arc.Core;
-import arc.graphics.Blending;
 import arc.graphics.Color;
 import arc.graphics.g2d.Draw;
 import arc.graphics.g2d.TextureRegion;
@@ -18,6 +17,7 @@ import mindustry.entities.bullet.BulletType;
 import mindustry.gen.Sounds;
 import mindustry.gen.Teamc;
 import mindustry.gen.Tex;
+import mindustry.graphics.Drawf;
 import mindustry.graphics.Layer;
 import mindustry.graphics.Pal;
 import mindustry.type.Liquid;
@@ -28,11 +28,12 @@ import sunset.content.SnFx;
 import sunset.utils.Utils;
 
 public class EMPFacility extends PowerTurret{
+    public boolean hasSpinners;
     public Color lightningColor;
-    public float shotAngleRand, spinUp, spinDown, rangeExtention, lightningStroke = 3.5f;
-    public int shotss;
+    public float zapAngleRand, spinUp, spinDown, rangeExtention, lightningStroke = 3.5f;
+    public int zaps;
 
-    public TextureRegion heatRegion, bottomRegion, topRegion;
+    public TextureRegion bottomRegion, topRegion;
 
     public EMPFacility(String name){
         super(name);
@@ -56,7 +57,7 @@ public class EMPFacility extends PowerTurret{
             stat.table(t -> {
                 t.left().defaults().padRight(3).left();
 
-                t.add(Core.bundle.format("bullet.lightning", shotss, shootType.damage));
+                t.add(Core.bundle.format("bullet.lightning", zaps, shootType.damage));
                 t.row();
 
                 if(shootType.status != StatusEffects.none){
@@ -66,22 +67,24 @@ public class EMPFacility extends PowerTurret{
         });
     }
 
+    public int size(){
+        if(this.size < 3) return this.size = 3;
+        return this.size;
+    }
+
     @Override
     public void load(){
         super.load();
-        heatRegion = Core.atlas.find(name + "-heat");
-        bottomRegion = Core.atlas.find(name + "-bottom");
         topRegion = Core.atlas.find(name + "-top");
     }
 
     @Override
     public void init(){
-        super.init();
         consumes.powerCond(powerUse, TurretBuild::isShooting);
         super.init();
     }
 
-    public class EMPFacilityBuild extends PowerTurretBuild{
+    public class EMPBuild extends PowerTurretBuild{
         protected Seq<Teamc> targets = new Seq<>();
         protected float speedScl;
 
@@ -90,20 +93,19 @@ public class EMPFacility extends PowerTurret{
             Draw.rect(baseRegion, x, y);
 
             Draw.z(Layer.turret);
-            if(heat > 0.00001f){
-                        Draw.color(heatColor, heat);
-                        Draw.blend(Blending.additive);
-                        Draw.rect(heatRegion, x, y, rotation - 90f);
-                        Draw.blend();
-                        Draw.color();
-                    }
+
+            TextureRegion r = hasSpinners ? bottomRegion : region;
+
+            Drawf.shadow(r, x - elevation, y - elevation);
+
+            Draw.rect(r, x, y);
+
             Draw.rect(topRegion, x, y);
+
         }
 
         @Override
         public void updateTile(){
-                heat = Mathf.lerpDelta(heat, 0f, cooldown);
-
             if(!hasAmmo() || !isShooting() || !isActive() || !cons.valid()){
                 speedScl = Mathf.lerpDelta(speedScl, 0, spinDown);
             }
@@ -127,6 +129,8 @@ public class EMPFacility extends PowerTurret{
                 for(int i = 0; i < shots; i++){
                     Teamc target = targets.random();
 
+                    Tmp.v3.setToRandomDirection().setLength(Mathf.random(inaccuracy)); //inaccuracy
+
                     float shootX = x + Tmp.v1.x + Tmp.v2.x, shootY = y + Tmp.v1.y + Tmp.v2.y;
                     float sX = target.x() + Tmp.v3.x, sY = target.y() + Tmp.v3.y;
 
@@ -141,8 +145,8 @@ public class EMPFacility extends PowerTurret{
                     }
                     final float spawnX = sX, spawnY = sY;
                     Time.run(3f, () -> {
-                        for(int j = 0; j < shotss; j++){
-                            shootType.create(this, team, spawnX, spawnY, ((360f / shotss) * j) + Mathf.range(shotAngleRand));
+                        for(int j = 0; j < zaps; j++){
+                            shootType.create(this, team, spawnX, spawnY, ((360f / zaps) * j) + Mathf.range(zapAngleRand));
                         }
                     });
                 }
@@ -151,16 +155,12 @@ public class EMPFacility extends PowerTurret{
 
         @Override
         protected void turnToTarget(float targetRot){
+            //DO nothing, turning is irrelevant
         }
 
         @Override
         public boolean canControl(){
-            return false;
-        }
-
-        public int size(){
-            if(size < 3) return size = 3;
-            return size;
+            return false; //Can't aim, technically does not shoot
         }
     }
 }
