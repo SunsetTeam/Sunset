@@ -39,7 +39,7 @@ public class EMPFacility extends PowerTurret{
         shootCone = 306f;
         lightningColor = Color.valueOf("7FFFD4");
         shootSound = Sounds.release;
-        shootEffect = SnFx.empShoot;
+        shootEffect = SnFx.empShootSmall;
         cooldown = 0.5f;
     }
 
