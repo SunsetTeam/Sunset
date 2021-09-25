@@ -286,6 +286,16 @@ public class SnFx{
         Lines.circle(e.x, e.y, 112f);
     }),
 
+    somesnipertrail = new Effect(12f, e -> {
+        float scale = e.data(), fin1 = Math.min(1, e.fin() * 1.5f), fout1 = 1-Math.max(0, e.fin() - 0.6666f)*3;
+        Vec2 front = new Vec2(0, 32*scale).setAngle(e.rotation).add(e.x, e.y);
+        Vec2 left = new Vec2(0, 5*fout1*scale).setAngle(e.rotation + fin1*60f).add(e.x, e.y);
+        Vec2 right = new Vec2(0, 5*fout1*scale).setAngle(e.rotation - fin1*60f).add(e.x, e.y);
+        Draw.z(Layer.bullet);
+        Draw.color(e.color);
+        Fill.quad(front.x, front.y, left.x, left.y, e.x, e.y, right.x, right.y);
+    }),
+
     shootWheel5Flame = new Effect(40f, 140f, e -> {
         color(Pal.lightFlame, Pal.darkFlame, Color.gray, e.fin());
 
@@ -517,7 +527,8 @@ public class SnFx{
            Fill.circle(e.x+x, e.y+y, e.fin() * 2);
        });
     }),
-        berserkLaserHitSmall = new Effect(20, e -> {
+
+    berserkLaserHitSmall = new Effect(20, e -> {
         Draw.color(Color.valueOf("CCCDDA"));
         Floatc2 floatc2 = new Floatc2() {
             @Override

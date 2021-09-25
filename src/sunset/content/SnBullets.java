@@ -25,6 +25,8 @@ public class SnBullets implements ContentList {
         //heavy-standart
         heavyCopper, heavyDense, heavyThorium, heavyTitanium, standartBlast, heavyIncendiary,
         heavystandardDense, heavystandardThorium, heavystandardIncendiary, standartBlastBig, standardForsBig,
+        //sniper
+        somesnipersurge,
         //burner
         heavyCoalFlame, heavyPyraFlame, flameidFlame,
         //liquid
@@ -218,6 +220,19 @@ public class SnBullets implements ContentList {
             lifetime = 67f;
         }};
         //endregion heavy-standart
+        //region somesniper
+        somesnipersurge = new SniperBulletType(){{
+            trailEffect = SnFx.somesnipertrail;
+            frontColor = Pal.surge;
+            trailDelay = 0.2f;
+            trailSpace = 32f;
+            range = 768f;
+            damage = 3400f;
+            pierceSizeMultiplier = 0.9f;
+            buildingDamageMultiplier = 0.4f;
+            pierceBuilding = pierce = true;
+        }};
+        //endregion somesniper
         //region big standart
         heavystandardDense = new BasicBulletType(8f, 100, "bullet") {{
             hitSize = 5;
@@ -1143,7 +1158,7 @@ public class SnBullets implements ContentList {
             pierceBuilding = true;
         }};
         //endregion wheel
-        //special
+        //region special
         empBullet = new EMPWaveBullet(5, 15, "emp-wave", 30, 120){{
             lifetime = 50;
             shootEffect = SnFx.empWave;
@@ -1174,7 +1189,6 @@ public class SnBullets implements ContentList {
             shrinkY = 0;
             knockback = 0;
         }};
-
         empBulletEvo = new EMPWaveBullet(5, 30, "emp-wave", 30, 120){{
             lifetime = 100;
             shootEffect = SnFx.empWave;
@@ -1251,7 +1265,6 @@ public class SnBullets implements ContentList {
             height = 0;
             lifetime = 0;
         }};
-        //endregion misc
         testbullet = new TorpedoBulletType(1, 1){{
             lifetime = 400f;
             trailEffect = SnFx.torpedoTrail;
@@ -1260,7 +1273,6 @@ public class SnBullets implements ContentList {
             homingPower = 0.2f;
             ammoMultiplier = 2;
         }};
-
         tempBullet1 = new LaserBoltBulletType(5, 15){{
             lifetime = 50;
             shootEffect = Fx.none;
@@ -1288,7 +1300,6 @@ public class SnBullets implements ContentList {
             knockback = 0;
             ammoMultiplier = 4;
         }};
-
         tempBullet2 = new LaserBoltBulletType(5, 30){{
             lifetime = 100;
             shootEffect = Fx.none;
@@ -1316,5 +1327,6 @@ public class SnBullets implements ContentList {
             knockback = 0;
             ammoMultiplier = 4;
         }};
+        //endregion misc
     }
 }
