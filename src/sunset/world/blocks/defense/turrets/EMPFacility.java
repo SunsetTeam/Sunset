@@ -28,6 +28,7 @@ import sunset.content.SnFx;
 import sunset.utils.Utils;
 
 public class EMPFacility extends PowerTurret{
+    public Seq<EMPPart> parts = new Seq<>();
     public boolean hasSpinners;
     public Color lightningColor;
     public float zapAngleRand, spinUp, spinDown, rangeExtention, lightningStroke = 3.5f;
@@ -78,10 +79,12 @@ public class EMPFacility extends PowerTurret{
         topRegion = Core.atlas.find(name + "-top");
     }
 
-    @Override
-    public void init(){
-        consumes.powerCond(powerUse, TurretBuild::isShooting);
-        super.init();
+    public static class EMPPart{
+        public float rotationMul, radius, xOffset, yOffset;
+
+        public EMPPart(float radius){
+            this.radius = radius;
+        }
     }
 
     public class EMPBuild extends PowerTurretBuild{
@@ -127,8 +130,11 @@ public class EMPFacility extends PowerTurret{
 
             if(targets.size > 0){
                 for(int i = 0; i < shots; i++){
+                    EMPPart part = parts.random();
                     Teamc target = targets.random();
 
+                    Tmp.v1.trns(rotation * part.rotationMul, part.xOffset, part.yOffset);
+                    Tmp.v2.setToRandomDirection().setLength(part.radius);
                     Tmp.v3.setToRandomDirection().setLength(Mathf.random(inaccuracy)); //inaccuracy
 
                     float shootX = x + Tmp.v1.x + Tmp.v2.x, shootY = y + Tmp.v1.y + Tmp.v2.y;
