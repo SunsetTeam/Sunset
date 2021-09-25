@@ -1159,65 +1159,23 @@ public class SnBullets implements ContentList {
         }};
         //endregion wheel
         //region special
-        empBullet = new EMPWaveBullet(5, 15, "emp-wave", 30, 120){{
+        empBullet = new EMPWaveBullet(5, 15, "emp-wave"){{
             lifetime = 50;
             shootEffect = SnFx.empWave;
             status = SnStatusEffects.electricalShort;
-            randomTime = true;
-            despawnEffect = Fx.none;
-            collidesAir = false;
-            collidesTiles = true;
-            reflectable = false;
-            hittable = false;
-            absorbable = false;
-            speed = 5;
-            height = 5;
-            width = 3;
-            shrinkX = -18;
-            shrinkY = 0;
             drawSize = 3;
             collidesTeam = true;
             hitSize = 36;
-            pierce = true;
-            pierceCap = 1;
-            pierceBuilding = true;
-            knockback = 0;
-            ammoMultiplier = 4;
-            shootEffect = Fx.none;
             hitEffect = SnFx.empWave;
-            smokeEffect = Fx.none;
-            shrinkY = 0;
-            knockback = 0;
         }};
-        empBulletEvo = new EMPWaveBullet(5, 30, "emp-wave", 30, 120){{
+        empBulletEvo = new EMPWaveBullet(5, 30, "emp-wave"){{
             lifetime = 100;
             shootEffect = SnFx.empWave;
             status = SnStatusEffects.electricalShort;
-            randomTime = true;
-            despawnEffect = Fx.none;
-            collidesAir = false;
-            collidesTiles = true;
-            reflectable = false;
-            hittable = false;
-            absorbable = false;
-            speed = 5;
-            height = 5;
-            width = 3;
-            shrinkX = -18;
-            shrinkY = 0;
             drawSize = 5.3f;
             collidesTeam = true;
             hitSize = 36;
-            pierce = true;
-            pierceCap = 1;
-            pierceBuilding = true;
-            knockback = 0;
-            ammoMultiplier = 4;
-            shootEffect = Fx.none;
             hitEffect = SnFx.empWave;
-            smokeEffect = Fx.none;
-            shrinkY = 0;
-            knockback = 0;
         }};
         //endregion special
         //region misc
@@ -1274,58 +1232,8 @@ public class SnBullets implements ContentList {
             ammoMultiplier = 2;
         }};
         tempBullet1 = new LaserBoltBulletType(5, 15){{
-            lifetime = 50;
-            shootEffect = Fx.none;
-            hitEffect = SnFx.empWave;
-            smokeEffect = Fx.none;
-            status = SnStatusEffects.electricalShort;
-            //randomTime = true;
-            despawnEffect = Fx.none;
-            collidesAir = false;
-            collidesTiles = true;
-            reflectable = false;
-            hittable = false;
-            absorbable = false;
-            speed = 5;
-            height = 5;
-            width = 3;
-            shrinkX = -18;
-            shrinkY = 0;
-            drawSize = 3;
-            collidesTeam = true;
-            hitSize = 36;
-            pierce = true;
-            pierceCap = 1;
-            pierceBuilding = true;
-            knockback = 0;
-            ammoMultiplier = 4;
         }};
         tempBullet2 = new LaserBoltBulletType(5, 30){{
-            lifetime = 100;
-            shootEffect = Fx.none;
-            hitEffect = SnFx.empWave;
-            smokeEffect = Fx.none;
-            status = SnStatusEffects.electricalShort;
-            //randomTime = true;
-            despawnEffect = Fx.none;
-            collidesAir = false;
-            collidesTiles = true;
-            reflectable = false;
-            hittable = false;
-            absorbable = false;
-            speed = 5;
-            height = 5;
-            width = 3;
-            shrinkX = -18;
-            shrinkY = 0;
-            drawSize = 5.3f;
-            collidesTeam = true;
-            hitSize = 36;
-            pierce = true;
-            pierceCap = 1;
-            pierceBuilding = true;
-            knockback = 0;
-            ammoMultiplier = 4;
         }};
         //endregion misc
     }

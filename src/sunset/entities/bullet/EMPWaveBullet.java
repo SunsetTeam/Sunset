@@ -3,6 +3,7 @@ package sunset.entities.bullet;
 import arc.graphics.Color;
 import arc.graphics.g2d.Draw;
 import arc.graphics.g2d.Lines;
+import mindustry.content.Fx;
 import mindustry.entities.bullet.LaserBoltBulletType;
 import mindustry.gen.Bullet;
 
@@ -10,14 +11,14 @@ import java.util.Random;
 
 /** Wave bullet with optional random status duration. */
 public class EMPWaveBullet extends LaserBoltBulletType{
-    public boolean randomTime = false;
+    public boolean randomTime;
     public int min;
     public int max;
 
     public EMPWaveBullet(float speed, float damage, String bulletSprite, int min, int max){
         super(speed, damage);
         this.sprite = bulletSprite;
-        //damage = 0;
+        collidesAir = false;
         collidesTiles = true;
         reflectable = false;
         hittable = false;
@@ -31,10 +32,15 @@ public class EMPWaveBullet extends LaserBoltBulletType{
         collidesTeam = true;
         hitSize = 36;
         pierce = true;
+        pierceBuilding = true;
         pierceCap = 1;
         lifetime = 50;
         knockback = 0;
         incendChance = 0;
+        despawnEffect = Fx.none;
+        shootEffect = Fx.none;
+        smokeEffect = Fx.none;
+        randomTime = false;
     }
 
     public EMPWaveBullet(float speed, float damage, String bulletSprite){
