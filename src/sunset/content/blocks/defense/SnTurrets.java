@@ -599,7 +599,7 @@ public class SnTurrets implements ContentList {
             chargeTime = 180;
             shootType = SnBullets.empBullet;
             range = 180;
-            shots = 5;
+            shots = 10;
             zaps = 10;
             zapAngleRand = 10f;
             parts.add(new EMPPart(1.2f));
@@ -614,7 +614,7 @@ public class SnTurrets implements ContentList {
             chargeTime = 300;
             shootType = SnBullets.empBulletEvo;
             range = 240;
-            shots = 5;
+            shots = 20;
             zaps = 20;
             zapAngleRand = 15f;
             parts.add(new EMPPart(5));

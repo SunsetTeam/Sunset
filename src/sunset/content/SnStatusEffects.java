@@ -82,6 +82,7 @@ public class SnStatusEffects implements ContentList{
        };
 
        electricalShort = new StatusEffect("electric-short"){{
+           effectChance = 1;
            speedMultiplier = 0;
            disarm = true;
            color = Color.valueOf("0AFEFF");

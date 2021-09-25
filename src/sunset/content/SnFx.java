@@ -549,20 +549,19 @@ public class SnFx{
         Angles.randLenVectors(e.id, 4, e.finpow() * 20, e.rotation, 360, floatc21);
     }),
 
-    empHit = new Effect(75, e -> {
+    empHit = new Effect(35, e -> {
         randLenVectors(e.id, 6, 4f + e.fin() * 8f, (x, y) -> {
-            Draw.color(Color.valueOf("7FFFD4"), Color.valueOf("7FFFD4"), e.fin());
-            float circleRad = 2f + e.fin() * 15f;
+            Draw.color(Color.valueOf("7FFFD4"), Color.valueOf("32D0DC"), e.fin());
+            float circleRad = 2f + e.fin() * 10f;
             Lines.circle(e.x, e.y, circleRad);
         });
     }),
 
     empShoot = new Effect(60, e -> {
         randLenVectors(e.id, 35, 7f + e.fin() * 9, (x, y) -> {
-            Draw.color(Color.valueOf("7FFFD4"), Color.valueOf("7FFFD4"), e.fin());
-            Lines.stroke(Interp.bounce.apply(0, 0, e.fin()));
-            float rad = Interp.bounce.apply(35, 0, e.fin());
-            Lines.poly(e.x, e.y, -1 <= 0 ? Lines.circleVertices(rad) : -1, rad, e.rotation);
+            Draw.color(Color.valueOf("7FFFD4"), Color.valueOf("32D0DC"), e.fin());
+            float circleRad = 2f + e.fin() * 10f;
+            Lines.spikes(e.x, e.y, circleRad, 4.9f, 10, 15);
         });
     }),
 
