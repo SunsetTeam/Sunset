@@ -559,10 +559,11 @@ public class SnFx{
 
     empShoot = new Effect(60, e -> {
         randLenVectors(e.id, 35, 7f + e.fin() * 9, (x, y) -> {
-            Draw.color(Color.valueOf("7FFFD4"), Color.valueOf("32D0DC"), e.fin());
-            //float circleRad = 2f + e.fin() * 10f;
-            //Lines.spikes(e.x, e.y, 16, 4.9f, 10);
-            Lines.swirl(e.x, e.y, 16, 4.9f, 10); //TODO test this line
+            Draw.color(Color.valueOf("7FFFD4"), e.fin());
+            float circleRad = 2f + e.fin() * 10f;
+            Lines.spikes(e.x, e.y, circleRad, 4.9f, 10);
+            Draw.color(Color.valueOf("32D0DC"), e.fin());
+            Lines.swirl(e.x, e.y, circleRad, 4.9f, 10);
         });
     }),
 
