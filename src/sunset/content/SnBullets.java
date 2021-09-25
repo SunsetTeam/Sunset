@@ -905,7 +905,7 @@ public class SnBullets implements ContentList {
             weaveScale = 5f;
             weaveMag = 2f;
         }};
-        HelicopterBomb = new BasicBulletType() {{
+        HelicopterBomb = new CopterRocketBulletType(2f, 5) {{
             sprite = "sunset-copter-bomb";
             width = height = 70 / 2f;
 
@@ -929,7 +929,6 @@ public class SnBullets implements ContentList {
 
             shrinkX = shrinkY = 0.55f;
 
-            speed = 2f;
             collides = true;
 
             splashDamage = 140f;
@@ -948,7 +947,7 @@ public class SnBullets implements ContentList {
             lightningDamage = 18;
 
         }};
-        HelicopterRocket = new MissileBulletType(5.0f, 50) {{
+        HelicopterRocket = new CopterRocketBulletType(5.0f, 50) {{
             sprite = "sunset-guardian-rocket";
             width = 13f;
             height = 20f;
@@ -986,7 +985,7 @@ public class SnBullets implements ContentList {
             fragBullets = 1;
             fragCone = 0.0001f;
         }};
-        bigHelicopterRocket = new MissileBulletType(6.3f, 70) {{
+        bigHelicopterRocket = new CopterRocketBulletType(6.3f, 70) {{
             sprite = "sunset-guardian-rocket";
             width = 13f;
             height = 23f;
