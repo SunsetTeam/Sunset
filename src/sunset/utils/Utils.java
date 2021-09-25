@@ -4,11 +4,18 @@ import arc.func.Boolf;
 import arc.func.Cons;
 import arc.func.Floatc2;
 import arc.func.Func;
+import arc.math.Mathf;
 import arc.math.Rand;
 import arc.math.geom.Vec2;
+import arc.struct.IntSet;
+import arc.struct.ObjectSet;
+import arc.struct.Seq;
 import arc.util.Log;
+import arc.util.Strings;
+import arc.util.Structs;
 import mindustry.Vars;
 import mindustry.ai.Astar;
+import mindustry.content.Blocks;
 import mindustry.content.StatusEffects;
 import mindustry.core.World;
 import mindustry.ctype.ContentType;
@@ -21,9 +28,13 @@ import mindustry.type.StatusEffect;
 import mindustry.type.UnitType;
 import mindustry.ui.fragments.MenuFragment;
 import mindustry.world.Tile;
+import mindustry.world.Tiles;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+
+import static mindustry.Vars.tilesize;
+import static mindustry.Vars.world;
 
 /** Набор различных static утилит. */
 public class Utils {
@@ -108,5 +119,45 @@ public class Utils {
                 return cost(tile);
             }
         };
+    }
+
+    /** for EMP */
+    public static void trueEachBlock(float wx, float wy, float range, Cons<Building> cons){
+        collidedBlocks.clear();
+        int tx = World.toTile(wx);
+        int ty = World.toTile(wy);
+
+        int tileRange = Mathf.floorPositive(range / tilesize);
+
+        for(int x = -tileRange + tx; x <= tileRange + tx; x++){
+            for(int y = -tileRange + ty; y <= tileRange + ty; y++){
+                if(Mathf.within(x * tilesize, y * tilesize, wx, wy, range)){
+                    Building other = world.build(x, y);
+                    if(other != null && !collidedBlocks.contains(other.pos())){
+                        cons.get(other);
+                        collidedBlocks.add(other.pos());
+                    }
+                }
+            }
+        }
+    }
+
+    /** for EMP */
+    public static Seq<Teamc> allNearbyEnemies(Team team, float x, float y, float radius){
+        Seq<Teamc> targets = new Seq<>();
+
+        Units.nearbyEnemies(team, x - radius, y - radius, radius * 2f, radius * 2f, unit -> {
+            if(Mathf.within(x, y, unit.x, unit.y, radius) && !unit.dead){
+                targets.add(unit);
+            }
+        });
+
+        trueEachBlock(x, y, radius, build -> {
+            if(build.team != team && !build.dead && build.block != null){
+                targets.add(build);
+            }
+        });
+
+        return targets;
     }
 }
