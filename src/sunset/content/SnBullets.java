@@ -1163,7 +1163,7 @@ public class SnBullets implements ContentList {
             //speed = 5;
             damage = 150;
             lifetime = 50;
-            shootEffect = SnFx.empShoot;
+            shootEffect = SnFx.empShootSmall;
             status = SnStatusEffects.electricalShort;
             drawSize = 3;
             collidesTeam = true;
@@ -1174,7 +1174,7 @@ public class SnBullets implements ContentList {
             //speed = 5;
             damage = 300;
             lifetime = 100;
-            shootEffect = SnFx.empShoot;
+            shootEffect = SnFx.empShootBig;
             status = SnStatusEffects.electricalShort;
             drawSize = 5.3f;
             collidesTeam = true;
