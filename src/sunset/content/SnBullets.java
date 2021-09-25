@@ -920,7 +920,7 @@ public class SnBullets implements ContentList {
             weaveScale = 5f;
             weaveMag = 2f;
         }};
-        HelicopterBomb = new CopterRocketBulletType(2f, 5) {{
+        HelicopterBomb = new BasicBulletType(2f, 5) {{
             sprite = "sunset-copter-bomb";
             width = height = 70 / 2f;
 
