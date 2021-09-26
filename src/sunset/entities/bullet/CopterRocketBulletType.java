@@ -10,7 +10,7 @@ public class CopterRocketBulletType extends MissileBulletType{
     }
     @Override
     public void draw(Bullet b){
-        Draw.z(Layer.plans);
+        Draw.z(Layer.legUnit);
         super.draw(b);
     }
 
