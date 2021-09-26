@@ -469,6 +469,59 @@ public class SnUnitTypes implements ContentList {
             }});
         }};
         //endregion air-support (buffers)
+        
+        //region berserk
+        mirage = new BerserkUnitType("mirage"){{
+            health = 230;
+            speed = 1.8f;
+            rotateSpeed = 3f;
+            visualElevation = 0.2f;
+            drag = 0.1f;
+            armor = 4f;
+            hitSize = 11f;
+            allowLegStep = true;
+            hovering = false;
+            groundLayer = Layer.legUnit - 1f;
+            legCount = 4;
+            legLength = 7f;
+            legTrns = 0.3f;
+            legMoveSpace = 1.2f;
+
+            weapons.add(new Weapon(){{
+                reload = 30f;
+                inaccuracy = 2f;
+                rotate = true;
+                mirror = true;
+                bullet = new BerserkLaserBulletType(){{
+                    damage = 5;
+                    maxLaserLength = 90f;
+                    continuous = true;
+                    hitEffect = Fx.none;
+                    laserHitEffect = SnFx.berserkLaserHitSmall;
+                    pierce = true;
+                    hittable = false;
+                    absorbable = false;
+                    keepVelocity = false;
+                    speed = 0.001f;
+                    width = 0.5f;
+                    lifetime = 240f;
+                }};
+            }});
+
+            stages.add(
+                new BerserkStage(){{
+                    healthMaximum = 0.4f;
+                    bulletWidthMultiplier = 2f;
+                    effect = StatusEffects.overclock;
+                }},
+                new BerserkStage(){{
+                    healthMaximum = 0.15f;
+                    bulletWidthMultiplier = 3f;
+                    effect = StatusEffects.burning;
+                }}
+            );
+        }};
+        //endregion berserk
 
         //region wheel
         wheel1 = new WheelUnitType("wheel1"){{
@@ -613,58 +666,6 @@ public class SnUnitTypes implements ContentList {
             }});
         }};
         //endregion freezing
-        //region berserk
-        mirage = new BerserkUnitType("mirage"){{
-            health = 230;
-            speed = 1.8f;
-            rotateSpeed = 3f;
-            visualElevation = 0.2f;
-            drag = 0.1f;
-            hitSize = 11f;
-            allowLegStep = true;
-            hovering = false;
-            groundLayer = Layer.legUnit - 1f;
-            legCount = 4;
-            legLength = 7f;
-            legTrns = 0.4f;
-            legMoveSpace = 1.4f;
-
-            weapons.add(new Weapon(){{
-                reload = 30f;
-                inaccuracy = 2f;
-                rotate = true;
-                mirror = true;
-                bullet = new BerserkLaserBulletType(){{
-                    damage = 5;
-                    maxLaserLength = 90f;
-                    continuous = true;
-                    hitEffect = Fx.none;
-                    laserHitEffect = SnFx.berserkLaserHitSmall;
-                    pierce = true;
-                    hittable = false;
-                    absorbable = false;
-                    keepVelocity = false;
-                    speed = 0.001f;
-                    width = 0.5f;
-                    lifetime = 240f;
-                }};
-            }});
-
-            stages.add(
-                new BerserkStage(){{
-                    healthMaximum = 0.4f;
-                    bulletWidthMultiplier = 2f;
-                    effect = StatusEffects.overclock;
-                }},
-                new BerserkStage(){{
-                    healthMaximum = 0.15f;
-                    bulletWidthMultiplier = 3f;
-                    effect = StatusEffects.burning;
-                }}
-            );
-        }};
-        //endregion berserk
-
         router = new UnitTypeExt("router") {{
             health = 2000000;
             speed = 2.85f;
