@@ -27,7 +27,7 @@ import static mindustry.Vars.headless;
 public class Sunset extends Mod {
 
     private static final Seq<Music> prevAmbient = new Seq<>(), prevDark = new Seq<>();
-    private boolean lastMapEso;
+    private boolean lastMapSn;
     private final ContentList[] SnContent = {
             new SnStatusEffects(),
             new SnItems(),
@@ -47,13 +47,13 @@ public class Sunset extends Mod {
 
     public Sunset(){
         if(!headless){
-            LoadedMod eso = mods.locateMod("sunset");
+            LoadedMod sn = mods.locateMod("sunset");
 
             Events.on(WorldLoadEvent.class, e -> {
-                boolean isSn = state.map.mod != null && state.map.mod == eso;
+                boolean isSn = state.map.mod != null && state.map.mod == sn;
 
-                if(isSn != lastMapEso){
-                    lastMapEso = !lastMapEso;
+                if(isSn != lastMapSn){
+                    lastMapSn = !lastMapSn;
                     if(isSn){
                         Music(control.sound.ambientMusic, SnMusic.snAmbientMusic, prevAmbient);
                         Music(control.sound.darkMusic, SnMusic.snDarkMusic, prevDark);
