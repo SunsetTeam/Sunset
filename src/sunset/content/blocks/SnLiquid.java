@@ -50,5 +50,13 @@ public class SnLiquid implements ContentList {
             hasPower = true;
             size = 5;
         }};
+        
+                liquidTank = new LiquidRouter("liquid-tank"){{
+            requirements(Category.liquid, with(Items.titanium, 110, Items.metaglass, 90, Items.thorium, 75));
+            size = 4;
+            liquidCapacity = 3100f;
+            pumpAmount = 0.01f; //ебу мож удалить эту строчку.хммммммммммммммм
+            health = 1270;
+        }};
     }
 }
