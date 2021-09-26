@@ -7,10 +7,11 @@ import mindustry.graphics.Layer;
 
 public class CopterRocketBulletType extends MissileBulletType{
     public CopterRocketBulletType(float speed, float damage){
+        super(speed, damage);
     }
     @Override
     public void draw(Bullet b){
-        Draw.z(Layer.legUnit);
+        Draw.z(Layer.plans);
         super.draw(b);
     }
 

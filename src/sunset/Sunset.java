@@ -16,9 +16,18 @@ import sunset.ui.ContentInfoDialogExt;
 import sunset.utils.Utils;
 import sunset.world.GeyserLogic;
 import sunset.world.MissileLogic;
+import arc.audio.*;
+import arc.struct.*;
+import mindustry.game.EventType.*;
+import mindustry.mod.Mods.*;
+
+import static mindustry.Vars.*;
 import static mindustry.Vars.headless;
 
 public class Sunset extends Mod {
+
+    private static final Seq<Music> prevAmbient = new Seq<>(), prevDark = new Seq<>();
+    private boolean lastMapEso;
     private final ContentList[] SnContent = {
             new SnStatusEffects(),
             new SnItems(),
@@ -35,6 +44,27 @@ public class Sunset extends Mod {
             new SnPlanets(),
             new SnSectorPresets()
     };
+
+    public Sunset(){
+        if(!headless){
+            LoadedMod eso = mods.locateMod("sunset");
+
+            Events.on(WorldLoadEvent.class, e -> {
+                boolean isSn = state.map.mod != null && state.map.mod == eso;
+
+                if(isSn != lastMapEso){
+                    lastMapEso = !lastMapEso;
+                    if(isSn){
+                        Music(control.sound.ambientMusic, SnMusic.snAmbientMusic, prevAmbient);
+                        Music(control.sound.darkMusic, SnMusic.snDarkMusic, prevDark);
+                    }else{
+                        Music(control.sound.ambientMusic, prevAmbient, null);
+                        Music(control.sound.darkMusic, prevDark, null);
+                    }
+                }
+            });
+        }
+    }
 
     @Override
     public void init() {
@@ -54,9 +84,19 @@ public class Sunset extends Mod {
             });
         });*/
     }
+
+    private void Music(Seq<Music> target, Seq<Music> replacement, Seq<Music> save){
+        if(save != null){
+            save.clear();
+            save.addAll(target);
+        }
+        target.clear();
+        target.addAll(replacement);
+    }
     
     @Override
     public void loadContent() {
+        new SnMusic().load();
         for(ContentList list : SnContent) {
             list.load();
             Log.info("@: Loaded content list: @", getClass().getSimpleName(), list.getClass().getSimpleName());
