@@ -6,6 +6,7 @@ import mindustry.game.Team;
 import mindustry.type.Category;
 import mindustry.world.Block;
 import mindustry.world.Tile;
+import mindustry.world.blocks.liquid.*;
 import mindustry.world.blocks.liquid.Conduit;
 import mindustry.world.blocks.production.Pump;
 import sunset.content.SnItems;
@@ -18,7 +19,8 @@ public class SnLiquid implements ContentList {
             naturiteConduit,
 
             //storage
-
+            advliquidTank, 
+    
             //extraction
             naturitePump;
 
@@ -40,7 +42,14 @@ public class SnLiquid implements ContentList {
         };
 
         //storage
-
+        advliquidTank = new LiquidRouter("adv-liquid-tank"){{
+            requirements(Category.liquid, with(Items.titanium, 110, Items.metaglass, 90, Items.thorium, 75));
+            size = 4;
+            liquidCapacity = 3100f;
+            pumpAmount = 0.01f; //ебу мож удалить эту строчку.хммммммммммммммм
+            health = 1270;
+        }};
+        
         //extraction
         naturitePump = new Pump("naturite-pump") {{
             requirements(Category.liquid, with(Items.copper, 120, Items.metaglass, 110, Items.silicon, 40, Items.titanium, 70, SnItems.naturite, 60));
@@ -49,14 +58,6 @@ public class SnLiquid implements ContentList {
             liquidCapacity = 100f;
             hasPower = true;
             size = 5;
-        }};
-        
-                liquidTank = new LiquidRouter("liquid-tank"){{
-            requirements(Category.liquid, with(Items.titanium, 110, Items.metaglass, 90, Items.thorium, 75));
-            size = 4;
-            liquidCapacity = 3100f;
-            pumpAmount = 0.01f; //ебу мож удалить эту строчку.хммммммммммммммм
-            health = 1270;
         }};
     }
 }
