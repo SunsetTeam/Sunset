@@ -34,7 +34,7 @@ public class SnItems implements ContentList{
             explosiveness = 0.7f;
         }};
         
-        planatrium = new Item("planatrium", Color.valueOf("bc65d4ff")){{
+        planatrium = new Item("planatrium", Color.valueOf("D57CED")){{
             cost = 5f;
             hardness = 4;
             explosiveness = 0.5f;
