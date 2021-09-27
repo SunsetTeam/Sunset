@@ -438,7 +438,7 @@ public class SnTurrets implements ContentList {
                 Items.graphite, SnBullets.heavystandardDense,
                 Items.pyratite, SnBullets.heavystandardIncendiary,
                 Items.thorium, SnBullets.heavystandardThorium,
-                Items.blastCompound, SnBullets.standartBlastBig,
+                Items.blastCompound, SnBullets.standartReneubiteBig,
                 SnItems.fors, SnBullets.standardForsBig
             );
             reloadTime = 4f;

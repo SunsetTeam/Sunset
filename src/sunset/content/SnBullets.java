@@ -23,8 +23,7 @@ public class SnBullets implements ContentList {
         //artillery
         artilleryForsMine, artilleryFors, artilleryBlastMine, artilleryBlast,
         //heavy-standart
-        heavyCopper, heavyDense, heavyThorium, heavyTitanium, standartBlast, heavyIncendiary,
-        heavystandardDense, heavystandardThorium, heavystandardIncendiary, standartBlastBig, standardForsBig,
+        heavystandardDense, heavystandardThorium, heavystandardIncendiary, standartReneubiteBig, standardForsBig,
         //sniper
         somesnipersurge,
         //burner
@@ -168,58 +167,6 @@ public class SnBullets implements ContentList {
             frontColor = SnPal.BlastBulletBack;
         }};
         //endregion artillery
-        //region heavy-standart
-        heavyCopper = new BasicBulletType(2.7f, 14) {{
-            width = 9f;
-            height = 11f;
-            lifetime = 67f;
-            shootEffect = Fx.shootSmall;
-            smokeEffect = Fx.shootSmallSmoke;
-            ammoMultiplier = 2;
-        }};
-        heavyDense = new BasicBulletType(3.9f, 21) {{
-            width = 11f;
-            height = 14f;
-            reloadMultiplier = 0.6f;
-            ammoMultiplier = 3;
-            lifetime = 67f;
-        }};
-        heavyThorium = new BasicBulletType(4.3f, 34, "bullet") {{
-            width = 12f;
-            height = 15f;
-            shootEffect = Fx.shootBig;
-            smokeEffect = Fx.shootBigSmoke;
-            ammoMultiplier = 3;
-            lifetime = 67f;
-        }};
-        heavyTitanium = new BasicBulletType(3.4f, 16, "bullet") {{
-            width = 9f;
-            height = 11f;
-            reloadMultiplier = 1.5f;
-            ammoMultiplier = 5;
-            lifetime = 67f;
-        }};
-        standartBlast = new BasicBulletType(3.5f, 15, "bullet") {{
-            width = 12f;
-            height = 14f;
-            frontColor = Pal.lightishOrange;
-            backColor = Pal.lightOrange;
-            status = StatusEffects.burning;
-            makeFire = true;
-            inaccuracy = 3f;
-            lifetime = 67f;
-        }};
-        heavyIncendiary = new BasicBulletType(3.5f, 15, "bullet") {{
-            width = 12f;
-            height = 14f;
-            frontColor = Pal.lightishOrange;
-            backColor = Pal.lightOrange;
-            status = StatusEffects.burning;
-            makeFire = true;
-            inaccuracy = 3f;
-            lifetime = 67f;
-        }};
-        //endregion heavy-standart
         //region somesniper
         somesnipersurge = new SniperBulletType(){{
             trailEffect = SnFx.somesnipertrail;
@@ -262,7 +209,7 @@ public class SnBullets implements ContentList {
             pierceBuilding = true;
             knockback = 0.9f;
         }};
-        standartBlastBig = new BasicBulletType(9f, 110, "bullet") {{
+        standartReneubiteBig = new BasicBulletType(9f, 140, "bullet") {{
             hitSize = 5;
             width = 19f;
             height = 24f;

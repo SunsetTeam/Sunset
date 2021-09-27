@@ -7,7 +7,7 @@ import mindustry.type.*;
 public class SnItems implements ContentList{
     public static Item
     
-    fors, naturite, nobium, newitmem, planatrium, enojie, flameid, coldent;
+    fors, naturite, nobium, reneubite, planatrium, enojie, flameid, coldent;
 
     @Override
     public void load(){
@@ -28,7 +28,7 @@ public class SnItems implements ContentList{
             radioactivity = 0.1f;
         }};
 
-        newitmem = new Item("new-item", Color.valueOf("ffffff")){{
+        reneubite = new Item("reneubite", Color.valueOf("ffffff")){{
             cost = 4f;
             flammability = 0.8f;
             explosiveness = 0.7f;
