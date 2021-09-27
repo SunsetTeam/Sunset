@@ -559,21 +559,23 @@ public class SnFx{
 
     empShootSmall = new Effect(60, e -> {
         randLenVectors(e.id, 35, 7f + e.fin() * 9, (x, y) -> {
-            Draw.color(Color.valueOf("7FFFD4"), e.fin());
-            float circleRad = 2f + e.fin() * 10f;
-            Lines.spikes(e.x, e.y, circleRad, 4.9f, 10);
-            Draw.color(Color.valueOf("32D0DC"), e.fin());
-            Lines.swirl(e.x, e.y, circleRad, 2.1f, 10);
+            Interp interp = Interp.linear;
+            float ifin = e.fin(Interp.linear);
+            Draw.color(SnPal.emp1, SnPal.emp2, ifin);
+            Lines.stroke(interp.apply(2, 50, e.fin()));
+            float rad = interp.apply(0, 100, e.fin());
+            Lines.poly(e.x, e.y, -1 <= 0 ? Lines.circleVertices(rad) : -1, rad, 0 + e.rotation);
         });
     }),
 
     empShootBig = new Effect(30, e -> {
         randLenVectors(e.id, 35, 7f + e.fin() * 9, (x, y) -> {
-            Draw.color(Color.valueOf("7FFFD4"), e.fin());
-            float circleRad = 2f + e.fin() * 10f;
-            Lines.circle(e.x, e.y, circleRad);
-            Draw.color(Color.valueOf("32D0DC"), e.fin());
-            Lines.spikes(e.x, e.y, circleRad, 4.9f, 10);
+            Interp interp = Interp.linear;
+            float ifin = e.fin(Interp.linear);
+            Draw.color(SnPal.emp1, SnPal.emp2, ifin);
+            Lines.stroke(interp.apply(2, 100, e.fin()));
+            float rad = interp.apply(0, 100, e.fin());
+            Lines.poly(e.x, e.y, -1 <= 0 ? Lines.circleVertices(rad) : -1, rad, 0 + e.rotation);
         });
     }),
 

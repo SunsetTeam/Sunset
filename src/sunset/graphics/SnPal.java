@@ -38,7 +38,12 @@ public class SnPal{
     PoisonBulletBack = Color.valueOf("D6E7A5"),
     PoisonBullet = Color.valueOf("F2FCD2"),
 
+    //emp
+    emp1 = Color.valueOf("7FFFD4"),
+    emp2 = Color.valueOf("32D0DC"),
+
     //other
     chainLaser = Pal.surge;
+
     
 }
