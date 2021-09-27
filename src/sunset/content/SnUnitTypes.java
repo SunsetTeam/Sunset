@@ -622,7 +622,7 @@ public class SnUnitTypes implements ContentList {
 
         //region delivery
         courier = new UnitTypeExt("courier"){{
-            speed = 4.3f;
+            speed = 3.9f;
             flying = true;
             itemCapacity = 100;
             health = 50;

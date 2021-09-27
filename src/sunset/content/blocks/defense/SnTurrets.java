@@ -445,7 +445,7 @@ public class SnTurrets implements ContentList {
             coolantMultiplier = 0.5f;
             restitution = 0.15f;
             ammoUseEffect = Fx.casing3;
-            range = 350f;
+            range = 400f;
             inaccuracy = 3f;
             recoilAmount = 2.7f;
             spread = 16f;

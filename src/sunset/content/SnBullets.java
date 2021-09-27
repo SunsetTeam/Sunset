@@ -234,13 +234,13 @@ public class SnBullets implements ContentList {
         }};
         //endregion somesniper
         //region big standart
-        heavystandardDense = new BasicBulletType(8f, 100, "bullet") {{
+        heavystandardDense = new BasicBulletType(8f, 105, "bullet") {{
             hitSize = 5;
             width = 19f;
             height = 24f;
             shootEffect = Fx.shootBig;
         }};
-        heavystandardThorium = new BasicBulletType(9.4f, 170, "bullet") {{
+        heavystandardThorium = new BasicBulletType(9.4f, 180, "bullet") {{
             hitSize = 7;
             width = 20f;
             height = 27f;
@@ -249,7 +249,7 @@ public class SnBullets implements ContentList {
             pierceBuilding = true;
             knockback = 0.7f;
         }};
-        heavystandardIncendiary = new BasicBulletType(7f, 110, "bullet") {{
+        heavystandardIncendiary = new BasicBulletType(7f, 115, "bullet") {{
             hitSize = 7;
             width = 19f;
             height = 24f;
@@ -262,7 +262,7 @@ public class SnBullets implements ContentList {
             pierceBuilding = true;
             knockback = 0.9f;
         }};
-        standartBlastBig = new BasicBulletType(9f, 105, "bullet") {{
+        standartBlastBig = new BasicBulletType(9f, 110, "bullet") {{
             hitSize = 5;
             width = 19f;
             height = 24f;
@@ -275,7 +275,7 @@ public class SnBullets implements ContentList {
             pierceBuilding = true;
             knockback = 0.7f;
         }};
-        standardForsBig = new BasicBulletType(7.8f, 150, "bullet") {{
+        standardForsBig = new BasicBulletType(7.8f, 155, "bullet") {{
             hitSize = 7;
             width = 19f;
             height = 24f;
