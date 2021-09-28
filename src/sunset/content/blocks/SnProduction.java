@@ -160,15 +160,16 @@ public class SnProduction implements ContentList {
 //          updateEffect = SnFx.;
             craftTime = 39f;
             size = 3;
+            itemCapacity = 15;
+            liquidCapacity = 30f;
             hasPower = true;
-            hasLiquids = false;
-            drawer = new DrawModRotator();
+            hasLiquids = true;
             ambientSound = Sounds.grinding;
             ambientSoundVolume = 0.025f;
 
             consumes.items(with(Items.blastCompound, 3, Items.titanium, 2));
             consumes.liquid(SnLiquids.burheyna, 0.4f);
-            consumes.power(2.5f);
+            consumes.power(3.5f);
         }};
 
         purifier = new GenericCrafter("purifier") {{
@@ -178,6 +179,7 @@ public class SnProduction implements ContentList {
             craftEffect = Fx.pulverize;
             updateEffect = Fx.pulverizeSmall;
             craftTime = 25f;
+            itemCapacity = 20;
             size = 3;
             hasPower = true;
             hasLiquids = false;
