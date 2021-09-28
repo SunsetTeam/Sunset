@@ -471,9 +471,9 @@ public class SnUnitTypes implements ContentList {
         //endregion air-support (buffers)
         
         //region berserk
-        mirage = new BerserkUnitType("mirage"){{
+ mirage = new BerserkUnitType("mirage"){{
             health = 230;
-            speed = 1.8f;
+            speed = 1f;
             rotateSpeed = 3f;
             visualElevation = 0.2f;
             drag = 0.1f;
@@ -487,27 +487,16 @@ public class SnUnitTypes implements ContentList {
             legTrns = 0.3f;
             legMoveSpace = 1.2f;
 
-            weapons.add(new Weapon(){{
+            weapons.add(new Weapon("mirage-gun"){{
                 reload = 30f;
+                x = 5;
+                range = 100;
+                y = -0.3f;
                 inaccuracy = 2f;
-                rotate = true;
+                rotate = false;
                 mirror = true;
-                bullet = new BerserkLaserBulletType(){{
-                    damage = 5;
-                    maxLaserLength = 90f;
-                    continuous = true;
-                    hitEffect = Fx.none;
-                    laserHitEffect = SnFx.berserkLaserHitSmall;
-                    pierce = true;
-                    hittable = false;
-                    absorbable = false;
-                    keepVelocity = false;
-                    speed = 0.001f;
-                    width = 0.5f;
-                    lifetime = 240f;
-                }};
+                bullet = SnBullets.mirageGunBullet;
             }});
-
             stages.add(
                 new BerserkStage(){{
                     healthMaximum = 0.4f;
@@ -519,6 +508,31 @@ public class SnUnitTypes implements ContentList {
                     bulletWidthMultiplier = 3f;
                     effect = StatusEffects.burning;
                 }}
+            );
+        }};
+        vision = new BerserkUnitType("vision"){{
+            health = 450;
+            speed = 0.8f;
+            rotateSpeed = 2f;
+            drag = 0.125f;
+            allowLegStep = true;
+            hovering = false;
+            groundLayer = Layer.legUnit - 1;
+            legCount = 4;
+            legLength = 8;
+            legTrns = 0.3f;
+            legMoveSpace = 1.2f;
+
+            weapons.add(
+                    new Weapon("vision-gun"){{
+                        reload = 30f;
+                        x = 6;
+                        y = -0.3f;
+                        alternate = true;
+                        mirror = true;
+                        inaccuracy = 2f;
+                        bullet = SnBullets.mirageGunBullet;
+                    }}
             );
         }};
         //endregion berserk
