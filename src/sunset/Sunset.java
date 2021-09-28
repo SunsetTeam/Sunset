@@ -30,6 +30,7 @@ public class Sunset extends Mod {
     private boolean lastMapSn;
     private final ContentList[] SnContent = {
             new SnStatusEffects(),
+            new SnLiquids(),
             new SnItems(),
             new SnBullets(),
             new SnUnitTypes(),
@@ -42,7 +43,7 @@ public class Sunset extends Mod {
             new SnProduction(),
             new SnWeathers(),
             new SnPlanets(),
-            new SnLiquidBlocks (),
+            new SnLiquidBlocks(),
             new SnSectorPresets()
     };
 
