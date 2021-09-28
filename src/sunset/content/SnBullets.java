@@ -16,41 +16,41 @@ import sunset.type.StackableStatusEffect;
 
 public class SnBullets implements ContentList {
     public static BulletType
-        //sap
-        leadSap, sporeSap, planatriumSap,
-        //heavy-sap
-        heavyplanatriumSap,
-        //artillery
-        artilleryForsMine, artilleryFors, artilleryBlastMine, artilleryBlast,
-        //heavy-standart
-        heavystandardDense, heavystandardThorium, heavystandardIncendiary, standartReneubiteBig, standardForsBig,
-        //sniper
-        somesnipersurge,
-        //burner
-        heavyCoalFlame, heavyPyraFlame, flameidFlame,
-        //liquid
-        typhoonWaterShot, typhoonCryoShot, typhoonSlagShot, typhoonOilShot,
-        floodWaterShot, floodCryoShot, floodSlagShot, floodOilShot,
-        //blast
-        lightBlastGraphite, lightBlastSilicon,
-        bigBlastPlastanium, bigBlastBlast, bigBlastPyratite,
-        maxBlastPlastanium, maxBlastBlast, maxBlastSurge, maxBlastPlastaniumFrag,
-        //poison
-        sporePodPoisonBullet, naturitePoisonBullet,
-        SporePodPoisonFrag, heavySporePodPoison, NaturitePoisonFrag, heavyNaturitePoison, NobiumPoisonFrag, heavyNobiumPoison,
-        bigSporePodPoisonFrag, bigSporePodPoison, bigNaturitePoisonFrag, bigNaturitePoison, bigNobiumPoisonFrag, bigNobiumPoison, bigPlastaniumPoisonFrag, bigPlastaniumPoison,
-        //units
-        BasicHelicopterGun, HelicopterShootgun, HelicopterMissile, HelicopterBomb, HelicopterRocket, bigHelicopterGun, laserHelicopterFrag, largeHelicopterGun, bigHelicopterRocket, HelicopterMissiles,
-        cometWaterShot, starStunBullet, galaxyKnockbackBullet,
-        wheel1bullet, wheel2shotgun, wheel3burst, wheel4shotgun, wheel4artillery, wheel5flame, wheel5bullet,
-        //misc
-        emptyBullet, overheatBullet,
-        //special
-        empBullet, empBulletEvo,
-        //test&temp
-        testbullet, tempBullet1, tempBullet2;
-        //exoticBullets (new) i will make it later... i must make more bulets (soulBullet, iceSpike, and more)
-        // spiralPllastanium, spiralSurge, SpiralFors, SpiralThorium, SpiralSmall;
+            //sap
+            leadSap, sporeSap, planatriumSap,
+    //heavy-sap
+    heavyplanatriumSap,
+    //artillery
+    artilleryForsMine, artilleryFors, artilleryBlastMine, artilleryBlast,
+    //heavy-standart
+    heavystandardDense, heavystandardThorium, heavystandardIncendiary, standartReneubiteBig, standardForsBig,
+    //sniper
+    somesnipersurge,
+    //burner
+    heavyCoalFlame, heavyPyraFlame, flameidFlame,
+    //liquid
+    typhoonWaterShot, typhoonCryoShot, typhoonSlagShot, typhoonOilShot,
+            floodWaterShot, floodCryoShot, floodSlagShot, floodOilShot,
+    //blast
+    lightBlastGraphite, lightBlastSilicon,
+            bigBlastPlastanium, bigBlastBlast, bigBlastPyratite,
+            maxBlastPlastanium, maxBlastBlast, maxBlastSurge, maxBlastPlastaniumFrag,
+    //poison
+    sporePodPoisonBullet, naturitePoisonBullet,
+            SporePodPoisonFrag, heavySporePodPoison, NaturitePoisonFrag, heavyNaturitePoison, NobiumPoisonFrag, heavyNobiumPoison,
+            bigSporePodPoisonFrag, bigSporePodPoison, bigNaturitePoisonFrag, bigNaturitePoison, bigNobiumPoisonFrag, bigNobiumPoison, bigPlastaniumPoisonFrag, bigPlastaniumPoison,
+    //units
+    BasicHelicopterGun, HelicopterShootgun, HelicopterMissile, HelicopterBomb, HelicopterRocket, bigHelicopterGun, laserHelicopterFrag, largeHelicopterGun, bigHelicopterRocket, HelicopterMissiles,
+            cometWaterShot, starStunBullet, galaxyKnockbackBullet,
+            wheel1bullet, wheel2shotgun, wheel3burst, wheel4shotgun, wheel4artillery, wheel5flame, wheel5bullet, mirageGunBullet,
+    //misc
+    emptyBullet, overheatBullet,
+    //special
+    empBullet, empBulletEvo,
+    //test&temp
+    testbullet, tempBullet1, tempBullet2;
+    //exoticBullets (new) i will make it later... i must make more bulets (soulBullet, iceSpike, and more)
+    // spiralPllastanium, spiralSurge, SpiralFors, SpiralThorium, SpiralSmall;
 
     @Override
     public void load() {
@@ -1029,7 +1029,7 @@ public class SnBullets implements ContentList {
         }};
         //endregion air-support
         //region bersrk
-                mirageGunBullet = new BasicBulletType(12f, 15f) {{
+        mirageGunBullet = new BasicBulletType(12f, 15f) {{
             hitEffect = despawnEffect = Fx.none;
             instantDisappear = true;
             lifetime = 12f;
