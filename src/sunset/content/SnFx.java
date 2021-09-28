@@ -132,13 +132,13 @@ public class SnFx{
         Lines.circle(e.x, e.y, circleRad);
 
         color(SnPal.redBomb);
-        for(int i = 0; i < 4; i++){
-            Drawf.tri(e.x, e.y, 6f, 100f * e.fout(), i*90);
+        for(int i = 0; i < 6; i++){
+            Drawf.tri(e.x, e.y, 6f, 100f * e.fout(), i*60);
         }
 
         color();
-        for(int i = 0; i < 4; i++){
-            Drawf.tri(e.x, e.y, 3f, 35f * e.fout(), i*90);
+        for(int i = 0; i < 6; i++){
+            Drawf.tri(e.x, e.y, 3f, 35f * e.fout(), i*60);
         }
 
         Drawf.light(e.x, e.y, circleRad * 1.5f, SnPal.redBomb, e.fout());
@@ -168,8 +168,8 @@ public class SnFx{
         stroke(e.fout() * 2f);
         float squareRad = 2f + e.finpow() * 25f;
         float circleRad = 2f + e.finpow() * 30f;
-        Lines.square(e.x, e.y, e.fin() * 50.0F, 90);
-        Lines.square(e.x, e.y, e.fin() * 40.0F, 45);
+        Lines.square(e.x, e.y, e.fin() * 50.0F, 90 * e.rotation);
+        Lines.square(e.x, e.y, e.fin() * 40.0F, 45 * e.rotation);
         Lines.circle(e.x, e.y, circleRad);
 
         color(SnPal.copterBomb);
@@ -222,6 +222,13 @@ public class SnFx{
         randLenVectors(e.id, 2, e.finpow() * 15f, e.rotation, 11f, (x, y) -> {
             Fill.circle(e.x + x, e.y + y, 0.5f + e.fout() * 2.5f);
         });
+    }),
+
+    viscous = new Effect(85f, e -> {
+        color(Color.valueOf("721A1A"));
+        alpha(Mathf.clamp(e.fin() * 3f));
+
+        Fill.circle(e.x, e.y, e.fout());
     }),
 
     tridenCharge = new Effect(210, e -> {

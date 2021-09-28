@@ -20,6 +20,7 @@ import mindustry.world.draw.DrawAnimation;
 import mindustry.world.draw.DrawMixer;
 import sunset.content.SnFx;
 import sunset.content.SnItems;
+import sunset.content.SnLiquids;
 import sunset.world.blocks.production.PrecussionDrill;
 import sunset.world.blocks.production.AdvancedSurge;
 import sunset.world.draw.DrawAngleRotator;
@@ -33,7 +34,7 @@ public class SnProduction implements ContentList {
     advancedCompressor, advancedWeaver, advancedCultivator, advancedKiln, advancedSurge, advancedCryomixer,
 
     //standard
-    crystallizer, purifier, enojieKiln,
+    сollider, purifier, crystallizer, enojieKiln,
 
     //drills
     percussionDrill;
@@ -151,6 +152,25 @@ public class SnProduction implements ContentList {
         //endregion advanced
 
         //region standard
+        сollider = new GenericCrafter("сollider") {{
+            requirements(Category.crafting, with(Items.copper, 110, Items.titanium, 105, Items.silicon, 65, SnItems.fors, 50));
+
+            outputItem = new ItemStack(SnItems.reneubite, 3);
+//          craftEffect = SnFx.;
+//          updateEffect = SnFx.;
+            craftTime = 39f;
+            size = 3;
+            hasPower = true;
+            hasLiquids = false;
+            drawer = new DrawModRotator();
+            ambientSound = Sounds.grinding;
+            ambientSoundVolume = 0.025f;
+
+            consumes.items(with(Items.blastCompound, 3, Items.titanium, 2));
+            consumes.liquid(SnLiquids.burheyna, 0.4f);
+            consumes.power(2.5f);
+        }};
+
         purifier = new GenericCrafter("purifier") {{
             requirements(Category.crafting, with(Items.copper, 120, Items.titanium, 95, Items.silicon, 80, Items.plastanium, 65));
 
@@ -191,8 +211,8 @@ public class SnProduction implements ContentList {
         enojieKiln = new GenericCrafter("enojie-kiln") {{
             requirements(Category.crafting, with(Items.lead, 200, SnItems.nobium, 150, Items.graphite, 140, Items.silicon, 120, Items.surgeAlloy, 80));
 
-            outputItem = new ItemStack(SnItems.enojie, 1);
-            craftTime = 45f;
+            outputItem = new ItemStack(SnItems.enojie, 2);
+            craftTime = 55f;
             size = 4;
             hasPower = true;
             hasLiquids = false;
