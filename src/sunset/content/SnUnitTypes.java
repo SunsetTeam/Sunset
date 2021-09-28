@@ -46,7 +46,7 @@ public class SnUnitTypes implements ContentList {
             //freezing
             snowflake,
             //berserk
-            mirage;
+            mirage, vision;
     public void loadFactoryRecipes()
     {
         UnitsUtils.init();
