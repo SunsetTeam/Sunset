@@ -14,7 +14,7 @@ import sunset.type.StackableStatusEffect;
 
 public class SnStatusEffects implements ContentList{
     public static StatusEffect
-            frostbite, stun, starBuff, galaxyDebuff, overheat, electricalShort, reloading;
+            frostbite, stun, starBuff, galaxyDebuff, overheat, electricalShort, reloading, azaliyed;
     @Override
     public void load(){
 
@@ -106,5 +106,12 @@ public class SnStatusEffects implements ContentList{
            disarm = true;
            color = Color.valueOf("047070");
        }};
+
+       azaliyed = new StatusEffect("azaliyed"){{
+        color = Color.valueOf("721A1A");
+        speedMultiplier = 0.94f;
+        effect = Fx.muddy;
+        effectChance = 0.09f;
+    }};
     }
 }

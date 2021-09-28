@@ -9,6 +9,7 @@ import mindustry.world.*;
 import mindustry.world.blocks.environment.*;
 import mindustry.world.meta.*;
 import sunset.content.SnItems;
+import sunset.content.SnLiquids;
 import sunset.world.blocks.environment.Geyser;
 
 public class SnEnvironment implements ContentList {
@@ -81,7 +82,7 @@ public class SnEnvironment implements ContentList {
         crimsonswamp = new Floor("crimson-swamp") {{
             speedMultiplier = 0.4f;
             variants = 3;
-            liquidDrop = Liquids.water;
+            liquidDrop = SnLiquids.Burheyna;
             liquidMultiplier = 0.4f;
             isLiquid = true;
             status = StatusEffects.wet;
@@ -100,7 +101,7 @@ public class SnEnvironment implements ContentList {
         crimsonsandwater = new Floor("crimson-sand-water") {{
             speedMultiplier = 0.9f;
             variants = 0;
-            liquidDrop = Liquids.water;
+            liquidDrop = SnLiquids.Burheyna;
             liquidMultiplier = 0.7f;
             isLiquid = true;
             status = StatusEffects.wet;
@@ -112,7 +113,7 @@ public class SnEnvironment implements ContentList {
         crimsonwater = new Floor("crimson-water") {{
             speedMultiplier = 0.8f;
             variants = 0;
-            liquidDrop = Liquids.water;
+            liquidDrop = SnLiquids.Burheyna;
             liquidMultiplier = 1.1f;
             isLiquid = true;
             status = StatusEffects.wet;
@@ -124,7 +125,7 @@ public class SnEnvironment implements ContentList {
         crimsondeepwater = new Floor("crimson-deep-water") {{
             speedMultiplier = 0.5f;
             variants = 0;
-            liquidDrop = Liquids.water;
+            liquidDrop = SnLiquids.Burheyna;
             liquidMultiplier = 1.1f;
             isLiquid = true;
             status = StatusEffects.wet;
