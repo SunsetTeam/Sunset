@@ -1028,6 +1028,24 @@ public class SnBullets implements ContentList {
             width = 6;
         }};
         //endregion air-support
+        //region bersrk
+                mirageGunBullet = new BasicBulletType(12f, 15f) {{
+            hitEffect = despawnEffect = Fx.none;
+            instantDisappear = true;
+            lifetime = 12f;
+            fragBullets = 12;
+            keepVelocity = true;
+            fragBullet = new BasicBulletType(12f, 8f) {{
+                lifetime = 12f;
+                keepVelocity = true;
+            }};
+            fragVelocityMin = 0.85f;
+            fragVelocityMax = 1.25f;
+            fragLifeMin = 0.85f;
+            fragLifeMax = 1.25f;
+            fragCone = 6f;
+        }};
+        //endregion berserk
         //region wheel
         wheel1bullet = new BasicBulletType(6.5f, 5f) {{
             width = 7f;
