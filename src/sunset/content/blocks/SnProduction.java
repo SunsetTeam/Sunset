@@ -87,7 +87,7 @@ public class SnProduction implements ContentList {
             requirements(Category.crafting, with(Items.lead, 180, Items.graphite, 90, SnItems.coldent, 60, Items.metaglass, 40));
             outputLiquid = new LiquidStack(Liquids.cryofluid, 1f);
             craftTime = 40f;
-            size = 3;
+            size = 4;
             hasPower = true;
             hasItems = true;
             hasLiquids = true;
