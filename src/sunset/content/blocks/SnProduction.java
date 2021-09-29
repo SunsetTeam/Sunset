@@ -34,7 +34,7 @@ public class SnProduction implements ContentList {
     advancedCompressor, advancedWeaver, advancedCultivator, advancedKiln, advancedSurge, advancedCryomixer,
 
     //standard
-    сollider, purifier, crystallizer, enojieKiln,
+    collider, purifier, crystallizer, enojieKiln,
 
     //drills
     percussionDrill;
@@ -152,7 +152,7 @@ public class SnProduction implements ContentList {
         //endregion advanced
 
         //region standard
-        сollider = new GenericCrafter("сollider") {{
+        collider = new GenericCrafter("collider") {{
             requirements(Category.crafting, with(Items.copper, 110, Items.titanium, 105, Items.silicon, 65, SnItems.fors, 50));
 
             outputItem = new ItemStack(SnItems.reneubite, 3);
