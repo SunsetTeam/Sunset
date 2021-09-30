@@ -35,8 +35,7 @@ public class SnFx{
         randLenVectors(e.id, 6, 4f + e.fin() * 8f, (x, y) -> {
             color(Pal.heal);
             Fill.square(e.x + x, e.y + y, e.fout() + 0.5f, 45);
-            float circleRad = 2f + e.fin() * 15f;
-            Lines.circle(e.x, e.y, circleRad);
+            Lines.circle(e.x, e.y, e.finpow() * 15f);
         });
     }),
 

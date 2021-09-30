@@ -60,7 +60,7 @@ public class SnProduction implements ContentList {
             absorbLasers = true;
 
             consumes.items(with(Items.titanium, 9));
-            consumes.liquid(Liquids.oil, 0.4f);
+            consumes.liquid(Liquids.oil, 0.35f);
             consumes.power(5.3f);
         }};
 
@@ -158,7 +158,7 @@ public class SnProduction implements ContentList {
             outputItem = new ItemStack(SnItems.reneubite, 3);
 //          craftEffect = SnFx.;
 //          updateEffect = SnFx.;
-            craftTime = 39f;
+            craftTime = 46f;
             size = 3;
             itemCapacity = 15;
             liquidCapacity = 30f;

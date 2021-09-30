@@ -16,10 +16,10 @@ import static mindustry.type.ItemStack.with;
 public class SnLiquidBlocks implements ContentList {
     public static Block
             //transportation
-            naturiteConduit,
+            naturiteConduit, nobiumConduit,
 
             //storage
-            advliquidTank, 
+            liquidWell, 
     
             //extraction
             naturitePump;
@@ -41,8 +41,15 @@ public class SnLiquidBlocks implements ContentList {
             }
         };
 
+        nobiumConduit = new Conduit("nobium-conduit"){{
+            requirements(Category.liquid, with(SnItems.nobium, 2, Items.metaglass, 1));
+            liquidCapacity = 19f;
+            liquidPressure = 1.050f;
+            health = 100;
+        }};
+
         //storage
-        advliquidTank = new LiquidRouter("adv-liquid-tank"){{
+        liquidWell = new LiquidRouter("liquid-well"){{
             requirements(Category.liquid, with(Items.titanium, 110, Items.metaglass, 90, Items.thorium, 75));
             size = 4;
             liquidCapacity = 3100f;
@@ -58,6 +65,5 @@ public class SnLiquidBlocks implements ContentList {
             hasPower = true;
             size = 5;
         }};
-        
     }
 }

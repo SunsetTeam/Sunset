@@ -6,6 +6,7 @@ import mindustry.type.Category;
 import mindustry.world.Block;
 import mindustry.world.blocks.distribution.MassDriver;
 import mindustry.world.blocks.storage.StorageBlock;
+import mindustry.world.blocks.distribution.StackConveyor;
 import sunset.content.SnItems;
 import sunset.content.SnUnitTypes;
 import sunset.world.blocks.units.Airport;
@@ -15,7 +16,7 @@ import static mindustry.type.ItemStack.with;
 public class SnDistribution implements ContentList {
     public static Block
             //transportation
-            enojieDriver,
+            enojieDriver, nubiumConveyor,
 
             //storage
             crypt,
@@ -33,6 +34,13 @@ public class SnDistribution implements ContentList {
             reloadTime = 250f;
             range = 540f;
             consumes.power(4.0f);
+        }};
+
+        nubiumConveyor = new StackConveyor("nubium-conveyor"){{
+            requirements(Category.distribution, with(SnItems.nobium, 1, Items.silicon, 1, Items.graphite, 1));
+            health = 80;
+            speed = 5f / 60f;
+            itemCapacity = 15;
         }};
 
         //storage

@@ -1,9 +1,7 @@
 package sunset.content;
 
 import mindustry.ai.types.SuicideAI;
-import mindustry.content.Blocks;
 import mindustry.content.Fx;
-import mindustry.content.Items;
 import mindustry.content.StatusEffects;
 import mindustry.ctype.ContentList;
 import mindustry.entities.bullet.BombBulletType;
@@ -47,16 +45,6 @@ public class SnUnitTypes implements ContentList {
             snowflake,
             //berserk
             mirage, vision;
-    public void loadFactoryRecipes()
-    {
-        UnitsUtils.init();
-        addUnitGroup(Blocks.airFactory, 60*20f, with(Items.silicon, 30, Items.metaglass, 20),
-            comet, satelite, planet, star, galaxy);
-        addUnitGroup(Blocks.airFactory, 60*15f, with(Items.silicon, 30, Items.graphite, 15),
-            guardcopter, bladecopter, swordcopter, guardiancopter, crusadercopter);
-        addUnitGroup(Blocks.groundFactory, 60*10f, with(Items.silicon, 25f, Items.lead, 20),
-            wheel1, wheel2, wheel3, wheel4, wheel5);
-    }
     @Override
     public void load() {
         //region attack copters
@@ -471,7 +459,7 @@ public class SnUnitTypes implements ContentList {
         //endregion air-support (buffers)
         
         //region berserk
- mirage = new BerserkUnitType("mirage"){{
+        mirage = new BerserkUnitType("mirage"){{
             health = 230;
             speed = 1f;
             rotateSpeed = 3f;
@@ -692,7 +680,5 @@ public class SnUnitTypes implements ContentList {
             @Override
             public boolean isHidden() { return true; }
         };
-
-        loadFactoryRecipes();
     }
 }
