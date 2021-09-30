@@ -19,11 +19,11 @@ public class SnLogic implements ContentList{
     naturitelogicProcessor = new LogicBlock("logic-processor"){{
         requirements(Category.logic, with(Items.lead, 370, Items.silicon, 140, Items.graphite, 120, SnItems.naturite, 70));
 
-        instructionsPerTick = 8;
+        instructionsPerTick = 13;
 
-        range = 8 * 22;
+        range = 10 * 20;
 
-        size = 2;
+        size = 1;
     }};
 }
 }
