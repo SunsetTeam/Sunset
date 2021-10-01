@@ -1,6 +1,5 @@
 package sunset.content;
 
-import com.sun.jndi.ldap.Ber;
 import mindustry.ai.types.SuicideAI;
 import mindustry.content.Fx;
 import mindustry.content.StatusEffects;
