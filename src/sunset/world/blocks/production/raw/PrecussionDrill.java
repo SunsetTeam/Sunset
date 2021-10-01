@@ -1,4 +1,4 @@
-package sunset.world.blocks.production;
+package sunset.world.blocks.production.raw;
 
 import arc.Core;
 import arc.graphics.Color;

@@ -5,7 +5,7 @@ import arc.scene.ui.layout.Table;
 import arc.struct.Seq;
 import arc.util.Strings;
 import mindustry.world.meta.StatValue;
-import sunset.world.blocks.production.PrecussionDrill.DrillItem;
+import sunset.world.blocks.production.raw.PrecussionDrill.DrillItem;
 
 public class DrillItemsValue implements StatValue {
     protected final Seq<DrillItem> items;
