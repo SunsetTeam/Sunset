@@ -49,7 +49,7 @@ public class SnProduction implements ContentList {
             craftEffect = SnFx.modPlasticburn;
             craftTime = 60f;
             outputItem = new ItemStack(Items.plastanium, 5);
-            
+            flameColor = Color.valueOf("C9F8AE");
             drawer = new DrawAnimation(){{
                     frameCount = 4;
                     frameSpeed = 4.8f;
@@ -57,7 +57,6 @@ public class SnProduction implements ContentList {
             itemCapacity = 20;
             liquidCapacity = 20f;
             absorbLasers = true;
-            flameColor = Color.valueOf("C9F8AE");
             consumes.items(with(Items.titanium, 9));
             consumes.liquid(Liquids.oil, 0.35f);
             consumes.power(5.3f);
