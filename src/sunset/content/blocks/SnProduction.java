@@ -48,14 +48,12 @@ public class SnProduction implements ContentList {
             size = 3;
             craftEffect = SnFx.modPlasticburn;
             craftTime = 60f;
-            outputItem = new ItemStack(Items.plastanium, 5
+            outputItem = new ItemStack(Items.plastanium, 5);
             
-            drawer = new DrawAnimation() {
-                {
+            drawer = new DrawAnimation(){{
                     frameCount = 4;
                     frameSpeed = 4.8f;
-                }
-            };
+            }};
             itemCapacity = 20;
             liquidCapacity = 20f;
             absorbLasers = true;

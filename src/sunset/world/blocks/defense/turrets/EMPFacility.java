@@ -166,12 +166,11 @@ public class EMPFacility extends PowerTurret{
 
         @Override
         protected void turnToTarget(float targetRot){
-            //DO nothing, turning is irrelevant
         }
 
         @Override
         public boolean canControl(){
-            return false; //Can't aim, technically does not shoot
+            return false;
         }
     }
 }
