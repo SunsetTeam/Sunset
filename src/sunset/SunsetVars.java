@@ -4,6 +4,7 @@ import mindustry.core.Renderer;
 //import sunset.utils.V7.SunsetWaveSpawner;
 
 public class SunsetVars{
+
     //public static SunsetWaveSpawner spawner;
 
     public static final int maxSchematicSize = 128;
