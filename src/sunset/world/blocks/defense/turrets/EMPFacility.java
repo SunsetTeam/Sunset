@@ -66,6 +66,10 @@ public class EMPFacility extends PowerTurret{
         });
     }
 
+    public boolean logicShooting(){
+        return false;
+    }
+
     public int size(){
         if(this.size < 3) return this.size = 3;
         return this.size;
