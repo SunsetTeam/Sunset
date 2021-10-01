@@ -35,10 +35,10 @@ public class SnProjectors implements ContentList {
             radius = 140;
             phaseRadiusBoost = 90;
             phaseShieldBoost = 1200;
-            shieldHealth = 3500;
-            cooldownNormal = 3.1f;
-            cooldownLiquid = 4.7f;
-            cooldownBrokenBase = 2.1f;
+            shieldHealth = 2500;
+            cooldownNormal = 2.1f;
+            cooldownLiquid = 3.3f;
+            cooldownBrokenBase = 1f;
             consumes.items(with(Items.phaseFabric, 3, SnItems.coldent, 5));
             consumes.power(20f);
         }};
