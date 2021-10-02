@@ -521,7 +521,7 @@ public class SnBullets implements ContentList {
         }};
         //endregion posion bullets
         //region heavy-poison bullets
-        SporePodPoisonFrag = new FlakBulletType(2f, 5) {{
+        SporePodPoisonFrag = new FlakBulletType(2f, 3) {{
             sprite = "sunset-circle-bullet";
             lifetime = 150f;
             splashDamage = 7f;
@@ -539,7 +539,7 @@ public class SnBullets implements ContentList {
             weaveScale = 6f;
             weaveMag = 1f;
         }};
-        heavySporePodPoison = new FlakBulletType(3f, 14) {{
+        heavySporePodPoison = new FlakBulletType(3f, 11) {{
             sprite = "sunset-circle-bullet";
             knockback = 0.5f;
             lifetime = 250f;
@@ -562,7 +562,7 @@ public class SnBullets implements ContentList {
             weaveScale = 9f;
             weaveMag = 1f;
         }};
-        NaturitePoisonFrag = new FlakBulletType(2f, 7) {{
+        NaturitePoisonFrag = new FlakBulletType(2f, 5) {{
             sprite = "sunset-circle-bullet";
             lifetime = 150f;
             splashDamage = 12f;
@@ -580,7 +580,7 @@ public class SnBullets implements ContentList {
             weaveScale = 6f;
             weaveMag = 1f;
         }};
-        heavyNaturitePoison = new FlakBulletType(3f, 16) {{
+        heavyNaturitePoison = new FlakBulletType(3f, 13) {{
             sprite = "sunset-circle-bullet";
             knockback = 0.6f;
             lifetime = 250f;
@@ -621,7 +621,7 @@ public class SnBullets implements ContentList {
             weaveScale = 6f;
             weaveMag = 1f;
         }};
-        heavyNobiumPoison = new FlakBulletType(3f, 15) {{
+        heavyNobiumPoison = new FlakBulletType(3f, 14) {{
             sprite = "sunset-circle-bullet";
             knockback = 0.4f;
             lifetime = 250f;
