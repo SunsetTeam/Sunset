@@ -1,5 +1,6 @@
 package sunset.content.blocks;
 
+import mindustry.content.Fx;
 import mindustry.content.Items;
 import mindustry.content.Liquids;
 import mindustry.ctype.ContentList;
@@ -23,7 +24,9 @@ public class SnRaw implements ContentList{
 
             //drills
             electroPneumaticdrill,
-            percussionDrill;
+            magneticDrill,
+            percussionDrill,
+            enojieDrill;
 
     @Override
     public void load(){
@@ -44,16 +47,35 @@ public class SnRaw implements ContentList{
         }};
 
         //drills
-
         electroPneumaticdrill = new Drill("pneumatic-drill"){{
             requirements(Category.production, with(Items.copper, 20, Items.graphite, 15, Items.silicon, 10));
             drillTime = 340;
-            size = 3;
+            size = 2;
             hasPower = true;
-            tier = 4;
+            tier = 3;
 
             consumes.power(0.6f);
             consumes.liquid(Liquids.water, 0.07f).boost();
+        }};
+
+        magneticDrill = new Drill("blast-drill"){{
+            requirements(Category.production, with(Items.copper, 70, Items.silicon, 60, SnItems.fors, 60, SnItems.nobium, 55, SnItems.planatrium, 45 ));
+            drillTime = 240;
+            size = 4;
+            drawRim = true;
+            hasPower = true;
+            tier = 5;
+            updateEffect = Fx.pulverizeRed;
+            updateEffectChance = 0.03f;
+            drillEffect = Fx.mineHuge;
+            rotateSpeed = 7f;
+            warmupSpeed = 0.01f;
+            itemCapacity = 40;
+
+            liquidBoostIntensity = 1.9f;
+
+            consumes.power(4f);
+            consumes.liquid(Liquids.water, 0.13f).boost();
         }};
 
         percussionDrill = new PrecussionDrill("percussion-drill") {{
@@ -70,6 +92,26 @@ public class SnRaw implements ContentList{
                     new DrillItem(Items.surgeAlloy, 1.25f),
                     new DrillItem(SnItems.nobium, 1.6f)
             );
+        }};
+
+        enojieDrill = new Drill("enojie-drill"){{
+            requirements(Category.production, with(Items.copper, 65, Items.silicon, 60, Items.titanium, 50, Items.thorium, 75));
+            drillTime = 200;
+            size = 7;
+            drawRim = true;
+            hasPower = true;
+            tier = 6;
+            updateEffect = Fx.pulverizeRed;
+            updateEffectChance = 0.04f;
+            drillEffect = Fx.mineHuge;
+            rotateSpeed = 5f;
+            warmupSpeed = 0.01f;
+            itemCapacity = 50;
+
+            liquidBoostIntensity = 2f;
+
+            consumes.power(3f);
+            consumes.liquid(Liquids.cryofluid, 0.4f).boost();
         }};
     }
 }
