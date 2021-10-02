@@ -7,6 +7,7 @@ import mindustry.type.Category;
 import mindustry.type.ItemStack;
 import mindustry.world.Block;
 import mindustry.world.blocks.production.Cultivator;
+import mindustry.world.blocks.production.Drill;
 import sunset.content.SnFx;
 import sunset.content.SnItems;
 import sunset.world.blocks.production.raw.PrecussionDrill;
@@ -21,6 +22,7 @@ public class SnRaw implements ContentList{
             advancedCultivator,
 
             //drills
+            electroPneumaticdrill,
             percussionDrill;
 
     @Override
@@ -42,6 +44,18 @@ public class SnRaw implements ContentList{
         }};
 
         //drills
+
+        electroPneumaticdrill = new Drill("pneumatic-drill"){{
+            requirements(Category.production, with(Items.copper, 20, Items.graphite, 15, Items.silicon, 10));
+            drillTime = 340;
+            size = 3;
+            hasPower = true;
+            tier = 4;
+
+            consumes.power(0.6f);
+            consumes.liquid(Liquids.water, 0.07f).boost();
+        }};
+
         percussionDrill = new PrecussionDrill("percussion-drill") {{
             requirements(Category.production, with(Items.copper, 100, Items.silicon, 90, Items.titanium, 90, Items.thorium, 85, SnItems.nobium, 80, SnItems.naturite, 70));
             size = 5;

@@ -26,11 +26,8 @@ import sunset.type.WheelUnitType;
 import sunset.type.weapons.ChainWeapon;
 import sunset.type.weapons.PointDefenseWeapon;
 import sunset.type.weapons.WeaponExt;
-import sunset.utils.UnitsUtils;
 
 import static mindustry.gen.EntityMapping.map;
-import static mindustry.type.ItemStack.with;
-import static sunset.utils.UnitsUtils.addUnitGroup;
 
 public class SnUnitTypes implements ContentList {
     public static UnitType
@@ -103,7 +100,7 @@ public class SnUnitTypes implements ContentList {
                         recoil = 2f;
                         shots = 1;
                         shootCone = 0.01f;
-                        inaccuracy = 0;
+                        inaccuracy = 2;
                         reload = 15f;
                         shootSound = Sounds.shoot;
                         bullet = SnBullets.HelicopterShootgun;
@@ -538,7 +535,7 @@ public class SnUnitTypes implements ContentList {
             legMoveSpace = 1.2f;
 
             weapons.add(
-                    new Weapon("sunset-illusion-gun1"){{
+                    new Weapon("sunset-illusion-gun"){{
                         reload = 40;
                         x = 8;
                         y = -2;
@@ -565,7 +562,7 @@ public class SnUnitTypes implements ContentList {
                             fragCone = 6f;
                         }};
                     }},
-                    new Weapon("sunset-illusion-gun2"){{
+                    new Weapon("sunset-iliusion-lasergun"){{
                         reload = 60f;
                         bullet = new BerserkLaserBulletType(){{
                             damage = 12;
@@ -576,7 +573,7 @@ public class SnUnitTypes implements ContentList {
         }};
         southSayer = new BerserkUnitType("southSayer"){
             {
-                health = 5400;
+                health = 7500;
                 speed = 1.3f;
                 rotateSpeed = 2.1f;
                 drag = 0.125f;
@@ -588,7 +585,7 @@ public class SnUnitTypes implements ContentList {
                 legTrns = 0.43f;
                 legMoveSpace = 1.2f;
                 weapons.add(
-                        new Weapon("southSayer-gun1") {
+                        new Weapon("southSayer-soothSayer-big-lasergun") {
                             {
                                 reload = 75f;
                                 x = 12;
