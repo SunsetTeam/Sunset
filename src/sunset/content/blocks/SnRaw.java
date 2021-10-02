@@ -5,6 +5,7 @@ import mindustry.content.Items;
 import mindustry.content.Liquids;
 import mindustry.ctype.ContentList;
 import mindustry.type.Category;
+import mindustry.type.Item;
 import mindustry.type.ItemStack;
 import mindustry.world.Block;
 import mindustry.world.blocks.production.Cultivator;
@@ -95,7 +96,7 @@ public class SnRaw implements ContentList{
         }};
 
         enojieDrill = new Drill("enojie-drill"){{
-            requirements(Category.production, with(Items.copper, 65, Items.silicon, 60, Items.titanium, 50, Items.thorium, 75));
+            requirements(Category.production, with(Items.copper, 410, Items.silicon, 380, SnItems.enojie, 370, Items.thorium, 200, Items.surgeAlloy, 190));
             drillTime = 200;
             size = 7;
             drawRim = true;
@@ -108,7 +109,7 @@ public class SnRaw implements ContentList{
             warmupSpeed = 0.01f;
             itemCapacity = 50;
 
-            liquidBoostIntensity = 2f;
+            liquidBoostIntensity = 1.7f;
 
             consumes.power(3f);
             consumes.liquid(Liquids.cryofluid, 0.4f).boost();
