@@ -46,6 +46,7 @@ public class Sunset extends Mod {
             new SnLiquidBlocks(),
             new SnLogic(),
             new SnUnitBlocks(),
+            new SnRaw(),
             new SnSectorPresets()
     };
 
