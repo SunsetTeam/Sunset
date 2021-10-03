@@ -10,8 +10,6 @@ import sunset.content.*;
 
 import static mindustry.type.ItemStack.*;
 
-import javax.net.ssl.SNIMatcher;
-
 public class SnUnitBlocks implements ContentList {
     public static Block
 
