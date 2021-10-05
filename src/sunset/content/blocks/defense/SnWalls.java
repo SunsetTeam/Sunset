@@ -8,6 +8,7 @@ import mindustry.ctype.ContentList;
 import mindustry.type.Category;
 import mindustry.world.Block;
 import mindustry.world.blocks.defense.Wall;
+import mindustry.world.meta.BuildVisibility;
 import sunset.content.SnItems;
 import sunset.world.blocks.defense.walls.AntiPierceWall;
 import sunset.world.blocks.defense.walls.SelfhealWall;
@@ -19,7 +20,9 @@ public class SnWalls implements ContentList {
 
             forsWall, forsWallLarge,
             naturiteWall, naturiteWallLarge,
-            enojiewall, enojieWallLarge;
+            enojiewall, enojieWallLarge,
+
+            sandboxWall;
 
     @Override
     public void load(){
@@ -62,6 +65,17 @@ public class SnWalls implements ContentList {
             pierceDebuff = 5;
             damageDebuff = 0.7225f;
             health = enojiewall.health * 4;
+            size = 2;
+            insulated = true;
+            absorbLasers = true;
+            schematicPriority = 10;
+        }};
+
+        sandboxWall = new AntiPierceWall("sandbox-wall"){{
+            requirements(Category.defense, BuildVisibility.sandboxOnly, with(SnItems.enojie, 24));
+            pierceDebuff = 5;
+            damageDebuff = 0.7225f;
+            health = 999999999;
             size = 2;
             insulated = true;
             absorbLasers = true;

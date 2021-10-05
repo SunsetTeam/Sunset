@@ -31,8 +31,8 @@ import static mindustry.gen.EntityMapping.map;
 
 public class SnUnitTypes implements ContentList {
     public static UnitType
-            //attack copters
-            guardcopter, bladecopter, swordcopter, guardiancopter, crusadercopter,
+    //attack copters
+    guardcopter, bladecopter, swordcopter, guardiancopter, crusadercopter,
     //air-support (buffers)
     comet, satelite, planet, star, galaxy,
     //wheel units
@@ -153,7 +153,7 @@ public class SnUnitTypes implements ContentList {
         guardiancopter = new CopterUnitType("guardian-copter") {{
             health = 4600;
             hitSize = 63;
-            speed = 2.7f;
+            speed = 2.4f;
             accel = 0.1f;
             drag = 0.02f;
             commandLimit = 4;
@@ -200,7 +200,7 @@ public class SnUnitTypes implements ContentList {
         crusadercopter = new CopterUnitType("crusader-copter") {{
             health = 16500;
             hitSize = 77;
-            speed = 2.6f;
+            speed = 2.1f;
             accel = 0.1f;
             drag = 0.02f;
             commandLimit = 3;

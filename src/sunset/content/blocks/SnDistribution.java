@@ -30,10 +30,10 @@ public class SnDistribution implements ContentList {
         enojieDriver = new MassDriver("enojie-driver") {{
             requirements(Category.distribution, with(Items.titanium, 450, Items.thorium, 200, Items.surgeAlloy, 180, SnItems.nobium, 150, SnItems.enojie, 130));
             size = 5;
-            itemCapacity = 210;
-            reloadTime = 250f;
-            range = 540f;
-            consumes.power(4.0f);
+            itemCapacity = 230;
+            reloadTime = 240f;
+            range = 560f;
+            consumes.power(5.0f);
         }};
 
         nubiumConveyor = new StackConveyor("nubium-conveyor"){{
