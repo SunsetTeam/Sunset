@@ -35,14 +35,14 @@ public class SnUnitTypes implements ContentList {
     guardcopter, bladecopter, swordcopter, guardiancopter, crusadercopter,
     //air-support (buffers)
     comet, satelite, planet, star, galaxy,
+    //berserk (spiders)
+    mirage, vision, illusion, soothSayer, seer, abyssEye,
     //wheel units
     wheel1, wheel2, wheel3, wheel4, wheel5,
     //delivery
     router, courier,
     //freezing
-    snowflake,
-    //berserk
-    mirage, vision, illusion, soothSayer;
+    snowflake;
     @Override
     public void load() {
         //region attack copters
@@ -462,7 +462,8 @@ public class SnUnitTypes implements ContentList {
             speed = 1f;
             rotateSpeed = 3f;
             visualElevation = 0.2f;
-            drag = 0.1f;
+            drag = 0.4f;
+            hitSize = 14f;
             armor = 4f;
             hitSize = 11f;
             allowLegStep = true;
@@ -500,15 +501,17 @@ public class SnUnitTypes implements ContentList {
             health = 980;
             speed = 0.8f;
             rotateSpeed = 2f;
-            drag = 0.125f;
+            drag = 0.4f;
+            hitSize = 18f;
             armor = 5f;
             allowLegStep = true;
             hovering = false;
             groundLayer = Layer.legUnit - 1;
+            visualElevation = 0.3f;
             legCount = 4;
-            legLength = 10f;
-            legTrns = 0.8f;
-            legMoveSpace = 1.4f;
+            legLength = 9f;
+            legTrns = 0.9f;
+            legMoveSpace = 1.3f;
             legBaseOffset = 2f;
 
             weapons.add(
@@ -528,9 +531,12 @@ public class SnUnitTypes implements ContentList {
             speed = 1.1f;
             rotateSpeed = 2.4f;
             drag = 0.125f;
+            hitSize = 25f;
+            armor = 6f;
             allowLegStep = true;
-            hovering = false;
+            hovering = true;
             groundLayer = Layer.legUnit - 1;
+            visualElevation = 0.4f;
             legCount = 6;
             legLength = 15;
             legTrns = 0.8f;
@@ -574,15 +580,17 @@ public class SnUnitTypes implements ContentList {
                     }}
             );
         }};
-        soothSayer = new BerserkUnitType("soothSayer"){
-            {
+        soothSayer = new BerserkUnitType("soothSayer"){{
                 health = 7500;
                 speed = 1.3f;
                 rotateSpeed = 2.1f;
                 drag = 0.125f;
+                hitSize = 40f;
+                armor = 8f;
                 allowLegStep = true;
-                hovering = false;
+                hovering = true;
                 groundLayer = Layer.legUnit - 1;
+                visualElevation = 0.5f;
                 legCount = 6;
                 legMoveSpace = 1f;
                 legPairOffset = 3;
@@ -634,6 +642,55 @@ public class SnUnitTypes implements ContentList {
                         }}
                 );
             }};
+
+        seer = new BerserkUnitType("seer"){{
+                health = 24000;
+                speed = 0.97f;
+                rotateSpeed = 1.8f;
+                drag = 0.125f;
+                hitSize = 60f;
+                armor = 12f;
+                allowLegStep = true;
+                hovering = true;
+                groundLayer = Layer.legUnit - 1;
+                visualElevation = 0.6f;
+                legCount = 8;
+                legMoveSpace = 0.8f;
+                legPairOffset = 3;
+                legLength = 60f;
+                legExtension = -19;
+                legBaseOffset = 8f;
+                landShake = 1f;
+                legSpeed = 0.1f;
+                legLengthScl = 0.93f;
+                rippleScale = 3f;
+                legSpeed = 0.19f;
+            }};
+
+
+        abyssEye = new BerserkUnitType("abyssEye"){{
+                health = 65000;
+                speed = 0.75f;
+                rotateSpeed = 1.5f;
+                drag = 0.125f;
+                hitSize = 90f;
+                armor = 16f;
+                allowLegStep = true;
+                hovering = true;
+                groundLayer = Layer.legUnit - 1;
+                visualElevation = 0.7f;
+                legCount = 8;
+                legMoveSpace = 0.7f;
+                legPairOffset = 3;
+                legLength = 80f;
+                legExtension = -21;
+                legBaseOffset = 9f;
+                landShake = 1.5f;
+                legSpeed = 0.21f;
+                legLengthScl = 0.9f;
+                rippleScale = 3f;
+                legSpeed = 0.19f;
+                }};
         //endregion berserk
 
         //region wheel
