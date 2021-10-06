@@ -3,9 +3,11 @@ package sunset.content;
 import arc.graphics.*;
 import arc.graphics.g2d.*;
 import arc.math.Angles;
+import arc.math.Mathf;
 import arc.math.geom.Vec2;
 import mindustry.ctype.*;
 import mindustry.content.*;
+import mindustry.entities.Lightning;
 import mindustry.entities.Units;
 import mindustry.entities.bullet.*;
 import mindustry.gen.*;
@@ -1134,7 +1136,12 @@ public class SnBullets implements ContentList {
             collidesTeam = true;
             hitSize = 36;
             hitEffect = SnFx.empHit;
-        }};
+        }
+            @Override
+            public void init(Bullet b){
+
+            }
+        };
         empBulletEvo = new LightningBulletType(){{
             //speed = 5;
             damage = 300;
@@ -1145,7 +1152,12 @@ public class SnBullets implements ContentList {
             collidesTeam = true;
             hitSize = 36;
             hitEffect = SnFx.empHit;
-        }};
+        }
+            @Override
+            public void init(Bullet b){
+
+            }
+        };
         //endregion special
         //region misc
         overheatBullet = new BasicBulletType(0.1f, 7, "error") {{

@@ -568,9 +568,7 @@ public class SnFx{
             Interp interp = Interp.linear;
             float ifin = e.fin(Interp.linear);
             Draw.color(SnPal.emp1, SnPal.emp2, ifin);
-            Lines.stroke(interp.apply(5, 25, e.fin()));
-            //float rad = interp.apply(0, 100, e.fin());
-            //Lines.poly(e.x, e.y, -1 <= 0 ? Lines.circleVertices(rad) : -1, rad, 0 + e.rotation);
+            Lines.stroke(interp.apply(5, 10, e.fin()));
         });
     }),
 
@@ -579,9 +577,7 @@ public class SnFx{
             Interp interp = Interp.linear;
             float ifin = e.fin(Interp.linear);
             Draw.color(SnPal.emp1, SnPal.emp2, ifin);
-            Lines.stroke(interp.apply(5, 30, e.fin()));
-            //float rad = interp.apply(0, 100, e.fin());
-            //Lines.poly(e.x, e.y, -1 <= 0 ? Lines.circleVertices(rad) : -1, rad, 0 + e.rotation);
+            Lines.stroke(interp.apply(5, 20, e.fin()));
         });
     }),
 

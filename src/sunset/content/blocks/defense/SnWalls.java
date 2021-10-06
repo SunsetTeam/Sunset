@@ -11,6 +11,7 @@ import mindustry.world.blocks.defense.Wall;
 import mindustry.world.meta.BuildVisibility;
 import sunset.content.SnItems;
 import sunset.world.blocks.defense.walls.AntiPierceWall;
+import sunset.world.blocks.defense.walls.IndestructibleWall;
 import sunset.world.blocks.defense.walls.SelfhealWall;
 
 import static mindustry.type.ItemStack.with;
@@ -22,7 +23,7 @@ public class SnWalls implements ContentList {
             naturiteWall, naturiteWallLarge,
             enojiewall, enojieWallLarge,
 
-            sandboxWall;
+            indestructibleWall, indestructibleWallLarge;
 
     @Override
     public void load(){
@@ -71,13 +72,11 @@ public class SnWalls implements ContentList {
             schematicPriority = 10;
         }};
 
-        sandboxWall = new Wall("sandbox-wall"){{
-            requirements(Category.defense, BuildVisibility.sandboxOnly, with(Items.copper, 1));
-            health = 999999999;
+        indestructibleWall = new IndestructibleWall("indestructible-wall"){{
+            size = 1;
+        }};
+        indestructibleWallLarge = new IndestructibleWall("indestructible-wall-large"){{
             size = 2;
-            insulated = true;
-            absorbLasers = true;
-            schematicPriority = 10;
         }};
     }
 }
