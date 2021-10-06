@@ -1,6 +1,7 @@
 package sunset.world.blocks.defense.walls;
 
 import mindustry.gen.Bullet;
+import mindustry.type.Category;
 import mindustry.world.blocks.defense.Wall;
 import mindustry.world.meta.BuildVisibility;
 
@@ -12,6 +13,7 @@ public class IndestructibleWall extends Wall{
         absorbLasers = true;
         chanceDeflect = 1;
         buildVisibility = BuildVisibility.sandboxOnly;
+        category = Category.defense;
     }
     public class IndestructibleBuild extends WallBuild{
         @Override
