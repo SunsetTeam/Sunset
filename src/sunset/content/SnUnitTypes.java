@@ -42,7 +42,7 @@ public class SnUnitTypes implements ContentList {
     //freezing
     snowflake,
     //berserk
-    mirage, vision, illusion, southSayer;
+    mirage, vision, illusion, soothSayer;
     @Override
     public void load() {
         //region attack copters
@@ -574,7 +574,7 @@ public class SnUnitTypes implements ContentList {
                     }}
             );
         }};
-        southSayer = new BerserkUnitType("southSayer"){
+        soothSayer = new BerserkUnitType("soothSayer"){
             {
                 health = 7500;
                 speed = 1.3f;
@@ -592,7 +592,7 @@ public class SnUnitTypes implements ContentList {
                 landShake = 1f;
                 legLengthScl = 0.97f;
                 weapons.add(
-                        new Weapon("southSayer-soothSayer-big-lasergun") {
+                        new Weapon("soothSayer-lasergun") {
                             {
                                 reload = 75f;
                                 x = 12;
@@ -623,7 +623,7 @@ public class SnUnitTypes implements ContentList {
                                 };
                             }
                         },
-                        new Weapon("southSayer-gun2"){{
+                        new Weapon("soothSayer-gun"){{
                             reload = 40f;
                             x = 12f;
                             y = 4f;
