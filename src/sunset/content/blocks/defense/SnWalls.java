@@ -71,10 +71,8 @@ public class SnWalls implements ContentList {
             schematicPriority = 10;
         }};
 
-        sandboxWall = new AntiPierceWall("sandbox-wall"){{
-            requirements(Category.defense, BuildVisibility.sandboxOnly, with(SnItems.enojie, 24));
-            pierceDebuff = 5;
-            damageDebuff = 0.7225f;
+        sandboxWall = new Wall("sandbox-wall"){{
+            requirements(Category.defense, BuildVisibility.sandboxOnly, with(Items.copper, 1));
             health = 999999999;
             size = 2;
             insulated = true;

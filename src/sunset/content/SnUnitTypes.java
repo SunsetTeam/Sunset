@@ -470,8 +470,8 @@ public class SnUnitTypes implements ContentList {
             groundLayer = Layer.legUnit - 1f;
             legCount = 4;
             legLength = 7f;
-            legTrns = 0.3f;
-            legMoveSpace = 1.2f;
+            legTrns = 0.5f;
+            legMoveSpace = 1.3f;
 
             weapons.add(new Weapon("sunset-mirage-gun"){{
                 reload = 30f;
@@ -501,13 +501,15 @@ public class SnUnitTypes implements ContentList {
             speed = 0.8f;
             rotateSpeed = 2f;
             drag = 0.125f;
+            armor = 5f;
             allowLegStep = true;
             hovering = false;
             groundLayer = Layer.legUnit - 1;
             legCount = 4;
-            legLength = 8;
-            legTrns = 0.3f;
-            legMoveSpace = 1.2f;
+            legLength = 10f;
+            legTrns = 0.8f;
+            legMoveSpace = 1.4f;
+            legBaseOffset = 2f;
 
             weapons.add(
                     new Weapon("sunset-vision-gun"){{
@@ -530,9 +532,10 @@ public class SnUnitTypes implements ContentList {
             hovering = false;
             groundLayer = Layer.legUnit - 1;
             legCount = 6;
-            legLength = 12;
-            legTrns = 0.43f;
-            legMoveSpace = 1.2f;
+            legLength = 15;
+            legTrns = 0.8f;
+            legMoveSpace = 1.4f;
+            legBaseOffset = 4f;
 
             weapons.add(
                     new Weapon("sunset-illusion-gun"){{
@@ -581,9 +584,13 @@ public class SnUnitTypes implements ContentList {
                 hovering = false;
                 groundLayer = Layer.legUnit - 1;
                 legCount = 6;
-                legLength = 12;
-                legTrns = 0.43f;
-                legMoveSpace = 1.2f;
+                legMoveSpace = 1f;
+                legPairOffset = 3;
+                legLength = 25f;
+                legExtension = -14;
+                legBaseOffset = 9f;
+                landShake = 1f;
+                legLengthScl = 0.97f;
                 weapons.add(
                         new Weapon("southSayer-soothSayer-big-lasergun") {
                             {

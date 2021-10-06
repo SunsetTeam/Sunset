@@ -482,6 +482,7 @@ public class SnTurrets implements ContentList {
             size = 7;
             health = 170 * size * size;
             targetGround = true;
+            targetAir = false;
             shootSound = Sounds.laser;
 
             shootType = new LaserBulletType(2500){{
