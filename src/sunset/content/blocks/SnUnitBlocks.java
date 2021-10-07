@@ -84,7 +84,7 @@ public class SnUnitBlocks implements ContentList {
 
             size = 7;
             consumes.power(13f);
-            consumes.items(with(Items.silicon, 850, SnItems.fors, 860, SnItems.nobium, 590, Items.plastanium, 650));
+            consumes.items(with(Items.silicon, 510, SnItems.fors, 700, SnItems.nobium, 510, Items.plastanium, 550));
 
             consumes.liquid(SnLiquids.burheyna, 1.5f);
 
@@ -99,11 +99,11 @@ public class SnUnitBlocks implements ContentList {
         }};
 
         nobiumTetrativeReconstructor = new Reconstructor("nobium-tetrative-reconstructor"){{
-            requirements(Category.units, with(SnItems.nobium, 4200, Items.lead, 4000, Items.surgeAlloy, 3880, Items.silicon, 3770, SnItems.enojie, 3500, Items.phaseFabric, 3200));
+            requirements(Category.units, with(SnItems.nobium, 3900, Items.lead, 3500, Items.phaseFabric, 2880, Items.silicon, 2470, SnItems.enojie, 2300, SnItems.planatrium, 2100));
 
             size = 9;
             consumes.power(26f);
-            consumes.items(with(Items.silicon, 1100, SnItems.nobium, 1250, SnItems.enojie, 740, Items.surgeAlloy, 880, Items.phaseFabric, 560));
+            consumes.items(with(Items.silicon, 800, SnItems.nobium, 990, SnItems.enojie, 730, SnItems.planatrium, 670, Items.phaseFabric, 410));
 
             consumes.liquid(SnLiquids.burheyna, 3.5f);
 
