@@ -43,7 +43,7 @@ public class CopterUnitType extends UnitType {
 
     @Override
     public void load(){
-        //super.load();
+        super.load();
         rotor.each(Rotor::load);
     }
 }
