@@ -61,7 +61,7 @@ public class SnUnitTypes implements ContentList {
             unitFallRotateSpeed = 6f;
 
             rotor.add(                    
-                new Rotor("small-rotor"){{
+                new Rotor("sunset-rotor-small"){{
                 offsetX = 0;
                 offsetY = 0;
                 rotorRotateSpeed = 27f;

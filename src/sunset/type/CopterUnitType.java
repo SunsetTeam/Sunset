@@ -41,9 +41,9 @@ public class CopterUnitType extends UnitType {
         Draw.reset();
     }
 
-    /*@Override
+    @Override
     public void load(){
-        super.load();
+        //super.load();
         rotor.each(Rotor::load);
-    }*/
+    }
 }
