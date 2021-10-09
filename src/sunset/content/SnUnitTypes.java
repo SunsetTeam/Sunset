@@ -21,6 +21,7 @@ import sunset.entities.abilities.StatusFieldAbility;
 import sunset.entities.bullet.BerserkLaserBulletType;
 import sunset.type.BerserkUnitType;
 import sunset.type.CopterUnitType;
+import sunset.type.Rotor;
 import sunset.type.UnitTypeExt;
 import sunset.type.WheelUnitType;
 import sunset.type.weapons.ChainWeapon;
@@ -32,24 +33,24 @@ import static mindustry.gen.EntityMapping.map;
 public class SnUnitTypes implements ContentList {
     public static UnitType
     //attack copters
-    guardcopter, bladecopter, swordcopter, guardiancopter, crusadercopter,
+    windcopter, bladecopter, swordcopter, guardiancopter, crusadercopter,
     //air-support (buffers)
     comet, satelite, planet, star, galaxy,
-    //berserk (spiders)
-    mirage, vision, illusion, soothSayer, seer, abyssEye,
     //wheel units
     wheel1, wheel2, wheel3, wheel4, wheel5,
     //delivery
     router, courier,
     //freezing
-    snowflake;
+    snowflake,
+    //berserk
+    mirage, vision, illusion, soothSayer;
     @Override
     public void load() {
         //region attack copters
-        guardcopter = new CopterUnitType("guard-copter") {{
-            health = 170;
-            hitSize = 27;
-            speed = 3.3f;
+        windcopter = new CopterUnitType("wind-copter") {{
+            health = 140;
+            hitSize = 14;
+            speed = 3.2f;
             accel = 0.1f;
             drag = 0.02f;
             commandLimit = 3;
@@ -59,17 +60,25 @@ public class SnUnitTypes implements ContentList {
             range = 130;
             unitFallRotateSpeed = 6f;
 
-            offsetY = 2.2f;
+            rotor.add(                    
+                new Rotor("small-rotor"){{
+                offsetX = 0;
+                offsetY = 0;
+                rotorRotateSpeed = 27f;
+                rotorCount = 2;
+                }}
+            );
+
             weapons.add(
-                    new WeaponExt("sunset-guard-gun") {{
+                    new WeaponExt("sunset-wind-gun") {{
                         rotate = false;
                         mirror = true;
                         top = true;
-                        x = 8f;
-                        y = 0f;
+                        x = 5f;
+                        y = -2f;
                         shots = 1;
                         inaccuracy = 1;
-                        reload = 5f;
+                        reload = 5.5f;
                         shootSound = Sounds.pew;
                         bullet = SnBullets.BasicHelicopterGun;
                     }});
@@ -87,7 +96,6 @@ public class SnUnitTypes implements ContentList {
             range = 170;
             unitFallRotateSpeed = 5f;
 
-            offsetY = 2.5f;
             weapons.add(
                     new WeaponExt("sunset-blade-gun") {{
                         rotate = false;
@@ -119,8 +127,6 @@ public class SnUnitTypes implements ContentList {
             range = 210;
 
             unitFallRotateSpeed = 5f;
-            rotorRotateSpeed = 27f;
-            offsetY = 2.6f;
             weapons.add(
                     new WeaponExt("sunset-sword-gun") {{
                         rotate = false;
@@ -162,8 +168,6 @@ public class SnUnitTypes implements ContentList {
             circleTarget = false;
 
             unitFallRotateSpeed = 5f;
-            rotorRotateSpeed = 26f;
-            offsetY = 2.6f;
             weapons.add(
                     new WeaponExt("sunset-guardian-gun") {{
                         rotate = false;
@@ -209,8 +213,6 @@ public class SnUnitTypes implements ContentList {
             circleTarget = false;
 
             unitFallRotateSpeed = 5f;
-            rotorRotateSpeed = 25f;
-            offsetY = 2.6f;
             weapons.add(
                     new WeaponExt("sunset-crusader-gun") {{
                         rotate = false;
@@ -462,8 +464,7 @@ public class SnUnitTypes implements ContentList {
             speed = 1f;
             rotateSpeed = 3f;
             visualElevation = 0.2f;
-            drag = 0.4f;
-            hitSize = 14f;
+            drag = 0.1f;
             armor = 4f;
             hitSize = 11f;
             allowLegStep = true;
@@ -501,17 +502,15 @@ public class SnUnitTypes implements ContentList {
             health = 980;
             speed = 0.8f;
             rotateSpeed = 2f;
-            drag = 0.4f;
-            hitSize = 18f;
+            drag = 0.125f;
             armor = 5f;
             allowLegStep = true;
             hovering = false;
             groundLayer = Layer.legUnit - 1;
-            visualElevation = 0.3f;
             legCount = 4;
-            legLength = 9f;
-            legTrns = 0.9f;
-            legMoveSpace = 1.3f;
+            legLength = 10f;
+            legTrns = 0.8f;
+            legMoveSpace = 1.4f;
             legBaseOffset = 2f;
 
             weapons.add(
@@ -531,12 +530,9 @@ public class SnUnitTypes implements ContentList {
             speed = 1.1f;
             rotateSpeed = 2.4f;
             drag = 0.125f;
-            hitSize = 25f;
-            armor = 6f;
             allowLegStep = true;
-            hovering = true;
+            hovering = false;
             groundLayer = Layer.legUnit - 1;
-            visualElevation = 0.4f;
             legCount = 6;
             legLength = 15;
             legTrns = 0.8f;
@@ -580,17 +576,15 @@ public class SnUnitTypes implements ContentList {
                     }}
             );
         }};
-        soothSayer = new BerserkUnitType("soothSayer"){{
+        soothSayer = new BerserkUnitType("soothSayer"){
+            {
                 health = 7500;
                 speed = 1.3f;
                 rotateSpeed = 2.1f;
                 drag = 0.125f;
-                hitSize = 40f;
-                armor = 8f;
                 allowLegStep = true;
-                hovering = true;
+                hovering = false;
                 groundLayer = Layer.legUnit - 1;
-                visualElevation = 0.5f;
                 legCount = 6;
                 legMoveSpace = 1f;
                 legPairOffset = 3;
@@ -642,55 +636,6 @@ public class SnUnitTypes implements ContentList {
                         }}
                 );
             }};
-
-        seer = new BerserkUnitType("seer"){{
-                health = 24000;
-                speed = 0.97f;
-                rotateSpeed = 1.8f;
-                drag = 0.125f;
-                hitSize = 60f;
-                armor = 12f;
-                allowLegStep = true;
-                hovering = true;
-                groundLayer = Layer.legUnit - 1;
-                visualElevation = 0.6f;
-                legCount = 8;
-                legMoveSpace = 0.8f;
-                legPairOffset = 3;
-                legLength = 60f;
-                legExtension = -19;
-                legBaseOffset = 8f;
-                landShake = 1f;
-                legSpeed = 0.1f;
-                legLengthScl = 0.93f;
-                rippleScale = 3f;
-                legSpeed = 0.19f;
-            }};
-
-
-        abyssEye = new BerserkUnitType("abyssEye"){{
-                health = 65000;
-                speed = 0.75f;
-                rotateSpeed = 1.5f;
-                drag = 0.125f;
-                hitSize = 90f;
-                armor = 16f;
-                allowLegStep = true;
-                hovering = true;
-                groundLayer = Layer.legUnit - 1;
-                visualElevation = 0.7f;
-                legCount = 8;
-                legMoveSpace = 0.7f;
-                legPairOffset = 3;
-                legLength = 80f;
-                legExtension = -21;
-                legBaseOffset = 9f;
-                landShake = 1.5f;
-                legSpeed = 0.21f;
-                legLengthScl = 0.9f;
-                rippleScale = 3f;
-                legSpeed = 0.19f;
-                }};
         //endregion berserk
 
         //region wheel

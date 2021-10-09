@@ -30,7 +30,7 @@ public class SnUnitBlocks implements ContentList {
     bigAirFactory = new UnitFactory("big-air-factory"){{
         requirements(Category.units, with(SnItems.fors, 80, Items.copper, 70));
         plans = Seq.with(
-            new UnitPlan(SnUnitTypes.guardcopter, 70f * 15, with(SnItems.fors, 15, Items.silicon, 20)),
+            new UnitPlan(SnUnitTypes.windcopter, 70f * 15, with(SnItems.fors, 15, Items.silicon, 20)),
             new UnitPlan(SnUnitTypes.comet, 60f * 40, with(Items.silicon, 40, SnItems.naturite, 20))
         );
         size = 3;
@@ -57,7 +57,7 @@ public class SnUnitBlocks implements ContentList {
             constructTime = 65f * 10f;
 
             upgrades.addAll(
-                new UnitType[]{SnUnitTypes.guardcopter, SnUnitTypes.bladecopter},
+                new UnitType[]{SnUnitTypes.windcopter, SnUnitTypes.bladecopter},
                 new UnitType[]{SnUnitTypes.comet, SnUnitTypes.satelite},
                 new UnitType[]{SnUnitTypes.mirage, SnUnitTypes.vision}
             );
@@ -112,7 +112,7 @@ public class SnUnitBlocks implements ContentList {
 
 
             upgrades.addAll(
-                new UnitType[]{SnUnitTypes.guardcopter, SnUnitTypes.crusadercopter},
+                new UnitType[]{SnUnitTypes.guardiancopter, SnUnitTypes.crusadercopter},
                 new UnitType[]{SnUnitTypes.star, SnUnitTypes.galaxy}
             );
         }};

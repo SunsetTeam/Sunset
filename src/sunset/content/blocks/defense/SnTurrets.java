@@ -462,9 +462,9 @@ public class SnTurrets implements ContentList {
 
         //7x7
         halberd = new PowerTurret("halberd"){{
-            requirements(Category.turret, with(Items.copper, 2400,  Items.metaglass, 1200, Items.lead, 1120, Items.silicon, 1200, Items.plastanium, 980, SnItems.planatrium, 860, SnItems.nobium, 750, SnItems.fors, 710, SnItems.enojie, 690));
+            requirements(Category.turret, with(Items.copper, 2400,  Items.metaglass, 1200, Items.lead, 1120, Items.silicon, 1200, Items.plastanium, 980, SnItems.nobium, 750, SnItems.fors, 710, SnItems.enojie, 690));
             range = 350f;
-            shots = 5;
+            shots = 1;
             chargeTime = 145f;
             rotateSpeed = 1.6F;
             chargeMaxDelay = 140f;
