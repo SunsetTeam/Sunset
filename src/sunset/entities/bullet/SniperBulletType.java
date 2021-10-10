@@ -1,8 +1,11 @@
 package sunset.entities.bullet;
 
+import arc.math.Angles;
+import arc.math.Mathf;
 import arc.math.geom.Vec2;
 import arc.struct.Seq;
 import arc.util.Time;
+import mindustry.entities.Damage;
 import mindustry.entities.bullet.BasicBulletType;
 import mindustry.gen.Building;
 import mindustry.gen.Bullet;
@@ -48,8 +51,16 @@ public class SniperBulletType extends BasicBulletType {
                 eLengthPassed += trailSpace * curSizeScale;
                 eIteration++;
             }
-            //обновляем данные
+            //урон
             current.damage(damage * curDmgScale * (current instanceof Building ? buildingDamageMultiplier : 1));
+            for(int i = 0; i < fragBullets; i++) {
+                float len = Mathf.random(fragVelocityMin, fragVelocityMax);
+                float a = b.rotation() + Mathf.range(fragCone / 2);
+                float fragDamage = damage/fragBullets*curDmgScale*(1-pierceDamageMultiplier);
+                Time.run(trailDelay * eIteration, runEffect(current.x(), current.y(), a, curSizeScale*len));
+                fragBullet.create(b, b.team, current.x(), current.y(), a, fragDamage, len,1, null);
+            }
+            //обновляем данные
             curDmgScale *= pierceDamageMultiplier;
             curSizeScale *= pierceSizeMultiplier;
             eOffset.scl(pierceSizeMultiplier);

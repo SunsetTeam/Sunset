@@ -27,7 +27,7 @@ public class SnBullets implements ContentList {
     //heavy-standart
     heavystandardDense, heavystandardThorium, heavystandardIncendiary, standartReneubiteBig, standardForsBig,
     //sniper
-    somesnipersurge,
+    somesnipersurge, somesnipersurgefrag,
     //burner
     heavyCoalFlame, heavyPyraFlame, flameidFlame,
     //liquid
@@ -170,16 +170,34 @@ public class SnBullets implements ContentList {
         }};
         //endregion artillery
         //region somesniper
+        somesnipersurgefrag = new BulletType(8f, 6700f){{
+            ammoMultiplier = 3f;
+            hitSize = 7f;
+            lifetime = 4f;
+            pierce = true;
+            trailEffect = Fx.none;
+            shootEffect = Fx.none;
+            hitEffect = Fx.none;
+            despawnEffect = Fx.none;
+            smokeEffect = Fx.none;
+            keepVelocity = false;
+            hittable = false;
+        }};
         somesnipersurge = new SniperBulletType(){{
             trailEffect = SnFx.somesnipertrail;
             frontColor = Pal.surge;
             trailDelay = 0.2f;
             trailSpace = 32f;
             range = 768f;
-            damage = 3400f;
+            fragBullets = 6;
+            fragBullet = somesnipersurgefrag;
+            fragVelocityMin = 1.2f;
+            fragVelocityMax = 1.9f;
+            fragCone = 150f;
+            damage = 6700f;
             pierceSizeMultiplier = 0.9f;
-            buildingDamageMultiplier = 0.4f;
             pierceBuilding = pierce = true;
+            buildingDamageMultiplier = 0.4f;
         }};
         //endregion somesniper
         //region big standart

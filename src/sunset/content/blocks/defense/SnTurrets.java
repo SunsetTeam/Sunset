@@ -384,7 +384,7 @@ public class SnTurrets implements ContentList {
             requirements(Category.turret, with(Items.copper, 1200, Items.surgeAlloy, 600, SnItems.naturite, 500, Items.silicon, 400));
             ammo(Items.surgeAlloy, SnBullets.somesnipersurge);
 
-            ammoPerShot = 6;
+            ammoPerShot = 9;
             rotateSpeed = 1.5f;
             reloadTime = 370f;
             recoilAmount = 12f;
