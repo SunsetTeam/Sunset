@@ -129,6 +129,7 @@ public class SnTurrets implements ContentList {
             rotateSpeed = 7f;
             shootSound = Sounds.sap;
             targetAir = true;
+            targetGround = false;
         }};
         reflection = new ItemTurret("reflection") {{
             requirements(Category.turret, with(Items.copper, 100, SnItems.fors, 60, SnItems.naturite, 55, SnItems.nobium, 45));
@@ -629,7 +630,7 @@ public class SnTurrets implements ContentList {
             );
             range = 130f;
             health = 780;
-            size = 3;
+            size = 2;
             reloadTime = 24f;
             range = 370f;
             recoilAmount = 0.3f;
