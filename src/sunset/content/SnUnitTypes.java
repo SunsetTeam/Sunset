@@ -33,7 +33,7 @@ import static mindustry.gen.EntityMapping.map;
 public class SnUnitTypes implements ContentList {
     public static UnitType
     //attack copters
-    windcopter, bladecopter, swordcopter, guardiancopter, crusadercopter,
+    wind, thunder, nadir, guardiancopter, crusadercopter,
     //air-support (buffers)
     comet, satelite, planet, star, galaxy,
     //berserk
@@ -47,9 +47,9 @@ public class SnUnitTypes implements ContentList {
     @Override
     public void load() {
         //region attack copters
-        windcopter = new CopterUnitType("wind-copter") {{
+        wind = new CopterUnitType("wind") {{
             health = 140;
-            hitSize = 14;
+            hitSize = 15;
             speed = 3.2f;
             accel = 0.1f;
             drag = 0.02f;
@@ -60,22 +60,21 @@ public class SnUnitTypes implements ContentList {
             range = 130;
             unitFallRotateSpeed = 6f;
 
-            rotor.add(                    
+            rotors.add(                    
                 new Rotor("sunset-rotor-small"){{
                 offsetX = 0;
-                offsetY = 0;
+                offsetY = 2;
                 rotorRotateSpeed = 27f;
-                rotorCount = 2;
+                rotorCount = 1;
                 }}
             );
-
             weapons.add(
                     new WeaponExt("sunset-wind-gun") {{
                         rotate = false;
                         mirror = true;
                         top = true;
-                        x = 5f;
-                        y = -2f;
+                        x = 4f;
+                        y = 2f;
                         shots = 1;
                         inaccuracy = 1;
                         reload = 5.5f;
@@ -83,9 +82,9 @@ public class SnUnitTypes implements ContentList {
                         bullet = SnBullets.BasicHelicopterGun;
                     }});
         }};
-        bladecopter = new CopterUnitType("blade-copter") {{
-            health = 370;
-            hitSize = 39;
+        thunder = new CopterUnitType("thunder") {{
+            health = 310;
+            hitSize = 20;
             speed = 3.0f;
             accel = 0.1f;
             drag = 0.02f;
@@ -95,28 +94,36 @@ public class SnUnitTypes implements ContentList {
             circleTarget = false;
             range = 170;
             unitFallRotateSpeed = 5f;
-
+            
+            rotors.add(                    
+                new Rotor("sunset-rotor-small"){{
+                offsetX = 0;
+                offsetY = 2;
+                rotorRotateSpeed = 28f;
+                rotorCount = 1;
+                }}
+            );
             weapons.add(
-                    new WeaponExt("sunset-blade-gun") {{
+                    new WeaponExt("sunset-missile-mount-small") {{
                         rotate = false;
                         mirror = true;
                         top = true;
-                        x = -10f;
-                        y = 4f;
-                        shootCone = 20f;
-                        spacing = 4f;
-                        recoil = 2f;
+                        x = 1f;
+                        y = 5f;
+                        spacing = 3f;
+                        reload = 45f;
+                        shake = 1f;
+                        recoil = 3f;
+                        inaccuracy = 5f;
+                        velocityRnd = 0.2f;
                         shots = 1;
-                        shootCone = 0.01f;
-                        inaccuracy = 2;
-                        reload = 15f;
-                        shootSound = Sounds.shoot;
-                        bullet = SnBullets.HelicopterShootgun;
+                        shootSound = Sounds.missile;
+                        bullet = SnBullets.HelicopterMissile;
                     }});
         }};
-        swordcopter = new CopterUnitType("sword-copter") {{
-            health = 630;
-            hitSize = 46;
+        nadir = new CopterUnitType("nadir") {{
+            health = 580;
+            hitSize = 30;
             speed = 2.8f;
             accel = 0.1f;
             drag = 0.02f;
@@ -124,36 +131,60 @@ public class SnUnitTypes implements ContentList {
 
             flying = true;
             circleTarget = false;
-            range = 210;
+            range = 170;
 
             unitFallRotateSpeed = 5f;
+
+            rotors.add(                    
+                new Rotor("sunset-triple-rotor"){{
+                offsetX = 0;
+                offsetY = 8;
+                rotorRotateSpeed = 27f;
+                rotorCount = 1;
+                }}
+            );
+
+            rotors.add(                    
+                new Rotor("sunset-rotor-small"){{
+                offsetX = 0;
+                offsetY = -9;
+                rotorRotateSpeed = 26f;
+                rotorCount = 1;
+                }}
+            );
             weapons.add(
-                    new WeaponExt("sunset-sword-gun") {{
+                    new WeaponExt("sunset-missile-launch") {{
                         rotate = false;
                         mirror = true;
                         top = true;
-                        x = -19f;
-                        y = 5f;
+                        x = -8f;
+                        y = 6f;
                         spacing = 3f;
                         reload = 45f;
                         shake = 1f;
-                        recoil = 4f;
+                        recoil = 5f;
                         inaccuracy = 5f;
+                        velocityRnd = 0.2f;
+                        shots = 1;
+                        shootSound = Sounds.missile;
+                        bullet = SnBullets.clusterRocket;
+                    }},
+
+                    new Weapon() {{
+                        rotate = false;
+                        mirror = true;
+                        top = true;
+                        x = 5f;
+                        y = -2f;
+                        spacing = 3f;
+                        reload = 5f;
+                        shake = 1f;
+                        recoil = 4f;
+                        inaccuracy = 2f;
                         velocityRnd = 0.2f;
                         shots = 3;
                         shootSound = Sounds.missile;
-                        bullet = SnBullets.HelicopterMissile;
-                    }},
-                    new Weapon() {{
-                        x = 0f;
-                        y = 10f;
-                        reload = 50f;
-                        top = false;
-                        minShootVelocity = 0.01f;
-
-                        soundPitchMin = 1f;
-                        shootSound = Sounds.plasmadrop;
-                        bullet = SnBullets.HelicopterBomb;
+                        bullet = SnBullets.LaserBoltHelicopterGun;
                     }});
         }};
         guardiancopter = new CopterUnitType("guardian-copter") {{
@@ -504,6 +535,7 @@ public class SnUnitTypes implements ContentList {
             rotateSpeed = 2f;
             drag = 0.125f;
             armor = 5f;
+            hitSize = 19f;
             allowLegStep = true;
             hovering = false;
             groundLayer = Layer.legUnit - 1;
@@ -530,6 +562,7 @@ public class SnUnitTypes implements ContentList {
             speed = 1.1f;
             rotateSpeed = 2.4f;
             drag = 0.125f;
+            hitSize = 29f;
             allowLegStep = true;
             hovering = false;
             groundLayer = Layer.legUnit - 1;
@@ -584,6 +617,7 @@ public class SnUnitTypes implements ContentList {
                 drag = 0.125f;
                 allowLegStep = true;
                 hovering = false;
+                hitSize = 40f;
                 groundLayer = Layer.legUnit - 1;
                 legCount = 6;
                 legMoveSpace = 1f;
@@ -641,7 +675,7 @@ public class SnUnitTypes implements ContentList {
                 speed = 0.97f;
                 rotateSpeed = 1.8f;
                 drag = 0.125f;
-                hitSize = 60f;
+                hitSize = 50f;
                 armor = 12f;
                 allowLegStep = true;
                 hovering = true;
@@ -666,7 +700,7 @@ public class SnUnitTypes implements ContentList {
                 speed = 0.75f;
                 rotateSpeed = 1.5f;
                 drag = 0.125f;
-                hitSize = 90f;
+                hitSize = 75f;
                 armor = 16f;
                 allowLegStep = true;
                 hovering = true;

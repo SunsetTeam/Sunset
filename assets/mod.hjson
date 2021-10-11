@@ -9,7 +9,7 @@ authors:
 \nMaps: Saigo no-nozomi.
 "
 description: Adds a lot of new content on type: 3 planets, new and upgraded turrets, factories, 50+ units, items, embodiment and more.....
-version: 0.1.7A
+version: 0.1.8A
 repo: SunsetTeam/Sunset
 main: sunset.Sunset
 minGameVersion: 126.2

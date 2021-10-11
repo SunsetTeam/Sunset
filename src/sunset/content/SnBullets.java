@@ -42,7 +42,7 @@ public class SnBullets implements ContentList {
             SporePodPoisonFrag, heavySporePodPoison, NaturitePoisonFrag, heavyNaturitePoison, NobiumPoisonFrag, heavyNobiumPoison,
             bigSporePodPoisonFrag, bigSporePodPoison, bigNaturitePoisonFrag, bigNaturitePoison, bigNobiumPoisonFrag, bigNobiumPoison, bigPlastaniumPoisonFrag, bigPlastaniumPoison,
     //units
-    BasicHelicopterGun, HelicopterShootgun, HelicopterMissile, HelicopterBomb, HelicopterRocket, bigHelicopterGun, laserHelicopterFrag, largeHelicopterGun, bigHelicopterRocket, HelicopterMissiles,
+    BasicHelicopterGun, LaserBoltHelicopterGun, HelicopterMissile, clusterRocketSmall, clusterRocket, HelicopterRocket, bigHelicopterGun, laserHelicopterFrag, largeHelicopterGun, bigHelicopterRocket, HelicopterMissiles,
             cometWaterShot, starStunBullet, galaxyKnockbackBullet,
             wheel1bullet, wheel2shotgun, wheel3burst, wheel4shotgun, wheel4artillery, wheel5flame, wheel5bullet, mirageGunBullet,
     //misc
@@ -842,80 +842,83 @@ public class SnBullets implements ContentList {
         }};
         //endregion big-poison bullets
         //region helicopter
-        BasicHelicopterGun = new BasicBulletType(5.6f, 11) {{
+        BasicHelicopterGun = new BasicBulletType(5.3f, 10) {{
             width = 8f;
             height = 11f;
             lifetime = 35f;
             shootEffect = Fx.shootSmall;
             smokeEffect = Fx.shootSmallSmoke;
         }};
-        HelicopterShootgun = new BasicBulletType(2f, 9) {{
-            width = 11f;
-            height = 15f;
-            lifetime = 55f;
-            hitEffect = despawnEffect = Fx.none;
-            instantDisappear = true;
-            fragBullets = 5;
-            keepVelocity = true;
-            fragBullet = new BasicBulletType(2f, 9f) {{
-                lifetime = 55f;
-                keepVelocity = true;
-            }};
-            fragVelocityMin = 0.8f;
-            fragVelocityMax = 1.5f;
-            fragLifeMin = 0.6f;
-            fragLifeMax = 1.5f;
-            fragCone = 18f;
+
+        LaserBoltHelicopterGun = new LaserBoltBulletType(5.6f, 12) {{
+            width = 8f;
+            height = 11f;
+            lifetime = 30f;
             shootEffect = Fx.shootSmall;
             smokeEffect = Fx.shootSmallSmoke;
         }};
-        HelicopterMissile = new MissileBulletType(6f, 31) {{
-            width = 14f;
-            height = 17f;
+
+        HelicopterMissile = new MissileBulletType(4f, 19) {{
+            width = 8f;
+            height = 11f;
             shrinkY = 0f;
             drag = -0.003f;
-            homingRange = 30f;
-            homingPower = 0.2f;
+            homingRange = 10f;
+            homingPower = 0.1f;
+            keepVelocity = false;
+            hitSound = Sounds.explosion;
+            trailChance = 0.2f;
+            lifetime = 30f;
+            backColor = Pal.unitBack;
+            frontColor = Pal.unitFront;
+            hitEffect = Fx.blastExplosion;
+            despawnEffect = Fx.blastExplosion;
+            weaveScale = 4f;
+            weaveMag = 2f;
+        }};
+        
+        clusterRocketSmall = new MissileBulletType(4f, 10) {{
+            width = 6f;
+            height = 9f;
+            shrinkY = 0f;
+            drag = -0.003f;
+            homingRange = 9f;
+            homingPower = 0.09f;
+            keepVelocity = false;
+            hitSound = Sounds.explosion;
+            trailChance = 0.1f;
+            lifetime = 17f;
+            backColor = Pal.unitBack;
+            frontColor = Pal.unitFront;
+            hitEffect = Fx.blastExplosion;
+            despawnEffect = Fx.blastExplosion;
+            weaveScale = 4f;
+            weaveMag = 2f;
+        }};
+
+        clusterRocket = new MissileBulletType(4f, 30) {{
+            width = 10f;
+            height = 14f;
+            shrinkY = 0f;
+            drag = -0.003f;
+            homingRange = 10f;
+            homingPower = 0.14f;
             keepVelocity = false;
             hitSound = Sounds.explosion;
             trailChance = 0.3f;
-            lifetime = 47f;
+            lifetime = 25f;
             backColor = Pal.unitBack;
             frontColor = Pal.unitFront;
             hitEffect = Fx.blastExplosion;
             despawnEffect = Fx.blastExplosion;
             weaveScale = 5f;
-            weaveMag = 2f;
+            weaveMag = 3f;
+            
+            fragBullet = clusterRocketSmall;
+            fragCone = 90f;
+            fragBullets = 4;
         }};
-        HelicopterBomb = new BasicBulletType(2f, 5) {{
-            sprite = "sunset-copter-bomb";
-            width = height = 70 / 2f;
 
-            maxRange = 30f;
-
-            backColor = SnPal.copterBomb;
-            frontColor = Color.white;
-            mixColorTo = Color.white;
-
-            hitSound = Sounds.plasmaboom;
-            hitShake = 2f;
-
-            collidesAir = false;
-
-            lifetime = 40f;
-
-            despawnEffect = SnFx.CopterBomb;
-            hitEffect = Fx.massiveExplosion;
-            keepVelocity = true;
-            spin = 2f;
-
-            shrinkX = shrinkY = 0.55f;
-
-            collides = true;
-
-            splashDamage = 140f;
-            splashDamageRadius = 45f;
-        }};
         bigHelicopterGun = new BasicBulletType(9f, 53) {{
             width = 17f;
             height = 24f;

@@ -8,7 +8,7 @@ import mindustry.gen.UnitEntity;
 import mindustry.type.UnitType;
 
 public class CopterUnitType extends UnitType {
-    public final Seq<Rotor> rotor = new Seq<>();
+    public final Seq<Rotor> rotors = new Seq<>(1);
     public float unitFallRotateSpeed = 6f;
 
     public CopterUnitType(String name) {
@@ -37,13 +37,13 @@ public class CopterUnitType extends UnitType {
 
     public void drawRotor(Unit unit){
         applyColor(unit);
-        rotor.each(rotor -> rotor.draw(unit));
+        rotors.each(rotor -> rotor.draw(unit));
         Draw.reset();
     }
 
     @Override
     public void load(){
         super.load();
-        rotor.each(Rotor::load);
+        rotors.each(Rotor::load);
     }
 }

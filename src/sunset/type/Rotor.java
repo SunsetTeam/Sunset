@@ -7,14 +7,14 @@ import arc.math.Angles;
 import arc.util.Time;
 import mindustry.gen.Unit;
 
-public class Rotor {
+public class Rotor{
     public final String name;
 
     public float offsetX = 0f;
     public float offsetY = 0f;
     public float rotorRotateSpeed = 27;
 
-    public int rotorCount = 4;
+    public int rotorCount = 1;
 
     public TextureRegion rotorRegion, topRegion;
 
@@ -28,7 +28,7 @@ public class Rotor {
     }
     
     public void draw(Unit unit){
-
+        
     float rotorx = unit.x + Angles.trnsx(unit.rotation - 90, offsetX, offsetY);
     float rotory = unit.y + Angles.trnsy(unit.rotation - 90, offsetX, offsetY);
 
