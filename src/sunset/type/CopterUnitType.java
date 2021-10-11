@@ -8,7 +8,7 @@ import mindustry.gen.UnitEntity;
 import mindustry.type.UnitType;
 
 public class CopterUnitType extends UnitType {
-    public final Seq<Rotor> rotors = new Seq<>(1);
+    public final Seq<Rotor> rotors = new Seq<>();
     public float unitFallRotateSpeed = 6f;
 
     public CopterUnitType(String name) {

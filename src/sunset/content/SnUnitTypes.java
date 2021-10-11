@@ -108,8 +108,8 @@ public class SnUnitTypes implements ContentList {
                         rotate = false;
                         mirror = true;
                         top = true;
-                        x = 1f;
-                        y = 5f;
+                        x = 3f;
+                        y = 4f;
                         spacing = 3f;
                         reload = 45f;
                         shake = 1f;
@@ -136,7 +136,7 @@ public class SnUnitTypes implements ContentList {
             unitFallRotateSpeed = 5f;
 
             rotors.add(                    
-                new Rotor("sunset-triple-rotor"){{
+                new Rotor("sunset-triple-rotor-small"){{
                 offsetX = 0;
                 offsetY = 8;
                 rotorRotateSpeed = 27f;
@@ -170,14 +170,14 @@ public class SnUnitTypes implements ContentList {
                         bullet = SnBullets.clusterRocket;
                     }},
 
-                    new Weapon() {{
+                    new Weapon("sunset-wind-gun") {{
                         rotate = false;
                         mirror = true;
                         top = true;
                         x = 5f;
                         y = -2f;
                         spacing = 3f;
-                        reload = 5f;
+                        reload = 6.5f;
                         shake = 1f;
                         recoil = 4f;
                         inaccuracy = 2f;

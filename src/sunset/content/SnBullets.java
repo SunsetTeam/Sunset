@@ -842,7 +842,7 @@ public class SnBullets implements ContentList {
         }};
         //endregion big-poison bullets
         //region helicopter
-        BasicHelicopterGun = new BasicBulletType(5.3f, 10) {{
+        BasicHelicopterGun = new BasicBulletType(4.7f, 10) {{
             width = 8f;
             height = 11f;
             lifetime = 35f;
@@ -850,9 +850,9 @@ public class SnBullets implements ContentList {
             smokeEffect = Fx.shootSmallSmoke;
         }};
 
-        LaserBoltHelicopterGun = new LaserBoltBulletType(5.6f, 12) {{
-            width = 8f;
-            height = 11f;
+        LaserBoltHelicopterGun = new LaserBoltBulletType(5.3f, 12) {{
+            width = 3f;
+            height = 6f;
             lifetime = 30f;
             shootEffect = Fx.shootSmall;
             smokeEffect = Fx.shootSmallSmoke;
