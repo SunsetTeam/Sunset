@@ -105,7 +105,7 @@ public class SnBullets implements ContentList {
             collidesGround = true;
             collidesAir = false;
             splashDamage = 120f;
-            splashDamageRadius = 100f;
+            splashDamageRadius = 10f;
             sprite = "sunset-red-mine";
             status = StatusEffects.melting;
             hitEffect = Fx.blastExplosion;
@@ -127,7 +127,7 @@ public class SnBullets implements ContentList {
             width = height = 25f;
             collidesTiles = false;
             collidesAir = true;
-            splashDamageRadius = 60f * 0.75f;
+            splashDamageRadius = 58f * 0.75f;
             splashDamage = 120f;
             fragBullet = artilleryForsMine;
             fragBullets = 2;
@@ -139,7 +139,7 @@ public class SnBullets implements ContentList {
             collidesGround = true;
             collidesAir = false;
             splashDamage = 100f;
-            splashDamageRadius = 120f;
+            splashDamageRadius = 12f;
             status = StatusEffects.melting;
             hitEffect = Fx.blastExplosion;
             makeFire = true;
@@ -160,7 +160,7 @@ public class SnBullets implements ContentList {
             width = height = 25f;
             collidesTiles = false;
             collidesAir = true;
-            splashDamageRadius = 68f * 0.75f;
+            splashDamageRadius = 66f * 0.75f;
             splashDamage = 90f;
             fragBullet = artilleryBlastMine;
             fragBullets = 3;
@@ -858,9 +858,9 @@ public class SnBullets implements ContentList {
             smokeEffect = Fx.shootSmallSmoke;
         }};
 
-        HelicopterMissile = new MissileBulletType(4f, 19) {{
-            width = 8f;
-            height = 11f;
+        HelicopterMissile = new MissileBulletType(4f, 21) {{
+            width = 7f;
+            height = 10f;
             shrinkY = 0f;
             drag = -0.003f;
             homingRange = 10f;
@@ -868,7 +868,7 @@ public class SnBullets implements ContentList {
             keepVelocity = false;
             hitSound = Sounds.explosion;
             trailChance = 0.2f;
-            lifetime = 30f;
+            lifetime = 40f;
             backColor = Pal.unitBack;
             frontColor = Pal.unitFront;
             hitEffect = Fx.blastExplosion;
@@ -877,7 +877,7 @@ public class SnBullets implements ContentList {
             weaveMag = 2f;
         }};
         
-        clusterRocketSmall = new MissileBulletType(4f, 10) {{
+        clusterRocketSmall = new MissileBulletType(4f, 14) {{
             width = 6f;
             height = 9f;
             shrinkY = 0f;
@@ -887,7 +887,7 @@ public class SnBullets implements ContentList {
             keepVelocity = false;
             hitSound = Sounds.explosion;
             trailChance = 0.1f;
-            lifetime = 17f;
+            lifetime = 25f;
             backColor = Pal.unitBack;
             frontColor = Pal.unitFront;
             hitEffect = Fx.blastExplosion;
@@ -906,7 +906,7 @@ public class SnBullets implements ContentList {
             keepVelocity = false;
             hitSound = Sounds.explosion;
             trailChance = 0.3f;
-            lifetime = 25f;
+            lifetime = 34f;
             backColor = Pal.unitBack;
             frontColor = Pal.unitFront;
             hitEffect = Fx.blastExplosion;

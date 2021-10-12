@@ -111,7 +111,7 @@ public class SnUnitTypes implements ContentList {
                         x = 3f;
                         y = 4f;
                         spacing = 3f;
-                        reload = 45f;
+                        reload = 30f;
                         shake = 1f;
                         recoil = 3f;
                         inaccuracy = 5f;
@@ -140,7 +140,7 @@ public class SnUnitTypes implements ContentList {
                 offsetX = 0;
                 offsetY = 8;
                 rotorRotateSpeed = 27f;
-                rotorCount = 1;
+                rotorCount = 2;
                 }}
             );
 
@@ -148,7 +148,7 @@ public class SnUnitTypes implements ContentList {
                 new Rotor("sunset-rotor-small"){{
                 offsetX = 0;
                 offsetY = -9;
-                rotorRotateSpeed = 26f;
+                rotorRotateSpeed = 28f;
                 rotorCount = 1;
                 }}
             );
