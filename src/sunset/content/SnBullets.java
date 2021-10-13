@@ -842,7 +842,7 @@ public class SnBullets implements ContentList {
         }};
         //endregion big-poison bullets
         //region helicopter
-        BasicHelicopterGun = new BasicBulletType(4.7f, 10) {{
+        BasicHelicopterGun = new BasicBulletType(4.7f, 9) {{
             width = 8f;
             height = 11f;
             lifetime = 35f;
@@ -858,13 +858,13 @@ public class SnBullets implements ContentList {
             smokeEffect = Fx.shootSmallSmoke;
         }};
 
-        HelicopterMissile = new MissileBulletType(4f, 21) {{
+        HelicopterMissile = new MissileBulletType(4f, 23) {{
             width = 7f;
             height = 10f;
             shrinkY = 0f;
             drag = -0.003f;
             homingRange = 10f;
-            homingPower = 0.1f;
+            homingPower = 0.2f;
             keepVelocity = false;
             hitSound = Sounds.explosion;
             trailChance = 0.2f;
@@ -933,7 +933,6 @@ public class SnBullets implements ContentList {
 
         }};
         HelicopterRocket = new CopterRocketBulletType(5.0f, 50) {{
-            sprite = "sunset-guardian-rocket";
             width = 13f;
             height = 20f;
             hitShake = 2f;

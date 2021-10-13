@@ -93,7 +93,7 @@ public class SnUnitBlocks implements ContentList {
 
 
             upgrades.addAll(
-                new UnitType[]{SnUnitTypes.nadir, SnUnitTypes.guardiancopter},
+                new UnitType[]{SnUnitTypes.nadir, SnUnitTypes.halo},
                 new UnitType[]{SnUnitTypes.planet, SnUnitTypes.star}
             );
         }};
@@ -112,7 +112,7 @@ public class SnUnitBlocks implements ContentList {
 
 
             upgrades.addAll(
-                new UnitType[]{SnUnitTypes.guardiancopter, SnUnitTypes.crusadercopter},
+                new UnitType[]{SnUnitTypes.halo, SnUnitTypes.crusadercopter},
                 new UnitType[]{SnUnitTypes.star, SnUnitTypes.galaxy}
             );
         }};

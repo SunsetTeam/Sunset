@@ -33,7 +33,7 @@ import static mindustry.gen.EntityMapping.map;
 public class SnUnitTypes implements ContentList {
     public static UnitType
     //attack copters
-    wind, thunder, nadir, guardiancopter, crusadercopter,
+    wind, thunder, nadir, halo, crusadercopter,
     //air-support (buffers)
     comet, satelite, planet, star, galaxy,
     //berserk
@@ -140,7 +140,7 @@ public class SnUnitTypes implements ContentList {
                 offsetX = 0;
                 offsetY = 8;
                 rotorRotateSpeed = 27f;
-                rotorCount = 2;
+                rotorCount = 1;
                 }}
             );
 
@@ -187,8 +187,8 @@ public class SnUnitTypes implements ContentList {
                         bullet = SnBullets.LaserBoltHelicopterGun;
                     }});
         }};
-        guardiancopter = new CopterUnitType("guardian-copter") {{
-            health = 4600;
+        halo = new CopterUnitType("halo") {{
+            health = 5100;
             hitSize = 63;
             speed = 2.4f;
             accel = 0.1f;
@@ -200,12 +200,12 @@ public class SnUnitTypes implements ContentList {
 
             unitFallRotateSpeed = 5f;
             weapons.add(
-                    new WeaponExt("sunset-guardian-gun") {{
+                    new WeaponExt("") {{
                         rotate = false;
                         mirror = true;
                         top = true;
-                        x = -20f;
-                        y = 4f;
+                        x = -10f;
+                        y = 6f;
                         shotDelay = 5f;
                         reload = 50f;
                         recoil = 5f;
