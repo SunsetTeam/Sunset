@@ -303,7 +303,7 @@ public class SnUnitTypes implements ContentList {
         //region air-support (buffers)
         comet = new UnitType("comet") {{
             health = 150;
-            hitSize = 20;
+            hitSize = 12;
             speed = 3.1f;
             accel = 0.15f;
             drag = 0.1f;
@@ -334,7 +334,7 @@ public class SnUnitTypes implements ContentList {
         }};
         satelite = new UnitTypeExt("satellite") {{
             health = 470;
-            hitSize = 29;
+            hitSize = 20;
             speed = 3f;
             accel = 0.2f;
             drag = 0.15f;
@@ -363,7 +363,7 @@ public class SnUnitTypes implements ContentList {
         }};
         planet = new UnitTypeExt("planet") {{
             health = 980;
-            hitSize = 32;
+            hitSize = 26;
             speed = 2.9f;
             accel = 0.25f;
             drag = 0.1f;
@@ -394,7 +394,7 @@ public class SnUnitTypes implements ContentList {
         }};
         star = new UnitTypeExt("star") {{
             health = 5800;
-            hitSize = 50;
+            hitSize = 55;
             speed = 2.7f;
             accel = 0.2f;
             drag = 0.1f;
@@ -443,7 +443,7 @@ public class SnUnitTypes implements ContentList {
         }};
         galaxy = new UnitTypeExt("galaxy") {{
             health = 20000;
-            hitSize = 75;
+            hitSize = 80;
             speed = 2.4f;
             accel = 0.1f;
             drag = 0.05f;
@@ -500,7 +500,9 @@ public class SnUnitTypes implements ContentList {
             hitSize = 11f;
             allowLegStep = true;
             hovering = false;
-            groundLayer = Layer.legUnit - 1f;
+            groundLayer = Layer.legUnit;
+            visualElevation = 0.15f;
+
             legCount = 4;
             legLength = 7f;
             legTrns = 0.5f;
@@ -538,7 +540,9 @@ public class SnUnitTypes implements ContentList {
             hitSize = 19f;
             allowLegStep = true;
             hovering = false;
-            groundLayer = Layer.legUnit - 1;
+            groundLayer = Layer.legUnit - 1f;
+            visualElevation = 0.2f;
+
             legCount = 4;
             legLength = 10f;
             legTrns = 0.8f;
@@ -565,7 +569,9 @@ public class SnUnitTypes implements ContentList {
             hitSize = 29f;
             allowLegStep = true;
             hovering = false;
-            groundLayer = Layer.legUnit - 1;
+            groundLayer = Layer.legUnit;
+            visualElevation = 0.4f;
+
             legCount = 6;
             legLength = 15;
             legTrns = 0.8f;
@@ -617,8 +623,10 @@ public class SnUnitTypes implements ContentList {
                 drag = 0.125f;
                 allowLegStep = true;
                 hovering = false;
-                hitSize = 40f;
-                groundLayer = Layer.legUnit - 1;
+                hitSize = 38f;
+                groundLayer = Layer.legUnit;
+                visualElevation = 0.6f;
+
                 legCount = 6;
                 legMoveSpace = 1f;
                 legPairOffset = 3;
@@ -627,6 +635,9 @@ public class SnUnitTypes implements ContentList {
                 legBaseOffset = 9f;
                 landShake = 1f;
                 legLengthScl = 0.97f;
+
+                legSplashDamage = 37;
+                legSplashRange = 30;
                 weapons.add(
                         new Weapon("soothSayer-lasergun") {
                             {
@@ -675,12 +686,13 @@ public class SnUnitTypes implements ContentList {
                 speed = 0.97f;
                 rotateSpeed = 1.8f;
                 drag = 0.125f;
-                hitSize = 50f;
+                hitSize = 47f;
                 armor = 12f;
                 allowLegStep = true;
                 hovering = true;
-                groundLayer = Layer.legUnit - 1;
-                visualElevation = 0.6f;
+                groundLayer = Layer.legUnit;
+                visualElevation = 0.96f;
+
                 legCount = 8;
                 legMoveSpace = 0.8f;
                 legPairOffset = 3;
@@ -692,6 +704,9 @@ public class SnUnitTypes implements ContentList {
                 legLengthScl = 0.93f;
                 rippleScale = 3f;
                 legSpeed = 0.19f;
+
+                legSplashDamage = 45;
+                legSplashRange = 40;
             }};
 
 
@@ -700,12 +715,13 @@ public class SnUnitTypes implements ContentList {
                 speed = 0.75f;
                 rotateSpeed = 1.5f;
                 drag = 0.125f;
-                hitSize = 75f;
+                hitSize = 71;
                 armor = 16f;
                 allowLegStep = true;
                 hovering = true;
-                groundLayer = Layer.legUnit - 1;
-                visualElevation = 0.7f;
+                groundLayer = Layer.legUnit;
+                visualElevation = 1.1f;
+
                 legCount = 8;
                 legMoveSpace = 0.7f;
                 legPairOffset = 3;
@@ -717,6 +733,9 @@ public class SnUnitTypes implements ContentList {
                 legLengthScl = 0.9f;
                 rippleScale = 3f;
                 legSpeed = 0.19f;
+                
+                legSplashDamage = 59;
+                legSplashRange = 70;
                 }};
         //endregion berserk
 
