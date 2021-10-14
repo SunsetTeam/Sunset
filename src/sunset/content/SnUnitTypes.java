@@ -203,33 +203,46 @@ public class SnUnitTypes implements ContentList {
                     new WeaponExt("") {{
                         rotate = false;
                         mirror = true;
-                        top = true;
-                        x = -10f;
-                        y = 6f;
+                        x = 10f;
+                        y = -5f;
                         shotDelay = 5f;
                         reload = 50f;
                         recoil = 5f;
                         shake = 2f;
                         ejectEffect = Fx.casing3;
-
-                        inaccuracy = 0.3f;
+                        inaccuracy = 1.8f;
                         velocityRnd = 0.2f;
-                        shots = 4;
+                        shots = 1;
                         shootSound = Sounds.bang;
-                        bullet = SnBullets.bigHelicopterGun;
+                        bullet = SnBullets.bigHelicopterBullet;
                     }},
-                    new Weapon() {{
+                    new Weapon("") {{
                         rotate = false;
                         mirror = false;
                         shake = 3f;
                         x = 0f;
-                        y = 10f;
-                        reload = 120f;
-                        top = false;
+                        y = 14f;
+                        reload = 30f;
+                        shotDelay = 4f;
+                        shots = 3;
                         inaccuracy = 1f;
                         velocityRnd = 0.2f;
-                        shootSound = Sounds.missile;
-                        bullet = SnBullets.HelicopterRocket;
+                        shootSound = Sounds.shootBig;
+                        bullet = SnBullets.bigHelicopterGun;
+                    }},
+
+                    new Weapon("") {{
+                        rotate = false;
+                        mirror = true;
+                        shake = 3f;
+                        x = 14f;
+                        y = 4f;
+                        reload = 10f;
+                        shotDelay = 1f;
+                        shots = 4;
+                        inaccuracy = 1f;                        
+                        shootSound = Sounds.spark;
+                        bullet = SnBullets.lightningGun;
                     }});
         }};
         crusadercopter = new CopterUnitType("crusader-copter") {{

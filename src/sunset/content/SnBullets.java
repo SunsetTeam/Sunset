@@ -42,7 +42,7 @@ public class SnBullets implements ContentList {
             SporePodPoisonFrag, heavySporePodPoison, NaturitePoisonFrag, heavyNaturitePoison, NobiumPoisonFrag, heavyNobiumPoison,
             bigSporePodPoisonFrag, bigSporePodPoison, bigNaturitePoisonFrag, bigNaturitePoison, bigNobiumPoisonFrag, bigNobiumPoison, bigPlastaniumPoisonFrag, bigPlastaniumPoison,
     //units
-    BasicHelicopterGun, LaserBoltHelicopterGun, HelicopterMissile, clusterRocketSmall, clusterRocket, HelicopterRocket, bigHelicopterGun, laserHelicopterFrag, largeHelicopterGun, bigHelicopterRocket, HelicopterMissiles,
+    BasicHelicopterGun, LaserBoltHelicopterGun, HelicopterMissile, clusterRocketSmall, clusterRocket, bigHelicopterGun, bigHelicopterBullet, lightningGun, laserHelicopterFrag, largeHelicopterGun, bigHelicopterRocket, HelicopterMissiles,
             cometWaterShot, starStunBullet, galaxyKnockbackBullet,
             wheel1bullet, wheel2shotgun, wheel3burst, wheel4shotgun, wheel4artillery, wheel5flame, wheel5bullet, mirageGunBullet,
     //misc
@@ -849,7 +849,6 @@ public class SnBullets implements ContentList {
             shootEffect = Fx.shootSmall;
             smokeEffect = Fx.shootSmallSmoke;
         }};
-
         LaserBoltHelicopterGun = new LaserBoltBulletType(5.3f, 12) {{
             width = 3f;
             height = 6f;
@@ -857,14 +856,17 @@ public class SnBullets implements ContentList {
             shootEffect = Fx.shootSmall;
             smokeEffect = Fx.shootSmallSmoke;
         }};
-
-        HelicopterMissile = new MissileBulletType(4f, 23) {{
+        HelicopterMissile = new MissileBulletType(4f, 4) {{
             width = 7f;
             height = 10f;
             shrinkY = 0f;
             drag = -0.003f;
             homingRange = 10f;
             homingPower = 0.2f;
+
+            splashDamageRadius = 10f;
+            splashDamage = 10f;
+
             keepVelocity = false;
             hitSound = Sounds.explosion;
             trailChance = 0.2f;
@@ -876,14 +878,17 @@ public class SnBullets implements ContentList {
             weaveScale = 4f;
             weaveMag = 2f;
         }};
-        
-        clusterRocketSmall = new MissileBulletType(4f, 14) {{
+        clusterRocketSmall = new MissileBulletType(4f, 5) {{
             width = 6f;
             height = 9f;
             shrinkY = 0f;
             drag = -0.003f;
             homingRange = 9f;
             homingPower = 0.09f;
+
+            splashDamageRadius = 15f;
+            splashDamage = 10f * 1.5f;
+
             keepVelocity = false;
             hitSound = Sounds.explosion;
             trailChance = 0.1f;
@@ -895,14 +900,15 @@ public class SnBullets implements ContentList {
             weaveScale = 4f;
             weaveMag = 2f;
         }};
-
-        clusterRocket = new MissileBulletType(4f, 30) {{
+        clusterRocket = new MissileBulletType(4f, 7) {{
             width = 10f;
             height = 14f;
             shrinkY = 0f;
             drag = -0.003f;
             homingRange = 10f;
             homingPower = 0.14f;
+            splashDamageRadius = 30f;
+            splashDamage = 25f * 1.5f;
             keepVelocity = false;
             hitSound = Sounds.explosion;
             trailChance = 0.3f;
@@ -918,37 +924,28 @@ public class SnBullets implements ContentList {
             fragCone = 90f;
             fragBullets = 4;
         }};
-
-        bigHelicopterGun = new BasicBulletType(9f, 53) {{
-            width = 17f;
-            height = 24f;
-            lifetime = 28f;
+        bigHelicopterGun = new BasicBulletType(4f, 23) {{
+            width = 9f;
+            height = 14f;
+            lifetime = 40f;
+            shootEffect = Fx.shootSmall;
+            smokeEffect = Fx.shootSmallSmoke;
+        }};
+        bigHelicopterBullet = new BasicBulletType(6f, 45) {{
+            width = 13f;
+            height = 17f;
+            lifetime = 30f;
+            makeFire = true;
             shootEffect = Fx.shootBig;
             smokeEffect = Fx.shootBigSmoke;
-
-            lightning = 4;
-            lightningLength = 7;
-            lightningColor = Pal.surge;
-            lightningDamage = 18;
-
         }};
-        HelicopterRocket = new CopterRocketBulletType(5.0f, 50) {{
-            width = 13f;
-            height = 20f;
-            hitShake = 2f;
-            lifetime = 38f;
-            despawnEffect = SnFx.heavyCopterBomb;
-            hitEffect = Fx.massiveExplosion;
-            keepVelocity = false;
-            hitSound = Sounds.explosion;
-            trailChance = 0.3f;
-            shrinkY = 0f;
-            drag = -0.003f;
-            homingRange = 30f;
-            homingPower = 0.2f;
-            splashDamage = 350f;
-            splashDamageRadius = 50f;
+        lightningGun = new LightningBulletType(){{
+            damage = 10;
+            lightningLength = 15;
+            collidesAir = true;
+            shootEffect = Fx.lightningShoot;
         }};
+
         laserHelicopterFrag = new LaserBulletType(50) {{
             colors = new Color[]{SnPal.copterLaser.cpy().a(0.4f), SnPal.copterLaser, Color.white};
             width = 20f;
@@ -987,6 +984,7 @@ public class SnBullets implements ContentList {
             splashDamage = 350f;
             splashDamageRadius = 78f;
         }};
+
         HelicopterMissiles = new MissileBulletType(4.4f, 45) {{
             width = 11f;
             height = 11f;
