@@ -924,23 +924,29 @@ public class SnBullets implements ContentList {
             fragCone = 90f;
             fragBullets = 4;
         }};
-        bigHelicopterGun = new BasicBulletType(4f, 23) {{
+        bigHelicopterGun = new BasicBulletType(4f, 26) {{
             width = 9f;
             height = 14f;
-            lifetime = 40f;
+            lifetime = 45f;
             shootEffect = Fx.shootSmall;
             smokeEffect = Fx.shootSmallSmoke;
         }};
-        bigHelicopterBullet = new BasicBulletType(6f, 45) {{
+        bigHelicopterBullet = new BasicBulletType(6f, 10) {{
             width = 13f;
             height = 17f;
             lifetime = 30f;
             makeFire = true;
+            splashDamageRadius = 35f;
+            splashDamage = 60f;
+            hitEffect = Fx.massiveExplosion;
+            trailEffect = Fx.artilleryTrail;
+            backColor = Pal.missileYellowBack;
+            frontColor = Pal.missileYellow;
             shootEffect = Fx.shootBig;
             smokeEffect = Fx.shootBigSmoke;
         }};
         lightningGun = new LightningBulletType(){{
-            damage = 10;
+            damage = 13;
             lightningLength = 15;
             collidesAir = true;
             shootEffect = Fx.lightningShoot;

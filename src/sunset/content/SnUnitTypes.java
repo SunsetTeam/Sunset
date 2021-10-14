@@ -205,13 +205,11 @@ public class SnUnitTypes implements ContentList {
                         mirror = true;
                         x = 10f;
                         y = -5f;
-                        shotDelay = 5f;
-                        reload = 50f;
+                        reload = 55f;
                         recoil = 5f;
                         shake = 2f;
                         ejectEffect = Fx.casing3;
                         inaccuracy = 1.8f;
-                        velocityRnd = 0.2f;
                         shots = 1;
                         shootSound = Sounds.bang;
                         bullet = SnBullets.bigHelicopterBullet;
@@ -225,8 +223,7 @@ public class SnUnitTypes implements ContentList {
                         reload = 30f;
                         shotDelay = 4f;
                         shots = 3;
-                        inaccuracy = 1f;
-                        velocityRnd = 0.2f;
+                        inaccuracy = 2.5f;
                         shootSound = Sounds.shootBig;
                         bullet = SnBullets.bigHelicopterGun;
                     }},
@@ -234,13 +231,13 @@ public class SnUnitTypes implements ContentList {
                     new Weapon("") {{
                         rotate = false;
                         mirror = true;
-                        shake = 3f;
+                        shake = 1f;
                         x = 14f;
                         y = 4f;
                         reload = 10f;
                         shotDelay = 1f;
                         shots = 4;
-                        inaccuracy = 1f;                        
+                        inaccuracy = 3f;                        
                         shootSound = Sounds.spark;
                         bullet = SnBullets.lightningGun;
                     }});
