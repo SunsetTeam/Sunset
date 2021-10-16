@@ -189,7 +189,7 @@ public class SnUnitTypes implements ContentList {
         }};
         halo = new CopterUnitType("halo") {{
             health = 5100;
-            hitSize = 63;
+            hitSize = 40;
             speed = 2.4f;
             accel = 0.1f;
             drag = 0.02f;
@@ -733,11 +733,11 @@ public class SnUnitTypes implements ContentList {
                 visualElevation = 1.1f;
 
                 legCount = 8;
-                legMoveSpace = 0.7f;
+                legMoveSpace = 0.8f;
                 legPairOffset = 3;
                 legLength = 80f;
-                legExtension = -21;
-                legBaseOffset = 9f;
+                legExtension = -17;
+                legBaseOffset = 11f;
                 landShake = 1.5f;
                 legSpeed = 0.21f;
                 legLengthScl = 0.9f;

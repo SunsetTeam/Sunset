@@ -907,7 +907,7 @@ public class SnBullets implements ContentList {
             drag = -0.003f;
             homingRange = 10f;
             homingPower = 0.14f;
-            splashDamageRadius = 30f;
+            splashDamageRadius = 35f;
             splashDamage = 25f * 1.5f;
             keepVelocity = false;
             hitSound = Sounds.explosion;
@@ -924,7 +924,7 @@ public class SnBullets implements ContentList {
             fragCone = 90f;
             fragBullets = 4;
         }};
-        bigHelicopterGun = new BasicBulletType(4f, 26) {{
+        bigHelicopterGun = new BasicBulletType(4f, 27) {{
             width = 9f;
             height = 14f;
             lifetime = 45f;
@@ -946,7 +946,7 @@ public class SnBullets implements ContentList {
             smokeEffect = Fx.shootBigSmoke;
         }};
         lightningGun = new LightningBulletType(){{
-            damage = 13;
+            damage = 15;
             lightningLength = 15;
             collidesAir = true;
             shootEffect = Fx.lightningShoot;
