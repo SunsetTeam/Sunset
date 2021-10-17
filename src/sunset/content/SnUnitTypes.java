@@ -209,7 +209,7 @@ public class SnUnitTypes implements ContentList {
                         recoil = 5f;
                         shake = 2f;
                         ejectEffect = Fx.casing3;
-                        inaccuracy = 1.8f;
+                        inaccuracy = 1.3f;
                         shots = 1;
                         shootSound = Sounds.bang;
                         bullet = SnBullets.bigHelicopterBullet;
@@ -223,7 +223,7 @@ public class SnUnitTypes implements ContentList {
                         reload = 30f;
                         shotDelay = 4f;
                         shots = 3;
-                        inaccuracy = 2.5f;
+                        inaccuracy = 0.5f;
                         shootSound = Sounds.shootBig;
                         bullet = SnBullets.bigHelicopterGun;
                     }},
