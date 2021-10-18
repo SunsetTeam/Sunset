@@ -203,7 +203,7 @@ public class SnUnitTypes implements ContentList {
                     new WeaponExt("") {{
                         rotate = false;
                         mirror = true;
-                        x = 10f;
+                        x = 13f;
                         y = -5f;
                         reload = 55f;
                         recoil = 5f;
