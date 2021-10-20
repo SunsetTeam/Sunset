@@ -97,7 +97,7 @@ public class SnProduction implements ContentList {
         advancedKiln = new GenericSmelter("advanced-kiln") {{
             requirements(Category.crafting, with(Items.copper, 210, Items.lead, 220, Items.metaglass, 190, Items.graphite, 185, Items.silicon, 200, Items.titanium, 210, Items.thorium, 205));
 
-            size = 4;
+            size = 3;
             health = 1200;
             craftEffect = SnFx.modSmokeCloud;
             craftTime = 95f;
