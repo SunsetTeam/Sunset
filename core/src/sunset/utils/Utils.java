@@ -31,32 +31,43 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
 import static mindustry.Vars.tilesize;
-
 import static mindustry.Vars.world;
 
-/** Набор различных static утилит. */
+/**
+ * Набор различных static утилит.
+ */
 public class Utils {
-    private static Rect rect = new Rect(), hitrect = new Rect();
     private static final Rand random = new Rand();
     private static final Vec2 rv = new Vec2(), tr = new Vec2();
+    private static Rect rect = new Rect(), hitrect = new Rect();
     private static IntSet collidedBlocks = new IntSet();
 
-    /** Определяет, горит ли юнит. */
+    /**
+     * Определяет, горит ли юнит.
+     */
     public static boolean isUnitBurning(Unit u) {
         // Считаем, что эффект - горение, если он наносит урон и
         // среди его противоположностей есть вода. Такой подход позволит
         // тушить "пожары" из других модов.
         return Vars.content.getBy(ContentType.status).find(content -> {
-            StatusEffect s = (StatusEffect)content;
+            StatusEffect s = (StatusEffect) content;
             return u.hasEffect(s) && s.damage > 0 && s.opposites.contains(StatusEffects.wet);
         }) != null;
     }
-    /** Возвращает один из огней на блоке или null, если блок не горит. */
+
+    /**
+     * Возвращает один из огней на блоке или null, если блок не горит.
+     */
     public static Fire getBuildingFire(Building b) {
-        for(int dx = 0; dx < b.block.size; dx++)
-            for(int dy = 0; dy < b.block.size; dy++)
-                if(Fires.has(b.tileX() + dx, b.tileY() + dy))
-                    return Fires.get(b.tileX() + dx, b.tileY() + dy);
+        int offsetx = -(b.block.size - 1) / 2;
+        int offsety = -(b.block.size - 1) / 2;
+        for (int dx = 0; dx < b.block.size; dx++)
+            for (int dy = 0; dy < b.block.size; dy++) {
+                int x = b.tileX() + dx - offsetx;
+                int y = b.tileY() + dy - offsety;
+                if (Fires.has(x, y))
+                    return Fires.get(x, y);
+            }
         return null;
     }
     /** Обрабатывает всех юнитов всех команд в некотором радиусе. */
@@ -85,7 +96,7 @@ public class Utils {
         try {
             Field rendererF = MenuFragment.class.getDeclaredField("renderer");
             rendererF.setAccessible(true);
-            MenuRenderer renderer = (MenuRenderer)rendererF.get(Vars.ui.menufrag);
+            MenuRenderer renderer = (MenuRenderer) rendererF.get(Vars.ui.menufrag);
             Field flyerTypeF = MenuRenderer.class.getDeclaredField("flyerType");
             flyerTypeF.setAccessible(true);
             flyerTypeF.set(renderer, type);
@@ -99,30 +110,40 @@ public class Utils {
             Log.err(e);
         }
     }
-    /** Создаёт случайные векторы. */
+
+    /**
+     * Создаёт случайные векторы.
+     */
     public static void randVectors(long seed, int amount, float lengthFrom, float lengthTo, Floatc2 cons) {
         random.setSeed(seed);
 
-        for(int i = 0; i < amount; ++i) {
+        for (int i = 0; i < amount; ++i) {
             float vang = random.nextFloat() * 360.0F;
             rv.set(random.random(lengthFrom, lengthTo), 0.0F).rotate(vang);
             cons.get(rv.x, rv.y);
         }
     }
-    /** Создаёт TileHueristic. Нужен для обхода бага AbstractMethodError на Android, когда runtime игнорирует реализацию методов по умолчанию в интерфейсах. */
+
+    /**
+     * Создаёт TileHueristic. Нужен для обхода бага AbstractMethodError на Android, когда runtime игнорирует реализацию методов по умолчанию в интерфейсах.
+     */
     public static Astar.TileHueristic tileHueristic(Func<Tile, Float> costFunc) {
         return new Astar.TileHueristic() {
             @Override
             public float cost(Tile tile) {
                 return costFunc.get(tile);
             }
+
             @Override
             public float cost(Tile from, Tile tile) { //само проблемное место. Runtime на Android почему-то не видит модификатор default и тело метода.
                 return cost(tile);
             }
         };
     }
-    /** Ищет коллизию, игнорируя некоторые цели. */
+
+    /**
+     * Ищет коллизию, игнорируя некоторые цели.
+     */
     public static Healthc linecast(Bullet hitter, float x, float y, float angle, float length, Boolf<Healthc> predicate) {
         final Building[] tmpBuilding = new Building[]{null};
         final Unit[] tmpUnit = new Unit[]{null};
@@ -178,19 +199,21 @@ public class Utils {
         return tmpUnit[0];
     }
 
-    /** for EMP */
-    public static void trueEachBlock(float wx, float wy, float range, Cons<Building> cons){
+    /**
+     * for EMP
+     */
+    public static void trueEachBlock(float wx, float wy, float range, Cons<Building> cons) {
         collidedBlocks.clear();
         int tx = World.toTile(wx);
         int ty = World.toTile(wy);
 
         int tileRange = Mathf.floorPositive(range / tilesize);
 
-        for(int x = -tileRange + tx; x <= tileRange + tx; x++){
-            for(int y = -tileRange + ty; y <= tileRange + ty; y++){
-                if(Mathf.within(x * tilesize, y * tilesize, wx, wy, range)){
+        for (int x = -tileRange + tx; x <= tileRange + tx; x++) {
+            for (int y = -tileRange + ty; y <= tileRange + ty; y++) {
+                if (Mathf.within(x * tilesize, y * tilesize, wx, wy, range)) {
                     Building other = world.build(x, y);
-                    if(other != null && !collidedBlocks.contains(other.pos())){
+                    if (other != null && !collidedBlocks.contains(other.pos())) {
                         cons.get(other);
                         collidedBlocks.add(other.pos());
                     }
@@ -199,18 +222,20 @@ public class Utils {
         }
     }
 
-    /** for EMP */
-    public static Seq<Teamc> allNearbyEnemies(Team team, float x, float y, float radius){
+    /**
+     * for EMP
+     */
+    public static Seq<Teamc> allNearbyEnemies(Team team, float x, float y, float radius) {
         Seq<Teamc> targets = new Seq<>();
 
         Units.nearbyEnemies(team, x - radius, y - radius, radius * 2f, radius * 2f, unit -> {
-            if(Mathf.within(x, y, unit.x, unit.y, radius) && !unit.dead){
+            if (Mathf.within(x, y, unit.x, unit.y, radius) && !unit.dead) {
                 targets.add(unit);
             }
         });
 
         trueEachBlock(x, y, radius, build -> {
-            if(build.team != team && !build.dead && build.block != null){
+            if (build.team != team && !build.dead && build.block != null) {
                 targets.add(build);
             }
         });
