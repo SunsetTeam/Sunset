@@ -278,12 +278,12 @@ task jarAndroid {
         def dependencies = files.collect { "--classpath $it.path" }.join(" ")
 
         //dex and desugar files - this requires d8 in your PATH
-        doExec("d8 $dependencies --min-api 14 --output ${project.archivesBaseName}Android.jar ${pArtifactFilename}")
+        doExec("d8 $dependencies --min-api 14 --output ${project.archivesBaseName}Android.jar ${project.archivesBaseName}Desktop.jar")
     }
 }
 jar {
     dependsOn "core:jar"
-    archiveFileName = pArtifactFilename
+    archiveFileName = "${project.archivesBaseName}Desktop.jar"
     from {
 //        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
         project(":core").fileTree("build/libs/core.jar").collect { it.isDirectory() ? it : zipTree(it) }
@@ -309,18 +309,18 @@ task deploy(type: Jar) {
     archiveFileName = "${project.archivesBaseName}.jar"
 
     from {
-        [zipTree("$buildDir/libs/$pArtifactFilename"),
+        [zipTree("$buildDir/libs/${project.archivesBaseName}Desktop.jar"),
          zipTree("$buildDir/libs/${project.archivesBaseName}Android.jar")]
     }
 
     doLast {
-        delete { delete "$buildDir/libs/$pArtifactFilename" }
+        delete { delete "$buildDir/libs/${project.archivesBaseName}Desktop.jar" }
         delete { delete "$buildDir/libs/${project.archivesBaseName}Android.jar" }
     }
 }
 
 
-
+/*
 task dexify(type: Jar) {
     archiveName "dexed-$pArtifactFilename"
 
@@ -340,6 +340,7 @@ task dexify(type: Jar) {
 
     from(zipTree(jarArtifact), zipTree(dexedArtifact))
 }
+*/
 
 def os() { //Returns OS name
     String s = System.getProperty("os.name");
@@ -407,4 +408,4 @@ tasks.create("run").dependsOn("mjar").doLast {
     }
 }
 
-task buildDex dependsOn "build", "dexify"
+//task buildDex dependsOn "build", "dexify"
