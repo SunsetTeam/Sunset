@@ -373,10 +373,10 @@ task mjar() {
     ext{
         move={String intoPath ->
             delete {
-                delete "${intoPath}/${project.archivesBaseName}.jar"
+                delete "${intoPath}/${project.archivesBaseName}Desktop.jar"
             }
             copy {
-                from "$buildDir/libs/${project.archivesBaseName}.jar"
+                from "$buildDir/libs/${project.archivesBaseName}Desktop.jar"
                 into intoPath
             }
             println "moved to "+intoPath
