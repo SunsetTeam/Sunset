@@ -20,7 +20,7 @@ public class SnPlanets implements ContentList{
     @Override
     public void load(){
         //stars
-        magma = new Planet("magma", Planets.sun, 0, 3.6f){{
+        magma = new Planet("magma", Planets.sun, 3.6f, 0){{
             bloom = true;
             accessible = false;
             hasAtmosphere = true;
@@ -40,7 +40,7 @@ public class SnPlanets implements ContentList{
         }};
 
         //planets
-        burnout = new Planet("burnout", SnPlanets.magma, 2, 0.7f){{
+        burnout = new Planet("burnout", SnPlanets.magma, 0.7f, 2){{
             meshLoader = () -> new HexMesh(this, 6);
             generator = new BurnoutGenerator();
             radius = 0.87f;
@@ -58,7 +58,7 @@ public class SnPlanets implements ContentList{
             alwaysUnlocked = true;
         }};
 
-        azaria = new Planet("azaria", SnPlanets.magma, 3, 1f){{
+        azaria = new Planet("azaria", SnPlanets.magma, 1f, 3){{
             meshLoader = () -> new HexMesh(this, 6);
             generator = new AzariaGenerator();
             radius = 1.03f;
@@ -75,7 +75,7 @@ public class SnPlanets implements ContentList{
             alwaysUnlocked = true;
         }};
 
-        rime = new Planet("rime", SnPlanets.magma, 3, 0.9f){{
+        rime = new Planet("rime", SnPlanets.magma, 0.9f, 3){{
             meshLoader = () -> new HexMesh(this, 6);
             generator = new RimeGenerator();
             radius = 1;
