@@ -8,6 +8,7 @@ import arc.math.Mathf;
 import arc.struct.Seq;
 import arc.util.Strings;
 import arc.util.Time;
+import mindustry.annotations.Annotations.*;
 import mindustry.game.Team;
 import mindustry.gen.Building;
 import mindustry.gen.Sounds;
@@ -44,8 +45,11 @@ public class PrecussionDrill extends Block {
     public int drillItemCapacity = 10;
     public int tier = 5;
     public float powerUse = 1f;
+    @Load("@-rim")
     public TextureRegion rimRegion;
+    @Load("@-rotator")
     public TextureRegion rotatorRegion;
+    @Load("@-top")
     public TextureRegion topRegion;
     public PrecussionDrill(String name) {
         super(name);
@@ -60,7 +64,7 @@ public class PrecussionDrill extends Block {
     }
 
     @Override
-    public TextureRegion[] icons(){
+    public TextureRegion[] makeIconRegions(){
         return new TextureRegion[]{region, rotatorRegion, topRegion};
     }
     @Override

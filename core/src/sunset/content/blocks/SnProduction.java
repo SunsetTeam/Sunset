@@ -18,10 +18,7 @@ import mindustry.world.draw.DrawMixer;
 import sunset.content.SnFx;
 import sunset.content.SnItems;
 import sunset.content.SnLiquids;
-import sunset.world.blocks.production.AdvancedSurge;
-import sunset.world.draw.DrawAngleRotator;
-import sunset.world.draw.DrawModRotator;
-import sunset.world.draw.DrawModWeave;
+import sunset.world.draw.*;
 
 import static mindustry.type.ItemStack.with;
 
@@ -111,8 +108,11 @@ public class SnProduction implements ContentList {
             consumes.power(7f);
         }};
 
-        advancedSurge = new AdvancedSurge("advanced-surge") {{
+        advancedSurge = new GenericCrafter("advanced-surge") {{
             requirements(Category.crafting, with(Items.lead, 130, Items.metaglass, 100, Items.silicon, 150, Items.thorium, 110, Items.surgeAlloy, 75));
+
+            ambientSound = Sounds.smelter;
+            ambientSoundVolume = 0.07f;
 
             size = 5;
             craftEffect = SnFx.modSmokeCloud;
@@ -120,7 +120,7 @@ public class SnProduction implements ContentList {
             outputItem = new ItemStack(Items.surgeAlloy, 7);
             itemCapacity = 50;
             liquidCapacity = 80f;
-            drawer = new DrawAngleRotator(360);
+            drawer = new MultiDrawBlock(new DrawAngleRotator(360),new DrawSurge());
 
             consumes.items(with(Items.copper, 10, Items.lead, 12, Items.titanium, 8, Items.silicon, 10, Items.pyratite, 3));
             consumes.liquid(Liquids.cryofluid, 0.70f);

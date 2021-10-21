@@ -9,19 +9,22 @@ import arc.math.geom.Vec2;
 import arc.struct.Seq;
 import arc.util.io.Reads;
 import arc.util.io.Writes;
+import mindustry.annotations.Annotations.Load;
 import mindustry.content.Fx;
 import mindustry.entities.Effect;
 import mindustry.game.Team;
 import mindustry.gen.Building;
 import mindustry.gen.Player;
-import mindustry.graphics.*;
+import mindustry.graphics.Drawf;
+import mindustry.graphics.Layer;
+import mindustry.graphics.MultiPacker;
+import mindustry.graphics.Pal;
 import mindustry.type.Item;
 import mindustry.type.ItemStack;
 import mindustry.ui.Bar;
 import mindustry.world.Tile;
 import mindustry.world.blocks.production.GenericCrafter;
 import mindustry.world.meta.Stat;
-import sunset.gen.*;
 import sunset.world.MissileLogic;
 import sunset.world.meta.values.MinMaxRangeValues;
 import sunset.world.meta.values.SplashDamageValue;
@@ -30,12 +33,32 @@ import static mindustry.Vars.tilesize;
 import static mindustry.game.EventType.*;
 
 public class MissileSiloTurret extends GenericCrafter {
+    public static MissileSiloTurretBuild selected = null;
+
+    static {
+        Events.on(WorldLoadEvent.class, (e) -> selected = null);
+        Events.on(GameOverEvent.class, (e) -> selected = null);
+        Events.run(Trigger.uiDrawEnd, () -> {
+            if (selected != null) {
+                selected.drawSelectIf();
+            }
+        });
+        Events.on(TapEvent.class, e -> {
+            if (selected != null) {
+                selected.tapTile(e.player, e.tile);
+            }
+        });
+    }
+
     public MissileLogic.MissileType missile;
     public Effect launchEffect = Fx.none;
     public float maxRange;
     public float minRange;
-    /** Положение ракет в шахте относительно размеров блока. От (0, 0) до (1, 1). */
-    public Seq<Vec2> rockets = new Seq<>(new Vec2[]{new Vec2(0.5f, 0.5f)});
+    /**
+     * Положение ракет в шахте относительно размеров блока. От (0, 0) до (1, 1).
+     */
+    public Seq<Vec2> rockets = Seq.with(new Vec2(0.5f, 0.5f));
+    @Load("@-bottom")
     public TextureRegion baseRegion;
 
     public MissileSiloTurret(String name) {
@@ -45,17 +68,16 @@ public class MissileSiloTurret extends GenericCrafter {
     @Override
     public void load() {
         super.load();
-        SnContentRegions.loadRegions(this);
-        baseRegion = Core.atlas.find(name + "-bottom");
         missile.rocketRegion = Core.atlas.find(name + "-rocket");
     }
 
     @Override
-    public TextureRegion[] icons() {
+    public TextureRegion[] makeIconRegions() {
         return new TextureRegion[]{baseRegion, region};
     }
+
     @Override
-    public void createIcons(MultiPacker packer){
+    public void createIcons(MultiPacker packer) {
         super.createIcons(packer);
     }
 
@@ -77,7 +99,7 @@ public class MissileSiloTurret extends GenericCrafter {
         bars.add("count", (MissileSiloTurretBuild e) -> new Bar(
                 () -> Core.bundle.format("bar.missilecount", e.loaded, rockets.size),
                 () -> Pal.ammo,
-                () -> e.loaded / (float)rockets.size));
+                () -> e.loaded / (float) rockets.size));
     }
 
     @Override
@@ -87,24 +109,21 @@ public class MissileSiloTurret extends GenericCrafter {
         Drawf.dashCircle(x * tilesize + offset, y * tilesize + offset, maxRange, Pal.placing);
     }
 
-    public static MissileSiloTurretBuild selected = null;
-    static {
-        Events.on(WorldLoadEvent.class, (e) -> selected = null);
-        Events.on(GameOverEvent.class, (e) -> selected = null);
-    }
-
     public class MissileSiloTurretBuild extends GenericCrafterBuild {
-        /** Количество загруженных ракет. Максимальный размер определяется rockets.size */
+        /**
+         * Количество загруженных ракет. Максимальный размер определяется rockets.size
+         */
         public int loaded = 0;
 
         @Override
         public Building init(Tile tile, Team team, boolean shouldAdd, int rotation) {
-            Events.on(TapEvent.class, this::tapTile);
-            Events.on(Trigger.uiDrawEnd.getClass(), this::drawSelectIf);
+//            Events.on(TapEvent.class, this::tapTile);
+//            Events.on(Trigger.uiDrawEnd.getClass(), this::drawSelectIf);
+//            Events.run(Trigger.uiDrawEnd, this::drawSelectIf);
             return super.init(tile, team, shouldAdd, rotation);
         }
 
-        private void drawSelectIf(Trigger t) {
+        private void drawSelectIf() {
             if (selected == this) {
                 Draw.z(Layer.overlayUI);
                 drawSelect();
@@ -112,17 +131,17 @@ public class MissileSiloTurret extends GenericCrafter {
         }
 
         @Override
-        public int getMaximumAccepted(Item item){
+        public int getMaximumAccepted(Item item) {
             int res = 0;
             for (ItemStack i : consumes.getItem().items) {
-                if(i.item == item) res += i.amount;
+                if (i.item == item) res += i.amount;
             }
-            return res*(rockets.size+1);
+            return res * (rockets.size + 1);
         }
 
         @Override
         public void tapped() {
-            if(selected == this) {
+            if (selected == this) {
                 selected = null;
             } else {
                 selected = this;
@@ -132,38 +151,35 @@ public class MissileSiloTurret extends GenericCrafter {
         @Override
         public void onRemoved() {
             super.onRemoved();
-            Events.remove(TapEvent.class, this::tapTile);
-            Events.remove(Trigger.uiDrawEnd.getClass(), this::drawSelectIf);
-            if(selected == this) selected = null;
+//            Events.remove(TapEvent.class, this::tapTile);
+//            Events.remove(Trigger.uiDrawEnd.getClass(), this::drawSelectIf);
+            if (selected == this) selected = null;
         }
 
-        private void tapTile(TapEvent te) {
-            Player p = te.player;
-            if(p.team() != team) return;
-            if(loaded == 0 || selected != this) return;
-            Vec2 v = Core.input.mouseWorld();
-            float dst = v.dst(x, y);
-            if(dst > maxRange || dst < minRange) return;
+        private void tapTile(Player player, Tile tile) {
+            if (player.team() != team || loaded == 0) return;
+            float dst = dst(tile.worldx(), tile.worldy());
+            if (dst > maxRange || dst < minRange) return;
             Vec2 from = new Vec2(x + size * tilesize * (rockets.get(loaded - 1).x - 0.5f),
                     y + size * tilesize * (rockets.get(loaded - 1).y - 0.5f));
             launchEffect.at(from);
-            missile.launch(from, v);
+            missile.launch(from, new Vec2(tile.worldx(), tile.worldy()));
             loaded--;
         }
 
         @Override
         public void updateTile() {
-            if(consValid() && loaded < rockets.size){
+            if (consValid() && loaded < rockets.size) {
                 progress += getProgressIncrease(craftTime);
                 totalProgress += delta();
                 warmup = Mathf.lerpDelta(warmup, 1f, 0.02f);
-                if(Mathf.chanceDelta(updateEffectChance)) {
+                if (Mathf.chanceDelta(updateEffectChance)) {
                     updateEffect.at(getX() + Mathf.range(size * 4f), getY() + Mathf.range(size * 4));
                 }
             } else {
                 warmup = Mathf.lerp(warmup, 0f, 0.02f);
             }
-            if(progress >= 1f) {
+            if (progress >= 1f) {
                 consume();
                 loaded++;
                 craftEffect.at(x, y);
@@ -175,7 +191,7 @@ public class MissileSiloTurret extends GenericCrafter {
         public void draw() {
             Draw.z(Layer.block);
             Draw.rect(baseRegion, x, y);
-            for(int i = 0; i < loaded; i++) {
+            for (int i = 0; i < loaded; i++) {
                 Draw.rect(missile.rocketRegion,
                         x + size * tilesize * (rockets.get(i).x - 0.5f),
                         y + size * tilesize * (rockets.get(i).y - 0.5f));

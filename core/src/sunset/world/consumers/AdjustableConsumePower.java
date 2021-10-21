@@ -12,15 +12,15 @@ import mindustry.world.consumers.ConsumePower;
  */
 public class AdjustableConsumePower extends ConsumePower {
     public final float baseUsage;
-    private final Func<Building, Float> factorGen;
-    public AdjustableConsumePower(float baseUsage, Func<Building, Float> factorGen)
+    private final Func<Building, Float> generationFactor;
+    public AdjustableConsumePower(float baseUsage, Func<Building, Float> generationFactor)
     {
         this.baseUsage = baseUsage;
-        this.factorGen = factorGen;
+        this.generationFactor = generationFactor;
     }
 
     @Override
     public float requestedPower(Building entity) {
-        return baseUsage * factorGen.get(entity);
+        return baseUsage * generationFactor.get(entity);
     }
 }

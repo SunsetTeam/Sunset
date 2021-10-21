@@ -1,29 +1,23 @@
 package sunset.world.blocks.defense.turrets;
 
-import arc.Core;
-import arc.graphics.Color;
-import arc.graphics.g2d.Draw;
-import arc.graphics.g2d.TextureRegion;
-import arc.math.Angles;
-import arc.math.Mathf;
-import arc.struct.Seq;
-import arc.util.Time;
-import arc.util.Tmp;
-import mindustry.Vars;
-import mindustry.content.StatusEffects;
-import mindustry.entities.Effect;
-import mindustry.entities.bullet.BulletType;
-import mindustry.gen.Sounds;
-import mindustry.gen.Teamc;
-import mindustry.gen.Tex;
-import mindustry.graphics.Drawf;
-import mindustry.graphics.Layer;
-import mindustry.type.Liquid;
-import mindustry.world.blocks.defense.turrets.PowerTurret;
-import mindustry.world.meta.Stat;
-import mindustry.world.meta.StatUnit;
-import sunset.content.SnFx;
-import sunset.utils.Utils;
+import arc.*;
+import arc.graphics.*;
+import arc.graphics.g2d.*;
+import arc.math.*;
+import arc.struct.*;
+import arc.util.*;
+import mindustry.*;
+import mindustry.annotations.Annotations.*;
+import mindustry.content.*;
+import mindustry.entities.*;
+import mindustry.entities.bullet.*;
+import mindustry.gen.*;
+import mindustry.graphics.*;
+import mindustry.type.*;
+import mindustry.world.blocks.defense.turrets.*;
+import mindustry.world.meta.*;
+import sunset.content.*;
+import sunset.utils.*;
 
 public class EMPFacility extends PowerTurret{
     public Seq<EMPPart> parts = new Seq<>();
@@ -31,8 +25,10 @@ public class EMPFacility extends PowerTurret{
     public Color lightningColor;
     public float zapAngleRand, spinUp, spinDown, rangeExtention, lightningStroke = 3.5f;
     public int zaps;
-
-    public TextureRegion bottomRegion, topRegion;
+    @Load("@-top")
+    public TextureRegion topRegion;
+    @Load("@-bottom")
+    public TextureRegion bottomRegion;
 
     public EMPFacility(String name){
         super(name);
@@ -66,20 +62,6 @@ public class EMPFacility extends PowerTurret{
         });
     }
 
-    public boolean logicShooting(){
-        return false;
-    }
-
-    public int size(){
-        if(this.size < 3) return this.size = 3;
-        return this.size;
-    }
-
-    @Override
-    public void load(){
-        super.load();
-        topRegion = Core.atlas.find(name + "-top");
-    }
 
     public static class EMPPart{
         public float rotationMul = 12f;

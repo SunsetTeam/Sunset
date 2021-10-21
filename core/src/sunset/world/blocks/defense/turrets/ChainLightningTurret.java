@@ -59,18 +59,24 @@ public class ChainLightningTurret extends BaseTurret{
     }
 
     @Override
-    public void load(){
-        super.load();
-//        laser = Core.atlas.find("parallax-laser");
-//        laserEnd = Core.atlas.find("parallax-laser-end");
-//        baseRegion = Core.atlas.find("block-" + size);
-//        SnContentRegions.loadRegions(this);
+    public void init(){
+        super.init();
+
         consumes.add(new AdjustableConsumePower(powerUse, e -> {
             ChainLightningTurretBuild t = (ChainLightningTurretBuild)e;
             return t.shouldShoot ? t.getBoost() : 0f;
         }));
         consumes.add(new ConsumeLiquidFilter(liquid -> liquid.temperature <= 0.5f && liquid.flammability < 0.1f, liquidUse)).update(false).boost();
         liquidCapacity = liquidUse * 60f;
+    }
+
+    @Override
+    public void load(){
+        super.load();
+//        laser = Core.atlas.find("parallax-laser");
+//        laserEnd = Core.atlas.find("parallax-laser-end");
+//        baseRegion = Core.atlas.find("block-" + size);
+//        SnContentRegions.loadRegions(this);
     }
 
     @Override

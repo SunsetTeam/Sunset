@@ -2,19 +2,14 @@ package sunset.content.blocks.defense;
 
 import static mindustry.type.ItemStack.with;
 
-import mindustry.content.Items;
-import mindustry.world.blocks.defense.*;
 import mindustry.ctype.ContentList;
 import mindustry.type.Category;
 import mindustry.world.Block;
 import mindustry.world.blocks.defense.Wall;
-import mindustry.world.meta.BuildVisibility;
 import sunset.content.SnItems;
 import sunset.world.blocks.defense.walls.AntiPierceWall;
 import sunset.world.blocks.defense.walls.IndestructibleWall;
-import sunset.world.blocks.defense.walls.SelfhealWall;
-
-import static mindustry.type.ItemStack.with;
+import sunset.world.blocks.defense.walls.SelfHealWall;
 
 public class SnWalls implements ContentList {
     public static Block
@@ -38,13 +33,13 @@ public class SnWalls implements ContentList {
             size = 2;
         }};
 
-        naturiteWall = new SelfhealWall("naturite-wall"){{
+        naturiteWall = new SelfHealWall("naturite-wall"){{
             requirements(Category.defense, with(SnItems.naturite, 6));
             size = 1;
             health = 810;
             heal = 0.5f;
         }};
-        naturiteWallLarge = new SelfhealWall("naturite-wall-large"){{
+        naturiteWallLarge = new SelfHealWall("naturite-wall-large"){{
             requirements(Category.defense, with(SnItems.naturite, 24));
             health = naturiteWall.health * 4;
             heal = 2f;

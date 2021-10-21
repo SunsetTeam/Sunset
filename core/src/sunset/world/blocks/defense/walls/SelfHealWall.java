@@ -1,14 +1,15 @@
 package sunset.world.blocks.defense.walls;
 
+import arc.util.Time;
 import mindustry.world.blocks.defense.Wall;
 import mindustry.world.meta.Stat;
 import mindustry.world.meta.StatUnit;
 
 /** Самовосстанавливающаяся стена. */
-public class SelfhealWall extends Wall {
+public class SelfHealWall extends Wall {
     public float heal = 0.1f;
 
-    public SelfhealWall(String name) {
+    public SelfHealWall(String name) {
         super(name);
         update = true;
     }
@@ -16,10 +17,10 @@ public class SelfhealWall extends Wall {
     @Override
     public void setStats() {
         super.setStats();
-        stats.add(Stat.repairTime, health / heal / 60f, StatUnit.seconds);
+        stats.add(Stat.repairTime, health / heal / Time.toSeconds, StatUnit.seconds);
     }
 
-    public class SelfhealWallBuild extends WallBuild {
+    public class SelfHealWallBuild extends WallBuild {
         @Override
         public void updateTile() {
             super.updateTile();
