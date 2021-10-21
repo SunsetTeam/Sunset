@@ -7,7 +7,7 @@ import mindustry.ctype.ContentList;
 import mindustry.type.Category;
 import mindustry.type.ItemStack;
 import mindustry.world.Block;
-import mindustry.world.blocks.production.Cultivator;
+import mindustry.world.blocks.production.AttributeCrafter;
 import mindustry.world.blocks.production.Drill;
 import mindustry.world.draw.DrawRotator;
 import sunset.content.SnFx;
@@ -17,7 +17,7 @@ import sunset.world.blocks.production.raw.PrecussionDrill;
 import static mindustry.type.ItemStack.with;
 
 /** This category is for blocks that produce raw products. (Such as cultivator, drill etc.) */
-public class SnRaw implements ContentList{
+    public class SnRaw implements ContentList{
     public static Block
             //crafters
             advancedCultivator,
@@ -31,7 +31,7 @@ public class SnRaw implements ContentList{
     @Override
     public void load(){
         //crafters
-        advancedCultivator = new Cultivator("advanced-cultivator") {{
+        advancedCultivator = new AttributeCrafter("advanced-cultivator") {{
             requirements(Category.production, with(Items.copper, 200, Items.lead, 200, Items.silicon, 180, Items.metaglass, 140, Items.titanium, 170, Items.phaseFabric, 155));
             size = 3;
             health = 990;

@@ -16,7 +16,6 @@ import mindustry.graphics.*;
 import mindustry.type.Item;
 import mindustry.type.ItemSeq;
 import mindustry.ui.Bar;
-import mindustry.ui.Cicon;
 import mindustry.world.Block;
 import mindustry.world.Tile;
 import mindustry.world.blocks.environment.Floor;
@@ -136,9 +135,9 @@ public class PrecussionDrill extends Block {
             float dy = y * tilesize + offset + size * tilesize / 2f + 5;
             items.each((item, amount) -> {
                 Draw.mixcol(Color.darkGray, 1f);
-                Draw.rect(item.icon(Cicon.small), dx[0], dy - 1);
+                Draw.rect(item.uiIcon, dx[0], dy - 1);
                 Draw.reset();
-                Draw.rect(item.icon(Cicon.small), dx[0], dy);
+                Draw.rect(item.uiIcon, dx[0], dy);
                 dx[0] -= 6;
             });
         }else if(state == State.LowTier){

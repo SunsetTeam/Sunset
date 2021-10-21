@@ -11,23 +11,26 @@ import mindustry.type.ItemStack;
 import mindustry.type.LiquidStack;
 import mindustry.world.Block;
 import mindustry.world.blocks.production.GenericCrafter;
-import mindustry.world.blocks.production.GenericSmelter;
 import mindustry.world.blocks.production.LiquidConverter;
 import mindustry.world.draw.DrawAnimation;
 import mindustry.world.draw.DrawMixer;
 import mindustry.world.draw.DrawRotator;
+import mindustry.world.draw.DrawSmelter;
 import sunset.content.SnFx;
 import sunset.content.SnItems;
 import sunset.content.SnLiquids;
-import sunset.world.draw.*;
+import sunset.world.draw.DrawAngleRotator;
+import sunset.world.draw.DrawModWeave;
+import sunset.world.draw.DrawSurge;
+import sunset.world.draw.MultiDrawBlock;
 
 import static mindustry.type.ItemStack.with;
 
 public class SnProduction implements ContentList {
     public static Block
 
-    //advanced
-    advancedCompressor, advancedWeaver, advancedKiln, advancedSurge, advancedCryomixer,
+            //advanced
+            advancedCompressor, advancedWeaver, advancedKiln, advancedSurge, advancedCryomixer,
 
     //standard
     collider, purifier, crystallizer, enojieKiln;
@@ -35,18 +38,19 @@ public class SnProduction implements ContentList {
     @Override
     public void load() {
         //region advanced
-        advancedCompressor = new GenericSmelter("advanced-compressor") {{
+        advancedCompressor = new GenericCrafter("advanced-compressor") {{
             requirements(Category.crafting, with(Items.lead, 150, Items.graphite, 120, Items.silicon, 210, Items.titanium, 110, Items.thorium, 200, Items.phaseFabric, 110));
 
             size = 3;
             craftEffect = SnFx.modPlasticburn;
             craftTime = 60f;
             outputItem = new ItemStack(Items.plastanium, 5);
-            flameColor = Color.valueOf("C9F8AE");
-            drawer = new DrawAnimation(){{
-                    frameCount = 4;
-                    frameSpeed = 4.8f;
-            }};
+            drawer = new MultiDrawBlock(new DrawSmelter() {{
+                flameColor = Color.valueOf("C9F8AE");
+            }}, new DrawAnimation() {{
+                frameCount = 4;
+                frameSpeed = 4.8f;
+            }});
             itemCapacity = 20;
             liquidCapacity = 20f;
             absorbLasers = true;
@@ -55,14 +59,14 @@ public class SnProduction implements ContentList {
             consumes.power(5.3f);
         }};
 
-        advancedWeaver = new GenericSmelter("advanced-weaver") {{
+        advancedWeaver = new GenericCrafter("advanced-weaver") {{
             requirements(Category.crafting, with(Items.copper, 210, Items.metaglass, 90, Items.silicon, 190, Items.titanium, 100, Items.thorium, 185, Items.surgeAlloy, 110));
             size = 3;
             health = 890;
             craftEffect = SnFx.weaverSmeltsmoke;
             craftTime = 180f;
             outputItem = new ItemStack(Items.phaseFabric, 6);
-            drawer = new DrawModWeave();
+            drawer = new MultiDrawBlock(new DrawSmelter(), new DrawModWeave());
             itemCapacity = 50;
             liquidCapacity = 30f;
 
@@ -74,7 +78,7 @@ public class SnProduction implements ContentList {
             consumes.power(6.1f);
         }};
 
-        advancedCryomixer = new LiquidConverter("advanced-cryomixer"){{
+        advancedCryomixer = new LiquidConverter("advanced-cryomixer") {{
             requirements(Category.crafting, with(Items.lead, 180, Items.graphite, 90, SnItems.coldent, 60, Items.metaglass, 40));
             outputLiquid = new LiquidStack(Liquids.cryofluid, 1f);
             craftTime = 40f;
@@ -92,7 +96,7 @@ public class SnProduction implements ContentList {
             consumes.liquid(Liquids.water, 1f);
         }};
 
-        advancedKiln = new GenericSmelter("advanced-kiln") {{
+        advancedKiln = new GenericCrafter("advanced-kiln") {{
             requirements(Category.crafting, with(Items.copper, 210, Items.lead, 220, Items.metaglass, 190, Items.graphite, 185, Items.silicon, 200, Items.titanium, 210, Items.thorium, 205));
 
             size = 3;
@@ -101,7 +105,9 @@ public class SnProduction implements ContentList {
             craftTime = 95f;
             outputItem = new ItemStack(Items.metaglass, 9);
             itemCapacity = 15;
-            flameColor = Color.valueOf("ffc099");
+            drawer = new DrawSmelter() {{
+                flameColor = Color.valueOf("ffc099");
+            }};
             liquidCapacity = 100f;
 
             consumes.items(with(Items.lead, 7, Items.sand, 5));
@@ -121,7 +127,7 @@ public class SnProduction implements ContentList {
             outputItem = new ItemStack(Items.surgeAlloy, 7);
             itemCapacity = 50;
             liquidCapacity = 80f;
-            drawer = new MultiDrawBlock(new DrawAngleRotator(360),new DrawSurge());
+            drawer = new MultiDrawBlock(new DrawAngleRotator(360), new DrawSurge());
 
             consumes.items(with(Items.copper, 10, Items.lead, 12, Items.titanium, 8, Items.silicon, 10, Items.pyratite, 3));
             consumes.liquid(Liquids.cryofluid, 0.70f);
@@ -169,7 +175,7 @@ public class SnProduction implements ContentList {
             consumes.power(2.5f);
         }};
 
-        crystallizer = new GenericSmelter("crystallizer") {{
+        crystallizer = new GenericCrafter("crystallizer") {{
             requirements(Category.crafting, with(Items.lead, 130, Items.thorium, 110, Items.silicon, 120, SnItems.nobium, 90, Items.plastanium, 75));
 
             craftEffect = SnFx.crystalyze;
@@ -181,7 +187,9 @@ public class SnProduction implements ContentList {
             craftTime = 34f;
             size = 3;
             hasPower = true;
-            flameColor = Color.valueOf("F9ECA3");
+            drawer = new DrawSmelter() {{
+                flameColor = Color.valueOf("F9ECA3");
+            }};
 
             consumes.item(Items.sand, 4);
             consumes.liquid(Liquids.water, 0.20f);
