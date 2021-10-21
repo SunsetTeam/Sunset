@@ -3,6 +3,7 @@ package sunset;
 import arc.Events;
 import arc.util.Log;
 import mindustry.Vars;
+import mindustry.core.*;
 import mindustry.ctype.*;
 import mindustry.game.EventType.FileTreeInitEvent;
 import mma.*;
@@ -96,6 +97,16 @@ public class Sunset extends MMAMod{
     public void loadContent() {
         SnVars.inTry(SnMusics::load);
         SnVars.inTry(SnSounds::load);
+        ContentLoader prev = Vars.content;
+        /*content=new ContentLoader(){
+            @Override
+            public void handleContent(Content content){
+                if (content instanceof MappableContent){
+
+                }
+                super.handleContent(content);
+            }
+        };*/
         super.loadContent();
     }
 }

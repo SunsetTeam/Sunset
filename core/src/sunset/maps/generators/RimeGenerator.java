@@ -145,7 +145,8 @@ public class RimeGenerator extends PlanetGenerator{
 
         float tar = Simplex.noise3d(seed, 4, 0.55f, 1f/2f, position.x, position.y + 999f, position.z) * 0.3f + Tmp.v31.dst(0, 0, 1f) * 0.2f;
 
-        Block res = arr[Mathf.clamp((int)(temp * arr.length), 0, arr[0].length - 1)][Mathf.clamp((int)(height * arr[0].length), 0, arr[0].length - 1)];
+        int i = Mathf.clamp((int)(temp * arr.length), 0, arr.length - 1);
+        Block res = arr[i][Mathf.clamp((int)(height * arr[i].length), 0, arr[i].length - 1)];
         if(tar > 0.5f){
             return tars.get(res, res);
         }else{

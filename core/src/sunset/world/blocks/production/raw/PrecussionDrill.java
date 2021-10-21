@@ -11,7 +11,7 @@ import arc.util.Time;
 import mindustry.game.Team;
 import mindustry.gen.Building;
 import mindustry.gen.Sounds;
-import mindustry.graphics.Pal;
+import mindustry.graphics.*;
 import mindustry.type.Item;
 import mindustry.type.ItemSeq;
 import mindustry.ui.Bar;
@@ -20,6 +20,7 @@ import mindustry.world.Block;
 import mindustry.world.Tile;
 import mindustry.world.blocks.environment.Floor;
 import mindustry.world.meta.*;
+import sunset.gen.*;
 import sunset.world.consumers.AdjustableConsumePower;
 import sunset.world.meta.values.DrillItemsValue;
 
@@ -62,10 +63,15 @@ public class PrecussionDrill extends Block {
     public TextureRegion[] icons(){
         return new TextureRegion[]{region, rotatorRegion, topRegion};
     }
+    @Override
+    public void createIcons(MultiPacker packer){
+        super.createIcons(packer);
+    }
 
     @Override
     public void load() {
         super.load();
+//        SnContentRegions.loadRegions(this);
         rimRegion = Core.atlas.find(name+"-rim");
         rotatorRegion = Core.atlas.find(name+"-rotator");
         topRegion = Core.atlas.find(name+"-top");

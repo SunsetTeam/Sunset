@@ -1,26 +1,22 @@
 package sunset.world.blocks.defense.turrets;
-import arc.Core;
-import arc.graphics.Color;
-import arc.graphics.g2d.Draw;
-import arc.graphics.g2d.TextureRegion;
-import arc.math.Angles;
-import arc.math.Mathf;
-import arc.struct.Seq;
-import arc.util.Time;
+
+import arc.*;
+import arc.graphics.*;
+import arc.graphics.g2d.*;
+import arc.math.*;
+import arc.struct.*;
+import arc.util.*;
 import mindustry.annotations.Annotations.*;
-import mindustry.entities.Units;
-import mindustry.gen.Unit;
-import mindustry.graphics.Drawf;
-import mindustry.graphics.Layer;
-import mindustry.type.Category;
-import mindustry.type.Liquid;
-import mindustry.world.blocks.defense.turrets.BaseTurret;
-import mindustry.world.consumers.ConsumeLiquidFilter;
-import mindustry.world.meta.BuildVisibility;
-import mindustry.world.meta.Stat;
-import mindustry.world.meta.StatUnit;
-import sunset.world.consumers.AdjustableConsumePower;
-import sunset.world.meta.values.BoosterLiquidList;
+import mindustry.entities.*;
+import mindustry.gen.*;
+import mindustry.graphics.*;
+import mindustry.type.*;
+import mindustry.world.blocks.defense.turrets.*;
+import mindustry.world.consumers.*;
+import mindustry.world.meta.*;
+import sunset.gen.*;
+import sunset.world.consumers.*;
+import sunset.world.meta.values.*;
 
 /**
  * Турель, которая атакует врагов постоянной
@@ -28,14 +24,16 @@ import sunset.world.meta.values.BoosterLiquidList;
  * постепенно теряя урон.
  * @see sunset.world.blocks.defense.turrets.ChainLightningTurret.ChainLightningTurretBuild
  */
-public class ChainLightningTurret extends BaseTurret {
+public class ChainLightningTurret extends BaseTurret{
     public float damage = 0f;
-    /** Определяет, насколько будет уменьшаться максимальная
+    /**
+     * Определяет, насколько будет уменьшаться максимальная
      * дальность обнружения врага лучом после нанесения
      * урона очереджному врагу.
      */
     public float rangeMultiplier = 0.9f;
-    /** Определяет, насколько меньший урон будет получать
+    /**
+     * Определяет, насколько меньший урон будет получать
      * каждый следующий враг в цепи.
      */
     public float damageMultiplier = 0.9f;
@@ -52,7 +50,8 @@ public class ChainLightningTurret extends BaseTurret {
     public float laserWidth = 0.7f;
     public float powerUse;
     public Color laserColor;
-    public ChainLightningTurret(String name) {
+
+    public ChainLightningTurret(String name){
         super(name);
         category = Category.turret;
         buildVisibility = BuildVisibility.shown;
@@ -60,8 +59,12 @@ public class ChainLightningTurret extends BaseTurret {
     }
 
     @Override
-    public void load() {
+    public void load(){
         super.load();
+//        laser = Core.atlas.find("parallax-laser");
+//        laserEnd = Core.atlas.find("parallax-laser-end");
+//        baseRegion = Core.atlas.find("block-" + size);
+//        SnContentRegions.loadRegions(this);
         consumes.add(new AdjustableConsumePower(powerUse, e -> {
             ChainLightningTurretBuild t = (ChainLightningTurretBuild)e;
             return t.shouldShoot ? t.getBoost() : 0f;
@@ -71,12 +74,25 @@ public class ChainLightningTurret extends BaseTurret {
     }
 
     @Override
-    public TextureRegion[] icons(){
-        return new TextureRegion[] { baseRegion, region };
+    public TextureRegion[] makeIconRegions(){
+//        return super.makeIconRegions();
+        return new TextureRegion[]{baseRegion, region};
     }
 
     @Override
-    public void setStats() {
+    public TextureRegion[] icons(){
+//                Log.info("baseRegion: @,region: @",baseRegion,region);
+//        return new TextureRegion[]{baseRegion, region};
+        return super.icons();
+    }
+
+    @Override
+    public void createIcons(MultiPacker packer){
+        super.createIcons(packer);
+    }
+
+    @Override
+    public void setStats(){
         super.setStats();
         stats.remove(Stat.powerUse);
         stats.add(Stat.powerUse, powerUse * 60f, StatUnit.powerSecond);
@@ -84,33 +100,36 @@ public class ChainLightningTurret extends BaseTurret {
         stats.add(Stat.targetsGround, targetGround);
         stats.add(Stat.damage, damage * 60f, StatUnit.perSecond);
         stats.add(Stat.booster, new BoosterLiquidList(
-                liquid -> liquid.temperature <= 0.5f && liquid.flammability < 0.1f,
-                liquid -> {
-                    float used = Math.min(liquidUse, Math.max(0, (1f / coolantMultiplier) / liquid.heatCapacity));
-                    return 1f + (used * liquid.heatCapacity * coolantMultiplier);
-                }, "bullet.damagefactor"));
+        liquid -> liquid.temperature <= 0.5f && liquid.flammability < 0.1f,
+        liquid -> {
+            float used = Math.min(liquidUse, Math.max(0, (1f / coolantMultiplier) / liquid.heatCapacity));
+            return 1f + (used * liquid.heatCapacity * coolantMultiplier);
+        }, "bullet.damagefactor"));
     }
+
     /** @see sunset.world.blocks.defense.turrets.ChainLightningTurret */
-    public class ChainLightningTurretBuild extends BaseTurretBuild {
+    public class ChainLightningTurretBuild extends BaseTurretBuild{
         public final Seq<Unit> units = new Seq<>();
         public boolean shouldShoot = false;
         private float liquidBoost = 1f;
 
         private long boostEndTime = 0;
         private float boost = 0f;
+
         public float getBoost(){
-            return Time.millis()<=boostEndTime ? Math.max(boost, 1) : 1;
+            return Time.millis() <= boostEndTime ? Math.max(boost, 1) : 1;
         }
+
         @Override
-        public void applyBoost(float intensity, float duration) {
-            boostEndTime = Time.millis() + (long)(duration*1000f/60f);
+        public void applyBoost(float intensity, float duration){
+            boostEndTime = Time.millis() + (long)(duration * 1000f / 60f);
             boost = intensity;
         }
 
         @Override
-        public void updateTile() {
+        public void updateTile(){
             //liquid
-            if(shouldShoot) {
+            if(shouldShoot){
                 Liquid liquid = liquids.current();
                 float used = Math.min(Math.min(liquids.get(liquid), liquidUse), Math.max(0, (1f / coolantMultiplier) / liquid.heatCapacity));
                 liquids.remove(liquid, used);
@@ -120,15 +139,15 @@ public class ChainLightningTurret extends BaseTurret {
             float r = range;
             units.clear();
             Unit unit = Units.closestEnemy(team, x, y, r, u -> u.checkTarget(targetAir, targetGround));
-            while (unit != null) {
+            while(unit != null){
                 units.add(unit);
                 r *= rangeMultiplier;
                 unit = Units.closestEnemy(team, unit.x, unit.y, r,
-                        u -> !units.contains(u) && u.checkTarget(targetAir, targetGround));
+                u -> !units.contains(u) && u.checkTarget(targetAir, targetGround));
             }
             shouldShoot = !units.isEmpty() && Angles.within(angleTo(units.first()), rotation, shootCone);
             // damage
-            if(shouldShoot) {
+            if(shouldShoot){
                 float[] d = {damage * efficiency() * liquidBoost};
                 units.each(enemy -> {
                     enemy.damageContinuousPierce(d[0]);
@@ -136,31 +155,30 @@ public class ChainLightningTurret extends BaseTurret {
                 });
             }
             //rotation
-            if(units.size > 0) {
+            if(units.size > 0){
                 rotation = Angles.moveToward(rotation, angleTo(units.first()), rotateSpeed * edelta());
             }
         }
 
         @Override
-        public float efficiency() {
+        public float efficiency(){
             return super.efficiency() * getBoost();
         }
 
         @Override
-        public void draw() {
+        public void draw(){
             Draw.rect(baseRegion, x, y);
-            if(shouldShoot) {
+            if(shouldShoot){
                 Draw.z(Layer.bullet);
-                Draw.mixcol(laserColor, 0.85f+Mathf.absin(0.8f,0.15f));
+                Draw.mixcol(laserColor, 0.85f + Mathf.absin(0.8f, 0.15f));
                 float unitX = units.get(0).x, unitY = units.get(0).y, nextUnitX = unitX, nextUnitY = unitY;
-                float lw = laserWidth*0.8f + Mathf.absin(4f,laserWidth*0.2f);
+                float lw = laserWidth * 0.8f + Mathf.absin(4f, laserWidth * 0.2f);
                 Drawf.laser(team, laser, laserEnd, x, y, unitX, unitY, lw);
-                for(int i = 0; i < units.size-1; i++)
-                {
+                for(int i = 0; i < units.size - 1; i++){
                     unitX = nextUnitX;
                     unitY = nextUnitY;
-                    nextUnitX = units.get(i+1).x;
-                    nextUnitY = units.get(i+1).y;
+                    nextUnitX = units.get(i + 1).x;
+                    nextUnitY = units.get(i + 1).y;
                     Drawf.laser(team, laser, laserEnd, unitX, unitY, nextUnitX, nextUnitY, lw);
                 }
             }

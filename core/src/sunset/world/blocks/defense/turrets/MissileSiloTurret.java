@@ -14,15 +14,14 @@ import mindustry.entities.Effect;
 import mindustry.game.Team;
 import mindustry.gen.Building;
 import mindustry.gen.Player;
-import mindustry.graphics.Drawf;
-import mindustry.graphics.Layer;
-import mindustry.graphics.Pal;
+import mindustry.graphics.*;
 import mindustry.type.Item;
 import mindustry.type.ItemStack;
 import mindustry.ui.Bar;
 import mindustry.world.Tile;
 import mindustry.world.blocks.production.GenericCrafter;
 import mindustry.world.meta.Stat;
+import sunset.gen.*;
 import sunset.world.MissileLogic;
 import sunset.world.meta.values.MinMaxRangeValues;
 import sunset.world.meta.values.SplashDamageValue;
@@ -46,6 +45,7 @@ public class MissileSiloTurret extends GenericCrafter {
     @Override
     public void load() {
         super.load();
+        SnContentRegions.loadRegions(this);
         baseRegion = Core.atlas.find(name + "-bottom");
         missile.rocketRegion = Core.atlas.find(name + "-rocket");
     }
@@ -53,6 +53,10 @@ public class MissileSiloTurret extends GenericCrafter {
     @Override
     public TextureRegion[] icons() {
         return new TextureRegion[]{baseRegion, region};
+    }
+    @Override
+    public void createIcons(MultiPacker packer){
+        super.createIcons(packer);
     }
 
     @Override
