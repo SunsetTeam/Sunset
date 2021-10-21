@@ -76,7 +76,7 @@ public class Sunset extends Mod {
         MissileLogic.init();
         UnitData.init();
         GeyserLogic.init();
-        Vars.ui.content = new ContentInfoDialogExt();
+        Vars.ui.content = new ContentInfoDialogExt(Vars.ui.content);
         Utils.setMenuUnit(SnUnitTypes.router);
         /*Log.info("startUp");
         Events.on(ClientLoadEvent.class, e -> {

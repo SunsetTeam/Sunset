@@ -18,6 +18,11 @@ import sunset.world.meta.SnStatsUser;
  * для возможности использовать SnStats или для возможности
  * отобразить свои сведения самостоятельно. */
 public class ContentInfoDialogExt extends ContentInfoDialog {
+    public final ContentInfoDialog parent;
+    public ContentInfoDialogExt(ContentInfoDialog parent){
+        this.parent=parent;
+    }
+
     @Override
     public void show(UnlockableContent content) {
         if(content instanceof SnStatsUser) {
@@ -25,7 +30,7 @@ public class ContentInfoDialogExt extends ContentInfoDialog {
         } else if(content instanceof SnCustomStat) {
             showSnCustomStat(content);
         } else {
-            super.show(content);
+            parent.show(content);
         }
     }
     private void showSnStats(UnlockableContent content) {
