@@ -1,53 +1,59 @@
 package sunset.content.blocks;
 
-import arc.struct.*;
+import arc.struct.Seq;
 import mindustry.content.Items;
-import mindustry.ctype.*;
-import mindustry.type.*;
-import mindustry.world.*;
-import mindustry.world.blocks.units.*;
-import sunset.content.*;
+import mindustry.ctype.ContentList;
+import mindustry.type.Category;
+import mindustry.type.UnitType;
+import mindustry.world.Block;
+import mindustry.world.blocks.units.Reconstructor;
+import mindustry.world.blocks.units.UnitFactory;
+import sunset.content.SnItems;
+import sunset.content.SnLiquids;
+import sunset.content.SnUnitTypes;
 
-import static mindustry.type.ItemStack.*;
+import static mindustry.type.ItemStack.with;
 
 public class SnUnitBlocks implements ContentList {
     public static Block
 
-    //air
-    bigAirFactory,
+            //air
+            bigAirFactory,
 
     //ground 
     bigGroundFactory,
 
     //reconstructors
     nobiumAdditiveReconstructor,
-    nobiummultiplicativeReconstructor,
-    nobiumExponentialReconstructor,
-    nobiumTetrativeReconstructor;
+            nobiummultiplicativeReconstructor,
+            nobiumExponentialReconstructor,
+            nobiumTetrativeReconstructor;
 
     @Override
-    public void load(){
-    bigAirFactory = new UnitFactory("big-air-factory"){{
-        requirements(Category.units, with(SnItems.fors, 80, Items.copper, 70));
-        plans = Seq.with(
-            new UnitPlan(SnUnitTypes.wind, 70f * 15, with(SnItems.fors, 15, Items.silicon, 20)),
-            new UnitPlan(SnUnitTypes.comet, 60f * 40, with(Items.silicon, 40, SnItems.naturite, 20))
-        );
-        size = 3;
-        consumes.power(2.5f);
-    }};
+    public void load() {
+        //factory region
+        bigAirFactory = new UnitFactory("big-air-factory") {{
+            requirements(Category.units, with(SnItems.fors, 80, Items.copper, 70));
+            plans = Seq.with(
+                    new UnitPlan(SnUnitTypes.wind, 70f * 15, with(SnItems.fors, 15, Items.silicon, 20)),
+                    new UnitPlan(SnUnitTypes.comet, 60f * 40, with(Items.silicon, 40, SnItems.naturite, 20))
+            );
+            size = 3;
+            consumes.power(2.5f);
+        }};
 
-    bigGroundFactory = new UnitFactory("big-ground-factory"){{
-        requirements(Category.units, with(SnItems.fors, 80, Items.copper, 70, Items.lead, 65));
-        plans = Seq.with(
-            new UnitPlan(SnUnitTypes.mirage, 75f * 15, with(SnItems.nobium, 20, Items.silicon, 20, SnItems.fors, 15))
-        );
-        size = 3;
-        consumes.power(2.5f);
-    }};
-//reconstructors
+        bigGroundFactory = new UnitFactory("big-ground-factory") {{
+            requirements(Category.units, with(SnItems.fors, 80, Items.copper, 70, Items.lead, 65));
+            plans = Seq.with(
+                    new UnitPlan(SnUnitTypes.mirage, 75f * 15, with(SnItems.nobium, 20, Items.silicon, 20, SnItems.fors, 15))
+            );
+            size = 3;
+            consumes.power(2.5f);
+        }};
+        //end region
 
-    nobiumAdditiveReconstructor = new Reconstructor("nobium-additive-reconstructor"){{
+        //reconstructors region
+        nobiumAdditiveReconstructor = new Reconstructor("nobium-additive-reconstructor") {{
             requirements(Category.units, with(SnItems.fors, 210, Items.copper, 230, SnItems.nobium, 100, Items.silicon, 90));
 
             size = 3;
@@ -57,13 +63,13 @@ public class SnUnitBlocks implements ContentList {
             constructTime = 65f * 10f;
 
             upgrades.addAll(
-                new UnitType[]{SnUnitTypes.wind, SnUnitTypes.thunder},
-                new UnitType[]{SnUnitTypes.comet, SnUnitTypes.satelite},
-                new UnitType[]{SnUnitTypes.mirage, SnUnitTypes.vision}
+                    new UnitType[]{SnUnitTypes.wind, SnUnitTypes.thunder},
+                    new UnitType[]{SnUnitTypes.comet, SnUnitTypes.satelite},
+                    new UnitType[]{SnUnitTypes.mirage, SnUnitTypes.vision}
             );
         }};
 
-     nobiummultiplicativeReconstructor = new Reconstructor("nobium-multiplicative-reconstructor"){{
+        nobiummultiplicativeReconstructor = new Reconstructor("nobium-multiplicative-reconstructor") {{
             requirements(Category.units, with(SnItems.fors, 670, Items.copper, 530, SnItems.nobium, 400, Items.silicon, 390, Items.metaglass, 100));
 
             size = 5;
@@ -73,13 +79,13 @@ public class SnUnitBlocks implements ContentList {
             constructTime = 65f * 30f;
 
             upgrades.addAll(
-                new UnitType[]{SnUnitTypes.thunder, SnUnitTypes.nadir},
-                new UnitType[]{SnUnitTypes.satelite, SnUnitTypes.planet}
+                    new UnitType[]{SnUnitTypes.thunder, SnUnitTypes.nadir},
+                    new UnitType[]{SnUnitTypes.satelite, SnUnitTypes.planet}
             );
         }};
 
 
-         nobiumExponentialReconstructor = new Reconstructor("nobium-exponential-reconstructor"){{
+        nobiumExponentialReconstructor = new Reconstructor("nobium-exponential-reconstructor") {{
             requirements(Category.units, with(SnItems.fors, 2100, Items.lead, 2000, SnItems.nobium, 1980, Items.silicon, 1420, SnItems.naturite, 700));
 
             size = 7;
@@ -93,12 +99,12 @@ public class SnUnitBlocks implements ContentList {
 
 
             upgrades.addAll(
-                new UnitType[]{SnUnitTypes.nadir, SnUnitTypes.halo},
-                new UnitType[]{SnUnitTypes.planet, SnUnitTypes.star}
+                    new UnitType[]{SnUnitTypes.nadir, SnUnitTypes.halo},
+                    new UnitType[]{SnUnitTypes.planet, SnUnitTypes.star}
             );
         }};
 
-        nobiumTetrativeReconstructor = new Reconstructor("nobium-tetrative-reconstructor"){{
+        nobiumTetrativeReconstructor = new Reconstructor("nobium-tetrative-reconstructor") {{
             requirements(Category.units, with(SnItems.nobium, 3900, Items.lead, 3500, Items.phaseFabric, 2880, Items.silicon, 2470, SnItems.enojie, 2300, SnItems.planatrium, 2100));
 
             size = 9;
@@ -112,9 +118,10 @@ public class SnUnitBlocks implements ContentList {
 
 
             upgrades.addAll(
-                new UnitType[]{SnUnitTypes.halo, SnUnitTypes.crusadercopter},
-                new UnitType[]{SnUnitTypes.star, SnUnitTypes.galaxy}
+                    new UnitType[]{SnUnitTypes.halo, SnUnitTypes.crusadercopter},
+                    new UnitType[]{SnUnitTypes.star, SnUnitTypes.galaxy}
             );
         }};
+        //end region
     }
 }

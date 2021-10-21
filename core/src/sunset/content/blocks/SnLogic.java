@@ -1,5 +1,6 @@
 package sunset.content.blocks;
 
+import mindustry.Vars;
 import mindustry.content.Items;
 import mindustry.ctype.*;
 import mindustry.type.*;
@@ -16,14 +17,11 @@ public class SnLogic implements ContentList{
 
     @Override
     public void load(){
-    naturitelogicProcessor = new LogicBlock("sn-logic-processor"){{
-        requirements(Category.logic, with(Items.lead, 370, Items.silicon, 140, Items.graphite, 120, SnItems.naturite, 70));
-
+    naturitelogicProcessor = new LogicBlock("naturitelogic-logic-processor"){{
         instructionsPerTick = 13;
-
-        range = 10 * 20;
-
+        range = 25.0f* Vars.tilesize;
         size = 1;
+        requirements(Category.logic, with(Items.lead, 370, Items.silicon, 140, Items.graphite, 120, SnItems.naturite, 70));
     }};
 }
 }
