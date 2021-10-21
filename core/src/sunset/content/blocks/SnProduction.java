@@ -178,7 +178,7 @@ public class SnProduction implements ContentList {
             liquidCapacity = 30f;
             outputItem = new ItemStack(SnItems.naturite, 2);
             craftTime = 34f;
-            size = 4;
+            size = 3;
             hasPower = true;
             flameColor = Color.valueOf("F9ECA3");
 
