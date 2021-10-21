@@ -162,3 +162,13 @@ android/libs/
 ## Misc
 
 cache
+
+
+## Zeluax
+cmp.py
+#gradlew.bat
+#gradle.properties
+core/build/
+modsDirectories.txt
+modsDirectoies.txt
+otherFiles/

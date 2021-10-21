@@ -1,0 +1,16 @@
+name: sunset
+displayName: "Sunset"
+authors:
+"
+\nCoding: Slish, Nukleer Bomb, RePoweRED, Darkness.
+\nSprites: MissionaryPoseBest, Saigo no-nozomi, Snake, Mak.
+\nOst: Saigo no-nozomi.
+\nSounds: King-Silicon.
+\nMaps: Saigo no-nozomi.
+"
+description: Adds a lot of new content on type: 3 planets, new and upgraded turrets, factories, 50+ units, items, embodiment and more.....
+version: 0.1.8A
+repo: SunsetTeam/Sunset
+main: sunset.Sunset
+minGameVersion: 133
+java: true
