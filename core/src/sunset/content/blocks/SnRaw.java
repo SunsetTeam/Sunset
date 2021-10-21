@@ -5,15 +5,14 @@ import mindustry.content.Items;
 import mindustry.content.Liquids;
 import mindustry.ctype.ContentList;
 import mindustry.type.Category;
-import mindustry.type.Item;
 import mindustry.type.ItemStack;
 import mindustry.world.Block;
 import mindustry.world.blocks.production.Cultivator;
 import mindustry.world.blocks.production.Drill;
+import mindustry.world.draw.DrawRotator;
 import sunset.content.SnFx;
 import sunset.content.SnItems;
 import sunset.world.blocks.production.raw.PrecussionDrill;
-import sunset.world.draw.DrawModRotator;
 
 import static mindustry.type.ItemStack.with;
 
@@ -38,7 +37,7 @@ public class SnRaw implements ContentList{
             health = 990;
             craftEffect = SnFx.cultivatorSmeltsmoke;
             craftTime = 200f;
-            drawer = new DrawModRotator();
+            drawer = new DrawRotator();
             outputItem = new ItemStack(Items.sporePod, 6);
             itemCapacity = 30;
             liquidCapacity = 40f;

@@ -15,6 +15,7 @@ import mindustry.world.blocks.production.GenericSmelter;
 import mindustry.world.blocks.production.LiquidConverter;
 import mindustry.world.draw.DrawAnimation;
 import mindustry.world.draw.DrawMixer;
+import mindustry.world.draw.DrawRotator;
 import sunset.content.SnFx;
 import sunset.content.SnItems;
 import sunset.content.SnLiquids;
@@ -160,7 +161,7 @@ public class SnProduction implements ContentList {
             size = 3;
             hasPower = true;
             hasLiquids = false;
-            drawer = new DrawModRotator();
+            drawer = new DrawRotator();
             ambientSound = Sounds.grinding;
             ambientSoundVolume = 0.025f;
 
