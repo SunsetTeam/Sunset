@@ -3,6 +3,7 @@ package sunset.content;
 import mindustry.ai.types.SuicideAI;
 import mindustry.content.Fx;
 import mindustry.content.StatusEffects;
+import mindustry.content.UnitTypes;
 import mindustry.ctype.ContentList;
 import mindustry.entities.bullet.BasicBulletType;
 import mindustry.entities.bullet.BombBulletType;
@@ -19,21 +20,16 @@ import sunset.ai.weapon.ExtinguishWeaponAI;
 import sunset.entities.abilities.BerserkStage;
 import sunset.entities.abilities.StatusFieldAbility;
 import sunset.entities.bullet.BerserkLaserBulletType;
-import sunset.type.BerserkUnitType;
-import sunset.type.CopterUnitType;
-import sunset.type.Rotor;
-import sunset.type.UnitTypeExt;
-import sunset.type.WheelUnitType;
+import sunset.type.*;
 import sunset.type.weapons.ChainWeapon;
 import sunset.type.weapons.PointDefenseWeapon;
 import sunset.type.weapons.WeaponExt;
 
-import static mindustry.gen.EntityMapping.map;
 
 public class SnUnitTypes implements ContentList {
     public static UnitType
-    //attack copters
-    wind, thunder, nadir, halo, crusadercopter,
+            //attack copters
+            wind, thunder, nadir, halo, crusadercopter,
     //air-support (buffers)
     comet, satelite, planet, star, galaxy,
     //berserk
@@ -44,6 +40,7 @@ public class SnUnitTypes implements ContentList {
     router, courier,
     //freezing
     snowflake;
+
     @Override
     public void load() {
         //region attack copters
@@ -60,13 +57,13 @@ public class SnUnitTypes implements ContentList {
             range = 130;
             unitFallRotateSpeed = 6f;
 
-            rotors.add(                    
-                new Rotor("sunset-rotor-small"){{
-                offsetX = 0;
-                offsetY = 2;
-                rotorRotateSpeed = 27f;
-                rotorCount = 1;
-                }}
+            rotors.add(
+                    new Rotor("sunset-rotor-small") {{
+                        offsetX = 0;
+                        offsetY = 2;
+                        rotorRotateSpeed = 27f;
+                        rotorCount = 1;
+                    }}
             );
             weapons.add(
                     new WeaponExt("sunset-wind-gun") {{
@@ -94,14 +91,14 @@ public class SnUnitTypes implements ContentList {
             circleTarget = false;
             range = 170;
             unitFallRotateSpeed = 5f;
-            
-            rotors.add(                    
-                new Rotor("sunset-rotor-small"){{
-                offsetX = 0;
-                offsetY = 2;
-                rotorRotateSpeed = 28f;
-                rotorCount = 1;
-                }}
+
+            rotors.add(
+                    new Rotor("sunset-rotor-small") {{
+                        offsetX = 0;
+                        offsetY = 2;
+                        rotorRotateSpeed = 28f;
+                        rotorCount = 1;
+                    }}
             );
             weapons.add(
                     new WeaponExt("sunset-missile-mount-small") {{
@@ -135,22 +132,22 @@ public class SnUnitTypes implements ContentList {
 
             unitFallRotateSpeed = 5f;
 
-            rotors.add(                    
-                new Rotor("sunset-triple-rotor-small"){{
-                offsetX = 0;
-                offsetY = 8;
-                rotorRotateSpeed = 27f;
-                rotorCount = 1;
-                }}
+            rotors.add(
+                    new Rotor("sunset-triple-rotor-small") {{
+                        offsetX = 0;
+                        offsetY = 8;
+                        rotorRotateSpeed = 27f;
+                        rotorCount = 1;
+                    }}
             );
 
-            rotors.add(                    
-                new Rotor("sunset-rotor-small"){{
-                offsetX = 0;
-                offsetY = -9;
-                rotorRotateSpeed = 28f;
-                rotorCount = 1;
-                }}
+            rotors.add(
+                    new Rotor("sunset-rotor-small") {{
+                        offsetX = 0;
+                        offsetY = -9;
+                        rotorRotateSpeed = 28f;
+                        rotorCount = 1;
+                    }}
             );
             weapons.add(
                     new WeaponExt("sunset-missile-launch") {{
@@ -237,7 +234,7 @@ public class SnUnitTypes implements ContentList {
                         reload = 10f;
                         shotDelay = 1f;
                         shots = 4;
-                        inaccuracy = 3f;                        
+                        inaccuracy = 3f;
                         shootSound = Sounds.spark;
                         bullet = SnBullets.lightningGun;
                     }});
@@ -500,7 +497,7 @@ public class SnUnitTypes implements ContentList {
         //endregion air-support (buffers)
 
         //region berserk
-        mirage = new BerserkUnitType("mirage"){{
+        mirage = new BerserkUnitType("mirage") {{
             health = 320;
             speed = 1f;
             rotateSpeed = 3f;
@@ -518,7 +515,7 @@ public class SnUnitTypes implements ContentList {
             legTrns = 0.5f;
             legMoveSpace = 1.3f;
 
-            weapons.add(new Weapon("sunset-mirage-gun"){{
+            weapons.add(new Weapon("sunset-mirage-gun") {{
                 reload = 30f;
                 x = 5;
                 range = 100;
@@ -529,19 +526,19 @@ public class SnUnitTypes implements ContentList {
                 bullet = SnBullets.mirageGunBullet;
             }});
             stages.add(
-                    new BerserkStage(){{
+                    new BerserkStage() {{
                         healthMaximum = 0.4f;
                         bulletWidthMultiplier = 2f;
                         effect = StatusEffects.overclock;
                     }},
-                    new BerserkStage(){{
+                    new BerserkStage() {{
                         healthMaximum = 0.15f;
                         bulletWidthMultiplier = 3f;
                         effect = StatusEffects.burning;
                     }}
             );
         }};
-        vision = new BerserkUnitType("vision"){{
+        vision = new BerserkUnitType("vision") {{
             health = 980;
             speed = 0.8f;
             rotateSpeed = 2f;
@@ -560,7 +557,7 @@ public class SnUnitTypes implements ContentList {
             legBaseOffset = 2f;
 
             weapons.add(
-                    new Weapon("sunset-vision-gun"){{
+                    new Weapon("sunset-vision-gun") {{
                         reload = 30f;
                         x = 6;
                         y = -0.3f;
@@ -571,7 +568,7 @@ public class SnUnitTypes implements ContentList {
                     }}
             );
         }};
-        illusion = new BerserkUnitType("illusion"){{
+        illusion = new BerserkUnitType("illusion") {{
             health = 1400;
             speed = 1.1f;
             rotateSpeed = 2.4f;
@@ -589,14 +586,14 @@ public class SnUnitTypes implements ContentList {
             legBaseOffset = 4f;
 
             weapons.add(
-                    new Weapon("sunset-illusion-gun"){{
+                    new Weapon("sunset-illusion-gun") {{
                         reload = 40;
                         x = 8;
                         y = -2;
                         alternate = false;
                         mirror = true;
                         inaccuracy = 3f;
-                        bullet = new BerserkLaserBulletType(){{
+                        bullet = new BerserkLaserBulletType() {{
                             hitEffect = despawnEffect = Fx.none;
                             instantDisappear = true;
                             damage = 30;
@@ -616,146 +613,145 @@ public class SnUnitTypes implements ContentList {
                             fragCone = 6f;
                         }};
                     }},
-                    new Weapon("sunset-iliusion-lasergun"){{
+                    new Weapon("sunset-iliusion-lasergun") {{
                         reload = 60f;
-                        bullet = new BerserkLaserBulletType(){{
+                        bullet = new BerserkLaserBulletType() {{
                             damage = 12;
                             lifetime = 30f;
                         }};
                     }}
             );
         }};
-        soothSayer = new BerserkUnitType("soothSayer"){
-            {
-                health = 7500;
-                speed = 1.3f;
-                rotateSpeed = 2.1f;
-                drag = 0.125f;
-                allowLegStep = true;
-                hovering = false;
-                hitSize = 38f;
-                groundLayer = Layer.legUnit;
-                visualElevation = 0.6f;
+        soothSayer = new BerserkUnitType("soothSayer") {{
+            health = 7500;
+            speed = 1.3f;
+            rotateSpeed = 2.1f;
+            drag = 0.125f;
+            allowLegStep = true;
+            hovering = false;
+            hitSize = 38f;
+            groundLayer = Layer.legUnit;
+            visualElevation = 0.6f;
 
-                legCount = 6;
-                legMoveSpace = 1f;
-                legPairOffset = 3;
-                legLength = 25f;
-                legExtension = -14;
-                legBaseOffset = 9f;
-                landShake = 1f;
-                legLengthScl = 0.97f;
+            legCount = 6;
+            legMoveSpace = 1f;
+            legPairOffset = 3;
+            legLength = 25f;
+            legExtension = -14;
+            legBaseOffset = 9f;
+            landShake = 1f;
+            legLengthScl = 0.97f;
 
-                legSplashDamage = 37;
-                legSplashRange = 30;
-                weapons.add(
-                        new Weapon("soothSayer-lasergun") {
-                            {
-                                reload = 75f;
-                                x = 12;
-                                y = -3;
-                                alternate = false;
-                                mirror = true;
-                                inaccuracy = 3f;
-                                bullet = new BerserkLaserBulletType() {
-                                    {
-                                        hitEffect = despawnEffect = Fx.none;
-                                        instantDisappear = true;
-                                        damage = 120;
-                                        shots = 6;
-                                        shotDelay = 12f;
-                                        lifetime = 30f;
-                                        fragBullets = 8;
+            legSplashDamage = 37;
+            legSplashRange = 30;
+            weapons.add(
+                    new Weapon("soothSayer-lasergun") {
+                        {
+                            reload = 75f;
+                            x = 12;
+                            y = -3;
+                            alternate = false;
+                            mirror = true;
+                            inaccuracy = 3f;
+                            bullet = new BerserkLaserBulletType() {
+                                {
+                                    hitEffect = despawnEffect = Fx.none;
+                                    instantDisappear = true;
+                                    damage = 120;
+                                    shots = 6;
+                                    shotDelay = 12f;
+                                    lifetime = 30f;
+                                    fragBullets = 8;
+                                    keepVelocity = true;
+                                    fragBullet = new BasicBulletType(4f, 50f) {{
+                                        lifetime = 13f;
                                         keepVelocity = true;
-                                        fragBullet = new BasicBulletType(4f, 50f) {{
-                                            lifetime = 13f;
-                                            keepVelocity = true;
-                                        }};
-                                        fragVelocityMin = 0.85f;
-                                        fragVelocityMax = 1.25f;
-                                        fragLifeMin = 0.85f;
-                                        fragLifeMax = 1.25f;
-                                        fragCone = 6f;
-                                    }
-                                };
-                            }
-                        },
-                        new Weapon("soothSayer-gun"){{
-                            reload = 40f;
-                            x = 12f;
-                            y = 4f;
-                            bullet = new BerserkLaserBulletType(){{
-                                lifetime = 30;
-                                damage = 4f;
-                            }};
-                        }}
-                );
-            }};
-        seer = new BerserkUnitType("seer"){{
-                health = 24000;
-                speed = 0.97f;
-                rotateSpeed = 1.8f;
-                drag = 0.125f;
-                hitSize = 47f;
-                armor = 12f;
-                allowLegStep = true;
-                hovering = true;
-                groundLayer = Layer.legUnit;
-                visualElevation = 0.96f;
+                                    }};
+                                    fragVelocityMin = 0.85f;
+                                    fragVelocityMax = 1.25f;
+                                    fragLifeMin = 0.85f;
+                                    fragLifeMax = 1.25f;
+                                    fragCone = 6f;
+                                }
+                            };
+                        }
+                    },
+                    new Weapon("soothSayer-gun") {{
+                        reload = 40f;
+                        x = 12f;
+                        y = 4f;
+                        bullet = new BerserkLaserBulletType() {{
+                            lifetime = 30;
+                            damage = 4f;
+                        }};
+                    }}
+            );
+        }};
+        seer = new BerserkUnitType("seer") {{
+            health = 24000;
+            speed = 0.97f;
+            rotateSpeed = 1.8f;
+            drag = 0.125f;
+            hitSize = 47f;
+            armor = 12f;
+            allowLegStep = true;
+            hovering = true;
+            groundLayer = Layer.legUnit;
+            visualElevation = 0.96f;
 
-                legCount = 8;
-                legMoveSpace = 0.8f;
-                legPairOffset = 3;
-                legLength = 60f;
-                legExtension = -19;
-                legBaseOffset = 8f;
-                landShake = 1f;
-                legSpeed = 0.1f;
-                legLengthScl = 0.93f;
-                rippleScale = 3f;
-                legSpeed = 0.19f;
+            legCount = 8;
+            legMoveSpace = 0.8f;
+            legPairOffset = 3;
+            legLength = 60f;
+            legExtension = -19;
+            legBaseOffset = 8f;
+            landShake = 1f;
+            legSpeed = 0.1f;
+            legLengthScl = 0.93f;
+            rippleScale = 3f;
+            legSpeed = 0.19f;
 
-                legSplashDamage = 45;
-                legSplashRange = 40;
-            }};
+            legSplashDamage = 45;
+            legSplashRange = 40;
+        }};
 
 
-        abyssEye = new BerserkUnitType("abyssEye"){{
-                health = 65000;
-                speed = 0.75f;
-                rotateSpeed = 1.5f;
-                drag = 0.125f;
-                hitSize = 71;
-                armor = 16f;
-                allowLegStep = true;
-                hovering = true;
-                groundLayer = Layer.legUnit;
-                visualElevation = 1.1f;
+        abyssEye = new BerserkUnitType("abyssEye") {{
+            health = 65000;
+            speed = 0.75f;
+            rotateSpeed = 1.5f;
+            drag = 0.125f;
+            hitSize = 71;
+            armor = 16f;
+            allowLegStep = true;
+            hovering = true;
+            groundLayer = Layer.legUnit;
+            visualElevation = 1.1f;
 
-                legCount = 8;
-                legMoveSpace = 0.8f;
-                legPairOffset = 3;
-                legLength = 80f;
-                legExtension = -17;
-                legBaseOffset = 11f;
-                landShake = 1.5f;
-                legSpeed = 0.21f;
-                legLengthScl = 0.9f;
-                rippleScale = 3f;
-                legSpeed = 0.19f;
-                
-                legSplashDamage = 59;
-                legSplashRange = 70;
-                }};
+            legCount = 8;
+            legMoveSpace = 0.8f;
+            legPairOffset = 3;
+            legLength = 80f;
+            legExtension = -17;
+            legBaseOffset = 11f;
+            landShake = 1.5f;
+            legSpeed = 0.21f;
+            legLengthScl = 0.9f;
+            rippleScale = 3f;
+            legSpeed = 0.19f;
+
+            legSplashDamage = 59;
+            legSplashRange = 70;
+        }};
         //endregion berserk
 
         //region wheel
-        wheel1 = new WheelUnitType("wheel1"){{
+        wheel1 = new WheelUnitType("wheel1") {{
             health = 80;
             speed = 3.5f;
             rotateSpeed = baseRotateSpeed = 2.75f;
             drag = 0.075f;
-            weapons.add(new WeaponExt("wheel1-minigun"){{
+            weapons.add(new WeaponExt("wheel1-minigun") {{
                 reload = 5.5f;
                 inaccuracy = 4f;
                 rotate = true;
@@ -764,12 +760,12 @@ public class SnUnitTypes implements ContentList {
                 x = y = 0;
             }});
         }};
-        wheel2 = new WheelUnitType("wheel2"){{
+        wheel2 = new WheelUnitType("wheel2") {{
             health = 420;
             speed = 3.4f;
             rotateSpeed = baseRotateSpeed = 2.66f;
             drag = 0.075f;
-            weapons.add(new WeaponExt("wheel2-shotgun"){{
+            weapons.add(new WeaponExt("wheel2-shotgun") {{
                 reload = 48f;
                 inaccuracy = 0f;
                 rotate = true;
@@ -778,12 +774,12 @@ public class SnUnitTypes implements ContentList {
                 x = y = 0;
             }});
         }};
-        wheel3 = new WheelUnitType("wheel3"){{
+        wheel3 = new WheelUnitType("wheel3") {{
             health = 890;
             speed = 3.2f;
             rotateSpeed = baseRotateSpeed = 2.33f;
             drag = 0.075f;
-            weapons.add(new WeaponExt("wheel3-burst"){{
+            weapons.add(new WeaponExt("wheel3-burst") {{
                 reload = 65f;
                 inaccuracy = 1f;
                 rotate = true;
@@ -793,12 +789,12 @@ public class SnUnitTypes implements ContentList {
                 x = y = 0;
             }});
         }};
-        wheel4 = new WheelUnitType("wheel4"){{
+        wheel4 = new WheelUnitType("wheel4") {{
             health = 6800;
             speed = 3.1f;
             rotateSpeed = baseRotateSpeed = 2.25f;
             drag = 0.075f;
-            weapons.add(new WeaponExt("wheel4-shotgun"){{
+            weapons.add(new WeaponExt("wheel4-shotgun") {{
                 reload = 92f;
                 rotate = true;
                 mirror = false;
@@ -806,7 +802,7 @@ public class SnUnitTypes implements ContentList {
                 shootSound = Sounds.shootBig;
                 x = y = 0;
             }});
-            weapons.add(new WeaponExt("wheel4-burst"){{
+            weapons.add(new WeaponExt("wheel4-burst") {{
                 reload = 56f;
                 inaccuracy = 3f;
                 alternate = true;
@@ -817,12 +813,12 @@ public class SnUnitTypes implements ContentList {
                 x = -3;
             }});
         }};
-        wheel5 = new WheelUnitType("wheel5"){{
+        wheel5 = new WheelUnitType("wheel5") {{
             health = 19400;
             speed = 3f;
             rotateSpeed = baseRotateSpeed = 2f;
             drag = 0.075f;
-            weapons.add(new WeaponExt("wheel5-flame"){{
+            weapons.add(new WeaponExt("wheel5-flame") {{
                 reload = 7f;
                 rotate = true;
                 mirror = false;
@@ -830,7 +826,7 @@ public class SnUnitTypes implements ContentList {
                 shootSound = Sounds.flame;
                 x = y = 0;
             }});
-            weapons.add(new WeaponExt("wheel5-bullet"){{
+            weapons.add(new WeaponExt("wheel5-bullet") {{
                 reload = 149f;
                 inaccuracy = 1f;
                 alternate = true;
@@ -847,7 +843,7 @@ public class SnUnitTypes implements ContentList {
         //endregion wheel
 
         //region delivery
-        courier = new UnitTypeExt("courier"){{
+        courier = new UnitTypeExt("courier") {{
             speed = 3.9f;
             flying = true;
             itemCapacity = 100;
@@ -861,7 +857,7 @@ public class SnUnitTypes implements ContentList {
         //region freezing
         snowflake = new UnitType("snowflake") {{
             defaultController = SuicideAI::new;
-            constructor = map(19);
+            constructor = UnitTypes.pulsar.constructor;
             speed = 1f;
             hitSize = 8f;
             health = 500;
@@ -870,14 +866,14 @@ public class SnUnitTypes implements ContentList {
 
             immunities.add(StatusEffects.freezing);
 
-            weapons.add(new Weapon(){{
+            weapons.add(new Weapon() {{
                 reload = 20f;
                 shootCone = 180f;
                 ejectEffect = Fx.freezing;
                 shootSound = Sounds.explosion;
                 x = shootY = 0f;
                 mirror = false;
-                bullet = new BombBulletType(0f, 0f, "clear"){{
+                bullet = new BombBulletType(0f, 0f, "clear") {{
                     hitEffect = Fx.pulverize;
                     lifetime = 10f;
                     speed = 1f;
@@ -892,17 +888,21 @@ public class SnUnitTypes implements ContentList {
             }});
         }};
         //endregion freezing
-        router = new UnitTypeExt("router") {{
-            health = 2000000;
-            speed = 2.85f;
-            hitSize = 16;
-            flying = true;
-            constructor = UnitEntity::create;
-            engineSize = 0;
-            drawCell = false;
-        }
+        router = new UnitTypeExt("router") {
+            {
+                health = 2000000;
+                speed = 2.85f;
+                hitSize = 16;
+                flying = true;
+                constructor = UnitEntity::create;
+                engineSize = 0;
+                drawCell = false;
+            }
+
             @Override
-            public boolean isHidden() { return true; }
+            public boolean isHidden() {
+                return true;
+            }
         };
     }
 }
