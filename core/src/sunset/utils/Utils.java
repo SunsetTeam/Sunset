@@ -92,6 +92,9 @@ public class Utils {
             Method generateM = MenuRenderer.class.getDeclaredMethod("generate");
             generateM.setAccessible(true);
             generateM.invoke(renderer);
+            Method cacheM = MenuRenderer.class.getDeclaredMethod("cache");
+            cacheM.setAccessible(true);
+            cacheM.invoke(renderer);
         } catch (Throwable e) {
             Log.err(e);
         }
