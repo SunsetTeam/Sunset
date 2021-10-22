@@ -6,6 +6,7 @@ import arc.util.Strings;
 import arc.util.Time;
 import mindustry.Vars;
 import mindustry.content.StatusEffects;
+import mindustry.entities.Units;
 import mindustry.entities.abilities.Ability;
 import mindustry.gen.Unit;
 import mindustry.type.StatusEffect;
@@ -32,7 +33,7 @@ public class StatusFieldAbility extends Ability implements StatValue {
 
         if(timer >= reload){
             SnFx.statusField.at(unit.x, unit.y, range);
-            Utils.unitsNearby(unit.x, unit.y, range, other -> {
+            Units.nearby(null,unit.x, unit.y, range, other -> {
                 if (other.team.isEnemy(unit.team)) {
                     other.apply(enemyEffect, reload);
                 } else {

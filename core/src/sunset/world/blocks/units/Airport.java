@@ -10,6 +10,7 @@ import arc.struct.IntSeq;
 import arc.util.Time;
 import arc.util.io.Reads;
 import arc.util.io.Writes;
+import mindustry.entities.Units;
 import mindustry.gen.*;
 import mindustry.graphics.Drawf;
 import mindustry.graphics.Pal;
@@ -211,7 +212,7 @@ public class Airport extends StorageBlock {
         public void firstUpdateAfterRead() {
             units.clear();
             for (int i = 0; i < states.size; i++) {
-                Unit u = Utils.unitClosest(xs.get(i), ys.get(i), (_u) -> true);
+                Unit u = Units.closest(null,xs.get(i), ys.get(i), (_u) -> true);
                 DeliverAI ai = (DeliverAI)u.controller();
                 ai.setup(this);
                 ai.state = states.get(i);

@@ -4,6 +4,7 @@ import arc.func.Boolf;
 import arc.func.Cons;
 import arc.func.Floatc2;
 import arc.func.Func;
+import arc.math.Angles;
 import arc.math.Mathf;
 import arc.math.Rand;
 import arc.math.geom.Geometry;
@@ -70,28 +71,10 @@ public class Utils {
             }
         return null;
     }
-    /** Обрабатывает всех юнитов всех команд в некотором радиусе. */
-    public static void unitsNearby(float x, float y, float radius, Cons<Unit> cons){
-        for (Team team : Team.all) Units.nearby(team, x, y, radius, cons);
-    }
-    /** Возвращает ближайшего юнита вне зависимости от команды. */
-    public static Unit unitClosest(float x, float y, Boolf<Unit> predicate) {
-        Unit result = null;
-        float cdist = 0f;
 
-        for(Unit e : Groups.unit){
-            if(!predicate.get(e)) continue;
-
-            float dist = e.dst2(x, y);
-            if(result == null || dist < cdist){
-                result = e;
-                cdist = dist;
-            }
-        }
-
-        return result;
-    }
-    /** Принудительно устанавливает юнита в меню. */
+    /**
+     * Принудительно устанавливает юнита в меню.
+     */
     public static void setMenuUnit(UnitType type) {
         try {
             Field rendererF = MenuFragment.class.getDeclaredField("renderer");
@@ -108,19 +91,6 @@ public class Utils {
             cacheM.invoke(renderer);
         } catch (Throwable e) {
             Log.err(e);
-        }
-    }
-
-    /**
-     * Создаёт случайные векторы.
-     */
-    public static void randVectors(long seed, int amount, float lengthFrom, float lengthTo, Floatc2 cons) {
-        random.setSeed(seed);
-
-        for (int i = 0; i < amount; ++i) {
-            float vang = random.nextFloat() * 360.0F;
-            rv.set(random.random(lengthFrom, lengthTo), 0.0F).rotate(vang);
-            cons.get(rv.x, rv.y);
         }
     }
 
@@ -206,7 +176,7 @@ public class Utils {
         collidedBlocks.clear();
         int tx = World.toTile(wx);
         int ty = World.toTile(wy);
-
+        Units.nearby();
         int tileRange = Mathf.floorPositive(range / tilesize);
 
         for (int x = -tileRange + tx; x <= tileRange + tx; x++) {

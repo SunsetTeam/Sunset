@@ -13,6 +13,7 @@ import arc.struct.ObjectMap;
 import arc.struct.Seq;
 import arc.util.Strings;
 import arc.util.Time;
+import mindustry.entities.Units;
 import mindustry.entities.units.WeaponMount;
 import mindustry.gen.*;
 import mindustry.graphics.Drawf;
@@ -87,7 +88,7 @@ public class ChainWeapon extends WeaponExt implements UpdateDrawWeapon, StatValu
     public static Unit getFirstUnit(WeaponMount mount, Unit unit) {
         Vec2 wpos = new Vec2(mount.weapon.x, mount.weapon.y).rotate(unit.rotation - 90).add(unit.x, unit.y);
         ChainWeapon weapon = (ChainWeapon)mount.weapon;
-        return unitClosest(wpos.x, wpos.y, u -> {
+        return Units.closest(null,wpos.x, wpos.y, u -> {
             if(u.team == unit.team && (weapon.healTick == 0 || !u.damaged())) return false;
             if(u.team != unit.team && weapon.damageTick == 0) return false;
             if(unit == u || Mathf.dst(wpos.x, wpos.y, u.x, u.y) > weapon.range) return false;
@@ -104,7 +105,7 @@ public class ChainWeapon extends WeaponExt implements UpdateDrawWeapon, StatValu
             d[0]--;
             r[0] *= rangeFactor;
             units.add(t[0]);
-            t[0] = unitClosest(t[0].x, t[0].y, u -> {
+            t[0] = Units.closest(null,t[0].x, t[0].y, u -> {
                 if(u == unit || units.contains(u)) return false;
                 if((u.health >= u.maxHealth) && !unit.team.isEnemy(u.team)) return false;
                 return (Mathf.dst(t[0].x, t[0].y, u.x, u.y) <= r[0]) && (d[0] > 0);

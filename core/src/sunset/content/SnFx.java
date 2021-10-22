@@ -243,7 +243,7 @@ public class SnFx{
                                      float minSpeed, float maxSpeed, float mainRadius, float miniRadius,
                                      Color c1, Color c2, float x, float y) {
         Seq<Vec2> vecs = new Seq<>();
-        Utils.randVectors(seed, amount, minSpeed, maxSpeed, (xx, yy) -> vecs.add(new Vec2(xx, yy)));
+        Angles.randLenVectors(seed, amount, minSpeed, maxSpeed, (xx, yy) -> vecs.add(new Vec2(xx, yy)));
         vecs.each(vec -> {
             float size = (vec.len() * time) % Mathf.PI2;
             if(size < Mathf.PI) return;
@@ -353,7 +353,7 @@ public class SnFx{
     missileLaunchSmall = new Effect(75, e -> {
         Draw.z(Layer.groundUnit);
         final int[] p = {0};
-        Utils.randVectors(e.id, 16, 16 * e.fin(), 52 * Mathf.pow(e.fin(), 0.55f), (x, y) -> {
+        Angles.randLenVectors(e.id, 16, 16 * e.fin(), 52 * Mathf.pow(e.fin(), 0.55f), (x, y) -> {
             float a = Mathf.pow(e.fout(), 0.35f);
             if(p[0] == 0) Draw.color(Pal.lightishGray, a);
             if(p[0] == 1) Draw.color(Pal.gray, a);
@@ -366,7 +366,7 @@ public class SnFx{
     missileLaunchMedium = new Effect(90, e -> {
         Draw.z(Layer.groundUnit);
         final int[] p = {0};
-        Utils.randVectors(e.id, 24, 28 * e.fin(), 72 * Mathf.pow(e.fin(), 0.55f), (x, y) -> {
+        Angles.randLenVectors(e.id, 24, 28 * e.fin(), 72 * Mathf.pow(e.fin(), 0.55f), (x, y) -> {
             float a = Mathf.pow(e.fout(), 0.5f);
             if(p[0] == 0) Draw.color(Pal.lightishGray, a);
             if(p[0] == 1) Draw.color(Pal.gray, a);
@@ -379,7 +379,7 @@ public class SnFx{
     missileLaunchLarge = new Effect(105, e -> {
         Draw.z(Layer.groundUnit);
         final int[] p = {0};
-        Utils.randVectors(e.id, 32, 36 * e.fin(), 86 * Mathf.pow(e.fin(), 0.55f), (x, y) -> {
+        Angles.randLenVectors(e.id, 32, 36 * e.fin(), 86 * Mathf.pow(e.fin(), 0.55f), (x, y) -> {
             float a = Mathf.pow(e.fout(), 0.7f);
             if(p[0] == 0) Draw.color(Pal.lightishGray, a);
             if(p[0] == 1) Draw.color(Pal.gray, a);
