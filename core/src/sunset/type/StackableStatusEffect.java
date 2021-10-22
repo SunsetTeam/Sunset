@@ -1,6 +1,6 @@
 package sunset.type;
 
-import arc.graphics.g2d.TextureRegion;
+import acontent.world.meta.AStats;
 import arc.scene.ui.layout.Table;
 import mindustry.*;
 import mindustry.content.TechTree;
@@ -13,7 +13,6 @@ import mindustry.gen.Unit;
 import mindustry.type.StatusEffect;
 import mma.*;
 import sunset.entities.units.StackableStatusEntry;
-import sunset.world.meta.SnCustomStat;
 import sunset.world.meta.values.StackableStatusEffectValue;
 
 import static mindustry.Vars.state;
@@ -29,7 +28,7 @@ import java.lang.reflect.Field;
  * @apiNote Для установки статус эффекта используйте метод {@code apply(Unit, float)}. 
  * Вместо {@code update(Unit, float)} переопределяйте метод {@code updateStack(Unit, float, int)}.
  * Вместо {@code draw(Unit)} переопределяйте метод {@code drawStack(Unit, int)}.*/
-public class StackableStatusEffect extends StatusEffect implements SnCustomStat {
+public class StackableStatusEffect extends StatusEffect {
     /** Максимальное количество наложений. */
     public int maxStacks = 1;
     /** Множители наносимого урона для каждого уровня стака. */
@@ -54,9 +53,16 @@ public class StackableStatusEffect extends StatusEffect implements SnCustomStat 
     public Seq<StatusEffect> stacks;
 
     private StackableStatusEffectValue displayer;
+    private final AStats aStats=new AStats(){
+        @Override
+        public void display(Table table) {
+            displayer.display(table);
+        }
+    };
 
     public StackableStatusEffect(String name) {
         super(name);
+        stats=aStats.copy(stats);
     }
 
     /** @implNote при инициализации создаёт статус-эффект для каждого уровня наложения. */
@@ -196,6 +202,4 @@ public class StackableStatusEffect extends StatusEffect implements SnCustomStat 
         StackableStatusEntry entry = new StackableStatusEntry(this, stackCount, duration);
         statuses.add(entry);
     }
-    @Override
-    public void displayStats(Table t) { displayer.display(t); }
 }

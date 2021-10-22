@@ -1,29 +1,28 @@
 package sunset.world.blocks.defense.walls;
 
+import acontent.world.meta.AStats;
 import mindustry.gen.Bullet;
 import mindustry.world.blocks.defense.Wall;
-import sunset.world.meta.SnStats;
-import sunset.world.meta.SnStatsUser;
+import mindustry.world.meta.StatUnit;
+import sunset.world.meta.SnStat;
 
 /** Стена, которая снижает пробитие пуль. */
-public class AntiPierceWall extends Wall implements SnStatsUser {
+public class AntiPierceWall extends Wall {
     /** Дополнительный штраф к пробитию. */
     public int pierceDebuff = 1;
     /** Множитель урона пули. */
     public float damageDebuff = 0.95f;
+    private final AStats snStats=new AStats();
     public AntiPierceWall(String name) {
         super(name);
+        stats=snStats.copy(stats);
     }
-
-    private SnStats snStats;
-    @Override
-    public SnStats snStats() { return snStats; }
     @Override
     public void setStats() {
         super.setStats();
-        snStats = new SnStats(stats);
-        if(pierceDebuff > 0) snStats.addU("piercedebuff", "durability", pierceDebuff);
-        if(damageDebuff < 1) snStats.addPercentU("piercedamagedebuff", "durability", 1-damageDebuff);
+
+        if(pierceDebuff > 0) snStats.add(SnStat.pierceDebuff, pierceDebuff);
+        if(damageDebuff < 1) snStats.add(SnStat.pierceDamageDebuff, (1f-damageDebuff)*100, StatUnit.percent);
     }
 
     public class AntiPierceWallBuild extends WallBuild {

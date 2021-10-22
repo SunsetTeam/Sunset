@@ -3,6 +3,7 @@ buildscript {
         arcHash = 'v133'
         mindustryVersion = 'v133'
         parserVersion='3.22.1'
+        aciVersion = "9f9ed7da24"
         packerHash = '128'
         modsDirectories = [] ;
         def file=new File(rootDir, "modsDirectories.txt");
@@ -111,6 +112,7 @@ allprojects {
 dependencies {
     implementation "com.github.Zelaux.ZelauxModCore:core:$modCoreVersion"
     implementation "com.github.Zelaux.ZelauxModCore:plugins:$modCoreVersion"
+    implementation "com.github.Zelaux:AdvancedContentInfo:$aciVersion"
 }
 
 configure(project(":annotations")) {
@@ -182,7 +184,9 @@ project(":core") {
         implementation "com.github.Zelaux.ZelauxModCore:core:$modCoreVersion"
         implementation "com.github.Zelaux.ZelauxModCore:plugins:$modCoreVersion"
         compileOnly "com.github.Zelaux.ZelauxModCore:annotations:$modCoreVersion"
-//        compileOnly "com.github.Anuken.Mindustry:entities:$mindustryVersion"
+
+        implementation "com.github.Zelaux:AdvancedContentInfo:$aciVersion"
+
         compileOnly "com.github.Anuken.Mindustry:core:$mindustryVersion"
         compileOnly "com.github.Anuken.Mindustry:tools:$mindustryVersion"
 
@@ -234,6 +238,8 @@ project(":tools") {
         implementation "com.github.Anuken.Mindustry:core:$mindustryVersion"
         implementation "com.github.Anuken.Mindustry:tools:$mindustryVersion"
 
+        implementation "com.github.Zelaux:AdvancedContentInfo:$aciVersion"
+
         implementation "com.github.Zelaux.ZelauxModCore:core:$modCoreVersion"
         implementation "com.github.Zelaux.ZelauxModCore:tools:$modCoreVersion"
 
@@ -249,6 +255,8 @@ project(":annotations") {
         implementation arcModule('arc-core')
         implementation "com.github.Anuken.Mindustry:core:$mindustryVersion"
         implementation "com.github.Anuken.Mindustry:tools:$mindustryVersion"
+
+        implementation "com.github.Zelaux:AdvancedContentInfo:$aciVersion"
 
         implementation "com.github.Zelaux.ZelauxModCore:core:$modCoreVersion"
         implementation "com.github.Zelaux.ZelauxModCore:tools:$modCoreVersion"

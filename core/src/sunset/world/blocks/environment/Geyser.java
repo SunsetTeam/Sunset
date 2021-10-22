@@ -14,7 +14,4 @@ public class Geyser extends Floor {
     public Geyser(String name) {
         super(name);
     }
-    public class GeyserBuild extends Building {
-
-    }
 }

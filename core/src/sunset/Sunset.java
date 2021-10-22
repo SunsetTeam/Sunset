@@ -1,18 +1,16 @@
 package sunset;
 
+import acontent.ui.AdvancedContentInfoDialog;
 import arc.Events;
-import arc.util.Log;
 import mindustry.Vars;
 import mindustry.core.*;
 import mindustry.ctype.*;
-import mindustry.game.EventType.FileTreeInitEvent;
 import mma.*;
 import mma.annotations.ModAnnotations.*;
 import sunset.content.*;
 import sunset.core.*;
 import sunset.gen.*;
 import sunset.type.UnitData;
-import sunset.ui.ContentInfoDialogExt;
 import sunset.utils.Utils;
 import sunset.world.GeyserLogic;
 import sunset.world.MissileLogic;
@@ -62,7 +60,7 @@ public class Sunset extends MMAMod{
         MissileLogic.init();
         UnitData.init();
         GeyserLogic.init();
-        Vars.ui.content = new ContentInfoDialogExt(Vars.ui.content);
+        AdvancedContentInfoDialog.init();
         Utils.setMenuUnit(SnUnitTypes.router);
         /*Log.info("startUp");
         Events.on(ClientLoadEvent.class, e -> {
