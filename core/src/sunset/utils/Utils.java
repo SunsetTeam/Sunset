@@ -176,7 +176,6 @@ public class Utils {
         collidedBlocks.clear();
         int tx = World.toTile(wx);
         int ty = World.toTile(wy);
-        Units.nearby();
         int tileRange = Mathf.floorPositive(range / tilesize);
 
         for (int x = -tileRange + tx; x <= tileRange + tx; x++) {
