@@ -7,14 +7,17 @@ import arc.graphics.g2d.TextureRegion;
 import arc.math.Mathf;
 import arc.math.geom.Vec2;
 import arc.struct.Seq;
+import arc.util.Nullable;
 import arc.util.io.Reads;
 import arc.util.io.Writes;
+import mindustry.Vars;
 import mindustry.annotations.Annotations.Load;
 import mindustry.content.Fx;
+import mindustry.content.UnitTypes;
 import mindustry.entities.Effect;
-import mindustry.game.Team;
-import mindustry.gen.Building;
+import mindustry.gen.BlockUnitc;
 import mindustry.gen.Player;
+import mindustry.gen.Unit;
 import mindustry.graphics.Drawf;
 import mindustry.graphics.Layer;
 import mindustry.graphics.MultiPacker;
@@ -23,6 +26,7 @@ import mindustry.type.Item;
 import mindustry.type.ItemStack;
 import mindustry.ui.Bar;
 import mindustry.world.Tile;
+import mindustry.world.blocks.ControlBlock;
 import mindustry.world.blocks.production.GenericCrafter;
 import mindustry.world.meta.Stat;
 import sunset.world.MissileLogic;
@@ -38,14 +42,23 @@ public class MissileSiloTurret extends GenericCrafter {
     static {
         Events.on(WorldLoadEvent.class, (e) -> selected = null);
         Events.on(GameOverEvent.class, (e) -> selected = null);
-        Events.run(Trigger.uiDrawEnd, () -> {
+        Events.run(Trigger.draw, () -> {
             if (selected != null) {
                 selected.drawSelectIf();
             }
+//            Player player = selected.unit().getPlayer();
+            if (Vars.player.unit() instanceof BlockUnitc b && b.tile() instanceof MissileSiloTurretBuild build) {
+                build.drawSelectIf();
+            }
+            /*if (player != null && player == Vars.player) {
+                selected.drawSelectIf();
+            }*/
         });
         Events.on(TapEvent.class, e -> {
-            if (selected != null) {
+            if (selected != null && e.player == Vars.player) {
                 selected.tapTile(e.player, e.tile);
+            } else if (e.player != null && e.player.unit() instanceof BlockUnitc b && b.tile() instanceof MissileSiloTurretBuild build) {
+                build.tapTile(e.player, e.tile);
             }
         });
     }
@@ -109,25 +122,37 @@ public class MissileSiloTurret extends GenericCrafter {
         Drawf.dashCircle(x * tilesize + offset, y * tilesize + offset, maxRange, Pal.placing);
     }
 
-    public class MissileSiloTurretBuild extends GenericCrafterBuild {
+    public class MissileSiloTurretBuild extends GenericCrafterBuild implements ControlBlock {
         /**
          * Количество загруженных ракет. Максимальный размер определяется rockets.size
          */
         public int loaded = 0;
+        public @Nullable
+        BlockUnitc unit;
 
         @Override
-        public Building init(Tile tile, Team team, boolean shouldAdd, int rotation) {
-//            Events.on(TapEvent.class, this::tapTile);
-//            Events.on(Trigger.uiDrawEnd.getClass(), this::drawSelectIf);
-//            Events.run(Trigger.uiDrawEnd, this::drawSelectIf);
-            return super.init(tile, team, shouldAdd, rotation);
+        public Unit unit() {
+            if (unit == null) {
+                unit = (BlockUnitc) UnitTypes.block.create(team);
+                unit.tile(this);
+            }
+            return (Unit) unit;
+        }
+
+        @Override
+        public boolean canControl() {
+            return true;
+        }
+
+        @Override
+        public boolean shouldAutoTarget() {
+            return false;
         }
 
         private void drawSelectIf() {
-            if (selected == this) {
-                Draw.z(Layer.overlayUI);
+            Draw.draw(Layer.overlayUI, () -> {
                 drawSelect();
-            }
+            });
         }
 
         @Override
@@ -141,6 +166,7 @@ public class MissileSiloTurret extends GenericCrafter {
 
         @Override
         public void tapped() {
+            if (true) return;
             if (selected == this) {
                 selected = null;
             } else {
@@ -157,18 +183,51 @@ public class MissileSiloTurret extends GenericCrafter {
         }
 
         private void tapTile(Player player, Tile tile) {
-            if (player.team() != team || loaded == 0) return;
-            float dst = dst(tile.worldx(), tile.worldy());
+            if (player.team() != team || Vars.player != player) return;
+            if (isControlled()) {
+                tryShoot(unit.aimX(), unit.aimY());
+            } else {
+                tryShoot(tile.worldx(), tile.worldy());
+            }
+        }
+
+        private void tryShoot(float shootX, float shootY) {
+            if (loaded == 0) {
+                return;
+            }
+            float dst = dst(shootX, shootY);
             if (dst > maxRange || dst < minRange) return;
             Vec2 from = new Vec2(x + size * tilesize * (rockets.get(loaded - 1).x - 0.5f),
                     y + size * tilesize * (rockets.get(loaded - 1).y - 0.5f));
             launchEffect.at(from);
-            missile.launch(from, new Vec2(tile.worldx(), tile.worldy()));
+            missile.launch(from, new Vec2(shootX, shootY));
             loaded--;
+            if (loaded == 0 && selected == this) {
+
+//                tapped();
+            }
+        }
+
+        public void updateShooting() {
+            if (unit == null || !isControlled()) return;
+
+            unit.health(health);
+            float ammof = loaded/(float)rockets.size;
+            if (loaded!=rockets.size){
+                ammof+=progress/rockets.size;
+            }
+
+            unit.ammo( unit.type().ammoCapacity *ammof);
+            unit.team(team);
+            unit.set(x, y);
+            if (!unit.isShooting()) {
+                return;
+            }
         }
 
         @Override
         public void updateTile() {
+            updateShooting();
             if (consValid() && loaded < rockets.size) {
                 progress += getProgressIncrease(craftTime);
                 totalProgress += delta();
