@@ -19,7 +19,7 @@ buildscript {
         }
         println "core: "+modCoreVersionDemo
         modCoreVersion = modCoreVersionDemo
-        modCoreVersion = "0ffef85b761"
+        modCoreVersion = "c9fc3273f15"
     }
     repositories {
         mavenLocal()
