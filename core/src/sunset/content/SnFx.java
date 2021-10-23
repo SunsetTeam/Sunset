@@ -267,23 +267,30 @@ public class SnFx {
     }),
 
     missilePoint = new Effect(1,18* tilesize, (e) -> {
-        Draw.z(Layer.bullet);
-        Runnable draw=()->{
-            Lines.circle(e.x, e.y, (Float) e.data);
-            Lines.circle(e.x, e.y, 20f);
-            float angle = e.time / 75 * Mathf.radiansToDegrees-180;
-            Vec2 p1 = Tmp.v1.trns(angle, 18);
-            Vec2 p2 = Tmp.v2.trns(angle, 24);
-            for (int i = 0; i < 4; i++) {
-                Lines.line(e.x + p1.x, e.y + p1.y, e.x + p2.x, e.y + p2.y);
-                p1.rotate90(1);
-                p2.rotate90(1);
-            }
-        };
-        stroke(4, Pal.gray);
-        draw.run();
-        stroke(2, e.color);
-        draw.run();
+        float y = e.y;
+        float x = e.x;
+        float time = e.time;
+        float rotation = e.rotation;
+        Color color = e.color;
+        Draw.draw(Layer.flyingUnit,()->{
+            Runnable draw=()->{
+                Lines.circle(x, y, rotation);
+                Lines.circle(x, y, 20f);
+                float angle = time / 75 * Mathf.radiansToDegrees-180;
+                Vec2 p1 = Tmp.v1.trns(angle, 18);
+                Vec2 p2 = Tmp.v2.trns(angle, 24);
+                for (int i = 0; i < 4; i++) {
+                    Lines.line(x + p1.x, y + p1.y, x + p2.x, y + p2.y);
+                    p1.rotate90(1);
+                    p2.rotate90(1);
+                }
+            };
+            stroke(4, Pal.gray);
+            draw.run();
+            stroke(2, color);
+            draw.run();
+        });
+
 
     }),
 

@@ -13,7 +13,6 @@ import sunset.gen.*;
 import sunset.type.UnitData;
 import sunset.utils.Utils;
 import sunset.world.GeyserLogic;
-import sunset.world.MissileLogic;
 import arc.audio.*;
 import arc.struct.*;
 import mindustry.game.EventType.*;
@@ -21,6 +20,8 @@ import mindustry.mod.Mods.*;
 
 import static mindustry.Vars.*;
 import static mindustry.Vars.headless;
+import static mma.ModVars.modInfo;
+
 @ModAssetsAnnotation
 public class Sunset extends MMAMod{
 
@@ -31,11 +32,11 @@ public class Sunset extends MMAMod{
     public Sunset(){
         super();
         SnVars.load();
+        SnEntityMapping.init();
         if(!headless){
-            LoadedMod sn = mods.locateMod("sunset");
 
             Events.on(WorldLoadEvent.class, e -> {
-                boolean isSn = state.map.mod != null && state.map.mod == sn;
+                boolean isSn = state.map.mod != null && state.map.mod == modInfo;
 
                 if(isSn != lastMapSn){
                     lastMapSn = !lastMapSn;
@@ -57,7 +58,6 @@ public class Sunset extends MMAMod{
     @Override
     public void init() {
         super.init();
-        MissileLogic.init();
         UnitData.init();
         GeyserLogic.init();
         AdvancedContentInfoDialog.init();

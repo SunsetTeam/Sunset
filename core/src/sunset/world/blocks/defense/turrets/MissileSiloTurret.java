@@ -16,9 +16,8 @@ import mindustry.annotations.Annotations.Load;
 import mindustry.content.Fx;
 import mindustry.content.UnitTypes;
 import mindustry.entities.Effect;
-import mindustry.gen.BlockUnitc;
-import mindustry.gen.Player;
-import mindustry.gen.Unit;
+import mindustry.game.Team;
+import mindustry.gen.*;
 import mindustry.graphics.Drawf;
 import mindustry.graphics.Layer;
 import mindustry.graphics.MultiPacker;
@@ -30,10 +29,11 @@ import mindustry.world.Tile;
 import mindustry.world.blocks.ControlBlock;
 import mindustry.world.blocks.production.GenericCrafter;
 import mindustry.world.meta.Stat;
-import sunset.world.MissileLogic;
+import sunset.type.MissileType;
 import sunset.world.meta.values.MinMaxRangeValues;
 import sunset.world.meta.values.SplashDamageValue;
 
+import static mindustry.Vars.reportIssueURL;
 import static mindustry.Vars.tilesize;
 import static mindustry.game.EventType.*;
 
@@ -64,7 +64,7 @@ public class MissileSiloTurret extends GenericCrafter {
         });
     }
 
-    public MissileLogic.MissileType missile;
+    public MissileType missile;
     public Effect launchEffect = Fx.none;
     public float maxRange;
     public float minRange;
@@ -287,6 +287,12 @@ public class MissileSiloTurret extends GenericCrafter {
             Drawf.dashCircle(x, y, maxRange, team.color);
         }
 
+
+        @Override
+        public byte version() {
+            return 0;
+        }
+
         @Override
         public void write(Writes write) {
             super.write(write);
@@ -298,5 +304,6 @@ public class MissileSiloTurret extends GenericCrafter {
             super.read(read, revision);
             loaded = read.i();
         }
+
     }
 }

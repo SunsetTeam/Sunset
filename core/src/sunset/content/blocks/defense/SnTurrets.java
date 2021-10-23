@@ -8,7 +8,6 @@ import mindustry.content.Fx;
 import mindustry.content.Items;
 import mindustry.content.Liquids;
 import mindustry.ctype.ContentList;
-import mindustry.entities.bullet.LaserBoltBulletType;
 import mindustry.entities.bullet.LaserBulletType;
 import mindustry.gen.Sounds;
 import mindustry.graphics.Pal;
@@ -23,10 +22,9 @@ import mindustry.world.meta.BuildVisibility;
 import sunset.content.SnBullets;
 import sunset.content.SnFx;
 import sunset.content.SnItems;
-import sunset.content.SnStatusEffects;
 import sunset.entities.bullet.EnergySphereBulletType;
 import sunset.graphics.SnPal;
-import sunset.world.MissileLogic;
+import sunset.type.MissileType;
 import sunset.world.blocks.defense.turrets.*;
 
 import static mindustry.type.ItemStack.with;
@@ -503,7 +501,7 @@ public class SnTurrets implements ContentList {
             launchEffect = SnFx.missileLaunchSmall;
             size = 2;
             itemCapacity = 240;
-            missile = new MissileLogic.MissileType(){{
+            missile = new MissileType(){{
                 damage = 0f;
                 splashDamage = 590f;
                 splashDamageRadius = 98f;
@@ -524,7 +522,7 @@ public class SnTurrets implements ContentList {
             launchEffect = SnFx.missileLaunchMedium;
             size = 3;
             itemCapacity = 900;
-            missile = new MissileLogic.MissileType(){{
+            missile = new MissileType(){{
                 damage = 0f;
                 splashDamage = 4400f;
                 splashDamageRadius = 129f;
@@ -545,7 +543,7 @@ public class SnTurrets implements ContentList {
             launchEffect = SnFx.missileLaunchLarge;
             size = 4;
             itemCapacity = 2400;
-            missile = new MissileLogic.MissileType(){{
+            missile = new MissileType(){{
                 damage = 0f;
                 splashDamage = 18600f;
                 splashDamageRadius = 154f;
@@ -572,8 +570,7 @@ public class SnTurrets implements ContentList {
                     new Vec2(p2, p1),
                     new Vec2(p2, p2));
 
-
-            missile = new MissileLogic.MissileType(){{
+            missile = new MissileType(){{
                 damage = 0f;
                 splashDamage = 7200f;
                 splashDamageRadius = 137f;
