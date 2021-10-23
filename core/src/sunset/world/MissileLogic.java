@@ -10,6 +10,7 @@ import arc.math.Scaled;
 import arc.math.geom.Vec2;
 import arc.struct.Seq;
 import arc.util.Time;
+import arc.util.Tmp;
 import mindustry.Vars;
 import mindustry.content.Fx;
 import mindustry.entities.Damage;
@@ -22,11 +23,11 @@ public class MissileLogic {
     public static final Seq<Missile> missiles = new Seq<>(false);
 
     public static void init() {
-        Events.on(EventType.Trigger.update.getClass(), MissileLogic::update);
-        Events.on(EventType.Trigger.draw.getClass(), MissileLogic::draw);
+        Events.run(EventType.Trigger.update, MissileLogic::update);
+        Events.run(EventType.Trigger.draw, MissileLogic::draw);
     }
 
-    public static void draw(EventType.Trigger t) {
+    public static void draw() {
         float z = Draw.z();
         Draw.z(Layer.weather); // ракеты в облаках, наверное.
         missiles.each((m) -> {
@@ -38,7 +39,7 @@ public class MissileLogic {
     }
 
     static long lastTime = 0;
-    public static void update(EventType.Trigger t) {
+    public static void update() {
         float secs = (Time.millis() - lastTime) / 1000f * 60f;
         if(!Vars.state.isPaused()) {
             missiles.each((m) -> m.update(secs));
@@ -50,25 +51,27 @@ public class MissileLogic {
      * @apiNote Реализация {@link arc.math.Scaled} предосавляет информацию о части пройденного пути. */
     public static class Missile implements Scaled {
         public final MissileType type;
-        public final Vec2 from, to, current, speed;
-        public float fligtLength, fligtTime;
-        public final long launchTime;
+        public final Vec2 from, to,
+                current=new Vec2(), speed=new Vec2()
+                ;
+        public float flightLength, flightTime;
+//        public final long launchTime;
         public Missile(MissileType type, Vec2 from, Vec2 to) {
-            launchTime = Time.millis();
+//            launchTime = Time.millis();
             this.type = type;
-            this.from = new Vec2(from);
-            this.to = new Vec2(to);
-            this.current = new Vec2(from);
-            speed = new Vec2(to.x - from.x, to.y - from.y);
-            fligtLength = speed.len();
-            fligtTime = fligtLength / type.speed;
+            this.from = from;
+            this.to = to;
+            this.current.set(from);
+            speed.set(to).sub(from);
+            flightLength = speed.len();
+            flightTime = flightLength / type.speed;
             speed.setLength(type.speed);
             missiles.add(this);
-            new Effect(fligtTime, type.markEffect.renderer).at(to.x, to.y, 0f, Color.red, type.splashDamageRadius);
+            new Effect(flightTime, type.markEffect.renderer).at(to.x, to.y, type.splashDamageRadius, Color.red);
         }
 
         public void update(float time) {
-            current.add(new Vec2(speed).scl(time));
+            current.add(Tmp.v1.set(speed).scl(time));
             if(fout() <= 0f) {
                 type.explode(to);
                 missiles.remove(this);
@@ -77,7 +80,7 @@ public class MissileLogic {
 
         @Override
         public float fin() {
-            return (from.dst(current)) / fligtLength;
+            return (from.dst(current)) / flightLength;
         }
         // Необходимо для обхода бага AbstractMethodError на Android, когда
         // runtime игнорирует реализацию методов по умолчанию в интерфейсах.
