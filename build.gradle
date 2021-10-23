@@ -3,7 +3,7 @@ buildscript {
         arcHash = 'v133'
         mindustryVersion = 'v133'
         parserVersion='3.22.1'
-        aciVersion = "9f9ed7da24"
+        aciVersion = "88aa8280375"
         packerHash = '128'
         modsDirectories = [] ;
         def file=new File(rootDir, "modsDirectories.txt");
