@@ -165,14 +165,14 @@ public class SnTurrets implements ContentList {
                     Items.plastanium, SnBullets.bigBlastPlastanium
             );
             shots = 2;
-            barrelPoints = new Seq<>(new Vec2[]{
+            barrelPoints = Seq.with(
                 new Vec2(30f/96f, 4f/96f),
                 new Vec2(66f/96f, 4f/96f)
-            });
-            ejectPoints = new Seq<>(new Vec2[]{
+            );
+            ejectPoints = Seq.with(
                 new Vec2(33f/96f, 40f/96f),
                 new Vec2(63f/96f, 40f/96f)
-            });
+            );
             health = 1960;
             size = 3;
             reloadTime = 130f;
@@ -228,16 +228,16 @@ public class SnTurrets implements ContentList {
                     Items.surgeAlloy, SnBullets.maxBlastSurge
             );
             shots = 3;
-            barrelPoints = new Seq<>(new Vec2[]{
+            barrelPoints = Seq.with(
                 new Vec2(32f/128f, 10f/128f),
                 new Vec2(64f/128f, 3f/128f),
-                new Vec2(96f/128f, 10f/128f),
-            });
-            ejectPoints = new Seq<>(new Vec2[]{
+                new Vec2(96f/128f, 10f/128f)
+            );
+            ejectPoints = Seq.with(
                 new Vec2(32f/128f, 47f/128f),
                 new Vec2(64f/128f, 40f/128f),
-                new Vec2(96f/128f, 47f/128f),
-            });
+                new Vec2(96f/128f, 47f/128f)
+            );
             health = 3200;
             size = 4;
             reloadTime = 160f;
@@ -567,12 +567,12 @@ public class SnTurrets implements ContentList {
             size = 5;
             itemCapacity = 2400;
             float p1 = 53f / 162f, p2 = 109f / 162f;
-            rockets = new Seq<>(new Vec2[] {
-                    new Vec2(p1, p1),
+            rockets(new Vec2(p1, p1),
                     new Vec2(p1, p2),
                     new Vec2(p2, p1),
-                    new Vec2(p2, p2)
-            });
+                    new Vec2(p2, p2));
+
+
             missile = new MissileLogic.MissileType(){{
                 damage = 0f;
                 splashDamage = 7200f;

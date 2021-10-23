@@ -8,6 +8,7 @@ import arc.math.Mathf;
 import arc.math.geom.Vec2;
 import arc.struct.Seq;
 import arc.util.Nullable;
+import arc.util.Tmp;
 import arc.util.io.Reads;
 import arc.util.io.Writes;
 import mindustry.Vars;
@@ -70,7 +71,7 @@ public class MissileSiloTurret extends GenericCrafter {
     /**
      * Положение ракет в шахте относительно размеров блока. От (0, 0) до (1, 1).
      */
-    public Seq<Vec2> rockets = Seq.with(new Vec2(0.5f, 0.5f));
+    public Vec2[] rockets = {new Vec2(0.5f, 0.5f)};
     @Load("@-bottom")
     public TextureRegion baseRegion;
 
@@ -82,6 +83,10 @@ public class MissileSiloTurret extends GenericCrafter {
     public void load() {
         super.load();
         missile.rocketRegion = Core.atlas.find(name + "-rocket");
+    }
+
+    public void rockets(Vec2... rockets) {
+        this.rockets = rockets;
     }
 
     @Override
@@ -108,11 +113,11 @@ public class MissileSiloTurret extends GenericCrafter {
         super.setBars();
         bars.add("progress", (MissileSiloTurretBuild e) -> new Bar("bar.progress",
                 Pal.ammo,
-                () -> e.loaded == rockets.size ? 1f : e.progress));
+                () -> e.loaded == rockets.length ? 1f : e.progress));
         bars.add("count", (MissileSiloTurretBuild e) -> new Bar(
-                () -> Core.bundle.format("bar.missilecount", e.loaded, rockets.size),
+                () -> Core.bundle.format("bar.missilecount", e.loaded, rockets.length),
                 () -> Pal.ammo,
-                () -> e.loaded / (float) rockets.size));
+                () -> e.loaded / (float) rockets.length));
     }
 
     @Override
@@ -120,6 +125,10 @@ public class MissileSiloTurret extends GenericCrafter {
         super.drawPlace(x, y, rotation, valid);
         Drawf.dashCircle(x * tilesize + offset, y * tilesize + offset, minRange, Pal.placing);
         Drawf.dashCircle(x * tilesize + offset, y * tilesize + offset, maxRange, Pal.placing);
+    }
+
+    private Vec2 calculatePosition(Vec2 rocket) {
+        return Tmp.v1.set(rocket).sub(0.5f, 0.5f).scl(tilesize * size);
     }
 
     public class MissileSiloTurretBuild extends GenericCrafterBuild implements ControlBlock {
@@ -161,7 +170,7 @@ public class MissileSiloTurret extends GenericCrafter {
             for (ItemStack i : consumes.getItem().items) {
                 if (i.item == item) res += i.amount;
             }
-            return res * (rockets.size + 1);
+            return res * (rockets.length + 1);
         }
 
         @Override
@@ -197,8 +206,8 @@ public class MissileSiloTurret extends GenericCrafter {
             }
             float dst = dst(shootX, shootY);
             if (dst > maxRange || dst < minRange) return;
-            Vec2 from = new Vec2(x + size * tilesize * (rockets.get(loaded - 1).x - 0.5f),
-                    y + size * tilesize * (rockets.get(loaded - 1).y - 0.5f));
+            Vec2 from = new Vec2(x + size * tilesize * (rockets[loaded - 1].x - 0.5f),
+                    y + size * tilesize * (rockets[loaded - 1].y - 0.5f));
             launchEffect.at(from);
             missile.launch(from, new Vec2(shootX, shootY));
             loaded--;
@@ -212,12 +221,12 @@ public class MissileSiloTurret extends GenericCrafter {
             if (unit == null || !isControlled()) return;
 
             unit.health(health);
-            float ammof = loaded/(float)rockets.size;
-            if (loaded!=rockets.size){
-                ammof+=progress/rockets.size;
+            float ammof = loaded / (float) rockets.length;
+            if (loaded != rockets.length) {
+                ammof += progress / rockets.length;
             }
 
-            unit.ammo( unit.type().ammoCapacity *ammof);
+            unit.ammo(unit.type().ammoCapacity * ammof);
             unit.team(team);
             unit.set(x, y);
             if (!unit.isShooting()) {
@@ -228,7 +237,7 @@ public class MissileSiloTurret extends GenericCrafter {
         @Override
         public void updateTile() {
             updateShooting();
-            if (consValid() && loaded < rockets.size) {
+            if (consValid() && loaded < rockets.length) {
                 progress += getProgressIncrease(craftTime);
                 totalProgress += delta();
                 warmup = Mathf.lerpDelta(warmup, 1f, 0.02f);
@@ -250,16 +259,26 @@ public class MissileSiloTurret extends GenericCrafter {
         public void draw() {
             Draw.z(Layer.block);
             Draw.rect(baseRegion, x, y);
+            Draw.rect(region, x, y);
+
             for (int i = 0; i < loaded; i++) {
+                Vec2 rocket = calculatePosition(rockets[i]);
                 Draw.rect(missile.rocketRegion,
-                        x + size * tilesize * (rockets.get(i).x - 0.5f),
-                        y + size * tilesize * (rockets.get(i).y - 0.5f));
+                        x + rocket.x,
+                        y + rocket.y);
                 // ... / 64f * tilesize = / 2f * tilesize / 32f
                 // / 2f  - нужна только половина блока
                 // / 32f - 32 пикселя в спрайте на 1 блок
                 // * tilesize - перевод координат
             }
-            Draw.rect(region, x, y);
+
+            if (loaded < rockets.length) {
+                Vec2 rocketPosition = calculatePosition(rockets[loaded]).add(this);
+                float rocketx=rocketPosition.x;
+                float rockety=rocketPosition.y;
+                Draw.draw(Layer.blockOver, () -> Drawf.construct(rocketx, rockety, missile.rocketRegion,
+                        0, progress, warmup, totalProgress));
+            }
         }
 
         @Override
