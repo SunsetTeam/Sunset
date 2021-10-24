@@ -7,7 +7,7 @@ import mindustry.type.UnitType;
 import sunset.entities.abilities.BerserkStage;
 import mindustry.gen.*;
 
-public class BerserkUnitType extends UnitType {
+public class BerserkUnitType extends SnUnitType {
     public final Seq<BerserkStage> stages = new Seq<>();
 
     /** Возвращает этап для данного юнита или null, если юнит не находится ни в каком этапе. */

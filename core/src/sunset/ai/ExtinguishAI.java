@@ -54,7 +54,7 @@ public class ExtinguishAI extends FlyingUnitWeaponAI {
         vec.set(target).sub(unit);
         unit.rotation(vec.angle());
         float scl = vec.len() < length ? 0 : 1f;
-        vec.setLength(unit.realSpeed() * scl);
+        vec.setLength(unit.speed() * scl);
         unit.moveAt(vec);
     }
 }

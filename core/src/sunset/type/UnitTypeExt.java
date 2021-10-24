@@ -16,7 +16,7 @@ import mindustry.world.meta.StatValue;
 import sunset.world.meta.values.WeaponListValueExt;
 
 /** UnitType, который имеет некоторые изменения. */
-public class UnitTypeExt extends UnitType {
+public class UnitTypeExt extends SnUnitType {
     public UnitTypeExt(String name) {
         super(name);
     }

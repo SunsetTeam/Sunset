@@ -5,17 +5,13 @@ import arc.graphics.g2d.Draw;
 import arc.graphics.g2d.Lines;
 import arc.math.Mathf;
 import arc.math.geom.Point2;
-import arc.math.geom.Vec2;
 import arc.scene.ui.layout.Table;
-import arc.struct.IntSeq;
 import arc.struct.Seq;
 import arc.util.Pack;
 import arc.util.Time;
 import arc.util.io.Reads;
 import arc.util.io.Writes;
-import mindustry.entities.Units;
 import mindustry.gen.Building;
-import mindustry.gen.Groups;
 import mindustry.gen.Unit;
 import mindustry.graphics.Drawf;
 import mindustry.graphics.Pal;
@@ -29,8 +25,10 @@ import mindustry.world.blocks.storage.StorageBlock;
 import mindustry.world.meta.Stat;
 import mindustry.world.meta.StatUnit;
 import mindustry.world.meta.StatValues;
-import sunset.ai.DeliverAI;
 import sunset.content.SnUnitTypes;
+import sunset.gen.DeliverUnit;
+import sunset.gen.Deliverc;
+import sunset.gen.SnGroups;
 import sunset.world.consumers.AdjustableConsumePower;
 
 import static mindustry.Vars.*;
@@ -41,6 +39,8 @@ public class Airport extends StorageBlock {
     public ItemStack[] requirements;
     public float powerUse;
     public int maxUnitCount;
+    private Item[] canDump = null;
+
 
     public Airport(String name) {
         super(name);
@@ -53,9 +53,9 @@ public class Airport extends StorageBlock {
             tile.link = link;
         });
         this.<Long, AirportBuild>config(Long.class, (tile, link) -> {
-            tile.link = Point2.unpack(Pack.leftInt(link)).add(tile.tile.x,tile.tile.y).pack();
+            tile.link = Point2.unpack(Pack.leftInt(link)).add(tile.tile.x, tile.tile.y).pack();
             int id = Pack.rightInt(link);
-            tile.takeItem = id==-1?null:content.item(id);
+            tile.takeItem = id == -1 ? null : content.item(id);
         });
     }
 
@@ -67,6 +67,7 @@ public class Airport extends StorageBlock {
             AirportBuild ab = (AirportBuild) b;
             return ab.shouldBuild ? ab.getBoost() : 0f;
         }));
+        consumes.items(requirements);
     }
 
     @Override
@@ -82,8 +83,8 @@ public class Airport extends StorageBlock {
 
         bars.add("units", (AirportBuild e) ->
                 new Bar(
+                        //TODO: string
                         () -> Core.bundle.format("bar.unitcap",
-                                "TODO: string",
                                 e.units.size,
                                 maxUnitCount
                         ),
@@ -103,44 +104,65 @@ public class Airport extends StorageBlock {
     }
 
     public class AirportBuild extends StorageBuild {
-        final IntSeq units = new IntSeq();
-        final Seq<Vec2> positions = new Seq<>();
+        public final Seq<DeliverUnit> units = new Seq<>();
         public int link = 0;
         public float construcionTime = 0f;
-        public boolean afterRead = false;
         public boolean shouldBuild;
         public Item takeItem;
-        IntSeq states = new IntSeq();
+        public boolean afterRead = false;
         private long boostEndTime = 0;
         private float boost = 0f;
 
         @Override
         public void updateTile() {
-            if (afterRead) firstUpdateAfterRead();
+            if (afterRead) {
+                afterRead = false;
+                for (Deliverc deliver : SnGroups.delivers) {
+                    if (deliver.base() != this) continue;
+                    if (needUnits()) {
+                        units.add(deliver.as());
+                    } else {
+                        deliver.base(null);
+                    }
+                }
+            }
+            units.removeAll(d -> !d.added || !d.isValid());
+            if (needUnits()) {
+                for (Deliverc deliver : SnGroups.delivers) {
+                    if (deliver.base() == null) {
+                        units.add(deliver.as());
+                        deliver.set(this);
+                    }
+                    if (!needUnits()) {
+                        break;
+                    }
+                }
+            }
             if (link == -1) return;
             Building linkBuild = world.build(link);
             if (!(linkBuild instanceof AirportBuild linked) || !linked.isValid()) {
 //                configure(-1);
                 return;
             }
-            for (int i = 0; i < units.size; i++) {
-                Unit unit = Groups.unit.getByID(units.get(i));
-                if (unit == null || unit.dead() || !unit.isValid()) {
-                    units.removeIndex(i);
-                    i--;
-                }
-            }
-            shouldBuild = items.has(requirements) && units.size < maxUnitCount;
+            shouldBuild = items.has(requirements) && needUnits();
             if (shouldBuild) {
                 construcionTime += Time.delta * getBoost() * efficiency();
                 if (construcionTime > unitBuildTime) {
                     items.remove(requirements);
-                    construcionTime = 0;
+                    construcionTime %= 1f;
                     Unit u = SnUnitTypes.courier.spawn(team, x, y); //TODO починить тип юнита
-                    ((DeliverAI) u.controller()).setup(this);
-                    units.add(u.id);
+                    DeliverUnit deliverUnit = u.as();
+                    deliverUnit.set(this);
+//                    ((DeliverAI) u.controller()).setup(this);
+                    units.add(deliverUnit);
                 }
             }
+            /*if (canDump==null){
+                canDump=content.items().select(i -> !Structs.contains(requirements, r -> r.item == i)).toArray(Item.class);
+            }
+            for (Item item : canDump) {
+                dump(item);
+            }*/
         }
 
         public float getBoost() {
@@ -160,7 +182,7 @@ public class Airport extends StorageBlock {
 
         @Override
         public Long config() {
-            return Pack.longInt(Point2.unpack(link).sub(tile.x,tile.y).pack(),takeItem==null?-1:takeItem.id);
+            return Pack.longInt(Point2.unpack(link).sub(tile.x, tile.y).pack(), takeItem == null ? -1 : takeItem.id);
         }
 
         @Override
@@ -190,18 +212,16 @@ public class Airport extends StorageBlock {
         }
 
         @Override
+        public byte version() {
+            return 1;
+        }
+
+        @Override
         public void write(Writes write) {
             super.write(write);
-            write.s(takeItem == null ? -1 : takeItem.id);
+            TypeIO.writeItem(write, takeItem);
             write.i(link);
             write.f(construcionTime);
-            write.i(units.size);
-            for (int i = 0; i < units.size; i++) {
-                Unit u = Groups.unit.getByID(units.get(i));
-                write.f(u.x);
-                write.f(u.y);
-                write.i(((DeliverAI) u.controller()).state);
-            }
         }
 
         @Override
@@ -210,28 +230,19 @@ public class Airport extends StorageBlock {
             takeItem = content.item(read.s());
             link = read.i();
             construcionTime = read.f();
-            states.clear();
-            int unitsCount = read.i();
-            for (int i = 0; i < unitsCount; i++) {
-                positions.add(TypeIO.readVec2(read));
-                states.add(read.i());
+            if (revision == 0) {
+//                states.clear();
+                int unitsCount = read.i();
+                for (int i = 0; i < unitsCount; i++) {
+                    TypeIO.readVec2(read);
+                    read.i();
+                }
             }
             afterRead = true;
         }
 
-        public void firstUpdateAfterRead() {
-            units.clear();
-            for (int i = 0; i < states.size; i++) {
-                Vec2 position = positions.get(i);
-                Unit u = Units.closest(null, position.x, position.y, (_u) -> true);
-                DeliverAI ai = (DeliverAI) u.controller();
-                ai.setup(this);
-                ai.state = states.get(i);
-                units.add(u.id);
-            }
-            states.clear();
-            positions.clear();
-            afterRead = false;
+        public boolean needUnits() {
+            return units.size < maxUnitCount;
         }
     }
 }

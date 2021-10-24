@@ -1,77 +1,118 @@
 package sunset.ai;
 
-import arc.math.geom.Vec2;
 import mindustry.Vars;
+import mindustry.ai.formations.Formation;
 import mindustry.ai.types.FlyingAI;
+import mindustry.ai.types.FormationAI;
+import mindustry.entities.units.AIController;
+import mindustry.entities.units.UnitCommand;
+import mindustry.gen.Call;
+import mindustry.gen.Unit;
+import mindustry.type.ItemStack;
+import sunset.gen.DeliverUnit;
+import sunset.gen.SnCall;
+import sunset.type.DeliverState;
 import sunset.world.blocks.units.Airport;
 
-public class DeliverAI extends FlyingAI {
-    public boolean inited = false;
-    public Airport.AirportBuild base;
-    public int state = 0;
+import static sunset.type.DeliverState.*;
+
+public class DeliverAI extends FormationAI {
+    DeliverAIWrapped wrapped=new DeliverAIWrapped();
+    public DeliverAI() {
+        super(null,null);
+    }
+
+    @Override
+    public void init() {
+        wrapped.init();
+    }
+
+    @Override
+    public void updateUnit() {
+        wrapped.unit(unit);
+        wrapped.updateUnit();
+    }
+
+    @Override
+    public void removed(Unit unit) {
+        wrapped.removed(unit);
+    }
+
+    @Override
+    public boolean isBeingControlled(Unit player) {
+        return wrapped.isBeingControlled(player);
+    }
+}
+class DeliverAIWrapped extends FlyingAI {
+    @Override
+    public AIController fallback() {
+        return new HealAI();
+    }
 
     // 0 - move to "base"
     // 1 - pick resources from "base"
     // 2 - move to "base.linked"
     // 1 - pick resources from "base.linked"
-    public void setup(Airport.AirportBuild base) {
-        this.base = base;
-        inited = true;
-    }
 
     @Override
     public void updateMovement() {
-        if (!inited) return;
-        if (base == null || !base.isValid()) {
+        if (!(unit instanceof DeliverUnit deliver)) {
             unit.killed();
             return;
         }
+        Airport.AirportBuild base = deliver.base;
+        if (base == null || !base.isValid()) {
+//            unit.killed();
+            return;
+        }
         Airport.AirportBuild linked = base.link != -1 && Vars.world.build(base.link) instanceof Airport.AirportBuild build && build.isValid() ? build : null;
-        if (state == 0) {
-            float len = new Vec2(unit.x, unit.y).sub(base.x, base.y).len();
-            if (len > unit.hitSize * 2) {
-                moveTo(new Vec2(base.x, base.y), unit.hitSize);
-            } else {
-                state = 1;
-            }
-        } else if (state == 1) {
-            if (unit.stack.amount > 0 && (unit.stack.item != base.takeItem)) {
-                state = 2;
-            } else {
-                if (base.takeItem != null) {
-                    int need = unit.itemCapacity() - unit.stack.amount;
-                    if (need > 0) {
-                        int toMove = Math.min(need, base.items.get(base.takeItem));
-                        base.items.remove(base.takeItem, toMove);
-                        unit.addItem(base.takeItem, toMove);
-                    } else {
-                        state = 2;
+        DeliverState state = deliver.deliverState;
+        switch (state) {
+
+            case base -> {
+                if (!unit.within(base, unit.hitSize * 2)) {
+                    moveTo(base, unit.hitSize);
+                    break;
+                }
+                if (unit.stack.amount <= 0 || (unit.stack.item == base.takeItem)) {
+                    if (base.takeItem != null) {
+//                    Call.transferItemEffect();
+                        int accepted = unit.maxAccepted(base.takeItem);
+                        int amount = Math.min(accepted,base.items.get(base.takeItem));
+                        if (amount > 0) {
+                            Call.setItem(base,base.takeItem,base.items().get(base.takeItem)-amount);
+                            SnCall.transferItemToUnit(base.takeItem, amount, base.x, base.y, unit);
+                        } else if (accepted==0) {
+                            state(DeliverState.target);
+                        }
                     }
+                    break;
+                }
+                state(DeliverState.target);
+            }
+            case target -> {
+                if (linked != null) {
+                    if (!unit.within(linked, unit.hitSize * 2f)) {
+                        moveTo(linked, unit.hitSize);
+                        break;
+                    }
+                    if (unit.stack.amount > 0) {
+                        ItemStack stack = unit.stack;
+                        int accepted = linked.acceptStack(stack.item, stack.amount, unit);
+                        if (accepted > 0) {
+                            Call.transferItemTo(unit, stack.item, stack.amount, unit.x, unit.y, linked);
+                        }
+                        break;
+                    }
+                    state(DeliverState.base);
                 }
             }
-        } else if (state == 2) {
-            if (linked != null) {
-                float len = new Vec2(unit.x, unit.y).sub(linked.x, linked.y).len();
-                if (len > unit.hitSize * 2) {
-                    moveTo(new Vec2(linked.x, linked.y), unit.hitSize);
-                } else {
-                    state = 3;
-                }
-            }
-        } else if (state == 3) {
-            if (linked != null) {
-                if (unit.stack.amount > 0) {
-                    int remains = linked.getMaximumAccepted(unit.stack.item) -
-                            linked.items.get(unit.stack.item);
-                    int toMove = Math.min(unit.stack.amount, remains);
-                    linked.items.add(unit.stack.item, toMove);
-                    unit.stack.amount -= toMove;
-                } else {
-                    state = 0;
-                }
-            } else {
-                state = 2;
-            }
+        }
+    }
+
+    private void state(DeliverState state) {
+        if (unit instanceof DeliverUnit deliver) {
+            deliver.deliverState = state;
         }
     }
 }

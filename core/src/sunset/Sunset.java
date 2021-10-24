@@ -5,8 +5,10 @@ import arc.Events;
 import mindustry.Vars;
 import mindustry.core.*;
 import mindustry.ctype.*;
+import mindustry.gen.Groups;
 import mma.*;
 import mma.annotations.ModAnnotations.*;
+import mma.gen.ModGroups;
 import sunset.content.*;
 import sunset.core.*;
 import sunset.gen.*;
@@ -33,6 +35,20 @@ public class Sunset extends MMAMod{
         super();
         SnVars.load();
         SnEntityMapping.init();
+        SnCall.registerPackets();
+        SnGroups.init();
+        Events.on(ResetEvent.class,e->{
+            SnGroups.clear();
+        });
+        ModListener.updaters.add(()->{
+            Seq<Deliverc> removed=new Seq<>();
+            for (Deliverc deliver : SnGroups.delivers) {
+                if (Groups.unit.getByID(deliver.id())==null){
+                    removed.add(deliver);
+                }
+            }
+            removed.each(SnGroups.delivers::remove);
+        });
         if(!headless){
 
             Events.on(WorldLoadEvent.class, e -> {

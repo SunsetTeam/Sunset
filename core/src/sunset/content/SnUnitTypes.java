@@ -1,6 +1,7 @@
 package sunset.content;
 
 import mindustry.ai.types.SuicideAI;
+import mindustry.annotations.Annotations;
 import mindustry.content.Fx;
 import mindustry.content.StatusEffects;
 import mindustry.content.UnitTypes;
@@ -9,6 +10,7 @@ import mindustry.entities.bullet.BasicBulletType;
 import mindustry.entities.bullet.BombBulletType;
 import mindustry.gen.Sounds;
 import mindustry.gen.UnitEntity;
+import mindustry.gen.Unitc;
 import mindustry.graphics.Layer;
 import mindustry.type.UnitType;
 import mindustry.type.Weapon;
@@ -20,6 +22,7 @@ import sunset.ai.weapon.ExtinguishWeaponAI;
 import sunset.entities.abilities.BerserkStage;
 import sunset.entities.abilities.StatusFieldAbility;
 import sunset.entities.bullet.BerserkLaserBulletType;
+import sunset.gen.Deliverc;
 import sunset.type.*;
 import sunset.type.weapons.ChainWeapon;
 import sunset.type.weapons.PointDefenseWeapon;
@@ -36,10 +39,12 @@ public class SnUnitTypes implements ContentList {
     mirage, vision, illusion, soothSayer, seer, abyssEye,
     //wheel units
     wheel1, wheel2, wheel3, wheel4, wheel5,
-    //delivery
-    router, courier,
+//    delivery
+    router,
     //freezing
     snowflake;
+    @Annotations.EntityDef({Unitc.class, Deliverc.class})
+    public static UnitType courier;
 
     @Override
     public void load() {
@@ -850,7 +855,7 @@ public class SnUnitTypes implements ContentList {
             health = 50;
             hitSize = 4;
             defaultController = DeliverAI::new;
-            constructor = UnitEntity::create;
+//            constructor = UnitEntity::create;
         }};
         //endregion delivery
 

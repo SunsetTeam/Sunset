@@ -7,7 +7,7 @@ import mindustry.gen.Mechc;
 import mindustry.gen.Unit;
 import sunset.ai.GroundUnitWeaponAI;
 
-public class WheelUnitType extends UnitTypeExt {
+public class WheelUnitType extends SnUnitType {
     public WheelUnitType(String name) {
         super(name);
     }

@@ -9,7 +9,6 @@ import arc.util.Strings;
 import mindustry.gen.Tex;
 import mindustry.type.UnitType;
 import mindustry.type.Weapon;
-import mindustry.ui.Cicon;
 import mindustry.world.meta.*;
 
 /** В отличии от стандартного WeaponListValueExt передаёт заполнение
@@ -34,7 +33,7 @@ public class WeaponListValueExt implements StatValue {
                 continue;
             }
 
-            TextureRegion region = !weapon.name.equals("") && weapon.outlineRegion.found() ? weapon.outlineRegion : unit.icon(Cicon.full);
+            TextureRegion region = !weapon.name.equals("") && weapon.outlineRegion.found() ? weapon.outlineRegion : unit.fullIcon;
 
             table.image(region).size(60).scaling(Scaling.bounded).right().top();
 
