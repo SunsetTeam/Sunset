@@ -15,10 +15,9 @@ import arc.util.Strings;
 import arc.util.Time;
 import mindustry.entities.Units;
 import mindustry.entities.units.WeaponMount;
-import mindustry.gen.*;
+import mindustry.gen.Unit;
 import mindustry.graphics.Drawf;
 import mindustry.graphics.Layer;
-import mindustry.type.UnitType;
 import mindustry.type.Weapon;
 import mindustry.world.meta.StatValue;
 import sunset.ai.weapon.EmptyWeaponAI;
@@ -27,7 +26,6 @@ import sunset.type.UnitData;
 import sunset.type.UpdateDrawWeapon;
 
 import static arc.graphics.Color.coral;
-import static sunset.utils.Utils.*;
 
 public class ChainWeapon extends WeaponExt implements UpdateDrawWeapon, StatValue {
     public int maxChainLength = 1;
@@ -40,13 +38,7 @@ public class ChainWeapon extends WeaponExt implements UpdateDrawWeapon, StatValu
     public Color chainColor = coral.cpy();
     public boolean draw = false;
     TextureRegion laser, laserEnd;
-
-    @Override
-    public void load(){
-        super.load();
-        laser = Core.atlas.find("parallax-laser");
-        laserEnd = Core.atlas.find("parallax-laser-end");
-    }
+    Seq<Unit> units;
 
     public ChainWeapon(String name) {
         super(name);
@@ -57,26 +49,45 @@ public class ChainWeapon extends WeaponExt implements UpdateDrawWeapon, StatValu
         reload = Float.MAX_VALUE;
         recoil = 0;
     }
-    Seq<Unit> units;
+
+    public static Unit getFirstUnit(WeaponMount mount, Unit unit) {
+        Vec2 wpos = new Vec2(mount.weapon.x, mount.weapon.y).rotate(unit.rotation - 90).add(unit.x, unit.y);
+        ChainWeapon weapon = (ChainWeapon) mount.weapon;
+        return Units.closest(null, wpos.x, wpos.y, u -> {
+            if (u.team == unit.team && (weapon.healTick == 0 || !u.damaged())) return false;
+            if (u.team != unit.team && weapon.damageTick == 0) return false;
+            if (unit == u || Mathf.dst(wpos.x, wpos.y, u.x, u.y) > weapon.range) return false;
+            return mount.weapon.rotate || Angles.within(wpos.angleTo(u), unit.rotation + mount.rotation, mount.weapon.shootCone);
+        });
+    }
+
+    @Override
+    public void load() {
+        super.load();
+        laser = Core.atlas.find("parallax-laser");
+        laserEnd = Core.atlas.find("parallax-laser-end");
+    }
+
     private void getUnits(WeaponMount mount, Unit unit) {
         ObjectMap<WeaponMount, Seq<Unit>> data = UnitData.data(unit, "ChainWeapon");
-        if(data == null) {
+        if (data == null) {
             data = new ObjectMap<>();
             UnitData.data(unit, "ChainWeapon", data);
         }
         units = data.get(mount);
-        if(units == null) {
+        if (units == null) {
             units = new Seq<>();
             data.put(mount, units);
         }
     }
+
     @Override
     public void update(WeaponMount mount, Unit unit) {
         getUnits(mount, unit);
         updateUnits(mount, unit);
-        float[] p = new float[] { damageTick, healTick };
+        float[] p = new float[]{damageTick, healTick};
         units.each(u -> {
-            if(unit.team.isEnemy(u.team)) {
+            if (unit.team.isEnemy(u.team)) {
                 u.damageContinuousPierce(p[0]);
             } else {
                 u.heal(p[1] * Time.delta);
@@ -85,35 +96,29 @@ public class ChainWeapon extends WeaponExt implements UpdateDrawWeapon, StatValu
             p[1] *= damageFactor;
         });
     }
-    public static Unit getFirstUnit(WeaponMount mount, Unit unit) {
-        Vec2 wpos = new Vec2(mount.weapon.x, mount.weapon.y).rotate(unit.rotation - 90).add(unit.x, unit.y);
-        ChainWeapon weapon = (ChainWeapon)mount.weapon;
-        return Units.closest(null,wpos.x, wpos.y, u -> {
-            if(u.team == unit.team && (weapon.healTick == 0 || !u.damaged())) return false;
-            if(u.team != unit.team && weapon.damageTick == 0) return false;
-            if(unit == u || Mathf.dst(wpos.x, wpos.y, u.x, u.y) > weapon.range) return false;
-            return mount.weapon.rotate || Angles.within(wpos.angleTo(u), unit.rotation + mount.rotation, mount.weapon.shootCone);
-        });
-    }
 
     private void updateUnits(WeaponMount mount, Unit unit) {
         units.clear();
-        final float[] r = new float[] { range };
-        final int[] d = new int[] { maxChainLength };
-        final Unit[] t = new Unit[] { getFirstUnit(mount, unit) };
-        while(t[0] != null) {
+        final float[] r = new float[]{range};
+        final int[] d = new int[]{maxChainLength};
+        final Unit[] t = new Unit[]{getFirstUnit(mount, unit)};
+        while (t[0] != null) {
             d[0]--;
             r[0] *= rangeFactor;
             units.add(t[0]);
-            t[0] = Units.closest(null,t[0].x, t[0].y, u -> {
-                if(u == unit || units.contains(u)) return false;
-                if((u.health >= u.maxHealth) && !unit.team.isEnemy(u.team)) return false;
+            t[0] = Units.closest(null, t[0].x, t[0].y, u -> {
+                if (u == unit || units.contains(u)) return false;
+                if ((u.health >= u.maxHealth) && !unit.team.isEnemy(u.team)) return false;
                 return (Mathf.dst(t[0].x, t[0].y, u.x, u.y) <= r[0]) && (d[0] > 0);
             });
         }
     }
+
     @Override
-    public boolean useDefaultDraw() { return false; }
+    public boolean useDefaultDraw() {
+        return false;
+    }
+
     private void drawWeapon(WeaponMount mount, Unit unit, float rotation) {
         Weapon weapon = mount.weapon;
         Vec2 wpos = new Vec2(weapon.x, weapon.y).rotate(unit.rotation - 90).add(unit.x, unit.y);
@@ -144,41 +149,44 @@ public class ChainWeapon extends WeaponExt implements UpdateDrawWeapon, StatValu
             Draw.color();
         }
     }
+
     @Override
     public void preDraw(WeaponMount mount, Unit unit) {
         Vec2 wpos = new Vec2(mount.weapon.x, mount.weapon.y).rotate(unit.rotation - 90).add(unit.x, unit.y);
         float angle = units.isEmpty() ? unit.rotation : wpos.angleTo(units.get(0));
         getUnits(mount, unit);
-        if(!units.isEmpty()) {
+        if (!units.isEmpty()) {
             float z = Draw.z();
             Draw.z(laserLayer); //TODO как-то пофиксить эффекты луча
             Draw.mixcol(chainColor, 0.4f);
             Drawf.laser(unit.team, laser, laserEnd, wpos.x, wpos.y, units.get(0).x, units.get(0).y);
-            for(int i = 0; i < units.size - 1; i++) {
+            for (int i = 0; i < units.size - 1; i++) {
                 Drawf.laser(unit.team, laser, laserEnd,
-                    units.get(i).x, units.get(i).y,
-                    units.get(i+1).x, units.get(i+1).y);
+                        units.get(i).x, units.get(i).y,
+                        units.get(i + 1).x, units.get(i + 1).y);
             }
             Draw.mixcol();
             Draw.z(z);
         }
-        if(draw) drawWeapon(mount, unit, angle - 90);
+        if (draw) drawWeapon(mount, unit, angle - 90);
     }
+
     @Override
-    public void postDraw(WeaponMount mount, Unit unit) { }
+    public void postDraw(WeaponMount mount, Unit unit) {
+    }
 
     @Override
     public void display(Table table) {
         table.left().defaults().padRight(3).left();
-        if(damageTick > 0) {
+        if (damageTick > 0) {
             table.row();
             table.add(Core.bundle.format("bullet.damagesec", Strings.autoFixed(damageTick * 60, 1)));
         }
-        if(healTick > 0) {
+        if (healTick > 0) {
             table.row();
             table.add(Core.bundle.format("bullet.healsec", Strings.autoFixed(healTick * 60, 1)));
         }
-        if(maxChainLength != 1) {
+        if (maxChainLength != 1) {
             table.row();
             table.add(Core.bundle.format("bullet.maxchain", maxChainLength));
         }

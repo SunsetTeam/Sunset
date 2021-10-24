@@ -26,6 +26,7 @@ import sunset.gen.Deliverc;
 import sunset.type.*;
 import sunset.type.weapons.ChainWeapon;
 import sunset.type.weapons.PointDefenseWeapon;
+import sunset.type.weapons.SnWeapon;
 import sunset.type.weapons.WeaponExt;
 
 
@@ -63,7 +64,7 @@ public class SnUnitTypes implements ContentList {
             unitFallRotateSpeed = 6f;
 
             rotors.add(
-                    new Rotor("sunset-rotor-small") {{
+                    new Rotor("rotor-small") {{
                         offsetX = 0;
                         offsetY = 2;
                         rotorRotateSpeed = 27f;
@@ -71,7 +72,7 @@ public class SnUnitTypes implements ContentList {
                     }}
             );
             weapons.add(
-                    new WeaponExt("sunset-wind-gun") {{
+                    new WeaponExt("wind-gun") {{
                         rotate = false;
                         mirror = true;
                         top = true;
@@ -98,7 +99,7 @@ public class SnUnitTypes implements ContentList {
             unitFallRotateSpeed = 5f;
 
             rotors.add(
-                    new Rotor("sunset-rotor-small") {{
+                    new Rotor("rotor-small") {{
                         offsetX = 0;
                         offsetY = 2;
                         rotorRotateSpeed = 28f;
@@ -106,7 +107,7 @@ public class SnUnitTypes implements ContentList {
                     }}
             );
             weapons.add(
-                    new WeaponExt("sunset-missile-mount-small") {{
+                    new WeaponExt("missile-mount-small") {{
                         rotate = false;
                         mirror = true;
                         top = true;
@@ -138,7 +139,7 @@ public class SnUnitTypes implements ContentList {
             unitFallRotateSpeed = 5f;
 
             rotors.add(
-                    new Rotor("sunset-triple-rotor-small") {{
+                    new Rotor("triple-rotor-small") {{
                         offsetX = 0;
                         offsetY = 8;
                         rotorRotateSpeed = 27f;
@@ -147,7 +148,7 @@ public class SnUnitTypes implements ContentList {
             );
 
             rotors.add(
-                    new Rotor("sunset-rotor-small") {{
+                    new Rotor("rotor-small") {{
                         offsetX = 0;
                         offsetY = -9;
                         rotorRotateSpeed = 28f;
@@ -155,7 +156,7 @@ public class SnUnitTypes implements ContentList {
                     }}
             );
             weapons.add(
-                    new WeaponExt("sunset-missile-launch") {{
+                    new WeaponExt("missile-launch") {{
                         rotate = false;
                         mirror = true;
                         top = true;
@@ -172,7 +173,7 @@ public class SnUnitTypes implements ContentList {
                         bullet = SnBullets.clusterRocket;
                     }},
 
-                    new Weapon("sunset-wind-gun") {{
+                    new SnWeapon("wind-gun") {{
                         rotate = false;
                         mirror = true;
                         top = true;
@@ -257,7 +258,7 @@ public class SnUnitTypes implements ContentList {
 
             unitFallRotateSpeed = 5f;
             weapons.add(
-                    new WeaponExt("sunset-crusader-gun") {{
+                    new WeaponExt("crusader-gun") {{
                         rotate = false;
                         mirror = true;
                         top = true;
@@ -275,7 +276,7 @@ public class SnUnitTypes implements ContentList {
                         shootSound = Sounds.bang;
                         bullet = SnBullets.largeHelicopterGun;
                     }},
-                    new WeaponExt("sunset-crusader-rocket") {{
+                    new WeaponExt("crusader-rocket") {{
                         rotate = false;
                         mirror = true;
                         top = true;
@@ -427,7 +428,7 @@ public class SnUnitTypes implements ContentList {
 
             abilities.add(new StatusFieldAbility(SnStatusEffects.starBuff, StatusEffects.none, 180, 8 * 24));
 
-            weapons.add(new WeaponExt("sunset-star-gun") {{
+            weapons.add(new WeaponExt("star-gun") {{
                 x = 0;
                 y = -12;
                 mirror = false;
@@ -439,7 +440,7 @@ public class SnUnitTypes implements ContentList {
                 recoil = 3.5f;
                 bullet = SnBullets.starStunBullet;
             }});
-            weapons.add(new ChainWeapon("sunset-galaxy-weak") {{
+            weapons.add(new ChainWeapon("galaxy-weak") {{
                 damageTick = 0f;
                 healTick = 2.2f;
                 maxChainLength = 3;
@@ -476,7 +477,7 @@ public class SnUnitTypes implements ContentList {
 
             abilities.add(new StatusFieldAbility(SnStatusEffects.starBuff, SnStatusEffects.galaxyDebuff, 180, 8 * 24));
 
-            weapons.add(new WeaponExt("sunset-galaxy-segment") {{
+            weapons.add(new WeaponExt("galaxy-segment") {{
                 mirror = true;
                 alternate = true;
                 rotate = true;
@@ -488,7 +489,7 @@ public class SnUnitTypes implements ContentList {
                 bullet = SnBullets.galaxyKnockbackBullet;
             }});
 
-            weapons.add(new PointDefenseWeapon("sunset-galaxy-weak") {{
+            weapons.add(new PointDefenseWeapon("galaxy-weak") {{
                 mirror = true;
                 alternate = true;
                 rotate = true;
@@ -520,7 +521,7 @@ public class SnUnitTypes implements ContentList {
             legTrns = 0.5f;
             legMoveSpace = 1.3f;
 
-            weapons.add(new Weapon("sunset-mirage-gun") {{
+            weapons.add(new SnWeapon("mirage-gun") {{
                 reload = 30f;
                 x = 5;
                 range = 100;
@@ -562,7 +563,7 @@ public class SnUnitTypes implements ContentList {
             legBaseOffset = 2f;
 
             weapons.add(
-                    new Weapon("sunset-vision-gun") {{
+                    new SnWeapon("vision-gun") {{
                         reload = 30f;
                         x = 6;
                         y = -0.3f;
@@ -591,7 +592,7 @@ public class SnUnitTypes implements ContentList {
             legBaseOffset = 4f;
 
             weapons.add(
-                    new Weapon("sunset-illusion-gun") {{
+                    new SnWeapon("illusion-gun") {{
                         reload = 40;
                         x = 8;
                         y = -2;
@@ -618,7 +619,7 @@ public class SnUnitTypes implements ContentList {
                             fragCone = 6f;
                         }};
                     }},
-                    new Weapon("sunset-iliusion-lasergun") {{
+                    new SnWeapon("iliusion-lasergun") {{
                         reload = 60f;
                         bullet = new BerserkLaserBulletType() {{
                             damage = 12;
@@ -650,7 +651,7 @@ public class SnUnitTypes implements ContentList {
             legSplashDamage = 37;
             legSplashRange = 30;
             weapons.add(
-                    new Weapon("soothSayer-lasergun") {
+                    new SnWeapon("soothSayer-lasergun") {
                         {
                             reload = 75f;
                             x = 12;
@@ -681,7 +682,7 @@ public class SnUnitTypes implements ContentList {
                             };
                         }
                     },
-                    new Weapon("soothSayer-gun") {{
+                    new SnWeapon("soothSayer-gun") {{
                         reload = 40f;
                         x = 12f;
                         y = 4f;

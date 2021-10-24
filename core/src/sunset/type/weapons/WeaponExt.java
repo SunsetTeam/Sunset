@@ -8,7 +8,7 @@ import sunset.ai.weapon.BaseWeaponAI;
 import sunset.ai.weapon.WeaponAI;
 
 /** Орудие с улучшениями: с собственным AI, с обработкой перезарядки, с поиском зеркального орудия. */
-public class WeaponExt extends Weapon {
+public class WeaponExt extends SnWeapon {
     public WeaponAI ai = new BaseWeaponAI();
     public WeaponExt(String name) {
         super(name);
