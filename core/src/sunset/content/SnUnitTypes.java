@@ -233,7 +233,7 @@ public class SnUnitTypes implements ContentList {
                         y = 4f;
                         reload = 20f;
                         shotDelay = 1f;
-                        shots = 4;
+                        shots = 1;
                         inaccuracy = 3f;
                         shootSound = Sounds.laser;
                         bullet = SnBullets.laserGun;

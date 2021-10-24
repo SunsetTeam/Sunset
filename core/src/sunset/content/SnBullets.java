@@ -982,7 +982,7 @@ public class SnBullets implements ContentList {
         }};
         laserGun = new LaserBulletType(){{
             colors = new Color[]{SnPal.copterLaser.cpy().a(0.4f), SnPal.copterLaser, Color.white};
-            damage = 20;
+            damage = 25;
             width = 25f;
             lifetime = 15f;
             length = 80f;
