@@ -40,13 +40,17 @@ public class MissileType {
      * @param spriteName sprite name
      */
     public MissileType(String spriteName) {
-        this.spriteName = spriteName;
+        this(spriteName, false);
+    }
+
+    private MissileType(String spriteName, boolean isFull) {
+        this.spriteName = isFull ? spriteName : fullName(spriteName);
         id = missileTypes.size;
         missileTypes.add(this);
     }
 
     public MissileType(MissileSiloTurret parent) {
-        this(parent.name + "-rocket");
+        this(parent.name + "-rocket", true);
     }
 
     public void load() {
@@ -54,8 +58,8 @@ public class MissileType {
             Log.warn("cannot load missileRegion");
             return;
         }
-        rocketRegion = Core.atlas.find(fullName(spriteName));
-        rocketOutlineRegion = Core.atlas.find(fullName(spriteName+"-outline"));
+        rocketRegion = Core.atlas.find(spriteName);
+        rocketOutlineRegion = Core.atlas.find(spriteName + "-outline");
     }
 
     public void explode(Vec2 p) {

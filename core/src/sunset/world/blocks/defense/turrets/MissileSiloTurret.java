@@ -6,7 +6,6 @@ import arc.graphics.g2d.Draw;
 import arc.graphics.g2d.TextureRegion;
 import arc.math.Mathf;
 import arc.math.geom.Vec2;
-import arc.struct.Seq;
 import arc.util.Nullable;
 import arc.util.Tmp;
 import arc.util.io.Reads;
@@ -16,8 +15,9 @@ import mindustry.annotations.Annotations.Load;
 import mindustry.content.Fx;
 import mindustry.content.UnitTypes;
 import mindustry.entities.Effect;
-import mindustry.game.Team;
-import mindustry.gen.*;
+import mindustry.gen.BlockUnitc;
+import mindustry.gen.Player;
+import mindustry.gen.Unit;
 import mindustry.graphics.Drawf;
 import mindustry.graphics.Layer;
 import mindustry.graphics.MultiPacker;
@@ -29,11 +29,11 @@ import mindustry.world.Tile;
 import mindustry.world.blocks.ControlBlock;
 import mindustry.world.blocks.production.GenericCrafter;
 import mindustry.world.meta.Stat;
+import mma.ModVars;
 import sunset.type.MissileType;
 import sunset.world.meta.values.MinMaxRangeValues;
 import sunset.world.meta.values.SplashDamageValue;
 
-import static mindustry.Vars.reportIssueURL;
 import static mindustry.Vars.tilesize;
 import static mindustry.game.EventType.*;
 
@@ -91,7 +91,7 @@ public class MissileSiloTurret extends GenericCrafter {
 
     @Override
     public TextureRegion[] icons() {
-        return new TextureRegion[]{baseRegion, region};
+        return !ModVars.packSprites ? new TextureRegion[]{region} : new TextureRegion[]{baseRegion, region};
     }
 
 
@@ -275,8 +275,8 @@ public class MissileSiloTurret extends GenericCrafter {
 
             if (loaded < rockets.length) {
                 Vec2 rocketPosition = calculatePosition(rockets[loaded]).add(this);
-                float rocketx=rocketPosition.x;
-                float rockety=rocketPosition.y;
+                float rocketx = rocketPosition.x;
+                float rockety = rocketPosition.y;
                 Draw.draw(Layer.blockOver, () -> Drawf.construct(rocketx, rockety, missile.rocketRegion,
                         0, progress, warmup, totalProgress));
             }

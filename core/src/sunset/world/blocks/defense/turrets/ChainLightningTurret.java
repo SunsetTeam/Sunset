@@ -14,6 +14,7 @@ import mindustry.type.*;
 import mindustry.world.blocks.defense.turrets.*;
 import mindustry.world.consumers.*;
 import mindustry.world.meta.*;
+import mma.ModVars;
 import sunset.gen.*;
 import sunset.world.consumers.*;
 import sunset.world.meta.values.*;
@@ -82,7 +83,7 @@ public class ChainLightningTurret extends BaseTurret{
     @Override
     public TextureRegion[] icons(){
 //        return super.makeIconRegions();
-        return new TextureRegion[]{baseRegion, region};
+        return !ModVars.packSprites ? new TextureRegion[]{region}:new TextureRegion[]{baseRegion, region};
     }
 
 

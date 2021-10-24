@@ -20,6 +20,7 @@ import mindustry.world.Block;
 import mindustry.world.Tile;
 import mindustry.world.blocks.environment.Floor;
 import mindustry.world.meta.*;
+import mma.ModVars;
 import sunset.gen.*;
 import sunset.world.consumers.AdjustableConsumePower;
 import sunset.world.meta.values.DrillItemsValue;
@@ -64,7 +65,7 @@ public class PrecussionDrill extends Block {
 
     @Override
     public TextureRegion[] icons(){
-        return new TextureRegion[]{region, rotatorRegion, topRegion};
+        return !ModVars.packSprites ? new TextureRegion[]{region}:new TextureRegion[]{region, rotatorRegion, topRegion};
     }
     @Override
     public void createIcons(MultiPacker packer){
