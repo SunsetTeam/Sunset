@@ -3,7 +3,7 @@ buildscript {
         arcHash = 'v133'
         mindustryVersion = 'v133'
         parserVersion='3.22.1'
-        aciVersion = "88aa8280375"
+        aciVersion = "9f9ed7da24"
         packerHash = '128'
         modsDirectories = [] ;
         def file=new File(rootDir, "modsDirectories.txt");
@@ -19,7 +19,7 @@ buildscript {
         }
         println "core: "+modCoreVersionDemo
         modCoreVersion = modCoreVersionDemo
-        modCoreVersion = "c9fc3273f15"
+        modCoreVersion = "88aa8280375"
     }
     repositories {
         mavenLocal()
