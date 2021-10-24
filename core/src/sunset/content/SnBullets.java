@@ -42,7 +42,7 @@ public class SnBullets implements ContentList {
             SporePodPoisonFrag, heavySporePodPoison, NaturitePoisonFrag, heavyNaturitePoison, NobiumPoisonFrag, heavyNobiumPoison,
             bigSporePodPoisonFrag, bigSporePodPoison, bigNaturitePoisonFrag, bigNaturitePoison, bigNobiumPoisonFrag, bigNobiumPoison, bigPlastaniumPoisonFrag, bigPlastaniumPoison,
     //units
-    BasicHelicopterGun, LaserBoltHelicopterGun, HelicopterMissile, clusterRocketSmall, clusterRocket, bigHelicopterGun, bigHelicopterBullet, lightningGun, laserHelicopterFrag, largeHelicopterGun, bigHelicopterRocket, HelicopterMissiles,
+    BasicHelicopterGun, LaserBoltHelicopterGun, HelicopterMissile, clusterRocketSmall, clusterRocket, bigHelicopterGun, bigHelicopterBullet, laserGun, laserHelicopterFrag, largeHelicopterGun, bigHelicopterRocket, HelicopterMissiles,
             cometWaterShot, starStunBullet, galaxyKnockbackBullet,
             wheel1bullet, wheel2shotgun, wheel3burst, wheel4shotgun, wheel4artillery, wheel5flame, wheel5bullet, mirageGunBullet,
     //misc
@@ -663,6 +663,7 @@ public class SnBullets implements ContentList {
 
             weaveScale = 9f;
             weaveMag = 1f;
+
             homingRange = 15f;
             homingPower = 0.1f;
         }};
@@ -682,6 +683,10 @@ public class SnBullets implements ContentList {
             shrinkX = 0.3f;
             shrinkY = 0.3f;
             drag = 0.04f;
+
+            trailColor = SnPal.PoisonBullet;
+            trailWidth = 2f;
+            trailLength = 10;
 
             weaveScale = 9f;
             weaveMag = 1f;
@@ -707,6 +712,10 @@ public class SnBullets implements ContentList {
             fragCone = 90f;
             fragBullets = 2;
 
+            trailColor = SnPal.PoisonBullet;
+            trailWidth = 5f;
+            trailLength = 31;
+
             weaveScale = 9f;
             weaveMag = 1f;
         }};
@@ -724,6 +733,10 @@ public class SnBullets implements ContentList {
             shrinkX = 0.3f;
             shrinkY = 0.3f;
             drag = 0.04f;
+
+            trailColor = SnPal.PoisonBullet;
+            trailWidth = 2f;
+            trailLength = 10;
 
             weaveScale = 9f;
             weaveMag = 1f;
@@ -749,6 +762,10 @@ public class SnBullets implements ContentList {
             fragCone = 90f;
             fragBullets = 3;
 
+            trailColor = SnPal.PoisonBullet;
+            trailWidth = 5f;
+            trailLength = 31;
+
             weaveScale = 9f;
             weaveMag = 1f;
         }};
@@ -766,6 +783,10 @@ public class SnBullets implements ContentList {
             shrinkX = 0.3f;
             shrinkY = 0.3f;
             drag = 0.04f;
+
+            trailColor = SnPal.PoisonBullet;
+            trailWidth = 2f;
+            trailLength = 10;
 
             weaveScale = 9f;
             weaveMag = 1f;
@@ -791,8 +812,13 @@ public class SnBullets implements ContentList {
             fragCone = 90f;
             fragBullets = 4;
 
+            trailColor = SnPal.PoisonBullet;
+            trailWidth = 5f;
+            trailLength = 31;
+
             weaveScale = 9f;
             weaveMag = 1f;
+
             homingRange = 15f;
             homingPower = 0.1f;
         }};
@@ -810,6 +836,10 @@ public class SnBullets implements ContentList {
             shrinkX = 0.3f;
             shrinkY = 0.3f;
             drag = 0.04f;
+
+            trailColor = SnPal.PoisonBullet;
+            trailWidth = 2f;
+            trailLength = 10;
 
             weaveScale = 9f;
             weaveMag = 1f;
@@ -835,8 +865,13 @@ public class SnBullets implements ContentList {
             fragCone = 90f;
             fragBullets = 4;
 
+            trailColor = SnPal.PoisonBullet;
+            trailWidth = 5f;
+            trailLength = 31;
+
             weaveScale = 9f;
             weaveMag = 1f;
+
             homingRange = 15f;
             homingPower = 0.1f;
         }};
@@ -945,11 +980,15 @@ public class SnBullets implements ContentList {
             shootEffect = Fx.shootBig;
             smokeEffect = Fx.shootBigSmoke;
         }};
-        lightningGun = new LightningBulletType(){{
-            damage = 15;
-            lightningLength = 15;
+        laserGun = new LaserBulletType(){{
+            colors = new Color[]{SnPal.copterLaser.cpy().a(0.4f), SnPal.copterLaser, Color.white};
+            damage = 20;
+            width = 25f;
+            lifetime = 15f;
+            length = 80f;
+            laserEffect = Fx.lancerLaserShootSmoke;
             collidesAir = true;
-            shootEffect = Fx.lightningShoot;
+            collidesGround = true;
         }};
 
         laserHelicopterFrag = new LaserBulletType(50) {{

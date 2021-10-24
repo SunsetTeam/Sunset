@@ -228,15 +228,15 @@ public class SnUnitTypes implements ContentList {
                     new Weapon("") {{
                         rotate = false;
                         mirror = true;
-                        shake = 1f;
+                        shake = 2f;
                         x = 14f;
                         y = 4f;
-                        reload = 10f;
+                        reload = 20f;
                         shotDelay = 1f;
                         shots = 4;
                         inaccuracy = 3f;
-                        shootSound = Sounds.spark;
-                        bullet = SnBullets.lightningGun;
+                        shootSound = Sounds.laser;
+                        bullet = SnBullets.laserGun;
                     }});
         }};
         crusadercopter = new CopterUnitType("crusader-copter") {{

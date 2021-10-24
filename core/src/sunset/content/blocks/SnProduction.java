@@ -39,6 +39,37 @@ public class SnProduction implements ContentList {
     @Override
     public void load() {
         //region advanced
+        advancedKiln = new GenericCrafter("advanced-kiln") {{
+            requirements(Category.crafting, with(Items.copper, 210, Items.lead, 220, Items.metaglass, 190, Items.graphite, 185, Items.silicon, 200, Items.titanium, 210, Items.thorium, 205));
+
+            size = 3;
+            health = 1200;
+            craftEffect = Fx.smeltsmoke;
+            craftTime = 95f;
+            outputItem = new ItemStack(Items.metaglass, 9);
+            itemCapacity = 15;
+            drawer = new MultiDrawSmelter() {{
+                flameColor = Color.valueOf("ffc099");
+                flameRadius*=1f/2f;
+                flameRadiusIn*=1f/2f;
+                flameRadiusMag*=1f/1.5f;
+                flameRadiusInMag*=1f/1.5f;
+                flamePoints(
+                        new FlamePoint(1f/3f,1f/3f),
+                        new FlamePoint(1f-1f/3f,1f/3f),
+                        new FlamePoint(1f/3f,1f-1f/3f),
+                        new FlamePoint(1f-1f/3f,1f-1f/3f),
+                        new FlamePoint(0.5f,0.5f,0.9f)
+                );
+                drawTopOnce=true;
+            }};
+            liquidCapacity = 100f;
+
+            consumes.items(with(Items.lead, 7, Items.sand, 5));
+            consumes.liquid(Liquids.water, 0.75f);
+            consumes.power(7f);
+        }};
+
         advancedCompressor = new GenericCrafter("advanced-compressor") {{
             requirements(Category.crafting, with(Items.lead, 150, Items.graphite, 120, Items.silicon, 210, Items.titanium, 110, Items.thorium, 200, Items.phaseFabric, 110));
 
@@ -46,12 +77,7 @@ public class SnProduction implements ContentList {
             craftEffect = SnFx.modPlasticburn;
             craftTime = 60f;
             outputItem = new ItemStack(Items.plastanium, 5);
-            drawer = new MultiDrawBlock(new DrawSmelter() {{
-                flameColor = Color.valueOf("C9F8AE");
-            }}, new DrawAnimation() {{
-                frameCount = 4;
-                frameSpeed = 4.8f;
-            }});
+            drawer = new DrawGlow();
             itemCapacity = 20;
             liquidCapacity = 20f;
             absorbLasers = true;
@@ -95,37 +121,6 @@ public class SnProduction implements ContentList {
             consumes.power(2.5f);
             consumes.item(SnItems.coldent);
             consumes.liquid(Liquids.water, 1f);
-        }};
-
-        advancedKiln = new GenericCrafter("advanced-kiln") {{
-            requirements(Category.crafting, with(Items.copper, 210, Items.lead, 220, Items.metaglass, 190, Items.graphite, 185, Items.silicon, 200, Items.titanium, 210, Items.thorium, 205));
-
-            size = 3;
-            health = 1200;
-            craftEffect = SnFx.modSmokeCloud;
-            craftTime = 95f;
-            outputItem = new ItemStack(Items.metaglass, 9);
-            itemCapacity = 15;
-            drawer = new MultiDrawSmelter() {{
-                flameColor = Color.valueOf("ffc099");
-                flameRadius*=1f/2f;
-                flameRadiusIn*=1f/2f;
-                flameRadiusMag*=1f/1.5f;
-                flameRadiusInMag*=1f/1.5f;
-                flamePoints(
-                        new FlamePoint(1f/3f,1f/3f),
-                        new FlamePoint(1f-1f/3f,1f/3f),
-                        new FlamePoint(1f/3f,1f-1f/3f),
-                        new FlamePoint(1f-1f/3f,1f-1f/3f),
-                        new FlamePoint(0.5f,0.5f,0.9f)
-                );
-                drawTopOnce=true;
-            }};
-            liquidCapacity = 100f;
-
-            consumes.items(with(Items.lead, 7, Items.sand, 5));
-            consumes.liquid(Liquids.water, 0.75f);
-            consumes.power(7f);
         }};
 
         advancedSurge = new GenericCrafter("advanced-surge") {{
