@@ -16,6 +16,7 @@ import mindustry.world.draw.DrawAnimation;
 import mindustry.world.draw.DrawMixer;
 import mindustry.world.draw.DrawRotator;
 import mindustry.world.draw.DrawSmelter;
+import mma.world.draw.MultiDrawSmelter;
 import sunset.content.SnFx;
 import sunset.content.SnItems;
 import sunset.content.SnLiquids;
@@ -105,8 +106,20 @@ public class SnProduction implements ContentList {
             craftTime = 95f;
             outputItem = new ItemStack(Items.metaglass, 9);
             itemCapacity = 15;
-            drawer = new DrawSmelter() {{
+            drawer = new MultiDrawSmelter() {{
                 flameColor = Color.valueOf("ffc099");
+                flameRadius*=1f/2f;
+                flameRadiusIn*=1f/2f;
+                flameRadiusMag*=1f/1.5f;
+                flameRadiusInMag*=1f/1.5f;
+                flamePoints(
+                        new FlamePoint(1f/3f,1f/3f),
+                        new FlamePoint(1f-1f/3f,1f/3f),
+                        new FlamePoint(1f/3f,1f-1f/3f),
+                        new FlamePoint(1f-1f/3f,1f-1f/3f),
+                        new FlamePoint(0.5f,0.5f,0.9f)
+                );
+                drawTopOnce=true;
             }};
             liquidCapacity = 100f;
 
