@@ -63,7 +63,7 @@ public class PrecussionDrill extends Block {
     }
 
     @Override
-    public TextureRegion[] makeIconRegions(){
+    public TextureRegion[] icons(){
         return new TextureRegion[]{region, rotatorRegion, topRegion};
     }
     @Override
