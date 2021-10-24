@@ -16,6 +16,7 @@ import mindustry.world.draw.DrawAnimation;
 import mindustry.world.draw.DrawMixer;
 import mindustry.world.draw.DrawRotator;
 import mindustry.world.draw.DrawSmelter;
+import mindustry.world.draw.DrawGlow;
 import mma.world.draw.MultiDrawSmelter;
 import sunset.content.SnFx;
 import sunset.content.SnItems;
