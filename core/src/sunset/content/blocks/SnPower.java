@@ -32,7 +32,7 @@ public class SnPower implements ContentList{
             itemDuration = 220f;
             minLiquidEfficiency = 0.2f;
             maxLiquidGenerate = 0.4f;
-            liquidCapacity = 40;
+            liquidCapacity = 50;
             hasLiquids = true;
             hasItems = false;
             size = 3;
