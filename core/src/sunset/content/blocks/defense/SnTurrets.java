@@ -501,7 +501,7 @@ public class SnTurrets implements ContentList {
             launchEffect = SnFx.missileLaunchSmall;
             size = 2;
             itemCapacity = 240;
-            missile = new MissileType(){{
+            missile = new MissileType(this){{
                 damage = 0f;
                 splashDamage = 590f;
                 splashDamageRadius = 98f;
@@ -522,7 +522,7 @@ public class SnTurrets implements ContentList {
             launchEffect = SnFx.missileLaunchMedium;
             size = 3;
             itemCapacity = 900;
-            missile = new MissileType(){{
+            missile = new MissileType(this){{
                 damage = 0f;
                 splashDamage = 4400f;
                 splashDamageRadius = 129f;
@@ -543,7 +543,7 @@ public class SnTurrets implements ContentList {
             launchEffect = SnFx.missileLaunchLarge;
             size = 4;
             itemCapacity = 2400;
-            missile = new MissileType(){{
+            missile = new MissileType(this){{
                 damage = 0f;
                 splashDamage = 18600f;
                 splashDamageRadius = 154f;
@@ -570,7 +570,7 @@ public class SnTurrets implements ContentList {
                     new Vec2(p2, p1),
                     new Vec2(p2, p2));
 
-            missile = new MissileType(){{
+            missile = new MissileType(this){{
                 damage = 0f;
                 splashDamage = 7200f;
                 splashDamageRadius = 137f;

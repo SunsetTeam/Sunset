@@ -82,7 +82,7 @@ public class MissileSiloTurret extends GenericCrafter {
     @Override
     public void load() {
         super.load();
-        missile.rocketRegion = Core.atlas.find(name + "-rocket");
+        missile.load();
     }
 
     public void rockets(Vec2... rockets) {
@@ -90,9 +90,10 @@ public class MissileSiloTurret extends GenericCrafter {
     }
 
     @Override
-    public TextureRegion[] makeIconRegions() {
+    public TextureRegion[] icons() {
         return new TextureRegion[]{baseRegion, region};
     }
+
 
     @Override
     public void createIcons(MultiPacker packer) {

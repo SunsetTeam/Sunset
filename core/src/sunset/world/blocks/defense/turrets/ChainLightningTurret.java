@@ -80,17 +80,11 @@ public class ChainLightningTurret extends BaseTurret{
     }
 
     @Override
-    public TextureRegion[] makeIconRegions(){
+    public TextureRegion[] icons(){
 //        return super.makeIconRegions();
         return new TextureRegion[]{baseRegion, region};
     }
 
-    @Override
-    public TextureRegion[] icons(){
-//                Log.info("baseRegion: @,region: @",baseRegion,region);
-//        return new TextureRegion[]{baseRegion, region};
-        return super.icons();
-    }
 
     @Override
     public void createIcons(MultiPacker packer){
