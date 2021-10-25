@@ -5,6 +5,7 @@ import mindustry.entities.bullet.*;
 import arc.graphics.g2d.Draw;
 import mindustry.graphics.Layer;
 import mindustry.gen.Bullet;
+import mindustry.graphics.Pal;
 import sunset.content.*;
 
 public class TorpedoBulletType extends BulletType {
@@ -12,6 +13,16 @@ public class TorpedoBulletType extends BulletType {
         super(speed, damage);
         collidesAir = absorbable = keepVelocity = false;
         trailEffect = SnFx.torpedoTrail;
+        trailColor = Pal.lightTrail;
+        trailLength = 30;
+        trailWidth = 10;
+    }
+
+    @Override
+    public void drawTrail(Bullet b) {
+        if (trailLength > 0 && b.trail != null){
+            b.trail.draw(trailColor, trailWidth);
+        }
     }
 
     @Override
