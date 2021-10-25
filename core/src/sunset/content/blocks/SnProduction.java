@@ -41,7 +41,7 @@ public class SnProduction implements ContentList {
     public void load() {
         //region advanced
         advancedKiln = new GenericCrafter("advanced-kiln") {{
-            requirements(Category.crafting, with(Items.copper, 210, Items.lead, 220, Items.metaglass, 190, Items.graphite, 185, Items.silicon, 200, Items.titanium, 210, Items.thorium, 205));
+            requirements(Category.crafting, with(Items.titanium, 150, Items.graphite, 80, Items.metaglass, 80,  Items.silicon, 60, Items.plastanium, 35));
 
             size = 3;
             health = 1200;
@@ -72,7 +72,7 @@ public class SnProduction implements ContentList {
         }};
 
         advancedCompressor = new GenericCrafter("advanced-compressor") {{
-            requirements(Category.crafting, with(Items.lead, 150, Items.graphite, 120, Items.silicon, 210, Items.titanium, 110, Items.thorium, 200, Items.phaseFabric, 110));
+            requirements(Category.crafting, with(Items.titanium, 150, Items.graphite, 120, Items.silicon, 110,  Items.metaglass, 80, Items.plastanium, 60));
 
             size = 3;
             craftEffect = SnFx.modPlasticburn;
@@ -88,7 +88,7 @@ public class SnProduction implements ContentList {
         }};
 
         advancedWeaver = new GenericCrafter("advanced-weaver") {{
-            requirements(Category.crafting, with(Items.copper, 210, Items.metaglass, 90, Items.silicon, 190, Items.titanium, 100, Items.thorium, 185, Items.surgeAlloy, 110));
+            requirements(Category.crafting, with(Items.lead, 190, Items.thorium, 160, Items.silicon, 145, Items.titanium, 80, Items.phaseFabric, 70));
             size = 3;
             health = 890;
             craftEffect = SnFx.weaverSmeltsmoke;
@@ -125,7 +125,7 @@ public class SnProduction implements ContentList {
         }};
 
         advancedSurge = new GenericCrafter("advanced-surge") {{
-            requirements(Category.crafting, with(Items.lead, 130, Items.metaglass, 100, Items.silicon, 150, Items.thorium, 110, Items.surgeAlloy, 75));
+            requirements(Category.crafting, with(Items.thorium, 280, Items.silicon, 200, Items.lead, 160, Items.surgeAlloy, 130, Items.plastanium, 110));
 
             ambientSound = Sounds.smelter;
             ambientSoundVolume = 0.07f;
