@@ -139,7 +139,7 @@ public class SnUnitTypes implements ContentList {
             unitFallRotateSpeed = 5f;
 
             rotors.add(
-                    new Rotor("triple-rotor-small") {{
+                    new Rotor("rotor-big") {{
                         offsetX = 0;
                         offsetY = 8;
                         rotorRotateSpeed = 27f;
@@ -152,7 +152,7 @@ public class SnUnitTypes implements ContentList {
                         offsetX = 0;
                         offsetY = -9;
                         rotorRotateSpeed = 28f;
-                        rotorCount = 1;
+                        rotorCount = 3;
                     }}
             );
             weapons.add(
