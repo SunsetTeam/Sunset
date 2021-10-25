@@ -34,7 +34,8 @@ public class Rotor {
         Vec2 rotor = Tmp.v1.trns(unit.rotation-90,offsetX,offsetY).add(unit);
 
         for (int i = 0; i < rotorCount; i++) {
-            Draw.rect(rotorRegion, rotor.x, rotor.y, Time.time * rotorRotateSpeed);
+            float angle = ((i * 360f / rotorCount + (((Time.time * rotorRotateSpeed))) % 360));    
+            Draw.rect(rotorRegion, rotor.x, rotor.y);
         }
         Draw.rect(topRegion, rotor.x, rotor.y, unit.rotation - 90);
     }
