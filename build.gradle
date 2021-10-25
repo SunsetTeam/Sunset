@@ -226,6 +226,36 @@ project(":core") {
         exclude("sunset/entities/compByAnuke/**")
     }
 }
+project(":tests") {
+    apply plugin: "java"
+    compileJava.options.fork = true
+
+    dependencies{
+        testImplementation project(":core")
+        testImplementation "com.github.Anuken.Arc:arc-core:$mindustryVersion"
+        testImplementation "com.github.Anuken.Mindustry:core:$mindustryVersion"
+        testImplementation "com.github.Anuken.Mindustry:server:$mindustryVersion"
+        testImplementation "org.junit.jupiter:junit-jupiter-params:5.7.1"
+        testImplementation "org.junit.jupiter:junit-jupiter-api:5.7.1"
+        testImplementation arcModule("backends:backend-headless")
+        testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:5.7.1"
+
+        testImplementation "com.github.Zelaux.ZelauxModCore:core:$modCoreVersion"
+        testImplementation "com.github.Zelaux.ZelauxModCore:plugins:$modCoreVersion"
+//        compileOnly "com.github.Zelaux.ZelauxModCore:annotations:$modCoreVersion"
+    }
+
+    test{
+        //fork every test so mods don't interact with each other
+        forkEvery = 1
+        useJUnitPlatform()
+        workingDir = new File("../core/assets")
+        testLogging{
+            exceptionFormat = 'full'
+            showStandardStreams = true
+        }
+    }
+}
 project(":tools") {
     apply plugin: "java"
     dependencies {

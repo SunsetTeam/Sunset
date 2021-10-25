@@ -12,6 +12,7 @@ import mindustry.gen.UnitEntity;
 import mindustry.graphics.Pal;
 import mma.type.ImageGenerator;
 import mma.type.pixmap.PixmapProcessor;
+import sunset.utils.PixmapRotator;
 
 public class CopterUnitType extends SnUnitType implements ImageGenerator {
     public final Seq<Rotor> rotors = new Seq<>();
@@ -55,19 +56,15 @@ public class CopterUnitType extends SnUnitType implements ImageGenerator {
     }
 
     @Override
-    public Pixmap generate(Pixmap icon, Func<TextureRegion, Pixmap> pixmapProvider) {
-        return null;
-    }
-
-    @Override
     public Pixmap generate(Pixmap icon, PixmapProcessor processor) {
         processor.save(icon,name+"-no-rotors");
         for (Rotor rotor : rotors) {
             Pixmap rotreg = processor.outline(processor.get(rotor.rotorRegion));
 //            Pixmap top = processor.get(rotor.topRegion).outline(Pal.darkerMetal,3);
-            Pixmap top =processor.outline( processor.get(rotor.topRegion));
+            Pixmap top =processor.get(rotor.topRegion);
 //            processor.save(rotreg, rotor.name + "-outline");
-            processor.replace(rotor.rotorRegion,rotreg);
+            processor.replace(rotor.rotorRegion,processor.outline(top));
+            rotreg =processor.outline( fullRotor(rotreg,processor,rotor.rotorCount));
             processor.replace(rotor.topRegion,top);
             int xoffset = (int) (rotor.offsetX / Draw.scl + icon.width / 2f);
             int yoffset = (int) (-rotor.offsetY / Draw.scl + icon.height / 2f);
@@ -83,6 +80,14 @@ public class CopterUnitType extends SnUnitType implements ImageGenerator {
 //            icon = processor.drawScaleAt(icon, top, tx, ty);
         }
         return icon;
+    }
+    private Pixmap fullRotor(Pixmap rotreg,PixmapProcessor processor,int count){
+        int size = Math.max(rotreg.width, rotreg.height);
+        Pixmap fullreg = new Pixmap(size, size);
+        for (int i = 0; i <count; i++) {
+            processor.drawCenter(fullreg, PixmapRotator.rotate(rotreg, i/(float)count*360f));
+        }
+        return fullreg;
     }
 
 }
