@@ -20,6 +20,7 @@ import mindustry.type.Item;
 import mindustry.type.ItemStack;
 import mindustry.type.UnitType;
 import mindustry.ui.Bar;
+import mindustry.world.Tile;
 import mindustry.world.blocks.ItemSelection;
 import mindustry.world.blocks.storage.StorageBlock;
 import mindustry.world.meta.Stat;
@@ -53,10 +54,24 @@ public class Airport extends StorageBlock {
             tile.link = link;
         });
         this.<Long, AirportBuild>config(Long.class, (tile, link) -> {
-            tile.link = Point2.unpack(Pack.leftInt(link)).add(tile.tile.x, tile.tile.y).pack();
-            int id = Pack.rightInt(link);
-            tile.takeItem = id == -1 ? null : content.item(id);
+            tile.link = decompressLink(link,tile.tile);
+            tile.takeItem = decompressItem(link);
         });
+    }
+
+    public static long compress(Tile tile, int link, Item item) {
+        return Pack.longInt(Point2.unpack(link).sub(tile.x, tile.y).pack(), item == null ? -1 : item.id);
+    }
+    public static Item decompressItem(long compressed){
+        int id = Pack.rightInt(compressed);
+        return  id == -1 ? null : content.item(id);
+    }
+    public static int decompressLink(long compressed,Tile tile){
+        Point2 point2 = Point2.unpack(Pack.leftInt(compressed));
+        if (tile!=null){
+            point2.add(tile.x, tile.y);
+        }
+        return point2.pack();
     }
 
     @Override
@@ -177,12 +192,14 @@ public class Airport extends StorageBlock {
 
         @Override
         public void buildConfiguration(Table table) {
-            ItemSelection.buildTable(table, content.items(), () -> takeItem, this::configure);
+            ItemSelection.buildTable(table, content.items(), () -> takeItem, item->{
+                configure(compress(tile,link,item));
+            });
         }
 
         @Override
         public Long config() {
-            return Pack.longInt(Point2.unpack(link).sub(tile.x, tile.y).pack(), takeItem == null ? -1 : takeItem.id);
+            return compress(tile,link, takeItem);
         }
 
         @Override

@@ -17,6 +17,7 @@ public class SnImagePacker extends ModImagePacker {
 
     @Override
     protected void start() throws Exception {
+        unitOutlines=true;
         SnVars.create();
         listener=new ModListener();
         super.start();
@@ -31,6 +32,12 @@ public class SnImagePacker extends ModImagePacker {
     protected void postCreatingContent() {
         super.postCreatingContent();
         ModVars.listener.init();
+    }
+
+    @Override
+    protected void preCreatingContent() {
+        super.preCreatingContent();
+        SnEntityMapping.init();
     }
 
     @Override

@@ -7,7 +7,6 @@ import arc.scene.ui.layout.Table;
 import arc.util.Strings;
 import mindustry.gen.Tex;
 import mindustry.type.Liquid;
-import mindustry.ui.Cicon;
 import mindustry.world.meta.StatValue;
 
 import static mindustry.Vars.content;
