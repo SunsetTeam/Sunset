@@ -143,7 +143,7 @@ public class SnUnitTypes implements ContentList {
                         offsetX = 0;
                         offsetY = 8;
                         rotorRotateSpeed = 27f;
-                        rotorCount = 1;
+                        rotorCount = 3;
                     }}
             );
 
@@ -152,7 +152,7 @@ public class SnUnitTypes implements ContentList {
                         offsetX = 0;
                         offsetY = -9;
                         rotorRotateSpeed = 28f;
-                        rotorCount = 3;
+                        rotorCount = 1;
                     }}
             );
             weapons.add(
