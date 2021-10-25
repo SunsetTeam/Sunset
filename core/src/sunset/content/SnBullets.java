@@ -682,7 +682,7 @@ public class SnBullets implements ContentList {
 
             shrinkX = 0.3f;
             shrinkY = 0.3f;
-            drag = 0.04f;
+            drag = 0.03f;
 
             trailColor = SnPal.PoisonBullet;
             trailWidth = 2f;
@@ -732,7 +732,7 @@ public class SnBullets implements ContentList {
 
             shrinkX = 0.3f;
             shrinkY = 0.3f;
-            drag = 0.04f;
+            drag = 0.03f;
 
             trailColor = SnPal.PoisonBullet;
             trailWidth = 2f;
@@ -782,7 +782,7 @@ public class SnBullets implements ContentList {
 
             shrinkX = 0.3f;
             shrinkY = 0.3f;
-            drag = 0.04f;
+            drag = 0.03f;
 
             trailColor = SnPal.PoisonBullet;
             trailWidth = 2f;
@@ -835,7 +835,7 @@ public class SnBullets implements ContentList {
 
             shrinkX = 0.3f;
             shrinkY = 0.3f;
-            drag = 0.04f;
+            drag = 0.3f;
 
             trailColor = SnPal.PoisonBullet;
             trailWidth = 2f;
