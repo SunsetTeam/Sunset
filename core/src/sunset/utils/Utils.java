@@ -76,6 +76,7 @@ public class Utils {
      * Принудительно устанавливает юнита в меню.
      */
     public static void setMenuUnit(UnitType type) {
+        if (Vars.headless)return;
         try {
             Field rendererF = MenuFragment.class.getDeclaredField("renderer");
             rendererF.setAccessible(true);

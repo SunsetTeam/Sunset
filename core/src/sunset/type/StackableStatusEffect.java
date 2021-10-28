@@ -56,9 +56,16 @@ public class StackableStatusEffect extends StatusEffect {
     private final AStats aStats=new AStats(){
         @Override
         public void display(Table table) {
+            if (displayer==null){
+                setupDisplayer();
+            }
             displayer.display(table);
         }
     };
+
+    public void setupDisplayer() {
+        displayer = new StackableStatusEffectValue(this);
+    }
 
     public StackableStatusEffect(String name) {
         super(name);
@@ -143,7 +150,6 @@ public class StackableStatusEffect extends StatusEffect {
             });
         }
         Vars.content.setCurrentMod(null);
-        displayer = new StackableStatusEffectValue(this);
     }
 
     /** Вызывается для обработки юнитов, на которых наложен эффект. Передаёт

@@ -1,8 +1,11 @@
 package sunset;
 
+import arc.Events;
 import arc.struct.Seq;
+import arc.util.Log;
 import mindustry.Vars;
 import mindustry.ctype.ContentList;
+import mindustry.game.EventType;
 import mma.ModVars;
 import sunset.content.*;
 import sunset.content.blocks.*;
@@ -69,6 +72,14 @@ public class SnVars extends ModVars {
 
     @Override
     protected void showException(Throwable ex) {
+        Log.err(ex);
+        if (Vars.headless){
+            return;
+        }
+        if (Vars.ui==null){
+            Events.on(EventType.ClientLoadEvent.class,e->showException(ex));
+            return;
+        }
         Vars.ui.showException(ex);
     }
 

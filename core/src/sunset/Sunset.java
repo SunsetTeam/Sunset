@@ -102,15 +102,17 @@ public class Sunset extends MMAMod{
     @Override
     protected void modContent(Content content){
         super.modContent(content);
-        if (content instanceof MappableContent){
+        if (content instanceof MappableContent && !headless){
             SnContentRegions.loadRegions((MappableContent)content);
         }
     }
 
     @Override
     public void loadContent() {
-        SnVars.inTry(SnMusics::load);
-        SnVars.inTry(SnSounds::load);
+        if (!headless){
+            SnVars.inTry(SnMusics::load);
+            SnVars.inTry(SnSounds::load);
+        }
         ContentLoader prev = Vars.content;
         /*content=new ContentLoader(){
             @Override
