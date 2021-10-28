@@ -501,7 +501,7 @@ public class SnFx {
     torpedoTrail = new Effect(30, e -> {
         color(Color.lightGray);
         randLenVectors(e.id, 15, 2 + e.fin() * 5, (x, y) -> {
-            Fill.circle(e.x + x, e.y + y, e.fin() * 2);
+            Fill.circle(e.x + x, e.y + y, e.fin() * 1.9f);
         });
     }),
 
