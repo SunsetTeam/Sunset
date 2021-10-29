@@ -498,6 +498,14 @@ public class SnFx {
         Lines.circle(e.x, e.y, e.rotation * val);
     }),
 
+    bigBulletTrail = new Effect(80f, e -> {
+        color(Pal.bulletYellow, e.fin());
+
+        randLenVectors(e.id, 6, 2f + e.finpow() * 31f, e.rotation + 130, 15f, (x, y) -> {
+            Fill.circle(e.x + x, e.y + y, 0.55f + e.fout() * 3f);
+        });
+    }),
+
     torpedoTrail = new Effect(30, e -> {
         color(Color.lightGray);
         randLenVectors(e.id, 15, 2 + e.fin() * 5, (x, y) -> {

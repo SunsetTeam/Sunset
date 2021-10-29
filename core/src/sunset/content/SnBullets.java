@@ -971,10 +971,10 @@ public class SnBullets implements ContentList {
             height = 18f;
             lifetime = 30f;
             makeFire = true;
-            splashDamageRadius = 35f;
+            splashDamageRadius = 20f;
             splashDamage = 60f;
             hitEffect = Fx.massiveExplosion;
-            trailEffect = Fx.artilleryTrail;
+            trailEffect = SnFx.bigBulletTrail;
             backColor = Pal.bulletYellow;
             frontColor = Pal.bulletYellowBack;
             shootEffect = Fx.shootBig;
@@ -990,7 +990,6 @@ public class SnBullets implements ContentList {
             collidesAir = true;
             collidesGround = true;
         }};
-
         laserHelicopterFrag = new LaserBulletType(50) {{
             colors = new Color[]{SnPal.copterLaser.cpy().a(0.4f), SnPal.copterLaser, Color.white};
             width = 20f;
