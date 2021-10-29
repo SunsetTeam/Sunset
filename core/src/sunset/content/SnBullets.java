@@ -978,8 +978,8 @@ public class SnBullets implements ContentList {
             frontColor = Pal.bulletYellowBack;
             shootEffect = Fx.shootBig;
             smokeEffect = Fx.shootBigSmoke;
-            trailLength = 30;
-            trailWidth = 20f;
+            trailLength = 25;
+            trailWidth = 10f;
             trailColor = Pal.bulletYellow;
             trailInterval = 0.7f;
             trailEffect = SnFx.bigBulletTrail;
