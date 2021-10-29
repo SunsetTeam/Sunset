@@ -69,7 +69,9 @@ public class ChainWeapon extends WeaponExt implements UpdateDrawWeapon, StatValu
     }
 
     private void getUnits(WeaponMount mount, Unit unit) {
-        units = UnitData.<ObjectMap<WeaponMount, Seq<Unit>>>data(unit, "ChainWeapon",ObjectMap::new).get(mount,Seq::new);
+        ObjectMap<WeaponMount, Seq<Unit>> chainWeapon = UnitData.data(unit, "ChainWeapon", ObjectMap::new);
+        if (chainWeapon==null)return;
+        units = chainWeapon.get(mount,Seq::new);
     }
 
     @Override
