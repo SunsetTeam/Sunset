@@ -499,7 +499,7 @@ public class SnFx {
     }),
 
     bigBulletTrail = new Effect(30f, 75f, e -> {
-        color(Pal.bulletYellow, e.fin());
+        color(Pal.bulletYellow, Pal.lighterOrange, e.fin());
 
         randLenVectors(e.id, 6, 2f + e.finpow() * 31f, e.rotation + 170, 14f, (x, y) -> {
             Fill.circle(e.x + x, e.y + y, 0.41f + e.fout() * 2f);

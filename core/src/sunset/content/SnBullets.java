@@ -978,19 +978,18 @@ public class SnBullets implements ContentList {
             frontColor = Pal.bulletYellowBack;
             shootEffect = Fx.shootBig;
             smokeEffect = Fx.shootBigSmoke;
-            trailLength = 25;
+            trailLength = 9;
             trailWidth = 10f;
             trailColor = Pal.bulletYellow;
-            trailInterval = 0.7f;
+            trailInterval = 0.6f;
             trailEffect = SnFx.bigBulletTrail;
-            trailRotation = true;
         }};
         laserGun = new LaserBulletType(){{
             colors = new Color[]{SnPal.copterLaser.cpy().a(0.4f), SnPal.copterLaser, Color.white};
             damage = 25;
             width = 25f;
             lifetime = 15f;
-            length = 80f;
+            length = 110f;
             laserEffect = Fx.lancerLaserShootSmoke;
             collidesAir = true;
             collidesGround = true;
