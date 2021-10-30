@@ -15,7 +15,6 @@ import mindustry.gen.Unit;
 public class UnitData {
     private static ObjectMap<Unit, ObjectMap<String, Object>> data = new ObjectMap<>();
 
-
     public static <T> T data(Unit unit, String key, Prov<T> prov) {
         if (unit != null && !validUnit(unit)) return null;
         ObjectMap<String, Object> entries = data.get(unit, ObjectMap::new);
