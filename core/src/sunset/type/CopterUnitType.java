@@ -59,12 +59,12 @@ public class CopterUnitType extends SnUnitType implements ImageGenerator {
     public Pixmap generate(Pixmap icon, PixmapProcessor processor) {
         processor.save(icon,name+"-no-rotors");
         for (Rotor rotor : rotors) {
-            Pixmap rotreg = processor.outline(processor.get(rotor.rotorRegion));
+            Pixmap rotreg = PixmapProcessor.outline(processor.get(rotor.rotorRegion));
 //            Pixmap top = processor.get(rotor.topRegion).outline(Pal.darkerMetal,3);
             Pixmap top =processor.get(rotor.topRegion);
 //            processor.save(rotreg, rotor.name + "-outline");
-            processor.replace(rotor.rotorRegion,processor.outline(top));
-            rotreg =processor.outline( fullRotor(rotreg,processor,rotor.rotorCount));
+            processor.replace(rotor.rotorRegion,PixmapProcessor.outline(top));
+            rotreg =PixmapProcessor.outline( fullRotor(rotreg,processor,rotor.rotorCount));
             processor.replace(rotor.topRegion,top);
             int xoffset = (int) (rotor.offsetX / Draw.scl + icon.width / 2f);
             int yoffset = (int) (-rotor.offsetY / Draw.scl + icon.height / 2f);
@@ -85,7 +85,7 @@ public class CopterUnitType extends SnUnitType implements ImageGenerator {
         int size = Math.max(rotreg.width, rotreg.height);
         Pixmap fullreg = new Pixmap(size, size);
         for (int i = 0; i <count; i++) {
-            processor.drawCenter(fullreg, PixmapRotator.rotate(rotreg, i/(float)count*360f));
+            PixmapProcessor.drawCenter(fullreg, PixmapRotator.rotate(rotreg, i/(float)count*360f));
         }
         return fullreg;
     }
