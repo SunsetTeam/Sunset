@@ -28,33 +28,20 @@ public class GeyserLogic {
         world.tiles.eachTile(tile -> {
             if (!(tile.floor() instanceof Geyser)) return;
             geysers.each(tiles -> {
-
-                if (tiles.contains(pred->{
-                    return pred.nearby(0) == tile ||
-                            pred.nearby(1) == tile ||
-                            pred.nearby(2) == tile ||
-                            pred.nearby(3) == tile;
-                })) {
-                    parts.add(tiles);
-                }
-                //=======
-                final boolean[] any = {false};
-                tiles.each(pred -> {
-                    if(!any[0] &&
-                        (pred.nearby(0) == tile ||
+                if(tiles.contains(pred-> pred.nearby(0) == tile ||
                         pred.nearby(1) == tile ||
                         pred.nearby(2) == tile ||
-                        pred.nearby(3) == tile)) any[0] = true;
-                });
-                if(any[0]) parts.add(tiles);
+                        pred.nearby(3) == tile)) {
+                    parts.add(tiles);
+                }
             });
             if(parts.isEmpty()) {
                 geysers.add(Seq.with(tile));
             } else {
-                parts.get(0).add(tile);
+                parts.first().add(tile);
                 if(parts.size > 1) {
                     for(int i = parts.size-1; i > 0; i--) {
-                        parts.get(0).addAll(parts.get(i));
+                        parts.first().addAll(parts.get(i));
                         geysers.remove(parts.get(i));
                     }
                 }
