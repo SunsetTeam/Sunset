@@ -258,7 +258,7 @@ public class SnUnitTypes implements ContentList {
 
             unitFallRotateSpeed = 5f;
             weapons.add(
-                    new WeaponExt() {{
+                    new Weapon() {{
                         rotate = false;
                         mirror = true;
                         top = true;
@@ -276,7 +276,7 @@ public class SnUnitTypes implements ContentList {
                         shootSound = Sounds.bang;
                         bullet = SnBullets.largeHelicopterGun;
                     }},
-                    new WeaponExt() {{
+                    new Weapon() {{
                         rotate = false;
                         mirror = true;
                         shake = 1f;
@@ -290,7 +290,7 @@ public class SnUnitTypes implements ContentList {
                         shootSound = Sounds.flame;
                         bullet = SnBullets.helicopterFlame;
                     }},
-                    new WeaponExt() {{
+                    new Weapon() {{
                         rotate = false;
                         mirror = true;
                         shake = 1f;

@@ -24,5 +24,7 @@ public class CopterRocketBulletType extends MissileBulletType{
         super.draw(b);
         Draw.rect(frontRegion, b.x, b.y, width, height, b.rotation() - 90);
         Draw.rect(backRegion, b.x, b.y, width, height, b.rotation() - 90);
+
+        Draw.reset();
     }
 }
