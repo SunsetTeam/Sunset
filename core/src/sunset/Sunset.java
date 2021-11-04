@@ -75,7 +75,6 @@ public class Sunset extends MMAMod{
     public void init() {
         super.init();
         UnitData.init();
-        GeyserLogic.init();
         AdvancedContentInfoDialog.init();
         Utils.setMenuUnit(SnUnitTypes.router);
         /*Log.info("startUp");

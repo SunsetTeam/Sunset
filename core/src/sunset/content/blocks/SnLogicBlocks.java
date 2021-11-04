@@ -10,7 +10,7 @@ import sunset.content.SnItems;
 
 import static mindustry.type.ItemStack.*;
 
-public class SnLogic implements ContentList{
+public class SnLogicBlocks implements ContentList{
     public static Block
 
     naturitelogicProcessor;

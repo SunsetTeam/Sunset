@@ -2,105 +2,90 @@ package sunset.world;
 
 import arc.Events;
 import arc.math.Mathf;
-import arc.struct.FloatSeq;
-import arc.struct.IntSeq;
+import arc.struct.ObjectSet;
 import arc.struct.Seq;
 import arc.util.Interval;
-import mindustry.entities.Effect;
+import mindustry.Vars;
+import mindustry.core.GameState;
 import mindustry.game.EventType;
 import mindustry.world.Tile;
+import mma.ModListener;
+import sunset.type.GeyserGroup;
 import sunset.world.blocks.environment.Geyser;
 
 import static mindustry.Vars.world;
 
 public class GeyserLogic {
-    public static void init(){
-        Events.on(EventType.WorldLoadEvent.class, (e) -> reloadData());
-        Events.on(EventType.Trigger.update.getClass(), (t) -> update());
+    private static final int effectTime = 30;
+    private final Seq<GeyserGroup> geysers = new Seq<>();
+    private final ObjectSet<Tile> tmpSet = new ObjectSet<>();
+    private final Interval effects = new Interval();
+    private float sumfactors;
+    private float baseUpChance = 0.00015f;
+    private float baseDownChance = 0.0001f;
+
+    public GeyserLogic() {
+        Events.run(EventType.WorldLoadEvent.class, this::reloadData);
+        ModListener.updaters.add(this::update);
     }
-    private static final Seq<Seq<Tile>> geysers = new Seq<>(), parts = new Seq<>();
-    private static final IntSeq states = new IntSeq();
-    private static final FloatSeq factors = new FloatSeq();
-    private static float sumfactors;
-    private static void reloadData() {
-        //TODO оптимизировать???
-        geysers.clear();
-        world.tiles.eachTile(tile -> {
-            if (!(tile.floor() instanceof Geyser)) return;
-            geysers.each(tiles -> {
-                if(tiles.contains(pred-> pred.nearby(0) == tile ||
-                        pred.nearby(1) == tile ||
-                        pred.nearby(2) == tile ||
-                        pred.nearby(3) == tile)) {
-                    parts.add(tiles);
-                }
-            });
-            if(parts.isEmpty()) {
-                geysers.add(Seq.with(tile));
-            } else {
-                parts.first().add(tile);
-                if(parts.size > 1) {
-                    for(int i = parts.size-1; i > 0; i--) {
-                        parts.first().addAll(parts.get(i));
-                        geysers.remove(parts.get(i));
-                    }
-                }
-            }
-            parts.clear();
-        });
-        states.clear();
-        states.setSize(geysers.size);
-        //update factors
-        sumfactors = 0;
-        factors.clear();
-        for(int i = 0; i < geysers.size; i++) {
-            float k = 1f / Mathf.pow(geysers.get(i).size, 0.333f);
-            sumfactors += k;
-            factors.add(k);
-        }
-    }
-    private static float baseUpChance = 0.00015f;
-    private static float baseDownChance = 0.0001f;
-    private static Interval effects = new Interval();
-    private static void update() {
-        if(geysers.isEmpty()) return;
-        //update states
-        //0 - спокоен, 1 - пар, 2 - извергается
-        if(Mathf.chance(baseUpChance)) {
-            int i = randomGeyser();
-            int v = states.get(i);
-            if(v < 2) states.set(i, v+1);
-        } else if(Mathf.chance(baseDownChance)) {
-            int i = randomGeyser();
-            int v = states.get(i);
-            if(v > -1) states.set(i, v-1);
-        }
-        //apply effects
-        if(effects.get(30)) {
-            for(int i = 0; i < geysers.size; i++) {
-                int s = states.get(i);
-                Seq<Tile> tiles = geysers.get(i);
-                Geyser g = (Geyser)tiles.get(0).floor();
-                Effect e = s == 0 ? g.calmEffect :
-                           s == 1 ? g.steamEffect :
-                                    g.eruptionEffect;
-                float d = s == 0 ? 0f :
-                          s == 1 ? g.steamDamage :
-                                   g.eruptionDamage;
-                tiles.each(pos -> {
-                    e.at(pos);
-                    if(d > 0 && pos.build != null) pos.build.damage(d * 30);
-                });
-            }
-        }
-    }
-    private static int randomGeyser(){
+
+    private int randomGeyser() {
         float f = Mathf.random(sumfactors);
         int r = 0;
-        while (r < factors.size && f > factors.get(r)) {
-            f -= factors.get(r);
+        while (r < geysers.size && f > geysers.get(r).factor()) {
+            f -= geysers.get(r).factor();
             r++;
         }
         return r;
     }
+
+    private void reloadData() {
+        //TODO оптимизировать???
+        geysers.clear();
+        tmpSet.clear();
+        ObjectSet<Tile> visited = new ObjectSet<>();
+        world.tiles.eachTile(tile -> {
+            if (!(tile.floor() instanceof Geyser) || !visited.add(tile)) return;
+            tmpSet.clear();
+            grabGeysers(tile, tmpSet);
+            visited.addAll(tmpSet);
+            geysers.add(new GeyserGroup(tmpSet.asArray()));
+        });
+        //update factors
+
+        updateFactors();
+    }
+
+    private void updateFactors() {
+        sumfactors = geysers.sumf(GeyserGroup::calculateFactor);
+    }
+
+
+    /**
+     * collects a group of geyser tiles using recursion
+     */
+    private void grabGeysers(Tile tile, ObjectSet<Tile> tiles) {
+        for (int i = 0; i < 4; i++) {
+            Tile nearby = tile.nearby(i);
+            if (nearby.floor() instanceof Geyser && tiles.add(nearby)) {
+                grabGeysers(nearby, tiles);
+            }
+        }
+    }
+
+    private void update() {
+        if (geysers.isEmpty() || !Vars.state.is(GameState.State.playing)) return;
+        //update states
+        if (Mathf.chance(baseUpChance)) {
+            geysers.get(randomGeyser()).upState();
+        } else if (Mathf.chance(baseDownChance)) {
+            geysers.get(randomGeyser()).downState();
+        }
+        //apply effects
+        if (effects.get(effectTime)) {
+            geysers.each(GeyserGroup::effect);
+        }
+    }
+
+
 }

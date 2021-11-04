@@ -38,27 +38,15 @@ import static mindustry.Vars.tilesize;
 import static mindustry.game.EventType.*;
 
 public class MissileSiloTurret extends GenericCrafter {
-    public static MissileSiloTurretBuild selected = null;
 
     static {
-        Events.on(WorldLoadEvent.class, (e) -> selected = null);
-        Events.on(GameOverEvent.class, (e) -> selected = null);
         Events.run(Trigger.draw, () -> {
-            if (selected != null) {
-                selected.drawSelectIf();
-            }
-//            Player player = selected.unit().getPlayer();
             if (Vars.player.unit() instanceof BlockUnitc b && b.tile() instanceof MissileSiloTurretBuild build) {
                 build.drawSelectIf();
             }
-            /*if (player != null && player == Vars.player) {
-                selected.drawSelectIf();
-            }*/
         });
         Events.on(TapEvent.class, e -> {
-            if (selected != null && e.player == Vars.player) {
-                selected.tapTile(e.player, e.tile);
-            } else if (e.player != null && e.player.unit() instanceof BlockUnitc b && b.tile() instanceof MissileSiloTurretBuild build) {
+            if (e.player != null && e.player.unit() instanceof BlockUnitc b && b.tile() instanceof MissileSiloTurretBuild build) {
                 build.tapTile(e.player, e.tile);
             }
         });
@@ -174,24 +162,6 @@ public class MissileSiloTurret extends GenericCrafter {
             return res * (rockets.length + 1);
         }
 
-        @Override
-        public void tapped() {
-            if (true) return;
-            if (selected == this) {
-                selected = null;
-            } else {
-                selected = this;
-            }
-        }
-
-        @Override
-        public void onRemoved() {
-            super.onRemoved();
-//            Events.remove(TapEvent.class, this::tapTile);
-//            Events.remove(Trigger.uiDrawEnd.getClass(), this::drawSelectIf);
-            if (selected == this) selected = null;
-        }
-
         private void tapTile(Player player, Tile tile) {
             if (player.team() != team || Vars.player != player) return;
             if (isControlled()) {
@@ -212,10 +182,6 @@ public class MissileSiloTurret extends GenericCrafter {
             launchEffect.at(from);
             missile.launch(from, new Vec2(shootX, shootY));
             loaded--;
-            if (loaded == 0 && selected == this) {
-
-//                tapped();
-            }
         }
 
         public void updateShooting() {

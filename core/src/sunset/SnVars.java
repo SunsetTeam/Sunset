@@ -12,12 +12,12 @@ import sunset.content.blocks.*;
 import sunset.content.blocks.defense.SnProjectors;
 import sunset.content.blocks.defense.SnTurrets;
 import sunset.content.blocks.defense.SnWalls;
+import sunset.core.SnLogic;
 //import sunset.utils.V7.SunsetWaveSpawner;
 
 public class SnVars extends ModVars {
 
-    //public static SunsetWaveSpawner spawner;
-
+    //core region
     private static final Seq<Runnable> onLoad = new Seq<>();
     private static final ContentList[] snContent = {
             new SnItems(),
@@ -33,7 +33,7 @@ public class SnVars extends ModVars {
             new SnDistribution(),
             new SnEnvironment(),
             new SnLiquidBlocks(),
-            new SnLogic(),
+            new SnLogicBlocks(),
             new SnPower(),
             new SnProduction(),
             new SnRaw(),
@@ -45,6 +45,9 @@ public class SnVars extends ModVars {
             new SnSectorPresets(),
             new SnTechTree(),
     };
+    //end region
+    //public static SunsetWaveSpawner spawner;
+    public static SnLogic logic;
 
     static {
         new SnVars();
@@ -62,7 +65,10 @@ public class SnVars extends ModVars {
     }
 
     public static void load() {
+        onLoad.each(Runnable::run);
+        onLoad.clear();
 
+        listener.add(logic = new SnLogic());
     }
 
     @Override
@@ -73,11 +79,11 @@ public class SnVars extends ModVars {
     @Override
     protected void showException(Throwable ex) {
         Log.err(ex);
-        if (Vars.headless){
+        if (Vars.headless) {
             return;
         }
-        if (Vars.ui==null){
-            Events.on(EventType.ClientLoadEvent.class,e->showException(ex));
+        if (Vars.ui == null) {
+            Events.on(EventType.ClientLoadEvent.class, e -> showException(ex));
             return;
         }
         Vars.ui.showException(ex);
