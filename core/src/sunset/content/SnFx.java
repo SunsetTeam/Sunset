@@ -215,6 +215,14 @@ public class SnFx {
         });
     }),
 
+    helicopterFlame = new Effect(65f, 84f, e -> {
+        Draw.color(Pal.lightFlame, Pal.darkFlame, Color.gray, e.fin());
+
+        randLenVectors(e.id, 8, e.finpow() * 64f, e.rotation, 10f, (x, y) -> {
+            Fill.circle(e.x + x * 2, e.y + y * 3, 0.70f + e.fout() * 2.0f);
+        });
+    }),
+
     typhoonShootLiquid = new Effect(15f, 80f, e -> {
         color(e.color);
 

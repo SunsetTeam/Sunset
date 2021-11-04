@@ -6,6 +6,7 @@ import mindustry.ctype.ContentList;
 import mindustry.graphics.g3d.HexMesh;
 import mindustry.graphics.g3d.SunMesh;
 import mindustry.type.Planet;
+import sunset.graphics.SnPal;
 import sunset.maps.generators.AzariaGenerator;
 import sunset.maps.generators.BurnoutGenerator;
 import sunset.maps.generators.RimeGenerator;
@@ -62,7 +63,7 @@ public class SnPlanets implements ContentList{
             meshLoader = () -> new HexMesh(this, 6);
             generator = new AzariaGenerator();
             radius = 1.03f;
-            atmosphereRadIn = 0.010f;
+            atmosphereRadIn = 0.02f;
             atmosphereRadOut = 0.4f;
             orbitRadius = 21.3f;
             orbitTime = 24.1f;
@@ -73,6 +74,7 @@ public class SnPlanets implements ContentList{
             atmosphereColor = Color.valueOf("68181C");
             hasAtmosphere = true;
             alwaysUnlocked = true;
+            landCloudColor = SnPal.azaria.cpy().a(0.5f);
         }};
 
         rime = new Planet("rime", SnPlanets.magma, 0.9f, 3){{

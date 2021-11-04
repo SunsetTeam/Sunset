@@ -42,7 +42,7 @@ public class SnBullets implements ContentList {
             SporePodPoisonFrag, heavySporePodPoison, NaturitePoisonFrag, heavyNaturitePoison, NobiumPoisonFrag, heavyNobiumPoison,
             bigSporePodPoisonFrag, bigSporePodPoison, bigNaturitePoisonFrag, bigNaturitePoison, bigNobiumPoisonFrag, bigNobiumPoison, bigPlastaniumPoisonFrag, bigPlastaniumPoison,
     //units
-    BasicHelicopterGun, LaserBoltHelicopterGun, HelicopterMissile, clusterRocketSmall, clusterRocket, bigHelicopterGun, bigHelicopterBullet, laserGun, laserHelicopterFrag, largeHelicopterGun, bigHelicopterRocket, HelicopterMissiles,
+    BasicHelicopterGun, LaserBoltHelicopterGun, HelicopterMissile, clusterRocketSmall, clusterRocket, bigHelicopterGun, bigHelicopterBullet, laserGun, helicopterFlame, laserHelicopterFrag, largeHelicopterBullet, bigHelicopterRocket, HelicopterMissiles,
             cometWaterShot, starStunBullet, galaxyKnockbackBullet,
             wheel1bullet, wheel2shotgun, wheel3burst, wheel4shotgun, wheel4artillery, wheel5flame, wheel5bullet, mirageGunBullet,
     //misc
@@ -994,7 +994,20 @@ public class SnBullets implements ContentList {
             collidesAir = true;
             collidesGround = true;
         }};
-        laserHelicopterFrag = new LaserBulletType(50) {{
+        helicopterFlame = new BulletType(13f, 24f) {{
+            hitSize = 13f;
+            pierce = true;
+            collidesAir = true;
+            lifetime = 10f;
+            statusDuration = 60f * 4;
+            shootEffect = SnFx.helicopterFlame;
+            hitEffect = Fx.hitFlameSmall;
+            despawnEffect = Fx.none;
+            status = StatusEffects.burning;
+            keepVelocity = false;
+            hittable = false;
+        }};
+        laserHelicopterFrag = new LaserBulletType(28) {{
             colors = new Color[]{SnPal.copterLaser.cpy().a(0.4f), SnPal.copterLaser, Color.white};
             width = 20f;
             lifetime = 15f;
@@ -1003,7 +1016,7 @@ public class SnBullets implements ContentList {
             collidesAir = true;
             collidesGround = true;
         }};
-        largeHelicopterGun = new BasicBulletType(10f, 80) {{
+        largeHelicopterBullet = new BasicBulletType(6f, 50) {{
             width = 17f;
             height = 27f;
             lifetime = 27f;
@@ -1014,7 +1027,7 @@ public class SnBullets implements ContentList {
             fragBullets = 1;
             fragCone = 0.0001f;
         }};
-        bigHelicopterRocket = new CopterRocketBulletType(6.3f, 70) {{
+        bigHelicopterRocket = new CopterRocketBulletType(6.3f, 15) {{
             sprite = "sunset-guardian-rocket";
             width = 13f;
             height = 23f;
@@ -1024,15 +1037,18 @@ public class SnBullets implements ContentList {
             hitEffect = Fx.massiveExplosion;
             keepVelocity = false;
             hitSound = Sounds.explosion;
-            trailChance = 0.5f;
             shrinkY = 0f;
             drag = -0.003f;
             homingRange = 20f;
-            homingPower = 0.4f;
-            splashDamage = 350f;
-            splashDamageRadius = 78f;
+            homingPower = 0.2f;
+            splashDamage = 100f;
+            splashDamageRadius = 60f;
+            trailLength = 0;
+            trailWidth = 5f;
+            trailColor = Pal.bulletYellow;
+            trailInterval = 0.5f;
+            trailEffect = SnFx.bigBulletTrail;
         }};
-
         HelicopterMissiles = new MissileBulletType(4.4f, 45) {{
             width = 11f;
             height = 11f;
