@@ -43,8 +43,8 @@ public class SnPal{
     emp2 = Color.valueOf("32D0DC"),
 
     //other
-    chainLaser = Pal.surge;
+    chainLaser = Pal.surge,
 
     //planets
-    azaria = Color.valueOf("5F0A0A"),
+    azaria = Color.valueOf("5F0A0A");
 }
