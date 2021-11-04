@@ -274,7 +274,7 @@ public class SnUnitTypes implements ContentList {
                         velocityRnd = 0.2f;
                         shots = 2;
                         shootSound = Sounds.bang;
-                        bullet = SnBullets.largeHelicopterGun;
+                        bullet = SnBullets.largeHelicopterBullet;
                     }},
                     new Weapon() {{
                         rotate = false;
