@@ -16,6 +16,9 @@ public class SnWeapon extends Weapon {
         super(ModVars.fullName(name));
     }
 
+    public SnWeapon() {
+        super();
+    }
 
     /**Anuke bug fix*/
     @Override

@@ -217,7 +217,7 @@ public class SnUnitTypes implements ContentList {
                         shootSound = Sounds.bang;
                         bullet = SnBullets.bigHelicopterBullet;
                     }},
-                    new Weapon("") {{
+                    new SnWeapon("") {{
                         rotate = false;
                         mirror = false;
                         shake = 3f;
@@ -231,7 +231,7 @@ public class SnUnitTypes implements ContentList {
                         bullet = SnBullets.bigHelicopterGun;
                     }},
 
-                    new Weapon("") {{
+                    new SnWeapon("") {{
                         rotate = false;
                         mirror = true;
                         shake = 2f;
@@ -258,7 +258,7 @@ public class SnUnitTypes implements ContentList {
 
             unitFallRotateSpeed = 5f;
             weapons.add(
-                    new Weapon() {{
+                    new SnWeapon() {{
                         rotate = false;
                         mirror = true;
                         top = true;
@@ -276,7 +276,7 @@ public class SnUnitTypes implements ContentList {
                         shootSound = Sounds.bang;
                         bullet = SnBullets.largeHelicopterBullet;
                     }},
-                    new Weapon() {{
+                    new SnWeapon() {{
                         rotate = false;
                         mirror = true;
                         shake = 1f;
@@ -290,7 +290,7 @@ public class SnUnitTypes implements ContentList {
                         shootSound = Sounds.flame;
                         bullet = SnBullets.helicopterFlame;
                     }},
-                    new Weapon() {{
+                    new SnWeapon() {{
                         rotate = false;
                         mirror = true;
                         shake = 1f;
@@ -866,7 +866,7 @@ public class SnUnitTypes implements ContentList {
 
             immunities.add(StatusEffects.freezing);
 
-            weapons.add(new Weapon() {{
+            weapons.add(new SnWeapon() {{
                 reload = 20f;
                 shootCone = 180f;
                 ejectEffect = Fx.freezing;
