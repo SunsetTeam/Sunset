@@ -13,16 +13,13 @@ public class CopterRocketBulletType extends MissileBulletType{
     public CopterRocketBulletType(float speed, float damage){
         super(speed, damage);
     }
-    @Override
-    public void draw(Bullet b){
-        Draw.z(Layer.plans);
-        super.draw(b);
-    }
 
     @Override
     public void draw(Bullet b) {
         super.draw(b);
         Draw.rect(frontRegion, b.x, b.y, width, height, b.rotation() - 90);
         Draw.rect(backRegion, b.x, b.y, width, height, b.rotation() - 90);
+
+        Draw.reset();
     }
 }
