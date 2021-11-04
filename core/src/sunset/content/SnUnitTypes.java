@@ -32,8 +32,8 @@ import sunset.type.weapons.WeaponExt;
 
 public class SnUnitTypes implements ContentList {
     public static UnitType
-            //attack copters
-            wind, thunder, nadir, halo, crusadercopter,
+    //attack copters
+    wind, thunder, nadir, halo, parhelion,
     //air-support (buffers)
     comet, satelite, planet, star, galaxy,
     //berserk
@@ -245,9 +245,9 @@ public class SnUnitTypes implements ContentList {
                         bullet = SnBullets.laserGun;
                     }});
         }};
-        crusadercopter = new CopterUnitType("crusader-copter") {{
+        parhelion = new CopterUnitType("parhelion") {{
             health = 16500;
-            hitSize = 77;
+            hitSize = 57;
             speed = 2.1f;
             accel = 0.1f;
             drag = 0.02f;
@@ -258,12 +258,12 @@ public class SnUnitTypes implements ContentList {
 
             unitFallRotateSpeed = 5f;
             weapons.add(
-                    new WeaponExt("crusader-gun") {{
+                    new WeaponExt() {{
                         rotate = false;
                         mirror = true;
                         top = true;
-                        x = -33f;
-                        y = 4f;
+                        x = -20f;
+                        y = 10f;
                         shotDelay = 5f;
                         reload = 55f;
                         recoil = 6f;
@@ -276,37 +276,31 @@ public class SnUnitTypes implements ContentList {
                         shootSound = Sounds.bang;
                         bullet = SnBullets.largeHelicopterGun;
                     }},
-                    new WeaponExt("crusader-rocket") {{
+                    new WeaponExt() {{
                         rotate = false;
                         mirror = true;
-                        top = true;
-                        x = -10f;
-                        y = -10f;
-                        reload = 31f;
-                        recoil = 1f;
-                        shotDelay = 1f;
                         shake = 1f;
-                        ejectEffect = Fx.casing3;
-
-                        shots = 3;
-                        xRand = 5f;
-                        inaccuracy = 10f;
-                        velocityRnd = 0.2f;
-                        shootSound = Sounds.missile;
-                        bullet = SnBullets.HelicopterMissiles;
+                        x = -28f;
+                        y = 15f;
+                        reload = 1.1f;
+                        shotDelay = 1f;
+                        shots = 1;
+                        inaccuracy = 3f;
+	                    recoil = 2f;
+                        shootSound = Sounds.flame;
+                        bullet = SnBullets.helicopterFlame;
                     }},
-                    new Weapon() {{
+                    new WeaponExt() {{
                         rotate = false;
-                        mirror = false;
-                        shake = 3f;
-                        x = 0f;
-                        y = 16f;
-                        reload = 230f;
-                        top = false;
-                        shotDelay = 8f;
-                        inaccuracy = 2f;
-                        shots = 3;
-                        velocityRnd = 0.2f;
+                        mirror = true;
+                        shake = 1f;
+                        x = -28f;
+                        y = 15f;
+                        reload = 100f;
+                        shotDelay = 1f;
+                        shots = 1;
+                        inaccuracy = 4f;
+	                    recoil = 2f;
                         shootSound = Sounds.missile;
                         bullet = SnBullets.bigHelicopterRocket;
                     }});
