@@ -19,11 +19,19 @@ import static arc.Core.camera;
 
 public class SnStatusEffects implements ContentList {
     public static StatusEffect
-            frostbite, stun, starBuff, galaxyDebuff, overheat, electricalShort, reloading, viscous;
+            //common
+            frostbite, stun, starBuff, galaxyDebuff, electricalShort, reloading, viscous,
+
+            //only reactive
+            greened,
+
+            //stackable
+            overheat;
 
     @Override
     public void load() {
 
+        //common
         frostbite = new StatusEffect("frostbite") {{
             color = Color.valueOf("6ecdec");
             damage = 0.17f;
@@ -61,9 +69,72 @@ public class SnStatusEffects implements ContentList {
             reloadMultiplier = 0.8f;
         }};
 
+        electricalShort = new StatusEffect("electric-short") {{
+            effectChance = 100;
+            speedMultiplier = 0;
+            disarm = true;
+            color = Color.valueOf("0AFEFF");
+            reloadMultiplier = 0.3f;
+            effect = Fx.freezing;
+            init(() -> {
+                opposite(StatusEffects.shocked);
+                affinity(StatusEffects.wet, ((unit, result, time) -> {
+                    unit.damagePierce(unit.health/4);
+                    result.set(reloading, 300);
+                }));
+                affinity(StatusEffects.freezing, ((unit, result, time) -> {
+                    unit.damagePierce(unit.health/2);
+                    result.set(reloading, 600);
+                }));
+            });
+        }};
+
+        reloading = new StatusEffect("reboot") {{
+            speedMultiplier = 0;
+            disarm = true;
+            color = Color.valueOf("047070");
+        }};
+
+        viscous = new StatusEffect("viscous") {{
+            color = Color.valueOf("721A1A");
+            speedMultiplier = 0.94f;
+            effect = SnFx.viscous;
+            effectChance = 0.09f;
+        }};
+
+        //only reactive
+        greened = new StatusEffect("greened"){{
+            color = Color.valueOf("3DD957");
+            permanent = true;
+            effect = Fx.heal;
+            init(() -> {
+                opposite(StatusEffects.freezing, SnStatusEffects.frostbite);
+                affinity(StatusEffects.overclock, ((unit, result, time) -> {
+                    unit.damagePierce(600);
+                    result.set(greened, 300);
+                }));
+                affinity(StatusEffects.overdrive, ((unit, result, time) -> {
+                    unit.damagePierce(600);
+                    result.set(greened, 300);
+                }));
+                affinity(StatusEffects.shielded, ((unit, result, time) -> {
+                    unit.damagePierce(450);
+                    result.set(greened, 300);
+                }));
+                affinity(StatusEffects.blasted, ((unit, result, time) -> {
+                    unit.damagePierce(30);
+                    result.set(greened, 300);
+                }));
+                affinity(StatusEffects.shocked, ((unit, result, time) -> {
+                    unit.damagePierce(30);
+                    result.set(greened, 300);
+                }));
+            });
+        }};
+
+        //stackable
         overheat = new StackableStatusEffect("overheat") {
             boolean draw = false;
-
             {
                 color = Color.valueOf("FF30000");
                 maxStacks = 20;
@@ -98,42 +169,9 @@ public class SnStatusEffects implements ContentList {
                 TextureRegion wrap = Draw.wrap(Vars.renderer.effectBuffer.getTexture());
                 wrap.flip(false,true);
                 Draw.rect(wrap, camera.position.x, camera.position.y, camera.width, camera.height);
-//                Vars.renderer.effectBuffer.blit(Shaders.screenspace);
+                //Vars.renderer.effectBuffer.blit(Shaders.screenspace);
                 Draw.color();
             }
         };
-
-        electricalShort = new StatusEffect("electric-short") {{
-            effectChance = 1;
-            speedMultiplier = 0;
-            disarm = true;
-            color = Color.valueOf("0AFEFF");
-            reloadMultiplier = 0.3f;
-            transitionDamage = 300; //TODO 50% of unit health
-            effect = Fx.freezing;
-            init(() -> {
-                affinity(StatusEffects.wet, ((unit, result, time) -> {
-                    unit.damagePierce(transitionDamage);
-                    result.set(reloading, 300);
-                }));
-                affinity(StatusEffects.freezing, ((unit, result, time) -> {
-                    unit.damagePierce(transitionDamage * 1.5f);
-                    result.set(reloading, 600);
-                }));
-            });
-        }};
-
-        reloading = new StatusEffect("reboot") {{
-            speedMultiplier = 0;
-            disarm = true;
-            color = Color.valueOf("047070");
-        }};
-
-        viscous = new StatusEffect("viscous") {{
-            color = Color.valueOf("721A1A");
-            speedMultiplier = 0.94f;
-            effect = SnFx.viscous;
-            effectChance = 0.09f;
-        }};
     }
 }

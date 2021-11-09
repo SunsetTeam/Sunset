@@ -31,7 +31,7 @@ import static mindustry.Vars.tilesize;
 public class SnFx {
     public static final Effect
 
-            enojiecraft = new Effect(60, e -> {
+    enojiecraft = new Effect(60, e -> {
         randLenVectors(e.id, 6, 4f + e.fin() * 8f, (x, y) -> {
             color(Pal.heal);
             Fill.square(e.x + x, e.y + y, e.fout() + 0.5f, 45);
@@ -565,6 +565,33 @@ public class SnFx {
             Draw.color(SnPal.emp1, SnPal.emp2, ifin);
             Lines.stroke(interp.apply(5, 20, e.fin()));
         });
+    }),
+
+    greenInstTrail = new Effect(30, e -> {
+        for(int i = 0; i < 2; i++){
+            color(i == 0 ? SnPal.synthesis1 : SnPal.synthesis2);
+
+            float m = i == 0 ? 1f : 0.5f;
+
+            float rot = e.rotation + 180f;
+            float w = 15f * e.fout() * m;
+            Drawf.tri(e.x, e.y, w, (30f + Mathf.randomSeedRange(e.id, 15f)) * m, rot);
+            Drawf.tri(e.x, e.y, w, 10f * m, rot + 180f);
+        }
+    }),
+
+    plasmaShot = new Effect(26, e -> {//TODO tune
+        color(SnPal.plasma1);
+        float length = !(e.data instanceof Float) ? 70f : (Float)e.data;
+        randLenVectors(e.id, 7, length, e.rotation, 0f, (x, y) -> {
+            lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), e.fout() * 9f);
+        });
+    }),
+
+    plasmaHit = new Effect(8, e -> {//TODO tune
+        color(SnPal.plasma1, SnPal.plasma2, e.fin());
+        stroke(0.5f + e.fout());
+        Lines.circle(e.x, e.y, e.fin() * 5f);
     }),
 
     fakeLightning = new Effect(10f, 500f, e -> {

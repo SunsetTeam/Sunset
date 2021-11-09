@@ -22,6 +22,8 @@ import mindustry.world.meta.BuildVisibility;
 import sunset.content.SnBullets;
 import sunset.content.SnFx;
 import sunset.content.SnItems;
+import sunset.content.SnStatusEffects;
+import sunset.entities.bullet.EnergyBoltBulletType;
 import sunset.entities.bullet.EnergySphereBulletType;
 import sunset.graphics.SnPal;
 import sunset.type.MissileType;
@@ -49,6 +51,8 @@ public class SnTurrets implements ContentList {
         sunrise, spark, dissector, art,
         //EMP
         discharger, dischargerEvo,
+        //synthesis
+        synthesisT1, synthesisT2, synthesisT3, synthesisT4,
         //testing
         testturret;
 
@@ -617,6 +621,92 @@ public class SnTurrets implements ContentList {
             zaps = 20;
             zapAngleRand = 15f;
             parts.add(new EMPPart(5));
+        }};
+        
+        //synthesis
+        synthesisT1 = new SynthesisTurret("synthesis-t1", 50){{
+            requirements(Category.turret, with(Items.copper, 120, Items.lead, 120, Items.titanium, 100));
+            ammo(
+                    SnItems.naturite, SnBullets.synthesisBullet1
+            );
+            size = 1;
+            health = 350;
+            reloadTime = 80;
+            range = 88;
+            shots = 1;
+            shootCone = 3;
+            shootSound = Sounds.railgun;
+            maxAmmo = 20;
+            spread = 3;
+            recoilAmount = 5;
+            restitution = 0.1f;
+            cooldown = 0.2f;
+            coolantUsage = 1.1f;
+        }};
+
+        synthesisT2 = new SynthesisTurret("synthesis-t2", 120){{
+            requirements(Category.turret, with(Items.copper, 240, Items.lead, 240, Items.titanium, 200));
+            ammo(
+                    SnItems.naturite, SnBullets.synthesisBullet2
+            );
+            size = 2;
+            health = synthesisT1.health * size;
+            reloadTime = 75;
+            range = 112;
+            shots = 1;
+            shootCone = 4;
+            shootSound = Sounds.railgun;
+            maxAmmo = 20;
+            spread = 5.1f;
+            recoilAmount = 3;
+            restitution = 1f;
+            cooldown = 0.01f;
+            coolantUsage = 1.7f;
+        }};
+
+        synthesisT3 = new SynthesisTurret("synthesis-t3", 260){{
+            requirements(Category.turret, with(Items.copper, 360, Items.lead, 360, Items.titanium, 300));
+            ammo(
+                    SnItems.naturite, SnBullets.synthesisBullet3
+            );
+            size = 3;
+            health = synthesisT1.health * size;
+            reloadTime = 60 / addSpeed;
+            range = 160;
+            shots = 3;
+            shootCone = 3;
+            shootSound = Sounds.railgun;
+            speed = 2;
+            shootShake = 5;
+            maxAmmo = 40;
+            spread = 0.1f;
+            recoilAmount = 2.1f;
+            restitution = 0.55f;
+            cooldown = 0.3f;
+            coolantUsage = 1.55f;
+        }};
+
+        synthesisT4 = new SynthesisTurret("synthesis-t4", 450){{
+            requirements(Category.turret, with(Items.copper, 480, Items.lead, 480, Items.titanium, 400));
+            ammo(
+                    SnItems.naturite, SnBullets.synthesisBullet4
+            );
+            size = 4;
+            health = synthesisT1.health * size;
+            reloadTime = 100 / addSpeed;
+            range = 240;
+            shots = 3;
+            shootCone = 1;
+            shootSound = Sounds.railgun;
+            speed = 5;
+            shootShake = 10;
+            minRange = 48;
+            maxAmmo = 50;
+            spread = 4;
+            recoilAmount = 5;
+            restitution = 0.9f;
+            cooldown = 0.7f;
+            coolantUsage = 0.9f;
         }};
 
         //testing

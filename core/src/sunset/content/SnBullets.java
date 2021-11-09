@@ -15,6 +15,7 @@ import mindustry.graphics.Pal;
 import sunset.entities.bullet.*;
 import sunset.graphics.*;
 import sunset.type.StackableStatusEffect;
+import sunset.world.blocks.defense.turrets.SynthesisTurret;
 
 public class SnBullets implements ContentList {
     public static BulletType
@@ -48,7 +49,7 @@ public class SnBullets implements ContentList {
     //misc
     emptyBullet, overheatBullet,
     //special
-    empBullet, empBulletEvo,
+    empBullet, empBulletEvo, synthesisBullet1, synthesisBullet2, synthesisBullet3, synthesisBullet4,
     //test&temp
     testbullet, tempBullet1, tempBullet2;
     //exoticBullets (new) i will make it later... i must make more bulets (soulBullet, iceSpike, and more)
@@ -165,8 +166,8 @@ public class SnBullets implements ContentList {
             fragBullet = artilleryBlastMine;
             fragBullets = 3;
             makeFire = true;
-            backColor = SnPal.BlastBullet;
-            frontColor = SnPal.BlastBulletBack;
+            backColor = SnPal.blastBullet;
+            frontColor = SnPal.blastBulletBack;
         }};
         //endregion artillery
         //region somesniper
@@ -233,8 +234,8 @@ public class SnBullets implements ContentList {
             hitSize = 5;
             width = 19f;
             height = 24f;
-            frontColor = SnPal.BlastBullet;
-            backColor = SnPal.BlastBulletBack;
+            frontColor = SnPal.blastBullet;
+            backColor = SnPal.blastBulletBack;
             status = StatusEffects.burning;
             shootEffect = Fx.shootBig;
             makeFire = true;
@@ -511,8 +512,8 @@ public class SnBullets implements ContentList {
             shrinkX = 0.3f;
             shrinkY = 0.3f;
             drag = 0.04f;
-            frontColor = SnPal.PoisonBullet;
-            backColor = SnPal.PoisonBulletBack;
+            frontColor = SnPal.poisonBullet;
+            backColor = SnPal.poisonBulletBack;
             collidesAir = true;
             collidesGround = true;
 
@@ -531,8 +532,8 @@ public class SnBullets implements ContentList {
             shrinkX = 0.3f;
             shrinkY = 0.3f;
             drag = 0.04f;
-            frontColor = SnPal.PoisonBullet;
-            backColor = SnPal.PoisonBulletBack;
+            frontColor = SnPal.poisonBullet;
+            backColor = SnPal.poisonBulletBack;
             collidesAir = true;
             collidesGround = true;
 
@@ -549,8 +550,8 @@ public class SnBullets implements ContentList {
             height = 6f;
             width = 6f;
             hitEffect = Fx.flakExplosion;
-            frontColor = SnPal.PoisonBullet;
-            backColor = SnPal.PoisonBulletBack;
+            frontColor = SnPal.poisonBullet;
+            backColor = SnPal.poisonBulletBack;
 
             shrinkX = 0.3f;
             shrinkY = 0.3f;
@@ -571,8 +572,8 @@ public class SnBullets implements ContentList {
             shrinkX = 0.3f;
             shrinkY = 0.3f;
             drag = 0.02f;
-            frontColor = SnPal.PoisonBullet;
-            backColor = SnPal.PoisonBulletBack;
+            frontColor = SnPal.poisonBullet;
+            backColor = SnPal.poisonBulletBack;
             collidesAir = true;
             collidesGround = true;
 
@@ -590,8 +591,8 @@ public class SnBullets implements ContentList {
             height = 6f;
             width = 6f;
             hitEffect = Fx.flakExplosion;
-            frontColor = SnPal.PoisonBullet;
-            backColor = SnPal.PoisonBulletBack;
+            frontColor = SnPal.poisonBullet;
+            backColor = SnPal.poisonBulletBack;
 
             shrinkX = 0.3f;
             shrinkY = 0.3f;
@@ -612,8 +613,8 @@ public class SnBullets implements ContentList {
             shrinkX = 0.3f;
             shrinkY = 0.3f;
             drag = 0.02f;
-            frontColor = SnPal.PoisonBullet;
-            backColor = SnPal.PoisonBulletBack;
+            frontColor = SnPal.poisonBullet;
+            backColor = SnPal.poisonBulletBack;
             collidesAir = true;
             collidesGround = true;
 
@@ -631,8 +632,8 @@ public class SnBullets implements ContentList {
             height = 6f;
             width = 6f;
             hitEffect = Fx.flakExplosion;
-            frontColor = SnPal.PoisonBullet;
-            backColor = SnPal.PoisonBulletBack;
+            frontColor = SnPal.poisonBullet;
+            backColor = SnPal.poisonBulletBack;
 
             shrinkX = 0.3f;
             shrinkY = 0.3f;
@@ -653,8 +654,8 @@ public class SnBullets implements ContentList {
             shrinkX = 0.3f;
             shrinkY = 0.3f;
             drag = 0.02f;
-            frontColor = SnPal.PoisonBullet;
-            backColor = SnPal.PoisonBulletBack;
+            frontColor = SnPal.poisonBullet;
+            backColor = SnPal.poisonBulletBack;
             collidesAir = true;
             collidesGround = true;
 
@@ -677,14 +678,14 @@ public class SnBullets implements ContentList {
             height = 8f;
             width = 8f;
             hitEffect = Fx.flakExplosion;
-            frontColor = SnPal.PoisonBullet;
-            backColor = SnPal.PoisonBulletBack;
+            frontColor = SnPal.poisonBullet;
+            backColor = SnPal.poisonBulletBack;
 
             shrinkX = 0.3f;
             shrinkY = 0.3f;
             drag = 0.03f;
 
-            trailColor = SnPal.PoisonBullet;
+            trailColor = SnPal.poisonBullet;
             trailWidth = 2f;
             trailLength = 10;
 
@@ -703,8 +704,8 @@ public class SnBullets implements ContentList {
             shrinkX = 0.3f;
             shrinkY = 0.3f;
             drag = 0.015f;
-            frontColor = SnPal.PoisonBullet;
-            backColor = SnPal.PoisonBulletBack;
+            frontColor = SnPal.poisonBullet;
+            backColor = SnPal.poisonBulletBack;
             collidesAir = true;
             collidesGround = true;
 
@@ -712,7 +713,7 @@ public class SnBullets implements ContentList {
             fragCone = 90f;
             fragBullets = 2;
 
-            trailColor = SnPal.PoisonBullet;
+            trailColor = SnPal.poisonBullet;
             trailWidth = 5f;
             trailLength = 31;
 
@@ -727,14 +728,14 @@ public class SnBullets implements ContentList {
             height = 8f;
             width = 8f;
             hitEffect = Fx.flakExplosion;
-            frontColor = SnPal.PoisonBullet;
-            backColor = SnPal.PoisonBulletBack;
+            frontColor = SnPal.poisonBullet;
+            backColor = SnPal.poisonBulletBack;
 
             shrinkX = 0.3f;
             shrinkY = 0.3f;
             drag = 0.03f;
 
-            trailColor = SnPal.PoisonBullet;
+            trailColor = SnPal.poisonBullet;
             trailWidth = 2f;
             trailLength = 10;
 
@@ -753,8 +754,8 @@ public class SnBullets implements ContentList {
             shrinkX = 0.3f;
             shrinkY = 0.3f;
             drag = 0.015f;
-            frontColor = SnPal.PoisonBullet;
-            backColor = SnPal.PoisonBulletBack;
+            frontColor = SnPal.poisonBullet;
+            backColor = SnPal.poisonBulletBack;
             collidesAir = true;
             collidesGround = true;
 
@@ -762,7 +763,7 @@ public class SnBullets implements ContentList {
             fragCone = 90f;
             fragBullets = 3;
 
-            trailColor = SnPal.PoisonBullet;
+            trailColor = SnPal.poisonBullet;
             trailWidth = 5f;
             trailLength = 31;
 
@@ -777,14 +778,14 @@ public class SnBullets implements ContentList {
             height = 6f;
             width = 6f;
             hitEffect = Fx.flakExplosion;
-            frontColor = SnPal.PoisonBullet;
-            backColor = SnPal.PoisonBulletBack;
+            frontColor = SnPal.poisonBullet;
+            backColor = SnPal.poisonBulletBack;
 
             shrinkX = 0.3f;
             shrinkY = 0.3f;
             drag = 0.03f;
 
-            trailColor = SnPal.PoisonBullet;
+            trailColor = SnPal.poisonBullet;
             trailWidth = 2f;
             trailLength = 10;
 
@@ -803,8 +804,8 @@ public class SnBullets implements ContentList {
             shrinkX = 0.3f;
             shrinkY = 0.3f;
             drag = 0.015f;
-            frontColor = SnPal.PoisonBullet;
-            backColor = SnPal.PoisonBulletBack;
+            frontColor = SnPal.poisonBullet;
+            backColor = SnPal.poisonBulletBack;
             collidesAir = true;
             collidesGround = true;
 
@@ -812,7 +813,7 @@ public class SnBullets implements ContentList {
             fragCone = 90f;
             fragBullets = 4;
 
-            trailColor = SnPal.PoisonBullet;
+            trailColor = SnPal.poisonBullet;
             trailWidth = 5f;
             trailLength = 31;
 
@@ -830,14 +831,14 @@ public class SnBullets implements ContentList {
             height = 6f;
             width = 6f;
             hitEffect = Fx.flakExplosion;
-            frontColor = SnPal.PoisonBullet;
-            backColor = SnPal.PoisonBulletBack;
+            frontColor = SnPal.poisonBullet;
+            backColor = SnPal.poisonBulletBack;
 
             shrinkX = 0.3f;
             shrinkY = 0.3f;
             drag = 0.3f;
 
-            trailColor = SnPal.PoisonBullet;
+            trailColor = SnPal.poisonBullet;
             trailWidth = 2f;
             trailLength = 10;
 
@@ -856,8 +857,8 @@ public class SnBullets implements ContentList {
             shrinkX = 0.3f;
             shrinkY = 0.3f;
             drag = 0.015f;
-            frontColor = SnPal.PoisonBullet;
-            backColor = SnPal.PoisonBulletBack;
+            frontColor = SnPal.poisonBullet;
+            backColor = SnPal.poisonBulletBack;
             collidesAir = true;
             collidesGround = true;
 
@@ -865,7 +866,7 @@ public class SnBullets implements ContentList {
             fragCone = 90f;
             fragBullets = 4;
 
-            trailColor = SnPal.PoisonBullet;
+            trailColor = SnPal.poisonBullet;
             trailWidth = 5f;
             trailLength = 31;
 
@@ -877,7 +878,7 @@ public class SnBullets implements ContentList {
         }};
         //endregion big-poison bullets
         //region helicopter
-        BasicHelicopterGun = new BasicBulletType(4.7f, 9) {{
+        BasicHelicopterGun = new BasicBulletType(4.7f, 10) {{
             width = 8f;
             height = 11f;
             lifetime = 35f;
@@ -1235,6 +1236,43 @@ public class SnBullets implements ContentList {
 
             }
         };
+        synthesisBullet1 = new EnergyBoltBulletType(15, 70){{
+            status = SnStatusEffects.greened;
+            lifetime = 7;
+            inaccuracy = 7;
+        }};
+        synthesisBullet2 = new EnergyBoltBulletType(18, 245){{
+            status = SnStatusEffects.greened;
+            lifetime = 6;
+            inaccuracy = 11;
+
+            fragBullets = 2;
+            fragCone = 35;
+            fragBullet = new LaserBoltBulletType(15, 70){{
+                lifetime = 60;
+            }};
+        }};
+        synthesisBullet3 = new EnergyBoltBulletType(16, 350){{
+            status = SnStatusEffects.greened;
+            lifetime = 12;
+            inaccuracy = 21;
+
+            fragBullets = 1;
+            fragBullet = new BulletType(){{
+                damage = 0;
+                knockback = 15;
+            }};
+        }};
+        synthesisBullet4 = new EnergyBoltBulletType(17, 700){{
+            status = SnStatusEffects.greened;
+            lifetime = 16;
+            inaccuracy = 2;
+
+            splashDamage = 110;
+            splashDamageRadius = 80;
+            trailChance = 1;
+            trailEffect = Fx.instTrail;
+        }};
         //endregion special
         //region misc
         overheatBullet = new BasicBulletType(0.1f, 7, "error") {{

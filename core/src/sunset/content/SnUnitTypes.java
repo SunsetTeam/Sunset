@@ -8,8 +8,11 @@ import mindustry.content.UnitTypes;
 import mindustry.ctype.ContentList;
 import mindustry.entities.bullet.BasicBulletType;
 import mindustry.entities.bullet.BombBulletType;
+import mindustry.entities.bullet.LaserBoltBulletType;
+import mindustry.entities.bullet.MissileBulletType;
 import mindustry.gen.Sounds;
 import mindustry.gen.UnitEntity;
+import mindustry.gen.UnitWaterMove;
 import mindustry.gen.Unitc;
 import mindustry.graphics.Layer;
 import mindustry.type.UnitType;
@@ -22,6 +25,7 @@ import sunset.ai.weapon.ExtinguishWeaponAI;
 import sunset.entities.abilities.BerserkStage;
 import sunset.entities.abilities.StatusFieldAbility;
 import sunset.entities.bullet.BerserkLaserBulletType;
+import sunset.entities.bullet.TorpedoBulletType;
 import sunset.gen.Deliverc;
 import sunset.type.*;
 import sunset.type.weapons.ChainWeapon;
@@ -40,7 +44,9 @@ public class SnUnitTypes implements ContentList {
     mirage, vision, illusion, soothSayer, seer, abyssEye,
     //wheel units
     wheel1, wheel2, wheel3, wheel4, wheel5,
-//    delivery
+    //naval
+    function, neocaridina,
+    //delivery
     router,
     //freezing
     snowflake;
@@ -842,6 +848,174 @@ public class SnUnitTypes implements ContentList {
         }};
         //endregion wheel
 
+        //region naval
+        function = new UnitType("function") {{
+            speed = 15;
+            boostMultiplier = 0.55f;
+            rotateSpeed = 6.3f;
+            baseRotateSpeed = 4;
+            drag = 0.65f;
+            accel = 0.7f;
+            health = 80;
+            range = 160;
+            armor = 120;
+            faceTarget = false;
+            weapons.add(
+                    new Weapon("plasma-mount") {{
+                        bullet = new LaserBoltBulletType() {{
+                            lifetime = 32;
+                            speed = 5;
+                            damage = 75;
+                            drawSize = 6.1f;
+                            pierceCap = 3;
+                            inaccuracy = 7;
+                            ammoMultiplier = 2;
+                            reloadMultiplier = 1.1f;
+                            buildingDamageMultiplier = 0.6f;
+                            recoil = 2;
+                            width = 6;
+                            height = 6;
+                            pierce = true;
+                            pierceBuilding = true;
+                            smokeEffect = SnFx.plasmaShot;
+                            hitEffect = SnFx.plasmaHit;
+                            despawnEffect = SnFx.plasmaHit;
+                            shootEffect = SnFx.plasmaShot;
+                        }};
+                        rotate = true;
+                        rotateSpeed = 30;
+                        reload = 35;
+                        shots = 5;
+                        spacing = 15;
+                        inaccuracy = 2;
+                        firstShotDelay = 20;
+                        shootCone = 6;
+                        cooldownTime = 15;
+                        ignoreRotation = true;
+                        shootSound = Sounds.lasershoot;
+                        shootStatus = StatusEffects.blasted;
+                    }},
+                    new Weapon("small-torpedo-launcher") {{
+                        bullet = new TorpedoBulletType(2, 120) {{
+                            lifetime = 80;
+                            drawSize = 9.2f;
+                            pierceCap = -1;
+                            inaccuracy = 1;
+                            ammoMultiplier = 1;
+                            reloadMultiplier = 3f;
+                            buildingDamageMultiplier = 0.9f;
+                            recoil = 1;
+                            pierce = true;
+                            pierceBuilding = false;
+                            smokeEffect = Fx.shootBigSmoke2;
+                            hitEffect = Fx.blastExplosion;
+                            despawnEffect = Fx.blastExplosion;
+                            shootEffect = Fx.shootBig2;
+                        }};
+                        rotate = true;
+                        rotateSpeed = 30;
+                        reload = 35;
+                        shots = 1;
+                        spacing = 15;
+                        inaccuracy = 2;
+                        firstShotDelay = 20;
+                        shootCone = 6;
+                        cooldownTime = 15;
+                        ignoreRotation = true;
+                        shootSound = Sounds.missile;
+                        shootStatus = StatusEffects.disarmed;
+                        shootStatusDuration = 15;
+                    }}
+            );
+            constructor = UnitWaterMove::create;
+            immunities.add(StatusEffects.wet);
+            immunities.add(StatusEffects.freezing);
+        }};
+        neocaridina = new UnitType("neocaridina") {{
+            speed = 13;
+            boostMultiplier = 1;
+            rotateSpeed = 7;
+            baseRotateSpeed = 5;
+            drag = 0.7f;
+            accel = 0.5f;
+            health = 170;
+            range = 205;
+            armor = 260;
+            faceTarget = false;
+            weapons.add(
+                    new Weapon("double-rocket-mount") {{
+                        bullet = new MissileBulletType() {{
+                            lifetime = 32;
+                            speed = 5;
+                            damage = 75;
+                            drawSize = 6.1f;
+                            pierceCap = 3;
+                            inaccuracy = 7;
+                            ammoMultiplier = 2;
+                            reloadMultiplier = 1.1f;
+                            buildingDamageMultiplier = 0.6f;
+                            recoil = 2;
+                            width = 6;
+                            height = 6;
+                            pierce = true;
+                            pierceBuilding = true;
+                            smokeEffect = SnFx.plasmaShot;
+                            hitEffect = Fx.blastExplosion;
+                            despawnEffect = Fx.blastExplosion;
+                            shootEffect = SnFx.plasmaShot;
+                        }};
+                        mirror = true;
+                        rotate = true;
+                        rotateSpeed = 30;
+                        reload = 45;
+                        shots = 2;
+                        spacing = 1;
+                        inaccuracy = 5;
+                        xRand = 5;
+                        firstShotDelay = 0;
+                        shootCone = 1;
+                        cooldownTime = 5;
+                        ignoreRotation = true;
+                        shootSound = Sounds.missile;
+                        shootStatus = StatusEffects.blasted;
+                    }},
+                    new Weapon("small-torpedo-launcher") {{
+                        bullet = new TorpedoBulletType(2, 140) {{
+                            lifetime = 80;
+                            drawSize = 9.2f;
+                            pierceCap = -1;
+                            inaccuracy = 1;
+                            ammoMultiplier = 1;
+                            reloadMultiplier = 3f;
+                            buildingDamageMultiplier = 0.9f;
+                            recoil = 1;
+                            pierce = true;
+                            pierceBuilding = false;
+                            smokeEffect = Fx.shootBigSmoke2;
+                            hitEffect = Fx.hitBulletBig;
+                            despawnEffect = Fx.hitBulletSmall;
+                            shootEffect = Fx.shootBig2;
+                        }};
+                        rotate = true;
+                        rotateSpeed = 30;
+                        reload = 35;
+                        shots = 1;
+                        spacing = 15;
+                        inaccuracy = 2;
+                        firstShotDelay = 20;
+                        shootCone = 6;
+                        cooldownTime = 15;
+                        ignoreRotation = true;
+                        shootSound = Sounds.missile;
+                        shootStatus = StatusEffects.disarmed;
+                        shootStatusDuration = 15;
+                    }}
+            );
+            constructor = UnitWaterMove::create;
+            immunities.add(StatusEffects.wet);
+            immunities.add(StatusEffects.freezing);
+        }};
+        //endregion naval
         //region delivery
         courier = new UnitTypeExt("courier") {{
             speed = 3.9f;
@@ -850,7 +1024,7 @@ public class SnUnitTypes implements ContentList {
             health = 50;
             hitSize = 4;
             defaultController = DeliverAI::new;
-//            constructor = UnitEntity::create;
+            //constructor = UnitEntity::create;
         }};
         //endregion delivery
 
