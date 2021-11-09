@@ -45,7 +45,7 @@ public class SnUnitTypes implements ContentList {
     //wheel units
     wheel1, wheel2, wheel3, wheel4, wheel5,
     //naval
-    function, neocaridina,
+    torpedo1, torpedo2,
     //delivery
     router,
     //freezing
@@ -849,7 +849,7 @@ public class SnUnitTypes implements ContentList {
         //endregion wheel
 
         //region naval
-        function = new UnitType("function") {{
+        torpedo1 = new UnitType("Torpedo T1") {{
             speed = 15;
             boostMultiplier = 0.55f;
             rotateSpeed = 6.3f;
@@ -861,7 +861,7 @@ public class SnUnitTypes implements ContentList {
             armor = 120;
             faceTarget = false;
             weapons.add(
-                    new Weapon("plasma-mount") {{
+                    new Weapon("plasma-gun") {{
                         bullet = new LaserBoltBulletType() {{
                             lifetime = 32;
                             speed = 5;
@@ -931,7 +931,7 @@ public class SnUnitTypes implements ContentList {
             immunities.add(StatusEffects.wet);
             immunities.add(StatusEffects.freezing);
         }};
-        neocaridina = new UnitType("neocaridina") {{
+        torpedo2 = new UnitType("Torpedo T2") {{
             speed = 13;
             boostMultiplier = 1;
             rotateSpeed = 7;
@@ -943,7 +943,7 @@ public class SnUnitTypes implements ContentList {
             armor = 260;
             faceTarget = false;
             weapons.add(
-                    new Weapon("double-rocket-mount") {{
+                    new Weapon("double-small-rocket-launcher") {{
                         bullet = new MissileBulletType() {{
                             lifetime = 32;
                             speed = 5;
