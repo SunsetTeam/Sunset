@@ -1236,42 +1236,41 @@ public class SnBullets implements ContentList {
 
             }
         };
-        synthesisBullet1 = new EnergyBoltBulletType(15, 70) {{
+        synthesisBullet1 = new EnergyBoltBulletType(11, 70) {{
             status = SnStatusEffects.greened;
             lifetime = 7;
             inaccuracy = 7;
         }};
-        synthesisBullet2 = new EnergyBoltBulletType(18, 245) {{
+        synthesisBullet2 = new EnergyBoltBulletType(14, 245) {{
             status = SnStatusEffects.greened;
             lifetime = 6;
             inaccuracy = 11;
-
-            fragBullets = 2;
+            fragBullets = 3;
             fragCone = 35;
-            fragBullet = new LaserBoltBulletType(15, 70) {{
+            fragBullet = new LaserBoltBulletType(12, 70) {{
                 lifetime = 60;
             }};
         }};
-        synthesisBullet3 = new EnergyBoltBulletType(16, 350) {{
+        synthesisBullet3 = new EnergyBoltBulletType(12, 350) {{
             status = SnStatusEffects.greened;
             lifetime = 12;
             inaccuracy = 21;
-
             fragBullets = 1;
             fragBullet = new BulletType() {{
                 damage = 0;
                 knockback = 15;
+                despawnEffect = Fx.none;
+                hitEffect = Fx.none;
             }};
         }};
         synthesisBullet4 = new EnergyBoltBulletType(17, 700) {{
             status = SnStatusEffects.greened;
             lifetime = 16;
             inaccuracy = 2;
-
             splashDamage = 110;
             splashDamageRadius = 80;
             trailChance = 1;
-            trailEffect = Fx.instTrail;
+            trailEffect = SnFx.greenInstTrail;
         }};
         //endregion special
         //region misc

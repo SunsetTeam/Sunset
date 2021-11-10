@@ -676,6 +676,7 @@ public class SnTurrets implements ContentList {
             shootSound = Sounds.railgun;
             speed = 2;
             shootShake = 5;
+            minRange = 48;
             maxAmmo = 40;
             spread = 0.1f;
             recoilAmount = 2.1f;
@@ -698,7 +699,7 @@ public class SnTurrets implements ContentList {
             shootSound = Sounds.railgun;
             speed = 5;
             shootShake = 10;
-            minRange = 48;
+            minRange = 52;
             maxAmmo = 50;
             spread = 4;
             recoilAmount = 5;
@@ -723,6 +724,7 @@ public class SnTurrets implements ContentList {
             rotateSpeed = 7f;
             shootSound = Sounds.pew;
             targetAir = true;
+            unlocked = true;
         }};
         //endregion testing
     }

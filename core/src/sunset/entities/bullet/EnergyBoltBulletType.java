@@ -44,7 +44,7 @@ public class EnergyBoltBulletType extends LaserBoltBulletType{
         this(1f, 1f);
     }
 
-    void handle(Bullet b, Posc pos, float initialHealth){
+    /*void handle(Bullet b, Posc pos, float initialHealth){
         float sub = Math.max(initialHealth * pierceDamageFactor, 0);
 
         if(b.damage <= 0){
@@ -57,13 +57,14 @@ public class EnergyBoltBulletType extends LaserBoltBulletType{
         }
 
         b.damage -= Math.min(b.damage, sub);
-    }
+    }*/
 
     @Override
     public void draw(Bullet b){
+        super.draw(b);
         Draw.color(backColor);
         Lines.stroke(width * SynthesisTurret.param1);
-        Lines.lineAngleCenter(b.x, b.y, b.rotation(), height * SynthesisTurret.param1);
+        Lines.lineAngleCenter(b.x, b.y, b.rotation(), height);
         Draw.color(frontColor);
         Lines.lineAngleCenter(b.x, b.y, b.rotation(), Mathf.random(height / 4, height / 2));
         Draw.reset();
