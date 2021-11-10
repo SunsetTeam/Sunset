@@ -849,7 +849,7 @@ public class SnUnitTypes implements ContentList {
         //endregion wheel
 
         //region naval
-        torpedo1 = new UnitType("Torpedo T1") {{
+        torpedo1 = new UnitType("torpedo-t1") {{
             speed = 15;
             boostMultiplier = 0.55f;
             rotateSpeed = 6.3f;
@@ -931,7 +931,7 @@ public class SnUnitTypes implements ContentList {
             immunities.add(StatusEffects.wet);
             immunities.add(StatusEffects.freezing);
         }};
-        torpedo2 = new UnitType("Torpedo T2") {{
+        torpedo2 = new UnitType("torpedo-t2") {{
             speed = 13;
             boostMultiplier = 1;
             rotateSpeed = 7;

@@ -22,8 +22,6 @@ import mindustry.world.meta.BuildVisibility;
 import sunset.content.SnBullets;
 import sunset.content.SnFx;
 import sunset.content.SnItems;
-import sunset.content.SnStatusEffects;
-import sunset.entities.bullet.EnergyBoltBulletType;
 import sunset.entities.bullet.EnergySphereBulletType;
 import sunset.graphics.SnPal;
 import sunset.type.MissileType;
