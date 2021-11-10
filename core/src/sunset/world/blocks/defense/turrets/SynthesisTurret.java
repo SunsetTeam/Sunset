@@ -4,6 +4,7 @@ import arc.Core;
 import arc.graphics.g2d.Draw;
 import arc.graphics.g2d.TextureRegion;
 import arc.scene.ui.layout.Table;
+import mindustry.annotations.Annotations.*;
 import mindustry.content.Fx;
 import mindustry.graphics.Drawf;
 import mindustry.graphics.Layer;
@@ -16,7 +17,10 @@ import sunset.graphics.SnPal;
 import static mindustry.Vars.minArmorDamage;
 
 public class SynthesisTurret extends ItemTurret {
-    public TextureRegion liquid, light;
+    @Load("@-liquid")
+    public TextureRegion liquid;
+    @Load("@-light")
+    public TextureRegion light;
     public static float armor;
     public static int param1;
     public int addSpeed;
@@ -32,12 +36,6 @@ public class SynthesisTurret extends ItemTurret {
         super(name);
         armor = 0;
         unitSort = (u, x, y) -> -u.armor;
-    }
-
-    @Override
-    public void load() {
-        liquid = Core.atlas.find(name + "-liquid");
-        light = Core.atlas.find(name + "-light");
     }
 
     @Override
