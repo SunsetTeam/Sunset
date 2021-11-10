@@ -3,7 +3,6 @@ package sunset.content;
 import arc.graphics.Color;
 import arc.graphics.g2d.Draw;
 import arc.graphics.g2d.TextureRegion;
-import arc.graphics.gl.FrameBuffer;
 import mindustry.Vars;
 import mindustry.content.Fx;
 import mindustry.content.StatusEffects;
@@ -11,7 +10,6 @@ import mindustry.ctype.ContentList;
 import mindustry.gen.Unit;
 import mindustry.graphics.Layer;
 import mindustry.graphics.Pal;
-import mindustry.graphics.Shaders;
 import mindustry.type.StatusEffect;
 import sunset.type.StackableStatusEffect;
 
@@ -103,7 +101,7 @@ public class SnStatusEffects implements ContentList {
         }};
 
         //only reactive
-        greened = new StatusEffect("greened"){{
+        greened = new StatusEffect("greened") {{
             color = Color.valueOf("3DD957");
             permanent = true;
             effect = Fx.heal;

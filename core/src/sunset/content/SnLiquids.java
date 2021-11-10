@@ -5,13 +5,13 @@ import mindustry.content.*;
 import mindustry.ctype.*;
 import mindustry.type.*;
 
-public class SnLiquids implements ContentList{
+public class SnLiquids implements ContentList {
     public static Liquid burheyna;
 
     @Override
-    public void load(){
+    public void load() {
      
-        burheyna = new Liquid("burheyna", Color.valueOf("962222")){{
+        burheyna = new Liquid("burheyna", Color.valueOf("962222")) {{
             viscosity = 0.8f;
             flammability = 0.5f;
             explosiveness = 0.8f;

@@ -8,13 +8,13 @@ import mindustry.type.*;
 import mindustry.type.weather.*;
 import mindustry.world.meta.*;
 
-public class SnWeathers implements ContentList{
+public class SnWeathers implements ContentList {
     public static Weather
     blizzard;
 
     @Override
-    public void load(){
-        blizzard = new ParticleWeather("blizzard"){{
+    public void load() {
+        blizzard = new ParticleWeather("blizzard") {{
             color = noiseColor = Color.valueOf("F3F3F3");
             particleRegion = "particle";
             drawNoise = true;

@@ -19,8 +19,8 @@ import sunset.world.blocks.defense.turrets.SynthesisTurret;
 
 public class SnBullets implements ContentList {
     public static BulletType
-            //sap
-            leadSap, sporeSap, planatriumSap,
+    //sap
+    leadSap, sporeSap, planatriumSap,
     //heavy-sap
     heavyplanatriumSap,
     //artillery
@@ -33,19 +33,19 @@ public class SnBullets implements ContentList {
     heavyCoalFlame, heavyPyraFlame, flameidFlame,
     //liquid
     typhoonWaterShot, typhoonCryoShot, typhoonSlagShot, typhoonOilShot,
-            floodWaterShot, floodCryoShot, floodSlagShot, floodOilShot,
+    floodWaterShot, floodCryoShot, floodSlagShot, floodOilShot,
     //blast
     lightBlastGraphite, lightBlastSilicon,
-            bigBlastPlastanium, bigBlastBlast, bigBlastPyratite,
-            maxBlastPlastanium, maxBlastBlast, maxBlastSurge, maxBlastPlastaniumFrag,
+    bigBlastPlastanium, bigBlastBlast, bigBlastPyratite,
+    maxBlastPlastanium, maxBlastBlast, maxBlastSurge, maxBlastPlastaniumFrag,
     //poison
     sporePodPoisonBullet, naturitePoisonBullet,
-            SporePodPoisonFrag, heavySporePodPoison, NaturitePoisonFrag, heavyNaturitePoison, NobiumPoisonFrag, heavyNobiumPoison,
-            bigSporePodPoisonFrag, bigSporePodPoison, bigNaturitePoisonFrag, bigNaturitePoison, bigNobiumPoisonFrag, bigNobiumPoison, bigPlastaniumPoisonFrag, bigPlastaniumPoison,
+    SporePodPoisonFrag, heavySporePodPoison, NaturitePoisonFrag, heavyNaturitePoison, NobiumPoisonFrag, heavyNobiumPoison,
+    bigSporePodPoisonFrag, bigSporePodPoison, bigNaturitePoisonFrag, bigNaturitePoison, bigNobiumPoisonFrag, bigNobiumPoison, bigPlastaniumPoisonFrag, bigPlastaniumPoison,
     //units
     BasicHelicopterGun, LaserBoltHelicopterGun, HelicopterMissile, clusterRocketSmall, clusterRocket, bigHelicopterGun, bigHelicopterBullet, laserGun, helicopterFlame, laserHelicopterFrag, largeHelicopterBullet, bigHelicopterRocket, HelicopterMissiles,
-            cometWaterShot, starStunBullet, galaxyKnockbackBullet,
-            wheel1bullet, wheel2shotgun, wheel3burst, wheel4shotgun, wheel4artillery, wheel5flame, wheel5bullet, mirageGunBullet,
+    cometWaterShot, starStunBullet, galaxyKnockbackBullet,
+    wheel1bullet, wheel2shotgun, wheel3burst, wheel4shotgun, wheel4artillery, wheel5flame, wheel5bullet, mirageGunBullet,
     //misc
     emptyBullet, overheatBullet,
     //special
@@ -53,7 +53,7 @@ public class SnBullets implements ContentList {
     //test&temp
     testbullet, tempBullet1, tempBullet2;
     //exoticBullets (new) i will make it later... i must make more bulets (soulBullet, iceSpike, and more)
-    // spiralPllastanium, spiralSurge, SpiralFors, SpiralThorium, SpiralSmall;
+    //spiralPllastanium, spiralSurge, SpiralFors, SpiralThorium, SpiralSmall;
 
     @Override
     public void load() {
@@ -171,7 +171,7 @@ public class SnBullets implements ContentList {
         }};
         //endregion artillery
         //region somesniper
-        somesnipersurgefrag = new BulletType(8f, 6700f){{
+        somesnipersurgefrag = new BulletType(8f, 6700f) {{
             ammoMultiplier = 3f;
             hitSize = 7f;
             lifetime = 4f;
@@ -184,7 +184,7 @@ public class SnBullets implements ContentList {
             keepVelocity = false;
             hittable = false;
         }};
-        somesnipersurge = new SniperBulletType(){{
+        somesnipersurge = new SniperBulletType() {{
             trailEffect = SnFx.somesnipertrail;
             frontColor = Pal.surge;
             trailDelay = 0.2f;
@@ -980,7 +980,7 @@ public class SnBullets implements ContentList {
             shootEffect = Fx.shootBig;
             smokeEffect = Fx.shootBigSmoke;
         }};
-        laserGun = new LaserBulletType(){{
+        laserGun = new LaserBulletType() {{
             colors = new Color[]{SnPal.copterLaser.cpy().a(0.4f), SnPal.copterLaser, Color.white};
             damage = 25;
             width = 25f;
@@ -1150,7 +1150,7 @@ public class SnBullets implements ContentList {
             fragLifeMax = 1.3f;
             fragCone = 16f;
         }};
-        wheel3burst = new BasicBulletType(11f, 43f){{
+        wheel3burst = new BasicBulletType(11f, 43f) {{
             lifetime = 24f;
             status = StatusEffects.blasted;
             splashDamage = 37f;
@@ -1174,7 +1174,7 @@ public class SnBullets implements ContentList {
             fragLifeMax = 1.25f;
             fragCone = 6f;
         }};
-        wheel4artillery = new ArtilleryBulletType(3f, 67f){{
+        wheel4artillery = new ArtilleryBulletType(3f, 67f) {{
             lifetime = 114f;
             status = StatusEffects.blasted;
             splashDamage = 79f;
@@ -1182,7 +1182,7 @@ public class SnBullets implements ContentList {
             width = 8f;
             height = 12f;
         }};
-        wheel5flame = new BulletType(20f, 120f){{
+        wheel5flame = new BulletType(20f, 120f) {{
             ammoMultiplier = 3f;
             hitSize = 7f;
             lifetime = 7f;
@@ -1195,7 +1195,7 @@ public class SnBullets implements ContentList {
             keepVelocity = false;
             hittable = false;
         }};
-        wheel5bullet = new BasicBulletType(8f, 62){{
+        wheel5bullet = new BasicBulletType(8f, 62) {{
             width = 8f;
             height = 14f;
             shootEffect = Fx.shootBig;
@@ -1204,7 +1204,7 @@ public class SnBullets implements ContentList {
         }};
         //endregion wheel
         //region special
-        empBullet = new LightningBulletType(){{
+        empBullet = new LightningBulletType() {{
             //speed = 5;
             damage = 150;
             lifetime = 50;
@@ -1216,11 +1216,11 @@ public class SnBullets implements ContentList {
             hitEffect = SnFx.empHit;
         }
             @Override
-            public void init(Bullet b){
+            public void init(Bullet b) {
 
             }
         };
-        empBulletEvo = new LightningBulletType(){{
+        empBulletEvo = new LightningBulletType() {{
             //speed = 5;
             damage = 300;
             lifetime = 100;
@@ -1232,38 +1232,38 @@ public class SnBullets implements ContentList {
             hitEffect = SnFx.empHit;
         }
             @Override
-            public void init(Bullet b){
+            public void init(Bullet b) {
 
             }
         };
-        synthesisBullet1 = new EnergyBoltBulletType(15, 70){{
+        synthesisBullet1 = new EnergyBoltBulletType(15, 70) {{
             status = SnStatusEffects.greened;
             lifetime = 7;
             inaccuracy = 7;
         }};
-        synthesisBullet2 = new EnergyBoltBulletType(18, 245){{
+        synthesisBullet2 = new EnergyBoltBulletType(18, 245) {{
             status = SnStatusEffects.greened;
             lifetime = 6;
             inaccuracy = 11;
 
             fragBullets = 2;
             fragCone = 35;
-            fragBullet = new LaserBoltBulletType(15, 70){{
+            fragBullet = new LaserBoltBulletType(15, 70) {{
                 lifetime = 60;
             }};
         }};
-        synthesisBullet3 = new EnergyBoltBulletType(16, 350){{
+        synthesisBullet3 = new EnergyBoltBulletType(16, 350) {{
             status = SnStatusEffects.greened;
             lifetime = 12;
             inaccuracy = 21;
 
             fragBullets = 1;
-            fragBullet = new BulletType(){{
+            fragBullet = new BulletType() {{
                 damage = 0;
                 knockback = 15;
             }};
         }};
-        synthesisBullet4 = new EnergyBoltBulletType(17, 700){{
+        synthesisBullet4 = new EnergyBoltBulletType(17, 700) {{
             status = SnStatusEffects.greened;
             lifetime = 16;
             inaccuracy = 2;
@@ -1319,7 +1319,7 @@ public class SnBullets implements ContentList {
             height = 0;
             lifetime = 0;
         }};
-        testbullet = new TorpedoBulletType(1, 1){{
+        testbullet = new TorpedoBulletType(1, 1) {{
             lifetime = 400f;
             trailEffect = SnFx.torpedoTrail;
             drag = -0.003f;
@@ -1327,9 +1327,9 @@ public class SnBullets implements ContentList {
             homingPower = 0.2f;
             ammoMultiplier = 2;
         }};
-        tempBullet1 = new LaserBoltBulletType(5, 15){{
+        tempBullet1 = new LaserBoltBulletType(5, 15) {{
         }};
-        tempBullet2 = new LaserBoltBulletType(5, 30){{
+        tempBullet2 = new LaserBoltBulletType(5, 30) {{
         }};
         //endregion misc
     }

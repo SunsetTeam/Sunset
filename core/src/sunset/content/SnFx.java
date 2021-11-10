@@ -568,7 +568,7 @@ public class SnFx {
     }),
 
     greenInstTrail = new Effect(30, e -> {
-        for(int i = 0; i < 2; i++){
+        for (int i = 0; i < 2; i++) {
             color(i == 0 ? SnPal.synthesis1 : SnPal.synthesis2);
 
             float m = i == 0 ? 1f : 0.5f;
