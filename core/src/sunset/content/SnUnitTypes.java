@@ -38,15 +38,15 @@ public class SnUnitTypes implements ContentList {
     public static UnitType
     //attack copters
     wind, thunder, nadir, halo, parhelion,
-    //air-support (buffers)
+    //buffers
     comet, satelite, planet, star, galaxy,
     //berserk
     mirage, vision, illusion, soothSayer, seer, abyssEye,
-    //wheel units
+    //wheel
     wheel1, wheel2, wheel3, wheel4, wheel5,
     //naval
     torpedo1, torpedo2,
-    //delivery
+    //misc
     router,
     //freezing
     snowflake;
@@ -312,8 +312,7 @@ public class SnUnitTypes implements ContentList {
                     }});
         }};
         //endregion attack copters
-
-        //region air-support (buffers)
+        //region buffers
         comet = new UnitType("comet") {{
             health = 150;
             hitSize = 12;
@@ -500,8 +499,7 @@ public class SnUnitTypes implements ContentList {
                 damage = 80;
             }});
         }};
-        //endregion air-support (buffers)
-
+        //endregion buffers
         //region berserk
         mirage = new BerserkUnitType("mirage") {{
             health = 320;
@@ -720,8 +718,6 @@ public class SnUnitTypes implements ContentList {
             legSplashDamage = 45;
             legSplashRange = 40;
         }};
-
-
         abyssEye = new BerserkUnitType("abyssEye") {{
             health = 65000;
             speed = 0.75f;
@@ -750,9 +746,8 @@ public class SnUnitTypes implements ContentList {
             legSplashRange = 70;
         }};
         //endregion berserk
-
         //region wheel
-        wheel1 = new WheelUnitType("wheel1") {{
+        wheel1 = new WheelUnitType("wheel-t1") {{
             health = 80;
             speed = 3.5f;
             rotateSpeed = baseRotateSpeed = 2.75f;
@@ -766,7 +761,7 @@ public class SnUnitTypes implements ContentList {
                 x = y = 0;
             }});
         }};
-        wheel2 = new WheelUnitType("wheel2") {{
+        wheel2 = new WheelUnitType("wheel-t2") {{
             health = 420;
             speed = 3.4f;
             rotateSpeed = baseRotateSpeed = 2.66f;
@@ -780,7 +775,7 @@ public class SnUnitTypes implements ContentList {
                 x = y = 0;
             }});
         }};
-        wheel3 = new WheelUnitType("wheel3") {{
+        wheel3 = new WheelUnitType("wheel-t3") {{
             health = 890;
             speed = 3.2f;
             rotateSpeed = baseRotateSpeed = 2.33f;
@@ -795,7 +790,7 @@ public class SnUnitTypes implements ContentList {
                 x = y = 0;
             }});
         }};
-        wheel4 = new WheelUnitType("wheel4") {{
+        wheel4 = new WheelUnitType("wheel-t4") {{
             health = 6800;
             speed = 3.1f;
             rotateSpeed = baseRotateSpeed = 2.25f;
@@ -819,7 +814,7 @@ public class SnUnitTypes implements ContentList {
                 x = -3;
             }});
         }};
-        wheel5 = new WheelUnitType("wheel5") {{
+        wheel5 = new WheelUnitType("wheel-t5") {{
             health = 19400;
             speed = 3f;
             rotateSpeed = baseRotateSpeed = 2f;
@@ -847,9 +842,8 @@ public class SnUnitTypes implements ContentList {
             }});
         }};
         //endregion wheel
-
         //region naval
-        torpedo1 = new UnitType("torpedo-t1") {{
+        /*torpedo1 = new UnitType("torpedo-t1") {{
             speed = 15;
             boostMultiplier = 0.55f;
             rotateSpeed = 6.3f;
@@ -1014,20 +1008,26 @@ public class SnUnitTypes implements ContentList {
             constructor = UnitWaterMove::create;
             immunities.add(StatusEffects.wet);
             immunities.add(StatusEffects.freezing);
-        }};
+        }};*/
         //endregion naval
-        //region delivery
-        courier = new UnitTypeExt("courier") {{
-            speed = 3.9f;
-            flying = true;
-            itemCapacity = 100;
-            health = 50;
-            hitSize = 4;
-            defaultController = DeliverAI::new;
-            //constructor = UnitEntity::create;
-        }};
-        //endregion delivery
+        //region misc
+        router = new UnitTypeExt("router") {
+            {
+                health = 2000000;
+                speed = 2.85f;
+                hitSize = 16;
+                flying = true;
+                constructor = UnitEntity::create;
+                engineSize = 0;
+                drawCell = false;
+            }
 
+            @Override
+            public boolean isHidden() {
+                return true;
+            }
+        };
+        //endregion misc
         //region freezing
         snowflake = new UnitType("snowflake") {{
             defaultController = SuicideAI::new;
@@ -1062,21 +1062,16 @@ public class SnUnitTypes implements ContentList {
             }});
         }};
         //endregion freezing
-        router = new UnitTypeExt("router") {
-            {
-                health = 2000000;
-                speed = 2.85f;
-                hitSize = 16;
-                flying = true;
-                constructor = UnitEntity::create;
-                engineSize = 0;
-                drawCell = false;
-            }
-
-            @Override
-            public boolean isHidden() {
-                return true;
-            }
-        };
+        //region delivery
+        courier = new UnitTypeExt("courier") {{
+            speed = 3.9f;
+            flying = true;
+            itemCapacity = 100;
+            health = 50;
+            hitSize = 4;
+            defaultController = DeliverAI::new;
+            //constructor = UnitEntity::create;
+        }};
+        //endregion delivery
     }
 }
