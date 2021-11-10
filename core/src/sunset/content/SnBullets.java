@@ -1327,10 +1327,8 @@ public class SnBullets implements ContentList {
             homingPower = 0.2f;
             ammoMultiplier = 2;
         }};
-        tempBullet1 = new LaserBoltBulletType(5, 15) {{
-        }};
-        tempBullet2 = new LaserBoltBulletType(5, 30) {{
-        }};
+        tempBullet1 = new LaserBoltBulletType(5, 15);
+        tempBullet2 = new LaserBoltBulletType(5, 30);
         //endregion misc
     }
 }
