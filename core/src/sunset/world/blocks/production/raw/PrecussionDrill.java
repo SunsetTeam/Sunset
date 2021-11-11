@@ -1,6 +1,7 @@
 package sunset.world.blocks.production.raw;
 
 import arc.Core;
+import arc.graphics.Blending;
 import arc.graphics.Color;
 import arc.graphics.g2d.Draw;
 import arc.graphics.g2d.TextureRegion;
@@ -45,6 +46,7 @@ public class PrecussionDrill extends Block {
     public int drillItemCapacity = 10;
     public int tier = 5;
     public float powerUse = 1f;
+    public Color heatColor = Color.valueOf("ff5512");
     @Load("@-rim")
     public TextureRegion rimRegion;
     @Load("@-rotator")
@@ -64,21 +66,19 @@ public class PrecussionDrill extends Block {
     }
 
     @Override
-    public TextureRegion[] icons(){
+    public TextureRegion[] icons() {
         return !ModVars.packSprites ? new TextureRegion[]{region}:new TextureRegion[]{region, rotatorRegion, topRegion};
     }
     @Override
-    public void createIcons(MultiPacker packer){
+    public void createIcons(MultiPacker packer) {
         super.createIcons(packer);
     }
 
     @Override
     public void load() {
         super.load();
-//        SnContentRegions.loadRegions(this);
-        rimRegion = Core.atlas.find(name+"-rim");
-        rotatorRegion = Core.atlas.find(name+"-rotator");
-        topRegion = Core.atlas.find(name+"-top");
+        //SnContentRegions.loadRegions(this);
+
         consumes.add(new AdjustableConsumePower(powerUse, e -> {
             PrecussionDrillBuild p = ((PrecussionDrillBuild)e);
             return p.working() ? p.getBoost() : 0;
@@ -86,7 +86,7 @@ public class PrecussionDrill extends Block {
     }
 
     @Override
-    public void setStats(){
+    public void setStats() {
         super.setStats();
         stats.remove(Stat.itemCapacity); //вместительность динаическая и равна размеру партии
         stats.add(Stat.productionTime, drillTime / 60f, StatUnit.seconds);
@@ -94,16 +94,16 @@ public class PrecussionDrill extends Block {
         stats.add(Stat.powerUse, powerUse * 60f, StatUnit.powerSecond);
         stats.add(Stat.drillTier, StatValues.blocks(b -> b instanceof Floor && b.itemDrop != null && b.itemDrop.hardness <= tier));
         stats.add(Stat.drillSpeed, (hardnessDrillMultiplier * size * size * itemCountMultiplier) / (drillTime / 60f), StatUnit.itemsSecond);
-        if(liquidBoostIntensity != 1) {
+        if (liquidBoostIntensity != 1) {
             stats.add(Stat.boostEffect, liquidBoostIntensity, StatUnit.timesSpeed);
         }
-        if(!drillItems.isEmpty()) {
+        if (!drillItems.isEmpty()) {
             stats.add(Stat.input, new DrillItemsValue(drillItems, drillItemCount));
         }
     }
 
     @Override
-    public void setBars(){
+    public void setBars() {
         super.setBars();
         bars.add("progress", (PrecussionDrillBuild e) ->
                 new Bar(() -> Core.bundle.get("bar.drillprogress"),
@@ -121,14 +121,14 @@ public class PrecussionDrill extends Block {
     }
     private final ItemSeq items = new ItemSeq();
     @Override
-    public void drawPlace(int x, int y, int rotation, boolean valid){
+    public void drawPlace(int x, int y, int rotation, boolean valid) {
         super.drawPlace(x, y, rotation, valid);
         Tile tile = world.tile(x, y);
-        if(tile == null) return;
+        if (tile == null) return;
 
         State state = updateOre(tile, items, tier, this);
 
-        if(state == State.OK) {
+        if (state == State.OK) {
             final float[] sumSpeed = {0};
             items.each((item, amount) -> sumSpeed[0] += (hardnessDrillMultiplier / Mathf.pow(item.hardness+1, 0.5f) * amount) / (drillTime / 60f));
             float width = drawPlaceText(Core.bundle.formatFloat("bar.drillspeed", sumSpeed[0] * itemCountMultiplier, 2), x, y, valid);
@@ -141,18 +141,18 @@ public class PrecussionDrill extends Block {
                 Draw.rect(item.uiIcon, dx[0], dy);
                 dx[0] -= 6;
             });
-        }else if(state == State.LowTier){
+        } else if (state == State.LowTier) {
             Tile to = tile.getLinkedTilesAs(this, tempTiles).find(t -> t.drop() != null && t.drop().hardness > tier);
             Item item = to == null ? null : to.drop();
-            if(item != null) drawPlaceText(Core.bundle.get("bar.drilltierreq"), x, y, valid);
+            if (item != null) drawPlaceText(Core.bundle.get("bar.drilltierreq"), x, y, valid);
         }
     }
     private static State updateOre(Tile tile, ItemSeq items, int tier, PrecussionDrill inst) {
         final State[] ret = {State.NoOre};
         items.clear();
         tile.getLinkedTilesAs(inst, tempTiles).each(t -> {
-            if(t != null && t.drop() != null) {
-                if(t.drop().hardness <= tier) {
+            if (t != null && t.drop() != null) {
+                if (t.drop().hardness <= tier) {
                     items.add(t.drop());
                     ret[0] = State.OK;
                 } else if (ret[0] != State.OK) ret[0] = State.LowTier;
@@ -206,7 +206,7 @@ public class PrecussionDrill extends Block {
             totalSpeed = currentSpeed * totalBoost;
             //update display value
             displaySpeed = baseDisplaySpeed * totalSpeed;
-            if(currentDrillItem != null) displaySpeed *= currentDrillItem.sizeMultiplier;
+            if (currentDrillItem != null) displaySpeed *= currentDrillItem.sizeMultiplier;
             //updating
             progressTime += Time.delta * totalSpeed;
             if (progressTime >= drillTime && working()) {
@@ -232,7 +232,7 @@ public class PrecussionDrill extends Block {
 
         @Override
         public int getMaximumAccepted(Item item) {
-            if(drillItems.contains(di -> di.item == item)) return drillItemCapacity;
+            if (drillItems.contains(di -> di.item == item)) return drillItemCapacity;
             return 0;
         }
 
@@ -251,7 +251,7 @@ public class PrecussionDrill extends Block {
         }
 
         @Override
-        public void drawSelect(){
+        public void drawSelect() {
             final float[] dx = {x - size * tilesize / 2f};
             float dy = y + size * tilesize/2f;
             items.each((item, amount) -> {
@@ -261,6 +261,26 @@ public class PrecussionDrill extends Block {
                 Draw.rect(item.uiIcon, dx[0], dy);
                 dx[0] -= 6;
             });
+        }
+
+        @Override
+        public void draw() {
+            float s = 0.3f;
+            float ts = 0.6f;
+
+            Draw.rect(region, x, y);
+            super.drawCracks();
+
+            Draw.color(heatColor);
+            //Draw.alpha(warmup * ts * (1f - s + Mathf.absin(Time.time, 3f, s)));
+            Draw.blend(Blending.additive);
+            Draw.rect(rimRegion, x, y);
+            Draw.blend();
+            Draw.color();
+
+            Drawf.spinSprite(rotatorRegion, x, y, 2);
+
+            Draw.rect(topRegion, x, y);
         }
     }
 }

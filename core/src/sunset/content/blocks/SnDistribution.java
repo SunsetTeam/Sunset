@@ -36,7 +36,7 @@ public class SnDistribution implements ContentList {
             consumes.power(5.0f);
         }};
 
-        nubiumConveyor = new StackConveyor("nubium-conveyor") {{
+        nubiumConveyor = new StackConveyor("nobium-conveyor") {{
             requirements(Category.distribution, with(SnItems.nobium, 1, Items.silicon, 1, Items.graphite, 1));
             health = 80;
             speed = 5f / 60f;

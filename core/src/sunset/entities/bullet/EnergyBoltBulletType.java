@@ -63,7 +63,7 @@ public class EnergyBoltBulletType extends LaserBoltBulletType{
     public void draw(Bullet b){
         super.draw(b);
         Draw.color(backColor);
-        Lines.stroke(width * SynthesisTurret.param1);
+        Lines.stroke(width);
         Lines.lineAngleCenter(b.x, b.y, b.rotation(), height);
         Draw.color(frontColor);
         Lines.lineAngleCenter(b.x, b.y, b.rotation(), Mathf.random(height / 4, height / 2));

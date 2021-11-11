@@ -17,7 +17,7 @@ public class SnLogicBlocks implements ContentList {
 
     @Override
     public void load() {
-    naturitelogicProcessor = new LogicBlock("naturitelogic-logic-processor") {{
+    naturitelogicProcessor = new LogicBlock("naturite-processor") {{
         instructionsPerTick = 13;
         range = 25.0f* Vars.tilesize;
         size = 1;

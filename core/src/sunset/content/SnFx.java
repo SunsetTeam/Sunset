@@ -41,7 +41,7 @@ public class SnFx {
 
     enojieburn = new Effect(40, e -> {
         randLenVectors(e.id, 5, 3f + e.fin() * 5f, (x, y) -> {
-            color(Color.valueOf("CFEDD4"), Color.lime, e.fin());
+            color(Color.lime, Color.valueOf("CFEDD4"), e.fin());
             Fill.square(e.x + x, e.y + y, e.fout());
         });
     }),

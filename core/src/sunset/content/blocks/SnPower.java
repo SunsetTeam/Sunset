@@ -52,7 +52,7 @@ public class SnPower implements ContentList {
         advThermalGenerator = new ThermalGeneratorExt("advanced-thermal-generator") {{
             requirements(Category.power, with(Items.copper, 140, Items.graphite, 90, SnItems.naturite, 80, Items.silicon, 40, Items.metaglass, 60));
             size = 3;
-            powerProduction = 2.6f;
+            powerProduction = 2.8f;
             attributeScale = 1.2352941f;
             generateEffect = Fx.redgeneratespark;
             floating = true;
