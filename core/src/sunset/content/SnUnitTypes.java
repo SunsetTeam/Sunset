@@ -40,7 +40,7 @@ public class SnUnitTypes implements ContentList {
     mirage, vision, illusion, soothSayer, seer, abyssEye,
     //wheel units
     wheel1, wheel2, wheel3, wheel4, wheel5,
-//    delivery
+    //delivery
     router,
     //freezing
     snowflake;

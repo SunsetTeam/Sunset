@@ -10,8 +10,8 @@ import mindustry.gen.*;
 import mindustry.graphics.*;
 
 public class CopterRocketBulletType extends MissileBulletType{
-    public CopterRocketBulletType(float speed, float damage){
-        super(speed, damage);
+    public CopterRocketBulletType(float speed, float damage, String sprite){
+        super(speed, damage, sprite);
     }
 
     @Override
@@ -26,6 +26,6 @@ public class CopterRocketBulletType extends MissileBulletType{
         Draw.rect(frontRegion, b.x, b.y, width, height, b.rotation() - 90);
         Draw.rect(backRegion, b.x, b.y, width, height, b.rotation() - 90);
 
-        Draw.reset();
+    Draw.reset();
     }
 }
