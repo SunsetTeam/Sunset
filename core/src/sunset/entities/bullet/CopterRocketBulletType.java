@@ -15,6 +15,12 @@ public class CopterRocketBulletType extends MissileBulletType{
     }
 
     @Override
+	public void load() {
+		super.load();
+		backRegion = Core.atlas.find(sprite);
+	}
+
+    @Override
     public void draw(Bullet b) {
         super.draw(b);
         Draw.rect(frontRegion, b.x, b.y, width, height, b.rotation() - 90);

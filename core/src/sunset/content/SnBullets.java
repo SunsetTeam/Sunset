@@ -989,8 +989,8 @@ public class SnBullets implements ContentList {
             collidesAir = true;
             collidesGround = true;
         }};
-        helicopterFlame = new BulletType(13f, 24f) {{
-            hitSize = 13f;
+        helicopterFlame = new BulletType(14f, 30f) {{
+            hitSize = 35f;
             pierce = true;
             collidesAir = true;
             lifetime = 10f;
@@ -1002,7 +1002,7 @@ public class SnBullets implements ContentList {
             keepVelocity = false;
             hittable = false;
         }};
-        laserHelicopterFrag = new LaserBulletType(28) {{
+        laserHelicopterFrag = new LaserBulletType(30) {{
             colors = new Color[]{SnPal.copterLaser.cpy().a(0.4f), SnPal.copterLaser, Color.white};
             width = 20f;
             lifetime = 15f;
@@ -1011,7 +1011,7 @@ public class SnBullets implements ContentList {
             collidesAir = true;
             collidesGround = true;
         }};
-        largeHelicopterBullet = new BasicBulletType(6f, 50) {{
+        largeHelicopterBullet = new BasicBulletType(6f, 48) {{
             width = 17f;
             height = 27f;
             lifetime = 27f;

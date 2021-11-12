@@ -219,7 +219,7 @@ public class SnFx {
         Draw.color(Pal.lightFlame, Pal.darkFlame, Color.gray, e.fin());
 
         randLenVectors(e.id, 8, e.finpow() * 64f, e.rotation, 10f, (x, y) -> {
-            Fill.circle(e.x + x * 2, e.y + y * 3, 0.70f + e.fout() * 2.0f);
+            Fill.circle(e.x + x * 2, e.y + y * 4, 0.70f + e.fout() * 2.0f);
         });
     }),
 
@@ -509,7 +509,7 @@ public class SnFx {
     bigRocketTrail = new Effect(30f, 75f, e -> {
         color(Pal.bulletYellow, Pal.lighterOrange, e.fin());
 
-        randLenVectors(e.id, 7, 2f + e.finpow() * 33f, e.rotation + 180, 16f, (x, y) -> {
+        randLenVectors(e.id, 8, 2f + e.finpow() * 35, e.rotation + 180, 17f, (x, y) -> {
             Fill.circle(e.x + x, e.y + y, 0.42f + e.fout() * 2f);
         });
     }),
