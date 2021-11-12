@@ -1022,8 +1022,7 @@ public class SnBullets implements ContentList {
             fragBullets = 1;
             fragCone = 0.0001f;
         }};
-        bigHelicopterRocket = new CopterRocketBulletType(6.3f, 15) {{
-            sprite = "sunset-guardian-rocket";
+        bigHelicopterRocket = new CopterRocketBulletType(6.3f, 15, "sunset-guardian-rocket") {{
             width = 13f;
             height = 23f;
             hitShake = 3f;
