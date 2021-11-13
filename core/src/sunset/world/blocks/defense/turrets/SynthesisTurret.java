@@ -16,6 +16,7 @@ import mindustry.ui.Bar;
 import mindustry.world.blocks.defense.turrets.ItemTurret;
 import mindustry.world.meta.Stat;
 import sunset.graphics.SnPal;
+import sunset.utils.Utils;
 
 import static mindustry.Vars.minArmorDamage;
 
@@ -50,16 +51,10 @@ public class SynthesisTurret extends ItemTurret {
     @Override
     public void setBars() {
         super.setBars();
-        bars.add("sn-reload", (SynthesisBuild entity) -> new Bar(
-                () -> Core.bundle.format("bar.sn-reload", Strings.autoFixed(Mathf.clamp(entity.reload / reloadTime) * 100f, 2)),
+        bars.add("sunset-reload", (SynthesisBuild entity) -> new Bar(
+                () -> Core.bundle.format("bar.sunset-reload", Utils.stringsFixed(Mathf.clamp(entity.reload / reloadTime) * 100f)),
                 () -> entity.team.color,
                 () -> Mathf.clamp(entity.reload / reloadTime)
-        ));
-
-        bars.add("sn-charge", (SynthesisBuild entity) -> new Bar(
-                () -> Core.bundle.format("bar.sn-charge", Strings.autoFixed(Mathf.clamp(entity.charge) * 100f, 2)),
-                () -> Pal.surge,
-                () -> entity.charge
         ));
     }
     public class SynthesisBuild extends ItemTurretBuild {

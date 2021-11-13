@@ -175,7 +175,7 @@ public class SnTurrets implements ContentList {
             );
             health = 1960;
             size = 3;
-            reloadTime = 130f;
+            reloadTime = 100f;
             range = 237f;
             recoilAmount = 3f;
             inaccuracy = 4f;
@@ -241,7 +241,7 @@ public class SnTurrets implements ContentList {
             health = 3200;
             size = 4;
             reloadTime = 160f;
-            range = 342f;
+            range = 300f;
             recoilAmount = 6f;
             inaccuracy = 3f;
             burstSpacing = 12f;
@@ -393,7 +393,7 @@ public class SnTurrets implements ContentList {
             range = 768.0f;
             cooldown = 0.02f;
             shootShake = 4f;
-            size = 5;
+            size = 4;
             shootCone = 2f;
             shootSound = Sounds.railgun;
             unitSort = (u, x, y) -> -u.maxHealth;

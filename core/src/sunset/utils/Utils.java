@@ -13,6 +13,7 @@ import arc.math.geom.Vec2;
 import arc.struct.IntSet;
 import arc.struct.Seq;
 import arc.util.Log;
+import arc.util.Strings;
 import mindustry.Vars;
 import mindustry.ai.Astar;
 import mindustry.content.StatusEffects;
@@ -211,5 +212,9 @@ public class Utils {
         });
 
         return targets;
+    }
+
+    public static String stringsFixed(float value){
+        return Strings.autoFixed(value, 2);
     }
 }
