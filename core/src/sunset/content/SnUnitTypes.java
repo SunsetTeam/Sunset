@@ -15,6 +15,7 @@ import mindustry.gen.UnitEntity;
 import mindustry.gen.UnitWaterMove;
 import mindustry.gen.Unitc;
 import mindustry.graphics.Layer;
+import mindustry.graphics.Pal;
 import mindustry.type.UnitType;
 import mindustry.type.Weapon;
 import sunset.ai.DeliverAI;
@@ -25,7 +26,6 @@ import sunset.ai.weapon.ExtinguishWeaponAI;
 import sunset.entities.abilities.BerserkStage;
 import sunset.entities.abilities.StatusFieldAbility;
 import sunset.entities.bullet.BerserkLaserBulletType;
-import sunset.entities.bullet.TorpedoBulletType;
 import sunset.gen.Deliverc;
 import sunset.type.*;
 import sunset.type.weapons.ChainWeapon;
@@ -853,13 +853,14 @@ public class SnUnitTypes implements ContentList {
         //endregion wheel
         //region naval
         torpedo1 = new UnitType("torpedo-t1") {{
-            speed = 3.5f;
+            speed = 2.5f;
             boostMultiplier = 0.55f;
             rotateSpeed = 6.3f;
             baseRotateSpeed = 4;
-            drag = 0.05f;
+            drag = 0.5f;
+            hitSize = 10;
             accel = 0.7f;
-            health = 80;
+            health = 180;
             range = 160;
             armor = 120;
             faceTarget = false;
@@ -886,6 +887,7 @@ public class SnUnitTypes implements ContentList {
                             shootEffect = SnFx.plasmaShot;
                         }};
                         rotate = true;
+                        top = true;
                         rotateSpeed = 30;
                         reload = 35;
                         shots = 5;
@@ -899,7 +901,7 @@ public class SnUnitTypes implements ContentList {
                         shootStatus = StatusEffects.blasted;
                     }},
                     new Weapon("small-torpedo-launcher") {{
-                        bullet = new TorpedoBulletType(2, 120) {{
+                        bullet = new BasicBulletType(2, 120) {{
                             lifetime = 80;
                             drawSize = 9.2f;
                             pierceCap = -1;
@@ -914,6 +916,14 @@ public class SnUnitTypes implements ContentList {
                             hitEffect = Fx.blastExplosion;
                             despawnEffect = Fx.blastExplosion;
                             shootEffect = Fx.shootBig2;
+
+                            collidesAir = absorbable = keepVelocity = false;
+                            trailEffect = SnFx.torpedoTrail;
+                            trailColor = Pal.lightTrail;
+                            trailLength = 30;
+                            trailWidth = 10;
+                            collideFloor = true;
+                            layer = Layer.scorch;
                         }};
                         rotate = true;
                         rotateSpeed = 30;
@@ -939,7 +949,8 @@ public class SnUnitTypes implements ContentList {
             boostMultiplier = 1;
             rotateSpeed = 7;
             baseRotateSpeed = 5;
-            drag = 0.07f;
+            drag = 0.7f;
+            hitSize = 13;
             accel = 0.5f;
             health = 170;
             range = 205;
@@ -969,6 +980,7 @@ public class SnUnitTypes implements ContentList {
                         }};
                         mirror = true;
                         rotate = true;
+                        top = true;
                         rotateSpeed = 30;
                         reload = 45;
                         shots = 2;
@@ -983,7 +995,7 @@ public class SnUnitTypes implements ContentList {
                         shootStatus = StatusEffects.blasted;
                     }},
                     new Weapon("small-torpedo-launcher") {{
-                        bullet = new TorpedoBulletType(2, 140) {{
+                        bullet = new BasicBulletType(2, 140) {{
                             lifetime = 80;
                             drawSize = 9.2f;
                             pierceCap = -1;
@@ -998,6 +1010,14 @@ public class SnUnitTypes implements ContentList {
                             hitEffect = Fx.hitBulletBig;
                             despawnEffect = Fx.hitBulletSmall;
                             shootEffect = Fx.shootBig2;
+
+                            collidesAir = absorbable = keepVelocity = false;
+                            trailEffect = SnFx.torpedoTrail;
+                            trailColor = Pal.lightTrail;
+                            trailLength = 30;
+                            trailWidth = 10;
+                            collideFloor = true;
+                            layer = Layer.scorch;
                         }};
                         rotate = true;
                         rotateSpeed = 30;

@@ -8,6 +8,10 @@ import mindustry.gen.Bullet;
 import mindustry.graphics.Pal;
 import sunset.content.*;
 
+/***
+ * Useless? Maybe.
+ */
+
 public class TorpedoBulletType extends BulletType {
     public TorpedoBulletType (float speed, float damage) {
         super(speed, damage);
@@ -20,14 +24,14 @@ public class TorpedoBulletType extends BulletType {
         layer = Layer.scorch;
     }
 
-    /*@Override
+    @Override
     public void drawTrail(Bullet b) {
         if (trailLength > 0 && b.trail != null){
             b.trail.draw(trailColor, trailWidth);
         }
     }
 
-    @Override
+    /*@Override
     public void draw(Bullet b){
         Draw.z(Layer.debris);
         super.draw(b);
