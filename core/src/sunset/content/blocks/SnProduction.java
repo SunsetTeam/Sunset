@@ -148,8 +148,8 @@ public class SnProduction implements ContentList {
             requirements(Category.crafting, with(Items.copper, 110, Items.titanium, 105, Items.silicon, 65, SnItems.fors, 50));
 
             outputItem = new ItemStack(SnItems.reneubite, 3);
-//          craftEffect = SnFx.;
-//          updateEffect = SnFx.;
+            //craftEffect = SnFx.;
+            //updateEffect = SnFx.;
             craftTime = 46f;
             size = 3;
             itemCapacity = 15;

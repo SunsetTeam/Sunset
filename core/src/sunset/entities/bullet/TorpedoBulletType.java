@@ -16,9 +16,11 @@ public class TorpedoBulletType extends BulletType {
         trailColor = Pal.lightTrail;
         trailLength = 30;
         trailWidth = 10;
+        collideFloor = true;
+        layer = Layer.scorch;
     }
 
-    @Override
+    /*@Override
     public void drawTrail(Bullet b) {
         if (trailLength > 0 && b.trail != null){
             b.trail.draw(trailColor, trailWidth);
@@ -34,5 +36,5 @@ public class TorpedoBulletType extends BulletType {
     @Override
     public void update(Bullet b) {
         if(!Vars.world.tileWorld(b.x, b.y).floor().isLiquid) b.remove();
-    }
+    }*/
 }

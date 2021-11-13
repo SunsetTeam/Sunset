@@ -853,11 +853,11 @@ public class SnUnitTypes implements ContentList {
         //endregion wheel
         //region naval
         torpedo1 = new UnitType("torpedo-t1") {{
-            speed = 15;
+            speed = 3.5f;
             boostMultiplier = 0.55f;
             rotateSpeed = 6.3f;
             baseRotateSpeed = 4;
-            drag = 0.65f;
+            drag = 0.05f;
             accel = 0.7f;
             health = 80;
             range = 160;
@@ -876,8 +876,8 @@ public class SnUnitTypes implements ContentList {
                             reloadMultiplier = 1.1f;
                             buildingDamageMultiplier = 0.6f;
                             recoil = 2;
-                            width = 6;
-                            height = 6;
+                            width = 3;
+                            height = 3;
                             pierce = true;
                             pierceBuilding = true;
                             smokeEffect = SnFx.plasmaShot;
@@ -935,11 +935,11 @@ public class SnUnitTypes implements ContentList {
             immunities.add(StatusEffects.freezing);
         }};
         torpedo2 = new UnitType("torpedo-t2") {{
-            speed = 13;
+            speed = 3;
             boostMultiplier = 1;
             rotateSpeed = 7;
             baseRotateSpeed = 5;
-            drag = 0.7f;
+            drag = 0.07f;
             accel = 0.5f;
             health = 170;
             range = 205;
