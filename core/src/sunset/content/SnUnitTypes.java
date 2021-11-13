@@ -43,7 +43,7 @@ public class SnUnitTypes implements ContentList {
     mirage, vision, illusion, soothSayer, seer, abyssEye,
     //wheel
     wheel1, wheel2, wheel3, wheel4, wheel5,
-    //naval
+    //torpedo
     torpedo1, torpedo2,
     //misc
     router,
@@ -851,7 +851,7 @@ public class SnUnitTypes implements ContentList {
             }});
         }};
         //endregion wheel
-        //region naval
+        //region torpedo
         torpedo1 = new UnitType("torpedo-t1") {{
             speed = 2.5f;
             boostMultiplier = 0.55f;
@@ -1038,7 +1038,7 @@ public class SnUnitTypes implements ContentList {
             immunities.add(StatusEffects.wet);
             immunities.add(StatusEffects.freezing);
         }};
-        //endregion naval
+        //endregion torpedo
         //region misc
         router = new UnitTypeExt("router") {
             {
