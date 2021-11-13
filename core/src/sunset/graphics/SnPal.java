@@ -3,7 +3,7 @@ package sunset.graphics;
 import arc.graphics.*;
 import mindustry.graphics.Pal;
 
-public class SnPal{
+public class SnPal {
     public static final Color
     
     //gray
@@ -17,13 +17,12 @@ public class SnPal{
     lightningDamage = Color.red,
 
     //yellow trail
-    YellowTrailBack = Color.valueOf("FDF59A62"),
-    YellowTrail = Color.valueOf("FDF59AFF"),
-
+    yellowTrailBack = Color.valueOf("FDF59A62"),
+    yellowTrail = Color.valueOf("FDF59AFF"),
 
     //blast
-    BlastBullet = Color.valueOf("FA5050"),
-    BlastBulletBack = Color.valueOf("F74646"),
+    blastBullet = Color.valueOf("FA5050"),
+    blastBulletBack = Color.valueOf("F74646"),
 
     //bombs
     redBomb = Color.valueOf("F78D87"),
@@ -35,12 +34,16 @@ public class SnPal{
     copterLaser = Color.valueOf("feb380"),
 
     //Poison bullets
-    PoisonBulletBack = Color.valueOf("D6E7A5"),
-    PoisonBullet = Color.valueOf("F2FCD2"),
+    poisonBulletBack = Color.valueOf("D6E7A5"),
+    poisonBullet = Color.valueOf("F2FCD2"),
 
-    //emp
+    //special
     emp1 = Color.valueOf("7FFFD4"),
     emp2 = Color.valueOf("32D0DC"),
+    synthesis1 = Color.valueOf("18B000"),
+    synthesis2 = Color.valueOf("721A1A"),
+    plasma1 = Color.valueOf("86FF11C"),
+    plasma2 = Color.valueOf("BBFF80"),
 
     //other
     chainLaser = Pal.surge,

@@ -26,9 +26,9 @@ public class EMPFacility extends PowerTurret{
     public float zapAngleRand, spinUp, spinDown, rangeExtention, lightningStroke = 3.5f;
     public int zaps;
     @Load("@-top")
-    public TextureRegion topRegion;
+    public TextureRegion top;
     @Load("@-bottom")
-    public TextureRegion bottomRegion;
+    public TextureRegion bottom;
 
     public EMPFacility(String name){
         super(name);
@@ -84,13 +84,13 @@ public class EMPFacility extends PowerTurret{
 
             Draw.z(Layer.turret);
 
-            TextureRegion r = hasSpinners ? bottomRegion : region;
+            TextureRegion r = hasSpinners ? bottom : region;
 
             Drawf.shadow(r, x - elevation, y - elevation);
 
             Draw.rect(r, x, y);
 
-            Draw.rect(topRegion, x, y);
+            Draw.rect(top, x, y);
 
         }
 

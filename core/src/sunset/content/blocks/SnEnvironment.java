@@ -136,31 +136,31 @@ public class SnEnvironment implements ContentList {
             albedo = 0.5f;
         }};
         
-        crimsonice = new Floor("crimson-ice"){{
+        crimsonice = new Floor("crimson-ice") {{
             variants = 3;
             dragMultiplier = 0.25f;
             speedMultiplier = 0.85f;
             attributes.set(Attribute.water, 0.38f);
         }};
 
-        crimsonsnow = new Floor("crimson-snow"){{
+        crimsonsnow = new Floor("crimson-snow") {{
             variants = 3;
             attributes.set(Attribute.water, 0.2f);
         }};
 
-        crimsonicesnow = new Floor("crimson-icesnow"){{
+        crimsonicesnow = new Floor("crimson-icesnow") {{
             variants = 3;
             dragMultiplier = 0.55f;
             attributes.set(Attribute.water, 0.28f);
         }};
 
-        crimsonmoss = new Floor("crimson-moss"){{
+        crimsonmoss = new Floor("crimson-moss") {{
             variants = 3;
             attributes.set(Attribute.spores, 0.2f);
             wall = crimsonpine;
         }};
 
-        granite = new Floor("granite"){{
+        granite = new Floor("granite") {{
             variants = 3;
             attributes.set(Attribute.spores, 0.2f);
             wall = crimsonpine;
@@ -236,13 +236,13 @@ public class SnEnvironment implements ContentList {
         crimsontree = new StaticTree("crimson-tree") {{
             variants = 0;
         }};
-        crimsontreedead = new StaticTree("crimson-tree-dead"){{
+        crimsontreedead = new StaticTree("crimson-tree-dead") {{
             variants = 0;
         }};
         //endregion trees
 
         //region pines
-        crimsonpine = new StaticTree("crimson-pine"){{
+        crimsonpine = new StaticTree("crimson-pine") {{
             variants = 0;
         }};
         //end region pines

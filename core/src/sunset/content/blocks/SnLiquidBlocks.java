@@ -26,7 +26,7 @@ public class SnLiquidBlocks implements ContentList {
             naturitePump;
 
     @Override
-    public void load(){
+    public void load() {
 
         //transportation
         naturiteConduit = new Conduit("naturite-conduit") {{
@@ -43,8 +43,8 @@ public class SnLiquidBlocks implements ContentList {
             }
         };
 
-        if (!ModVars.packSprites){
-            nobiumConduit = new Conduit("nobium-conduit"){{
+        if (!ModVars.packSprites) {
+            nobiumConduit = new Conduit("nobium-conduit") {{
                 requirements(Category.liquid, with(SnItems.nobium, 2, Items.metaglass, 1));
                 liquidCapacity = 19f;
                 liquidPressure = 1.050f;
@@ -53,7 +53,7 @@ public class SnLiquidBlocks implements ContentList {
         }
 
         //storage
-        liquidWell = new LiquidRouter("liquid-well"){{
+        liquidWell = new LiquidRouter("liquid-well") {{
             requirements(Category.liquid, with(Items.titanium, 110, Items.metaglass, 90, Items.thorium, 75));
             size = 4;
             liquidCapacity = 3100f;

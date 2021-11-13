@@ -14,8 +14,8 @@ public class SnProjectors implements ContentList {
     public static Block forcedome, deflectorProjector;
 
     @Override
-    public void load(){
-        forcedome = new ForceProjector("force-dome"){{
+    public void load() {
+        forcedome = new ForceProjector("force-dome") {{
             requirements(Category.effect, with(Items.titanium, 600, Items.thorium, 480, Items.silicon, 300, SnItems.naturite, 250, SnItems.nobium, 240, SnItems.enojie, 210));
             size = 5;
             radius = 220f;
@@ -28,7 +28,7 @@ public class SnProjectors implements ContentList {
             consumes.power(15f);
         }};
 
-        deflectorProjector = new DeflectorProjector("deflector-projector"){{
+        deflectorProjector = new DeflectorProjector("deflector-projector") {{
             requirements(Category.effect, with(Items.silicon, 1200, Items.titanium, 2500, Items.thorium, 1300, Items.phaseFabric, 900, Items.surgeAlloy, 1000, SnItems.enojie, 850));
             size = 3;
             health = 900;

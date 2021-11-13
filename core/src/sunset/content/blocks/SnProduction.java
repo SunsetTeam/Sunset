@@ -31,9 +31,8 @@ import static mindustry.type.ItemStack.with;
 public class SnProduction implements ContentList {
     public static Block
 
-            //advanced
-            advancedCompressor, advancedWeaver, advancedKiln, advancedSurge, advancedCryomixer,
-
+    //advanced
+    advancedCompressor, advancedWeaver, advancedKiln, advancedSurge, advancedCryomixer,
     //standard
     collider, purifier, crystallizer, enojieKiln;
 

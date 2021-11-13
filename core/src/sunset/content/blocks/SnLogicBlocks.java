@@ -10,14 +10,14 @@ import sunset.content.SnItems;
 
 import static mindustry.type.ItemStack.*;
 
-public class SnLogicBlocks implements ContentList{
+public class SnLogicBlocks implements ContentList {
     public static Block
 
     naturitelogicProcessor;
 
     @Override
-    public void load(){
-    naturitelogicProcessor = new LogicBlock("naturitelogic-logic-processor"){{
+    public void load() {
+    naturitelogicProcessor = new LogicBlock("naturite-processor") {{
         instructionsPerTick = 13;
         range = 25.0f* Vars.tilesize;
         size = 1;

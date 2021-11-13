@@ -17,7 +17,7 @@ import sunset.world.blocks.production.raw.PrecussionDrill;
 import static mindustry.type.ItemStack.with;
 
 /** This category is for blocks that produce raw products. (Such as cultivator, drill etc.) */
-    public class SnRaw implements ContentList{
+    public class SnRaw implements ContentList {
     public static Block
             //crafters
             advancedCultivator,
@@ -29,7 +29,7 @@ import static mindustry.type.ItemStack.with;
             enojieDrill;
 
     @Override
-    public void load(){
+    public void load() {
         //crafters
         advancedCultivator = new AttributeCrafter("advanced-cultivator") {{
             requirements(Category.production, with(Items.copper, 200, Items.lead, 200, Items.silicon, 180, Items.metaglass, 140, Items.titanium, 170, Items.phaseFabric, 155));
@@ -47,7 +47,7 @@ import static mindustry.type.ItemStack.with;
         }};
 
         //drills
-        electroPneumaticdrill = new Drill("electro-pneumatic-drill"){{
+        electroPneumaticdrill = new Drill("electro-pneumatic-drill") {{
             requirements(Category.production, with(Items.copper, 20, Items.graphite, 15, Items.silicon, 10));
             drillTime = 340;
             size = 2;
@@ -58,7 +58,7 @@ import static mindustry.type.ItemStack.with;
             consumes.liquid(Liquids.water, 0.07f).boost();
         }};
 
-        magneticDrill = new Drill("magnetic-drill"){{
+        magneticDrill = new Drill("magnetic-drill") {{
             requirements(Category.production, with(Items.copper, 70, Items.silicon, 60, SnItems.fors, 60, SnItems.nobium, 55, SnItems.planatrium, 45 ));
             drillTime = 240;
             size = 4;
@@ -94,7 +94,7 @@ import static mindustry.type.ItemStack.with;
             );
         }};
 
-        enojieDrill = new Drill("enojie-drill"){{
+        enojieDrill = new Drill("enojie-drill") {{
             requirements(Category.production, with(Items.copper, 410, Items.silicon, 380, SnItems.enojie, 370, Items.thorium, 200, Items.surgeAlloy, 190));
             drillTime = 200;
             size = 7;
