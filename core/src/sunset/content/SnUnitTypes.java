@@ -505,7 +505,6 @@ public class SnUnitTypes implements ContentList {
             health = 320;
             speed = 1f;
             rotateSpeed = 3f;
-            visualElevation = 0.2f;
             drag = 0.1f;
             armor = 4f;
             hitSize = 11f;
@@ -710,7 +709,6 @@ public class SnUnitTypes implements ContentList {
             legExtension = -19;
             legBaseOffset = 8f;
             landShake = 1f;
-            legSpeed = 0.1f;
             legLengthScl = 0.93f;
             rippleScale = 3f;
             legSpeed = 0.19f;
@@ -737,7 +735,6 @@ public class SnUnitTypes implements ContentList {
             legExtension = -17;
             legBaseOffset = 11f;
             landShake = 1.5f;
-            legSpeed = 0.21f;
             legLengthScl = 0.9f;
             rippleScale = 3f;
             legSpeed = 0.19f;
@@ -843,7 +840,7 @@ public class SnUnitTypes implements ContentList {
         }};
         //endregion wheel
         //region naval
-        /*torpedo1 = new UnitType("torpedo-t1") {{
+        torpedo1 = new UnitType("torpedo-t1") {{
             speed = 15;
             boostMultiplier = 0.55f;
             rotateSpeed = 6.3f;
@@ -1008,7 +1005,7 @@ public class SnUnitTypes implements ContentList {
             constructor = UnitWaterMove::create;
             immunities.add(StatusEffects.wet);
             immunities.add(StatusEffects.freezing);
-        }};*/
+        }};
         //endregion naval
         //region misc
         router = new UnitTypeExt("router") {

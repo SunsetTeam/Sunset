@@ -622,7 +622,7 @@ public class SnTurrets implements ContentList {
         }};
         //endregion EMP
         //region synthesis
-        /*synthesisT1 = new SynthesisTurret("synthesis-t1", 50) {{
+        synthesisT1 = new SynthesisTurret("synthesis-t1", 50) {{
             requirements(Category.turret, with(Items.copper, 120, Items.lead, 120, Items.titanium, 100));
             ammo(
                     SnItems.naturite, SnBullets.synthesisBullet1
@@ -641,7 +641,6 @@ public class SnTurrets implements ContentList {
             cooldown = 0.2f;
             coolantUsage = 1.1f;
         }};
-
         synthesisT2 = new SynthesisTurret("synthesis-t2", 120) {{
             requirements(Category.turret, with(Items.copper, 240, Items.lead, 240, Items.titanium, 200));
             ammo(
@@ -661,7 +660,6 @@ public class SnTurrets implements ContentList {
             cooldown = 0.01f;
             coolantUsage = 1.7f;
         }};
-
         synthesisT3 = new SynthesisTurret("synthesis-t3", 260) {{
             requirements(Category.turret, with(Items.copper, 360, Items.lead, 360, Items.titanium, 300));
             ammo(
@@ -684,7 +682,6 @@ public class SnTurrets implements ContentList {
             cooldown = 0.3f;
             coolantUsage = 1.55f;
         }};
-
         synthesisT4 = new SynthesisTurret("synthesis-t4", 450) {{
             requirements(Category.turret, with(Items.copper, 480, Items.lead, 480, Items.titanium, 400));
             ammo(
@@ -706,7 +703,7 @@ public class SnTurrets implements ContentList {
             restitution = 0.9f;
             cooldown = 0.7f;
             coolantUsage = 0.9f;
-        }};*/
+        }};
         //endregion synthesis
         //region testing
         testturret = new ItemTurret("test-turret") {{
@@ -714,7 +711,6 @@ public class SnTurrets implements ContentList {
             ammo(
                 Items.copper, SnBullets.testbullet
             );
-            range = 130f;
             health = 780;
             size = 2;
             reloadTime = 24f;
