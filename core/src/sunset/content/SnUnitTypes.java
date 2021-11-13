@@ -843,7 +843,7 @@ public class SnUnitTypes implements ContentList {
         }};
         //endregion wheel
         //region naval
-        torpedo1 = new UnitType("torpedo-t1") {{
+        /*torpedo1 = new UnitType("torpedo-t1") {{
             speed = 15;
             boostMultiplier = 0.55f;
             rotateSpeed = 6.3f;
@@ -1008,7 +1008,7 @@ public class SnUnitTypes implements ContentList {
             constructor = UnitWaterMove::create;
             immunities.add(StatusEffects.wet);
             immunities.add(StatusEffects.freezing);
-        }};
+        }};*/
         //endregion naval
         //region misc
         router = new UnitTypeExt("router") {
