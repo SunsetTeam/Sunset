@@ -41,7 +41,7 @@ public class SnFx {
 
     enojieburn = new Effect(40, e -> {
         randLenVectors(e.id, 5, 3f + e.fin() * 5f, (x, y) -> {
-            color(Color.lime, Color.valueOf("CFEDD4"), e.fin());
+            color(Color.valueOf("CFEDD4"), Color.lime, e.fin());
             Fill.square(e.x + x, e.y + y, e.fout());
         });
     }),
@@ -114,7 +114,7 @@ public class SnFx {
         color(Pal.meltdownHit);
         stroke(e.fout() * 7f);
         Lines.circle(e.x, e.y, e.fin() * 50f);
-        Lines.square(e.x, e.y, e.fin() * 40f, 65);
+        //Lines.square(e.x, e.y, e.fin() * 40f, 65);
 
         for (int i : Mathf.signs) {
             Drawf.tri(e.x, e.y, 14.0f * e.fout(), 80f, e.rotation + 90f * i);
