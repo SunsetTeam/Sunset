@@ -33,7 +33,6 @@ import sunset.type.weapons.PointDefenseWeapon;
 import sunset.type.weapons.SnWeapon;
 import sunset.type.weapons.WeaponExt;
 
-
 public class SnUnitTypes implements ContentList {
     public static UnitType
     //attack copters
