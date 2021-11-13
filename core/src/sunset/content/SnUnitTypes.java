@@ -37,7 +37,7 @@ import sunset.type.weapons.WeaponExt;
 public class SnUnitTypes implements ContentList {
     public static UnitType
     //attack copters
-    wind, thunder, nadir, halo, parhelion,
+    wind, thunder, nadir, halo, parhelion, testcopter,
     //buffers
     comet, satelite, planet, star, galaxy,
     //berserk
@@ -310,6 +310,19 @@ public class SnUnitTypes implements ContentList {
                         shootSound = Sounds.missile;
                         bullet = SnBullets.bigHelicopterRocket;
                     }});
+        }};
+        testcopter = new CopterUnitType("test-copter") {{
+            health = 200;
+            hitSize = 20;
+            speed = 2.1f;
+            accel = 0.1f;
+            drag = 0.02f;
+            commandLimit = 3;
+
+            flying = true;
+            circleTarget = false;
+
+            unitFallRotateSpeed = 4f;
         }};
         //endregion attack copters
         //region buffers

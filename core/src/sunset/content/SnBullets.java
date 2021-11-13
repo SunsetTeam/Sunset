@@ -970,7 +970,7 @@ public class SnBullets implements ContentList {
         bigHelicopterBullet = new BasicBulletType(6f, 10) {{
             width = 14f;
             height = 18f;
-            lifetime = 30f;
+            lifetime = 35f;
             makeFire = true;
             splashDamageRadius = 20f;
             splashDamage = 60f;
@@ -985,13 +985,13 @@ public class SnBullets implements ContentList {
             damage = 25;
             width = 25f;
             lifetime = 15f;
-            length = 110f;
+            length = 125f;
             laserEffect = Fx.lancerLaserShootSmoke;
             collidesAir = true;
             collidesGround = true;
         }};
-        helicopterFlame = new BulletType(13f, 24f) {{
-            hitSize = 13f;
+        helicopterFlame = new BulletType(14f, 33f) {{
+            hitSize = 40f;
             pierce = true;
             collidesAir = true;
             lifetime = 10f;
@@ -1003,7 +1003,7 @@ public class SnBullets implements ContentList {
             keepVelocity = false;
             hittable = false;
         }};
-        laserHelicopterFrag = new LaserBulletType(28) {{
+        laserHelicopterFrag = new LaserBulletType(30) {{
             colors = new Color[]{SnPal.copterLaser.cpy().a(0.4f), SnPal.copterLaser, Color.white};
             width = 20f;
             lifetime = 15f;
@@ -1023,8 +1023,7 @@ public class SnBullets implements ContentList {
             fragBullets = 1;
             fragCone = 0.0001f;
         }};
-        bigHelicopterRocket = new CopterRocketBulletType(6.3f, 15) {{
-            sprite = "sunset-guardian-rocket";
+        bigHelicopterRocket = new CopterRocketBulletType(6.3f, 15, "sunset-guardian-rocket") {{
             width = 13f;
             height = 23f;
             hitShake = 3f;
@@ -1037,8 +1036,10 @@ public class SnBullets implements ContentList {
             drag = -0.003f;
             homingRange = 20f;
             homingPower = 0.2f;
-            splashDamage = 100f;
-            splashDamageRadius = 60f;
+            splashDamage = 115f;
+            splashDamageRadius = 63f;
+            backColor = Pal.missileYellowBack;
+		    frontColor = Pal.missileYellow;
             trailLength = 0;
             trailWidth = 5f;
             trailColor = Pal.bulletYellow;
