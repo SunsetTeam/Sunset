@@ -853,7 +853,7 @@ public class SnUnitTypes implements ContentList {
         //endregion wheel
         //region torpedo
         torpedo1 = new UnitType("torpedo-t1") {{
-            speed = 2.5f;
+            speed = 2.1f;
             boostMultiplier = 0.55f;
             rotateSpeed = 6.3f;
             baseRotateSpeed = 4;
@@ -884,10 +884,10 @@ public class SnUnitTypes implements ContentList {
                             height = 3;
                             pierce = true;
                             pierceBuilding = true;
-                            smokeEffect = SnFx.plasmaShot;
-                            hitEffect = SnFx.plasmaHit;
+                            //smokeEffect = SnFx.plasmaShot;
+                            //hitEffect = SnFx.plasmaHit;
                             despawnEffect = SnFx.plasmaHit;
-                            shootEffect = SnFx.plasmaShot;
+                            //shootEffect = SnFx.plasmaShot;
                         }};
                         rotate = true;
                         top = true;
@@ -920,8 +920,9 @@ public class SnUnitTypes implements ContentList {
                             despawnEffect = Fx.blastExplosion;
                             shootEffect = Fx.shootBig2;
 
-                            collidesAir = absorbable = keepVelocity = false;
-                            trailEffect = SnFx.torpedoTrail;
+                            collidesAir = absorbable = false;
+                            keepVelocity = true;
+                            trailEffect = Fx.missileTrail;
                             trailColor = Pal.lightTrail;
                             trailLength = 30;
                             trailWidth = 10;
@@ -948,7 +949,7 @@ public class SnUnitTypes implements ContentList {
             immunities.add(StatusEffects.freezing);
         }};
         torpedo2 = new UnitType("torpedo-t2") {{
-            speed = 3;
+            speed = 2;
             boostMultiplier = 1;
             rotateSpeed = 7;
             baseRotateSpeed = 5;
@@ -976,10 +977,10 @@ public class SnUnitTypes implements ContentList {
                             height = 6;
                             pierce = true;
                             pierceBuilding = true;
-                            smokeEffect = SnFx.plasmaShot;
+                            //smokeEffect = SnFx.plasmaShot;
                             hitEffect = Fx.blastExplosion;
                             despawnEffect = Fx.blastExplosion;
-                            shootEffect = SnFx.plasmaShot;
+                            //shootEffect = SnFx.plasmaShot;
                         }};
                         mirror = true;
                         rotate = true;
@@ -1014,8 +1015,9 @@ public class SnUnitTypes implements ContentList {
                             despawnEffect = Fx.hitBulletSmall;
                             shootEffect = Fx.shootBig2;
 
-                            collidesAir = absorbable = keepVelocity = false;
-                            trailEffect = SnFx.torpedoTrail;
+                            collidesAir = absorbable = false;
+                            keepVelocity = true;
+                            trailEffect = Fx.missileTrail;
                             trailColor = Pal.lightTrail;
                             trailLength = 30;
                             trailWidth = 10;

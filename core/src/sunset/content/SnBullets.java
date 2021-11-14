@@ -1,21 +1,24 @@
 package sunset.content;
 
-import arc.graphics.*;
-import arc.graphics.g2d.*;
+import arc.graphics.Color;
+import arc.graphics.g2d.Draw;
+import arc.graphics.g2d.Fill;
 import arc.math.Angles;
-import arc.math.Mathf;
 import arc.math.geom.Vec2;
-import mindustry.ctype.*;
-import mindustry.content.*;
-import mindustry.entities.Lightning;
+import mindustry.content.Bullets;
+import mindustry.content.Fx;
+import mindustry.content.Liquids;
+import mindustry.content.StatusEffects;
+import mindustry.ctype.ContentList;
 import mindustry.entities.Units;
 import mindustry.entities.bullet.*;
-import mindustry.gen.*;
+import mindustry.gen.Bullet;
+import mindustry.gen.Sounds;
+import mindustry.gen.Unit;
 import mindustry.graphics.Pal;
 import sunset.entities.bullet.*;
-import sunset.graphics.*;
+import sunset.graphics.SnPal;
 import sunset.type.StackableStatusEffect;
-import sunset.world.blocks.defense.turrets.SynthesisTurret;
 
 public class SnBullets implements ContentList {
     public static BulletType
@@ -1249,7 +1252,9 @@ public class SnBullets implements ContentList {
             fragBullets = 3;
             fragCone = 35;
             fragBullet = new LaserBoltBulletType(12, 70) {{
-                lifetime = 60;
+                lifetime = 30;
+                backColor = Pal.heal;
+                frontColor = Color.white;
             }};
         }};
         synthesisBullet3 = new EnergyBoltBulletType(12, 350) {{
@@ -1271,12 +1276,13 @@ public class SnBullets implements ContentList {
             splashDamage = 110;
             splashDamageRadius = 80;
             trailChance = 1;
+            trailEffect = Fx.none;
             //trailEffect = SnFx.greenInstTrail;
         }};
         //endregion special
         //region misc
         overheatBullet = new BasicBulletType(0.1f, 7, "error") {{
-            shootEffect = Fx.none;
+            //shootEffect = Fx.none;
             hitEffect = Fx.none;
             despawnEffect = Fx.none;
             trailEffect = Fx.none;
@@ -1330,8 +1336,9 @@ public class SnBullets implements ContentList {
         tempBullet1 = new LaserBoltBulletType(5, 15);
         tempBullet2 = new LaserBoltBulletType(5, 30);
         testbullet0 = new ArtilleryBulletType(5, 100) {{
-            fragBullets = 6;
+            fragBullets = 360;
             fragBullet = new LaserBulletType(50);
+            fragCone = 360;
         }};
         //endregion misc
     }

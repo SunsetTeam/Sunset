@@ -4,9 +4,6 @@ import arc.Core;
 import arc.graphics.g2d.Draw;
 import arc.graphics.g2d.TextureRegion;
 import arc.math.Mathf;
-import arc.scene.ui.layout.Table;
-import arc.util.Strings;
-import arc.util.Time;
 import mindustry.annotations.Annotations.Load;
 import mindustry.content.Fx;
 import mindustry.graphics.Drawf;
@@ -25,7 +22,7 @@ public class SynthesisTurret extends ItemTurret {
     public TextureRegion liquid;
     @Load("@-light")
     public TextureRegion light;
-    public static float armor;
+    public static float armor = 50;
     //public static int param1;
     //public int addSpeed;
     public int speed = 1;
@@ -38,7 +35,7 @@ public class SynthesisTurret extends ItemTurret {
 
     public SynthesisTurret(String name) {
         super(name);
-        armor = 50;
+        //armor = 50;
         unitSort = (u, x, y) -> -u.armor;
     }
 
