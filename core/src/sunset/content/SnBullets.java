@@ -991,7 +991,7 @@ public class SnBullets implements ContentList {
             collidesGround = true;
         }};
         helicopterFlame = new BulletType(14f, 33f) {{
-            hitSize = 40f;
+            hitSize = 45f;
             pierce = true;
             collidesAir = true;
             lifetime = 10f;
