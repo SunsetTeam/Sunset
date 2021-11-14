@@ -58,8 +58,6 @@ public class SynthesisTurret extends ItemTurret {
         ));
     }
     public class SynthesisBuild extends ItemTurretBuild {
-        protected float charge;
-
         @Override
         public void updateTile() {
             super.updateTile();
@@ -71,12 +69,6 @@ public class SynthesisTurret extends ItemTurret {
             }else{
                 addSpeed = 1;
             }*/
-
-            if(charging){
-                charge = Mathf.clamp(charge + Time.delta / chargeTime);
-            }else{
-                charge = 0;
-            }
         }
 
         @Override

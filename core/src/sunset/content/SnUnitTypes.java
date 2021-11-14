@@ -858,14 +858,17 @@ public class SnUnitTypes implements ContentList {
             rotateSpeed = 6.3f;
             baseRotateSpeed = 4;
             drag = 0.5f;
-            hitSize = 10;
+            hitSize = 15;
             accel = 0.7f;
             health = 180;
             range = 160;
             armor = 120;
             faceTarget = false;
+            commandLimit = 5;
+            commandRadius = 135;
+            visualElevation = -1;
             weapons.add(
-                    new Weapon("plasma-gun") {{
+                    new WeaponExt("torpedo-t1-plasma-gun") {{
                         bullet = new LaserBoltBulletType() {{
                             lifetime = 32;
                             speed = 5;
@@ -900,7 +903,7 @@ public class SnUnitTypes implements ContentList {
                         shootSound = Sounds.lasershoot;
                         shootStatus = StatusEffects.blasted;
                     }},
-                    new Weapon("small-torpedo-launcher") {{
+                    new WeaponExt("small-torpedo-launcher") {{
                         bullet = new BasicBulletType(2, 120) {{
                             lifetime = 80;
                             drawSize = 9.2f;
@@ -950,14 +953,14 @@ public class SnUnitTypes implements ContentList {
             rotateSpeed = 7;
             baseRotateSpeed = 5;
             drag = 0.7f;
-            hitSize = 13;
+            hitSize = 17;
             accel = 0.5f;
             health = 170;
             range = 205;
             armor = 260;
             faceTarget = false;
             weapons.add(
-                    new Weapon("double-small-rocket-launcher") {{
+                    new WeaponExt("torpedo-t2-double-small-rocket-launcher") {{
                         bullet = new MissileBulletType() {{
                             lifetime = 32;
                             speed = 5;
@@ -994,7 +997,7 @@ public class SnUnitTypes implements ContentList {
                         shootSound = Sounds.missile;
                         shootStatus = StatusEffects.blasted;
                     }},
-                    new Weapon("small-torpedo-launcher") {{
+                    new WeaponExt("small-torpedo-launcher") {{
                         bullet = new BasicBulletType(2, 140) {{
                             lifetime = 80;
                             drawSize = 9.2f;

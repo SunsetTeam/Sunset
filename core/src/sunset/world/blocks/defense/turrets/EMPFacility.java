@@ -66,16 +66,10 @@ public class EMPFacility extends PowerTurret{
     @Override
     public void setBars(){
         super.setBars();
-        bars.add("pm-reload", (EMPBuild entity) -> new Bar(
-                () -> Core.bundle.format("bar.pm-reload", Utils.stringsFixed(Mathf.clamp(entity.reload / reloadTime) * 100f)),
+        bars.add("sunset-reload", (EMPBuild entity) -> new Bar(
+                () -> Core.bundle.format("bar.sunset-reload", Utils.stringsFixed(Mathf.clamp(entity.reload / reloadTime) * 100f)),
                 () -> entity.team.color,
                 () -> Mathf.clamp(entity.reload / reloadTime)
-        ));
-
-        bars.add("pm-charge", (EMPBuild entity) -> new Bar(
-                () -> Core.bundle.format("bar.pm-charge", Utils.stringsFixed(Mathf.clamp(entity.charge) * 100f)),
-                () -> Pal.surge,
-                () -> entity.charge
         ));
     }
 
@@ -93,7 +87,7 @@ public class EMPFacility extends PowerTurret{
     public class EMPBuild extends PowerTurretBuild{
         protected Seq<Teamc> targets = new Seq<>();
         protected float speedScl;
-        protected float charge;
+
 
         @Override
         public void draw(){
@@ -124,12 +118,6 @@ public class EMPFacility extends PowerTurret{
             rotation -= speedScl * Time.delta;
 
             super.updateTile();
-
-            if(charging){
-                charge = Mathf.clamp(charge + Time.delta / chargeTime);
-            }else{
-                charge = 0;
-            }
         }
 
         @Override

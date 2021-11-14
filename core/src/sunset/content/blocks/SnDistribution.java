@@ -16,7 +16,7 @@ import static mindustry.type.ItemStack.with;
 public class SnDistribution implements ContentList {
     public static Block
             //transportation
-            enojieDriver, nubiumConveyor,
+            enojieDriver, nobiumConveyor,
 
             //storage
             crypt,
@@ -26,7 +26,7 @@ public class SnDistribution implements ContentList {
 
     @Override
     public void load() {
-        //transportation
+        //region transportation
         enojieDriver = new MassDriver("enojie-driver") {{
             requirements(Category.distribution, with(Items.titanium, 450, Items.thorium, 200, Items.surgeAlloy, 180, SnItems.nobium, 150, SnItems.enojie, 130));
             size = 5;
@@ -35,22 +35,21 @@ public class SnDistribution implements ContentList {
             range = 560f;
             consumes.power(5.0f);
         }};
-
-        nubiumConveyor = new StackConveyor("nobium-conveyor") {{
+        nobiumConveyor = new StackConveyor("nobium-conveyor") {{
             requirements(Category.distribution, with(SnItems.nobium, 1, Items.silicon, 1, Items.graphite, 1));
             health = 80;
             speed = 5f / 60f;
             itemCapacity = 15;
         }};
-
-        //storage
+        //endregion transportation
+        //region storage
         crypt = new StorageBlock("crypt") {{
             requirements(Category.effect, with(Items.titanium, 350, SnItems.naturite, 200));
             size = 5;
             itemCapacity = 3500;
         }};
-
-        //special
+        //endregion storage
+        //region special
         airport = new Airport("airport") {{
             size = 4;
             health = 1000;
@@ -62,5 +61,6 @@ public class SnDistribution implements ContentList {
             itemCapacity = 1000;
             requirements = with(Items.thorium, 60, SnItems.naturite, 40);
         }};
+        //endregion special
     }
 }

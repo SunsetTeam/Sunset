@@ -50,8 +50,8 @@ public class SnBullets implements ContentList {
     emptyBullet, overheatBullet,
     //special
     empBullet, empBulletEvo, synthesisBullet1, synthesisBullet2, synthesisBullet3, synthesisBullet4,
-    //test&temp
-    testbullet, tempBullet1, tempBullet2;
+    //misc
+    testbullet, tempBullet1, tempBullet2, testbullet0;
     //exoticBullets (new) i will make it later... i must make more bulets (soulBullet, iceSpike, and more)
     //spiralPllastanium, spiralSurge, SpiralFors, SpiralThorium, SpiralSmall;
 
@@ -499,7 +499,7 @@ public class SnBullets implements ContentList {
             collidesAir = false;
         }};
         //endregion blast
-        //region posion bullets
+        //region poison bullets
         sporePodPoisonBullet = new FlakBulletType(4f, 5) {{
             sprite = "sunset-circle-bullet";
             knockback = 0.2f;
@@ -540,7 +540,7 @@ public class SnBullets implements ContentList {
             weaveScale = 8f;
             weaveMag = 1f;
         }};
-        //endregion posion bullets
+        //endregion poison bullets
         //region heavy-poison bullets
         SporePodPoisonFrag = new FlakBulletType(2f, 3) {{
             sprite = "sunset-circle-bullet";
@@ -1109,7 +1109,7 @@ public class SnBullets implements ContentList {
             width = 6;
         }};
         //endregion air-support
-        //region bersrk
+        //region berserk
         mirageGunBullet = new BasicBulletType(12f, 15f) {{
             hitEffect = despawnEffect = Fx.none;
             instantDisappear = true;
@@ -1271,7 +1271,7 @@ public class SnBullets implements ContentList {
             splashDamage = 110;
             splashDamageRadius = 80;
             trailChance = 1;
-            trailEffect = SnFx.greenInstTrail;
+            //trailEffect = SnFx.greenInstTrail;
         }};
         //endregion special
         //region misc
@@ -1329,6 +1329,10 @@ public class SnBullets implements ContentList {
         }};
         tempBullet1 = new LaserBoltBulletType(5, 15);
         tempBullet2 = new LaserBoltBulletType(5, 30);
+        testbullet0 = new ArtilleryBulletType(5, 100) {{
+            fragBullets = 6;
+            fragBullet = new LaserBulletType(50);
+        }};
         //endregion misc
     }
 }

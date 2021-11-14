@@ -393,7 +393,7 @@ public class SnTurrets implements ContentList {
             range = 768.0f;
             cooldown = 0.02f;
             shootShake = 4f;
-            size = 4;
+            size = 5;
             shootCone = 2f;
             shootSound = Sounds.railgun;
             unitSort = (u, x, y) -> -u.maxHealth;
@@ -709,7 +709,8 @@ public class SnTurrets implements ContentList {
         testturret = new ItemTurret("test-turret") {{
             requirements(Category.turret, with(Items.copper, 2));
             ammo(
-                Items.copper, SnBullets.testbullet
+                    Items.copper, SnBullets.testbullet,
+                    Items.lead, SnBullets.testbullet0
             );
             health = 780;
             size = 2;
