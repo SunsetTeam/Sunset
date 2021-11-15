@@ -22,20 +22,15 @@ public class SynthesisTurret extends ItemTurret {
     public TextureRegion liquid;
     @Load("@-light")
     public TextureRegion light;
-    public static float armor = 50;
+    public float armor;
     //public static int param1;
     //public int addSpeed;
     public int speed = 1;
     float shield;
     transient float shieldAlpha = 0f;
 
-    public SynthesisTurret(String name, float armor) {
-        super(name);
-    }
-
     public SynthesisTurret(String name) {
         super(name);
-        //armor = 50;
         unitSort = (u, x, y) -> -u.armor;
     }
 

@@ -43,16 +43,18 @@ public class SnBullets implements ContentList {
     maxBlastPlastanium, maxBlastBlast, maxBlastSurge, maxBlastPlastaniumFrag,
     //poison
     sporePodPoisonBullet, naturitePoisonBullet,
-    SporePodPoisonFrag, heavySporePodPoison, NaturitePoisonFrag, heavyNaturitePoison, NobiumPoisonFrag, heavyNobiumPoison,
+    sporePodPoisonFrag, heavySporePodPoison, naturitePoisonFrag, heavyNaturitePoison, nobiumPoisonFrag, heavyNobiumPoison,
     bigSporePodPoisonFrag, bigSporePodPoison, bigNaturitePoisonFrag, bigNaturitePoison, bigNobiumPoisonFrag, bigNobiumPoison, bigPlastaniumPoisonFrag, bigPlastaniumPoison,
     //units
-    BasicHelicopterGun, LaserBoltHelicopterGun, HelicopterMissile, clusterRocketSmall, clusterRocket, bigHelicopterGun, bigHelicopterBullet, laserGun, helicopterFlame, laserHelicopterFrag, largeHelicopterBullet, bigHelicopterRocket, HelicopterMissiles,
+    basicHelicopterGun, laserBoltHelicopterGun, helicopterMissile, clusterRocketSmall, clusterRocket, bigHelicopterGun, bigHelicopterBullet, laserGun, helicopterFlame, laserHelicopterFrag, largeHelicopterBullet, bigHelicopterRocket, helicopterMissiles,
     cometWaterShot, starStunBullet, galaxyKnockbackBullet,
     wheel1bullet, wheel2shotgun, wheel3burst, wheel4shotgun, wheel4artillery, wheel5flame, wheel5bullet, mirageGunBullet,
     //misc
     emptyBullet, overheatBullet,
-    //special
-    empBullet, empBulletEvo, synthesisBullet1, synthesisBullet2, synthesisBullet3, synthesisBullet4,
+    //EMP
+    empBullet, empBulletEvo,
+    //synthesis
+    synthesisBullet1, synthesisBullet2, synthesisBullet3, synthesisBullet4,
     //misc
     testbullet, tempBullet1, tempBullet2, testbullet0;
     //exoticBullets (new) i will make it later... i must make more bulets (soulBullet, iceSpike, and more)
@@ -126,7 +128,6 @@ public class SnBullets implements ContentList {
         artilleryFors = new ArtilleryBulletType(3.0f, 70, "shell") {{
             hitEffect = SnFx.redBomb;
             knockback = 1f;
-            width = height = 19f;
             lifetime = 110f;
             width = height = 25f;
             collidesTiles = false;
@@ -545,7 +546,7 @@ public class SnBullets implements ContentList {
         }};
         //endregion poison bullets
         //region heavy-poison bullets
-        SporePodPoisonFrag = new FlakBulletType(2f, 3) {{
+        sporePodPoisonFrag = new FlakBulletType(2f, 3) {{
             sprite = "sunset-circle-bullet";
             lifetime = 150f;
             splashDamage = 7f;
@@ -580,13 +581,13 @@ public class SnBullets implements ContentList {
             collidesAir = true;
             collidesGround = true;
 
-            fragBullet = SporePodPoisonFrag;
+            fragBullet = sporePodPoisonFrag;
             fragBullets = 3;
 
             weaveScale = 9f;
             weaveMag = 1f;
         }};
-        NaturitePoisonFrag = new FlakBulletType(2f, 5) {{
+        naturitePoisonFrag = new FlakBulletType(2f, 5) {{
             sprite = "sunset-circle-bullet";
             lifetime = 150f;
             splashDamage = 12f;
@@ -621,13 +622,13 @@ public class SnBullets implements ContentList {
             collidesAir = true;
             collidesGround = true;
 
-            fragBullet = NaturitePoisonFrag;
+            fragBullet = naturitePoisonFrag;
             fragBullets = 2;
 
             weaveScale = 9f;
             weaveMag = 1f;
         }};
-        NobiumPoisonFrag = new FlakBulletType(2f, 6) {{
+        nobiumPoisonFrag = new FlakBulletType(2f, 6) {{
             sprite = "sunset-circle-bullet";
             lifetime = 150f;
             splashDamage = 10f;
@@ -662,7 +663,7 @@ public class SnBullets implements ContentList {
             collidesAir = true;
             collidesGround = true;
 
-            fragBullet = NobiumPoisonFrag;
+            fragBullet = nobiumPoisonFrag;
             fragBullets = 4;
 
             weaveScale = 9f;
@@ -881,21 +882,21 @@ public class SnBullets implements ContentList {
         }};
         //endregion big-poison bullets
         //region helicopter
-        BasicHelicopterGun = new BasicBulletType(4.7f, 10) {{
+        basicHelicopterGun = new BasicBulletType(4.7f, 10) {{
             width = 8f;
             height = 11f;
             lifetime = 35f;
             shootEffect = Fx.shootSmall;
             smokeEffect = Fx.shootSmallSmoke;
         }};
-        LaserBoltHelicopterGun = new LaserBoltBulletType(5.3f, 12) {{
+        laserBoltHelicopterGun = new LaserBoltBulletType(5.3f, 12) {{
             width = 3f;
             height = 6f;
             lifetime = 30f;
             shootEffect = Fx.shootSmall;
             smokeEffect = Fx.shootSmallSmoke;
         }};
-        HelicopterMissile = new MissileBulletType(4f, 4) {{
+        helicopterMissile = new MissileBulletType(4f, 4) {{
             width = 7f;
             height = 10f;
             shrinkY = 0f;
@@ -1049,7 +1050,7 @@ public class SnBullets implements ContentList {
             trailInterval = 0.5f;
             trailEffect = SnFx.bigRocketTrail;
         }};
-        HelicopterMissiles = new MissileBulletType(4.4f, 45) {{
+        helicopterMissiles = new MissileBulletType(4.4f, 45) {{
             width = 11f;
             height = 11f;
             shrinkY = 0f;
@@ -1062,7 +1063,7 @@ public class SnBullets implements ContentList {
             weaveMag = 2f;
         }};
         //endregion copter
-        //region air-support
+        //region buffer
         cometWaterShot = new ExtinguishBulletType(Liquids.water) {{
             lifetime = 30f;
             speed = 2.5f;
@@ -1111,7 +1112,7 @@ public class SnBullets implements ContentList {
             height = 30;
             width = 6;
         }};
-        //endregion air-support
+        //endregion buffer
         //region berserk
         mirageGunBullet = new BasicBulletType(12f, 15f) {{
             hitEffect = despawnEffect = Fx.none;
@@ -1207,7 +1208,7 @@ public class SnBullets implements ContentList {
             pierceBuilding = true;
         }};
         //endregion wheel
-        //region special
+        //region EMP
         empBullet = new LightningBulletType() {{
             //speed = 5;
             damage = 150;
@@ -1240,6 +1241,8 @@ public class SnBullets implements ContentList {
 
             }
         };
+        //endregion EMP
+        //region synthesis
         synthesisBullet1 = new EnergyBoltBulletType(11, 70) {{
             status = SnStatusEffects.greened;
             lifetime = 7;
@@ -1279,7 +1282,7 @@ public class SnBullets implements ContentList {
             trailEffect = Fx.none;
             //trailEffect = SnFx.greenInstTrail;
         }};
-        //endregion special
+        //endregion synthesis
         //region misc
         overheatBullet = new BasicBulletType(0.1f, 7, "error") {{
             //shootEffect = Fx.none;
@@ -1336,7 +1339,7 @@ public class SnBullets implements ContentList {
         tempBullet1 = new LaserBoltBulletType(5, 15);
         tempBullet2 = new LaserBoltBulletType(5, 30);
         testbullet0 = new ArtilleryBulletType(5, 100) {{
-            fragBullets = 360;
+            fragBullets = 6;
             fragBullet = new LaserBulletType(50);
             fragCone = 360;
         }};
