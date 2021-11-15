@@ -200,13 +200,13 @@ public class SnTurrets implements ContentList {
             health = 140 * size * size;
             size = 3;
             range = 100f;
-	        reloadTime = 5f;
-	        recoilAmount = 2f;
+            reloadTime = 5f;
+            recoilAmount = 2f;
             inaccuracy = 3f;
-	        rotateSpeed = 7.5f;
+            rotateSpeed = 7.5f;
             shootCone = 25f;
             targetAir = true;
-	        shootSound = Sounds.flame;
+            shootSound = Sounds.flame;
         }};
         trigger = new PowerTurret("trigger") {{
             requirements(Category.turret, with(Items.silicon, 275, Items.titanium, 125, SnItems.enojie, 75));
