@@ -852,7 +852,7 @@ public class SnUnitTypes implements ContentList {
         }};
         //endregion wheel
         //region torpedo
-        /*torpedo1 = new UnitType("torpedo-t1") {{
+        torpedo1 = new UnitType("torpedo-t1") {{
             speed = 2.1f;
             boostMultiplier = 0.55f;
             rotateSpeed = 6.3f;
@@ -903,7 +903,7 @@ public class SnUnitTypes implements ContentList {
                         shootSound = Sounds.lasershoot;
                         shootStatus = StatusEffects.blasted;
                     }},
-                    new WeaponExt("torpedo-t1-small-torpedo") {{
+                    new WeaponExt("torpedo-t1-torpedo") {{
                         bullet = new BasicBulletType(2, 120) {{
                             lifetime = 80;
                             drawSize = 9.2f;
@@ -961,7 +961,7 @@ public class SnUnitTypes implements ContentList {
             armor = 260;
             faceTarget = false;
             weapons.add(
-                    new WeaponExt("torpedo-t2-double-small-rocket") {{
+                    new WeaponExt("torpedo-t2-rocket-launcher") {{
                         bullet = new MissileBulletType() {{
                             lifetime = 32;
                             speed = 5;
@@ -998,7 +998,7 @@ public class SnUnitTypes implements ContentList {
                         shootSound = Sounds.missile;
                         shootStatus = StatusEffects.blasted;
                     }},
-                    new WeaponExt("torpedo-t2-small-torpedo") {{
+                    new WeaponExt("torpedo-t2-torpedo") {{
                         bullet = new BasicBulletType(2, 140) {{
                             lifetime = 80;
                             drawSize = 9.2f;
@@ -1042,7 +1042,7 @@ public class SnUnitTypes implements ContentList {
             constructor = UnitWaterMove::create;
             immunities.add(StatusEffects.wet);
             immunities.add(StatusEffects.freezing);
-        }};*/
+        }};
         //endregion torpedo
         //region misc
         router = new UnitTypeExt("router") {
