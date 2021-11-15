@@ -852,7 +852,7 @@ public class SnUnitTypes implements ContentList {
         }};
         //endregion wheel
         //region torpedo
-        torpedo1 = new UnitType("torpedo-t1") {{
+        /*torpedo1 = new UnitType("torpedo-t1") {{
             speed = 2.1f;
             boostMultiplier = 0.55f;
             rotateSpeed = 6.3f;
@@ -884,10 +884,10 @@ public class SnUnitTypes implements ContentList {
                             height = 3;
                             pierce = true;
                             pierceBuilding = true;
-                            /*smokeEffect = SnFx.plasmaShot;
-                            hitEffect = SnFx.plasmaHit;
-                            despawnEffect = SnFx.plasmaHit;
-                            shootEffect = SnFx.plasmaShot;*/
+                            //smokeEffect = SnFx.plasmaShot;
+                            //hitEffect = SnFx.plasmaHit;
+                            //despawnEffect = SnFx.plasmaHit;
+                            //shootEffect = SnFx.plasmaShot;
                         }};
                         rotate = true;
                         top = true;
@@ -915,10 +915,10 @@ public class SnUnitTypes implements ContentList {
                             recoil = 0;
                             pierce = true;
                             pierceBuilding = false;
-                            /*smokeEffect = Fx.shootBigSmoke2;
-                            hitEffect = Fx.blastExplosion;
-                            despawnEffect = Fx.blastExplosion;
-                            shootEffect = Fx.shootBig2;*/
+                            //smokeEffect = Fx.shootBigSmoke2;
+                            //hitEffect = Fx.blastExplosion;
+                            //despawnEffect = Fx.blastExplosion;
+                            //shootEffect = Fx.shootBig2;
 
                             collidesAir = absorbable = false;
                             keepVelocity = true;
@@ -977,10 +977,10 @@ public class SnUnitTypes implements ContentList {
                             height = 6;
                             pierce = true;
                             pierceBuilding = true;
-                            /*smokeEffect = SnFx.plasmaShot;
-                            hitEffect = Fx.blastExplosion;
-                            despawnEffect = Fx.blastExplosion;
-                            shootEffect = SnFx.plasmaShot;*/
+                            //smokeEffect = SnFx.plasmaShot;
+                            //hitEffect = Fx.blastExplosion;
+                            //despawnEffect = Fx.blastExplosion;
+                            //shootEffect = SnFx.plasmaShot;
                         }};
                         mirror = true;
                         rotate = true;
@@ -1010,10 +1010,10 @@ public class SnUnitTypes implements ContentList {
                             recoil = 0;
                             pierce = true;
                             pierceBuilding = false;
-                            /*smokeEffect = Fx.shootBigSmoke2;
-                            hitEffect = Fx.hitBulletBig;
-                            despawnEffect = Fx.hitBulletSmall;
-                            shootEffect = Fx.shootBig2;*/
+                            //smokeEffect = Fx.shootBigSmoke2;
+                            //hitEffect = Fx.hitBulletBig;
+                            //despawnEffect = Fx.hitBulletSmall;
+                            //shootEffect = Fx.shootBig2;
 
                             collidesAir = absorbable = false;
                             keepVelocity = true;
@@ -1042,7 +1042,7 @@ public class SnUnitTypes implements ContentList {
             constructor = UnitWaterMove::create;
             immunities.add(StatusEffects.wet);
             immunities.add(StatusEffects.freezing);
-        }};
+        }};*/
         //endregion torpedo
         //region misc
         router = new UnitTypeExt("router") {
