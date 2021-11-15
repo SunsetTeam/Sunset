@@ -7,13 +7,11 @@ import arc.math.Mathf;
 import mindustry.content.Fx;
 import mindustry.entities.bullet.LaserBoltBulletType;
 import mindustry.gen.Bullet;
-import mindustry.gen.Posc;
 import mindustry.graphics.Pal;
-import sunset.world.blocks.defense.turrets.SynthesisTurret;
 
 public class EnergyBoltBulletType extends LaserBoltBulletType{
     public float width = 2f, height = 7f;
-    public float pierceDamageFactor = 1f;
+    //public float pierceDamageFactor = 1f;
     public float length = 100f;
 
     public EnergyBoltBulletType(float speed, float damage){
@@ -40,11 +38,11 @@ public class EnergyBoltBulletType extends LaserBoltBulletType{
         frontColor = Color.white;
     }
 
-    public EnergyBoltBulletType(){
+    /*public EnergyBoltBulletType(){
         this(1f, 1f);
     }
 
-    /*void handle(Bullet b, Posc pos, float initialHealth){
+    void handle(Bullet b, Posc pos, float initialHealth){
         float sub = Math.max(initialHealth * pierceDamageFactor, 0);
 
         if(b.damage <= 0){

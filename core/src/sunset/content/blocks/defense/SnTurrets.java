@@ -175,7 +175,7 @@ public class SnTurrets implements ContentList {
             );
             health = 1960;
             size = 3;
-            reloadTime = 130f;
+            reloadTime = 100f;
             range = 237f;
             recoilAmount = 3f;
             inaccuracy = 4f;
@@ -200,13 +200,13 @@ public class SnTurrets implements ContentList {
             health = 140 * size * size;
             size = 3;
             range = 100f;
-	        reloadTime = 5f;
-	        recoilAmount = 2f;
+            reloadTime = 5f;
+            recoilAmount = 2f;
             inaccuracy = 3f;
-	        rotateSpeed = 7.5f;
+            rotateSpeed = 7.5f;
             shootCone = 25f;
             targetAir = true;
-	        shootSound = Sounds.flame;
+            shootSound = Sounds.flame;
         }};
         trigger = new PowerTurret("trigger") {{
             requirements(Category.turret, with(Items.silicon, 275, Items.titanium, 125, SnItems.enojie, 75));
@@ -241,7 +241,7 @@ public class SnTurrets implements ContentList {
             health = 3200;
             size = 4;
             reloadTime = 160f;
-            range = 342f;
+            range = 300f;
             recoilAmount = 6f;
             inaccuracy = 3f;
             burstSpacing = 12f;
@@ -622,11 +622,12 @@ public class SnTurrets implements ContentList {
         }};
         //endregion EMP
         //region synthesis
-        /*synthesisT1 = new SynthesisTurret("synthesis-t1", 50) {{
+        /*synthesisT1 = new SynthesisTurret("synthesis-t1") {{
             requirements(Category.turret, with(Items.copper, 120, Items.lead, 120, Items.titanium, 100));
             ammo(
                     SnItems.naturite, SnBullets.synthesisBullet1
             );
+            armor = 50;
             size = 1;
             health = 350;
             reloadTime = 80;
@@ -641,12 +642,12 @@ public class SnTurrets implements ContentList {
             cooldown = 0.2f;
             coolantUsage = 1.1f;
         }};
-
-        synthesisT2 = new SynthesisTurret("synthesis-t2", 120) {{
+        synthesisT2 = new SynthesisTurret("synthesis-t2") {{
             requirements(Category.turret, with(Items.copper, 240, Items.lead, 240, Items.titanium, 200));
             ammo(
                     SnItems.naturite, SnBullets.synthesisBullet2
             );
+            armor = 120;
             size = 2;
             health = synthesisT1.health * size;
             reloadTime = 75;
@@ -661,12 +662,12 @@ public class SnTurrets implements ContentList {
             cooldown = 0.01f;
             coolantUsage = 1.7f;
         }};
-
-        synthesisT3 = new SynthesisTurret("synthesis-t3", 260) {{
+        synthesisT3 = new SynthesisTurret("synthesis-t3") {{
             requirements(Category.turret, with(Items.copper, 360, Items.lead, 360, Items.titanium, 300));
             ammo(
                     SnItems.naturite, SnBullets.synthesisBullet3
             );
+            armor = 260;
             size = 3;
             health = synthesisT1.health * size;
             reloadTime = 60;
@@ -684,12 +685,12 @@ public class SnTurrets implements ContentList {
             cooldown = 0.3f;
             coolantUsage = 1.55f;
         }};
-
-        synthesisT4 = new SynthesisTurret("synthesis-t4", 450) {{
+        synthesisT4 = new SynthesisTurret("synthesis-t4") {{
             requirements(Category.turret, with(Items.copper, 480, Items.lead, 480, Items.titanium, 400));
             ammo(
                     SnItems.naturite, SnBullets.synthesisBullet4
             );
+            armor = 450;
             size = 4;
             health = synthesisT1.health * size;
             reloadTime = 100;
@@ -701,7 +702,7 @@ public class SnTurrets implements ContentList {
             shootShake = 10;
             minRange = 52;
             maxAmmo = 50;
-            spread = 4;
+            spread = 0;
             recoilAmount = 5;
             restitution = 0.9f;
             cooldown = 0.7f;
@@ -712,9 +713,9 @@ public class SnTurrets implements ContentList {
         testturret = new ItemTurret("test-turret") {{
             requirements(Category.turret, with(Items.copper, 2));
             ammo(
-                Items.copper, SnBullets.testbullet
+                    Items.copper, SnBullets.testbullet,
+                    Items.lead, SnBullets.testbullet0
             );
-            range = 130f;
             health = 780;
             size = 2;
             reloadTime = 24f;

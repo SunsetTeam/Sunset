@@ -25,7 +25,7 @@ public class SnPower implements ContentList {
 
     @Override
     public void load() {
-        //generators
+        //region generators
         oilGenerator = new LiquidGenerator("oil-generator") {{
             requirements(Category.power, with(Items.copper, 110, Items.titanium, 70, Items.lead, 120, Items.silicon, 55, Items.metaglass, 70));
             powerProduction = 8.3f;
@@ -60,8 +60,8 @@ public class SnPower implements ContentList {
             ambientSoundVolume = 0.06f;
             consumes.liquid(Liquids.water, 0.35f);
         }};
-
-        //reactors
+        //endregion generators
+        //region reactors
         planatriumReactor = new NuclearReactor("planatrium-reactor") {{
             requirements(Category.power, with(Items.lead, 400, Items.silicon, 270, Items.graphite, 220, SnItems.planatrium, 200, SnItems.fors, 180, SnItems.nobium, 120));
             ambientSound = Sounds.hum;
@@ -79,5 +79,6 @@ public class SnPower implements ContentList {
             heating = 0.07f;
             consumes.liquid(Liquids.cryofluid, heating / coolantPower).update(false);
         }};
+        //endregion reactors
     }
 }

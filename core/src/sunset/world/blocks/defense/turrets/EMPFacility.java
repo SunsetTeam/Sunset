@@ -14,6 +14,7 @@ import mindustry.entities.bullet.*;
 import mindustry.gen.*;
 import mindustry.graphics.*;
 import mindustry.type.*;
+import mindustry.ui.Bar;
 import mindustry.world.blocks.defense.turrets.*;
 import mindustry.world.meta.*;
 import sunset.content.*;
@@ -62,6 +63,15 @@ public class EMPFacility extends PowerTurret{
         });
     }
 
+    @Override
+    public void setBars(){
+        super.setBars();
+        bars.add("sunset-reload", (EMPBuild entity) -> new Bar(
+                () -> Core.bundle.format("bar.sunset-reload", Utils.stringsFixed(Mathf.clamp(entity.reload / reloadTime) * 100f)),
+                () -> entity.team.color,
+                () -> Mathf.clamp(entity.reload / reloadTime)
+        ));
+    }
 
     public static class EMPPart{
         public float rotationMul = 12f;
@@ -77,6 +87,7 @@ public class EMPFacility extends PowerTurret{
     public class EMPBuild extends PowerTurretBuild{
         protected Seq<Teamc> targets = new Seq<>();
         protected float speedScl;
+
 
         @Override
         public void draw(){

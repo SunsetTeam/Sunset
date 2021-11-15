@@ -49,37 +49,31 @@ public class SnEnvironment implements ContentList {
             oreThreshold = 0.921f;
             oreScale = 26.1234f;
         }};
-
         orePlanatrium = new OreBlock(SnItems.planatrium) {{
             oreDefault = false;
             oreThreshold = 0.921f;
             oreScale = 26.1234f;
         }};
-
         oreFlameid = new OreBlock(SnItems.flameid) {{
             oreDefault = false;
             oreThreshold = 0.921f;
             oreScale = 26.1234f;
         }};
-
         oreColdent = new OreBlock(SnItems.coldent) {{
             oreDefault = false;
             oreThreshold = 0.921f;
             oreScale = 26.1234f;
         }};
         //endregion ores
-
         //region floors
         crimsongrass = new Floor("crimson-grass") {{
             variants = 3;
             wall = crimsongrasswall;
         }};
-
         crimsondirt = new Floor("crimson-dirt") {{
             variants = 3;
             wall = crimsondirtwall;
         }};
-
         crimsonswamp = new Floor("crimson-swamp") {{
             speedMultiplier = 0.4f;
             variants = 3;
@@ -91,14 +85,12 @@ public class SnEnvironment implements ContentList {
             drownTime = 700f;
             albedo = 0.5f;
         }};
-
         crimsonsand = new Floor("crimson-sand") {{
             itemDrop = Items.sand;
             playerUnmineable = true;
             variants = 3;
             wall = crimsonsandwall;
         }};
-
         crimsonsandwater = new Floor("crimson-sand-water") {{
             speedMultiplier = 0.9f;
             variants = 0;
@@ -110,7 +102,6 @@ public class SnEnvironment implements ContentList {
             cacheLayer = CacheLayer.water;
             albedo = 0.5f;
         }};
-
         crimsonwater = new Floor("crimson-water") {{
             speedMultiplier = 0.8f;
             variants = 0;
@@ -122,7 +113,6 @@ public class SnEnvironment implements ContentList {
             cacheLayer = CacheLayer.water;
             albedo = 0.5f;
         }};
-
         crimsondeepwater = new Floor("crimson-deep-water") {{
             speedMultiplier = 0.5f;
             variants = 0;
@@ -135,54 +125,45 @@ public class SnEnvironment implements ContentList {
             cacheLayer = CacheLayer.water;
             albedo = 0.5f;
         }};
-        
         crimsonice = new Floor("crimson-ice") {{
             variants = 3;
             dragMultiplier = 0.25f;
             speedMultiplier = 0.85f;
             attributes.set(Attribute.water, 0.38f);
         }};
-
         crimsonsnow = new Floor("crimson-snow") {{
             variants = 3;
             attributes.set(Attribute.water, 0.2f);
         }};
-
         crimsonicesnow = new Floor("crimson-icesnow") {{
             variants = 3;
             dragMultiplier = 0.55f;
             attributes.set(Attribute.water, 0.28f);
         }};
-
         crimsonmoss = new Floor("crimson-moss") {{
             variants = 3;
             attributes.set(Attribute.spores, 0.2f);
             wall = crimsonpine;
         }};
-
         granite = new Floor("granite") {{
             variants = 3;
             attributes.set(Attribute.spores, 0.2f);
             wall = crimsonpine;
         }};
-
         orangesand = new Floor("orange-sand") {{
             itemDrop = Items.sand;
             playerUnmineable = true;
             variants = 3;
             wall = orangesandwall;
         }};
-
         obsidian = new Floor("obsidian") {{
             variants = 3;
             wall = obsidianwall;
         }};
-
         ash = new Floor("ash") {{
             variants = 3;
             wall = ashwall;
         }};
-
         burningash = new Floor("burning-ash") {{
             variants = 2;
             attributes.set(Attribute.heat, 0.55f);
@@ -193,45 +174,35 @@ public class SnEnvironment implements ContentList {
             lightColor = Color.orange.cpy().a(0.15f);
         }};
         //endregion floors
-
         //region static walls
         crimsondirtwall = new StaticWall("crimson-dirt-wall") {{
             variants = 2;
         }};
-
         crimsongrasswall = new StaticWall("crimson-grass-wall") {{
             variants = 2;
         }};
-
         crimsonsandwall = new StaticWall("crimson-sand-wall") {{
             variants = 2;
         }};
-
         granitewall = new StaticWall("granite-wall") {{
             variants = 3;
         }};
-
         stonesandwall = new StaticWall("stone-sand-wall") {{
             variants = 2;
         }};
-
         stonesand = new Floor("stone-sand") {{
             variants = 3;
         }};
-
         orangesandwall = new StaticWall("orange-sand-wall") {{
             variants = 2;
         }};
-
         obsidianwall = new StaticWall("obsidian-wall") {{
             variants = 2;
         }};
-
         ashwall = new StaticWall("ash-wall") {{
             variants = 2;
         }};
         //endregion static walls
-
         //region trees
         crimsontree = new StaticTree("crimson-tree") {{
             variants = 0;
@@ -240,13 +211,11 @@ public class SnEnvironment implements ContentList {
             variants = 0;
         }};
         //endregion trees
-
         //region pines
         crimsonpine = new StaticTree("crimson-pine") {{
             variants = 0;
         }};
-        //end region pines
-
+        //endregion pines
         //region special
         geyser = new Geyser("geyser") {{
             damageTaken = 0.2f;
@@ -261,39 +230,33 @@ public class SnEnvironment implements ContentList {
             steamEffect = new Effect(30f, Fx.steam.renderer);
             eruptionEffect = new Effect(30f, Fx.ballfire.renderer);
         }};
-        //end region special
-
+        //endregion special
         //region hidden
         hotSlag1 = new Floor("hotSlag1") {{
             buildVisibility = BuildVisibility.debugOnly;
             inEditor = false;
             //only for burnout planet generator
         }};
-
         hotSlag2 = new Floor("hotSlag2") {{
             buildVisibility = BuildVisibility.debugOnly;
             inEditor = false;
             //only for burnout planet generator
         }};
-
         hotSlag3 = new Floor("hotSlag3") {{
             buildVisibility = BuildVisibility.debugOnly;
             inEditor = false;
             //only for burnout planet generator
         }};
-
         glacier1 = new Floor("glacier1") {{
             buildVisibility = BuildVisibility.debugOnly;
             inEditor = false;
             //only for rime planet generator
         }};
-
         glacier2 = new Floor("glacier2") {{
             buildVisibility = BuildVisibility.debugOnly;
             inEditor = false;
             //only for rime planet generator
         }};
-
         glacier3 = new Floor("glacier3") {{
             buildVisibility = BuildVisibility.debugOnly;
             inEditor = false;

@@ -578,6 +578,8 @@ public class SnFx {
             Drawf.tri(e.x, e.y, w, (30f + Mathf.randomSeedRange(e.id, 15f)) * m, rot);
             Drawf.tri(e.x, e.y, w, 10f * m, rot + 180f);
         }
+
+        Drawf.light(e.x, e.y, 60f, Pal.bulletYellowBack, 0.6f * e.fout());
     }),
 
     plasmaShot = new Effect(26, e -> {//TODO tune

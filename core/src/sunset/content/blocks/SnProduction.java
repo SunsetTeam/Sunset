@@ -69,7 +69,6 @@ public class SnProduction implements ContentList {
             consumes.liquid(Liquids.water, 0.75f);
             consumes.power(7f);
         }};
-
         advancedCompressor = new GenericCrafter("advanced-compressor") {{
             requirements(Category.crafting, with(Items.titanium, 150, Items.graphite, 120, Items.silicon, 110,  Items.metaglass, 80, Items.plastanium, 60));
 
@@ -85,7 +84,6 @@ public class SnProduction implements ContentList {
             consumes.liquid(Liquids.oil, 0.35f);
             consumes.power(5.3f);
         }};
-
         advancedWeaver = new GenericCrafter("advanced-weaver") {{
             requirements(Category.crafting, with(Items.lead, 190, Items.thorium, 160, Items.silicon, 145, Items.titanium, 80, Items.phaseFabric, 70));
             size = 3;
@@ -104,7 +102,6 @@ public class SnProduction implements ContentList {
             consumes.liquid(Liquids.cryofluid, 0.3f);
             consumes.power(6.1f);
         }};
-
         advancedCryomixer = new LiquidConverter("advanced-cryomixer") {{
             requirements(Category.crafting, with(Items.lead, 180, Items.graphite, 90, SnItems.coldent, 60, Items.metaglass, 40));
             outputLiquid = new LiquidStack(Liquids.cryofluid, 1f);
@@ -122,7 +119,6 @@ public class SnProduction implements ContentList {
             consumes.item(SnItems.coldent);
             consumes.liquid(Liquids.water, 1f);
         }};
-
         advancedSurge = new GenericCrafter("advanced-surge") {{
             requirements(Category.crafting, with(Items.thorium, 280, Items.silicon, 200, Items.lead, 160, Items.surgeAlloy, 130, Items.plastanium, 110));
 
@@ -142,14 +138,13 @@ public class SnProduction implements ContentList {
             consumes.power(5.5f);
         }};
         //endregion advanced
-
         //region standard
         collider = new GenericCrafter("collider") {{
             requirements(Category.crafting, with(Items.copper, 110, Items.titanium, 105, Items.silicon, 65, SnItems.fors, 50));
 
             outputItem = new ItemStack(SnItems.reneubite, 3);
-//          craftEffect = SnFx.;
-//          updateEffect = SnFx.;
+            //craftEffect = SnFx.;
+            //updateEffect = SnFx.;
             craftTime = 46f;
             size = 3;
             itemCapacity = 15;
@@ -163,7 +158,6 @@ public class SnProduction implements ContentList {
             consumes.liquid(SnLiquids.burheyna, 0.4f);
             consumes.power(3.5f);
         }};
-
         purifier = new GenericCrafter("purifier") {{
             requirements(Category.crafting, with(Items.copper, 120, Items.titanium, 95, Items.silicon, 80, Items.plastanium, 65));
 
@@ -182,7 +176,6 @@ public class SnProduction implements ContentList {
             consumes.items(with(Items.titanium, 3, Items.thorium, 2, SnItems.fors, 1));
             consumes.power(2.5f);
         }};
-
         crystallizer = new GenericCrafter("crystallizer") {{
             requirements(Category.crafting, with(Items.lead, 130, Items.thorium, 110, Items.silicon, 120, SnItems.nobium, 90, Items.plastanium, 75));
 
@@ -203,7 +196,6 @@ public class SnProduction implements ContentList {
             consumes.liquid(Liquids.water, 0.20f);
             consumes.power(2.7f);
         }};
-
         enojieKiln = new GenericCrafter("enojie-kiln") {{
             requirements(Category.crafting, with(Items.lead, 200, SnItems.nobium, 150, Items.graphite, 140, Items.silicon, 120, Items.surgeAlloy, 80));
 

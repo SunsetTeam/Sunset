@@ -4,9 +4,6 @@ import arc.Core;
 import arc.graphics.g2d.Draw;
 import arc.graphics.g2d.TextureRegion;
 import arc.math.Mathf;
-import arc.scene.ui.layout.Table;
-import arc.util.Strings;
-import arc.util.Time;
 import mindustry.annotations.Annotations.Load;
 import mindustry.content.Fx;
 import mindustry.graphics.Drawf;
@@ -16,6 +13,7 @@ import mindustry.ui.Bar;
 import mindustry.world.blocks.defense.turrets.ItemTurret;
 import mindustry.world.meta.Stat;
 import sunset.graphics.SnPal;
+import sunset.utils.Utils;
 
 import static mindustry.Vars.minArmorDamage;
 
@@ -24,20 +22,15 @@ public class SynthesisTurret extends ItemTurret {
     public TextureRegion liquid;
     @Load("@-light")
     public TextureRegion light;
-    public static float armor;
+    public float armor;
     //public static int param1;
     //public int addSpeed;
     public int speed = 1;
     float shield;
     transient float shieldAlpha = 0f;
 
-    public SynthesisTurret(String name, float armor) {
-        super(name);
-    }
-
     public SynthesisTurret(String name) {
         super(name);
-        armor = 50;
         unitSort = (u, x, y) -> -u.armor;
     }
 
@@ -50,21 +43,13 @@ public class SynthesisTurret extends ItemTurret {
     @Override
     public void setBars() {
         super.setBars();
-        bars.add("sn-reload", (SynthesisBuild entity) -> new Bar(
-                () -> Core.bundle.format("bar.sn-reload", Strings.autoFixed(Mathf.clamp(entity.reload / reloadTime) * 100f, 2)),
+        bars.add("sunset-reload", (SynthesisBuild entity) -> new Bar(
+                () -> Core.bundle.format("bar.sunset-reload", Utils.stringsFixed(Mathf.clamp(entity.reload / reloadTime) * 100f)),
                 () -> entity.team.color,
                 () -> Mathf.clamp(entity.reload / reloadTime)
         ));
-
-        bars.add("sn-charge", (SynthesisBuild entity) -> new Bar(
-                () -> Core.bundle.format("bar.sn-charge", Strings.autoFixed(Mathf.clamp(entity.charge) * 100f, 2)),
-                () -> Pal.surge,
-                () -> entity.charge
-        ));
     }
     public class SynthesisBuild extends ItemTurretBuild {
-        protected float charge;
-
         @Override
         public void updateTile() {
             super.updateTile();
@@ -76,12 +61,6 @@ public class SynthesisTurret extends ItemTurret {
             }else{
                 addSpeed = 1;
             }*/
-
-            if(charging){
-                charge = Mathf.clamp(charge + Time.delta / chargeTime);
-            }else{
-                charge = 0;
-            }
         }
 
         @Override
