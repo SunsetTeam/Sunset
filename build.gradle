@@ -440,10 +440,10 @@ task mjar() {
 
 tasks.create("run").dependsOn("mjar").doLast {
     def path = temporaryDir.absolutePath + "\\Mindustry.jar"
-    def url = "https://github.com/Anuken/Mindustry/releases/download/$pMindustryVersion"+"/Mindustry.jar"
+    def url = "https://github.com/Anuken/Mindustry/releases/download/$mindustryVersion"+"/Mindustry.jar"
     def f = new File(path)
     if (!f.exists()) {
-        print "Downloading Mindustry $pMindustryVersion... "
+        print "Downloading Mindustry $mindustryVersion... "
         new URL(url).withInputStream{ i -> f.withOutputStream{ it << i }}
         println "Done"
     }
