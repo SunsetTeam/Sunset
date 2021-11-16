@@ -427,12 +427,13 @@ task mjar() {
         }
     }
     doLast {
-        for (String directory:modsDirectories){
+/* (не работает) for (String directory:modsDirectories){
             if (directory.equals("classic")){
                 directory=getdatadir() + "mods";
             }
             move(directory);
-        }
+        }*/
+        move(getdatadir() + "mods")
         def time = LocalDateTime.now().format(java.time.format.DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss"));
         System.out.println("\tlast build time: ${time}")
     }
