@@ -12,18 +12,19 @@ import mindustry.world.blocks.production.Drill;
 import mindustry.world.draw.DrawRotator;
 import sunset.content.SnFx;
 import sunset.content.SnItems;
+import sunset.world.blocks.production.raw.DRDrill;
 import sunset.world.blocks.production.raw.PrecussionDrill;
 
 import static mindustry.type.ItemStack.with;
 
 /** This category is for blocks that produce raw products. (Such as cultivator, drill etc.) */
-    public class SnRaw implements ContentList {
+public class SnRaw implements ContentList {
     public static Block
             //crafters
             advancedCultivator,
 
-            //drills
-            electroPneumaticdrill,
+    //drills
+    electroPneumaticdrill,
             magneticDrill,
             percussionDrill,
             enojieDrill;
@@ -47,18 +48,17 @@ import static mindustry.type.ItemStack.with;
         }};
 
         //drills
-        electroPneumaticdrill = new Drill("electro-pneumatic-drill") {{
+        electroPneumaticdrill = new DRDrill("electro-pneumatic-drill") {{
             requirements(Category.production, with(Items.copper, 20, Items.graphite, 15, Items.silicon, 10));
             drillTime = 340;
             size = 2;
             hasPower = true;
             tier = 3;
-
             consumes.power(0.6f);
             consumes.liquid(Liquids.water, 0.07f).boost();
         }};
 
-        magneticDrill = new Drill("magnetic-drill") {{
+        magneticDrill = new DRDrill("magnetic-drill") {{
             requirements(Category.production, with(Items.copper, 70, Items.silicon, 60, SnItems.fors, 60, SnItems.nobium, 55, SnItems.planatrium, 45 ));
             drillTime = 240;
             size = 4;
@@ -71,11 +71,11 @@ import static mindustry.type.ItemStack.with;
             rotateSpeed = 7f;
             warmupSpeed = 0.01f;
             itemCapacity = 40;
-
             liquidBoostIntensity = 1.9f;
-
             consumes.power(4f);
             consumes.liquid(Liquids.water, 0.13f).boost();
+            m1 = 3;
+            m2 = -3;
         }};
 
         percussionDrill = new PrecussionDrill("percussion-drill") {{
