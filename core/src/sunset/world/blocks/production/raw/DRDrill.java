@@ -35,11 +35,11 @@ public class DRDrill extends Drill {
     public class DRDBuild extends DrillBuild {
         @Override
         public void draw() {
-            if (bottom.found()) Draw.rect(bottom, x, y);
-            Draw.rect(block.region, x, y);
+            Draw.rect(bottom, x, y);
             Draw.rect(rotator, x, y, timeDrilled * m1);
             if (rotator0.found()) Draw.rect(rotator0, x, y, timeDrilled * m2);
-            if (top.found()) Draw.rect(top, x, y);
+            Draw.rect(block.region, x, y);
+            Draw.rect(top, x, y);
         }
     }
 }
