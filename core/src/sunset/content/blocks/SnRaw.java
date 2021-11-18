@@ -50,7 +50,7 @@ public class SnRaw implements ContentList {
         //drills
         electroPneumaticdrill = new DRDrill("electro-pneumatic-drill") {{
             requirements(Category.production, with(Items.copper, 20, Items.graphite, 15, Items.silicon, 10));
-            drillTime = 340;
+            drillTime = 310;
             size = 2;
             hasPower = true;
             tier = 3;
@@ -61,7 +61,7 @@ public class SnRaw implements ContentList {
 
         magneticDrill = new DRDrill("magnetic-drill") {{
             requirements(Category.production, with(Items.copper, 70, Items.silicon, 60, SnItems.fors, 60, SnItems.nobium, 55, SnItems.planatrium, 45 ));
-            drillTime = 240;
+            drillTime = 200;
             size = 4;
             drawRim = true;
             hasPower = true;
@@ -97,7 +97,7 @@ public class SnRaw implements ContentList {
 
         enojieDrill = new DRDrill("enojie-drill") {{
             requirements(Category.production, with(Items.copper, 410, Items.silicon, 380, SnItems.enojie, 370, Items.thorium, 200, Items.surgeAlloy, 190));
-            drillTime = 200;
+            drillTime = 170;
             size = 7;
             drawRim = true;
             hasPower = true;

@@ -7,8 +7,6 @@ import mindustry.world.Block;
 import mindustry.world.blocks.production.Drill;
 
 public class DRDrill extends Drill {
-    @Load("@-item")
-    public TextureRegion item;
     @Load("@-top")
     public TextureRegion top;
     @Load("@-rotator")
@@ -17,8 +15,8 @@ public class DRDrill extends Drill {
     public TextureRegion rotator0;
     @Load("@-bottom")
     public TextureRegion bottom;
-    @Load("@-icon")
-    public TextureRegion icon;
+    @Load("@-full")
+    public TextureRegion full;
     public int m1;
     public int m2;
 
@@ -28,8 +26,9 @@ public class DRDrill extends Drill {
         m2 = -2;
     }
 
-    public TextureRegion[] icons(Block block) {
-        return new TextureRegion[] {icon};
+    @Override
+    public TextureRegion[] icons() {
+        return new TextureRegion[] {full};
     }
 
     public class DRDBuild extends DrillBuild {
@@ -40,6 +39,7 @@ public class DRDrill extends Drill {
             if (rotator0.found()) Draw.rect(rotator0, x, y, timeDrilled * m2);
             Draw.rect(block.region, x, y);
             Draw.rect(top, x, y);
+            Draw.rect(itemRegion, x , y);
         }
     }
 }

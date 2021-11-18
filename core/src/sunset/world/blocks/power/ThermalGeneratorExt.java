@@ -12,25 +12,25 @@ public class ThermalGeneratorExt extends ThermalGenerator {
     }
 
     @Override
-    public void setStats(){
+    public void setStats() {
         super.setStats();
         stats.remove(Stat.tiles);
         stats.add(Stat.tiles, attribute, floating, attributeScale, false);
     }
     @Override
-    public void drawPlace(int x, int y, int rotation, boolean valid){
+    public void drawPlace(int x, int y, int rotation, boolean valid) {
         drawPotentialLinks(x, y);
         drawPlaceText(Core.bundle.format("bar.efficiency", Math.round(sumAttribute(attribute, x, y) * 100 * attributeScale)), x, y, valid);
     }
     public class ThermalGeneratorBuildExt extends ThermalGeneratorBuild {
         @Override
-        public void updateTile(){
+        public void updateTile() {
             if(cons.valid()) {
                 productionEfficiency = sum * attributeScale + attribute.env();
             } else {
                 productionEfficiency = 0;
             }
-            if(productionEfficiency > 0.1f && Mathf.chanceDelta(0.05 * delta())){
+            if(productionEfficiency > 0.1f && Mathf.chanceDelta(0.05 * delta())) {
                 generateEffect.at(x + Mathf.range(3f), y + Mathf.range(3f));
             }
         }

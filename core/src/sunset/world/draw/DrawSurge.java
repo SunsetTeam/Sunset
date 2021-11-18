@@ -10,19 +10,19 @@ import mindustry.world.*;
 import mindustry.world.blocks.production.GenericCrafter.*;
 import mindustry.world.draw.*;
 
-public class DrawSurge extends DrawBlock{
+public class DrawSurge extends DrawBlock {
     public Color flameColor = Color.valueOf("ffc999");
     public TextureRegion topRegion;
 
-    public DrawSurge(){
+    public DrawSurge() {
     }
 
-    public DrawSurge(Color flameColor){
+    public DrawSurge(Color flameColor) {
         this.flameColor = flameColor;
     }
 
     @Override
-    public void drawLight(GenericCrafterBuild build){
+    public void drawLight(GenericCrafterBuild build) {
         super.drawLight(build);
 
             Drawf.light(build.team, build.x, build.y, (60f + Mathf.absin(10f, 5f)) * build.warmup * build.block.size, flameColor, 0.65f);
@@ -30,7 +30,7 @@ public class DrawSurge extends DrawBlock{
     }
 
     @Override
-    public void draw(GenericCrafterBuild build){
+    public void draw(GenericCrafterBuild build) {
         float g = 0.3f;
         float r = 0.06f;
         float cr = Mathf.random(0.1f);
@@ -46,7 +46,7 @@ public class DrawSurge extends DrawBlock{
     }
 
     @Override
-    public void load(Block block){
+    public void load(Block block) {
         super.load(block);
         topRegion = Core.atlas.find(block.name + "-top");
     }

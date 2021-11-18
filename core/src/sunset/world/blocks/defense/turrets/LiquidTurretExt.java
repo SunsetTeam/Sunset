@@ -17,7 +17,7 @@ public class LiquidTurretExt extends LiquidTurret {
 
     public class LiquidTurretExtBuild extends LiquidTurretBuild {
         @Override
-        public BulletType useAmmo(){
+        public BulletType useAmmo() {
             if(cheating()) return ammoTypes.get(liquids.current());
             BulletType type = ammoTypes.get(liquids.current());
             liquids.remove(liquids.current(), ammoPerShot / type.ammoMultiplier);

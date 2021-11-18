@@ -73,7 +73,7 @@ public class SnPower implements ContentList {
             itemCapacity = 50;
             liquidCapacity = 80;
             itemDuration = 280f;
-            powerProduction = 38f;
+            powerProduction = 180f;
             //later explodeEffect = Fx.reactorExplosion;
             consumes.item(SnItems.planatrium);
             heating = 0.07f;

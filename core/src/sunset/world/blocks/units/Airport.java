@@ -62,13 +62,13 @@ public class Airport extends StorageBlock {
     public static long compress(Tile tile, int link, Item item) {
         return Pack.longInt(Point2.unpack(link).sub(tile.x, tile.y).pack(), item == null ? -1 : item.id);
     }
-    public static Item decompressItem(long compressed){
+    public static Item decompressItem(long compressed) {
         int id = Pack.rightInt(compressed);
         return  id == -1 ? null : content.item(id);
     }
-    public static int decompressLink(long compressed,Tile tile){
+    public static int decompressLink(long compressed,Tile tile) {
         Point2 point2 = Point2.unpack(Pack.leftInt(compressed));
-        if (tile!=null){
+        if (tile!=null) {
             point2.add(tile.x, tile.y);
         }
         return point2.pack();
@@ -172,7 +172,7 @@ public class Airport extends StorageBlock {
                     units.add(deliverUnit);
                 }
             }
-            /*if (canDump==null){
+            /*if (canDump==null) {
                 canDump=content.items().select(i -> !Structs.contains(requirements, r -> r.item == i)).toArray(Item.class);
             }
             for (Item item : canDump) {
