@@ -17,8 +17,8 @@ public class DRDrill extends Drill {
     public TextureRegion rotator0;
     @Load("@-bottom")
     public TextureRegion bottom;
-    @Load("@-full")
-    public TextureRegion full;
+    @Load("@-icon")
+    public TextureRegion icon;
     public int m1;
     public int m2;
 
@@ -29,7 +29,7 @@ public class DRDrill extends Drill {
     }
 
     public TextureRegion[] icons(Block block) {
-        return new TextureRegion[] {full};
+        return new TextureRegion[] {icon};
     }
 
     public class DRDBuild extends DrillBuild {

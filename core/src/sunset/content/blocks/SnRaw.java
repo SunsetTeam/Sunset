@@ -56,6 +56,7 @@ public class SnRaw implements ContentList {
             tier = 3;
             consumes.power(0.6f);
             consumes.liquid(Liquids.water, 0.07f).boost();
+            m1 = 4;
         }};
 
         magneticDrill = new DRDrill("magnetic-drill") {{
@@ -64,7 +65,7 @@ public class SnRaw implements ContentList {
             size = 4;
             drawRim = true;
             hasPower = true;
-            tier = 5;
+            tier = 6;
             updateEffect = Fx.pulverizeRed;
             updateEffectChance = 0.03f;
             drillEffect = Fx.mineHuge;
@@ -74,8 +75,8 @@ public class SnRaw implements ContentList {
             liquidBoostIntensity = 1.9f;
             consumes.power(4f);
             consumes.liquid(Liquids.water, 0.13f).boost();
-            m1 = 3;
-            m2 = -3;
+            m1 = 7;
+            m2 = -7;
         }};
 
         percussionDrill = new PrecussionDrill("percussion-drill") {{
@@ -112,6 +113,7 @@ public class SnRaw implements ContentList {
 
             consumes.power(3f);
             consumes.liquid(Liquids.cryofluid, 0.4f).boost();
+            m1 = 13;
         }};
     }
 }

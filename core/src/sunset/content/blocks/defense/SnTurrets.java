@@ -622,7 +622,7 @@ public class SnTurrets implements ContentList {
         }};
         //endregion EMP
         //region synthesis
-        synthesisT1 = new SynthesisTurret("synthesis-t1") {{
+        /*synthesisT1 = new SynthesisTurret("synthesis-t1") {{
             requirements(Category.turret, with(Items.copper, 120, Items.lead, 120, Items.titanium, 100));
             ammo(
                     SnItems.naturite, SnBullets.synthesisBullet1
@@ -707,7 +707,7 @@ public class SnTurrets implements ContentList {
             restitution = 0.9f;
             cooldown = 0.7f;
             coolantUsage = 0.9f;
-        }};
+        }};*/
         //endregion synthesis
         //region testing
         testturret = new ItemTurret("test-turret") {{
