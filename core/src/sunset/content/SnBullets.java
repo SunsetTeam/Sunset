@@ -58,7 +58,7 @@ public class SnBullets implements ContentList {
     //misc
     testbullet, tempBullet1, tempBullet2, testbullet0, testbullet1, testbullet2;
     //exoticBullets (new) i will make it later... i must make more bulets (soulBullet, iceSpike, and more)
-    //spiralPllastanium, spiralSurge, SpiralFors, SpiralThorium, SpiralSmall;
+    //spiralPlastanium, spiralSurge, spiralFors, spiralThorium, spiralSmall;
 
     @Override
     public void load() {

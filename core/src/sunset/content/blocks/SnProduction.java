@@ -17,10 +17,7 @@ import mma.world.draw.MultiDrawSmelter;
 import sunset.content.SnFx;
 import sunset.content.SnItems;
 import sunset.content.SnLiquids;
-import sunset.world.draw.DrawAngleRotator;
-import sunset.world.draw.DrawModWeave;
-import sunset.world.draw.DrawSurge;
-import sunset.world.draw.MultiDrawBlock;
+import sunset.world.draw.*;
 
 import static mindustry.type.ItemStack.with;
 
@@ -87,7 +84,7 @@ public class SnProduction implements ContentList {
             craftEffect = SnFx.weaverSmeltsmoke;
             craftTime = 180f;
             outputItem = new ItemStack(Items.phaseFabric, 6);
-            drawer = new MultiDrawBlock(new DrawModWeave(), new DrawSmelter());
+            drawer = new MultiDrawBlock(new DrawModWeave(), new DrawModSmelter(false));
             itemCapacity = 50;
             liquidCapacity = 30f;
 

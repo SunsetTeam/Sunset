@@ -18,6 +18,6 @@ Sprites: Saigo no-nozomi, MissionaryPoseBest, Snake, Mak, NotTheGrawxz, Toxin\
 Sounds: King-Silicon\
 Ost: Saigo no-nozomi\
 Maps: Saigo no-nozomi\
-Plot: tabyretka
+Plot: Tabyretka
 
 

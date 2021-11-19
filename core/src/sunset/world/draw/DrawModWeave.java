@@ -37,6 +37,6 @@ public class DrawModWeave extends DrawBlock {
     
   @Override
   public TextureRegion[] icons(Block block) {
-      return new TextureRegion[]{bottom, block.region, top};
+      return new TextureRegion[]{bottom, block.region, weave, top};
   }
 }
