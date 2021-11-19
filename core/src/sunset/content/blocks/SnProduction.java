@@ -12,11 +12,7 @@ import mindustry.type.LiquidStack;
 import mindustry.world.Block;
 import mindustry.world.blocks.production.GenericCrafter;
 import mindustry.world.blocks.production.LiquidConverter;
-import mindustry.world.draw.DrawAnimation;
-import mindustry.world.draw.DrawMixer;
-import mindustry.world.draw.DrawRotator;
-import mindustry.world.draw.DrawSmelter;
-import mindustry.world.draw.DrawGlow;
+import mindustry.world.draw.*;
 import mma.world.draw.MultiDrawSmelter;
 import sunset.content.SnFx;
 import sunset.content.SnItems;
@@ -153,6 +149,7 @@ public class SnProduction implements ContentList {
             hasLiquids = true;
             ambientSound = Sounds.grinding;
             ambientSoundVolume = 0.025f;
+            drawer = new MultiDrawBlock(new DrawLiquid(), new DrawSmelter());
 
             consumes.items(with(Items.blastCompound, 3, Items.titanium, 2));
             consumes.liquid(SnLiquids.burheyna, 0.4f);

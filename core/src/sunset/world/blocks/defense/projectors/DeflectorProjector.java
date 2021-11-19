@@ -17,17 +17,14 @@ import mindustry.content.Fx;
 import mindustry.gen.Bullet;
 import mindustry.gen.Groups;
 import mindustry.gen.Sounds;
-import mindustry.graphics.Drawf;
 import mindustry.graphics.Layer;
 import mindustry.graphics.Pal;
 import mindustry.logic.Ranged;
 import mindustry.world.blocks.defense.ForceProjector;
 import mindustry.world.consumers.ConsumeLiquidFilter;
 import mindustry.world.consumers.ConsumeType;
-import mindustry.world.meta.BlockStatus;
 import mindustry.world.meta.Stat;
 import mindustry.world.meta.StatUnit;
-import sunset.graphics.SnPal;
 
 import static mindustry.Vars.player;
 import static mindustry.Vars.tilesize;
@@ -102,7 +99,7 @@ public class DeflectorProjector extends ForceProjector {
         Draw.color();
     }
 
-    public class DeflectorBuild extends ForceBuild implements Ranged{
+    public class DeflectorBuild extends ForceBuild implements Ranged {
 
         @Override
         public void updateTile() {
@@ -187,7 +184,7 @@ public class DeflectorProjector extends ForceProjector {
 
             drawTeamTop();
 
-            if(buildup > 0f){
+            if(buildup > 0f) {
                 Draw.alpha(buildup / shieldHealth * 0.75f);
                 Draw.blend(Blending.additive);
                 Draw.rect(topRegion, x, y);

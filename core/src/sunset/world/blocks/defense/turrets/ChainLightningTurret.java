@@ -25,7 +25,7 @@ import sunset.world.meta.values.*;
  * постепенно теряя урон.
  * @see sunset.world.blocks.defense.turrets.ChainLightningTurret.ChainLightningTurretBuild
  */
-public class ChainLightningTurret extends BaseTurret{
+public class ChainLightningTurret extends BaseTurret {
     public float damage = 0f;
     /**
      * Определяет, насколько будет уменьшаться максимальная
@@ -52,7 +52,7 @@ public class ChainLightningTurret extends BaseTurret{
     public float powerUse;
     public Color laserColor;
 
-    public ChainLightningTurret(String name){
+    public ChainLightningTurret(String name) {
         super(name);
         category = Category.turret;
         buildVisibility = BuildVisibility.shown;
@@ -60,7 +60,7 @@ public class ChainLightningTurret extends BaseTurret{
     }
 
     @Override
-    public void init(){
+    public void init() {
         super.init();
 
         consumes.add(new AdjustableConsumePower(powerUse, e -> {
@@ -72,7 +72,7 @@ public class ChainLightningTurret extends BaseTurret{
     }
 
     @Override
-    public void load(){
+    public void load() {
         super.load();
 //        laser = Core.atlas.find("parallax-laser");
 //        laserEnd = Core.atlas.find("parallax-laser-end");
@@ -81,19 +81,19 @@ public class ChainLightningTurret extends BaseTurret{
     }
 
     @Override
-    public TextureRegion[] icons(){
+    public TextureRegion[] icons() {
 //        return super.makeIconRegions();
         return !ModVars.packSprites ? new TextureRegion[]{region}:new TextureRegion[]{baseRegion, region};
     }
 
 
     @Override
-    public void createIcons(MultiPacker packer){
+    public void createIcons(MultiPacker packer) {
         super.createIcons(packer);
     }
 
     @Override
-    public void setStats(){
+    public void setStats() {
         super.setStats();
         stats.remove(Stat.powerUse);
         stats.add(Stat.powerUse, powerUse * 60f, StatUnit.powerSecond);
@@ -109,7 +109,7 @@ public class ChainLightningTurret extends BaseTurret{
     }
 
     /** @see sunset.world.blocks.defense.turrets.ChainLightningTurret */
-    public class ChainLightningTurretBuild extends BaseTurretBuild{
+    public class ChainLightningTurretBuild extends BaseTurretBuild {
         public final Seq<Unit> units = new Seq<>();
         public boolean shouldShoot = false;
         private float liquidBoost = 1f;
@@ -117,20 +117,20 @@ public class ChainLightningTurret extends BaseTurret{
         private long boostEndTime = 0;
         private float boost = 0f;
 
-        public float getBoost(){
+        public float getBoost() {
             return Time.millis() <= boostEndTime ? Math.max(boost, 1) : 1;
         }
 
         @Override
-        public void applyBoost(float intensity, float duration){
+        public void applyBoost(float intensity, float duration) {
             boostEndTime = Time.millis() + (long)(duration * 1000f / 60f);
             boost = intensity;
         }
 
         @Override
-        public void updateTile(){
+        public void updateTile() {
             //liquid
-            if(shouldShoot){
+            if(shouldShoot) {
                 Liquid liquid = liquids.current();
                 float used = Math.min(Math.min(liquids.get(liquid), liquidUse), Math.max(0, (1f / coolantMultiplier) / liquid.heatCapacity));
                 liquids.remove(liquid, used);
@@ -140,7 +140,7 @@ public class ChainLightningTurret extends BaseTurret{
             float r = range;
             units.clear();
             Unit unit = Units.closestEnemy(team, x, y, r, u -> u.checkTarget(targetAir, targetGround));
-            while(unit != null){
+            while(unit != null) {
                 units.add(unit);
                 r *= rangeMultiplier;
                 unit = Units.closestEnemy(team, unit.x, unit.y, r,
@@ -148,7 +148,7 @@ public class ChainLightningTurret extends BaseTurret{
             }
             shouldShoot = !units.isEmpty() && Angles.within(angleTo(units.first()), rotation, shootCone);
             // damage
-            if(shouldShoot){
+            if(shouldShoot) {
                 float[] d = {damage * efficiency() * liquidBoost};
                 units.each(enemy -> {
                     enemy.damageContinuousPierce(d[0]);
@@ -156,26 +156,26 @@ public class ChainLightningTurret extends BaseTurret{
                 });
             }
             //rotation
-            if(units.size > 0){
+            if(units.size > 0) {
                 rotation = Angles.moveToward(rotation, angleTo(units.first()), rotateSpeed * edelta());
             }
         }
 
         @Override
-        public float efficiency(){
+        public float efficiency() {
             return super.efficiency() * getBoost();
         }
 
         @Override
-        public void draw(){
+        public void draw() {
             Draw.rect(baseRegion, x, y);
-            if(shouldShoot){
+            if(shouldShoot) {
                 Draw.z(Layer.bullet);
                 Draw.mixcol(laserColor, 0.85f + Mathf.absin(0.8f, 0.15f));
                 float unitX = units.get(0).x, unitY = units.get(0).y, nextUnitX = unitX, nextUnitY = unitY;
                 float lw = laserWidth * 0.8f + Mathf.absin(4f, laserWidth * 0.2f);
                 Drawf.laser(team, laser, laserEnd, x, y, unitX, unitY, lw);
-                for(int i = 0; i < units.size - 1; i++){
+                for(int i = 0; i < units.size - 1; i++) {
                     unitX = nextUnitX;
                     unitY = nextUnitY;
                     nextUnitX = units.get(i + 1).x;

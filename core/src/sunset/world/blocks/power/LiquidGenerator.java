@@ -4,14 +4,14 @@ import mindustry.type.*;
 import mindustry.world.blocks.power.ItemLiquidGenerator;
 
 
-public class LiquidGenerator extends ItemLiquidGenerator{
+public class LiquidGenerator extends ItemLiquidGenerator {
 
-    public LiquidGenerator(String name){
+    public LiquidGenerator(String name) {
         super(name);
         defaults = true;
     }
     @Override
-    protected float getLiquidEfficiency(Liquid liquid){
+    protected float getLiquidEfficiency(Liquid liquid) {
         return 1f;
     }
 }
