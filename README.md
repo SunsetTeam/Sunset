@@ -13,10 +13,11 @@ The third planet in the mod, the most difficult, has more content and size than 
 `[Data Deleted]`
 
 # Devs
-Coder's: Slish, Nukleer Bomb, RePoweRED, Darkness6030, Mr.Ricco\
-Sprites: Saigo no-nozomi, MissionaryPoseBest, Snake, Mak\
+Coder's: Slish, Nukleer Bomb, RePoweRED, Darkness6030, Mr.Ricco, Zelaux, Def-Try\
+Sprites: Saigo no-nozomi, MissionaryPoseBest, Snake, Mak, NotTheGrawxz, Toxin\
 Sounds: King-Silicon\
 Ost: Saigo no-nozomi\
-Maps: Saigo no-nozomi
+Maps: Saigo no-nozomi\
+Plot: tabyretka
 
 
