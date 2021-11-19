@@ -6,10 +6,7 @@ import mindustry.content.Fx;
 import mindustry.content.StatusEffects;
 import mindustry.content.UnitTypes;
 import mindustry.ctype.ContentList;
-import mindustry.entities.bullet.BasicBulletType;
-import mindustry.entities.bullet.BombBulletType;
-import mindustry.entities.bullet.LaserBoltBulletType;
-import mindustry.entities.bullet.MissileBulletType;
+import mindustry.entities.bullet.*;
 import mindustry.gen.Sounds;
 import mindustry.gen.UnitEntity;
 import mindustry.gen.UnitWaterMove;
@@ -865,11 +862,11 @@ public class SnUnitTypes implements ContentList {
             armor = 120;
             faceTarget = false;
             commandLimit = 5;
-            commandRadius = 135;
+            commandRadius = 48;
             visualElevation = -1;
             weapons.add(
-                    new WeaponExt("torpedo-t1-plasma") {{
-                        bullet = new LaserBoltBulletType() {{
+                    new WeaponExt("plasma-gun") {{
+                        bullet = new ArtilleryBulletType() {{
                             lifetime = 32;
                             speed = 5;
                             damage = 75;
@@ -884,10 +881,6 @@ public class SnUnitTypes implements ContentList {
                             height = 3;
                             pierce = true;
                             pierceBuilding = true;
-                            //smokeEffect = SnFx.plasmaShot;
-                            //hitEffect = SnFx.plasmaHit;
-                            //despawnEffect = SnFx.plasmaHit;
-                            //shootEffect = SnFx.plasmaShot;
                         }};
                         rotate = true;
                         top = true;
@@ -903,7 +896,7 @@ public class SnUnitTypes implements ContentList {
                         shootSound = Sounds.lasershoot;
                         shootStatus = StatusEffects.blasted;
                     }},
-                    new WeaponExt("torpedo-t1-torpedo") {{
+                    new WeaponExt("torpedo-gun") {{
                         bullet = new BasicBulletType(2, 120) {{
                             lifetime = 80;
                             drawSize = 9.2f;
@@ -915,14 +908,9 @@ public class SnUnitTypes implements ContentList {
                             recoil = 0;
                             pierce = true;
                             pierceBuilding = false;
-                            //smokeEffect = Fx.shootBigSmoke2;
-                            //hitEffect = Fx.blastExplosion;
-                            //despawnEffect = Fx.blastExplosion;
-                            //shootEffect = Fx.shootBig2;
-
+                            shootEffect = smokeEffect = Fx.none;
                             collidesAir = absorbable = false;
                             keepVelocity = true;
-                            //trailEffect = Fx.missileTrail;
                             trailColor = Pal.lightTrail;
                             trailLength = 30;
                             trailWidth = 10;
@@ -960,10 +948,15 @@ public class SnUnitTypes implements ContentList {
             range = 205;
             armor = 260;
             faceTarget = false;
+            commandLimit = 5;
+            commandRadius = 48;
+            visualElevation = -1;
             weapons.add(
-                    new WeaponExt("torpedo-t2-rocket-launcher") {{
-                        bullet = new MissileBulletType() {{
-                            lifetime = 32;
+                    new WeaponExt("rocket-launcher") {{
+                        bullet = new ArtilleryBulletType() {{
+                            backColor = Pal.missileYellowBack;
+                            frontColor = Pal.missileYellow;
+                            lifetime = 52;
                             speed = 5;
                             damage = 75;
                             drawSize = 6.1f;
@@ -973,14 +966,14 @@ public class SnUnitTypes implements ContentList {
                             reloadMultiplier = 1.1f;
                             buildingDamageMultiplier = 0.6f;
                             recoil = 0;
-                            width = 6;
-                            height = 6;
+                            width = 8;
+                            height = 8;
                             pierce = true;
                             pierceBuilding = true;
-                            //smokeEffect = SnFx.plasmaShot;
-                            //hitEffect = Fx.blastExplosion;
-                            //despawnEffect = Fx.blastExplosion;
-                            //shootEffect = SnFx.plasmaShot;
+                            homingPower = 0.08f;
+                            shrinkY = 0f;
+                            hitSound = Sounds.explosion;
+                            trailChance = 0.2f;
                         }};
                         mirror = true;
                         rotate = true;
@@ -998,7 +991,7 @@ public class SnUnitTypes implements ContentList {
                         shootSound = Sounds.missile;
                         shootStatus = StatusEffects.blasted;
                     }},
-                    new WeaponExt("torpedo-t2-torpedo") {{
+                    new WeaponExt("torpedo-gun") {{
                         bullet = new BasicBulletType(2, 140) {{
                             lifetime = 80;
                             drawSize = 9.2f;
@@ -1010,15 +1003,9 @@ public class SnUnitTypes implements ContentList {
                             recoil = 0;
                             pierce = true;
                             pierceBuilding = false;
-                            //smokeEffect = Fx.shootBigSmoke2;
-                            //hitEffect = Fx.hitBulletBig;
-                            //despawnEffect = Fx.hitBulletSmall;
-                            //shootEffect = Fx.shootBig2;
-
+                            shootEffect = smokeEffect = Fx.none;
                             collidesAir = absorbable = false;
                             keepVelocity = true;
-                            //trailEffect = Fx.missileTrail;
-                            //trailColor = Pal.lightTrail;
                             trailLength = 30;
                             trailWidth = 10;
                             collideFloor = true;

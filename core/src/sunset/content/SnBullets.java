@@ -56,7 +56,7 @@ public class SnBullets implements ContentList {
     //synthesis
     synthesisBullet1, synthesisBullet2, synthesisBullet3, synthesisBullet4,
     //misc
-    testbullet, tempBullet1, tempBullet2, testbullet0;
+    testbullet, tempBullet1, tempBullet2, testbullet0, testbullet1, testbullet2;
     //exoticBullets (new) i will make it later... i must make more bulets (soulBullet, iceSpike, and more)
     //spiralPllastanium, spiralSurge, SpiralFors, SpiralThorium, SpiralSmall;
 
@@ -1342,6 +1342,52 @@ public class SnBullets implements ContentList {
             fragBullets = 6;
             fragBullet = new LaserBulletType(50);
             fragCone = 360;
+        }};
+        testbullet1 = new BasicBulletType(5, 50) {{
+            fragBullets = 3;
+            fragCone = 45;
+            fragBullet = new BasicBulletType(5, 50) {{
+                fragBullets = 3;
+                fragCone = 45;
+                fragBullet = new BasicBulletType(5, 50) {{
+                    fragBullets = 3;
+                    fragCone = 45;
+                    fragBullet = new BasicBulletType(5, 50) {{
+                        fragBullets = 3;
+                        fragCone = 45;
+                        fragBullet = new BasicBulletType(5, 50) {{
+                            fragBullets = 3;
+                            fragCone = 45;
+                            fragBullet = new BasicBulletType(5, 50) {{
+                                fragBullets = 3;
+                                fragCone = 45;
+                                fragBullet = new BasicBulletType(5, 50) {{
+                                    fragBullets = 3;
+                                    fragCone = 45;
+                                    fragBullet = new BasicBulletType(5, 50) {{
+                                        fragBullets = 3;
+                                        fragCone = 45;
+                                        fragBullet = new BasicBulletType(5, 50) {{
+                                            fragBullets = 3;
+                                            fragCone = 45;
+                                            fragBullet = new BasicBulletType(5, 50) {{
+                                                fragBullets = 360;
+                                                fragCone = 360;
+                                                fragBullet = new LaserBulletType(100);
+                                            }};
+                                        }};
+                                    }};
+                                }};
+                            }};
+                        }};
+                    }};
+                }};
+            }};
+        }};
+        testbullet2 = new BasicBulletType(5, 50) {{
+            fragBullets = 6;
+            fragCone = 360;
+            fragBullet = new ContinuousLaserBulletType(150);
         }};
         //endregion misc
     }

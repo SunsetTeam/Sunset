@@ -87,7 +87,7 @@ public class SnProduction implements ContentList {
             craftEffect = SnFx.weaverSmeltsmoke;
             craftTime = 180f;
             outputItem = new ItemStack(Items.phaseFabric, 6);
-            drawer = new MultiDrawBlock(new DrawSmelter(), new DrawModWeave());
+            drawer = new MultiDrawBlock(new DrawModWeave(), new DrawSmelter());
             itemCapacity = 50;
             liquidCapacity = 30f;
 
