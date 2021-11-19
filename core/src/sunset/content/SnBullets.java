@@ -24,8 +24,6 @@ public class SnBullets implements ContentList {
     public static BulletType
     //sap
     leadSap, sporeSap, planatriumSap,
-    //heavy-sap
-    heavyplanatriumSap,
     //artillery
     artilleryForsMine, artilleryFors, artilleryBlastMine, artilleryBlast,
     //heavy-standart
@@ -35,7 +33,6 @@ public class SnBullets implements ContentList {
     //burner
     heavyCoalFlame, heavyPyraFlame, flameidFlame,
     //liquid
-    typhoonWaterShot, typhoonCryoShot, typhoonSlagShot, typhoonOilShot,
     floodWaterShot, floodCryoShot, floodSlagShot, floodOilShot,
     //blast
     lightBlastGraphite, lightBlastSilicon,
@@ -94,18 +91,6 @@ public class SnBullets implements ContentList {
             lifetime = 23f;
         }};
         //endregion sap
-        //region heavy-sap
-        heavyplanatriumSap = new SapBulletType() {{
-            sapStrength = 0.95f;
-            length = 240f;
-            damage = 60f;
-            shootEffect = Fx.shootSmall;
-            despawnEffect = Fx.none;
-            width = 1.8f;
-            hitColor = color = Color.valueOf("bf92f9");
-            lifetime = 30f;
-        }};
-        //endregion heavy-sap
         //region artillery
         artilleryForsMine = new FlakBulletType(3f, 20) {{
             collidesGround = true;
@@ -304,50 +289,6 @@ public class SnBullets implements ContentList {
         }};
         //endregion burn
         //region liquid
-        typhoonWaterShot = new LiquidBulletType(Liquids.water) {{
-            lifetime = 70f;
-            speed = 4f;
-            knockback = 2.5f;
-            puddleSize = 11f;
-            orbSize = 6f;
-            drag = 0.001f;
-            ammoMultiplier = 0.4f;
-            statusDuration = 60f * 4f;
-            damage = 0.3f;
-        }};
-        typhoonCryoShot = new LiquidBulletType(Liquids.cryofluid) {{
-            lifetime = 70f;
-            speed = 4f;
-            knockback = 1.8f;
-            puddleSize = 11f;
-            orbSize = 6f;
-            drag = 0.001f;
-            ammoMultiplier = 0.4f;
-            statusDuration = 60f * 4f;
-            damage = 0.4f;
-        }};
-        typhoonSlagShot = new LiquidBulletType(Liquids.slag) {{
-            lifetime = 49f;
-            speed = 4f;
-            knockback = 1.8f;
-            puddleSize = 8f;
-            orbSize = 4f;
-            damage = 4.95f;
-            drag = 0.001f;
-            ammoMultiplier = 0.3f;
-            statusDuration = 60f * 4f;
-        }};
-        typhoonOilShot = new LiquidBulletType(Liquids.oil) {{
-            lifetime = 70f;
-            speed = 4f;
-            knockback = 1.8f;
-            puddleSize = 11f;
-            orbSize = 6f;
-            drag = 0.001f;
-            ammoMultiplier = 0.4f;
-            statusDuration = 60f * 4f;
-            damage = 0.3f;
-        }};
         floodWaterShot = new ArtilleryLiquidBulletType(Liquids.water) {{
             lifetime = 130f;
             speed = 3f;

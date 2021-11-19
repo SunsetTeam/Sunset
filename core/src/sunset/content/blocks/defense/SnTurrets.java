@@ -280,29 +280,6 @@ public class SnTurrets implements ContentList {
             targetAir = true;
             targetGround = true;
         }};
-        typhoon = new LiquidTurret("typhoon") {{
-            requirements(Category.turret, with(Items.metaglass, 250, Items.lead, 530, Items.titanium, 340, Items.thorium, 170, SnItems.fors, 150));
-            ammo(
-                Liquids.water, SnBullets.typhoonWaterShot,
-                Liquids.slag, SnBullets.typhoonSlagShot,
-                Liquids.cryofluid, SnBullets.typhoonCryoShot,
-                Liquids.oil, SnBullets.typhoonOilShot
-            );
-            size = 4;
-            reloadTime = 2f;
-            shots = 2;
-            velocityInaccuracy = 0.15f;
-            inaccuracy = 6f;
-            recoilAmount = 1f;
-            restitution = 0.05f;
-            shootCone = 46f;
-            liquidCapacity = 90f;
-            shootEffect = SnFx.typhoonShootLiquid;
-            range = 260f;
-            health = 220 * size * size;
-            flags = EnumSet.of(BlockFlag.turret, BlockFlag.extinguisher);
-            ammoPerShot = 4;
-        }};
         flood = new LiquidTurretExt("flood") {{
             requirements(Category.turret, with(Items.metaglass, 230, Items.lead, 500, Items.titanium, 330, Items.thorium, 190, SnItems.fors, 180));
             ammo(
@@ -324,21 +301,6 @@ public class SnTurrets implements ContentList {
             health = 200 * size * size;
             flags = EnumSet.of(BlockFlag.turret, BlockFlag.extinguisher);
             ammoPerShot = 15;
-        }};
-        tentacle = new ItemTurret("tentacle") {{
-            requirements(Category.turret, with(Items.copper, 600, Items.graphite, 580, Items.lead, 550, SnItems.planatrium, 430, SnItems.nobium, 300));
-            ammo(
-                    SnItems.planatrium, SnBullets.heavyplanatriumSap
-            );
-            range = 290f;
-            health = 3400;
-            size = 4;
-            reloadTime = 15f;
-            recoilAmount = 0.4f;
-            inaccuracy = 2.5f;
-            rotateSpeed = 5f;
-            shootSound = Sounds.sap;
-            targetAir = true;
         }};
         chain = new ChainLightningTurret("chain") {{
             requirements(Category.turret, with(Items.copper, 600, Items.lead, 500, Items.surgeAlloy, 460, SnItems.nobium, 450, SnItems.naturite, 400, SnItems.planatrium, 350));
