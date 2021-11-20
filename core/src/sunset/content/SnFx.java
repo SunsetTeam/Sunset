@@ -30,8 +30,8 @@ import static mindustry.Vars.tilesize;
 
 public class SnFx {
     public static final Effect
-
-    enojiecraft = new Effect(60, e -> {
+    //region
+    enojieCraft = new Effect(60, e -> {
         randLenVectors(e.id, 6, 4f + e.fin() * 8f, (x, y) -> {
             color(Pal.heal);
             Fill.square(e.x + x, e.y + y, e.fout() + 0.5f, 45);
@@ -39,7 +39,7 @@ public class SnFx {
         });
     }),
 
-    enojieburn = new Effect(40, e -> {
+    enojieBurn = new Effect(40, e -> {
         randLenVectors(e.id, 5, 3f + e.fin() * 5f, (x, y) -> {
             color(Color.valueOf("CFEDD4"), Color.lime, e.fin());
             Fill.square(e.x + x, e.y + y, e.fout());
@@ -68,17 +68,19 @@ public class SnFx {
         });
     }),
 
-    modPlasticburn = new Effect(45, e -> {
+    modPlasticBurn = new Effect(45, e -> {
         randLenVectors(e.id, 7, 2.8f + e.fin() * 5f, 25, 30f, (x, y) -> {
             color((SnPal.gGray), Color.gray, e.fin());
             Fill.square(e.x + x, e.y + y, e.fout() * 3.1f, 45);
         });
     }),
 
-    modFormsmoke = new Effect(50, e -> randLenVectors(e.id, 8, 6f + e.fin() * 8f, (x, y) -> {
-        color(Pal.plasticSmoke, Color.lightGray, e.fin());
-        Fill.rect(e.x + x, e.y + y, 0.2f + e.fout() * 2f, 45);
-    })),
+    modFormSmoke = new Effect(50, e -> {
+        randLenVectors(e.id, 8, 6f + e.fin() * 8f, (x, y) -> {
+            color(Pal.plasticSmoke, Color.lightGray, e.fin());
+            Fill.rect(e.x + x, e.y + y, 0.2f + e.fout() * 2f, 45);
+        });
+    }),
 
     weaverSmeltsmoke = new Effect(20f, e -> {
         randLenVectors(e.id, 7, 6.8f + e.fin() * 5f, (x, y) -> {
@@ -87,7 +89,7 @@ public class SnFx {
         });
     }),
 
-    cultivatorSmeltsmoke = new Effect(20f, e -> {
+    cultivatorSmeltSmoke = new Effect(20f, e -> {
         randLenVectors(e.id, 7, 6.8f + e.fin() * 5f, (x, y) -> {
             color(Color.valueOf("5841A6"), e.color, e.fin());
             Fill.square(e.x + x, e.y + y, 0.5f + e.fout() * 2f, 45);
@@ -143,7 +145,7 @@ public class SnFx {
         Drawf.light(e.x, e.y, circleRad * 1.5f, SnPal.redBomb, e.fout());
     }),
 
-    CopterBomb = new Effect(25f, 60f, e -> {
+    copterBomb = new Effect(25f, 60f, e -> {
         color(SnPal.copterBomb);
         stroke(e.fout() * 2f);
         float circleRad = 2f + e.finpow() * 30f;
@@ -238,7 +240,7 @@ public class SnFx {
         Fill.circle(e.x, e.y, e.fout());
     }),
 
-    tridenCharge = new Effect(210, e -> {
+    tridentCharge = new Effect(210, e -> {
         final Color c1 = Color.valueOf("eaecff"), c2 = Color.valueOf("ffeaec");
         float r = Mathf.degRad * e.rotation;
         float cx = e.x - Mathf.cos(r) * 12f;
@@ -246,17 +248,41 @@ public class SnFx {
         Draw.z(Layer.block);
         enegrySphere(e.id, e.time, e.fin(), 8, Mathf.PI / 120f, Mathf.PI / 30f, 8f, 1.5f, c1, c2, cx, cy);
     });
-    //endregion Energy sphere utils
-    public static final Effect tridenHit = new Effect(30, e -> {
+
+    public static final Effect tridentHit = new Effect(30, e -> {
         Draw.z(Layer.effect);
         stroke(0);
         color(new Color(Pal.surge).a(Mathf.clamp(2 * e.fout() - 1)));
         Fill.circle(e.x, e.y, 112f);
         stroke(3, new Color(Pal.surge).a(Mathf.clamp(2 * e.fout())));
         Lines.circle(e.x, e.y, 112f);
+    });
+
+    public static final Effect tridentHit0 = new Effect(30, e -> {
+        color(Pal.plastaniumFront);
+
+        e.scaled(7, i -> {
+            stroke(3f * i.fout());
+            Lines.circle(e.x, e.y, 3f + i.fin() * 24f);
+        });
+
+        color(Color.gray);
+
+        randLenVectors(e.id, 7, 2f + 28f * e.finpow(), (x, y) -> {
+            Fill.circle(e.x + x, e.y + y, 112f);
+        });
+
+        color(Pal.surge);
+        stroke(e.fout());
+
+        randLenVectors(e.id + 1, 4, 1f + 25f * e.finpow(), (x, y) -> {
+            lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + e.fout() * 3f);
+        });
+
+        Drawf.light(e.x, e.y, 50f, Pal.shield, 0.8f * e.fout());
     }),
 
-    somesnipertrail = new Effect(12f, e -> {
+    sniperTrail = new Effect(12f, e -> {
         float scale = e.data(), fin1 = Math.min(1, e.fin() * 1.5f), fout1 = 1 - Math.max(0, e.fin() - 0.6666f) * 3;
         Vec2 front = new Vec2(0, 32 * scale).setAngle(e.rotation).add(e.x, e.y);
         Vec2 left = new Vec2(0, 5 * fout1 * scale).setAngle(e.rotation + fin1 * 60f).add(e.x, e.y);
@@ -540,7 +566,8 @@ public class SnFx {
         };
         Angles.randLenVectors(e.id, 4, e.finpow() * 20, e.rotation, 360, floatc21);
     }),
-
+    //endregion
+    //region special
     empHit = new Effect(35, e -> {
         randLenVectors(e.id, 6, 4f + e.fin() * 8f, (x, y) -> {
             Draw.color(Color.valueOf("7FFFD4"), Color.valueOf("32D0DC"), e.fin());
@@ -567,6 +594,13 @@ public class SnFx {
         });
     }),
 
+    empWave = new Effect(0, e -> {
+        randLenVectors(e.id, 10, 5f + e.fin() * 5f, (x, y) -> {
+            color(SnPal.emp1, SnPal.emp2, e.fin());
+            Fill.square(e.x + x, e.y + y, e.fout());
+        });
+    }),
+
     greenInstTrail = new Effect(30, e -> {
         for (int i = 0; i < 2; i++) {
             color(i == 0 ? SnPal.synthesis1 : SnPal.synthesis2);
@@ -580,7 +614,7 @@ public class SnFx {
         }
 
         Drawf.light(e.x, e.y, 60f, Pal.bulletYellowBack, 0.6f * e.fout());
-    }),
+    }),//temporary unused
 
     plasmaShot = new Effect(26, e -> {//TODO tune
         color(SnPal.plasma1);
@@ -588,13 +622,13 @@ public class SnFx {
         randLenVectors(e.id, 7, length, e.rotation, 0f, (x, y) -> {
             lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), e.fout() * 9f);
         });
-    }),
+    }),//temporary unused
 
     plasmaHit = new Effect(8, e -> {//TODO tune
         color(SnPal.plasma1, SnPal.plasma2, e.fin());
         stroke(0.5f + e.fout());
         Lines.circle(e.x, e.y, e.fin() * 5f);
-    }),
+    }),//temporary unused
 
     fakeLightning = new Effect(10f, 500f, e -> {
         Object[] data = (Object[]) e.data;
@@ -627,8 +661,8 @@ public class SnFx {
 
         Fill.circle(Tmp.v2.x, Tmp.v2.y, Lines.getStroke() / 2);
     }).layer(Layer.bullet + 0.01f);
-
-    //region Energy sphere utils
+    //endregion special
+    //region energy sphere utils
     public static void enegrySphere(long seed, float time, float fin, int amount,
                                     float minSpeed, float maxSpeed, float mainRadius, float miniRadius,
                                     Color c1, Color c2, float x, float y) {
@@ -675,5 +709,5 @@ public class SnFx {
         e.at(x1, y1, 0f, c, lines);
 
     }
-
+    //endregion energy sphere utils
 }

@@ -13,6 +13,7 @@ import sunset.content.blocks.defense.SnProjectors;
 import sunset.content.blocks.defense.SnTurrets;
 import sunset.content.blocks.defense.SnWalls;
 import sunset.core.SnLogic;
+import sunset.content.SnTeams;
 //import sunset.utils.V7.SunsetWaveSpawner;
 
 public class SnVars extends ModVars {
@@ -44,6 +45,7 @@ public class SnVars extends ModVars {
             new SnPlanets(),
             new SnSectorPresets(),
             new SnTechTree(),
+            //new SnTeams(),
     };
     //end region
     //public static SunsetWaveSpawner spawner;

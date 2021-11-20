@@ -44,6 +44,8 @@ public class SnPal {
     synthesis2 = Color.valueOf("721A1A"),
     plasma1 = Color.valueOf("86FF11C"),
     plasma2 = Color.valueOf("BBFF80"),
+    renBlast1 = Color.valueOf("6173FF"),
+    renBlast2 = Color.valueOf("6239BD"),
 
     //other
     chainLaser = Pal.surge,

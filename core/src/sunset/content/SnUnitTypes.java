@@ -14,7 +14,6 @@ import mindustry.gen.Unitc;
 import mindustry.graphics.Layer;
 import mindustry.graphics.Pal;
 import mindustry.type.UnitType;
-import mindustry.type.Weapon;
 import sunset.ai.DeliverAI;
 import sunset.ai.ExtinguishAI;
 import sunset.ai.FlyingUnitWeaponAI;
@@ -763,7 +762,7 @@ public class SnUnitTypes implements ContentList {
                 inaccuracy = 4f;
                 rotate = true;
                 mirror = false;
-                bullet = SnBullets.wheel1bullet;
+                bullet = SnBullets.wheel1Bullet;
                 x = y = 0;
             }});
         }};
@@ -777,7 +776,7 @@ public class SnUnitTypes implements ContentList {
                 inaccuracy = 0f;
                 rotate = true;
                 mirror = false;
-                bullet = SnBullets.wheel2shotgun;
+                bullet = SnBullets.wheel2Shotgun;
                 x = y = 0;
             }});
         }};
@@ -791,7 +790,7 @@ public class SnUnitTypes implements ContentList {
                 inaccuracy = 1f;
                 rotate = true;
                 mirror = false;
-                bullet = SnBullets.wheel3burst;
+                bullet = SnBullets.wheel3Burst;
                 shootSound = Sounds.shootBig;
                 x = y = 0;
             }});
@@ -805,7 +804,7 @@ public class SnUnitTypes implements ContentList {
                 reload = 92f;
                 rotate = true;
                 mirror = false;
-                bullet = SnBullets.wheel4shotgun;
+                bullet = SnBullets.wheel4Shotgun;
                 shootSound = Sounds.shootBig;
                 x = y = 0;
             }});
@@ -814,7 +813,7 @@ public class SnUnitTypes implements ContentList {
                 inaccuracy = 3f;
                 alternate = true;
                 rotate = true;
-                bullet = SnBullets.wheel4artillery;
+                bullet = SnBullets.wheel4Artillery;
                 shootSound = Sounds.shootBig;
                 y = -6;
                 x = -3;
@@ -829,7 +828,7 @@ public class SnUnitTypes implements ContentList {
                 reload = 7f;
                 rotate = true;
                 mirror = false;
-                bullet = SnBullets.wheel5flame;
+                bullet = SnBullets.wheel5Flame;
                 shootSound = Sounds.flame;
                 x = y = 0;
             }});
@@ -841,7 +840,7 @@ public class SnUnitTypes implements ContentList {
                 rotateShooting = true;
                 shots = 9;
                 shotDelay = 5f;
-                bullet = SnBullets.wheel5bullet;
+                bullet = SnBullets.wheel5Bullet;
                 shootSound = Sounds.shootBig;
                 y = -12;
                 x = -6;

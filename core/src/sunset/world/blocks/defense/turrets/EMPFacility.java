@@ -97,8 +97,6 @@ public class EMPFacility extends PowerTurret {
 
             TextureRegion r = hasSpinners ? bottom : region;
 
-            Drawf.shadow(r, x - elevation, y - elevation);
-
             Draw.rect(r, x, y);
 
             Draw.rect(top, x, y);

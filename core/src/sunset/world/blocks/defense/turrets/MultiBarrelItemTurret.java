@@ -1,12 +1,15 @@
 package sunset.world.blocks.defense.turrets;
 
+import arc.Core;
 import arc.math.Mathf;
 import arc.math.geom.Vec2;
 import arc.struct.Seq;
 import arc.util.Time;
 import mindustry.Vars;
 import mindustry.entities.bullet.BulletType;
+import mindustry.ui.Bar;
 import mindustry.world.blocks.defense.turrets.ItemTurret;
+import sunset.utils.Utils;
 
 /**
  * Описывает многоствольную турель.
@@ -23,7 +26,22 @@ public class MultiBarrelItemTurret extends ItemTurret {
         super(name);
     }
 
-    public class MultiBarrelItemTurretBuild extends ItemTurretBuild {
+    @Override
+    public void setBars() {
+        super.setBars();
+        bars.add("sunset-reload", (MultiBarrelTurretBuild entity) -> new Bar(
+                () -> Core.bundle.format("bar.sunset-reload", Utils.stringsFixed(Mathf.clamp(reloadTime / slowReloadTime) * 100f)),
+                () -> entity.team.color,
+                () -> Mathf.clamp(reloadTime / slowReloadTime)
+        ));
+        bars.add("sunset-speedup", (MultiBarrelTurretBuild entity) -> new Bar(
+                () -> Core.bundle.format("bar.sunset-speedup", Utils.stringsFixed(Mathf.clamp(entity.reload / reloadTime) * 100f)),
+                () -> entity.team.color,
+                () -> Mathf.clamp(entity.reload / reloadTime)
+        ));
+    }
+
+    public class MultiBarrelTurretBuild extends ItemTurretBuild {
         public float speedupScl = 0f;
         public float slowDownReload = 0f;
         public float maxReloadTime = 0f;
