@@ -45,7 +45,6 @@ public class SnVars extends ModVars {
             new SnPlanets(),
             new SnSectorPresets(),
             new SnTechTree(),
-            //new SnTeams(),
     };
     //end region
     //public static SunsetWaveSpawner spawner;
