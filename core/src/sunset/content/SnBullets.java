@@ -842,6 +842,9 @@ public class SnBullets implements ContentList {
             width = 8f;
             height = 11f;
             lifetime = 35f;
+            splashDamageRadius = 3f;
+            splashDamage = 1f;
+            makeFire = true;
             shootEffect = Fx.shootSmall;
             smokeEffect = Fx.shootSmallSmoke;
         }};
