@@ -30,14 +30,14 @@ public class MultiBarrelItemTurret extends ItemTurret {
     public void setBars() {
         super.setBars();
         bars.add("sunset-reload", (MultiBarrelTurretBuild entity) -> new Bar(
-                () -> Core.bundle.format("bar.sunset-reload", Utils.stringsFixed(Mathf.clamp(reloadTime / slowReloadTime) * 100f)),
-                () -> entity.team.color,
-                () -> Mathf.clamp(reloadTime / slowReloadTime)
-        ));
-        bars.add("sunset-speedup", (MultiBarrelTurretBuild entity) -> new Bar(
-                () -> Core.bundle.format("bar.sunset-speedup", Utils.stringsFixed(Mathf.clamp(entity.reload / reloadTime) * 100f)),
+                () -> Core.bundle.format("bar.sunset-reload", Utils.stringsFixed(Mathf.clamp(entity.reload / reloadTime) * 100f)),
                 () -> entity.team.color,
                 () -> Mathf.clamp(entity.reload / reloadTime)
+        ));
+        bars.add("sunset-speedup", (MultiBarrelTurretBuild entity) -> new Bar(
+                () -> Core.bundle.format("bar.sunset-speedup", Utils.stringsFixed(Mathf.clamp(reloadTime / slowReloadTime) * 100f)),
+                () -> entity.team.color,
+                () -> Mathf.clamp(reloadTime / slowReloadTime)
         ));
     }
 

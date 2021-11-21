@@ -318,7 +318,7 @@ public class SnTurrets implements ContentList {
         }};
         //endregion 4x4
         //region 5x5
-        field = new ItemTurret("field") {{
+        field = new ModItemTurret("field") {{
             requirements(Category.turret, with(Items.copper, 1200, Items.lead, 800, Items.plastanium, 350, Items.thorium, 400, SnItems.fors, 400, SnItems.nobium, 300));
             ammo(
                     SnItems.fors, SnBullets.artilleryFors,
@@ -342,7 +342,7 @@ public class SnTurrets implements ContentList {
 
             health = 160 * size * size;
         }};
-        sniper = new ItemTurret("sniper") {{
+        sniper = new ModItemTurret("sniper") {{
             requirements(Category.turret, with(Items.copper, 1200, Items.surgeAlloy, 600, SnItems.naturite, 500, Items.silicon, 400));
             ammo(
                     Items.surgeAlloy, SnBullets.sniperSurge
@@ -396,7 +396,7 @@ public class SnTurrets implements ContentList {
                 hitEffect = SnFx.tridentHit0;
             }};
         }};
-        radius = new ItemTurret("radius") {{
+        radius = new ModItemTurret("radius") {{
             requirements(Category.turret, with(Items.copper, 1400, Items.graphite, 800, Items.surgeAlloy, 650, Items.plastanium, 555, SnItems.fors, 520, Items.thorium, 480, SnItems.enojie, 420));
             ammo(
                     Items.graphite, SnBullets.heavyStandardDense,
@@ -676,7 +676,7 @@ public class SnTurrets implements ContentList {
         }};
         //endregion synthesis
         //region testing
-        testturret = new ItemTurret("test-turret") {{
+        testturret = new ModItemTurret("test-turret") {{
             requirements(Category.turret, with(Items.copper, 2));
             ammo(
                     Items.copper, SnBullets.testBullet,
