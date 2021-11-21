@@ -75,7 +75,7 @@ public class MissileSiloCommander extends Block {
     public void setBars() {
         super.setBars();
         bars.<MissileSiloCommanderBuild>add("connections", entity -> new Bar(() ->
-                Core.bundle.format("bar.control-lines", entity.missilePositions.size, maxConnections),
+                Core.bundle.format("bar.connections", entity.missilePositions.size, maxConnections),
                 () -> Pal.items,
                 () -> (float)entity.missilePositions.size / (float)maxConnections
         ));

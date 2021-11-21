@@ -59,9 +59,10 @@ public class CopterUnitType extends SnUnitType implements ImageGenerator {
     public Pixmap generate(Pixmap icon, PixmapProcessor processor) {
         processor.save(icon,name+"-no-rotors");
         for (Rotor rotor : rotors) {
-            Pixmap rotreg = PixmapProcessor.outline(processor.get(rotor.rotorRegion));
+//            Pixmap rotreg = PixmapProcessor.outline(processor.get(rotor.rotorRegion));
+            Pixmap rotreg = processor.get(rotor.rotorRegion);
 //            Pixmap top = processor.get(rotor.topRegion).outline(Pal.darkerMetal,3);
-            Pixmap top =processor.get(rotor.topRegion);
+            Pixmap top =PixmapProcessor.outline(processor.get(rotor.topRegion));
 //            processor.save(rotreg, rotor.name + "-outline");
             processor.replace(rotor.rotorRegion,PixmapProcessor.outline(top));
             rotreg =PixmapProcessor.outline( fullRotor(rotreg,processor,rotor.rotorCount));
