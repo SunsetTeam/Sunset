@@ -5,6 +5,7 @@ import arc.Events;
 import arc.graphics.g2d.Draw;
 import arc.graphics.g2d.TextureRegion;
 import arc.math.Mathf;
+import arc.math.geom.Position;
 import arc.math.geom.Vec2;
 import arc.util.Nullable;
 import arc.util.Tmp;
@@ -16,6 +17,7 @@ import mindustry.content.Fx;
 import mindustry.content.UnitTypes;
 import mindustry.entities.Effect;
 import mindustry.gen.BlockUnitc;
+import mindustry.gen.Building;
 import mindustry.gen.Player;
 import mindustry.gen.Unit;
 import mindustry.graphics.Drawf;
@@ -30,26 +32,18 @@ import mindustry.world.blocks.ControlBlock;
 import mindustry.world.blocks.production.GenericCrafter;
 import mindustry.world.meta.Stat;
 import mma.ModVars;
+import mma.graphics.ModFill;
 import sunset.type.MissileType;
 import sunset.world.meta.values.MinMaxRangeValues;
 import sunset.world.meta.values.SplashDamageValue;
 
 import static mindustry.Vars.tilesize;
-import static mindustry.game.EventType.*;
+import static mindustry.game.EventType.TapEvent;
+import static mindustry.game.EventType.Trigger;
 
 public class MissileSiloTurret extends GenericCrafter {
 
     static {
-        Events.run(Trigger.draw, () -> {
-            if (Vars.player.unit() instanceof BlockUnitc b && b.tile() instanceof MissileSiloTurretBuild build) {
-                build.drawSelectIf();
-            }
-        });
-        Events.on(TapEvent.class, e -> {
-            if (e.player != null && e.player.unit() instanceof BlockUnitc b && b.tile() instanceof MissileSiloTurretBuild build) {
-                build.tapTile(e.player, e.tile);
-            }
-        });
     }
 
     public MissileType missile;
@@ -59,7 +53,7 @@ public class MissileSiloTurret extends GenericCrafter {
     /**
      * Положение ракет в шахте относительно размеров блока. От (0, 0) до (1, 1).
      */
-    public Vec2[] rockets = {new Vec2(0.5f, 0.5f)};
+    public MissilePlace[] rockets = {new MissilePlace(0.5f, 0.5f)};
     @Load("@-bottom")
     public TextureRegion baseRegion;
 
@@ -74,7 +68,10 @@ public class MissileSiloTurret extends GenericCrafter {
     }
 
     public void rockets(Vec2... rockets) {
-        this.rockets = rockets;
+        this.rockets = new MissilePlace[rockets.length];
+        for (int i = 0; i < this.rockets.length; i++) {
+            this.rockets[i] = new MissilePlace(rockets[i]);
+        }
     }
 
     @Override
@@ -116,11 +113,38 @@ public class MissileSiloTurret extends GenericCrafter {
         Drawf.dashCircle(x * tilesize + offset, y * tilesize + offset, maxRange, Pal.placing);
     }
 
-    private Vec2 calculatePosition(Vec2 rocket) {
+    private Vec2 calculatePosition(MissilePlace rocket) {
         return Tmp.v1.set(rocket).sub(0.5f, 0.5f).scl(tilesize * size);
     }
 
-    public class MissileSiloTurretBuild extends GenericCrafterBuild implements ControlBlock {
+    public static class MissilePlace implements Position {
+        public float x, y;
+
+        public MissilePlace(float x, float y) {
+            this.x = x;
+            this.y = y;
+        }
+
+        public MissilePlace(Position position) {
+            this(position.getX(), position.getY());
+        }
+
+        public Vec2 positionAt(Building build, Vec2 reference) {
+            return reference.set(this).sub(0.5f, 0.5f).scl(build.block.size * tilesize).add(build);
+        }
+
+        @Override
+        public float getX() {
+            return x;
+        }
+
+        @Override
+        public float getY() {
+            return y;
+        }
+    }
+
+    public class MissileSiloTurretBuild extends GenericCrafterBuild implements ControlBlock, MissileSileBuild {
         /**
          * Количество загруженных ракет. Максимальный размер определяется rockets.size
          */
@@ -146,11 +170,16 @@ public class MissileSiloTurret extends GenericCrafter {
         public boolean shouldAutoTarget() {
             return false;
         }
-
-        private void drawSelectIf() {
+        @Override
+        public void drawControlled() {
             Draw.draw(Layer.overlayUI, () -> {
                 drawSelect();
             });
+        }
+
+        @Override
+        public void drawActiveTerritory() {
+            ModFill.doubleSwirl(x,y,minRange,maxRange,1f,0);
         }
 
         @Override
@@ -162,7 +191,7 @@ public class MissileSiloTurret extends GenericCrafter {
             return res * (rockets.length + 1);
         }
 
-        private void tapTile(Player player, Tile tile) {
+        public void tapTile(Player player, Tile tile) {
             if (player.team() != team || Vars.player != player) return;
             if (isControlled()) {
                 tryShoot(unit.aimX(), unit.aimY());
@@ -171,17 +200,18 @@ public class MissileSiloTurret extends GenericCrafter {
             }
         }
 
-        private void tryShoot(float shootX, float shootY) {
+        @Override
+        public boolean tryShoot(float shootX, float shootY) {
             if (loaded == 0) {
-                return;
+                return false;
             }
             float dst = dst(shootX, shootY);
-            if (dst > maxRange || dst < minRange) return;
-            Vec2 from = new Vec2(x + size * tilesize * (rockets[loaded - 1].x - 0.5f),
-                    y + size * tilesize * (rockets[loaded - 1].y - 0.5f));
+            if (dst > maxRange || dst < minRange) return false;
+            Vec2 from = rockets[loaded - 1].positionAt(this, new Vec2());
             launchEffect.at(from);
             missile.launch(from, new Vec2(shootX, shootY));
             loaded--;
+            return true;
         }
 
         public void updateShooting() {
@@ -228,21 +258,15 @@ public class MissileSiloTurret extends GenericCrafter {
             Draw.rect(baseRegion, x, y);
             Draw.rect(region, x, y);
 
+            Vec2 rocket = Tmp.v1;
             for (int i = 0; i < loaded; i++) {
-                Vec2 rocket = calculatePosition(rockets[i]);
-                Draw.rect(missile.rocketRegion,
-                        x + rocket.x,
-                        y + rocket.y);
-                // ... / 64f * tilesize = / 2f * tilesize / 32f
-                // / 2f  - нужна только половина блока
-                // / 32f - 32 пикселя в спрайте на 1 блок
-                // * tilesize - перевод координат
+                rockets[i].positionAt(this, rocket);
+                Draw.rect(missile.rocketRegion, rocket.x, rocket.y);
             }
 
             if (loaded < rockets.length) {
-                Vec2 rocketPosition = calculatePosition(rockets[loaded]).add(this);
-                float rocketx = rocketPosition.x;
-                float rockety = rocketPosition.y;
+                float rocketx = rockets[loaded].positionAt(this, Tmp.v1).x;
+                float rockety = Tmp.v1.y;
                 Draw.draw(Layer.blockOver, () -> Drawf.construct(rocketx, rockety, missile.rocketRegion,
                         0, progress, warmup, totalProgress));
             }
