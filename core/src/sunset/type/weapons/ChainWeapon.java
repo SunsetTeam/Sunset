@@ -11,6 +11,7 @@ import arc.math.geom.Vec2;
 import arc.scene.ui.layout.Table;
 import arc.struct.ObjectMap;
 import arc.struct.Seq;
+import arc.util.Log;
 import arc.util.Strings;
 import arc.util.Time;
 import mindustry.entities.Units;
@@ -38,7 +39,7 @@ public class ChainWeapon extends WeaponExt implements UpdateDrawWeapon, StatValu
     public Color chainColor = coral.cpy();
     public boolean draw = false;
     TextureRegion laser, laserEnd;
-    Seq<Unit> units;
+    Seq<Unit> units=new Seq<>();
 
     public ChainWeapon(String name) {
         super(name);
@@ -70,7 +71,10 @@ public class ChainWeapon extends WeaponExt implements UpdateDrawWeapon, StatValu
 
     private void getUnits(WeaponMount mount, Unit unit) {
         ObjectMap<WeaponMount, Seq<Unit>> chainWeapon = UnitData.data(unit, "ChainWeapon", ObjectMap::new);
-        if (chainWeapon==null)return;
+        if (chainWeapon==null) {
+            units.clear();
+            return;
+        }
         units = chainWeapon.get(mount,Seq::new);
     }
 

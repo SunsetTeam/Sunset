@@ -4,6 +4,7 @@ import arc.Events;
 import arc.func.Prov;
 import arc.struct.ObjectMap;
 import arc.struct.Seq;
+import arc.util.Log;
 import mindustry.game.EventType;
 import mindustry.game.EventType.UnitDestroyEvent;
 import mindustry.gen.Groups;
@@ -16,13 +17,13 @@ public class UnitData {
     private static ObjectMap<Unit, ObjectMap<String, Object>> data = new ObjectMap<>();
 
     public static <T> T data(Unit unit, String key, Prov<T> prov) {
-        if (unit != null && !validUnit(unit)) return null;
+        if (unit == null || invalidUnit(unit)) return null;
         ObjectMap<String, Object> entries = data.get(unit, ObjectMap::new);
         return (T) entries.get(key, prov::get);
     }
 
     public static <T> void data(Unit unit, String key, T value) {
-        if (unit == null || unit.dead) return;
+        if (unit == null || invalidUnit(unit)) return;
         data.get(unit, ObjectMap::new).put(key, value);
     }
 
@@ -52,8 +53,11 @@ public class UnitData {
         Events.on(UnitDestroyEvent.class, (e) -> data.remove(e.unit));
     }
 
-    private static boolean validUnit(Unit unit) {
-        return !unit.isValid() || unit.isNull() ||
-                Groups.unit.getByID(unit.id) == null;
+    public static boolean validUnit(Unit unit) {
+        return !invalidUnit(unit);
+    }
+
+    public static boolean invalidUnit(Unit unit) {
+        return !unit.isValid() || unit.isNull() || Groups.unit.getByID(unit.id) == null;
     }
 }
