@@ -8,10 +8,6 @@ import mindustry.ctype.ContentList;
 import mindustry.game.EventType;
 import mma.ModVars;
 import sunset.content.*;
-import sunset.content.blocks.*;
-import sunset.content.blocks.defense.SnProjectors;
-import sunset.content.blocks.defense.SnTurrets;
-import sunset.content.blocks.defense.SnWalls;
 import sunset.core.SnLogic;
 //import sunset.utils.V7.SunsetWaveSpawner;
 
@@ -19,32 +15,19 @@ public class SnVars extends ModVars {
 
     //core region
     private static final Seq<Runnable> onLoad = new Seq<>();
-    private static final ContentList[] snContent = {
+    private static final ContentList[] snContent = Seq.<ContentList>with(
             new SnItems(),
             new SnStatusEffects(),
             new SnLiquids(),
             new SnBullets(),
             new SnUnitTypes(),
-            //blocks region
-            new SnProjectors(),
-            new SnTurrets(),
-            new SnWalls(),
-
-            new SnDistribution(),
-            new SnEnvironment(),
-            new SnLiquidBlocks(),
-            new SnLogicBlocks(),
-            new SnPower(),
-            new SnProduction(),
-            new SnRaw(),
-            new SnUnitBlocks(),
-            //region end
+            new SnBlocks(),
             //new SnLoadouts(),
             new SnWeathers(),
             new SnPlanets(),
             new SnSectorPresets(),
-            new SnTechTree(),
-    };
+            new SnTechTree()
+    ).flatMap(contentList -> Seq.with(contentList instanceof SnBlocks b ? b.list : new ContentList[]{contentList})).toArray(ContentList.class);
     //end region
     //public static SunsetWaveSpawner spawner;
     public static SnLogic logic;
