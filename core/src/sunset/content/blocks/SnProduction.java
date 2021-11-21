@@ -36,7 +36,7 @@ public class SnProduction implements ContentList {
             requirements(Category.production, with(Items.copper, 200, Items.lead, 200, Items.silicon, 180, Items.metaglass, 140, Items.titanium, 170, Items.phaseFabric, 155));
             size = 3;
             health = 990;
-            craftEffect = SnFx.cultivatorSmeltsmoke;
+            craftEffect = SnFx.cultivatorSmeltSmoke;
             craftTime = 200f;
             drawer = new DrawRotator();
             outputItem = new ItemStack(Items.sporePod, 6);

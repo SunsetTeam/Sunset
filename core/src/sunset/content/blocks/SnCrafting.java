@@ -69,7 +69,7 @@ public class SnCrafting implements ContentList {
             requirements(Category.crafting, with(Items.titanium, 150, Items.graphite, 120, Items.silicon, 110,  Items.metaglass, 80, Items.plastanium, 60));
 
             size = 3;
-            craftEffect = SnFx.modPlasticburn;
+            craftEffect = SnFx.modPlasticBurn;
             craftTime = 60f;
             outputItem = new ItemStack(Items.plastanium, 5);
             drawer = new DrawGlow();
@@ -201,8 +201,8 @@ public class SnCrafting implements ContentList {
             size = 4;
             hasPower = true;
             hasLiquids = false;
-            craftEffect = SnFx.enojiecraft;
-            updateEffect = SnFx.enojieburn;
+            craftEffect = SnFx.enojieCraft;
+            updateEffect = SnFx.enojieBurn;
 
             consumes.items(with(SnItems.nobium, 2, SnItems.planatrium, 3, Items.metaglass, 1));
             consumes.power(5.3f);

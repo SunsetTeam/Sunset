@@ -39,7 +39,11 @@ public class DRDrill extends Drill {
             if (rotator0.found()) Draw.rect(rotator0, x, y, timeDrilled * m2);
             Draw.rect(block.region, x, y);
             Draw.rect(top, x, y);
-            Draw.rect(itemRegion, x , y);
+            if(dominantItem != null && drawMineItem){
+                Draw.color(dominantItem.color);
+                Draw.rect(itemRegion, x, y);
+                Draw.color();
+            }
         }
     }
 }

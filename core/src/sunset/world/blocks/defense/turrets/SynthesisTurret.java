@@ -5,7 +5,6 @@ import arc.graphics.g2d.Draw;
 import arc.graphics.g2d.TextureRegion;
 import arc.math.Mathf;
 import mindustry.annotations.Annotations.Load;
-import mindustry.content.Fx;
 import mindustry.graphics.Drawf;
 import mindustry.graphics.Layer;
 import mindustry.graphics.Pal;
@@ -23,11 +22,7 @@ public class SynthesisTurret extends ItemTurret {
     @Load("@-light")
     public TextureRegion light;
     public float armor;
-    //public static int param1;
-    //public int addSpeed;
     public int speed = 1;
-    float shield;
-    transient float shieldAlpha = 0f;
 
     public SynthesisTurret(String name) {
         super(name);
@@ -53,14 +48,7 @@ public class SynthesisTurret extends ItemTurret {
         @Override
         public void updateTile() {
             super.updateTile();
-
-            /* * Increase shooting speed if health less or equal 10%.
-             * If parameter speed = 1, shooting speed not be increased.
-            if(this.health <= maxHealth * 100 / 10) {
-                addSpeed = speed;
-            }else{
-                addSpeed = 1;
-            }*/
+            //TODO Increase shooting speed if health less or equal 10%.
         }
 
         @Override
@@ -72,8 +60,6 @@ public class SynthesisTurret extends ItemTurret {
             Drawf.shadow(region, x + tr2.x - elevation, y + tr2.y - elevation, rotation - 90);
             drawer.get(this);
             if (this.health <= maxHealth * 100 / 10) Draw.rect(light, x + tr2.x, y + tr2.y, rotation - 90);
-            if (this.isShooting())
-            if (this.wasShooting)
             if (heatRegion != Core.atlas.find("error")) {
                 heatDrawer.get(this);
             }
@@ -86,50 +72,11 @@ public class SynthesisTurret extends ItemTurret {
             if (minRange > 0) Drawf.dashCircle(x, y, minRange, Pal.health);
         }
 
-        /*@Override
-        public void displayBars(Table bars) {
-            super.displayBars(bars);
-            if (armor > 0) {
-                bars.add(new Bar("stat.armor", Pal.shield, () -> shield)).growX();
-                bars.row();
-            }
-        }*/
-
         @Override
         public float handleDamage(float amount) {
-            return Math.max(amount - armor, minArmorDamage * amount);
+            return Math.max(amount - armor, minArmorDamage * amount); //TODO make my own variant of armor applying (% and etc...)
         }
 
-        @Override
-        public void damage(float amount) {
-            //apply armor
-            amount = Math.max(amount - armor, minArmorDamage * amount);
-
-            rawDamage(amount);
-        }
-
-        private void rawDamage(float amount) {
-            boolean hadShields = shield > 0.0001f;
-
-            if(hadShields) {
-                shieldAlpha = 1f;
-            }
-
-            float shieldDamage = Math.min(Math.max(shield, 0), amount);
-            shield -= shieldDamage;
-            hitTime = 1f;
-            amount -= shieldDamage;
-
-            if (amount > 0) {
-                health -= amount;
-                if(health <= 0 && !dead) {
-                    kill();
-                }
-
-                if (hadShields && shield <= 0.0001f) {
-                    Fx.unitShieldBreak.at(x, y, 0, this);
-                }
-            }
-        }
+        //TODO make a visual display of the armor
     }
 }

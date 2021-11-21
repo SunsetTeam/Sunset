@@ -9,6 +9,7 @@ import mindustry.game.EventType;
 import mma.ModVars;
 import sunset.content.*;
 import sunset.core.SnLogic;
+import sunset.content.SnTeams;
 //import sunset.utils.V7.SunsetWaveSpawner;
 
 public class SnVars extends ModVars {
