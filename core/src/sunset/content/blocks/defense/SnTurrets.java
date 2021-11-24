@@ -21,6 +21,7 @@ import mindustry.world.meta.BuildVisibility;
 import sunset.content.SnBullets;
 import sunset.content.SnFx;
 import sunset.content.SnItems;
+import sunset.content.SnStatusEffects;
 import sunset.entities.bullet.EnergySphereBulletType;
 import sunset.graphics.SnPal;
 import sunset.type.MissileType;
@@ -73,7 +74,7 @@ public class SnTurrets implements ContentList {
             ammoUseEffect = Fx.casing1;
             targetAir = true;
         }};
-        eagle = new ItemTurret("eagle") {{
+        eagle = new ModItemTurret("eagle") {{
             requirements(Category.turret, with(Items.copper, 60, Items.titanium, 40, SnItems.naturite, 25));
             ammo(
                     Items.sporePod, SnBullets.sporePodPoisonBullet,
@@ -257,10 +258,10 @@ public class SnTurrets implements ContentList {
         scorpio = new ModItemTurret("scorpio") {{
             requirements(Category.turret, with(Items.copper, 600, SnItems.fors, 560, Items.plastanium, 480, SnItems.nobium, 450, SnItems.naturite, 400));
             ammo(
-                    Items.sporePod, SnBullets.bigSporePodPoison,
-                    SnItems.naturite, SnBullets.bigNaturitePoison,
-                    SnItems.nobium, SnBullets.bigNobiumPoison,
-                    Items.plastanium, SnBullets.bigPlastaniumPoison
+                    Items.sporePod, SnBullets.bigSporePodPoison,//TODO
+                    SnItems.naturite, SnBullets.bigNaturitePoison,//TODO
+                    SnItems.nobium, SnBullets.bigNobiumPoison,//TODO
+                    Items.plastanium, SnBullets.bigPlastaniumPoison//TODO
             );
             health = 2900;
             size = 4;
@@ -300,7 +301,7 @@ public class SnTurrets implements ContentList {
             health = 200 * size * size;
             flags = EnumSet.of(BlockFlag.turret, BlockFlag.extinguisher);
             ammoPerShot = 15;
-            alternate = true;
+            alternate = true;//TODO
         }};
         chain = new ChainLightningTurret("chain") {{
             requirements(Category.turret, with(Items.copper, 600, Items.lead, 500, Items.surgeAlloy, 460, SnItems.nobium, 450, SnItems.naturite, 400, SnItems.planatrium, 350));
@@ -321,8 +322,8 @@ public class SnTurrets implements ContentList {
         field = new ModItemTurret("field") {{
             requirements(Category.turret, with(Items.copper, 1200, Items.lead, 800, Items.plastanium, 350, Items.thorium, 400, SnItems.fors, 400, SnItems.nobium, 300));
             ammo(
-                    SnItems.fors, SnBullets.artilleryFors,
-                    Items.blastCompound, SnBullets.artilleryBlast
+                    SnItems.fors, SnBullets.artilleryFors,//TODO
+                    Items.blastCompound, SnBullets.artilleryBlast//TODO
             );
             targetAir = true;
             targetGround = true;
@@ -393,7 +394,7 @@ public class SnTurrets implements ContentList {
                 lightningLength = 192;
                 healPercent = 5f;
                 lifetime = 250f;
-                hitEffect = SnFx.tridentHit0;
+                hitEffect = SnFx.tridentHit0;//TODO
             }};
         }};
         radius = new ModItemTurret("radius") {{
@@ -426,7 +427,7 @@ public class SnTurrets implements ContentList {
         }};
         //endregion 6x6
         //region 7x7
-        halberd = new PowerTurret("halberd") {{
+        halberd = new ModPowerTurret("halberd") {{
             requirements(Category.turret, with(Items.copper, 2400,  Items.metaglass, 1200, Items.lead, 1120, Items.silicon, 1200, Items.plastanium, 980, SnItems.nobium, 750, SnItems.fors, 710, SnItems.enojie, 690));
             range = 350f;
             shots = 1;
@@ -449,7 +450,7 @@ public class SnTurrets implements ContentList {
             targetGround = true;
             targetAir = false;
             shootSound = Sounds.laser;
-            alternate = true;
+            alternate = true;//TODO
 
             shootType = new LaserBulletType(2500) {{
                 colors = new Color[] {Pal.meltdownHit.cpy().a(0.4f), Pal.meltdownHit, Color.white};
@@ -458,7 +459,7 @@ public class SnTurrets implements ContentList {
                 drawSize = 440f;
                 collidesAir = false;
                 length = 370f;
-                width = 60.0F;
+                width = 60.0F;//TODO
             }};
         }};
         //endregion 7x7
@@ -566,10 +567,9 @@ public class SnTurrets implements ContentList {
             shootType = SnBullets.empBullet;
             shootEffect = SnFx.empWave;
             range = 180;
-            shots = 10;
+            shots = 1;
             zaps = 10;
             zapAngleRand = 10f;
-            parts.add(new EMPPart(1.2f));
         }};
         dischargerEvo = new EMPFacility("discharger-evo") {{
             requirements(Category.turret, ItemStack.mult(discharger.requirements, 2));
@@ -584,7 +584,6 @@ public class SnTurrets implements ContentList {
             shots = 20;
             zaps = 20;
             zapAngleRand = 15f;
-            parts.add(new EMPPart(5));
         }};
         //endregion EMP
         //region synthesis

@@ -1021,7 +1021,7 @@ public class SnBullets implements ContentList {
             weaveScale = 4f;
             weaveMag = 2f;
         }};
-        //endregion copter
+        //endregion helicopter
         //region buffer
         cometWaterShot = new ExtinguishBulletType(Liquids.water) {{
             lifetime = 30f;
