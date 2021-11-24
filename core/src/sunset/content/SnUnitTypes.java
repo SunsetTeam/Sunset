@@ -1,7 +1,7 @@
 package sunset.content;
 
 import mindustry.ai.types.SuicideAI;
-import mindustry.annotations.Annotations;
+import mindustry.annotations.Annotations.EntityDef;
 import mindustry.content.Fx;
 import mindustry.content.StatusEffects;
 import mindustry.content.UnitTypes;
@@ -45,7 +45,7 @@ public class SnUnitTypes implements ContentList {
     router,
     //freezing
     snowflake;
-    @Annotations.EntityDef({Unitc.class, Deliverc.class})
+    @EntityDef({Unitc.class, Deliverc.class})
     public static UnitType courier;
 
     @Override
@@ -339,7 +339,7 @@ public class SnUnitTypes implements ContentList {
 
             constructor = UnitEntity::create;
 
-            weapons.add(new WeaponExt("comet") {{
+            weapons.add(new WeaponExt("sprite") {{
                 ai = new ExtinguishWeaponAI();
                 rotate = true;
                 mirror = false;
