@@ -43,7 +43,7 @@ public class SnBullets implements ContentList {
     sporePodPoisonFrag, heavySporePodPoison, naturitePoisonFrag, heavyNaturitePoison, nobiumPoisonFrag, heavyNobiumPoison,
     bigSporePodPoisonFrag, bigSporePodPoison, bigNaturitePoisonFrag, bigNaturitePoison, bigNobiumPoisonFrag, bigNobiumPoison, bigPlastaniumPoisonFrag, bigPlastaniumPoison,
     //energy-sphere
-    smallEnergySphere, mediumEnergySphere,
+    smallEnergySphere, mediumEnergySphereFrag, mediumEnergySphere,
     //units
     basicHelicopterGun, laserBoltHelicopterGun, helicopterMissile, clusterRocketSmall, clusterRocket, bigHelicopterGun, bigHelicopterBullet, laserGun, helicopterFlame, laserHelicopterFrag, largeHelicopterBullet, bigHelicopterRocket, helicopterMissiles,
     cometWaterShot, starStunBullet, galaxyKnockbackBullet,
