@@ -136,15 +136,6 @@ public class SnFx {
     mediumEnergySphereCharge = new Effect(55f, e -> {
         color(SnPal.redBombBack);
         Fill.circle(e.x, e.y, e.fin() * 4f);
-
-        for (int i = 0; i < 2; i++) {
-            Drawf.tri(e.x, e.y, 3f, 45f * e.fout(), i * 60);
-        }
-
-        color();
-        for (int i = 0; i < 2; i++) {
-            Drawf.tri(e.x, e.y, 2f, 25f * e.fout(), i * 60);
-        }
     }),
     
     mediumEnergySphereHit = new Effect(20f, 50f, e -> {
