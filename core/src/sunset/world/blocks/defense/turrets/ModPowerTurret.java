@@ -4,7 +4,11 @@ import arc.Core;
 import arc.math.Mathf;
 import mindustry.ui.Bar;
 import mindustry.world.blocks.defense.turrets.PowerTurret;
+import sunset.content.SnSettings;
 import sunset.utils.Utils;
+
+import static arc.Core.settings;
+import static sunset.content.SnSettings.snSettings;
 
 /** Power turret with useful things.
  * Features:
@@ -20,10 +24,12 @@ public class ModPowerTurret extends PowerTurret {
     @Override
     public void setBars() {
         super.setBars();
-        bars.add("sunset-reload", (PowerTurretBuild entity) -> new Bar(
-                () -> Core.bundle.format("bar.sunset-reload", Utils.stringsFixed(Mathf.clamp(entity.reload / reloadTime) * 100f)),
-                () -> entity.team.color,
-                () -> Mathf.clamp(entity.reload / reloadTime)
-        ));
+        if (settings.getBool("sn-reloadbar")) {
+            bars.add("sunset-reload", (PowerTurretBuild entity) -> new Bar(
+                    () -> Core.bundle.format("bar.sunset-reload", Utils.stringsFixed(Mathf.clamp(entity.reload / reloadTime) * 100f)),
+                    () -> entity.team.color,
+                    () -> Mathf.clamp(entity.reload / reloadTime)
+            ));
+        }
     }
 }
