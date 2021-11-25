@@ -842,7 +842,7 @@ public class SnBullets implements ContentList {
         //region energy-sphere
         smallEnergySphere = new BasicBulletType(3f, 15) {{
             sprite = "sunset-circle-bullet";
-            lifetime = 130f;
+            lifetime = 30f;
             height = 4f;
             width = 4f;
             hitEffect = Fx.flakExplosion;
@@ -862,16 +862,16 @@ public class SnBullets implements ContentList {
 
         mediumEnergySphere = new BasicBulletType(3f, 30) {{
             sprite = "sunset-circle-bullet";
-            lifetime = 190f;
+            lifetime = 45f;
             height = 8f;
             width = 8f;
             hitEffect = SnFx.mediumEnergySphereHit;
             frontColor = SnPal.redBomb;
             backColor = SnPal.redBombBack;
 
-            trailColor = Pal.heal;
-            trailWidth = 3f;
-            trailLength = 8;
+            trailColor = SnPal.redBombBack;
+            trailWidth = 2f;
+            trailLength = 4;
             trailEffect = Fx.artilleryTrail;
 
             fragBullet = mediumEnergySphereFrag;
