@@ -150,10 +150,6 @@ public class SnFx {
         for (int i = 0; i < 2; i++) {
             Drawf.tri(e.x, e.y, 1f, 20f * e.fout(), i * 50);
         }
-<<<<<<< HEAD
-=======
-
->>>>>>> 8446fe4fa3d85fff6a22696b4d843c2a862f363a
         Drawf.light(e.x, e.y, 12, SnPal.redBomb, e.fout());
     }),
 
