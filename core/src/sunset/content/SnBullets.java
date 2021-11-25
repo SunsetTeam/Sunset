@@ -43,7 +43,7 @@ public class SnBullets implements ContentList {
     sporePodPoisonFrag, heavySporePodPoison, naturitePoisonFrag, heavyNaturitePoison, nobiumPoisonFrag, heavyNobiumPoison,
     bigSporePodPoisonFrag, bigSporePodPoison, bigNaturitePoisonFrag, bigNaturitePoison, bigNobiumPoisonFrag, bigNobiumPoison, bigPlastaniumPoisonFrag, bigPlastaniumPoison,
     //energy-sphere
-    smallEnergySphere, energySphere,
+    smallEnergySphere, mediumEnergySphere,
     //units
     basicHelicopterGun, laserBoltHelicopterGun, helicopterMissile, clusterRocketSmall, clusterRocket, bigHelicopterGun, bigHelicopterBullet, laserGun, helicopterFlame, laserHelicopterFrag, largeHelicopterBullet, bigHelicopterRocket, helicopterMissiles,
     cometWaterShot, starStunBullet, galaxyKnockbackBullet,
@@ -850,12 +850,12 @@ public class SnBullets implements ContentList {
             backColor = SnPal.redBombBack;
         }};
 
-        energySphere = new BasicBulletType(3f, 15) {{
+        mediumEnergySphere = new BasicBulletType(3f, 30) {{
             sprite = "sunset-circle-bullet";
-            lifetime = 130f;
-            height = 4f;
-            width = 4f;
-            hitEffect = Fx.flakExplosion;
+            lifetime = 190f;
+            height = 8f;
+            width = 8f;
+            hitEffect = SnFx.mediumEnergySphereHit;
             frontColor = SnPal.redBomb;
             backColor = SnPal.redBombBack;
         }};

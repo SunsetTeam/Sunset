@@ -33,7 +33,7 @@ public class SnTurrets implements ContentList {
         //1x1
         sting, spine, eagle,
         //2x2
-        carbine, pulsation, reflection,
+        supreme, carbine, pulsation, reflection,
         //3x3
         major, burner, trigger,
         //4x4
@@ -74,7 +74,6 @@ public class SnTurrets implements ContentList {
             powerUse = 1f;
             chargeEffect = SnFx.smallEnergySphereCharge;
         }};
-
         spine = new ModItemTurret("spine") {{
             requirements(Category.turret, with(Items.copper, 55, Items.lead, 25));
             ammo(
@@ -117,6 +116,23 @@ public class SnTurrets implements ContentList {
         }};
         //endregion 1x1
         //region 2x2
+        supreme = new ModPowerTurret("supreme") {{
+            requirements(Category.turret, with(SnItems.fors, 150, Items.lead, 70, Items.silicon, 40));
+            reloadTime = 50f;
+            range = 190f;
+            recoilAmount = 2f;
+            inaccuracy = 3f;
+            rotateSpeed = 6f;
+            shootCone = 3f;
+            shootSound = Sounds.laser;
+            ammoUseEffect = Fx.casing1;
+            targetAir = true;
+            shootType = SnBullets.mediumEnergySphere;
+            chargeTime = 30f;
+            chargeMaxDelay = 30f;
+            powerUse = 1f;
+            chargeEffect = SnFx.mediumEnergySphereCharge;
+        }};
         carbine = new ChainLightningTurret("carbine") {{
             requirements(Category.turret, with(Items.copper, 150, Items.lead, 140, Items.surgeAlloy, 60, SnItems.nobium, 90, SnItems.naturite, 120));
             range = 132.2f;
