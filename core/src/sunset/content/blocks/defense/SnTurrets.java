@@ -118,6 +118,7 @@ public class SnTurrets implements ContentList {
         //region 2x2
         supreme = new ModPowerTurret("supreme") {{
             requirements(Category.turret, with(SnItems.fors, 150, Items.lead, 70, Items.silicon, 40));
+            size = 2;
             reloadTime = 50f;
             range = 190f;
             recoilAmount = 2f;
@@ -130,7 +131,7 @@ public class SnTurrets implements ContentList {
             shootType = SnBullets.mediumEnergySphere;
             chargeTime = 30f;
             chargeMaxDelay = 30f;
-            powerUse = 1f;
+            powerUse = 2f;
             chargeEffect = SnFx.mediumEnergySphereCharge;
         }};
         carbine = new ChainLightningTurret("carbine") {{

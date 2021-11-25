@@ -850,6 +850,16 @@ public class SnBullets implements ContentList {
             backColor = SnPal.redBombBack;
         }};
 
+        mediumEnergySphereFrag = new LaserBulletType(10) {{
+            colors = new Color[]{SnPal.redBomb.cpy().a(0.4f), SnPal.redBomb, Color.white};
+            width = 20f;
+            lifetime = 15f;
+            length = 20f;
+            laserEffect = Fx.lancerLaserShootSmoke;
+            collidesAir = true;
+            collidesGround = true;
+        }};
+
         mediumEnergySphere = new BasicBulletType(3f, 30) {{
             sprite = "sunset-circle-bullet";
             lifetime = 190f;
@@ -858,6 +868,16 @@ public class SnBullets implements ContentList {
             hitEffect = SnFx.mediumEnergySphereHit;
             frontColor = SnPal.redBomb;
             backColor = SnPal.redBombBack;
+
+            trailColor = Pal.heal;
+            trailWidth = 3f;
+            trailLength = 8;
+            trailEffect = Fx.artilleryTrail;
+
+            fragBullet = mediumEnergySphereFrag;
+            fragBullets = 1;
+            fragCone = 0.0001f;
+
         }};
         //endregion energy-sphere
         //region helicopter

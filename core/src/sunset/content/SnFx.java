@@ -150,8 +150,7 @@ public class SnFx {
         for (int i = 0; i < 2; i++) {
             Drawf.tri(e.x, e.y, 1f, 20f * e.fout(), i * 50);
         }
-
-        Drawf.light(e.x, e.y, SnPal.redBomb, e.fout());
+        Drawf.light(e.x, e.y, 12, SnPal.redBomb, e.fout());
     }),
 
     redBomb = new Effect(30f, 70f, e -> {
