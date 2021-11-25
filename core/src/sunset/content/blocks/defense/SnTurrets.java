@@ -588,7 +588,7 @@ public class SnTurrets implements ContentList {
             shots = 10;
             zaps = 10;
             zapAngleRand = 10f;
-            parts.add(new EMPPart(1.2f));
+            parts.add(new Core(1.2f));
         }};
         dischargerEvo = new EMPFacility("discharger-evo") {{
             requirements(Category.turret, ItemStack.mult(discharger.requirements, 2));
@@ -603,7 +603,7 @@ public class SnTurrets implements ContentList {
             shots = 20;
             zaps = 20;
             zapAngleRand = 15f;
-            parts.add(new EMPPart(5));
+            parts.add(new Core(5));
         }};
         //endregion EMP
         //region synthesis
