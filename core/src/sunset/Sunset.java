@@ -68,6 +68,7 @@ public class Sunset extends MMAMod{
         }
         Events.on(ClientLoadEvent.class, (e) -> {
             SnAudio.reload();
+            SnSettings.init();
         });
     }
 

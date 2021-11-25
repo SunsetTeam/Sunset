@@ -11,6 +11,8 @@ import mindustry.ui.Bar;
 import mindustry.world.blocks.defense.turrets.ItemTurret;
 import sunset.utils.Utils;
 
+import static arc.Core.settings;
+
 /**
  * Описывает многоствольную турель.
  */
@@ -29,11 +31,13 @@ public class MultiBarrelItemTurret extends ItemTurret {
     @Override
     public void setBars() {
         super.setBars();
-        bars.add("sunset-reload", (MultiBarrelTurretBuild entity) -> new Bar(
-                () -> Core.bundle.format("bar.sunset-reload", Utils.stringsFixed(Mathf.clamp(entity.reload / reloadTime) * 100f)),
-                () -> entity.team.color,
-                () -> Mathf.clamp(entity.reload / reloadTime)
-        ));
+        if (settings.getBool("sn-reloadbar")) {
+            bars.add("sunset-reload", (MultiBarrelTurretBuild entity) -> new Bar(
+                    () -> Core.bundle.format("bar.sunset-reload", Utils.stringsFixed(Mathf.clamp(entity.reload / reloadTime) * 100f)),
+                    () -> entity.team.color,
+                    () -> Mathf.clamp(entity.reload / reloadTime)
+            ));
+        }
         bars.add("sunset-speedup", (MultiBarrelTurretBuild entity) -> new Bar(
                 () -> Core.bundle.format("bar.sunset-speedup", Utils.stringsFixed(Mathf.clamp(reloadTime / slowReloadTime) * 100f)),
                 () -> entity.team.color,

@@ -7,13 +7,15 @@ import arc.math.Rand;
 import arc.struct.Seq;
 import arc.util.Nullable;
 import mindustry.game.Rules.TeamRule;
+import mindustry.game.Team;
 import mindustry.game.Teams.TeamData;
+import mindustry.graphics.Pal;
 import mindustry.world.blocks.storage.CoreBlock.CoreBuild;
 import mindustry.world.modules.ItemModule;
 
 import static mindustry.Vars.state;
 
-public class Team extends mindustry.game.Team {
+public class SnTeam extends mindustry.game.Team {
     public final int id;
     public final Color color;
     public final Color[] palette;
@@ -23,34 +25,34 @@ public class Team extends mindustry.game.Team {
     public String name;
 
     /** All 256 registered teams. */
-    public static final Team[] all = new Team[256];
+    public static final SnTeam[] all = new SnTeam[256];
     /** The 6 base teams used in the editor. */
-    public static final Team[] baseTeams = new Team[6];
+    public static final SnTeam[] baseTeams = new SnTeam[6];
 
-    /*public final static Team
-            derelict = new Team(0, "derelict", Color.valueOf("4d4e58")),
-            sharded = new Team(1, "sharded", Pal.accent.cpy(),
+    public final static Team
+            derelict = new SnTeam(0, "derelict", Color.valueOf("4d4e58")),
+            sharded = new SnTeam(1, "sharded", Pal.accent.cpy(),
                     Color.valueOf("ffd37f"), Color.valueOf("eab678"), Color.valueOf("d4816b")),
-            crux = new Team(2, "crux", Color.valueOf("f25555"),
+            crux = new SnTeam(2, "crux", Color.valueOf("f25555"),
                     Color.valueOf("fc8e6c"), Color.valueOf("f25555"), Color.valueOf("a04553")),
-            green = new Team(3, "green", Color.valueOf("54d67d"), Color.valueOf("96f58c"), Color.valueOf("54d67d"), Color.valueOf("28785c")),
-            purple = new Team(4, "purple", Color.valueOf("995bb0"), Color.valueOf("f08dd5"), Color.valueOf("995bb0"), Color.valueOf("312c63")),
-            blue = new Team(5, "blue", Color.valueOf("554deb"), Color.valueOf("80aaff"), Color.valueOf("554deb"), Color.valueOf("3f207d"));*/
+            green = new SnTeam(3, "green", Color.valueOf("54d67d"), Color.valueOf("96f58c"), Color.valueOf("54d67d"), Color.valueOf("28785c")),
+            purple = new SnTeam(4, "purple", Color.valueOf("995bb0"), Color.valueOf("f08dd5"), Color.valueOf("995bb0"), Color.valueOf("312c63")),
+            blue = new SnTeam(5, "blue", Color.valueOf("554deb"), Color.valueOf("80aaff"), Color.valueOf("554deb"), Color.valueOf("3f207d"));
 
     static {
         Mathf.rand.setSeed(8);
         //create the whole 256 placeholder teams
         for(int i = 6; i < all.length; i++) {
-            new Team(i, "team#" + i, Color.HSVtoRGB(360f * Mathf.random(), 100f * Mathf.random(0.6f, 1f), 100f * Mathf.random(0.8f, 1f), 1f));
+            new SnTeam(i, "team#" + i, Color.HSVtoRGB(360f * Mathf.random(), 100f * Mathf.random(0.6f, 1f), 100f * Mathf.random(0.8f, 1f), 1f));
         }
         Mathf.rand.setSeed(new Rand().nextLong());
     }
 
-    public static Team get(int id) {
+    public static SnTeam get(int id) {
         return all[((byte)id) & 0xff];
     }
 
-    public Team(int id, String name, Color color) {
+    public SnTeam(int id, String name, Color color) {
         super(id, name, color);
         this.name = name;
         this.color = color;
@@ -70,7 +72,7 @@ public class Team extends mindustry.game.Team {
     }
 
     /** Specifies a 3-color team palette. */
-    public Team(int id, String name, Color color, Color pal1, Color pal2, Color pal3) {
+    public SnTeam(int id, String name, Color color, Color pal1, Color pal2, Color pal3) {
         this(id, name, color);
 
         palette[0] = pal1;
@@ -111,9 +113,9 @@ public class Team extends mindustry.game.Team {
         return state.rules.waves && this == state.rules.waveTeam;
     }
 
-    /*public boolean isEnemy(Team other) {
+    public boolean isEnemy(Team other) {
         return this != other;
-    }*/
+    }
 
     public Seq<CoreBuild> cores() {
         return state.teams.cores(this);
@@ -123,10 +125,10 @@ public class Team extends mindustry.game.Team {
         return Core.bundle.get("team." + name + ".name", name);
     }
 
-    /*@Override
+    @Override
     public int compareTo(Team team) {
         return Integer.compare(id, team.id);
-    }*/
+    }
 
     @Override
     public String toString() {
