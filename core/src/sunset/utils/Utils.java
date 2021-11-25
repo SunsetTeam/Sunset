@@ -259,4 +259,10 @@ public class Utils {
     public static String stringsFixed(float value){
         return Strings.autoFixed(value, 2);
     }
+
+    /** Extracts a number out of a string by removing every non-numerical character  */
+    public static String extractNumber(String s){
+        //God, I love google. I have no idea what the "[^\\d.]" part even is. meep moment :D
+        return s.replaceAll("[^\\d.]", "");
+    }
 }

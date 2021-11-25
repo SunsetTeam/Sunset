@@ -19,6 +19,8 @@ import mindustry.world.meta.*;
 import sunset.content.*;
 import sunset.utils.*;
 
+import static arc.Core.settings;
+
 public class EMPFacility extends PowerTurret {
     public Seq<Core> parts = new Seq<>();
     public boolean hasSpinners;
@@ -66,11 +68,13 @@ public class EMPFacility extends PowerTurret {
     @Override
     public void setBars() {
         super.setBars();
-        bars.add("sunset-reload", (EMPFBuild entity) -> new Bar(
-                () -> arc.Core.bundle.format("bar.sunset-reload", Utils.stringsFixed(Mathf.clamp(entity.reload / reloadTime) * 100f)),
-                () -> entity.team.color,
-                () -> Mathf.clamp(entity.reload / reloadTime)
-        ));
+        if (settings.getBool("sn-reloadbar")) {
+            bars.add("sunset-reload", (EMPFBuild entity) -> new Bar(
+                    () -> arc.Core.bundle.format("bar.sunset-reload", Utils.stringsFixed(Mathf.clamp(entity.reload / reloadTime) * 100f)),
+                    () -> entity.team.color,
+                    () -> Mathf.clamp(entity.reload / reloadTime)
+            ));
+        }
     }
 
     public static class Core {

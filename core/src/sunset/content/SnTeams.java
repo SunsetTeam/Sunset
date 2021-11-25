@@ -2,14 +2,14 @@ package sunset.content;
 
 import arc.graphics.Color;
 import mindustry.ctype.ContentList;
-import sunset.game.Team;
+import sunset.game.SnTeam;
 
 
 public class SnTeams implements ContentList {
-    public static Team orange;
+    public static SnTeam orange;
 
     @Override
     public void load() {
-        orange = new Team(67864, "orange", Color.orange);
+        orange = new SnTeam(67864, "orange", Color.orange);
     }
 }
