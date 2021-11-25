@@ -112,6 +112,7 @@ public class SnFx {
         Fill.circle(e.x, e.y, e.fin() * 7f);
     }),
 
+
     galebardShoot = new Effect(70f, e -> {
         color(Pal.meltdownHit);
         stroke(e.fout() * 7f);
@@ -124,6 +125,11 @@ public class SnFx {
             Drawf.tri(e.x, e.y, 7.0f * e.fout(), 70f, e.rotation + 12f * i);
             Drawf.tri(e.x, e.y, 8.0f * e.fout(), 110f, e.rotation + 125f * i);
         }
+    }),
+
+    smallEnergySphereCharge = new Effect(80f, e -> {
+        color(SnPal.redBombBack);
+        Fill.circle(e.x, e.y, e.fin() * 3f);
     }),
 
     redBomb = new Effect(30f, 70f, e -> {

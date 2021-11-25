@@ -31,7 +31,7 @@ import static mindustry.type.ItemStack.with;
 public class SnTurrets implements ContentList {
     public static Block
         //1x1
-        spine, eagle,
+        sting, spine, eagle,
         //2x2
         carbine, pulsation, reflection,
         //3x3
@@ -56,6 +56,25 @@ public class SnTurrets implements ContentList {
     @Override
     public void load() {
         //region 1x1
+        sting = new ModPowerTurret("sting") {{
+            requirements(Category.turret, with(Items.fors, 50, Items.lead, 20));
+            health = 400;
+            reloadTime = 40f;
+            range = 140f;
+            recoilAmount = 1f;
+            inaccuracy = 2f;
+            rotateSpeed = 7.5f;
+            shootCone = 2f;
+            shootSound = Sounds.laser;
+            ammoUseEffect = Fx.casing1;
+            targetAir = true;
+            shootType = SnBullets.smallEnergySphere;
+            chargeTime = 20f;
+            chargeMaxDelay = 20f;
+            powerUse = 1f;
+            chargeEffect = SnFx.smallEnergySphereCharge;
+        }};
+
         spine = new ModItemTurret("spine") {{
             requirements(Category.turret, with(Items.copper, 55, Items.lead, 25));
             ammo(
@@ -426,7 +445,7 @@ public class SnTurrets implements ContentList {
         }};
         //endregion 6x6
         //region 7x7
-        halberd = new PowerTurret("halberd") {{
+        halberd = new ModPowerTurret("halberd") {{
             requirements(Category.turret, with(Items.copper, 2400,  Items.metaglass, 1200, Items.lead, 1120, Items.silicon, 1200, Items.plastanium, 980, SnItems.nobium, 750, SnItems.fors, 710, SnItems.enojie, 690));
             range = 350f;
             shots = 1;
