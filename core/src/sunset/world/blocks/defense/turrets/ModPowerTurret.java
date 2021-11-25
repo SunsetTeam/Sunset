@@ -6,7 +6,7 @@ import mindustry.ui.Bar;
 import mindustry.world.blocks.defense.turrets.PowerTurret;
 import sunset.utils.Utils;
 
-/** Item turret with useful things.
+/** Power turret with useful things.
  * Features:
  * 1) reload bar
  * 2)

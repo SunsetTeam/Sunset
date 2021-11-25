@@ -9,6 +9,7 @@ import arc.graphics.g2d.Lines;
 import arc.math.Angles;
 import arc.math.Interp;
 import arc.math.Mathf;
+import arc.math.geom.Position;
 import arc.math.geom.Vec2;
 import arc.struct.Seq;
 import arc.util.Tmp;
@@ -600,11 +601,15 @@ public class SnFx {
         });
     }),
 
-    empWave = new Effect(0, e -> {
+    empWave = new Effect(30, e -> {
         randLenVectors(e.id, 10, 5f + e.fin() * 5f, (x, y) -> {
             color(SnPal.emp1, SnPal.emp2, e.fin());
             Fill.square(e.x + x, e.y + y, e.fout());
         });
+        /*randLenVectors(e.id, 5, 3f + e.fin() * 5f, (x, y) -> {
+            color(Color.valueOf("CFEDD4"), Color.lime, e.fin());
+            Fill.square(e.x + x, e.y + y, e.fout());
+        });*/
     }),
 
     greenInstTrail = new Effect(30, e -> {
@@ -716,4 +721,15 @@ public class SnFx {
 
     }
     //endregion energy sphere utils
+
+    /** EMP data. */
+    public static class LightningData{
+        Position pos;
+        float stroke;
+
+        public LightningData(Position pos, float stroke){
+            this.pos = pos;
+            this.stroke = stroke;
+        }
+    }
 }
