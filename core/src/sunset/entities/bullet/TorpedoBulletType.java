@@ -6,7 +6,7 @@ import arc.graphics.g2d.Draw;
 import mindustry.graphics.Layer;
 import mindustry.gen.Bullet;
 import mindustry.graphics.Pal;
-import Depths.*;
+import sunset.content.*;
 
 /***
  * Useless? Maybe.
