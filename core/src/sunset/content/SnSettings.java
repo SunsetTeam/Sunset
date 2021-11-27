@@ -1,59 +1,89 @@
 package sunset.content;
 
+import arc.ApplicationListener;
 import arc.Core;
 import arc.Events;
+import arc.func.Func;
 import arc.scene.Group;
 import arc.scene.ui.layout.Table;
+import arc.struct.ObjectMap;
+import arc.struct.OrderedMap;
+import mindustry.Vars;
 import mindustry.game.EventType;
+import mindustry.gen.Building;
+import mindustry.ui.Bar;
 import mindustry.ui.Styles;
 import mindustry.ui.dialogs.BaseDialog;
 import mindustry.ui.dialogs.SettingsMenuDialog.SettingsTable;
+import mindustry.world.Block;
+import mindustry.world.meta.BlockBars;
+import mma.customArc.cfunc.Couple;
+
+import java.lang.reflect.Field;
 
 import static arc.Core.bundle;
 import static arc.Core.settings;
 import static mindustry.Vars.ui;
 
-public class SnSettings {
-    public static SettingsTable snSettings;
+public class SnSettings implements ApplicationListener {
+    public SettingsTable snSettings;
+    public ObjectMap<Couple<Block, OrderedMap<String, Func<Building, Bar>>>, Func<Building, Bar>> reloadBarBlock = new ObjectMap<>();
+
     public SnSettings() {
     }
 
-    public static void init() {
-        BaseDialog dialog = new BaseDialog("@setting.sn-title");
-        dialog.addCloseButton();
+    public <T extends Building> void registerReloadBarBlock(Block block, Func<T, Bar> prov) {
+        OrderedMap<String, Func<Building, Bar>> map;
+        try {
 
-        snSettings = new SettingsTable() {
-            @Override
-            public void rebuild() {
-                clearChildren();
+            Field field = BlockBars.class.getDeclaredField("bars");
+            field.setAccessible(true);
+            map = (OrderedMap<String, Func<Building, Bar>>) field.get(block);
+        } catch (Exception e) {
+            map = null;
+        }
+        reloadBarBlock.put(Couple.of(block, map), (Func<Building, Bar>) prov);
 
-                for (Setting setting : list) {
-                    setting.add(this);
-                }
-
-                button(bundle.get("settings.reset", "Reset to Defaults"), () -> {
-                    for (Setting setting : list) {
-                        if (setting.name == null || setting.title == null) continue;
-                        settings.put(setting.name, settings.getDefault(setting.name));
-                    }
-                    rebuild();
-                }).margin(14).width(240f).pad(6);
-            }
-        };
-        snSettings.checkPref("sn-reloadbar", false);
-
-        dialog.cont.center().add(snSettings);
-
-        Events.on(EventType.ResizeEvent.class, event -> {
-            if (dialog.isShown() && Core.scene.getDialog() == dialog) {
-                dialog.updateScrollFocus();
-            }
-        });
-
-        ui.settings.shown(() -> {
-            Table settingUi = (Table)((Group)((Group)(ui.settings.getChildren().get(1))).getChildren().get(0)).getChildren().get(0); //This looks so stupid lol
-            settingUi.row();
-            settingUi.button("@setting.sn-title", Styles.cleart, dialog::show);
-        });
     }
+
+    public boolean reloadBar() {
+        return settings.getBool("sn-reloadbar", true);
+    }
+
+    public void reloadBar(boolean reloadBar) {
+        settings.put("sn-reloadbar", reloadBar);
+        updateReloadBars();
+    }
+
+    public void updateReloadBars() {
+        boolean bar = reloadBar();
+        final String barName = "sunset-reload";
+        for (ObjectMap.Entry<Couple<Block, OrderedMap<String, Func<Building, Bar>>>, Func<Building, Bar>> entry : reloadBarBlock) {
+            Block block = entry.key.o1;
+            OrderedMap<String, Func<Building, Bar>> map = entry.key.o2;
+            Func<Building, Bar> barFunc = entry.value;
+            boolean contains = false;
+            if (map != null) {
+                contains = map.containsKey(barName);
+            } else {
+                try {
+                    block.bars.remove(barName);
+                } catch (Exception ignored) {
+
+                }
+            }
+            if (bar && !contains) {
+                block.bars.add(barName, barFunc);
+            } else if (!bar && contains) {
+                block.bars.remove(barName);
+            }
+        }
+    }
+
+    public void init() {
+        if (!Vars.headless){
+            ui.settings.game.checkPref("sn-reloadbar",false,this::reloadBar);
+        }
+    }
+
 }

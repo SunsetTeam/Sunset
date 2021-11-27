@@ -33,6 +33,7 @@ public class SnVars extends ModVars {
     //end region
     //public static SunsetWaveSpawner spawner;
     public static SnLogic logic;
+    public static SnSettings settings;
 
     static {
         new SnVars();
@@ -54,6 +55,7 @@ public class SnVars extends ModVars {
         onLoad.clear();
 
         listener.add(logic = new SnLogic());
+        listener.add(settings=new SnSettings());
     }
 
     @Override

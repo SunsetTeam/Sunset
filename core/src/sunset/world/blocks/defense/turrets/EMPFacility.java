@@ -16,6 +16,7 @@ import mindustry.type.*;
 import mindustry.ui.Bar;
 import mindustry.world.blocks.defense.turrets.*;
 import mindustry.world.meta.*;
+import sunset.SnVars;
 import sunset.content.*;
 import sunset.utils.*;
 
@@ -68,13 +69,11 @@ public class EMPFacility extends PowerTurret {
     @Override
     public void setBars() {
         super.setBars();
-        if (settings.getBool("sn-reloadbar")) {
-            bars.add("sunset-reload", (EMPFBuild entity) -> new Bar(
-                    () -> arc.Core.bundle.format("bar.sunset-reload", Utils.stringsFixed(Mathf.clamp(entity.reload / reloadTime) * 100f)),
-                    () -> entity.team.color,
-                    () -> Mathf.clamp(entity.reload / reloadTime)
-            ));
-        }
+        SnVars.settings.registerReloadBarBlock(this, (EMPFBuild entity) -> new Bar(
+                () -> arc.Core.bundle.format("bar.sunset-reload", Utils.stringsFixed(Mathf.clamp(entity.reload / reloadTime) * 100f)),
+                () -> entity.team.color,
+                () -> Mathf.clamp(entity.reload / reloadTime)
+        ));
     }
 
     public static class Core {

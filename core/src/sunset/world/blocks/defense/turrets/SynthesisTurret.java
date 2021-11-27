@@ -11,6 +11,7 @@ import mindustry.graphics.Pal;
 import mindustry.ui.Bar;
 import mindustry.world.blocks.defense.turrets.ItemTurret;
 import mindustry.world.meta.Stat;
+import sunset.SnVars;
 import sunset.graphics.SnPal;
 import sunset.utils.Utils;
 
@@ -39,13 +40,11 @@ public class SynthesisTurret extends ItemTurret {
     @Override
     public void setBars() {
         super.setBars();
-        if (settings.getBool("sn-reloadbar")) {
-            bars.add("sunset-reload", (SynthesisBuild entity) -> new Bar(
-                    () -> Core.bundle.format("bar.sunset-reload", Utils.stringsFixed(Mathf.clamp(entity.reload / reloadTime) * 100f)),
-                    () -> entity.team.color,
-                    () -> Mathf.clamp(entity.reload / reloadTime)
-            ));
-        }
+        SnVars.settings.registerReloadBarBlock(this, (SynthesisBuild entity) -> new Bar(
+                () -> Core.bundle.format("bar.sunset-reload", Utils.stringsFixed(Mathf.clamp(entity.reload / reloadTime) * 100f)),
+                () -> entity.team.color,
+                () -> Mathf.clamp(entity.reload / reloadTime)
+        ));
     }
     public class SynthesisBuild extends ItemTurretBuild {
         @Override
