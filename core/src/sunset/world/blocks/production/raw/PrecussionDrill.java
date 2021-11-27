@@ -5,11 +5,15 @@ import arc.graphics.Blending;
 import arc.graphics.Color;
 import arc.graphics.g2d.Draw;
 import arc.graphics.g2d.TextureRegion;
+import arc.math.Interp;
 import arc.math.Mathf;
 import arc.util.Strings;
 import arc.util.Structs;
-import arc.util.Time;
+import arc.util.io.Reads;
+import arc.util.io.Writes;
 import mindustry.annotations.Annotations.Load;
+import mindustry.content.Fx;
+import mindustry.entities.Effect;
 import mindustry.game.Team;
 import mindustry.gen.Building;
 import mindustry.gen.Sounds;
@@ -46,23 +50,19 @@ public class PrecussionDrill extends Block {
      */
     public float itemCountMultiplier = 1f;
     /**
-     * Во сколько раз ускоряется водой.
+     * Во сколько раз ускоряется жидкостью.
      */
-    public float liquidBoostIntensity = 1.6f;
+    public float liquidBoost = 1.6f;
     /**
-     * Длительность добычи одной партии ресурсов.
+     * The duration of the extraction of one batch of resources.
      */
     public float drillTime = 540f;
     /**
-     * Список ресурсов, используемых при добыче.
+     * List of resources used in mining.
      */
     public DrillItem[] reqDrillItems = {};
     /**
-     * Количество используемого ресурса за одну партию.
-     */
-    public int drillItemCount = 2;
-    /**
-     * Вместимость используемого ресурса за одну партию.
+     * Capacity of consumed resources
      */
     public int drillItemCapacity = 10;
 
@@ -70,6 +70,8 @@ public class PrecussionDrill extends Block {
      * automatic unloading on adjacent blocks
      */
     public boolean canDump = false;
+
+    public Effect downEffect = Fx.unitLand;
 
     public int tier = 5;
     public float powerUse = 1f;
@@ -124,7 +126,7 @@ public class PrecussionDrill extends Block {
     public void init() {
         for (DrillItem drillItem : reqDrillItems) {
             if (drillItem.amount == -1) {
-                drillItem.amount = drillItemCount;
+                drillItem.amount = 2;
             }
         }
         consumes.add(new DynamicConsumePower(b -> {
@@ -147,8 +149,8 @@ public class PrecussionDrill extends Block {
         stats.add(Stat.powerUse, powerUse * 60f, StatUnit.powerSecond);
         stats.add(Stat.drillTier, StatValues.blocks(b -> b instanceof Floor && b.itemDrop != null && b.itemDrop.hardness <= tier));
         stats.add(Stat.drillSpeed, (hardnessDrillMultiplier * size * size * itemCountMultiplier) / (drillTime / 60f), StatUnit.itemsSecond);
-        if (liquidBoostIntensity != 1) {
-            stats.add(Stat.boostEffect, liquidBoostIntensity, StatUnit.timesSpeed);
+        if (liquidBoost != 1) {
+            stats.add(Stat.boostEffect, liquidBoost, StatUnit.timesSpeed);
         }
     }
 
@@ -240,7 +242,7 @@ public class PrecussionDrill extends Block {
 
         @Override
         public void updateTile() {
-            currentDrillItem = Structs.find(reqDrillItems, di -> items.has(di.item, drillItemCount));
+            currentDrillItem = Structs.find(reqDrillItems, di -> items.has(di.item, di.amount));
 
             currentSpeed = Mathf.lerpDelta(currentSpeed, baseSpeed(), warmupSpeed);
             if (!working()) {
@@ -248,7 +250,7 @@ public class PrecussionDrill extends Block {
             }
             //speed count
             totalBoost = 1f;
-            if (cons.optionalValid()) totalBoost *= liquidBoostIntensity;
+            if (cons.optionalValid()) totalBoost *= liquidBoost;
             totalSpeed = currentSpeed * totalBoost;
             //update display value
             displaySpeed = baseDisplaySpeed * totalSpeed;
@@ -258,6 +260,7 @@ public class PrecussionDrill extends Block {
             if (progressTime >= drillTime && working()) {
                 cons.trigger();
                 progressTime %= drillTime;
+                downEffect.at(this);
                 drillItems.each((item, amount) -> {
                     float multiplier = multiplier(item) * currentDrillItem.sizeMultiplier;
                     for (int i = 0; i < (int) (amount * multiplier * itemCountMultiplier); i++) {
@@ -320,10 +323,42 @@ public class PrecussionDrill extends Block {
             Draw.rect(rimRegion, x, y);
             Draw.blend();
             Draw.color();
-
+            float xscl = Draw.xscl, yscl = Draw.yscl;
+            float toa = 1.07f;
+            float progress = progress() * toa;
+            if (progress > 1f) {
+                Draw.scl(Mathf.map(progress, 1f, toa, 1.3f, 0.9f));
+            } else {
+                Draw.scl(Mathf.map(progress, 0, 1, 0.9f, 1.3f));
+            }
             Drawf.spinSprite(rotatorRegion, x, y, 2);
 
             Draw.rect(topRegion, x, y);
+            Draw.scl(xscl, yscl);
+        }
+
+        public float progress() {
+            return progressTime / drillTime;
+        }
+
+        @Override
+        public byte version() {
+            return 1;
+        }
+
+        @Override
+        public void write(Writes write) {
+            super.write(write);
+            write.f(progressTime);
+        }
+
+        @Override
+        public void read(Reads read, byte revision) {
+            super.read(read, revision);
+            if (revision == 0) {
+                return;
+            }
+            progressTime = read.f();
         }
     }
 }

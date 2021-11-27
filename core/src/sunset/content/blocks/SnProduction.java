@@ -8,7 +8,6 @@ import mindustry.type.Category;
 import mindustry.type.ItemStack;
 import mindustry.world.Block;
 import mindustry.world.blocks.production.AttributeCrafter;
-import mindustry.world.blocks.production.Drill;
 import mindustry.world.draw.DrawRotator;
 import sunset.content.SnFx;
 import sunset.content.SnItems;
@@ -86,7 +85,7 @@ public class SnProduction implements ContentList {
             hasPower = true;
             powerUse = 4.25f;
             hardnessDrillMultiplier = 8;
-            liquidBoostIntensity = 3.86f;
+            liquidBoost = 3.86f;
             itemCountMultiplier = 0.5f;
             consumes.liquid(Liquids.water, 0.15f).boost();
             drillItems(

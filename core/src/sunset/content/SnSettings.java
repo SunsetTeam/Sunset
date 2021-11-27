@@ -82,6 +82,7 @@ public class SnSettings implements ApplicationListener {
 
     public void init() {
         if (!Vars.headless){
+            updateReloadBars();
             ui.settings.game.checkPref("sn-reloadbar",false,this::reloadBar);
         }
     }
