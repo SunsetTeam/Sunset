@@ -151,7 +151,7 @@ public class PrecussionDrill extends Block {
         bars.add("progress", (PrecussionDrillBuild e) ->
                 new Bar(() -> Core.bundle.get("bar.drillprogress"),
                         () -> Pal.surge,
-                        () -> e.progressTime / ((PrecussionDrill) e.block).drillTime));
+                        () -> e.progressTime /drillTime));
         bars.add("drillspeed", (PrecussionDrillBuild e) ->
                 new Bar(() -> Core.bundle.format("bar.drillspeed",
                         Strings.fixed(e.displaySpeed, 2)),
