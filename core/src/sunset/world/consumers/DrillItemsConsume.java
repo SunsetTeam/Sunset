@@ -53,6 +53,11 @@ public class DrillItemsConsume extends Consume {
     }
 
     @Override
+    public boolean isUpdate() {
+        return super.isUpdate();
+    }
+
+    @Override
     public void trigger(Building entity) {
         DrillItem item = Structs.find(drillItems, d -> entity.items.has(d.item, d.amount));
         if (item==null)return;
@@ -72,7 +77,7 @@ public class DrillItemsConsume extends Consume {
     @Override
     public boolean valid(Building entity) {
         for (DrillItem drillItem : drillItems) {
-            if (entity.items.has(drillItem.item, itemAmount)) {
+            if (entity.items.has(drillItem.item, drillItem.amount)) {
                 return true;
             }
         }

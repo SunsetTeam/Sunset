@@ -129,7 +129,7 @@ public class PrecussionDrill extends Block {
         }
         consumes.add(new DynamicConsumePower(b -> {
             PrecussionDrillBuild p = (PrecussionDrillBuild) b;
-            return powerUse * (p.working() ? p.getBoost() : 0);
+            return powerUse * (p.working() ? p.timeScale : 0);
         }));
 //        consumes.add(new ConsumeItemFilter(i -> Structs.contains(reqDrillItems, d -> d.item == i)));
         Arrays.sort(reqDrillItems, Structs.comparingFloat(di -> di.sizeMultiplier));
@@ -218,8 +218,6 @@ public class PrecussionDrill extends Block {
         public float warmupSpeed = 0.02f;
         private int offloadSize; //размер партии = количество item'ов, выдаваемых за раз
         private DrillItem currentDrillItem; //текущий предмет для бурения
-        private long boostEndTime = 0;
-        private float boost = 0f;
 
         public float baseSpeed() {
             return working() ? (power == null) ? 1f : power.status : 0f;
@@ -236,6 +234,11 @@ public class PrecussionDrill extends Block {
         }
 
         @Override
+        public void update() {
+            super.update();
+        }
+
+        @Override
         public void updateTile() {
             currentDrillItem = Structs.find(reqDrillItems, di -> items.has(di.item, drillItemCount));
 
@@ -244,14 +247,14 @@ public class PrecussionDrill extends Block {
                 return;
             }
             //speed count
-            totalBoost = getBoost();
+            totalBoost = 1f;
             if (cons.optionalValid()) totalBoost *= liquidBoostIntensity;
             totalSpeed = currentSpeed * totalBoost;
             //update display value
             displaySpeed = baseDisplaySpeed * totalSpeed;
             if (currentDrillItem != null) displaySpeed *= currentDrillItem.sizeMultiplier;
             //updating
-            progressTime += Time.delta * totalSpeed;
+            progressTime += delta() * totalSpeed;
             if (progressTime >= drillTime && working()) {
                 cons.trigger();
                 progressTime %= drillTime;
@@ -288,16 +291,6 @@ public class PrecussionDrill extends Block {
 
         private boolean working() {
             return enabled && (items().total() < offloadSize) && (currentDrillItem != null) && cons.valid();
-        }
-
-        public float getBoost() {
-            return Time.millis() <= boostEndTime ? Math.max(boost, 1) : 1;
-        }
-
-        @Override
-        public void applyBoost(float intensity, float duration) {
-            boostEndTime = Time.millis() + (long) (duration * 1000f / 60f);
-            boost = intensity;
         }
 
         @Override

@@ -1,7 +1,6 @@
 package sunset.world.blocks.defense.turrets;
 
 import arc.Core;
-import arc.Events;
 import arc.graphics.g2d.Draw;
 import arc.graphics.g2d.TextureRegion;
 import arc.math.Mathf;
@@ -34,12 +33,9 @@ import mindustry.world.meta.Stat;
 import mma.ModVars;
 import mma.graphics.ModFill;
 import sunset.type.MissileType;
-import sunset.world.meta.values.MinMaxRangeValues;
-import sunset.world.meta.values.SplashDamageValue;
+import sunset.world.meta.SnStatValues;
 
 import static mindustry.Vars.tilesize;
-import static mindustry.game.EventType.TapEvent;
-import static mindustry.game.EventType.Trigger;
 
 public class MissileSiloTurret extends GenericCrafter {
 
@@ -88,10 +84,8 @@ public class MissileSiloTurret extends GenericCrafter {
     @Override
     public void setStats() {
         super.setStats();
-        stats.add(Stat.damage, new SplashDamageValue(missile.damage,
-                missile.splashDamage,
-                missile.splashDamageRadius));
-        stats.add(Stat.range, new MinMaxRangeValues(minRange, maxRange));
+        stats.add(Stat.damage, SnStatValues.splashDamage(missile.damage, missile.splashDamage, missile.splashDamageRadius));
+        stats.add(Stat.range, SnStatValues.minMaxRange(minRange, maxRange));
     }
 
     @Override

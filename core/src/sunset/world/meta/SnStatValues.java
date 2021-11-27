@@ -1,6 +1,8 @@
 package sunset.world.meta;
 
 import arc.Core;
+import arc.func.Boolf;
+import arc.func.Func;
 import arc.graphics.g2d.TextureRegion;
 import arc.scene.ui.layout.Table;
 import arc.struct.OrderedMap;
@@ -9,6 +11,7 @@ import arc.util.Scaling;
 import arc.util.Strings;
 import mindustry.ctype.UnlockableContent;
 import mindustry.gen.Tex;
+import mindustry.type.Liquid;
 import mindustry.type.UnitType;
 import mindustry.type.Weapon;
 import mindustry.ui.ItemDisplay;
@@ -19,14 +22,70 @@ import mindustry.world.meta.StatValue;
 import mindustry.world.meta.StatValues;
 import sunset.type.DrillItem;
 
+import static mindustry.Vars.content;
+import static mindustry.Vars.tilesize;
+
 public class SnStatValues {
-    public static StatValue weaponListExt(UnitType unit, Seq<Weapon> weapons){
+    public static StatValue minMaxRange(float minRange, float maxRange) {
+        return table -> {
+            table.table(bt -> {
+                bt.left().defaults().padRight(3).left();
+                bt.add(Core.bundle.format("missile.rangerange",
+                        Strings.fixed(minRange / tilesize, 1),
+                        Strings.fixed(maxRange / tilesize, 1)));
+            }).left();
+
+            table.row();
+        };
+    }
+
+    public static StatValue splashDamage(float damage, float splashDamage, float splashDamageRadius) {
+        return table -> {
+            table.table(bt -> {
+                bt.left().defaults().padRight(3).left();
+
+                if (damage > 0) {
+                    bt.add(Core.bundle.format("bullet.damage", damage));
+                }
+
+                if (splashDamage > 0) {
+                    bt.row();
+                    bt.add(Core.bundle.format("bullet.splashdamage", Strings.fixed(splashDamage, 1), Strings.fixed(splashDamageRadius / tilesize, 1)));
+                }
+
+            }).left();
+
+            table.row();
+        };
+    }
+
+    public static StatValue boosterLiquidList(Boolf<Liquid> filter, Func<Liquid, Float> factorGen, String bundle) {
         return table -> {
             table.row();
-            for(int i = 0; i < weapons.size;i ++){
+            table.table(c -> {
+                for (Liquid liquid : content.liquids()) {
+                    if (!filter.get(liquid)) continue;
+
+                    c.image(liquid.fullIcon).size(3 * 8).padRight(4).right().top();
+                    c.add(liquid.localizedName).padRight(10).left().top();
+                    c.table(Tex.underline, bt -> {
+                        bt.left().defaults().padRight(3).left();
+                        bt.add(Core.bundle.format(bundle, Strings.autoFixed(factorGen.get(liquid), 2)));
+                    }).left().padTop(-9);
+                    c.row();
+                }
+            }).colspan(table.getColumns());
+            table.row();
+        };
+    }
+
+    public static StatValue weaponListExt(UnitType unit, Seq<Weapon> weapons) {
+        return table -> {
+            table.row();
+            for (int i = 0; i < weapons.size; i++) {
                 Weapon weapon = weapons.get(i);
 
-                if(weapon.flipSprite){
+                if (weapon.flipSprite) {
                     //flipped weapons are not given stats
                     continue;
                 }
@@ -35,8 +94,8 @@ public class SnStatValues {
 
                 table.image(region).size(60).scaling(Scaling.bounded).right().top();
 
-                if(weapon instanceof StatValue) {
-                    table.table(Tex.underline, ((StatValue)weapon)::display).padTop(-9).left();
+                if (weapon instanceof StatValue) {
+                    table.table(Tex.underline, ((StatValue) weapon)::display).padTop(-9).left();
                 } else {
                     table.table(Tex.underline, w -> {
                         w.left().defaults().padRight(3).left();
@@ -69,21 +128,22 @@ public class SnStatValues {
 
                 //no point in displaying unit icon twice
                 if (!compact) {
-                    table.add(new ItemImage(icon(t.item), t.amount)).right().top();
+                    table.image(icon(t.item)).size(3 * 8).padRight(4).right().top();
+                    table.add(t.item.localizedName).padRight(10).left().top();
                 }
 
                 table.table(bt -> {
                     bt.left().defaults().padRight(3).left();
                     bt.add(Core.bundle.format("stat.drillsizedesc", Strings.autoFixed(t.sizeMultiplier, 2))).padLeft(6);
-                    if (false) {
-                        sep(table, t.amount + " " + StatUnit.items.localized());
-                    }
+
+                    sep(bt, t.amount + " " + StatUnit.items.localized());
                 }).padTop(compact ? 0 : -9).padLeft(indent * 8).left().get().background(compact ? null : Tex.underline);
 
                 table.row();
             }
         };
     }
+
     public static StatValue drillItems_old(DrillItem[] items) {
         return table -> {
             table.table(t -> {

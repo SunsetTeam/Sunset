@@ -22,7 +22,7 @@ import mindustry.world.meta.BuildVisibility;
 import mindustry.world.meta.Stat;
 import mindustry.world.meta.StatUnit;
 import mma.ModVars;
-import sunset.world.meta.values.BoosterLiquidList;
+import sunset.world.meta.SnStatValues;
 
 /**
  * Турель, которая атакует врагов постоянной
@@ -106,7 +106,7 @@ public class ChainLightningTurret extends BaseTurret {
         stats.add(Stat.targetsAir, targetAir);
         stats.add(Stat.targetsGround, targetGround);
         stats.add(Stat.damage, damage * 60f, StatUnit.perSecond);
-        stats.add(Stat.booster, new BoosterLiquidList(
+        stats.add(Stat.booster, SnStatValues.boosterLiquidList(
                 liquid -> liquid.temperature <= 0.5f && liquid.flammability < 0.1f,
                 liquid -> {
                     float used = Math.min(liquidUse, Math.max(0, (1f / coolantMultiplier) / liquid.heatCapacity));
