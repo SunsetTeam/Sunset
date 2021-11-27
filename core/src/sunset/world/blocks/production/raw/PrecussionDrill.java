@@ -172,7 +172,7 @@ public class PrecussionDrill extends Block {
 
         if (state == State.OK) {
             final float[] sumSpeed = {0};
-            tmpItems.each((item, amount) -> sumSpeed[0] += (hardnessDrillMultiplier / Mathf.pow(item.hardness + 1, 0.5f) * amount) / (drillTime / 60f));
+            tmpItems.each((item, amount) -> sumSpeed[0] += (multiplier(item) * amount) / (drillTime / 60f));
             float width = drawPlaceText(Core.bundle.formatFloat("bar.drillspeed", sumSpeed[0] * itemCountMultiplier, 2), x, y, valid);
             final float[] dx = {x * tilesize + offset - width / 2f - 4f};
             float dy = y * tilesize + offset + size * tilesize / 2f + 5;
@@ -188,6 +188,11 @@ public class PrecussionDrill extends Block {
             Item item = to == null ? null : to.drop();
             if (item != null) drawPlaceText(Core.bundle.get("bar.drilltierreq"), x, y, valid);
         }
+    }
+
+    public float multiplier(Item item) {
+        return hardnessDrillMultiplier / Mathf.sqrt(item.hardness + 1f);
+
     }
 
     private enum State {
@@ -216,8 +221,8 @@ public class PrecussionDrill extends Block {
         public void created() {
             updateOre(tile, drillItems, tier);
             drillItems.each((item, amount) -> {
-                baseDisplaySpeed += (hardnessDrillMultiplier / Mathf.pow(item.hardness + 1, 0.5f) * amount) / (drillTime / 60f);
-                offloadSize += (int) (amount * (hardnessDrillMultiplier / Mathf.pow(item.hardness + 1, 0.5f)));
+                baseDisplaySpeed += (multiplier(item) * amount) / (drillTime / 60f);
+                offloadSize += (int) (amount * multiplier(item));
             });
             baseDisplaySpeed *= itemCountMultiplier;
         }
@@ -243,7 +248,7 @@ public class PrecussionDrill extends Block {
                 cons.trigger();
                 progressTime %= drillTime;
                 drillItems.each((item, amount) -> {
-                    float multiplier = hardnessDrillMultiplier / Mathf.sqrt(item.hardness + 1) * currentDrillItem.sizeMultiplier;
+                    float multiplier = multiplier(item) * currentDrillItem.sizeMultiplier;
                     for (int i = 0; i < (int) (amount * multiplier * itemCountMultiplier); i++) {
                         offload(item);
                     }
