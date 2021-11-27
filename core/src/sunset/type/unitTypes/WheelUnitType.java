@@ -1,4 +1,4 @@
-package sunset.type;
+package sunset.type.unitTypes;
 
 import arc.math.geom.Vec2;
 import arc.util.Time;

@@ -1,4 +1,4 @@
-package sunset.type;
+package sunset.type.unitTypes;
 
 import arc.Core;
 import mindustry.gen.EntityMapping;

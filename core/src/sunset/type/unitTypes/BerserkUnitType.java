@@ -1,9 +1,8 @@
-package sunset.type;
+package sunset.type.unitTypes;
 
 import arc.struct.Seq;
 import mindustry.content.StatusEffects;
 import mindustry.gen.Unit;
-import mindustry.type.UnitType;
 import sunset.entities.abilities.BerserkStage;
 import mindustry.gen.*;
 

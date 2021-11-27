@@ -22,6 +22,7 @@ import mindustry.type.UnitType;
 import mindustry.ui.Bar;
 import mindustry.world.Tile;
 import mindustry.world.blocks.ItemSelection;
+import mindustry.world.blocks.power.DynamicConsumePower;
 import mindustry.world.blocks.storage.StorageBlock;
 import mindustry.world.meta.Stat;
 import mindustry.world.meta.StatUnit;
@@ -30,7 +31,6 @@ import sunset.content.SnUnitTypes;
 import sunset.gen.DeliverUnit;
 import sunset.gen.Deliverc;
 import sunset.gen.SnGroups;
-import sunset.world.consumers.AdjustableConsumePower;
 
 import static mindustry.Vars.*;
 
@@ -78,9 +78,9 @@ public class Airport extends StorageBlock {
     public void init() {
         super.init();
 
-        consumes.add(new AdjustableConsumePower(powerUse, b -> {
-            AirportBuild ab = (AirportBuild) b;
-            return ab.shouldBuild ? ab.getBoost() : 0f;
+        consumes.add(new DynamicConsumePower(build -> {
+            AirportBuild tile = build.as();
+            return powerUse * (tile.shouldBuild ? tile.getBoost() : 0);
         }));
         consumes.items(requirements);
     }

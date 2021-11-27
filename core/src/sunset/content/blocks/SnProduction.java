@@ -12,6 +12,7 @@ import mindustry.world.blocks.production.Drill;
 import mindustry.world.draw.DrawRotator;
 import sunset.content.SnFx;
 import sunset.content.SnItems;
+import sunset.type.DrillItem;
 import sunset.world.blocks.production.raw.DRDrill;
 import sunset.world.blocks.production.raw.PrecussionDrill;
 
@@ -88,7 +89,7 @@ public class SnProduction implements ContentList {
             liquidBoostIntensity = 3.86f;
             itemCountMultiplier = 0.5f;
             consumes.liquid(Liquids.water, 0.15f).boost();
-            drillItems.addAll(
+            drillItems(
                     new DrillItem(Items.graphite, 1f),
                     new DrillItem(Items.surgeAlloy, 1.25f),
                     new DrillItem(SnItems.nobium, 1.6f)

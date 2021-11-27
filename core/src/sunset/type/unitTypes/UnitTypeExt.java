@@ -1,4 +1,4 @@
-package sunset.type;
+package sunset.type.unitTypes;
 
 import arc.graphics.Blending;
 import arc.graphics.g2d.Draw;
@@ -9,10 +9,10 @@ import mindustry.entities.abilities.Ability;
 import mindustry.entities.units.WeaponMount;
 import mindustry.gen.Unit;
 import mindustry.graphics.Drawf;
-import mindustry.type.UnitType;
 import mindustry.type.Weapon;
 import mindustry.world.meta.Stat;
 import mindustry.world.meta.StatValue;
+import sunset.type.UpdateDrawWeapon;
 import sunset.world.meta.values.WeaponListValueExt;
 
 /** UnitType, который имеет некоторые изменения. */

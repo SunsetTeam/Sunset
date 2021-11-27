@@ -6,44 +6,71 @@ import arc.graphics.Color;
 import arc.graphics.g2d.Draw;
 import arc.graphics.g2d.TextureRegion;
 import arc.math.Mathf;
-import arc.struct.Seq;
 import arc.util.Strings;
+import arc.util.Structs;
 import arc.util.Time;
-import mindustry.annotations.Annotations.*;
+import mindustry.annotations.Annotations.Load;
 import mindustry.game.Team;
 import mindustry.gen.Building;
 import mindustry.gen.Sounds;
-import mindustry.graphics.*;
+import mindustry.graphics.Drawf;
+import mindustry.graphics.Pal;
 import mindustry.type.Item;
 import mindustry.type.ItemSeq;
 import mindustry.ui.Bar;
 import mindustry.world.Block;
 import mindustry.world.Tile;
 import mindustry.world.blocks.environment.Floor;
-import mindustry.world.meta.*;
+import mindustry.world.blocks.power.DynamicConsumePower;
+import mindustry.world.consumers.ConsumeItemFilter;
+import mindustry.world.meta.BlockGroup;
+import mindustry.world.meta.Stat;
+import mindustry.world.meta.StatUnit;
+import mindustry.world.meta.StatValues;
 import mma.ModVars;
-import sunset.gen.*;
-import sunset.world.consumers.AdjustableConsumePower;
+import sunset.type.DrillItem;
+import sunset.world.consumers.DrillItemsConsume;
 import sunset.world.meta.values.DrillItemsValue;
 
 import static mindustry.Vars.tilesize;
 import static mindustry.Vars.world;
 
 public class PrecussionDrill extends Block {
-    /** Чем выше, тем быстрее бурит. Сильнее воздейсвует на мягкие руды, чем на твёрдые. */
+    private static final ItemSeq tmpItems = new ItemSeq();
+    /**
+     * Чем выше, тем быстрее бурит. Сильнее воздейсвует на мягкие руды, чем на твёрдые.
+     */
     public float hardnessDrillMultiplier = 6f;
-    /** Чем выше, тем быстрее бурит. Одинаково воздейсвует на все руды. */
+    /**
+     * Чем выше, тем быстрее бурит. Одинаково воздейсвует на все руды.
+     */
     public float itemCountMultiplier = 1f;
-    /** Во сколько раз ускоряется водой. */
+    /**
+     * Во сколько раз ускоряется водой.
+     */
     public float liquidBoostIntensity = 1.6f;
-    /** Длительность добычи одной партии ресурсов. */
+    /**
+     * Длительность добычи одной партии ресурсов.
+     */
     public float drillTime = 540f;
-    /** Список ресурсов, используемых при добыче. */
-    public final Seq<DrillItem> drillItems = new Seq<>();
-    /** Количество используемого ресурса за одну партию. */
+    /**
+     * Список ресурсов, используемых при добыче.
+     */
+    public DrillItem[] reqDrillItems = {};
+    /**
+     * Количество используемого ресурса за одну партию.
+     */
     public int drillItemCount = 2;
-    /** Вместимость используемого ресурса за одну партию. */
+    /**
+     * Вместимость используемого ресурса за одну партию.
+     */
     public int drillItemCapacity = 10;
+
+    /**
+     * automatic unloading on adjacent blocks
+     * */
+    public boolean canDump=false;
+
     public int tier = 5;
     public float powerUse = 1f;
     public Color heatColor = Color.valueOf("ff5512");
@@ -53,6 +80,7 @@ public class PrecussionDrill extends Block {
     public TextureRegion rotatorRegion;
     @Load("@-top")
     public TextureRegion topRegion;
+
     public PrecussionDrill(String name) {
         super(name);
         update = true;
@@ -65,24 +93,42 @@ public class PrecussionDrill extends Block {
         ambientSoundVolume = 0.018f;
     }
 
+    public  State updateOre(Tile tile, ItemSeq items, int tier) {
+        return updateOre(tile,items,tier,this);
+    }
+    public static State updateOre(Tile tile, ItemSeq items, int tier, PrecussionDrill inst) {
+        State ret = State.NoOre;
+        items.clear();
+        for (Tile t : tile.getLinkedTilesAs(inst, tempTiles)) {
+            if (t != null && t.drop() != null) {
+                if (t.drop().hardness <= tier) {
+                    items.add(t.drop());
+                    ret= State.OK;
+                } else if (ret != State.OK) ret = State.LowTier;
+            }
+        }
+        return ret;
+    }
+
+    public void drillItems(DrillItem... drillItems) {
+        this.reqDrillItems = drillItems;
+    }
+
     @Override
     public TextureRegion[] icons() {
-        return !ModVars.packSprites ? new TextureRegion[]{region}:new TextureRegion[]{region, rotatorRegion, topRegion};
-    }
-    @Override
-    public void createIcons(MultiPacker packer) {
-        super.createIcons(packer);
+        return !ModVars.packSprites ? new TextureRegion[]{region} : new TextureRegion[]{region, rotatorRegion, topRegion};
     }
 
     @Override
-    public void load() {
-        super.load();
-        //SnContentRegions.loadRegions(this);
-
-        consumes.add(new AdjustableConsumePower(powerUse, e -> {
-            PrecussionDrillBuild p = ((PrecussionDrillBuild)e);
-            return p.working() ? p.getBoost() : 0;
+    public void init() {
+        consumes.add(new DynamicConsumePower(b -> {
+            PrecussionDrillBuild p = (PrecussionDrillBuild) b;
+            return powerUse * (p.working() ? p.getBoost() : 0);
         }));
+//        consumes.add(new ConsumeItemFilter(i -> Structs.contains(reqDrillItems, d -> d.item == i)));
+        consumes.add(new DrillItemsConsume(reqDrillItems,drillItemCount));
+        super.init();
+
     }
 
     @Override
@@ -97,9 +143,6 @@ public class PrecussionDrill extends Block {
         if (liquidBoostIntensity != 1) {
             stats.add(Stat.boostEffect, liquidBoostIntensity, StatUnit.timesSpeed);
         }
-        if (!drillItems.isEmpty()) {
-            stats.add(Stat.input, new DrillItemsValue(drillItems, drillItemCount));
-        }
     }
 
     @Override
@@ -108,33 +151,33 @@ public class PrecussionDrill extends Block {
         bars.add("progress", (PrecussionDrillBuild e) ->
                 new Bar(() -> Core.bundle.get("bar.drillprogress"),
                         () -> Pal.surge,
-                        () -> e.progressTime / ((PrecussionDrill)e.block).drillTime));
+                        () -> e.progressTime / ((PrecussionDrill) e.block).drillTime));
         bars.add("drillspeed", (PrecussionDrillBuild e) ->
-            new Bar(() -> Core.bundle.format("bar.drillspeed",
-                Strings.fixed(e.displaySpeed, 2)),
-                () -> Pal.ammo,
-                () -> e.currentSpeed));
+                new Bar(() -> Core.bundle.format("bar.drillspeed",
+                        Strings.fixed(e.displaySpeed, 2)),
+                        () -> Pal.ammo,
+                        () -> e.currentSpeed));
     }
 
     public boolean canPlaceOn(Tile tile, Team team) {
-        return updateOre(tile, items, tier, this) == State.OK;
+        return updateOre(tile, tmpItems, tier) == State.OK;
     }
-    private final ItemSeq items = new ItemSeq();
+
     @Override
     public void drawPlace(int x, int y, int rotation, boolean valid) {
         super.drawPlace(x, y, rotation, valid);
         Tile tile = world.tile(x, y);
         if (tile == null) return;
 
-        State state = updateOre(tile, items, tier, this);
+        State state = updateOre(tile, tmpItems, tier);
 
         if (state == State.OK) {
             final float[] sumSpeed = {0};
-            items.each((item, amount) -> sumSpeed[0] += (hardnessDrillMultiplier / Mathf.pow(item.hardness+1, 0.5f) * amount) / (drillTime / 60f));
+            tmpItems.each((item, amount) -> sumSpeed[0] += (hardnessDrillMultiplier / Mathf.pow(item.hardness + 1, 0.5f) * amount) / (drillTime / 60f));
             float width = drawPlaceText(Core.bundle.formatFloat("bar.drillspeed", sumSpeed[0] * itemCountMultiplier, 2), x, y, valid);
             final float[] dx = {x * tilesize + offset - width / 2f - 4f};
             float dy = y * tilesize + offset + size * tilesize / 2f + 5;
-            items.each((item, amount) -> {
+            tmpItems.each((item, amount) -> {
                 Draw.mixcol(Color.darkGray, 1f);
                 Draw.rect(item.uiIcon, dx[0], dy - 1);
                 Draw.reset();
@@ -147,27 +190,7 @@ public class PrecussionDrill extends Block {
             if (item != null) drawPlaceText(Core.bundle.get("bar.drilltierreq"), x, y, valid);
         }
     }
-    private static State updateOre(Tile tile, ItemSeq items, int tier, PrecussionDrill inst) {
-        final State[] ret = {State.NoOre};
-        items.clear();
-        tile.getLinkedTilesAs(inst, tempTiles).each(t -> {
-            if (t != null && t.drop() != null) {
-                if (t.drop().hardness <= tier) {
-                    items.add(t.drop());
-                    ret[0] = State.OK;
-                } else if (ret[0] != State.OK) ret[0] = State.LowTier;
-            }
-        });
-        return ret[0];
-    }
-    public static class DrillItem {
-        public final Item item;
-        public final float sizeMultiplier;
-        public DrillItem(Item item, float sizeMultiplier) {
-            this.item = item;
-            this.sizeMultiplier = sizeMultiplier;
-        }
-    }
+
     private enum State {
         NoOre, //нет руды под буром
         LowTier, //"Требуется бур получше"
@@ -175,32 +198,38 @@ public class PrecussionDrill extends Block {
     }
 
     public class PrecussionDrillBuild extends Building {
+        final ItemSeq drillItems = new ItemSeq(); //список руды, находящейся под буром
         public float displaySpeed, baseDisplaySpeed;
-        public float currentSpeed, baseSpeed, totalSpeed;
+        public float currentSpeed, totalSpeed;
         public float progressTime;
         public float totalBoost;
         public float warmupSpeed = 0.02f;
         private int offloadSize; //размер партии = количество item'ов, выдаваемых за раз
         private DrillItem currentDrillItem; //текущий предмет для бурения
-
-        final ItemSeq items = new ItemSeq(); //список руды, находящейся под буром
+        private long boostEndTime = 0;
+        private float boost = 0f;
+public float baseSpeed(){
+    return working()?(power == null) ? 1f : power.status:0f;
+}
         @Override
         public void created() {
-            updateOre(tile, items, tier, (PrecussionDrill)block);
-            items.each((item, amount) -> {
+            updateOre(tile, drillItems, tier);
+            drillItems.each((item, amount) -> {
                 baseDisplaySpeed += (hardnessDrillMultiplier / Mathf.pow(item.hardness + 1, 0.5f) * amount) / (drillTime / 60f);
-                offloadSize += (int)(amount * (hardnessDrillMultiplier / Mathf.pow(item.hardness+1, 0.5f)));
+                offloadSize += (int) (amount * (hardnessDrillMultiplier / Mathf.pow(item.hardness + 1, 0.5f)));
             });
             baseDisplaySpeed *= itemCountMultiplier;
         }
 
         @Override
         public void updateTile() {
-            currentDrillItem = drillItems.find(di -> items().has(di.item, drillItemCount));
+            currentDrillItem = Structs.find(reqDrillItems, di -> items.has(di.item, drillItemCount));
+
+            currentSpeed = Mathf.lerpDelta(currentSpeed, baseSpeed(), warmupSpeed);
+            if (!working()){
+                return;
+            }
             //speed count
-            baseSpeed = (power == null) ? 1f : power.status;
-            if (!working()) baseSpeed = 0;
-            currentSpeed = Mathf.lerpDelta(currentSpeed, baseSpeed, warmupSpeed);
             totalBoost = getBoost();
             if (cons.optionalValid()) totalBoost *= liquidBoostIntensity;
             totalSpeed = currentSpeed * totalBoost;
@@ -210,51 +239,58 @@ public class PrecussionDrill extends Block {
             //updating
             progressTime += Time.delta * totalSpeed;
             if (progressTime >= drillTime && working()) {
+                cons.trigger();
                 progressTime %= drillTime;
-                items.each((item, amount) -> {
-                    float multiplier = hardnessDrillMultiplier / Mathf.pow(item.hardness + 1, 0.5f) * currentDrillItem.sizeMultiplier;
-                    for (int i = 0; i < (int) (amount * multiplier * itemCountMultiplier); i++) offload(item);
+                drillItems.each((item, amount) -> {
+                    float multiplier = hardnessDrillMultiplier / Mathf.sqrt(item.hardness + 1) * currentDrillItem.sizeMultiplier;
+                    for (int i = 0; i < (int) (amount * multiplier * itemCountMultiplier); i++) {
+                        offload(item);
+                    }
                 });
-                items().remove(currentDrillItem.item, drillItemCount);
+            }
+            if (canDump){
+                drillItems.each((i, a) -> dump(i));
             }
         }
-
-        @Override
-        public boolean acceptItem(Building source, Item item) {
-            boolean accept = currentDrillItem == null || currentDrillItem.item == item;
-            return accept && drillItems.contains(di -> di.item == item) && items().get(item) < drillItemCapacity;
-        }
-
-        @Override
-        public boolean canDump(Building to, Item item) { return false; }
         // возможность мультидобычи ломает обычный вывод ресурсов,
         // для стабильной работы нужно использовать разгрузчик
 
         @Override
+        public boolean acceptItem(Building source, Item item) {
+            boolean accept = currentDrillItem == null || currentDrillItem.item == item;
+            return accept && Structs.contains(reqDrillItems, di -> di.item == item) && items().get(item) < drillItemCapacity;
+        }
+
+        @Override
+        public boolean canDump(Building to, Item item) {
+            return canDump&& drillItems.has(item);
+        }
+
+        @Override
         public int getMaximumAccepted(Item item) {
-            if (drillItems.contains(di -> di.item == item)) return drillItemCapacity;
+            if (Structs.contains(reqDrillItems, di -> di.item == item)) return drillItemCapacity;
             return 0;
         }
 
         private boolean working() {
-            return enabled && (items().total() < offloadSize) && (currentDrillItem != null);
+            return enabled && (items().total() < offloadSize) && (currentDrillItem != null) && cons.valid();
         }
-        private long boostEndTime = 0;
-        private float boost = 0f;
+
         public float getBoost() {
             return Time.millis() <= boostEndTime ? Math.max(boost, 1) : 1;
         }
+
         @Override
         public void applyBoost(float intensity, float duration) {
-            boostEndTime = Time.millis() + (long)(duration*1000f/60f);
+            boostEndTime = Time.millis() + (long) (duration * 1000f / 60f);
             boost = intensity;
         }
 
         @Override
         public void drawSelect() {
             final float[] dx = {x - size * tilesize / 2f};
-            float dy = y + size * tilesize/2f;
-            items.each((item, amount) -> {
+            float dy = y + size * tilesize / 2f;
+            drillItems.each((item, amount) -> {
                 Draw.mixcol(Color.darkGray, 1f);
                 Draw.rect(item.uiIcon, dx[0], dy - 1);
                 Draw.reset();

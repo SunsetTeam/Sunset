@@ -1,17 +1,15 @@
-package sunset.type;
+package sunset.type.unitTypes;
 
 import arc.Core;
-import arc.func.Func;
 import arc.graphics.Pixmap;
 import arc.graphics.g2d.Draw;
-import arc.graphics.g2d.TextureRegion;
 import arc.struct.Seq;
 import arc.util.Time;
 import mindustry.gen.Unit;
 import mindustry.gen.UnitEntity;
-import mindustry.graphics.Pal;
 import mma.type.ImageGenerator;
 import mma.type.pixmap.PixmapProcessor;
+import sunset.type.Rotor;
 import sunset.utils.PixmapRotator;
 
 public class CopterUnitType extends SnUnitType implements ImageGenerator {

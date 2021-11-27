@@ -10,7 +10,7 @@ import mindustry.entities.*;
 import mindustry.entities.bullet.*;
 import mindustry.gen.*;
 import sunset.entities.abilities.BerserkStage;
-import sunset.type.BerserkUnitType;
+import sunset.type.unitTypes.BerserkUnitType;
 
 
 public class BerserkLaserBulletType extends BulletType {
