@@ -56,7 +56,7 @@ public class SnTurrets implements ContentList {
     @Override
     public void load() {
         //region 1x1
-        sting = new ModPowerTurret("sting") {{
+        sting = new SnPowerTurret("sting") {{
             requirements(Category.turret, with(SnItems.fors, 50, Items.lead, 20));
             health = 400;
             reloadTime = 40f;
@@ -116,7 +116,7 @@ public class SnTurrets implements ContentList {
         }};
         //endregion 1x1
         //region 2x2
-        supreme = new ModPowerTurret("supreme") {{
+        supreme = new SnPowerTurret("supreme") {{
             requirements(Category.turret, with(SnItems.fors, 150, Items.lead, 70, Items.silicon, 40));
             size = 2;
             reloadTime = 50f;
@@ -462,7 +462,7 @@ public class SnTurrets implements ContentList {
         }};
         //endregion 6x6
         //region 7x7
-        halberd = new ModPowerTurret("halberd") {{
+        halberd = new SnPowerTurret("halberd") {{
             requirements(Category.turret, with(Items.copper, 2400,  Items.metaglass, 1200, Items.lead, 1120, Items.silicon, 1200, Items.plastanium, 980, SnItems.nobium, 750, SnItems.fors, 710, SnItems.enojie, 690));
             range = 350f;
             shots = 1;

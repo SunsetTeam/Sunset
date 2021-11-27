@@ -15,9 +15,9 @@ import static sunset.content.SnSettings.snSettings;
  * 1) reload bar
  * 2)
  * */
-public class ModPowerTurret extends PowerTurret {
+public class SnPowerTurret extends PowerTurret {
 
-    public ModPowerTurret(String name) {
+    public SnPowerTurret(String name) {
         super(name);
     }
 

@@ -35,6 +35,7 @@ public class Sunset extends MMAMod{
 
     public Sunset(){
         super();
+        disableBlockOutline=true;
         SnVars.load();
         SnEntityMapping.init();
         SnCall.registerPackets();

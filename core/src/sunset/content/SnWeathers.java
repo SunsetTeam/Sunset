@@ -1,16 +1,17 @@
 package sunset.content;
 
-import arc.graphics.*;
-import arc.util.*;
-import mindustry.ctype.*;
-import mindustry.gen.*;
-import mindustry.type.*;
-import mindustry.type.weather.*;
-import mindustry.world.meta.*;
+import arc.graphics.Color;
+import arc.util.Time;
+import mindustry.content.Weathers;
+import mindustry.ctype.ContentList;
+import mindustry.gen.Sounds;
+import mindustry.type.Weather;
+import mindustry.type.weather.ParticleWeather;
+import mindustry.world.meta.Attribute;
 
 public class SnWeathers implements ContentList {
     public static Weather
-    blizzard, flood;
+            blizzard, flood;
 
     @Override
     public void load() {
@@ -39,7 +40,7 @@ public class SnWeathers implements ContentList {
             soundVolMin = 0.02f;
         }};
 
-        flood = new ParticleWeather("flood"){{
+        flood = new ParticleWeather("flood") {{
             duration = 10f * Time.toMinutes;
             noiseLayers = 3;
             noiseLayerSclM = 0.4f;
@@ -49,7 +50,11 @@ public class SnWeathers implements ContentList {
             baseSpeed = 0.03f;
             color = noiseColor = Color.grays(0.4f);
             noiseScale = 1000f;
-            noisePath = "flood";
+            //TODO make new weather
+
+//            noisePath = fullName("flood");
+//            noisePath = "flood";
+            noisePath= ((ParticleWeather)Weathers.fog).noisePath;
             drawParticles = false;
             drawNoise = true;
             useWindVector = false;
