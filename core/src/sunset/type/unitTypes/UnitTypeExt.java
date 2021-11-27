@@ -13,7 +13,7 @@ import mindustry.type.Weapon;
 import mindustry.world.meta.Stat;
 import mindustry.world.meta.StatValue;
 import sunset.type.UpdateDrawWeapon;
-import sunset.world.meta.values.WeaponListValueExt;
+import sunset.world.meta.SnStatValues;
 
 /** UnitType, который имеет некоторые изменения. */
 public class UnitTypeExt extends SnUnitType {
@@ -42,7 +42,7 @@ public class UnitTypeExt extends SnUnitType {
         // Передаём заполнение сведений об орудии самому орудию, если оно это поддерживает
         if(weapons.any()) {
             stats.remove(Stat.weapons);
-            stats.add(Stat.weapons, new WeaponListValueExt(this, weapons));
+            stats.add(Stat.weapons, SnStatValues.weaponListExt(this, weapons));
         }
     }
 

@@ -1,0 +1,110 @@
+package sunset.world.meta;
+
+import arc.Core;
+import arc.graphics.g2d.TextureRegion;
+import arc.scene.ui.layout.Table;
+import arc.struct.OrderedMap;
+import arc.struct.Seq;
+import arc.util.Scaling;
+import arc.util.Strings;
+import mindustry.ctype.UnlockableContent;
+import mindustry.gen.Tex;
+import mindustry.type.UnitType;
+import mindustry.type.Weapon;
+import mindustry.ui.ItemDisplay;
+import mindustry.ui.ItemImage;
+import mindustry.world.meta.Stat;
+import mindustry.world.meta.StatUnit;
+import mindustry.world.meta.StatValue;
+import mindustry.world.meta.StatValues;
+import sunset.type.DrillItem;
+
+public class SnStatValues {
+    public static StatValue weaponListExt(UnitType unit, Seq<Weapon> weapons){
+        return table -> {
+            table.row();
+            for(int i = 0; i < weapons.size;i ++){
+                Weapon weapon = weapons.get(i);
+
+                if(weapon.flipSprite){
+                    //flipped weapons are not given stats
+                    continue;
+                }
+
+                TextureRegion region = !weapon.name.equals("") && weapon.outlineRegion.found() ? weapon.outlineRegion : unit.fullIcon;
+
+                table.image(region).size(60).scaling(Scaling.bounded).right().top();
+
+                if(weapon instanceof StatValue) {
+                    table.table(Tex.underline, ((StatValue)weapon)::display).padTop(-9).left();
+                } else {
+                    table.table(Tex.underline, w -> {
+                        w.left().defaults().padRight(3).left();
+
+                        if (weapon.inaccuracy > 0) {
+                            sep(w, "[lightgray]" + Stat.inaccuracy.localized() + ": [white]" + (int) weapon.inaccuracy + " " + StatUnit.degrees.localized());
+                        }
+                        sep(w, "[lightgray]" + Stat.reload.localized() + ": " + (weapon.mirror ? "2x " : "") + "[white]" + Strings.autoFixed(60f / weapon.reload * weapon.shots, 2));
+
+                        StatValues.ammo(OrderedMap.of(unit, weapon.bullet)).display(w);
+                    }).padTop(-9).left();
+                }
+                table.row();
+            }
+        };
+    }
+
+    public static StatValue drillItems(DrillItem[] drillItems) {
+        return drillItems(drillItems, 0);
+    }
+
+    public static StatValue drillItems(DrillItem[] drillItems, int indent) {
+        return table -> {
+
+            table.row();
+
+            for (DrillItem t : drillItems) {
+                boolean compact = indent > 0;
+
+
+                //no point in displaying unit icon twice
+                if (!compact) {
+                    table.add(new ItemImage(icon(t.item), t.amount)).right().top();
+                }
+
+                table.table(bt -> {
+                    bt.left().defaults().padRight(3).left();
+                    bt.add(Core.bundle.format("stat.drillsizedesc", Strings.autoFixed(t.sizeMultiplier, 2))).padLeft(6);
+                    if (false) {
+                        sep(table, t.amount + " " + StatUnit.items.localized());
+                    }
+                }).padTop(compact ? 0 : -9).padLeft(indent * 8).left().get().background(compact ? null : Tex.underline);
+
+                table.row();
+            }
+        };
+    }
+    public static StatValue drillItems_old(DrillItem[] items) {
+        return table -> {
+            table.table(t -> {
+                t.left().defaults().padRight(3).left();
+                for (DrillItem di : items) {
+                    t.add(new ItemDisplay(di.item, di.amount));
+                    t.add(Core.bundle.format("stat.drillsizedesc", Strings.autoFixed(di.sizeMultiplier, 2))).padLeft(6);
+//                t.add(Core.bundle.format("stat.drillitemdesc", count, di.item.emoji(), di.item.localizedName));
+                    t.row();
+                }
+            });
+        };
+    }
+
+    //for AmmoListValue
+    private static void sep(Table table, String text) {
+        table.row();
+        table.add(text);
+    }
+
+    private static TextureRegion icon(UnlockableContent t) {
+        return t.uiIcon;
+    }
+}

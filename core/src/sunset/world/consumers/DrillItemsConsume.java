@@ -12,15 +12,13 @@ import mindustry.world.consumers.ConsumeType;
 import mindustry.world.meta.Stat;
 import mindustry.world.meta.Stats;
 import sunset.type.DrillItem;
-import sunset.world.meta.values.DrillItemsValue;
+import sunset.world.meta.SnStatValues;
 
 public class DrillItemsConsume extends Consume {
     public final DrillItem[] drillItems;
-    public final int itemAmount;
 
-    public DrillItemsConsume(DrillItem[] drillItems, int itemAmount) {
+    public DrillItemsConsume(DrillItem[] drillItems) {
         this.drillItems = drillItems;
-        this.itemAmount = itemAmount;
     }
 
     @Override
@@ -38,7 +36,7 @@ public class DrillItemsConsume extends Consume {
             if (!item.item.unlockedNow()) {
                 continue;
             }
-            image.add(new ReqImage(new ItemImage(item.item.uiIcon, itemAmount), () -> tile.items != null && tile.items.has(item.item)));
+            image.add(new ReqImage(new ItemImage(item.item.uiIcon, item.amount), () -> tile.items != null && tile.items.has(item.item)));
         }
 
         table.add(image).size(8 * 4);
@@ -56,12 +54,14 @@ public class DrillItemsConsume extends Consume {
 
     @Override
     public void trigger(Building entity) {
-        entity.items.remove(Structs.find(drillItems, d -> entity.items.has(d.item, itemAmount)).item, itemAmount);
+        DrillItem item = Structs.find(drillItems, d -> entity.items.has(d.item, d.amount));
+        if (item==null)return;
+        entity.items.remove(item.item, item.amount);
     }
 
     @Override
     public void display(Stats stats) {
-        stats.add(Stat.input, new DrillItemsValue(drillItems, itemAmount));
+        stats.add(Stat.input, SnStatValues.drillItems(drillItems));
     }
 
     @Override

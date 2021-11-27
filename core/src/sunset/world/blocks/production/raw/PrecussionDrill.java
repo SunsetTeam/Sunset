@@ -30,6 +30,8 @@ import mma.ModVars;
 import sunset.type.DrillItem;
 import sunset.world.consumers.DrillItemsConsume;
 
+import java.util.Arrays;
+
 import static mindustry.Vars.tilesize;
 import static mindustry.Vars.world;
 
@@ -92,14 +94,14 @@ public class PrecussionDrill extends Block {
     }
 
     public static State updateOre(Tile tile, ItemSeq items, int tier, PrecussionDrill inst) {
-        State ret = State.NoOre;
+        State ret = State.noOre;
         items.clear();
         for (Tile t : tile.getLinkedTilesAs(inst, tempTiles)) {
             if (t != null && t.drop() != null) {
                 if (t.drop().hardness <= tier) {
                     items.add(t.drop());
-                    ret = State.OK;
-                } else if (ret != State.OK) ret = State.LowTier;
+                    ret = State.ok;
+                } else if (ret == State.noOre) ret = State.lowTier;
             }
         }
         return ret;
@@ -120,12 +122,18 @@ public class PrecussionDrill extends Block {
 
     @Override
     public void init() {
+        for (DrillItem drillItem : reqDrillItems) {
+            if (drillItem.amount == -1) {
+                drillItem.amount = drillItemCount;
+            }
+        }
         consumes.add(new DynamicConsumePower(b -> {
             PrecussionDrillBuild p = (PrecussionDrillBuild) b;
             return powerUse * (p.working() ? p.getBoost() : 0);
         }));
 //        consumes.add(new ConsumeItemFilter(i -> Structs.contains(reqDrillItems, d -> d.item == i)));
-        consumes.add(new DrillItemsConsume(reqDrillItems, drillItemCount));
+        Arrays.sort(reqDrillItems, Structs.comparingFloat(di -> di.sizeMultiplier));
+        consumes.add(new DrillItemsConsume(reqDrillItems));
         super.init();
 
     }
@@ -159,7 +167,7 @@ public class PrecussionDrill extends Block {
     }
 
     public boolean canPlaceOn(Tile tile, Team team) {
-        return updateOre(tile, tmpItems, tier) == State.OK;
+        return updateOre(tile, tmpItems, tier) == State.ok;
     }
 
     @Override
@@ -170,7 +178,7 @@ public class PrecussionDrill extends Block {
 
         State state = updateOre(tile, tmpItems, tier);
 
-        if (state == State.OK) {
+        if (state == State.ok) {
             final float[] sumSpeed = {0};
             tmpItems.each((item, amount) -> sumSpeed[0] += (multiplier(item) * amount) / (drillTime / 60f));
             float width = drawPlaceText(Core.bundle.formatFloat("bar.drillspeed", sumSpeed[0] * itemCountMultiplier, 2), x, y, valid);
@@ -183,7 +191,7 @@ public class PrecussionDrill extends Block {
                 Draw.rect(item.uiIcon, dx[0], dy);
                 dx[0] -= 6;
             });
-        } else if (state == State.LowTier) {
+        } else if (state == State.lowTier) {
             Tile to = tile.getLinkedTilesAs(this, tempTiles).find(t -> t.drop() != null && t.drop().hardness > tier);
             Item item = to == null ? null : to.drop();
             if (item != null) drawPlaceText(Core.bundle.get("bar.drilltierreq"), x, y, valid);
@@ -196,9 +204,9 @@ public class PrecussionDrill extends Block {
     }
 
     private enum State {
-        NoOre, //нет руды под буром
-        LowTier, //"Требуется бур получше"
-        OK //всё гуд
+        noOre, //нет руды под буром
+        lowTier, //"Требуется бур получше"
+        ok //всё гуд
     }
 
     public class PrecussionDrillBuild extends Building {
