@@ -2,9 +2,7 @@ package sunset.utils;
 
 import arc.func.Boolf;
 import arc.func.Cons;
-import arc.func.Floatc2;
 import arc.func.Func;
-import arc.math.Angles;
 import arc.math.Mathf;
 import arc.math.Rand;
 import arc.math.geom.Geometry;
@@ -28,10 +26,12 @@ import mindustry.type.StatusEffect;
 import mindustry.type.UnitType;
 import mindustry.ui.fragments.MenuFragment;
 import mindustry.world.Tile;
+import mindustry.world.meta.StatValue;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
+import static arc.Core.bundle;
 import static mindustry.Vars.tilesize;
 import static mindustry.Vars.world;
 
@@ -43,6 +43,7 @@ public class Utils {
     private static final Vec2 rv = new Vec2(), tr = new Vec2();
     private static Rect rect = new Rect(), hitrect = new Rect();
     private static IntSet collidedBlocks = new IntSet();
+    private static boolean check;
 
     /**
      * Определяет, горит ли юнит.
@@ -192,11 +193,7 @@ public class Utils {
             }
         }
     }
-
-    /**
-     * for EMP
-     */
-    public static Seq<Teamc> allNearbyEnemies(Team team, float x, float y, float radius) {
+    public static Seq<Teamc> allNearbyEnemiesOld(Team team, float x, float y, float radius) {
         Seq<Teamc> targets = new Seq<>();
 
         Units.nearbyEnemies(team, x - radius, y - radius, radius * 2f, radius * 2f, unit -> {
@@ -213,8 +210,59 @@ public class Utils {
 
         return targets;
     }
+    public static void allNearbyEnemies(Team team, float x, float y, float radius, Cons<Healthc> cons){
+        Units.nearbyEnemies(team, x - radius, y - radius, radius * 2f, radius * 2f, unit -> {
+            if(unit.within(x, y, radius + unit.hitSize / 2f) && !unit.dead){
+                cons.get(unit);
+            }
+        });
 
+        trueEachBlock(x, y, radius, build -> {
+            if(build.team != team && !build.dead && build.block != null){
+                cons.get(build);
+            }
+        });
+    }
+    public static StatValue empWave(float damage, float maxTargets, StatusEffect status){
+        return table -> {
+            table.row();
+            table.table(t -> {
+                t.left().defaults().padRight(3).left();
+
+                t.add(bundle.format("bullet.lightning", maxTargets, damage));
+                t.row();
+
+                if(status != StatusEffects.none){
+                    t.add((status.minfo.mod == null ? status.emoji() : "") + "[stat]" + status.localizedName);
+                }
+            }).padTop(-9).left().get().background(Tex.underline);
+        };
+    }
+    public static boolean checkForTargets(Team team, float x, float y, float radius){
+        check = false;
+
+        Units.nearbyEnemies(team, x - radius, y - radius, radius * 2f, radius * 2f, unit -> {
+            if(unit.within(x, y, radius + unit.hitSize / 2f) && !unit.dead){
+                check = true;
+            }
+        });
+
+        trueEachBlock(x, y, radius, build -> {
+            if(build.team != team && !build.dead && build.block != null){
+                check = true;
+            }
+        });
+
+        return check;
+    }
+    /** For reload bar. */
     public static String stringsFixed(float value){
         return Strings.autoFixed(value, 2);
+    }
+
+    /** Extracts a number out of a string by removing every non-numerical character  */
+    public static String extractNumber(String s){
+        //God, I love google. I have no idea what the "[^\\d.]" part even is. meep moment :D
+        return s.replaceAll("[^\\d.]", "");
     }
 }

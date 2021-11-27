@@ -10,6 +10,7 @@ import mindustry.world.Block;
 import mindustry.world.blocks.power.DecayGenerator;
 import mindustry.world.blocks.power.NuclearReactor;
 import sunset.content.SnItems;
+import sunset.content.SnLiquids;
 import sunset.world.blocks.power.LiquidGenerator;
 import sunset.world.blocks.power.ThermalGeneratorExt;
 
@@ -21,7 +22,7 @@ public class SnPower implements ContentList {
                 oilGenerator, advrtgGenerator, advThermalGenerator,
 
                 //reactors
-                planatriumReactor;
+                differentialReactor, planatriumReactor;
 
     @Override
     public void load() {
@@ -62,6 +63,23 @@ public class SnPower implements ContentList {
         }};
         //endregion generators
         //region reactors
+        differentialReactor = new NuclearReactor("differential-reactor") {{
+            requirements(Category.power, with(Items.copper, 70, Items.titanium, 50, Items.lead, 100, Items.silicon, 65, Items.metaglass, 50));
+            ambientSound = Sounds.steam;
+            ambientSoundVolume = 0.03f;
+            size = 4;
+            health = 1300;
+            explosionRadius = 10;
+            explosionDamage = 1300;
+            itemCapacity = 35;
+            liquidCapacity = 70;
+            itemDuration = 240f;
+            powerProduction = 40f;
+            heating = 0.03f;
+            consumes.item(SnItems.reneubite).optional(true, false);
+            consumes.liquid(SnLiquids.burheyna, heating / coolantPower).update(false);
+        }};
+
         planatriumReactor = new NuclearReactor("planatrium-reactor") {{
             requirements(Category.power, with(Items.lead, 400, Items.silicon, 270, Items.graphite, 220, SnItems.planatrium, 200, SnItems.fors, 180, SnItems.nobium, 120));
             ambientSound = Sounds.hum;
@@ -69,12 +87,12 @@ public class SnPower implements ContentList {
             size = 5;
             explosionRadius = 21;
             explosionDamage = 2100;
-            health = 4100;
+            health = 3100;
             itemCapacity = 50;
             liquidCapacity = 80;
             itemDuration = 280f;
             powerProduction = 180f;
-            //later explodeEffect = Fx.reactorExplosion;
+            explodeEffect = Fx.reactorExplosion;
             consumes.item(SnItems.planatrium);
             heating = 0.07f;
             consumes.liquid(Liquids.cryofluid, heating / coolantPower).update(false);

@@ -10,7 +10,7 @@ import mindustry.world.meta.*;
 
 public class SnWeathers implements ContentList {
     public static Weather
-    blizzard;
+    blizzard, flood;
 
     @Override
     public void load() {
@@ -37,6 +37,29 @@ public class SnWeathers implements ContentList {
             soundVolOscMag = 1.5f;
             soundVolOscScl = 1100f;
             soundVolMin = 0.02f;
+        }};
+
+        flood = new ParticleWeather("flood"){{
+            duration = 10f * Time.toMinutes;
+            noiseLayers = 3;
+            noiseLayerSclM = 0.4f;
+            noiseLayerAlphaM = 0.4f;
+            noiseLayerSpeedM = 1f;
+            noiseLayerSclM = 0.7f;
+            baseSpeed = 0.03f;
+            color = noiseColor = Color.grays(0.4f);
+            noiseScale = 1000f;
+            noisePath = "flood";
+            drawParticles = false;
+            drawNoise = true;
+            useWindVector = false;
+            xspeed = 3f;
+            yspeed = 0.1f;
+            attrs.set(Attribute.water, 0.07f);
+            opacityMultiplier = 0.30f;
+
+            statusAir = false;
+            statusGround = true;
         }};
     }
 }

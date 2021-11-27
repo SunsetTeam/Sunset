@@ -31,9 +31,9 @@ import static mindustry.type.ItemStack.with;
 public class SnTurrets implements ContentList {
     public static Block
         //1x1
-        spine, eagle,
+        sting, spine, eagle,
         //2x2
-        carbine, pulsation, reflection,
+        supreme, carbine, pulsation, reflection,
         //3x3
         major, burner, trigger,
         //4x4
@@ -56,6 +56,24 @@ public class SnTurrets implements ContentList {
     @Override
     public void load() {
         //region 1x1
+        sting = new ModPowerTurret("sting") {{
+            requirements(Category.turret, with(SnItems.fors, 50, Items.lead, 20));
+            health = 400;
+            reloadTime = 40f;
+            range = 140f;
+            recoilAmount = 1f;
+            inaccuracy = 2f;
+            rotateSpeed = 7.5f;
+            shootCone = 2f;
+            shootSound = Sounds.laser;
+            ammoUseEffect = Fx.casing1;
+            targetAir = true;
+            shootType = SnBullets.smallEnergySphere;
+            chargeTime = 20f;
+            chargeMaxDelay = 20f;
+            powerUse = 1f;
+            chargeEffect = SnFx.smallEnergySphereCharge;
+        }};
         spine = new ModItemTurret("spine") {{
             requirements(Category.turret, with(Items.copper, 55, Items.lead, 25));
             ammo(
@@ -98,6 +116,24 @@ public class SnTurrets implements ContentList {
         }};
         //endregion 1x1
         //region 2x2
+        supreme = new ModPowerTurret("supreme") {{
+            requirements(Category.turret, with(SnItems.fors, 150, Items.lead, 70, Items.silicon, 40));
+            size = 2;
+            reloadTime = 50f;
+            range = 190f;
+            recoilAmount = 2f;
+            inaccuracy = 3f;
+            rotateSpeed = 6f;
+            shootCone = 3f;
+            shootSound = Sounds.laser;
+            ammoUseEffect = Fx.casing1;
+            targetAir = true;
+            shootType = SnBullets.mediumEnergySphere;
+            chargeTime = 30f;
+            chargeMaxDelay = 30f;
+            powerUse = 2f;
+            chargeEffect = SnFx.mediumEnergySphereCharge;
+        }};
         carbine = new ChainLightningTurret("carbine") {{
             requirements(Category.turret, with(Items.copper, 150, Items.lead, 140, Items.surgeAlloy, 60, SnItems.nobium, 90, SnItems.naturite, 120));
             range = 132.2f;
@@ -426,7 +462,7 @@ public class SnTurrets implements ContentList {
         }};
         //endregion 6x6
         //region 7x7
-        halberd = new PowerTurret("halberd") {{
+        halberd = new ModPowerTurret("halberd") {{
             requirements(Category.turret, with(Items.copper, 2400,  Items.metaglass, 1200, Items.lead, 1120, Items.silicon, 1200, Items.plastanium, 980, SnItems.nobium, 750, SnItems.fors, 710, SnItems.enojie, 690));
             range = 350f;
             shots = 1;
@@ -569,7 +605,7 @@ public class SnTurrets implements ContentList {
             shots = 10;
             zaps = 10;
             zapAngleRand = 10f;
-            parts.add(new EMPPart(1.2f));
+            parts.add(new Core(1.2f));
         }};
         dischargerEvo = new EMPFacility("discharger-evo") {{
             requirements(Category.turret, ItemStack.mult(discharger.requirements, 2));
@@ -584,7 +620,7 @@ public class SnTurrets implements ContentList {
             shots = 20;
             zaps = 20;
             zapAngleRand = 15f;
-            parts.add(new EMPPart(5));
+            parts.add(new Core(5));
         }};
         //endregion EMP
         //region synthesis

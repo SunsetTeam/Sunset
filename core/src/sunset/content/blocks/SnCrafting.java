@@ -201,7 +201,7 @@ public class SnCrafting implements ContentList {
             size = 4;
             hasPower = true;
             hasLiquids = false;
-            craftEffect = SnFx.enojieCraft;
+            //craftEffect = SnFx.enojieCraft;
             updateEffect = SnFx.enojieBurn;
 
             consumes.items(with(SnItems.nobium, 2, SnItems.planatrium, 3, Items.metaglass, 1));

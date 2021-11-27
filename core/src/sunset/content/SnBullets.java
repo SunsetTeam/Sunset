@@ -42,6 +42,8 @@ public class SnBullets implements ContentList {
     sporePodPoisonBullet, naturitePoisonBullet,
     sporePodPoisonFrag, heavySporePodPoison, naturitePoisonFrag, heavyNaturitePoison, nobiumPoisonFrag, heavyNobiumPoison,
     bigSporePodPoisonFrag, bigSporePodPoison, bigNaturitePoisonFrag, bigNaturitePoison, bigNobiumPoisonFrag, bigNobiumPoison, bigPlastaniumPoisonFrag, bigPlastaniumPoison,
+    //energy-sphere
+    smallEnergySphere, mediumEnergySphereFrag, mediumEnergySphere,
     //units
     basicHelicopterGun, laserBoltHelicopterGun, helicopterMissile, clusterRocketSmall, clusterRocket, bigHelicopterGun, bigHelicopterBullet, laserGun, helicopterFlame, laserHelicopterFrag, largeHelicopterBullet, bigHelicopterRocket, helicopterMissiles,
     cometWaterShot, starStunBullet, galaxyKnockbackBullet,
@@ -837,6 +839,47 @@ public class SnBullets implements ContentList {
             weaveMag = 1f;
         }};
         //endregion big-poison bullets
+        //region energy-sphere
+        smallEnergySphere = new BasicBulletType(3f, 15) {{
+            sprite = "sunset-circle-bullet";
+            lifetime = 30f;
+            height = 4f;
+            width = 4f;
+            hitEffect = Fx.flakExplosion;
+            frontColor = SnPal.redBomb;
+            backColor = SnPal.redBombBack;
+        }};
+
+        mediumEnergySphereFrag = new LaserBulletType(10) {{
+            colors = new Color[]{SnPal.redBomb.cpy().a(0.4f), SnPal.redBomb, Color.white};
+            width = 20f;
+            lifetime = 15f;
+            length = 20f;
+            laserEffect = Fx.lancerLaserShootSmoke;
+            collidesAir = true;
+            collidesGround = true;
+        }};
+
+        mediumEnergySphere = new BasicBulletType(3f, 30) {{
+            sprite = "sunset-circle-bullet";
+            lifetime = 45f;
+            height = 8f;
+            width = 8f;
+            hitEffect = SnFx.mediumEnergySphereHit;
+            frontColor = SnPal.redBomb;
+            backColor = SnPal.redBombBack;
+
+            trailColor = SnPal.redBombBack;
+            trailWidth = 2f;
+            trailLength = 4;
+            trailEffect = Fx.artilleryTrail;
+
+            fragBullet = mediumEnergySphereFrag;
+            fragBullets = 1;
+            fragCone = 0.0001f;
+
+        }};
+        //endregion energy-sphere
         //region helicopter
         basicHelicopterGun = new BasicBulletType(4.7f, 10) {{
             width = 8f;
@@ -1021,7 +1064,7 @@ public class SnBullets implements ContentList {
             weaveScale = 4f;
             weaveMag = 2f;
         }};
-        //endregion copter
+        //endregion helicopter
         //region buffer
         cometWaterShot = new ExtinguishBulletType(Liquids.water) {{
             lifetime = 30f;

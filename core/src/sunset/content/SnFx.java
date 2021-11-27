@@ -9,6 +9,7 @@ import arc.graphics.g2d.Lines;
 import arc.math.Angles;
 import arc.math.Interp;
 import arc.math.Mathf;
+import arc.math.geom.Position;
 import arc.math.geom.Vec2;
 import arc.struct.Seq;
 import arc.util.Tmp;
@@ -112,6 +113,7 @@ public class SnFx {
         Fill.circle(e.x, e.y, e.fin() * 7f);
     }),
 
+
     galebardShoot = new Effect(70f, e -> {
         color(Pal.meltdownHit);
         stroke(e.fout() * 7f);
@@ -124,6 +126,32 @@ public class SnFx {
             Drawf.tri(e.x, e.y, 7.0f * e.fout(), 70f, e.rotation + 12f * i);
             Drawf.tri(e.x, e.y, 8.0f * e.fout(), 110f, e.rotation + 125f * i);
         }
+    }),
+
+    smallEnergySphereCharge = new Effect(40f, e -> {
+        color(SnPal.redBombBack);
+        Fill.circle(e.x, e.y, e.fin() * 2f);
+    }),
+
+    mediumEnergySphereCharge = new Effect(55f, e -> {
+        color(SnPal.redBombBack);
+        Fill.circle(e.x, e.y, e.fin() * 4f);
+    }),
+    
+    mediumEnergySphereHit = new Effect(20f, 50f, e -> {
+        color(SnPal.redBomb);
+        stroke(e.fout() * 1f);
+        color(SnPal.redBomb);
+        for (int i = 0; i < 2; i++) {
+            Drawf.tri(e.x, e.y, 3f, 45f * e.fout(), i * 60);
+        }
+
+        color();
+        for (int i = 0; i < 2; i++) {
+            Drawf.tri(e.x, e.y, 2f, 25f * e.fout(), i * 60);
+        }
+
+        Drawf.light(e.x, e.y, 12, SnPal.redBomb, e.fout());
     }),
 
     redBomb = new Effect(30f, 70f, e -> {
@@ -594,11 +622,15 @@ public class SnFx {
         });
     }),
 
-    empWave = new Effect(0, e -> {
+    empWave = new Effect(30, e -> {
         randLenVectors(e.id, 10, 5f + e.fin() * 5f, (x, y) -> {
             color(SnPal.emp1, SnPal.emp2, e.fin());
             Fill.square(e.x + x, e.y + y, e.fout());
         });
+        /*randLenVectors(e.id, 5, 3f + e.fin() * 5f, (x, y) -> {
+            color(Color.valueOf("CFEDD4"), Color.lime, e.fin());
+            Fill.square(e.x + x, e.y + y, e.fout());
+        });*/
     }),
 
     greenInstTrail = new Effect(30, e -> {
@@ -710,4 +742,15 @@ public class SnFx {
 
     }
     //endregion energy sphere utils
+
+    /** EMP data. */
+    public static class LightningData{
+        Position pos;
+        float stroke;
+
+        public LightningData(Position pos, float stroke){
+            this.pos = pos;
+            this.stroke = stroke;
+        }
+    }
 }

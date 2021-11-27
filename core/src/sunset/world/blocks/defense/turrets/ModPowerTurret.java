@@ -3,19 +3,21 @@ package sunset.world.blocks.defense.turrets;
 import arc.Core;
 import arc.math.Mathf;
 import mindustry.ui.Bar;
-import mindustry.world.blocks.defense.turrets.ItemTurret;
+import mindustry.world.blocks.defense.turrets.PowerTurret;
+import sunset.content.SnSettings;
 import sunset.utils.Utils;
 
 import static arc.Core.settings;
+import static sunset.content.SnSettings.snSettings;
 
-/** Item turret with useful things.
+/** Power turret with useful things.
  * Features:
  * 1) reload bar
  * 2)
  * */
-public class ModItemTurret extends ItemTurret {
+public class ModPowerTurret extends PowerTurret {
 
-    public ModItemTurret(String name) {
+    public ModPowerTurret(String name) {
         super(name);
     }
 
@@ -23,7 +25,7 @@ public class ModItemTurret extends ItemTurret {
     public void setBars() {
         super.setBars();
         if (settings.getBool("sn-reloadbar")) {
-            bars.add("sunset-reload", (ItemTurretBuild entity) -> new Bar(
+            bars.add("sunset-reload", (PowerTurretBuild entity) -> new Bar(
                     () -> Core.bundle.format("bar.sunset-reload", Utils.stringsFixed(Mathf.clamp(entity.reload / reloadTime) * 100f)),
                     () -> entity.team.color,
                     () -> Mathf.clamp(entity.reload / reloadTime)

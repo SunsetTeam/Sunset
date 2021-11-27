@@ -1,7 +1,7 @@
 package sunset.content;
 
 import mindustry.ai.types.SuicideAI;
-import mindustry.annotations.Annotations;
+import mindustry.annotations.Annotations.EntityDef;
 import mindustry.content.Fx;
 import mindustry.content.StatusEffects;
 import mindustry.content.UnitTypes;
@@ -14,6 +14,7 @@ import mindustry.gen.Unitc;
 import mindustry.graphics.Layer;
 import mindustry.graphics.Pal;
 import mindustry.type.UnitType;
+import mindustry.world.meta.BlockFlag;
 import sunset.ai.DeliverAI;
 import sunset.ai.ExtinguishAI;
 import sunset.ai.FlyingUnitWeaponAI;
@@ -45,7 +46,7 @@ public class SnUnitTypes implements ContentList {
     router,
     //freezing
     snowflake;
-    @Annotations.EntityDef({Unitc.class, Deliverc.class})
+    @EntityDef({Unitc.class, Deliverc.class})
     public static UnitType courier;
 
     @Override
@@ -58,7 +59,8 @@ public class SnUnitTypes implements ContentList {
             accel = 0.1f;
             drag = 0.02f;
             commandLimit = 3;
-
+            targetFlags = new BlockFlag[]{BlockFlag.battery, BlockFlag.generator, BlockFlag.reactor, null};
+            
             flying = true;
             circleTarget = false;
             range = 130;
@@ -93,6 +95,7 @@ public class SnUnitTypes implements ContentList {
             accel = 0.1f;
             drag = 0.02f;
             commandLimit = 3;
+            targetFlags = new BlockFlag[]{BlockFlag.battery, BlockFlag.generator, BlockFlag.reactor, null};
 
             flying = true;
             circleTarget = false;
@@ -132,6 +135,7 @@ public class SnUnitTypes implements ContentList {
             accel = 0.1f;
             drag = 0.02f;
             commandLimit = 4;
+            targetFlags = new BlockFlag[]{BlockFlag.battery, BlockFlag.generator, BlockFlag.reactor, null};
 
             flying = true;
             circleTarget = false;
@@ -198,6 +202,7 @@ public class SnUnitTypes implements ContentList {
             accel = 0.1f;
             drag = 0.02f;
             commandLimit = 4;
+            targetFlags = new BlockFlag[]{BlockFlag.battery, BlockFlag.generator, BlockFlag.reactor, null};
 
             flying = true;
             circleTarget = false;
@@ -253,6 +258,7 @@ public class SnUnitTypes implements ContentList {
             accel = 0.1f;
             drag = 0.02f;
             commandLimit = 3;
+            targetFlags = new BlockFlag[]{BlockFlag.battery, BlockFlag.generator, BlockFlag.reactor, null};
 
             flying = true;
             circleTarget = false;
@@ -313,6 +319,7 @@ public class SnUnitTypes implements ContentList {
             accel = 0.1f;
             drag = 0.02f;
             commandLimit = 3;
+            targetFlags = new BlockFlag[]{BlockFlag.battery, BlockFlag.generator, BlockFlag.reactor, null};
 
             flying = true;
             circleTarget = false;
@@ -339,7 +346,7 @@ public class SnUnitTypes implements ContentList {
 
             constructor = UnitEntity::create;
 
-            weapons.add(new WeaponExt("comet") {{
+            weapons.add(new WeaponExt("sprite") {{
                 ai = new ExtinguishWeaponAI();
                 rotate = true;
                 mirror = false;

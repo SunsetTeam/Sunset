@@ -1,6 +1,5 @@
 package sunset.world.blocks.defense.turrets;
 
-import arc.*;
 import arc.graphics.*;
 import arc.graphics.g2d.*;
 import arc.math.*;
@@ -20,8 +19,10 @@ import mindustry.world.meta.*;
 import sunset.content.*;
 import sunset.utils.*;
 
+import static arc.Core.settings;
+
 public class EMPFacility extends PowerTurret {
-    public Seq<EMPPart> parts = new Seq<>();
+    public Seq<Core> parts = new Seq<>();
     public boolean hasSpinners;
     public Color lightningColor;
     public float zapAngleRand, spinUp, spinDown, rangeExtention, lightningStroke = 3.5f;
@@ -38,6 +39,7 @@ public class EMPFacility extends PowerTurret {
         shootSound = Sounds.release;
         shootEffect = SnFx.empShootSmall;
         cooldown = 0.5f;
+        parts.add(new Core(2.5f));
     }
 
     @Override
@@ -53,7 +55,7 @@ public class EMPFacility extends PowerTurret {
             stat.table(t -> {
                 t.left().defaults().padRight(3).left();
 
-                t.add(Core.bundle.format("bullet.lightning", zaps, shootType.damage));
+                t.add(arc.Core.bundle.format("bullet.lightning", zaps, shootType.damage));
                 t.row();
 
                 if(shootType.status != StatusEffects.none) {
@@ -66,25 +68,27 @@ public class EMPFacility extends PowerTurret {
     @Override
     public void setBars() {
         super.setBars();
-        bars.add("sunset-reload", (EMPBuild entity) -> new Bar(
-                () -> Core.bundle.format("bar.sunset-reload", Utils.stringsFixed(Mathf.clamp(entity.reload / reloadTime) * 100f)),
-                () -> entity.team.color,
-                () -> Mathf.clamp(entity.reload / reloadTime)
-        ));
+        if (settings.getBool("sn-reloadbar")) {
+            bars.add("sunset-reload", (EMPFBuild entity) -> new Bar(
+                    () -> arc.Core.bundle.format("bar.sunset-reload", Utils.stringsFixed(Mathf.clamp(entity.reload / reloadTime) * 100f)),
+                    () -> entity.team.color,
+                    () -> Mathf.clamp(entity.reload / reloadTime)
+            ));
+        }
     }
 
-    public static class EMPPart {
+    public static class Core {
         public float rotationMul = 12f;
         public float radius = 4.25f;
         public float xOffset = 0;
         public float yOffset = 0f;
 
-        public EMPPart(float radius) {
+        public Core(float radius) {
             this.radius = radius;
         }
     }
 
-    public class EMPBuild extends PowerTurretBuild {
+    public class EMPFBuild extends PowerTurretBuild {
         protected Seq<Teamc> targets = new Seq<>();
         protected float speedScl;
 
@@ -122,11 +126,11 @@ public class EMPFacility extends PowerTurret {
         protected void shoot(BulletType type) {
             targets.clear();
 
-            targets = Utils.allNearbyEnemies(team, x, y, range + rangeExtention);
+            targets = Utils.allNearbyEnemiesOld(team, x, y, range + rangeExtention);
 
             if(targets.size > 0) {
                 for(int i = 0; i < shots; i++) {
-                    EMPPart part = parts.random();
+                    Core part = parts.random();
                     Teamc target = targets.random();
 
                     Tmp.v1.trns(rotation * part.rotationMul, part.xOffset, part.yOffset);
