@@ -22,7 +22,6 @@ import mindustry.world.Block;
 import mindustry.world.Tile;
 import mindustry.world.blocks.environment.Floor;
 import mindustry.world.blocks.power.DynamicConsumePower;
-import mindustry.world.consumers.ConsumeItemFilter;
 import mindustry.world.meta.BlockGroup;
 import mindustry.world.meta.Stat;
 import mindustry.world.meta.StatUnit;
@@ -30,7 +29,6 @@ import mindustry.world.meta.StatValues;
 import mma.ModVars;
 import sunset.type.DrillItem;
 import sunset.world.consumers.DrillItemsConsume;
-import sunset.world.meta.values.DrillItemsValue;
 
 import static mindustry.Vars.tilesize;
 import static mindustry.Vars.world;
@@ -68,8 +66,8 @@ public class PrecussionDrill extends Block {
 
     /**
      * automatic unloading on adjacent blocks
-     * */
-    public boolean canDump=false;
+     */
+    public boolean canDump = false;
 
     public int tier = 5;
     public float powerUse = 1f;
@@ -93,9 +91,6 @@ public class PrecussionDrill extends Block {
         ambientSoundVolume = 0.018f;
     }
 
-    public  State updateOre(Tile tile, ItemSeq items, int tier) {
-        return updateOre(tile,items,tier,this);
-    }
     public static State updateOre(Tile tile, ItemSeq items, int tier, PrecussionDrill inst) {
         State ret = State.NoOre;
         items.clear();
@@ -103,11 +98,15 @@ public class PrecussionDrill extends Block {
             if (t != null && t.drop() != null) {
                 if (t.drop().hardness <= tier) {
                     items.add(t.drop());
-                    ret= State.OK;
+                    ret = State.OK;
                 } else if (ret != State.OK) ret = State.LowTier;
             }
         }
         return ret;
+    }
+
+    public State updateOre(Tile tile, ItemSeq items, int tier) {
+        return updateOre(tile, items, tier, this);
     }
 
     public void drillItems(DrillItem... drillItems) {
@@ -126,7 +125,7 @@ public class PrecussionDrill extends Block {
             return powerUse * (p.working() ? p.getBoost() : 0);
         }));
 //        consumes.add(new ConsumeItemFilter(i -> Structs.contains(reqDrillItems, d -> d.item == i)));
-        consumes.add(new DrillItemsConsume(reqDrillItems,drillItemCount));
+        consumes.add(new DrillItemsConsume(reqDrillItems, drillItemCount));
         super.init();
 
     }
@@ -151,7 +150,7 @@ public class PrecussionDrill extends Block {
         bars.add("progress", (PrecussionDrillBuild e) ->
                 new Bar(() -> Core.bundle.get("bar.drillprogress"),
                         () -> Pal.surge,
-                        () -> e.progressTime /drillTime));
+                        () -> e.progressTime / drillTime));
         bars.add("drillspeed", (PrecussionDrillBuild e) ->
                 new Bar(() -> Core.bundle.format("bar.drillspeed",
                         Strings.fixed(e.displaySpeed, 2)),
@@ -208,9 +207,11 @@ public class PrecussionDrill extends Block {
         private DrillItem currentDrillItem; //текущий предмет для бурения
         private long boostEndTime = 0;
         private float boost = 0f;
-public float baseSpeed(){
-    return working()?(power == null) ? 1f : power.status:0f;
-}
+
+        public float baseSpeed() {
+            return working() ? (power == null) ? 1f : power.status : 0f;
+        }
+
         @Override
         public void created() {
             updateOre(tile, drillItems, tier);
@@ -226,7 +227,7 @@ public float baseSpeed(){
             currentDrillItem = Structs.find(reqDrillItems, di -> items.has(di.item, drillItemCount));
 
             currentSpeed = Mathf.lerpDelta(currentSpeed, baseSpeed(), warmupSpeed);
-            if (!working()){
+            if (!working()) {
                 return;
             }
             //speed count
@@ -248,7 +249,7 @@ public float baseSpeed(){
                     }
                 });
             }
-            if (canDump){
+            if (canDump) {
                 drillItems.each((i, a) -> dump(i));
             }
         }
@@ -263,7 +264,7 @@ public float baseSpeed(){
 
         @Override
         public boolean canDump(Building to, Item item) {
-            return canDump&& drillItems.has(item);
+            return canDump && drillItems.has(item);
         }
 
         @Override
