@@ -20,6 +20,8 @@ import arc.struct.*;
 import mindustry.game.EventType.*;
 import mindustry.mod.Mods.*;
 
+import java.io.IOException;
+
 import static mindustry.Vars.*;
 import static mindustry.Vars.headless;
 import static mma.ModVars.modInfo;
