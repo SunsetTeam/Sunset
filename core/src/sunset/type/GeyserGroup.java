@@ -6,12 +6,12 @@ import arc.math.Mathf;
 import arc.struct.Seq;
 import mindustry.entities.Effect;
 import mindustry.world.Tile;
-import sunset.world.GeyserLogic;
 import sunset.world.blocks.environment.Geyser;
 
 public class GeyserGroup {
+    private static final Seq<Tile> tmpTiles = new Seq<>();
     public Seq<Tile> tiles;
-    private GeyserState state;
+    private GeyserState state = GeyserState.ready;
     private float factor;
 
     public GeyserGroup(Seq<Tile> tiles) {
@@ -27,21 +27,35 @@ public class GeyserGroup {
     }
 
     public void upState() {
-        state=state.up();
+        state = state.up();
     }
+
     public void downState() {
-        state=state.down();
+        state = state.down();
     }
 
     public void effect() {
         Geyser geyser = (Geyser) tiles.get(0).floor();
         Effect e = state.effect(geyser);
         float d = state.damage(geyser);
-        tiles.each(pos -> {
-            e.at(pos);
-            if (d > 0 && pos.build != null) pos.build.damage(d * 30);
-        });
+
+        tmpTiles.set(tiles);
+        for (int i = 0; tmpTiles.size * 2 > tiles.size; i++) {
+            Tile random = tmpTiles.random();
+            tmpTiles.remove(random);
+
+            e.at(random);
+            if (d > 0 && random.build != null) random.build.damage(d * 30);
+        }
+        tmpTiles.clear();
+//        tiles.each(pos -> {
+//        });
     }
+
+    public GeyserState state() {
+        return state;
+    }
+
     enum GeyserState {
         ready(g -> g.calmEffect, g -> 0f),
         steady(g -> g.steamEffect, g -> g.steamDamage),
@@ -59,11 +73,11 @@ public class GeyserGroup {
         }
 
         public GeyserState up() {
-            return values()[Math.min(ordinal() + 1, values().length)];
+            return values()[Math.min(ordinal() + 1, values().length-1)];
         }
 
         public GeyserState down() {
-            return values()[Math.min(ordinal() - 1, 0)];
+            return values()[Math.max(ordinal() - 1, 0)];
         }
 
         public Effect effect(Geyser geyser) {

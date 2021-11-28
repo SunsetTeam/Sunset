@@ -1,6 +1,9 @@
 package sunset.world;
 
 import arc.Events;
+import arc.graphics.Color;
+import arc.graphics.g2d.Draw;
+import arc.graphics.g2d.Fill;
 import arc.math.Mathf;
 import arc.struct.ObjectSet;
 import arc.struct.Seq;
@@ -8,15 +11,18 @@ import arc.util.Interval;
 import mindustry.Vars;
 import mindustry.core.GameState;
 import mindustry.game.EventType;
+import mindustry.graphics.Layer;
 import mindustry.world.Tile;
 import mma.ModListener;
+import mma.graphics.ModDraw;
 import sunset.type.GeyserGroup;
 import sunset.world.blocks.environment.Geyser;
 
+import static mindustry.Vars.tilesize;
 import static mindustry.Vars.world;
 
 public class GeyserLogic {
-    private static final int effectTime = 30;
+    private static final int effectTime = 20;
     private final Seq<GeyserGroup> geysers = new Seq<>();
     private final ObjectSet<Tile> tmpSet = new ObjectSet<>();
     private final Interval effects = new Interval();
@@ -26,17 +32,19 @@ public class GeyserLogic {
 
     public GeyserLogic() {
         Events.run(EventType.WorldLoadEvent.class, this::reloadData);
+//        Events.run(EventType.Trigger.draw, this::debugDraw);
         ModListener.updaters.add(this::update);
     }
 
-    private int randomGeyser() {
+    private GeyserGroup randomGeyser() {
         float f = Mathf.random(sumfactors);
-        int r = 0;
-        while (r < geysers.size && f > geysers.get(r).factor()) {
-            f -= geysers.get(r).factor();
-            r++;
+        for (GeyserGroup geyser : geysers) {
+            if (f <= geyser.factor()) {
+                return geyser;
+            }
+            f -= geyser.factor();
         }
-        return r;
+        return geysers.random();
     }
 
     private void reloadData() {
@@ -51,6 +59,9 @@ public class GeyserLogic {
             visited.addAll(tmpSet);
             geysers.add(new GeyserGroup(tmpSet.asArray()));
         });
+        for (GeyserGroup geyser : geysers) {
+            geyser.tiles.sort(Tile::pos);
+        }
         //update factors
 
         updateFactors();
@@ -67,19 +78,39 @@ public class GeyserLogic {
     private void grabGeysers(Tile tile, ObjectSet<Tile> tiles) {
         for (int i = 0; i < 4; i++) {
             Tile nearby = tile.nearby(i);
-            if (nearby.floor() instanceof Geyser && tiles.add(nearby)) {
+            if (nearby != null && nearby.floor() instanceof Geyser && tiles.add(nearby)) {
                 grabGeysers(nearby, tiles);
             }
         }
+    }
+
+    private void debugDraw() {
+        Draw.reset();
+        Draw.z(Layer.overlayUI);
+        for (int i = 0; i < geysers.size; i++) {
+//            renderer.effectBuffer.resize(graphics.getWidth(), graphics.getHeight());
+//            renderer.effectBuffer.begin(Color.clear);
+            GeyserGroup group = geysers.get(i);
+            Draw.color(Color.grays(i / (float) geysers.size), 1f);
+            for (Tile tile : group.tiles) {
+                Fill.rect(tile.worldx(), tile.worldy(), tilesize, tilesize);
+            }
+//            renderer.effectBuffer.end();
+//            renderer.effectBuffer.blit(Shaders.shield);
+            Tile tile = group.tiles.first();
+//            Log.info("draw gay ser#@(@)",i,group.tiles.size);
+            ModDraw.drawLabel(tile.worldx(), tile.worldy(), (i + 1) + ": " + group.state());
+        }
+        Draw.reset();
     }
 
     private void update() {
         if (geysers.isEmpty() || !Vars.state.is(GameState.State.playing)) return;
         //update states
         if (Mathf.chance(baseUpChance)) {
-            geysers.get(randomGeyser()).upState();
+            randomGeyser().upState();
         } else if (Mathf.chance(baseDownChance)) {
-            geysers.get(randomGeyser()).downState();
+            randomGeyser().downState();
         }
         //apply effects
         if (effects.get(effectTime)) {
