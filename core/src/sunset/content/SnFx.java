@@ -421,7 +421,7 @@ public class SnFx {
         });
     }),
 
-    sunriseMissileExplosion = new Effect(40, e -> {
+    sunriseMissileExplosion = new Effect(45, e -> {
         color(Pal.missileYellow);
 
         e.scaled(8, i -> {
@@ -450,7 +450,7 @@ public class SnFx {
         });
     }),
 
-    sparkMissileExplosion = new Effect(40, e -> {
+    sparkMissileExplosion = new Effect(55, e -> {
         color(Pal.missileYellow);
 
         e.scaled(9, i -> {
@@ -479,7 +479,7 @@ public class SnFx {
         });
     }),
 
-    dissectorMissileExplosion = new Effect(40, e -> {
+    dissectorMissileExplosion = new Effect(77, e -> {
         color(Pal.missileYellow);
 
         e.scaled(11, i -> {
@@ -515,7 +515,7 @@ public class SnFx {
         });
     }),
 
-    artMissileExplosion = new Effect(40, e -> {
+    artMissileExplosion = new Effect(65, e -> {
         color(Pal.missileYellow);
 
         e.scaled(10, i -> {
