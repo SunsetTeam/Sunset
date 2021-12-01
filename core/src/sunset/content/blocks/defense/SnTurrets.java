@@ -507,7 +507,7 @@ public class SnTurrets implements ContentList {
             missile = new MissileType(this) {{
                 damage = 0f;
                 splashDamage = 590f;
-                splashDamageRadius = 98f;
+                splashDamageRadius = 105f;
                 speed = 1.75f;
                 explodeEffect = SnFx.sunriseMissileExplosion;
             }};
@@ -528,7 +528,7 @@ public class SnTurrets implements ContentList {
             missile = new MissileType(this) {{
                 damage = 0f;
                 splashDamage = 4400f;
-                splashDamageRadius = 129f;
+                splashDamageRadius = 135f;
                 speed = 1.5f;
                 explodeEffect = SnFx.sparkMissileExplosion;
             }};
@@ -536,7 +536,7 @@ public class SnTurrets implements ContentList {
             consumes.items(with(Items.graphite, 270, Items.silicon, 360, Items.plastanium, 450, Items.blastCompound, 540));
             consumes.power(4.5f);
             health = 720;
-            maxRange = 434.0f;
+            maxRange = 450f;
             minRange = 168.0f;
             category = Category.turret;
             buildVisibility = BuildVisibility.shown;
@@ -549,7 +549,7 @@ public class SnTurrets implements ContentList {
             missile = new MissileType(this) {{
                 damage = 0f;
                 splashDamage = 17000f;
-                splashDamageRadius = 154f;
+                splashDamageRadius = 160f;
                 speed = 1.25f;
                 explodeEffect = SnFx.dissectorMissileExplosion;
             }};
@@ -557,7 +557,7 @@ public class SnTurrets implements ContentList {
             consumes.items(with(Items.phaseFabric, 440, Items.silicon, 620, Items.surgeAlloy, 800, Items.thorium, 980, Items.plastanium, 1200));
             consumes.power(16f);
             health = 1280;
-            maxRange = 524.0f;
+            maxRange = 550f;
             minRange = 248.0f;
             category = Category.turret;
             buildVisibility = BuildVisibility.shown;
@@ -576,7 +576,7 @@ public class SnTurrets implements ContentList {
             missile = new MissileType(this) {{
                 damage = 0f;
                 splashDamage = 7200f;
-                splashDamageRadius = 137f;
+                splashDamageRadius = 145f;
                 speed = 1f;
                 explodeEffect = SnFx.artMissileExplosion;
             }};
@@ -584,7 +584,7 @@ public class SnTurrets implements ContentList {
             consumes.items(with(Items.plastanium, 180, Items.silicon, 270, Items.surgeAlloy, 90, Items.thorium, 330));
             consumes.power(7.5f);
             health = 2000;
-            maxRange = 578.0f;
+            maxRange = 620f;
             minRange = 276.0f;
             category = Category.turret;
             buildVisibility = BuildVisibility.shown;
