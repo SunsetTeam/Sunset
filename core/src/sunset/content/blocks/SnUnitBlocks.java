@@ -17,21 +17,15 @@ import static mindustry.type.ItemStack.with;
 public class SnUnitBlocks implements ContentList {
     public static Block
 
-            //air
-            bigAirFactory,
+            //factories
+            bigAirFactory, bigGroundFactory,
 
-    //ground 
-    bigGroundFactory,
-
-    //reconstructors
-    nobiumAdditiveReconstructor,
-            nobiummultiplicativeReconstructor,
-            nobiumExponentialReconstructor,
-            nobiumTetrativeReconstructor;
+            //reconstructors
+            nobiumAdditiveReconstructor, nobiummultiplicativeReconstructor, nobiumExponentialReconstructor, nobiumTetrativeReconstructor;
 
     @Override
     public void load() {
-        //factory region
+        //region factories
         bigAirFactory = new UnitFactory("big-air-factory") {{
             requirements(Category.units, with(SnItems.fors, 80, Items.copper, 70));
             plans = Seq.with(
@@ -50,9 +44,8 @@ public class SnUnitBlocks implements ContentList {
             size = 3;
             consumes.power(2.5f);
         }};
-        //end region
-
-        //reconstructors region
+        //endregion factories
+        //region reconstructors
         nobiumAdditiveReconstructor = new Reconstructor("nobium-additive-reconstructor") {{
             requirements(Category.units, with(SnItems.fors, 210, Items.copper, 230, SnItems.nobium, 100, Items.silicon, 90));
 
@@ -122,6 +115,6 @@ public class SnUnitBlocks implements ContentList {
                     new UnitType[]{SnUnitTypes.star, SnUnitTypes.galaxy}
             );
         }};
-        //end region
+        //endregion reconstructors
     }
 }

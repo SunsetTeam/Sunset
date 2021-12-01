@@ -15,11 +15,11 @@ public class EnergyBoltBulletType extends LaserBoltBulletType{
     public float length = 100f;
 
     public EnergyBoltBulletType(float speed, float damage){
-        super(15, 35);
+        super(speed, damage);
 
         lifetime = 35;
         ammoMultiplier = 1;
-        buildingDamageMultiplier = this.damage * 0.75f;
+        buildingDamageMultiplier = this.damage * 0.5f;
         healPercent = 0.001f;
 
         reflectable = true;
@@ -38,11 +38,11 @@ public class EnergyBoltBulletType extends LaserBoltBulletType{
         frontColor = Color.white;
     }
 
-    /*public EnergyBoltBulletType(){
-        this(1f, 1f);
+    public EnergyBoltBulletType(){
+        this(15, 35);
     }
 
-    void handle(Bullet b, Posc pos, float initialHealth){
+    /*void handle(Bullet b, Posc pos, float initialHealth){
         float sub = Math.max(initialHealth * pierceDamageFactor, 0);
 
         if(b.damage <= 0){

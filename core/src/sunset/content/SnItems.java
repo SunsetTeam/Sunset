@@ -17,18 +17,18 @@ public class SnItems implements ContentList {
             hardness = 3;
         }};
 
-        naturite = new Item("naturite", Color.valueOf("f2e878")) {{
+        naturite = new Item("naturite", Color.valueOf("F2E878")) {{
             flammability = 0.6f;
             radioactivity = 0.1f;
             cost = 3f;
         }};
 
-        nobium = new Item("nobium", Color.valueOf("ffffff")) {{
+        nobium = new Item("nobium", Color.valueOf("FFFFFF")) {{
             cost = 4f;
             radioactivity = 0.1f;
         }};
 
-        reneubite = new Item("reneubite", Color.valueOf("ffffff")) {{
+        reneubite = new Item("reneubite", Color.valueOf("6173FF")) {{
             cost = 4f;
             flammability = 0.8f;
             explosiveness = 0.7f;
@@ -41,20 +41,20 @@ public class SnItems implements ContentList {
             radioactivity = 1f;
         }};
 
-        enojie = new Item("enojie", Color.valueOf("99f2c7")) {{
+        enojie = new Item("enojie", Color.valueOf("99f2C7")) {{
             radioactivity = 0.8f;
             explosiveness = 0.2f;
             cost = 6f;
         }};
         
 
-        flameid = new Item("flameid", Color.valueOf("ea8878")) {{
+        flameid = new Item("flameid", Color.valueOf("EA8878")) {{
             cost = 4f;
             flammability = 0.6f;
             hardness = 4;
         }};
         
-        coldent = new Item("coldent", Color.valueOf("baf4f5ff")) {{
+        coldent = new Item("coldent", Color.valueOf("BAF4F5FF")) {{
             cost = 4f;
             hardness = 4;
         }};

@@ -20,7 +20,7 @@ public class SnPlanets implements ContentList {
 
     @Override
     public void load() {
-        //stars
+        //region stars
         magma = new Planet("magma", Planets.sun, 3.6f, 0) {{
             bloom = true;
             accessible = false;
@@ -39,8 +39,8 @@ public class SnPlanets implements ContentList {
             );
             lightColor = Color.valueOf("F5E14E");
         }};
-
-        //planets
+        //endregion stars
+        //region planets
         burnout = new Planet("burnout", SnPlanets.magma, 0.7f, 2) {{
             meshLoader = () -> new HexMesh(this, 6);
             generator = new BurnoutGenerator();
@@ -57,6 +57,7 @@ public class SnPlanets implements ContentList {
             atmosphereColor = Color.valueOf("BB4E17");
             hasAtmosphere = true;
             alwaysUnlocked = true;
+            landCloudColor = Color.valueOf("D65318");
         }};
 
         azaria = new Planet("azaria", SnPlanets.magma, 1f, 3) {{
@@ -92,6 +93,8 @@ public class SnPlanets implements ContentList {
             atmosphereColor = Color.valueOf("59C2BBFF");
             hasAtmosphere = true;
             alwaysUnlocked = true;
+            landCloudColor = Color.valueOf("00A6FF");
         }};
+        //endregion planets
     }
 }

@@ -6,7 +6,7 @@ buildscript {
         aciVersion = "ddba381caf1"
         String modCoreVersionDemo = null;
         try {
-//            modCoreVersionDemo = new String(new java.net.URL("https://raw.githubusercontent.com/Zelaux/ZelauxModCore/master/versions/" + mindustryVersion + ".txt").openStream().readAllBytes());
+            modCoreVersionDemo = new String(new java.net.URL("https://raw.githubusercontent.com/Zelaux/ZelauxModCore/master/versions/" + mindustryVersion + ".txt").openStream().readAllBytes());
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }

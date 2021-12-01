@@ -29,7 +29,7 @@ public class SnStatusEffects implements ContentList {
     @Override
     public void load() {
 
-        //common
+        //region common
         frostbite = new StatusEffect("frostbite") {{
             color = Color.valueOf("6ecdec");
             damage = 0.17f;
@@ -99,8 +99,8 @@ public class SnStatusEffects implements ContentList {
             effect = SnFx.viscous;
             effectChance = 0.09f;
         }};
-
-        //only reactive
+        //endregion common
+        //region only reactive
         greened = new StatusEffect("greened") {{
             color = Color.valueOf("3DD957");
             permanent = true;
@@ -129,8 +129,8 @@ public class SnStatusEffects implements ContentList {
                 }));
             });
         }};
-
-        //stackable
+        //endregion only reactive
+        //region stackable
         overheat = new StackableStatusEffect("overheat") {
             boolean draw = false;
             {
@@ -171,5 +171,6 @@ public class SnStatusEffects implements ContentList {
                 Draw.color();
             }
         };
+        //endregion stackable
     }
 }
