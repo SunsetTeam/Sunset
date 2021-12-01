@@ -113,7 +113,6 @@ public class SnFx {
         Fill.circle(e.x, e.y, e.fin() * 7f);
     }),
 
-
     galebardShoot = new Effect(70f, e -> {
         color(Pal.meltdownHit);
         stroke(e.fout() * 7f);
@@ -151,7 +150,7 @@ public class SnFx {
             Drawf.tri(e.x, e.y, 2f, 25f * e.fout(), i * 60);
         }
 
-        Drawf.light(e.x, e.y, 12, SnPal.redBomb, e.fout());
+        Drawf.light(e.x, e.y, 5, SnPal.redBomb, e.fout());
     }),
 
     redBomb = new Effect(30f, 70f, e -> {
@@ -692,7 +691,23 @@ public class SnFx {
         }
 
         Fill.circle(Tmp.v2.x, Tmp.v2.y, Lines.getStroke() / 2);
-    }).layer(Layer.bullet + 0.01f);
+    }).layer(Layer.bullet + 0.01f),
+
+    laserArtHit = new Effect(20f, 50f, e -> {
+        color(Pal.meltdownHit);
+        stroke(e.fout() * 2);
+        color(Pal.meltdownHit);
+        for (int i = 0; i < 2; i++) {
+            Drawf.tri(e.x, e.y, 1f, 40f * e.fout(), i * 50);
+        }
+
+        color();
+        for (int i = 0; i < 7; i++) {
+            Drawf.tri(e.x, e.y, 3f, 20f * e.fout(), i * 50);
+        }
+
+        Drawf.light(e.x, e.y, 5, Pal.meltdownHit, e.fout());
+    });
     //endregion special
     //region energy sphere utils
     public static void enegrySphere(long seed, float time, float fin, int amount,

@@ -23,15 +23,15 @@ public class SnProduction implements ContentList {
             //crafters
             advancedCultivator,
 
-    //drills
-    electroPneumaticdrill,
+            //drills
+            electroPneumaticDrill,
             magneticDrill,
             percussionDrill,
             enojieDrill;
 
     @Override
     public void load() {
-        //crafters
+        //region crafters
         advancedCultivator = new AttributeCrafter("advanced-cultivator") {{
             requirements(Category.production, with(Items.copper, 200, Items.lead, 200, Items.silicon, 180, Items.metaglass, 140, Items.titanium, 170, Items.phaseFabric, 155));
             size = 3;
@@ -46,9 +46,9 @@ public class SnProduction implements ContentList {
             consumes.liquid(Liquids.water, 0.4f);
             consumes.power(2f);
         }};
-
-        //drills
-        electroPneumaticdrill = new DRDrill("electro-pneumatic-drill") {{
+        //endregion crafters
+        //region drills
+        electroPneumaticDrill = new DRDrill("electro-pneumatic-drill") {{
             requirements(Category.production, with(Items.copper, 20, Items.graphite, 15, Items.silicon, 10));
             drillTime = 310;
             size = 2;
@@ -60,7 +60,7 @@ public class SnProduction implements ContentList {
         }};
 
         magneticDrill = new DRDrill("magnetic-drill") {{
-            requirements(Category.production, with(Items.copper, 70, Items.silicon, 60, SnItems.fors, 60, SnItems.nobium, 55, SnItems.planatrium, 45 ));
+            requirements(Category.production, with(Items.copper, 70, Items.titanium, 90, Items.silicon, 60, SnItems.fors, 60, SnItems.nobium, 55));
             drillTime = 200;
             size = 4;
             drawRim = true;
@@ -115,5 +115,6 @@ public class SnProduction implements ContentList {
             consumes.liquid(Liquids.cryofluid, 0.4f).boost();
             m1 = 13;
         }};
+        //endregion drills
     }
 }

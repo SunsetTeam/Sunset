@@ -4,7 +4,9 @@ import arc.Core;
 import arc.graphics.g2d.Draw;
 import arc.graphics.g2d.TextureRegion;
 import arc.math.Mathf;
+import arc.util.Time;
 import mindustry.annotations.Annotations.Load;
+import mindustry.entities.bullet.BulletType;
 import mindustry.graphics.Drawf;
 import mindustry.graphics.Layer;
 import mindustry.graphics.Pal;
@@ -15,16 +17,18 @@ import sunset.SnVars;
 import sunset.graphics.SnPal;
 import sunset.utils.Utils;
 
-import static arc.Core.settings;
 import static mindustry.Vars.minArmorDamage;
+import static mindustry.Vars.tilesize;
 
 public class SynthesisTurret extends ItemTurret {
     @Load("@-liquid")
     public TextureRegion liquid;
-    @Load("@-light")
-    public TextureRegion light;
     public float armor;
     public int speed = 1;
+
+    public float maxReloadMultiplier = 0.5f;
+    public float speedupPerShot = 0.125f;
+    public float slowReloadTime = 70;
 
     public SynthesisTurret(String name) {
         super(name);
@@ -46,11 +50,57 @@ public class SynthesisTurret extends ItemTurret {
                 () -> Mathf.clamp(entity.reload / reloadTime)
         ));
     }
+
+    @Override
+    public void drawPlace(int x, int y, int rotation, boolean valid){
+        super.drawPlace(x, y, rotation, valid);
+
+        Drawf.dashCircle(x * tilesize + offset, y * tilesize + offset, range, Pal.placing);
+        if (minRange > 0) Drawf.dashCircle(x, y, minRange, Pal.health);
+    }
+
     public class SynthesisBuild extends ItemTurretBuild {
+        public float speedupScl = 0f;
+        public float slowDownReload = 0f;
+
         @Override
         public void updateTile() {
             super.updateTile();
-            //TODO Increase shooting speed if health less or equal 10%.
+
+            if (this.health < maxHealth / 10) {
+                if (slowDownReload >= 1f) {
+                    slowDownReload -= Time.delta;
+                } else speedupScl = Mathf.lerpDelta(speedupScl, 0f, 0.05f);
+            }
+        }
+
+        @Override
+        protected void updateShooting() {
+            if (this.health < maxHealth / 10) {
+                if (reload >= reloadTime && !charging) {
+                    BulletType type = peekAmmo();
+                    shoot(type);
+                    reload %= reloadTime;
+                } else {
+                    reload += (1 + speedupScl) * delta() * peekAmmo().reloadMultiplier * baseReloadSpeed();
+                }
+            } else {
+                super.updateShooting();
+            }
+        }
+
+        @Override
+        protected void shoot(BulletType b) {
+            super.shoot(b);
+
+            if (this.health < maxHealth / 10) {
+                slowDownReload = slowReloadTime;
+                if (speedupScl < maxReloadMultiplier) {
+                    speedupScl += speedupPerShot;
+                } else speedupScl = maxReloadMultiplier;
+            } else {
+                super.shoot(b);
+            }
         }
 
         @Override
@@ -61,16 +111,17 @@ public class SynthesisTurret extends ItemTurret {
             tr2.trns(rotation, -recoil);
             Drawf.shadow(region, x + tr2.x - elevation, y + tr2.y - elevation, rotation - 90);
             drawer.get(this);
-            if (this.health <= maxHealth * 100 / 10) Draw.rect(light, x + tr2.x, y + tr2.y, rotation - 90);
+
             if (heatRegion != Core.atlas.find("error")) {
                 heatDrawer.get(this);
             }
+
             if (size > 2) Drawf.liquid(liquid, x + tr2.x, y + tr2.y, liquids.total() / liquidCapacity, SnPal.synthesis1);
         }
 
         @Override
         public void drawSelect() {
-            Drawf.dashCircle(x, y, range, Pal.heal);
+            Drawf.dashCircle(x, y, range, team.color);
             if (minRange > 0) Drawf.dashCircle(x, y, minRange, Pal.health);
         }
 
