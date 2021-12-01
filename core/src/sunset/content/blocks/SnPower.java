@@ -6,6 +6,7 @@ import mindustry.content.Liquids;
 import mindustry.ctype.ContentList;
 import mindustry.gen.Sounds;
 import mindustry.type.Category;
+import mindustry.type.Item;
 import mindustry.world.Block;
 import mindustry.world.blocks.power.DecayGenerator;
 import mindustry.world.blocks.power.NuclearReactor;
@@ -64,7 +65,7 @@ public class SnPower implements ContentList {
         //endregion generators
         //region reactors
         differentialReactor = new NuclearReactor("differential-reactor") {{
-            requirements(Category.power, with(Items.copper, 70, Items.titanium, 50, Items.lead, 100, Items.silicon, 65, Items.metaglass, 50));
+            requirements(Category.power, with(Items.copper, 200, Items.titanium, 120, Items.lead, 250, Items.silicon, 130, Items.metaglass, 100));
             ambientSound = Sounds.steam;
             ambientSoundVolume = 0.03f;
             size = 4;
