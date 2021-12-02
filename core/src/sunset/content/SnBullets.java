@@ -1241,7 +1241,7 @@ public class SnBullets implements ContentList {
             }
         };
         //endregion EMP
--       //region synthesis
+       //region synthesis
         synthesisBullet1 = new EnergyBoltBulletType(11, 70) {{
             status = SnStatusEffects.greened;
             lifetime = 7;
