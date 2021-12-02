@@ -5,10 +5,7 @@ import arc.graphics.g2d.Draw;
 import arc.graphics.g2d.Fill;
 import arc.math.Angles;
 import arc.math.geom.Vec2;
-import mindustry.content.Bullets;
-import mindustry.content.Fx;
-import mindustry.content.Liquids;
-import mindustry.content.StatusEffects;
+import mindustry.content.*;
 import mindustry.ctype.ContentList;
 import mindustry.entities.Units;
 import mindustry.entities.bullet.*;
@@ -51,9 +48,9 @@ public class SnBullets implements ContentList {
     //misc
     emptyBullet, overheatBullet,
     //special
-    empBullet, empBulletEvo, synthesisBullet1, synthesisBullet2, synthesisBullet3, synthesisBullet4,
+    empBullet, empBulletEvo, synthesisBullet1, synthesisBullet2, synthesisBullet3, synthesisBullet4, laserArtThorium, laserArtPhase, laserArtEnojie, laserArtReneubite,
     //misc
-    testBullet, tempBullet1, tempBullet2, testBullet0, testBullet1, testBullet2;
+    testBullet, tempBullet1, tempBullet2, testBullet0, testBullet1, testBullet2, testBullet3;
     //exoticBullets (new) I will make it later... I must make more bullets (soulBullet, iceSpike, and more)
     //spiralPlastanium, spiralSurge, spiralFors, spiralThorium, spiralSmall;
 
@@ -244,7 +241,7 @@ public class SnBullets implements ContentList {
             pierceBuilding = true;
             knockback = 0.84f;
         }};
-        reneubiteBlast = new BasicBulletType(9f, 190){{
+        reneubiteBlast = new BasicBulletType(9f, 190) {{
             hitSize = 7;
             width = height = 25;
             frontColor = SnPal.renBlast1;
@@ -1211,6 +1208,7 @@ public class SnBullets implements ContentList {
         }};
         //endregion wheel
         //region special
+        //region EMP
         empBullet = new LightningBulletType() {{
             //speed = 5;
             damage = 150;
@@ -1243,7 +1241,8 @@ public class SnBullets implements ContentList {
 
             }
         };
-
+        //endregion EMP
+        //region synthesis
         synthesisBullet1 = new EnergyBoltBulletType(11, 70) {{
             status = SnStatusEffects.greened;
             lifetime = 7;
@@ -1277,12 +1276,94 @@ public class SnBullets implements ContentList {
             status = SnStatusEffects.greened;
             lifetime = 16;
             inaccuracy = 2;
+            fragBullets = 6;
+            fragCone = 360;
+            fragBullet = new LaserBoltBulletType(12, 70) {{
+                lifetime = 7.5f;
+                backColor = Pal.heal;
+                frontColor = Color.white;
+            }};
             splashDamage = 110;
             splashDamageRadius = 80;
             trailChance = 1;
             trailEffect = Fx.none;
             //trailEffect = SnFx.greenInstTrail;
         }};
+        //endregion synthesis
+        //region laser art
+        laserArtThorium = new ArtilleryBulletType(5, 200, "shell") {{//TODO: shell sprite
+            knockback = 3.4f;
+            lifetime = 77;
+            width = height = 12;
+            splashDamageRadius = 80;
+            splashDamage = damage * 2.75f;
+            fragBullets = 6;
+            fragCone = 360;
+            fragBullet = new ContinuousLaserBulletType(8.4f) {{
+                length = 35;
+            }};
+            despawnEffect = hitEffect = SnFx.laserArtHit;
+
+            trailColor = Items.thorium.color;
+            trailWidth = 4;
+            trailLength = 7;
+            trailEffect = Fx.artilleryTrail;
+        }};
+        laserArtPhase = new ArtilleryBulletType(5, 700, "shell") {{//TODO: shell sprite
+            knockback = 0.2f;
+            lifetime = 77;
+            width = height = 12;
+            splashDamageRadius = 24;
+            splashDamage = damage * 0.15f;
+            fragBullets = 6;
+            fragCone = 360;
+            fragBullet = new ContinuousLaserBulletType(8.75f) {{
+                length = 55;
+            }};
+            despawnEffect = hitEffect = SnFx.laserArtHit;
+
+            trailColor = Items.phaseFabric.color;
+            trailWidth = 4;
+            trailLength = 7;
+            trailEffect = Fx.artilleryTrail;
+        }};
+        laserArtEnojie = new ArtilleryBulletType(5, 450, "shell") {{//TODO: shell sprite
+            knockback = 1;
+            lifetime = 77;
+            width = height = 12;
+            splashDamageRadius = 50;
+            splashDamage = damage * 0.25f;
+            fragBullets = 6;
+            fragCone = 360;
+            fragBullet = new ContinuousLaserBulletType(50) {{
+                length = 60;
+            }};
+            despawnEffect = hitEffect = SnFx.laserArtHit;
+
+            trailColor = SnItems.enojie.color;
+            trailWidth = 4;
+            trailLength = 7;
+            trailEffect = Fx.artilleryTrail;
+        }};
+        laserArtReneubite = new ArtilleryBulletType(5, 100, "shell") {{
+            knockback = 2;
+            lifetime = 77;
+            width = height = 12;
+            splashDamageRadius = 50;
+            splashDamage = damage * 1.5f;
+            fragBullets = 6;
+            fragCone = 360;
+            fragBullet = new ContinuousLaserBulletType(51.7f) {{
+                length = 40;
+            }};
+            despawnEffect = hitEffect = SnFx.laserArtHit;
+
+            trailColor = SnItems.reneubite.color;
+            trailWidth = 4;
+            trailLength = 7;
+            trailEffect = Fx.artilleryTrail;
+        }};
+        //endregion laser art
         //endregion special
         //region misc
         overheatBullet = new BasicBulletType(0.1f, 7, "error") {{
@@ -1389,6 +1470,13 @@ public class SnBullets implements ContentList {
             fragBullets = 6;
             fragCone = 360;
             fragBullet = new ContinuousLaserBulletType(150);
+        }};
+        testBullet3 = new ArtilleryBulletType(5, 50) {{
+            fragBullets = 6;
+            fragCone = 360;
+            fragBullet = new ContinuousLaserBulletType(150) {{
+                colors = new Color[] {Pal.meltdownHit.cpy().a(0.4f), Pal.meltdownHit, Color.white};
+            }};
         }};
         //endregion misc
     }

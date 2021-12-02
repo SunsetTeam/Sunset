@@ -928,7 +928,7 @@ public class SnUnitTypes implements ContentList {
                         spacing = 15;
                         inaccuracy = 2;
                         firstShotDelay = 20;
-                        shootCone = 6;
+                        shootCone = 3;
                         cooldownTime = 15;
                         ignoreRotation = true;
                         shootSound = Sounds.lasershoot;
@@ -1018,7 +1018,7 @@ public class SnUnitTypes implements ContentList {
                         top = true;
                         rotateSpeed = 30;
                         reload = 45;
-                        shots = 2;
+                        shots = 1;
                         spacing = 1;
                         inaccuracy = 5;
                         xRand = 5;

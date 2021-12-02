@@ -1,13 +1,13 @@
 package sunset.content;
 
-import arc.graphics.Color;
-import arc.util.Time;
+import arc.graphics.*;
+import arc.util.*;
 import mindustry.content.Weathers;
-import mindustry.ctype.ContentList;
-import mindustry.gen.Sounds;
-import mindustry.type.Weather;
-import mindustry.type.weather.ParticleWeather;
-import mindustry.world.meta.Attribute;
+import mindustry.ctype.*;
+import mindustry.gen.*;
+import mindustry.type.*;
+import mindustry.type.weather.*;
+import mindustry.world.meta.*;
 
 public class SnWeathers implements ContentList {
     public static Weather
@@ -54,7 +54,7 @@ public class SnWeathers implements ContentList {
 
 //            noisePath = fullName("flood");
 //            noisePath = "flood";
-            noisePath= ((ParticleWeather)Weathers.fog).noisePath;
+            noisePath= ((ParticleWeather) Weathers.fog).noisePath;
             drawParticles = false;
             drawNoise = true;
             useWindVector = false;

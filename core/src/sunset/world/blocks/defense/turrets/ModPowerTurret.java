@@ -14,9 +14,9 @@ import static arc.Core.settings;
  * 1) reload bar
  * 2)
  * */
-public class SnPowerTurret extends PowerTurret {
+public class ModPowerTurret extends PowerTurret {
 
-    public SnPowerTurret(String name) {
+    public ModPowerTurret(String name) {
         super(name);
     }
 
