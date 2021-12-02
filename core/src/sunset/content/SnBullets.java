@@ -241,7 +241,7 @@ public class SnBullets implements ContentList {
             pierceBuilding = true;
             knockback = 0.84f;
         }};
-        reneubiteBlast = new BasicBulletType(9f, 190) {{
+        reneubiteBlast = new BasicBulletType(9f, 190){{
             hitSize = 7;
             width = height = 25;
             frontColor = SnPal.renBlast1;
@@ -1208,7 +1208,6 @@ public class SnBullets implements ContentList {
         }};
         //endregion wheel
         //region special
-        //region EMP
         empBullet = new LightningBulletType() {{
             //speed = 5;
             damage = 150;
@@ -1242,7 +1241,7 @@ public class SnBullets implements ContentList {
             }
         };
         //endregion EMP
-        //region synthesis
+-       //region synthesis
         synthesisBullet1 = new EnergyBoltBulletType(11, 70) {{
             status = SnStatusEffects.greened;
             lifetime = 7;
@@ -1276,13 +1275,6 @@ public class SnBullets implements ContentList {
             status = SnStatusEffects.greened;
             lifetime = 16;
             inaccuracy = 2;
-            fragBullets = 6;
-            fragCone = 360;
-            fragBullet = new LaserBoltBulletType(12, 70) {{
-                lifetime = 7.5f;
-                backColor = Pal.heal;
-                frontColor = Color.white;
-            }};
             splashDamage = 110;
             splashDamageRadius = 80;
             trailChance = 1;
@@ -1470,13 +1462,6 @@ public class SnBullets implements ContentList {
             fragBullets = 6;
             fragCone = 360;
             fragBullet = new ContinuousLaserBulletType(150);
-        }};
-        testBullet3 = new ArtilleryBulletType(5, 50) {{
-            fragBullets = 6;
-            fragCone = 360;
-            fragBullet = new ContinuousLaserBulletType(150) {{
-                colors = new Color[] {Pal.meltdownHit.cpy().a(0.4f), Pal.meltdownHit, Color.white};
-            }};
         }};
         //endregion misc
     }

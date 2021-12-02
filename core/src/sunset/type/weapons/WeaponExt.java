@@ -39,4 +39,6 @@ public class WeaponExt extends SnWeapon {
     protected void setShoot() {
         lastShootTime = Time.millis();
     }
+    public void draw(Weapon weapon) {
+    }
 }

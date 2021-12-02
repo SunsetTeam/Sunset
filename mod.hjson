@@ -13,5 +13,5 @@ description: "[blue]Adds a lot of new content on type: 3 planets, new and upgrad
 version: 0.1.8A
 repo: SunsetTeam/Sunset
 main: sunset.Sunset
-minGameVersion: 133
+minGameVersion: 135
 java: true
