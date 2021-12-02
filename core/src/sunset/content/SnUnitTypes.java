@@ -130,6 +130,19 @@ public class SnUnitTypes implements ContentList {
                         shots = 1;
                         shootSound = Sounds.missile;
                         bullet = SnBullets.helicopterMissile;
+                    }},
+
+                    new WeaponExt("wind-gun") {{
+                        rotate = false;
+                        mirror = true;
+                        top = true;
+                        x = 5f;
+                        y = -3f;
+                        shots = 1;
+                        inaccuracy = 1;
+                        reload = 8f;
+                        shootSound = Sounds.pew;
+                        bullet = SnBullets.mediumHelicopterGun;
                     }});
         }};
         nadir = new CopterUnitType("nadir") {{
@@ -196,11 +209,11 @@ public class SnUnitTypes implements ContentList {
                         velocityRnd = 0.2f;
                         shots = 1;
                         shootSound = Sounds.pew;
-                        bullet = SnBullets.laserBoltHelicopterGun;
+                        bullet = SnBullets.mediumHelicopterGun;
                     }});
         }};
         halo = new CopterUnitType("halo") {{
-            health = 5100;
+            health = 6100;
             hitSize = 40;
             speed = 2.4f;
             accel = 0.1f;
@@ -256,7 +269,7 @@ public class SnUnitTypes implements ContentList {
                     }});
         }};
         parhelion = new CopterUnitType("parhelion") {{
-            health = 16500;
+            health = 17800;
             hitSize = 57;
             speed = 2.1f;
             accel = 0.1f;
@@ -318,7 +331,7 @@ public class SnUnitTypes implements ContentList {
         }};
         
         mudflow = new CopterUnitType("mudflow") {{
-            health = 47000;
+            health = 48500;
             hitSize = 78;
             speed = 1.7f;
             accel = 0.1f;

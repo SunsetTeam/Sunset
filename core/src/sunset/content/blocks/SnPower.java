@@ -76,6 +76,7 @@ public class SnPower implements ContentList {
             liquidCapacity = 70;
             itemDuration = 240f;
             powerProduction = 40f;
+            explodeEffect = Fx.impactReactorExplosion;
             heating = 0.03f;
             consumes.item(SnItems.reneubite).optional(true, false);
             consumes.liquid(SnLiquids.burheyna, heating / coolantPower).update(false);

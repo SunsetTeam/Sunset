@@ -45,7 +45,7 @@ public class SnBullets implements ContentList {
     //energy-sphere
     smallEnergySphere, mediumEnergySphereFrag, mediumEnergySphere,
     //units
-    basicHelicopterGun, laserBoltHelicopterGun, helicopterMissile, clusterRocketSmall, clusterRocket, bigHelicopterGun, bigHelicopterBullet, laserGun, helicopterFlame, laserHelicopterFrag, largeHelicopterBullet, bigHelicopterRocket, helicopterMissiles,
+    basicHelicopterGun, mediumHelicopterGun, helicopterMissile, clusterRocketSmall, clusterRocket, bigHelicopterGun, bigHelicopterBullet, laserGun, helicopterFlame, laserHelicopterFrag, largeHelicopterBullet, bigHelicopterRocket, helicopterMissiles,
     cometWaterShot, starStunBullet, galaxyKnockbackBullet,
     wheel1Bullet, wheel2Shotgun, wheel3Burst, wheel4Shotgun, wheel4Artillery, wheel5Flame, wheel5Bullet, mirageGunBullet,
     //misc
@@ -891,23 +891,23 @@ public class SnBullets implements ContentList {
             shootEffect = Fx.shootSmall;
             smokeEffect = Fx.shootSmallSmoke;
         }};
-        laserBoltHelicopterGun = new LaserBoltBulletType(5.3f, 12) {{
+        mediumHelicopterGun = new LaserBoltBulletType(5.7f, 13) {{
             width = 3f;
             height = 6f;
             lifetime = 30f;
             shootEffect = Fx.shootSmall;
             smokeEffect = Fx.shootSmallSmoke;
         }};
-        helicopterMissile = new MissileBulletType(4f, 4) {{
+        helicopterMissile = new MissileBulletType(4f, 5) {{
             width = 7f;
             height = 10f;
             shrinkY = 0f;
             drag = -0.003f;
-            homingRange = 10f;
-            homingPower = 0.2f;
+            homingRange = 15f;
+            homingPower = 0.1f;
 
-            splashDamageRadius = 10f;
-            splashDamage = 10f;
+            splashDamageRadius = 13f;
+            splashDamage = 15f;
 
             keepVelocity = false;
             hitSound = Sounds.explosion;
