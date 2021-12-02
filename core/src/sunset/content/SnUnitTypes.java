@@ -185,7 +185,7 @@ public class SnUnitTypes implements ContentList {
                         x = -8f;
                         y = 6f;
                         spacing = 3f;
-                        reload = 45f;
+                        reload = 40f;
                         shake = 1f;
                         recoil = 5f;
                         inaccuracy = 5f;
@@ -201,15 +201,14 @@ public class SnUnitTypes implements ContentList {
                         top = true;
                         x = 3f;
                         y = 0f;
-                        spacing = 3f;
-                        reload = 6.5f;
+                        reload = 25f;
                         shake = 1f;
-                        recoil = 4f;
-                        inaccuracy = 2f;
+                        recoil = 2f;
+                        inaccuracy = 3f;
                         velocityRnd = 0.2f;
                         shots = 1;
-                        shootSound = Sounds.pew;
-                        bullet = SnBullets.mediumHelicopterGun;
+                        shootSound = Sounds.spark;
+                        bullet = SnBullets.copterEnergySphere;
                     }});
         }};
         halo = new CopterUnitType("halo") {{
