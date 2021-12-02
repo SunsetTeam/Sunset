@@ -305,20 +305,6 @@ public class SnUnitTypes implements ContentList {
                         shake = 1f;
                         x = -28f;
                         y = 15f;
-                        reload = 1.1f;
-                        shotDelay = 1f;
-                        shots = 1;
-                        inaccuracy = 3f;
-	                    recoil = 2f;
-                        shootSound = Sounds.flame;
-                        bullet = SnBullets.helicopterFlame;
-                    }},
-                    new SnWeapon() {{
-                        rotate = false;
-                        mirror = true;
-                        shake = 1f;
-                        x = -28f;
-                        y = 15f;
                         reload = 100f;
                         shotDelay = 1f;
                         shots = 1;
