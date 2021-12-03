@@ -66,7 +66,7 @@ public class SnPlanets implements ContentList {
             radius = 1.03f;
             atmosphereRadIn = 0.02f;
             atmosphereRadOut = 0.4f;
-            orbitRadius = 28f;
+            orbitRadius = 29f;
             orbitTime = 24.1f;
             rotateTime = 15f*30f;
             accessible = true;
@@ -84,7 +84,7 @@ public class SnPlanets implements ContentList {
             radius = 1;
             atmosphereRadIn = 0.016f;
             atmosphereRadOut = 0.28f;
-            orbitRadius = 37;
+            orbitRadius = 40;
             orbitTime = 36f;
             rotateTime = 15f*30f;
             accessible = true;
