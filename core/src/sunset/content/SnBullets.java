@@ -440,7 +440,7 @@ public class SnBullets implements ContentList {
             backColor = Pal.darkFlame;
             collidesAir = false;
         }};
-        maxBlastSurge = new BasicBulletType(16, 115) {{
+        maxBlastSurge = new BasicBulletType(16, 123) {{
             lifetime = 22f;
             splashDamage = 134f;
             splashDamageRadius = 94f;
@@ -964,13 +964,13 @@ public class SnBullets implements ContentList {
         }};
         copterEnergySphere = new BasicBulletType(3f, 7) {{
             sprite = "sunset-circle-bullet";
-            lifetime = 30f;
+            lifetime = 37f;
             splashDamageRadius = 14f;
             splashDamage = 15f;
             height = 9f;
             width = 9f;
-            lightning = 3;
-            lightningLength = 5;
+            lightning = 4;
+            lightningLength = 9;
             lightningColor = SnPal.copterLaser;
             lightningDamage = 7f;
             shrinkX = 0.01f;

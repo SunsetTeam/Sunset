@@ -25,7 +25,7 @@ public class SnPlanets implements ContentList {
             bloom = true;
             accessible = false;
             hasAtmosphere = true;
-            orbitRadius = 54;
+            orbitRadius = 75;
             meshLoader = () -> new SunMesh(
                 this, 7,
                 10, 0.7, 1.9, 1.4, 1.6,
@@ -48,7 +48,7 @@ public class SnPlanets implements ContentList {
             atmosphereRadIn = 0.019f;
             atmosphereRadOut = 0.19f;
             sectorApproxRadius = 3;
-            orbitRadius = 16;
+            orbitRadius = 20;
             orbitTime = 17f;
             rotateTime = 15f*30f;
             accessible = true;
@@ -66,7 +66,7 @@ public class SnPlanets implements ContentList {
             radius = 1.03f;
             atmosphereRadIn = 0.02f;
             atmosphereRadOut = 0.4f;
-            orbitRadius = 21.3f;
+            orbitRadius = 28f;
             orbitTime = 24.1f;
             rotateTime = 15f*30f;
             accessible = true;
@@ -84,7 +84,7 @@ public class SnPlanets implements ContentList {
             radius = 1;
             atmosphereRadIn = 0.016f;
             atmosphereRadOut = 0.28f;
-            orbitRadius = 29;
+            orbitRadius = 37;
             orbitTime = 36f;
             rotateTime = 15f*30f;
             accessible = true;
