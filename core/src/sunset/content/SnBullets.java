@@ -859,6 +859,8 @@ public class SnBullets implements ContentList {
 
         mediumEnergySphere = new BasicBulletType(3f, 30) {{
             sprite = "sunset-circle-bullet";
+            shrinkX = 0.01f;
+            shrinkY = 0.01f;
             lifetime = 45f;
             height = 8f;
             width = 8f;
@@ -902,7 +904,7 @@ public class SnBullets implements ContentList {
             homingRange = 15f;
             homingPower = 0.1f;
 
-            splashDamageRadius = 20f;
+            splashDamageRadius = 18f;
             splashDamage = 14f;
 
             keepVelocity = false;
@@ -924,7 +926,7 @@ public class SnBullets implements ContentList {
             homingRange = 9f;
             homingPower = 0.09f;
 
-            splashDamageRadius = 15f;
+            splashDamageRadius = 13f;
             splashDamage = 15f;
 
             keepVelocity = false;
@@ -945,7 +947,7 @@ public class SnBullets implements ContentList {
             drag = -0.003f;
             homingRange = 10f;
             homingPower = 0.14f;
-            splashDamageRadius = 35f;
+            splashDamageRadius = 30f;
             splashDamage = 25f;
             keepVelocity = false;
             hitSound = Sounds.explosion;
