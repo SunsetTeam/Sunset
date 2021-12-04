@@ -74,10 +74,17 @@ public class SnUnitTypes implements ContentList {
                     new Rotor("rotor-small") {{
                         offsetX = 0;
                         offsetY = 2;
+                        rotorRotateSpeed = -27f;
+                        rotorCount = 2;
+                    }},
+
+
+                    new Rotor("rotor-small") {{
+                        offsetX = 0;
+                        offsetY = 2;
                         rotorRotateSpeed = 27f;
-                        rotorCount = 1;
-                    }}
-            );
+                        rotorCount = 2;
+                    }});
             weapons.add(
                     new WeaponExt("wind-gun") {{
                         rotate = false;
@@ -107,13 +114,20 @@ public class SnUnitTypes implements ContentList {
             unitFallRotateSpeed = 5f;
 
             rotors.add(
-                    new Rotor("rotor-small") {{
-                        offsetX = 0;
-                        offsetY = 2;
-                        rotorRotateSpeed = 28f;
-                        rotorCount = 1;
-                    }}
-            );
+                new Rotor("rotor-small") {{
+                    offsetX = 0;
+                    offsetY = 2;
+                    rotorRotateSpeed = -27f;
+                    rotorCount = 2;
+                }},
+
+
+                new Rotor("rotor-small") {{
+                    offsetX = 0;
+                    offsetY = 2;
+                    rotorRotateSpeed = 27f;
+                    rotorCount = 2;
+                }});
             weapons.add(
                     new WeaponExt("missile-mount-small") {{
                         rotate = false;
