@@ -25,7 +25,7 @@ public class SnPlanets implements ContentList {
             bloom = true;
             accessible = false;
             hasAtmosphere = true;
-            orbitRadius = 100;
+            orbitRadius = 130;
             meshLoader = () -> new SunMesh(
                 this, 7,
                 10, 0.7, 1.9, 1.4, 1.6,
