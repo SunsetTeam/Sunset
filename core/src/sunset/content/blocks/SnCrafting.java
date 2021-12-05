@@ -23,6 +23,10 @@ import sunset.world.draw.DrawSurge;
 import sunset.world.draw.MultiDrawBlock;
 
 import arc.math.Interp;
+import arc.graphics.g2d.TextureRegion;
+import arc.Core;
+import arc.graphics.g2d.Draw;
+import arc.graphics.g2d.Drawf;
 
 import static mindustry.type.ItemStack.with;
 
@@ -213,7 +217,7 @@ public class SnCrafting implements ContentList {
         //endregion standard
 		testCrafter = new GenericCrafter("test-crafter") {{
 				size = 2;
-				outputItem = new ItemStack(Interp.lead, 4);
+				outputItem = new ItemStack(Items.lead, 4);
 				consumes.items(with(Items.lead, 2));
 			}
 			@Override
