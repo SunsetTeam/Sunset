@@ -22,7 +22,7 @@ import sunset.world.draw.DrawModWeave;
 import sunset.world.draw.DrawSurge;
 import sunset.world.draw.MultiDrawBlock;
 
-import arc.math.Interp:
+import arc.math.Interp;
 
 import static mindustry.type.ItemStack.with;
 
