@@ -84,6 +84,7 @@ public class SnProduction implements ContentList {
             size = 5;
             hasPower = true;
             powerUse = 4.25f;
+            snake = 2f;
             hardnessDrillMultiplier = 8;
             liquidBoost = 3.86f;
             itemCountMultiplier = 0.5f;
