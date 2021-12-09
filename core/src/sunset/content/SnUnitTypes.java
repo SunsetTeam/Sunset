@@ -293,6 +293,48 @@ public class SnUnitTypes implements ContentList {
             circleTarget = false;
 
             unitFallRotateSpeed = 5f;
+            weapons.add(
+                    new WeaponExt("") {{
+                        rotate = false;
+                        mirror = true;
+                        x = 17f;
+                        y = 6f;
+                        spacing = 4;
+                        reload = 55f;
+                        recoil = 5f;
+                        shake = 2f;
+                        ejectEffect = Fx.casing3;
+                        inaccuracy = 3f;
+                        shots = 3;
+                        shootSound = Sounds.bang;
+                        bullet = SnBullets.largeHelicopterMissile;
+                    }},
+                    new SnWeapon("") {{
+                        rotate = false;
+                        mirror = false;
+                        shake = 3f;
+                        x = 10f;
+                        y = 10f;
+                        reload = 45f;
+                        shotDelay = 4f;
+                        shots = 2;
+                        inaccuracy = 0.5f;
+                        shootSound = Sounds.shootBig;
+                        bullet = SnBullets.largeHelicopterGun;
+                    }},
+                    new SnWeapon("") {{
+                        rotate = false;
+                        mirror = true;
+                        shake = 2f;
+                        x = 9f;
+                        y = 7f;
+                        reload = 25f;
+                        shotDelay = 1f;
+                        shots = 1;
+                        inaccuracy = 3f;
+                        shootSound = Sounds.laser;
+                        bullet = SnBullets.smallHelicopterMissiles;
+                    }});
         }};
         
         mudflow = new CopterUnitType("mudflow") {{
