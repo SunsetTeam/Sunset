@@ -364,6 +364,58 @@ public class SnUnitTypes implements ContentList {
             circleTarget = false;
 
             unitFallRotateSpeed = 4f;
+            weapons.add(
+                    new WeaponExt("") {{
+                        rotate = false;
+                        mirror = true;
+                        x = 24f;
+                        y = 3f;
+                        reload = 55f;
+                        recoil = 7f;
+                        shake = 4f;
+                        inaccuracy = 1f;
+                        ejectEffect = Fx.casing1;
+                        shootSound = Sounds.shotgun;
+                        bullet = SnBullets.shrapnelCopterGun;
+                    }},
+                    new SnWeapon("") {{
+                        rotate = false;
+                        mirror = false;
+                        shake = 3f;
+                        x = 17f;
+                        y = 14f;
+                        reload = 8f;
+                        shots = 1;
+                        inaccuracy = 0.5f;
+                        shootSound = Sounds.shootBig;
+                        bullet = SnBullets.gigantHelicopterGun;
+                    }},
+                    new SnWeapon("") {{
+                        rotate = false;
+                        mirror = false;
+                        shake = 3f;
+                        x = 20f;
+                        y = 10f;
+                        reload = 60f;
+                        shotDelay = 4f;
+                        shots = 2;
+                        inaccuracy = 0.5f;
+                        shootSound = Sounds.missile;
+                        bullet = SnBullets.bigClusterRocket;
+                    }},
+                    new SnWeapon("") {{
+                        rotate = false;
+                        mirror = true;
+                        shake = 2f;
+                        x = 4f;
+                        y = 16f;
+                        reload = 40f;
+                        shotDelay = 1f;
+                        shots = 1;
+                        inaccuracy = 3f;
+                        shootSound = Sounds.spark;
+                        bullet = SnBullets.bigCopterEnergySphere;
+                    }});
         }};
         //endregion attack copters
         //region buffers

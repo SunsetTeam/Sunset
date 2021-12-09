@@ -42,7 +42,7 @@ public class SnBullets implements ContentList {
     //energy-sphere
     smallEnergySphere, mediumEnergySphereFrag, mediumEnergySphere,
     //units
-    basicHelicopterGun, mediumHelicopterGun, helicopterMissile, clusterRocketSmall, clusterRocket, copterEnergySphere, bigHelicopterGunFrag, bigHelicopterGun, bigHelicopterMissile, laserGun, laserHelicopterFrag, largeHelicopterGun, largeHelicopterMissile, smallHelicopterMissiles,
+    basicHelicopterGun, mediumHelicopterGun, helicopterMissile, clusterRocketSmall, clusterRocket, copterEnergySphere, bigHelicopterGunFrag, bigHelicopterGun, bigHelicopterMissile, laserGun, laserHelicopterFrag, largeHelicopterGun, largeHelicopterMissile, smallHelicopterMissiles, shrapnelCopterGun, gigantHelicopterGun, bigClusterRocketSmall, bigClusterRocket, bigCopterEnergySphere,
     cometWaterShot, starStunBullet, galaxyKnockbackBullet,
     wheel1Bullet, wheel2Shotgun, wheel3Burst, wheel4Shotgun, wheel4Artillery, wheel5Flame, wheel5Bullet, mirageGunBullet,
     //misc
@@ -975,7 +975,7 @@ public class SnBullets implements ContentList {
             height = 9f;
             width = 9f;
             lightning = 4;
-            lightningLength = 9;
+            lightningLength = 10;
             lightningColor = SnPal.copterLaser;
             lightningDamage = 7f;
             shrinkX = 0.01f;
@@ -1094,6 +1094,87 @@ public class SnBullets implements ContentList {
             weaveMag = 2f;
             pierce = true;
             pierceCap = 3;
+        }};
+        //T6-copter
+        shrapnelCopterGun = new ShrapnelBulletType() {{
+            speed = 14;
+            length = 120f;
+            width = 20f;
+            damage = 70;
+            lifetime = 20f;
+            splashDamage = 59f;
+            splashDamageRadius = 30f;
+            collidesAir = true;
+        }};
+
+        gigantHelicopterGun = new BasicBulletType(5f, 25) {{
+            width = 12f;
+            height = 17f;
+            lifetime = 45f;
+            hitEffect = Fx.flakExplosion;
+            shootEffect = Fx.shootSmall;
+            smokeEffect = Fx.shootSmallSmoke;
+            fragBullet = bigHelicopterGunFrag;
+            fragBullets = 5;
+        }};
+
+        bigClusterRocketSmall = new MissileBulletType(4f, 8) {{
+            width = 13f;
+            height = 13f;
+            shrinkY = 0f;
+            lifetime = 55f;
+            splashDamageRadius = 35f;
+            splashDamage = 35f;
+            hitEffect = Fx.blastExplosion;
+            despawnEffect = Fx.blastExplosion;
+            homingRange = 30;
+            homingPower = 0.5f;
+            weaveScale = 4f;
+            weaveMag = 2f;
+            pierce = true;
+            pierceCap = 6;
+        }};
+        bigClusterRocket = new MissileBulletType(4f, 10, "missile-large") {{
+            width = 16f;
+            height = 18f;
+            shrinkY = 0f;
+            drag = -0.003f;
+            homingRange = 10f;
+            homingPower = 0.2f;
+            splashDamageRadius = 50f;
+            splashDamage = 55f;
+            keepVelocity = false;
+            hitSound = Sounds.explosion;
+            trailChance = 0.3f;
+            lifetime = 40f;
+            backColor = Pal.unitBack;
+            frontColor = Pal.unitFront;
+            hitEffect = Fx.blastExplosion;
+            despawnEffect = Fx.blastExplosion;
+            weaveScale = 5f;
+            weaveMag = 3f;
+            
+            fragBullet = bigClusterRocketSmall;
+            fragCone = 90f;
+            fragBullets = 3;
+        }};
+
+        bigCopterEnergySphere = new BasicBulletType(3f, 7) {{
+            sprite = "sunset-circle-bullet";
+            lifetime = 37f;
+            splashDamageRadius = 25f;
+            splashDamage = 25f;
+            height = 14f;
+            width = 14f;
+            lightning = 7;
+            lightningLength = 20;
+            lightningColor = SnPal.copterLaser;
+            lightningDamage = 18f;
+            shrinkX = 0.01f;
+            shrinkY = 0.01f;
+            hitEffect = Fx.flakExplosion;
+            frontColor = SnPal.copterLaser;
+            backColor = SnPal.copterLaserBack;
         }};
         //endregion helicopter
         //region buffer
