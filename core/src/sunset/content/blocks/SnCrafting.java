@@ -26,8 +26,6 @@ import arc.math.Interp;
 import arc.graphics.g2d.TextureRegion;
 import arc.Core;
 import arc.graphics.g2d.Draw;
-import arc.graphics.g2d.Drawf;
-
 import static mindustry.type.ItemStack.with;
 
 public class SnCrafting implements ContentList {
@@ -219,24 +217,6 @@ public class SnCrafting implements ContentList {
 				size = 2;
 				outputItem = new ItemStack(Items.lead, 4);
 				consumes.items(with(Items.lead, 2));
-			}
-			@Override
-			public void load() {
-				bottom = Core.atlas.find(name + "-bottom");
-				liquid = Core.atlas.find(name + "-liquid");
-				rotator = Core.atlas.find(name + "-rotator");
-			}
-			@Override
-			public TextureRegion[] icons() {
-				return new TextureRegion[] {bottom, rotator, block};
-			}
-			@Override
-			public void draw() {
-				Draw.rect(bottom,x, y);
-				Drawf.liquid(liquid, x, y, liquids.total() / liquidCapacity, liquids.current().color);
-				Draw.rect(rotator, x, y, Interp.pow3In.apply(progress));
-				Draw.rect(block, x, y);
-			}
-		};
+			}};
     }
 }
