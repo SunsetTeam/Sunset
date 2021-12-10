@@ -4,7 +4,6 @@ import arc.Events;
 import arc.audio.Music;
 import arc.struct.Seq;
 import mindustry.game.EventType;
-import sunset.content.SnMusic;
 
 import static mindustry.Vars.*;
 import static mma.ModVars.modInfo;
