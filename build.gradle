@@ -1,4 +1,3 @@
-import java.time.format.DateTimeFormatter
 
 buildscript {
     ext {
@@ -422,19 +421,23 @@ task mjar() {
         }
     }
     doLast {
-        def file = new File(rootDir, "modsDirectories.txt")
+        def modsDirectories = [];
+        def file = new File(rootDir, "modsDirectories.txt");
+
         if (file.exists()) {
-            def modsDirectories = []
-            BufferedReader reader = new BufferedReader(new FileReader(file))
-            reader.lines().forEach(line -> {
-                if(line == "classic") line = getdatadir() + "mods"
-                acopy line
-            })
-            reader.close()
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            reader.lines().forEach(line -> modsDirectories.add(line))
+            reader.close();
         } else {
-            acopy getdatadir() + "mods"
+            modsDirectories.add("classic");
         }
-        def time = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss"));
+        for (String directory : modsDirectories) {
+            if (directory.equals("classic")) {
+                directory = getdatadir() + "mods";
+            }
+            acopy(directory);
+        }
+        def time = LocalDateTime.now().format(java.time.format.DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss"));
         println "Build ended at: ${time}"
     }
 }
