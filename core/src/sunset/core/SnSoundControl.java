@@ -4,6 +4,7 @@ import arc.Events;
 import arc.audio.Music;
 import arc.struct.Seq;
 import mindustry.game.EventType;
+import sunset.gen.SnMusics;
 
 import static mindustry.Vars.*;
 import static mma.ModVars.modInfo;
@@ -40,7 +41,7 @@ public class SnSoundControl {
                 }
             }
         });
-
+        
         Events.run(EventType.ClientLoadEvent.class, this::reload);
     }
 
@@ -53,6 +54,7 @@ public class SnSoundControl {
         if (save != null) {
             save.set(target);
         }
-        target.set(replacement);
+        target.clear();
+        target.addAll(replacement);
     }
 }
