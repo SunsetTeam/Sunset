@@ -13,7 +13,7 @@ buildscript {
         }
         println "core: " + modCoreVersionDemo
         modCoreVersion = modCoreVersionDemo
-        modCoreVersion = "7dd781781c8"
+        modCoreVersion = "0f5b210e354"
     }
     repositories {
         mavenLocal()
@@ -177,6 +177,7 @@ project(":core") {
 
         implementation "com.github.Zelaux.ZelauxModCore:core:$modCoreVersion"
         implementation "com.github.Zelaux.ZelauxModCore:plugins:$modCoreVersion"
+        implementation "com.github.Zelaux.ZelauxModCore:graphics:$modCoreVersion"
         compileOnly "com.github.Zelaux.ZelauxModCore:annotations:$modCoreVersion"
 
         implementation "com.github.Zelaux:AdvancedContentInfo:$aciVersion"

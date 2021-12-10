@@ -14,6 +14,7 @@ import mindustry.game.EventType;
 import mindustry.graphics.Layer;
 import mindustry.world.Tile;
 import mma.ModListener;
+import mma.graphics.ADrawf;
 import mma.graphics.ModDraw;
 import sunset.type.GeyserGroup;
 import sunset.world.blocks.environment.Geyser;
@@ -99,7 +100,7 @@ public class GeyserLogic {
 //            renderer.effectBuffer.blit(Shaders.shield);
             Tile tile = group.tiles.first();
 //            Log.info("draw gay ser#@(@)",i,group.tiles.size);
-            ModDraw.drawLabel(tile.worldx(), tile.worldy(), (i + 1) + ": " + group.state());
+            ADrawf.drawText(tile.worldx(), tile.worldy(), (i + 1) + ": " + group.state());
         }
         Draw.reset();
     }

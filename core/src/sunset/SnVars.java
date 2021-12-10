@@ -5,11 +5,14 @@ import arc.struct.Seq;
 import arc.util.Log;
 import mindustry.Vars;
 import mindustry.ctype.ContentList;
+import mindustry.ctype.MappableContent;
 import mindustry.game.EventType;
 import mma.ModVars;
 import sunset.content.*;
 import sunset.core.SnLogic;
-import sunset.content.SnTeams;
+import sunset.core.SnSoundControl;
+
+import static mindustry.Vars.headless;
 //import sunset.utils.V7.SunsetWaveSpawner;
 
 public class SnVars extends ModVars {
@@ -34,6 +37,7 @@ public class SnVars extends ModVars {
     //public static SunsetWaveSpawner spawner;
     public static SnLogic logic;
     public static SnSettings settings;
+    public static SnSoundControl sound;
 
     static {
         new SnVars();
@@ -54,8 +58,15 @@ public class SnVars extends ModVars {
         onLoad.each(Runnable::run);
         onLoad.clear();
 
+        if (!headless) {
+            sound = new SnSoundControl();
+        }
         listener.add(logic = new SnLogic());
-        listener.add(settings=new SnSettings());
+        listener.add(settings = new SnSettings());
+    }
+
+    public static String realName(MappableContent content) {
+        return content.minfo.mod == null ? content.name : content.name.substring(content.minfo.mod.name.length() + 1);
     }
 
     @Override
@@ -66,7 +77,7 @@ public class SnVars extends ModVars {
     @Override
     protected void showException(Throwable ex) {
         Log.err(ex);
-        if (Vars.headless) {
+        if (headless) {
             return;
         }
         if (Vars.ui == null) {
