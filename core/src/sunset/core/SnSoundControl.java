@@ -17,11 +17,11 @@ public class SnSoundControl {
 
     public SnSoundControl() {
 
-        snDarkMusic.addAll(SnMusic.acid_rain);
-        snAmbientMusic.addAll(SnMusic.storm);
-        snAmbientMusic.addAll(SnMusic.deceit);
-        snBossMusic.addAll(SnMusic.heavy_arsenal);
-        snBossMusic.addAll(SnMusic.cold_fire);
+        snDarkMusic.addAll(SnMusics.acid_rain);
+        snAmbientMusic.addAll(SnMusics.storm);
+        snAmbientMusic.addAll(SnMusics.deceit);
+        snBossMusic.addAll(SnMusics.heavy_arsenal);
+        snBossMusic.addAll(SnMusics.cold_fire);
         
 
         Events.on(EventType.WorldLoadEvent.class, e -> {
