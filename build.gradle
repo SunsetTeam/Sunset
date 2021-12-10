@@ -1,3 +1,5 @@
+import java.time.format.DateTimeFormatter
+
 buildscript {
     ext {
         arcHash = 'v135'
@@ -406,10 +408,9 @@ def getdatadir() { //Returns Mindustry data directory path
 
 task mjar() {
     dependsOn "jar"
-    doFirst {
-    }
+    doFirst { }
     ext {
-        move = { String intoPath ->
+        acopy = { String intoPath ->
             delete {
                 delete "${intoPath}/${project.archivesBaseName}Desktop.jar"
             }
@@ -417,43 +418,40 @@ task mjar() {
                 from "$buildDir/libs/${project.archivesBaseName}Desktop.jar"
                 into intoPath
             }
-            println "moved to " + intoPath
+            println "Moved to ${intoPath}"
         }
     }
     doLast {
-
-        def modsDirectories = [];
-        def file = new File(rootDir, "modsDirectories.txt");
+        def file = new File(rootDir, "modsDirectories.txt")
         if (file.exists()) {
-            BufferedReader reader = new BufferedReader(new FileReader(file));
-            reader.lines().forEach(line -> modsDirectories.add(line))
+            def modsDirectories = []
+            BufferedReader reader = new BufferedReader(new FileReader(file))
+            reader.lines().forEach(line -> {
+                if(line == "classic") line = getdatadir() + "mods"
+                acopy line
+            })
+            reader.close()
+        } else {
+            acopy getdatadir() + "mods"
         }
-        for (String directory : modsDirectories) {
-            if (directory.equals("classic")) {
-                directory = getdatadir() + "mods";
-            }
-            move(directory);
-        }
-//        move(getdatadir() + "mods")
-        def time = LocalDateTime.now().format(java.time.format.DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss"));
-        System.out.println("\tlast build time: ${time}")
+        def time = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss"));
+        println "Build ended at: ${time}"
     }
 }
 
-/*(не работает)
-tasks.create("run").dependsOn("mjar").doLast {
-    def path = temporaryDir.absolutePath + "\\Mindustry.jar"
-    def url = "https://github.com/Anuken/Mindustry/releases/download/$mindustryVersion" + "/Mindustry.jar"
-    def f = new File(path)
-    if (!f.exists()) {
-        print "Downloading Mindustry $mindustryVersion... "
-        new URL(url).withInputStream { i -> f.withOutputStream { it << i } }
-        println "Done"
-    }
-    javaexec {
-        classpath = files(path)
+task run {
+    dependsOn mjar
+    doLast {
+        def gamePath = temporaryDir.absolutePath + "\\Mindustry$mindustryVersion" + ".jar"
+        def gameUrl = "https://github.com/Anuken/Mindustry/releases/download/$mindustryVersion" + "/Mindustry.jar"
+        def gameFile = new File(gamePath)
+        if (!gameFile.exists()) {
+            println "Downloading Mindustry $mindustryVersion" + " to ${gamePath}"
+            new URL(gameUrl).withInputStream { i -> gameFile.withOutputStream { it << i } }
+            println "Done"
+        }
+        javaexec { classpath = files(gamePath) }
     }
 }
-*/
 
 //task buildDex dependsOn "build", "dexify"
