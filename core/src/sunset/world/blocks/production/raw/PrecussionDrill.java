@@ -1,6 +1,7 @@
 package sunset.world.blocks.production.raw;
 
 import arc.Core;
+import arc.audio.Sound;
 import arc.graphics.Blending;
 import arc.graphics.Color;
 import arc.graphics.g2d.Draw;
@@ -84,6 +85,22 @@ public class PrecussionDrill extends Block {
     public TextureRegion rotatorRegion;
     @Load("@-top")
     public TextureRegion topRegion;
+
+    public float shakeIntensity = 3f;
+    public float shakeDuration = 8f;
+    public Sound drillSound = Sounds.none;
+    public float soundPitch = 1f;
+    public float soundVolume = 1f;
+    public Interp scaleInterp = p -> {
+        float toa = 1.07f;
+        float progress = p * toa;
+        if (progress > 1f) {
+            return Mathf.map(progress, 1f, toa, 1.3f, 0.9f);
+        } else {
+            return Mathf.map(progress, 0, 1, 0.9f, 1.3f);
+        }
+    };
+
 
     public PrecussionDrill(String name) {
         super(name);
@@ -261,6 +278,9 @@ public class PrecussionDrill extends Block {
             progressTime += delta() * totalSpeed;
             if (progressTime >= drillTime && working()) {
                 cons.trigger();
+                Effect.shake(shakeIntensity, shakeDuration, x, y);
+                drillSound.at(x, y, soundPitch, soundVolume);
+
                 progressTime %= drillTime;
                 downEffect.at(this);
                 drillItems.each((item, amount) -> {
@@ -271,7 +291,11 @@ public class PrecussionDrill extends Block {
                 });
             }
             if (canDump) {
-                drillItems.each((i, a) -> dump(i));
+                items.each((i,a)->{
+                    if (Structs.contains(reqDrillItems,s->s.item==i))return;
+                    dump(i);
+                });
+//                drillItems.each((i, a) -> dump(i));
             }
         }
         // the possibility of multi-mining breaks the usual withdrawal of resources,
@@ -313,8 +337,6 @@ public class PrecussionDrill extends Block {
 
         @Override
         public void draw() {
-            float s = 0.3f;
-            float ts = 0.6f;
 
             Draw.rect(region, x, y);
             super.drawCracks();
@@ -326,21 +348,15 @@ public class PrecussionDrill extends Block {
             Draw.blend();
             Draw.color();
             float xscl = Draw.xscl, yscl = Draw.yscl;
-            float toa = 1.07f;
-            float progress = progress() * toa;
-            if (progress > 1f) {
-                Draw.scl(Mathf.map(progress, 1f, toa, 1.3f, 0.9f));
-            } else {
-                Draw.scl(Mathf.map(progress, 0, 1, 0.9f, 1.3f));
-            }
+            Draw.scl(scaleInterp.apply(progress()));
             Drawf.spinSprite(rotatorRegion, x, y, 2);
 
             Draw.rect(topRegion, x, y);
             Draw.scl(xscl, yscl);
         }
 
-        public void effect(){
-            if(drillTime > 0){
+        public void effect() {
+            if (drillTime > 0) {
                 Effect.shake(drillTime, drillTime, this);
             }
         }
