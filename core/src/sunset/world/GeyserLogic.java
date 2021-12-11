@@ -15,7 +15,6 @@ import mindustry.graphics.Layer;
 import mindustry.world.Tile;
 import mma.ModListener;
 import mma.graphics.ADrawf;
-import mma.graphics.ModDraw;
 import sunset.type.GeyserGroup;
 import sunset.world.blocks.environment.Geyser;
 

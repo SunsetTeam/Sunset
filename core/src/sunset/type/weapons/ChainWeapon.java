@@ -28,6 +28,7 @@ import sunset.type.UpdateDrawWeapon;
 import static arc.graphics.Color.coral;
 
 public class ChainWeapon extends WeaponExt implements UpdateDrawWeapon, StatValue {
+    public static final UnitData.DataKey chainWeaponDataKey = UnitData.dataKey();
     public int maxChainLength = 1;
     public float range = 120f;
     public float damageTick = 1f;
@@ -38,7 +39,7 @@ public class ChainWeapon extends WeaponExt implements UpdateDrawWeapon, StatValu
     public Color chainColor = coral.cpy();
     public boolean draw = false;
     TextureRegion laser, laserEnd;
-    Seq<Unit> units=new Seq<>();
+    Seq<Unit> units = new Seq<>();
 
     public ChainWeapon(String name) {
         super(name);
@@ -69,12 +70,12 @@ public class ChainWeapon extends WeaponExt implements UpdateDrawWeapon, StatValu
     }
 
     private void getUnits(WeaponMount mount, Unit unit) {
-        ObjectMap<WeaponMount, Seq<Unit>> chainWeapon = UnitData.getData(unit, UnitData.chainWeapon, ObjectMap::new);
-        if (chainWeapon==null) {
+        ObjectMap<WeaponMount, Seq<Unit>> chainWeapon = UnitData.getData(unit, chainWeaponDataKey, ObjectMap::new);
+        if (chainWeapon == null) {
             units.clear();
             return;
         }
-        units = chainWeapon.get(mount,Seq::new);
+        units = chainWeapon.get(mount, Seq::new);
     }
 
     @Override

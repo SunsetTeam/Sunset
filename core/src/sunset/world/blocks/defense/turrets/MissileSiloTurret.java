@@ -31,7 +31,7 @@ import mindustry.world.blocks.ControlBlock;
 import mindustry.world.blocks.production.GenericCrafter;
 import mindustry.world.meta.Stat;
 import mma.ModVars;
-import mma.graphics.ModFill;
+import mma.graphics.AFill;
 import sunset.type.MissileType;
 import sunset.world.meta.SnStatValues;
 
@@ -173,7 +173,7 @@ public class MissileSiloTurret extends GenericCrafter {
 
         @Override
         public void drawActiveTerritory() {
-            ModFill.doubleSwirl(x,y,minRange,maxRange,1f,0);
+            AFill.donut(x,y,minRange,maxRange,1f,0);
         }
 
         @Override

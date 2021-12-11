@@ -78,7 +78,7 @@ public class Utils {
      * Принудительно устанавливает юнита в меню.
      */
     public static void setMenuUnit(UnitType type) {
-        if (Vars.headless)return;
+        if (Vars.headless) return;
         try {
             Field rendererF = MenuFragment.class.getDeclaredField("renderer");
             rendererF.setAccessible(true);
@@ -193,6 +193,7 @@ public class Utils {
             }
         }
     }
+
     public static Seq<Teamc> allNearbyEnemiesOld(Team team, float x, float y, float radius) {
         Seq<Teamc> targets = new Seq<>();
 
@@ -210,20 +211,22 @@ public class Utils {
 
         return targets;
     }
-    public static void allNearbyEnemies(Team team, float x, float y, float radius, Cons<Healthc> cons){
+
+    public static void allNearbyEnemies(Team team, float x, float y, float radius, Cons<Healthc> cons) {
         Units.nearbyEnemies(team, x - radius, y - radius, radius * 2f, radius * 2f, unit -> {
-            if(unit.within(x, y, radius + unit.hitSize / 2f) && !unit.dead){
+            if (unit.within(x, y, radius + unit.hitSize / 2f) && !unit.dead) {
                 cons.get(unit);
             }
         });
 
         trueEachBlock(x, y, radius, build -> {
-            if(build.team != team && !build.dead && build.block != null){
+            if (build.team != team && !build.dead && build.block != null) {
                 cons.get(build);
             }
         });
     }
-    public static StatValue empWave(float damage, float maxTargets, StatusEffect status){
+
+    public static StatValue empWave(float damage, float maxTargets, StatusEffect status) {
         return table -> {
             table.row();
             table.table(t -> {
@@ -232,41 +235,48 @@ public class Utils {
                 t.add(bundle.format("bullet.lightning", maxTargets, damage));
                 t.row();
 
-                if(status != StatusEffects.none){
+                if (status != StatusEffects.none) {
                     t.add((status.minfo.mod == null ? status.emoji() : "") + "[stat]" + status.localizedName);
                 }
             }).padTop(-9).left().get().background(Tex.underline);
         };
     }
-    public static boolean checkForTargets(Team team, float x, float y, float radius){
+
+    public static boolean checkForTargets(Team team, float x, float y, float radius) {
         check = false;
 
         Units.nearbyEnemies(team, x - radius, y - radius, radius * 2f, radius * 2f, unit -> {
-            if(unit.within(x, y, radius + unit.hitSize / 2f) && !unit.dead){
+            if (unit.within(x, y, radius + unit.hitSize / 2f) && !unit.dead) {
                 check = true;
             }
         });
 
         trueEachBlock(x, y, radius, build -> {
-            if(build.team != team && !build.dead && build.block != null){
+            if (build.team != team && !build.dead && build.block != null) {
                 check = true;
             }
         });
 
         return check;
     }
-    /** For reload bar. */
-    public static String stringsFixed(float value){
+
+    /**
+     * For reload bar.
+     */
+    public static String stringsFixed(float value) {
         return Strings.autoFixed(value, 2);
     }
 
-    /** Extracts a number out of a string by removing every non-numerical character  */
-    public static String extractNumber(String s){
+    /**
+     * Extracts a number out of a string by removing every non-numerical character
+     */
+    public static String extractNumber(String s) {
         //God, I love google. I have no idea what the "[^\\d.]" part even is. meep moment :D
         return s.replaceAll("[^\\d.]", "");
     }
 
     // Some powers below because Math.Pow is VERY slow
-    public static float Pow2(float a) { return a*a; }
-    public static float Pow3(float a) { return a*a*a; }
+    public static float Pow3(float a) {
+        return a * a * a;
+    }
 }

@@ -2,6 +2,7 @@ package sunset.ai;
 
 import arc.math.Mathf;
 import arc.math.geom.Vec2;
+import arc.util.Interval;
 import mindustry.Vars;
 import mindustry.gen.*;
 
@@ -11,40 +12,39 @@ import static sunset.utils.Utils.*;
 
 /** AI, которое преследует горящие союзные пострйки или боевые единицы, если таковые есть. */
 public class ExtinguishAI extends FlyingUnitWeaponAI {
-    private int tick = 0;
-    public int ticks = 15;
+    Interval timer=new Interval(10);
+    public float ticks=15;
     boolean found = false;
-    final Vec2[] target = { new Vec2() };
-    final float[] minCost = { Float.MAX_VALUE };
+    final Vec2 target = new Vec2() ;
+    float minCost = Float.MAX_VALUE;
     @Override
     public void updateMovement() {
         // обновляемся раз в 60 тиков
-        if (++tick >= ticks) {
-            tick = 0;
+        if (timer.get(0,ticks)) {
             // ниже здоровье - выше приоритет
             // ближе к юниту - выше приоритет
             // сначала ищем горящих союзных юнитов
-            minCost[0] = Float.MAX_VALUE;
+            minCost = Float.MAX_VALUE;
             found = false;
             unit.team.data().units.each(un -> {
                 if (un == unit || !isUnitBurning(un)) return;
-                float cost = Pow2(un.healthf()) * Mathf.len(unit.x - un.x, un.y - unit.y);
-                if (cost > minCost[0]) return;
-                minCost[0] = cost;
-                target[0].set(un);
+                float cost = Mathf.sqr(un.healthf()) * Mathf.len(unit.x - un.x, un.y - unit.y);
+                if (cost > minCost) return;
+                minCost = cost;
+                target.set(un);
                 found = true;
             });
             // если не нашли юнитов, то ищем постройки
             if(!found) {
-                minCost[0] = Float.MAX_VALUE;
+                minCost = Float.MAX_VALUE;
                 float range = Math.max(world.width(), world.height()) * tilesize;
                 Vars.indexer.eachBlock(unit.team, unit.x, unit.y, range, bld -> true, building -> {
                     Fire fire = getBuildingFire(building);
                     if (fire == null) return;
-                    float cost = Pow2(building.healthf()) * Mathf.dst(unit.x, unit.y, building.x, building.y);
-                    if (cost > minCost[0]) return;
-                    minCost[0] = cost;
-                    target[0].set(building);
+                    float cost = Mathf.sqr(building.healthf()) * Mathf.dst(unit.x, unit.y, building.x, building.y);
+                    if (cost > minCost) return;
+                    minCost = cost;
+                    target.set(building);
                     found = true;
                 });
             }

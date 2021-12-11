@@ -12,24 +12,27 @@ import mindustry.gen.Unit;
  * Позволяет хранить информацию о конкретном юните, как правило для работы ИИ.
  */
 public class UnitData {
-    public static final int chainWeapon = 0;
-    public static final int extinguishTick = 1;
 
     private static IntMap<IntMap<Object>> data = new IntMap<>();
 
-    public static <T> T getData(Unit unit, int key, Prov<T> def) {
+    public static DataKey dataKey() {
+        return new DataKey();
+    }
+
+    public static <T> T getData(Unit unit, DataKey key, Prov<T> def) {
         if (unit == null || invalidUnit(unit)) return null;
+//        return ;
         IntMap<Object> entries = data.get(unit.id, IntMap::new);
-        if(entries.containsKey(key)) {
-            return (T) entries.get(key);
+        if (entries.containsKey(key.id)) {
+            return (T) entries.get(key.id);
         } else {
             return def.get();
         }
     }
 
-    public static <T> void setData(Unit unit, int key, T value) {
+    public static <T> void setData(Unit unit, DataKey key, T value) {
         if (unit == null || invalidUnit(unit)) return;
-        data.get(unit.id, IntMap::new).put(key, value);
+        data.get(unit.id, IntMap::new).put(key.id, value);
     }
 
     public static void init() {
@@ -49,9 +52,9 @@ public class UnitData {
         });*/
         Events.run(EventType.Trigger.update, () -> {
             IntMap.Keys keys = data.keys();
-            while(keys.hasNext) {
+            while (keys.hasNext) {
                 int id = keys.next();
-                if(invalidUnit(Groups.unit.getByID(id))) data.remove(id);
+                if (invalidUnit(Groups.unit.getByID(id))) data.remove(id);
             }
         });
         Events.on(EventType.WorldLoadEvent.class, e -> data.clear());
@@ -64,5 +67,14 @@ public class UnitData {
 
     public static boolean invalidUnit(Unit unit) {
         return !unit.isValid() || unit.isNull() || Groups.unit.getByID(unit.id) == null;
+    }
+
+    public static class DataKey {
+        private static int totalId;
+        private int id;
+
+        private DataKey() {
+            id = totalId++;
+        }
     }
 }
