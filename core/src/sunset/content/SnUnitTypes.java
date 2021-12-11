@@ -110,11 +110,11 @@ public class SnUnitTypes implements ContentList {
 
             flying = true;
             circleTarget = false;
-            range = 170;
+            range = 150;
             unitFallRotateSpeed = 5f;
 
             rotors.add(
-                new Rotor("rotor-small") {{
+                new Rotor("rotor-medium") {{
                     offsetX = 0;
                     offsetY = 2;
                     rotorRotateSpeed = -27f;
@@ -122,7 +122,7 @@ public class SnUnitTypes implements ContentList {
                 }},
 
 
-                new Rotor("rotor-small") {{
+                new Rotor("rotor-medium") {{
                     offsetX = 0;
                     offsetY = 2;
                     rotorRotateSpeed = 27f;
@@ -146,7 +146,7 @@ public class SnUnitTypes implements ContentList {
                         bullet = SnBullets.helicopterMissile;
                     }},
 
-                    new WeaponExt("wind-gun") {{
+                    new WeaponExt("small-minigun") {{
                         rotate = false;
                         mirror = true;
                         top = true;
@@ -160,7 +160,7 @@ public class SnUnitTypes implements ContentList {
                     }});
         }};
         nadir = new CopterUnitType("nadir") {{
-            health = 580;
+            health = 650;
             hitSize = 30;
             speed = 2.8f;
             accel = 0.1f;
@@ -170,7 +170,7 @@ public class SnUnitTypes implements ContentList {
 
             flying = true;
             circleTarget = false;
-            range = 170;
+            range = 160;
 
             unitFallRotateSpeed = 5f;
 
@@ -235,7 +235,7 @@ public class SnUnitTypes implements ContentList {
 
             flying = true;
             circleTarget = false;
-
+            range = 180f;
             unitFallRotateSpeed = 5f;
             weapons.add(
                     new WeaponExt("") {{
@@ -286,11 +286,12 @@ public class SnUnitTypes implements ContentList {
             speed = 2.1f;
             accel = 0.1f;
             drag = 0.02f;
-            commandLimit = 3;
+            commandLimit = 5;
             targetFlags = new BlockFlag[]{BlockFlag.battery, BlockFlag.generator, BlockFlag.reactor, null};
 
             flying = true;
             circleTarget = false;
+            range = 185f;
 
             unitFallRotateSpeed = 5f;
             weapons.add(
@@ -343,7 +344,7 @@ public class SnUnitTypes implements ContentList {
             speed = 1.7f;
             accel = 0.1f;
             drag = 0.02f;
-            commandLimit = 5;
+            commandLimit = 4;
             targetFlags = new BlockFlag[]{BlockFlag.battery, BlockFlag.generator, BlockFlag.reactor, null};
 
             flying = true;
