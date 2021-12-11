@@ -5,6 +5,7 @@ import arc.math.geom.Vec2;
 import arc.util.Interval;
 import mindustry.Vars;
 import mindustry.gen.*;
+import sunset.utils.Utils;
 
 import static mindustry.Vars.tilesize;
 import static mindustry.Vars.world;
@@ -21,36 +22,15 @@ public class ExtinguishAI extends FlyingUnitWeaponAI {
     public void updateMovement() {
         // обновляемся раз в 60 тиков
         if (timer.get(0,ticks)) {
-            // ниже здоровье - выше приоритет
-            // ближе к юниту - выше приоритет
-            // сначала ищем горящих союзных юнитов
-            minCost = Float.MAX_VALUE;
-            found = false;
-            unit.team.data().units.each(un -> {
-                if (un == unit || !isUnitBurning(un)) return;
-                float cost = Mathf.sqr(un.healthf()) * Mathf.len(unit.x - un.x, un.y - unit.y);
-                if (cost > minCost) return;
-                minCost = cost;
-                target.set(un);
-                found = true;
-            });
-            // если не нашли юнитов, то ищем постройки
-            if(!found) {
-                minCost = Float.MAX_VALUE;
-                float range = Math.max(world.width(), world.height()) * tilesize;
-                Vars.indexer.eachBlock(unit.team, unit.x, unit.y, range, bld -> true, building -> {
-                    Fire fire = getBuildingFire(building);
-                    if (fire == null) return;
-                    float cost = Mathf.sqr(building.healthf()) * Mathf.dst(unit.x, unit.y, building.x, building.y);
-                    if (cost > minCost) return;
-                    minCost = cost;
-                    target.set(building);
-                    found = true;
-                });
+            float range = Math.max(world.width(), world.height()) * tilesize;
+            Posc targ= Utils.findFireTarget(unit.x,unit.y,unit.team,range,un->un!=unit,b->true);
+            found=targ!=null;
+            if (found){
+                target.set(targ);
             }
         }
         if (found) {
-            moveTo(target[0], unit.range()*0.9f);
+            moveTo(target, unit.range()*0.9f);
         }
     }
 

@@ -45,6 +45,28 @@ public class Utils {
     private static IntSet collidedBlocks = new IntSet();
     private static boolean check;
 
+    public static Posc findFireTarget(float x, float y, Team team, float range, Boolf<Unit> unitFilter,Boolf<Building> buildingFilter) {
+        Posc target[] = {null};
+        float minCost[] = {0};
+        target[0] = team.data().units.min(un -> unitFilter.get(un) && isUnitBurning(un), un -> {
+            return un.healthf() * un.healthf() * un.dst2(x,y);
+        });
+        // если не нашли юнитов, то ищем постройки
+        if (target[0] == null) {
+            minCost[0] = Float.MAX_VALUE;
+            Vars.indexer.eachBlock(team, x, y, range, buildingFilter, building -> {
+                Fire fire = getBuildingFire(building);
+                if (fire == null) return;
+                float cost = Mathf.sqr(building.healthf()) * Mathf.dst(x, y, building.x, building.y);
+                if (cost < minCost[0]) {
+                    minCost[0] = cost;
+                    target[0] = fire;
+                }
+            });
+        }
+        return target[0];
+    }
+
     /**
      * Определяет, горит ли юнит.
      */
