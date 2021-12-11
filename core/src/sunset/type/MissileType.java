@@ -1,4 +1,4 @@
-package sunset.type.blocks;
+package sunset.type;
 
 import arc.Core;
 import arc.graphics.Color;

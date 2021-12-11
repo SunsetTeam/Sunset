@@ -6,7 +6,7 @@ import mindustry.annotations.Annotations;
 import mindustry.gen.Building;
 import mma.io.ModTypeIO;
 import sunset.type.DeliverState;
-import sunset.type.blocks.MissileType;
+import sunset.type.MissileType;
 import sunset.world.blocks.units.Airport;
 
 @Annotations.TypeIOHandler

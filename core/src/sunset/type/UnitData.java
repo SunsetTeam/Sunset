@@ -66,7 +66,7 @@ public class UnitData {
     }
 
     public static boolean invalidUnit(Unit unit) {
-        return !unit.isValid() || unit.isNull() || Groups.unit.getByID(unit.id) == null;
+        return unit==null || !unit.isValid() || unit.isNull() || Groups.unit.getByID(unit.id) == null;
     }
 
     public static class DataKey<T> {
@@ -75,13 +75,15 @@ public class UnitData {
         private final Prov<T> def;
 
         private DataKey(Prov<T> def) {
-            this.def = def;
+            this.def = def == null ? () -> null : def;
             id = totalId++;
         }
-        public T get(Unit unit){
+
+        public T get(Unit unit) {
             return getData(unit, this, def);
         }
-        public void set(Unit unit,T value){
+
+        public void set(Unit unit, T value) {
             setData(unit, this, value);
         }
 

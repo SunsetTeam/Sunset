@@ -23,7 +23,7 @@ import sunset.content.SnFx;
 import sunset.content.SnItems;
 import sunset.entities.bullet.EnergySphereBulletType;
 import sunset.graphics.SnPal;
-import sunset.type.blocks.MissileType;
+import sunset.type.MissileType;
 import sunset.world.blocks.defense.turrets.*;
 
 import static mindustry.type.ItemStack.with;

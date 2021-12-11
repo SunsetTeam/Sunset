@@ -4,7 +4,7 @@ import arc.graphics.Pixmap;
 import arc.graphics.g2d.TextureRegion;
 import arc.util.Log;
 import mma.tools.ModGenerators;
-import sunset.type.blocks.MissileType;
+import sunset.type.MissileType;
 
 import static mma.tools.gen.MindustryImagePacker.*;
 
