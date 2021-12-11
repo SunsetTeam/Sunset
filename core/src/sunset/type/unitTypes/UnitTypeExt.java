@@ -12,10 +12,12 @@ import mindustry.graphics.Drawf;
 import mindustry.type.Weapon;
 import mindustry.world.meta.Stat;
 import mindustry.world.meta.StatValue;
-import sunset.type.UpdateDrawWeapon;
+import sunset.type.CustomWeapon;
 import sunset.world.meta.SnStatValues;
 
-/** UnitType, который имеет некоторые изменения. */
+/**
+ * UnitType, который имеет некоторые изменения.
+ */
 public class UnitTypeExt extends SnUnitType {
     public UnitTypeExt(String name) {
         super(name);
@@ -25,14 +27,14 @@ public class UnitTypeExt extends SnUnitType {
     public void setStats() {
         super.setStats();
         // Передаём заполнение сведений об способностях самим способностям, если оно это поддерживает
-        if(abilities.any()){
+        if (abilities.any()) {
             stats.remove(Stat.abilities);
             ObjectSet<String> unique = new ObjectSet<>();
 
-            for(Ability a : abilities){
-                if(unique.add(a.localized())){
-                    if(a instanceof StatValue) {
-                        stats.add(Stat.abilities, (StatValue)a);
+            for (Ability a : abilities) {
+                if (unique.add(a.localized())) {
+                    if (a instanceof StatValue) {
+                        stats.add(Stat.abilities, (StatValue) a);
                     } else {
                         stats.add(Stat.abilities, a.localized());
                     }
@@ -40,7 +42,7 @@ public class UnitTypeExt extends SnUnitType {
             }
         }
         // Передаём заполнение сведений об орудии самому орудию, если оно это поддерживает
-        if(weapons.any()) {
+        if (weapons.any()) {
             stats.remove(Stat.weapons);
             stats.add(Stat.weapons, SnStatValues.weaponListExt(this, weapons));
         }
@@ -50,10 +52,10 @@ public class UnitTypeExt extends SnUnitType {
     public void update(Unit unit) {
         super.update(unit);
         // Вызываем update() у поддерживающих это орудий
-        for(WeaponMount mount : unit.mounts){
+        for (WeaponMount mount : unit.mounts) {
             Weapon weapon = mount.weapon;
-            if(weapon instanceof UpdateDrawWeapon) {
-                ((UpdateDrawWeapon)weapon).update(mount, unit);
+            if (weapon instanceof CustomWeapon customWeapon) {
+                customWeapon.update(mount, unit);
             }
         }
     }
@@ -61,13 +63,13 @@ public class UnitTypeExt extends SnUnitType {
     @Override
     public void drawWeapons(Unit unit) {
         applyColor(unit);
-        // Передаём отрисовку орудия самому орудию, если оно это поддерживает
-        for(WeaponMount mount : unit.mounts) {
+        // We transfer the rendering of the weapon to the weapon itself, if it supports it
+        for (WeaponMount mount : unit.mounts) {
             Weapon weapon = mount.weapon;
-            if (weapon instanceof UpdateDrawWeapon) {
-                ((UpdateDrawWeapon) weapon).preDraw(mount, unit);
+            if (weapon instanceof CustomWeapon customWeapon) {
+                customWeapon.preDraw(mount, unit);
             }
-            if(!(weapon instanceof UpdateDrawWeapon) || ((UpdateDrawWeapon)weapon).useDefaultDraw()) {
+            if (!(weapon instanceof CustomWeapon customWeapon) || customWeapon.useDefaultDraw()) {
                 float rotation = unit.rotation - 90;
                 float weaponRotation = rotation + (weapon.rotate ? mount.rotation : 0);
                 float recoil = -((mount.reload) / weapon.reload * weapon.recoil);
@@ -109,8 +111,8 @@ public class UnitTypeExt extends SnUnitType {
                     Draw.color();
                 }
             }
-            if(weapon instanceof UpdateDrawWeapon) {
-                ((UpdateDrawWeapon)weapon).postDraw(mount, unit);
+            if (weapon instanceof CustomWeapon customWeapon) {
+                customWeapon.postDraw(mount, unit);
             }
         }
         Draw.reset();

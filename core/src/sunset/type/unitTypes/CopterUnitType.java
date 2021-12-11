@@ -9,7 +9,7 @@ import mindustry.gen.Unit;
 import mindustry.gen.UnitEntity;
 import mma.type.ImageGenerator;
 import mma.type.pixmap.PixmapProcessor;
-import sunset.type.Rotor;
+import sunset.type.blocks.Rotor;
 import sunset.utils.PixmapRotator;
 
 public class CopterUnitType extends SnUnitType implements ImageGenerator {

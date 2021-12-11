@@ -1,4 +1,4 @@
-package sunset.type;
+package sunset.type.blocks;
 
 import mindustry.type.Item;
 

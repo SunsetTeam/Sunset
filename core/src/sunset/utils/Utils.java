@@ -3,6 +3,7 @@ package sunset.utils;
 import arc.func.Boolf;
 import arc.func.Cons;
 import arc.func.Func;
+import arc.math.Angles;
 import arc.math.Mathf;
 import arc.math.Rand;
 import arc.math.geom.Geometry;
@@ -19,11 +20,13 @@ import mindustry.core.World;
 import mindustry.ctype.ContentType;
 import mindustry.entities.Fires;
 import mindustry.entities.Units;
+import mindustry.entities.units.WeaponMount;
 import mindustry.game.Team;
 import mindustry.gen.*;
 import mindustry.graphics.MenuRenderer;
 import mindustry.type.StatusEffect;
 import mindustry.type.UnitType;
+import mindustry.type.Weapon;
 import mindustry.ui.fragments.MenuFragment;
 import mindustry.world.Tile;
 import mindustry.world.meta.StatValue;
@@ -44,6 +47,28 @@ public class Utils {
     private static Rect rect = new Rect(), hitrect = new Rect();
     private static IntSet collidedBlocks = new IntSet();
     private static boolean check;
+
+    public static Posc findFireTarget(float x, float y, Team team, float range, Boolf<Unit> unitFilter,Boolf<Building> buildingFilter) {
+        Posc target[] = {null};
+        float minCost[] = {0};
+        target[0] = team.data().units.min(un -> unitFilter.get(un) && isUnitBurning(un), un -> {
+            return un.healthf() * un.healthf() * un.dst2(x,y);
+        });
+        // если не нашли юнитов, то ищем постройки
+        if (target[0] == null) {
+            minCost[0] = Float.MAX_VALUE;
+            Vars.indexer.eachBlock(team, x, y, range, buildingFilter, building -> {
+                Fire fire = getBuildingFire(building);
+                if (fire == null) return;
+                float cost = Mathf.sqr(building.healthf()) * Mathf.dst(x, y, building.x, building.y);
+                if (cost < minCost[0]) {
+                    minCost[0] = cost;
+                    target[0] = fire;
+                }
+            });
+        }
+        return target[0];
+    }
 
     /**
      * Определяет, горит ли юнит.
@@ -78,7 +103,7 @@ public class Utils {
      * Принудительно устанавливает юнита в меню.
      */
     public static void setMenuUnit(UnitType type) {
-        if (Vars.headless)return;
+        if (Vars.headless) return;
         try {
             Field rendererF = MenuFragment.class.getDeclaredField("renderer");
             rendererF.setAccessible(true);
@@ -193,6 +218,7 @@ public class Utils {
             }
         }
     }
+
     public static Seq<Teamc> allNearbyEnemiesOld(Team team, float x, float y, float radius) {
         Seq<Teamc> targets = new Seq<>();
 
@@ -210,20 +236,22 @@ public class Utils {
 
         return targets;
     }
-    public static void allNearbyEnemies(Team team, float x, float y, float radius, Cons<Healthc> cons){
+
+    public static void allNearbyEnemies(Team team, float x, float y, float radius, Cons<Healthc> cons) {
         Units.nearbyEnemies(team, x - radius, y - radius, radius * 2f, radius * 2f, unit -> {
-            if(unit.within(x, y, radius + unit.hitSize / 2f) && !unit.dead){
+            if (unit.within(x, y, radius + unit.hitSize / 2f) && !unit.dead) {
                 cons.get(unit);
             }
         });
 
         trueEachBlock(x, y, radius, build -> {
-            if(build.team != team && !build.dead && build.block != null){
+            if (build.team != team && !build.dead && build.block != null) {
                 cons.get(build);
             }
         });
     }
-    public static StatValue empWave(float damage, float maxTargets, StatusEffect status){
+
+    public static StatValue empWave(float damage, float maxTargets, StatusEffect status) {
         return table -> {
             table.row();
             table.table(t -> {
@@ -232,41 +260,65 @@ public class Utils {
                 t.add(bundle.format("bullet.lightning", maxTargets, damage));
                 t.row();
 
-                if(status != StatusEffects.none){
+                if (status != StatusEffects.none) {
                     t.add((status.minfo.mod == null ? status.emoji() : "") + "[stat]" + status.localizedName);
                 }
             }).padTop(-9).left().get().background(Tex.underline);
         };
     }
-    public static boolean checkForTargets(Team team, float x, float y, float radius){
+
+    public static boolean checkForTargets(Team team, float x, float y, float radius) {
         check = false;
 
         Units.nearbyEnemies(team, x - radius, y - radius, radius * 2f, radius * 2f, unit -> {
-            if(unit.within(x, y, radius + unit.hitSize / 2f) && !unit.dead){
+            if (unit.within(x, y, radius + unit.hitSize / 2f) && !unit.dead) {
                 check = true;
             }
         });
 
         trueEachBlock(x, y, radius, build -> {
-            if(build.team != team && !build.dead && build.block != null){
+            if (build.team != team && !build.dead && build.block != null) {
                 check = true;
             }
         });
 
         return check;
     }
-    /** For reload bar. */
-    public static String stringsFixed(float value){
+
+    /**
+     * For reload bar.
+     */
+    public static String stringsFixed(float value) {
         return Strings.autoFixed(value, 2);
     }
 
-    /** Extracts a number out of a string by removing every non-numerical character  */
-    public static String extractNumber(String s){
+    public static float mountX(Unit unit, WeaponMount mount) {
+        Weapon weapon = mount.weapon;
+        float
+                rotation = unit.rotation - 90,
+                weaponRotation = rotation + (weapon.rotate ? mount.rotation : 0);
+        return unit.x + Angles.trnsx(rotation, weapon.x, weapon.y) + Angles.trnsx(weaponRotation, 0, -mount.recoil);
+    }
+
+    public static float mountY(Unit unit, WeaponMount mount) {
+        Weapon weapon = mount.weapon;
+        float
+                rotation = unit.rotation - 90,
+                weaponRotation = rotation + (weapon.rotate ? mount.rotation : 0);
+        return unit.y + Angles.trnsy(rotation, weapon.x, weapon.y) + Angles.trnsy(weaponRotation, 0, -mount.recoil);
+    }
+
+
+    /**
+     * Extracts a number out of a string by removing every non-numerical character
+     */
+    public static String extractNumber(String s) {
         //God, I love google. I have no idea what the "[^\\d.]" part even is. meep moment :D
         return s.replaceAll("[^\\d.]", "");
     }
 
     // Some powers below because Math.Pow is VERY slow
-    public static float Pow2(float a) { return a*a; }
-    public static float Pow3(float a) { return a*a*a; }
+    public static float Pow3(float a) {
+        return a * a * a;
+    }
 }
