@@ -419,7 +419,7 @@ public class SnUnitTypes implements ContentList {
         }};
         //endregion attack copters
         //region buffers
-        comet = new UnitType("comet") {{
+        comet = new UnitTypeExt("comet") {{
             health = 150;
             hitSize = 12;
             speed = 3.1f;

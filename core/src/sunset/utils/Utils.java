@@ -265,4 +265,8 @@ public class Utils {
         //God, I love google. I have no idea what the "[^\\d.]" part even is. meep moment :D
         return s.replaceAll("[^\\d.]", "");
     }
+
+    // Some powers below because Math.Pow is VERY slow
+    public static float Pow2(float a) { return a*a; }
+    public static float Pow3(float a) { return a*a*a; }
 }
