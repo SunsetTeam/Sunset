@@ -7,14 +7,17 @@ import arc.math.Mathf;
 import arc.math.geom.*;
 import arc.scene.ui.layout.Table;
 import arc.util.Strings;
+import arc.util.Tmp;
 import mindustry.content.Fx;
 import mindustry.entities.Effect;
 import mindustry.entities.units.*;
 import mindustry.gen.*;
 import mindustry.world.meta.StatValue;
 import sunset.ai.weapon.EmptyWeaponAI;
+import sunset.ai.weapon.WeaponAI;
 import sunset.content.SnBullets;
 import sunset.type.UpdateDrawWeapon;
+import sunset.utils.Utils;
 
 public class PointDefenseWeapon extends WeaponExt implements UpdateDrawWeapon, StatValue {
     public float range;
@@ -39,7 +42,7 @@ public class PointDefenseWeapon extends WeaponExt implements UpdateDrawWeapon, S
     }
     @Override
     public void update(WeaponMount mount, Unit unit) {
-        Vec2 wpos = new Vec2(mount.weapon.x, mount.weapon.y).rotate(unit.rotation - 90).add(unit.x, unit.y);
+        Vec2 wpos = Tmp.v1.set(Utils.mountX(unit,mount), Utils.mountY(unit,mount));
         _target = findTarget(unit, wpos.x, wpos.y, range);
         if(_target != null && checkTarget(unit, _target, wpos.x, wpos.y, range)) {
             target = _target;

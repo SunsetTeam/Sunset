@@ -13,6 +13,7 @@ import arc.struct.ObjectMap;
 import arc.struct.Seq;
 import arc.util.Strings;
 import arc.util.Time;
+import arc.util.Tmp;
 import mindustry.entities.Units;
 import mindustry.entities.units.WeaponMount;
 import mindustry.gen.Unit;
@@ -21,9 +22,11 @@ import mindustry.graphics.Layer;
 import mindustry.type.Weapon;
 import mindustry.world.meta.StatValue;
 import sunset.ai.weapon.EmptyWeaponAI;
+import sunset.ai.weapon.WeaponAI;
 import sunset.content.SnBullets;
 import sunset.type.UnitData;
 import sunset.type.UpdateDrawWeapon;
+import sunset.utils.Utils;
 
 import static arc.graphics.Color.coral;
 
@@ -52,7 +55,7 @@ public class ChainWeapon extends WeaponExt implements UpdateDrawWeapon, StatValu
     }
 
     public static Unit getFirstUnit(WeaponMount mount, Unit unit) {
-        Vec2 wpos = new Vec2(mount.weapon.x, mount.weapon.y).rotate(unit.rotation - 90).add(unit.x, unit.y);
+        Vec2 wpos = Tmp.v1.set(Utils.mountX(unit,mount), Utils.mountY(unit,mount));
         ChainWeapon weapon = (ChainWeapon) mount.weapon;
         return Units.closest(null, wpos.x, wpos.y, u -> {
             if (u.team == unit.team && (weapon.healTick == 0 || !u.damaged())) return false;
@@ -113,7 +116,7 @@ public class ChainWeapon extends WeaponExt implements UpdateDrawWeapon, StatValu
 
     private void drawWeapon(WeaponMount mount, Unit unit, float rotation) {
         Weapon weapon = mount.weapon;
-        Vec2 wpos = new Vec2(weapon.x, weapon.y).rotate(unit.rotation - 90).add(unit.x, unit.y);
+        Vec2 wpos = Tmp.v1.set(Utils.mountX(unit,mount), Utils.mountY(unit,mount));
 
         if (weapon.shadow > 0) Drawf.shadow(wpos.x, wpos.y, weapon.shadow);
 
@@ -144,7 +147,7 @@ public class ChainWeapon extends WeaponExt implements UpdateDrawWeapon, StatValu
 
     @Override
     public void preDraw(WeaponMount mount, Unit unit) {
-        Vec2 wpos = new Vec2(mount.weapon.x, mount.weapon.y).rotate(unit.rotation - 90).add(unit.x, unit.y);
+        Vec2 wpos = Tmp.v1.set(Utils.mountX(unit,mount), Utils.mountY(unit,mount));
         float angle = units.isEmpty() ? unit.rotation : wpos.angleTo(units.get(0));
         getUnits(mount, unit);
         if (!units.isEmpty()) {

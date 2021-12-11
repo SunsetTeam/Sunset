@@ -1,38 +1,39 @@
 package sunset.ai;
 
-import arc.math.Angles;
 import arc.math.geom.Vec2;
 import mindustry.entities.Predict;
 import mindustry.entities.units.AIController;
 import mindustry.entities.units.WeaponMount;
-import mindustry.gen.Teamc;
 import mindustry.type.Weapon;
 import sunset.ai.weapon.WeaponAI;
 import sunset.type.weapons.WeaponExt;
+import sunset.utils.Utils;
 
-/** AI, которое использует AI орудия, если таковое существует. */
+/**
+ * AI, которое использует AI орудия, если таковое существует.
+ */
 public class UnitWeaponAI extends AIController {
     @Override
     public void updateWeapons() {
         float rotation = unit.rotation - 90;
         boolean ret = retarget();
 
-        if(ret) {
+        if (ret) {
             target = findTarget(unit.x, unit.y, unit.range(), unit.type.targetAir, unit.type.targetGround);
         }
-        if(invalid(target)) {
+        if (invalid(target)) {
             target = null;
         }
 
         unit.isShooting = false;
-        for(WeaponMount mount : unit.mounts){
+        for (WeaponMount mount : unit.mounts) {
             Weapon weapon = mount.weapon;
 
-            float mountX = unit.x + Angles.trnsx(rotation, weapon.x, weapon.y),
-            mountY = unit.y + Angles.trnsy(rotation, weapon.x, weapon.y);
+            float mountX = Utils.mountX(unit, mount),
+                    mountY = Utils.mountY(unit, mount);
 
             if (weapon instanceof WeaponExt) {
-                WeaponAI ai = ((WeaponExt)weapon).ai;
+                WeaponAI ai = ((WeaponExt) weapon).ai;
                 unit.isShooting |= ai.update(unit, mount);
             } else {
                 if (ret) {
@@ -41,10 +42,10 @@ public class UnitWeaponAI extends AIController {
 
                 boolean shoot = false;
 
-                if ( mount.target != null) {
-                    shoot =  mount.target.within(mountX, mountY, weapon.bullet.range()) && shouldShoot();
+                if (mount.target != null) {
+                    shoot = mount.target.within(mountX, mountY, weapon.bullet.range()) && shouldShoot();
 
-                    Vec2 to = Predict.intercept(unit,  mount.target, weapon.bullet.speed);
+                    Vec2 to = Predict.intercept(unit, mount.target, weapon.bullet.speed);
                     mount.aimX = to.x;
                     mount.aimY = to.y;
                 }

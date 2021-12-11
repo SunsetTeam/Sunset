@@ -3,6 +3,7 @@ package sunset.utils;
 import arc.func.Boolf;
 import arc.func.Cons;
 import arc.func.Func;
+import arc.math.Angles;
 import arc.math.Mathf;
 import arc.math.Rand;
 import arc.math.geom.Geometry;
@@ -19,11 +20,13 @@ import mindustry.core.World;
 import mindustry.ctype.ContentType;
 import mindustry.entities.Fires;
 import mindustry.entities.Units;
+import mindustry.entities.units.WeaponMount;
 import mindustry.game.Team;
 import mindustry.gen.*;
 import mindustry.graphics.MenuRenderer;
 import mindustry.type.StatusEffect;
 import mindustry.type.UnitType;
+import mindustry.type.Weapon;
 import mindustry.ui.fragments.MenuFragment;
 import mindustry.world.Tile;
 import mindustry.world.meta.StatValue;
@@ -288,6 +291,23 @@ public class Utils {
     public static String stringsFixed(float value) {
         return Strings.autoFixed(value, 2);
     }
+
+    public static float mountX(Unit unit, WeaponMount mount) {
+        Weapon weapon = mount.weapon;
+        float
+                rotation = unit.rotation - 90,
+                weaponRotation = rotation + (weapon.rotate ? mount.rotation : 0);
+        return unit.x + Angles.trnsx(rotation, weapon.x, weapon.y) + Angles.trnsx(weaponRotation, 0, -mount.recoil);
+    }
+
+    public static float mountY(Unit unit, WeaponMount mount) {
+        Weapon weapon = mount.weapon;
+        float
+                rotation = unit.rotation - 90,
+                weaponRotation = rotation + (weapon.rotate ? mount.rotation : 0);
+        return unit.y + Angles.trnsy(rotation, weapon.x, weapon.y) + Angles.trnsy(weaponRotation, 0, -mount.recoil);
+    }
+
 
     /**
      * Extracts a number out of a string by removing every non-numerical character

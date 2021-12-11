@@ -1,8 +1,12 @@
 package sunset.ai.weapon;
 
+import arc.func.Floatc2;
+import arc.math.Angles;
+import arc.math.geom.Vec2;
 import arc.util.Interval;
 import mindustry.entities.units.WeaponMount;
 import mindustry.gen.Unit;
+import mindustry.type.Weapon;
 import sunset.type.UnitData;
 
 /**
