@@ -11,7 +11,6 @@ import arc.math.geom.Vec2;
 import arc.scene.ui.layout.Table;
 import arc.struct.ObjectMap;
 import arc.struct.Seq;
-import arc.util.Log;
 import arc.util.Strings;
 import arc.util.Time;
 import mindustry.entities.Units;
@@ -70,7 +69,7 @@ public class ChainWeapon extends WeaponExt implements UpdateDrawWeapon, StatValu
     }
 
     private void getUnits(WeaponMount mount, Unit unit) {
-        ObjectMap<WeaponMount, Seq<Unit>> chainWeapon = UnitData.data(unit, "ChainWeapon", ObjectMap::new);
+        ObjectMap<WeaponMount, Seq<Unit>> chainWeapon = UnitData.getData(unit, UnitData.chainWeapon, ObjectMap::new);
         if (chainWeapon==null) {
             units.clear();
             return;
