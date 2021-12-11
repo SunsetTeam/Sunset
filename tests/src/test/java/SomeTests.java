@@ -8,7 +8,6 @@ import arc.struct.ObjectSet;
 import arc.struct.Seq;
 import arc.util.Log;
 import arc.util.Tmp;
-import sunset.ctype.ContentType;
 
 public class SomeTests {
     static final

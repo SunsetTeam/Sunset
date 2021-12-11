@@ -11,7 +11,7 @@ import mindustry.world.blocks.production.AttributeCrafter;
 import mindustry.world.draw.DrawRotator;
 import sunset.content.SnFx;
 import sunset.content.SnItems;
-import sunset.type.DrillItem;
+import sunset.type.blocks.DrillItem;
 import sunset.world.blocks.production.raw.DRDrill;
 import sunset.world.blocks.production.raw.PrecussionDrill;
 

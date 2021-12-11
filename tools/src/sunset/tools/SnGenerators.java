@@ -1,28 +1,11 @@
 package sunset.tools;
 
-import arc.func.Cons;
-import arc.func.Func;
-import arc.graphics.Color;
 import arc.graphics.Pixmap;
-import arc.graphics.g2d.Draw;
 import arc.graphics.g2d.TextureRegion;
-import arc.math.Mathf;
-import arc.math.Rand;
-import arc.math.geom.Vec2;
-import arc.struct.ObjectSet;
 import arc.util.Log;
-import arc.util.noise.Noise;
-import arc.util.noise.Ridged;
-import arc.util.noise.VoronoiNoise;
-import mindustry.gen.Legsc;
-import mindustry.gen.Mechc;
-import mindustry.gen.Unit;
-import mindustry.graphics.Pal;
-import mindustry.type.Weapon;
 import mma.tools.ModGenerators;
-import sunset.type.MissileType;
+import sunset.type.blocks.MissileType;
 
-import static mindustry.Vars.content;
 import static mma.tools.gen.MindustryImagePacker.*;
 
 public class SnGenerators extends ModGenerators {

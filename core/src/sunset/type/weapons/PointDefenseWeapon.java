@@ -14,12 +14,11 @@ import mindustry.entities.units.*;
 import mindustry.gen.*;
 import mindustry.world.meta.StatValue;
 import sunset.ai.weapon.EmptyWeaponAI;
-import sunset.ai.weapon.WeaponAI;
 import sunset.content.SnBullets;
-import sunset.type.UpdateDrawWeapon;
+import sunset.type.CustomWeapon;
 import sunset.utils.Utils;
 
-public class PointDefenseWeapon extends WeaponExt implements UpdateDrawWeapon, StatValue {
+public class PointDefenseWeapon extends WeaponExt implements CustomWeapon, StatValue {
     public float range;
     public Color color = Color.white;
     Bullet target, _target;
@@ -68,12 +67,6 @@ public class PointDefenseWeapon extends WeaponExt implements UpdateDrawWeapon, S
         bullet.hitEffect.at(target.x, target.y, color);
         shootSound.at(from.x, from.y, Mathf.random(0.9f, 1.1f));
     }
-    @Override
-    public boolean useDefaultDraw() { return true; }
-    @Override
-    public void preDraw(WeaponMount mount, Unit unit) { }
-    @Override
-    public void postDraw(WeaponMount mount, Unit unit) { }
     @Override
     public void display(Table table) {
         table.left().defaults().padRight(3).left();

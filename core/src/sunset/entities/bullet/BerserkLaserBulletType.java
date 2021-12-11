@@ -9,7 +9,7 @@ import mindustry.content.*;
 import mindustry.entities.*;
 import mindustry.entities.bullet.*;
 import mindustry.gen.*;
-import sunset.entities.abilities.BerserkStage;
+import sunset.type.BerserkStage;
 import sunset.type.unitTypes.BerserkUnitType;
 
 

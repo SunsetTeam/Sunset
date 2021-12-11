@@ -22,15 +22,14 @@ import mindustry.graphics.Layer;
 import mindustry.type.Weapon;
 import mindustry.world.meta.StatValue;
 import sunset.ai.weapon.EmptyWeaponAI;
-import sunset.ai.weapon.WeaponAI;
 import sunset.content.SnBullets;
 import sunset.type.UnitData;
-import sunset.type.UpdateDrawWeapon;
+import sunset.type.CustomWeapon;
 import sunset.utils.Utils;
 
 import static arc.graphics.Color.coral;
 
-public class ChainWeapon extends WeaponExt implements UpdateDrawWeapon, StatValue {
+public class ChainWeapon extends WeaponExt implements CustomWeapon, StatValue {
     public static final UnitData.DataKey<ObjectMap<WeaponMount, Seq<Unit>>> chainWeaponDataKey = UnitData.dataKey(ObjectMap::new);
     public int maxChainLength = 1;
     public float range = 120f;

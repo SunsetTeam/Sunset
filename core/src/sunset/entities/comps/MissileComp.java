@@ -8,9 +8,8 @@ import mindustry.annotations.Annotations;
 import mindustry.gen.Drawc;
 import mindustry.gen.Entityc;
 import mindustry.gen.Posc;
-import sunset.gen.Missile;
 import sunset.gen.Missilec;
-import sunset.type.MissileType;
+import sunset.type.blocks.MissileType;
 
 @Annotations.EntityDef(value = {Missilec.class})
 @Annotations.Component(base = true)

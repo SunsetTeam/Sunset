@@ -32,7 +32,7 @@ import mindustry.world.blocks.production.GenericCrafter;
 import mindustry.world.meta.Stat;
 import mma.ModVars;
 import mma.graphics.AFill;
-import sunset.type.MissileType;
+import sunset.type.blocks.MissileType;
 import sunset.world.meta.SnStatValues;
 
 import static mindustry.Vars.tilesize;
