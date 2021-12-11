@@ -33,13 +33,7 @@ public class UnitWeaponAI extends AIController {
 
             if (weapon instanceof WeaponExt) {
                 WeaponAI ai = ((WeaponExt)weapon).ai;
-                if(ai.isUnset()) ai.set(unit, mount);
-                ai.update();
-                unit.isShooting |= ai.isShooting();
-                if(ai.isShooting()) {
-                    unit.aimX = ai.aimX();
-                    unit.aimY = ai.aimY();
-                }
+                unit.isShooting |= ai.update(unit, mount);
             } else {
                 if (ret) {
                     mount.target = findTarget(mountX, mountY, weapon.bullet.range(), weapon.bullet.collidesAir, weapon.bullet.collidesGround);
