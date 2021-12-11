@@ -20,7 +20,6 @@ logs/
 /tests/build/
 /server/build/
 /test_files/
-/annotations/build/
 /desktop-sdl/build/
 desktop-sdl/build/
 /android/assets/mindustry-maps/
@@ -38,8 +37,8 @@ config/
 version.properties
 
 .attach_*
-## Java
 
+## Java
 *.class
 *.war
 *.ear
@@ -73,7 +72,6 @@ www-test/
 com_crashlytics_export_strings.xml
 
 ## Eclipse
-
 .classpath
 .project
 .metadata/
@@ -93,7 +91,6 @@ com_crashlytics_export_strings.xml
 *.launch
 
 ## NetBeans
-
 /nbproject/private/
 /android/nbproject/private/
 /core/nbproject/private/
@@ -137,22 +134,10 @@ com_crashlytics_export_strings.xml
 nbactions.xml
 nb-configuration.xml
 
-## Intellij IDEA
-
-.idea/
-
 ## Gradle
-
 /local.properties
 .gradle/
 gradle-app.setting
-/build/
-/android/build/
-/core/build/
-/desktop/build/
-/html/build/
-/ios/build/
-/ios-moe/build/
 
 ## OS Specific
 .DS_Store
@@ -160,15 +145,12 @@ Thumbs.db
 android/libs/
 
 ## Misc
-
 cache
 
-
-## Zeluax
+## Zelaux
 cmp.py
 #gradlew.bat
 #gradle.properties
 core/build/
 modsDirectories.txt
-modsDirectoies.txt
 otherFiles/
