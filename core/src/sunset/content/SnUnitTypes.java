@@ -836,15 +836,15 @@ public class SnUnitTypes implements ContentList {
             visualElevation = 1.1f;
 
             legCount = 8;
-            legMoveSpace = 0.8f;
-            legPairOffset = 3;
-            legLength = 80f;
-            legExtension = -17;
-            legBaseOffset = 11f;
-            landShake = 1.5f;
-            legLengthScl = 0.9f;
+            legMoveSpace = 1f;
+            legPairOffset = 4;
+            legLength = 60f;
+            legExtension = -19;
+            legBaseOffset = 10f;
+            landShake = 1f;
+            legLengthScl = 1f;
             rippleScale = 3f;
-            legSpeed = 0.19f;
+            legSpeed = 0.2f;
 
             legSplashDamage = 59;
             legSplashRange = 70;

@@ -83,8 +83,9 @@ public class SnProduction implements ContentList {
             requirements(Category.production, with(Items.copper, 100, Items.silicon, 90, Items.titanium, 90, Items.thorium, 85, SnItems.nobium, 80, SnItems.naturite, 70));
             size = 5;
             hasPower = true;
-            powerUse = 4.25f;
-            snake = 2f;
+            powerUse = 5f;
+            shakeIntensity = 5f;
+            shakeDuration = 10f;
             hardnessDrillMultiplier = 8;
             liquidBoost = 3.86f;
             itemCountMultiplier = 0.5f;
