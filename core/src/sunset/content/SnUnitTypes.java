@@ -30,7 +30,6 @@ import sunset.type.unitTypes.CopterUnitType;
 import sunset.type.unitTypes.UnitTypeExt;
 import sunset.type.unitTypes.WheelUnitType;
 import sunset.type.weapons.ChainWeapon;
-import sunset.type.weapons.CopterWeapon;
 import sunset.type.weapons.PointDefenseWeapon;
 import sunset.type.weapons.SnWeapon;
 import sunset.type.weapons.WeaponExt;
@@ -147,7 +146,7 @@ public class SnUnitTypes implements ContentList {
                         bullet = SnBullets.helicopterMissile;
                     }},
 
-                    new CopterWeapon("medium-minigun") {{
+                    new WeaponExt("medium-minigun") {{
                         rotate = false;
                         mirror = true;
                         top = true;
