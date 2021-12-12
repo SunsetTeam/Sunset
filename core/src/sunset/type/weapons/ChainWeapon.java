@@ -56,10 +56,10 @@ public class ChainWeapon extends WeaponExt implements CustomWeapon, StatValue {
     public static Unit getFirstUnit(WeaponMount mount, Unit unit) {
         Vec2 wpos = Tmp.v1.set(Utils.mountX(unit,mount), Utils.mountY(unit,mount));
         ChainWeapon weapon = (ChainWeapon) mount.weapon;
-        return Units.closest(null, wpos.x, wpos.y, u -> {
-            if (u.team == unit.team && (weapon.healTick == 0 || !u.damaged())) return false;
+        return Utils.closest(wpos.x, wpos.y, weapon.range, u -> {
+            if (unit == u) return false;
             if (u.team != unit.team && weapon.damageTick == 0) return false;
-            if (unit == u || Mathf.dst(wpos.x, wpos.y, u.x, u.y) > weapon.range) return false;
+            if (u.team == unit.team && (weapon.healTick == 0 || !u.damaged())) return false;
             return mount.weapon.rotate || Angles.within(wpos.angleTo(u), unit.rotation + mount.rotation, mount.weapon.shootCone);
         });
     }
@@ -72,12 +72,18 @@ public class ChainWeapon extends WeaponExt implements CustomWeapon, StatValue {
     }
 
     private void getUnits(WeaponMount mount, Unit unit) {
-        units = chainWeaponDataKey.get(unit).get(mount, Seq::new);
+        ObjectMap<WeaponMount, Seq<Unit>> v = chainWeaponDataKey.get(unit);
+        if(v == null) {
+            units = null;
+        } else {
+            units = v.get(mount, Seq::new);
+        }
     }
 
     @Override
     public void update(WeaponMount mount, Unit unit) {
         getUnits(mount, unit);
+        if(units == null) return;
         updateUnits(mount, unit);
         float[] p = new float[]{damageTick, healTick};
         units.each(u -> {
@@ -94,17 +100,17 @@ public class ChainWeapon extends WeaponExt implements CustomWeapon, StatValue {
     private void updateUnits(WeaponMount mount, Unit unit) {
         units.clear();
         final float[] r = new float[]{range};
-        final int[] d = new int[]{maxChainLength};
+        int d = maxChainLength;
         final Unit[] t = new Unit[]{getFirstUnit(mount, unit)};
-        while (t[0] != null) {
-            d[0]--;
+        while (t[0] != null && d > 0) {
             r[0] *= rangeFactor;
             units.add(t[0]);
-            t[0] = Units.closest(null, t[0].x, t[0].y, u -> {
+            t[0] = Utils.closest(t[0].x, t[0].y, r[0], u -> {
                 if (u == unit || units.contains(u)) return false;
                 if ((u.health >= u.maxHealth) && !unit.team.isEnemy(u.team)) return false;
-                return (Mathf.dst(t[0].x, t[0].y, u.x, u.y) <= r[0]) && (d[0] > 0);
+                return Mathf.dst(t[0].x, t[0].y, u.x, u.y) <= r[0];
             });
+            d--;
         }
     }
 
@@ -147,9 +153,9 @@ public class ChainWeapon extends WeaponExt implements CustomWeapon, StatValue {
     @Override
     public void preDraw(WeaponMount mount, Unit unit) {
         Vec2 wpos = Tmp.v1.set(Utils.mountX(unit,mount), Utils.mountY(unit,mount));
-        float angle = units.isEmpty() ? unit.rotation : wpos.angleTo(units.get(0));
+        float angle = (units == null || units.isEmpty()) ? unit.rotation : wpos.angleTo(units.get(0));
         getUnits(mount, unit);
-        if (!units.isEmpty()) {
+        if (units != null && !units.isEmpty()) {
             float z = Draw.z();
             Draw.z(laserLayer); //TODO как-то пофиксить эффекты луча
             Draw.mixcol(chainColor, 0.4f);
