@@ -32,7 +32,7 @@ import mindustry.world.meta.Stat;
 import mindustry.world.meta.StatUnit;
 import mindustry.world.meta.StatValues;
 import mma.ModVars;
-import sunset.type.DrillItem;
+import sunset.type.blocks.DrillItem;
 import sunset.world.consumers.DrillItemsConsume;
 
 import java.util.Arrays;

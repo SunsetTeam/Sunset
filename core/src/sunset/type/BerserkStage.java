@@ -1,4 +1,4 @@
-package sunset.entities.abilities;
+package sunset.type;
 
 import mindustry.content.StatusEffects;
 import mindustry.gen.Unit;

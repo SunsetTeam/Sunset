@@ -3,7 +3,7 @@ package sunset.type.unitTypes;
 import arc.struct.Seq;
 import mindustry.content.StatusEffects;
 import mindustry.gen.Unit;
-import sunset.entities.abilities.BerserkStage;
+import sunset.type.BerserkStage;
 import mindustry.gen.*;
 
 public class BerserkUnitType extends SnUnitType {
