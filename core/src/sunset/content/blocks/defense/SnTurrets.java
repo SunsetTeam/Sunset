@@ -221,7 +221,7 @@ public class SnTurrets implements ContentList {
             targetAir = false;
 
             speedupPerShot = 0.1f;
-            slowReloadTime = 180f;
+            maxReloadMultiplier = 0.7f;
         }};
         burner = new ItemTurret("burner") {{
             requirements(Category.turret, with(Items.metaglass, 75, Items.lead, 200, Items.graphite, 100));
@@ -286,7 +286,8 @@ public class SnTurrets implements ContentList {
             targetAir = false;
 
             speedupPerShot = 0.08f;
-            slowReloadTime = 210f;
+            maxReloadMultiplier = 0.5f;
+            
         }};
         scorpio = new ModItemTurret("scorpio") {{
             requirements(Category.turret, with(Items.copper, 600, SnItems.fors, 560, Items.plastanium, 480, SnItems.nobium, 450, SnItems.naturite, 400));

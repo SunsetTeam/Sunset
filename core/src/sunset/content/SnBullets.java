@@ -1515,9 +1515,9 @@ public class SnBullets implements ContentList {
             height = 0;
             lifetime = 0;
         }};
-        testBullet = new TorpedoBulletType(1, 1) {{
+        testBullet = new BasicBulletType(1, 1) {{
             lifetime = 400f;
-            trailEffect = SnFx.torpedoTrail;
+            hitEffect = SnFx.unused1;
             drag = -0.003f;
             homingRange = 10f;
             homingPower = 0.2f;
