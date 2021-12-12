@@ -110,7 +110,7 @@ public class SnUnitTypes implements ContentList {
 
             flying = true;
             circleTarget = false;
-            range = 150;
+            range = 145;
             unitFallRotateSpeed = 5f;
 
             rotors.add(
@@ -170,7 +170,7 @@ public class SnUnitTypes implements ContentList {
 
             flying = true;
             circleTarget = false;
-            range = 160;
+            range = 150;
 
             unitFallRotateSpeed = 5f;
 
@@ -225,7 +225,7 @@ public class SnUnitTypes implements ContentList {
                     }});
         }};
         halo = new CopterUnitType("halo") {{
-            health = 6100;
+            health = 6700;
             hitSize = 40;
             speed = 2.4f;
             accel = 0.1f;
@@ -281,7 +281,7 @@ public class SnUnitTypes implements ContentList {
                     }});
         }};
         parhelion = new CopterUnitType("parhelion") {{
-            health = 17800;
+            health = 18800;
             hitSize = 57;
             speed = 2.1f;
             accel = 0.1f;
@@ -300,12 +300,12 @@ public class SnUnitTypes implements ContentList {
                         mirror = true;
                         x = 17f;
                         y = 6f;
-                        spacing = 4;
-                        reload = 55f;
+                        spacing = 5;
+                        reload = 50f;
                         recoil = 5f;
                         shake = 2f;
                         ejectEffect = Fx.casing3;
-                        inaccuracy = 3f;
+                        inaccuracy = 4f;
                         shots = 3;
                         shootSound = Sounds.bang;
                         bullet = SnBullets.largeHelicopterMissile;
@@ -316,7 +316,7 @@ public class SnUnitTypes implements ContentList {
                         shake = 3f;
                         x = 10f;
                         y = 10f;
-                        reload = 45f;
+                        reload = 40f;
                         shotDelay = 4f;
                         shots = 2;
                         inaccuracy = 0.5f;
@@ -329,9 +329,9 @@ public class SnUnitTypes implements ContentList {
                         shake = 2f;
                         x = 9f;
                         y = 7f;
-                        reload = 25f;
+                        reload = 20f;
                         shotDelay = 1f;
-                        shots = 1;
+                        shots = 3;
                         inaccuracy = 3f;
                         shootSound = Sounds.laser;
                         bullet = SnBullets.smallHelicopterMissiles;
