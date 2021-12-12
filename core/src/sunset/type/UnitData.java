@@ -63,6 +63,6 @@ public class UnitData {
     }
 
     public static boolean invalidUnit(Unit unit) {
-        return !unit.isValid() || unit.isNull() || Groups.unit.getByID(unit.id) == null;
+        return unit == null || !unit.isValid() || unit.isNull() || Groups.unit.getByID(unit.id) == null;
     }
 }
