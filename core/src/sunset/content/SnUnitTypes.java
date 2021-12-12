@@ -30,6 +30,7 @@ import sunset.type.unitTypes.CopterUnitType;
 import sunset.type.unitTypes.UnitTypeExt;
 import sunset.type.unitTypes.WheelUnitType;
 import sunset.type.weapons.ChainWeapon;
+import sunset.type.weapons.CopterWeapon;
 import sunset.type.weapons.PointDefenseWeapon;
 import sunset.type.weapons.SnWeapon;
 import sunset.type.weapons.WeaponExt;
@@ -86,7 +87,7 @@ public class SnUnitTypes implements ContentList {
                         rotorCount = 2;
                     }});
             weapons.add(
-                    new WeaponExt("wind-gun") {{
+                    new WeaponExt("small-minigun") {{
                         rotate = false;
                         mirror = true;
                         top = true;
@@ -134,7 +135,7 @@ public class SnUnitTypes implements ContentList {
                         mirror = true;
                         top = true;
                         x = 3f;
-                        y = 4f;
+                        y = -2f;
                         spacing = 3f;
                         reload = 30f;
                         shake = 1f;
@@ -146,12 +147,12 @@ public class SnUnitTypes implements ContentList {
                         bullet = SnBullets.helicopterMissile;
                     }},
 
-                    new WeaponExt("small-minigun") {{
+                    new CopterWeapon("medium-minigun") {{
                         rotate = false;
                         mirror = true;
                         top = true;
-                        x = 5f;
-                        y = -3f;
+                        x = -4f;
+                        y = 4f;
                         shots = 1;
                         inaccuracy = 1;
                         reload = 8f;
