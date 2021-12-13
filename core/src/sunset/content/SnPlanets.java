@@ -90,11 +90,11 @@ public class SnPlanets implements ContentList {
             accessible = true;
             startSector = 1;
             //lightColor = Color.valueOf("B3DDE3");
-            atmosphereColor = Color.valueOf("59C2BBFF");
+            atmosphereColor = Color.valueOf("39DACFFF");
             hasAtmosphere = true;
             alwaysUnlocked = true;
             landCloudColor = Color.valueOf("00A6FF");
         }};
         //endregion planets
     }
-}
+}//hello world
