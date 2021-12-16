@@ -196,25 +196,6 @@ public class Utils {
 
         return tmpUnit[0];
     }
-
-    /**
-     * Возвращает ближайшего юнита, удволетвояющего условию
-     */
-    public static Unit closest(float x, float y, float radius, Boolf<Unit> predicate){
-        final Unit[] result = {null};
-        final float[] mindist = {0};
-        Units.nearby(x-radius,y-radius,radius*2,radius*2, unit -> {
-            if(!unit.within(x, y, radius + unit.hitSize/2f)) return;
-            if(!predicate.get(unit)) return;
-            float dist = Mathf.len(x-unit.x,y-unit.y);
-            if(result[0] == null || mindist[0] > dist) {
-                mindist[0] = dist;
-                result[0] = unit;
-            }
-        });
-        return result[0];
-    }
-
     /**
      * for EMP
      */

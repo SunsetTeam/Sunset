@@ -56,7 +56,7 @@ public class ChainWeapon extends WeaponExt implements CustomWeapon, StatValue {
     public static Unit getFirstUnit(WeaponMount mount, Unit unit) {
         Vec2 wpos = Tmp.v1.set(Utils.mountX(unit,mount), Utils.mountY(unit,mount));
         ChainWeapon weapon = (ChainWeapon) mount.weapon;
-        return Utils.closest(wpos.x, wpos.y, weapon.range, u -> {
+        return Units.closest(null,wpos.x, wpos.y, weapon.range, u -> {
             if (unit == u) return false;
             if (u.team != unit.team && weapon.damageTick == 0) return false;
             if (u.team == unit.team && (weapon.healTick == 0 || !u.damaged())) return false;
@@ -105,7 +105,7 @@ public class ChainWeapon extends WeaponExt implements CustomWeapon, StatValue {
         while (t[0] != null && d > 0) {
             r[0] *= rangeFactor;
             units.add(t[0]);
-            t[0] = Utils.closest(t[0].x, t[0].y, r[0], u -> {
+            t[0] = Units.closest(null,t[0].x, t[0].y, r[0], u -> {
                 if (u == unit || units.contains(u)) return false;
                 if ((u.health >= u.maxHealth) && !unit.team.isEnemy(u.team)) return false;
                 return Mathf.dst(t[0].x, t[0].y, u.x, u.y) <= r[0];
