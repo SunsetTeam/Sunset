@@ -125,11 +125,11 @@ public class SnMultiSource extends Block{
             b.get().setDisabled(data::invalid);
 
             table.table(t -> {
-                PMItemSelection.buildTable(t, content.items(), () -> data.item, this::configure, false, true).top();
+                SnItemSelection.buildTable(t, content.items(), () -> data.item, this::configure, false, true).top();
                 t.row();
                 t.image(Tex.whiteui).size(40f * 4f, 8f).color(Color.gray).left().top();
                 t.row();
-                PMItemSelection.buildTable(t, content.liquids(), () -> data.liquid, this::configure, false, true).top();
+                SnItemSelection.buildTable(t, content.liquids(), () -> data.liquid, this::configure, false, true).top();
             });
         }
 
