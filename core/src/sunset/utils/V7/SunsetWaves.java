@@ -12,7 +12,7 @@ import mindustry.type.UnitType;
 
 import static mindustry.content.UnitTypes.*;
 
-public class SunsetWaves extends Waves{
+public class SunsetWaves{
     public static Seq<SpawnGroup> generate(float difficulty){
         //apply power curve to make starting sectors easier
         return generate(Mathf.pow(difficulty, 1.12f), new Rand(), false);

@@ -12,7 +12,7 @@ public class SnTechTree extends TechTreeManager implements ContentList {
     @Override
     public void load() {
         //region items and liquids
-        nodeProduce(lead, () -> {
+        node(lead, () -> {
             nodeProduce(fors, () -> {
                 nodeProduce(nobium, () -> {
 

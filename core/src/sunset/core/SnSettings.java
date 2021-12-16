@@ -1,4 +1,4 @@
-package sunset.content;
+package sunset.core;
 
 import arc.ApplicationListener;
 import arc.Core;
