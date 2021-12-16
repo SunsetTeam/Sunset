@@ -28,9 +28,6 @@ public class SnBlocks implements ContentList {
             new SnProduction(),
             new SnUnitBlocks(),
             new SnTests(),
-
-            new SnMultiSource(),
-            new SnMultiVoid()
     };
 
     @Override
