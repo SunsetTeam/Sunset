@@ -19,7 +19,7 @@ import sunset.ui.*;
 
 import static mindustry.Vars.*;
 
-public class SnMultiSource extends Block implements SnContentList{
+public class SnMultiSource extends Block implements ContentList{
     public TextureRegion cross;
     public TextureRegion[] center = new TextureRegion[2];
 
