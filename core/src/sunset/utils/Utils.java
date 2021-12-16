@@ -123,23 +123,6 @@ public class Utils {
     }
 
     /**
-     * Создаёт TileHueristic. Нужен для обхода бага AbstractMethodError на Android, когда runtime игнорирует реализацию методов по умолчанию в интерфейсах.
-     */
-    public static Astar.TileHueristic tileHueristic(Func<Tile, Float> costFunc) {
-        return new Astar.TileHueristic() {
-            @Override
-            public float cost(Tile tile) {
-                return costFunc.get(tile);
-            }
-
-            @Override
-            public float cost(Tile from, Tile tile) { //само проблемное место. Runtime на Android почему-то не видит модификатор default и тело метода.
-                return cost(tile);
-            }
-        };
-    }
-
-    /**
      * Ищет коллизию, игнорируя некоторые цели.
      */
     public static Healthc linecast(Bullet hitter, float x, float y, float angle, float length, Boolf<Healthc> predicate) {
@@ -200,6 +183,7 @@ public class Utils {
      * for EMP
      */
     public static void trueEachBlock(float wx, float wy, float range, Cons<Building> cons) {
+//        Units.nearbyBuildings(wx, wy, range, cons);
         collidedBlocks.clear();
         int tx = World.toTile(wx);
         int ty = World.toTile(wy);
@@ -249,23 +233,6 @@ public class Utils {
             }
         });
     }
-
-    public static StatValue empWave(float damage, float maxTargets, StatusEffect status) {
-        return table -> {
-            table.row();
-            table.table(t -> {
-                t.left().defaults().padRight(3).left();
-
-                t.add(bundle.format("bullet.lightning", maxTargets, damage));
-                t.row();
-
-                if (status != StatusEffects.none) {
-                    t.add((status.minfo.mod == null ? status.emoji() : "") + "[stat]" + status.localizedName);
-                }
-            }).padTop(-9).left().get().background(Tex.underline);
-        };
-    }
-
     public static boolean checkForTargets(Team team, float x, float y, float radius) {
         check = false;
 
@@ -306,16 +273,6 @@ public class Utils {
                 weaponRotation = rotation + (weapon.rotate ? mount.rotation : 0);
         return unit.y + Angles.trnsy(rotation, weapon.x, weapon.y) + Angles.trnsy(weaponRotation, 0, -mount.recoil);
     }
-
-
-    /**
-     * Extracts a number out of a string by removing every non-numerical character
-     */
-    public static String extractNumber(String s) {
-        //God, I love google. I have no idea what the "[^\\d.]" part even is. meep moment :D
-        return s.replaceAll("[^\\d.]", "");
-    }
-
     // Some powers below because Math.Pow is VERY slow
     public static float Pow3(float a) {
         return a * a * a;
