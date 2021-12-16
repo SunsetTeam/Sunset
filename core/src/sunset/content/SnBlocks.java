@@ -9,6 +9,8 @@ import sunset.content.blocks.*;
 import sunset.content.blocks.defense.SnProjectors;
 import sunset.content.blocks.defense.SnTurrets;
 import sunset.content.blocks.defense.SnWalls;
+import sunset.content.blocks.sandbox.SnMultiSource;
+import sunset.content.blocks.sandbox.SnMultiVoid;
 import sunset.world.blocks.defense.turrets.MissileSiloCommander;
 
 public class SnBlocks implements ContentList {
@@ -25,7 +27,10 @@ public class SnBlocks implements ContentList {
             new SnCrafting(),
             new SnProduction(),
             new SnUnitBlocks(),
-            new SnTests()
+            new SnTests(),
+
+            new SnMultiSource(),
+            new SnMultiVoid()
     };
 
     @Override

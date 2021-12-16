@@ -60,7 +60,6 @@ public class SnUnitTypes implements ContentList {
             health = 140;
             hitSize = 15;
             speed = 3.2f;
-            rotateSpeed = 5.4f;
             accel = 0.1f;
             drag = 0.02f;
             commandLimit = 3;
@@ -103,8 +102,7 @@ public class SnUnitTypes implements ContentList {
         thunder = new CopterUnitType("thunder") {{
             health = 310;
             hitSize = 20;
-            speed = 2.9f;
-            rotateSpeed = 5f;
+            speed = 3.0f;
             accel = 0.1f;
             drag = 0.02f;
             commandLimit = 3;
@@ -164,8 +162,7 @@ public class SnUnitTypes implements ContentList {
         nadir = new CopterUnitType("nadir") {{
             health = 650;
             hitSize = 30;
-            speed = 2.6f;
-            rotateSpeed = 4.6f;
+            speed = 2.8f;
             accel = 0.1f;
             drag = 0.02f;
             commandLimit = 4;
@@ -173,7 +170,7 @@ public class SnUnitTypes implements ContentList {
 
             flying = true;
             circleTarget = false;
-            range = 145;
+            range = 150;
 
             unitFallRotateSpeed = 5f;
 
@@ -230,8 +227,7 @@ public class SnUnitTypes implements ContentList {
         halo = new CopterUnitType("halo") {{
             health = 6700;
             hitSize = 40;
-            speed = 2.3f;
-            rotateSpeed = 4.1f;
+            speed = 2.4f;
             accel = 0.1f;
             drag = 0.02f;
             commandLimit = 4;
@@ -239,7 +235,7 @@ public class SnUnitTypes implements ContentList {
 
             flying = true;
             circleTarget = false;
-            range = 170f;
+            range = 180f;
             unitFallRotateSpeed = 5f;
             weapons.add(
                     new WeaponExt("") {{
@@ -288,7 +284,6 @@ public class SnUnitTypes implements ContentList {
             health = 18800;
             hitSize = 57;
             speed = 2.1f;
-            rotateSpeed = 3.6f;
             accel = 0.1f;
             drag = 0.02f;
             commandLimit = 5;
@@ -296,7 +291,7 @@ public class SnUnitTypes implements ContentList {
 
             flying = true;
             circleTarget = false;
-            range = 175f;
+            range = 185f;
 
             unitFallRotateSpeed = 5f;
             weapons.add(
@@ -347,12 +342,10 @@ public class SnUnitTypes implements ContentList {
             health = 48500;
             hitSize = 78;
             speed = 1.7f;
-            rotateSpeed = 3f;
             accel = 0.1f;
             drag = 0.02f;
             commandLimit = 4;
             targetFlags = new BlockFlag[]{BlockFlag.battery, BlockFlag.generator, BlockFlag.reactor, null};
-            range = 170f;
 
             flying = true;
             circleTarget = false;
