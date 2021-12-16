@@ -14,6 +14,7 @@ import mindustry.gen.*;
 import mindustry.type.*;
 import mindustry.ui.*;
 import mindustry.world.*;
+import mindustry.world.blocks.ItemSelection;
 import mindustry.world.meta.*;
 import sunset.ui.*;
 
@@ -125,11 +126,12 @@ public class SnMultiSource extends Block{
             b.get().setDisabled(data::invalid);
 
             table.table(t -> {
-                SnItemSelection.buildTable(t, content.items(), () -> data.item, this::configure, false, true).top();
+                ItemSelection.buildTable(block,t, content.items(), () ->data.item,  i->configure(i==null?data.item:i), false);
                 t.row();
                 t.image(Tex.whiteui).size(40f * 4f, 8f).color(Color.gray).left().top();
                 t.row();
-                SnItemSelection.buildTable(t, content.liquids(), () -> data.liquid, this::configure, false, true).top();
+                ItemSelection.buildTable(block,t, content.liquids(), () ->data.liquid,  l->configure(l==null?data.liquid:l), false);
+//                SnItemSelection.buildTable(t, content.liquids(), () -> data.liquid, l->configure(l==null?data.liquid:l), false, true).top();
             });
         }
 
