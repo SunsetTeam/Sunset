@@ -47,12 +47,20 @@ public class SnSettings implements ApplicationListener {
     }
 
     public boolean reloadBar() {
-        return settings.getBool("sn-reloadbar", true);
+        return settings.getBool("sn-reloadbar", false);
     }
 
     public void reloadBar(boolean reloadBar) {
         settings.put("sn-reloadbar", reloadBar);
         updateReloadBars();
+    }
+
+    public boolean advancedShadows() {
+        return settings.getBool("sn-advancedShadows", false);
+    }
+
+    public void advancedShadows(boolean advancedShadows) {
+        settings.put("sn-advancedShadows", advancedShadows);
     }
 
     public void updateReloadBars() {
@@ -84,6 +92,7 @@ public class SnSettings implements ApplicationListener {
         if (!Vars.headless){
             updateReloadBars();
             ui.settings.game.checkPref("sn-reloadbar",false,this::reloadBar);
+            ui.settings.graphics.checkPref("sn-advancedshadows",false,this::advancedShadows);
         }
     }
 
