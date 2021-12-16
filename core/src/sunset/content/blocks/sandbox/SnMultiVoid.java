@@ -5,7 +5,7 @@ import mindustry.type.*;
 import mindustry.world.*;
 import mindustry.world.meta.*;
 
-public class SnMultiVoid extends Block{
+public class SnMultiVoid extends Block implements SnContentList{
     public SnMultiVoid(String name){
         super(name);
         requirements(Category.effect, BuildVisibility.sandboxOnly, ItemStack.empty);
