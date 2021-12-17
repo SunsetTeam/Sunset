@@ -23,6 +23,7 @@ public class SnSoundControl {
         snAmbientMusic.addAll(SnMusics.deceit);
         snBossMusic.addAll(SnMusics.heavy_arsenal);
         snBossMusic.addAll(SnMusics.cold_fire);
+        snAmbientMusic.add(SnMusics.deceit);
         
 
         Events.on(EventType.WorldLoadEvent.class, e -> {

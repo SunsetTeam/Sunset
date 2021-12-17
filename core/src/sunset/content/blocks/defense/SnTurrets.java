@@ -58,7 +58,7 @@ public class SnTurrets implements ContentList {
             requirements(Category.turret, with(SnItems.fors, 50, Items.lead, 20));
             health = 400;
             reloadTime = 40f;
-            range = 140f;
+            range = 95f;
             recoilAmount = 1f;
             inaccuracy = 2f;
             rotateSpeed = 7.5f;
@@ -67,7 +67,7 @@ public class SnTurrets implements ContentList {
             ammoUseEffect = Fx.casing1;
             targetAir = true;
             shootType = SnBullets.smallEnergySphere;
-            chargeTime = 20f;
+            chargeTime = 30f;
             chargeMaxDelay = 20f;
             powerUse = 1f;
             chargeEffect = SnFx.smallEnergySphereCharge;
@@ -118,7 +118,7 @@ public class SnTurrets implements ContentList {
             requirements(Category.turret, with(SnItems.fors, 150, Items.lead, 70, Items.silicon, 40));
             size = 2;
             reloadTime = 50f;
-            range = 190f;
+            range = 175f;
             recoilAmount = 2f;
             inaccuracy = 3f;
             rotateSpeed = 6f;

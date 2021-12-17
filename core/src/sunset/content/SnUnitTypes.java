@@ -64,7 +64,7 @@ public class SnUnitTypes implements ContentList {
             accel = 0.1f;
             drag = 0.02f;
             commandLimit = 3;
-            targetFlags = new BlockFlag[]{BlockFlag.battery, BlockFlag.generator, BlockFlag.reactor, null};
+            targetFlags = new BlockFlag[]{BlockFlag.battery, BlockFlag.generator, BlockFlag.reactor};
             
             flying = true;
             circleTarget = false;
@@ -108,7 +108,7 @@ public class SnUnitTypes implements ContentList {
             accel = 0.04f;
 			drag = 0.016f;
             commandLimit = 3;
-            targetFlags = new BlockFlag[]{BlockFlag.battery, BlockFlag.generator, BlockFlag.reactor, null};
+            targetFlags = new BlockFlag[]{BlockFlag.battery, BlockFlag.generator, BlockFlag.reactor};
 
             flying = true;
             circleTarget = false;
@@ -169,7 +169,7 @@ public class SnUnitTypes implements ContentList {
             accel = 0.08f;
 			drag = 0.03f;
             commandLimit = 4;
-            targetFlags = new BlockFlag[]{BlockFlag.battery, BlockFlag.generator, BlockFlag.reactor, null};
+            targetFlags = new BlockFlag[]{BlockFlag.battery, BlockFlag.generator, BlockFlag.reactor};
 
             flying = true;
             circleTarget = false;
@@ -235,7 +235,7 @@ public class SnUnitTypes implements ContentList {
             accel = 0.06f;
 			drag = 0.04f;
             commandLimit = 4;
-            targetFlags = new BlockFlag[]{BlockFlag.battery, BlockFlag.generator, BlockFlag.reactor, null};
+            targetFlags = new BlockFlag[]{BlockFlag.battery, BlockFlag.generator, BlockFlag.reactor};
 
             flying = true;
             circleTarget = false;
@@ -292,7 +292,7 @@ public class SnUnitTypes implements ContentList {
             accel = 0.04f;
 			drag = 0.02f;
             commandLimit = 5;
-            targetFlags = new BlockFlag[]{BlockFlag.battery, BlockFlag.generator, BlockFlag.reactor, null};
+            targetFlags = new BlockFlag[]{BlockFlag.battery, BlockFlag.generator, BlockFlag.reactor};
 
             flying = true;
             circleTarget = false;
@@ -344,14 +344,14 @@ public class SnUnitTypes implements ContentList {
         }};
         
         mudflow = new CopterUnitType("mudflow") {{
-            health = 5000;
+            health = 50000;
             hitSize = 78;
             speed = 1.7f;
             rotateSpeed = 3f;
             accel = 0.02f;
 			drag = 0.01f;
             commandLimit = 4;
-            targetFlags = new BlockFlag[]{BlockFlag.battery, BlockFlag.generator, BlockFlag.reactor, null};
+            targetFlags = new BlockFlag[]{BlockFlag.battery, BlockFlag.generator, BlockFlag.reactor};
             range = 170f;
 
             flying = true;
@@ -418,7 +418,7 @@ public class SnUnitTypes implements ContentList {
             accel = 0.1f;
             drag = 0.02f;
             commandLimit = 3;
-            targetFlags = new BlockFlag[]{BlockFlag.battery, BlockFlag.generator, BlockFlag.reactor, null};
+            targetFlags = new BlockFlag[]{BlockFlag.battery, BlockFlag.generator, BlockFlag.reactor};
 
             flying = true;
             circleTarget = false;
@@ -845,15 +845,15 @@ public class SnUnitTypes implements ContentList {
             visualElevation = 1.1f;
 
             legCount = 8;
-            legMoveSpace = 0.7f;
+            legMoveSpace = 0.9f;
             legPairOffset = 3;
             legLength = 70f;
-            legExtension = -27;
-            legBaseOffset = 3f;
+            legExtension = -24;
+            legBaseOffset = 4f;
             landShake = 3f;
-            legLengthScl = 2f;
-            rippleScale = 4f;
-            legSpeed = 0.1f;
+            legLengthScl = 1f;
+            rippleScale = 3f;
+            legSpeed = 0.3f;
 
             legSplashDamage = 70;
             legSplashRange = 70;
