@@ -1,30 +1,20 @@
 package sunset.content.blocks;
 
-import arc.graphics.Color;
-import mindustry.content.Fx;
-import mindustry.content.Items;
-import mindustry.content.Liquids;
-import mindustry.ctype.ContentList;
-import mindustry.gen.Sounds;
-import mindustry.type.Category;
-import mindustry.type.ItemStack;
-import mindustry.type.LiquidStack;
-import mindustry.world.Block;
-import mindustry.world.blocks.production.GenericCrafter;
-import mindustry.world.blocks.production.LiquidConverter;
+import arc.graphics.*;
+import mindustry.content.*;
+import mindustry.ctype.*;
+import mindustry.gen.*;
+import mindustry.type.*;
+import mindustry.world.*;
+import mindustry.world.blocks.production.*;
 import mindustry.world.draw.*;
-import mma.world.draw.MultiDrawSmelter;
-import sunset.content.SnFx;
-import sunset.content.SnItems;
-import sunset.content.SnLiquids;
-import sunset.world.draw.DrawAngleRotator;
-import sunset.world.draw.DrawModWeave;
-import sunset.world.draw.DrawSurge;
-import sunset.world.draw.MultiDrawBlock;
+import mma.world.draw.*;
+import sunset.content.*;
+import sunset.world.draw.*;
 
 import static mindustry.type.ItemStack.with;
 
-public class SnCrafting implements ContentList {
+public class SnCrafting implements ContentList{
     public static Block
 
     //advanced
@@ -33,10 +23,10 @@ public class SnCrafting implements ContentList {
     collider, purifier, crystallizer, enojieKiln;
 
     @Override
-    public void load() {
+    public void load(){
         //region advanced
-        advancedKiln = new GenericCrafter("advanced-kiln") {{
-            requirements(Category.crafting, with(Items.titanium, 150, Items.graphite, 80, Items.metaglass, 80,  Items.silicon, 60, Items.plastanium, 35));
+        advancedKiln = new GenericCrafter("advanced-kiln"){{
+            requirements(Category.crafting, with(Items.titanium, 150, Items.graphite, 80, Items.metaglass, 80, Items.silicon, 60, Items.plastanium, 35));
 
             size = 3;
             health = 1200;
@@ -44,20 +34,20 @@ public class SnCrafting implements ContentList {
             craftTime = 95f;
             outputItem = new ItemStack(Items.metaglass, 9);
             itemCapacity = 15;
-            drawer = new MultiDrawSmelter() {{
+            drawer = new MultiDrawSmelter(){{
                 flameColor = Color.valueOf("ffc099");
-                flameRadius*=1f/2f;
-                flameRadiusIn*=1f/2f;
-                flameRadiusMag*=1f/1.5f;
-                flameRadiusInMag*=1f/1.5f;
+                flameRadius *= 1f / 2f;
+                flameRadiusIn *= 1f / 2f;
+                flameRadiusMag *= 1f / 1.5f;
+                flameRadiusInMag *= 1f / 1.5f;
                 flamePoints(
-                        new FlamePoint(1f/3f,1f/3f),
-                        new FlamePoint(1f-1f/3f,1f/3f),
-                        new FlamePoint(1f/3f,1f-1f/3f),
-                        new FlamePoint(1f-1f/3f,1f-1f/3f),
-                        new FlamePoint(0.5f,0.5f,0.9f)
+                new FlamePoint(1f / 3f, 1f / 3f),
+                new FlamePoint(1f - 1f / 3f, 1f / 3f),
+                new FlamePoint(1f / 3f, 1f - 1f / 3f),
+                new FlamePoint(1f - 1f / 3f, 1f - 1f / 3f),
+                new FlamePoint(0.5f, 0.5f, 0.9f)
                 );
-                drawTopOnce=true;
+                drawTopOnce = true;
             }};
             liquidCapacity = 100f;
 
@@ -65,8 +55,8 @@ public class SnCrafting implements ContentList {
             consumes.liquid(Liquids.water, 0.75f);
             consumes.power(7f);
         }};
-        advancedCompressor = new GenericCrafter("advanced-compressor") {{
-            requirements(Category.crafting, with(Items.titanium, 150, Items.graphite, 120, Items.silicon, 110,  Items.metaglass, 80, Items.plastanium, 60));
+        advancedCompressor = new GenericCrafter("advanced-compressor"){{
+            requirements(Category.crafting, with(Items.titanium, 150, Items.graphite, 120, Items.silicon, 110, Items.metaglass, 80, Items.plastanium, 60));
 
             size = 3;
             craftEffect = SnFx.modPlasticBurn;
@@ -80,7 +70,7 @@ public class SnCrafting implements ContentList {
             consumes.liquid(Liquids.oil, 0.35f);
             consumes.power(5.3f);
         }};
-        advancedWeaver = new GenericCrafter("advanced-weaver") {{
+        advancedWeaver = new GenericCrafter("advanced-weaver"){{
             requirements(Category.crafting, with(Items.lead, 190, Items.thorium, 160, Items.silicon, 145, Items.titanium, 80, Items.phaseFabric, 70));
             size = 3;
             health = 890;
@@ -98,7 +88,7 @@ public class SnCrafting implements ContentList {
             consumes.liquid(Liquids.cryofluid, 0.3f);
             consumes.power(6.1f);
         }};
-        advancedCryomixer = new LiquidConverter("advanced-cryomixer") {{
+        advancedCryomixer = new LiquidConverter("advanced-cryomixer"){{
             requirements(Category.crafting, with(Items.lead, 180, Items.graphite, 90, SnItems.coldent, 60, Items.metaglass, 40));
             outputLiquid = new LiquidStack(Liquids.cryofluid, 1f);
             craftTime = 40f;
@@ -115,7 +105,7 @@ public class SnCrafting implements ContentList {
             consumes.item(SnItems.coldent);
             consumes.liquid(Liquids.water, 1f);
         }};
-        advancedSurge = new GenericCrafter("advanced-surge") {{
+        advancedSurge = new GenericCrafter("advanced-surge"){{
             requirements(Category.crafting, with(Items.thorium, 280, Items.silicon, 200, Items.lead, 160, Items.surgeAlloy, 130, Items.plastanium, 110));
 
             ambientSound = Sounds.smelter;
@@ -127,7 +117,7 @@ public class SnCrafting implements ContentList {
             outputItem = new ItemStack(Items.surgeAlloy, 7);
             itemCapacity = 50;
             liquidCapacity = 80f;
-            drawer = new MultiDrawBlock(new DrawAngleRotator(360), new DrawSurge());
+            drawer = new mma.world.draw.MultiDrawBlock(new DrawAngleRotator(360), new DrawSurge());
 
             consumes.items(with(Items.copper, 10, Items.lead, 12, Items.titanium, 8, Items.silicon, 10, Items.pyratite, 3));
             consumes.liquid(Liquids.cryofluid, 0.70f);
@@ -135,7 +125,7 @@ public class SnCrafting implements ContentList {
         }};
         //endregion advanced
         //region standard
-        collider = new GenericCrafter("collider") {{
+        collider = new GenericCrafter("collider"){{
             requirements(Category.crafting, with(Items.copper, 110, Items.titanium, 105, Items.silicon, 65, SnItems.fors, 50));
 
             outputItem = new ItemStack(SnItems.reneubite, 3);
@@ -149,13 +139,13 @@ public class SnCrafting implements ContentList {
             hasLiquids = true;
             ambientSound = Sounds.grinding;
             ambientSoundVolume = 0.025f;
-            drawer = new MultiDrawBlock(new DrawLiquid(), new DrawSmelter());
+            drawer = new mma.world.draw.MultiDrawBlock(new DrawLiquid(), new DrawSmelter());
 
             consumes.items(with(Items.blastCompound, 3, Items.titanium, 2));
             consumes.liquid(SnLiquids.burheyna, 0.4f);
             consumes.power(3.5f);
         }};
-        purifier = new GenericCrafter("purifier") {{
+        purifier = new GenericCrafter("purifier"){{
             requirements(Category.crafting, with(Items.copper, 120, Items.titanium, 95, Items.silicon, 80, Items.plastanium, 65));
 
             outputItem = new ItemStack(SnItems.nobium, 2);
@@ -173,7 +163,7 @@ public class SnCrafting implements ContentList {
             consumes.items(with(Items.titanium, 3, Items.thorium, 2, SnItems.fors, 1));
             consumes.power(2.5f);
         }};
-        crystallizer = new GenericCrafter("crystallizer") {{
+        crystallizer = new GenericCrafter("crystallizer"){{
             requirements(Category.crafting, with(Items.lead, 130, Items.thorium, 110, Items.silicon, 120, SnItems.nobium, 90, Items.plastanium, 75));
 
             craftEffect = SnFx.crystalyze;
@@ -185,7 +175,7 @@ public class SnCrafting implements ContentList {
             craftTime = 34f;
             size = 3;
             hasPower = true;
-            drawer = new DrawSmelter() {{
+            drawer = new DrawSmelter(){{
                 flameColor = Color.valueOf("F9ECA3");
             }};
 
@@ -193,7 +183,7 @@ public class SnCrafting implements ContentList {
             consumes.liquid(Liquids.water, 0.20f);
             consumes.power(2.7f);
         }};
-        enojieKiln = new GenericCrafter("enojie-kiln") {{
+        enojieKiln = new GenericCrafter("enojie-kiln"){{
             requirements(Category.crafting, with(Items.lead, 200, SnItems.nobium, 150, Items.graphite, 140, Items.silicon, 120, Items.surgeAlloy, 80));
 
             outputItem = new ItemStack(SnItems.enojie, 2);

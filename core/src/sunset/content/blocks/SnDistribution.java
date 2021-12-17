@@ -59,7 +59,7 @@ public class SnDistribution implements ContentList {
             unitType = SnUnitTypes.courier;
             powerUse = 3.25f;
             itemCapacity = 1000;
-            requirements = with(Items.thorium, 60, SnItems.naturite, 40);
+            unitRequirements = with(Items.thorium, 60, SnItems.naturite, 40);
         }};
         //endregion special
     }
