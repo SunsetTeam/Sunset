@@ -9,7 +9,6 @@ import mindustry.type.Category;
 import mindustry.type.Item;
 import mindustry.world.Block;
 import mindustry.world.blocks.power.DecayGenerator;
-import mindustry.world.blocks.power.ItemLiquidGenerator;
 import mindustry.world.blocks.power.NuclearReactor;
 import sunset.content.SnItems;
 import sunset.content.SnLiquids;
@@ -29,7 +28,7 @@ public class SnPower implements ContentList {
     @Override
     public void load() {
         //region generators
-        oilGenerator = new ItemLiquidGenerator("oil-generator") {{
+        oilGenerator = new LiquidGenerator("oil-generator") {{
             requirements(Category.power, with(Items.copper, 110, Items.titanium, 70, Items.lead, 120, Items.silicon, 55, Items.metaglass, 70));
             powerProduction = 8.3f;
             itemDuration = 220f;

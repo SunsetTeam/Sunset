@@ -169,6 +169,7 @@ public class SnUnitTypes implements ContentList {
             flying = true;
             circleTarget = false;
             range = 145;
+            targetFlags = new BlockFlag[]{BlockFlag.generator, BlockFlag.reactor, BlockFlag.storage, null};
 
             unitFallRotateSpeed = 5f;
 
@@ -207,7 +208,7 @@ public class SnUnitTypes implements ContentList {
                         bullet = SnBullets.clusterRocket;
                     }},
 
-                    new SnWeapon("small-minigun") {{
+                    new WeaponExt("small-minigun") {{
                         rotate = false;
                         mirror = true;
                         top = true;
@@ -230,6 +231,7 @@ public class SnUnitTypes implements ContentList {
             accel = 0.06f;
 			drag = 0.04f;
             commandLimit = 4;
+            targetFlags = new BlockFlag[]{BlockFlag.generator, BlockFlag.factory, null};
 
             flying = true;
             circleTarget = false;
@@ -251,7 +253,7 @@ public class SnUnitTypes implements ContentList {
                         shootSound = Sounds.bang;
                         bullet = SnBullets.bigHelicopterMissile;
                     }},
-                    new SnWeapon("big-salvo") {{
+                    new WeaponExt("big-salvo") {{
                         rotate = false;
                         mirror = false;
                         shake = 3f;
@@ -289,6 +291,7 @@ public class SnUnitTypes implements ContentList {
             flying = true;
             circleTarget = false;
             range = 175f;
+            targetFlags = new BlockFlag[]{BlockFlag.generator, BlockFlag.core, null};
 
             unitFallRotateSpeed = 5f;
             weapons.add(
@@ -344,6 +347,7 @@ public class SnUnitTypes implements ContentList {
 			drag = 0.01f;
             commandLimit = 4;
             range = 170f;
+            targetFlags = new BlockFlag[]{BlockFlag.reactor, BlockFlag.battery, BlockFlag.core, null};
 
             flying = true;
             circleTarget = false;
