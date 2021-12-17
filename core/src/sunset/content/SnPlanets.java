@@ -4,8 +4,6 @@ import arc.graphics.Color;
 import mindustry.content.Planets;
 import mindustry.ctype.ContentList;
 import mindustry.graphics.g3d.HexMesh;
-import mindustry.graphics.g3d.HexSkyMesh;
-import mindustry.graphics.g3d.MultiMesh;
 import mindustry.graphics.g3d.SunMesh;
 import mindustry.type.Planet;
 import sunset.graphics.SnPal;
@@ -78,11 +76,6 @@ public class SnPlanets implements ContentList {
             hasAtmosphere = true;
             alwaysUnlocked = true;
             landCloudColor = SnPal.azaria.cpy().a(0.5f);
-
-            cloudMeshLoader = () -> new MultiMesh(
-                new HexSkyMesh(this, 11, 0.15f, 0.7f, 5, new Color().set(SnPal.azariaClouds).mul(0.9f).a(0.75f), 2, 0.45f, 0.9f, 0.38f)            
-                );
-        }};
 
         rime = new Planet("rime", SnPlanets.magma, 0.9f, 3) {{
             meshLoader = () -> new HexMesh(this, 6);
