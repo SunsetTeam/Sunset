@@ -105,8 +105,8 @@ public class SnUnitTypes implements ContentList {
             hitSize = 20;
             speed = 2.9f;
             rotateSpeed = 5f;
-            accel = 0.1f;
-            drag = 0.02f;
+            accel = 0.04f;
+			drag = 0.016f;
             commandLimit = 3;
             targetFlags = new BlockFlag[]{BlockFlag.battery, BlockFlag.generator, BlockFlag.reactor, null};
 
@@ -138,7 +138,7 @@ public class SnUnitTypes implements ContentList {
                         x = 3f;
                         y = -2f;
                         spacing = 3f;
-                        reload = 30f;
+                        reload = 28f;
                         shake = 1f;
                         recoil = 3f;
                         inaccuracy = 5f;
@@ -156,18 +156,18 @@ public class SnUnitTypes implements ContentList {
                         y = 4f;
                         shots = 1;
                         inaccuracy = 1;
-                        reload = 8f;
+                        reload = 7f;
                         shootSound = Sounds.pew;
                         bullet = SnBullets.mediumHelicopterGun;
                     }});
         }};
         nadir = new CopterUnitType("nadir") {{
-            health = 650;
+            health = 690;
             hitSize = 30;
             speed = 2.6f;
             rotateSpeed = 4.6f;
-            accel = 0.1f;
-            drag = 0.02f;
+            accel = 0.08f;
+			drag = 0.03f;
             commandLimit = 4;
             targetFlags = new BlockFlag[]{BlockFlag.battery, BlockFlag.generator, BlockFlag.reactor, null};
 
@@ -228,12 +228,12 @@ public class SnUnitTypes implements ContentList {
                     }});
         }};
         halo = new CopterUnitType("halo") {{
-            health = 6700;
+            health = 6900;
             hitSize = 40;
             speed = 2.3f;
             rotateSpeed = 4.1f;
-            accel = 0.1f;
-            drag = 0.02f;
+            accel = 0.06f;
+			drag = 0.04f;
             commandLimit = 4;
             targetFlags = new BlockFlag[]{BlockFlag.battery, BlockFlag.generator, BlockFlag.reactor, null};
 
@@ -285,12 +285,12 @@ public class SnUnitTypes implements ContentList {
                     }});
         }};
         parhelion = new CopterUnitType("parhelion") {{
-            health = 18800;
+            health = 19200;
             hitSize = 57;
             speed = 2.1f;
             rotateSpeed = 3.6f;
-            accel = 0.1f;
-            drag = 0.02f;
+            accel = 0.04f;
+			drag = 0.02f;
             commandLimit = 5;
             targetFlags = new BlockFlag[]{BlockFlag.battery, BlockFlag.generator, BlockFlag.reactor, null};
 
@@ -344,12 +344,12 @@ public class SnUnitTypes implements ContentList {
         }};
         
         mudflow = new CopterUnitType("mudflow") {{
-            health = 48500;
+            health = 5000;
             hitSize = 78;
             speed = 1.7f;
             rotateSpeed = 3f;
-            accel = 0.1f;
-            drag = 0.02f;
+            accel = 0.02f;
+			drag = 0.01f;
             commandLimit = 4;
             targetFlags = new BlockFlag[]{BlockFlag.battery, BlockFlag.generator, BlockFlag.reactor, null};
             range = 170f;
@@ -429,7 +429,7 @@ public class SnUnitTypes implements ContentList {
         //region buffers
         comet = new UnitTypeExt("comet") {{
             health = 150;
-            hitSize = 12;
+            hitSize = 10;
             speed = 3.1f;
             accel = 0.15f;
             drag = 0.1f;
@@ -460,7 +460,7 @@ public class SnUnitTypes implements ContentList {
         }};
         satelite = new UnitTypeExt("satellite") {{
             health = 470;
-            hitSize = 20;
+            hitSize = 17;
             speed = 3f;
             accel = 0.2f;
             drag = 0.15f;
@@ -489,7 +489,7 @@ public class SnUnitTypes implements ContentList {
         }};
         planet = new UnitTypeExt("planet") {{
             health = 980;
-            hitSize = 26;
+            hitSize = 23;
             speed = 2.9f;
             accel = 0.25f;
             drag = 0.1f;
@@ -617,11 +617,11 @@ public class SnUnitTypes implements ContentList {
         //region berserk
         mirage = new BerserkUnitType("mirage") {{
             health = 320;
-            speed = 1f;
+            speed = 1.7f;
             rotateSpeed = 3f;
             drag = 0.1f;
             armor = 4f;
-            hitSize = 11f;
+            hitSize = 10f;
             allowLegStep = true;
             hovering = false;
             groundLayer = Layer.legUnit;
@@ -657,7 +657,7 @@ public class SnUnitTypes implements ContentList {
         }};
         vision = new BerserkUnitType("vision") {{
             health = 980;
-            speed = 0.8f;
+            speed = 1.6f;
             rotateSpeed = 2f;
             drag = 0.125f;
             armor = 5f;
@@ -687,7 +687,7 @@ public class SnUnitTypes implements ContentList {
         }};
         illusion = new BerserkUnitType("illusion") {{
             health = 1400;
-            speed = 1.1f;
+            speed = 1.4f;
             rotateSpeed = 2.4f;
             drag = 0.125f;
             hitSize = 29f;
@@ -741,7 +741,7 @@ public class SnUnitTypes implements ContentList {
         }};
         soothSayer = new BerserkUnitType("soothSayer") {{
             health = 9700;
-            speed = 1.3f;
+            speed = 1f;
             rotateSpeed = 2.1f;
             drag = 0.125f;
             allowLegStep = true;
@@ -806,7 +806,7 @@ public class SnUnitTypes implements ContentList {
         }};
         seer = new BerserkUnitType("seer") {{
             health = 25900;
-            speed = 0.97f;
+            speed = 0.8f;
             rotateSpeed = 1.8f;
             drag = 0.125f;
             hitSize = 47f;
@@ -832,7 +832,7 @@ public class SnUnitTypes implements ContentList {
         }};
         abyssEye = new BerserkUnitType("abyssEye") {{
             health = 70000;
-            speed = 0.75f;
+            speed = 0.46f;
             rotateSpeed = 1.5f;
             drag = 0.125f;
             hitSize = 71;

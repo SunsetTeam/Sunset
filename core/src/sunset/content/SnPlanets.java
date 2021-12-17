@@ -21,11 +21,11 @@ public class SnPlanets implements ContentList {
     @Override
     public void load() {
         //region stars
-        magma = new Planet("magma", Planets.sun, 3.6f, 0) {{
+        magma = new Planet("magma", Planets.sun, 4f, 0) {{
             bloom = true;
             accessible = false;
             hasAtmosphere = true;
-            orbitRadius = 130;
+            orbitRadius = 145;
             meshLoader = () -> new SunMesh(
                 this, 7,
                 10, 0.7, 1.9, 1.4, 1.6,
@@ -48,7 +48,7 @@ public class SnPlanets implements ContentList {
             atmosphereRadIn = 0.019f;
             atmosphereRadOut = 0.19f;
             sectorApproxRadius = 3;
-            orbitRadius = 31;
+            orbitRadius = 33;
             orbitTime = 17f;
             rotateTime = 15f*30f;
             accessible = true;
@@ -66,7 +66,7 @@ public class SnPlanets implements ContentList {
             radius = 1.03f;
             atmosphereRadIn = 0.02f;
             atmosphereRadOut = 0.4f;
-            orbitRadius = 50f;
+            orbitRadius = 58f;
             orbitTime = 24.1f;
             rotateTime = 15f*30f;
             accessible = true;
@@ -84,11 +84,11 @@ public class SnPlanets implements ContentList {
             radius = 1;
             atmosphereRadIn = 0.016f;
             atmosphereRadOut = 0.28f;
-            orbitRadius = 85;
+            orbitRadius = 93;
             orbitTime = 36f;
             rotateTime = 15f*30f;
             accessible = true;
-            startSector = 1;
+            startSector = 50;
             //lightColor = Color.valueOf("B3DDE3");
             atmosphereColor = Color.valueOf("39DACFFF");
             hasAtmosphere = true;

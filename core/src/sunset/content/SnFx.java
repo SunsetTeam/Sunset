@@ -127,12 +127,12 @@ public class SnFx {
         }
     }),
 
-    smallEnergySphereCharge = new Effect(40f, e -> {
+    smallEnergySphereCharge = new Effect(30f, e -> {
         color(SnPal.redBombBack);
         Fill.circle(e.x, e.y, e.fin() * 2f);
     }),
 
-    mediumEnergySphereCharge = new Effect(55f, e -> {
+    mediumEnergySphereCharge = new Effect(35f, e -> {
         color(SnPal.redBombBack);
         Fill.circle(e.x, e.y, e.fin() * 4f);
     }),
@@ -140,6 +140,7 @@ public class SnFx {
     mediumEnergySphereHit = new Effect(20f, 50f, e -> {
         color(SnPal.redBomb);
         stroke(e.fout() * 1f);
+        
         color(SnPal.redBomb);
         for (int i = 0; i < 2; i++) {
             Drawf.tri(e.x, e.y, 3f, 45f * e.fout(), i * 60);
@@ -147,7 +148,7 @@ public class SnFx {
 
         color();
         for (int i = 0; i < 2; i++) {
-            Drawf.tri(e.x, e.y, 2f, 25f * e.fout(), i * 60);
+            Drawf.tri(e.x, e.y, 2f, 25f * e.fout(), i * 160);
         }
 
         Drawf.light(e.x, e.y, 5, SnPal.redBomb, e.fout());
