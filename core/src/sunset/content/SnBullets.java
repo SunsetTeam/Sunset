@@ -1095,7 +1095,6 @@ public class SnBullets implements ContentList {
         }};
         //T6-copter
         shrapnelCopterGun = new ShrapnelBulletType() {{
-            speed = 14;
             length = 140f;
             width = 30f;
             damage = 110;
@@ -1103,7 +1102,6 @@ public class SnBullets implements ContentList {
             toColor = SnPal.copterLaserBack;
             collidesAir = true;
             collidesGround = true;
-
         }};
 
         gigantHelicopterGun = new BasicBulletType(5f, 65) {{
