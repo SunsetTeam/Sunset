@@ -80,8 +80,8 @@ public class SnPlanets implements ContentList {
             landCloudColor = SnPal.azaria.cpy().a(0.5f);
 
             cloudMeshLoader = () -> new MultiMesh(
-                new HexSkyMesh(this, 9, 0.9f, 0.7f, 5, new Color().set(SnPal.azaria).mul(0.7f).a(0.75f), 2, 0.45f, 0.7f, 0.38f),
-                new HexSkyMesh(this, 1, 0.2f, 0.10f, 5, Color.white.cpy().lerp(SnPal.azaria, 0.50f).a(0.75f), 2, 0.45f, 1f, 0.41f)
+                new HexSkyMesh(this, 9, 0.9f, 0.7f, 5, new Color().set(SnPal.azariaClouds).mul(0.7f).a(0.75f), 2, 0.45f, 0.7f, 0.38f),
+                new HexSkyMesh(this, 1, 0.2f, 0.10f, 5, Color.white.cpy().lerp(SnPal.azariaClouds, 0.50f).a(0.75f), 2, 0.45f, 1f, 0.41f)
             );
         }};
 

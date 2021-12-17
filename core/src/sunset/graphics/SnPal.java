@@ -51,5 +51,6 @@ public class SnPal {
     chainLaser = Pal.surge,
 
     //planets
-    azaria = Color.valueOf("5F0A0A");
+    azaria = Color.valueOf("5F0A0A"),
+    azariaClouds = Color.valueOf("6F3E3E");
 }
