@@ -359,7 +359,7 @@ public class SnBullets implements ContentList {
             damage = 20;
             fromColor = Pal.bulletYellow;
             toColor = Pal.bulletYellowBack;
-            width = 4f;
+            width = 10f;
             collidesAir = true;
         }};
         lightBlastSilicon = new ShrapnelBulletType() {{
@@ -367,7 +367,7 @@ public class SnBullets implements ContentList {
             fromColor = Pal.bulletYellow;
             toColor = Pal.bulletYellowBack;
             reloadMultiplier = 1.1f;
-            width = 4f;
+            width = 19f;
             collidesAir = true;
         }};
         bigBlastPlastanium = new BasicBulletType(12, 81) {{
@@ -1102,6 +1102,8 @@ public class SnBullets implements ContentList {
             fromColor = SnPal.copterLaser;
             toColor = SnPal.copterLaserBack;
             collidesAir = true;
+            collidesGround = true;
+
         }};
 
         gigantHelicopterGun = new BasicBulletType(5f, 65) {{
