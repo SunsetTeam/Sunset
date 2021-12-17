@@ -37,7 +37,7 @@ import sunset.type.weapons.WeaponExt;
 public class SnUnitTypes implements ContentList {
     public static UnitType
     //attack copters
-    wind, thunder, nadir, halo, parhelion, mudflow, testcopter,
+    wind, thunder, nadir, halo, parhelion, mudflow,
     //buffers
     comet, satelite, planet, star, galaxy,
     //berserk
@@ -63,9 +63,7 @@ public class SnUnitTypes implements ContentList {
             rotateSpeed = 5.4f;
             accel = 0.1f;
             drag = 0.02f;
-            commandLimit = 3;
-            targetFlags = new BlockFlag[]{BlockFlag.battery, BlockFlag.generator, BlockFlag.reactor};
-            
+            commandLimit = 3;            
             flying = true;
             circleTarget = false;
             range = 130;
@@ -108,7 +106,6 @@ public class SnUnitTypes implements ContentList {
             accel = 0.04f;
 			drag = 0.016f;
             commandLimit = 3;
-            targetFlags = new BlockFlag[]{BlockFlag.battery, BlockFlag.generator, BlockFlag.reactor};
 
             flying = true;
             circleTarget = false;
@@ -169,8 +166,6 @@ public class SnUnitTypes implements ContentList {
             accel = 0.08f;
 			drag = 0.03f;
             commandLimit = 4;
-            targetFlags = new BlockFlag[]{BlockFlag.battery, BlockFlag.generator, BlockFlag.reactor};
-
             flying = true;
             circleTarget = false;
             range = 145;
@@ -212,7 +207,7 @@ public class SnUnitTypes implements ContentList {
                         bullet = SnBullets.clusterRocket;
                     }},
 
-                    new SnWeapon("wind-gun") {{
+                    new SnWeapon("small-minigun") {{
                         rotate = false;
                         mirror = true;
                         top = true;
@@ -235,7 +230,6 @@ public class SnUnitTypes implements ContentList {
             accel = 0.06f;
 			drag = 0.04f;
             commandLimit = 4;
-            targetFlags = new BlockFlag[]{BlockFlag.battery, BlockFlag.generator, BlockFlag.reactor};
 
             flying = true;
             circleTarget = false;
@@ -292,8 +286,6 @@ public class SnUnitTypes implements ContentList {
             accel = 0.04f;
 			drag = 0.02f;
             commandLimit = 5;
-            targetFlags = new BlockFlag[]{BlockFlag.battery, BlockFlag.generator, BlockFlag.reactor};
-
             flying = true;
             circleTarget = false;
             range = 175f;
@@ -351,7 +343,6 @@ public class SnUnitTypes implements ContentList {
             accel = 0.02f;
 			drag = 0.01f;
             commandLimit = 4;
-            targetFlags = new BlockFlag[]{BlockFlag.battery, BlockFlag.generator, BlockFlag.reactor};
             range = 170f;
 
             flying = true;
@@ -410,20 +401,6 @@ public class SnUnitTypes implements ContentList {
                         shootSound = Sounds.spark;
                         bullet = SnBullets.bigCopterEnergySphere;
                     }});
-        }};
-        testcopter = new CopterUnitType("test-copter") {{
-            health = 200;
-            hitSize = 20;
-            speed = 2.1f;
-            accel = 0.1f;
-            drag = 0.02f;
-            commandLimit = 3;
-            targetFlags = new BlockFlag[]{BlockFlag.battery, BlockFlag.generator, BlockFlag.reactor};
-
-            flying = true;
-            circleTarget = false;
-
-            unitFallRotateSpeed = 4f;
         }};
         //endregion attack copters
         //region buffers
@@ -848,11 +825,11 @@ public class SnUnitTypes implements ContentList {
             legMoveSpace = 0.9f;
             legPairOffset = 3;
             legLength = 70f;
-            legExtension = -24;
+            legExtension = -27;
             legBaseOffset = 4f;
-            landShake = 3f;
-            legLengthScl = 1f;
-            rippleScale = 3f;
+            landShake = 4f;
+            legLengthScl = 2f;
+            rippleScale = 4f;
             legSpeed = 0.3f;
 
             legSplashDamage = 70;
