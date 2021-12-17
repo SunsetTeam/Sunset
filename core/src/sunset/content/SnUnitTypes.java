@@ -617,7 +617,7 @@ public class SnUnitTypes implements ContentList {
         //region berserk
         mirage = new BerserkUnitType("mirage") {{
             health = 320;
-            speed = 1.7f;
+            speed = 1f;
             rotateSpeed = 3f;
             drag = 0.1f;
             armor = 4f;
@@ -657,10 +657,10 @@ public class SnUnitTypes implements ContentList {
         }};
         vision = new BerserkUnitType("vision") {{
             health = 980;
-            speed = 1.6f;
+            speed = 0.9f;
             rotateSpeed = 2f;
             drag = 0.125f;
-            armor = 5f;
+            armor = 9f;
             hitSize = 19f;
             allowLegStep = true;
             hovering = false;
@@ -687,10 +687,11 @@ public class SnUnitTypes implements ContentList {
         }};
         illusion = new BerserkUnitType("illusion") {{
             health = 1400;
-            speed = 1.4f;
+            speed = 0.7f;
             rotateSpeed = 2.4f;
             drag = 0.125f;
             hitSize = 29f;
+            armor = 14f;
             allowLegStep = true;
             hovering = false;
             groundLayer = Layer.legUnit;
@@ -741,12 +742,13 @@ public class SnUnitTypes implements ContentList {
         }};
         soothSayer = new BerserkUnitType("soothSayer") {{
             health = 9700;
-            speed = 1f;
+            speed = 0.57f;
             rotateSpeed = 2.1f;
             drag = 0.125f;
+            hitSize = 38f;
+            armor = 20f;
             allowLegStep = true;
             hovering = false;
-            hitSize = 38f;
             groundLayer = Layer.legUnit;
             visualElevation = 0.6f;
 
@@ -806,11 +808,11 @@ public class SnUnitTypes implements ContentList {
         }};
         seer = new BerserkUnitType("seer") {{
             health = 25900;
-            speed = 0.8f;
+            speed = 0.53f;
             rotateSpeed = 1.8f;
             drag = 0.125f;
             hitSize = 47f;
-            armor = 12f;
+            armor = 29f;
             allowLegStep = true;
             hovering = true;
             groundLayer = Layer.legUnit;
@@ -832,28 +834,28 @@ public class SnUnitTypes implements ContentList {
         }};
         abyssEye = new BerserkUnitType("abyssEye") {{
             health = 70000;
-            speed = 0.46f;
+            speed = 0.45f;
             rotateSpeed = 1.5f;
             drag = 0.125f;
             hitSize = 71;
-            armor = 16f;
+            armor = 30f;
             allowLegStep = true;
             hovering = true;
             groundLayer = Layer.legUnit;
             visualElevation = 1.1f;
 
             legCount = 8;
-            legMoveSpace = 1f;
-            legPairOffset = 4;
-            legLength = 60f;
-            legExtension = -19;
-            legBaseOffset = 10f;
-            landShake = 1f;
-            legLengthScl = 1f;
-            rippleScale = 3f;
-            legSpeed = 0.2f;
+            legMoveSpace = 0.7f;
+            legPairOffset = 3;
+            legLength = 70f;
+            legExtension = -27;
+            legBaseOffset = 3f;
+            landShake = 3f;
+            legLengthScl = 2f;
+            rippleScale = 4f;
+            legSpeed = 0.1f;
 
-            legSplashDamage = 59;
+            legSplashDamage = 70;
             legSplashRange = 70;
         }};
         //endregion berserk
