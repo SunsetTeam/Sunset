@@ -26,7 +26,6 @@ public class SnMultiSource extends Block{
 
     public SnMultiSource(String name){
         super(name);
-        requirements(Category.effect, BuildVisibility.sandboxOnly, ItemStack.empty);
         alwaysUnlocked = true;
 
         update = solid = saveConfig = noUpdateDisabled = true;
