@@ -1,4 +1,4 @@
-package sunset.content.blocks.sandbox;
+package sunset.world.blocks.sandbox;
 
 import arc.*;
 import arc.graphics.*;

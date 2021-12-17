@@ -1,4 +1,4 @@
-package sunset.content.blocks.sandbox;
+package sunset.world.blocks.sandbox;
 
 import mindustry.gen.*;
 import mindustry.type.*;

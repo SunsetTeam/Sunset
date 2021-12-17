@@ -60,6 +60,7 @@ public class SnUnitTypes implements ContentList {
             health = 140;
             hitSize = 15;
             speed = 3.2f;
+            rotateSpeed = 5.4f;
             accel = 0.1f;
             drag = 0.02f;
             commandLimit = 3;
@@ -102,7 +103,8 @@ public class SnUnitTypes implements ContentList {
         thunder = new CopterUnitType("thunder") {{
             health = 310;
             hitSize = 20;
-            speed = 3.0f;
+            speed = 2.9f;
+            rotateSpeed = 5f;
             accel = 0.1f;
             drag = 0.02f;
             commandLimit = 3;
@@ -162,7 +164,8 @@ public class SnUnitTypes implements ContentList {
         nadir = new CopterUnitType("nadir") {{
             health = 650;
             hitSize = 30;
-            speed = 2.8f;
+            speed = 2.6f;
+            rotateSpeed = 4.6f;
             accel = 0.1f;
             drag = 0.02f;
             commandLimit = 4;
@@ -170,7 +173,7 @@ public class SnUnitTypes implements ContentList {
 
             flying = true;
             circleTarget = false;
-            range = 150;
+            range = 145;
 
             unitFallRotateSpeed = 5f;
 
@@ -227,7 +230,8 @@ public class SnUnitTypes implements ContentList {
         halo = new CopterUnitType("halo") {{
             health = 6700;
             hitSize = 40;
-            speed = 2.4f;
+            speed = 2.3f;
+            rotateSpeed = 4.1f;
             accel = 0.1f;
             drag = 0.02f;
             commandLimit = 4;
@@ -235,7 +239,7 @@ public class SnUnitTypes implements ContentList {
 
             flying = true;
             circleTarget = false;
-            range = 180f;
+            range = 170f;
             unitFallRotateSpeed = 5f;
             weapons.add(
                     new WeaponExt("") {{
@@ -284,6 +288,7 @@ public class SnUnitTypes implements ContentList {
             health = 18800;
             hitSize = 57;
             speed = 2.1f;
+            rotateSpeed = 3.6f;
             accel = 0.1f;
             drag = 0.02f;
             commandLimit = 5;
@@ -291,7 +296,7 @@ public class SnUnitTypes implements ContentList {
 
             flying = true;
             circleTarget = false;
-            range = 185f;
+            range = 175f;
 
             unitFallRotateSpeed = 5f;
             weapons.add(
@@ -342,29 +347,17 @@ public class SnUnitTypes implements ContentList {
             health = 48500;
             hitSize = 78;
             speed = 1.7f;
+            rotateSpeed = 3f;
             accel = 0.1f;
             drag = 0.02f;
             commandLimit = 4;
             targetFlags = new BlockFlag[]{BlockFlag.battery, BlockFlag.generator, BlockFlag.reactor, null};
+            range = 170f;
 
             flying = true;
             circleTarget = false;
 
             unitFallRotateSpeed = 5f;
-        }};
-        testcopter = new CopterUnitType("test-copter") {{
-            health = 200;
-            hitSize = 20;
-            speed = 2.1f;
-            accel = 0.1f;
-            drag = 0.02f;
-            commandLimit = 3;
-            targetFlags = new BlockFlag[]{BlockFlag.battery, BlockFlag.generator, BlockFlag.reactor, null};
-
-            flying = true;
-            circleTarget = false;
-
-            unitFallRotateSpeed = 4f;
             weapons.add(
                     new WeaponExt("") {{
                         rotate = false;
@@ -417,6 +410,20 @@ public class SnUnitTypes implements ContentList {
                         shootSound = Sounds.spark;
                         bullet = SnBullets.bigCopterEnergySphere;
                     }});
+        }};
+        testcopter = new CopterUnitType("test-copter") {{
+            health = 200;
+            hitSize = 20;
+            speed = 2.1f;
+            accel = 0.1f;
+            drag = 0.02f;
+            commandLimit = 3;
+            targetFlags = new BlockFlag[]{BlockFlag.battery, BlockFlag.generator, BlockFlag.reactor, null};
+
+            flying = true;
+            circleTarget = false;
+
+            unitFallRotateSpeed = 4f;
         }};
         //endregion attack copters
         //region buffers
@@ -733,7 +740,7 @@ public class SnUnitTypes implements ContentList {
             );
         }};
         soothSayer = new BerserkUnitType("soothSayer") {{
-            health = 7500;
+            health = 9700;
             speed = 1.3f;
             rotateSpeed = 2.1f;
             drag = 0.125f;
@@ -798,7 +805,7 @@ public class SnUnitTypes implements ContentList {
             );
         }};
         seer = new BerserkUnitType("seer") {{
-            health = 24000;
+            health = 25900;
             speed = 0.97f;
             rotateSpeed = 1.8f;
             drag = 0.125f;
@@ -824,7 +831,7 @@ public class SnUnitTypes implements ContentList {
             legSplashRange = 40;
         }};
         abyssEye = new BerserkUnitType("abyssEye") {{
-            health = 65000;
+            health = 70000;
             speed = 0.75f;
             rotateSpeed = 1.5f;
             drag = 0.125f;
