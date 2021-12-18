@@ -76,7 +76,7 @@ public class SnPlanets implements ContentList {
             hasAtmosphere = true;
             alwaysUnlocked = true;
             landCloudColor = SnPal.azaria.cpy().a(0.5f);
-
+        }};
         rime = new Planet("rime", SnPlanets.magma, 0.9f, 3) {{
             meshLoader = () -> new HexMesh(this, 6);
             generator = new RimeGenerator();
