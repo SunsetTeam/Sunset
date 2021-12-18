@@ -30,6 +30,7 @@ import sunset.type.unitTypes.CopterUnitType;
 import sunset.type.unitTypes.UnitTypeExt;
 import sunset.type.unitTypes.WheelUnitType;
 import sunset.type.weapons.ChainWeapon;
+import sunset.type.weapons.CopterWeapon;
 import sunset.type.weapons.PointDefenseWeapon;
 import sunset.type.weapons.SnWeapon;
 import sunset.type.weapons.WeaponExt;
@@ -61,8 +62,8 @@ public class SnUnitTypes implements ContentList {
             hitSize = 15;
             speed = 3.2f;
             rotateSpeed = 5.4f;
-            accel = 0.1f;
-            drag = 0.02f;
+            accel = 0.04f;
+			drag = 0.016f;
             commandLimit = 3;            
             flying = true;
             circleTarget = false;
@@ -186,7 +187,7 @@ public class SnUnitTypes implements ContentList {
                         offsetX = 0;
                         offsetY = -9;
                         rotorRotateSpeed = 28f;
-                        rotorCount = 1;
+                        rotorCount = 3;
                     }}
             );
             weapons.add(
@@ -236,11 +237,11 @@ public class SnUnitTypes implements ContentList {
             range = 170f;
             unitFallRotateSpeed = 5f;
             weapons.add(
-                    new WeaponExt("big-rocket-launcher") {{
+                    new CopterWeapon("big-rocket-launcher") {{
                         rotate = false;
                         mirror = true;
-                        x = 13f;
-                        y = -5f;
+                        x = 17f;
+                        y = 14f;
                         spacing = 4;
                         reload = 40f;
                         recoil = 5f;
@@ -251,7 +252,7 @@ public class SnUnitTypes implements ContentList {
                         shootSound = Sounds.bang;
                         bullet = SnBullets.bigHelicopterMissile;
                     }},
-                    new WeaponExt("big-salvo") {{
+                    new CopterWeapon("big-salvo") {{
                         rotate = false;
                         mirror = false;
                         shake = 3f;
@@ -259,7 +260,7 @@ public class SnUnitTypes implements ContentList {
                         y = 14f;
                         reload = 30f;
                         shotDelay = 4f;
-                        shots = 3;
+                        shots = 5;
                         inaccuracy = 0.5f;
                         shootSound = Sounds.shootBig;
                         bullet = SnBullets.bigHelicopterGun;
@@ -268,10 +269,11 @@ public class SnUnitTypes implements ContentList {
                         rotate = false;
                         mirror = true;
                         shake = 2f;
-                        x = 14f;
+                        x = -14f;
                         y = 4f;
                         reload = 20f;
                         shotDelay = 1f;
+                        shootY = 3;
                         shots = 1;
                         inaccuracy = 3f;
                         shootSound = Sounds.laser;
@@ -280,7 +282,7 @@ public class SnUnitTypes implements ContentList {
         }};
         parhelion = new CopterUnitType("parhelion") {{
             health = 19200;
-            hitSize = 57;
+            hitSize = 70;
             speed = 2.1f;
             rotateSpeed = 3.6f;
             accel = 0.04f;

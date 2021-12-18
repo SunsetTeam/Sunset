@@ -991,10 +991,10 @@ public class SnBullets implements ContentList {
             frontColor = Color.white;
             despawnEffect = Fx.none;
         }};
-        bigHelicopterGun = new BasicBulletType(4.4f, 50) {{
+        bigHelicopterGun = new BasicBulletType(5f, 40) {{
             width = 10f;
             height = 15f;
-            lifetime = 50f;
+            lifetime = 44f;
             hitEffect = Fx.flakExplosion;
             shootEffect = Fx.shootSmall;
             smokeEffect = Fx.shootSmallSmoke;
