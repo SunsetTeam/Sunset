@@ -127,12 +127,12 @@ public class SnFx {
         }
     }),
 
-    smallEnergySphereCharge = new Effect(20f, e -> {
+    smallEnergySphereCharge = new Effect(17f, e -> {
         color(SnPal.redBombBack);
         Fill.circle(e.x, e.y, e.fin() * 2f);
     }),
 
-    mediumEnergySphereCharge = new Effect(25f, e -> {
+    mediumEnergySphereCharge = new Effect(20f, e -> {
         color(SnPal.redBombBack);
         Fill.circle(e.x, e.y, e.fin() * 4f);
     }),

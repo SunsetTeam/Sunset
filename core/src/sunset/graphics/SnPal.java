@@ -52,5 +52,5 @@ public class SnPal {
 
     //planets
     azaria = Color.valueOf("5F0A0A"),
-    azariaClouds = Color.valueOf("6F3E3E");
+    azariaClouds = Color.valueOf("785C5C");
 }

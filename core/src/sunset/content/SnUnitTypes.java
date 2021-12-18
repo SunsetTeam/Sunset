@@ -149,8 +149,8 @@ public class SnUnitTypes implements ContentList {
                         rotate = false;
                         mirror = true;
                         top = true;
-                        x = -4f;
-                        y = 4f;
+                        x = -6f;
+                        y = 5f;
                         shots = 1;
                         inaccuracy = 1;
                         reload = 7f;
@@ -169,7 +169,6 @@ public class SnUnitTypes implements ContentList {
             flying = true;
             circleTarget = false;
             range = 145;
-            targetFlags = new BlockFlag[]{BlockFlag.generator, BlockFlag.reactor, BlockFlag.storage, null};
 
             unitFallRotateSpeed = 5f;
 
@@ -231,7 +230,6 @@ public class SnUnitTypes implements ContentList {
             accel = 0.06f;
 			drag = 0.04f;
             commandLimit = 4;
-            targetFlags = new BlockFlag[]{BlockFlag.generator, BlockFlag.factory, null};
 
             flying = true;
             circleTarget = false;
@@ -266,7 +264,7 @@ public class SnUnitTypes implements ContentList {
                         shootSound = Sounds.shootBig;
                         bullet = SnBullets.bigHelicopterGun;
                     }},
-                    new SnWeapon("laser-gun") {{
+                    new WeaponExt("laser-gun") {{
                         rotate = false;
                         mirror = true;
                         shake = 2f;
@@ -291,7 +289,6 @@ public class SnUnitTypes implements ContentList {
             flying = true;
             circleTarget = false;
             range = 175f;
-            targetFlags = new BlockFlag[]{BlockFlag.generator, BlockFlag.core, null};
 
             unitFallRotateSpeed = 5f;
             weapons.add(
@@ -333,7 +330,7 @@ public class SnUnitTypes implements ContentList {
                         shotDelay = 1f;
                         shots = 3;
                         inaccuracy = 3f;
-                        shootSound = Sounds.laser;
+                        shootSound = Sounds.missile;
                         bullet = SnBullets.smallHelicopterMissiles;
                     }});
         }};
@@ -347,7 +344,6 @@ public class SnUnitTypes implements ContentList {
 			drag = 0.01f;
             commandLimit = 4;
             range = 170f;
-            targetFlags = new BlockFlag[]{BlockFlag.reactor, BlockFlag.battery, BlockFlag.core, null};
 
             flying = true;
             circleTarget = false;

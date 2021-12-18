@@ -1130,7 +1130,7 @@ public class SnBullets implements ContentList {
             pierceBuilding = true;
             pierceCap = 5;
         }};
-        bigClusterRocket = new MissileBulletType(4f, 10, "missile-large") {{
+        bigClusterRocket = new MissileBulletType(4.3f, 10, "missile-large") {{
             width = 16f;
             height = 18f;
             shrinkY = 0f;
@@ -1163,7 +1163,7 @@ public class SnBullets implements ContentList {
             height = 14f;
             width = 14f;
             lightning = 10;
-            lightningLength = 14;
+            lightningLength = 12;
             lightningColor = SnPal.copterLaser;
             lightningDamage = 30f;
             shrinkX = 0.01f;
