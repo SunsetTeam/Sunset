@@ -240,6 +240,7 @@ public class SnUnitTypes implements ContentList {
                     new CopterWeapon("big-rocket-launcher") {{
                         rotate = false;
                         mirror = true;
+                        top = true;
                         x = 17f;
                         y = 14f;
                         spacing = 4;
@@ -255,6 +256,7 @@ public class SnUnitTypes implements ContentList {
                     new CopterWeapon("big-salvo") {{
                         rotate = false;
                         mirror = false;
+                        top = true;
                         shake = 3f;
                         x = 0f;
                         y = 14f;
@@ -269,6 +271,7 @@ public class SnUnitTypes implements ContentList {
                     new WeaponExt("laser-gun") {{
                         rotate = false;
                         mirror = true;
+                        top = true;
                         shake = 2f;
                         x = -14f;
                         y = 4f;
