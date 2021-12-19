@@ -259,7 +259,7 @@ public class SnUnitTypes implements ContentList {
                         top = true;
                         shake = 3f;
                         x = 0f;
-                        y = 14f;
+                        y = 16f;
                         reload = 37f;
                         shotDelay = 4f;
                         shotDelay = 2f;

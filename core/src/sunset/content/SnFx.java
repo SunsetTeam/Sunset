@@ -142,13 +142,9 @@ public class SnFx {
         stroke(e.fout() * 2f);
         
         color(SnPal.redBomb);
-        for (int i = 0; i < 4; i++) {
-            Drawf.tri(e.x, e.y, 3f, 45f * e.fout(), i * 40);
-        }
-
-        color(SnPal.redBomb);
-        for (int i = 0; i < 4; i++) {
-            Drawf.tri(e.x, e.y, 2f, 25f * e.fout(), i * 40);
+        for (int i : Mathf.signs) {
+            Drawf.tri(e.x, e.y, 9f * e.fout(), 20f, e.rotation + 80f * i);
+            Drawf.tri(e.x, e.y, 8f * e.fout(), 20f, e.rotation + 110f * i);
         }
 
         Drawf.light(e.x, e.y, 1.8f, SnPal.redBomb, e.fout());
