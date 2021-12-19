@@ -257,9 +257,10 @@ public class SnUnitTypes implements ContentList {
                         mirror = false;
                         shake = 3f;
                         x = 0f;
-                        y = 16f;
-                        reload = 30f;
+                        y = 14f;
+                        reload = 37f;
                         shotDelay = 4f;
+                        shotDelay = 2f;
                         shots = 5;
                         inaccuracy = 0.5f;
                         shootSound = Sounds.shootBig;
@@ -269,8 +270,8 @@ public class SnUnitTypes implements ContentList {
                         rotate = false;
                         mirror = true;
                         shake = 2f;
-                        x = -13f;
-                        y = 3f;
+                        x = -14f;
+                        y = 4f;
                         reload = 20f;
                         shotDelay = 1f;
                         shootY = 3;
