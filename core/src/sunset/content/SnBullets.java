@@ -1046,7 +1046,7 @@ public class SnBullets implements ContentList {
         largeHelicopterGun = new BasicBulletType(6f, 50) {{
             width = 17f;
             height = 27f;
-            lifetime = 40f;
+            lifetime = 38f;
             hitEffect = Fx.hitBulletBig;
             shootEffect = Fx.shootBig2;
             smokeEffect = Fx.shootBigSmoke;
@@ -1058,7 +1058,7 @@ public class SnBullets implements ContentList {
             width = 14f;
             height = 17f;
             hitShake = 3f;
-            lifetime = 30f;
+            lifetime = 40f;
             hitEffect = Fx.massiveExplosion;
             keepVelocity = false;
             hitSound = Sounds.explosion;
@@ -1080,7 +1080,7 @@ public class SnBullets implements ContentList {
             width = 11f;
             height = 11f;
             shrinkY = 0f;
-            lifetime = 65f;
+            lifetime = 60f;
             splashDamageRadius = 30f;
             splashDamage = 35f;
             hitEffect = Fx.blastExplosion;
