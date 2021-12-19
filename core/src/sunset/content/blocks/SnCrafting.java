@@ -148,10 +148,10 @@ public class SnCrafting implements ContentList{
         purifier = new GenericCrafter("purifier"){{
             requirements(Category.crafting, with(Items.copper, 120, Items.titanium, 95, Items.silicon, 80, Items.plastanium, 65));
 
-            outputItem = new ItemStack(SnItems.nobium, 2);
+            outputItem = new ItemStack(SnItems.nobium, 1);
             craftEffect = Fx.pulverize;
             updateEffect = Fx.pulverizeSmall;
-            craftTime = 25f;
+            craftTime = 20f;
             itemCapacity = 20;
             size = 3;
             hasPower = true;
@@ -187,11 +187,11 @@ public class SnCrafting implements ContentList{
             requirements(Category.crafting, with(Items.lead, 200, SnItems.nobium, 150, Items.graphite, 140, Items.silicon, 120, Items.surgeAlloy, 80));
 
             outputItem = new ItemStack(SnItems.enojie, 2);
-            craftTime = 55f;
+            craftTime = 65f;
             size = 4;
             hasPower = true;
             hasLiquids = false;
-            //craftEffect = SnFx.enojieCraft;
+            craftEffect = SnFx.enojieCraft;
             updateEffect = SnFx.enojieBurn;
 
             consumes.items(with(SnItems.nobium, 2, SnItems.planatrium, 3, Items.metaglass, 1));
