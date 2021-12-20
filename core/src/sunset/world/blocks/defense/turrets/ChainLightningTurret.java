@@ -48,6 +48,7 @@ public class ChainLightningTurret extends BaseTurret {
     public float coolantMultiplier = 1.5f;
     public float liquidUse = 0f;
     public float shootCone = 0f;
+    public float powerUse = 0f;
     @Load("block-@size")
     public TextureRegion baseRegion;
     @Load("parallax-laser")
@@ -55,7 +56,6 @@ public class ChainLightningTurret extends BaseTurret {
     @Load("parallax-laser-end")
     public TextureRegion laserEnd;
     public float laserWidth = 0.7f;
-    public float powerUse;
     public Color laserColor;
 
     public ChainLightningTurret(String name) {

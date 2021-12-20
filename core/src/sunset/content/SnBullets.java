@@ -991,7 +991,7 @@ public class SnBullets implements ContentList {
             frontColor = Color.white;
             despawnEffect = Fx.none;
         }};
-        bigHelicopterGun = new BasicBulletType(5f, 40) {{
+        bigHelicopterGun = new BasicBulletType(5f, 45) {{
             width = 10f;
             height = 15f;
             lifetime = 44f;
@@ -1009,8 +1009,8 @@ public class SnBullets implements ContentList {
             homingRange = 20f;
             homingPower = 0.3f;
 
-            splashDamageRadius = 38f;
-            splashDamage = 45f;
+            splashDamageRadius = 40f;
+            splashDamage = 47f;
 
             keepVelocity = false;
             hitSound = Sounds.explosion;
@@ -1025,7 +1025,7 @@ public class SnBullets implements ContentList {
         }};
         laserGun = new LaserBulletType() {{
             colors = new Color[]{SnPal.copterLaser.cpy().a(0.4f), SnPal.copterLaser, Color.white};
-            damage = 55;
+            damage = 58;
             width = 25f;
             lifetime = 15f;
             length = 125f;
@@ -1043,7 +1043,7 @@ public class SnBullets implements ContentList {
             collidesAir = true;
             collidesGround = true;
         }};
-        largeHelicopterGun = new BasicBulletType(6f, 50) {{
+        largeHelicopterGun = new BasicBulletType(6f, 55) {{
             width = 17f;
             height = 27f;
             lifetime = 38f;
@@ -1066,8 +1066,8 @@ public class SnBullets implements ContentList {
             drag = -0.003f;
             homingRange = 20f;
             homingPower = 0.2f;
-            splashDamage = 70f;
-            splashDamageRadius = 60f;
+            splashDamage = 75f;
+            splashDamageRadius = 65f;
             backColor = Pal.missileYellowBack;
 		    frontColor = Pal.missileYellow;
             trailLength = 0;
@@ -1081,30 +1081,30 @@ public class SnBullets implements ContentList {
             height = 11f;
             shrinkY = 0f;
             lifetime = 60f;
-            splashDamageRadius = 30f;
-            splashDamage = 35f;
+            splashDamageRadius = 35f;
+            splashDamage = 40f;
             hitEffect = Fx.blastExplosion;
             despawnEffect = Fx.blastExplosion;
             homingRange = 30;
-            homingPower = 0.4f;
+            homingPower = 0.7f;
             weaveScale = 4f;
             weaveMag = 2f;
             pierce = true;
             pierceBuilding = true;
-            pierceCap = 3;
+            pierceCap = 5;
         }};
         //T6-copter
         shrapnelCopterGun = new ShrapnelBulletType() {{
-            length = 140f;
-            width = 30f;
-            damage = 110;
+            length = 160f;
+            width = 45f;
+            damage = 145;
             fromColor = SnPal.copterLaser;
             toColor = SnPal.copterLaserBack;
             collidesAir = true;
             collidesGround = true;
         }};
 
-        gigantHelicopterGun = new BasicBulletType(5f, 65) {{
+        gigantHelicopterGun = new BasicBulletType(5f, 75) {{
             width = 12f;
             height = 17f;
             lifetime = 50f;
@@ -1114,21 +1114,21 @@ public class SnBullets implements ContentList {
         }};
 
         bigClusterRocketSmall = new MissileBulletType(4f, 8) {{
-            width = 13f;
+            width = 12f;
             height = 13f;
             shrinkY = 0f;
             lifetime = 55f;
-            splashDamageRadius = 40f;
-            splashDamage = 55f;
+            splashDamageRadius = 45f;
+            splashDamage = 60f;
             hitEffect = Fx.blastExplosion;
             despawnEffect = Fx.blastExplosion;
             homingRange = 30;
-            homingPower = 0.5f;
+            homingPower = 1.2f;
             weaveScale = 4f;
             weaveMag = 2f;
             pierce = true;
             pierceBuilding = true;
-            pierceCap = 5;
+            pierceCap = 10;
         }};
         bigClusterRocket = new MissileBulletType(4.3f, 10, "missile-large") {{
             width = 16f;
@@ -1137,8 +1137,8 @@ public class SnBullets implements ContentList {
             drag = -0.003f;
             homingRange = 10f;
             homingPower = 0.2f;
-            splashDamageRadius = 70f;
-            splashDamage = 85f;
+            splashDamageRadius = 80f;
+            splashDamage = 95f;
             keepVelocity = false;
             hitSound = Sounds.explosion;
             trailChance = 0.3f;
@@ -1158,8 +1158,8 @@ public class SnBullets implements ContentList {
         bigCopterEnergySphere = new BasicBulletType(3f, 7) {{
             sprite = "sunset-circle-bullet";
             lifetime = 37f;
-            splashDamageRadius = 80f;
-            splashDamage = 70f;
+            splashDamageRadius = 90f;
+            splashDamage = 80f;
             height = 14f;
             width = 14f;
             lightning = 10;
