@@ -187,7 +187,7 @@ public class SnCrafting implements ContentList{
             requirements(Category.crafting, with(Items.lead, 200, SnItems.nobium, 150, Items.graphite, 140, Items.silicon, 120, Items.surgeAlloy, 80));
 
             outputItem = new ItemStack(SnItems.enojie, 2);
-            craftTime = 65f;
+            craftTime = 69f;
             size = 4;
             hasPower = true;
             hasLiquids = false;

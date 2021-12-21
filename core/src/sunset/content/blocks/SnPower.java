@@ -6,7 +6,6 @@ import mindustry.content.Liquids;
 import mindustry.ctype.ContentList;
 import mindustry.gen.Sounds;
 import mindustry.type.Category;
-import mindustry.type.Item;
 import mindustry.world.Block;
 import mindustry.world.blocks.power.DecayGenerator;
 import mindustry.world.blocks.power.NuclearReactor;

@@ -32,12 +32,21 @@ import static mindustry.Vars.tilesize;
 public class SnFx {
     public static final Effect
     //region
-    enojieCraft = new Effect(60, e -> {
+    enojieCraft = new Effect(55, e -> {
         randLenVectors(e.id, 6, 4f + e.fin() * 8f, (x, y) -> {
             color(Pal.heal);
             Fill.square(e.x + x, e.y + y, e.fout() + 0.5f, 45);
-            Lines.circle(e.x, e.y, e.finpow() * 15f);
+            Lines.circle(e.x, e.y, 10f + e.finpow());
         });
+        color(SnPal.redBomb);
+        for (int i = 0; i < 4; i++) {
+            Drawf.tri(e.x, e.y, 4f, 40f * e.fout(), i * 90);
+        }
+
+        color();
+        for (int i = 0; i < 4; i++) {
+            Drawf.tri(e.x, e.y, 2f, 20f * e.fout(), i * 90);
+        }
     }),
 
     enojieBurn = new Effect(40, e -> {
@@ -142,11 +151,12 @@ public class SnFx {
         stroke(e.fout() * 2f);
         
         color(SnPal.redBomb);
+        
         for (int i : Mathf.signs) {
             Drawf.tri(e.x, e.y, 9f * e.fout(), 20f, e.rotation + 80f * i);
             Drawf.tri(e.x, e.y, 8f * e.fout(), 20f, e.rotation + 110f * i);
+            
         }
-
         Drawf.light(e.x, e.y, 1.8f, SnPal.redBomb, e.fout());
     }),
 
@@ -653,6 +663,11 @@ public class SnFx {
 
         randLenVectors(e.id, 1, 2f + e.fin(), e.rotation + 360, 20f, (x, y) -> {
         Lines.square(e.x, e.y, squareRad, e.fin());
+
+        for(int i = 0; i < 2; ++i){
+            Drawf.tri(e.x, e.y, e.fout() * 5, e.fout() * 70, e.rotation - 190 + (25 * i) - e.fin());
+          };
+
         });
 
         Lines.circle(e.x, e.y, circleRad);

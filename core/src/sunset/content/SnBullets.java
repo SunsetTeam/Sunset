@@ -1034,11 +1034,11 @@ public class SnBullets implements ContentList {
             collidesGround = true;
         }};
         //T5-copter
-        laserHelicopterFrag = new LaserBulletType(40) {{
+        laserHelicopterFrag = new LaserBulletType(45) {{
             colors = new Color[]{SnPal.copterLaser.cpy().a(0.4f), SnPal.copterLaser, Color.white};
             width = 20f;
             lifetime = 15f;
-            length = 50f;
+            length = 70f;
             laserEffect = Fx.lancerLaserShootSmoke;
             collidesAir = true;
             collidesGround = true;
