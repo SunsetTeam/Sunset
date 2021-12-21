@@ -33,12 +33,12 @@ public class SnDistribution implements ContentList {
             itemCapacity = 230;
             reloadTime = 240f;
             range = 560f;
-            consumes.power(5.0f);
+            consumes.power(6.0f);
         }};
         nobiumConveyor = new StackConveyor("nobium-conveyor") {{
             requirements(Category.distribution, with(SnItems.nobium, 1, Items.silicon, 1, Items.graphite, 1));
             health = 80;
-            speed = 5f / 60f;
+            speed = 6f / 60f;
             itemCapacity = 15;
         }};
         //endregion transportation
