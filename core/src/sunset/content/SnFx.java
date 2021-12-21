@@ -36,16 +36,16 @@ public class SnFx {
         randLenVectors(e.id, 6, 4f + e.fin() * 8f, (x, y) -> {
             color(Pal.heal);
             Fill.square(e.x + x, e.y + y, e.fout() + 0.5f, 45);
-            Lines.circle(e.x, e.y, 10f + e.finpow());
+            Lines.circle(e.x, e.y, 10f + e.fin());
         });
-        color(SnPal.redBomb);
+        color(Pal.heal);
         for (int i = 0; i < 4; i++) {
-            Drawf.tri(e.x, e.y, 4f, 40f * e.fout(), i * 90);
+            Drawf.tri(e.x, e.y, 4f, 30f * e.fout(), i * 90);
         }
 
         color();
         for (int i = 0; i < 4; i++) {
-            Drawf.tri(e.x, e.y, 2f, 20f * e.fout(), i * 90);
+            Drawf.tri(e.x, e.y, 2f, 15f * e.fout(), i * 90);
         }
     }),
 
