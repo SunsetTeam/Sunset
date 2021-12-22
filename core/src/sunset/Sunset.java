@@ -22,7 +22,6 @@ import mma.MMAMod;
 import mma.ModListener;
 import mma.annotations.ModAnnotations.ModAssetsAnnotation;
 import sunset.content.SnUnitTypes;
-import sunset.core.SnAudio;
 import sunset.core.SnContentTranslation;
 import sunset.core.SnSoundControl;
 import sunset.gen.*;
