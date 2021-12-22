@@ -31,11 +31,7 @@ public class SnSoundControl{
         replacements = new Prov[]{() -> snAmbientMusic, () -> snDarkMusic, () -> snBossMusic},
         targets = new Prov[]{() -> control.sound.ambientMusic, () -> control.sound.darkMusic, () -> control.sound.bossMusic},
         previous = new Prov[]{() -> prevAmbient, () -> prevDark, () -> prevBossMusic};
-        Events.run(EventType.SaveLoadEvent.class,()->{
-            Log.info("save load");
-        });
         Events.on(EventType.WorldLoadEvent.class, e -> {
-            Log.info("world load");
             checkState(replacements, targets, previous);
         });
 
