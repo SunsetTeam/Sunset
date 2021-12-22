@@ -36,6 +36,8 @@ public class SnVars extends ModVars {
     //end region
     public static SnLogic logic;
     public static SnSettings settings;
+    public static SnSoundControl sound;
+
     static {
         new SnVars();
     }
@@ -55,6 +57,9 @@ public class SnVars extends ModVars {
         onLoad.each(Runnable::run);
         onLoad.clear();
 
+        if (!headless) {
+            sound = new SnSoundControl();
+        }
         listener.add(logic = new SnLogic());
         listener.add(settings = new SnSettings());
     }

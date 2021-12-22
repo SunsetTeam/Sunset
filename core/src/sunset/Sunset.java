@@ -9,7 +9,6 @@ import arc.struct.Seq;
 import arc.util.Log;
 import arc.util.Time;
 import mindustry.Vars;
-import mindustry.audio.SoundControl;
 import mindustry.core.ContentLoader;
 import mindustry.ctype.Content;
 import mindustry.ctype.ContentType;
@@ -22,20 +21,18 @@ import mma.MMAMod;
 import mma.ModListener;
 import mma.annotations.ModAnnotations.ModAssetsAnnotation;
 import sunset.content.SnUnitTypes;
-import sunset.core.SnAudio;
 import sunset.core.SnContentTranslation;
-import sunset.core.SnSoundControl;
 import sunset.gen.*;
 import sunset.type.UnitData;
 import sunset.utils.Utils;
 
-import java.rmi.StubNotFoundException;
 import java.util.Arrays;
 
 import static mindustry.Vars.headless;
 
 @ModAssetsAnnotation
 public class Sunset extends MMAMod {
+
 
     public Sunset() {
         super();
@@ -89,7 +86,6 @@ public class Sunset extends MMAMod {
 
     @Override
     public void loadContent() {
-        SnSoundControl.reload();
         if (!headless) {
             SnVars.inTry(SnMusics::load);
             SnVars.inTry(SnSounds::load);
