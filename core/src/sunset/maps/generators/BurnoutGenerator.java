@@ -1,66 +1,59 @@
 package sunset.maps.generators;
 
-import arc.graphics.Color;
-import arc.math.Angles;
-import arc.math.Mathf;
-import arc.math.Rand;
+import arc.graphics.*;
+import arc.math.*;
 import arc.math.geom.*;
-import arc.struct.FloatSeq;
-import arc.struct.ObjectMap;
-import arc.struct.ObjectSet;
-import arc.struct.Seq;
+import arc.struct.*;
 import arc.util.*;
 import arc.util.noise.*;
-import mindustry.ai.Astar;
-import mindustry.ai.BaseRegistry.BasePart;
-import mindustry.content.Blocks;
+import mindustry.ai.*;
+import mindustry.ai.BaseRegistry.*;
+import mindustry.content.*;
 import mindustry.game.*;
-import mindustry.graphics.g3d.PlanetGrid.Ptile;
+import mindustry.graphics.g3d.PlanetGrid.*;
 import mindustry.maps.generators.*;
-import mindustry.type.Sector;
-import mindustry.world.Block;
-import mindustry.world.Tile;
-import mindustry.world.TileGen;
-import mindustry.world.Tiles;
-import sunset.content.blocks.SnEnvironment;
+import mindustry.type.*;
+import mindustry.world.*;
+import sunset.content.blocks.*;
+import sunset.world.blocks.environment.*;
 
 import static mindustry.Vars.*;
 
 public class BurnoutGenerator extends PlanetGenerator{
+    static final int seed = 0;
     //alternate, less direct generation (wip)
     public static boolean alt = false;
-    static final int seed = 0;
     BaseGenerator basegen = new BaseGenerator();
     float scl = 4.5f;
     float waterOffset = 0.04f;
     boolean genLakes = false;
 
     Block[][] arr = {
-            {SnEnvironment.hotSlag3, SnEnvironment.hotSlag2, SnEnvironment.hotSlag1, SnEnvironment.hotSlag1, Blocks.slag, Blocks.slag, Blocks.slag, Blocks.slag, Blocks.slag, Blocks.slag, Blocks.slag, Blocks.slag, Blocks.slag, Blocks.slag},
-            {SnEnvironment.hotSlag3, SnEnvironment.hotSlag2, SnEnvironment.hotSlag1, SnEnvironment.hotSlag1, Blocks.slag, Blocks.slag, Blocks.slag, Blocks.slag, Blocks.slag, Blocks.slag, Blocks.slag},
-            {SnEnvironment.hotSlag1, Blocks.slag, Blocks.slag, Blocks.slag, Blocks.slag, Blocks.magmarock, Blocks.magmarock, Blocks.magmarock, Blocks.hotrock, Blocks.hotrock, Blocks.charr, Blocks.charr},
-            {SnEnvironment.hotSlag3, SnEnvironment.hotSlag2, SnEnvironment.hotSlag1, Blocks.slag, Blocks.magmarock, Blocks.magmarock, Blocks.hotrock, Blocks.hotrock, Blocks.hotrock, Blocks.charr, Blocks.basalt},
-            {Blocks.slag, Blocks.slag, Blocks.slag, Blocks.slag, Blocks.slag, Blocks.slag, Blocks.slag, Blocks.slag, Blocks.slag, Blocks.magmarock, Blocks.magmarock, Blocks.hotrock, Blocks.hotrock},
-            {SnEnvironment.hotSlag3, SnEnvironment.hotSlag1, Blocks.slag, Blocks.slag, Blocks.magmarock, Blocks.magmarock, Blocks.hotrock, Blocks.hotrock, Blocks.charr, Blocks.darksand, Blocks.darksand, Blocks.darksand},
-            {Blocks.craters, Blocks.craters, Blocks.craters, Blocks.craters, Blocks.charr, Blocks.charr, Blocks.stone, Blocks.stone, Blocks.darksand, Blocks.darksand, Blocks.darksand, Blocks.basalt, Blocks.basalt},
-            {Blocks.basalt, Blocks.basalt, Blocks.basalt, Blocks.charr, Blocks.slag, Blocks.slag, Blocks.craters, Blocks.craters, Blocks.craters, Blocks.craters, Blocks.darksand, Blocks.darksand, Blocks.stone},
-            {Blocks.craters, Blocks.craters, Blocks.craters, Blocks.charr, Blocks.charr, Blocks.slag, Blocks.slag, Blocks.slag, Blocks.darksand, Blocks.darksand, Blocks.darksand, Blocks.basalt, Blocks.basalt},
-            {Blocks.slag, Blocks.slag, Blocks.slag, Blocks.slag, Blocks.slag, Blocks.slag, Blocks.slag, Blocks.slag, Blocks.slag, Blocks.magmarock, Blocks.magmarock, Blocks.magmarock, Blocks.magmarock},
-            {Blocks.darksand, Blocks.darksand, Blocks.charr, Blocks.charr, Blocks.charr, Blocks.basalt, Blocks.basalt, Blocks.hotrock, Blocks.hotrock, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone},
-            {Blocks.darksand, Blocks.darksand, Blocks.darksand, Blocks.charr, Blocks.charr, Blocks.charr, Blocks.basalt, Blocks.hotrock, Blocks.hotrock, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone},
-            {Blocks.darksand, Blocks.darksand, Blocks.darksand, Blocks.darksand, Blocks.darksand, Blocks.darksand, Blocks.darksand, Blocks.darksand, Blocks.darksand, Blocks.darksand, Blocks.darksand, Blocks.darksand, Blocks.darksand}
+    {SnEnvironment.hotSlag3, SnEnvironment.hotSlag2, SnEnvironment.hotSlag1, SnEnvironment.hotSlag1, Blocks.slag, Blocks.slag, Blocks.slag, Blocks.slag, Blocks.slag, Blocks.slag, Blocks.slag, Blocks.slag, Blocks.slag, Blocks.slag},
+    {SnEnvironment.hotSlag3, SnEnvironment.hotSlag2, SnEnvironment.hotSlag1, SnEnvironment.hotSlag1, Blocks.slag, Blocks.slag, Blocks.slag, Blocks.slag, Blocks.slag, Blocks.slag, Blocks.slag},
+    {SnEnvironment.hotSlag1, Blocks.slag, Blocks.slag, Blocks.slag, Blocks.slag, Blocks.magmarock, Blocks.magmarock, Blocks.magmarock, Blocks.hotrock, Blocks.hotrock, Blocks.charr, Blocks.charr},
+    {SnEnvironment.hotSlag3, SnEnvironment.hotSlag2, SnEnvironment.hotSlag1, Blocks.slag, Blocks.magmarock, Blocks.magmarock, Blocks.hotrock, Blocks.hotrock, Blocks.hotrock, Blocks.charr, Blocks.basalt},
+    {Blocks.slag, Blocks.slag, Blocks.slag, Blocks.slag, Blocks.slag, Blocks.slag, Blocks.slag, Blocks.slag, Blocks.slag, Blocks.magmarock, Blocks.magmarock, Blocks.hotrock, Blocks.hotrock},
+    {SnEnvironment.hotSlag3, SnEnvironment.hotSlag1, Blocks.slag, Blocks.slag, Blocks.magmarock, Blocks.magmarock, Blocks.hotrock, Blocks.hotrock, Blocks.charr, Blocks.darksand, Blocks.darksand, Blocks.darksand},
+    {Blocks.craters, Blocks.craters, Blocks.craters, Blocks.craters, Blocks.charr, Blocks.charr, Blocks.stone, Blocks.stone, Blocks.darksand, Blocks.darksand, Blocks.darksand, Blocks.basalt, Blocks.basalt},
+    {Blocks.basalt, Blocks.basalt, Blocks.basalt, Blocks.charr, Blocks.slag, Blocks.slag, Blocks.craters, Blocks.craters, Blocks.craters, Blocks.craters, Blocks.darksand, Blocks.darksand, Blocks.stone},
+    {Blocks.craters, Blocks.craters, Blocks.craters, Blocks.charr, Blocks.charr, Blocks.slag, Blocks.slag, Blocks.slag, Blocks.darksand, Blocks.darksand, Blocks.darksand, Blocks.basalt, Blocks.basalt},
+    {Blocks.slag, Blocks.slag, Blocks.slag, Blocks.slag, Blocks.slag, Blocks.slag, Blocks.slag, Blocks.slag, Blocks.slag, Blocks.magmarock, Blocks.magmarock, Blocks.magmarock, Blocks.magmarock},
+    {Blocks.darksand, Blocks.darksand, Blocks.charr, Blocks.charr, Blocks.charr, Blocks.basalt, Blocks.basalt, Blocks.hotrock, Blocks.hotrock, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone},
+    {Blocks.darksand, Blocks.darksand, Blocks.darksand, Blocks.charr, Blocks.charr, Blocks.charr, Blocks.basalt, Blocks.hotrock, Blocks.hotrock, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone},
+    {Blocks.darksand, Blocks.darksand, Blocks.darksand, Blocks.darksand, Blocks.darksand, Blocks.darksand, Blocks.darksand, Blocks.darksand, Blocks.darksand, Blocks.darksand, Blocks.darksand, Blocks.darksand, Blocks.darksand}
     };
 
     ObjectMap<Block, Block> tars = ObjectMap.of(
-            Blocks.slag, Blocks.slag,
-            Blocks.magmarock, Blocks.hotrock
+    Blocks.slag, Blocks.slag,
+    Blocks.magmarock, Blocks.hotrock
     );
 
     ObjectMap<Block, Block> dec = ObjectMap.of(
-            Blocks.darksand, Blocks.darksand,
-            Blocks.charr, Blocks.charr,
-            Blocks.craters, Blocks.craters,
-            Blocks.basalt, Blocks.basalt
+    Blocks.darksand, Blocks.darksand,
+    Blocks.charr, Blocks.charr,
+    Blocks.craters, Blocks.craters,
+    Blocks.basalt, Blocks.basalt
     );
 
     float water = 0f;
@@ -68,7 +61,7 @@ public class BurnoutGenerator extends PlanetGenerator{
     public float rawHeight(Vec3 position){
         position = Tmp.v33.set(position).scl(scl);
 
-        return (Mathf.pow(Simplex.noise3d(seed, 7, 0.5f, 1f/3f, position.x, position.y, position.z), 2.3f) + waterOffset) / (1f + waterOffset);
+        return (Mathf.pow(Simplex.noise3d(seed, 7, 0.5f, 1f / 3f, position.x, position.y, position.z), 2.3f) + waterOffset) / (1f + waterOffset);
     }
 
     @Override
@@ -86,7 +79,7 @@ public class BurnoutGenerator extends PlanetGenerator{
         float poles = Math.abs(tile.v.y);
         float noise = Noise.snoise3(tile.v.x, tile.v.y, tile.v.z, 0.001f, 0.58f);
 
-        if(noise + poles/7.1 > 0.12 && poles > 0.23){
+        if(noise + poles / 7.1 > 0.12 && poles > 0.23){
             any = true;
         }
 
@@ -96,9 +89,9 @@ public class BurnoutGenerator extends PlanetGenerator{
 
                 //no sectors near start sector!
                 if(
-                        osec.id == sector.planet.startSector || //near starting sector
-                                osec.generateEnemyBase && poles < 0.85 || //near other base
-                                (sector.preset != null && noise < 0.11) //near preset
+                osec.id == sector.planet.startSector || //near starting sector
+                osec.generateEnemyBase && poles < 0.85 || //near other base
+                (sector.preset != null && noise < 0.11) //near preset
                 ){
                     return;
                 }
@@ -124,7 +117,8 @@ public class BurnoutGenerator extends PlanetGenerator{
 
     @Override
     public void genTile(Vec3 position, TileGen tile){
-        tile.floor = getBlock(position);
+        Block block = getBlock(position);
+        tile.floor = block instanceof MockEnvironmentBlock env ? env.replacement : block;
         tile.block = tile.floor.asFloor().wall;
 
         if(Ridged.noise3d(1, position.x, position.y, position.z, 2, 22) > 0.31){
@@ -138,12 +132,12 @@ public class BurnoutGenerator extends PlanetGenerator{
         position = Tmp.v33.set(position).scl(scl);
         float rad = scl;
         float temp = Mathf.clamp(Math.abs(position.y * 2f) / (rad));
-        float tnoise = Simplex.noise3d(seed, 7, 0.56, 1f/3f, position.x, position.y + 999f, position.z);
+        float tnoise = Simplex.noise3d(seed, 7, 0.56, 1f / 3f, position.x, position.y + 999f, position.z);
         temp = Mathf.lerp(temp, tnoise, 0.5f);
         height *= 1.2f;
         height = Mathf.clamp(height);
 
-        float tar = Simplex.noise3d(seed, 4, 0.55f, 1f/2f, position.x, position.y + 999f, position.z) * 0.3f + Tmp.v31.dst(0, 0, 1f) * 0.2f;
+        float tar = Simplex.noise3d(seed, 4, 0.55f, 1f / 2f, position.x, position.y + 999f, position.z) * 0.3f + Tmp.v31.dst(0, 0, 1f) * 0.2f;
 
         int i = Mathf.clamp((int)(temp * arr.length), 0, arr.length - 1);
         Block res = arr[i][Mathf.clamp((int)(height * arr[i].length), 0, arr[i].length - 1)];
@@ -153,6 +147,7 @@ public class BurnoutGenerator extends PlanetGenerator{
             return res;
         }
     }
+
     @Override
     protected float noise(float x, float y, double octaves, double falloff, double scl, double mag){
         Vec3 v = sector.rect.project(x, y).scl(5f);
@@ -192,7 +187,7 @@ public class BurnoutGenerator extends PlanetGenerator{
                     midpoint.add(Tmp.v2.setToRandomDirection(rand).scl(Tmp.v1.dst(x, y)));
                 }
 
-                midpoint.sub(width/2f, height/2f).limit(width / 2f / Mathf.sqrt3).add(width/2f, height/2f);
+                midpoint.sub(width / 2f, height / 2f).limit(width / 2f / Mathf.sqrt3).add(width / 2f, height / 2f);
 
                 int mx = (int)midpoint.x, my = (int)midpoint.y;
 
@@ -211,8 +206,8 @@ public class BurnoutGenerator extends PlanetGenerator{
 
         for(int i = 0; i < rooms; i++){
             Tmp.v1.trns(rand.random(360f), rand.random(radius / constraint));
-            float rx = (width/2f + Tmp.v1.x);
-            float ry = (height/2f + Tmp.v1.y);
+            float rx = (width / 2f + Tmp.v1.x);
+            float ry = (height / 2f + Tmp.v1.y);
             float maxrad = radius - Tmp.v1.len();
             float rrad = Math.min(rand.random(9f, maxrad / 2f), 30f);
             roomseq.add(new Room((int)rx, (int)ry, (int)rrad));
@@ -223,13 +218,13 @@ public class BurnoutGenerator extends PlanetGenerator{
         Seq<Room> enemies = new Seq<>();
         int enemySpawns = rand.random(1, Math.max((int)(sector.threat * 4), 1));
         int offset = rand.nextInt(360);
-        float length = width/2.55f - rand.random(13, 23);
+        float length = width / 2.55f - rand.random(13, 23);
         int angleStep = 5;
         int waterCheckRad = 5;
-        for(int i = 0; i < 360; i+= angleStep){
+        for(int i = 0; i < 360; i += angleStep){
             int angle = offset + i;
-            int cx = (int)(width/2 + Angles.trnsx(angle, length));
-            int cy = (int)(height/2 + Angles.trnsy(angle, length));
+            int cx = (int)(width / 2 + Angles.trnsx(angle, length));
+            int cy = (int)(height / 2 + Angles.trnsy(angle, length));
 
             int waterTiles = 0;
 
@@ -238,7 +233,7 @@ public class BurnoutGenerator extends PlanetGenerator{
                 for(int ry = -waterCheckRad; ry <= waterCheckRad; ry++){
                     Tile tile = tiles.get(cx + rx, cy + ry);
                     if(tile == null || tile.floor().liquidDrop != null){
-                        waterTiles ++;
+                        waterTiles++;
                     }
                 }
             }
@@ -248,8 +243,8 @@ public class BurnoutGenerator extends PlanetGenerator{
 
                 for(int j = 0; j < enemySpawns; j++){
                     float enemyOffset = rand.range(60f);
-                    Tmp.v1.set(cx - width/2, cy - height/2).rotate(180f + enemyOffset).add(width/2, height/2);
-                    Room espawn = new Room((int) Tmp.v1.x, (int) Tmp.v1.y, rand.random(8, 16));
+                    Tmp.v1.set(cx - width / 2, cy - height / 2).rotate(180f + enemyOffset).add(width / 2, height / 2);
+                    Room espawn = new Room((int)Tmp.v1.x, (int)Tmp.v1.y, rand.random(8, 16));
                     roomseq.add(espawn);
                     enemies.add(espawn);
                 }
@@ -292,9 +287,9 @@ public class BurnoutGenerator extends PlanetGenerator{
                 //ignore pre-existing liquids
                 if(!(floor == SnEnvironment.ash || floor == Blocks.slag || floor == SnEnvironment.burningash || floor.asFloor().isLiquid)){
                     floor = spore ?
-                            (deep ? Blocks.slag : SnEnvironment.ash) :
-                            (deep ? SnEnvironment.ash :
-                                    (floor == SnEnvironment.burningash ? Blocks.darksand : SnEnvironment.obsidian));
+                    (deep ? Blocks.slag : SnEnvironment.ash) :
+                    (deep ? SnEnvironment.ash :
+                    (floor == SnEnvironment.burningash ? Blocks.darksand : SnEnvironment.obsidian));
                 }
             }
         });
@@ -305,15 +300,15 @@ public class BurnoutGenerator extends PlanetGenerator{
         float scl = 1f;
         float addscl = 1.3f;
 
-        if(Simplex.noise3d(seed, 2, 0.5, scl, sector.tile.v.x, sector.tile.v.y, sector.tile.v.z)*nmag + poles > 0.25f*addscl){
+        if(Simplex.noise3d(seed, 2, 0.5, scl, sector.tile.v.x, sector.tile.v.y, sector.tile.v.z) * nmag + poles > 0.25f * addscl){
             ores.add(Blocks.oreCoal);
         }
 
-        if(Simplex.noise3d(seed, 2, 0.5, scl, sector.tile.v.x + 1, sector.tile.v.y, sector.tile.v.z)*nmag + poles > 0.5f*addscl){
+        if(Simplex.noise3d(seed, 2, 0.5, scl, sector.tile.v.x + 1, sector.tile.v.y, sector.tile.v.z) * nmag + poles > 0.5f * addscl){
             ores.add(Blocks.oreTitanium);
         }
 
-        if(Simplex.noise3d(seed, 2, 0.5, scl, sector.tile.v.x + 2, sector.tile.v.y, sector.tile.v.z)*nmag + poles > 0.7f*addscl){
+        if(Simplex.noise3d(seed, 2, 0.5, scl, sector.tile.v.x + 2, sector.tile.v.y, sector.tile.v.z) * nmag + poles > 0.7f * addscl){
             ores.add(Blocks.oreThorium);
         }
 
@@ -321,7 +316,7 @@ public class BurnoutGenerator extends PlanetGenerator{
             ores.add(Blocks.oreScrap);
         }
 
-        if(Simplex.noise3d(seed, 3, 0.5f, scl, sector.tile.v.x + 1, sector.tile.v.y, sector.tile.v.z)*nmag + poles > 0.55f*addscl){
+        if(Simplex.noise3d(seed, 3, 0.5f, scl, sector.tile.v.x + 1, sector.tile.v.y, sector.tile.v.z) * nmag + poles > 0.55f * addscl){
             ores.add(SnEnvironment.oreFlameid);
         }
 
@@ -337,8 +332,8 @@ public class BurnoutGenerator extends PlanetGenerator{
             for(int i = ores.size - 1; i >= 0; i--){
                 Block entry = ores.get(i);
                 float freq = frequencies.get(i);
-                if(Math.abs(0.5f - noise(offsetX, offsetY + i*999, 2, 0.7, (40 + i * 2))) > 0.22f + i*0.01 &&
-                        Math.abs(0.5f - noise(offsetX, offsetY - i*999, 1, 1, (30 + i * 4))) > 0.37f + freq){
+                if(Math.abs(0.5f - noise(offsetX, offsetY + i * 999, 2, 0.7, (40 + i * 2))) > 0.22f + i * 0.01 &&
+                Math.abs(0.5f - noise(offsetX, offsetY - i * 999, 1, 1, (30 + i * 4))) > 0.37f + freq){
                     ore = entry;
                     break;
                 }
@@ -368,7 +363,7 @@ public class BurnoutGenerator extends PlanetGenerator{
             //tar
             if(floor == Blocks.darksand){
                 if(Math.abs(0.5f - noise(x - 40, y, 2, 0.7, 80)) > 0.25f &&
-                        Math.abs(0.5f - noise(x, y + sector.id*10, 1, 1, 60)) > 0.41f && !(roomseq.contains(r -> Mathf.within(x, y, r.x, r.y, 15)))){
+                Math.abs(0.5f - noise(x, y + sector.id * 10, 1, 1, 60)) > 0.41f && !(roomseq.contains(r -> Mathf.within(x, y, r.x, r.y, 15)))){
                     floor = Blocks.tar;
                 }
             }
@@ -419,7 +414,8 @@ public class BurnoutGenerator extends PlanetGenerator{
             }*/
 
             //random stuff
-            dec:{
+            dec:
+            {
                 for(int i = 0; i < 4; i++){
                     Tile near = world.tile(x + Geometry.d4[i].x, y + Geometry.d4[i].y);
                     if(near != null && near.block() != Blocks.air){
@@ -484,7 +480,7 @@ public class BurnoutGenerator extends PlanetGenerator{
                         other.setOverlay(Blocks.oreScrap);
                         for(int j = 1; j <= 2; j++){
                             for(Point2 p : Geometry.d8){
-                                Tile t = tiles.get(cx + p.x*j, cy + p.y*j);
+                                Tile t = tiles.get(cx + p.x * j, cy + p.y * j);
                                 if(t != null && t.floor().hasSurface() && rand.chance(j == 1 ? 0.4 : 0.2)){
                                     t.setOverlay(Blocks.oreScrap);
                                 }
@@ -492,9 +488,9 @@ public class BurnoutGenerator extends PlanetGenerator{
                         }
                     }
                 })){
-                    placed ++;
+                    placed++;
 
-                    int debrisRadius = Math.max(part.schematic.width, part.schematic.height)/2 + 3;
+                    int debrisRadius = Math.max(part.schematic.width, part.schematic.height) / 2 + 3;
                     Geometry.circle(x, y, tiles.width, tiles.height, debrisRadius, (cx, cy) -> {
                         float dst = Mathf.dst(cx, cy, x, y);
                         float removeChance = Mathf.lerp(0.05f, 0.5f, dst / debrisRadius);

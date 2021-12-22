@@ -1,17 +1,18 @@
 package sunset.content;
 
-import arc.graphics.Color;
+import arc.graphics.*;
+import arc.math.*;
+import arc.math.geom.*;
 import mindustry.content.Planets;
 import mindustry.ctype.ContentList;
 import mindustry.graphics.g3d.HexMesh;
 import mindustry.graphics.g3d.HexSkyMesh;
 import mindustry.graphics.g3d.MultiMesh;
 import mindustry.graphics.g3d.SunMesh;
+import mindustry.graphics.g3d.*;
 import mindustry.type.Planet;
 import sunset.graphics.SnPal;
-import sunset.maps.generators.AzariaGenerator;
-import sunset.maps.generators.BurnoutGenerator;
-import sunset.maps.generators.RimeGenerator;
+import sunset.maps.generators.*;
 
 public class SnPlanets implements ContentList {
     public static Planet
@@ -19,7 +20,7 @@ public class SnPlanets implements ContentList {
             magma,
             //planets
             burnout, azaria, rime;
-
+public PlanetParams state=new PlanetParams();
     @Override
     public void load() {
         //region stars
@@ -82,17 +83,28 @@ public class SnPlanets implements ContentList {
                 new HexSkyMesh(this, 11, 0.11f, 0.13f, 5, new Color().set(SnPal.azariaClouds).mul(0.9f).a(0.75f), 2, 0.45f, 0.9f, 0.38f)
             );
         }};
+
         rime = new Planet("rime", SnPlanets.magma, 0.9f, 3) {{
-            meshLoader = () -> new HexMesh(this, 6);
-            generator = new RimeGenerator();
+            meshLoader = () -> {
+//                Mesh mesh = new Mesh()
+                ;
+//                mesh.
+//                PlanetMesh planetMesh = new PlanetMesh(this, );
+//                return new MultiMesh(new MatMesh(new HexMesh(this, 6), new Mat3D().translate(2f, 0, 0)));
+                return new HexMesh(this,6);
+            };
+            generator = new PizdecGenerator((generator,pos)->{
+                float max = 4;
+                return Mathf.clamp((pos.x / pos.y / pos.z), -max, max);
+            });
             radius = 1;
             atmosphereRadIn = 0.016f;
             atmosphereRadOut = 0.28f;
-            orbitRadius = 93;
+            orbitRadius = 85;
             orbitTime = 36f;
             rotateTime = 15f*30f;
             accessible = true;
-            startSector = 50;
+            startSector = 1;
             //lightColor = Color.valueOf("B3DDE3");
             atmosphereColor = Color.valueOf("39DACFFF");
             hasAtmosphere = true;
@@ -100,5 +112,8 @@ public class SnPlanets implements ContentList {
             landCloudColor = Color.valueOf("00A6FF");
         }};
         //endregion planets
+
+        state.solarSystem=magma;
+        state.planet=azaria;
     }
-}//hello world
+}

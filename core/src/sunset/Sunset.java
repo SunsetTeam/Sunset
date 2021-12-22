@@ -17,6 +17,7 @@ import mindustry.ctype.UnlockableContent;
 import mindustry.game.EventType.ClientLoadEvent;
 import mindustry.game.EventType.ResetEvent;
 import mindustry.gen.Groups;
+import mindustry.type.*;
 import mma.MMAMod;
 import mma.ModListener;
 import mma.annotations.ModAnnotations.ModAssetsAnnotation;
@@ -29,6 +30,7 @@ import sunset.utils.Utils;
 import java.util.Arrays;
 
 import static mindustry.Vars.headless;
+import static mma.ModVars.modInfo;
 
 @ModAssetsAnnotation
 public class Sunset extends MMAMod {
@@ -66,17 +68,19 @@ public class Sunset extends MMAMod {
     }
 
     @Override
-    protected void modContent(Content content) {
-        super.modContent(content);
-        if (content instanceof MappableContent && !headless) {
-            SnContentRegions.loadRegions((MappableContent) content);
+    protected void modContent(Content c) {
+        super.modContent(c);
+        if (c instanceof MappableContent && !headless) {
+            SnContentRegions.loadRegions((MappableContent) c);
+        }
+        if (c instanceof SectorPreset sector){
+            sector.generator.map.mod=modInfo;
         }
     }
 
     @Override
     protected void created(Content c) {
         super.created(c);
-
         if (c instanceof UnlockableContent ) {
             UnlockableContent content = (UnlockableContent) c;
             SnContentTranslation.checkContent(content);
