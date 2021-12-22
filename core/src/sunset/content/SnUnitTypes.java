@@ -284,7 +284,7 @@ public class SnUnitTypes implements ContentList {
                         bullet = SnBullets.laserGun;
                     }});
         }};
-        parhelion = new CopterUnitType("parhelion") {{
+        mudflow = new CopterUnitType("mudflow") {{
             health = 19200;
             hitSize = 70;
             speed = 2.1f;
@@ -341,7 +341,7 @@ public class SnUnitTypes implements ContentList {
                     }});
         }};
         
-        mudflow = new CopterUnitType("mudflow") {{
+        parhelion = new CopterUnitType("parhelion") {{
             health = 50000;
             hitSize = 78;
             speed = 1.7f;

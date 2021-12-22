@@ -19,10 +19,8 @@ public class SnSoundControl {
     public SnSoundControl() {
 
         snDarkMusic.addAll(SnMusics.acid_rain);
-        snAmbientMusic.addAll(SnMusics.storm);
-        snAmbientMusic.addAll(SnMusics.deceit);
-        snBossMusic.addAll(SnMusics.heavy_arsenal);
-        snBossMusic.addAll(SnMusics.cold_fire);        
+        snAmbientMusic.addAll(SnMusics.storm, SnMusics.deceit);
+        snBossMusic.addAll(SnMusics.heavy_arsenal, SnMusics.cold_fire);
 
         Events.on(EventType.WorldLoadEvent.class, e -> {
             boolean isSn = state.map.mod != null && state.map.mod == modInfo;
@@ -46,7 +44,6 @@ public class SnSoundControl {
 
 
     public void reload() {
-
     }
 
     private void replaceMusic(Seq<Music> target, Seq<Music> replacement, Seq<Music> save) {

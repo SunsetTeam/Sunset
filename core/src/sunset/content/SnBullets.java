@@ -1058,7 +1058,7 @@ public class SnBullets implements ContentList {
             width = 14f;
             height = 17f;
             hitShake = 3f;
-            lifetime = 40f;
+            lifetime = 46f;
             hitEffect = Fx.massiveExplosion;
             keepVelocity = false;
             hitSound = Sounds.explosion;
@@ -1067,7 +1067,7 @@ public class SnBullets implements ContentList {
             homingRange = 20f;
             homingPower = 0.2f;
             splashDamage = 75f;
-            splashDamageRadius = 65f;
+            splashDamageRadius = 70f;
             backColor = Pal.missileYellowBack;
 		    frontColor = Pal.missileYellow;
             trailLength = 0;
@@ -1086,7 +1086,7 @@ public class SnBullets implements ContentList {
             hitEffect = Fx.blastExplosion;
             despawnEffect = Fx.blastExplosion;
             homingRange = 30;
-            homingPower = 0.7f;
+            homingPower = 2f;
             weaveScale = 4f;
             weaveMag = 2f;
             pierce = true;
@@ -1123,7 +1123,7 @@ public class SnBullets implements ContentList {
             hitEffect = Fx.blastExplosion;
             despawnEffect = Fx.blastExplosion;
             homingRange = 30;
-            homingPower = 1.2f;
+            homingPower = 2.5f;
             weaveScale = 4f;
             weaveMag = 2f;
             pierce = true;
