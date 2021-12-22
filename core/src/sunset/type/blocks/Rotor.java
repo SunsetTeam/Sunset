@@ -43,7 +43,7 @@ public class Rotor {
     }
 
     public void draw(Unit unit) {
-        drawOutline(unit,false);
+        drawOutline(unit,true);
         Vec2 rotor = Tmp.v1.trns(unit.rotation - 90, offsetX, offsetY).add(unit);
 
         for (int i = 0; i < rotorCount; i++) {

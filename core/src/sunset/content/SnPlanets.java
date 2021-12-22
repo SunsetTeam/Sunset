@@ -84,18 +84,8 @@ public class SnPlanets implements ContentList {
         }};
 
         rime = new Planet("rime", SnPlanets.magma, 0.9f, 3) {{
-            meshLoader = () -> {
-//                Mesh mesh = new Mesh()
-                ;
-//                mesh.
-//                PlanetMesh planetMesh = new PlanetMesh(this, );
-//                return new MultiMesh(new MatMesh(new HexMesh(this, 6), new Mat3D().translate(2f, 0, 0)));
-                return new HexMesh(this,6);
-            };
-            generator = new PizdecGenerator((generator,pos)->{
-                float max = 4;
-                return Mathf.clamp((pos.x / pos.y / pos.z), -max, max);
-            });
+            meshLoader = () -> new HexMesh(this, 6);
+            generator = new RimeGenerator();
             radius = 1;
             atmosphereRadIn = 0.016f;
             atmosphereRadOut = 0.28f;
