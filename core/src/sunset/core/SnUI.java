@@ -1,6 +1,7 @@
 package sunset.core;
 
 import arc.KeyBinds.*;
+import mindustry.*;
 import mma.core.*;
 
 public class SnUI extends ModUI{
@@ -11,5 +12,6 @@ public class SnUI extends ModUI{
     @Override
     public void init(){
         super.init();
+        SnPlanetSystem.setup();
     }
 }

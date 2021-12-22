@@ -20,11 +20,10 @@ public class SnPlanets implements ContentList {
             magma,
             //planets
             burnout, azaria, rime;
-public PlanetParams state=new PlanetParams();
     @Override
     public void load() {
         //region stars
-        magma = new Planet("magma", Planets.sun, 4f, 0) {{
+        magma = new Planet("magma",null, 4f, 0) {{
             bloom = true;
             accessible = false;
             hasAtmosphere = true;
@@ -113,7 +112,5 @@ public PlanetParams state=new PlanetParams();
         }};
         //endregion planets
 
-        state.solarSystem=magma;
-        state.planet=azaria;
     }
 }

@@ -3,56 +3,47 @@ package sunset.core;
 import arc.*;
 import arc.audio.*;
 import arc.func.*;
-import arc.graphics.*;
-import arc.graphics.g2d.*;
-import arc.scene.*;
 import arc.struct.*;
-import arc.util.*;
-import mindustry.*;
 import mindustry.game.*;
 import mindustry.type.*;
-import sunset.content.*;
 import sunset.gen.*;
 
 import static mindustry.Vars.*;
 import static mma.ModVars.modInfo;
 
 public class SnSoundControl{
-    public static Seq<Music> snAmbientMusic = new Seq<>();
-    public static Seq<Music> snDarkMusic = new Seq<>();
-    public static Seq<Music> snBossMusic = new Seq<>();
+    public static final Seq<Music> snAmbientMusic = new Seq<>();
+    public static final Seq<Music> snDarkMusic = new Seq<>();
+    public static final Seq<Music> snBossMusic = new Seq<>();
     private boolean lastMapSn;
 
     public SnSoundControl(){
+        new MusicField(() -> control.sound.ambientMusic, snAmbientMusic);
+        new MusicField(() -> control.sound.darkMusic, snDarkMusic);
+        new MusicField(() -> control.sound.bossMusic, snBossMusic);
 
-
-        final Seq<Music> prevAmbient = new Seq<>(), prevDark = new Seq<>(), prevBossMusic = new Seq<>();
-        Prov<Seq<Music>>[]
-        replacements = new Prov[]{() -> snAmbientMusic, () -> snDarkMusic, () -> snBossMusic},
-        targets = new Prov[]{() -> control.sound.ambientMusic, () -> control.sound.darkMusic, () -> control.sound.bossMusic},
-        previous = new Prov[]{() -> prevAmbient, () -> prevDark, () -> prevBossMusic};
-        Events.on(EventType.WorldLoadEvent.class, e -> {
-            checkState(replacements, targets, previous);
-        });
+        Events.run(EventType.WorldLoadEvent.class, this::checkState);
 
         Events.run(EventType.MusicRegisterEvent.class, this::reload);
     }
 
-    public void checkState(Prov<Seq<Music>>[] replacements, Prov<Seq<Music>>[] targets, Prov<Seq<Music>>[] previous){
+    public void checkState(){
         boolean isSn = isModMap();
 
         if(isSn != lastMapSn){
             lastMapSn = !lastMapSn;
-            for(int i = 0; i < targets.length; i++){
-                replaceSave(targets[i].get(), replacements[i].get(), isSn ? previous[i].get() : null);
+            if(isSn){
+                MusicField.fields.each(MusicField::add);
+            }else{
+                MusicField.fields.each(MusicField::remove);
             }
         }
     }
 
     private boolean isModMap(){
         Sector sector = state.getSector();
-        if (sector!=null){
-            return sector.planet.minfo.mod ==modInfo;
+        if(sector != null){
+            return sector.planet.minfo.mod == modInfo;
         }
         return state.map != null && state.map.mod != null && state.map.mod == modInfo;
     }
@@ -66,10 +57,31 @@ public class SnSoundControl{
 
     }
 
-    private <T> void replaceSave(Seq<T> target, Seq<T> replacement, Seq<T> save){
-        if(save != null){
-            save.set(target);
+    private static class MusicField{
+        public static final Seq<MusicField> fields = new Seq<>();
+        private final Prov<Seq<Music>> target;
+        private final Prov<Seq<Music>> replacement;
+        private final Seq<Music> save = new Seq<>();
+
+        public MusicField(Prov<Seq<Music>> target, Prov<Seq<Music>> replacement){
+            this.target = target;
+            this.replacement = replacement;
+            fields.add(this);
         }
-        target.set(replacement);
+
+        public MusicField(Prov<Seq<Music>> target, Seq<Music> replacement){
+            this(target, () -> replacement);
+        }
+
+        public void add(){
+
+            save.set(target.get());
+            target.get().set(replacement.get());
+        }
+
+        public void remove(){
+            target.get().set(save);
+            save.clear();
+        }
     }
 }
