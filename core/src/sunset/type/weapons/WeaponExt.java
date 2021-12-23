@@ -3,7 +3,6 @@ package sunset.type.weapons;
 import arc.util.Time;
 import mindustry.entities.units.WeaponMount;
 import mindustry.gen.Unit;
-import mindustry.type.Weapon;
 import sunset.ai.weapon.BaseWeaponAI;
 import sunset.ai.weapon.WeaponAI;
 

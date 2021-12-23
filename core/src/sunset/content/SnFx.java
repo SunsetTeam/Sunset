@@ -163,6 +163,26 @@ public class SnFx {
         Drawf.light(e.x, e.y, 1.8f, SnPal.redBomb, e.fout());
     }),
 
+    hitCopter = new Effect(12, e -> {
+        color(SnPal.copterLaser);
+        stroke(e.fout() * 1.5f);
+
+        randLenVectors(e.id, 8, e.finpow() * 17f, (x, y) -> {
+            float ang = Mathf.angle(x, y);
+            lineAngle(e.x + x, e.y + y, ang, e.fout() * 4 + 1f);
+        });
+    }),
+
+    hitSpine = new Effect(12, e -> {
+        color(Pal.bulletYellow);
+        stroke(e.fout() * 1.5f);
+
+        randLenVectors(e.id, 8, e.finpow() * 17f, (x, y) -> {
+            float ang = Mathf.angle(x, y);
+            lineAngle(e.x + x, e.y + y, ang, e.fout() * 4 + 1f);
+        });
+    }),
+
     redBomb = new Effect(30f, 70f, e -> {
         color(SnPal.redBomb);
         stroke(e.fout() * 2f);

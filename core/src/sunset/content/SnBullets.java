@@ -357,6 +357,7 @@ public class SnBullets implements ContentList {
         lightBlastGraphite = new ShrapnelBulletType() {{
             speed = 14;
             damage = 20;
+            hitEffect = SnFx.hitSpine;
             fromColor = Pal.bulletYellow;
             toColor = Pal.bulletYellowBack;
             width = 10f;
@@ -364,6 +365,7 @@ public class SnBullets implements ContentList {
         }};
         lightBlastSilicon = new ShrapnelBulletType() {{
             damage = 25;
+            hitEffect = SnFx.hitSpine;
             fromColor = Pal.bulletYellow;
             toColor = Pal.bulletYellowBack;
             reloadMultiplier = 1.1f;
@@ -1098,6 +1100,7 @@ public class SnBullets implements ContentList {
             length = 160f;
             width = 45f;
             damage = 145;
+            hitEffect = SnFx.hitCopter;
             fromColor = SnPal.copterLaser;
             toColor = SnPal.copterLaserBack;
             collidesAir = true;
