@@ -36,11 +36,7 @@ public class SnFx {
         randLenVectors(e.id, 6, 4f + e.fin() * 8f, (x, y) -> {
             color(Pal.heal);
             Fill.square(e.x + x, e.y + y, e.fout() + 0.5f, 45);
-            Lines.square(e.x, e.y, 5f, e.rotation * e.fout());
         });
-        
-        color(Pal.heal);
-        Lines.circle(e.x, e.y, 9f + e.fout());
 
         color(Pal.heal);
         for (int i = 0; i < 4; i++) {
