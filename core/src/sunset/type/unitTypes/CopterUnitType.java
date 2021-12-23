@@ -29,7 +29,8 @@ public class CopterUnitType extends SnUnitType implements ImageGenerator {
     public final Seq<Rotor> rotors = new Seq<>();
     public float unitFallRotateSpeed = 6f;
     public Effect smokeFx = Fx.none;
-    public float smokeChance = 0.1f;
+    public Effect burningFx = Fx.none;
+    public float smokeChance = 0f;
     public float smokeX = 0f;
     public float smokeY = 0f;
 
@@ -51,6 +52,7 @@ public class CopterUnitType extends SnUnitType implements ImageGenerator {
             unit.rotation = Time.time * unitFallRotateSpeed;
             if (Mathf.chanceDelta(smokeChance)) {
                 smokeFx.at(smokeX, smokeY);
+                burningFx.at(smokeX, smokeY);
             }
         }
     }

@@ -68,7 +68,13 @@ public class SnUnitTypes implements ContentList {
             flying = true;
             circleTarget = false;
             range = 130;
+
             unitFallRotateSpeed = 6f;
+            smokeFx = Fx.fallSmoke;
+            burningFx = Fx.burning;
+            smokeChance = 0.4f;
+            smokeX = 0f;
+            smokeY = 2f;
 
             rotors.add(
                     new Rotor("rotor-small") {{
@@ -111,7 +117,13 @@ public class SnUnitTypes implements ContentList {
             flying = true;
             circleTarget = false;
             range = 145;
-            unitFallRotateSpeed = 5f;
+
+            unitFallRotateSpeed = 5.7f;
+            smokeFx = Fx.fallSmoke;
+            burningFx = Fx.burning;
+            smokeChance = 0.5f;
+            smokeX = 0f;
+            smokeY = 2f;
 
             rotors.add(
                 new Rotor("rotor-medium") {{
@@ -172,6 +184,11 @@ public class SnUnitTypes implements ContentList {
             range = 145;
 
             unitFallRotateSpeed = 5f;
+            smokeFx = Fx.fallSmoke;
+            burningFx = Fx.burning;
+            smokeChance = 1f;
+            smokeX = 0f;
+            smokeY = 8f;
 
             rotors.add(
                     new Rotor("rotor-big") {{
@@ -218,7 +235,7 @@ public class SnUnitTypes implements ContentList {
                         shake = 1f;
                         recoil = 2f;
                         inaccuracy = 3f;
-                         shots = 1;
+                        shots = 1;
                         shootSound = Sounds.spark;
                         bullet = SnBullets.copterEnergySphere;
                     }});
@@ -235,7 +252,13 @@ public class SnUnitTypes implements ContentList {
             flying = true;
             circleTarget = false;
             range = 170f;
-            unitFallRotateSpeed = 5f;
+
+            unitFallRotateSpeed = 3.7f;
+            smokeFx = Fx.fallSmoke;
+            burningFx = Fx.burning;
+            smokeChance = 0.6f;
+            smokeX = 0f;
+            smokeY = 0f;
             weapons.add(
                     new WeaponExt("laser-gun") {{
                         rotate = false;
@@ -296,7 +319,12 @@ public class SnUnitTypes implements ContentList {
             circleTarget = false;
             range = 175f;
 
-            unitFallRotateSpeed = 5f;
+            unitFallRotateSpeed = 3.1f;
+            smokeFx = Fx.fallSmoke;
+            burningFx = Fx.burning;
+            smokeChance = 0.6f;
+            smokeX = 0f;
+            smokeY = 0f;
             weapons.add(
                     new WeaponExt("") {{
                         rotate = false;
@@ -354,7 +382,12 @@ public class SnUnitTypes implements ContentList {
             flying = true;
             circleTarget = false;
 
-            unitFallRotateSpeed = 5f;
+            unitFallRotateSpeed = 2.6f;
+            smokeFx = Fx.fallSmoke;
+            burningFx = Fx.burning;
+            smokeChance = 0.6f;
+            smokeX = 0f;
+            smokeY = 0f;
             weapons.add(
                     new WeaponExt("") {{
                         rotate = false;
