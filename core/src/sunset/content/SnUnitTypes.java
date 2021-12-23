@@ -72,7 +72,7 @@ public class SnUnitTypes implements ContentList {
             unitFallRotateSpeed = 6f;
             smokeFx = Fx.fallSmoke;
             burningFx = Fx.burning;
-            smokeChance = 0.4f;
+            smokeChance = 0.2f;
             smokeX = 0f;
             smokeY = 2f;
 
@@ -121,7 +121,7 @@ public class SnUnitTypes implements ContentList {
             unitFallRotateSpeed = 5.7f;
             smokeFx = Fx.fallSmoke;
             burningFx = Fx.burning;
-            smokeChance = 0.5f;
+            smokeChance = 0.3f;
             smokeX = 0f;
             smokeY = 2f;
 
@@ -186,7 +186,7 @@ public class SnUnitTypes implements ContentList {
             unitFallRotateSpeed = 5f;
             smokeFx = Fx.fallSmoke;
             burningFx = Fx.burning;
-            smokeChance = 1f;
+            smokeChance = 0.4f;
             smokeX = 0f;
             smokeY = 8f;
 
@@ -256,7 +256,7 @@ public class SnUnitTypes implements ContentList {
             unitFallRotateSpeed = 3.7f;
             smokeFx = Fx.fallSmoke;
             burningFx = Fx.burning;
-            smokeChance = 0.6f;
+            smokeChance = 0.3f;
             smokeX = 0f;
             smokeY = 0f;
             weapons.add(
@@ -322,7 +322,7 @@ public class SnUnitTypes implements ContentList {
             unitFallRotateSpeed = 3.1f;
             smokeFx = Fx.fallSmoke;
             burningFx = Fx.burning;
-            smokeChance = 0.6f;
+            smokeChance = 0.4f;
             smokeX = 0f;
             smokeY = 0f;
             weapons.add(
@@ -385,7 +385,7 @@ public class SnUnitTypes implements ContentList {
             unitFallRotateSpeed = 2.6f;
             smokeFx = Fx.fallSmoke;
             burningFx = Fx.burning;
-            smokeChance = 0.6f;
+            smokeChance = 0.5f;
             smokeX = 0f;
             smokeY = 0f;
             weapons.add(
