@@ -50,7 +50,7 @@ public class SnProduction implements ContentList {
         //region drills
         electroPneumaticDrill = new DRDrill("electro-pneumatic-drill") {{
             requirements(Category.production, with(Items.copper, 20, Items.graphite, 15, Items.silicon, 10));
-            drillTime = 310;
+            drillTime = 300;
             size = 2;
             hasPower = true;
             tier = 3;
@@ -99,7 +99,7 @@ public class SnProduction implements ContentList {
 
         enojieDrill = new DRDrill("enojie-drill") {{
             requirements(Category.production, with(Items.copper, 410, Items.silicon, 380, SnItems.enojie, 370, Items.thorium, 200, Items.surgeAlloy, 190));
-            drillTime = 170;
+            drillTime = 158;
             size = 7;
             drawRim = true;
             hasPower = true;

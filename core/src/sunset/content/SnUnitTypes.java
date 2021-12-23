@@ -237,6 +237,21 @@ public class SnUnitTypes implements ContentList {
             range = 170f;
             unitFallRotateSpeed = 5f;
             weapons.add(
+                    new WeaponExt("laser-gun") {{
+                        rotate = false;
+                        mirror = true;
+                        top = true;
+                        shake = 2f;
+                        x = -21f;
+                        y = -1f;
+                        reload = 20f;
+                        shotDelay = 1f;
+                        shootY = 3;
+                        shots = 1;
+                        inaccuracy = 3f;
+                        shootSound = Sounds.laser;
+                        bullet = SnBullets.laserGun;
+                    }},
                     new CopterWeapon("big-rocket-launcher") {{
                         rotate = false;
                         mirror = true;
@@ -259,7 +274,7 @@ public class SnUnitTypes implements ContentList {
                         top = true;
                         shake = 3f;
                         x = 0f;
-                        y = 18f;
+                        y = 21f;
                         reload = 37f;
                         shotDelay = 4f;
                         shotDelay = 2f;
@@ -267,21 +282,6 @@ public class SnUnitTypes implements ContentList {
                         inaccuracy = 0.5f;
                         shootSound = Sounds.shootBig;
                         bullet = SnBullets.bigHelicopterGun;
-                    }},
-                    new WeaponExt("laser-gun") {{
-                        rotate = false;
-                        mirror = true;
-                        top = true;
-                        shake = 2f;
-                        x = -21f;
-                        y = -1f;
-                        reload = 20f;
-                        shotDelay = 1f;
-                        shootY = 3;
-                        shots = 1;
-                        inaccuracy = 3f;
-                        shootSound = Sounds.laser;
-                        bullet = SnBullets.laserGun;
                     }});
         }};
         mudflow = new CopterUnitType("mudflow") {{

@@ -12,7 +12,7 @@ public class CopterWeapon extends WeaponExt {
     }
     @Override
     public void draw(Unit unit, WeaponMount mount){
-        Draw.z(Layer.groundUnit);
+        Draw.z(Layer.plans);
         super.draw(unit, mount);
     }
 

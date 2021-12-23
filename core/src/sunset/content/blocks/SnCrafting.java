@@ -126,7 +126,7 @@ public class SnCrafting implements ContentList{
         //endregion advanced
         //region standard
         collider = new GenericCrafter("collider"){{
-            requirements(Category.crafting, with(Items.copper, 110, Items.titanium, 105, Items.silicon, 65, SnItems.fors, 50));
+            requirements(Category.crafting, with(Items.copper, 105, Items.titanium, 100, Items.silicon, 65, SnItems.fors, 50));
 
             outputItem = new ItemStack(SnItems.reneubite, 3);
             //craftEffect = SnFx.;
@@ -146,7 +146,7 @@ public class SnCrafting implements ContentList{
             consumes.power(3.5f);
         }};
         purifier = new GenericCrafter("purifier"){{
-            requirements(Category.crafting, with(Items.copper, 120, Items.titanium, 95, Items.silicon, 80, Items.plastanium, 65));
+            requirements(Category.crafting, with(Items.copper, 110, Items.titanium, 95, Items.silicon, 80, Items.plastanium, 65));
 
             outputItem = new ItemStack(SnItems.nobium, 1);
             craftEffect = Fx.pulverize;
