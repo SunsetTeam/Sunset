@@ -11,6 +11,7 @@ import arc.struct.Seq;
 import arc.util.Time;
 import arc.util.Tmp;
 import mindustry.content.Fx;
+import mindustry.entities.Effect;
 import mindustry.gen.Unit;
 import mindustry.gen.UnitEntity;
 import mindustry.graphics.Pal;
@@ -27,6 +28,7 @@ import static mindustry.Vars.world;
 public class CopterUnitType extends SnUnitType implements ImageGenerator {
     public final Seq<Rotor> rotors = new Seq<>();
     public float unitFallRotateSpeed = 6f;
+    public Effect smokeFx = Fx.none;
     public float smokeChance = 0.1f;
     public float smokeX = 0f;
     public float smokeY = 0f;
@@ -48,8 +50,7 @@ public class CopterUnitType extends SnUnitType implements ImageGenerator {
             unit.rotation += Time.delta * (fallSpeed * 2000);
             unit.rotation = Time.time * unitFallRotateSpeed;
             if (Mathf.chanceDelta(smokeChance)) {
-                Fx.fallSmoke.at(rotor.x, rotor.y);
-                Fx.burning.at(rotor.x, rotor.y);
+                smokeFx.at(smokeX, smokeY);
             }
         }
     }
