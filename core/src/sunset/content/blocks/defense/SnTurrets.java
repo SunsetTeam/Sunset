@@ -21,6 +21,7 @@ import mindustry.world.meta.BuildVisibility;
 import sunset.content.SnBullets;
 import sunset.content.SnFx;
 import sunset.content.SnItems;
+import sunset.content.SnLiquids;
 import sunset.entities.bullet.EnergySphereBulletType;
 import sunset.graphics.SnPal;
 import sunset.type.MissileType;
@@ -320,7 +321,8 @@ public class SnTurrets implements ContentList {
                     Liquids.water, SnBullets.floodWaterShot,
                     Liquids.slag, SnBullets.floodSlagShot,
                     Liquids.cryofluid, SnBullets.floodCryoShot,
-                    Liquids.oil, SnBullets.floodOilShot
+                    Liquids.oil, SnBullets.floodOilShot,
+                    SnLiquids.burheyna, SnBullets.floodBurheynaShot    
             );
             size = 4;
             reloadTime = 45f;

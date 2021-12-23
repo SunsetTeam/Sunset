@@ -30,7 +30,7 @@ public class SnBullets implements ContentList {
     //burner
     heavyCoalFlame, heavyPyraFlame, flameidFlame,
     //liquid
-    floodWaterShot, floodCryoShot, floodSlagShot, floodOilShot, burheynaFrag,
+    floodWaterShot, floodCryoShot, floodSlagShot, floodOilShot, burheynaFrag, floodBurheynaShot,
     //blast
     lightBlastGraphite, lightBlastSilicon,
     bigBlastPlastanium, bigBlastBlast, bigBlastPyratite,
@@ -349,8 +349,21 @@ public class SnBullets implements ContentList {
             fragBullet = Bullets.oilShot;
         }};
         burheynaFrag = new LiquidBulletType(SnLiquids.burheyna) {{
-            damage = 3.1f;
-            speed = 2.8f;
+            damage = 2;
+            drag = 0.01f;
+        }};
+
+        floodBurheynaShot = new ArtilleryLiquidBulletType(SnLiquids.burheyna) {{
+            lifetime = 130f;
+            speed = 3f;
+            knockback = 7f;
+            puddleSize = 18f;
+            orbSize = 9f;
+            drag = 0.001f;
+            statusDuration = 60f * 4f;
+            damage = 10f;
+            fragBullets = 36;
+            fragBullet = burheynaFrag;
         }};
         //endregion liquid
         //region blast
@@ -365,7 +378,6 @@ public class SnBullets implements ContentList {
         }};
         lightBlastSilicon = new ShrapnelBulletType() {{
             damage = 25;
-            hitEffect = SnFx.hitSpine;
             fromColor = Pal.bulletYellow;
             toColor = Pal.bulletYellowBack;
             reloadMultiplier = 1.1f;
