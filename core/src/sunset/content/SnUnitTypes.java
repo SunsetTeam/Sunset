@@ -252,7 +252,7 @@ public class SnUnitTypes implements ContentList {
                         shootSound = Sounds.laser;
                         bullet = SnBullets.laserGun;
                     }},
-                    new CopterWeapon("big-rocket-launcher") {{
+                    new WeaponExt("big-rocket-launcher") {{
                         rotate = false;
                         mirror = true;
                         top = true;
@@ -268,13 +268,13 @@ public class SnUnitTypes implements ContentList {
                         shootSound = Sounds.bang;
                         bullet = SnBullets.bigHelicopterMissile;
                     }},
-                    new CopterWeapon("big-salvo") {{
+                    new WeaponExt("big-salvo") {{
                         rotate = false;
                         mirror = false;
                         top = true;
                         shake = 3f;
                         x = 0f;
-                        y = 21f;
+                        y = 18f;
                         reload = 37f;
                         shotDelay = 4f;
                         shotDelay = 2f;
