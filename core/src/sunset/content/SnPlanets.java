@@ -34,7 +34,7 @@ public class SnPlanets implements ContentList{
             Color.valueOf("FFB514"),
             Color.valueOf("F5EA58")
             );
-            lightColor = Color.valueOf("F5E14E");
+           // lightColor = Color.valueOf("F5E14E");
         }};
         //endregion stars
         //region planets
