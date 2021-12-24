@@ -300,7 +300,6 @@ public class SnUnitTypes implements ContentList {
                         y = 18f;
                         reload = 37f;
                         shotDelay = 4f;
-                        shotDelay = 2f;
                         shots = 5;
                         inaccuracy = 0.5f;
                         shootSound = Sounds.shootBig;

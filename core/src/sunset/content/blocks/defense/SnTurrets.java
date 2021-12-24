@@ -36,7 +36,7 @@ public class SnTurrets implements ContentList {
         //2x2
         excellence, carbine, pulsation, reflection,
         //3x3
-        major, burner, trigger,
+        major, burner, trigger, eternity,
         //4x4
         admiral, scorpio, flood, chain,
         //5x5
@@ -239,6 +239,30 @@ public class SnTurrets implements ContentList {
             inaccuracy = 3f;
             rotateSpeed = 7.5f;
             shootCone = 25f;
+            targetAir = true;
+            shootSound = Sounds.flame;
+        }};
+        eternity = new ItemTurret("eternity") {{
+            requirements(Category.turret, with(SnItems.fors, 230, Items.plastanium, 100, Items.graphite, 60, Items.surgeAlloy, 30));
+            ammo(
+                    Items.plastanium, SnBullets.smallPlastaniumBullet,
+                    Items.pyratite, SnBullets.smallPyratiteBullet,
+                    Items.surgeAlloy, SnBullets.smallSurgeAlloyBullet,
+                    SnItems.fors, SnBullets.smallForsSpine,
+                    SnItems.reneubite, SnBullets.smallBlueMissile,
+                    SnItems.enojie, SnBullets.smallEnojieMissile
+            );
+            health = 1780;
+            size = 3;
+            range = 160f;
+            reloadTime = 50f;
+            recoilAmount = 3f;
+            inaccuracy = 3f;
+            rotateSpeed = 5f;
+            shootCone = 25f;
+            shots = 3;
+            shootShake = 1.5f;
+            burstSpacing = 3f;
             targetAir = true;
             shootSound = Sounds.flame;
         }};

@@ -180,6 +180,30 @@ public class SnFx {
         });
     }),
 
+    hitBlue = new Effect(50f, 100f, e -> {
+        float rad = 40f;
+        e.scaled(7f, b -> {
+            color(SnPal.blueBullet, b.fout());
+            Fill.circle(e.x, e.y, rad);
+        });
+
+        color(SnPal.blueBullet);
+        stroke(e.fout() * 3f);
+        Lines.circle(e.x, e.y, rad);
+
+        int points = 15;
+        float offset = Mathf.randomSeed(e.id, 360f);
+        for(int i = 0; i < points; i++){
+            float angle = i* 360f / points + offset;
+                Drawf.tri(e.x + Angles.trnsx(angle, rad), e.y + Angles.trnsy(angle, rad), 3f, 40f * e.fout(), angle);
+        }
+
+        Fill.circle(e.x, e.y, 11f * e.fout());
+        color();
+        Fill.circle(e.x, e.y, 4f * e.fout());
+        Drawf.light(e.x, e.y, rad * 1.6f, SnPal.blueBullet, e.fout());
+    }),
+
     redBomb = new Effect(30f, 70f, e -> {
         color(SnPal.redBomb);
         stroke(e.fout() * 2f);
