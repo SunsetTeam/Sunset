@@ -995,7 +995,7 @@ public class SnBullets implements ContentList {
             frontColor = SnPal.blastBullet;
             backColor = SnPal.blastBulletBack;
 
-            spin = 2f;
+            spin = 8f;
 
             splashDamage = 30f;
             splashDamageRadius = 25f;
@@ -1004,13 +1004,13 @@ public class SnBullets implements ContentList {
             weaveMag = 3f;
         }};
 
-        smallEnojieMissile = new MissileBulletType(4f, 10) {{
+        smallEnojieMissile = new MissileBulletType(3f, 10) {{
             width = 7f;
             height = 10f;
             shrinkY = 0f;
             drag = -0.003f;
             homingRange = 60f;
-            homingPower = 1f;
+            homingPower = 4f;
 
             splashDamageRadius = 30f;
             splashDamage = 25f;
@@ -1018,9 +1018,9 @@ public class SnBullets implements ContentList {
             keepVelocity = false;
             hitSound = Sounds.explosion;
             trailChance = 0.2f;
-            lifetime = 40f;
-            backColor = Pal.unitBack;
-            frontColor = Pal.unitFront;
+            lifetime = 55f;
+            backColor = SnPal.enojieBulletBack;
+            frontColor = SnPal.enojieBullet;
             hitEffect = Fx.blastExplosion;
             despawnEffect = Fx.blastExplosion;
             weaveScale = 4f;

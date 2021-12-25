@@ -39,7 +39,11 @@ public class SnPal {
 
     //Blue bullets
     blueBullet = Color.valueOf("A4DAE7"),
-    blueBulletBack = Color.valueOf("98D5E3"),
+    blueBulletBack = Color.valueOf("97E2A7"),
+
+    //Enojie bullets
+    enojieBullet = Color.valueOf("A4ECB3"),
+    enojieBulletBack = Color.valueOf("98D5E3"),
 
     //special
     emp1 = Color.valueOf("7FFFD4"),
