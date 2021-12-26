@@ -391,7 +391,7 @@ public class SnUnitTypes implements ContentList {
             rotors.add(
                     new Rotor("rotor-medium") {{
                         offsetX = 0;
-                        offsetY = -28;
+                        offsetY = -33;
                         rotorRotateSpeed = -27f;
                         rotorCount = 4;
                     }}
@@ -399,8 +399,17 @@ public class SnUnitTypes implements ContentList {
 
             rotors.add(
                     new Rotor("rotor-big") {{
-                        offsetX = 27;
-                        offsetY = 15;
+                        offsetX = -30;
+                        offsetY = 20;
+                        rotorRotateSpeed = 27f;
+                        rotorCount = 3;
+                    }}
+            );
+
+            rotors.add(
+                    new Rotor("rotor-big") {{
+                        offsetX = 30;
+                        offsetY = 20;
                         rotorRotateSpeed = 27f;
                         rotorCount = 3;
                     }}
@@ -409,7 +418,7 @@ public class SnUnitTypes implements ContentList {
             rotors.add(
                     new Rotor("rotor-gigant") {{
                         offsetX = 0;
-                        offsetY = 7;
+                        offsetY = 8;
                         rotorRotateSpeed = 26f;
                         rotorCount = 5;
                     }}
