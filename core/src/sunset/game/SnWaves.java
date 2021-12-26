@@ -251,6 +251,21 @@ public class SnWaves{
                 spacing = 35;
                 shields = 1000;
                 shieldScaling = 35f;
+            }},
+
+            new SpawnGroup(SnUnitTypes.wind){{
+                begin = 3;
+                spacing = 3;
+                unitAmount = 1;
+                unitScaling = 3;
+                max = 20;
+            }},
+            new SpawnGroup(SnUnitTypes.thunder){{
+                begin = 5;
+                spacing = 4;
+                unitAmount = 2;
+                unitScaling = 4;
+                max = 12;
             }}
             );
         }
@@ -278,7 +293,7 @@ public class SnWaves{
 //        {risso, minke, bryde, sei, omura},
 //        {risso, oxynoe, cyerce, aegires, navanax}, //retusa intentionally left out as it cannot damage the core properly
 //        {flare, horizon, zenith, rand.chance(0.5) ? quad : antumbra, rand.chance(0.1) ? quad : eclipse}
-        {SnUnitTypes.comet,SnUnitTypes.comet,SnUnitTypes.comet,SnUnitTypes.comet,SnUnitTypes.comet},
+        {SnUnitTypes.wind,SnUnitTypes.thunder,SnUnitTypes.comet,SnUnitTypes.comet,SnUnitTypes.comet},
         {SnUnitTypes.torpedo1,SnUnitTypes.torpedo1,SnUnitTypes.torpedo1,SnUnitTypes.torpedo1,SnUnitTypes.torpedo1},
         {SnUnitTypes.comet,SnUnitTypes.comet,SnUnitTypes.comet,SnUnitTypes.comet,SnUnitTypes.comet},
         {SnUnitTypes.comet,SnUnitTypes.comet,SnUnitTypes.comet,SnUnitTypes.comet,SnUnitTypes.comet},
