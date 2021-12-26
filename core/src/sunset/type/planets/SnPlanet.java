@@ -2,8 +2,11 @@ package sunset.type.planets;
 
 import mindustry.graphics.g3d.*;
 import mindustry.type.*;
+import sunset.game.*;
 
 public class SnPlanet extends Planet{
+    public SnWaves waves;
+
     public SnPlanet(String name, Planet parent, float radius){
         super(name, parent, radius);
     }
@@ -20,5 +23,13 @@ public class SnPlanet extends Planet{
 
             sectorApproxRadius = sectors.first().tile.v.dst(sectors.first().tile.corners[0].v);
         }
+    }
+
+    @Override
+    public void init(){
+        if(waves == null){
+            waves = new SnWaves();
+        }
+        super.init();
     }
 }

@@ -15,6 +15,7 @@ import mindustry.maps.generators.*;
 import mindustry.type.*;
 import mindustry.world.*;
 import sunset.game.*;
+import sunset.type.planets.*;
 import sunset.world.blocks.environment.*;
 
 import static mindustry.Vars.*;
@@ -367,8 +368,15 @@ public class SnPlanetGenerator extends PlanetGenerator{
         state.rules.enemyCoreBuildRadius = 600f;
 
         //spawn air only when spawn is blocked
-        state.rules.spawns = SnWaves.generate(difficulty, new Rand(), state.rules.attackMode);
+        SnSector sector = snSector();
+        if (sector!=null){
+            state.rules.spawns = sector.waves().generate(difficulty, new Rand(), state.rules.attackMode);
+        }
 //        state.rules.spawns = SunsetWaves.generate(difficulty, new Rand(sector.id), state.rules.attackMode, state.rules.attackMode && SunsetVars.spawner.countGroundSpawns() == 0);
+    }
+
+    private SnSector snSector(){
+        return sector instanceof SnSector? (SnSector)sector :null;
     }
 
     protected void passRivers(Room fspawn, int x, int y){

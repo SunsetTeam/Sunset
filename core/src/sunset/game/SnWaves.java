@@ -12,279 +12,48 @@ import sunset.content.*;
 import static mindustry.content.UnitTypes.*;
 
 public class SnWaves{
-    public static final int waveVersion = -2;
+    public final int waveVersion;
+    private UnitType[][] species;
 
-    private Seq<SpawnGroup> spawns;
-
-    public Seq<SpawnGroup> get(){
-        if(spawns == null && dagger != null){
-            spawns = Seq.with(
-            new SpawnGroup(dagger){{
-                end = 10;
-                unitScaling = 2f;
-                max = 30;
-            }},
-
-            new SpawnGroup(crawler){{
-                begin = 4;
-                end = 13;
-                unitAmount = 2;
-                unitScaling = 1.5f;
-            }},
-
-            new SpawnGroup(flare){{
-                begin = 12;
-                end = 16;
-                unitScaling = 1f;
-            }},
-
-            new SpawnGroup(dagger){{
-                begin = 11;
-                unitScaling = 1.7f;
-                spacing = 2;
-                max = 4;
-                shieldScaling = 25f;
-            }},
-
-            new SpawnGroup(pulsar){{
-                begin = 13;
-                spacing = 3;
-                unitScaling = 0.5f;
-                max = 25;
-            }},
-
-            new SpawnGroup(mace){{
-                begin = 7;
-                spacing = 3;
-                unitScaling = 2;
-
-                end = 30;
-            }},
-
-            new SpawnGroup(dagger){{
-                begin = 12;
-                unitScaling = 1;
-                unitAmount = 4;
-                spacing = 2;
-                shieldScaling = 20f;
-                max = 14;
-            }},
-
-            new SpawnGroup(mace){{
-                begin = 28;
-                spacing = 3;
-                unitScaling = 1;
-                end = 40;
-                shieldScaling = 20f;
-            }},
-
-            new SpawnGroup(spiroct){{
-                begin = 45;
-                spacing = 3;
-                unitScaling = 1;
-                max = 10;
-                shieldScaling = 30f;
-                shields = 100;
-                effect = StatusEffects.overdrive;
-            }},
-
-            new SpawnGroup(pulsar){{
-                begin = 120;
-                spacing = 2;
-                unitScaling = 3;
-                unitAmount = 5;
-                effect = StatusEffects.overdrive;
-            }},
-
-            new SpawnGroup(flare){{
-                begin = 16;
-                unitScaling = 1;
-                spacing = 2;
-                shieldScaling = 20f;
-                max = 20;
-            }},
-
-            new SpawnGroup(quasar){{
-                begin = 82;
-                spacing = 3;
-                unitAmount = 4;
-                unitScaling = 3;
-                shieldScaling = 30f;
-                effect = StatusEffects.overdrive;
-            }},
-
-            new SpawnGroup(pulsar){{
-                begin = 41;
-                spacing = 5;
-                unitAmount = 1;
-                unitScaling = 3;
-                shields = 640f;
-                max = 25;
-            }},
-
-            new SpawnGroup(fortress){{
-                begin = 40;
-                spacing = 5;
-                unitAmount = 2;
-                unitScaling = 2;
-                max = 20;
-                shieldScaling = 30;
-            }},
-
-            new SpawnGroup(nova){{
-                begin = 35;
-                spacing = 3;
-                unitAmount = 4;
-                effect = StatusEffects.overdrive;
-                items = new ItemStack(Items.blastCompound, 60);
-                end = 60;
-            }},
-
-            new SpawnGroup(dagger){{
-                begin = 42;
-                spacing = 3;
-                unitAmount = 4;
-                effect = StatusEffects.overdrive;
-                items = new ItemStack(Items.pyratite, 100);
-                end = 130;
-                max = 30;
-            }},
-
-            new SpawnGroup(horizon){{
-                begin = 40;
-                unitAmount = 2;
-                spacing = 2;
-                unitScaling = 2;
-                shieldScaling = 20;
-            }},
-
-            new SpawnGroup(flare){{
-                begin = 50;
-                unitAmount = 4;
-                unitScaling = 3;
-                spacing = 5;
-                shields = 100f;
-                shieldScaling = 10f;
-                effect = StatusEffects.overdrive;
-                max = 20;
-            }},
-
-            new SpawnGroup(zenith){{
-                begin = 50;
-                unitAmount = 2;
-                unitScaling = 3;
-                spacing = 5;
-                max = 16;
-                shieldScaling = 30;
-            }},
-
-            new SpawnGroup(nova){{
-                begin = 53;
-                unitAmount = 2;
-                unitScaling = 3;
-                spacing = 4;
-                shieldScaling = 30;
-            }},
-
-            new SpawnGroup(atrax){{
-                begin = 31;
-                unitAmount = 4;
-                unitScaling = 1;
-                spacing = 3;
-                shieldScaling = 10f;
-            }},
-
-            new SpawnGroup(scepter){{
-                begin = 41;
-                unitAmount = 1;
-                unitScaling = 1;
-                spacing = 30;
-                shieldScaling = 30f;
-            }},
-
-            new SpawnGroup(reign){{
-                begin = 81;
-                unitAmount = 1;
-                unitScaling = 1;
-                spacing = 40;
-                shieldScaling = 30f;
-            }},
-
-            new SpawnGroup(antumbra){{
-                begin = 120;
-                unitAmount = 1;
-                unitScaling = 1;
-                spacing = 40;
-                shieldScaling = 30f;
-            }},
-
-            new SpawnGroup(vela){{
-                begin = 100;
-                unitAmount = 1;
-                unitScaling = 1;
-                spacing = 30;
-                shieldScaling = 30f;
-            }},
-
-            new SpawnGroup(corvus){{
-                begin = 145;
-                unitAmount = 1;
-                unitScaling = 1;
-                spacing = 35;
-                shieldScaling = 30f;
-                shields = 100;
-            }},
-
-            new SpawnGroup(horizon){{
-                begin = 90;
-                unitAmount = 2;
-                unitScaling = 3;
-                spacing = 4;
-                shields = 40f;
-                shieldScaling = 30f;
-            }},
-
-            new SpawnGroup(toxopid){{
-                begin = 210;
-                unitAmount = 1;
-                unitScaling = 1;
-                spacing = 35;
-                shields = 1000;
-                shieldScaling = 35f;
-            }}
-            );
-        }
-        return spawns == null ? new Seq<>() : spawns;
+    public SnWaves(){
+        this(-2);
+        species(
+        line(SnUnitTypes.comet, SnUnitTypes.comet, SnUnitTypes.comet, SnUnitTypes.comet, SnUnitTypes.comet),
+        line(SnUnitTypes.torpedo1, SnUnitTypes.torpedo1, SnUnitTypes.torpedo1, SnUnitTypes.torpedo1, SnUnitTypes.torpedo1),
+        line(SnUnitTypes.comet, SnUnitTypes.comet, SnUnitTypes.comet, SnUnitTypes.comet, SnUnitTypes.comet),
+        line(SnUnitTypes.comet, SnUnitTypes.comet, SnUnitTypes.comet, SnUnitTypes.comet, SnUnitTypes.comet),
+        line(SnUnitTypes.comet, SnUnitTypes.comet, SnUnitTypes.comet, SnUnitTypes.comet, SnUnitTypes.comet),
+        line(SnUnitTypes.comet, SnUnitTypes.comet, SnUnitTypes.comet, SnUnitTypes.comet, SnUnitTypes.comet)
+        );
     }
 
-    public static Seq<SpawnGroup> generate(float difficulty){
+    public SnWaves(int waveVersion){
+        this.waveVersion = waveVersion;
+    }
+
+    protected UnitType[] line(UnitType... unitTypes){
+        return unitTypes;
+    }
+
+    public SnWaves species(UnitType[]... species){
+        this.species = species;
+        return this;
+    }
+
+    public Seq<SpawnGroup> generate(float difficulty){
         //apply power curve to make starting sectors easier
         return generate(Mathf.pow(difficulty, 1.12f), new Rand(), false);
     }
 
-    public static Seq<SpawnGroup> generate(float difficulty, Rand rand, boolean attack){
+    public Seq<SpawnGroup> generate(float difficulty, Rand rand, boolean attack){
         return generate(difficulty, rand, attack, false);
     }
 
-    public static Seq<SpawnGroup> generate(float difficulty, Rand rand, boolean attack, boolean airOnly){
+    public Seq<SpawnGroup> generate(float difficulty, Rand rand, boolean attack, boolean airOnly){
         return generate(difficulty, rand, attack, airOnly, false);
     }
 
-    public static Seq<SpawnGroup> generate(float difficulty, Rand rand, boolean attack, boolean airOnly, boolean naval){
-        UnitType[][] species = {
-//        {dagger, mace, fortress, scepter, reign},
-//        {nova, pulsar, quasar, vela, corvus},
-//        {crawler, atrax, spiroct, arkyid, toxopid},
-//        {risso, minke, bryde, sei, omura},
-//        {risso, oxynoe, cyerce, aegires, navanax}, //retusa intentionally left out as it cannot damage the core properly
-//        {flare, horizon, zenith, rand.chance(0.5) ? quad : antumbra, rand.chance(0.1) ? quad : eclipse}
-        {SnUnitTypes.comet,SnUnitTypes.comet,SnUnitTypes.comet,SnUnitTypes.comet,SnUnitTypes.comet},
-        {SnUnitTypes.torpedo1,SnUnitTypes.torpedo1,SnUnitTypes.torpedo1,SnUnitTypes.torpedo1,SnUnitTypes.torpedo1},
-        {SnUnitTypes.comet,SnUnitTypes.comet,SnUnitTypes.comet,SnUnitTypes.comet,SnUnitTypes.comet},
-        {SnUnitTypes.comet,SnUnitTypes.comet,SnUnitTypes.comet,SnUnitTypes.comet,SnUnitTypes.comet},
-        {SnUnitTypes.comet,SnUnitTypes.comet,SnUnitTypes.comet,SnUnitTypes.comet,SnUnitTypes.comet},
-        {SnUnitTypes.comet,SnUnitTypes.comet,SnUnitTypes.comet,SnUnitTypes.comet,SnUnitTypes.comet},
-        };
+    public Seq<SpawnGroup> generate(float difficulty, Rand rand, boolean attack, boolean airOnly, boolean naval){
 
         if(airOnly){
             species = Structs.filter(UnitType[].class, species, v -> v[0].flying);
@@ -306,7 +75,7 @@ public class SnWaves{
         //max reasonable wave, after which everything gets boring
         int cap = 150;
 
-        float shieldStart = 30, shieldsPerWave = 20 + difficulty*30f;
+        float shieldStart = 30, shieldsPerWave = 20 + difficulty * 30f;
         float[] scaling = {1, 2f, 3f, 4f, 5f};
 
         Intc createProgression = start -> {
@@ -314,7 +83,7 @@ public class SnWaves{
             UnitType[] curSpecies = Structs.random(fspec);
             int curTier = 0;
 
-            for(int i = start; i < cap;){
+            for(int i = start; i < cap; ){
                 int f = i;
                 int next = rand.random(8, 16) + (int)Mathf.lerp(5f, 0f, difficulty) + curTier * 4;
 
@@ -342,13 +111,13 @@ public class SnWaves{
                     max = 6;
                     unitScaling = rand.random(2f, 4f);
                     spacing = rand.random(2, 4);
-                    shields = shieldAmount/2f;
+                    shields = shieldAmount / 2f;
                     shieldScaling = shieldsPerWave;
                 }});
 
                 i += next + 1;
                 if(curTier < 3 || (rand.chance(0.05) && difficulty > 0.8)){
-                    curTier ++;
+                    curTier++;
                 }
 
                 //do not spawn bosses
@@ -405,7 +174,7 @@ public class SnWaves{
         out.add(new SpawnGroup(Structs.random(species)[bossTier]){{
             unitAmount = 1;
             begin = finalBossStart;
-            spacing = bossSpacing/2;
+            spacing = bossSpacing / 2;
             end = never;
             unitScaling = bossSpacing;
             shields = 500;
@@ -417,7 +186,7 @@ public class SnWaves{
         out.add(new SpawnGroup(Structs.random(species)[bossTier]){{
             unitAmount = 1;
             begin = finalBossStart + 15;
-            spacing = bossSpacing/2;
+            spacing = bossSpacing / 2;
             end = never;
             unitScaling = bossSpacing;
             shields = 500;
@@ -427,7 +196,7 @@ public class SnWaves{
 
         //add megas to heal the base.
         if(attack && difficulty >= 0.5){
-            int amount = Mathf.random(1, 3 + (int)(difficulty*2));
+            int amount = Mathf.random(1, 3 + (int)(difficulty * 2));
 
             for(int i = 0; i < amount; i++){
                 int wave = Mathf.random(3, 20);

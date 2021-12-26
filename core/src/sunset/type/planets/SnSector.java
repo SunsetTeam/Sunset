@@ -6,13 +6,22 @@ import arc.util.*;
 import mindustry.ctype.*;
 import mindustry.graphics.g3d.PlanetGrid.*;
 import mindustry.type.*;
+import sunset.game.*;
 import sunset.maps.generators.*;
 
 import java.lang.reflect.*;
 
 public class SnSector extends Sector{
+    private SnSectorInfo snInfo;
+
     public SnSector(Planet planet, Ptile tile){
-        super(planet, tile);
+        super(checkPlanet(planet), tile);
+        info = snInfo = new SnSectorInfo(this);
+    }
+
+    private static Planet checkPlanet(Planet planet){
+        if(planet instanceof SnPlanet) return planet;
+        throw new RuntimeException("Planet must be SnPlanet");
     }
 
     public static void setup(Content c){
@@ -34,15 +43,22 @@ public class SnSector extends Sector{
         }
     }
 
-
     @Override
     public void loadInfo(){
-        info = Core.settings.getJson(planet.name + "-s-" + id + "-info", SnSectorInfo.class, SnSectorInfo::new);
+        info = snInfo = Core.settings.getJson(planet.name + "-s-" + id + "-info", SnSectorInfo.class, SnSectorInfo::new).parent(this);
     }
 
     @Override
     public void clearInfo(){
-        info = new SnSectorInfo();
+        info = snInfo = new SnSectorInfo().parent(this);
         Core.settings.remove(planet.name + "-s-" + id + "-info");
+    }
+
+    public SnPlanet snPlanet(){
+        return (SnPlanet)planet;
+    }
+
+    public SnWaves waves(){
+        return snPlanet().waves;
     }
 }

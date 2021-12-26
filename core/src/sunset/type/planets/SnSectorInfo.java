@@ -8,10 +8,29 @@ import sunset.game.*;
 import static mindustry.Vars.state;
 
 public class SnSectorInfo extends SectorInfo{
+    private SnSector parent;
+    public SnSectorInfo(SnSector parent){
+        this.parent=parent;
+    }
+
+    public SnSectorInfo(){
+
+    }
+
+    public SnSectorInfo parent(SnSector parent){
+        this.parent = parent;
+        return this;
+    }
+
     @Override
     public void prepare(){
         super.prepare();
-        waveVersion=SnWaves.waveVersion;
+
+        waveVersion= waves().waveVersion;
+    }
+
+    public SnWaves waves(){
+        return parent.snPlanet().waves;
     }
 
     @Override
@@ -34,8 +53,8 @@ public class SnSectorInfo extends SectorInfo{
         state.rules.attackMode = attack;
 
         //assign new wave patterns when the version changes
-        if(waveVersion != SnWaves.waveVersion && state.rules.sector.preset == null){
-            state.rules.spawns = SnWaves.generate(state.rules.sector.threat);
+        if(waveVersion != waves().waveVersion && state.rules.sector.preset == null){
+            state.rules.spawns =  waves().generate(state.rules.sector.threat);
         }
 
         CoreBuild entity = state.rules.defaultTeam.core();
