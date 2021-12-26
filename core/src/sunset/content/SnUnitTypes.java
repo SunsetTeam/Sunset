@@ -411,7 +411,7 @@ public class SnUnitTypes implements ContentList {
                         offsetX = 31;
                         offsetY = 25;
                         rotorRotateSpeed = 27f;
-                        rotorCount = 3;
+                        rotorCount = 8;
                     }}
             );
 
