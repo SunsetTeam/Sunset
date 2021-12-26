@@ -895,14 +895,14 @@ public class SnBullets implements ContentList {
             height = 10f;
             shrinkY = 1f;
             lifetime = 20f;
-            backColor = Pal.gray;
-            frontColor = Color.white;
+            frontColor = Pal.plastanium;
+            backColor = Pal.plastaniumBack;
             despawnEffect = Fx.none;
         }};
         smallPlastaniumBullet = new BasicBulletType(5f, 25) {{
             shrinkX = 0f;
             shrinkY = 0f;
-            lifetime = 40f;
+            lifetime = 45f;
             height = 15f;
             width = 10f;
             frontColor = Pal.plastanium;
@@ -914,7 +914,7 @@ public class SnBullets implements ContentList {
         smallPyratiteBullet = new BasicBulletType(5f, 15) {{
             shrinkX = 0f;
             shrinkY = 0f;
-            lifetime = 40f;
+            lifetime = 45f;
             height = 13f;
             width = 9f;
 
@@ -928,7 +928,7 @@ public class SnBullets implements ContentList {
         smallSurgeAlloyBullet = new BasicBulletType(5f, 28) {{
             shrinkX = 0f;
             shrinkY = 0f;
-            lifetime = 40f;
+            lifetime = 45f;
             height = 14f;
             width = 10f;
 
@@ -960,27 +960,29 @@ public class SnBullets implements ContentList {
             trailWidth = 2f;
             trailLength = 4;
             trailRotation = false;
+            
+            weaveScale = 5f;
+            weaveMag = 3f;
         }};
         smallBlueMissile = new BasicBulletType(5f, 15, "missile") {{
             shrinkX = 0f;
             shrinkY = 0f;
-            lifetime = 40f;
-            height = 13f;
-            width = 8f;
-            frontColor = SnPal.blastBullet;
+            lifetime = 45f;
+            height = 15f;
+            width = 9f;
+            frontColor = SnPal.blueBullet;
             backColor = SnPal.blueBulletBack;
 
             splashDamage = 40f;
             splashDamageRadius = 30f;
 
-            trailColor = SnPal.blastBullet;
+            trailColor = SnPal.blueBullet;
             trailWidth = 4f;
             trailLength = 4;
             trailRotation = false;
 
             fragBullet = smallBlueMissileFrag;
             fragBullets = 6;
-            fragCone = 0.0001f;
 
             weaveScale = 5f;
             weaveMag = 3f;
@@ -989,7 +991,7 @@ public class SnBullets implements ContentList {
         smallForsSpine = new BasicBulletType(5f, 6) {{
             shrinkX = 0f;
             shrinkY = 0f;
-            lifetime = 40f;
+            lifetime = 45f;
             height = 13f;
             width = 8f;
             frontColor = SnPal.blastBullet;
@@ -1018,7 +1020,7 @@ public class SnBullets implements ContentList {
             keepVelocity = false;
             hitSound = Sounds.explosion;
             trailChance = 0.2f;
-            lifetime = 55f;
+            lifetime = 60f;
             backColor = SnPal.enojieBulletBack;
             frontColor = SnPal.enojieBullet;
             hitEffect = Fx.blastExplosion;
