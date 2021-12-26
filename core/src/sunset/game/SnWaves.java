@@ -9,7 +9,7 @@ import mindustry.game.*;
 import mindustry.type.*;
 import sunset.content.*;
 
-import static mindustry.content.UnitTypes.*;
+import static mindustry.content.UnitTypes.mega;
 
 public class SnWaves{
     public final int waveVersion;
@@ -31,12 +31,15 @@ public class SnWaves{
         this.waveVersion = waveVersion;
     }
 
-    protected UnitType[] line(UnitType... unitTypes){
-        return unitTypes;
+    protected UnitTypeLine line(UnitType t1, UnitType t2, UnitType t3, UnitType t4, UnitType t5, UnitType... extra){
+        return new UnitTypeLine(t1, t2, t3, t4, t5, extra);
     }
 
-    public SnWaves species(UnitType[]... species){
-        this.species = species;
+    public SnWaves species(UnitTypeLine... species){
+        this.species = new UnitType[species.length][];
+        for(int i = 0; i < this.species.length; i++){
+            this.species[i] = species[i].array;
+        }
         return this;
     }
 
@@ -54,7 +57,12 @@ public class SnWaves{
     }
 
     public Seq<SpawnGroup> generate(float difficulty, Rand rand, boolean attack, boolean airOnly, boolean naval){
-
+        UnitType[][] species = new UnitType[this.species.length][];
+        for(int i = 0; i < species.length; i++){
+            UnitType[] root = this.species[i];
+            species[i] = new UnitType[root.length];
+            System.arraycopy(root, 0, species[i], 0, root.length);
+        }
         if(airOnly){
             species = Structs.filter(UnitType[].class, species, v -> v[0].flying);
         }
@@ -218,5 +226,16 @@ public class SnWaves{
         }
 
         return out;
+    }
+
+    private static class UnitTypeLine{
+        private final UnitType[] array;
+
+        private UnitTypeLine(UnitType t1, UnitType t2, UnitType t3, UnitType t4, UnitType t5, UnitType... extra){
+            array = new UnitType[extra.length + 5];
+            UnitType[] types = {t1, t2, t3, t4, t5};
+            System.arraycopy(types, 0, array, 0, types.length);
+            System.arraycopy(extra, 0, array, 5, extra.length);
+        }
     }
 }
