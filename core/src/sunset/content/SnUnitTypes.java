@@ -200,7 +200,7 @@ public class SnUnitTypes implements ContentList {
             );
 
             rotors.add(
-                    new Rotor("rotor-small") {{
+                    new Rotor("rotor-mini") {{
                         offsetX = 0;
                         offsetY = -9;
                         rotorRotateSpeed = 28f;
@@ -307,7 +307,7 @@ public class SnUnitTypes implements ContentList {
                     }});
         }};
         mudflow = new CopterUnitType("mudflow") {{
-            health = 19200;
+            health = 19700;
             hitSize = 70;
             speed = 2.1f;
             rotateSpeed = 3.6f;
@@ -369,7 +369,7 @@ public class SnUnitTypes implements ContentList {
         }};
         
         parhelion = new CopterUnitType("parhelion") {{
-            health = 50000;
+            health = 57000;
             hitSize = 78;
             speed = 1.7f;
             rotateSpeed = 3f;
@@ -387,6 +387,34 @@ public class SnUnitTypes implements ContentList {
             smokeChance = 0.5f;
             smokeX = 0f;
             smokeY = 0f;
+
+            rotors.add(
+                    new Rotor("rotor-medium") {{
+                        offsetX = 0;
+                        offsetY = -17;
+                        rotorRotateSpeed = -27f;
+                        rotorCount = 4;
+                    }}
+            );
+
+            rotors.add(
+                    new Rotor("rotor-big") {{
+                        offsetX = 17;
+                        offsetY = 10;
+                        rotorRotateSpeed = 27f;
+                        rotorCount = 3;
+                    }}
+            );
+
+            rotors.add(
+                    new Rotor("rotor-gigant") {{
+                        offsetX = 0;
+                        offsetY = 5;
+                        rotorRotateSpeed = 30f;
+                        rotorCount = 5;
+                    }}
+            );
+
             weapons.add(
                     new WeaponExt("") {{
                         rotate = false;

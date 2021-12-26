@@ -260,7 +260,7 @@ public class SnTurrets implements ContentList {
             inaccuracy = 3f;
             rotateSpeed = 5f;
             shootCone = 25f;
-            shots = 3;
+            shots = 4;
             shootShake = 1.5f;
             burstSpacing = 3f;
             targetAir = true;
