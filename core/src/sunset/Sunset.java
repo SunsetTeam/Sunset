@@ -54,7 +54,6 @@ public class Sunset extends MMAMod {
     @Override
     public void init() {
         super.init();
-        Events.run(ClientLoadEvent.class,()->Core.app.post(()->Vars.ui.announce(TestKotlin.testField,120f)));
         UnitData.init();
         AdvancedContentInfoDialog.init();
         Utils.setMenuUnit(SnUnitTypes.router);
