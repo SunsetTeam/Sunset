@@ -3,15 +3,10 @@ package sunset;
 import acontent.ui.AdvancedContentInfoDialog;
 import arc.Core;
 import arc.Events;
-import arc.struct.EnumSet;
-import arc.struct.ObjectMap;
 import arc.struct.Seq;
-import arc.util.Log;
-import arc.util.Time;
 import mindustry.Vars;
 import mindustry.core.ContentLoader;
 import mindustry.ctype.Content;
-import mindustry.ctype.ContentType;
 import mindustry.ctype.MappableContent;
 import mindustry.ctype.UnlockableContent;
 import mindustry.game.EventType.ClientLoadEvent;
@@ -26,8 +21,6 @@ import sunset.core.SnContentTranslation;
 import sunset.gen.*;
 import sunset.type.UnitData;
 import sunset.utils.Utils;
-
-import java.util.Arrays;
 
 import static mindustry.Vars.headless;
 import static mma.ModVars.modInfo;
@@ -61,6 +54,7 @@ public class Sunset extends MMAMod {
     @Override
     public void init() {
         super.init();
+        Events.run(ClientLoadEvent.class,()->Core.app.post(()->Vars.ui.announce(TestKotlin.testField,120f)));
         UnitData.init();
         AdvancedContentInfoDialog.init();
         Utils.setMenuUnit(SnUnitTypes.router);
