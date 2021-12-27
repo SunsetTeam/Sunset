@@ -160,26 +160,23 @@ public class SnFx {
         Drawf.light(e.x, e.y, 1.8f, SnPal.redBomb, e.fout());
     }),
 
-    hitCopter = new Effect(12, e -> {
-        color(SnPal.copterLaser);
-        stroke(e.fout() * 1.5f);
+    copterShoot = new Effect(12, e -> {
+        color(SnPal.copterLaser, e.fin());
+        stroke(e.fout() * 1.2f + 0.5f);
 
-        randLenVectors(e.id, 8, e.finpow() * 17f, (x, y) -> {
-            float ang = Mathf.angle(x, y);
-            lineAngle(e.x + x, e.y + y, ang, e.fout() * 4 + 1f);
+        randLenVectors(e.id, 7, 25f * e.finpow(), e.rotation, 50f, (x, y) -> {
+            lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), e.fin() * 5f + 2f);
         });
     }),
 
-    hitSpine = new Effect(12, e -> {
+    spineShoot = new Effect(12, e -> {
         color(Pal.bulletYellow);
-        stroke(e.fout() * 1.5f);
+        stroke(e.fout() * 1.2f + 0.5f);
 
-        randLenVectors(e.id, 8, e.finpow() * 17f, (x, y) -> {
-            float ang = Mathf.angle(x, y);
-            lineAngle(e.x + x, e.y + y, ang, e.fout() * 4 + 1f);
+        randLenVectors(e.id, 7, 25f * e.finpow(), e.rotation, 50f, (x, y) -> {
+            lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), e.fin() * 5f + 2f);
         });
     }),
-
     hitBlue = new Effect(50f, 100f, e -> {
         float rad = 40f;
         e.scaled(7f, b -> {
