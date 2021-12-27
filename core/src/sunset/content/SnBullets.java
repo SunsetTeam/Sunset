@@ -1046,7 +1046,7 @@ public class SnBullets implements ContentList {
         mediumHelicopterGun = new BasicBulletType(6f, 13) {{
             width = 8f;
             height = 12f;
-            lifetime = 35f;
+            lifetime = 38f;
             shootEffect = Fx.shootSmall;
             smokeEffect = Fx.shootSmallSmoke;
         }};
@@ -1124,8 +1124,8 @@ public class SnBullets implements ContentList {
             lifetime = 40f;
             splashDamageRadius = 17f;
             splashDamage = 25f;
-            height = 9f;
-            width = 9f;
+            height = 10f;
+            width = 10f;
             lightning = 4;
             lightningLength = 10;
             lightningColor = SnPal.copterLaser;

@@ -214,7 +214,7 @@ public class SnUnitTypes implements ContentList {
                         top = true;
                         x = 11f;
                         y = 10f;
-                        layerOffset = 85;
+                        layerOffset = 70;
                         spacing = 3f;
                         reload = 40f;
                         shake = 1f;
@@ -295,7 +295,7 @@ public class SnUnitTypes implements ContentList {
                         shake = 2f;
                         x = -21f;
                         y = -1f;
-                        layerOffset = 80;
+                        layerOffset = 75;
                         reload = 20f;
                         shotDelay = 1f;
                         shootY = 3;
@@ -310,7 +310,7 @@ public class SnUnitTypes implements ContentList {
                         top = true;
                         x = 17f;
                         y = 17f;
-                        layerOffset = 80;
+                        layerOffset = 75;
                         spacing = 4;
                         reload = 40f;
                         recoil = 5f;
@@ -328,7 +328,7 @@ public class SnUnitTypes implements ContentList {
                         shake = 3f;
                         x = 0f;
                         y = 18f;
-                        layerOffset = 85;
+                        layerOffset = 75;
                         reload = 37f;
                         shotDelay = 4f;
                         shots = 5;
