@@ -950,15 +950,15 @@ public class SnBullets implements ContentList {
             lifetime = 25f;
             height = 9f;
             width = 6f;
-            frontColor = SnPal.blastBullet;
+            frontColor = SnPal.blueBullet;
             backColor = SnPal.blueBulletBack;
 
             splashDamage = 10f;
             splashDamageRadius = 15f;
 
-            trailColor = SnPal.blastBullet;
-            trailWidth = 2f;
-            trailLength = 4;
+            trailColor = SnPal.blueBullet;
+            trailWidth = 1.4f;
+            trailLength = 2;
             trailRotation = false;
             
             weaveScale = 5f;
@@ -977,12 +977,13 @@ public class SnBullets implements ContentList {
             splashDamageRadius = 30f;
 
             trailColor = SnPal.blueBullet;
-            trailWidth = 4f;
-            trailLength = 4;
+            trailWidth = 3.2f;
+            trailLength = 3;
             trailRotation = false;
 
             fragBullet = smallBlueMissileFrag;
             fragBullets = 6;
+            fragCone = 90;
 
             weaveScale = 5f;
             weaveMag = 3f;
@@ -1001,9 +1002,6 @@ public class SnBullets implements ContentList {
 
             splashDamage = 30f;
             splashDamageRadius = 25f;
-
-            weaveScale = 5f;
-            weaveMag = 3f;
         }};
 
         smallEnojieMissile = new MissileBulletType(3f, 10) {{
@@ -1227,9 +1225,7 @@ public class SnBullets implements ContentList {
             backColor = Pal.missileYellowBack;
 		    frontColor = Pal.missileYellow;
             trailLength = 0;
-            trailWidth = 5f;
-            trailColor = Pal.bulletYellow;
-            trailInterval = 0.5f;
+            trailWidth = 3f;
             trailEffect = SnFx.bigRocketTrail;
         }};
         smallHelicopterMissiles = new MissileBulletType(4.4f, 10) {{

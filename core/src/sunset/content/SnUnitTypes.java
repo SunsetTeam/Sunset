@@ -281,6 +281,7 @@ public class SnUnitTypes implements ContentList {
                         top = true;
                         x = 17f;
                         y = 14f;
+                        layerOffset = Layer.plans;
                         spacing = 4;
                         reload = 40f;
                         recoil = 5f;
@@ -298,6 +299,7 @@ public class SnUnitTypes implements ContentList {
                         shake = 3f;
                         x = 0f;
                         y = 18f;
+                        layerOffset = Layer.plans;
                         reload = 37f;
                         shotDelay = 4f;
                         shots = 5;
@@ -391,7 +393,7 @@ public class SnUnitTypes implements ContentList {
             rotors.add(
                     new Rotor("rotor-medium") {{
                         offsetX = 0;
-                        offsetY = -37;
+                        offsetY = -35;
                         rotorRotateSpeed = -27f;
                         rotorCount = 6;
                     }}
@@ -399,19 +401,19 @@ public class SnUnitTypes implements ContentList {
 
             rotors.add(
                     new Rotor("rotor-big") {{
-                        offsetX = -31;
-                        offsetY = 25;
-                        rotorRotateSpeed = 27f;
-                        rotorCount = 8;
+                        offsetX = -30;
+                        offsetY = 23;
+                        rotorRotateSpeed = -27f;
+                        rotorCount = 4;
                     }}
             );
 
             rotors.add(
                     new Rotor("rotor-big") {{
-                        offsetX = 31;
-                        offsetY = 25;
-                        rotorRotateSpeed = 27f;
-                        rotorCount = 8;
+                        offsetX = 30;
+                        offsetY = 23;
+                        rotorRotateSpeed = -27f;
+                        rotorCount = 4;
                     }}
             );
 
@@ -420,7 +422,7 @@ public class SnUnitTypes implements ContentList {
                         offsetX = 0;
                         offsetY = 8;
                         rotorRotateSpeed = 26f;
-                        rotorCount = 5;
+                        rotorCount = 3;
                     }}
             );
 

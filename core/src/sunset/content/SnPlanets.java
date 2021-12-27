@@ -47,7 +47,7 @@ public class SnPlanets implements ContentList{
             sectorApproxRadius = 3;
             orbitRadius = 33;
             orbitTime = 17f;
-            rotateTime = 15f * 30f;
+            rotateTime = 40f * 60f;
             accessible = true;
             startSector = 20;
             //lightColor = Color.valueOf("E3B3E3");
@@ -65,7 +65,7 @@ public class SnPlanets implements ContentList{
             atmosphereRadOut = 0.4f;
             orbitRadius = 58f;
             orbitTime = 24.1f;
-            rotateTime = 15f * 30f;
+            rotateTime = 25f * 60f;
             accessible = true;
             startSector = 1;
             //lightColor = Color.valueOf("B3E3BA");
@@ -86,7 +86,7 @@ public class SnPlanets implements ContentList{
             atmosphereRadOut = 0.28f;
             orbitRadius = 85;
             orbitTime = 36f;
-            rotateTime = 15f * 30f;
+            rotateTime = 15f * 60f;
             accessible = true;
             startSector = 1;
             //lightColor = Color.valueOf("B3DDE3");
