@@ -543,10 +543,10 @@ public class SnFx {
         Lines.circle(e.x, e.y, e.rotation * val);
     }),
 
-    bigRocketTrail = new Effect(30f, 78f, e -> {
-        color(Color.lightGray, Pal.lightPyraFlame, e.fin() * e.fin());
+    bigRocketTrail = new Effect(36f, 78f, e -> {
+        color(Pal.lightPyraFlame, Color.gray, Color.lightGray, e.fin() * e.fin());
 
-        randLenVectors(e.id, 8, 2f + e.finpow() * 36, e.rotation + 180, 16f, (x, y) -> {
+        randLenVectors(e.id, 8, 2f + e.finpow() * 36, e.rotation + 180, 18f, (x, y) -> {
             Fill.circle(e.x + x, e.y + y, 0.40f + e.fout() * 2f);
         });
     }),

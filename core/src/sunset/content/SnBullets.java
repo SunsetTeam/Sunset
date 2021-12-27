@@ -1044,15 +1044,15 @@ public class SnBullets implements ContentList {
         }};
         //T2-copter
         mediumHelicopterGun = new BasicBulletType(6f, 13) {{
-            width = 7f;
-            height = 11f;
+            width = 8f;
+            height = 12f;
             lifetime = 35f;
             shootEffect = Fx.shootSmall;
             smokeEffect = Fx.shootSmallSmoke;
         }};
         helicopterMissile = new MissileBulletType(4f, 6) {{
-            width = 7f;
-            height = 10f;
+            width = 8f;
+            height = 11f;
             shrinkY = 0f;
             drag = -0.003f;
             homingRange = 15f;
