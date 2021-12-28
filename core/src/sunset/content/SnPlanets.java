@@ -38,7 +38,7 @@ public class SnPlanets implements ContentList{
         }};
         //endregion stars
         //region planets
-        burnout = new Planet("burnout", SnPlanets.magma, 0.7f, 2){{
+        burnout = new Planet("burnout", SnPlanets.magma, 0.7f, 3){{
             meshLoader = () -> new HexMesh(this, 6);
             generator = new BurnoutGenerator();
             radius = 0.87f;
@@ -47,7 +47,7 @@ public class SnPlanets implements ContentList{
             sectorApproxRadius = 3;
             orbitRadius = 33;
             orbitTime = 17f;
-            rotateTime = 150f * 60f;
+            rotateTime = 400f * 60f;
             accessible = true;
             startSector = 20;
             //lightColor = Color.valueOf("E3B3E3");
@@ -65,7 +65,7 @@ public class SnPlanets implements ContentList{
             atmosphereRadOut = 0.4f;
             orbitRadius = 58f;
             orbitTime = 24.1f;
-            rotateTime = 100f * 60f;
+            rotateTime = 340f * 60f;
             accessible = true;
             startSector = 1;
             //lightColor = Color.valueOf("B3E3BA");
@@ -86,7 +86,7 @@ public class SnPlanets implements ContentList{
             atmosphereRadOut = 0.28f;
             orbitRadius = 85;
             orbitTime = 36f;
-            rotateTime = 70f * 60f;
+            rotateTime = 270f * 60f;
             accessible = true;
             startSector = 1;
             //lightColor = Color.valueOf("B3DDE3");
