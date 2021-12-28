@@ -30,7 +30,6 @@ import sunset.type.unitTypes.CopterUnitType;
 import sunset.type.unitTypes.UnitTypeExt;
 import sunset.type.unitTypes.WheelUnitType;
 import sunset.type.weapons.ChainWeapon;
-import sunset.type.weapons.CopterWeapon;
 import sunset.type.weapons.PointDefenseWeapon;
 import sunset.type.weapons.SnWeapon;
 import sunset.type.weapons.WeaponExt;
@@ -210,7 +209,7 @@ public class SnUnitTypes implements ContentList {
                         mirror = true;
                         x = 11f;
                         y = 10f;
-                        layerOffset = 60;
+                        layer = 60;
                         spacing = 3f;
                         reload = 40f;
                         shake = 1f;
@@ -289,7 +288,7 @@ public class SnUnitTypes implements ContentList {
                         shake = 2f;
                         x = -21f;
                         y = -1f;
-                        layerOffset = 60;
+                        layer = 75;
                         reload = 20f;
                         shotDelay = 1f;
                         shootY = 3;
@@ -303,7 +302,7 @@ public class SnUnitTypes implements ContentList {
                         mirror = true;
                         x = 17f;
                         y = 17f;
-                        layerOffset = 60;
+                        layer = 75;
                         spacing = 4;
                         reload = 40f;
                         recoil = 5f;
@@ -320,7 +319,7 @@ public class SnUnitTypes implements ContentList {
                         shake = 3f;
                         x = 0f;
                         y = 18f;
-                        layerOffset = 60;
+                        layer = 75;
                         reload = 37f;
                         shotDelay = 4f;
                         shots = 5;
@@ -349,8 +348,8 @@ public class SnUnitTypes implements ContentList {
             smokeY = 0f;
             rotors.add(
                     new Rotor("rotor-medium2") {{
-                        offsetX = -8;
-                        offsetY = 15;
+                        offsetX = -11;
+                        offsetY = 18;
                         rotorRotateSpeed = -27f;
                         rotorCount = 3;
                     }}
@@ -358,27 +357,36 @@ public class SnUnitTypes implements ContentList {
 
             rotors.add(
                     new Rotor("rotor-medium2") {{
-                        offsetX = -8;
-                        offsetY = 15;
+                        offsetX = -11;
+                        offsetY = 18;
                         rotorRotateSpeed = 27f;
-                        rotorCount = 4;
+                        rotorCount = 3;
                     }}
             );
 
             rotors.add(
                     new Rotor("rotor-medium2") {{
-                        offsetX = -8;
-                        offsetY = 15;
+                        offsetX = 11;
+                        offsetY = 18;
                         rotorRotateSpeed = -27f;
-                        rotorCount = 4;
+                        rotorCount = 3;
                     }}
             );
 
             rotors.add(
                     new Rotor("rotor-medium2") {{
-                        offsetX = -8;
-                        offsetY = 15;
+                        offsetX = 11;
+                        offsetY = 18;
                         rotorRotateSpeed = 27f;
+                        rotorCount = 3;
+                    }}
+            );
+
+            rotors.add(
+                    new Rotor("rotor-big2") {{
+                        offsetX = 0;
+                        offsetY = -14;
+                        rotorRotateSpeed = -27f;
                         rotorCount = 4;
                     }}
             );
@@ -386,7 +394,7 @@ public class SnUnitTypes implements ContentList {
             rotors.add(
                     new Rotor("rotor-big2") {{
                         offsetX = 0;
-                        offsetY = -15;
+                        offsetY = -14;
                         rotorRotateSpeed = 27f;
                         rotorCount = 4;
                     }}
