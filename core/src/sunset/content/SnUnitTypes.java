@@ -210,7 +210,7 @@ public class SnUnitTypes implements ContentList {
                         mirror = true;
                         x = 11f;
                         y = 10f;
-                        layerOffset = 70;
+                        layerOffset = 60;
                         spacing = 3f;
                         reload = 40f;
                         shake = 1f;
@@ -266,7 +266,7 @@ public class SnUnitTypes implements ContentList {
             );
 
             rotors.add(
-                    new Rotor("rotor-medium2") {{
+                    new Rotor("rotor-medium3") {{
                         offsetX = -13;
                         offsetY = 10;
                         rotorRotateSpeed = -27f;
@@ -275,7 +275,7 @@ public class SnUnitTypes implements ContentList {
             );
 
             rotors.add(
-                    new Rotor("rotor-medium2") {{
+                    new Rotor("rotor-medium3") {{
                         offsetX = 13;
                         offsetY = 10;
                         rotorRotateSpeed = 27f;
@@ -289,7 +289,7 @@ public class SnUnitTypes implements ContentList {
                         shake = 2f;
                         x = -21f;
                         y = -1f;
-                        layerOffset = 75;
+                        layerOffset = 60;
                         reload = 20f;
                         shotDelay = 1f;
                         shootY = 3;
@@ -303,7 +303,7 @@ public class SnUnitTypes implements ContentList {
                         mirror = true;
                         x = 17f;
                         y = 17f;
-                        layerOffset = 75;
+                        layerOffset = 60;
                         spacing = 4;
                         reload = 40f;
                         recoil = 5f;
@@ -320,7 +320,7 @@ public class SnUnitTypes implements ContentList {
                         shake = 3f;
                         x = 0f;
                         y = 18f;
-                        layerOffset = 75;
+                        layerOffset = 60;
                         reload = 37f;
                         shotDelay = 4f;
                         shots = 5;
@@ -347,6 +347,50 @@ public class SnUnitTypes implements ContentList {
             smokeChance = 0.4f;
             smokeX = 0f;
             smokeY = 0f;
+            rotors.add(
+                    new Rotor("rotor-medium2") {{
+                        offsetX = -8;
+                        offsetY = 15;
+                        rotorRotateSpeed = -27f;
+                        rotorCount = 3;
+                    }}
+            );
+
+            rotors.add(
+                    new Rotor("rotor-medium2") {{
+                        offsetX = -8;
+                        offsetY = 15;
+                        rotorRotateSpeed = 27f;
+                        rotorCount = 4;
+                    }}
+            );
+
+            rotors.add(
+                    new Rotor("rotor-medium2") {{
+                        offsetX = -8;
+                        offsetY = 15;
+                        rotorRotateSpeed = -27f;
+                        rotorCount = 4;
+                    }}
+            );
+
+            rotors.add(
+                    new Rotor("rotor-medium2") {{
+                        offsetX = -8;
+                        offsetY = 15;
+                        rotorRotateSpeed = 27f;
+                        rotorCount = 4;
+                    }}
+            );
+
+            rotors.add(
+                    new Rotor("rotor-big2") {{
+                        offsetX = 0;
+                        offsetY = -15;
+                        rotorRotateSpeed = 27f;
+                        rotorCount = 4;
+                    }}
+            );
             weapons.add(
                     new WeaponExt("") {{
                         rotate = false;
