@@ -1065,7 +1065,7 @@ public class SnBullets implements ContentList {
             hitSound = Sounds.explosion;
             trailLength = 10;
             trailWidth = 1.6f;
-            trailRotation = true;
+            trailRotation = false;
             trailEffect = Fx.artilleryTrail;
             lifetime = 40f;
             backColor = Pal.unitBack;
@@ -1223,7 +1223,7 @@ public class SnBullets implements ContentList {
             shrinkY = 0f;
             drag = -0.003f;
             homingRange = 80f;
-            homingPower = 0.4f;
+            homingPower = 0.3f;
             splashDamage = 75f;
             splashDamageRadius = 70f;
             backColor = Pal.missileYellowBack;
@@ -1241,8 +1241,8 @@ public class SnBullets implements ContentList {
             splashDamage = 40f;
             hitEffect = Fx.blastExplosion;
             despawnEffect = Fx.blastExplosion;
-            homingRange = 30;
-            homingPower = 2f;
+            homingRange = 100;
+            homingPower = 1f;
             weaveScale = 4f;
             weaveMag = 2f;
             pierce = true;
@@ -1251,8 +1251,8 @@ public class SnBullets implements ContentList {
         }};
         //T6-copter
         shrapnelCopterGun = new ShrapnelBulletType() {{
-            length = 160f;
-            width = 45f;
+            length = 180f;
+            width = 55f;
             damage = 145;
             shootEffect = SnFx.copterShoot;
             fromColor = SnPal.copterLaser;
@@ -1279,8 +1279,8 @@ public class SnBullets implements ContentList {
             splashDamage = 60f;
             hitEffect = Fx.blastExplosion;
             despawnEffect = Fx.blastExplosion;
-            homingRange = 30;
-            homingPower = 2.5f;
+            homingRange = 140;
+            homingPower = 2f;
             weaveScale = 4f;
             weaveMag = 2f;
             pierce = true;

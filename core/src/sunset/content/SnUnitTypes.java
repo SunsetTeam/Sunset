@@ -348,8 +348,8 @@ public class SnUnitTypes implements ContentList {
             smokeY = 0f;
             rotors.add(
                     new Rotor("rotor-medium2") {{
-                        offsetX = -11;
-                        offsetY = 18;
+                        offsetX = -13;
+                        offsetY = 20;
                         rotorRotateSpeed = -27f;
                         rotorCount = 3;
                     }}
@@ -357,8 +357,8 @@ public class SnUnitTypes implements ContentList {
 
             rotors.add(
                     new Rotor("rotor-medium2") {{
-                        offsetX = -11;
-                        offsetY = 18;
+                        offsetX = -13;
+                        offsetY = 20;
                         rotorRotateSpeed = 27f;
                         rotorCount = 3;
                     }}
@@ -366,8 +366,8 @@ public class SnUnitTypes implements ContentList {
 
             rotors.add(
                     new Rotor("rotor-medium2") {{
-                        offsetX = 11;
-                        offsetY = 18;
+                        offsetX = 13;
+                        offsetY = 20;
                         rotorRotateSpeed = -27f;
                         rotorCount = 3;
                     }}
@@ -375,8 +375,8 @@ public class SnUnitTypes implements ContentList {
 
             rotors.add(
                     new Rotor("rotor-medium2") {{
-                        offsetX = 11;
-                        offsetY = 18;
+                        offsetX = 13;
+                        offsetY = 20;
                         rotorRotateSpeed = 27f;
                         rotorCount = 3;
                     }}
