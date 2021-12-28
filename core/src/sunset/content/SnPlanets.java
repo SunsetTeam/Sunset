@@ -47,7 +47,7 @@ public class SnPlanets implements ContentList{
             sectorApproxRadius = 3;
             orbitRadius = 33;
             orbitTime = 45f;
-            rotateTime = 10f * 60f;
+            rotateTime = 10f * 120f;
             accessible = true;
             startSector = 20;
             //lightColor = Color.valueOf("E3B3E3");
@@ -65,7 +65,7 @@ public class SnPlanets implements ContentList{
             atmosphereRadOut = 0.5f;
             orbitRadius = 58f;
             orbitTime = 30f;
-            rotateTime = 800f * 60f;
+            rotateTime = 18f * 120f;
             accessible = true;
             startSector = 1;
             //lightColor = Color.valueOf("B3E3BA");
@@ -83,10 +83,10 @@ public class SnPlanets implements ContentList{
             generator = new RimeGenerator();
             radius = 1;
             atmosphereRadIn = 0.02f;
-            atmosphereRadOut = 0.31f;
+            atmosphereRadOut = 0.35f;
             orbitRadius = 85;
             orbitTime = 40f;
-            rotateTime = 24f * 60f;
+            rotateTime = 24f * 120f;
             accessible = true;
             startSector = 1;
             //lightColor = Color.valueOf("B3DDE3");

@@ -1063,8 +1063,9 @@ public class SnBullets implements ContentList {
 
             keepVelocity = false;
             hitSound = Sounds.explosion;
-            trailLength = 15;
+            trailLength = 10;
             trailWidth = 1.6f;
+            trailRotation = false;
             lifetime = 40f;
             backColor = Pal.unitBack;
             frontColor = Pal.unitFront;
