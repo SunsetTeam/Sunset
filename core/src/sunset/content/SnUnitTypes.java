@@ -95,7 +95,6 @@ public class SnUnitTypes implements ContentList {
                     new WeaponExt("small-minigun") {{
                         rotate = false;
                         mirror = true;
-                        top = true;
                         x = 4f;
                         y = 2f;
                         shots = 1;
@@ -144,7 +143,6 @@ public class SnUnitTypes implements ContentList {
                     new WeaponExt("missile-mount-small") {{
                         rotate = false;
                         mirror = true;
-                        top = true;
                         x = 3f;
                         y = -2f;
                         spacing = 3f;
@@ -161,7 +159,6 @@ public class SnUnitTypes implements ContentList {
                     new WeaponExt("medium-minigun") {{
                         rotate = false;
                         mirror = true;
-                        top = true;
                         x = -6f;
                         y = 5f;
                         shots = 1;
@@ -211,7 +208,6 @@ public class SnUnitTypes implements ContentList {
                     new WeaponExt("missile-launch") {{
                         rotate = false;
                         mirror = true;
-                        top = true;
                         x = 11f;
                         y = 10f;
                         layerOffset = 70;
@@ -229,7 +225,6 @@ public class SnUnitTypes implements ContentList {
                     new WeaponExt("small-minigun") {{
                         rotate = false;
                         mirror = true;
-                        top = true;
                         x = 3f;
                         y = 0f;
                         reload = 25f;
@@ -291,7 +286,6 @@ public class SnUnitTypes implements ContentList {
                     new WeaponExt("laser-gun") {{
                         rotate = false;
                         mirror = true;
-                        top = true;
                         shake = 2f;
                         x = -21f;
                         y = -1f;
@@ -307,7 +301,6 @@ public class SnUnitTypes implements ContentList {
                     new WeaponExt("big-rocket-launcher") {{
                         rotate = false;
                         mirror = true;
-                        top = true;
                         x = 17f;
                         y = 17f;
                         layerOffset = 75;
@@ -324,7 +317,6 @@ public class SnUnitTypes implements ContentList {
                     new WeaponExt("big-salvo") {{
                         rotate = false;
                         mirror = false;
-                        top = true;
                         shake = 3f;
                         x = 0f;
                         y = 18f;
@@ -471,7 +463,7 @@ public class SnUnitTypes implements ContentList {
                     }},
                     new SnWeapon("") {{
                         rotate = false;
-                        mirror = false;
+                        mirror = true;
                         shake = 3f;
                         x = 17f;
                         y = 14f;
@@ -483,7 +475,7 @@ public class SnUnitTypes implements ContentList {
                     }},
                     new SnWeapon("") {{
                         rotate = false;
-                        mirror = false;
+                        mirror = true;
                         shake = 3f;
                         x = 20f;
                         y = 10f;

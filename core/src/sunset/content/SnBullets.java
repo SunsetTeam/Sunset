@@ -1063,7 +1063,8 @@ public class SnBullets implements ContentList {
 
             keepVelocity = false;
             hitSound = Sounds.explosion;
-            trailChance = 0.2f;
+            trailLength = 15;
+            trailWidth = 1.6f;
             lifetime = 40f;
             backColor = Pal.unitBack;
             frontColor = Pal.unitFront;
@@ -1209,7 +1210,7 @@ public class SnBullets implements ContentList {
             fragBullets = 1;
             fragCone = 0.0001f;
         }};
-        largeHelicopterMissile = new CopterRocketBulletType(6.3f, 13, "missile-large") {{
+        largeHelicopterMissile = new MissileBulletType(6.3f, 13, "missile-large") {{
             width = 14f;
             height = 17f;
             hitShake = 3f;
@@ -1219,14 +1220,14 @@ public class SnBullets implements ContentList {
             hitSound = Sounds.explosion;
             shrinkY = 0f;
             drag = -0.003f;
-            homingRange = 20f;
-            homingPower = 0.2f;
+            homingRange = 80f;
+            homingPower = 0.4f;
             splashDamage = 75f;
             splashDamageRadius = 70f;
             backColor = Pal.missileYellowBack;
 		    frontColor = Pal.missileYellow;
             trailLength = 0;
-            trailWidth = 3f;
+            trailWidth = 2.5f;
             trailEffect = SnFx.bigRocketTrail;
         }};
         smallHelicopterMissiles = new MissileBulletType(4.4f, 10) {{
