@@ -1050,7 +1050,7 @@ public class SnBullets implements ContentList {
             shootEffect = Fx.shootSmall;
             smokeEffect = Fx.shootSmallSmoke;
         }};
-        helicopterMissile = new MissileBulletType(4f, 6) {{
+        helicopterMissile = new BasicBulletType(4f, 6, "missile") {{
             width = 8f;
             height = 11f;
             shrinkY = 0f;
@@ -1065,7 +1065,8 @@ public class SnBullets implements ContentList {
             hitSound = Sounds.explosion;
             trailLength = 10;
             trailWidth = 1.6f;
-            trailRotation = false;
+            trailRotation = true;
+            trailEffect = Fx.artilleryTrail;
             lifetime = 40f;
             backColor = Pal.unitBack;
             frontColor = Pal.unitFront;
