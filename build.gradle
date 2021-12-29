@@ -213,7 +213,6 @@ project(":core") {
     }
     jar {
         exclude("sunset/entities/comp/**")
-        exclude("sunset/entities/compByAnuke/**")
     }
 }
 project(":tests") {
@@ -290,7 +289,8 @@ task jarAndroid{
     doLast{
         if(!sdkRoot || !new File(sdkRoot).exists()) throw new GradleException("No valid Android SDK found. Ensure that ANDROID_HOME is set to your Android SDK directory.");
 
-        def platformRoot = new File("$sdkRoot/platforms/").listFiles().sort().reverse().find{ f -> new File(f, "android.jar").exists()}
+        def platformRoot =
+                new File("$sdkRoot/platforms/").listFiles().sort().reverse().find{ f -> new File(f, "android.jar").exists()}
 
         if(!platformRoot) throw new GradleException("No android.jar found. Ensure that you have an Android platform installed.")
 

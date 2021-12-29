@@ -301,7 +301,7 @@ public class SnUnitTypes implements ContentList {
                         mirror = true;
                         x = 17f;
                         y = 17f;
-                        layer = 60f;
+                        layerOffset = 60f;
                         spacing = 4;
                         reload = 40f;
                         recoil = 5f;
@@ -318,7 +318,7 @@ public class SnUnitTypes implements ContentList {
                         shake = 3f;
                         x = 0f;
                         y = 18f;
-                        layer = 60f;
+                        layerOffset = 60f;
                         reload = 37f;
                         shotDelay = 4f;
                         shots = 5;
@@ -1317,16 +1317,16 @@ public class SnUnitTypes implements ContentList {
             }});
         }};
         //endregion freezing
-        //region delivery
+        //region no branck
         courier = new UnitTypeExt("courier") {{
             speed = 3.9f;
             flying = true;
             itemCapacity = 100;
             health = 50;
             hitSize = 4;
-            defaultController = DeliverAI::new;
+            defaultController = DeliverAI::wrapper;
             //constructor = UnitEntity::create;
         }};
-        //endregion delivery
+        //endregion
     }
 }
