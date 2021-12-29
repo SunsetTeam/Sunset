@@ -1,13 +1,13 @@
-package sunset.ai;
+package sunset.ai.wrappers;
 
 import mindustry.ai.types.*;
 import mindustry.entities.units.*;
 import mindustry.gen.*;
 
-public class AIWrapper extends FormationAI{
+public class FormationAIWrapper extends FormationAI{
     final AIController wrapped;
 
-    public AIWrapper(AIController wrapped){
+    public FormationAIWrapper(AIController wrapped){
         super(null, null);
         this.wrapped = wrapped;
     }

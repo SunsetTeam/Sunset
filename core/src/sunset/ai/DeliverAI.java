@@ -5,6 +5,7 @@ import mindustry.ai.types.*;
 import mindustry.entities.units.*;
 import mindustry.gen.*;
 import mindustry.type.*;
+import sunset.ai.wrappers.*;
 import sunset.gen.*;
 import sunset.type.*;
 import sunset.world.blocks.units.*;
@@ -82,6 +83,6 @@ public class DeliverAI extends FlyingAI{
         }
     }
     public static UnitController wrapper(){
-        return new AIWrapper(new DeliverAI());
+        return new FormationAIWrapper(new DeliverAI());
     }
 }

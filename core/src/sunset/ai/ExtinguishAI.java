@@ -5,6 +5,7 @@ import arc.math.geom.Vec2;
 import arc.util.Interval;
 import mindustry.Vars;
 import mindustry.gen.*;
+import sunset.gen.*;
 import sunset.utils.Utils;
 
 import static mindustry.Vars.tilesize;
@@ -12,7 +13,7 @@ import static mindustry.Vars.world;
 import static sunset.utils.Utils.*;
 
 /** AI, которое преследует горящие союзные пострйки или боевые единицы, если таковые есть. */
-public class ExtinguishAI extends FlyingUnitWeaponAI {
+public class ExtinguishAI extends FlyingUnitWeaponAI{
     Interval timer=new Interval(10);
     public float ticks=15;
     boolean found = false;

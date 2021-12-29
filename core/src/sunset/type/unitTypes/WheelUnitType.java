@@ -5,7 +5,8 @@ import arc.util.Time;
 import mindustry.gen.MechUnit;
 import mindustry.gen.Mechc;
 import mindustry.gen.Unit;
-import sunset.ai.GroundUnitWeaponAI;
+import sunset.ai.*;
+import sunset.gen.*;
 
 public class WheelUnitType extends SnUnitType {
     public WheelUnitType(String name) {
