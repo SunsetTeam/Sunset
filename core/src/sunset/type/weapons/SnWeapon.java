@@ -12,6 +12,7 @@ import mma.ModVars;
 
 /** needs for remove modPrefix when you create a weapon*/
 public class SnWeapon extends Weapon {
+    public float layer = 0f;
     public SnWeapon(String name) {
         super(ModVars.fullName(name));
     }
@@ -39,6 +40,10 @@ public class SnWeapon extends Weapon {
     /**Anuke bug fix*/
     @Override
     public void draw(Unit unit, WeaponMount mount){
+
+        float z = Draw.z();
+        Draw.z(z + layer);
+
         float
                 rotation = unit.rotation - 90,
                 weaponRotation  = rotation + (rotate ? mount.rotation : 0),
