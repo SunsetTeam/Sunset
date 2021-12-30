@@ -1072,8 +1072,8 @@ public class SnBullets implements ContentList {
             frontColor = Pal.unitFront;
             hitEffect = Fx.blastExplosion;
             despawnEffect = Fx.blastExplosion;
-            weaveScale = 4f;
-            weaveMag = 2f;
+            // weaveScale = 4f;
+            // weaveMag = 2f;
         }};
         //T3-copter
         clusterRocketSmall = new MissileBulletType(4.2f, 5) {{
