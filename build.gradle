@@ -139,11 +139,11 @@ project(":core") {
     }
 
     compileJava.options.fork = true
-
     task preGen {
         outputs.upToDateWhen { false }
         writeProcessors()
     }
+
     task sourcesJar(type: Jar, dependsOn: classes) {
         archiveClassifier = 'sources'
         from sourceSets.main.allSource
@@ -213,6 +213,7 @@ project(":core") {
     }
     jar {
         exclude("sunset/entities/comp/**")
+        exclude("sunset/codegen/**")
     }
 }
 project(":tests") {
