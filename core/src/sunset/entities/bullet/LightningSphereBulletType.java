@@ -18,9 +18,8 @@ public class LightningSphereBulletType extends BasicBulletType {
     public float lightningDamage = -1;
     public float lightningCone = 360f;
     public float lightningAngle = 0f;
-    public LightningSphereBulletType (float speed, float damage){
-        super(speed, damage);
-        sprite = "sunset-circle-bullet";
+    public LightningSphereBulletType (float speed, float damage, String bulletSprite){
+        super(speed, damage, bulletSprite);
         despawnEffect = Fx.none;
         hitEffect = Fx.hitLancer;
     }
