@@ -91,7 +91,7 @@ public class SnUnitTypes implements ContentList {
                     new WeaponExt("small-minigun") {{
                         rotate = false;
                         mirror = true;
-                        x = 4f;
+                        x = -4f;
                         y = 2f;
                         shots = 1;
                         inaccuracy = 1;
@@ -218,11 +218,12 @@ public class SnUnitTypes implements ContentList {
                         bullet = SnBullets.clusterRocket;
                     }},
 
-                    new WeaponExt("small-minigun") {{
+                    new WeaponExt("small-energy-shpere-generator") {{
                         rotate = false;
                         mirror = true;
-                        x = 3f;
-                        y = 0f;
+                        x = 0f;
+                        y = 14f;
+                        layerOffset = -1f;
                         reload = 25f;
                         shake = 1f;
                         recoil = 2f;
@@ -396,11 +397,11 @@ public class SnUnitTypes implements ContentList {
                     }}
             );
             weapons.add(
-                    new WeaponExt("") {{
+                    new WeaponExt("large-rocket-launcher") {{
                         rotate = false;
                         mirror = true;
-                        x = 17f;
-                        y = 6f;
+                        x = 5f;
+                        y = 4f;
                         spacing = 5;
                         reload = 50f;
                         recoil = 5f;
@@ -411,11 +412,11 @@ public class SnUnitTypes implements ContentList {
                         shootSound = Sounds.bang;
                         bullet = SnBullets.largeHelicopterMissile;
                     }},
-                    new SnWeapon("") {{
+                    new SnWeapon("big-salvo") {{
                         rotate = false;
-                        mirror = false;
+                        mirror = true;
                         shake = 3f;
-                        x = 10f;
+                        x = 17f;
                         y = 10f;
                         reload = 40f;
                         shotDelay = 4f;
@@ -424,12 +425,26 @@ public class SnUnitTypes implements ContentList {
                         shootSound = Sounds.shootBig;
                         bullet = SnBullets.largeHelicopterGun;
                     }},
-                    new SnWeapon("") {{
+                    new SnWeapon("big-salvo") {{
                         rotate = false;
                         mirror = true;
-                        shake = 2f;
-                        x = 9f;
-                        y = 7f;
+                        shake = 3f;
+                        x = 20f;
+                        y = 6f;
+                        reload = 30f;
+                        shotDelay = 4f;
+                        shots = 2;
+                        inaccuracy = 0.5f;
+                        shootSound = Sounds.shootBig;
+                        bullet = SnBullets.largeHelicopterGun;
+                    }},
+                    new SnWeapon("small-missile-launcher") {{
+                        rotate = false;
+                        mirror = false;
+                        shake = 3f;
+                        x = 0f;
+                        y = 17f;
+                        layerOffset = -1f;
                         reload = 20f;
                         shotDelay = 1f;
                         shots = 3;
@@ -496,11 +511,12 @@ public class SnUnitTypes implements ContentList {
             );
 
             weapons.add(
-                    new WeaponExt("") {{
+                    new WeaponExt("large-shrapnel-gun") {{
                         rotate = false;
                         mirror = true;
-                        x = 24f;
-                        y = 3f;
+                        x = 30f;
+                        y = 31f;
+                        layerOffset = -1f;
                         reload = 55f;
                         recoil = 7f;
                         shake = 4f;
@@ -509,12 +525,13 @@ public class SnUnitTypes implements ContentList {
                         shootSound = Sounds.shotgun;
                         bullet = SnBullets.shrapnelCopterGun;
                     }},
-                    new SnWeapon("") {{
+                    new SnWeapon("gigant-minigun") {{
                         rotate = false;
                         mirror = true;
                         shake = 3f;
                         x = 17f;
-                        y = 14f;
+                        y = -3f;
+                        recoil = 4f;
                         reload = 8f;
                         shots = 1;
                         inaccuracy = 0.5f;
@@ -525,8 +542,10 @@ public class SnUnitTypes implements ContentList {
                         rotate = false;
                         mirror = true;
                         shake = 3f;
-                        x = 20f;
-                        y = 10f;
+                        x = 36f;
+                        y = 29f;
+                        recoil = 3f;
+                        layerOffset = -1f;
                         reload = 60f;
                         shotDelay = 4f;
                         shots = 2;
@@ -534,12 +553,14 @@ public class SnUnitTypes implements ContentList {
                         shootSound = Sounds.missile;
                         bullet = SnBullets.bigClusterRocket;
                     }},
-                    new SnWeapon("") {{
+                    new SnWeapon("medium-energy-sphere-generator") {{
                         rotate = false;
                         mirror = true;
                         shake = 2f;
-                        x = 4f;
-                        y = 16f;
+                        x = 0f;
+                        y = 30f;
+                        recoil = 4f;
+                        layerOffset = -1f;
                         reload = 40f;
                         shotDelay = 1f;
                         shots = 1;
