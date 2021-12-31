@@ -25,6 +25,17 @@ public class LightningSphereBulletType extends BasicBulletType {
     }
 
     @Override
+    public void update(Bullet b) {
+        super.update(b);
+
+        if (Mathf.chanceDelta(LightningChance)) {
+            for(int i = 0; i < lightning; i++) {
+                Lightning.create(b, lightningColor, lightningDamage < 0 ? damage : lightningDamage, b.x, b.y, b.rotation() + Mathf.range(lightningCone/2) + lightningAngle, lightningLength + Mathf.random(lightningLengthRand));
+            }
+        }
+    }
+
+    @Override
     public float estimateDPS(){
         return super.estimateDPS() * Math.max(lightningLength / 10f, 1);
     }
