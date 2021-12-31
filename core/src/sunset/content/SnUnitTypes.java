@@ -400,7 +400,7 @@ public class SnUnitTypes implements ContentList {
                     new WeaponExt("large-rocket-launcher") {{
                         rotate = false;
                         mirror = true;
-                        x = 5f;
+                        x = 9f;
                         y = 4f;
                         spacing = 5;
                         reload = 50f;
@@ -416,7 +416,7 @@ public class SnUnitTypes implements ContentList {
                         rotate = false;
                         mirror = true;
                         shake = 3f;
-                        x = 17f;
+                        x = 19f;
                         y = 10f;
                         reload = 40f;
                         shotDelay = 4f;
@@ -429,7 +429,7 @@ public class SnUnitTypes implements ContentList {
                         rotate = false;
                         mirror = true;
                         shake = 3f;
-                        x = 20f;
+                        x = 24f;
                         y = 6f;
                         reload = 30f;
                         shotDelay = 4f;
@@ -443,7 +443,7 @@ public class SnUnitTypes implements ContentList {
                         mirror = false;
                         shake = 3f;
                         x = 0f;
-                        y = 17f;
+                        y = 25f;
                         layerOffset = -1f;
                         reload = 20f;
                         shotDelay = 1f;
@@ -514,8 +514,8 @@ public class SnUnitTypes implements ContentList {
                     new WeaponExt("large-shrapnel-gun") {{
                         rotate = false;
                         mirror = true;
-                        x = 30f;
-                        y = 31f;
+                        x = 34f;
+                        y = 35f;
                         layerOffset = -1f;
                         reload = 55f;
                         recoil = 7f;
@@ -529,8 +529,8 @@ public class SnUnitTypes implements ContentList {
                         rotate = false;
                         mirror = true;
                         shake = 3f;
-                        x = 17f;
-                        y = -3f;
+                        x = 23f;
+                        y = -7f;
                         recoil = 4f;
                         reload = 8f;
                         shots = 1;
@@ -542,8 +542,8 @@ public class SnUnitTypes implements ContentList {
                         rotate = false;
                         mirror = true;
                         shake = 3f;
-                        x = 36f;
-                        y = 29f;
+                        x = 40f;
+                        y = 38f;
                         recoil = 3f;
                         layerOffset = -1f;
                         reload = 60f;
@@ -558,7 +558,7 @@ public class SnUnitTypes implements ContentList {
                         mirror = true;
                         shake = 2f;
                         x = 0f;
-                        y = 30f;
+                        y = 35f;
                         recoil = 4f;
                         layerOffset = -1f;
                         reload = 40f;
