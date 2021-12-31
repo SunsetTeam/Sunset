@@ -39,11 +39,6 @@ public class LightningSphereBulletType extends BasicBulletType {
     }
 
     @Override
-    public float range(){
-        return (lightningLength) * 6f;
-    }
-
-    @Override
     public float estimateDPS(){
         return super.estimateDPS() * Math.max(lightningLength / 10f, 1);
     }
