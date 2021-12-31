@@ -186,8 +186,8 @@ public class SnUnitTypes implements ContentList {
             rotors.add(
                     new Rotor("rotor-mini") {{
                         offsetX = 0;
-                        offsetY = -8;
-                        rotorRotateSpeed = 27f;
+                        offsetY = -9;
+                        rotorRotateSpeed = -27f;
                         rotorCount = 3;
                     }}
             );
@@ -195,7 +195,7 @@ public class SnUnitTypes implements ContentList {
             rotors.add(
                     new Rotor("rotor-big") {{
                         offsetX = 0;
-                        offsetY = 8;
+                        offsetY = 9;
                         rotorRotateSpeed = 28f;
                         rotorCount = 3;
                     }}
@@ -344,7 +344,7 @@ public class SnUnitTypes implements ContentList {
             smokeY = 0f;
             rotors.add(
                     new Rotor("rotor-medium2") {{
-                        offsetX = -13;
+                        offsetX = -14;
                         offsetY = 20;
                         rotorRotateSpeed = -27f;
                         rotorCount = 3;
@@ -353,7 +353,7 @@ public class SnUnitTypes implements ContentList {
 
             rotors.add(
                     new Rotor("rotor-medium2") {{
-                        offsetX = -13;
+                        offsetX = -14;
                         offsetY = 20;
                         rotorRotateSpeed = 27f;
                         rotorCount = 3;
@@ -362,18 +362,18 @@ public class SnUnitTypes implements ContentList {
 
             rotors.add(
                     new Rotor("rotor-medium2") {{
-                        offsetX = 13;
+                        offsetX = 14;
+                        offsetY = 20;
+                        rotorRotateSpeed = 27f;
+                        rotorCount = 3;
+                    }}
+            );
+
+            rotors.add(
+                    new Rotor("rotor-medium2") {{
+                        offsetX = 14;
                         offsetY = 20;
                         rotorRotateSpeed = -27f;
-                        rotorCount = 3;
-                    }}
-            );
-
-            rotors.add(
-                    new Rotor("rotor-medium2") {{
-                        offsetX = 13;
-                        offsetY = 20;
-                        rotorRotateSpeed = 27f;
                         rotorCount = 3;
                     }}
             );
