@@ -1312,14 +1312,15 @@ public class SnBullets implements ContentList {
             fragBullets = 3;
         }};
 
-        bigCopterEnergySphere = new BasicBulletType(3f, 7) {{
+        bigCopterEnergySphere = new LightningSphereBulletType(3f, 7) {{
             sprite = "sunset-circle-bullet";
             lifetime = 37f;
             splashDamageRadius = 90f;
             splashDamage = 80f;
             height = 14f;
             width = 14f;
-            lightning = 10;
+            LightningChance = 0.4f;
+            lightning = 4;
             lightningLength = 12;
             lightningColor = SnPal.copterLaser;
             lightningDamage = 30f;
