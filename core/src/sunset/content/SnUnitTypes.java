@@ -310,7 +310,7 @@ public class SnUnitTypes implements ContentList {
                         shootSound = Sounds.bang;
                         bullet = SnBullets.bigHelicopterMissile;
                     }},
-                    new WeaponExt("big-salvo") {{
+                    new WeaponExt("large-salvo") {{
                         rotate = false;
                         mirror = false;
                         shake = 3f;
@@ -331,7 +331,7 @@ public class SnUnitTypes implements ContentList {
             speed = 2.1f;
             rotateSpeed = 3.6f;
             accel = 0.04f;
-			drag = 0.02f;
+			drag = 0.007f;
             commandLimit = 5;
             flying = true;
             circleTarget = false;
@@ -400,7 +400,7 @@ public class SnUnitTypes implements ContentList {
                     new WeaponExt("large-rocket-launcher") {{
                         rotate = false;
                         mirror = true;
-                        x = 9f;
+                        x = -9f;
                         y = 4f;
                         spacing = 5;
                         reload = 50f;
@@ -417,7 +417,7 @@ public class SnUnitTypes implements ContentList {
                         mirror = true;
                         shake = 3f;
                         x = 19f;
-                        y = 10f;
+                        y = 24f;
                         reload = 40f;
                         shotDelay = 4f;
                         shots = 2;
@@ -430,7 +430,7 @@ public class SnUnitTypes implements ContentList {
                         mirror = true;
                         shake = 3f;
                         x = 24f;
-                        y = 6f;
+                        y = 8f;
                         reload = 30f;
                         shotDelay = 4f;
                         shots = 2;
@@ -443,7 +443,7 @@ public class SnUnitTypes implements ContentList {
                         mirror = false;
                         shake = 3f;
                         x = 0f;
-                        y = 25f;
+                        y = 30f;
                         layerOffset = -1f;
                         reload = 20f;
                         shotDelay = 1f;
@@ -460,7 +460,7 @@ public class SnUnitTypes implements ContentList {
             speed = 1.7f;
             rotateSpeed = 3f;
             accel = 0.02f;
-			drag = 0.01f;
+			drag = 0.005f;
             commandLimit = 4;
             range = 170f;
 
@@ -514,10 +514,10 @@ public class SnUnitTypes implements ContentList {
                     new WeaponExt("large-shrapnel-gun") {{
                         rotate = false;
                         mirror = true;
-                        x = 34f;
-                        y = 35f;
+                        x = 30f;
+                        y = 40f;
                         layerOffset = -1f;
-                        reload = 55f;
+                        reload = 65f;
                         recoil = 7f;
                         shake = 4f;
                         inaccuracy = 1f;
@@ -530,7 +530,7 @@ public class SnUnitTypes implements ContentList {
                         mirror = true;
                         shake = 3f;
                         x = 23f;
-                        y = -7f;
+                        y = -11f;
                         recoil = 4f;
                         reload = 8f;
                         shots = 1;
@@ -542,11 +542,11 @@ public class SnUnitTypes implements ContentList {
                         rotate = false;
                         mirror = true;
                         shake = 3f;
-                        x = 40f;
-                        y = 38f;
+                        x = 45f;
+                        y = 31f;
                         recoil = 3f;
                         layerOffset = -1f;
-                        reload = 60f;
+                        reload = 55f;
                         shotDelay = 4f;
                         shots = 2;
                         inaccuracy = 0.5f;
