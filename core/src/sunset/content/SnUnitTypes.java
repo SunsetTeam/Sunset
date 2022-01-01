@@ -91,7 +91,7 @@ public class SnUnitTypes implements ContentList {
                     new WeaponExt("small-minigun") {{
                         rotate = false;
                         mirror = true;
-                        x = -4f;
+                        x = 5f;
                         y = 2f;
                         shots = 1;
                         inaccuracy = 1;
@@ -400,7 +400,7 @@ public class SnUnitTypes implements ContentList {
                     new WeaponExt("large-rocket-launcher") {{
                         rotate = false;
                         mirror = true;
-                        x = -9f;
+                        x = 9f;
                         y = 4f;
                         spacing = 5;
                         reload = 50f;
@@ -416,8 +416,8 @@ public class SnUnitTypes implements ContentList {
                         rotate = false;
                         mirror = true;
                         shake = 3f;
-                        x = 19f;
-                        y = 24f;
+                        x = 20f;
+                        y = 27f;
                         reload = 40f;
                         shotDelay = 4f;
                         shots = 2;
@@ -429,7 +429,7 @@ public class SnUnitTypes implements ContentList {
                         rotate = false;
                         mirror = true;
                         shake = 3f;
-                        x = 24f;
+                        x = 25f;
                         y = 8f;
                         reload = 30f;
                         shotDelay = 4f;
