@@ -443,7 +443,7 @@ public class SnUnitTypes implements ContentList {
                         mirror = false;
                         shake = 3f;
                         x = 0f;
-                        y = 30f;
+                        y = 35f;
                         layerOffset = -1f;
                         reload = 20f;
                         shotDelay = 1f;
@@ -558,7 +558,7 @@ public class SnUnitTypes implements ContentList {
                         mirror = true;
                         shake = 2f;
                         x = 0f;
-                        y = 38f;
+                        y = 40f;
                         recoil = 4f;
                         layerOffset = -1f;
                         reload = 40f;
