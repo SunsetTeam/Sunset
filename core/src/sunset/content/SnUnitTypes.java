@@ -456,12 +456,12 @@ public class SnUnitTypes implements ContentList {
         
         parhelion = new CopterUnitType("parhelion") {{
             health = 57000;
-            hitSize = 78;
-            speed = 1.7f;
+            hitSize = 90;
+            speed = 1.5f;
             rotateSpeed = 3f;
             accel = 0.02f;
 			drag = 0.005f;
-            commandLimit = 4;
+            commandLimit = 6;
             range = 170f;
 
             flying = true;
