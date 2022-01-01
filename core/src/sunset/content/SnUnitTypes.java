@@ -222,7 +222,7 @@ public class SnUnitTypes implements ContentList {
                         rotate = false;
                         mirror = true;
                         x = 0f;
-                        y = 14f;
+                        y = 16f;
                         layerOffset = -1f;
                         reload = 25f;
                         shake = 1f;
