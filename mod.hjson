@@ -10,7 +10,7 @@ author:
 \n[#f28805]Plot:[] [#b61f10]Tabyretka[]
 "
 description: "[blue]Adds a lot of new content on type: 3 planets, new and upgraded turrets, factories, 50+ units, items, embodiment and more....."
-version: 0.1.9A
+version: 0.2.0A
 repo: SunsetTeam/Sunset
 main: sunset.Sunset
 minGameVersion: 135
