@@ -525,7 +525,7 @@ public class SnUnitTypes implements ContentList {
                         shootSound = Sounds.shotgun;
                         bullet = SnBullets.shrapnelCopterGun;
                     }},
-                    new SnWeapon("gigant-minigun") {{
+                    new WeaponExt("gigant-minigun") {{
                         rotate = false;
                         mirror = true;
                         shake = 3f;
@@ -538,7 +538,7 @@ public class SnUnitTypes implements ContentList {
                         shootSound = Sounds.shootBig;
                         bullet = SnBullets.gigantHelicopterGun;
                     }},
-                    new SnWeapon("") {{
+                    new WeaponExt("gigant-rocket-launcher") {{
                         rotate = false;
                         mirror = true;
                         shake = 3f;
@@ -553,7 +553,7 @@ public class SnUnitTypes implements ContentList {
                         shootSound = Sounds.missile;
                         bullet = SnBullets.bigClusterRocket;
                     }},
-                    new SnWeapon("medium-energy-sphere-generator") {{
+                    new WeaponExt("medium-energy-sphere-generator") {{
                         rotate = false;
                         mirror = true;
                         shake = 2f;
