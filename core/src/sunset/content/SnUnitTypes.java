@@ -330,8 +330,8 @@ public class SnUnitTypes implements ContentList {
             hitSize = 70;
             speed = 2.1f;
             rotateSpeed = 3.6f;
-            accel = 0.04f;
-			drag = 0.007f;
+            accel = 0.06f;
+            drag = 0.04f;
             commandLimit = 5;
             flying = true;
             circleTarget = false;
@@ -459,8 +459,8 @@ public class SnUnitTypes implements ContentList {
             hitSize = 90;
             speed = 1.5f;
             rotateSpeed = 3f;
-            accel = 0.02f;
-			drag = 0.005f;
+            accel = 0.05f;
+            drag = 0.04f;
             commandLimit = 6;
             range = 170f;
 
@@ -515,7 +515,7 @@ public class SnUnitTypes implements ContentList {
                         rotate = false;
                         mirror = true;
                         x = 30f;
-                        y = 44f;
+                        y = 47f;
                         layerOffset = -1f;
                         reload = 65f;
                         recoil = 7f;
@@ -558,7 +558,7 @@ public class SnUnitTypes implements ContentList {
                         mirror = true;
                         shake = 2f;
                         x = 0f;
-                        y = 40f;
+                        y = 45f;
                         recoil = 4f;
                         layerOffset = -1f;
                         reload = 40f;

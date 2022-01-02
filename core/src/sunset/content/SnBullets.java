@@ -1259,9 +1259,9 @@ public class SnBullets implements ContentList {
         }};
 
         gigantHelicopterGun = new BasicBulletType(5f, 75) {{
-            width = 12f;
-            height = 17f;
-            lifetime = 50f;
+            width = 16f;
+            height = 21f;
+            lifetime = 55f;
             hitEffect = Fx.flakExplosion;
             shootEffect = Fx.shootSmall;
             smokeEffect = Fx.shootSmallSmoke;
@@ -1284,7 +1284,7 @@ public class SnBullets implements ContentList {
             pierceBuilding = true;
             pierceCap = 10;
         }};
-        bigClusterRocket = new MissileBulletType(4.3f, 10, "missile-large") {{
+        bigClusterRocket = new MissileBulletType(4.5f, 10, "missile-large") {{
             width = 16f;
             height = 18f;
             shrinkY = 0f;
@@ -1310,14 +1310,14 @@ public class SnBullets implements ContentList {
         }};
 
         bigCopterEnergySphere = new LightningSphereBulletType(3f, 7, "sunset-circle-bullet") {{
-            lifetime = 37f;
+            lifetime = 40f;
             splashDamageRadius = 90f;
             splashDamage = 80f;
             height = 14f;
             width = 14f;
             LightningChance = 0.3f;
             lightning = 4;
-            lightningLength = 10;
+            lightningLength = 8;
             lightningColor = SnPal.copterLaser;
             lightningDamage = 30f;
             shrinkX = 0.01f;

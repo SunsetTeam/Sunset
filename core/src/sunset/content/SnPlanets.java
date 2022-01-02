@@ -42,7 +42,7 @@ public class SnPlanets implements ContentList{
             meshLoader = () -> new HexMesh(this, 6);
             generator = new BurnoutGenerator();
             radius = 0.87f;
-            atmosphereRadIn = 0.05f;
+            atmosphereRadIn = 0.02f;
             atmosphereRadOut = 0.19f;
             sectorApproxRadius = 3;
             orbitRadius = 33;
@@ -61,7 +61,7 @@ public class SnPlanets implements ContentList{
             meshLoader = () -> new HexMesh(this, 6);
             generator = new AzariaGenerator();
             radius = 1.03f;
-            atmosphereRadIn = 0.04f;
+            atmosphereRadIn = 0.03f;
             atmosphereRadOut = 0.5f;
             orbitRadius = 58f;
             orbitTime = 30f;
