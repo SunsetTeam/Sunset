@@ -350,10 +350,6 @@ public class SnBullets implements ContentList {
             fragBullets = 36;
             fragBullet = Bullets.oilShot;
         }};
-        burheynaFrag = new LiquidBulletType(SnLiquids.burheyna) {{
-            damage = 2;
-            drag = 0.01f;
-        }};
 
         floodBurheynaShot = new ArtilleryLiquidBulletType(SnLiquids.burheyna) {{
             lifetime = 130f;
@@ -657,9 +653,9 @@ public class SnBullets implements ContentList {
             collidesAir = true;
             collidesGround = true;
 
-            fragBullet = burheynaFrag;
-            fragCone = 360;
-            fragBullets = 2;
+            fragBullet = bigSporePodPoisonFrag;
+            fragCone = 90f;
+            fragBullets = 4;
 
             trailColor = SnPal.poisonBullet;
             trailWidth = 4f;
@@ -685,9 +681,9 @@ public class SnBullets implements ContentList {
             collidesAir = true;
             collidesGround = true;
 
-            fragBullet = burheynaFrag;
-            fragCone = 360f;
-            fragBullets = 12;
+            fragBullet = bigNaturitePoisonFrag;
+            fragCone = 90f;
+            fragBullets = 5;
 
             trailColor = SnPal.poisonBullet;
             trailWidth = 4f;
@@ -713,9 +709,9 @@ public class SnBullets implements ContentList {
             collidesAir = true;
             collidesGround = true;
 
-            fragBullet = burheynaFrag;
-            fragCone = 360f;
-            fragBullets = 12;
+            fragBullet = bigNobiumPoisonFrag;
+            fragCone = 90f;
+            fragBullets = 4;
 
             trailColor = SnPal.poisonBullet;
             trailWidth = 4f;
@@ -744,9 +740,9 @@ public class SnBullets implements ContentList {
             collidesAir = true;
             collidesGround = true;
 
-            fragBullet = burheynaFrag;
-            fragCone = 360f;
-            fragBullets = 4;
+            fragBullet = bigPlastaniumPoisonFrag;
+            fragCone = 90f;
+            fragBullets = 6;
 
             trailColor = SnPal.poisonBullet;
             trailWidth = 4f;
@@ -1044,13 +1040,13 @@ public class SnBullets implements ContentList {
         }};
         //T2-copter
         mediumHelicopterGun = new BasicBulletType(6f, 13) {{
-            width = 8f;
+            width = 9f;
             height = 12f;
             lifetime = 38f;
             shootEffect = Fx.shootSmall;
             smokeEffect = Fx.shootSmallSmoke;
         }};
-        helicopterMissile = new BasicBulletType(4.2f, 6, "missile") {{
+        helicopterMissile = new MissileBulletType(4.2f, 6) {{
             width = 8f;
             height = 11f;
             shrinkY = 0f;
@@ -1723,10 +1719,18 @@ public class SnBullets implements ContentList {
                 }};
             }};
         }};
-        testBullet2 = new BasicBulletType(5, 50) {{
-            fragBullets = 6;
-            fragCone = 360;
-            fragBullet = new ContinuousLaserBulletType(150);
+        testBullet2 = new LightningSphereBulletType(5, 50, "sunset-circle-bullet") {{
+            height = 13f;
+            width = 13f;
+            LightningChance = 0.3f;
+            lightning = 3;
+            lightningLength = 4;
+            lightningDamage = 30f;
+            lifetime = 30f;
+            hitEffect = SnFx.unused2;
+            drag = -0.003f;
+            homingRange = 10f;
+            homingPower = 0.2f;
         }};
         //endregion misc
     }

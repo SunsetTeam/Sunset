@@ -558,7 +558,7 @@ public class SnUnitTypes implements ContentList {
                         mirror = true;
                         shake = 2f;
                         x = 0f;
-                        y = 45f;
+                        y = 48f;
                         recoil = 4f;
                         layerOffset = -1f;
                         reload = 40f;

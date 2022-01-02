@@ -12,6 +12,7 @@ import arc.math.Mathf;
 import arc.math.geom.Position;
 import arc.math.geom.Vec2;
 import arc.struct.Seq;
+import arc.util.Time;
 import arc.util.Tmp;
 import mindustry.Vars;
 import mindustry.content.Fx;
@@ -723,7 +724,16 @@ public class SnFx {
         }
 
         Drawf.light(e.x, e.y, squareRad * 1.5f, SnPal.copterBomb, e.fout());
+    }),
+
+    unused2 = new Effect(120f, 65f, e -> {
+        color(SnPal.copterBomb);
+        stroke(e.fout() * 2f);
+
+        // Lines.square(e.x, e.y, e.fin() * 60.0F, 90 * e.rotation);
+         Lines.square(e.x, e.y, e.fin() * 15f,  Time.time % 360f);
     });
+
     //endregion unused
     //region energy sphere utils
     public static void enegrySphere(long seed, float time, float fin, int amount,
