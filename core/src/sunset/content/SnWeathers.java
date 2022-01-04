@@ -2,16 +2,18 @@ package sunset.content;
 
 import arc.graphics.*;
 import arc.util.*;
+import mindustry.content.StatusEffects;
 import mindustry.content.Weathers;
 import mindustry.ctype.*;
 import mindustry.gen.*;
 import mindustry.type.*;
 import mindustry.type.weather.*;
 import mindustry.world.meta.*;
+import sunset.type.weather.Storm;
 
 public class SnWeathers implements ContentList {
     public static Weather
-            blizzard, flood;
+            blizzard, flood, lightningStorm;
 
     @Override
     public void load() {
@@ -65,6 +67,28 @@ public class SnWeathers implements ContentList {
 
             statusAir = false;
             statusGround = true;
+        }};
+
+        lightningStorm = new Storm("lightning-storm") {{
+            color = noiseColor = Color.valueOf("CACACA");
+            particleRegion = "particle";
+            drawNoise = true;
+            useWindVector = true;
+            sizeMax = 30f;
+            sizeMin = 10f;
+            minAlpha = 0f;
+            maxAlpha = 0.1f;
+            density = 1700f;
+            baseSpeed = 5.9f;
+            attrs.set(Attribute.light, -0.40f);
+            attrs.set(Attribute.water, 0.2f);
+            status = StatusEffects.wet;
+            opacityMultiplier = 0.35f;
+            force = 0.4f;
+            duration = 3f * Time.toMinutes;
+
+            sound = Sounds.rain;
+            soundVol = 0.25f;
         }};
     }
 }
