@@ -2,6 +2,7 @@ package sunset.content;
 
 import arc.graphics.*;
 import arc.math.*;
+import arc.util.Time;
 import mindustry.ctype.*;
 import mindustry.graphics.g3d.*;
 import mindustry.type.*;
@@ -47,7 +48,7 @@ public class SnPlanets implements ContentList{
             sectorApproxRadius = 3;
             orbitRadius = 33;
             orbitTime = 45f;
-            rotateTime = 10f * 120f;
+            rotateTime = 35f * Time.toMinutes;
             accessible = true;
             startSector = 20;
             //lightColor = Color.valueOf("E3B3E3");
@@ -65,7 +66,7 @@ public class SnPlanets implements ContentList{
             atmosphereRadOut = 0.5f;
             orbitRadius = 58f;
             orbitTime = 30f;
-            rotateTime = 18f * 120f;
+            rotateTime = 25f * Time.toMinutes;
             accessible = true;
             startSector = 1;
             //lightColor = Color.valueOf("B3E3BA");
@@ -86,7 +87,7 @@ public class SnPlanets implements ContentList{
             atmosphereRadOut = 0.35f;
             orbitRadius = 85;
             orbitTime = 40f;
-            rotateTime = 24f * 120f;
+            rotateTime = 18f * Time.toMinutes;
             accessible = true;
             startSector = 1;
             //lightColor = Color.valueOf("B3DDE3");

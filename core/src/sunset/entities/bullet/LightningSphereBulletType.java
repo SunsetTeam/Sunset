@@ -3,11 +3,9 @@ package sunset.entities.bullet;
 import arc.graphics.Color;
 import arc.math.Mathf;
 import mindustry.content.Fx;
-import mindustry.entities.Effect;
 import mindustry.entities.Lightning;
 import mindustry.entities.bullet.BasicBulletType;
 import mindustry.gen.Bullet;
-import mindustry.gen.Sounds;
 import mindustry.graphics.Pal;
 
 public class LightningSphereBulletType extends BasicBulletType {

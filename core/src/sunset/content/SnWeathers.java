@@ -87,6 +87,10 @@ public class SnWeathers implements ContentList {
             force = 0.4f;
             duration = 3f * Time.toMinutes;
 
+            lightningScl = 40;
+            lightningLength = 9;
+            lightningDamage = 20f;
+
             sound = Sounds.rain;
             soundVol = 0.25f;
         }};
