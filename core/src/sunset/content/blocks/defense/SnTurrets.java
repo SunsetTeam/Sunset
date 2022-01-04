@@ -221,8 +221,8 @@ public class SnTurrets implements ContentList {
             ammoUseEffect = Fx.casing2;
             targetAir = false;
 
-            speedupPerShot = 0.17f;
-            maxReloadMultiplier = 0.7f;
+            speedupPerShot = 0.15f;
+            maxReloadMultiplier = 2f;
         }};
         burner = new ItemTurret("burner") {{
             requirements(Category.turret, with(Items.metaglass, 75, Items.lead, 200, Items.graphite, 100));
@@ -310,9 +310,8 @@ public class SnTurrets implements ContentList {
             ammoUseEffect = Fx.casing2;
             targetAir = false;
 
-            speedupPerShot = 0.14f;
-            maxReloadMultiplier = 0.5f;
-            
+            speedupPerShot = 0.16f;
+            maxReloadMultiplier = 1.6f;
         }};
         scorpio = new ModItemTurret("scorpio") {{
             requirements(Category.turret, with(Items.copper, 600, SnItems.fors, 560, Items.plastanium, 480, SnItems.nobium, 450, SnItems.naturite, 400));
