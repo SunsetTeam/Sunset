@@ -10,10 +10,10 @@ import mindustry.type.Weapon;
 import sunset.type.UnitData;
 
 /**
- * AI, которое управляет одним орудием, а не всей боевой единицой.
+ * AI, which controls one weapon, not the entire combat unit.
  *
- * @implNote реализация данного AI должна не только находить цель, но и
- * самостоятельно наводить орудие и проводить проверку на корректность цели!
+ * @implNote implementation of a given AI should not only find the target, but also
+ * independently aim the gun and check for the correctness of the target!
  */
 public abstract class WeaponAI {
     public final static UnitData.DataKey<Interval> timerKey = UnitData.dataKey(null);

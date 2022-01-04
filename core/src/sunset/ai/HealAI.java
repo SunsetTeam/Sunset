@@ -5,7 +5,7 @@ import mindustry.entities.Units;
 import mindustry.gen.*;
 import sunset.gen.*;
 
-/** AI, которое преследует повреждённые союзные боевые единицы, если таковые есть. */
+/** AI that is chasing damaged allied units, if any. */
 public class HealAI extends FlyingUnitWeaponAI{
     @Override
     public void updateMovement() {

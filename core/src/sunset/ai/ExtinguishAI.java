@@ -12,7 +12,7 @@ import static mindustry.Vars.tilesize;
 import static mindustry.Vars.world;
 import static sunset.utils.Utils.*;
 
-/** AI, которое преследует горящие союзные пострйки или боевые единицы, если таковые есть. */
+/** AI that is chasing burning allied buildings or units, if any. */
 public class ExtinguishAI extends FlyingUnitWeaponAI{
     Interval timer=new Interval(10);
     public float ticks=15;
