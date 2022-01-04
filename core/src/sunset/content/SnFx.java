@@ -702,14 +702,9 @@ public class SnFx {
         float circleRad = 2f + e.finpow() * 40f;
         // Lines.square(e.x, e.y, e.fin() * 60.0F, 90 * e.rotation);
 
-        randLenVectors(e.id, 1, 2f + e.fin(), e.rotation + 360, 20f, (x, y) -> {
-        Lines.square(e.x, e.y, squareRad, e.fin());
-
         for(int i = 0; i < 2; ++i){
             Drawf.tri(e.x, e.y, e.fout() * 5, e.fout() * 70, e.rotation - 190 + (25 * i) - e.fin());
           };
-
-        });
 
         Lines.circle(e.x, e.y, circleRad);
 
@@ -726,12 +721,12 @@ public class SnFx {
         Drawf.light(e.x, e.y, squareRad * 1.5f, SnPal.copterBomb, e.fout());
     }),
 
-    unused2 = new Effect(120f, 65f, e -> {
+    unused2 = new Effect(70f, 65f, e -> {
         color(SnPal.copterBomb);
         stroke(e.fout() * 2f);
 
         // Lines.square(e.x, e.y, e.fin() * 60.0F, 90 * e.rotation);
-         Lines.square(e.x, e.y, e.fin() * 15f,  Time.time % 360f);
+         Lines.square(e.x, e.y, e.fin() * 15f,  Time.time % 360f * Time.delta * 10f);
     });
 
     //endregion unused

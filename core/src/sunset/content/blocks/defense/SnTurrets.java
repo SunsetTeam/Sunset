@@ -221,7 +221,7 @@ public class SnTurrets implements ContentList {
             ammoUseEffect = Fx.casing2;
             targetAir = false;
 
-            speedupPerShot = 0.1f;
+            speedupPerShot = 0.17f;
             maxReloadMultiplier = 0.7f;
         }};
         burner = new ItemTurret("burner") {{
@@ -310,7 +310,7 @@ public class SnTurrets implements ContentList {
             ammoUseEffect = Fx.casing2;
             targetAir = false;
 
-            speedupPerShot = 0.08f;
+            speedupPerShot = 0.14f;
             maxReloadMultiplier = 0.5f;
             
         }};
@@ -530,7 +530,7 @@ public class SnTurrets implements ContentList {
             smokeEffect = Fx.none;
             chargeEffect = SnFx.galebardLaserCharge;
             chargeBeginEffect = SnFx.galebardLaserChargeBegin;
-            heatColor = Color.red;
+            heatColor = Pal.turretHeat;
             size = 7;
             health = 170 * size * size;
             targetGround = true;

@@ -111,7 +111,7 @@ public class SnUnitBlocks implements ContentList {
 
 
             upgrades.addAll(
-                    new UnitType[]{SnUnitTypes.halo, SnUnitTypes.parhelion},
+                    new UnitType[]{SnUnitTypes.halo, SnUnitTypes.mudflow},
                     new UnitType[]{SnUnitTypes.star, SnUnitTypes.galaxy}
             );
         }};

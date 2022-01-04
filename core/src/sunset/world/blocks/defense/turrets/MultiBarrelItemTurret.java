@@ -19,9 +19,9 @@ public class MultiBarrelItemTurret extends ItemTurret{
     public Seq<Vec2> barrelPoints = new Seq<>();
     public Seq<Vec2> ejectPoints = new Seq<>();
 
-    public float maxReloadMultiplier = 0.5f;
-    public float speedupPerShot = 0.075f;
-    public float slowReloadTime = 90f;
+    public float maxReloadMultiplier = 0.3f;
+    public float speedupPerShot = 0.01f;
+    public float slowReloadTime = 100f;
 
     public MultiBarrelItemTurret(String name){
         super(name);
@@ -38,14 +38,13 @@ public class MultiBarrelItemTurret extends ItemTurret{
         bars.add("sunset-speedup", (MultiBarrelTurretBuild entity) -> new Bar(
         () -> Core.bundle.format("bar.sunset-speedup", Utils.stringsFixed(Mathf.clamp(entity.slowDownReload / slowReloadTime) * 100f)),
         () -> entity.team.color,
-        () -> Mathf.clamp(entity.slowDownReload / slowReloadTime)
+        () -> Mathf.clamp(entity.speedupScl / maxReloadMultiplier)
         ));
     }
 
     public class MultiBarrelTurretBuild extends ItemTurretBuild{
         public float speedupScl = 0f;
         public float slowDownReload = 0f;
-        public float maxReloadTime = 0f;
 
         @Override
         public void updateTile(){
