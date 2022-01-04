@@ -13,13 +13,15 @@ import sunset.*;
 import sunset.utils.*;
 
 /**
- * Описывает многоствольную турель.
+ * Describes a multi-barreled turret.
  */
 public class MultiBarrelItemTurret extends ItemTurret{
     public Seq<Vec2> barrelPoints = new Seq<>();
     public Seq<Vec2> ejectPoints = new Seq<>();
 
+    // reload acceleration multiplier
     public float maxReloadMultiplier = 0.3f;
+    // number of detonations per 1 shot
     public float speedupPerShot = 0.01f;
     public float slowReloadTime = 100f;
 
@@ -96,7 +98,7 @@ public class MultiBarrelItemTurret extends ItemTurret{
 
         @Override
         protected void ejectEffects(){
-            // эффекты в shoot()
+            //effects in shoot()
         }
     }
 }

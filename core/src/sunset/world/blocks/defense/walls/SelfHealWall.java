@@ -5,7 +5,7 @@ import mindustry.world.blocks.defense.Wall;
 import mindustry.world.meta.Stat;
 import mindustry.world.meta.StatUnit;
 
-/** Самовосстанавливающаяся стена. */
+/** Self-healing wall. */
 public class SelfHealWall extends Wall {
     public float heal = 0.1f;
 

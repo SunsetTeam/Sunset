@@ -6,14 +6,14 @@ import mindustry.gen.Unit;
 import sunset.ai.weapon.BaseWeaponAI;
 import sunset.ai.weapon.WeaponAI;
 
-/** Орудие с улучшениями: с собственным AI, с обработкой перезарядки, с поиском зеркального орудия. */
+/** Weapon with improvements: with its own AI, with reload processing, with the search for a mirror weapon. */
 public class WeaponExt extends SnWeapon {
     public WeaponAI ai = new BaseWeaponAI();
     public WeaponExt(String name) {
         super(name);
     }
     WeaponExt mirrorWeapon = this; //this - ещё не искалось, null - не было найдено
-    /** Возвращает орудие, зеркальное данному. Если mirror==false, то вернёт null. */
+    /** Returns the weapon that is mirrored to the given one. If mirror == false, then it will return null.*/
     public WeaponExt mirrorWeapon(Unit unit) {
         if(mirrorWeapon == this) {
             if(mirror) {
@@ -29,12 +29,12 @@ public class WeaponExt extends SnWeapon {
         return mirrorWeapon;
     }
     protected long lastShootTime = 0;
-    /** Готово ли данное орудие стрелять. Учитывает alternate переменную. */
+    /** Is this weapon ready to fire? Considers the alternate variable. */
     protected boolean readyToShoot(Unit unit) {
         return (Time.millis() - lastShootTime > (reload / 60 * 1000))
                 && (!mirror || !alternate || Time.millis() - mirrorWeapon(unit).lastShootTime > reload / 60 * 500);
     }
-    /** Оповещает о том, что данное орудие выстрелило. */
+    /** Indicates that the given weapon has fired. */
     protected void setShoot() {
         lastShootTime = Time.millis();
     }

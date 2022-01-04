@@ -20,7 +20,7 @@ import mindustry.world.meta.StatValue;
 import sunset.type.StackableStatusEffect;
 
 /**
- * Создаёт интерактивный интерфейс, предоставляющий информацию о {@link StackableStatusEffect}.
+ * Creates an interactive interface providing information about {@link StackableStatusEffect}.
  */
 public class StackableStatusEffectValue implements StatValue {
     final StackableStatusEffect effect;

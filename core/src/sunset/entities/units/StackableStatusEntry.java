@@ -3,13 +3,13 @@ package sunset.entities.units;
 import mindustry.entities.units.StatusEntry;
 import sunset.type.StackableStatusEffect;
 
-/** Запись о накладываемом статус-эффекте. */
+/** A record of the superimposed status effect. */
 public class StackableStatusEntry extends StatusEntry {
-    /** Текущее количество наложений. */
+    /** A record of the superimposed status effect. */
     public int stackCount;
-    /** Базовая длительность. */
+    /** Base duration. */
     public float duration;
-    /** Базовый статус-эффект, из которого необходимо брать наложения. */
+    /** The base status effect from which to take overlays. */
     public StackableStatusEffect baseEffect;
 
     public StackableStatusEntry(StackableStatusEffect baseEffect, int stackCount, float duration) {

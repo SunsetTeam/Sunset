@@ -3,7 +3,7 @@ package sunset.world.blocks.defense.turrets;
 import mindustry.entities.bullet.BulletType;
 import mindustry.world.blocks.defense.turrets.LiquidTurret;
 
-/** Различные дополнения для жидкостной турели. */
+/** Various add-ons for the liquid turret. */
 public class LiquidTurretExt extends LiquidTurret {
     public LiquidTurretExt(String name) {
         super(name);
@@ -12,7 +12,7 @@ public class LiquidTurretExt extends LiquidTurret {
     @Override
     public void setStats() {
         super.setStats();
-        //TODO: переопределить ammoPerShot под описание жидкости
+        //TODO: override ammoPerShot for liquid description
     }
 
     public class LiquidTurretExtBuild extends LiquidTurretBuild {

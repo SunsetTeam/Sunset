@@ -45,7 +45,7 @@ public class ChainWeapon extends WeaponExt implements CustomWeapon, StatValue {
 
     public ChainWeapon(String name) {
         super(name);
-        // Никогда не должно стрелять стандартным методом.
+        // Should never shoot using the standard method.
         ai = new EmptyWeaponAI();
         bullet = SnBullets.emptyBullet;
         firstShotDelay = Float.MAX_VALUE;

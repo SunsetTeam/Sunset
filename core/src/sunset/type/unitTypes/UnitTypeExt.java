@@ -16,7 +16,7 @@ import sunset.type.CustomWeapon;
 import sunset.world.meta.SnStatValues;
 
 /**
- * UnitType, который имеет некоторые изменения.
+ * UnitType, which has some changes.
  */
 public class UnitTypeExt extends SnUnitType {
     public UnitTypeExt(String name) {
@@ -26,7 +26,7 @@ public class UnitTypeExt extends SnUnitType {
     @Override
     public void setStats() {
         super.setStats();
-        // Передаём заполнение сведений об способностях самим способностям, если оно это поддерживает
+        // We pass the filling of information about the abilities to the abilities themselves, if it supports it
         if (abilities.any()) {
             stats.remove(Stat.abilities);
             ObjectSet<String> unique = new ObjectSet<>();
@@ -41,7 +41,7 @@ public class UnitTypeExt extends SnUnitType {
                 }
             }
         }
-        // Передаём заполнение сведений об орудии самому орудию, если оно это поддерживает
+        // We transfer the filling of information about the instrument to the instrument itself, if it supports
         if (weapons.any()) {
             stats.remove(Stat.weapons);
             stats.add(Stat.weapons, SnStatValues.weaponListExt(this, weapons));
@@ -51,7 +51,7 @@ public class UnitTypeExt extends SnUnitType {
     @Override
     public void update(Unit unit) {
         super.update(unit);
-        // Вызываем update() у поддерживающих это орудий
+        // Call update () on the implements that support it
         for (WeaponMount mount : unit.mounts) {
             Weapon weapon = mount.weapon;
             if (weapon instanceof CustomWeapon customWeapon) {

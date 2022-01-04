@@ -19,37 +19,37 @@ import static mindustry.Vars.state;
 
 import java.lang.reflect.Field;
 
-/** Накладываемый статус-эффект. Имеет различную силу на
- * каждой стадии наложения, как правило возрастающую.
- * @implNote Если длина массива, определяющего тот или иной параметр
- * статус-эффекта не совпадает с параметром {@code maxStacks}, то
- * используются параметры из обычного {@link StatusEffect}.
- * Не предназначен для реактивных эффектов (смысл им стакаться, если они моментально исчезают?)
- * @apiNote Для установки статус эффекта используйте метод {@code apply(Unit, float)}. 
- * Вместо {@code update(Unit, float)} переопределяйте метод {@code updateStack(Unit, float, int)}.
- * Вместо {@code draw(Unit)} переопределяйте метод {@code drawStack(Unit, int)}.*/
+/**Superimposed status effect. Has varying strength on
+ * each stage of overlap tends to increase.
+ * @implNote If the length of the array defining this or that parameter
+ * the effect status does not match the {@code maxStacks} parameter, then
+ * parameters from regular {@link StatusEffect} are used.
+ * Not intended for reactive effects (what's the point of stacking them if they instantly disappear?)
+ * @apiNote Use the {@code apply (Unit, float)} method to set the status of an effect.
+ * Instead of {@code update (Unit, float)}, override the {@code updateStack (Unit, float, int)} method.
+ * Instead of {@code draw (Unit)}, override the {@code drawStack (Unit, int)} method.*/
 public class StackableStatusEffect extends StatusEffect {
-    /** Максимальное количество наложений. */
+    /** The maximum number of overlays. */
     public int maxStacks = 1;
-    /** Множители наносимого урона для каждого уровня стака. */
+    /** Damage multipliers for each stack level. */
     public FloatSeq damageMultipliers = new FloatSeq();
-    /** Множители здоровья для каждого уровня стака. */
+    /** Health multipliers for each stack level. */
     public FloatSeq healthMultipliers = new FloatSeq();
-    /** Множители скорости передвижения для каждого уровня стака. */
+    /** Movement speed multipliers for each stack level. */
     public FloatSeq speedMultipliers = new FloatSeq();
-    /** Множители длительности перезарядки для каждого уровня стака. */
+    /** Cooldown multipliers for each stack level. */
     public FloatSeq reloadMultipliers = new FloatSeq();
-    /** Множители скорости строительства для каждого уровня стака. */
+    /** Construction speed multipliers for each stack level. */
     public FloatSeq buildSpeedMultipliers = new FloatSeq();
-    /** Множители ускорения для каждого уровня стака. */
+    /** Acceleration multipliers for each stack level. */
     public FloatSeq dragMultipliers = new FloatSeq();
-    /** Количества урона при взаимодействии с усиляющими эффектами для каждого уровня стака. */
+    /** The amount of damage when interacting with buffs for each level of the stack. */
     public FloatSeq transitionDamages = new FloatSeq();
-    /** Неспособность стрелять для каждого уровня стака. */
+    /** Failure to shoot for every stack level. */
     public BoolSeq disarmedArray = new BoolSeq();
-    /** Урон за тик для каждого уровня стака. */
+    /** Damage per tick for each stack level. */
     public FloatSeq damageArray = new FloatSeq();
-    /** Список отдельных наложение эффекта. */
+    /** List of individual overlay effect. */
     public Seq<StatusEffect> stacks;
 
     private StackableStatusEffectValue displayer;
@@ -72,7 +72,7 @@ public class StackableStatusEffect extends StatusEffect {
         stats=aStats.copy(stats);
     }
 
-    /** @implNote при инициализации создаёт статус-эффект для каждого уровня наложения. */
+    /** @implNote, when initialized, creates a status effect for each overlay level. */
     @Override
     public void init() {
         super.init();
@@ -112,15 +112,15 @@ public class StackableStatusEffect extends StatusEffect {
                 base.damage;
                 base.opposites.each(this::opposite);
                 base.affinities.each(e -> this.affinity(e, transitions.get(e)));
-                // визуальные параметры
+                // visual parameters
                 this.localizedName = base.localizedName;
                 this.description = base.description;
                 this.details = base.details;
             }
                 @Override
                 public boolean isHidden() { return true; }
-                // перенаправляем вызовы различных методов статус эффектов
-                // в вызовы методов базового (данного) статус-эффекта
+                // redirecting calls to various methods effect status
+                // to method calls of the base (given) status effect
                 @Override
                 public void update(Unit unit, float time) {
                     super.update(unit, time);
@@ -152,19 +152,19 @@ public class StackableStatusEffect extends StatusEffect {
         Vars.content.setCurrentMod(null);
     }
 
-    /** Вызывается для обработки юнитов, на которых наложен эффект. Передаёт
-     *  информацию о оставшемся времени и степени наложения. */
+    /** Called to handle affected units. Transfers
+     * information about the remaining time and the degree of overlap. */
     public void updateStack(Unit unit, float time, int stackCount) { }
-    /** Вызывается для отрисовки юнитов, на которых наложен эффект. Передаёт
-     *  информацию о оставшемся времени. */
+    /** Called to render the units on which the effect is applied. Transfers
+     * information about the remaining time. */
     public void drawStack(Unit unit, int stackCount) { }
 
-    /** Применяет эффект к юниту, если эффект ещё не был установлен, иначе
-     *  увеличивает количество наложений данного эффекта на 1. */
+    /** Applies an effect to a unit if the effect has not been set yet, otherwise
+     * increases the number of overlays of this effect by 1. */
     public void apply(Unit unit, float duration) {
-        // Приходится использовать рефлексию, так как существуют несколько классов, описывающих
-        // юнитов (как минимум - UnitEntity и UnitMech), и эти классы не имеют никакого общего
-        // интерфейса, который бы имел поле statuses (ну или я слепой).
+        // We have to use reflection, since there are several classes that describe
+        // units (at least - UnitEntity and UnitMech), and these classes have nothing in common
+        // an interface that would have a statuses field (well, or I'm blind).
         Field fieldStatuses;
         Seq<StatusEntry> statuses = null;
         try {
@@ -172,7 +172,7 @@ public class StackableStatusEffect extends StatusEffect {
             fieldStatuses.setAccessible(true);
             statuses = (Seq<StatusEntry>)fieldStatuses.get(unit);
         } catch (NoSuchFieldException e) {
-            // Поля может и не оказаться, тогда просто считаем, что юнит не поддерживает эффекты
+            // The field may not appear, then we just think that the unit does not support the effects
             return;
         } catch (Throwable e) {
             Log.err(e);

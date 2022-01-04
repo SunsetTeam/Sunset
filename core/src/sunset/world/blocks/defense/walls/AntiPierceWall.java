@@ -6,11 +6,11 @@ import mindustry.world.blocks.defense.Wall;
 import mindustry.world.meta.StatUnit;
 import sunset.world.meta.SnStat;
 
-/** Стена, которая снижает пробитие пуль. */
+/** Сwall that reduces bullet penetration. */
 public class AntiPierceWall extends Wall {
-    /** Дополнительный штраф к пробитию. */
+    /** Additional penalty to penetration. */
     public int pierceDebuff = 1;
-    /** Множитель урона пули. */
+    /** Bullet damage multiplier. */
     public float damageDebuff = 0.95f;
     private final AStats snStats=new AStats();
     public AntiPierceWall(String name) {

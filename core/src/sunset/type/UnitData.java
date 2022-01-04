@@ -9,7 +9,7 @@ import mindustry.gen.Groups;
 import mindustry.gen.Unit;
 
 /**
- * Позволяет хранить информацию о конкретном юните, как правило для работы ИИ.
+ * Allows you to store information about a specific unit, usually for AI work.
  */
 public class UnitData {
     private static IntMap<IntMap<Object>> data = new IntMap<>();
