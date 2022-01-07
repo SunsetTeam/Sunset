@@ -29,7 +29,7 @@ public class MinigunTurret extends ItemTurret {
     @Override
     public void setBars() {
         super.setBars();
-        SnVars.settings.registerReloadBarBlock(this, (MinigunTurret.MinigunTurretBuild entity) -> new Bar(
+        bars.add("sunset-speedup", (MinigunTurret.MinigunTurretBuild entity) -> new Bar(
                 () -> Core.bundle.format("bar.sunset-heat", Utils.stringsFixed(Mathf.clamp(entity.reload / maxShootTime) * 100f)),
                 () -> entity.team.color,
                 () -> Mathf.clamp(entity.reload / maxShootTime)
