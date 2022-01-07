@@ -38,8 +38,8 @@ public class MinigunTurret extends ItemTurret {
         public float maxTime = Time.time * maxShootTime;
 
         @Override
-        protected void bullet(BulletType type, float angle) {
-            super.bullet(type,angle + Mathf.range(maxTime * inaccuracyUp));
+        public void bullet(BulletType type, float angle) {
+            super.bullet(type, angle + Mathf.range(maxTime * inaccuracyUp));
         }
     }
 }
