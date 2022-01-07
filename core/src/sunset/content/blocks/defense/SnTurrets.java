@@ -494,13 +494,12 @@ public class SnTurrets implements ContentList {
                     SnItems.reneubite, SnBullets.reneubiteBlast
             );
             reloadTime = 4f;
-            maxShootTime = 30f * Time.toSeconds;
             coolantMultiplier = 0.5f;
             restitution = 0.15f;
             ammoUseEffect = Fx.casing3;
             range = 400f;
             inaccuracy = 3f;
-            inaccuracyUp = 2f;
+            inaccuracyUp = 0.1f;
             recoilAmount = 2.7f;
             spread = 16f;
             alternate = true;
