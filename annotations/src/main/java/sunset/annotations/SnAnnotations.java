@@ -8,7 +8,7 @@ public class SnAnnotations{
     public @interface BothExtends{
         String[] classes();
 
-        String[] prefixes() default {};
+        String[] classNames() default {};
         String packageName() default "\n\n";
     }
 }

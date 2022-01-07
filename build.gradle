@@ -7,7 +7,7 @@ buildscript {
 
         aciVersion = "ddba381caf1"
 
-        modCoreVersion = "0f5b210e354"
+        modCoreVersion = "19cdb23aea5"
 
         kotlinVersion="1.5.21"
 
@@ -28,12 +28,13 @@ buildscript {
         classpath "com.github.Anuken.Arc:packer:$mindustryVersion"
         classpath "com.github.Zelaux.ZelauxModCore:annotations:$modCoreVersion"
 
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
 
     }
 }
 plugins {
-    id 'org.jetbrains.kotlin.jvm' version '1.5.21'
-    id "org.jetbrains.kotlin.kapt" version "1.5.21"
+    id 'org.jetbrains.kotlin.jvm' version "$kotlinVersion"
+    id "org.jetbrains.kotlin.kapt" version "$kotlinVersion"
 }
 apply plugin: "kotlin"
 version '1.0'

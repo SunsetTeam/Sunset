@@ -677,7 +677,7 @@ public class SnUnitTypes implements ContentList {
             itemCapacity = 100;
             commandLimit = 6;
 
-            defaultController = FlyingUnitWeaponAI::new;
+            defaultController = FlyingWeaponAI::new;
 
             constructor = UnitEntity::create;
 
@@ -726,7 +726,7 @@ public class SnUnitTypes implements ContentList {
             itemCapacity = 180;
             commandLimit = 6;
 
-            defaultController = FlyingUnitWeaponAI::new;
+            defaultController = FlyingWeaponAI::new;
 
             constructor = UnitEntity::create;
 

@@ -1,37 +1,33 @@
 package sunset.ai;
 
-import arc.math.Mathf;
-import arc.math.geom.Vec2;
-import arc.util.Interval;
-import mindustry.Vars;
+import arc.math.geom.*;
+import arc.util.*;
 import mindustry.gen.*;
-import sunset.gen.*;
-import sunset.utils.Utils;
+import sunset.utils.*;
 
-import static mindustry.Vars.tilesize;
-import static mindustry.Vars.world;
-import static sunset.utils.Utils.*;
+import static mindustry.Vars.*;
 
 /** AI that is chasing burning allied buildings or units, if any. */
-public class ExtinguishAI extends FlyingUnitWeaponAI{
-    Interval timer=new Interval(10);
-    public float ticks=15;
+public class ExtinguishAI extends FlyingWeaponAI{
+    final Vec2 target = new Vec2();
+    public float ticks = 15;
+    Interval timer = new Interval(10);
     boolean found = false;
-    final Vec2 target = new Vec2() ;
     float minCost = Float.MAX_VALUE;
+
     @Override
-    public void updateMovement() {
+    public void updateMovement(){
         // обновляемся раз в 60 тиков
-        if (timer.get(0,ticks)) {
+        if(timer.get(0, ticks)){
             float range = Math.max(world.width(), world.height()) * tilesize;
-            Posc targ= Utils.findFireTarget(unit.x,unit.y,unit.team,range,un->un!=unit,b->true);
-            found=targ!=null;
-            if (found){
+            Posc targ = Utils.findFireTarget(unit.x, unit.y, unit.team, range, un -> un != unit, b -> true);
+            found = targ != null;
+            if(found){
                 target.set(targ);
             }
         }
-        if (found) {
-            moveTo(target, unit.range()*0.9f);
+        if(found){
+            moveTo(target, unit.range() * 0.9f);
         }
     }
 

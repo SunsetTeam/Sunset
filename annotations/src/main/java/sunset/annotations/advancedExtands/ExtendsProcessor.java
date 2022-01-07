@@ -39,7 +39,7 @@ public class ExtendsProcessor extends ModBaseProcessor{
                 packageName = annotation.packageName();
             }
 
-            String[] prefixes = annotation.prefixes();
+            String[] classNames = annotation.classNames();
             CompilationUnit rootUnit = StaticJavaParser.parse(trees.getPath(type.e).getCompilationUnit().toString());
 //            Log.info("imports: @",rootUnit.getImports().toString());
 
@@ -64,13 +64,12 @@ public class ExtendsProcessor extends ModBaseProcessor{
                 CompilationUnit unit = rootUnit.clone();
                 unit.setPackageDeclaration(packageName);
 
-                String prefix;
-                if(prefixes.length == classes.length){
-                    prefix = prefixes[i];
+                String newClassName;
+                if(classNames.length == classes.length){
+                    newClassName = classNames[i];
                 }else{
-                    prefix = className.substring(className.contains(".") ? className.lastIndexOf(".") + 1 : 0);
+                    newClassName = className.substring(className.contains(".") ? className.lastIndexOf(".") + 1 : 0) + Strings.capitalize(type.name());
                 }
-                String newClassName = prefix + Strings.capitalize(type.name());
 
 
                 ClassOrInterfaceDeclaration declaration = unit.getClassByName(type.name()).get();

@@ -17,7 +17,7 @@ public class WheelUnitType extends SnUnitType {
 
     @Override
     public void init() {
-        defaultController = GroundUnitWeaponAI::new;
+        defaultController = GroundWeaponAI::new;
         constructor = MechUnit::create;
         rotateShooting = false;
         super.init();

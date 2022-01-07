@@ -14,7 +14,7 @@ import sunset.utils.*;
  */
 @BothExtends(
 classes = {"mindustry.ai.types.FlyingAI","mindustry.ai.types.GroundAI"},
-prefixes = {"Flying", "Ground"},
+classNames = {"FlyingWeaponAI", "GroundWeaponAI"},
 packageName = "sunset.ai"
 )
 class UnitWeaponAI extends AIController{
