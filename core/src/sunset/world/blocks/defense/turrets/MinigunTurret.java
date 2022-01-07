@@ -16,9 +16,7 @@ import sunset.utils.Utils;
 
 public class MinigunTurret extends ItemTurret {
     public float inaccuracyUp = 0f;
-    public float maxShootTime = 20f * Time.toSeconds;
-    @Annotations.Load("@-heatSensor")
-    public TextureRegion heatSensor;
+    public float maxShootTime = 20f;
 
     public MinigunTurret(String name){
         super(name);
@@ -40,14 +38,9 @@ public class MinigunTurret extends ItemTurret {
         stats.add(Stat.inaccuracy, inaccuracyUp, StatUnit.degrees);
     }
     public class MinigunTurretBuild extends ItemTurretBuild{
-
         @Override
         public void bullet(BulletType type, float angle) {
-            super.bullet(type, angle + Mathf.range(maxShootTime * inaccuracyUp));
-        }
-
-        public void draw(){
-            Draw.rect(heatSensor, x, y, maxShootTime);
+            super.bullet(type, angle + Mathf.range(Time.time * maxShootTime / inaccuracyUp));
         }
     }
 }
