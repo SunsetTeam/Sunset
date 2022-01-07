@@ -22,10 +22,7 @@ import sunset.type.BerserkStage;
 import sunset.entities.abilities.StatusFieldAbility;
 import sunset.entities.bullet.BerserkLaserBulletType;
 import sunset.type.blocks.Rotor;
-import sunset.type.unitTypes.BerserkUnitType;
-import sunset.type.unitTypes.CopterUnitType;
-import sunset.type.unitTypes.UnitTypeExt;
-import sunset.type.unitTypes.WheelUnitType;
+import sunset.type.unitTypes.*;
 import sunset.type.weapons.ChainWeapon;
 import sunset.type.weapons.PointDefenseWeapon;
 import sunset.type.weapons.SnWeapon;
@@ -52,6 +49,7 @@ public class SnUnitTypes implements ContentList {
 
     @Override
     public void load() {
+
         //region attack copters
         wind = new CopterUnitType("wind") {{
             health = 140;
@@ -60,7 +58,7 @@ public class SnUnitTypes implements ContentList {
             rotateSpeed = 5.4f;
             accel = 0.04f;
 			drag = 0.016f;
-            commandLimit = 3;            
+            commandLimit = 3;
             flying = true;
             circleTarget = false;
             range = 130;
@@ -453,7 +451,7 @@ public class SnUnitTypes implements ContentList {
                         bullet = SnBullets.smallHelicopterMissiles;
                     }});
         }};
-        
+
         parhelion = new CopterUnitType("parhelion") {{
             health = 57000;
             hitSize = 90;
