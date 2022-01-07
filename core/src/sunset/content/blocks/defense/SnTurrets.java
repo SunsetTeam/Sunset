@@ -4,6 +4,7 @@ import arc.graphics.Color;
 import arc.math.geom.Vec2;
 import arc.struct.EnumSet;
 import arc.struct.Seq;
+import arc.util.Time;
 import mindustry.content.Fx;
 import mindustry.content.Items;
 import mindustry.content.Liquids;
@@ -482,7 +483,7 @@ public class SnTurrets implements ContentList {
                 hitEffect = SnFx.tridentHit0;
             }};
         }};
-        radius = new ModItemTurret("radius") {{
+        radius = new MinigunTurret("radius") {{
             requirements(Category.turret, with(Items.copper, 1400, Items.graphite, 800, Items.surgeAlloy, 650, Items.plastanium, 555, SnItems.fors, 520, Items.thorium, 480, SnItems.enojie, 420));
             ammo(
                     Items.graphite, SnBullets.heavyStandardDense,
@@ -493,11 +494,13 @@ public class SnTurrets implements ContentList {
                     SnItems.reneubite, SnBullets.reneubiteBlast
             );
             reloadTime = 4f;
+            maxShootTime = 30f * Time.toSeconds;
             coolantMultiplier = 0.5f;
             restitution = 0.15f;
             ammoUseEffect = Fx.casing3;
             range = 400f;
             inaccuracy = 3f;
+            inaccuracyUp = 2f;
             recoilAmount = 2.7f;
             spread = 16f;
             alternate = true;
