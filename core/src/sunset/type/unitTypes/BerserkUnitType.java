@@ -3,13 +3,13 @@ package sunset.type.unitTypes;
 import arc.struct.Seq;
 import mindustry.content.StatusEffects;
 import mindustry.gen.Unit;
-import sunset.entities.abilities.BerserkStage;
+import sunset.type.BerserkStage;
 import mindustry.gen.*;
 
 public class BerserkUnitType extends SnUnitType {
     public final Seq<BerserkStage> stages = new Seq<>();
 
-    /** Возвращает этап для данного юнита или null, если юнит не находится ни в каком этапе. */
+    /** Returns the stage for the given unit, or null if the unit is not in any stage. */
     public static BerserkStage getStage(Unit unit) {
         if(!(unit.type instanceof BerserkUnitType)) return null;
         return ((BerserkUnitType)unit.type).stages.find(stage -> stage.healthMaximum < unit.healthf());

@@ -1,6 +1,7 @@
 package sunset.world.blocks.production.raw;
 
 import arc.Core;
+import arc.audio.Sound;
 import arc.graphics.Blending;
 import arc.graphics.Color;
 import arc.graphics.g2d.Draw;
@@ -31,7 +32,7 @@ import mindustry.world.meta.Stat;
 import mindustry.world.meta.StatUnit;
 import mindustry.world.meta.StatValues;
 import mma.ModVars;
-import sunset.type.DrillItem;
+import sunset.type.blocks.DrillItem;
 import sunset.world.consumers.DrillItemsConsume;
 
 import java.util.Arrays;
@@ -42,11 +43,11 @@ import static mindustry.Vars.world;
 public class PrecussionDrill extends Block {
     private static final ItemSeq tmpItems = new ItemSeq();
     /**
-     * Чем выше, тем быстрее бурит. Сильнее воздейсвует на мягкие руды, чем на твёрдые.
+     * The higher, the faster it drills. Stronger effect on soft ores than on hard ores.
      */
     public float hardnessDrillMultiplier = 6f;
     /**
-     * Чем выше, тем быстрее бурит. Одинаково воздейсвует на все руды.
+     * The higher, the faster it drills. Same effect on all ores.
      */
     public float itemCountMultiplier = 1f;
     /**
@@ -72,7 +73,6 @@ public class PrecussionDrill extends Block {
     public boolean canDump = false;
 
     public Effect downEffect = Fx.unitLand;
-
     public int tier = 5;
     public float powerUse = 1f;
     public Color heatColor = Color.valueOf("ff5512");
@@ -82,6 +82,22 @@ public class PrecussionDrill extends Block {
     public TextureRegion rotatorRegion;
     @Load("@-top")
     public TextureRegion topRegion;
+
+    public float shakeIntensity = 3f;
+    public float shakeDuration = 8f;
+    public Sound drillSound = Sounds.none;
+    public float soundPitch = 1f;
+    public float soundVolume = 1f;
+    public Interp scaleInterp = p -> {
+        float toa = 1.07f;
+        float progress = p * toa;
+        if (progress > 1f) {
+            return Mathf.map(progress, 1f, toa, 1.3f, 0.9f);
+        } else {
+            return Mathf.map(progress, 0, 1, 0.9f, 1.3f);
+        }
+    };
+
 
     public PrecussionDrill(String name) {
         super(name);
@@ -143,7 +159,7 @@ public class PrecussionDrill extends Block {
     @Override
     public void setStats() {
         super.setStats();
-        stats.remove(Stat.itemCapacity); //вместительность динаическая и равна размеру партии
+        stats.remove(Stat.itemCapacity); //dynamic capacity and equal to the batch size
         stats.add(Stat.productionTime, drillTime / 60f, StatUnit.seconds);
         stats.remove(Stat.powerUse);
         stats.add(Stat.powerUse, powerUse * 60f, StatUnit.powerSecond);
@@ -206,20 +222,20 @@ public class PrecussionDrill extends Block {
     }
 
     private enum State {
-        noOre, //нет руды под буром
-        lowTier, //"Требуется бур получше"
-        ok //всё гуд
+        noOre, //no ore under the drill
+        lowTier, //"Better drill required"
+        ok //everything is good
     }
 
     public class PrecussionDrillBuild extends Building {
-        final ItemSeq drillItems = new ItemSeq(); //список руды, находящейся под буром
+        final ItemSeq drillItems = new ItemSeq(); //list of ore under the drill
         public float displaySpeed, baseDisplaySpeed;
         public float currentSpeed, totalSpeed;
         public float progressTime;
         public float totalBoost;
         public float warmupSpeed = 0.02f;
-        private int offloadSize; //размер партии = количество item'ов, выдаваемых за раз
-        private DrillItem currentDrillItem; //текущий предмет для бурения
+        private int offloadSize; //batch size = number of items given out at a time
+        private DrillItem currentDrillItem; //current item to drill
 
         public float baseSpeed() {
             return working() ? (power == null) ? 1f : power.status : 0f;
@@ -259,6 +275,9 @@ public class PrecussionDrill extends Block {
             progressTime += delta() * totalSpeed;
             if (progressTime >= drillTime && working()) {
                 cons.trigger();
+                Effect.shake(shakeIntensity, shakeDuration, x, y);
+                drillSound.at(x, y, soundPitch, soundVolume);
+
                 progressTime %= drillTime;
                 downEffect.at(this);
                 drillItems.each((item, amount) -> {
@@ -269,11 +288,15 @@ public class PrecussionDrill extends Block {
                 });
             }
             if (canDump) {
-                drillItems.each((i, a) -> dump(i));
+                items.each((i,a)->{
+                    if (Structs.contains(reqDrillItems,s->s.item==i))return;
+                    dump(i);
+                });
+//                drillItems.each((i, a) -> dump(i));
             }
         }
-        // возможность мультидобычи ломает обычный вывод ресурсов,
-        // для стабильной работы нужно использовать разгрузчик
+        // the possibility of multi-mining breaks the usual withdrawal of resources,
+        // for stable operation, you need to use an unloader
 
         @Override
         public boolean acceptItem(Building source, Item item) {
@@ -311,8 +334,6 @@ public class PrecussionDrill extends Block {
 
         @Override
         public void draw() {
-            float s = 0.3f;
-            float ts = 0.6f;
 
             Draw.rect(region, x, y);
             super.drawCracks();
@@ -324,17 +345,17 @@ public class PrecussionDrill extends Block {
             Draw.blend();
             Draw.color();
             float xscl = Draw.xscl, yscl = Draw.yscl;
-            float toa = 1.07f;
-            float progress = progress() * toa;
-            if (progress > 1f) {
-                Draw.scl(Mathf.map(progress, 1f, toa, 1.3f, 0.9f));
-            } else {
-                Draw.scl(Mathf.map(progress, 0, 1, 0.9f, 1.3f));
-            }
+            Draw.scl(scaleInterp.apply(progress()));
             Drawf.spinSprite(rotatorRegion, x, y, 2);
 
             Draw.rect(topRegion, x, y);
             Draw.scl(xscl, yscl);
+        }
+
+        public void effect() {
+            if (drillTime > 0) {
+                Effect.shake(drillTime, drillTime, this);
+            }
         }
 
         public float progress() {

@@ -4,6 +4,7 @@ import arc.graphics.Color;
 import arc.math.geom.Vec2;
 import arc.struct.EnumSet;
 import arc.struct.Seq;
+import arc.util.Time;
 import mindustry.content.Fx;
 import mindustry.content.Items;
 import mindustry.content.Liquids;
@@ -21,6 +22,7 @@ import mindustry.world.meta.BuildVisibility;
 import sunset.content.SnBullets;
 import sunset.content.SnFx;
 import sunset.content.SnItems;
+import sunset.content.SnLiquids;
 import sunset.entities.bullet.EnergySphereBulletType;
 import sunset.graphics.SnPal;
 import sunset.type.MissileType;
@@ -35,7 +37,7 @@ public class SnTurrets implements ContentList {
         //2x2
         excellence, carbine, pulsation, reflection,
         //3x3
-        major, burner, trigger,
+        major, burner, trigger, eternity,
         //4x4
         admiral, scorpio, flood, chain,
         //5x5
@@ -58,7 +60,7 @@ public class SnTurrets implements ContentList {
             requirements(Category.turret, with(SnItems.fors, 50, Items.lead, 20));
             health = 400;
             reloadTime = 40f;
-            range = 140f;
+            range = 95f;
             recoilAmount = 1f;
             inaccuracy = 2f;
             rotateSpeed = 7.5f;
@@ -67,7 +69,7 @@ public class SnTurrets implements ContentList {
             ammoUseEffect = Fx.casing1;
             targetAir = true;
             shootType = SnBullets.smallEnergySphere;
-            chargeTime = 20f;
+            chargeTime = 30f;
             chargeMaxDelay = 20f;
             powerUse = 1f;
             chargeEffect = SnFx.smallEnergySphereCharge;
@@ -118,7 +120,7 @@ public class SnTurrets implements ContentList {
             requirements(Category.turret, with(SnItems.fors, 150, Items.lead, 70, Items.silicon, 40));
             size = 2;
             reloadTime = 50f;
-            range = 190f;
+            range = 175f;
             recoilAmount = 2f;
             inaccuracy = 3f;
             rotateSpeed = 6f;
@@ -220,8 +222,8 @@ public class SnTurrets implements ContentList {
             ammoUseEffect = Fx.casing2;
             targetAir = false;
 
-            speedupPerShot = 0.1f;
-            slowReloadTime = 180f;
+            speedupPerShot = 0.15f;
+            maxReloadMultiplier = 2f;
         }};
         burner = new ItemTurret("burner") {{
             requirements(Category.turret, with(Items.metaglass, 75, Items.lead, 200, Items.graphite, 100));
@@ -238,6 +240,30 @@ public class SnTurrets implements ContentList {
             inaccuracy = 3f;
             rotateSpeed = 7.5f;
             shootCone = 25f;
+            targetAir = true;
+            shootSound = Sounds.flame;
+        }};
+        eternity = new ItemTurret("eternity") {{
+            requirements(Category.turret, with(SnItems.fors, 230, Items.plastanium, 100, Items.graphite, 60, Items.surgeAlloy, 30));
+            ammo(
+                    Items.plastanium, SnBullets.smallPlastaniumBullet,
+                    Items.pyratite, SnBullets.smallPyratiteBullet,
+                    Items.surgeAlloy, SnBullets.smallSurgeAlloyBullet,
+                    SnItems.fors, SnBullets.smallForsSpine,
+                    SnItems.reneubite, SnBullets.smallBlueMissile,
+                    SnItems.enojie, SnBullets.smallEnojieMissile
+            );
+            health = 1780;
+            size = 3;
+            range = 225f;
+            reloadTime = 39f;
+            recoilAmount = 3f;
+            inaccuracy = 3f;
+            rotateSpeed = 5f;
+            shootCone = 25f;
+            shots = 4;
+            shootShake = 1.5f;
+            burstSpacing = 3f;
             targetAir = true;
             shootSound = Sounds.flame;
         }};
@@ -285,8 +311,8 @@ public class SnTurrets implements ContentList {
             ammoUseEffect = Fx.casing2;
             targetAir = false;
 
-            speedupPerShot = 0.08f;
-            slowReloadTime = 210f;
+            speedupPerShot = 0.16f;
+            maxReloadMultiplier = 1.6f;
         }};
         scorpio = new ModItemTurret("scorpio") {{
             requirements(Category.turret, with(Items.copper, 600, SnItems.fors, 560, Items.plastanium, 480, SnItems.nobium, 450, SnItems.naturite, 400));
@@ -319,7 +345,8 @@ public class SnTurrets implements ContentList {
                     Liquids.water, SnBullets.floodWaterShot,
                     Liquids.slag, SnBullets.floodSlagShot,
                     Liquids.cryofluid, SnBullets.floodCryoShot,
-                    Liquids.oil, SnBullets.floodOilShot
+                    Liquids.oil, SnBullets.floodOilShot,
+                    SnLiquids.burheyna, SnBullets.floodBurheynaShot    
             );
             size = 4;
             reloadTime = 45f;
@@ -456,7 +483,7 @@ public class SnTurrets implements ContentList {
                 hitEffect = SnFx.tridentHit0;
             }};
         }};
-        radius = new ModItemTurret("radius") {{
+        radius = new MinigunTurret("radius") {{
             requirements(Category.turret, with(Items.copper, 1400, Items.graphite, 800, Items.surgeAlloy, 650, Items.plastanium, 555, SnItems.fors, 520, Items.thorium, 480, SnItems.enojie, 420));
             ammo(
                     Items.graphite, SnBullets.heavyStandardDense,
@@ -472,6 +499,7 @@ public class SnTurrets implements ContentList {
             ammoUseEffect = Fx.casing3;
             range = 400f;
             inaccuracy = 3f;
+            inaccuracyUp = 0.1f;
             recoilAmount = 2.7f;
             spread = 16f;
             alternate = true;
@@ -503,7 +531,7 @@ public class SnTurrets implements ContentList {
             smokeEffect = Fx.none;
             chargeEffect = SnFx.galebardLaserCharge;
             chargeBeginEffect = SnFx.galebardLaserChargeBegin;
-            heatColor = Color.red;
+            heatColor = Pal.turretHeat;
             size = 7;
             health = 170 * size * size;
             targetGround = true;

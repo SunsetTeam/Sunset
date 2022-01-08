@@ -25,9 +25,10 @@ public class ExtinguishBulletType extends LiquidBulletType {
                 if(!did[0]) {
                     for (Content s : Vars.content.getBy(ContentType.status)) {
                         StatusEffect e = (StatusEffect)s;
-                        // Считаем, что эффект - горение, если он наносит урон и
-                        // среди его противоположностей есть вода. Такой подход позволит
-                        // тушить "пожары" из других модов.
+                        /* We consider that the effect is burning if it deals damage and
+                        among its opposites there is water. This approach will allow
+                        extinguish "fires" from other mods.
+                        */
                         if(unit.hasEffect(e) && e.damage > 0 && e.opposites.contains(StatusEffects.wet)) {
                             unit.unapply(e);
                             Fx.steam.at(b.x, b.y);

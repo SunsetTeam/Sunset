@@ -25,29 +25,30 @@ import mma.ModVars;
 import sunset.world.meta.SnStatValues;
 
 /**
- * Турель, которая атакует врагов постоянной
- * цепной молнией, "перепрыгивающей" от одного врага к другому,
- * постепенно теряя урон.
+ * Turret that attacks use constant
+ * chain lightning, "jumping" from one enemy to another,
+ * gradually losing damage.
  *
  * @see sunset.world.blocks.defense.turrets.ChainLightningTurret.ChainLightningTurretBuild
  */
 public class ChainLightningTurret extends BaseTurret {
     public float damage = 0f;
     /**
-     * Определяет, насколько будет уменьшаться максимальная
-     * дальность обнружения врага лучом после нанесения
-     * урона очереджному врагу.
+     * Determination of how much the maximum will decrease
+     * range of detection of the enemy by the beam after application
+     * damage to the next enemy.
      */
     public float rangeMultiplier = 0.9f;
     /**
-     * Определяет, насколько меньший урон будет получать
-     * каждый следующий враг в цепи.
+     * Determines how much less damage will be received
+     * each next enemy in the chain.
      */
     public float damageMultiplier = 0.9f;
     public boolean targetAir = true, targetGround = true;
     public float coolantMultiplier = 1.5f;
     public float liquidUse = 0f;
     public float shootCone = 0f;
+    public float powerUse = 0f;
     @Load("block-@size")
     public TextureRegion baseRegion;
     @Load("parallax-laser")
@@ -55,7 +56,6 @@ public class ChainLightningTurret extends BaseTurret {
     @Load("parallax-laser-end")
     public TextureRegion laserEnd;
     public float laserWidth = 0.7f;
-    public float powerUse;
     public Color laserColor;
 
     public ChainLightningTurret(String name) {

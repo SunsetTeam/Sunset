@@ -1,52 +1,34 @@
 package sunset.ai;
 
-import arc.math.Mathf;
-import mindustry.Vars;
+import arc.math.geom.*;
+import arc.util.*;
 import mindustry.gen.*;
+import sunset.utils.*;
 
-import static mindustry.Vars.tilesize;
-import static mindustry.Vars.world;
-import static sunset.utils.Utils.*;
+import static mindustry.Vars.*;
 
-/** AI, которое преследует горящие союзные пострйки или боевые единицы, если таковые есть. */
-public class ExtinguishAI extends FlyingUnitWeaponAI {
-    private int tick = 0;
-    public int ticks = 30;
+/** AI that is chasing burning allied buildings or units, if any. */
+public class ExtinguishAI extends FlyingWeaponAI{
+    final Vec2 target = new Vec2();
+    public float ticks = 15;
+    Interval timer = new Interval(10);
+    boolean found = false;
+    float minCost = Float.MAX_VALUE;
+
     @Override
-    public void updateMovement() {
-        if(++tick < ticks) return;
-        tick = 0;
-        final Unit[] u = {null};
-        final float[] f = {Float.MAX_VALUE};
-        unit.team.data().units.each(un -> {
-            if(un == unit || !isUnitBurning(un)) return;
-            float cost = 0; //Mathf.pow(un.health / un.maxHealth, 2f) * Mathf.len(unit.x - un.x, un.y - unit.y);
-            if(cost > f[0]) return;
-            f[0] = cost;
-            u[0] = un;
-        });
-        if(u[0] != null) {
-            moveTo(u[0], unit.range());
-            return;
-        }
-        Fire[] b = new Fire[] { null };
-        float[] cost = new float[] { Float.MAX_VALUE };
-        float range = Math.max(world.width(), world.height()) * tilesize;
-        Vars.indexer.eachBlock(unit.team, unit.x, unit.y, range, bld -> true, building -> {
-            Fire fire = getBuildingFire(building);
-            if(fire == null) return;
-            float cs = Mathf.pow(building.health / building.maxHealth, 2f)
-                    * Mathf.dst(unit.x, unit.y, building.x, building.y);
-            if(b[0] == null || cs < cost[0]) {
-                cost[0] = cs;
-                b[0] = fire;
+    public void updateMovement(){
+        // обновляемся раз в 60 тиков
+        if(timer.get(0, ticks)){
+            float range = Math.max(world.width(), world.height()) * tilesize;
+            Posc targ = Utils.findFireTarget(unit.x, unit.y, unit.team, range, un -> un != unit, b -> true);
+            found = targ != null;
+            if(found){
+                target.set(targ);
             }
-        });
-        if(b[0] != null) {
-            moveTo(b[0], unit.range());
-            return;
         }
-        super.updateMovement();
+        if(found){
+            moveTo(target, unit.range() * 0.9f);
+        }
     }
 
     protected void moveTo(Posc target, float length){

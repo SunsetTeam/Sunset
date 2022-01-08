@@ -31,7 +31,7 @@ import mindustry.world.blocks.ControlBlock;
 import mindustry.world.blocks.production.GenericCrafter;
 import mindustry.world.meta.Stat;
 import mma.ModVars;
-import mma.graphics.ModFill;
+import mma.graphics.AFill;
 import sunset.type.MissileType;
 import sunset.world.meta.SnStatValues;
 
@@ -47,7 +47,7 @@ public class MissileSiloTurret extends GenericCrafter {
     public float maxRange;
     public float minRange;
     /**
-     * Положение ракет в шахте относительно размеров блока. От (0, 0) до (1, 1).
+     * The position of the missiles in the silo relative to the block size. From (0, 0) to (1, 1).
      */
     public MissilePlace[] rockets = {new MissilePlace(0.5f, 0.5f)};
     @Load("@-bottom")
@@ -140,7 +140,7 @@ public class MissileSiloTurret extends GenericCrafter {
 
     public class MissileSiloTurretBuild extends GenericCrafterBuild implements ControlBlock, MissileSileBuild {
         /**
-         * Количество загруженных ракет. Максимальный размер определяется rockets.size
+         * The number of missiles loaded. The maximum size is determined by rockets.size
          */
         public int loaded = 0;
         public @Nullable
@@ -173,7 +173,7 @@ public class MissileSiloTurret extends GenericCrafter {
 
         @Override
         public void drawActiveTerritory() {
-            ModFill.doubleSwirl(x,y,minRange,maxRange,1f,0);
+            AFill.donut(x,y,minRange,maxRange,1f,0);
         }
 
         @Override

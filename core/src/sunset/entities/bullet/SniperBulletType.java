@@ -22,11 +22,11 @@ public class SniperBulletType extends BasicBulletType {
     @Override
     public void init() {
         super.init();
-        speed = range; //для корректной автонаводки
+        speed = range; //for correct auto aiming
         lifetime = 1f;
     }
 
-    // Используется, чтобы сохранить значения переменных во время задержки
+    // Used to store the values ​​of variables during a delay
     private Runnable runEffect(float x, float y, float rotation, float scale) {
         return () -> trailEffect.at(x, y, rotation, frontColor, scale);
     }
@@ -34,15 +34,15 @@ public class SniperBulletType extends BasicBulletType {
     public void init(Bullet b) {
         super.init(b);
         int eIteration = 0;
-        Vec2 basePoint = new Vec2(b.x + b.vel.x * Time.delta, b.y + b.vel.y * Time.delta); //сброс позиции для корректной обработки коллизий
-        Vec2 curPoint = new Vec2(basePoint), //начальная точка и смещение для каждого нового trail'а
-             eOffset = new Vec2(0, trailSpace).setAngle(b.rotation());
-        float eLengthPassed = 0, eToPassed = 0; //расстояние, на котором уже отрисованы trail'ы и расстояние, до которого их нужно отрисовать
-        float curDmgScale = 1, curSizeScale = 1; //текущие множители урона пули и размера trail'а
-        Seq<Healthc> hitted = new Seq<>(); //уже повреждённые цели
-        Healthc current = Utils.linecast(b, basePoint.x, basePoint.y, b.rotation(), range, (bb) -> true); //текущая цель
+        Vec2 basePoint = new Vec2(b.x + b.vel.x * Time.delta, b.y + b.vel.y * Time.delta); //reset position for correct collision handling
+        Vec2 curPoint = new Vec2(basePoint), //starting point and offset for each new trail
+                eOffset = new Vec2(0, trailSpace).setAngle(b.rotation());
+        float eLengthPassed = 0, eToPassed = 0; //the distance at which the trails are already drawn and the distance to which they need to be drawn
+        float curDmgScale = 1, curSizeScale = 1; //current bullet damage and trail size multipliers
+        Seq<Healthc> hitted = new Seq<>(); //already damaged targets
+        Healthc current = Utils.linecast(b, basePoint.x, basePoint.y, b.rotation(), range, (bb) -> true); //current goal
         while (current != null) {
-            //обновляем размер trail'а и расстояние, до которого отрисовываем trail'ы
+            //update the size of the trail and the distance to which we draw the trails
             eToPassed = current.dst(basePoint);
             //отрисовка
             while (eLengthPassed < eToPassed) {

@@ -15,12 +15,11 @@ import mindustry.type.Liquid;
 import mindustry.type.UnitType;
 import mindustry.type.Weapon;
 import mindustry.ui.ItemDisplay;
-import mindustry.ui.ItemImage;
 import mindustry.world.meta.Stat;
 import mindustry.world.meta.StatUnit;
 import mindustry.world.meta.StatValue;
 import mindustry.world.meta.StatValues;
-import sunset.type.DrillItem;
+import sunset.type.blocks.DrillItem;
 
 import static mindustry.Vars.content;
 import static mindustry.Vars.tilesize;

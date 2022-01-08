@@ -11,7 +11,7 @@ import mindustry.world.blocks.production.AttributeCrafter;
 import mindustry.world.draw.DrawRotator;
 import sunset.content.SnFx;
 import sunset.content.SnItems;
-import sunset.type.DrillItem;
+import sunset.type.blocks.DrillItem;
 import sunset.world.blocks.production.raw.DRDrill;
 import sunset.world.blocks.production.raw.PrecussionDrill;
 
@@ -50,7 +50,7 @@ public class SnProduction implements ContentList {
         //region drills
         electroPneumaticDrill = new DRDrill("electro-pneumatic-drill") {{
             requirements(Category.production, with(Items.copper, 20, Items.graphite, 15, Items.silicon, 10));
-            drillTime = 310;
+            drillTime = 300;
             size = 2;
             hasPower = true;
             tier = 3;
@@ -83,7 +83,9 @@ public class SnProduction implements ContentList {
             requirements(Category.production, with(Items.copper, 100, Items.silicon, 90, Items.titanium, 90, Items.thorium, 85, SnItems.nobium, 80, SnItems.naturite, 70));
             size = 5;
             hasPower = true;
-            powerUse = 4.25f;
+            powerUse = 5f;
+            shakeIntensity = 5f;
+            shakeDuration = 10f;
             hardnessDrillMultiplier = 8;
             liquidBoost = 3.86f;
             itemCountMultiplier = 0.5f;
@@ -97,7 +99,7 @@ public class SnProduction implements ContentList {
 
         enojieDrill = new DRDrill("enojie-drill") {{
             requirements(Category.production, with(Items.copper, 410, Items.silicon, 380, SnItems.enojie, 370, Items.thorium, 200, Items.surgeAlloy, 190));
-            drillTime = 170;
+            drillTime = 158;
             size = 7;
             drawRim = true;
             hasPower = true;

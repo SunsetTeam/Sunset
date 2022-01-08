@@ -7,6 +7,7 @@ import arc.math.Mathf;
 import arc.math.geom.*;
 import arc.scene.ui.layout.Table;
 import arc.util.Strings;
+import arc.util.Tmp;
 import mindustry.content.Fx;
 import mindustry.entities.Effect;
 import mindustry.entities.units.*;
@@ -14,9 +15,10 @@ import mindustry.gen.*;
 import mindustry.world.meta.StatValue;
 import sunset.ai.weapon.EmptyWeaponAI;
 import sunset.content.SnBullets;
-import sunset.type.UpdateDrawWeapon;
+import sunset.type.CustomWeapon;
+import sunset.utils.Utils;
 
-public class PointDefenseWeapon extends WeaponExt implements UpdateDrawWeapon, StatValue {
+public class PointDefenseWeapon extends WeaponExt implements CustomWeapon, StatValue {
     public float range;
     public Color color = Color.white;
     Bullet target, _target;
@@ -39,7 +41,7 @@ public class PointDefenseWeapon extends WeaponExt implements UpdateDrawWeapon, S
     }
     @Override
     public void update(WeaponMount mount, Unit unit) {
-        Vec2 wpos = new Vec2(mount.weapon.x, mount.weapon.y).rotate(unit.rotation - 90).add(unit.x, unit.y);
+        Vec2 wpos = Tmp.v1.set(Utils.mountX(unit,mount), Utils.mountY(unit,mount));
         _target = findTarget(unit, wpos.x, wpos.y, range);
         if(_target != null && checkTarget(unit, _target, wpos.x, wpos.y, range)) {
             target = _target;
@@ -65,12 +67,6 @@ public class PointDefenseWeapon extends WeaponExt implements UpdateDrawWeapon, S
         bullet.hitEffect.at(target.x, target.y, color);
         shootSound.at(from.x, from.y, Mathf.random(0.9f, 1.1f));
     }
-    @Override
-    public boolean useDefaultDraw() { return true; }
-    @Override
-    public void preDraw(WeaponMount mount, Unit unit) { }
-    @Override
-    public void postDraw(WeaponMount mount, Unit unit) { }
     @Override
     public void display(Table table) {
         table.left().defaults().padRight(3).left();

@@ -24,8 +24,9 @@ public class SnBlocks implements ContentList {
             new SnPower(),
             new SnCrafting(),
             new SnProduction(),
+            new SnSandbox(),
             new SnUnitBlocks(),
-            new SnTests()
+            new SnTests(),
     };
 
     @Override

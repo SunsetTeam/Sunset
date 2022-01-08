@@ -11,9 +11,9 @@ import arc.math.geom.Vec2;
 import arc.scene.ui.layout.Table;
 import arc.struct.ObjectMap;
 import arc.struct.Seq;
-import arc.util.Log;
 import arc.util.Strings;
 import arc.util.Time;
+import arc.util.Tmp;
 import mindustry.entities.Units;
 import mindustry.entities.units.WeaponMount;
 import mindustry.gen.Unit;
@@ -24,11 +24,13 @@ import mindustry.world.meta.StatValue;
 import sunset.ai.weapon.EmptyWeaponAI;
 import sunset.content.SnBullets;
 import sunset.type.UnitData;
-import sunset.type.UpdateDrawWeapon;
+import sunset.type.CustomWeapon;
+import sunset.utils.Utils;
 
 import static arc.graphics.Color.coral;
 
-public class ChainWeapon extends WeaponExt implements UpdateDrawWeapon, StatValue {
+public class ChainWeapon extends WeaponExt implements CustomWeapon, StatValue {
+    public static final UnitData.DataKey<ObjectMap<WeaponMount, Seq<Unit>>> chainWeaponDataKey = UnitData.dataKey(ObjectMap::new);
     public int maxChainLength = 1;
     public float range = 120f;
     public float damageTick = 1f;
@@ -39,11 +41,11 @@ public class ChainWeapon extends WeaponExt implements UpdateDrawWeapon, StatValu
     public Color chainColor = coral.cpy();
     public boolean draw = false;
     TextureRegion laser, laserEnd;
-    Seq<Unit> units=new Seq<>();
+    Seq<Unit> units = new Seq<>();
 
     public ChainWeapon(String name) {
         super(name);
-        // Никогда не должно стрелять стандартным методом.
+        // Should never shoot using the standard method.
         ai = new EmptyWeaponAI();
         bullet = SnBullets.emptyBullet;
         firstShotDelay = Float.MAX_VALUE;
@@ -52,12 +54,12 @@ public class ChainWeapon extends WeaponExt implements UpdateDrawWeapon, StatValu
     }
 
     public static Unit getFirstUnit(WeaponMount mount, Unit unit) {
-        Vec2 wpos = new Vec2(mount.weapon.x, mount.weapon.y).rotate(unit.rotation - 90).add(unit.x, unit.y);
+        Vec2 wpos = Tmp.v1.set(Utils.mountX(unit,mount), Utils.mountY(unit,mount));
         ChainWeapon weapon = (ChainWeapon) mount.weapon;
-        return Units.closest(null, wpos.x, wpos.y, u -> {
-            if (u.team == unit.team && (weapon.healTick == 0 || !u.damaged())) return false;
+        return Units.closest(null,wpos.x, wpos.y, weapon.range, u -> {
+            if (unit == u) return false;
             if (u.team != unit.team && weapon.damageTick == 0) return false;
-            if (unit == u || Mathf.dst(wpos.x, wpos.y, u.x, u.y) > weapon.range) return false;
+            if (u.team == unit.team && (weapon.healTick == 0 || !u.damaged())) return false;
             return mount.weapon.rotate || Angles.within(wpos.angleTo(u), unit.rotation + mount.rotation, mount.weapon.shootCone);
         });
     }
@@ -70,17 +72,18 @@ public class ChainWeapon extends WeaponExt implements UpdateDrawWeapon, StatValu
     }
 
     private void getUnits(WeaponMount mount, Unit unit) {
-        ObjectMap<WeaponMount, Seq<Unit>> chainWeapon = UnitData.data(unit, "ChainWeapon", ObjectMap::new);
-        if (chainWeapon==null) {
-            units.clear();
-            return;
+        ObjectMap<WeaponMount, Seq<Unit>> v = chainWeaponDataKey.get(unit);
+        if(v == null) {
+            units = null;
+        } else {
+            units = v.get(mount, Seq::new);
         }
-        units = chainWeapon.get(mount,Seq::new);
     }
 
     @Override
     public void update(WeaponMount mount, Unit unit) {
         getUnits(mount, unit);
+        if(units == null) return;
         updateUnits(mount, unit);
         float[] p = new float[]{damageTick, healTick};
         units.each(u -> {
@@ -97,17 +100,17 @@ public class ChainWeapon extends WeaponExt implements UpdateDrawWeapon, StatValu
     private void updateUnits(WeaponMount mount, Unit unit) {
         units.clear();
         final float[] r = new float[]{range};
-        final int[] d = new int[]{maxChainLength};
+        int d = maxChainLength;
         final Unit[] t = new Unit[]{getFirstUnit(mount, unit)};
-        while (t[0] != null) {
-            d[0]--;
+        while (t[0] != null && d > 0) {
             r[0] *= rangeFactor;
             units.add(t[0]);
-            t[0] = Units.closest(null, t[0].x, t[0].y, u -> {
+            t[0] = Units.closest(null,t[0].x, t[0].y, r[0], u -> {
                 if (u == unit || units.contains(u)) return false;
                 if ((u.health >= u.maxHealth) && !unit.team.isEnemy(u.team)) return false;
-                return (Mathf.dst(t[0].x, t[0].y, u.x, u.y) <= r[0]) && (d[0] > 0);
+                return Mathf.dst(t[0].x, t[0].y, u.x, u.y) <= r[0];
             });
+            d--;
         }
     }
 
@@ -118,7 +121,7 @@ public class ChainWeapon extends WeaponExt implements UpdateDrawWeapon, StatValu
 
     private void drawWeapon(WeaponMount mount, Unit unit, float rotation) {
         Weapon weapon = mount.weapon;
-        Vec2 wpos = new Vec2(weapon.x, weapon.y).rotate(unit.rotation - 90).add(unit.x, unit.y);
+        Vec2 wpos = Tmp.v1.set(Utils.mountX(unit,mount), Utils.mountY(unit,mount));
 
         if (weapon.shadow > 0) Drawf.shadow(wpos.x, wpos.y, weapon.shadow);
 
@@ -149,10 +152,10 @@ public class ChainWeapon extends WeaponExt implements UpdateDrawWeapon, StatValu
 
     @Override
     public void preDraw(WeaponMount mount, Unit unit) {
-        Vec2 wpos = new Vec2(mount.weapon.x, mount.weapon.y).rotate(unit.rotation - 90).add(unit.x, unit.y);
-        float angle = units.isEmpty() ? unit.rotation : wpos.angleTo(units.get(0));
+        Vec2 wpos = Tmp.v1.set(Utils.mountX(unit,mount), Utils.mountY(unit,mount));
+        float angle = (units == null || units.isEmpty()) ? unit.rotation : wpos.angleTo(units.get(0));
         getUnits(mount, unit);
-        if (!units.isEmpty()) {
+        if (units != null && !units.isEmpty()) {
             float z = Draw.z();
             Draw.z(laserLayer); //TODO как-то пофиксить эффекты луча
             Draw.mixcol(chainColor, 0.4f);

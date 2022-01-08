@@ -1,77 +1,54 @@
 package sunset;
 
 import acontent.ui.AdvancedContentInfoDialog;
+import arc.Core;
 import arc.Events;
+import arc.struct.Seq;
 import mindustry.Vars;
-import mindustry.core.*;
-import mindustry.ctype.*;
+import mindustry.core.ContentLoader;
+import mindustry.ctype.Content;
+import mindustry.ctype.MappableContent;
+import mindustry.ctype.UnlockableContent;
+import mindustry.game.EventType.ClientLoadEvent;
+import mindustry.game.EventType.ResetEvent;
 import mindustry.gen.Groups;
-import mma.*;
-import mma.annotations.ModAnnotations.*;
-import mma.gen.ModGroups;
-import sunset.content.*;
-import sunset.core.*;
+import mindustry.type.*;
+import mma.MMAMod;
+import mma.ModListener;
+import mma.annotations.ModAnnotations.ModAssetsAnnotation;
+import sunset.content.SnUnitTypes;
+import sunset.core.SnContentTranslation;
 import sunset.gen.*;
 import sunset.type.UnitData;
 import sunset.utils.Utils;
-import sunset.world.GeyserLogic;
-import arc.audio.*;
-import arc.struct.*;
-import mindustry.game.EventType.*;
-import mindustry.mod.Mods.*;
 
-import java.io.IOException;
-
-import static mindustry.Vars.*;
 import static mindustry.Vars.headless;
 import static mma.ModVars.modInfo;
 
 @ModAssetsAnnotation
-public class Sunset extends MMAMod{
-
-    private static final Seq<Music> prevAmbient = new Seq<>(), prevDark = new Seq<>();
-    private boolean lastMapSn;
+public class Sunset extends MMAMod {
 
 
-    public Sunset(){
+    public Sunset() {
         super();
-        disableBlockOutline=true;
+        disableBlockOutline = true;
         SnVars.load();
         SnEntityMapping.init();
         SnCall.registerPackets();
         SnGroups.init();
-        Events.on(ResetEvent.class,e->{
+        Events.on(ResetEvent.class, e -> {
             SnGroups.clear();
         });
-        ModListener.updaters.add(()->{
-            Seq<Deliverc> removed=new Seq<>();
+        ModListener.updaters.add(() -> {
+            Seq<Deliverc> removed = new Seq<>();
             for (Deliverc deliver : SnGroups.delivers) {
-                if (Groups.unit.getByID(deliver.id())==null){
+                if (Groups.unit.getByID(deliver.id()) == null) {
                     removed.add(deliver);
                 }
             }
             removed.each(SnGroups.delivers::remove);
         });
-        if(!headless){
 
-            Events.on(WorldLoadEvent.class, e -> {
-                boolean isSn = state.map.mod != null && state.map.mod == modInfo;
-
-                if(isSn != lastMapSn){
-                    lastMapSn = !lastMapSn;
-                    if(isSn){
-                        Music(control.sound.ambientMusic, SnAudio.snAmbientMusic, prevAmbient);
-                        Music(control.sound.darkMusic, SnAudio.snDarkMusic, prevDark);
-                    }else{
-                        Music(control.sound.ambientMusic, prevAmbient, null);
-                        Music(control.sound.darkMusic, prevDark, null);
-                    }
-                }
-            });
-        }
-        Events.on(ClientLoadEvent.class, (e) -> {
-            SnAudio.reload();
-        });
     }
 
     @Override
@@ -80,38 +57,33 @@ public class Sunset extends MMAMod{
         UnitData.init();
         AdvancedContentInfoDialog.init();
         Utils.setMenuUnit(SnUnitTypes.router);
-        /*Log.info("startUp");
-        Events.on(ClientLoadEvent.class, e -> {
-            Time.runTask(10f, () -> {
-                BaseDialog dialog = new BaseDialog("Start up");
-                dialog.cont.add("Start up").row();
-                dialog.cont.image(Core.atlas.find("sunset-startUpImage")).pad(20f).row();
-                dialog.cont.button("OK", dialog::hide).size(500f, 50f);
-                dialog.show();
-            });
-        });*/
-    }
 
-    private void Music(Seq<Music> target, Seq<Music> replacement, Seq<Music> save){
-        if(save != null){
-            save.clear();
-            save.addAll(target);
-        }
-        target.clear();
-        target.addAll(replacement);
     }
 
     @Override
-    protected void modContent(Content content){
-        super.modContent(content);
-        if (content instanceof MappableContent && !headless){
-            SnContentRegions.loadRegions((MappableContent)content);
+    protected void modContent(Content c) {
+        super.modContent(c);
+        if (c instanceof MappableContent && !headless) {
+            SnContentRegions.loadRegions((MappableContent) c);
+        }
+        if (c instanceof SectorPreset sector){
+            sector.generator.map.mod=modInfo;
+        }
+    }
+
+    @Override
+    protected void created(Content c) {
+        super.created(c);
+        if (c instanceof UnlockableContent ) {
+            UnlockableContent content = (UnlockableContent) c;
+            SnContentTranslation.checkContent(content);
+
         }
     }
 
     @Override
     public void loadContent() {
-        if (!headless){
+        if (!headless) {
             SnVars.inTry(SnMusics::load);
             SnVars.inTry(SnSounds::load);
         }
@@ -127,4 +99,5 @@ public class Sunset extends MMAMod{
         };*/
         super.loadContent();
     }
+
 }

@@ -2,29 +2,36 @@ package sunset.type;
 
 import arc.Events;
 import arc.func.Prov;
-import arc.struct.ObjectMap;
-import arc.struct.Seq;
-import arc.util.Log;
+import arc.struct.IntMap;
 import mindustry.game.EventType;
 import mindustry.game.EventType.UnitDestroyEvent;
 import mindustry.gen.Groups;
 import mindustry.gen.Unit;
 
 /**
- * Позволяет хранить информацию о конкретном юните, как правило для работы ИИ.
+ * Allows you to store information about a specific unit, usually for AI work.
  */
 public class UnitData {
-    private static ObjectMap<Unit, ObjectMap<String, Object>> data = new ObjectMap<>();
+    private static IntMap<IntMap<Object>> data = new IntMap<>();
 
-    public static <T> T data(Unit unit, String key, Prov<T> prov) {
-        if (unit == null || invalidUnit(unit)) return null;
-        ObjectMap<String, Object> entries = data.get(unit, ObjectMap::new);
-        return (T) entries.get(key, prov::get);
+    public static <T> DataKey<T> dataKey(Prov<T> def) {
+        return new DataKey<T>(def);
     }
 
-    public static <T> void data(Unit unit, String key, T value) {
+    public static <T> T getData(Unit unit, DataKey key, Prov<T> def) {
+        if (unit == null || invalidUnit(unit)) return null;
+//        return ;
+        IntMap<Object> entries = data.get(unit.id, IntMap::new);
+        if (entries.containsKey(key.id)) {
+            return (T) entries.get(key.id);
+        } else {
+            return def.get();
+        }
+    }
+
+    public static <T> void setData(Unit unit, DataKey key, T value) {
         if (unit == null || invalidUnit(unit)) return;
-        data.get(unit, ObjectMap::new).put(key, value);
+        data.get(unit.id, IntMap::new).put(key.id, value);
     }
 
     public static void init() {
@@ -43,14 +50,14 @@ public class UnitData {
             }
         });*/
         Events.run(EventType.Trigger.update, () -> {
-            Seq<Unit> select = data.keys().toSeq().select(UnitData::validUnit
-            );
-            for (Unit unit : select) {
-                data.remove(unit);
+            IntMap.Keys keys = data.keys();
+            while (keys.hasNext) {
+                int id = keys.next();
+                if (invalidUnit(Groups.unit.getByID(id))) data.remove(id);
             }
         });
         Events.on(EventType.WorldLoadEvent.class, e -> data.clear());
-        Events.on(UnitDestroyEvent.class, (e) -> data.remove(e.unit));
+        Events.on(UnitDestroyEvent.class, (e) -> data.remove(e.unit.id));
     }
 
     public static boolean validUnit(Unit unit) {
@@ -58,6 +65,25 @@ public class UnitData {
     }
 
     public static boolean invalidUnit(Unit unit) {
-        return !unit.isValid() || unit.isNull() || Groups.unit.getByID(unit.id) == null;
+        return unit == null || !unit.isValid() || unit.isNull() || Groups.unit.getByID(unit.id) == null;
+    }
+
+    public static class DataKey<T> {
+        private static int totalId;
+        private final int id;
+        private final Prov<T> def;
+
+        private DataKey(Prov<T> def) {
+            this.def = def == null ? () -> null : def;
+            id = totalId++;
+        }
+
+        public T get(Unit unit) {
+            return getData(unit, this, def);
+        }
+
+        public void set(Unit unit, T value) {
+            setData(unit, this, value);
+        }
     }
 }

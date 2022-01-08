@@ -1,30 +1,33 @@
 package sunset.ai.weapon;
 
+import arc.func.Floatc2;
+import arc.math.Angles;
+import arc.math.geom.Vec2;
+import arc.util.Interval;
 import mindustry.entities.units.WeaponMount;
 import mindustry.gen.Unit;
+import mindustry.type.Weapon;
+import sunset.type.UnitData;
 
 /**
- * AI, которое управляет одним орудием, а не всей боевой единицой.
- * @implNote реализация данного AI должна не только находить цель, но и
- * самостоятельно наводить орудие и проводить проверку на корректность цели!
- * */
+ * AI, which controls one weapon, not the entire combat unit.
+ *
+ * @implNote implementation of a given AI should not only find the target, but also
+ * independently aim the gun and check for the correctness of the target!
+ */
 public abstract class WeaponAI {
-    protected Unit unit;
-    protected WeaponMount mount;
+    public final static UnitData.DataKey<Interval> timerKey = UnitData.dataKey(null);
+    protected int timers = 0;
 
-    public boolean isShooting() { return mount.shoot; }
-    public float aimX() { return mount.aimX; }
-    public float aimY() { return mount.aimY; }
+    protected Interval timer(Unit unit) {
+        Interval interval = timerKey.get(unit);
+        if (interval == null) {
+            interval = new Interval(timers);
+            timerKey.set(unit, interval);
+        }
+        return interval;
 
-    protected float weaponX() { return mount.weapon.x + unit.x; }
-    protected float weaponY() { return mount.weapon.y + unit.y; }
-    protected float range() { return mount.weapon.bullet.range(); }
-
-    public boolean isUnset() { return unit == null || mount == null; }
-    public void set(Unit unit, WeaponMount mount) {
-        this.mount = mount;
-        this.unit = unit;
     }
 
-    public abstract void update();
+    public abstract boolean update(Unit unit, WeaponMount mount);
 }

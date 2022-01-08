@@ -1,19 +1,14 @@
 package sunset.annotations;
 
-import arc.struct.ObjectMap;
-import arc.struct.Seq;
-import arc.util.Log;
-import mindustry.gen.Building;
-import mindustry.world.Block;
-import mindustry.world.blocks.defense.Door;
-import mindustry.world.blocks.storage.StorageBlock;
-
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
-import java.lang.reflect.Method;
+import java.lang.annotation.*;
 
 public class SnAnnotations{
+    @Target(ElementType.TYPE)
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface BothExtends{
+        String[] classes();
 
+        String[] classNames() default {};
+        String packageName() default "\n\n";
+    }
 }

@@ -1,7 +1,10 @@
 package sunset.ai.weapon;
 
-/** AI, которое ничего не делает с орудием. Может быть полезно в специфичных случаях. */
+import mindustry.entities.units.WeaponMount;
+import mindustry.gen.Unit;
+
+/** AI that does nothing with the weapon. It can be useful in specific cases. */
 public class EmptyWeaponAI extends WeaponAI {
     @Override
-    public void update() { }
+    public boolean update(Unit unit, WeaponMount mount) { return false; }
 }

@@ -5,10 +5,8 @@ import arc.math.Mathf;
 import mindustry.ui.Bar;
 import mindustry.world.blocks.defense.turrets.PowerTurret;
 import sunset.SnVars;
-import sunset.content.SnSettings;
 import sunset.utils.Utils;
 
-import static arc.Core.settings;
 /** Power turret with useful things.
  * Features:
  * 1) reload bar

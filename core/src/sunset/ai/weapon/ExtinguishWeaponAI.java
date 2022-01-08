@@ -1,54 +1,38 @@
 package sunset.ai.weapon;
 
-import arc.math.Mathf;
-import arc.math.geom.Position;
-import mindustry.Vars;
-import mindustry.entities.Units;
-import mindustry.gen.*;
+import arc.math.geom.Vec2;
+import arc.util.Tmp;
+import mindustry.entities.units.WeaponMount;
+import mindustry.gen.Posc;
+import mindustry.gen.Unit;
+import sunset.utils.Utils;
 
-import static sunset.utils.Utils.*;
+import static sunset.utils.Utils.mountX;
+import static sunset.utils.Utils.mountY;
 
 public class ExtinguishWeaponAI extends BaseWeaponAI {
+    private static final Vec2 tmpVec = new Vec2();
+    private static int ticks = 15;
+    public final int tickTimer=timers++;
+    Posc target;
+
     @Override
-    public void update() {
-        Posc t = findTarget();
-        if (t != null) {
-            aim(new Pos(t));
-        } else {
-            aim(null);
+    public boolean update(Unit unit, WeaponMount mount) {
+        if (timer(unit).get(tickTimer,ticks)) {
+            target = findTarget(unit, mount);
         }
-    }
-    private static class Pos implements Position {
-        public Pos(Posc c) {
-            this.x = c.getX();
-            this.y = c.getY();
+        if (target != null) {
+            aim(Tmp.v1.set(target), unit, mount);
+            return true;
         }
-        final float x, y;
-        @Override
-        public float getX() { return x; }
-        @Override
-        public float getY() { return y; }
+        aim(null, unit, mount);
+        return false;
     }
-    private Posc findTarget() {
-        final Posc[] ret = new Posc[] { null };
-        // Ищем горящих юнитов
-        ret[0] = Units.closest(unit.team, weaponX(), weaponY(),
-                range(), un -> un != unit && isUnitBurning(un),
-                (unit1, xx, yy) -> Mathf.pow(unit1.health / unit1.maxHealth, 2f));
-        if(ret[0] != null) return ret[0];
-        // Ищем горящие постройки
-        float[] cost = new float[] { Float.MAX_VALUE };
-        Vars.indexer.eachBlock(unit.team, unit.x, unit.y, range(), bld -> ret[0] == null, building -> {
-            Fire fire = getBuildingFire(building);
-            if(fire == null) return;
-            float cs = Mathf.pow(building.health / building.maxHealth, 2f)
-                    * Mathf.dst(unit.x, unit.y, building.x, building.y);
-            if(cs < cost[0]) {
-                cost[0] = cs;
-                ret[0] = fire;
-            }
-        });
-        if(ret[0] != null) return ret[0];
-        return null;
+
+    private Posc findTarget(Unit unit, WeaponMount mount) {
+        float range = mount.weapon.bullet.range();
+        float range2 = range * range;
+        Vec2 point = tmpVec.set(mountX(unit,mount), mountY(unit,mount));
+        return target = Utils.findFireTarget(unit.x, unit.y, unit.team, range, u -> point.dst2(u) < range2 && u != unit, b -> true);
     }
 }

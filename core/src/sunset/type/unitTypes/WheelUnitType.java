@@ -5,7 +5,8 @@ import arc.util.Time;
 import mindustry.gen.MechUnit;
 import mindustry.gen.Mechc;
 import mindustry.gen.Unit;
-import sunset.ai.GroundUnitWeaponAI;
+import sunset.ai.*;
+import sunset.gen.*;
 
 public class WheelUnitType extends SnUnitType {
     public WheelUnitType(String name) {
@@ -16,16 +17,16 @@ public class WheelUnitType extends SnUnitType {
 
     @Override
     public void init() {
-        defaultController = GroundUnitWeaponAI::new;
+        defaultController = GroundWeaponAI::new;
         constructor = MechUnit::create;
         rotateShooting = false;
         super.init();
         mechSideSway = mechFrontSway = mechStepShake = mechStride = 0f;
-        speed /= speedScl; // снижеам скорость, чтобы самостоятельно определять движение юнита
+        speed /= speedScl; // lower the speed to independently determine the movement of the unit
     }
     @Override
     public void setStats() {
-        speed *= speedScl; // возвращаем старую скорость для корректного отображения харакеристик
+        speed *= speedScl; // revert to old speed for digital display of characteristics
         super.setStats();
         speed /= speedScl;
     }
@@ -39,5 +40,6 @@ public class WheelUnitType extends SnUnitType {
         unit.move(vel.x * Time.delta, vel.y * Time.delta);
     }
     @Override
-    public void drawMech(Mechc mech) { } //не отрисовываем ноги
+    public void drawMech(Mechc mech) { } //do not draw legs
+
 }

@@ -11,7 +11,7 @@ import mindustry.world.consumers.Consume;
 import mindustry.world.consumers.ConsumeType;
 import mindustry.world.meta.Stat;
 import mindustry.world.meta.Stats;
-import sunset.type.DrillItem;
+import sunset.type.blocks.DrillItem;
 import sunset.world.meta.SnStatValues;
 
 public class DrillItemsConsume extends Consume {
