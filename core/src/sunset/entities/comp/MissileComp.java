@@ -1,4 +1,4 @@
-package sunset.entities.comps;
+package sunset.entities.comp;
 
 import arc.math.Scaled;
 import arc.math.geom.Vec2;

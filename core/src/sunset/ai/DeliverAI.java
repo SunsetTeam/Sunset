@@ -11,6 +11,10 @@ import sunset.type.*;
 import sunset.world.blocks.units.*;
 
 public class DeliverAI extends FlyingAI{
+    private DeliverAI(){
+
+    }
+
     @Override
     public AIController fallback(){
         return new HealAI();
