@@ -30,7 +30,7 @@ public class SnUnitBlocks implements ContentList {
             requirements(Category.units, with(SnItems.fors, 80, Items.copper, 70));
             plans = Seq.with(
                     new UnitPlan(SnUnitTypes.wind, 70f * 15, with(SnItems.fors, 15, Items.silicon, 20)),
-//                    new UnitPlan(SnUnitTypes.comet, 60f * 40, with(Items.silicon, 30, SnItems.naturite, 20))
+                    new UnitPlan(SnUnitTypes.comet, 60f * 40, with(Items.silicon, 30, SnItems.naturite, 20))
             );
             size = 3;
             consumes.power(2.5f);
@@ -57,7 +57,7 @@ public class SnUnitBlocks implements ContentList {
 
             upgrades.addAll(
                     new UnitType[]{SnUnitTypes.wind, SnUnitTypes.thunder},
-//                    new UnitType[]{SnUnitTypes.comet, SnUnitTypes.satelite},
+                    new UnitType[]{SnUnitTypes.comet, SnUnitTypes.satelite},
                     new UnitType[]{SnUnitTypes.mirage, SnUnitTypes.vision}
             );
         }};
