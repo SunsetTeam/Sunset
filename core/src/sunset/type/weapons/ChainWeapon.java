@@ -14,7 +14,6 @@ import arc.struct.Seq;
 import arc.util.Strings;
 import arc.util.Time;
 import arc.util.Tmp;
-import mindustry.entities.Units;
 import mindustry.entities.units.WeaponMount;
 import mindustry.gen.Unit;
 import mindustry.graphics.Drawf;
@@ -41,7 +40,6 @@ public class ChainWeapon extends WeaponExt implements CustomWeapon, StatValue {
     public Color chainColor = coral.cpy();
     public boolean draw = false;
     TextureRegion laser, laserEnd;
-    Seq<Unit> units = new Seq<>();
 
     public ChainWeapon(String name) {
         super(name);
@@ -71,46 +69,41 @@ public class ChainWeapon extends WeaponExt implements CustomWeapon, StatValue {
         laserEnd = Core.atlas.find("parallax-laser-end");
     }
 
-    private void getUnits(WeaponMount mount, Unit unit) {
-        ObjectMap<WeaponMount, Seq<Unit>> v = chainWeaponDataKey.get(unit);
-        if(v == null) {
-            units = null;
-        } else {
-            units = v.get(mount, Seq::new);
-        }
+    private Seq<Unit> getUnits(WeaponMount mount, Unit unit) {
+        return chainWeaponDataKey.get(unit).get(mount, Seq::new);
     }
 
     @Override
     public void update(WeaponMount mount, Unit unit) {
-        getUnits(mount, unit);
+        Seq<Unit> units = getUnits(mount, unit);
         if(units == null) return;
-        updateUnits(mount, unit);
-        float[] p = new float[]{damageTick, healTick};
+        updateUnits(units, mount, unit);
+        float[] damages = new float[]{damageTick, healTick};
         units.each(u -> {
             if (unit.team.isEnemy(u.team)) {
-                u.damageContinuousPierce(p[0]);
+                u.damageContinuousPierce(damages[0]);
             } else {
-                u.heal(p[1] * Time.delta);
+                u.heal(damages[1] * Time.delta);
             }
-            p[0] *= damageFactor;
-            p[1] *= damageFactor;
+            damages[0] *= damageFactor;
+            damages[1] *= damageFactor;
         });
     }
 
-    private void updateUnits(WeaponMount mount, Unit unit) {
+    private void updateUnits(Seq<Unit> units, WeaponMount mount, Unit unit) {
         units.clear();
-        final float[] r = new float[]{range};
-        int d = maxChainLength;
-        final Unit[] t = new Unit[]{getFirstUnit(mount, unit)};
-        while (t[0] != null && d > 0) {
-            r[0] *= rangeFactor;
-            units.add(t[0]);
-            t[0] = Utils.closest(t[0].x, t[0].y, r[0], u -> {
+        final float[] currentRange = new float[]{range};
+        int unitsLeft = maxChainLength;
+        final Unit[] currentUnit = new Unit[]{getFirstUnit(mount, unit)};
+        while (currentUnit[0] != null && unitsLeft > 0) {
+            currentRange[0] *= rangeFactor;
+            units.add(currentUnit[0]);
+            currentUnit[0] = Utils.closest(currentUnit[0].x, currentUnit[0].y, currentRange[0], u -> {
                 if (u == unit || units.contains(u)) return false;
                 if ((u.health >= u.maxHealth) && !unit.team.isEnemy(u.team)) return false;
-                return Mathf.dst(t[0].x, t[0].y, u.x, u.y) <= r[0];
+                return Mathf.dst(currentUnit[0].x, currentUnit[0].y, u.x, u.y) <= currentRange[0];
             });
-            d--;
+            unitsLeft--;
         }
     }
 
@@ -152,14 +145,14 @@ public class ChainWeapon extends WeaponExt implements CustomWeapon, StatValue {
 
     @Override
     public void preDraw(WeaponMount mount, Unit unit) {
-        Vec2 wpos = Tmp.v1.set(Utils.mountX(unit,mount), Utils.mountY(unit,mount));
-        float angle = (units == null || units.isEmpty()) ? unit.rotation : wpos.angleTo(units.get(0));
-        getUnits(mount, unit);
+        Seq<Unit> units = getUnits(mount, unit);
+        Vec2 weaponPos = Tmp.v1.set(Utils.mountX(unit,mount), Utils.mountY(unit,mount));
+        float angle = (units == null || units.isEmpty()) ? unit.rotation : weaponPos.angleTo(units.get(0));
         if (units != null && !units.isEmpty()) {
             float z = Draw.z();
             Draw.z(laserLayer); //TODO как-то пофиксить эффекты луча
             Draw.mixcol(chainColor, 0.4f);
-            Drawf.laser(unit.team, laser, laserEnd, wpos.x, wpos.y, units.get(0).x, units.get(0).y);
+            Drawf.laser(unit.team, laser, laserEnd, weaponPos.x, weaponPos.y, units.get(0).x, units.get(0).y);
             for (int i = 0; i < units.size - 1; i++) {
                 Drawf.laser(unit.team, laser, laserEnd,
                         units.get(i).x, units.get(i).y,
