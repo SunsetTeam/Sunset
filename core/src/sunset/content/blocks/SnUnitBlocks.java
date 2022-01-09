@@ -29,7 +29,7 @@ public class SnUnitBlocks implements ContentList {
         bigAirFactory = new UnitFactory("big-air-factory") {{
             requirements(Category.units, with(SnItems.fors, 80, Items.copper, 70));
             plans = Seq.with(
-                    new UnitPlan(SnUnitTypes.wind, 70f * 15, with(SnItems.fors, 15, Items.silicon, 20)),
+                    new UnitPlan(SnUnitTypes.wind, 70f * 15, with(SnItems.fors, 15, Items.silicon, 20))
 //                    new UnitPlan(SnUnitTypes.comet, 60f * 40, with(Items.silicon, 30, SnItems.naturite, 20))
             );
             size = 3;
