@@ -9,7 +9,7 @@ import mindustry.world.blocks.defense.Wall;
 import sunset.content.SnItems;
 import sunset.world.blocks.defense.walls.AntiPierceWall;
 import sunset.world.blocks.defense.walls.IndestructibleWall;
-import sunset.world.blocks.defense.walls.SelfHealWall;
+import sunset.world.blocks.defense.walls.RegeneratingWall;
 
 public class SnWalls implements ContentList {
     public static Block
@@ -33,13 +33,13 @@ public class SnWalls implements ContentList {
             size = 2;
         }};
 
-        naturiteWall = new SelfHealWall("naturite-wall") {{
+        naturiteWall = new RegeneratingWall("naturite-wall") {{
             requirements(Category.defense, with(SnItems.naturite, 6));
             size = 1;
             health = 810;
             heal = 0.5f;
         }};
-        naturiteWallLarge = new SelfHealWall("naturite-wall-large") {{
+        naturiteWallLarge = new RegeneratingWall("naturite-wall-large") {{
             requirements(Category.defense, with(SnItems.naturite, 24));
             health = naturiteWall.health * 4;
             heal = 2f;

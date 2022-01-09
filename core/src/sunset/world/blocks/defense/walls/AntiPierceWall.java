@@ -6,7 +6,7 @@ import mindustry.world.blocks.defense.Wall;
 import mindustry.world.meta.StatUnit;
 import sunset.world.meta.SnStat;
 
-/** Сwall that reduces bullet penetration. */
+/** Wall that reduces bullet penetration. */
 public class AntiPierceWall extends Wall {
     /** Additional penalty to penetration. */
     public int pierceDebuff = 1;

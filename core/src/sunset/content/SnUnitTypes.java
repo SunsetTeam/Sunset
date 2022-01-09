@@ -70,14 +70,14 @@ public class SnUnitTypes implements ContentList{
                 rotorRotateSpeed = -27f;
                 rotorCount = 2;
             }},
-
-
             new Rotor("rotor-small"){{
                 offsetX = 0;
                 offsetY = 2;
                 rotorRotateSpeed = 27f;
                 rotorCount = 2;
-            }});
+            }}
+            );
+
             weapons.add(
             new WeaponExt("small-minigun"){{
                 rotate = false;
@@ -118,14 +118,13 @@ public class SnUnitTypes implements ContentList{
                 rotorRotateSpeed = -27f;
                 rotorCount = 2;
             }},
-
-
             new Rotor("rotor-medium"){{
                 offsetX = 0;
                 offsetY = 2;
                 rotorRotateSpeed = 27f;
                 rotorCount = 2;
             }});
+
             weapons.add(
             new WeaponExt("missile-mount-small"){{
                 rotate = false;
@@ -180,10 +179,7 @@ public class SnUnitTypes implements ContentList{
                 offsetY = -9;
                 rotorRotateSpeed = -27f;
                 rotorCount = 3;
-            }}
-            );
-
-            rotors.add(
+            }},
             new Rotor("rotor-big"){{
                 offsetX = 0;
                 offsetY = 9;
@@ -250,19 +246,13 @@ public class SnUnitTypes implements ContentList{
                 offsetY = -15;
                 rotorRotateSpeed = 27f;
                 rotorCount = 3;
-            }}
-            );
-
-            rotors.add(
+            }},
             new Rotor("rotor-medium3"){{
                 offsetX = -13;
                 offsetY = 10;
                 rotorRotateSpeed = -27f;
                 rotorCount = 4;
-            }}
-            );
-
-            rotors.add(
+            }},
             new Rotor("rotor-medium3"){{
                 offsetX = 13;
                 offsetY = 10;
@@ -334,52 +324,37 @@ public class SnUnitTypes implements ContentList{
             smokeChance = 0.4f;
             smokeX = 0f;
             smokeY = 0f;
-            rotors.add(
+            rotors(
             new Rotor("rotor-medium2"){{
                 offsetX = -14;
                 offsetY = 20;
                 rotorRotateSpeed = -27f;
                 rotorCount = 3;
-            }}
-            );
-
-            rotors.add(
+            }},
             new Rotor("rotor-medium2"){{
                 offsetX = -14;
                 offsetY = 20;
                 rotorRotateSpeed = 27f;
                 rotorCount = 3;
-            }}
-            );
-
-            rotors.add(
+            }},
             new Rotor("rotor-medium2"){{
                 offsetX = 14;
                 offsetY = 20;
                 rotorRotateSpeed = 27f;
                 rotorCount = 3;
-            }}
-            );
-
-            rotors.add(
+            }},
             new Rotor("rotor-medium2"){{
                 offsetX = 14;
                 offsetY = 20;
                 rotorRotateSpeed = -27f;
                 rotorCount = 3;
-            }}
-            );
-
-            rotors.add(
+            }},
             new Rotor("rotor-big2"){{
                 offsetX = 0;
                 offsetY = -14;
                 rotorRotateSpeed = -27f;
                 rotorCount = 4;
-            }}
-            );
-
-            rotors.add(
+            }},
             new Rotor("rotor-big2"){{
                 offsetX = 0;
                 offsetY = -14;
@@ -471,28 +446,19 @@ public class SnUnitTypes implements ContentList{
                 offsetY = -35;
                 rotorRotateSpeed = -27f;
                 rotorCount = 6;
-            }}
-            );
-
-            rotors.add(
+            }},
             new Rotor("rotor-big"){{
                 offsetX = -30;
                 offsetY = 23;
                 rotorRotateSpeed = -27f;
                 rotorCount = 4;
-            }}
-            );
-
-            rotors.add(
+            }},
             new Rotor("rotor-big"){{
                 offsetX = 30;
                 offsetY = 23;
                 rotorRotateSpeed = -27f;
                 rotorCount = 4;
-            }}
-            );
-
-            rotors.add(
+            }},
             new Rotor("rotor-gigant"){{
                 offsetX = 0;
                 offsetY = 8;
@@ -1061,7 +1027,7 @@ public class SnUnitTypes implements ContentList{
         }};
         //endregion wheel
         //region torpedo
-        torpedo1 = new UnitType("torpedo-t1"){{
+        torpedo1 = new SnUnitType("torpedo-t1"){{
             speed = 2.1f;
             boostMultiplier = 0.55f;
             rotateSpeed = 6.3f;
@@ -1148,7 +1114,7 @@ public class SnUnitTypes implements ContentList{
             immunities.add(StatusEffects.wet);
             immunities.add(StatusEffects.freezing);
         }};
-        torpedo2 = new UnitType("torpedo-t2"){{
+        torpedo2 = new SnUnitType("torpedo-t2"){{
             speed = 2;
             boostMultiplier = 1;
             rotateSpeed = 7;
@@ -1263,7 +1229,7 @@ public class SnUnitTypes implements ContentList{
         };
         //endregion misc
         //region freezing
-        snowflake = new UnitType("snowflake"){{
+        snowflake = new SnUnitType("snowflake"){{
             defaultController = SuicideAI::new;
             constructor = UnitTypes.pulsar.constructor;
             speed = 1f;

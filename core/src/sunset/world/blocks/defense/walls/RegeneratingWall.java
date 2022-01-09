@@ -6,10 +6,10 @@ import mindustry.world.meta.Stat;
 import mindustry.world.meta.StatUnit;
 
 /** Self-healing wall. */
-public class SelfHealWall extends Wall {
+public class RegeneratingWall extends Wall {
     public float heal = 0.1f;
 
-    public SelfHealWall(String name) {
+    public RegeneratingWall(String name) {
         super(name);
         update = true;
     }
@@ -20,7 +20,7 @@ public class SelfHealWall extends Wall {
         stats.add(Stat.repairTime, health / heal / Time.toSeconds, StatUnit.seconds);
     }
 
-    public class SelfHealWallBuild extends WallBuild {
+    public class RegeneratingWallBuild extends WallBuild {
         @Override
         public void updateTile() {
             super.updateTile();
