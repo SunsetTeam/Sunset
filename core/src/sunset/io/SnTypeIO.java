@@ -8,6 +8,7 @@ import mma.io.ModTypeIO;
 import sunset.type.DeliverState;
 import sunset.type.MissileType;
 import sunset.world.blocks.units.Airport;
+import sunset.world.blocks.units.FireFightersStation.*;
 
 @Annotations.TypeIOHandler
 public class SnTypeIO extends ModTypeIO {
@@ -28,6 +29,14 @@ public class SnTypeIO extends ModTypeIO {
     public static Airport.AirportBuild readAirportBuild(Reads read) {
         Building building = readBuilding(read);
         return building instanceof Airport.AirportBuild ? building.as() : null;
+    }
+    public static void writeFireFightersStationBuild(Writes write, FireFightersStationBuild airportBuild) {
+        writeBuilding(write, airportBuild);
+    }
+
+    public static FireFightersStationBuild readFireFightersStationBuild(Reads read) {
+        Building building = readBuilding(read);
+        return building instanceof FireFightersStationBuild ? building.as() : null;
     }
     public static void writeDeliverState(Writes write, DeliverState state){
         writeEnum(write,state);

@@ -86,6 +86,19 @@ public class SnFx {
         });
     }),
 
+   liquidTransfer = new Effect(12f, e -> {
+        if(!(e.data instanceof Position to)) return;
+        Tmp.v1.set(e.x, e.y).interpolate(Tmp.v2.set(to), e.fin(), Interp.pow3)
+        .add(Tmp.v2.sub(e.x, e.y).nor().rotate90(1).scl(Mathf.randomSeedRange(e.id, 1f) * e.fslope() * 10f));
+        float x = Tmp.v1.x, y = Tmp.v1.y;
+        float size = 1f;
+
+        stroke(e.fslope() * 2f * size, e.color);
+        Lines.circle(x, y, e.fslope() * 2f * size);
+
+        color(e.color.cpy().mul(0.8f));
+        Fill.circle(x, y, e.fslope() * 1.5f * size);
+    }),
     modFormSmoke = new Effect(50, e -> {
         randLenVectors(e.id, 8, 6f + e.fin() * 8f, (x, y) -> {
             color(Pal.plasticSmoke, Color.lightGray, e.fin());
@@ -259,18 +272,18 @@ public class SnFx {
         float cy = e.y - Mathf.sin(r) * 12f;
         Draw.z(Layer.block);
         enegrySphere(e.id, e.time, e.fin(), 8, Mathf.PI / 120f, Mathf.PI / 30f, 8f, 1.5f, c1, c2, cx, cy);
-    });
+    }),
 
-    public static final Effect tridentHit = new Effect(30, e -> {
+    tridentHit = new Effect(30, e -> {
         Draw.z(Layer.effect);
         stroke(0);
         color(new Color(Pal.surge).a(Mathf.clamp(2 * e.fout() - 1)));
         Fill.circle(e.x, e.y, 112f);
         stroke(3, new Color(Pal.surge).a(Mathf.clamp(2 * e.fout())));
         Lines.circle(e.x, e.y, 112f);
-    });
+    }),
 
-    public static final Effect tridentHit0 = new Effect(30, e -> {
+    tridentHit0 = new Effect(30, e -> {
         color(Pal.plastaniumFront);
 
         e.scaled(7, i -> {

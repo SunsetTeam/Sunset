@@ -7,7 +7,7 @@ import arc.util.Interval;
 import mindustry.entities.units.WeaponMount;
 import mindustry.gen.Unit;
 import mindustry.type.Weapon;
-import sunset.type.UnitData;
+import sunset.utils.*;
 
 /**
  * AI, which controls one weapon, not the entire combat unit.

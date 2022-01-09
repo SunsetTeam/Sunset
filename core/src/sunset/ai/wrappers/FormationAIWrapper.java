@@ -5,7 +5,7 @@ import mindustry.entities.units.*;
 import mindustry.gen.*;
 
 public class FormationAIWrapper extends FormationAI{
-    final AIController wrapped;
+   public final AIController wrapped;
 
     public FormationAIWrapper(AIController wrapped){
         super(null, null);

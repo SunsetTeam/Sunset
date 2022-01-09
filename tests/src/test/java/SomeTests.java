@@ -1,59 +1,41 @@
-import arc.files.Fi;
-import arc.func.Cons3;
-import arc.graphics.Color;
-import arc.graphics.Pixmap;
-import arc.math.geom.Vec2;
-import arc.struct.ObjectMap;
-import arc.struct.ObjectSet;
-import arc.struct.Seq;
-import arc.util.Log;
-import arc.util.Tmp;
+import arc.files.*;
+import arc.func.*;
+import arc.graphics.*;
+import arc.math.geom.*;
+import arc.struct.*;
+import arc.util.*;
+import mma.type.pixmap.*;
+import sunset.utils.*;
 
-public class SomeTests {
+public class SomeTests{
     static final
     Fi resources = Fi.get("tests/src/test/resources"),
-            sprites = Fi.get("core/assets-raw/sprites"),
-            assets = Fi.get("core/assets");
+    sprites = Fi.get("core/assets-raw/sprites"),
+    assets = Fi.get("core/assets");
 
-    public static void main(String[] args) {
-        class TodoObject {
-            Seq<String> parts = new Seq<>();
-        }
-        ObjectMap<ContentType, ObjectMap<String, ObjectSet<String>>> todoList = new ObjectMap<>();
-        for (Fi bundleFile : assets.child("bundles").list()) {
-          Seq<String> fileBuilder=new Seq<>();
+    public static void main(String[] args){
+        Log.info("Start testing");
+        Fi file = resources.child("rotor-big-1.png");
+//        Fi file = resources.child("rotor-big-1.png");
+        Pixmap pixmap = PixmapIO.readPNG(file);
 
-            String[] split = bundleFile.readString().split("\n");
-            for (String line : split) {
-                if (!line.replace(" ", "").startsWith("#")&& line.contains("[#FF0000]//TODO")) {
-//                    Log.info("broken line: @",line);
-                    String type = line.substring(0,line.indexOf("."));
-                    int fromIndex = line.indexOf(" =");
-                    int endIndex = line.lastIndexOf(".", fromIndex);
-                    String name=line.substring(type.length()+1, endIndex);
-                    todoList.get(ContentType.valueOf(type), ObjectMap::new).get(name, ObjectSet::new).add(line.substring(endIndex+1,fromIndex));
-                    fileBuilder.add("#"+line.substring(0,fromIndex)+" = [#FF0000]//TOD");
-                } else {
-                    fileBuilder.add(line);
-                }
-            }
-            bundleFile.writeString(fileBuilder.toString("\n"));
-//            Log.info("file: @", bundleFile.name());
-        }
-
-        for (ContentType key : todoList.keys()) {
-            Log.info(key);
-            for (ObjectMap.Entry<String, ObjectSet<String>> entry : todoList.get(key)) {
-                String name = entry.key;
-                Log.info(" |-@ (@)", name,entry.value.toString(","));
-            }
-        }
+        resources.child("out/result.png").writePng(fullRotor(pixmap, 1000));
 
 //        resources.child("rotor-full.png").writePng(pixmap);
 //        rotatePixmap(root,2);
     }
 
-    static Pixmap rotate(Pixmap pixmap, float angle) {
+    private static Pixmap fullRotor(Pixmap rotreg, int count){
+        int size = Math.max(rotreg.width, rotreg.height);
+        Pixmap fullreg = new Pixmap(size, size);
+        for(int i = 0; i < count; i++){
+            Log.info(i+'/'+count);
+            PixmapProcessor.drawCenter(fullreg, PixmapRotator.rotate(rotreg, i / (float)count * 360f));
+        }
+        return fullreg;
+    }
+
+    static Pixmap rotate(Pixmap pixmap, float angle){
         final int size = Math.max(pixmap.width, pixmap.height);
         Pixmap rotated = new Pixmap(size, size);
         Vec2 center = new Vec2(pixmap.width / 2f, pixmap.height / 2f);
@@ -62,28 +44,28 @@ public class SomeTests {
             x += (size - pixmap.width) / 2;
             y += (size - pixmap.height) / 2;
             Color set = Tmp.c4.set(rotated.get(x, y));
-            if (!coordinates.add(x + "_" + y)) {
+            if(!coordinates.add(x + "_" + y)){
                 Log.info("twice(@;@)", x, y);
             }
             float a = set.a;
             set.lerp(color, color.a).a = a + color.a;
-            if (color.a > 0) {
+            if(color.a > 0){
             }
-            if (set.a == 0) return;
+            if(set.a == 0) return;
             rotated.set(x, y, set);
         };
         rotated.fill(Color.clearRgba);
         pixmap.each((x, y) -> {
             Color color = Tmp.c1.set(pixmap.get(x, y));
-            if (color.a == 0) return;
+            if(color.a == 0) return;
             Tmp.v1.set(x, y).rotateAround(center, angle);
             float x1 = Tmp.v1.x;
             float y1 = Tmp.v1.y;
-            int roundX = (int) x1;
-            int roundY = (int) y1;
+            int roundX = (int)x1;
+            int roundY = (int)y1;
             float dx = x1 % 1f;
             float dy = y1 % 1f;
-            if (dx == 0 && dy == 0) {
+            if(dx == 0 && dy == 0){
                 blendSet.get(roundX, roundY, color);
 //                rotated.set(roundX, roundY, color.rgba());
                 return;

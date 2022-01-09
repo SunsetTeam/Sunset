@@ -1245,7 +1245,7 @@ public class SnBullets implements ContentList {
         //T6-copter
         shrapnelCopterGun = new ShrapnelBulletType() {{
             length = 180f;
-            width = 55f;
+            width = 50f;
             damage = 145;
             shootEffect = SnFx.copterShoot;
             fromColor = SnPal.copterLaser;
@@ -1306,12 +1306,12 @@ public class SnBullets implements ContentList {
         }};
 
         bigCopterEnergySphere = new LightningSphereBulletType(3f, 7, "sunset-circle-bullet") {{
-            lifetime = 40f;
+            lifetime = 45f;
             splashDamageRadius = 90f;
             splashDamage = 80f;
             height = 14f;
             width = 14f;
-            LightningChance = 0.3f;
+            LightningChance = 0.4f;
             lightning = 4;
             lightningLength = 8;
             lightningColor = SnPal.copterLaser;
@@ -1368,10 +1368,18 @@ public class SnBullets implements ContentList {
             lifetime = 36;
             knockback = 384;
             status = SnStatusEffects.stun;
+            trailEffect = SnFx.stuff;
             statusDuration = 30;
-            height = 30;
-            width = 6;
-        }};
+            height = 56;
+            width = 10;
+        }
+            @Override
+            public void update(Bullet b) {
+                if (b.timer(0, 1f)) {
+                    trailEffect.at(b.x, b.y, b.rotation(), 3f);
+                }
+            }
+        };
         //endregion buffer
         //region berserk
         mirageGunBullet = new BasicBulletType(12f, 15f) {{
