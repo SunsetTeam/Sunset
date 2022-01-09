@@ -71,7 +71,9 @@ public class ChainWeapon extends WeaponExt implements CustomWeapon, StatValue {
     }
 
     private Seq<Unit> getUnits(WeaponMount mount, Unit unit) {
-        return chainWeaponDataKey.get(unit).get(mount, Seq::new);
+        ObjectMap<WeaponMount, Seq<Unit>> data = chainWeaponDataKey.get(unit);
+        if(data == null) return null;
+        return data.get(mount, Seq::new);
     }
 
     @Override

@@ -272,18 +272,18 @@ public class SnFx {
         float cy = e.y - Mathf.sin(r) * 12f;
         Draw.z(Layer.block);
         enegrySphere(e.id, e.time, e.fin(), 8, Mathf.PI / 120f, Mathf.PI / 30f, 8f, 1.5f, c1, c2, cx, cy);
-    });
+    }),
 
-    public static final Effect tridentHit = new Effect(30, e -> {
+    tridentHit = new Effect(30, e -> {
         Draw.z(Layer.effect);
         stroke(0);
         color(new Color(Pal.surge).a(Mathf.clamp(2 * e.fout() - 1)));
         Fill.circle(e.x, e.y, 112f);
         stroke(3, new Color(Pal.surge).a(Mathf.clamp(2 * e.fout())));
         Lines.circle(e.x, e.y, 112f);
-    });
+    }),
 
-    public static final Effect tridentHit0 = new Effect(30, e -> {
+    tridentHit0 = new Effect(30, e -> {
         color(Pal.plastaniumFront);
 
         e.scaled(7, i -> {
