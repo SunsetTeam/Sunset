@@ -1368,10 +1368,18 @@ public class SnBullets implements ContentList {
             lifetime = 36;
             knockback = 384;
             status = SnStatusEffects.stun;
+            trailEffect = SnFx.stuff;
             statusDuration = 30;
-            height = 30;
-            width = 6;
-        }};
+            height = 56;
+            width = 10;
+        }
+            @Override
+            public void update(Bullet b) {
+                if (b.timer(0, 1f)) {
+                    trailEffect.at(b.x, b.y, b.rotation(), 3f);
+                }
+            }
+        };
         //endregion buffer
         //region berserk
         mirageGunBullet = new BasicBulletType(12f, 15f) {{
