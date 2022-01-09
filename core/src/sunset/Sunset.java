@@ -17,6 +17,7 @@ import sunset.gen.*;
 import sunset.type.*;
 import sunset.type.unitTypes.*;
 import sunset.utils.*;
+import sunset.utils.UnitData;
 
 import static mindustry.Vars.*;
 import static mma.ModVars.*;
