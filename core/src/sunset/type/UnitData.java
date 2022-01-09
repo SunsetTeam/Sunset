@@ -25,7 +25,9 @@ public class UnitData {
         if (entries.containsKey(key.id)) {
             return (T) entries.get(key.id);
         } else {
-            return def.get();
+            T newData = def.get();
+            entries.put(key.id, newData);
+            return newData;
         }
     }
 
