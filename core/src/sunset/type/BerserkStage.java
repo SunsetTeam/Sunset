@@ -5,16 +5,16 @@ import mindustry.gen.Unit;
 import mindustry.type.StatusEffect;
 
 public class BerserkStage {
-    /** Максимально возможный процент прочности, при котором данный этап будет активен. */
+    /** The maximum possible percentage of strength at which this stage will be active.*/
     public float healthMaximum;
-    /** Порядковый индекс. Чем ниже, тем меньше по здоровью. Не устанавливать вручную! */
+    /** Ordinal index. The lower, the less health. Do not install manually! */
     public int index;
-    /** Эффект, накладываемый данным этапом. */
+    /** The effect of this stage. */
     public StatusEffect effect = StatusEffects.none;
     public float bulletWidthMultiplier = 1f;
 
-    /** Переопределяйте для обработки логики данного этапа. */
+    /** Override to handle the logic for this step. */
     public void update(Unit unit) { }
-    /** Переопределяйте для отрисовки данного этапа. */
+    /** Override to render this stage. */
     public void draw(Unit unit) { }
 }

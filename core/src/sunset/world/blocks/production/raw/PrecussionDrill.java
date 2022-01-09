@@ -61,9 +61,6 @@ public class PrecussionDrill extends Block {
     /**
      * List of resources used in mining.
      */
-
-    public float snake = 0f;
-
     public DrillItem[] reqDrillItems = {};
     /**
      * Capacity of consumed resources

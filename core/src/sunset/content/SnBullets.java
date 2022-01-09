@@ -30,7 +30,7 @@ public class SnBullets implements ContentList {
     //burner
     heavyCoalFlame, heavyPyraFlame, flameidFlame,
     //liquid
-    floodWaterShot, floodCryoShot, floodSlagShot, floodOilShot, burheynaFrag,
+    floodWaterShot, floodCryoShot, floodSlagShot, floodOilShot, burheynaFrag, floodBurheynaShot,
     //blast
     lightBlastGraphite, lightBlastSilicon,
     bigBlastPlastanium, bigBlastBlast, bigBlastPyratite,
@@ -41,6 +41,8 @@ public class SnBullets implements ContentList {
     bigSporePodPoisonFrag, bigSporePodPoison, bigNaturitePoisonFrag, bigNaturitePoison, bigNobiumPoisonFrag, bigNobiumPoison, bigPlastaniumPoisonFrag, bigPlastaniumPoison,
     //energy-sphere
     smallEnergySphere, mediumEnergySphereFrag, mediumEnergySphere,
+    //air-defense
+    smallPlastaniumBulletFrag, smallPlastaniumBullet, smallPyratiteBullet, smallSurgeAlloyBullet, smallBlueMissileFrag, smallBlueMissile, smallForsSpine, smallEnojieMissile,
     //units
     basicHelicopterGun, mediumHelicopterGun, helicopterMissile, clusterRocketSmall, clusterRocket, copterEnergySphere, bigHelicopterGunFrag, bigHelicopterGun, bigHelicopterMissile, laserGun, laserHelicopterFrag, largeHelicopterGun, largeHelicopterMissile, smallHelicopterMissiles, shrapnelCopterGun, gigantHelicopterGun, bigClusterRocketSmall, bigClusterRocket, bigCopterEnergySphere,
     cometWaterShot, starStunBullet, galaxyKnockbackBullet,
@@ -348,31 +350,37 @@ public class SnBullets implements ContentList {
             fragBullets = 36;
             fragBullet = Bullets.oilShot;
         }};
-        burheynaFrag = new LiquidBulletType(SnLiquids.burheyna) {{
-            damage = 3.1f;
-            speed = 2.8f;
+
+        floodBurheynaShot = new ArtilleryLiquidBulletType(SnLiquids.burheyna) {{
+            lifetime = 130f;
+            speed = 3f;
+            knockback = 7f;
+            puddleSize = 18f;
+            orbSize = 9f;
+            drag = 0.001f;
+            statusDuration = 60f * 4f;
+            damage = 10f;
+            fragBullets = 36;
+            fragBullet = burheynaFrag;
         }};
         //endregion liquid
         //region blast
         lightBlastGraphite = new ShrapnelBulletType() {{
             speed = 14;
-            damage = 19;
-            lifetime = 11f;
-            splashDamage = 39f;
-            splashDamageRadius = 13f;
-            width = 4f;
+            damage = 20;
+            shootEffect = SnFx.spineShoot;
+            fromColor = Pal.bulletYellow;
+            toColor = Pal.bulletYellowBack;
+            width = 10f;
             collidesAir = true;
         }};
         lightBlastSilicon = new ShrapnelBulletType() {{
-            speed = 9;
-            damage = 34;
-            lifetime = 19f;
-            splashDamage = 16f;
-            splashDamageRadius = 7.4f;
-            homingPower = 0.033f;
-            homingRange = 154f;
+            damage = 25;
+            shootEffect = SnFx.spineShoot;
+            fromColor = Pal.bulletYellow;
+            toColor = Pal.bulletYellowBack;
             reloadMultiplier = 1.1f;
-            width = 4f;
+            width = 19f;
             collidesAir = true;
         }};
         bigBlastPlastanium = new BasicBulletType(12, 81) {{
@@ -637,20 +645,20 @@ public class SnBullets implements ContentList {
             hitEffect = Fx.flakExplosion;
             splashDamage = 19f;
             splashDamageRadius = 37f;
-            shrinkX = 0.3f;
-            shrinkY = 0.3f;
+            shrinkX = 0f;
+            shrinkY = 0f;
             drag = 0.015f;
             frontColor = SnPal.poisonBullet;
             backColor = SnPal.poisonBulletBack;
             collidesAir = true;
             collidesGround = true;
 
-            fragBullet = burheynaFrag;
-            fragCone = 360;
-            fragBullets = 2;
+            fragBullet = bigSporePodPoisonFrag;
+            fragCone = 90f;
+            fragBullets = 4;
 
             trailColor = SnPal.poisonBullet;
-            trailWidth = 5f;
+            trailWidth = 4f;
             trailLength = 31;
 
             weaveScale = 9f;
@@ -665,20 +673,20 @@ public class SnBullets implements ContentList {
             hitEffect = Fx.flakExplosion;
             splashDamage = 24f;
             splashDamageRadius = 30f;
-            shrinkX = 0.3f;
-            shrinkY = 0.3f;
+            shrinkX = 0f;
+            shrinkY = 0f;
             drag = 0.015f;
             frontColor = SnPal.poisonBullet;
             backColor = SnPal.poisonBulletBack;
             collidesAir = true;
             collidesGround = true;
 
-            fragBullet = burheynaFrag;
-            fragCone = 360f;
-            fragBullets = 12;
+            fragBullet = bigNaturitePoisonFrag;
+            fragCone = 90f;
+            fragBullets = 5;
 
             trailColor = SnPal.poisonBullet;
-            trailWidth = 5f;
+            trailWidth = 4f;
             trailLength = 31;
 
             weaveScale = 9f;
@@ -693,20 +701,20 @@ public class SnBullets implements ContentList {
             hitEffect = Fx.flakExplosion;
             splashDamage = 22f;
             splashDamageRadius = 27f;
-            shrinkX = 0.3f;
-            shrinkY = 0.3f;
+            shrinkX = 0f;
+            shrinkY = 0f;
             drag = 0.015f;
             frontColor = SnPal.poisonBullet;
             backColor = SnPal.poisonBulletBack;
             collidesAir = true;
             collidesGround = true;
 
-            fragBullet = burheynaFrag;
-            fragCone = 360f;
-            fragBullets = 12;
+            fragBullet = bigNobiumPoisonFrag;
+            fragCone = 90f;
+            fragBullets = 4;
 
             trailColor = SnPal.poisonBullet;
-            trailWidth = 5f;
+            trailWidth = 4f;
             trailLength = 31;
 
             weaveScale = 9f;
@@ -724,20 +732,20 @@ public class SnBullets implements ContentList {
             hitEffect = Fx.flakExplosion;
             splashDamage = 25f;
             splashDamageRadius = 34f;
-            shrinkX = 0.3f;
-            shrinkY = 0.3f;
+            shrinkX = 0f;
+            shrinkY = 0f;
             drag = 0.015f;
             frontColor = SnPal.poisonBullet;
             backColor = SnPal.poisonBulletBack;
             collidesAir = true;
             collidesGround = true;
 
-            fragBullet = burheynaFrag;
-            fragCone = 360f;
-            fragBullets = 4;
+            fragBullet = bigPlastaniumPoisonFrag;
+            fragCone = 90f;
+            fragBullets = 6;
 
             trailColor = SnPal.poisonBullet;
-            trailWidth = 5f;
+            trailWidth = 4f;
             trailLength = 31;
 
             weaveScale = 9f;
@@ -758,8 +766,8 @@ public class SnBullets implements ContentList {
             frontColor = SnPal.poisonBullet;
             backColor = SnPal.poisonBulletBack;
 
-            shrinkX = 0.3f;
-            shrinkY = 0.3f;
+            shrinkX = 0f;
+            shrinkY = 0f;
             drag = 0.03f;
 
             trailColor = SnPal.poisonBullet;
@@ -780,8 +788,8 @@ public class SnBullets implements ContentList {
             frontColor = SnPal.poisonBullet;
             backColor = SnPal.poisonBulletBack;
 
-            shrinkX = 0.3f;
-            shrinkY = 0.3f;
+            shrinkX = 0f;
+            shrinkY = 0f;
             drag = 0.03f;
 
             trailColor = SnPal.poisonBullet;
@@ -802,8 +810,8 @@ public class SnBullets implements ContentList {
             frontColor = SnPal.poisonBullet;
             backColor = SnPal.poisonBulletBack;
 
-            shrinkX = 0.3f;
-            shrinkY = 0.3f;
+            shrinkX = 0f;
+            shrinkY = 0f;
             drag = 0.03f;
 
             trailColor = SnPal.poisonBullet;
@@ -824,8 +832,8 @@ public class SnBullets implements ContentList {
             frontColor = SnPal.poisonBullet;
             backColor = SnPal.poisonBulletBack;
 
-            shrinkX = 0.3f;
-            shrinkY = 0.3f;
+            shrinkX = 0f;
+            shrinkY = 0f;
             drag = 0.3f;
 
             trailColor = SnPal.poisonBullet;
@@ -839,6 +847,8 @@ public class SnBullets implements ContentList {
         //region energy-sphere
         smallEnergySphere = new BasicBulletType(3f, 15) {{
             sprite = "sunset-circle-bullet";
+            shrinkX = 0f;
+            shrinkY = 0f;
             lifetime = 30f;
             height = 4f;
             width = 4f;
@@ -846,7 +856,6 @@ public class SnBullets implements ContentList {
             frontColor = SnPal.redBomb;
             backColor = SnPal.redBombBack;
         }};
-
         mediumEnergySphereFrag = new LaserBulletType(10) {{
             colors = new Color[]{SnPal.redBomb.cpy().a(0.4f), SnPal.redBomb, Color.white};
             width = 20f;
@@ -856,12 +865,11 @@ public class SnBullets implements ContentList {
             collidesAir = true;
             collidesGround = true;
         }};
-
         mediumEnergySphere = new BasicBulletType(3f, 30) {{
             sprite = "sunset-circle-bullet";
-            shrinkX = 0.01f;
-            shrinkY = 0.01f;
-            lifetime = 45f;
+            shrinkX = 0f;
+            shrinkY = 0f;
+            lifetime = 50f;
             height = 8f;
             width = 8f;
             hitEffect = SnFx.mediumEnergySphereHit;
@@ -876,9 +884,149 @@ public class SnBullets implements ContentList {
             fragBullet = mediumEnergySphereFrag;
             fragBullets = 1;
             fragCone = 0.0001f;
-
         }};
         //endregion energy-sphere
+        //region air-defense
+        smallPlastaniumBulletFrag = new BasicBulletType(3f, 15, "bullet"){{
+            width = 6f;
+            height = 10f;
+            shrinkY = 1f;
+            lifetime = 20f;
+            frontColor = Pal.plastanium;
+            backColor = Pal.plastaniumBack;
+            despawnEffect = Fx.none;
+        }};
+        smallPlastaniumBullet = new BasicBulletType(5f, 25) {{
+            shrinkX = 0f;
+            shrinkY = 0f;
+            lifetime = 45f;
+            height = 15f;
+            width = 10f;
+            frontColor = Pal.plastanium;
+            backColor = Pal.plastaniumBack;
+
+            fragBullet = smallPlastaniumBulletFrag;
+            fragBullets = 4;
+        }};
+        smallPyratiteBullet = new BasicBulletType(5f, 15) {{
+            shrinkX = 0f;
+            shrinkY = 0f;
+            lifetime = 45f;
+            height = 13f;
+            width = 9f;
+
+            splashDamage = 10f;
+            splashDamageRadius = 14f;
+            makeFire = true;
+
+            frontColor = Pal.bulletYellow;
+            backColor = Pal.bulletYellowBack;
+        }};
+        smallSurgeAlloyBullet = new BasicBulletType(5f, 28) {{
+            shrinkX = 0f;
+            shrinkY = 0f;
+            lifetime = 45f;
+            height = 14f;
+            width = 10f;
+
+            splashDamage = 10f;
+            splashDamageRadius = 14f;
+            makeFire = true;
+
+            lightning = 7;
+            lightningLength = 6;
+            lightningColor = Pal.surge;
+            lightningDamage = 11f;
+
+            frontColor = Pal.bulletYellow;
+            backColor = Pal.bulletYellowBack;
+        }};
+        smallBlueMissileFrag = new BasicBulletType(3f, 10, "missile") {{
+            shrinkX = 0f;
+            shrinkY = 0f;
+            lifetime = 25f;
+            height = 9f;
+            width = 6f;
+            frontColor = SnPal.blueBullet;
+            backColor = SnPal.blueBulletBack;
+
+            splashDamage = 10f;
+            splashDamageRadius = 15f;
+
+            trailColor = SnPal.blueBullet;
+            trailWidth = 1.4f;
+            trailLength = 2;
+            trailRotation = false;
+            
+            weaveScale = 5f;
+            weaveMag = 3f;
+        }};
+        smallBlueMissile = new BasicBulletType(5f, 15, "missile") {{
+            shrinkX = 0f;
+            shrinkY = 0f;
+            lifetime = 45f;
+            height = 15f;
+            width = 9f;
+            frontColor = SnPal.blueBullet;
+            backColor = SnPal.blueBulletBack;
+
+            splashDamage = 40f;
+            splashDamageRadius = 30f;
+
+            trailColor = SnPal.blueBullet;
+            trailWidth = 3.2f;
+            trailLength = 3;
+            trailRotation = false;
+
+            fragBullet = smallBlueMissileFrag;
+            fragBullets = 6;
+            fragCone = 90;
+
+            weaveScale = 5f;
+            weaveMag = 3f;
+        }};
+
+        smallForsSpine = new BasicBulletType(5f, 6) {{
+            shrinkX = 0f;
+            shrinkY = 0f;
+            lifetime = 45f;
+            height = 13f;
+            width = 8f;
+            frontColor = SnPal.blastBullet;
+            backColor = SnPal.blastBulletBack;
+
+            spin = 8f;
+
+            splashDamage = 30f;
+            splashDamageRadius = 25f;
+        }};
+
+        smallEnojieMissile = new MissileBulletType(3f, 10) {{
+            width = 7f;
+            height = 10f;
+            shrinkY = 0f;
+            drag = -0.003f;
+            homingRange = 60f;
+            homingPower = 4f;
+
+            splashDamageRadius = 30f;
+            splashDamage = 25f;
+
+            keepVelocity = false;
+            hitSound = Sounds.explosion;
+            trailChance = 0.2f;
+            lifetime = 60f;
+            backColor = SnPal.enojieBulletBack;
+            frontColor = SnPal.enojieBullet;
+            hitEffect = Fx.blastExplosion;
+            despawnEffect = Fx.blastExplosion;
+            weaveScale = 4f;
+            weaveMag = 2f;
+            pierce = true;
+            pierceBuilding = true;
+            pierceCap = 3;
+        }};
+        //endregion air-defense
         //region helicopter
         //T1-copter
         basicHelicopterGun = new BasicBulletType(4.7f, 10) {{
@@ -891,28 +1039,28 @@ public class SnBullets implements ContentList {
             smokeEffect = Fx.shootSmallSmoke;
         }};
         //T2-copter
-        mediumHelicopterGun = new BasicBulletType(5.7f, 13) {{
-            width = 7f;
-            height = 11f;
-            lifetime = 30f;
+        mediumHelicopterGun = new BasicBulletType(6f, 13) {{
+            width = 9f;
+            height = 12f;
+            lifetime = 38f;
             shootEffect = Fx.shootSmall;
             smokeEffect = Fx.shootSmallSmoke;
         }};
-        helicopterMissile = new MissileBulletType(4f, 6) {{
-            width = 7f;
-            height = 10f;
+        helicopterMissile = new MissileBulletType(4.2f, 6) {{
+            width = 8f;
+            height = 11f;
             shrinkY = 0f;
             drag = -0.003f;
             homingRange = 15f;
             homingPower = 0.1f;
 
-            splashDamageRadius = 18f;
-            splashDamage = 14f;
+            splashDamageRadius = 25f;
+            splashDamage = 15f;
 
             keepVelocity = false;
             hitSound = Sounds.explosion;
-            trailChance = 0.2f;
-            lifetime = 39f;
+            trailEffect = Fx.artilleryTrail;
+            lifetime = 40f;
             backColor = Pal.unitBack;
             frontColor = Pal.unitFront;
             hitEffect = Fx.blastExplosion;
@@ -921,7 +1069,7 @@ public class SnBullets implements ContentList {
             weaveMag = 2f;
         }};
         //T3-copter
-        clusterRocketSmall = new MissileBulletType(4f, 5) {{
+        clusterRocketSmall = new MissileBulletType(4.2f, 5) {{
             width = 6f;
             height = 9f;
             shrinkY = 0f;
@@ -929,8 +1077,8 @@ public class SnBullets implements ContentList {
             homingRange = 9f;
             homingPower = 0.09f;
 
-            splashDamageRadius = 13f;
-            splashDamage = 17f;
+            splashDamageRadius = 20f;
+            splashDamage = 20f;
 
             keepVelocity = false;
             hitSound = Sounds.explosion;
@@ -943,19 +1091,19 @@ public class SnBullets implements ContentList {
             weaveScale = 4f;
             weaveMag = 2f;
         }};
-        clusterRocket = new MissileBulletType(4f, 7) {{
+        clusterRocket = new MissileBulletType(4.7f, 7) {{
             width = 10f;
             height = 14f;
             shrinkY = 0f;
             drag = -0.003f;
             homingRange = 10f;
             homingPower = 0.14f;
-            splashDamageRadius = 30f;
-            splashDamage = 27f;
+            splashDamageRadius = 35f;
+            splashDamage = 35f;
             keepVelocity = false;
             hitSound = Sounds.explosion;
             trailChance = 0.3f;
-            lifetime = 34f;
+            lifetime = 35f;
             backColor = Pal.unitBack;
             frontColor = Pal.unitFront;
             hitEffect = Fx.blastExplosion;
@@ -967,13 +1115,13 @@ public class SnBullets implements ContentList {
             fragCone = 90f;
             fragBullets = 5;
         }};
-        copterEnergySphere = new BasicBulletType(3f, 7) {{
+        copterEnergySphere = new BasicBulletType(3.3f, 7) {{
             sprite = "sunset-circle-bullet";
             lifetime = 40f;
-            splashDamageRadius = 14f;
-            splashDamage = 20f;
-            height = 9f;
-            width = 9f;
+            splashDamageRadius = 17f;
+            splashDamage = 25f;
+            height = 10f;
+            width = 10f;
             lightning = 4;
             lightningLength = 10;
             lightningColor = SnPal.copterLaser;
@@ -985,7 +1133,7 @@ public class SnBullets implements ContentList {
             backColor = SnPal.copterLaserBack;
         }};
         //T4-copter
-        bigHelicopterGunFrag = new BasicBulletType(3f, 9, "bullet"){{
+        bigHelicopterGunFrag = new BasicBulletType(3f, 10, "bullet"){{
             width = 6f;
             height = 15f;
             shrinkY = 1f;
@@ -994,10 +1142,10 @@ public class SnBullets implements ContentList {
             frontColor = Color.white;
             despawnEffect = Fx.none;
         }};
-        bigHelicopterGun = new BasicBulletType(4f, 40) {{
+        bigHelicopterGun = new BasicBulletType(5f, 45) {{
             width = 10f;
             height = 15f;
-            lifetime = 50f;
+            lifetime = 44f;
             hitEffect = Fx.flakExplosion;
             shootEffect = Fx.shootSmall;
             smokeEffect = Fx.shootSmallSmoke;
@@ -1012,8 +1160,8 @@ public class SnBullets implements ContentList {
             homingRange = 20f;
             homingPower = 0.3f;
 
-            splashDamageRadius = 35f;
-            splashDamage = 40f;
+            splashDamageRadius = 40f;
+            splashDamage = 47f;
 
             keepVelocity = false;
             hitSound = Sounds.explosion;
@@ -1028,7 +1176,7 @@ public class SnBullets implements ContentList {
         }};
         laserGun = new LaserBulletType() {{
             colors = new Color[]{SnPal.copterLaser.cpy().a(0.4f), SnPal.copterLaser, Color.white};
-            damage = 45;
+            damage = 58;
             width = 25f;
             lifetime = 15f;
             length = 125f;
@@ -1037,19 +1185,19 @@ public class SnBullets implements ContentList {
             collidesGround = true;
         }};
         //T5-copter
-        laserHelicopterFrag = new LaserBulletType(35) {{
+        laserHelicopterFrag = new LaserBulletType(45) {{
             colors = new Color[]{SnPal.copterLaser.cpy().a(0.4f), SnPal.copterLaser, Color.white};
             width = 20f;
             lifetime = 15f;
-            length = 50f;
+            length = 70f;
             laserEffect = Fx.lancerLaserShootSmoke;
             collidesAir = true;
             collidesGround = true;
         }};
-        largeHelicopterGun = new BasicBulletType(6f, 45) {{
+        largeHelicopterGun = new BasicBulletType(6f, 55) {{
             width = 17f;
             height = 27f;
-            lifetime = 35f;
+            lifetime = 38f;
             hitEffect = Fx.hitBulletBig;
             shootEffect = Fx.shootBig2;
             smokeEffect = Fx.shootBigSmoke;
@@ -1057,90 +1205,90 @@ public class SnBullets implements ContentList {
             fragBullets = 1;
             fragCone = 0.0001f;
         }};
-        largeHelicopterMissile = new CopterRocketBulletType(6.3f, 13, "missile-large") {{
+        largeHelicopterMissile = new MissileBulletType(6.3f, 13, "missile-large") {{
             width = 14f;
             height = 17f;
             hitShake = 3f;
-            lifetime = 35f;
+            lifetime = 46f;
             hitEffect = Fx.massiveExplosion;
             keepVelocity = false;
             hitSound = Sounds.explosion;
             shrinkY = 0f;
             drag = -0.003f;
-            homingRange = 20f;
-            homingPower = 0.2f;
-            splashDamage = 50f;
-            splashDamageRadius = 30f;
+            homingRange = 80f;
+            homingPower = 0.3f;
+            splashDamage = 75f;
+            splashDamageRadius = 70f;
             backColor = Pal.missileYellowBack;
 		    frontColor = Pal.missileYellow;
             trailLength = 0;
-            trailWidth = 5f;
-            trailColor = Pal.bulletYellow;
-            trailInterval = 0.5f;
+            trailWidth = 2.5f;
             trailEffect = SnFx.bigRocketTrail;
         }};
         smallHelicopterMissiles = new MissileBulletType(4.4f, 10) {{
             width = 11f;
             height = 11f;
             shrinkY = 0f;
-            lifetime = 50f;
-            splashDamageRadius = 30f;
-            splashDamage = 15f;
+            lifetime = 60f;
+            splashDamageRadius = 35f;
+            splashDamage = 40f;
             hitEffect = Fx.blastExplosion;
             despawnEffect = Fx.blastExplosion;
-            homingRange = 30;
-            homingPower = 0.4f;
+            homingRange = 100;
+            homingPower = 1f;
             weaveScale = 4f;
             weaveMag = 2f;
             pierce = true;
-            pierceCap = 3;
+            pierceBuilding = true;
+            pierceCap = 5;
         }};
         //T6-copter
         shrapnelCopterGun = new ShrapnelBulletType() {{
-            speed = 14;
-            length = 120f;
-            width = 20f;
-            damage = 70;
-            lifetime = 20f;
-            splashDamage = 59f;
-            splashDamageRadius = 30f;
+            length = 180f;
+            width = 55f;
+            damage = 145;
+            shootEffect = SnFx.copterShoot;
+            fromColor = SnPal.copterLaser;
+            toColor = SnPal.copterLaserBack;
             collidesAir = true;
+            collidesGround = true;
         }};
 
-        gigantHelicopterGun = new BasicBulletType(5f, 25) {{
-            width = 12f;
-            height = 17f;
-            lifetime = 48f;
+        gigantHelicopterGun = new BasicBulletType(5f, 75) {{
+            width = 16f;
+            height = 21f;
+            lifetime = 55f;
             hitEffect = Fx.flakExplosion;
             shootEffect = Fx.shootSmall;
             smokeEffect = Fx.shootSmallSmoke;
         }};
 
         bigClusterRocketSmall = new MissileBulletType(4f, 8) {{
-            width = 13f;
+            width = 12f;
             height = 13f;
             shrinkY = 0f;
             lifetime = 55f;
-            splashDamageRadius = 35f;
-            splashDamage = 35f;
+            splashDamageRadius = 45f;
+            splashDamage = 60f;
             hitEffect = Fx.blastExplosion;
             despawnEffect = Fx.blastExplosion;
-            homingRange = 30;
-            homingPower = 0.5f;
+            homingRange = 140;
+            homingPower = 2f;
             weaveScale = 4f;
             weaveMag = 2f;
             pierce = true;
-            pierceCap = 6;
+            pierceBuilding = true;
+            pierceCap = 10;
         }};
-        bigClusterRocket = new MissileBulletType(4f, 10, "missile-large") {{
+        bigClusterRocket = new MissileBulletType(4.5f, 10, "missile-large") {{
             width = 16f;
             height = 18f;
             shrinkY = 0f;
             drag = -0.003f;
             homingRange = 10f;
             homingPower = 0.2f;
-            splashDamageRadius = 50f;
-            splashDamage = 60f;
+            splashDamageRadius = 80f;
+            splashDamage = 95f;
             keepVelocity = false;
             hitSound = Sounds.explosion;
             trailChance = 0.3f;
@@ -1157,17 +1305,17 @@ public class SnBullets implements ContentList {
             fragBullets = 3;
         }};
 
-        bigCopterEnergySphere = new BasicBulletType(3f, 7) {{
-            sprite = "sunset-circle-bullet";
-            lifetime = 37f;
-            splashDamageRadius = 25f;
-            splashDamage = 50f;
+        bigCopterEnergySphere = new LightningSphereBulletType(3f, 7, "sunset-circle-bullet") {{
+            lifetime = 40f;
+            splashDamageRadius = 90f;
+            splashDamage = 80f;
             height = 14f;
             width = 14f;
-            lightning = 7;
-            lightningLength = 20;
+            LightningChance = 0.3f;
+            lightning = 4;
+            lightningLength = 8;
             lightningColor = SnPal.copterLaser;
-            lightningDamage = 18f;
+            lightningDamage = 30f;
             shrinkX = 0.01f;
             shrinkY = 0.01f;
             hitEffect = Fx.flakExplosion;
@@ -1515,9 +1663,9 @@ public class SnBullets implements ContentList {
             height = 0;
             lifetime = 0;
         }};
-        testBullet = new TorpedoBulletType(1, 1) {{
+        testBullet = new BasicBulletType(1, 1) {{
             lifetime = 400f;
-            trailEffect = SnFx.torpedoTrail;
+            hitEffect = SnFx.unused1;
             drag = -0.003f;
             homingRange = 10f;
             homingPower = 0.2f;
@@ -1571,10 +1719,18 @@ public class SnBullets implements ContentList {
                 }};
             }};
         }};
-        testBullet2 = new BasicBulletType(5, 50) {{
-            fragBullets = 6;
-            fragCone = 360;
-            fragBullet = new ContinuousLaserBulletType(150);
+        testBullet2 = new LightningSphereBulletType(5, 50, "sunset-circle-bullet") {{
+            height = 13f;
+            width = 13f;
+            LightningChance = 0.3f;
+            lightning = 3;
+            lightningLength = 4;
+            lightningDamage = 30f;
+            lifetime = 30f;
+            hitEffect = SnFx.unused2;
+            drag = -0.003f;
+            homingRange = 10f;
+            homingPower = 0.2f;
         }};
         //endregion misc
     }

@@ -20,6 +20,7 @@ import mindustry.graphics.Pal;
 import mindustry.ui.Styles;
 import mindustry.ui.dialogs.BaseDialog;
 import sunset.SnVars;
+import sunset.type.planets.*;
 
 import static mindustry.Vars.headless;
 
@@ -56,6 +57,7 @@ public class SnContentTranslation {
     }
 
     public static void checkContent(UnlockableContent content) {
+        SnSector.setup(content);
         if (headless) return;
         String nameKey = content.getContentType() + "." + content.name + ".name";
         String descriptionName = content.getContentType() + "." + content.name + ".description";
@@ -120,7 +122,7 @@ public class SnContentTranslation {
                     table.row();
                     ObjectMap<UnlockableContent, ObjectSet<WrongTranslationType>> contentMap = contentWithoutTranslation.get(type);
                     table.table(t -> {
-                        Seq<UnlockableContent> keys = contentMap.keys().toSeq();
+                        Seq<UnlockableContent> keys = contentMap.keys().toSeq().sort();
                         for (UnlockableContent key : keys) {
                             boolean bottom = key == keys.peek();
                             t.add(new Element() {

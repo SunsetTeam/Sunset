@@ -30,7 +30,7 @@ public class SnUnitBlocks implements ContentList {
             requirements(Category.units, with(SnItems.fors, 80, Items.copper, 70));
             plans = Seq.with(
                     new UnitPlan(SnUnitTypes.wind, 70f * 15, with(SnItems.fors, 15, Items.silicon, 20)),
-                    new UnitPlan(SnUnitTypes.comet, 60f * 40, with(Items.silicon, 40, SnItems.naturite, 20))
+                    new UnitPlan(SnUnitTypes.comet, 60f * 40, with(Items.silicon, 30, SnItems.naturite, 20))
             );
             size = 3;
             consumes.power(2.5f);
@@ -51,7 +51,7 @@ public class SnUnitBlocks implements ContentList {
 
             size = 3;
             consumes.power(4f);
-            consumes.items(with(Items.silicon, 50, SnItems.nobium, 50));
+            consumes.items(with(Items.silicon, 40, SnItems.nobium, 50));
 
             constructTime = 65f * 10f;
 
@@ -67,7 +67,7 @@ public class SnUnitBlocks implements ContentList {
 
             size = 5;
             consumes.power(6f);
-            consumes.items(with(Items.silicon, 130, SnItems.fors, 140, SnItems.nobium, 90, Items.metaglass, 40));
+            consumes.items(with(Items.silicon, 130, SnItems.nobium, 90, Items.metaglass, 40));
 
             constructTime = 65f * 30f;
 
@@ -83,7 +83,7 @@ public class SnUnitBlocks implements ContentList {
 
             size = 7;
             consumes.power(13f);
-            consumes.items(with(Items.silicon, 510, SnItems.fors, 700, SnItems.nobium, 510, Items.plastanium, 550));
+            consumes.items(with(Items.silicon, 510, SnItems.nobium, 510, Items.plastanium, 550));
 
             consumes.liquid(SnLiquids.burheyna, 1.5f);
 
@@ -102,7 +102,7 @@ public class SnUnitBlocks implements ContentList {
 
             size = 9;
             consumes.power(26f);
-            consumes.items(with(Items.silicon, 800, SnItems.nobium, 990, SnItems.enojie, 730, SnItems.planatrium, 670, Items.phaseFabric, 410));
+            consumes.items(with(Items.silicon, 800, SnItems.enojie, 730, SnItems.planatrium, 670, Items.phaseFabric, 410));
 
             consumes.liquid(SnLiquids.burheyna, 3.5f);
 
@@ -111,7 +111,7 @@ public class SnUnitBlocks implements ContentList {
 
 
             upgrades.addAll(
-                    new UnitType[]{SnUnitTypes.halo, SnUnitTypes.parhelion},
+                    new UnitType[]{SnUnitTypes.halo, SnUnitTypes.mudflow},
                     new UnitType[]{SnUnitTypes.star, SnUnitTypes.galaxy}
             );
         }};

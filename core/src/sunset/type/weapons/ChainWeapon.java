@@ -14,6 +14,7 @@ import arc.struct.Seq;
 import arc.util.Strings;
 import arc.util.Time;
 import arc.util.Tmp;
+import mindustry.entities.Units;
 import mindustry.entities.units.WeaponMount;
 import mindustry.gen.Unit;
 import mindustry.graphics.Drawf;
@@ -43,7 +44,7 @@ public class ChainWeapon extends WeaponExt implements CustomWeapon, StatValue {
 
     public ChainWeapon(String name) {
         super(name);
-        // Никогда не должно стрелять стандартным методом.
+        // Should never shoot using the standard method.
         ai = new EmptyWeaponAI();
         bullet = SnBullets.emptyBullet;
         firstShotDelay = Float.MAX_VALUE;
@@ -54,7 +55,7 @@ public class ChainWeapon extends WeaponExt implements CustomWeapon, StatValue {
     public static Unit getFirstUnit(WeaponMount mount, Unit unit) {
         Vec2 wpos = Tmp.v1.set(Utils.mountX(unit,mount), Utils.mountY(unit,mount));
         ChainWeapon weapon = (ChainWeapon) mount.weapon;
-        return Utils.closest(wpos.x, wpos.y, weapon.range, u -> {
+        return Units.closest(null,wpos.x, wpos.y, weapon.range, u -> {
             if (unit == u) return false;
             if (u.team != unit.team && weapon.damageTick == 0) return false;
             if (u.team == unit.team && (weapon.healTick == 0 || !u.damaged())) return false;
@@ -98,7 +99,7 @@ public class ChainWeapon extends WeaponExt implements CustomWeapon, StatValue {
         while (currentUnit[0] != null && unitsLeft > 0) {
             currentRange[0] *= rangeFactor;
             units.add(currentUnit[0]);
-            currentUnit[0] = Utils.closest(currentUnit[0].x, currentUnit[0].y, currentRange[0], u -> {
+            currentUnit[0] = Units.closest(null, currentUnit[0].x, currentUnit[0].y, currentRange[0], u -> {
                 if (u == unit || units.contains(u)) return false;
                 if ((u.health >= u.maxHealth) && !unit.team.isEnemy(u.team)) return false;
                 return Mathf.dst(currentUnit[0].x, currentUnit[0].y, u.x, u.y) <= currentRange[0];
@@ -108,9 +109,7 @@ public class ChainWeapon extends WeaponExt implements CustomWeapon, StatValue {
     }
 
     @Override
-    public boolean useDefaultDraw() {
-        return false;
-    }
+    public boolean useDefaultDraw() { return false; }
 
     private void drawWeapon(WeaponMount mount, Unit unit, float rotation) {
         Weapon weapon = mount.weapon;

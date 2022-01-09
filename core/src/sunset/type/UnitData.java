@@ -9,7 +9,7 @@ import mindustry.gen.Groups;
 import mindustry.gen.Unit;
 
 /**
- * Позволяет хранить информацию о конкретном юните, как правило для работы ИИ.
+ * Allows you to store information about a specific unit, usually for AI work.
  */
 public class UnitData {
     private static IntMap<IntMap<Object>> data = new IntMap<>();
@@ -20,15 +20,7 @@ public class UnitData {
 
     public static <T> T getData(Unit unit, DataKey key, Prov<T> def) {
         if (unit == null || invalidUnit(unit)) return null;
-//        return ;
-        IntMap<Object> entries = data.get(unit.id, IntMap::new);
-        if (entries.containsKey(key.id)) {
-            return (T) entries.get(key.id);
-        } else {
-            T newData = def.get();
-            entries.put(key.id, newData);
-            return newData;
-        }
+        return (T)data.get(unit.id, IntMap::new).get(key.id,(Prov<Object>)def);
     }
 
     public static <T> void setData(Unit unit, DataKey key, T value) {

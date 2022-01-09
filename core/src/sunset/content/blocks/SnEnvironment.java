@@ -11,7 +11,7 @@ import mindustry.world.meta.*;
 import sunset.content.SnItems;
 import sunset.content.SnLiquids;
 import sunset.content.SnStatusEffects;
-import sunset.world.blocks.environment.Geyser;
+import sunset.world.blocks.environment.*;
 
 public class SnEnvironment implements ContentList {
     public static Block
@@ -231,35 +231,36 @@ public class SnEnvironment implements ContentList {
             eruptionEffect = new Effect(30f, Fx.ballfire.renderer);
         }};
         //endregion special
+
         //region hidden
-        hotSlag1 = new Floor("hotSlag1") {{
-            buildVisibility = BuildVisibility.debugOnly;
-            inEditor = false;
+        hotSlag1 = new MockEnvironmentBlock("hotSlag1") {{
+            replacement=Blocks.slag;
+            Color.valueOf(mapColor,"FD7738");
             //only for burnout planet generator
         }};
-        hotSlag2 = new Floor("hotSlag2") {{
-            buildVisibility = BuildVisibility.debugOnly;
-            inEditor = false;
+        hotSlag2 = new MockEnvironmentBlock("hotSlag2") {{
+            replacement=Blocks.slag;
+            Color.valueOf(mapColor,"FF6324");
             //only for burnout planet generator
         }};
-        hotSlag3 = new Floor("hotSlag3") {{
-            buildVisibility = BuildVisibility.debugOnly;
-            inEditor = false;
+        hotSlag3 = new MockEnvironmentBlock("hotSlag3") {{
+            replacement=Blocks.slag;
+            Color.valueOf(mapColor,"FF591A");
             //only for burnout planet generator
         }};
-        glacier1 = new Floor("glacier1") {{
-            buildVisibility = BuildVisibility.debugOnly;
-            inEditor = false;
+        glacier1 = new MockEnvironmentBlock("glacier1") {{
+            replacement=Blocks.snow;
+            Color.valueOf(mapColor,"5ECBD9");
             //only for rime planet generator
         }};
-        glacier2 = new Floor("glacier2") {{
-            buildVisibility = BuildVisibility.debugOnly;
-            inEditor = false;
+        glacier2 = new MockEnvironmentBlock("glacier2") {{
+            replacement=Blocks.ice;
+            Color.valueOf(mapColor,"94DDE6");
             //only for rime planet generator
         }};
-        glacier3 = new Floor("glacier3") {{
-            buildVisibility = BuildVisibility.debugOnly;
-            inEditor = false;
+        glacier3 = new MockEnvironmentBlock("glacier3") {{
+            replacement=Blocks.snow;
+            Color.valueOf(mapColor,"8AE4F0");
             //only for rime planet generator
         }};
         //endregion hidden

@@ -10,4 +10,5 @@ public class SnStat {
     public static final AStat pierceDamageDebuff = AStat.get("piercedamagedebuff",SnStatCat.durability);
 
     public static final AStat maxControlled = AStat.get("maxcontroller", StatCat.function);
+    public static final AStat inaccuracy = AStat.get("inaccuracy", Stat.inaccuracy.category);
 }

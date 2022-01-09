@@ -3,9 +3,10 @@ package sunset.ai;
 import arc.math.Mathf;
 import mindustry.entities.Units;
 import mindustry.gen.*;
+import sunset.gen.*;
 
-/** AI, которое преследует повреждённые союзные боевые единицы, если таковые есть. */
-public class HealAI extends FlyingUnitWeaponAI {
+/** AI that is chasing damaged allied units, if any. */
+public class HealAI extends FlyingWeaponAI{
     @Override
     public void updateMovement() {
         Unit u = Units.closest(unit.team, unit.x, unit.y,

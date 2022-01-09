@@ -9,11 +9,9 @@ import mindustry.ctype.MappableContent;
 import mindustry.game.EventType;
 import mma.ModVars;
 import sunset.content.*;
-import sunset.core.SnLogic;
-import sunset.core.SnSoundControl;
+import sunset.core.*;
 
 import static mindustry.Vars.headless;
-//import sunset.utils.V7.SunsetWaveSpawner;
 
 public class SnVars extends ModVars {
 
@@ -34,10 +32,10 @@ public class SnVars extends ModVars {
             new SnTeams()*/
     ).flatMap(contentList -> Seq.with(contentList instanceof SnBlocks b ? b.list : new ContentList[]{contentList})).toArray(ContentList.class);
     //end region
-    //public static SunsetWaveSpawner spawner;
     public static SnLogic logic;
     public static SnSettings settings;
     public static SnSoundControl sound;
+    public static SnUI ui;
 
     static {
         new SnVars();
@@ -60,6 +58,7 @@ public class SnVars extends ModVars {
 
         if (!headless) {
             sound = new SnSoundControl();
+            listener.add(ui = new SnUI());
         }
         listener.add(logic = new SnLogic());
         listener.add(settings = new SnSettings());

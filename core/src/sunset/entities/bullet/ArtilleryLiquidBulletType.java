@@ -9,7 +9,7 @@ import mindustry.entities.bullet.LiquidBulletType;
 import mindustry.gen.Bullet;
 import mindustry.type.Liquid;
 
-/** "Артиллерийская" жидкостная пуля. */
+/** "Artillery" liquid bullet. */
 public class ArtilleryLiquidBulletType extends LiquidBulletType {
     public ArtilleryLiquidBulletType(Liquid liquid) {
         super(liquid);
