@@ -24,8 +24,7 @@ import sunset.gen.*;
 import static mindustry.Vars.*;
 
 public class Airport extends StorageBlock{
-    private final Item[] canDump = null;
-    public float unitBuildTime = 720f;
+    public float unitBuildTime = 12 * Time.toSeconds;
     public UnitType unitType;
     public ItemStack[] unitRequirements;
     public float powerUse;

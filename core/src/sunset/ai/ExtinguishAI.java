@@ -2,7 +2,9 @@ package sunset.ai;
 
 import arc.math.geom.*;
 import arc.util.*;
+import mindustry.entities.units.*;
 import mindustry.gen.*;
+import sunset.ai.wrappers.*;
 import sunset.utils.*;
 
 import static mindustry.Vars.*;
@@ -13,7 +15,14 @@ public class ExtinguishAI extends FlyingWeaponAI{
     public float ticks = 15;
     Interval timer = new Interval(10);
     boolean found = false;
-    float minCost = Float.MAX_VALUE;
+
+    private ExtinguishAI(){
+
+    }
+
+    public static UnitController wrapper(){
+        return new FormationAIWrapper(new ExtinguishAI());
+    }
 
     @Override
     public void updateMovement(){
@@ -29,14 +38,5 @@ public class ExtinguishAI extends FlyingWeaponAI{
         if(found){
             moveTo(target, unit.range() * 0.9f);
         }
-    }
-
-    protected void moveTo(Posc target, float length){
-        if(target == null) return;
-        vec.set(target).sub(unit);
-        unit.rotation(vec.angle());
-        float scl = vec.len() < length ? 0 : 1f;
-        vec.setLength(unit.speed() * scl);
-        unit.moveAt(vec);
     }
 }

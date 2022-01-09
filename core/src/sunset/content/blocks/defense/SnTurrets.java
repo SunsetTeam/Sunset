@@ -499,7 +499,7 @@ public class SnTurrets implements ContentList {
             ammoUseEffect = Fx.casing3;
             range = 400f;
             inaccuracy = 3f;
-            inaccuracyUp = 0.1f;
+            inaccuracyUp = 0.4f;
             recoilAmount = 2.7f;
             spread = 16f;
             alternate = true;
