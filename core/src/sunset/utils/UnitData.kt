@@ -16,7 +16,8 @@ import mindustry.gen.Groups
 import mindustry.gen.Unit
 
 object UnitData {
-    private val data = IntMap<IntMap<Any>>()
+    @JvmStatic
+    val data = IntMap<IntMap<Any>>()
 
     @JvmStatic
     fun <T> dataKey(def: Prov<T?>?): DataKey<T> {
@@ -25,7 +26,8 @@ object UnitData {
 
     @JvmStatic
     fun <T> getData(unit: Unit?, key: DataKey<*>, def: Prov<T?>): T? {
-        return if (unit == null || invalidUnit(unit)) null else data[unit.id, { IntMap() }].get(key.id, def) as T
+        if (unit == null || invalidUnit(unit)) return null;
+        return ( data.get(unit.id, { IntMap() }) as IntMap<T>).get(key.id,def)
     }
 
     @JvmStatic
@@ -73,3 +75,4 @@ object UnitData {
 
     }
 }
+

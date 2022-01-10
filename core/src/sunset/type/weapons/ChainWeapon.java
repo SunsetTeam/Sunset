@@ -63,6 +63,7 @@ public class ChainWeapon extends WeaponExt implements StatValue{
 
     private Seq<Unit> getUnits(WeaponMount mount, Unit unit){
         ObjectMap<WeaponMount, Seq<Unit>> data = chainWeaponDataKey.get(unit);
+        new IntMap<>().get(0,()->0);
         if(data == null) return null;
         return data.get(mount, Seq::new);
     }
