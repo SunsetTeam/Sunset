@@ -48,7 +48,7 @@ public class SnTurrets implements ContentList{
 
     //EMP
     discharger, dischargerEvo,
-    synthesisT1, synthesisT2, synthesisT3, synthesisT4, synthesisT5,
+    synthesisT1, synthesisT2, synthesisT3, synthesisT4, synthesisT5
     ;
 
     @Override

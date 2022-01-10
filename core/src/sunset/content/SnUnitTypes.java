@@ -682,7 +682,7 @@ public class SnUnitTypes implements ContentList{
                 y = -6;
                 reload = 3;
                 range = 420;
-                damage = 80;
+//                damage = 80;
             }});
         }};
         //endregion buffers
