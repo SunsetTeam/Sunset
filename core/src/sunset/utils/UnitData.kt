@@ -14,10 +14,10 @@ import mindustry.game.EventType.UnitDestroyEvent
 import mindustry.game.EventType.WorldLoadEvent
 import mindustry.gen.Groups
 import mindustry.gen.Unit
+import sunset.utils.kotlin.set
 
 object UnitData {
-    @JvmStatic
-    val data = IntMap<IntMap<Any>>()
+    private val data = IntMap<IntMap<Any>>()
 
     @JvmStatic
     fun <T> dataKey(def: Prov<T?>?): DataKey<T> {
@@ -27,13 +27,13 @@ object UnitData {
     @JvmStatic
     fun <T> getData(unit: Unit?, key: DataKey<*>, def: Prov<T?>): T? {
         if (unit == null || invalidUnit(unit)) return null;
-        return ( data.get(unit.id, { IntMap() }) as IntMap<T>).get(key.id,def)
+        return (data[unit.id, { IntMap() }] as IntMap<T>)[key.id, def]
     }
 
     @JvmStatic
     fun <T> setData(unit: Unit?, key: DataKey<T>, value: T?) {
         if (unit == null || invalidUnit(unit)) return
-        data[unit.id, { IntMap() }].put(key.id, value)
+        data[unit.id, { IntMap() }][key.id] = value
     }
 
     @JvmStatic
