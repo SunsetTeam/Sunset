@@ -1,33 +1,28 @@
 package sunset.content.blocks;
 
-import mindustry.content.Fx;
-import mindustry.content.Items;
-import mindustry.content.Liquids;
-import mindustry.ctype.ContentList;
-import mindustry.gen.Sounds;
-import mindustry.type.Category;
-import mindustry.world.Block;
-import mindustry.world.blocks.power.DecayGenerator;
-import mindustry.world.blocks.power.NuclearReactor;
-import sunset.content.SnItems;
-import sunset.content.SnLiquids;
-import sunset.world.blocks.power.LiquidGenerator;
-import sunset.world.blocks.power.ThermalGeneratorExt;
+import mindustry.content.*;
+import mindustry.ctype.*;
+import mindustry.gen.*;
+import mindustry.type.*;
+import mindustry.world.*;
+import mindustry.world.blocks.power.*;
+import sunset.content.*;
+import sunset.world.blocks.power.*;
 
-import static mindustry.type.ItemStack.with;
+import static mindustry.type.ItemStack.*;
 
-public class SnPower implements ContentList {
+public class SnPower implements ContentList{
     public static Block
-                //generators
-                oilGenerator, advrtgGenerator, advThermalGenerator,
+    //generators
+    oilGenerator, advrtgGenerator, advThermalGenerator,
 
-                //reactors
-                differentialReactor, planatriumReactor;
+    //reactors
+    differentialReactor, planatriumReactor;
 
     @Override
-    public void load() {
+    public void load(){
         //region generators
-        oilGenerator = new LiquidGenerator("oil-generator") {{
+        oilGenerator = new LiquidGenerator("oil-generator"){{
             requirements(Category.power, with(Items.copper, 110, Items.titanium, 70, Items.lead, 120, Items.silicon, 55, Items.metaglass, 70));
             powerProduction = 11f;
             itemDuration = 220f;
@@ -41,16 +36,16 @@ public class SnPower implements ContentList {
             ambientSoundVolume = 0.03f;
 
             consumes.liquid(Liquids.oil, 0.11f);
-            }};
+        }};
 
-        advrtgGenerator = new DecayGenerator("advance-rtg-generator") {{
+        advrtgGenerator = new DecayGenerator("advance-rtg-generator"){{
             requirements(Category.power, with(Items.lead, 240, Items.silicon, 185, Items.phaseFabric, 75, Items.plastanium, 125, Items.thorium, 130, SnItems.planatrium, 100));
             size = 4;
             powerProduction = 13.2f;
             itemDuration = 55 * 12f;
         }};
 
-        advThermalGenerator = new ThermalGeneratorExt("advanced-thermal-generator") {{
+        advThermalGenerator = new ThermalGeneratorExt("advanced-thermal-generator"){{
             requirements(Category.power, with(Items.copper, 140, Items.graphite, 90, SnItems.naturite, 80, Items.silicon, 40, Items.metaglass, 60));
             size = 3;
             powerProduction = 2.8f;
@@ -63,7 +58,7 @@ public class SnPower implements ContentList {
         }};
         //endregion generators
         //region reactors
-        differentialReactor = new NuclearReactor("differential-reactor") {{
+        differentialReactor = new NuclearReactor("differential-reactor"){{
             requirements(Category.power, with(Items.copper, 200, Items.titanium, 120, Items.lead, 250, Items.silicon, 130, Items.metaglass, 100));
             ambientSound = Sounds.steam;
             ambientSoundVolume = 0.03f;
@@ -81,7 +76,7 @@ public class SnPower implements ContentList {
             consumes.liquid(SnLiquids.burheyna, heating / coolantPower).update(false);
         }};
 
-        planatriumReactor = new NuclearReactor("planatrium-reactor") {{
+        planatriumReactor = new NuclearReactor("planatrium-reactor"){{
             requirements(Category.power, with(Items.lead, 400, Items.silicon, 270, Items.graphite, 220, SnItems.planatrium, 200, SnItems.fors, 180, SnItems.nobium, 120));
             ambientSound = Sounds.hum;
             ambientSoundVolume = 0.24f;

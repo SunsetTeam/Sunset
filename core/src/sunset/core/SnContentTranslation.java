@@ -38,19 +38,6 @@ public class SnContentTranslation {
     }
 
     private static void showDialog() {
-      /*  for (ContentType key : contentWithoutTranslation.keys().toSeq()) {
-            ObjectMap<UnlockableContent, ObjectSet<WrongTranslationType>> map = contentWithoutTranslation.get(key);
-            Seq<UnlockableContent> mapKeys = map.keys().toSeq();
-            for (UnlockableContent mapKey : mapKeys) {
-                if (map.get(mapKey).size==0) {
-                    map.remove(mapKey);
-                }
-            }
-
-            if (map.size==0) {
-                contentWithoutTranslation.remove(key);
-            }
-        }*/
         if (contentWithoutTranslation.size == 0) return;
         new TranslationsDialog().show();
 

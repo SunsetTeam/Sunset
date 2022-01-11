@@ -7,7 +7,7 @@ import sunset.ai.weapon.BaseWeaponAI;
 import sunset.ai.weapon.WeaponAI;
 
 /** Weapon with improvements: with its own AI, with reload processing, with the search for a mirror weapon. */
-public class WeaponExt extends SnWeapon {
+public class WeaponExt extends CustomWeapon {
     public WeaponAI ai = new BaseWeaponAI();
     public WeaponExt(String name) {
         super(name);

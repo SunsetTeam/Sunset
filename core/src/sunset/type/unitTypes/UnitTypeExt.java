@@ -12,7 +12,7 @@ import mindustry.graphics.Drawf;
 import mindustry.type.Weapon;
 import mindustry.world.meta.Stat;
 import mindustry.world.meta.StatValue;
-import sunset.type.CustomWeapon;
+import sunset.type.weapons.*;
 import sunset.world.meta.SnStatValues;
 
 /**
@@ -51,13 +51,13 @@ public class UnitTypeExt extends SnUnitType {
     @Override
     public void update(Unit unit) {
         super.update(unit);
-        // Call update () on the implements that support it
+        /*// Call update () on the implements that support it
         for (WeaponMount mount : unit.mounts) {
             Weapon weapon = mount.weapon;
             if (weapon instanceof CustomWeapon customWeapon) {
-                customWeapon.update(mount, unit);
+                customWeapon.update( unit,mount);
             }
-        }
+        }*/
     }
 
     @Override
@@ -69,7 +69,7 @@ public class UnitTypeExt extends SnUnitType {
             if (weapon instanceof CustomWeapon customWeapon) {
                 customWeapon.preDraw(mount, unit);
             }
-            if (!(weapon instanceof CustomWeapon customWeapon) || customWeapon.useDefaultDraw()) {
+            if (!(weapon instanceof CustomWeapon customWeapon) || customWeapon.customDraw()) {
                 float rotation = unit.rotation - 90;
                 float weaponRotation = rotation + (weapon.rotate ? mount.rotation : 0);
                 float recoil = -((mount.reload) / weapon.reload * weapon.recoil);

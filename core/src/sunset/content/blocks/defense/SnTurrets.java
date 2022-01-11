@@ -1,62 +1,60 @@
 package sunset.content.blocks.defense;
 
-import arc.graphics.Color;
-import arc.math.geom.Vec2;
-import arc.struct.EnumSet;
-import arc.struct.Seq;
-import arc.util.Time;
-import mindustry.content.Fx;
-import mindustry.content.Items;
-import mindustry.content.Liquids;
-import mindustry.ctype.ContentList;
-import mindustry.entities.bullet.LaserBulletType;
-import mindustry.gen.Sounds;
-import mindustry.graphics.Pal;
-import mindustry.type.Category;
-import mindustry.type.ItemStack;
-import mindustry.world.Block;
-import mindustry.world.blocks.defense.turrets.ItemTurret;
-import mindustry.world.blocks.defense.turrets.PowerTurret;
-import mindustry.world.meta.BlockFlag;
-import mindustry.world.meta.BuildVisibility;
-import sunset.content.SnBullets;
-import sunset.content.SnFx;
-import sunset.content.SnItems;
-import sunset.content.SnLiquids;
-import sunset.entities.bullet.EnergySphereBulletType;
-import sunset.graphics.SnPal;
-import sunset.type.MissileType;
+import arc.graphics.*;
+import arc.math.geom.*;
+import arc.struct.*;
+import mindustry.content.*;
+import mindustry.ctype.*;
+import mindustry.entities.bullet.*;
+import mindustry.gen.*;
+import mindustry.graphics.*;
+import mindustry.type.*;
+import mindustry.world.*;
+import mindustry.world.blocks.defense.turrets.*;
+import mindustry.world.meta.*;
+import sunset.content.*;
+import sunset.entities.bullet.*;
+import sunset.graphics.*;
+import sunset.type.*;
 import sunset.world.blocks.defense.turrets.*;
 
-import static mindustry.type.ItemStack.with;
+import static mindustry.type.ItemStack.*;
 
-public class SnTurrets implements ContentList {
+public class SnTurrets implements ContentList{
     public static Block
-        //1x1
-        sting, spine, eagle,
-        //2x2
-        excellence, carbine, pulsation, reflection,
-        //3x3
-        major, burner, trigger, eternity,
-        //4x4
-        admiral, scorpio, flood, chain,
-        //5x5
-        field, sniper, fanatic,
-        //6x6
-        trident, radius,
-        //7x7
-        halberd,
-        //special
-        sunrise, spark, dissector, art,
-        discharger, dischargerEvo,
-        synthesisT1, synthesisT2, synthesisT3, synthesisT4, synthesisT5,
-        //testing
-        testturret;
+    //1x1
+    sting, spine, eagle,
+
+    //2x2
+    excellence, carbine, pulsation, reflection,
+
+    //3x3
+    major, burner, trigger, eternity,
+
+    //4x4
+    admiral, scorpio, flood, chain,
+
+    //5x5
+    field, sniper, fanatic,
+
+    //6x6
+    trident, radius,
+
+    //7x7
+    halberd,
+
+    //missile
+    sunrise/*2x2*/, spark/*3x3*/, dissector/*4x4*/, art/*5x5*/,
+
+    //EMP
+    discharger, dischargerEvo,
+    synthesisT1, synthesisT2, synthesisT3, synthesisT4, synthesisT5
+    ;
 
     @Override
-    public void load() {
+    public void load(){
         //region 1x1
-        sting = new ModPowerTurret("sting") {{
+        sting = new ModPowerTurret("sting"){{
             requirements(Category.turret, with(SnItems.fors, 50, Items.lead, 20));
             health = 400;
             reloadTime = 40f;
@@ -74,11 +72,11 @@ public class SnTurrets implements ContentList {
             powerUse = 1f;
             chargeEffect = SnFx.smallEnergySphereCharge;
         }};
-        spine = new ModItemTurret("spine") {{
+        spine = new ModItemTurret("spine"){{
             requirements(Category.turret, with(Items.copper, 55, Items.lead, 25));
             ammo(
-                    Items.graphite, SnBullets.lightBlastGraphite,
-                    Items.silicon, SnBullets.lightBlastSilicon
+            Items.graphite, SnBullets.lightBlastGraphite,
+            Items.silicon, SnBullets.lightBlastSilicon
             );
             health = 360;
             reloadTime = 78f;
@@ -91,11 +89,11 @@ public class SnTurrets implements ContentList {
             ammoUseEffect = Fx.casing1;
             targetAir = true;
         }};
-        eagle = new ItemTurret("eagle") {{
+        eagle = new ItemTurret("eagle"){{
             requirements(Category.turret, with(Items.copper, 60, Items.titanium, 40, SnItems.naturite, 25));
             ammo(
-                    Items.sporePod, SnBullets.sporePodPoisonBullet,
-                    SnItems.naturite, SnBullets.naturitePoisonBullet
+            Items.sporePod, SnBullets.sporePodPoisonBullet,
+            SnItems.naturite, SnBullets.naturitePoisonBullet
             );
             health = 350;
             size = 1;
@@ -116,7 +114,7 @@ public class SnTurrets implements ContentList {
         }};
         //endregion 1x1
         //region 2x2
-        excellence = new ModPowerTurret("excellence") {{
+        excellence = new ModPowerTurret("excellence"){{
             requirements(Category.turret, with(SnItems.fors, 150, Items.lead, 70, Items.silicon, 40));
             size = 2;
             reloadTime = 50f;
@@ -134,7 +132,7 @@ public class SnTurrets implements ContentList {
             powerUse = 2f;
             chargeEffect = SnFx.mediumEnergySphereCharge;
         }};
-        carbine = new ChainLightningTurret("carbine") {{
+        carbine = new ChainLightningTurret("carbine"){{
             requirements(Category.turret, with(Items.copper, 150, Items.lead, 140, Items.surgeAlloy, 60, SnItems.nobium, 90, SnItems.naturite, 120));
             range = 132.2f;
             damage = 1.5f;
@@ -148,12 +146,12 @@ public class SnTurrets implements ContentList {
             liquidUse = 0.3f;
             laserColor = SnPal.chainLaser;
         }};
-        pulsation = new ItemTurret("pulsation") {{
+        pulsation = new ItemTurret("pulsation"){{
             requirements(Category.turret, with(Items.copper, 95, Items.graphite, 85, Items.lead, 70, SnItems.planatrium, 35));
             ammo(
-                    Items.lead, SnBullets.leadSap,
-                    Items.sporePod, SnBullets.sporeSap,
-                    SnItems.planatrium, SnBullets.planatriumSap
+            Items.lead, SnBullets.leadSap,
+            Items.sporePod, SnBullets.sporeSap,
+            SnItems.planatrium, SnBullets.planatriumSap
             );
             health = 780;
             size = 2;
@@ -166,12 +164,12 @@ public class SnTurrets implements ContentList {
             targetAir = true;
             targetGround = false;
         }};
-        reflection = new ModItemTurret("reflection") {{
+        reflection = new ModItemTurret("reflection"){{
             requirements(Category.turret, with(Items.copper, 100, SnItems.fors, 60, SnItems.naturite, 55, SnItems.nobium, 45));
             ammo(
-                    Items.sporePod, SnBullets.heavySporePodPoison,
-                    SnItems.naturite, SnBullets.heavyNaturitePoison,
-                    SnItems.nobium, SnBullets.heavyNobiumPoison
+            Items.sporePod, SnBullets.heavySporePodPoison,
+            SnItems.naturite, SnBullets.heavyNaturitePoison,
+            SnItems.nobium, SnBullets.heavyNobiumPoison
             );
             health = 780;
             size = 2;
@@ -192,21 +190,21 @@ public class SnTurrets implements ContentList {
         }};
         //endregion 2x2
         //region 3x3
-        major = new MultiBarrelItemTurret("major") {{
+        major = new MultiBarrelItemTurret("major"){{
             requirements(Category.turret, with(Items.plastanium, 175, Items.titanium, 75, Items.metaglass, 50, SnItems.naturite, 30));
             ammo(
-                    Items.blastCompound, SnBullets.bigBlastBlast,
-                    Items.pyratite, SnBullets.bigBlastPyratite,
-                    Items.plastanium, SnBullets.bigBlastPlastanium
+            Items.blastCompound, SnBullets.bigBlastBlast,
+            Items.pyratite, SnBullets.bigBlastPyratite,
+            Items.plastanium, SnBullets.bigBlastPlastanium
             );
             shots = 2;
             barrelPoints = Seq.with(
-                    new Vec2(30f/96f, 4f/96f),
-                    new Vec2(66f/96f, 4f/96f)
+            new Vec2(30f / 96f, 4f / 96f),
+            new Vec2(66f / 96f, 4f / 96f)
             );
             ejectPoints = Seq.with(
-                    new Vec2(33f/96f, 40f/96f),
-                    new Vec2(63f/96f, 40f/96f)
+            new Vec2(33f / 96f, 40f / 96f),
+            new Vec2(63f / 96f, 40f / 96f)
             );
             health = 1960;
             size = 3;
@@ -225,12 +223,12 @@ public class SnTurrets implements ContentList {
             speedupPerShot = 0.15f;
             maxReloadMultiplier = 2f;
         }};
-        burner = new ItemTurret("burner") {{
+        burner = new ItemTurret("burner"){{
             requirements(Category.turret, with(Items.metaglass, 75, Items.lead, 200, Items.graphite, 100));
             ammo(
-                    Items.coal, SnBullets.heavyCoalFlame,
-                    Items.pyratite, SnBullets.heavyPyraFlame,
-                    SnItems.flameid, SnBullets.flameidFlame
+            Items.coal, SnBullets.heavyCoalFlame,
+            Items.pyratite, SnBullets.heavyPyraFlame,
+            SnItems.flameid, SnBullets.flameidFlame
             );
             health = 140 * size * size;
             size = 3;
@@ -243,15 +241,15 @@ public class SnTurrets implements ContentList {
             targetAir = true;
             shootSound = Sounds.flame;
         }};
-        eternity = new ItemTurret("eternity") {{
+        eternity = new ItemTurret("eternity"){{
             requirements(Category.turret, with(SnItems.fors, 230, Items.plastanium, 100, Items.graphite, 60, Items.surgeAlloy, 30));
             ammo(
-                    Items.plastanium, SnBullets.smallPlastaniumBullet,
-                    Items.pyratite, SnBullets.smallPyratiteBullet,
-                    Items.surgeAlloy, SnBullets.smallSurgeAlloyBullet,
-                    SnItems.fors, SnBullets.smallForsSpine,
-                    SnItems.reneubite, SnBullets.smallBlueMissile,
-                    SnItems.enojie, SnBullets.smallEnojieMissile
+            Items.plastanium, SnBullets.smallPlastaniumBullet,
+            Items.pyratite, SnBullets.smallPyratiteBullet,
+            Items.surgeAlloy, SnBullets.smallSurgeAlloyBullet,
+            SnItems.fors, SnBullets.smallForsSpine,
+            SnItems.reneubite, SnBullets.smallBlueMissile,
+            SnItems.enojie, SnBullets.smallEnojieMissile
             );
             health = 1780;
             size = 3;
@@ -267,7 +265,7 @@ public class SnTurrets implements ContentList {
             targetAir = true;
             shootSound = Sounds.flame;
         }};
-        trigger = new PowerTurret("trigger") {{
+        trigger = new PowerTurret("trigger"){{
             requirements(Category.turret, with(Items.silicon, 275, Items.titanium, 125, SnItems.enojie, 75));
             size = 3;
             powerUse = 9f;
@@ -279,23 +277,23 @@ public class SnTurrets implements ContentList {
         }};
         //endregion 3x3
         //region 4x4
-        admiral = new MultiBarrelItemTurret("admiral") {{
+        admiral = new MultiBarrelItemTurret("admiral"){{
             requirements(Category.turret, with(Items.copper, 1100, Items.titanium, 800, Items.silicon, 600, Items.surgeAlloy, 300, SnItems.naturite, 190));
             ammo(
-                    Items.blastCompound, SnBullets.maxBlastBlast,
-                    Items.plastanium, SnBullets.maxBlastPlastanium,
-                    Items.surgeAlloy, SnBullets.maxBlastSurge
+            Items.blastCompound, SnBullets.maxBlastBlast,
+            Items.plastanium, SnBullets.maxBlastPlastanium,
+            Items.surgeAlloy, SnBullets.maxBlastSurge
             );
             shots = 3;
             barrelPoints = Seq.with(
-                    new Vec2(32f/128f, 10f/128f),
-                    new Vec2(64f/128f, 3f/128f),
-                    new Vec2(96f/128f, 10f/128f)
+            new Vec2(32f / 128f, 10f / 128f),
+            new Vec2(64f / 128f, 3f / 128f),
+            new Vec2(96f / 128f, 10f / 128f)
             );
             ejectPoints = Seq.with(
-                    new Vec2(32f/128f, 47f/128f),
-                    new Vec2(64f/128f, 40f/128f),
-                    new Vec2(96f/128f, 47f/128f)
+            new Vec2(32f / 128f, 47f / 128f),
+            new Vec2(64f / 128f, 40f / 128f),
+            new Vec2(96f / 128f, 47f / 128f)
             );
             health = 3200;
             size = 4;
@@ -314,13 +312,13 @@ public class SnTurrets implements ContentList {
             speedupPerShot = 0.16f;
             maxReloadMultiplier = 1.6f;
         }};
-        scorpio = new ModItemTurret("scorpio") {{
+        scorpio = new ModItemTurret("scorpio"){{
             requirements(Category.turret, with(Items.copper, 600, SnItems.fors, 560, Items.plastanium, 480, SnItems.nobium, 450, SnItems.naturite, 400));
             ammo(
-                    Items.sporePod, SnBullets.bigSporePodPoison,
-                    SnItems.naturite, SnBullets.bigNaturitePoison,
-                    SnItems.nobium, SnBullets.bigNobiumPoison,
-                    Items.plastanium, SnBullets.bigPlastaniumPoison
+            Items.sporePod, SnBullets.bigSporePodPoison,
+            SnItems.naturite, SnBullets.bigNaturitePoison,
+            SnItems.nobium, SnBullets.bigNobiumPoison,
+            Items.plastanium, SnBullets.bigPlastaniumPoison
             );
             health = 2900;
             size = 4;
@@ -339,14 +337,14 @@ public class SnTurrets implements ContentList {
             targetAir = true;
             targetGround = true;
         }};
-        flood = new LiquidTurretExt("flood") {{
+        flood = new LiquidTurretExt("flood"){{
             requirements(Category.turret, with(Items.metaglass, 230, Items.lead, 500, Items.titanium, 330, Items.thorium, 190, SnItems.fors, 180));
             ammo(
-                    Liquids.water, SnBullets.floodWaterShot,
-                    Liquids.slag, SnBullets.floodSlagShot,
-                    Liquids.cryofluid, SnBullets.floodCryoShot,
-                    Liquids.oil, SnBullets.floodOilShot,
-                    SnLiquids.burheyna, SnBullets.floodBurheynaShot    
+            Liquids.water, SnBullets.floodWaterShot,
+            Liquids.slag, SnBullets.floodSlagShot,
+            Liquids.cryofluid, SnBullets.floodCryoShot,
+            Liquids.oil, SnBullets.floodOilShot,
+            SnLiquids.burheyna, SnBullets.floodBurheynaShot
             );
             size = 4;
             reloadTime = 45f;
@@ -363,7 +361,7 @@ public class SnTurrets implements ContentList {
             ammoPerShot = 15;
             alternate = true;
         }};
-        chain = new ChainLightningTurret("chain") {{
+        chain = new ChainLightningTurret("chain"){{
             requirements(Category.turret, with(Items.copper, 600, Items.lead, 500, Items.surgeAlloy, 460, SnItems.nobium, 450, SnItems.naturite, 400, SnItems.planatrium, 350));
             range = 168.0f;
             damage = 7.60f;
@@ -379,11 +377,11 @@ public class SnTurrets implements ContentList {
         }};
         //endregion 4x4
         //region 5x5
-        field = new ModItemTurret("field") {{
+        field = new ModItemTurret("field"){{
             requirements(Category.turret, with(Items.copper, 1200, Items.lead, 800, Items.plastanium, 350, Items.thorium, 400, SnItems.fors, 400, SnItems.nobium, 300));
             ammo(
-                    SnItems.fors, SnBullets.artilleryFors,
-                    Items.blastCompound, SnBullets.artilleryBlast
+            SnItems.fors, SnBullets.artilleryFors,
+            Items.blastCompound, SnBullets.artilleryBlast
             );
             targetAir = true;
             targetGround = true;
@@ -403,10 +401,10 @@ public class SnTurrets implements ContentList {
 
             health = 160 * size * size;
         }};
-        sniper = new ModItemTurret("sniper") {{
+        sniper = new ModItemTurret("sniper"){{
             requirements(Category.turret, with(Items.copper, 1200, Items.surgeAlloy, 600, SnItems.naturite, 500, Items.silicon, 400));
             ammo(
-                    Items.surgeAlloy, SnBullets.sniperSurge
+            Items.surgeAlloy, SnBullets.sniperSurge
             );
 
             ammoPerShot = 9;
@@ -429,13 +427,13 @@ public class SnTurrets implements ContentList {
 
             consumes.powerCond(21f, TurretBuild::isActive);
         }};
-        fanatic = new ModItemTurret("fanatic") {{
+        fanatic = new ModItemTurret("fanatic"){{
             requirements(Category.turret, with(Items.titanium, 900, Items.thorium, 890, Items.plastanium, 700, SnItems.fors, 500, SnItems.flameid, 520, SnItems.naturite, 200));
             ammo(
-                    Items.thorium, SnBullets.laserArtThorium,
-                    Items.phaseFabric, SnBullets.laserArtPhase,
-                    SnItems.enojie, SnBullets.laserArtEnojie,
-                    SnItems.reneubite, SnBullets.laserArtReneubite
+            Items.thorium, SnBullets.laserArtThorium,
+            Items.phaseFabric, SnBullets.laserArtPhase,
+            SnItems.enojie, SnBullets.laserArtEnojie,
+            SnItems.reneubite, SnBullets.laserArtReneubite
             );
             health = 2300;
             size = 5;
@@ -457,7 +455,7 @@ public class SnTurrets implements ContentList {
         }};
         //endregion 5x5
         //region 6x6
-        trident = new PowerTurret("trident") {{
+        trident = new PowerTurret("trident"){{
             requirements(Category.turret, with(Items.copper, 1000, Items.lead, 810, Items.silicon, 790, Items.plastanium, 780, Items.surgeAlloy, 670, SnItems.enojie, 600, SnItems.nobium, 400, SnItems.planatrium, 370));
             health = 5400;
             range = 247f;
@@ -471,7 +469,7 @@ public class SnTurrets implements ContentList {
             chargeEffect = SnFx.tridentCharge;
             category = Category.turret;
             buildVisibility = BuildVisibility.shown;
-            shootType = new EnergySphereBulletType(1.75f, 240f) {{
+            shootType = new EnergySphereBulletType(1.75f, 240f){{
                 hitSize = 8f;
                 splashDamage = 1280f;
                 splashDamageRadius = 112f;
@@ -483,15 +481,15 @@ public class SnTurrets implements ContentList {
                 hitEffect = SnFx.tridentHit0;
             }};
         }};
-        radius = new MinigunTurret("radius") {{
+        radius = new MinigunTurret("radius"){{
             requirements(Category.turret, with(Items.copper, 1400, Items.graphite, 800, Items.surgeAlloy, 650, Items.plastanium, 555, SnItems.fors, 520, Items.thorium, 480, SnItems.enojie, 420));
             ammo(
-                    Items.graphite, SnBullets.heavyStandardDense,
-                    Items.pyratite, SnBullets.heavyStandardIncendiary,
-                    Items.thorium, SnBullets.heavyStandardThorium,
-                    Items.blastCompound, SnBullets.standardBlastBig,
-                    SnItems.fors, SnBullets.standardForsBig,
-                    SnItems.reneubite, SnBullets.reneubiteBlast
+            Items.graphite, SnBullets.heavyStandardDense,
+            Items.pyratite, SnBullets.heavyStandardIncendiary,
+            Items.thorium, SnBullets.heavyStandardThorium,
+            Items.blastCompound, SnBullets.standardBlastBig,
+            SnItems.fors, SnBullets.standardForsBig,
+            SnItems.reneubite, SnBullets.reneubiteBlast
             );
             reloadTime = 4f;
             coolantMultiplier = 0.5f;
@@ -514,8 +512,8 @@ public class SnTurrets implements ContentList {
         }};
         //endregion 6x6
         //region 7x7
-        halberd = new ModPowerTurret("halberd") {{
-            requirements(Category.turret, with(Items.copper, 2400,  Items.metaglass, 1200, Items.lead, 1120, Items.silicon, 1200, Items.plastanium, 980, SnItems.nobium, 750, SnItems.fors, 710, SnItems.enojie, 690));
+        halberd = new ModPowerTurret("halberd"){{
+            requirements(Category.turret, with(Items.copper, 2400, Items.metaglass, 1200, Items.lead, 1120, Items.silicon, 1200, Items.plastanium, 980, SnItems.nobium, 750, SnItems.fors, 710, SnItems.enojie, 690));
             range = 350f;
             shots = 1;
             chargeTime = 145f;
@@ -539,8 +537,8 @@ public class SnTurrets implements ContentList {
             shootSound = Sounds.laser;
             alternate = true;
 
-            shootType = new LaserBulletType(2500) {{
-                colors = new Color[] {Pal.meltdownHit.cpy().a(0.4f), Pal.meltdownHit, Color.white};
+            shootType = new LaserBulletType(2500){{
+                colors = new Color[]{Pal.meltdownHit.cpy().a(0.4f), Pal.meltdownHit, Color.white};
                 despawnEffect = Fx.none;
                 lifetime = 60f;
                 drawSize = 440f;
@@ -552,12 +550,12 @@ public class SnTurrets implements ContentList {
         //endregion 7x7
         //region special
         //region missile
-        sunrise = new MissileSiloTurret("sunrise") {{
+        sunrise = new MissileSiloTurret("sunrise"){{
             requirements(Category.turret, with(Items.copper, 180, Items.lead, 175, Items.graphite, 165, Items.silicon, 150));
             launchEffect = SnFx.missileLaunchSmall;
             size = 2;
             itemCapacity = 240;
-            missile = new MissileType(this) {{
+            missile = new MissileType(this){{
                 damage = 0f;
                 splashDamage = 590f;
                 splashDamageRadius = 105f;
@@ -573,12 +571,12 @@ public class SnTurrets implements ContentList {
             category = Category.turret;
             buildVisibility = BuildVisibility.shown;
         }};
-        spark = new MissileSiloTurret("spark") {{
+        spark = new MissileSiloTurret("spark"){{
             requirements(Category.turret, with(Items.copper, 290, Items.lead, 280, Items.graphite, 275, Items.silicon, 260, Items.plastanium, 255, SnItems.fors, 230));
             launchEffect = SnFx.missileLaunchMedium;
             size = 3;
             itemCapacity = 900;
-            missile = new MissileType(this) {{
+            missile = new MissileType(this){{
                 damage = 0f;
                 splashDamage = 4400f;
                 splashDamageRadius = 135f;
@@ -594,12 +592,12 @@ public class SnTurrets implements ContentList {
             category = Category.turret;
             buildVisibility = BuildVisibility.shown;
         }};
-        dissector = new MissileSiloTurret("dissector") {{
+        dissector = new MissileSiloTurret("dissector"){{
             requirements(Category.turret, with(Items.copper, 500, Items.lead, 510, Items.plastanium, 490, Items.silicon, 480, Items.graphite, 475, SnItems.fors, 430, SnItems.nobium, 400));
             launchEffect = SnFx.missileLaunchLarge;
             size = 4;
             itemCapacity = 2400;
-            missile = new MissileType(this) {{
+            missile = new MissileType(this){{
                 damage = 0f;
                 splashDamage = 17000f;
                 splashDamageRadius = 160f;
@@ -615,18 +613,18 @@ public class SnTurrets implements ContentList {
             category = Category.turret;
             buildVisibility = BuildVisibility.shown;
         }};
-        art = new MissileSiloTurret("art") {{
+        art = new MissileSiloTurret("art"){{
             requirements(Category.turret, with(Items.copper, 1400, Items.lead, 1300, Items.plastanium, 1010, Items.silicon, 980, Items.graphite, 975, Items.surgeAlloy, 800, SnItems.enojie, 750));
             launchEffect = SnFx.missileLaunchMedium;
             size = 5;
             itemCapacity = 2400;
             float p1 = 53f / 162f, p2 = 109f / 162f;
             rockets(new Vec2(p1, p1),
-                    new Vec2(p1, p2),
-                    new Vec2(p2, p1),
-                    new Vec2(p2, p2));
+            new Vec2(p1, p2),
+            new Vec2(p2, p1),
+            new Vec2(p2, p2));
 
-            missile = new MissileType(this) {{
+            missile = new MissileType(this){{
                 damage = 0f;
                 splashDamage = 7200f;
                 splashDamageRadius = 145f;
@@ -644,7 +642,7 @@ public class SnTurrets implements ContentList {
         }};
         //endregion missile
         //region EMP
-        discharger = new EMPFacility("discharger") {{
+        discharger = new EMPFacility("discharger"){{
             requirements(Category.turret, with(Items.copper, 1600, Items.lead, 1500, Items.metaglass, 1000, Items.plastanium, 850, Items.silicon, 1300, Items.surgeAlloy, 910, Items.phaseFabric, 780, SnItems.flameid, 1000, SnItems.enojie, 1100, SnItems.coldent, 670));
             size = 3;
             health = 980;
@@ -660,7 +658,7 @@ public class SnTurrets implements ContentList {
             zapAngleRand = 10f;
             parts.add(new Core(1.2f));
         }};
-        dischargerEvo = new EMPFacility("discharger-evo") {{
+        dischargerEvo = new EMPFacility("discharger-evo"){{
             requirements(Category.turret, ItemStack.mult(discharger.requirements, 2));
             size = 4;
             health = 1200;
@@ -770,28 +768,5 @@ public class SnTurrets implements ContentList {
         //TODO synthesisT5
         //endregion synthesis*/
         //endregion special
-        //region testing
-        testturret = new ModItemTurret("test-turret") {{
-            requirements(Category.turret, with(Items.copper, 2));
-            ammo(
-                    Items.copper, SnBullets.testBullet,
-                    Items.lead, SnBullets.testBullet0,
-                    Items.metaglass, SnBullets.testBullet1,
-                    Items.graphite, SnBullets.testBullet2,
-                    Items.sand, SnBullets.testBullet3
-            );
-            health = 780;
-            size = 2;
-            reloadTime = 24f;
-            range = 370f;
-            recoilAmount = 0.3f;
-            inaccuracy = 1.1f;
-            rotateSpeed = 7f;
-            shootSound = Sounds.pew;
-            targetAir = true;
-            unlocked = true;
-            alwaysUnlocked = true;
-        }};
-        //endregion testing
     }
 }
