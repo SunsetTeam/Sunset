@@ -2042,7 +2042,6 @@ public class SnBullets implements ContentList {
         testBullet2 = new LightningContinuousLaserBulletType(40) {{
             length = 1140f;
             width = 13f;
-            LightningChance = 0.3f;
             lightning = 7;
             lightningLength = 20;
             lightningDamage = 30f;
