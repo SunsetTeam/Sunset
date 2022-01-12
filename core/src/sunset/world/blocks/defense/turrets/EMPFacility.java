@@ -35,12 +35,12 @@ public class EMPFacility extends PowerTurret {
 
     public EMPFacility(String name) {
         super(name);
-        shootCone = 306f;
+        shootCone = 360f;
         lightningColor = Color.valueOf("7FFFD4");
         shootSound = Sounds.release;
-        shootEffect = SnFx.empShootSmall;
+        shootEffect = Fx.none;
         cooldown = 0.5f;
-        parts.add(new Core(2.5f));
+        //parts.add(new Core(2.5f));
     }
 
     @Override

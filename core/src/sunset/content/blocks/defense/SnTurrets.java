@@ -46,10 +46,9 @@ public class SnTurrets implements ContentList{
     //missile
     sunrise/*2x2*/, spark/*3x3*/, dissector/*4x4*/, art/*5x5*/,
 
-    //EMP
+    //EMP and synthesis
     discharger, dischargerEvo,
-    synthesisT1, synthesisT2, synthesisT3, synthesisT4, synthesisT5
-    ;
+    synthesisT1, synthesisT2, synthesisT3, synthesisT4, synthesisT5;
 
     @Override
     public void load(){
@@ -651,9 +650,9 @@ public class SnTurrets implements ContentList{
             heatColor = Color.valueOf("7FFFD4");
             chargeTime = 180;
             shootType = SnBullets.empBullet;
-            shootEffect = SnFx.empWave;
+            shootEffect = SnFx.wave1;
             range = 180;
-            shots = 10;
+            shots = 1;
             zaps = 10;
             zapAngleRand = 10f;
             parts.add(new Core(1.2f));
@@ -667,15 +666,16 @@ public class SnTurrets implements ContentList{
             heatColor = Color.valueOf("7FFFD4");
             chargeTime = 300;
             shootType = SnBullets.empBulletEvo;
+            shootEffect = SnFx.wave2;
             range = 240;
-            shots = 20;
+            shots = 1;
             zaps = 20;
             zapAngleRand = 15f;
             parts.add(new Core(5));
         }};
         //endregion EMP
-        /*//region synthesis
-        synthesisT1 = new SynthesisTurret("synthesis-t1") {{
+        //region synthesis
+        /*synthesisT1 = new SynthesisTurret("synthesis-t1") {{
             requirements(Category.turret, with(Items.copper, 120, Items.lead, 120, Items.titanium, 100));
             ammo(
                     SnItems.naturite, SnBullets.synthesisBullet1
@@ -688,16 +688,17 @@ public class SnTurrets implements ContentList{
             shots = 1;
             shootCone = 3;
             shootSound = Sounds.railgun;
-            maxAmmo = 20;
+            maxAmmo = 30;
             spread = 3;
             recoilAmount = 5;
             restitution = 0.1f;
             cooldown = 0.2f;
             coolantUsage = 1.1f;
-            consumes.power(3.8f);
+            //consumes.power(3.8f);
+            powerUse = 3.8f;
         }};
         synthesisT2 = new SynthesisTurret("synthesis-t2") {{
-            requirements(Category.turret, with(Items.copper, 240, Items.lead, 240, Items.titanium, 200));
+            requirements(Category.turret, ItemStack.mult(synthesisT1.requirements, 2));
             ammo(
                     SnItems.naturite, SnBullets.synthesisBullet2
             );
@@ -709,16 +710,17 @@ public class SnTurrets implements ContentList{
             shots = 1;
             shootCone = 4;
             shootSound = Sounds.railgun;
-            maxAmmo = 20;
+            maxAmmo = 30;
             spread = 5.1f;
             recoilAmount = 3;
             restitution = 1f;
             cooldown = 0.01f;
             coolantUsage = 1.7f;
-            consumes.power(6.9f);
+            //consumes.power(6.9f);
+            powerUse = 6.9f;
         }};
         synthesisT3 = new SynthesisTurret("synthesis-t3") {{
-            requirements(Category.turret, with(Items.copper, 360, Items.lead, 360, Items.titanium, 300));
+            requirements(Category.turret, ItemStack.mult(synthesisT1.requirements, 3));
             ammo(
                     SnItems.naturite, SnBullets.synthesisBullet3
             );
@@ -733,16 +735,17 @@ public class SnTurrets implements ContentList{
             speed = 2;
             shootShake = 5;
             minRange = 48;
-            maxAmmo = 40;
+            maxAmmo = 30;
             spread = 0.1f;
             recoilAmount = 2.1f;
             restitution = 0.55f;
             cooldown = 0.3f;
             coolantUsage = 1.55f;
-            consumes.power(9.2f);
+            //consumes.power(9.2f);
+            powerUse = 9.2f;
         }};
         synthesisT4 = new SynthesisTurret("synthesis-t4") {{
-            requirements(Category.turret, with(Items.copper, 480, Items.lead, 480, Items.titanium, 400));
+            requirements(Category.turret, ItemStack.mult(synthesisT1.requirements, 4));
             ammo(
                     SnItems.naturite, SnBullets.synthesisBullet4
             );
@@ -757,16 +760,41 @@ public class SnTurrets implements ContentList{
             speed = 5;
             shootShake = 10;
             minRange = 52;
-            maxAmmo = 50;
+            maxAmmo = 30;
             spread = 0;
             recoilAmount = 5;
             restitution = 0.9f;
             cooldown = 0.7f;
             coolantUsage = 0.9f;
-            consumes.power(11.3f);
+            //consumes.power(11.3f);
+            powerUse = 11.3f;
         }};
-        //TODO synthesisT5
-        //endregion synthesis*/
+        synthesisT5 = new SynthesisTurret("synthesis-t5") {{
+            requirements(Category.turret, ItemStack.mult(synthesisT1.requirements, 5));
+            ammo(
+                    SnItems.naturite, SnBullets.synthesisBullet5
+            );
+            armor = 600;
+            size = 5;
+            health = synthesisT1.health * size;
+            reloadTime = 180;
+            range = 400;
+            shots = 5;
+            shootCone = 2.1f;
+            shootSound = Sounds.release;
+            speed = 5;
+            shootShake = 13;
+            minRange = 70;
+            maxAmmo = 30;
+            spread = 0.2f;
+            recoilAmount = 9;
+            restitution = 1.3f;
+            cooldown = 0.85f;
+            coolantUsage = 3.2f;
+            //consumes.power(25);
+            powerUse = 25;
+        }};*/
+        //endregion synthesis
         //endregion special
     }
 }

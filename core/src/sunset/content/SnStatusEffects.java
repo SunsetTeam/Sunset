@@ -21,7 +21,7 @@ public class SnStatusEffects implements ContentList {
             frostbite, stun, starBuff, galaxyDebuff, electricalShort, reloading, viscous,
 
             //only reactive
-            greened,
+            molecula,
 
             //stackable
             overheat;
@@ -51,7 +51,7 @@ public class SnStatusEffects implements ContentList {
             color = Color.valueOf("392f17");
             speedMultiplier = 0f;
             disarm = true;
-        }};
+        }};//no sprite
 
         starBuff = new StatusEffect("star-buff") {{
             color = Pal.surge;
@@ -65,7 +65,7 @@ public class SnStatusEffects implements ContentList {
             speedMultiplier = 0.8f;
             damageMultiplier = 0.9f;
             reloadMultiplier = 0.8f;
-        }};
+        }};//no sprite
 
         electricalShort = new StatusEffect("electric-short") {{
             effectChance = 100;
@@ -98,10 +98,10 @@ public class SnStatusEffects implements ContentList {
             speedMultiplier = 0.94f;
             effect = SnFx.viscous;
             effectChance = 0.09f;
-        }};
+        }};//no sprite
         //endregion common
         //region only reactive
-        greened = new StatusEffect("greened") {{
+        molecula = new StatusEffect("molecula") {{
             color = Color.valueOf("3DD957");
             permanent = true;
             effect = Fx.heal;
@@ -109,23 +109,23 @@ public class SnStatusEffects implements ContentList {
                 opposite(StatusEffects.freezing, SnStatusEffects.frostbite);
                 affinity(StatusEffects.overclock, ((unit, result, time) -> {
                     unit.damagePierce(600);
-                    result.set(greened, 300);
+                    result.set(molecula, 300);
                 }));
                 affinity(StatusEffects.overdrive, ((unit, result, time) -> {
                     unit.damagePierce(600);
-                    result.set(greened, 300);
+                    result.set(molecula, 300);
                 }));
                 affinity(StatusEffects.shielded, ((unit, result, time) -> {
                     unit.damagePierce(450);
-                    result.set(greened, 300);
+                    result.set(molecula, 300);
                 }));
                 affinity(StatusEffects.blasted, ((unit, result, time) -> {
                     unit.damagePierce(30);
-                    result.set(greened, 300);
+                    result.set(molecula, 300);
                 }));
                 affinity(StatusEffects.shocked, ((unit, result, time) -> {
                     unit.damagePierce(30);
-                    result.set(greened, 300);
+                    result.set(molecula, 300);
                 }));
             });
         }};

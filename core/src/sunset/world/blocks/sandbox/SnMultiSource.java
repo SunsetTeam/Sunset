@@ -85,6 +85,7 @@ public class SnMultiSource extends Block{
         public void draw(){
             super.draw();
 
+            Draw.rect(block.region, x, y);
             Draw.rect(cross, x, y);
 
             if(data.item != null){
