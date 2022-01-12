@@ -32,7 +32,7 @@ import static mindustry.Vars.tilesize;
 
 public class SnFx {
     public static final Effect
-    //region
+    //region common
     enojieCraft = new Effect(55, e -> {
         randLenVectors(e.id, 6, 4f + e.fin() * 8f, (x, y) -> {
             color(Pal.heal);
@@ -591,7 +591,7 @@ public class SnFx {
         };
         Angles.randLenVectors(e.id, 4, e.finpow() * 20, e.rotation, 360, floatc21);
     }),
-    //endregion
+    //endregion common
     //region special
     empHit = new Effect(35, e -> {
         randLenVectors(e.id, 6, 4f + e.fin() * 8f, (x, y) -> {
@@ -628,6 +628,18 @@ public class SnFx {
             color(Color.valueOf("CFEDD4"), Color.lime, e.fin());
             Fill.square(e.x + x, e.y + y, e.fout());
         });*/
+    }),
+
+    wave1 = new Effect(22, e -> {
+        color(Pal.lancerLaser);
+        stroke(e.fout() * 2f);
+        Lines.circle(e.x, e.y, 180);
+    }),
+
+    wave2 = new Effect(22, e -> {
+        color(Pal.lancerLaser);
+        stroke(e.fout() * 2f);
+        Lines.circle(e.x, e.y, 240);
     }),
 
     greenInstTrail = new Effect(30, e -> {

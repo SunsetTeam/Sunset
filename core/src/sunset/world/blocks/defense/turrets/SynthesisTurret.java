@@ -6,12 +6,14 @@ import arc.graphics.g2d.TextureRegion;
 import arc.math.Mathf;
 import arc.util.Time;
 import mindustry.annotations.Annotations.Load;
+import mindustry.core.UI;
 import mindustry.entities.bullet.BulletType;
 import mindustry.graphics.Drawf;
 import mindustry.graphics.Layer;
 import mindustry.graphics.Pal;
 import mindustry.ui.Bar;
 import mindustry.world.blocks.defense.turrets.ItemTurret;
+import mindustry.world.consumers.ConsumePower;
 import mindustry.world.meta.Stat;
 import sunset.SnVars;
 import sunset.graphics.SnPal;
@@ -25,6 +27,8 @@ public class SynthesisTurret extends ItemTurret {
     public TextureRegion liquid;
     public float armor;
     public int speed = 1;
+    public float powerUse;
+    public float powerStored;
 
     public float maxReloadMultiplier = 0.5f;
     public float speedupPerShot = 0.125f;
@@ -33,12 +37,22 @@ public class SynthesisTurret extends ItemTurret {
     public SynthesisTurret(String name) {
         super(name);
         unitSort = (u, x, y) -> -u.armor;
+        powerUse = 1;
+    }
+
+    @Override
+    public void init(){
+        consumes.powerCond(powerUse, TurretBuild::isShooting);
+        consumes.powerBuffered(powerStored);
+        super.init();
     }
 
     @Override
     public void setStats() {
         super.setStats();
         stats.add(Stat.armor, armor);
+        stats.add(Stat.powerUse, powerUse);
+        stats.add(Stat.powerCapacity, powerStored);
     }
 
     @Override
@@ -49,6 +63,11 @@ public class SynthesisTurret extends ItemTurret {
                 () -> entity.team.color,
                 () -> Mathf.clamp(entity.reload / reloadTime)
         ));
+        ConsumePower cons = consumes.getPower();
+        boolean buffered = cons.buffered;
+        float capacity = cons.capacity;
+        bars.add("power", entity -> new Bar(() -> buffered ? Core.bundle.format("bar.poweramount", Float.isNaN(entity.power.status * capacity) ? "<ERROR>" : UI.formatAmount((int)(entity.power.status * capacity))) :
+                Core.bundle.get("bar.power"), () -> Pal.powerBar, () -> Mathf.zero(cons.requestedPower(entity)) && entity.power.graph.getPowerProduced() + entity.power.graph.getBatteryStored() > 0f ? 1f : entity.power.status));
     }
 
     @Override

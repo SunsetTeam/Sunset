@@ -1,24 +1,36 @@
 package sunset.content;
 
-import mindustry.ai.types.*;
-import mindustry.annotations.Annotations.*;
-import mindustry.content.*;
-import mindustry.ctype.*;
-import mindustry.entities.bullet.*;
-import mindustry.gen.*;
-import mindustry.graphics.*;
-import mindustry.type.*;
+import mindustry.ai.types.SuicideAI;
+import mindustry.annotations.Annotations.EntityDef;
+import mindustry.content.Fx;
+import mindustry.content.Liquids;
+import mindustry.content.StatusEffects;
+import mindustry.content.UnitTypes;
+import mindustry.ctype.ContentList;
+import mindustry.entities.bullet.BasicBulletType;
+import mindustry.entities.bullet.BombBulletType;
+import mindustry.gen.Sounds;
+import mindustry.gen.UnitEntity;
+import mindustry.gen.UnitWaterMove;
+import mindustry.gen.Unitc;
+import mindustry.graphics.Layer;
+import mindustry.type.UnitType;
 import mindustry.type.weapons.PointDefenseWeapon;
-import sunset.ai.*;
-import sunset.ai.weapon.*;
-import sunset.entities.abilities.*;
-import sunset.entities.bullet.*;
-import sunset.gen.*;
-import sunset.type.*;
-import sunset.type.ammo.*;
-import sunset.type.blocks.*;
+import sunset.ai.DeliverAI;
+import sunset.ai.ExtinguishAI;
+import sunset.ai.FlyingWeaponAI;
+import sunset.ai.HealAI;
+import sunset.ai.weapon.ExtinguishWeaponAI;
+import sunset.entities.abilities.StatusFieldAbility;
+import sunset.entities.bullet.BerserkLaserBulletType;
+import sunset.gen.Deliverc;
+import sunset.type.BerserkStage;
+import sunset.type.ammo.LiquidAmmoType;
+import sunset.type.blocks.Rotor;
 import sunset.type.unitTypes.*;
-import sunset.type.weapons.*;
+import sunset.type.weapons.ChainWeapon;
+import sunset.type.weapons.SnWeapon;
+import sunset.type.weapons.WeaponExt;
 
 public class SnUnitTypes implements ContentList{
     public static UnitType
@@ -31,7 +43,7 @@ public class SnUnitTypes implements ContentList{
     //wheel
     wheel1, wheel2, wheel3, wheel4, wheel5,
     //torpedo
-    torpedo1, torpedo2,
+    torpedo1, torpedo2, torpedo3, torpedo4,torpedo5,
     //misc
     router,
     //freezing
@@ -42,8 +54,7 @@ public class SnUnitTypes implements ContentList{
     public static UnitType comet;
 
     @Override
-    public void load(){
-
+    public void load() {
         //region attack copters
         wind = new CopterUnitType("wind"){{
             health = 140;
@@ -417,7 +428,7 @@ public class SnUnitTypes implements ContentList{
                 shots = 3;
                 inaccuracy = 3f;
                 shootSound = Sounds.missile;
-                bullet = SnBullets.smallHelicopterMissiles;
+                bullet = SnBullets.smallHelicopterMissile;
             }});
         }};
 
@@ -494,7 +505,7 @@ public class SnUnitTypes implements ContentList{
                 shots = 1;
                 inaccuracy = 0.5f;
                 shootSound = Sounds.shootBig;
-                bullet = SnBullets.gigantHelicopterGun;
+                bullet = SnBullets.giantHelicopterGun;
             }},
             new WeaponExt("gigant-rocket-launcher"){{
                 rotate = false;
@@ -1028,13 +1039,11 @@ public class SnUnitTypes implements ContentList{
         }};
         //endregion wheel
         //region torpedo
-        torpedo1 = new SnUnitType("torpedo-t1"){{
+        torpedo1 = new UnitTypeExt("torpedo-t1") {{
             speed = 2.1f;
-            boostMultiplier = 0.55f;
-            rotateSpeed = 6.3f;
-            baseRotateSpeed = 4;
+            rotateSpeed = 7;
             drag = 0.5f;
-            hitSize = 15;
+            hitSize = 10;
             accel = 0.7f;
             health = 180;
             range = 160;
@@ -1044,86 +1053,54 @@ public class SnUnitTypes implements ContentList{
             commandRadius = 48;
             visualElevation = -1;
             weapons.add(
-            new WeaponExt("plasma-gun"){{
-                bullet = new ArtilleryBulletType(){{
-                    lifetime = 32;
-                    speed = 5;
-                    damage = 75;
-                    drawSize = 6.1f;
-                    pierceCap = 3;
-                    inaccuracy = 7;
-                    ammoMultiplier = 2;
-                    reloadMultiplier = 1.1f;
-                    buildingDamageMultiplier = 0.6f;
-                    recoil = 0;
-                    width = 3;
-                    height = 3;
-                    pierce = true;
-                    pierceBuilding = true;
-                }};
-                rotate = true;
-                top = true;
-                rotateSpeed = 30;
-                reload = 35;
-                shots = 5;
-                spacing = 15;
-                inaccuracy = 2;
-                firstShotDelay = 20;
-                shootCone = 3;
-                cooldownTime = 15;
-                ignoreRotation = true;
-                shootSound = Sounds.lasershoot;
-                shootStatus = StatusEffects.blasted;
-            }},
-            new WeaponExt("torpedo-gun"){{
-                bullet = new BasicBulletType(2, 120){{
-                    lifetime = 80;
-                    drawSize = 9.2f;
-                    pierceCap = -1;
-                    inaccuracy = 1;
-                    ammoMultiplier = 1;
-                    reloadMultiplier = 3;
-                    buildingDamageMultiplier = 0.9f;
-                    recoil = 0;
-                    pierce = true;
-                    pierceBuilding = false;
-                    shootEffect = smokeEffect = Fx.none;
-                    collidesAir = absorbable = false;
-                    keepVelocity = true;
-                    trailColor = Pal.lightTrail;
-                    collideFloor = true;
-                    layer = Layer.scorch;
-                    splashDamage = 40;
-                    splashDamageRadius = 80;
-                }};
-                rotate = true;
-                rotateSpeed = 30;
-                reload = 35;
-                shots = 1;
-                spacing = 15;
-                inaccuracy = 2;
-                firstShotDelay = 20;
-                shootCone = 6;
-                cooldownTime = 15;
-                ignoreRotation = true;
-                shootSound = Sounds.missile;
-                shootStatus = StatusEffects.disarmed;
-                shootStatusDuration = 15;
-            }}
+                    new WeaponExt("plasma-gun") {{
+                        bullet = SnBullets.plasmaArt;
+                        rotate = true;
+                        top = true;
+                        rotateSpeed = 30;
+                        reload = 35;
+                        shots = 5;
+                        spacing = 15;
+                        inaccuracy = 2;
+                        x = 3.5f;
+                        y = 0;
+                        firstShotDelay = 20;
+                        shootCone = 3;
+                        cooldownTime = 15;
+                        ignoreRotation = true;
+                        shootSound = Sounds.lasershoot;
+                        shootStatus = StatusEffects.shocked;
+                    }},
+                    new WeaponExt("torpedo-gun") {{
+                        bullet = SnBullets.torpedo1;
+                        mirror = false;
+                        rotate = true;
+                        top = false;
+                        rotateSpeed = 30;
+                        reload = 35;
+                        shots = 1;
+                        spacing = 15;
+                        inaccuracy = 5;
+                        x = y = 0;
+                        firstShotDelay = 30;
+                        shootCone = 6;
+                        cooldownTime = 15;
+                        ignoreRotation = true;
+                        shootSound = Sounds.lasershoot;
+                        shootStatus = StatusEffects.shocked;
+                    }}
             );
             constructor = UnitWaterMove::create;
             immunities.add(StatusEffects.wet);
             immunities.add(StatusEffects.freezing);
         }};
-        torpedo2 = new SnUnitType("torpedo-t2"){{
+        torpedo2 = new UnitTypeExt("torpedo-t2") {{
             speed = 2;
-            boostMultiplier = 1;
-            rotateSpeed = 7;
-            baseRotateSpeed = 5;
+            rotateSpeed = 6.9f;
             drag = 0.7f;
-            hitSize = 17;
+            hitSize = 15;
             accel = 0.5f;
-            health = 170;
+            health = 360;
             range = 205;
             armor = 260;
             faceTarget = false;
@@ -1131,80 +1108,290 @@ public class SnUnitTypes implements ContentList{
             commandRadius = 48;
             visualElevation = -1;
             weapons.add(
-            new WeaponExt("rocket-launcher"){{
-                bullet = new ArtilleryBulletType(){{
-                    backColor = Pal.missileYellowBack;
-                    frontColor = Pal.missileYellow;
-                    lifetime = 52;
-                    speed = 5;
-                    damage = 75;
-                    drawSize = 6.1f;
-                    pierceCap = 3;
-                    inaccuracy = 7;
-                    ammoMultiplier = 2;
-                    reloadMultiplier = 1.1f;
-                    buildingDamageMultiplier = 0.6f;
-                    recoil = 0;
-                    width = 8;
-                    height = 8;
-                    pierce = true;
-                    pierceBuilding = true;
-                    homingPower = 0.08f;
-                    shrinkY = 0f;
-                    hitSound = Sounds.explosion;
-                    trailChance = 0.2f;
-                }};
-                mirror = true;
-                rotate = true;
-                top = true;
-                rotateSpeed = 30;
-                reload = 45;
-                shots = 1;
-                spacing = 1;
-                inaccuracy = 5;
-                xRand = 5;
-                firstShotDelay = 0;
-                shootCone = 1;
-                cooldownTime = 5;
-                ignoreRotation = true;
-                shootSound = Sounds.missile;
-                shootStatus = StatusEffects.blasted;
-            }},
-            new WeaponExt("torpedo-gun"){{
-                bullet = new BasicBulletType(2, 140){{
-                    lifetime = 80;
-                    drawSize = 9.2f;
-                    pierceCap = -1;
-                    inaccuracy = 1;
-                    ammoMultiplier = 1;
-                    reloadMultiplier = 3;
-                    buildingDamageMultiplier = 0.9f;
-                    recoil = 0;
-                    pierce = true;
-                    pierceBuilding = false;
-                    shootEffect = smokeEffect = Fx.none;
-                    collidesAir = absorbable = false;
-                    trailColor = Pal.lightTrail;
-                    keepVelocity = true;
-                    collideFloor = true;
-                    layer = Layer.scorch;
-                    splashDamage = 60;
-                    splashDamageRadius = 90;
-                }};
-                rotate = true;
-                rotateSpeed = 30;
-                reload = 35;
-                shots = 1;
-                spacing = 15;
-                inaccuracy = 2;
-                firstShotDelay = 20;
-                shootCone = 6;
-                cooldownTime = 15;
-                ignoreRotation = true;
-                shootSound = Sounds.missile;
-                shootStatus = StatusEffects.disarmed;
-                shootStatusDuration = 15;
-            }}
+                    new WeaponExt("rocket-launcher") {{
+                        bullet = SnBullets.rocketArt;
+                        mirror = true;
+                        rotate = true;
+                        top = true;
+                        rotateSpeed = 30;
+                        reload = 45;
+                        shots = 1;
+                        spacing = 1;
+                        inaccuracy = 5;
+                        x = 5.1f;
+                        y = 0;
+                        xRand = 5;
+                        firstShotDelay = 0;
+                        shootCone = 1;
+                        cooldownTime = 5;
+                        ignoreRotation = true;
+                        shootSound = Sounds.missile;
+                        shootStatus = StatusEffects.blasted;
+                    }},
+                    new WeaponExt("torpedo-gun") {{
+                        bullet = SnBullets.torpedo2;
+                        mirror = false;
+                        rotate = true;
+                        top = false;
+                        rotateSpeed = 30;
+                        reload = 35;
+                        shots = 1;
+                        inaccuracy = 2;
+                        x = 0;
+                        y = 0;
+                        firstShotDelay = 20;
+                        shootCone = 6;
+                        cooldownTime = 15;
+                        ignoreRotation = true;
+                        shootSound = Sounds.missile;
+                        shootStatus = StatusEffects.disarmed;
+                        shootStatusDuration = 30;
+                    }}
+            );
+            constructor = UnitWaterMove::create;
+            immunities.add(StatusEffects.wet);
+            immunities.add(StatusEffects.freezing);
+        }};
+        torpedo3 = new UnitTypeExt("torpedo-t3") {{
+            speed = 1.7f;
+            rotateSpeed = 6.9f;
+            drag = 0.6f;
+            hitSize = 18;
+            accel = 1;
+            health = 1980;
+            range = 350;
+            armor = 490;
+            faceTarget = false;
+            commandLimit = 5;
+            commandRadius = 48;
+            visualElevation = -1;
+            weapons.add(
+                    new WeaponExt("laser-gun") {{
+                        bullet = SnBullets.laserGun2;
+                        mirror = true;
+                        rotate = true;
+                        top = true;
+                        rotateSpeed = 45;
+                        reload = 60;
+                        shots = 1;
+                        spacing = 3;
+                        inaccuracy = 6;
+                        x = 5.8f;
+                        y = 3;
+                        firstShotDelay = 20;
+                        shootCone = 2.1f;
+                        cooldownTime = 5;
+                        ignoreRotation = true;
+                        shootStatus = StatusEffects.slow;
+                        shootStatusDuration = 180;
+                    }},
+                    new WeaponExt("laser-continuous") {{
+                        bullet = SnBullets.laserCGun;
+                        mirror = true;
+                        rotate = true;
+                        top = true;
+                        rotateSpeed = 50;
+                        reload = 90;
+                        shots = 1;
+                        spacing = 4.3f;
+                        inaccuracy = 7.1f;
+                        x = 7;
+                        y = -2;
+                        firstShotDelay = 0;
+                        shootCone = 2.2f;
+                        cooldownTime = 5;
+                        ignoreRotation = true;
+                        shootSound = Sounds.missile;
+                        shootStatus = StatusEffects.blasted;
+                    }},
+                    new WeaponExt("torpedo-gun") {{
+                        bullet = SnBullets.torpedo3;
+                        mirror = false;
+                        rotate = true;
+                        top = false;
+                        rotateSpeed = 30;
+                        reload = 35;
+                        shots = 1;
+                        inaccuracy = 2;
+                        x = y = 0;
+                        firstShotDelay = 20;
+                        shootCone = 6;
+                        cooldownTime = 15;
+                        ignoreRotation = true;
+                        shootSound = Sounds.missile;
+                        shootStatus = StatusEffects.disarmed;
+                        shootStatusDuration = 30;
+                    }}
+            );
+            constructor = UnitWaterMove::create;
+            immunities.add(StatusEffects.wet);
+            immunities.add(StatusEffects.freezing);
+        }};
+        torpedo4 = new UnitTypeExt("torpedo-t4") {{
+            speed = 1.5f;
+            rotateSpeed = 5.9f;
+            drag = 0.75f;
+            hitSize = 31;
+            accel = 0.7f;
+            health = 5400;
+            range = 180;
+            armor = 900;
+            faceTarget = false;
+            commandLimit = 5;
+            commandRadius = 48;
+            visualElevation = -1;
+            weapons.add(
+                    new WeaponExt("big-rocket-launcher") {{
+                        bullet = SnBullets.bigRocketArt;
+                        mirror = false;
+                        rotate = true;
+                        top = true;
+                        rotateSpeed = 30;
+                        reload = 45;
+                        shots = 1;
+                        spacing = 1;
+                        inaccuracy = 5;
+                        x = y = 0;
+                        xRand = 5;
+                        firstShotDelay = 0;
+                        shootCone = 1;
+                        cooldownTime = 5;
+                        ignoreRotation = true;
+                        shootSound = Sounds.missile;
+                        shootStatus = StatusEffects.blasted;
+                    }},
+                    new WeaponExt("machinegun") {{
+                        bullet = SnBullets.machineBullet;
+                        rotate = true;
+                        top = false;
+                        rotateSpeed = 30;
+                        reload = 35;
+                        shots = 1;
+                        inaccuracy = 2;
+                        x = 9;
+                        y = -5.3f;
+                        firstShotDelay = 20;
+                        shootCone = 6;
+                        cooldownTime = 15;
+                        ignoreRotation = true;
+                        shootSound = Sounds.missile;
+                        shootStatus = StatusEffects.disarmed;
+                        shootStatusDuration = 30;
+                    }},
+                    new WeaponExt("torpedo-gun") {{
+                        bullet = SnBullets.torpedo4;
+                        mirror = true;
+                        rotate = true;
+                        top = false;
+                        rotateSpeed = 30;
+                        reload = 35;
+                        shots = 1;
+                        inaccuracy = 2;
+                        x = 5;
+                        y = 0;
+                        firstShotDelay = 20;
+                        shootCone = 6;
+                        cooldownTime = 15;
+                        ignoreRotation = true;
+                        shootSound = Sounds.missile;
+                        shootStatus = StatusEffects.disarmed;
+                        shootStatusDuration = 30;
+                    }}
+            );
+            constructor = UnitWaterMove::create;
+            immunities.add(StatusEffects.wet);
+            immunities.add(StatusEffects.freezing);
+        }};
+        torpedo5 = new UnitTypeExt("torpedo-t5") {{
+            speed = 1.1f;
+            rotateSpeed = 5.4f;
+            drag = 1;
+            hitSize = 35;
+            accel = 0.5f;
+            health = 21600;
+            range = 160;
+            armor = 2000;
+            faceTarget = false;
+            commandLimit = 5;
+            commandRadius = 48;
+            visualElevation = -1;
+            weapons.add(
+                    new WeaponExt("big-machinegun") {{
+                        bullet = SnBullets.bigMachineBullet;
+                        rotate = true;
+                        mirror = false;
+                        top = true;
+                        rotateSpeed = 30;
+                        reload = 35;
+                        shots = 1;
+                        spacing = 15;
+                        inaccuracy = 5;
+                        x = 0;
+                        y = 3;
+                        firstShotDelay = 30;
+                        shootCone = 6;
+                        cooldownTime = 15;
+                        ignoreRotation = true;
+                        shootSound = Sounds.lasershoot;
+                        shootStatus = StatusEffects.shocked;
+                    }},
+                    new WeaponExt("heavy-rocket-launcher") {{
+                        bullet = SnBullets.heavyRocketArt;
+                        rotate = true;
+                        top = true;
+                        rotateSpeed = 30;
+                        reload = 45;
+                        shots = 1;
+                        spacing = 1;
+                        inaccuracy = 5;
+                        x = 7;
+                        y = 0;
+                        xRand = 5;
+                        firstShotDelay = 0;
+                        shootCone = 1;
+                        cooldownTime = 5;
+                        ignoreRotation = true;
+                        shootSound = Sounds.missile;
+                        shootStatus = StatusEffects.blasted;
+                    }},
+                    new WeaponExt("laser-continuous") {{
+                        bullet = SnBullets.bigCLaserGun;
+                        mirror = false;
+                        rotate = true;
+                        top = true;
+                        rotateSpeed = 50;
+                        reload = 90;
+                        shots = 1;
+                        spacing = 4.3f;
+                        inaccuracy = 7.1f;
+                        x = 0;
+                        y = -9;
+                        firstShotDelay = 0;
+                        shootCone = 2.2f;
+                        cooldownTime = 5;
+                        ignoreRotation = true;
+                        shootSound = Sounds.missile;
+                        shootStatus = StatusEffects.blasted;
+                    }},
+                    new WeaponExt("torpedo-gun") {{
+                        bullet = SnBullets.torpedo5;
+                        mirror = true;
+                        rotate = true;
+                        top = false;
+                        rotateSpeed = 30;
+                        reload = 35;
+                        shots = 1;
+                        inaccuracy = 2;
+                        x = 7.3f;
+                        y = 0;
+                        firstShotDelay = 20;
+                        shootCone = 6;
+                        cooldownTime = 15;
+                        ignoreRotation = true;
+                        shootSound = Sounds.missile;
+                        shootStatus = StatusEffects.disarmed;
+                        shootStatusDuration = 30;
+                    }}
             );
             constructor = UnitWaterMove::create;
             immunities.add(StatusEffects.wet);
