@@ -534,7 +534,7 @@ public class SnTurrets implements ContentList{
             targetGround = true;
             targetAir = false;
             shootSound = Sounds.laser;
-            alternate = true;
+            alternate = false;
 
             shootType = new LaserBulletType(2500){{
                 colors = new Color[]{Pal.meltdownHit.cpy().a(0.4f), Pal.meltdownHit, Color.white};

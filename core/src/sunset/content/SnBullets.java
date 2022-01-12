@@ -2039,14 +2039,14 @@ public class SnBullets implements ContentList {
                 }};
             }};
         }};
-        testBullet2 = new LightningSphereBulletType(5, 50, "sunset-circle-bullet") {{
-            height = 13f;
+        testBullet2 = new LightningContinuousLaserBulletType(40) {{
+            length = 1140f;
             width = 13f;
             LightningChance = 0.3f;
-            lightning = 3;
-            lightningLength = 4;
+            lightning = 7;
+            lightningLength = 20;
             lightningDamage = 30f;
-            lifetime = 30f;
+            lifetime = 40f;
             hitEffect = SnFx.unused2;
             drag = -0.003f;
             homingRange = 10f;
