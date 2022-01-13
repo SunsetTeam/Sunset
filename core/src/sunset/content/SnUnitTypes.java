@@ -24,6 +24,7 @@ import sunset.ai.weapon.ExtinguishWeaponAI;
 import sunset.entities.abilities.StatusFieldAbility;
 import sunset.entities.bullet.BerserkLaserBulletType;
 import sunset.gen.Deliverc;
+import sunset.gen.Segmentc;
 import sunset.type.BerserkStage;
 import sunset.type.ammo.LiquidAmmoType;
 import sunset.type.blocks.Rotor;
@@ -44,8 +45,6 @@ public class SnUnitTypes implements ContentList{
     wheel1, wheel2, wheel3, wheel4, wheel5,
     //torpedo
     torpedo1, torpedo2, torpedo3, torpedo4,torpedo5,
-    //snake
-    snake1,
     //misc
     router,
     //freezing
@@ -54,6 +53,8 @@ public class SnUnitTypes implements ContentList{
     public static UnitType courier;
     //    @EntityDef({Unitc.class, FireFighterc.class})
     public static UnitType comet;
+    @EntityDef({Unitc.class, Segmentc.class})
+    public static UnitType snake1;
 
     @Override
     public void load() {
