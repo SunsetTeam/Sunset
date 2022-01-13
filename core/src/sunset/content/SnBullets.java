@@ -71,7 +71,6 @@ public class SnBullets implements ContentList {
         torpedo1, torpedo2, torpedo3, torpedo4, torpedo5,
         //misc and testing
         emptyBullet, overheatBullet,
-        testBullet, tempBullet1, tempBullet2, testBullet0, testBullet1, testBullet2, testBullet3,
         temp;
         //exoticBullets (new) I will make it later... I must make more bullets (soulBullet, iceSpike, and more)
         //spiralPlastanium, spiralSurge, spiralFors, spiralThorium, spiralSmall;
@@ -1982,74 +1981,6 @@ public class SnBullets implements ContentList {
             width = 0;
             height = 0;
             lifetime = 0;
-        }};
-        testBullet = new BasicBulletType(1, 1) {{
-            lifetime = 400f;
-            hitEffect = SnFx.unused1;
-            drag = -0.003f;
-            homingRange = 10f;
-            homingPower = 0.2f;
-            ammoMultiplier = 2;
-        }};
-        tempBullet1 = new LaserBoltBulletType(5, 15);
-        tempBullet2 = new LaserBoltBulletType(5, 30);
-        testBullet0 = new ArtilleryBulletType(5, 100) {{
-            fragBullets = 6;
-            fragBullet = new LaserBulletType(50);
-            fragCone = 360;
-        }};
-        testBullet1 = new BasicBulletType(5, 50) {{
-            fragBullets = 3;
-            fragCone = 45;
-            fragBullet = new BasicBulletType(5, 50) {{
-                fragBullets = 3;
-                fragCone = 45;
-                fragBullet = new BasicBulletType(5, 50) {{
-                    fragBullets = 3;
-                    fragCone = 45;
-                    fragBullet = new BasicBulletType(5, 50) {{
-                        fragBullets = 3;
-                        fragCone = 45;
-                        fragBullet = new BasicBulletType(5, 50) {{
-                            fragBullets = 3;
-                            fragCone = 45;
-                            fragBullet = new BasicBulletType(5, 50) {{
-                                fragBullets = 3;
-                                fragCone = 45;
-                                fragBullet = new BasicBulletType(5, 50) {{
-                                    fragBullets = 3;
-                                    fragCone = 45;
-                                    fragBullet = new BasicBulletType(5, 50) {{
-                                        fragBullets = 3;
-                                        fragCone = 45;
-                                        fragBullet = new BasicBulletType(5, 50) {{
-                                            fragBullets = 3;
-                                            fragCone = 45;
-                                            fragBullet = new BasicBulletType(5, 50) {{
-                                                fragBullets = 360;
-                                                fragCone = 360;
-                                                fragBullet = new LaserBulletType(100);
-                                            }};
-                                        }};
-                                    }};
-                                }};
-                            }};
-                        }};
-                    }};
-                }};
-            }};
-        }};
-        testBullet2 = new LightningContinuousLaserBulletType(40) {{
-            length = 1140f;
-            width = 13f;
-            lightning = 7;
-            lightningLength = 20;
-            lightningDamage = 30f;
-            lifetime = 40f;
-            hitEffect = SnFx.unused2;
-            drag = -0.003f;
-            homingRange = 10f;
-            homingPower = 0.2f;
         }};
         //endregion misc and testing
     }
