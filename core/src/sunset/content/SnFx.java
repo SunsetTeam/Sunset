@@ -98,6 +98,7 @@ public class SnFx {
         color(e.color.cpy().mul(0.8f));
         Fill.circle(x, y, e.fslope() * 1.5f * size);
     }),
+
     modFormSmoke = new Effect(50, e -> {
         randLenVectors(e.id, 8, 6f + e.fin() * 8f, (x, y) -> {
             color(Pal.plasticSmoke, Color.lightGray, e.fin());

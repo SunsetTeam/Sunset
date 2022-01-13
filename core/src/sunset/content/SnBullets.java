@@ -3,10 +3,13 @@ package sunset.content;
 import arc.graphics.Color;
 import arc.graphics.g2d.Draw;
 import arc.graphics.g2d.Fill;
+import arc.graphics.g2d.Lines;
 import arc.math.Angles;
 import arc.math.geom.Vec2;
+import mindustry.Vars;
 import mindustry.content.*;
 import mindustry.ctype.ContentList;
+import mindustry.entities.Effect;
 import mindustry.entities.Units;
 import mindustry.entities.bullet.*;
 import mindustry.gen.Bullet;
@@ -17,6 +20,9 @@ import mindustry.graphics.Pal;
 import sunset.entities.bullet.*;
 import sunset.graphics.SnPal;
 import sunset.type.StackableStatusEffect;
+
+import static arc.graphics.g2d.Draw.color;
+import static arc.graphics.g2d.Lines.stroke;
 
 public class SnBullets implements ContentList {
     public static BulletType
@@ -1655,15 +1661,10 @@ public class SnBullets implements ContentList {
             collidesTeam = true;
             hitSize = 36;
             //hitEffect = SnFx.empHit;
-        }
-            @Override
-            public void init(Bullet b) {
-
-            }
-        };
+        }};
         empBulletEvo = new LightningBulletType() {{
             //speed = 5;
-            damage = 300;
+            damage = 320;
             lifetime = 100;
             //shootEffect = SnFx.empShootBig;
             status = SnStatusEffects.electricalShort;
@@ -1671,12 +1672,7 @@ public class SnBullets implements ContentList {
             collidesTeam = true;
             hitSize = 36;
             //hitEffect = SnFx.empHit;
-        }
-            @Override
-            public void init(Bullet b) {
-
-            }
-        };
+        }};
         //endregion EMP
         //region synthesis
         synthesisBullet1 = new EnergyBoltBulletType(11, 70) {{
@@ -1722,7 +1718,7 @@ public class SnBullets implements ContentList {
                 frontColor = Color.white;
             }};
             splashDamage = 110;
-            splashDamageRadius = 80;
+            splashDamageRadius = 10 * Vars.tilesize;
             trailChance = 1;
             trailEffect = Fx.none;
             //trailEffect = SnFx.greenInstTrail;
@@ -1732,7 +1728,7 @@ public class SnBullets implements ContentList {
             inaccuracy = 2;
             fragBullets = 3;
             fragCone = 360;
-            fragBullet = new BombBulletType(100, 40) {{
+            fragBullet = new BombBulletType(100, 5 * Vars.tilesize) {{
                 lifetime = 11;
                 backColor = Pal.heal;
                 frontColor = Color.white;
@@ -1745,7 +1741,7 @@ public class SnBullets implements ContentList {
                     frontColor = Color.white;
                 }};
             }};
-            splashDamage = 90;
+            splashDamage = 7 * Vars.tilesize;
             splashDamageRadius = 56;
             trailChance = 1;
             trailEffect = Fx.artilleryTrail;
@@ -1757,7 +1753,7 @@ public class SnBullets implements ContentList {
             knockback = 3.4f;
             lifetime = 77;
             width = height = 12;
-            splashDamageRadius = 80;
+            splashDamageRadius = 10 * Vars.tilesize;
             splashDamage = 430;
             fragBullets = 6;
             fragCone = 360;
@@ -1777,7 +1773,7 @@ public class SnBullets implements ContentList {
             knockback = 0.2f;
             lifetime = 77;
             width = height = 12;
-            splashDamageRadius = 24;
+            splashDamageRadius = 3 * Vars.tilesize;
             splashDamage = 150;
             fragBullets = 6;
             fragCone = 360;
@@ -1797,7 +1793,7 @@ public class SnBullets implements ContentList {
             knockback = 2;
             lifetime = 77;
             width = height = 12;
-            splashDamageRadius = 50;
+            splashDamageRadius = 6.25f * Vars.tilesize;
             splashDamage = 100;
             fragBullets = 6;
             fragCone = 360;
@@ -1817,7 +1813,7 @@ public class SnBullets implements ContentList {
             knockback = 1;
             lifetime = 77;
             width = height = 12;
-            splashDamageRadius = 50;
+            splashDamageRadius = 6.25f * Vars.tilesize;
             splashDamage = 250;
             fragBullets = 6;
             fragCone = 360;
@@ -1853,7 +1849,7 @@ public class SnBullets implements ContentList {
             collideFloor = true;
             layer = Layer.scorch;
             splashDamage = 40;
-            splashDamageRadius = 80;
+            splashDamageRadius = 10 * Vars.tilesize;
         }};
         torpedo2 = new BasicBulletType(2, 140) {{
             lifetime = 80;
@@ -1873,7 +1869,7 @@ public class SnBullets implements ContentList {
             collideFloor = true;
             layer = Layer.scorch;
             splashDamage = 60;
-            splashDamageRadius = 90;
+            splashDamageRadius = 11.25f * Vars.tilesize;
         }};
         torpedo3 = new BasicBulletType(2, 280) {{
             lifetime = 80;
@@ -1893,7 +1889,7 @@ public class SnBullets implements ContentList {
             collideFloor = true;
             layer = Layer.scorch;
             splashDamage = 60;
-            splashDamageRadius = 90;
+            splashDamageRadius = 11.25f * Vars.tilesize;
         }};
         torpedo4 = new BasicBulletType(2, 500) {{
             lifetime = 80;
@@ -1913,7 +1909,7 @@ public class SnBullets implements ContentList {
             collideFloor = true;
             layer = Layer.scorch;
             splashDamage = 60;
-            splashDamageRadius = 90;
+            splashDamageRadius = 11.25f * Vars.tilesize;
         }};
         torpedo5 = new BasicBulletType(2, 690) {{
             lifetime = 80;
@@ -1933,7 +1929,7 @@ public class SnBullets implements ContentList {
             collideFloor = true;
             layer = Layer.scorch;
             splashDamage = 60;
-            splashDamageRadius = 90;
+            splashDamageRadius = 11.25f * Vars.tilesize;
         }};
         //endregion torpedo
         //endregion special
