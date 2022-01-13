@@ -20,12 +20,15 @@ public class LightningContinuousLaserBulletType extends ContinuousLaserBulletTyp
     public float lightningCone = 180f;
     public float lightningAngle = 0f;
     public LightningContinuousLaserBulletType(float damage) {
+        this.damage = damage;
+        this.speed = 0f;
+
         drawSize = 420f;
     }
 
     @Override
     public float estimateDPS(){
-        return damage * 100f / 5f * 3f + super.estimateDPS() * Math.max(lightningLength / 10f, 1);
+        return damage * 100f / 5f * 3f;
     }
 
     @Override

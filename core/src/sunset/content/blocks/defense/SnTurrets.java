@@ -487,23 +487,24 @@ public class SnTurrets implements ContentList{
                 recoilAmount = 6f;
                 size = 6;
                 shootShake = 3f;
-                range = 240f;
+                range = 300f;
                 reloadTime = 170f;
-                firingMoveFract = 0.6f;
-                shootDuration = 300f;
-                powerUse = 24f;
+                firingMoveFract = 0.5f;
+                shootDuration = 380f;
+                powerUse = 26f;
                 shootSound = Sounds.laserbig;
                 loopSound = Sounds.beam;
                 loopSoundVolume = 2.5f;
 
-                shootType = new LightningContinuousLaserBulletType(160) {{
-                    length = 290f;
+                shootType = new LightningContinuousLaserBulletType(170) {{
+                    length = 340f;
+                    width = 20f;
                     hitEffect = Fx.hitMeltdown;
                     hitColor = Pal.meltdownHit;
                     status = StatusEffects.melting;
-                    drawSize = 440f;
+                    drawSize = 420f;
 
-                    lightning = 4;
+                    lightning = 2;
                     lightningDamage = 30;
                     lightningLength = 25;
                     lightningColor = Pal.meltdownHit;
