@@ -3,6 +3,8 @@ package sunset.content.blocks.defense;
 import arc.graphics.*;
 import arc.math.geom.*;
 import arc.struct.*;
+import arc.util.*;
+import mindustry.*;
 import mindustry.content.*;
 import mindustry.ctype.*;
 import mindustry.entities.bullet.*;
@@ -481,41 +483,41 @@ public class SnTurrets implements ContentList{
             }};
         }};
         melter = new LaserTurret("melter"){{
-                requirements(Category.turret, with(Items.copper, 1500, Items.lead, 900, Items.graphite, 800, Items.surgeAlloy, 760, Items.silicon, 500));
-                shootEffect = Fx.shootBigSmoke2;
-                shootCone = 40f;
-                recoilAmount = 6f;
-                size = 6;
-                shootShake = 3f;
-                range = 300f;
-                reloadTime = 150f;
-                firingMoveFract = 0.5f;
-                shootDuration = 350f;
-                powerUse = 26f;
-                shootSound = Sounds.laserbig;
-                loopSound = Sounds.beam;
-                loopSoundVolume = 2.5f;
+            requirements(Category.turret, with(Items.copper, 1500, Items.lead, 900, Items.graphite, 800, Items.surgeAlloy, 760, Items.silicon, 500));
+            shootEffect = Fx.shootBigSmoke2;
+            shootCone = 40f;
+            recoilAmount = 6f;
+            size = 6;
+            shootShake = 3f;
+            range = 37.5f * Vars.tilesize;
+            reloadTime = 2.5f * Time.toSeconds;
+            firingMoveFract = 0.5f;
+            shootDuration = 50.0f + 5 * Time.toSeconds;
+            powerUse = 26f;
+            shootSound = Sounds.laserbig;
+            loopSound = Sounds.beam;
+            loopSoundVolume = 2.5f;
 
-                shootType = new LightningContinuousLaserBulletType(170) {{
-                    length = 360f;
-                    width = 17f;
-                    hitEffect = Fx.hitMeltdown;
-                    hitColor = Pal.meltdownHit;
-                    status = StatusEffects.melting;
-                    drawSize = 420f;
+            shootType = new LightningContinuousLaserBulletType(170){{
+                length = 360f;
+                width = 17f;
+                hitEffect = Fx.hitMeltdown;
+                hitColor = Pal.meltdownHit;
+                status = StatusEffects.melting;
+                drawSize = 52.5f*Vars.tilesize;
 
-                    lightning = 2;
-                    lightningDamage = 30;
-                    lightningLength = 25;
-                    lightningCone = 160;
-                    lightningColor = Pal.meltdownHit;
+                lightning = 2;
+                lightningDamage = 30;
+                lightningLength = 25;
+                lightningCone = 160;
+                lightningColor = Pal.meltdownHit;
 
-                    incendChance = 0.4f;
-                    incendSpread = 5f;
-                    incendAmount = 1;
-                    ammoMultiplier = 1f;
-                }};
+                incendChance = 0.4f;
+                incendSpread = 5f;
+                incendAmount = 1;
+                ammoMultiplier = 1f;
             }};
+        }};
         radius = new MinigunTurret("radius"){{
             requirements(Category.turret, with(Items.copper, 1400, Items.graphite, 800, Items.surgeAlloy, 650, Items.plastanium, 555, SnItems.fors, 520, Items.thorium, 480, SnItems.enojie, 420));
             ammo(
@@ -530,7 +532,7 @@ public class SnTurrets implements ContentList{
             coolantMultiplier = 0.5f;
             restitution = 0.15f;
             ammoUseEffect = Fx.casing3;
-            range = 400f;
+            range = 50.0f*Time.delta;
             inaccuracy = 3f;
             inaccuracyUp = 0.4f;
             recoilAmount = 2.7f;
