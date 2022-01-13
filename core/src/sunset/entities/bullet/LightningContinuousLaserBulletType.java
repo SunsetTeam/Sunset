@@ -26,24 +26,14 @@ public class LightningContinuousLaserBulletType extends ContinuousLaserBulletTyp
     }
 
     @Override
-    public float estimateDPS(){
-        return damage * 100f / 5f * 3f;
-    }
+    public void init(Bullet b){
+        super.init(b);
 
-    @Override
-    public void update(Bullet b){
-
-        //damage every 5 ticks
-        if(b.timer(1, 5f)){
-            Damage.collideLine(b, b.team, hitEffect, b.x, b.y, b.rotation(), length, largeHit);
-        }
-
-        if(shake > 0){
-            Effect.shake(shake, shake, b);
-        }
+        drawSize = Math.max(drawSize, length*2f);
 
         for(int i = 0; i < lightning; i++) {
             Lightning.create(b, lightningColor, lightningDamage < 0 ? damage : lightningDamage, b.x, b.y, b.rotation() + Mathf.range(lightningCone/2) + lightningAngle, lightningLength + Mathf.random(lightningLengthRand));
         }
     }
+
 }
