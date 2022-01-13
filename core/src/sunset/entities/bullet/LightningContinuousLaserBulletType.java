@@ -12,7 +12,6 @@ import mindustry.graphics.Pal;
 public class LightningContinuousLaserBulletType extends ContinuousLaserBulletType {
     public float length = 220f;
     public float shake = 1f;
-    public boolean largeHit = true;
     public Color lightningColor = Pal.meltdownHit;
     public int lightning;
     public int lightningLength = 0, lightningLengthRand = 0;
@@ -33,9 +32,6 @@ public class LightningContinuousLaserBulletType extends ContinuousLaserBulletTyp
 
     @Override
     public void update(Bullet b){
-        for(int i = 0; i < lightning; i++) {
-            Lightning.create(b, lightningColor, lightningDamage < 0 ? damage : lightningDamage, b.x, b.y, b.rotation() + Mathf.range(lightningCone/2) + lightningAngle, lightningLength + Mathf.random(lightningLengthRand));
-        }
 
         //damage every 5 ticks
         if(b.timer(1, 5f)){
@@ -44,6 +40,10 @@ public class LightningContinuousLaserBulletType extends ContinuousLaserBulletTyp
 
         if(shake > 0){
             Effect.shake(shake, shake, b);
+        }
+
+        for(int i = 0; i < lightning; i++) {
+            Lightning.create(b, lightningColor, lightningDamage < 0 ? damage : lightningDamage, b.x, b.y, b.rotation() + Mathf.range(lightningCone/2) + lightningAngle, lightningLength + Mathf.random(lightningLengthRand));
         }
     }
 }
