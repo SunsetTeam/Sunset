@@ -38,7 +38,7 @@ public class SnTurrets implements ContentList{
     field, sniper, fanatic,
 
     //6x6
-    trident, radius,
+    trident, melter, radius,
 
     //7x7
     halberd,
@@ -480,6 +480,40 @@ public class SnTurrets implements ContentList{
                 hitEffect = SnFx.tridentHit0;
             }};
         }};
+        melter = new LaserTurret("melter"){{
+                requirements(Category.turret, with(Items.copper, 1500, Items.lead, 900, Items.graphite, 800, Items.surgeAlloy, 760, Items.silicon, 500));
+                shootEffect = Fx.shootBigSmoke2;
+                shootCone = 40f;
+                recoilAmount = 6f;
+                size = 6;
+                shootShake = 3f;
+                range = 240f;
+                reloadTime = 170f;
+                firingMoveFract = 0.6f;
+                shootDuration = 300f;
+                powerUse = 24f;
+                shootSound = Sounds.laserbig;
+                loopSound = Sounds.beam;
+                loopSoundVolume = 2.5f;
+
+                shootType = new LightningContinuousLaserBulletType(160) {{
+                    length = 290f;
+                    hitEffect = Fx.hitMeltdown;
+                    hitColor = Pal.meltdownHit;
+                    status = StatusEffects.melting;
+                    drawSize = 440f;
+
+                    lightning = 4;
+                    lightningDamage = 30;
+                    lightningLength = 25;
+                    lightningColor = Pal.meltdownHit;
+
+                    incendChance = 0.4f;
+                    incendSpread = 5f;
+                    incendAmount = 1;
+                    ammoMultiplier = 1f;
+                }};
+            }};
         radius = new MinigunTurret("radius"){{
             requirements(Category.turret, with(Items.copper, 1400, Items.graphite, 800, Items.surgeAlloy, 650, Items.plastanium, 555, SnItems.fors, 520, Items.thorium, 480, SnItems.enojie, 420));
             ammo(
