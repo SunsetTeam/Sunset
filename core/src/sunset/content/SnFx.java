@@ -14,14 +14,13 @@ import arc.math.geom.Vec2;
 import arc.struct.Seq;
 import arc.util.Time;
 import arc.util.Tmp;
-import mindustry.Vars;
 import mindustry.content.Fx;
 import mindustry.entities.Effect;
 import mindustry.game.Team;
 import mindustry.graphics.Drawf;
 import mindustry.graphics.Layer;
 import mindustry.graphics.Pal;
-import sunset.graphics.SnPal;
+import sunset.graphics.*;
 
 import static arc.graphics.g2d.Draw.alpha;
 import static arc.graphics.g2d.Draw.color;
@@ -271,19 +270,9 @@ public class SnFx {
         float cx = e.x - Mathf.cos(r) * 12f;
         float cy = e.y - Mathf.sin(r) * 12f;
         Draw.z(Layer.block);
-        enegrySphere(e.id, e.time, e.fin(), 8, Mathf.PI / 120f, Mathf.PI / 30f, 8f, 1.5f, c1, c2, cx, cy);
+        Drawm.energySphere(e.id, e.time, e.fin(), 8, Mathf.PI / 120f, Mathf.PI / 30f, 8f, 1.5f, c1, c2, cx, cy);
     }),
-
     tridentHit = new Effect(30, e -> {
-        Draw.z(Layer.effect);
-        stroke(0);
-        color(new Color(Pal.surge).a(Mathf.clamp(2 * e.fout() - 1)));
-        Fill.circle(e.x, e.y, 112f);
-        stroke(3, new Color(Pal.surge).a(Mathf.clamp(2 * e.fout())));
-        Lines.circle(e.x, e.y, 112f);
-    }),
-
-    tridentHit0 = new Effect(30, e -> {
         color(Pal.plastaniumFront);
 
         e.scaled(7, i -> {
@@ -756,33 +745,6 @@ public class SnFx {
 
     //endregion unused
     //region energy sphere utils
-    public static void enegrySphere(long seed, float time, float fin, int amount,
-                                    float minSpeed, float maxSpeed, float mainRadius, float miniRadius,
-                                    Color c1, Color c2, float x, float y) {
-        Seq<Vec2> vecs = new Seq<>();
-        Angles.randLenVectors(seed, amount, minSpeed, maxSpeed, (xx, yy) -> vecs.add(new Vec2(xx, yy)));
-        vecs.each(vec -> {
-            float size = (vec.len() * time) % Mathf.PI2;
-            if (size < Mathf.PI) return;
-            miniEnergySphere(fin, mainRadius, miniRadius, c1, c2, x, y, vec.angleRad(), Mathf.PI2 - size);
-        });
-        color(Pal.surge, Color.white, 1 - fin);
-        Fill.circle(x, y, fin * mainRadius);
-        vecs.each(vec -> {
-            float size = (vec.len() * time) % Mathf.PI2;
-            if (size >= Mathf.PI) return;
-            miniEnergySphere(fin, mainRadius, miniRadius, c2, c1, x, y, vec.angleRad(), size);
-        });
-    }
-
-    private static void miniEnergySphere(float fin, float mainRadius, float miniRadius, Color c1, Color c2, float x, float y, float angle, float size) {
-        float _size = (Mathf.sin(size) * 0.15f + 0.85f) * fin;
-        float len = Mathf.cos(size) * fin * (mainRadius + miniRadius);
-        float bx = Mathf.sin(angle) * len;
-        float by = Mathf.cos(angle) * len;
-        color(c1, c2, Mathf.sin(size));
-        Fill.circle(x + bx, y + by, _size * miniRadius);
-    }
 
     public static void lightning(float x1, float y1, float x2, float y2, Color c, int iterations, float rndScale, Effect e) {
         Seq<Vec2> lines = new Seq<>();
@@ -801,16 +763,5 @@ public class SnFx {
         }
         e.at(x1, y1, 0f, c, lines);
 
-    }
-    //endregion energy sphere utils
-    /** EMP data. */
-    public static class LightningData{
-        Position pos;
-        float stroke;
-
-        public LightningData(Position pos, float stroke){
-            this.pos = pos;
-            this.stroke = stroke;
-        }
     }
 }
