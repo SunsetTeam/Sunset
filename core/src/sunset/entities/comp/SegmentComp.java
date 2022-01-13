@@ -1,29 +1,70 @@
 package sunset.entities.comp;
 
-import arc.*;
-import arc.struct.*;
+import arc.func.*;
+import arc.math.geom.*;
 import arc.util.*;
-import mindustry.*;
 import mindustry.annotations.Annotations.*;
-import mindustry.game.EventType.*;
 import mindustry.gen.*;
 import sunset.gen.*;
 import sunset.type.unitTypes.*;
 
+import java.util.*;
+
 @Component
-abstract class SegmentComp implements Entityc, Unitc{
-    public Seq<BodySegmentc> _segments = new Seq<>();
+abstract class SegmentComp implements Entityc, Unitc, Segmentc{
     public int totalSegments = 0;
-    public boolean setSneak = false;
     public float timeOut = 1;
-    public boolean tryFindSegment = false;
+    public boolean segmentBuilding = false;
+    public boolean completedSnake = false;
+    public float segmentBuildTimer = 0;
+    Segmentc previous = null;
+    Segmentc next = null;
 
     @Import
     float x, y, hitSize, minFormationSpeed, rotation, elevation;
 
-    public void add(){
-        //check is on snake
-        if(!this.setSneak) this.createSegments();
+    public static int countSegmentsFromHead(Segmentc head){
+        Segmentc segmentc = head;
+        int counter = 1;
+        while(segmentc.next() != null){
+            segmentc = segmentc.next();
+            counter++;
+        }
+        return counter;
+    }
+
+    ;
+
+    public static Segmentc findHead(Segmentc segmentc){
+        while(segmentc.previous() != null){
+            segmentc = segmentc.previous();
+        }
+        return segmentc;
+    }
+
+    public static Segmentc findTail(Segmentc segmentc){
+        while(segmentc.next() != null){
+            segmentc = segmentc.next();
+        }
+        return segmentc;
+    }
+
+    public static int countSegmentsFromTail(Segmentc tail){
+        Segmentc segmentc = tail;
+        int counter = 1;
+        while(segmentc.previous() != null){
+            segmentc = segmentc.previous();
+            counter++;
+        }
+        return counter;
+    }
+
+    ;
+
+    @Override
+    @Replace
+    public boolean serialize(){
+        return previous == null;
     }
 
     ;
@@ -35,37 +76,108 @@ abstract class SegmentComp implements Entityc, Unitc{
 
     ;
 
-    public void _update(){
-        if(!tryFindSegment) timeOutSegment();
-        //if save map on creating segments
-        if(!setSneak) createSegments();
-        //if has changes array segments
-        if(_segments.count(unitSegment -> unitSegment != null && !unitSegment.dead()) != totalSegments){
-            //update
-            _segments.filter(unitSegment -> unitSegment != null && !unitSegment.dead());
-            this.totalSegments = this._segments.size;
-            //update segments
-            for(var i = 0; i < this._segments.size; i++){
-                Unitc lastSegment = this._segments.size - 1 > i ? this._segments.get(i - 1) : self();
-                var segment = this._segments.get(i);
-                //set segment
-                if((segment != null && !segment.dead()) && (lastSegment != null && !lastSegment.dead())) segment.setSegment(lastSegment.as());
-            }
+    @Override
+    public void destroy(){
+        if(next != null){
+            next.previous(null);
         }
-        //detroy head ohno
-        if(this.canDead(this.totalSegments) && this.tryFindSegment) this.kill();
+        if(previous != null){
+            previous.next(null);
+            previous.segmentBuildTimer(segmentBuildTimer);
+            previous.segmentBuilding(segmentBuilding);
+        }
+
     }
 
-    ;
+    public void _update(){
+        if(isTail() && !completedSnake){
+            if(!segmentBuilding){
+                segmentBuilding = segmentType().lengthSnake > sizeFromTail();
+                if(!segmentBuilding){
+                    eachSegment(cont -> completedSnake = true);
+                }
+            }
+            if(segmentBuilding){
+                segmentBuildTimer += Time.delta;
+                if(segmentBuildTimer >= segmentType().segmentBuildTime){
+                    resetBuilding();
+                    calculateNextPosition(Tmp.v1);
 
-    /*
-     *Any event you need segments has to verify if the term segment search
-     */
-    public void timeOutSegment(){
-        //remove time
-        this.timeOut -= Time.delta;
-        //stop
-        if(this.timeOut < 0) this.tryFindSegment = true;
+                    addChild(segmentType().spawn(team(), Tmp.v1).as());
+                }
+            }
+        }
+    }
+
+    public void calculateNextPosition(Vec2 vec2){
+        vec2.trns((isHead() ? rotation : angleTo(next))+180, segmentType().offsetSegment);
+    }
+
+    public boolean isHead(){
+        return previous == null;
+    }
+
+
+    public Iterator<Segmentc> iterator(){
+        ;
+        return new Iterator<>(){
+            Segmentc head = findHead(self());
+
+            @Override
+            public boolean hasNext(){
+                return head.next() != null;
+            }
+
+            @Override
+            public Segmentc next(){
+                return head = head.next();
+            }
+        };
+    }
+
+    public Iterable<Segmentc> iterable(){
+        ;
+        return this::iterator;
+    }
+
+    public Iterator<Segmentc> reverseIterator(){
+        ;
+        return new Iterator<>(){
+            Segmentc tail = findTail(self());
+
+            @Override
+            public boolean hasNext(){
+                return tail.previous() != null;
+            }
+
+            @Override
+            public Segmentc next(){
+                return tail = tail.previous();
+            }
+        };
+    }
+
+    public Iterable<Segmentc> reverseIterable(){
+        ;
+        return this::reverseIterator;
+    }
+
+    private void eachSegment(Cons<Segmentc> cons){
+        for(Segmentc segmentc : iterable()){
+            cons.get(segmentc);
+        }
+    }
+
+    public int sizeFromTail(){
+        return countSegmentsFromTail(findTail(self()));
+    }
+
+    private boolean isTail(){
+        return next == null;
+    }
+
+    private boolean head(){
+        return previous == null;
     }
 
     ;
@@ -76,58 +188,28 @@ abstract class SegmentComp implements Entityc, Unitc{
 
     ;
 
-    public void createSegments(){
-        //:b anti error
-        SegmentUnitType type = segmentType();
-        if(type.body != null && type.end != null){
-            //create childs
-            int total = type.lengthSnake - this.totalSegments;
-            for(int i = 0; i < total; i++){
-                //last unit
-                Unit lastSegment = this._segments.size - 1 > i ? this._segments.get(i - 1).as() : self();
-
-                //unit
-                BodySegmentc segment = (i + 1 == total ? type.end.create(team()) : type.body.create(team())).as();
-                //caculated pos
-                Tmp.v1.trns(this.rotation, -(segment.hitSize() + 10));
-                Tmp.v1.add(lastSegment.x, lastSegment.y);
-
-                //set unit
-                segment.setParent(self());
-                //set x,y
-                segment.set(Tmp.v1.x, Tmp.v1.y);
-                //rotation
-                segment.rotation((float)(Math.atan2(lastSegment.y - segment.y(), lastSegment.x - segment.x()) * 180 / Math.PI));
-                //set segment
-                segment.setSegment(lastSegment);
-                //multiplayer compatibility
-                Events.fire(new UnitCreateEvent(segment.as(), null, self()));
-                if(!Vars.net.client()){
-                    segment.add();
-                }
-                // register segment
-                this.addChild(segment);
-            }
-            //set on snake
-            this.setSneak = true;
-        }
-        ;
-    }
-
-    protected SegmentUnitType segmentType(){
+    public SegmentUnitType segmentType(){
         return (SegmentUnitType)type();
     }
 
-    ;
 
-    public void addChild(BodySegmentc child){
-        if(child != null){
-            //add child
-            this._segments.add(child);
-            //updateList
-            this.totalSegments = this._segments.size;
-        }
-        ;
+    public void addChild(Segmentc child){
+        if(isTail()){
+            setNext(child);
+        }else findTail(self()).addChild(child);
+    }
+
+    public void setNext(Segmentc segmentc){
+        next = segmentc;
+        segmentc.previous(this);
+        segmentc.segmentBuildTimer(segmentBuildTimer);
+        segmentc.segmentBuilding(segmentBuilding);
+        resetBuilding();
+    }
+
+    public void resetBuilding(){
+        segmentBuildTimer = 0;
+        segmentBuilding = false;
     }
 
     ;
