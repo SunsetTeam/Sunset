@@ -10,7 +10,7 @@ import mindustry.game.Team;
 import mindustry.gen.Bullet;
 import mindustry.graphics.Pal;
 import sunset.content.SnFx;
-import sunset.graphics.SnPal;
+import sunset.graphics.*;
 
 public class EnergySphereBulletType extends BasicBulletType {
     public float lightningPeriod = 1f;
@@ -59,7 +59,7 @@ public class EnergySphereBulletType extends BasicBulletType {
 
     @Override
     public void draw(Bullet b) {
-        SnFx.enegrySphere(b.id, b.time, 1f, amount, minSpeed, maxSpeed, mainRadius, miniRadius, c1, c2, b.x, b.y);
+        Drawm.energySphere(b.id, b.time, 1f, amount, minSpeed, maxSpeed, mainRadius, miniRadius, c1, c2, b.x, b.y);
     }
 
     @Override

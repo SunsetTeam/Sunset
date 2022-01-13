@@ -479,7 +479,7 @@ public class SnTurrets implements ContentList{
                 lightningLength = 192;
                 healPercent = 5f;
                 lifetime = 250f;
-                hitEffect = SnFx.tridentHit0;
+                hitEffect = SnFx.tridentHit;
             }};
         }};
         melter = new LaserTurret("melter"){{
