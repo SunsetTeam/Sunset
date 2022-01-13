@@ -44,6 +44,8 @@ public class SnUnitTypes implements ContentList{
     wheel1, wheel2, wheel3, wheel4, wheel5,
     //torpedo
     torpedo1, torpedo2, torpedo3, torpedo4,torpedo5,
+    //snake
+    snake1,
     //misc
     router,
     //freezing
@@ -1398,6 +1400,18 @@ public class SnUnitTypes implements ContentList{
             immunities.add(StatusEffects.freezing);
         }};
         //endregion torpedo
+        //region snake
+        snake1 = new SegmentUnitType("snake1"){{
+            lengthSnake = 3;
+            health = 3000f;
+            hitSize = 30f;
+            speed = 1.4f;
+            commandLimit = 2;
+            rotateSpeed = 2f;
+            accel = 0.01f;
+            drag = 0.001f;
+        }};
+        //endregion snake
         //region misc
         router = new UnitTypeExt("router"){
             {
