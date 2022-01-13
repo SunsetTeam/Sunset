@@ -547,6 +547,44 @@ public class SnTurrets implements ContentList{
             health = 160 * size * size;
             coolantUsage = 0.9f;
         }};
+        melter = new LaserTurret("melter"){{
+            requirements(Category.turret, with(Items.copper, 1500, Items.lead, 900, Items.graphite, 800, Items.surgeAlloy, 760, Items.silicon, 500));
+            shootEffect = Fx.shootBigSmoke2;
+            shootCone = 40f;
+            recoilAmount = 5f;
+            size = 6;
+            shootShake = 3f;
+            range = 300f;
+            reloadTime = 150f;
+            firingMoveFract = 0.5f;
+            shootDuration = 300f;
+            restitution = 0.009f;
+            cooldown = 0.009f;
+            powerUse = 26f;
+            shootSound = Sounds.laserbig;
+            loopSound = Sounds.beam;
+            loopSoundVolume = 2f;
+
+
+            shootType = new LightningContinuousLaserBulletType(170f) {{
+                length = 360f;
+                width = 17f;
+                hitEffect = Fx.hitMeltdown;
+                hitColor = Pal.meltdownHit;
+                status = StatusEffects.melting;
+                drawSize = 420f;
+
+                lightning = 2;
+                lightningDamage = 30;
+                lightningLength = 25;
+                lightningCone = 160;
+
+                incendChance = 0.4f;
+                incendSpread = 5f;
+                incendAmount = 1;
+                ammoMultiplier = 1f;
+            }};
+        }};
         //endregion 6x6
         //region 7x7
         halberd = new ModPowerTurret("halberd"){{
