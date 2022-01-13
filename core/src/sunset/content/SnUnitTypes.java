@@ -53,8 +53,8 @@ public class SnUnitTypes implements ContentList{
     public static UnitType courier;
     //    @EntityDef({Unitc.class, FireFighterc.class})
     public static UnitType comet;
-    @EntityDef({Unitc.class, Segmentc.class})
-    public static UnitType snake1;
+    // @EntityDef({Unitc.class, Segmentc.class})
+    // public static UnitType snake1;
 
     @Override
     public void load() {
@@ -1402,6 +1402,7 @@ public class SnUnitTypes implements ContentList{
         }};
         //endregion torpedo
         //region snake
+        /*
         snake1 = new SegmentUnitType("snake1"){{
             lengthSnake = 3;
             health = 3000f;
@@ -1412,6 +1413,7 @@ public class SnUnitTypes implements ContentList{
             accel = 0.01f;
             drag = 0.001f;
         }};
+         */
         //endregion snake
         //region misc
         router = new UnitTypeExt("router"){
