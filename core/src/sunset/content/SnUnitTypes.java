@@ -1,6 +1,6 @@
 package sunset.content;
 
-import mindustry.ai.types.SuicideAI;
+import mindustry.ai.types.*;
 import mindustry.annotations.Annotations.EntityDef;
 import mindustry.content.Fx;
 import mindustry.content.Liquids;
@@ -16,10 +16,7 @@ import mindustry.gen.Unitc;
 import mindustry.graphics.Layer;
 import mindustry.type.UnitType;
 import mindustry.type.weapons.PointDefenseWeapon;
-import sunset.ai.DeliverAI;
-import sunset.ai.ExtinguishAI;
-import sunset.ai.FlyingWeaponAI;
-import sunset.ai.HealAI;
+import sunset.ai.*;
 import sunset.ai.weapon.ExtinguishWeaponAI;
 import sunset.entities.abilities.StatusFieldAbility;
 import sunset.entities.bullet.BerserkLaserBulletType;
@@ -1403,14 +1400,16 @@ public class SnUnitTypes implements ContentList{
         //endregion torpedo
         //region snake
         snake1 = new SegmentUnitType("snake1"){{
-            lengthSnake = 3;
+            lengthSnake = 5;
             health = 3000f;
             hitSize = 30f;
             speed = 1.4f;
-            commandLimit = 2;
+//            commandLimit = 2;
             rotateSpeed = 2f;
-            accel = 0.01f;
-            drag = 0.001f;
+//            accel = 0.01f;
+//            drag = 0.001f;
+            flying=true;
+            defaultController=SegmentAI.wrapper(FlyingAI::new);
         }};
         //endregion snake
         //region misc

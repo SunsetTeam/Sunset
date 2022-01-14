@@ -3,11 +3,13 @@ package sunset.entities.comp;
 import arc.func.*;
 import arc.graphics.g2d.*;
 import arc.math.geom.*;
+import arc.scene.ui.layout.*;
 import arc.util.*;
 import arc.util.io.*;
 import mindustry.annotations.Annotations.*;
 import mindustry.gen.*;
 import mindustry.graphics.*;
+import mindustry.ui.*;
 import mma.annotations.ModAnnotations.*;
 import org.jetbrains.annotations.*;
 import sunset.gen.*;
@@ -62,16 +64,6 @@ abstract class SegmentComp implements Entityc, Unitc, Segmentc{
         return segmentc;
     }
 
-    public Segmentc findHead(){
-        return findHead(self());
-    }
-
-    public Segmentc findTail(){
-        return findTail(self());
-    }
-
-    ;
-
     public static int countSegmentsFromTail(Segmentc tail){
         Segmentc segmentc = tail;
         int counter = 1;
@@ -80,6 +72,16 @@ abstract class SegmentComp implements Entityc, Unitc, Segmentc{
             counter++;
         }
         return counter;
+    }
+
+    public Segmentc findHead(){
+        return findHead(self());
+    }
+
+    ;
+
+    public Segmentc findTail(){
+        return findTail(self());
     }
 
     @Override
@@ -138,6 +140,17 @@ abstract class SegmentComp implements Entityc, Unitc, Segmentc{
 
     }
 
+    @Override
+    public void display(Table table){
+        table.label(() -> "prev: " + previous).row();
+        table.label(() -> "next: " + next).row();
+        table.add(new Bar("build",Pal.ammo,this::buildSegmentf)).growX();
+    }
+
+    public float buildSegmentf(){
+        return segmentBuildTimer/segmentType().segmentBuildTime;
+    }
+
     public void _update(){
         if(isTail() && !completedSnake){
             if(!segmentBuilding){
@@ -148,7 +161,7 @@ abstract class SegmentComp implements Entityc, Unitc, Segmentc{
             }
             if(segmentBuilding){
                 segmentBuildTimer += Time.delta;
-                if(segmentBuildTimer >= segmentType().segmentBuildTime){
+                if(buildSegmentf()>=1f){
                     resetBuilding();
                     calculateNextPosition(Tmp.v1);
 
@@ -160,13 +173,16 @@ abstract class SegmentComp implements Entityc, Unitc, Segmentc{
 
     @Override
     public void draw(){
-        calculateNextPosition(Tmp.v1);
-        Draw.draw(Layer.blockOver, () -> Drawf.construct(Tmp.v1.x, Tmp.v1.y, type().region,
-        Tmp.v1.angleTo(this), segmentBuildTimer/segmentType().segmentBuildTime, 1f, Time.time));
+        Draw.draw(Layer.blockOver, () -> {
+            calculateNextPosition(Tmp.v1);
+            float angle = Tmp.v1.angleTo(this);
+            Drawf.construct(Tmp.v1.x, Tmp.v1.y, type().region,
+            angle, segmentBuildTimer / segmentType().segmentBuildTime, 1f, Time.time);
+        });
     }
 
     public void calculateNextPosition(Vec2 vec2){
-        vec2.trns((isTail() ? rotation : angleTo(next)) + 180, segmentType().offsetSegment);
+        vec2.trns((isTail() ? rotation : angleTo(next)) + 180, segmentType().offsetSegment).add(this);
     }
 
     public boolean isHead(){

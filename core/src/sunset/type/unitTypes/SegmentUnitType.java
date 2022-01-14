@@ -5,14 +5,17 @@ import mindustry.type.*;
 
 public class SegmentUnitType extends SnUnitType{
     public int lengthSnake = 1;
-    //body
-    public UnitType body = null;
-    public UnitType end = null;
-    public float offsetSegment;
+    public float offsetSegment = 1;
     public float segmentBuildTime = 10 * Time.toSeconds;
 
     public SegmentUnitType(String name){
         super(name);
+    }
+
+    @Override
+    public void init(){
+//        offsetSegment = hitSize;
+        super.init();
     }
 
     public enum SegmentType{
