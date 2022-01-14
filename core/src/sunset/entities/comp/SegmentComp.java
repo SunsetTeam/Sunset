@@ -1,12 +1,15 @@
 package sunset.entities.comp;
 
 import arc.func.*;
+import arc.graphics.g2d.*;
 import arc.math.geom.*;
 import arc.util.*;
 import arc.util.io.*;
 import mindustry.annotations.Annotations.*;
 import mindustry.gen.*;
+import mindustry.graphics.*;
 import mma.annotations.ModAnnotations.*;
+import org.jetbrains.annotations.*;
 import sunset.gen.*;
 import sunset.type.unitTypes.*;
 
@@ -155,8 +158,15 @@ abstract class SegmentComp implements Entityc, Unitc, Segmentc{
         }
     }
 
+    @Override
+    public void draw(){
+        calculateNextPosition(Tmp.v1);
+        Draw.draw(Layer.blockOver, () -> Drawf.construct(Tmp.v1.x, Tmp.v1.y, type().region,
+        Tmp.v1.angleTo(this), segmentBuildTimer/segmentType().segmentBuildTime, 1f, Time.time));
+    }
+
     public void calculateNextPosition(Vec2 vec2){
-        vec2.trns((isHead() ? rotation : angleTo(next)) + 180, segmentType().offsetSegment);
+        vec2.trns((isTail() ? rotation : angleTo(next)) + 180, segmentType().offsetSegment);
     }
 
     public boolean isHead(){
@@ -164,6 +174,7 @@ abstract class SegmentComp implements Entityc, Unitc, Segmentc{
     }
 
 
+    @NotNull
     public Iterator<Segmentc> iterator(){
         ;
         return new Iterator<>(){
@@ -181,11 +192,13 @@ abstract class SegmentComp implements Entityc, Unitc, Segmentc{
         };
     }
 
+    @NotNull
     public Iterable<Segmentc> iterable(){
         ;
         return this::iterator;
     }
 
+    @NotNull
     public Iterator<Segmentc> reverseIterator(){
         ;
         return new Iterator<>(){
@@ -203,6 +216,7 @@ abstract class SegmentComp implements Entityc, Unitc, Segmentc{
         };
     }
 
+    @NotNull
     public Iterable<Segmentc> reverseIterable(){
         ;
         return this::reverseIterator;
@@ -215,7 +229,7 @@ abstract class SegmentComp implements Entityc, Unitc, Segmentc{
     }
 
     public int sizeFromTail(){
-        return countSegmentsFromTail(findTail(self()));
+        return countSegmentsFromTail(findTail());
     }
 
     private boolean isTail(){
