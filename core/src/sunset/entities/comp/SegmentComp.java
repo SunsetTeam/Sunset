@@ -3,8 +3,10 @@ package sunset.entities.comp;
 import arc.func.*;
 import arc.math.geom.*;
 import arc.util.*;
+import arc.util.io.*;
 import mindustry.annotations.Annotations.*;
 import mindustry.gen.*;
+import mma.annotations.ModAnnotations.*;
 import sunset.gen.*;
 import sunset.type.unitTypes.*;
 
@@ -12,16 +14,26 @@ import java.util.*;
 
 @Component
 abstract class SegmentComp implements Entityc, Unitc, Segmentc{
-    public int totalSegments = 0;
-    public float timeOut = 1;
+    private static final int nullSegmentId = -1;
+    private static final int noSegmentId = -2;
+    private static int lastGlobalSegmentId = 0;
     public boolean segmentBuilding = false;
     public boolean completedSnake = false;
     public float segmentBuildTimer = 0;
-    Segmentc previous = null;
-    Segmentc next = null;
-
+    transient Segmentc previous = null;
+    transient Segmentc next = null;
     @Import
     float x, y, hitSize, minFormationSpeed, rotation, elevation;
+    private int previousId = -2;
+    private int nextId = -2;
+    private int globalSegmentId = nextGlobalSegmentId();
+
+    public static int nextGlobalSegmentId(){
+        int id = lastGlobalSegmentId;
+        while(lastGlobalSegmentId++ == nullSegmentId || lastGlobalSegmentId == noSegmentId){
+        }
+        return id;
+    }
 
     public static int countSegmentsFromHead(Segmentc head){
         Segmentc segmentc = head;
@@ -32,8 +44,6 @@ abstract class SegmentComp implements Entityc, Unitc, Segmentc{
         }
         return counter;
     }
-
-    ;
 
     public static Segmentc findHead(Segmentc segmentc){
         while(segmentc.previous() != null){
@@ -49,6 +59,16 @@ abstract class SegmentComp implements Entityc, Unitc, Segmentc{
         return segmentc;
     }
 
+    public Segmentc findHead(){
+        return findHead(self());
+    }
+
+    public Segmentc findTail(){
+        return findTail(self());
+    }
+
+    ;
+
     public static int countSegmentsFromTail(Segmentc tail){
         Segmentc segmentc = tail;
         int counter = 1;
@@ -59,18 +79,44 @@ abstract class SegmentComp implements Entityc, Unitc, Segmentc{
         return counter;
     }
 
-    ;
-
     @Override
+    @MethodPriority(-1000)
     @Replace
-    public boolean serialize(){
-        return previous == null;
+    @ReplaceInternalImpl
+    public void write(Writes write){
+        nextId = previousId = noSegmentId;
+        nextId = next == null ? nullSegmentId : next.globalSegmentId();
+        previousId = previous == null ? nullSegmentId : previous.globalSegmentId();
+        superWrite(write);
+    }
+
+    @SuperMethod(parentName = "write")
+    private void superWrite(Writes write){
     }
 
     ;
 
+    public int globalSegmentId(){
+        return globalSegmentId;
+    }
+
+    @Override
+    @MethodPriority(-1_000_000)
+    @GlobalReturn
     public void update(){
-        //update
+//update
+        boolean updateValues = false;
+        if(nextId != noSegmentId){
+            next = SnGroups.segments.find(s -> s.globalSegmentId() == nextId);
+            nextId = noSegmentId;
+            updateValues = true;
+        }
+        if(previousId != noSegmentId){
+            previous = SnGroups.segments.find(s -> s.globalSegmentId() == previousId);
+            previousId = noSegmentId;
+            updateValues = true;
+        }
+        if(updateValues) return;
         this._update();
     }
 
@@ -110,7 +156,7 @@ abstract class SegmentComp implements Entityc, Unitc, Segmentc{
     }
 
     public void calculateNextPosition(Vec2 vec2){
-        vec2.trns((isHead() ? rotation : angleTo(next))+180, segmentType().offsetSegment);
+        vec2.trns((isHead() ? rotation : angleTo(next)) + 180, segmentType().offsetSegment);
     }
 
     public boolean isHead(){
@@ -121,7 +167,7 @@ abstract class SegmentComp implements Entityc, Unitc, Segmentc{
     public Iterator<Segmentc> iterator(){
         ;
         return new Iterator<>(){
-            Segmentc head = findHead(self());
+            Segmentc head = findHead();
 
             @Override
             public boolean hasNext(){
@@ -143,7 +189,7 @@ abstract class SegmentComp implements Entityc, Unitc, Segmentc{
     public Iterator<Segmentc> reverseIterator(){
         ;
         return new Iterator<>(){
-            Segmentc tail = findTail(self());
+            Segmentc tail = findTail();
 
             @Override
             public boolean hasNext(){
