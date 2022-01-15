@@ -8,8 +8,11 @@ import mindustry.gen.Building;
 import mindustry.gen.Unit;
 import mindustry.logic.Ranged;
 import mindustry.world.blocks.defense.MendProjector;
+import mindustry.world.meta.Stat;
+import mindustry.world.meta.StatUnit;
 
 import static mindustry.Vars.indexer;
+import static mindustry.Vars.tilesize;
 import static mindustry.gen.Puddle.rect;
 
 public class RepairStation extends MendProjector {
@@ -17,6 +20,7 @@ public class RepairStation extends MendProjector {
     public float reload = 250f;
     public float range = 60f;
     public float healPercent = 12f;
+    public float repairHealth = 50f;
     public float phaseBoost = 12f;
     public float phaseRangeBoost = 50f;
     public float useTime = 400f;
@@ -24,6 +28,21 @@ public class RepairStation extends MendProjector {
     public RepairStation(String name) {
         super(name);
     }
+
+    @Override
+    public void setStats(){
+        stats.timePeriod = useTime;
+        super.setStats();
+
+        stats.add(Stat.repairTime, (int)(100f / healPercent * reload / 60f), StatUnit.seconds);
+        stats.add(Stat.repairTime, (repairHealth * reload / 60f), StatUnit.seconds);
+        stats.add(Stat.range, range / tilesize, StatUnit.blocks);
+
+        stats.add(Stat.boostEffect, phaseRangeBoost / tilesize, StatUnit.blocks);
+        stats.add(Stat.boostEffect, (phaseBoost + healPercent) / healPercent, StatUnit.timesSpeed);
+        stats.add(Stat.boostEffect, (phaseBoost + repairHealth) / repairHealth, StatUnit.timesSpeed);
+    }
+
 
     public class RepairStationBuild extends Building implements Ranged {
         public Unit target;
@@ -67,7 +86,7 @@ public class RepairStation extends MendProjector {
                     offset.setZero();
                 }
 
-                target.heal((target.maxHealth() *healPercent + phaseHeat * phaseBoost) / 100f * efficiency());
+                target.heal((target.maxHealth() * repairHealth + phaseHeat * phaseBoost) / 100f * efficiency());
                 target = Units.closest(team, x, y, range, Unit::damaged);
                 Fx.healBlockFull.at(target.x, target.y, target.hitSize, baseColor);
 
