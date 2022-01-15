@@ -4,10 +4,10 @@ import arc.graphics.g2d.*;
 import arc.math.Mathf;
 import arc.util.*;
 import arc.util.io.*;
+import mindustry.ai.types.*;
 import mindustry.content.Fx;
 import mindustry.entities.Units;
-import mindustry.gen.Building;
-import mindustry.gen.Unit;
+import mindustry.gen.*;
 import mindustry.graphics.*;
 import mindustry.logic.*;
 import mindustry.world.blocks.defense.MendProjector;
@@ -71,15 +71,14 @@ public class RepairStation extends MendProjector {
         }
 
         private void runHealing(){
-            float realRange = range + phaseHeat * phaseRangeBoost;
 
-            Units.nearby(team,x,y,realRange,u->{
+            Units.nearby(team,x,y,realRange(),u->{
                 u.heal(repairHealth + phaseHeat * phaseBoost / 100f * efficiency());
                 Fx.heal.at(u.x, u.y, u.hitSize, baseColor);
             });
 
 
-            indexer.eachBlock(this, realRange, Building::damaged, other -> {
+            indexer.eachBlock(this, realRange(), Building::damaged, other -> {
                 other.heal(other.maxHealth() * (healPercent + phaseHeat * phaseBoost) / 100f * efficiency());
                 Fx.healBlockFull.at(other.x, other.y, other.block.size, baseColor);
             });
@@ -92,11 +91,20 @@ public class RepairStation extends MendProjector {
 
         @Override
         public void drawSelect(){
-            float realRange = range + phaseHeat * phaseRangeBoost;
+            float realRange = realRange();
 
             indexer.eachBlock(this, realRange, other -> true, other -> Drawf.selected(other, Tmp.c1.set(baseColor).a(Mathf.absin(4f, 1f))));
 
+
+            Units.nearby(team,x,y,realRange(),unit->{
+                Drawf.square(unit.x, unit.y, unit.hitSize, unit.rotation + 45,Pal.heal);
+            });
+
             Drawf.dashCircle(x, y, realRange, baseColor);
+        }
+
+        public float realRange(){
+            return range + phaseHeat * phaseRangeBoost;
         }
 
         @Override
