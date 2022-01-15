@@ -1,7 +1,6 @@
 package sunset.world.blocks.defense;
 
 import arc.math.Mathf;
-import arc.math.geom.Vec2;
 import mindustry.content.Fx;
 import mindustry.entities.Units;
 import mindustry.gen.Building;
@@ -13,7 +12,6 @@ import mindustry.world.meta.StatUnit;
 
 import static mindustry.Vars.indexer;
 import static mindustry.Vars.tilesize;
-import static mindustry.gen.Puddle.rect;
 
 public class RepairStation extends MendProjector {
     public final int timerUse = timers++;
@@ -35,7 +33,7 @@ public class RepairStation extends MendProjector {
         super.setStats();
 
         stats.add(Stat.repairTime, (int)(100f / healPercent * reload / 60f), StatUnit.seconds);
-        stats.add(Stat.repairTime, (repairHealth * reload), StatUnit.seconds);
+        stats.add(Stat.repairTime, (repairHealth * reload / 60f), StatUnit.seconds);
         stats.add(Stat.range, range / tilesize, StatUnit.blocks);
 
         stats.add(Stat.boostEffect, phaseRangeBoost / tilesize, StatUnit.blocks);
@@ -58,11 +56,6 @@ public class RepairStation extends MendProjector {
 
         @Override
         public void updateTile() {
-
-            if (timer(timerUse, 20)) {
-                rect.setSize(range * 2).setCenter(x, y);
-
-            }
             smoothEfficiency = Mathf.lerpDelta(smoothEfficiency, efficiency(), 0.08f);
             heat = Mathf.lerpDelta(heat, consValid() || cheating() ? 1f : 0f, 0.08f);
             charge += heat * delta();
@@ -77,8 +70,12 @@ public class RepairStation extends MendProjector {
                 float realRange = range + phaseHeat * phaseRangeBoost;
                 charge = 0f;
 
-                Units.closest(team, x, y, realRange, Unit::damaged);
-                target.heal(target.maxHealth() * (repairHealth + phaseHeat * phaseBoost) / 100f * efficiency());
+                if(target != null && (target.dead() || target.dst(this) - target.hitSize/2f > range || target.health() >= target.maxHealth())){
+                    target = null;
+                }
+
+                target = Units.closest(team, x, y, realRange, Unit::damaged);
+                target.health((repairHealth + phaseHeat * phaseBoost) / 100f * efficiency());
                 Fx.heal.at(target.x, target.y, target.hitSize, baseColor);
 
                 indexer.eachBlock(this, realRange, Building::damaged, other -> {
