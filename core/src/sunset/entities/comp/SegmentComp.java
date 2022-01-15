@@ -1,6 +1,7 @@
 package sunset.entities.comp;
 
 import arc.func.*;
+import arc.graphics.*;
 import arc.graphics.g2d.*;
 import arc.math.geom.*;
 import arc.scene.ui.layout.*;
@@ -29,6 +30,8 @@ abstract class SegmentComp implements Entityc, Unitc, Segmentc{
     transient Segmentc next = null;
     @Import
     float x, y, hitSize, minFormationSpeed, rotation, elevation;
+    @Import
+    Vec2 tmp1, tmp2;
     private int previousId = -2;
     private int nextId = -2;
     private int globalSegmentId = nextGlobalSegmentId();
@@ -74,11 +77,11 @@ abstract class SegmentComp implements Entityc, Unitc, Segmentc{
         return counter;
     }
 
+    ;
+
     public Segmentc findHead(){
         return findHead(self());
     }
-
-    ;
 
     public Segmentc findTail(){
         return findTail(self());
@@ -95,15 +98,17 @@ abstract class SegmentComp implements Entityc, Unitc, Segmentc{
         superWrite(write);
     }
 
+    ;
+
     @SuperMethod(parentName = "write")
     private void superWrite(Writes write){
     }
 
-    ;
-
     public int globalSegmentId(){
         return globalSegmentId;
     }
+
+    ;
 
     @Override
     @MethodPriority(-1_000_000)
@@ -122,10 +127,11 @@ abstract class SegmentComp implements Entityc, Unitc, Segmentc{
             updateValues = true;
         }
         if(updateValues) return;
+        if (!isTail()){
+//            next.set(nextPosition(tmp1,angleTo(next)));
+        }
         this._update();
     }
-
-    ;
 
     @Override
     public void destroy(){
@@ -144,11 +150,11 @@ abstract class SegmentComp implements Entityc, Unitc, Segmentc{
     public void display(Table table){
         table.label(() -> "prev: " + previous).row();
         table.label(() -> "next: " + next).row();
-        table.add(new Bar("build",Pal.ammo,this::buildSegmentf)).growX();
+        table.add(new Bar("build", Pal.ammo, this::buildSegmentf)).growX();
     }
 
     public float buildSegmentf(){
-        return segmentBuildTimer/segmentType().segmentBuildTime;
+        return segmentBuildTimer / segmentType().segmentBuildTime;
     }
 
     public void _update(){
@@ -161,28 +167,48 @@ abstract class SegmentComp implements Entityc, Unitc, Segmentc{
             }
             if(segmentBuilding){
                 segmentBuildTimer += Time.delta;
-                if(buildSegmentf()>=1f){
+                if(buildSegmentf() >= 1f){
                     resetBuilding();
-                    calculateNextPosition(Tmp.v1);
+                    calculateNextPosition(tmp1);
 
-                    addChild(segmentType().spawn(team(), Tmp.v1).as());
+                    addChild(segmentType().spawn(team(), tmp1).as());
                 }
             }
         }
     }
 
+    /*public Vec2 nextPosition(Vec2 out, Segmentc next){
+        return nextPosition(out, angleTo(next));
+    }*/
+
+    public Vec2 nextPosition(Vec2 out, float angle){
+        return out.setZero().trns(angle, segmentType().offsetSegment + hitSize ).add(x, y);
+    }
+
     @Override
     public void draw(){
+        Draw.draw(Layer.flyingUnit, () -> {
+            Draw.color(Color.red);
+            Lines.rect(x - hitSize / 2f, y - hitSize / 2, hitSize, hitSize);
+            Draw.color(Color.yellow);
+            Lines.circle(x, y, hitSize / 2);
+            if(isTail()){
+                Draw.color(Color.blue);
+                calculateNextPosition(tmp1);
+                Lines.line(x, y, tmp1.x, tmp1.y);
+            }
+            Draw.color(Color.white);
+        });
+        if(!isTail()) return;
         Draw.draw(Layer.blockOver, () -> {
-            calculateNextPosition(Tmp.v1);
-            float angle = Tmp.v1.angleTo(this);
-            Drawf.construct(Tmp.v1.x, Tmp.v1.y, type().region,
+            float angle = calculateNextPosition(tmp1.setZero()).angleTo(this);
+            Drawf.construct(tmp1.x, tmp1.y, type().region,
             angle, segmentBuildTimer / segmentType().segmentBuildTime, 1f, Time.time);
         });
     }
 
-    public void calculateNextPosition(Vec2 vec2){
-        vec2.trns((isTail() ? rotation : angleTo(next)) + 180, segmentType().offsetSegment).add(this);
+    public Vec2 calculateNextPosition(Vec2 vec2){
+        return nextPosition(vec2, rotation + 180);
     }
 
     public boolean isHead(){
