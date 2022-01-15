@@ -18,14 +18,7 @@ import static mindustry.Vars.indexer;
 import static mindustry.Vars.tilesize;
 
 public class RepairStation extends MendProjector {
-    public final int timerUse = timers++;
-    public float reload = 250f;
-    public float range = 60f;
-    public float healPercent = 12f;
     public float repairHealth = 50f;
-    public float phaseBoost = 12f;
-    public float phaseRangeBoost = 50f;
-    public float useTime = 400f;
 
     public RepairStation(String name) {
         super(name);
