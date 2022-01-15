@@ -60,7 +60,10 @@ public class CopterUnitType extends SnUnitType implements ImageGenerator{
     @Override
     public void draw(Unit unit){
         super.draw(unit);
+        float z = unit.elevation > 0.5f ? (lowAltitude ? Layer.flyingUnitLow : Layer.flyingUnit) : groundLayer + Mathf.clamp(hitSize / 4000f, 0, 0.01f);
+        Draw.z(z);
         drawRotor(unit);
+        Draw.reset();
     }
 
     public void drawRotor(Unit unit){
@@ -113,6 +116,7 @@ public class CopterUnitType extends SnUnitType implements ImageGenerator{
     @Override
     public Pixmap generate(Pixmap icon, PixmapProcessor processor){
         processor.save(icon, name + "-no-rotors");
+        Pixmap realIcon;
         for(Rotor rotor : rotors){
 //            Pixmap rotreg = PixmapProcessor.outline(processor.get(rotor.rotorRegion));
             Pixmap rotreg = processor.get(rotor.rotorRegion);
@@ -129,7 +133,16 @@ public class CopterUnitType extends SnUnitType implements ImageGenerator{
             int tx = xoffset - top.width / 2;
             int ty = yoffset - top.height / 2;
 //            icon = processor.drawScaleAt(icon, rotreg, rx, ry);
+//            PixmapProcessor.drawScaleAt()
+            realIcon = icon;
+            if(rotor.underUnit){
+                icon = new Pixmap(icon.width, icon.height);
+//                icon=PixmapProcessor.drawScaleAt(rotreg,icon,rx,ry);
+            }
             icon.draw(rotreg, rx, ry, true);
+            if(rotor.underUnit){
+                icon.draw(realIcon, true);
+            }
 //            xoffset = (int) (rotor.offsetX / Draw.scl + icon.width / 2f);
 //            yoffset = (int) (-rotor.offsetY / Draw.scl + icon.height / 2f);
             icon.draw(top, tx, ty, true);
