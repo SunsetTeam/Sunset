@@ -6,15 +6,29 @@ import mindustry.type.Category;
 import mindustry.world.Block;
 import mindustry.world.blocks.defense.ForceProjector;
 import sunset.content.SnItems;
+import sunset.world.blocks.defense.RepairStation;
 import sunset.world.blocks.defense.projectors.DeflectorProjector;
 
 import static mindustry.type.ItemStack.with;
 
 public class SnProjectors implements ContentList {
-    public static Block forcedome, deflectorProjector;
+    public static Block repairStation, forcedome, deflectorProjector;
 
     @Override
     public void load() {
+
+        repairStation = new RepairStation("repair-station"){{
+            requirements(Category.effect, with(Items.lead, 100, Items.titanium, 25, Items.silicon, 40, Items.copper, 50));
+            consumes.power(1.5f);
+            size = 2;
+            reload = 250f;
+            range = 85f;
+            healPercent = 11f;
+            phaseBoost = 15f;
+            health = 80 * size * size;
+            consumes.item(Items.phaseFabric).boost();
+        }};
+
         forcedome = new ForceProjector("force-dome") {{
             requirements(Category.effect, with(Items.titanium, 600, Items.thorium, 480, Items.silicon, 300, SnItems.naturite, 250, SnItems.nobium, 240, SnItems.enojie, 210));
             size = 5;
