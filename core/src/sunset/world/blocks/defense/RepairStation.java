@@ -46,7 +46,6 @@ public class RepairStation extends MendProjector {
 
     public class RepairStationBuild extends Building implements Ranged {
         public Unit target;
-        public Vec2 offset = new Vec2(), lastEnd = new Vec2();
         float heat;
         float charge = Mathf.random(reload);
         float phaseHeat;
@@ -78,16 +77,8 @@ public class RepairStation extends MendProjector {
                 float realRange = range + phaseHeat * phaseRangeBoost;
                 charge = 0f;
 
-                if (target != null && (target.dead() || target.dst(this) - target.hitSize / 2f > range || target.health() >= target.maxHealth())) {
-                    target = null;
-                }
-
-                if (target == null) {
-                    offset.setZero();
-                }
-
-                target.heal(target.maxHealth() * ( repairHealth + phaseHeat * phaseBoost) / 100f * efficiency());
-                target = Units.closest(team, x, y, range, Unit::damaged);
+                target = Units.closest(team, x, y, realRange, Unit::damaged);
+                target.heal((repairHealth + phaseHeat * phaseBoost) / 100f * efficiency());
                 Fx.healBlockFull.at(target.x, target.y, target.hitSize, baseColor);
 
                 indexer.eachBlock(this, realRange, Building::damaged, other -> {
