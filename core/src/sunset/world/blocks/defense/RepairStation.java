@@ -35,7 +35,7 @@ public class RepairStation extends MendProjector {
         super.setStats();
 
         stats.add(Stat.repairTime, (int)(100f / healPercent * reload / 60f), StatUnit.seconds);
-        stats.add(Stat.repairTime, (repairHealth * reload / 60f), StatUnit.seconds);
+        stats.add(Stat.repairTime, (repairHealth * reload), StatUnit.seconds);
         stats.add(Stat.range, range / tilesize, StatUnit.blocks);
 
         stats.add(Stat.boostEffect, phaseRangeBoost / tilesize, StatUnit.blocks);
@@ -77,9 +77,9 @@ public class RepairStation extends MendProjector {
                 float realRange = range + phaseHeat * phaseRangeBoost;
                 charge = 0f;
 
-                target = Units.closest(team, x, y, realRange, Unit::damaged);
-                target.heal((repairHealth + phaseHeat * phaseBoost) / 100f * efficiency());
-                Fx.healBlockFull.at(target.x, target.y, target.hitSize, baseColor);
+                Units.closest(team, x, y, realRange, Unit::damaged);
+                target.heal(target.maxHealth * (repairHealth + phaseHeat * phaseBoost) / 100f * efficiency());
+                Fx.heal.at(target.x, target.y, target.hitSize, baseColor);
 
                 indexer.eachBlock(this, realRange, Building::damaged, other -> {
                     other.heal(other.maxHealth() * (healPercent + phaseHeat * phaseBoost) / 100f * efficiency());
