@@ -1,12 +1,16 @@
 package sunset.ai;
 
 import arc.func.*;
+import arc.math.*;
+import arc.math.geom.*;
 import arc.util.*;
 import mindustry.entities.units.*;
 import sunset.ai.wrappers.*;
 import sunset.gen.*;
 
 public class SegmentAI extends AIController{
+    private static Vec2 tmp = new Vec2();
+
     public SegmentAI(AIController fallback){
         this.fallback = fallback;
     }
@@ -24,13 +28,6 @@ public class SegmentAI extends AIController{
         return unit.<Segmentc>as().isHead();
     }
 
-    public float getDstSegment(Segmentc segment){
-        var next = segment.previous();
-        Tmp.v1.trns(segment.angleTo(next), -segment.segmentType().offsetSegment);
-
-        return segment.dst(next.x() + Tmp.v1.x, next.y() + Tmp.v1.y) - (segment.hitSize() + 10);
-    }
-
     @Override
     public void updateMovement(){
         this.unloadPayloads();
@@ -38,16 +35,15 @@ public class SegmentAI extends AIController{
         //check segment
         //get unit
         Segmentc previous = unit.previous();
-        //get dst
-        float dst = getDstSegment(unit);
         //calculated pos
-        previous.calculateNextPosition(Tmp.v1);
+        previous.calculateNextPosition(tmp);
+//        previous.nextPosition(tmp,);
         //check dst > offset
-        if(dst > unit.segmentType().offsetSegment){
+        if(!Mathf.zero(tmp.dst(unit),0.1f)){
             //move unit
-//            Tmp.v2.trns(unit.angleTo(Tmp.v1), unit.speed());
-//            unit.moveAt(Tmp.v2);
-            moveTo(Tmp.v1,unit.segmentType().offsetSegment,0);
+//            tmp.sub(unit).limit(unit.speed()* Time.delta).add(unit);
+//            unit.set(tmp);
+            moveTo(tmp, 0.1f, 1f);
         }
     }
 }
