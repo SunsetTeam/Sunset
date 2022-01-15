@@ -86,7 +86,7 @@ public class RepairStation extends MendProjector {
                     offset.setZero();
                 }
 
-                target.heal((target.maxHealth() * repairHealth + phaseHeat * phaseBoost) / 100f * efficiency());
+                target.heal(target.maxHealth() * ( repairHealth + phaseHeat * phaseBoost) / 100f * efficiency());
                 target = Units.closest(team, x, y, range, Unit::damaged);
                 Fx.healBlockFull.at(target.x, target.y, target.hitSize, baseColor);
 
