@@ -70,12 +70,12 @@ public class RepairStation extends MendProjector {
                 float realRange = range + phaseHeat * phaseRangeBoost;
                 charge = 0f;
 
-                if(target != null && (target.dead() || target.dst(this) - target.hitSize/2f > range || target.health() >= target.maxHealth())){
+                if(target != null && (target.dead() || target.dst(this) > realRange || target.health() >= target.maxHealth())){
                     target = null;
                 }
 
                 target = Units.closest(team, x, y, realRange, Unit::damaged);
-                target.health((repairHealth + phaseHeat * phaseBoost) / 100f * efficiency());
+                target.heal((repairHealth + phaseHeat * phaseBoost) / 100f * efficiency());
                 Fx.heal.at(target.x, target.y, target.hitSize, baseColor);
 
                 indexer.eachBlock(this, realRange, Building::damaged, other -> {
