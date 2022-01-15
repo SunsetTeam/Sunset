@@ -71,7 +71,7 @@ public class RepairStation extends MendProjector {
                 charge = 0f;
 
                 target = Units.closest(team, x, y, realRange, Unit::damaged);
-                target.health((repairHealth + phaseHeat * phaseBoost) / 100f * efficiency());
+                target.heal(repairHealth + phaseHeat * phaseBoost / 100f * efficiency());
                 if (target.health() >= target.maxHealth()) {
                     target.remove();
                 }
