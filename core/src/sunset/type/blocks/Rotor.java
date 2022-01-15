@@ -7,6 +7,7 @@ import arc.math.geom.Vec2;
 import arc.util.Time;
 import arc.util.Tmp;
 import mindustry.gen.Unit;
+import mindustry.graphics.Layer;
 import mma.ModVars;
 
 public class Rotor {
@@ -17,6 +18,7 @@ public class Rotor {
     public float rotorRotateSpeed = 27;
 
     public int rotorCount = 1;
+    public float layer = Layer.flyingUnitLow + 0.001f;
 
     public TextureRegion rotorRegion, topRegion, outlineRegion;
 
@@ -35,6 +37,7 @@ public class Rotor {
 
         for (int i = 0; i < rotorCount; i++) {
             float angle = (i * 360f / rotorCount + (Time.time * rotorRotateSpeed) % 360);
+            Draw.z(layer + 0.001f);
             Draw.rect(outlineRegion, rotor.x, rotor.y, angle);
         }
         if (drawTop){
@@ -48,6 +51,7 @@ public class Rotor {
 
         for (int i = 0; i < rotorCount; i++) {
             float angle = (i * 360f / rotorCount + (Time.time * rotorRotateSpeed) % 360);
+            Draw.z(layer);
             Draw.rect(rotorRegion, rotor.x, rotor.y, angle);
         }
         Draw.rect(topRegion, rotor.x, rotor.y, unit.rotation - 90);
