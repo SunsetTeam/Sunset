@@ -58,6 +58,8 @@ public class SnEnvironment implements ContentList {
             oreDefault = false;
             oreThreshold = 0.921f;
             oreScale = 26.1234f;
+            status = StatusEffects.burning;
+            statusDuration = 60f;
         }};
         oreColdent = new OreBlock(SnItems.coldent) {{
             oreDefault = false;

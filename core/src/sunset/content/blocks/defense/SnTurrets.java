@@ -37,7 +37,7 @@ public class SnTurrets implements ContentList{
     admiral, scorpio, flood, chain,
 
     //5x5
-    field, sniper, fanatic,
+    pressure, field, sniper, fanatic,
 
     //6x6
     trident, melter, radius,
@@ -378,6 +378,33 @@ public class SnTurrets implements ContentList{
         }};
         //endregion 4x4
         //region 5x5
+        pressure = new ItemTurret("pressure"){{
+            requirements(Category.turret, with(SnItems.fors, 600, Items.silicon, 500, Items.plastanium, 450, Items.graphite, 400, Items.surgeAlloy, 300, SnItems.naturite, 100));
+            ammo(
+                    Items.plastanium, SnBullets.mediumPlastaniumBullet,
+                    Items.surgeAlloy, SnBullets.bigEnergySphere,
+                    SnItems.fors, SnBullets.mediumForsSpine,
+                    SnItems.reneubite, SnBullets.reneubiteBullet,
+                    SnItems.enojie, SnBullets.mediumEnojieMissile
+            );
+            health = 4180;
+            size = 5;
+            range = 35f * Vars.tilesize;
+            reloadTime = 10f * Time.toSeconds;
+            recoilAmount = 4f;
+            inaccuracy = 5f;
+            rotateSpeed = 3f;
+            shootCone = 25f;
+            shots = 4;
+            shootShake = 2f;
+            burstSpacing = 4f;
+            restitution = 0.05f;
+            targetAir = true;
+            hasPower = true;
+            shootSound = Sounds.flame;
+            consumes.power(7f);
+        }};
+
         field = new ModItemTurret("field"){{
             requirements(Category.turret, with(Items.copper, 1200, Items.lead, 800, Items.plastanium, 350, Items.thorium, 400, SnItems.fors, 400, SnItems.nobium, 300));
             ammo(

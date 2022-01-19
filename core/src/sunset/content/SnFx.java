@@ -580,6 +580,25 @@ public class SnFx {
         };
         Angles.randLenVectors(e.id, 4, e.finpow() * 20, e.rotation, 360, floatc21);
     }),
+
+    hitReneubiteBullet = new Effect(14, e -> {
+        color(Color.white, SnPal.renBlast1, e.fin());
+
+        e.scaled(8f, s -> {
+            stroke(0.6f + s.fout());
+            Lines.circle(e.x, e.y, s.fin() * 8f);
+        });
+
+        stroke(0.6f + e.fout());
+
+        randLenVectors(e.id, 6, e.fin() * 16f, (x, y) -> {
+            float ang = Mathf.angle(x, y);
+            lineAngle(e.x + x, e.y + y, ang, e.fout() * 4 + 2f);
+        });
+
+        Drawf.light(e.x, e.y, 20f, SnPal.renBlast2, 0.6f * e.fout());
+    }),
+
     //endregion common
     //region special
     empHit = new Effect(35, e -> {
