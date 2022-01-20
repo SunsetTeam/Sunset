@@ -389,8 +389,8 @@ public class SnTurrets implements ContentList{
             );
             health = 4180;
             size = 5;
-            range = 35f * Vars.tilesize;
-            reloadTime = 10f * Time.toSeconds;
+            range = 40f * Vars.tilesize;
+            reloadTime = 3f * Time.toSeconds;
             recoilAmount = 4f;
             inaccuracy = 5f;
             rotateSpeed = 3f;

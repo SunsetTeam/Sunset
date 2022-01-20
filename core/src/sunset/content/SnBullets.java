@@ -285,7 +285,7 @@ public class SnBullets implements ContentList {
         reneubiteBullet = new BasicBulletType(6f, 50f, "missile") {{
             width = 10;
             height = 14;
-            lifetime = 45f;
+            lifetime = 50f;
             frontColor = SnPal.renBlast1;
             backColor = SnPal.renBlast2;
             shootEffect = Fx.shootBig2;
@@ -535,14 +535,13 @@ public class SnBullets implements ContentList {
             drag = -0.003f;
             homingRange = 75f;
             homingPower = 1f;
-            drag = -0.0016f;
 
             splashDamageRadius = 45f;
             splashDamage = 65f;
 
             keepVelocity = false;
             hitSound = Sounds.explosion;
-            lifetime = 15f;
+            lifetime = 65f;
             backColor = SnPal.enojieBulletBack;
             frontColor = SnPal.enojieBullet;
             hitEffect = Fx.blastExplosion;
@@ -1112,7 +1111,7 @@ public class SnBullets implements ContentList {
         mediumPlastaniumBullet = new BasicBulletType(6f, 40) {{//yes
             shrinkX = 0f;
             shrinkY = 0f;
-            lifetime = 45f;
+            lifetime = 50f;
             height = 18f;
             width = 13f;
             frontColor = Pal.plastanium;
@@ -1191,7 +1190,7 @@ public class SnBullets implements ContentList {
         mediumForsSpine = new FlakBulletType(6f, 10) {{
             shrinkX = 0f;
             shrinkY = 0f;
-            lifetime = 45f;
+            lifetime = 50f;
             height = 13f;
             width = 8f;
             frontColor = SnPal.blastBullet;
@@ -1318,7 +1317,7 @@ public class SnBullets implements ContentList {
             fragCone = 0.0001f;
         }};
         bigEnergySphere = new LightningSphereBulletType(4f, 12, "sunset-circle-bullet") {{
-            lifetime = 55f;
+            lifetime = 63f;
             splashDamageRadius = 40f;
             splashDamage = 55f;
             height = 13f;
