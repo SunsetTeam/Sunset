@@ -3,13 +3,12 @@ package sunset.content;
 import arc.graphics.Color;
 import arc.graphics.g2d.Draw;
 import arc.graphics.g2d.Fill;
-import arc.graphics.g2d.Lines;
 import arc.math.Angles;
 import arc.math.geom.Vec2;
+import arc.util.Time;
 import mindustry.Vars;
 import mindustry.content.*;
 import mindustry.ctype.ContentList;
-import mindustry.entities.Effect;
 import mindustry.entities.Units;
 import mindustry.entities.bullet.*;
 import mindustry.gen.Bullet;
@@ -20,9 +19,6 @@ import mindustry.graphics.Pal;
 import sunset.entities.bullet.*;
 import sunset.graphics.SnPal;
 import sunset.type.StackableStatusEffect;
-
-import static arc.graphics.g2d.Draw.color;
-import static arc.graphics.g2d.Lines.stroke;
 
 public class SnBullets implements ContentList {
     public static BulletType
@@ -37,6 +33,8 @@ public class SnBullets implements ContentList {
         machineBullet, bigMachineBullet,
         //rocket
         smallBlueMissile, smallEnojieMissile,
+        powerRocket,
+        thoriumPowerRocket, forsPowerRocket,
         //artillery
         artilleryFors, artilleryBlast,
         wheel4Artillery,
@@ -47,11 +45,14 @@ public class SnBullets implements ContentList {
         bigNobiumPoison, heavyNobiumPoison,
         bigPlastaniumPoison,
         smallPlastaniumBullet, smallPyratiteBullet, smallSurgeAlloyBullet, smallForsSpine,
+        thoriumFlak, forsFlak,
         //shrapnel
         lightBlastGraphite, lightBlastSilicon,
         //laser
         laserGun2,
         laserCGun, bigCLaserGun,
+        //lightning
+        defLight, powerLight,
         //sap
         leadSap, sporeSap, planatriumSap,
         //energy sphere
@@ -63,6 +64,7 @@ public class SnBullets implements ContentList {
         //flame
         heavyCoalFlame, heavyPyraFlame, flameidFlame,
         wheel5Flame,
+        infernoFlame/*reserved*/,
         //copters
         basicHelicopterGun,
         mediumHelicopterGun, helicopterMissile,
@@ -505,6 +507,68 @@ public class SnBullets implements ContentList {
             pierceBuilding = true;
             pierceCap = 3;
         }};
+
+        powerRocket = new MissileBulletType(7f, 920) {{
+            width = 10f;
+            height = 20f;
+            drag = -0.05f;
+            homingRange = 13 * Vars.tilesize;
+            homingPower = 6f;
+            splashDamageRadius = 20 * Vars.tilesize;
+            splashDamage = 380;
+            keepVelocity = true;
+            hitSound = Sounds.explosion;
+            trailChance = 0.7f;
+            lifetime = 0.7f * Time.toSeconds;
+            frontColor = SnPal.redfire1;
+            backColor = SnPal.redfire2;
+            hitEffect = despawnEffect = Fx.blastExplosion;
+            trailEffect = SnFx.bigRocketTrail;
+            pierce = true;
+            pierceBuilding = true;
+            pierceCap = 3;
+        }};
+
+        thoriumPowerRocket = new MissileBulletType(3, 465) {{
+            width = 5f;
+            height = 10f;
+            drag = -0.05f;
+            homingRange = 10 * Vars.tilesize;
+            homingPower = 7f;
+            splashDamageRadius = 9 * Vars.tilesize;
+            splashDamage = 190;
+            keepVelocity = true;
+            hitSound = Sounds.explosion;
+            trailChance = 0.7f;
+            lifetime = 1.6f * Time.toSeconds;
+            //frontColor = SnPal.redfire1;
+            //backColor = SnPal.redfire2;
+            hitEffect = despawnEffect = Fx.blastExplosion;
+            trailEffect = SnFx.bigRocketTrail;
+            pierce = true;
+            pierceBuilding = true;
+            pierceCap = 5;
+        }};//unused
+        forsPowerRocket = new MissileBulletType(5, 870) {{
+            width = 5f;
+            height = 10f;
+            drag = -0.05f;
+            homingRange = 13 * Vars.tilesize;
+            homingPower = 7f;
+            splashDamageRadius = 11 * Vars.tilesize;
+            splashDamage = 350;
+            keepVelocity = true;
+            hitSound = Sounds.explosion;
+            trailChance = 0.7f;
+            lifetime = 1f * Time.toSeconds;
+            //frontColor = SnPal.redfire1;
+            //backColor = SnPal.redfire2;
+            hitEffect = despawnEffect = Fx.blastExplosion;
+            trailEffect = SnFx.bigRocketTrail;
+            pierce = true;
+            pierceBuilding = true;
+            pierceCap = 6;
+        }};//unused
         //endregion  rocket
         //region artillery
         artilleryFors = new ArtilleryBulletType(3.0f, 70, "shell") {{
@@ -1105,6 +1169,31 @@ public class SnBullets implements ContentList {
             splashDamage = 30f;
             splashDamageRadius = 25f;
         }};
+
+        thoriumFlak = new FlakBulletType(4f, 310) {{
+            knockback = 1;
+            lifetime = 1.2f * Time.toSeconds;
+            width = 20;
+            height = 10;
+            hitEffect = despawnEffect = SnFx.thoriumExplosion;
+            splashDamage = 110;
+            splashDamageRadius = 5 * Vars.tilesize;
+            frontColor = Color.valueOf("F9A3C7");
+            backColor = Color.valueOf("F9A3C7").saturation(4);
+            shootEffect = Fx.none;
+        }};
+        forsFlak = new FlakBulletType(5f, 580) {{
+            knockback = 1.2f;
+            lifetime = 1 * Time.toSeconds;
+            width = 20;
+            height = 10;
+            hitEffect = despawnEffect = SnFx.forsExplosion;
+            splashDamage = 190;
+            splashDamageRadius = 7 * Vars.tilesize;
+            frontColor = Color.valueOf("F3A39F");
+            backColor = Color.valueOf("F3A39F").saturation(4);
+            shootEffect = Fx.none;
+        }};
         //endregion  flak
         //region shrapnel
         lightBlastGraphite = new ShrapnelBulletType() {{
@@ -1148,6 +1237,23 @@ public class SnBullets implements ContentList {
             lightColor = Color.yellow;
         }};
         //endregion laser
+        //region lightning
+        defLight = new LightningBulletType() {{
+            damage = 320;
+            shootEffect = hitEffect = despawnEffect = smokeEffect = Fx.none;
+        }};
+        powerLight = new LightningBulletType() {{
+            inaccuracy = 360;
+            /*shootCone = 360;
+            targetAir = false;
+            targetGround = true;
+            drawLight = true;
+            spread = 18f;*/
+            damage = 736;
+            shootEffect = hitEffect = despawnEffect = smokeEffect = Fx.none;
+            lightningColor = SnPal.redfire1;
+        }};
+        //endregion lightning
         //region sap
         leadSap = new SapBulletType() {{
             sapStrength = 0.30f;
@@ -1358,6 +1464,23 @@ public class SnBullets implements ContentList {
             status = StatusEffects.burning;
             keepVelocity = false;
             hittable = false;
+        }};
+
+        infernoFlame = new FireBulletType(50f, 320f) {{
+            ammoMultiplier = 2.1f;
+            hitSize = 11f;
+            pierce = true;
+            lifetime = 0.05f * Time.toSeconds;
+            trailEffect = despawnEffect = Fx.none;
+            shootEffect = SnFx.redFlame;
+            hitEffect = SnFx.redFlameHit;
+            status = SnStatusEffects.inferno;
+            statusDuration = 60f * 3;
+            keepVelocity = false;
+            hittable = false;
+            /*colorFrom = SnPal.redfire1;
+            colorMid = SnPal.redfire2;
+            colorTo = Pal.lightPyraFlame;*/
         }};
         //endregion flame
         //region copters
@@ -1652,26 +1775,20 @@ public class SnBullets implements ContentList {
         //region special
         //region EMP
         empBullet = new LightningBulletType() {{
-            //speed = 5;
             damage = 150;
             lifetime = 50;
-            //shootEffect = SnFx.empShootSmall;
             status = SnStatusEffects.electricalShort;
             drawSize = 3;
             collidesTeam = true;
             hitSize = 36;
-            //hitEffect = SnFx.empHit;
         }};
         empBulletEvo = new LightningBulletType() {{
-            //speed = 5;
             damage = 320;
             lifetime = 100;
-            //shootEffect = SnFx.empShootBig;
             status = SnStatusEffects.electricalShort;
             drawSize = 5.3f;
             collidesTeam = true;
             hitSize = 36;
-            //hitEffect = SnFx.empHit;
         }};
         //endregion EMP
         //region synthesis

@@ -18,7 +18,6 @@ import mindustry.type.Category;
 import mindustry.type.ItemStack;
 import mindustry.world.Block;
 import mindustry.world.blocks.defense.turrets.ItemTurret;
-import mindustry.world.blocks.defense.turrets.LaserTurret;
 import mindustry.world.blocks.defense.turrets.PowerTurret;
 import mindustry.world.meta.BlockFlag;
 import mindustry.world.meta.BuildVisibility;
@@ -49,13 +48,13 @@ public class SnTurrets implements ContentList{
     admiral, scorpio, flood, chain,
 
     //5x5
-    field, sniper, fanatic,
+    field, sniper, fanatic, defibrillator,
 
     //6x6
     trident, melter, radius,
 
     //7x7
-    halberd,
+    halberd, pinwheel, inferno/*reserved*/,
 
     //missile
     sunrise/*2x2*/, spark/*3x3*/, dissector/*4x4*/, art/*5x5*/,
@@ -466,6 +465,30 @@ public class SnTurrets implements ContentList{
             drawLight = true;
             chargeTime = 20;
         }};
+        defibrillator = new Turret360("defibrillator") {{
+            requirements(Category.turret, with(Items.copper, 650, Items.graphite, 550, Items.titanium, 600, Items.thorium, 600, SnItems.flameid, 650, SnItems.fors, 700));
+            ammo(
+                    SnItems.nobium, SnBullets.defLight
+            );
+            health = 2100;
+            size = 5;
+            shots = 20;
+            reloadTime = 1 * Time.toSeconds;
+            range = 20f * Vars.tilesize;
+            recoilAmount = 0;
+            cooldown = 0.3f;
+            restitution = 0.8f;
+            inaccuracy = 360;
+            shootCone = 360;
+            shootSound = Sounds.spark;
+            targetAir = false;
+            targetGround = true;
+            drawLight = true;
+            spread = 18f;
+            rotateSpeed = 0;
+            powerBullet = SnBullets.powerLight;
+            debug = true;//TODO off this when done
+        }};
         //endregion 5x5
         //region 6x6
         trident = new PowerTurret("trident"){{
@@ -595,6 +618,33 @@ public class SnTurrets implements ContentList{
                 length = 370f;
                 width = 60.0F;
             }};
+        }};
+        pinwheel = new Turret360("pinwheel") {{
+            requirements(Category.turret, with(Items.copper, 900, Items.lead, 900, Items.silicon, 710, Items.titanium, 800, Items.thorium, 750, Items.surgeAlloy, 450, SnItems.planatrium, 450, SnItems.flameid, 700, SnItems.fors, 870, SnItems.enojie, 200));
+            ammo(
+                    Items.thorium, SnBullets.thoriumFlak,
+                    SnItems.fors, SnBullets.forsFlak
+            );
+            health = 4000;
+            size = 7;
+            shots = 16;
+            reloadTime = 0.75f * Time.toSeconds;
+            range = 35f * Vars.tilesize;
+            recoilAmount = 0;
+            cooldown = 0.3f;
+            restitution = 1f;
+            inaccuracy = 0;
+            shootCone = 360;
+            shootSound = Sounds.shootBig;
+            targetAir = false;
+            targetGround = true;
+            drawLight = true;
+            rotate = true;
+            shootShake = 2;
+            spread = 22.5f;
+            rotateSpeed = 5;
+            powerBullet = SnBullets.powerRocket;
+            debug = true;//TODO off this when done
         }};
         //endregion 7x7
         //region special

@@ -11,6 +11,7 @@ import mindustry.gen.Unit;
 import mindustry.graphics.Layer;
 import mindustry.graphics.Pal;
 import mindustry.type.StatusEffect;
+import sunset.graphics.SnPal;
 import sunset.type.StackableStatusEffect;
 
 import static arc.Core.camera;
@@ -18,7 +19,7 @@ import static arc.Core.camera;
 public class SnStatusEffects implements ContentList {
     public static StatusEffect
             //common
-            frostbite, stun, starBuff, galaxyDebuff, electricalShort, reloading, viscous,
+            frostbite, stun, starBuff, galaxyDebuff, electricalShort, reloading, viscous, inferno,
 
             //only reactive
             molecula,
@@ -98,6 +99,20 @@ public class SnStatusEffects implements ContentList {
             speedMultiplier = 0.94f;
             effect = SnFx.viscous;
             effectChance = 0.09f;
+        }};//no sprite
+
+        inferno = new StatusEffect("inferno") {{
+            color = SnPal.redfire1;
+            effect = SnFx.redFlame;
+            effectChance = 0.3f;
+            speedMultiplier = 1.1f;
+            reloadMultiplier = 0.6f;
+            healthMultiplier = 0.7f;
+            damageMultiplier = 0.7f;
+
+            init(() -> {
+                opposite(frostbite);
+            });
         }};//no sprite
         //endregion common
         //region only reactive

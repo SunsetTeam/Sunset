@@ -7,28 +7,38 @@ import arc.graphics.g2d.Draw;
 import arc.graphics.g2d.TextureRegion;
 import arc.math.Mathf;
 import mindustry.annotations.Annotations.Load;
+import mindustry.entities.bullet.BulletType;
 import mindustry.graphics.Drawf;
 import mindustry.graphics.Layer;
 import mindustry.ui.Bar;
 import mindustry.world.blocks.defense.turrets.ItemTurret;
+import mma.graphics.ADrawf;
 import sunset.SnVars;
+import sunset.graphics.SnPal;
 import sunset.utils.Utils;
-
-import static arc.Core.settings;
 
 /** Item turret with useful things.
  * Features:
  * 1) reload bar
- * 2)
+ * 2) power shot
  * */
 public class ModItemTurret extends ItemTurret {
     @Load("@-light")
     public TextureRegion light;
     public boolean drawLight;
 
+    public BulletType powerBullet;
+    public boolean debug = false;
+    public int chargeShots = 3;
+
     public ModItemTurret(String name) {
         super(name);
         drawLight = false;
+    }
+
+    @Override
+    public void setStats() {
+        super.setStats();
     }
 
     @Override
@@ -52,6 +62,8 @@ public class ModItemTurret extends ItemTurret {
     };
 
     public class ModItemTurretBuild extends ItemTurretBuild {
+        boolean isShoot = false;
+        int totalShoots = 0;
         @Override
         public void draw() {
             Draw.rect(baseRegion, x, y);
@@ -69,6 +81,40 @@ public class ModItemTurret extends ItemTurret {
             }
 
             if (drawLight && this.liquids.currentAmount() > 0) lightDrawer.get(this);
+
+            if (debug) ADrawf.drawText(this, "Total Shoots: " + totalShoots);
+        }
+
+        @Override
+        protected void updateShooting() {
+            if (powerBullet != null) {
+                boolean canShoot = reload + delta() * peekAmmo().reloadMultiplier * baseReloadSpeed() >= reloadTime && !charging;
+                this.isShoot = canShoot;
+                super.updateShooting();
+                if (!canShoot || isShoot) return;
+                totalShoots++;
+                if (totalShoots == chargeShots) {
+                    totalShoots = 0;
+                }
+            } else {
+                super.updateShooting();
+            }
+        }
+
+        @Override
+        protected void shoot(BulletType type) {
+            if (powerBullet != null) isShoot = false;
+            super.shoot(type);
+        }
+
+        @Override
+        public void bullet(BulletType type, float angle) {
+            if (powerBullet != null & totalShoots == 2) {
+                float lifeScl = type.scaleVelocity ? Mathf.clamp(Mathf.dst(x + tr.x, y + tr.y, targetPos.x, targetPos.y) / type.range(), minRange / type.range(), range / type.range()) : 1f;
+                powerBullet.create(this, team, x + tr.x, y + tr.y, angle, 1f + Mathf.range(velocityInaccuracy), lifeScl);
+            } else {
+                super.bullet(type, angle);
+            }
         }
     }
 }
