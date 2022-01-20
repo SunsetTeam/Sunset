@@ -41,6 +41,10 @@ public class SnPal {
     blueBullet = Color.valueOf("A4DAE7"),
     blueBulletBack = Color.valueOf("97E2A7"),
 
+    //Nobium bullets
+    nobiumBullet = Color.valueOf("EDEDED"),
+    nobiumBulletBack = Color.valueOf("E4E4E4"), //E1E1E1
+
     //Enojie bullets
     enojieBullet = Color.valueOf("A4ECB3"),
     enojieBulletBack = Color.valueOf("98D5E3"),

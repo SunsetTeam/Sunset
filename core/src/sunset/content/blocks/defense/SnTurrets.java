@@ -383,7 +383,7 @@ public class SnTurrets implements ContentList{
             ammo(
                     Items.plastanium, SnBullets.mediumPlastaniumBullet,
                     Items.surgeAlloy, SnBullets.bigEnergySphere,
-                    SnItems.fors, SnBullets.mediumForsSpine,
+                    SnItems.nobium, SnBullets.smallNobiumSpine,
                     SnItems.reneubite, SnBullets.reneubiteBullet,
                     SnItems.enojie, SnBullets.mediumEnojieMissile
             );

@@ -40,7 +40,7 @@ public class SnBullets implements ContentList {
         naturitePoisonBullet, bigNaturitePoison, heavyNaturitePoison,
         bigNobiumPoison, heavyNobiumPoison,
         bigPlastaniumPoison,
-        smallPlastaniumBullet, mediumPlastaniumBullet, smallPyratiteBullet, smallSurgeAlloyBullet, smallForsSpine, mediumForsSpine,
+        smallPlastaniumBullet, mediumPlastaniumBullet, smallPyratiteBullet, smallSurgeAlloyBullet, smallForsSpine, smallNobiumSpine,
         //shrapnel
         lightBlastGraphite, lightBlastSilicon,
         //laser
@@ -285,26 +285,26 @@ public class SnBullets implements ContentList {
         reneubiteBullet = new BasicBulletType(6f, 50f, "missile") {{
             width = 10;
             height = 14;
-            lifetime = 50f;
+            lifetime = 30f;
             frontColor = SnPal.renBlast1;
             backColor = SnPal.renBlast2;
             shootEffect = Fx.shootBig2;
             despawnEffect = SnFx.hitReneubiteBullet;
             hittable = reflectable = absorbable = false;
             trailParam = 5f;
-            trailLength = 10;
+            trailLength = 15;
             trailWidth = 2f;
             trailColor = SnPal.renBlast1;
             fragBullets = 1;
             fragCone = 1f;
             fragVelocityMin = 0.9f;
             fragVelocityMax = 0.9f;
-            fragBullet = new BasicBulletType(4f, 50f){{
+            fragBullet = new BasicBulletType(6f, 50f){{
                 width = 10;
                 height = 14;
-                lifetime = 25;
+                lifetime = 25f;
                 trailParam = 5f;
-                trailLength = 10;
+                trailLength = 15;
                 trailWidth = 2f;
                 trailColor = SnPal.renBlast1;
                 despawnEffect = SnFx.hitReneubiteBullet;
@@ -549,6 +549,7 @@ public class SnBullets implements ContentList {
             pierce = true;
             pierceBuilding = true;
             pierceCap = 8;
+            trailColor = SnPal.enojieBullet;
             trailWidth = 4f;
             trailLength = 11;
             weaveScale = 4f;
@@ -1187,16 +1188,22 @@ public class SnBullets implements ContentList {
             splashDamageRadius = 25f;
         }};
 
-        mediumForsSpine = new FlakBulletType(6f, 10) {{
+        smallNobiumSpine = new FlakBulletType(6f, 10) {{
             shrinkX = 0f;
             shrinkY = 0f;
             lifetime = 50f;
             height = 13f;
             width = 8f;
-            frontColor = SnPal.blastBullet;
-            backColor = SnPal.blastBulletBack;
+            frontColor = SnPal.nobiumBullet;
+            backColor = SnPal.nobiumBulletBack;
 
             spin = 8f;
+
+            homingPower = 2f;
+            homingRange = 120f;
+            trailColor = SnPal.nobiumBullet;
+            trailLength = 19;
+            trailWidth = 5;
 
             splashDamage = 40f;
             splashDamageRadius = 30f;
