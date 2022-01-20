@@ -26,13 +26,14 @@ public class SnBullets implements ContentList {
         heavyStandardDense, heavyStandardThorium, heavyStandardIncendiary, standardBlastBig, standardForsBig,
         sniperSurge,
         bigBlastPlastanium, bigBlastBlast, bigBlastPyratite, maxBlastPlastanium, maxBlastBlast, maxBlastSurge, reneubiteBlast,
+        reneubiteBullet,
         //bigHelicopterGun, bigHelicopterBullet, largeHelicopterBullet,
         starStunBullet, galaxyKnockbackBullet,
         wheel1Bullet, wheel2Shotgun, wheel3Burst, wheel4Shotgun,  wheel5Bullet,
         mirageGunBullet,
         machineBullet, bigMachineBullet,
         //rocket
-        smallBlueMissile, smallEnojieMissile,
+        smallBlueMissile, smallEnojieMissile, mediumEnojieMissile,
         powerRocket,
         thoriumPowerRocket, forsPowerRocket,
         //artillery
@@ -44,7 +45,7 @@ public class SnBullets implements ContentList {
         naturitePoisonBullet, bigNaturitePoison, heavyNaturitePoison,
         bigNobiumPoison, heavyNobiumPoison,
         bigPlastaniumPoison,
-        smallPlastaniumBullet, smallPyratiteBullet, smallSurgeAlloyBullet, smallForsSpine,
+        smallPlastaniumBullet, mediumPlastaniumBullet, smallPyratiteBullet, smallSurgeAlloyBullet, smallForsSpine, smallNobiumSpine,
         thoriumFlak, forsFlak,
         //shrapnel
         lightBlastGraphite, lightBlastSilicon,
@@ -56,7 +57,7 @@ public class SnBullets implements ContentList {
         //sap
         leadSap, sporeSap, planatriumSap,
         //energy sphere
-        smallEnergySphere, mediumEnergySphere,
+        smallEnergySphere, mediumEnergySphere, bigEnergySphere,
         //liquid
         floodWaterShot, floodCryoShot, floodSlagShot, floodOilShot, floodBurheynaShot,
         burheynaFrag,
@@ -288,7 +289,35 @@ public class SnBullets implements ContentList {
             knockback = 1;
             hittable = reflectable = absorbable = false;
             makeFire = true;
+        }};
 
+        reneubiteBullet = new BasicBulletType(6f, 50f, "missile") {{
+            width = 10;
+            height = 14;
+            lifetime = 30f;
+            frontColor = SnPal.renBlast1;
+            backColor = SnPal.renBlast2;
+            shootEffect = Fx.shootBig2;
+            despawnEffect = SnFx.hitReneubiteBullet;
+            hittable = reflectable = absorbable = false;
+            trailParam = 5f;
+            trailLength = 15;
+            trailWidth = 2f;
+            trailColor = SnPal.renBlast1;
+            fragBullets = 1;
+            fragCone = 1f;
+            fragVelocityMin = 0.9f;
+            fragVelocityMax = 0.9f;
+            fragBullet = new BasicBulletType(6f, 50f){{
+                width = 10;
+                height = 14;
+                lifetime = 25f;
+                trailParam = 5f;
+                trailLength = 15;
+                trailWidth = 2f;
+                trailColor = SnPal.renBlast1;
+                despawnEffect = SnFx.hitReneubiteBullet;
+            }};
         }};
 
         starStunBullet = new BasicBulletType() {{
@@ -488,7 +517,7 @@ public class SnBullets implements ContentList {
             shrinkY = 0f;
             drag = -0.003f;
             homingRange = 60f;
-            homingPower = 4f;
+            homingPower = 0.5f;
 
             splashDamageRadius = 30f;
             splashDamage = 25f;
@@ -506,6 +535,34 @@ public class SnBullets implements ContentList {
             pierce = true;
             pierceBuilding = true;
             pierceCap = 3;
+        }};
+
+        mediumEnojieMissile = new MissileBulletType(4f, 15) {{//yes
+            width = 10f;
+            height = 16f;
+            shrinkY = 0f;
+            drag = -0.003f;
+            homingRange = 75f;
+            homingPower = 1f;
+
+            splashDamageRadius = 45f;
+            splashDamage = 65f;
+
+            keepVelocity = false;
+            hitSound = Sounds.explosion;
+            lifetime = 65f;
+            backColor = SnPal.enojieBulletBack;
+            frontColor = SnPal.enojieBullet;
+            hitEffect = Fx.blastExplosion;
+            despawnEffect = Fx.blastExplosion;
+            pierce = true;
+            pierceBuilding = true;
+            pierceCap = 8;
+            trailColor = SnPal.enojieBullet;
+            trailWidth = 4f;
+            trailLength = 11;
+            weaveScale = 4f;
+            weaveMag = 2f;
         }};
 
         powerRocket = new MissileBulletType(7f, 920) {{
@@ -1122,6 +1179,37 @@ public class SnBullets implements ContentList {
             }};
             fragBullets = 4;
         }};
+        mediumPlastaniumBullet = new BasicBulletType(6f, 40) {{//yes
+            shrinkX = 0f;
+            shrinkY = 0f;
+            lifetime = 50f;
+            height = 18f;
+            width = 13f;
+            frontColor = Pal.plastanium;
+            backColor = Pal.plastaniumBack;
+
+            fragBullet = new BasicBulletType(4f, 20, "bullet"){{
+                width = 8f;
+                height = 12f;
+                shrinkY = 1f;
+                lifetime = 20f;
+                frontColor = Pal.plastanium;
+                backColor = Pal.plastaniumBack;
+                despawnEffect = Fx.none;
+                fragBullets = 5;
+                fragBullet = new BasicBulletType(3f, 10, "bullet"){{
+                    width = 5f;
+                    height = 9f;
+                    shrinkY = 1f;
+                    lifetime = 15f;
+
+                    frontColor = Pal.plastanium;
+                    backColor = Pal.plastaniumBack;
+                    despawnEffect = Fx.none;
+                }};
+            }};
+            fragBullets = 4;
+        }};
         smallPyratiteBullet = new BasicBulletType(5f, 15) {{//yes
             shrinkX = 0f;
             shrinkY = 0f;
@@ -1168,6 +1256,27 @@ public class SnBullets implements ContentList {
 
             splashDamage = 30f;
             splashDamageRadius = 25f;
+        }};
+
+        smallNobiumSpine = new FlakBulletType(6f, 10) {{
+            shrinkX = 0f;
+            shrinkY = 0f;
+            lifetime = 50f;
+            height = 13f;
+            width = 8f;
+            frontColor = SnPal.nobiumBullet;
+            backColor = SnPal.nobiumBulletBack;
+
+            spin = 8f;
+
+            homingPower = 2f;
+            homingRange = 120f;
+            trailColor = SnPal.nobiumBullet;
+            trailLength = 19;
+            trailWidth = 5;
+
+            splashDamage = 40f;
+            splashDamageRadius = 30f;
         }};
 
         thoriumFlak = new FlakBulletType(4f, 310) {{
@@ -1325,7 +1434,23 @@ public class SnBullets implements ContentList {
             }};
             fragBullets = 1;
             fragCone = 0.0001f;
-
+        }};
+        bigEnergySphere = new LightningSphereBulletType(4f, 12, "sunset-circle-bullet") {{
+            lifetime = 63f;
+            splashDamageRadius = 40f;
+            splashDamage = 55f;
+            height = 13f;
+            width = 13f;
+            LightningChance = 0.4f;
+            lightning = 3;
+            lightningLength = 6;
+            lightningColor = Pal.bulletYellow;
+            lightningDamage = 10f;
+            shrinkX = 0f;
+            shrinkY = 0f;
+            hitEffect = Fx.flakExplosion;
+            frontColor = Pal.bulletYellow;
+            backColor = Pal.bulletYellowBack;
         }};
         //endregion energy sphere
         //endregion energy
