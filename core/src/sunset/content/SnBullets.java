@@ -287,7 +287,7 @@ public class SnBullets implements ContentList {
             height = 14;
             lifetime = 30f;
             frontColor = SnPal.renBlast1;
-            backColor = SnPal.renBlast2;
+            backColor = Color.white;
             shootEffect = Fx.shootBig2;
             despawnEffect = SnFx.hitReneubiteBullet;
             hittable = reflectable = absorbable = false;
@@ -303,6 +303,8 @@ public class SnBullets implements ContentList {
                 width = 10;
                 height = 14;
                 lifetime = 25f;
+                frontColor = SnPal.renBlast1;
+                backColor = Color.white;
                 trailParam = 5f;
                 trailLength = 15;
                 trailWidth = 2f;

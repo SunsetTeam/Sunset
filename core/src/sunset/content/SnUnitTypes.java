@@ -203,10 +203,8 @@ public class SnUnitTypes implements ContentList{
             new WeaponExt("missile-launch"){{
                 rotate = false;
                 mirror = true;
-                x = 11f;
-                y = 10f;
-                layerOffset = -0.01f;
-                top = false;
+                x = 9f;
+                y = 3f;
                 spacing = 3f;
                 reload = 40f;
                 shake = 1f;
@@ -312,7 +310,8 @@ public class SnUnitTypes implements ContentList{
                 shake = 3f;
                 x = 0f;
                 y = 18f;
-                layerOffset = -1f;
+                layerOffset = -0.01f;
+                top = false;
                 reload = 37f;
                 shotDelay = 4f;
                 shots = 5;
