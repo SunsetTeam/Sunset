@@ -341,25 +341,25 @@ public class SnUnitTypes implements ContentList{
             smokeY = 0f;
             rotors(
             new Rotor("rotor-medium2"){{
-                offsetX = -16;
+                offsetX = -15;
                 offsetY = 20;
                 rotorRotateSpeed = -27f;
                 rotorCount = 3;
             }},
             new Rotor("rotor-medium2"){{
-                offsetX = -16;
+                offsetX = -15;
                 offsetY = 20;
                 rotorRotateSpeed = 27f;
                 rotorCount = 3;
             }},
             new Rotor("rotor-medium2"){{
-                offsetX = 16;
+                offsetX = 15;
                 offsetY = 20;
                 rotorRotateSpeed = 27f;
                 rotorCount = 3;
             }},
             new Rotor("rotor-medium2"){{
-                offsetX = 16;
+                offsetX = 15;
                 offsetY = 20;
                 rotorRotateSpeed = -27f;
                 rotorCount = 3;
