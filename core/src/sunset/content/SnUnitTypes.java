@@ -204,7 +204,7 @@ public class SnUnitTypes implements ContentList{
                 rotate = false;
                 mirror = true;
                 x = 9f;
-                y = 1f;
+                y = 3f;
                 spacing = 3f;
                 reload = 40f;
                 shake = 1f;
