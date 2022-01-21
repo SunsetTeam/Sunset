@@ -312,7 +312,8 @@ public class SnUnitTypes implements ContentList{
                 shake = 3f;
                 x = 0f;
                 y = 18f;
-                layerOffset = -1f;
+                layerOffset = -0.01f;
+                top = false;
                 reload = 37f;
                 shotDelay = 4f;
                 shots = 5;
