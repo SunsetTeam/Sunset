@@ -94,7 +94,7 @@ public class SnProduction implements ContentList{
 
         enojieDrill = new DRDrill("enojie-drill"){{
             requirements(Category.production, with(Items.copper, 410, Items.silicon, 380, SnItems.enojie, 370, Items.thorium, 200, Items.surgeAlloy, 190));
-            drillTime = 158;
+            drillTime = 150;
             size = 7;
             drawRim = true;
             hasPower = true;

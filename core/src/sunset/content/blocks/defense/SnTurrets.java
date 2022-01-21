@@ -545,14 +545,14 @@ public class SnTurrets implements ContentList{
             shootCone = 40f;
             recoilAmount = 4f;
             size = 6;
-            shootShake = 3f;
+            shootShake = 5f;
             range = 37.5f * Vars.tilesize;
             reloadTime = 8f * Time.toSeconds;
-            shootDuration = 40.0f * Time.toSeconds;
+            shootDuration = 13f * Time.toSeconds;
             restitution = 0.01f;
             cooldown = 0.05f;
             heatColor = Pal.turretHeat;
-            chargeTime = 0.5f * Time.toSeconds;
+            chargeTime = 0.4f * Time.toSeconds;
             chargeSound = Sounds.lasercharge2;
             powerUse = 26f;
             shootSound = Sounds.laserbig;
@@ -583,17 +583,17 @@ public class SnTurrets implements ContentList{
         //endregion 6x6
         //region 7x7
         halberd = new ModPowerTurret("halberd"){{
-            requirements(Category.turret, with(Items.copper, 2400, Items.metaglass, 1200, Items.lead, 1120, Items.silicon, 1200, Items.plastanium, 980, SnItems.nobium, 750, SnItems.fors, 710, SnItems.enojie, 690));
+            requirements(Category.turret, with(Items.copper, 2800, Items.metaglass, 1700, Items.lead, 1520, Items.silicon, 1200, Items.plastanium, 980, SnItems.nobium, 750, SnItems.enojie, 690));
             range = 350f;
             shots = 1;
             chargeTime = 145f;
-            rotateSpeed = 1.6F;
-            chargeMaxDelay = 140f;
+            rotateSpeed = 1.6f;
+            chargeMaxDelay = 110f;
             chargeEffects = 15;
             recoilAmount = 8f;
-            reloadTime = 345f;
+            reloadTime = 20f * Time.toSeconds;
             cooldown = 10f;
-            powerUse = 24f;
+            powerUse = 30f;
             shootShake = 8f;
             shootEffect = SnFx.galebardShoot;
             smokeEffect = Fx.none;
@@ -607,14 +607,14 @@ public class SnTurrets implements ContentList{
             shootSound = Sounds.laser;
             alternate = false;
 
-            shootType = new LaserBulletType(2500){{
+            shootType = new LaserBulletType(4500){{
                 colors = new Color[]{Pal.meltdownHit.cpy().a(0.4f), Pal.meltdownHit, Color.white};
                 despawnEffect = Fx.none;
                 lifetime = 60f;
                 drawSize = 440f;
                 collidesAir = false;
                 length = 370f;
-                width = 60.0F;
+                width = 60f;
             }};
         }};
         //endregion 7x7

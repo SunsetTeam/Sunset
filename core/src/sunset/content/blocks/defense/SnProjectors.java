@@ -12,12 +12,12 @@ import sunset.world.blocks.defense.projectors.DeflectorProjector;
 import static mindustry.type.ItemStack.with;
 
 public class SnProjectors implements ContentList {
-    public static Block repairStation, forcedome, deflectorProjector;
+    public static Block hugeRestoringProjector, forceDome, deflectorProjector;
 
     @Override
     public void load() {
 
-        repairStation = new RepairStation("repair-station"){{
+        hugeRestoringProjector = new RepairStation("huge-restoring-projector"){{
             requirements(Category.effect, with(Items.lead, 100, Items.titanium, 25, Items.silicon, 40, Items.copper, 50));
             consumes.power(1.5f);
             size = 2;
@@ -29,7 +29,7 @@ public class SnProjectors implements ContentList {
             consumes.item(Items.phaseFabric).boost();
         }};
 
-        forcedome = new ForceProjector("force-dome") {{
+        forceDome = new ForceProjector("force-dome") {{
             requirements(Category.effect, with(Items.titanium, 600, Items.thorium, 480, Items.silicon, 300, SnItems.naturite, 250, SnItems.nobium, 240, SnItems.enojie, 210));
             size = 5;
             radius = 220f;
