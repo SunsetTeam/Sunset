@@ -205,7 +205,8 @@ public class SnUnitTypes implements ContentList{
                 mirror = true;
                 x = 11f;
                 y = 10f;
-                layerOffset = -1f;
+                layerOffset = -0.01f;
+                top = false;
                 spacing = 3f;
                 reload = 40f;
                 shake = 1f;
@@ -222,7 +223,8 @@ public class SnUnitTypes implements ContentList{
                 mirror = false;
                 x = 0f;
                 y = 16f;
-                layerOffset = -1f;
+                layerOffset = -0.01f;
+                top = false;
                 reload = 25f;
                 shake = 1f;
                 recoil = 2f;
@@ -292,7 +294,8 @@ public class SnUnitTypes implements ContentList{
                 mirror = true;
                 x = 17f;
                 y = 17f;
-                layerOffset = -1f;
+                layerOffset = -0.01f;
+                top = false;
                 spacing = 4;
                 reload = 40f;
                 recoil = 5f;
@@ -338,25 +341,25 @@ public class SnUnitTypes implements ContentList{
             smokeY = 0f;
             rotors(
             new Rotor("rotor-medium2"){{
-                offsetX = -14;
+                offsetX = -16;
                 offsetY = 20;
                 rotorRotateSpeed = -27f;
                 rotorCount = 3;
             }},
             new Rotor("rotor-medium2"){{
-                offsetX = -14;
+                offsetX = -16;
                 offsetY = 20;
                 rotorRotateSpeed = 27f;
                 rotorCount = 3;
             }},
             new Rotor("rotor-medium2"){{
-                offsetX = 14;
+                offsetX = 16;
                 offsetY = 20;
                 rotorRotateSpeed = 27f;
                 rotorCount = 3;
             }},
             new Rotor("rotor-medium2"){{
-                offsetX = 14;
+                offsetX = 16;
                 offsetY = 20;
                 rotorRotateSpeed = -27f;
                 rotorCount = 3;
@@ -422,7 +425,8 @@ public class SnUnitTypes implements ContentList{
                 shake = 3f;
                 x = 0f;
                 y = 35f;
-                layerOffset = -1f;
+                layerOffset = -0.01f;
+                top = false;
                 reload = 20f;
                 shotDelay = 1f;
                 shots = 3;
@@ -485,7 +489,8 @@ public class SnUnitTypes implements ContentList{
                 mirror = true;
                 x = 30f;
                 y = 47f;
-                layerOffset = -1f;
+                layerOffset = -0.01f;
+                top = false;
                 reload = 65f;
                 recoil = 7f;
                 shake = 4f;
@@ -514,7 +519,8 @@ public class SnUnitTypes implements ContentList{
                 x = 45f;
                 y = 40f;
                 recoil = 3f;
-                layerOffset = -1f;
+                layerOffset = -0.01f;
+                top = false;
                 reload = 55f;
                 shotDelay = 4f;
                 shots = 2;
@@ -529,7 +535,8 @@ public class SnUnitTypes implements ContentList{
                 x = 0f;
                 y = 48f;
                 recoil = 4f;
-                layerOffset = -1f;
+                layerOffset = -0.01f;
+                top = false;
                 reload = 40f;
                 shotDelay = 1f;
                 shots = 1;
