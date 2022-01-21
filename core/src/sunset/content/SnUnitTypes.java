@@ -219,7 +219,7 @@ public class SnUnitTypes implements ContentList{
 
             new WeaponExt("small-energy-shpere-generator"){{
                 rotate = false;
-                mirror = true;
+                mirror = false;
                 x = 0f;
                 y = 16f;
                 layerOffset = -1f;
@@ -495,13 +495,13 @@ public class SnUnitTypes implements ContentList{
                 bullet = SnBullets.shrapnelCopterGun;
             }},
             new WeaponExt("gigant-minigun"){{
-                rotate = false;
-                mirror = true;
-                shake = 3f;
-                x = 23f;
-                y = -11f;
+                rotate = true;
+                mirror = false;
+                shake = 4f;
+                x = 0f;
+                y = 8f;
                 recoil = 4f;
-                reload = 8f;
+                reload = 7f;
                 shots = 1;
                 inaccuracy = 0.5f;
                 shootSound = Sounds.shootBig;
@@ -524,7 +524,7 @@ public class SnUnitTypes implements ContentList{
             }},
             new WeaponExt("medium-energy-sphere-generator"){{
                 rotate = false;
-                mirror = true;
+                mirror = false;
                 shake = 2f;
                 x = 0f;
                 y = 48f;
