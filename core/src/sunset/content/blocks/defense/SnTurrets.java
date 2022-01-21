@@ -547,13 +547,11 @@ public class SnTurrets implements ContentList{
             size = 6;
             shootShake = 5f;
             range = 37.5f * Vars.tilesize;
-            reloadTime = 8f * Time.toSeconds;
-            shootDuration = 13f * Time.toSeconds;
+            reloadTime = 6f * Time.toSeconds;
+            shootDuration = 10f * Time.toSeconds;
             restitution = 0.01f;
             cooldown = 0.05f;
             heatColor = Pal.turretHeat;
-            chargeTime = 0.4f * Time.toSeconds;
-            chargeSound = Sounds.lasercharge2;
             powerUse = 26f;
             shootSound = Sounds.laserbig;
             loopSound = Sounds.beam;
