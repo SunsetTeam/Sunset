@@ -41,7 +41,7 @@ public class SnTurrets implements ContentList{
     pressure, field, sniper, fanatic,
 
     //6x6
-    trident, melter, radius,
+    trident, disappearance, radius,
 
     //7x7
     halberd,
@@ -539,7 +539,7 @@ public class SnTurrets implements ContentList{
             health = 160 * size * size;
             coolantUsage = 0.9f;
         }};
-        melter = new LaserTurret("melter"){{
+        disappearance = new LaserTurret("disappearance"){{
             requirements(Category.turret, with(Items.copper, 1900, Items.lead, 1400, Items.graphite, 1600, Items.surgeAlloy, 1060, Items.silicon, 800));
             shootEffect = Fx.shootBigSmoke2;
             shootCone = 40f;
