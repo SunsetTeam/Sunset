@@ -23,6 +23,7 @@ import mindustry.graphics.Pal;
 import sunset.graphics.Drawm;
 import sunset.graphics.SnPal;
 import sunset.utils.test.DrawFunc;
+import sunset.world.blocks.defense.turrets.SynthesisTurret;
 
 import static arc.graphics.g2d.Draw.alpha;
 import static arc.graphics.g2d.Draw.color;
@@ -506,27 +507,6 @@ public class SnFx {
         });
     }),
 
-
-    berserkLaserHitSmall = new Effect(20, e -> {
-        Draw.color(Color.valueOf("CCCDDA"));
-        Floatc2 floatc2 = new Floatc2() {
-            @Override
-            public void get(float v, float v1) {
-                Fill.poly(e.x + v, e.y + v1, 4, 1.5f + e.fout() * 2f);
-            }
-        };
-        Angles.randLenVectors(e.id, 4, e.finpow() * 20, e.rotation, 360, floatc2);
-        Draw.color(Color.valueOf("FFFFFF"));
-        Floatc2 floatc21 = new Floatc2() {
-            @Override
-            public void get(float v, float v1) {
-                float angl = Mathf.angle(v, v1);
-                Lines.lineAngle(e.x + v, e.y + v1, angl, e.fout() * 1.5f);
-            }
-        };
-        Angles.randLenVectors(e.id, 4, e.finpow() * 20, e.rotation, 360, floatc21);
-    }),
-
     hitReneubiteBullet = new Effect(14, e -> {
         color(Color.white, SnPal.renBlast1, e.fin());
 
@@ -543,43 +523,6 @@ public class SnFx {
         });
 
         Drawf.light(e.x, e.y, 20f, SnPal.renBlast2, 0.6f * e.fout());
-    }),
-
-    empHit = new Effect(35, e -> {
-        randLenVectors(e.id, 6, 4f + e.fin() * 8f, (x, y) -> {
-            Draw.color(Color.valueOf("7FFFD4"), Color.valueOf("32D0DC"), e.fin());
-            float circleRad = 2f + e.fin() * 10f;
-            Lines.circle(e.x, e.y, circleRad);
-        });
-    }),
-
-    empShootSmall = new Effect(60, e -> {
-        randLenVectors(e.id, 35, 5f + e.fin() * 9, (x, y) -> {
-            Interp interp = Interp.linear;
-            float ifin = e.fin(Interp.linear);
-            Draw.color(SnPal.emp1, SnPal.emp2, ifin);
-            Lines.stroke(interp.apply(5, 10, e.fin()));
-        });
-    }),
-
-    empShootBig = new Effect(90, e -> {
-        randLenVectors(e.id, 35, 5f + e.fin() * 9, (x, y) -> {
-            Interp interp = Interp.linear;
-            float ifin = e.fin(Interp.linear);
-            Draw.color(SnPal.emp1, SnPal.emp2, ifin);
-            Lines.stroke(interp.apply(5, 20, e.fin()));
-        });
-    }),
-
-    empWave = new Effect(30, e -> {
-        randLenVectors(e.id, 10, 5f + e.fin() * 5f, (x, y) -> {
-            color(SnPal.emp1, SnPal.emp2, e.fin());
-            Fill.square(e.x + x, e.y + y, e.fout());
-        });
-        /*randLenVectors(e.id, 5, 3f + e.fin() * 5f, (x, y) -> {
-            color(Color.valueOf("CFEDD4"), Color.lime, e.fin());
-            Fill.square(e.x + x, e.y + y, e.fout());
-        });*/
     }),
     //endregion unorganized
 
@@ -610,6 +553,24 @@ public class SnFx {
         stroke(0.5f + e.fout());
         circle(e.x, e.y, e.fin() * 5f);
     }),//temporary unused
+
+    blockShieldBreak = new Effect(35, e -> {
+        if(!(e.data instanceof SynthesisTurret.SynthesisBuild)) return;
+        SynthesisTurret.SynthesisBuild build = e.data();
+
+        float radius = build.block.size * build.block.size * 1.3f;
+
+        e.scaled(16f, c -> {
+            color(Pal.shield);
+            stroke(c.fout() * 2f + 0.1f);
+
+            randLenVectors(e.id, (int)(radius * 1.2f), radius / 2f + c.finpow() * radius * 1.25f, (x, y) -> lineAngle(c.x + x, c.y + y, Mathf.angle(x, y), c.fout() * 5 + 1f));
+        });
+
+        color(Pal.shield, e.fout());
+        stroke(e.fout());
+        Lines.circle(e.x, e.y, radius);
+    }),
     //endregion green turrets
 
     laserArtHit = new Effect(20f, 50f, e -> {

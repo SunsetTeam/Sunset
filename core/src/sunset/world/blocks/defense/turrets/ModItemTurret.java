@@ -14,7 +14,6 @@ import mindustry.ui.Bar;
 import mindustry.world.blocks.defense.turrets.ItemTurret;
 import mma.graphics.ADrawf;
 import sunset.SnVars;
-import sunset.graphics.SnPal;
 import sunset.utils.Utils;
 
 /** Item turret with useful things.

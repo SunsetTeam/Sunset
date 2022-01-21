@@ -35,7 +35,7 @@ public class SnBullets implements ContentList {
         //rocket
         smallBlueMissile, smallEnojieMissile, mediumEnojieMissile,
         powerRocket,
-        thoriumPowerRocket, forsPowerRocket,
+        thoriumPowerRocket, forsPowerRocket,//todo: use this
         //artillery
         artilleryFors, artilleryBlast,
         wheel4Artillery,
@@ -65,7 +65,7 @@ public class SnBullets implements ContentList {
         //flame
         heavyCoalFlame, heavyPyraFlame, flameidFlame,
         wheel5Flame,
-        infernoFlame/*reserved*/,
+        infernoFlame,//todo: use this
         //copters
         basicHelicopterGun,
         mediumHelicopterGun, helicopterMissile,
@@ -75,7 +75,7 @@ public class SnBullets implements ContentList {
         giantHelicopterGun, shrapnelCopterGun, bigClusterRocket, bigCopterEnergySphere,
         //special
         empBullet, empBulletEvo,
-        synthesisBullet1, synthesisBullet2, synthesisBullet3, synthesisBullet4, synthesisBullet5,
+        naturiteBolt1, naturiteBolt2, naturiteBolt3, naturiteBolt4, naturiteBolt5,
         laserArtThorium, laserArtPhase, laserArtEnojie, laserArtReneubite,
         torpedo1, torpedo2, torpedo3, torpedo4, torpedo5,
         //misc and testing
@@ -536,7 +536,6 @@ public class SnBullets implements ContentList {
             pierceBuilding = true;
             pierceCap = 3;
         }};
-
         mediumEnojieMissile = new MissileBulletType(4f, 15) {{//yes
             width = 10f;
             height = 16f;
@@ -617,7 +616,7 @@ public class SnBullets implements ContentList {
             keepVelocity = true;
             hitSound = Sounds.explosion;
             trailChance = 0.7f;
-            lifetime = 1f * Time.toSeconds;
+            lifetime = Time.toSeconds;
             //frontColor = SnPal.redfire1;
             //backColor = SnPal.redfire2;
             hitEffect = despawnEffect = Fx.blastExplosion;
@@ -1900,7 +1899,7 @@ public class SnBullets implements ContentList {
         //region special
         //region EMP
         empBullet = new LightningBulletType() {{
-            damage = 150;
+            damage = 320;
             lifetime = 50;
             status = SnStatusEffects.electricalShort;
             drawSize = 3;
@@ -1908,7 +1907,7 @@ public class SnBullets implements ContentList {
             hitSize = 36;
         }};
         empBulletEvo = new LightningBulletType() {{
-            damage = 320;
+            damage = 700;
             lifetime = 100;
             status = SnStatusEffects.electricalShort;
             drawSize = 5.3f;
@@ -1917,28 +1916,34 @@ public class SnBullets implements ContentList {
         }};
         //endregion EMP
         //region synthesis
-        synthesisBullet1 = new EnergyBoltBulletType(11, 70) {{
+        naturiteBolt1 = new EnergyBoltBulletType(11, 890) {{
             status = SnStatusEffects.molecula;
             lifetime = 7;
             inaccuracy = 7;
+            width = 10;
+            height = 35;
         }};
-        synthesisBullet2 = new EnergyBoltBulletType(14, 245) {{
+        naturiteBolt2 = new EnergyBoltBulletType(14, 1570) {{
             status = SnStatusEffects.molecula;
             lifetime = 6;
             inaccuracy = 11;
+            width = 10;
+            height = 35;
             fragBullets = 3;
             fragCone = 35;
-            fragBullet = new LaserBoltBulletType(12, 70) {{
+            fragBullet = new LaserBoltBulletType(12, 880) {{
                 status = SnStatusEffects.molecula;
                 lifetime = 30;
                 backColor = Pal.heal;
                 frontColor = Color.white;
             }};
         }};
-        synthesisBullet3 = new EnergyBoltBulletType(12, 350) {{
+        naturiteBolt3 = new EnergyBoltBulletType(12, 2100) {{
             status = SnStatusEffects.molecula;
             lifetime = 12;
             inaccuracy = 21;
+            width = 10;
+            height = 35;
             fragBullets = 1;
             fragBullet = new BulletType() {{
                 damage = 0;
@@ -1947,47 +1952,54 @@ public class SnBullets implements ContentList {
                 hitEffect = Fx.none;
             }};
         }};
-        synthesisBullet4 = new EnergyBoltBulletType(17, 700) {{
+        naturiteBolt4 = new EnergyBoltBulletType(17, 2750) {{
             status = SnStatusEffects.molecula;
             lifetime = 16;
             inaccuracy = 2;
+            width = 10;
+            height = 35;
             fragBullets = 6;
             fragCone = 360;
-            fragBullet = new LaserBoltBulletType(12, 70) {{
+            fragBullet = new LaserBoltBulletType(12, 880) {{
                 status = SnStatusEffects.molecula;
                 lifetime = 7.5f;
                 backColor = Pal.heal;
                 frontColor = Color.white;
             }};
-            splashDamage = 110;
+            splashDamage = 500;
             splashDamageRadius = 10 * Vars.tilesize;
             trailChance = 1;
             trailEffect = Fx.none;
             //trailEffect = SnFx.greenInstTrail;
         }};
-        synthesisBullet5 = new ArtilleryBulletType(9, 10) {{
+        naturiteBolt5 = new ArtilleryBulletType(9, 200) {{
             lifetime = 16;
             inaccuracy = 2;
+            width = 12;
+            height = 37;
             fragBullets = 3;
             fragCone = 360;
-            fragBullet = new BombBulletType(100, 5 * Vars.tilesize) {{
+            fragBullet = new BombBulletType(2300, 5 * Vars.tilesize) {{
                 lifetime = 11;
+                width = 5;
+                height = 7;
                 backColor = Pal.heal;
                 frontColor = Color.white;
                 fragBullets = 12;
                 fragCone = 360;
-                fragBullet = new EnergyBoltBulletType(15, 490) {{
+                fragBullet = new EnergyBoltBulletType(15, 1500) {{
                     status = SnStatusEffects.molecula;
                     lifetime = 8f;
+                    width = 8;
+                    height = 33;
                     backColor = Pal.heal;
                     frontColor = Color.white;
                 }};
             }};
-            splashDamage = 7 * Vars.tilesize;
+            splashDamage = 600 * Vars.tilesize;
             splashDamageRadius = 56;
             trailChance = 1;
             trailEffect = Fx.artilleryTrail;
-            //trailEffect = SnFx.greenInstTrail;
         }};
         //endregion synthesis
         //region laser art
