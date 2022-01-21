@@ -203,9 +203,8 @@ public class SnUnitTypes implements ContentList{
             new WeaponExt("missile-launch"){{
                 rotate = false;
                 mirror = true;
-                x = 11f;
-                y = 10f;
-                layerOffset = -1f;
+                x = 9f;
+                y = 3f;
                 spacing = 3f;
                 reload = 40f;
                 shake = 1f;
@@ -219,10 +218,11 @@ public class SnUnitTypes implements ContentList{
 
             new WeaponExt("small-energy-shpere-generator"){{
                 rotate = false;
-                mirror = true;
+                mirror = false;
                 x = 0f;
                 y = 16f;
-                layerOffset = -1f;
+                layerOffset = -0.01f;
+                top = false;
                 reload = 25f;
                 shake = 1f;
                 recoil = 2f;
@@ -292,7 +292,8 @@ public class SnUnitTypes implements ContentList{
                 mirror = true;
                 x = 17f;
                 y = 17f;
-                layerOffset = -1f;
+                layerOffset = -0.01f;
+                top = false;
                 spacing = 4;
                 reload = 40f;
                 recoil = 5f;
@@ -309,7 +310,8 @@ public class SnUnitTypes implements ContentList{
                 shake = 3f;
                 x = 0f;
                 y = 18f;
-                layerOffset = -1f;
+                layerOffset = -0.01f;
+                top = false;
                 reload = 37f;
                 shotDelay = 4f;
                 shots = 5;
@@ -338,25 +340,25 @@ public class SnUnitTypes implements ContentList{
             smokeY = 0f;
             rotors(
             new Rotor("rotor-medium2"){{
-                offsetX = -14;
+                offsetX = -15;
                 offsetY = 20;
                 rotorRotateSpeed = -27f;
                 rotorCount = 3;
             }},
             new Rotor("rotor-medium2"){{
-                offsetX = -14;
+                offsetX = -15;
                 offsetY = 20;
                 rotorRotateSpeed = 27f;
                 rotorCount = 3;
             }},
             new Rotor("rotor-medium2"){{
-                offsetX = 14;
+                offsetX = 15;
                 offsetY = 20;
                 rotorRotateSpeed = 27f;
                 rotorCount = 3;
             }},
             new Rotor("rotor-medium2"){{
-                offsetX = 14;
+                offsetX = 15;
                 offsetY = 20;
                 rotorRotateSpeed = -27f;
                 rotorCount = 3;
@@ -422,7 +424,8 @@ public class SnUnitTypes implements ContentList{
                 shake = 3f;
                 x = 0f;
                 y = 35f;
-                layerOffset = -1f;
+                layerOffset = -0.01f;
+                top = false;
                 reload = 20f;
                 shotDelay = 1f;
                 shots = 3;
@@ -485,7 +488,8 @@ public class SnUnitTypes implements ContentList{
                 mirror = true;
                 x = 30f;
                 y = 47f;
-                layerOffset = -1f;
+                layerOffset = -0.01f;
+                top = false;
                 reload = 65f;
                 recoil = 7f;
                 shake = 4f;
@@ -495,13 +499,13 @@ public class SnUnitTypes implements ContentList{
                 bullet = SnBullets.shrapnelCopterGun;
             }},
             new WeaponExt("gigant-minigun"){{
-                rotate = false;
-                mirror = true;
-                shake = 3f;
-                x = 23f;
-                y = -11f;
+                rotate = true;
+                mirror = false;
+                shake = 4f;
+                x = 0f;
+                y = 8f;
                 recoil = 4f;
-                reload = 8f;
+                reload = 7f;
                 shots = 1;
                 inaccuracy = 0.5f;
                 shootSound = Sounds.shootBig;
@@ -514,7 +518,8 @@ public class SnUnitTypes implements ContentList{
                 x = 45f;
                 y = 40f;
                 recoil = 3f;
-                layerOffset = -1f;
+                layerOffset = -0.01f;
+                top = false;
                 reload = 55f;
                 shotDelay = 4f;
                 shots = 2;
@@ -524,12 +529,13 @@ public class SnUnitTypes implements ContentList{
             }},
             new WeaponExt("medium-energy-sphere-generator"){{
                 rotate = false;
-                mirror = true;
+                mirror = false;
                 shake = 2f;
                 x = 0f;
                 y = 48f;
                 recoil = 4f;
-                layerOffset = -1f;
+                layerOffset = -0.01f;
+                top = false;
                 reload = 40f;
                 shotDelay = 1f;
                 shots = 1;

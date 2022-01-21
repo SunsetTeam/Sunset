@@ -42,17 +42,28 @@ public class MinigunTurret extends ItemTurret{
     public class MinigunTurretBuild extends ItemTurretBuild{
         boolean isShoot = false;
         float totalShootingTime = 0;
+        @Override
+        protected void shoot(BulletType type){
+            isShoot = false;
+            super.shoot(type);
+        }
+        @Override
+        protected void updateShooting(){
+            boolean canShoot = reload + delta() * peekAmmo().reloadMultiplier * baseReloadSpeed() >= reloadTime && !charging;
+            this.isShoot = canShoot;
+            super.updateShooting();
+            if(!canShoot || isShoot) return;
+            totalShootingTime += Time.delta;
+        }
+
 
         @Override
         public void bullet(BulletType type, float angle){
             super.bullet(type, angle + Mathf.range(inaccuracyUp * totalShootingTime));
         }
 
-        @Override
-        protected void shoot(BulletType type){
-            isShoot = false;
-            super.shoot(type);
-        }
+
+
 
         @Override
         public void updateTile(){
@@ -71,15 +82,6 @@ public class MinigunTurret extends ItemTurret{
         public void draw(){
             super.draw();
             ADrawf.drawText(this, "totalShootingTime: " + totalShootingTime);
-        }
-
-        @Override
-        protected void updateShooting(){
-            boolean canShoot = reload + delta() * peekAmmo().reloadMultiplier * baseReloadSpeed() >= reloadTime && !charging;
-            this.isShoot = canShoot;
-            super.updateShooting();
-            if(!canShoot || isShoot) return;
-            totalShootingTime += Time.delta;
         }
 
         @Override

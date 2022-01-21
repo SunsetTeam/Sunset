@@ -1,5 +1,7 @@
 package sunset.content.blocks.defense;
 
+import arc.util.Time;
+import mindustry.Vars;
 import mindustry.content.Items;
 import mindustry.ctype.ContentList;
 import mindustry.type.Category;
@@ -12,24 +14,25 @@ import sunset.world.blocks.defense.projectors.DeflectorProjector;
 import static mindustry.type.ItemStack.with;
 
 public class SnProjectors implements ContentList {
-    public static Block repairStation, forcedome, deflectorProjector;
+    public static Block hugeRestoringProjector, forceDome, deflectorProjector;
 
     @Override
     public void load() {
 
-        repairStation = new RepairStation("repair-station"){{
-            requirements(Category.effect, with(Items.lead, 100, Items.titanium, 25, Items.silicon, 40, Items.copper, 50));
-            consumes.power(1.5f);
-            size = 2;
-            reload = 250f;
-            range = 85f;
-            healPercent = 11f;
+        hugeRestoringProjector = new RepairStation("huge-restoring-projector"){{
+            requirements(Category.effect, with(Items.lead, 560, Items.titanium, 255, Items.silicon, 140, SnItems.nobium, 100));
+            consumes.power(4.4f);
+            size = 5;
+            reload = 15f * Time.toSeconds;
+            range = 15f * Vars.tilesize;
+            healPercent = 20f;
+            repairHealth = 250f;
             phaseBoost = 15f;
             health = 80 * size * size;
-            consumes.item(Items.phaseFabric).boost();
+            consumes.item(SnItems.nobium).boost();
         }};
 
-        forcedome = new ForceProjector("force-dome") {{
+        forceDome = new ForceProjector("force-dome") {{
             requirements(Category.effect, with(Items.titanium, 600, Items.thorium, 480, Items.silicon, 300, SnItems.naturite, 250, SnItems.nobium, 240, SnItems.enojie, 210));
             size = 5;
             radius = 220f;

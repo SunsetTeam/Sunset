@@ -1,6 +1,7 @@
 package sunset.content.blocks;
 
 import arc.graphics.*;
+import arc.util.Time;
 import mindustry.ctype.*;
 import mindustry.content.*;
 import mindustry.entities.Effect;
@@ -59,7 +60,7 @@ public class SnEnvironment implements ContentList {
             oreThreshold = 0.921f;
             oreScale = 26.1234f;
             status = StatusEffects.burning;
-            statusDuration = 60f;
+            statusDuration = 2f * Time.toSeconds;
         }};
         oreColdent = new OreBlock(SnItems.coldent) {{
             oreDefault = false;

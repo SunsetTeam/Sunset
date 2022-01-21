@@ -30,6 +30,25 @@ import sunset.entities.bullet.EnergySphereBulletType;
 import sunset.entities.bullet.LightningContinuousLaserBulletType;
 import sunset.graphics.SnPal;
 import sunset.type.MissileType;
+import arc.graphics.*;
+import arc.math.geom.*;
+import arc.struct.*;
+import arc.util.*;
+import mindustry.*;
+import mindustry.content.*;
+import mindustry.ctype.*;
+import mindustry.entities.bullet.*;
+import mindustry.gen.*;
+import mindustry.graphics.*;
+import mindustry.type.*;
+import mindustry.world.*;
+import mindustry.world.blocks.defense.turrets.*;
+import mindustry.world.consumers.ConsumeCoolant;
+import mindustry.world.meta.*;
+import sunset.content.*;
+import sunset.entities.bullet.*;
+import sunset.graphics.*;
+import sunset.type.*;
 import sunset.world.blocks.defense.turrets.*;
 
 import static mindustry.type.ItemStack.with;
@@ -52,7 +71,7 @@ public class SnTurrets implements ContentList{
     pressure, field, sniper, fanatic, defibrillator,
 
     //6x6
-    trident, melter, radius,
+    trident, disappearance, radius,
 
     //7x7
     halberd, pinwheel, inferno/*reserved*/,
@@ -546,7 +565,7 @@ public class SnTurrets implements ContentList{
             }};
         }};
         radius = new MinigunTurret("radius"){{
-            requirements(Category.turret, with(Items.copper, 1400, Items.graphite, 800, Items.surgeAlloy, 650, Items.plastanium, 555, SnItems.fors, 520, Items.thorium, 480, SnItems.enojie, 420));
+            requirements(Category.turret, with(Items.copper, 2000, Items.graphite, 1500, Items.surgeAlloy, 1050, Items.plastanium, 855, SnItems.enojie, 620));
             ammo(
             Items.graphite, SnBullets.heavyStandardDense,
             Items.pyratite, SnBullets.heavyStandardIncendiary,
@@ -574,25 +593,27 @@ public class SnTurrets implements ContentList{
             health = 160 * size * size;
             coolantUsage = 0.9f;
         }};
-        melter = new LaserTurret("melter"){{
-            requirements(Category.turret, with(Items.copper, 1500, Items.lead, 900, Items.graphite, 800, Items.surgeAlloy, 760, Items.silicon, 500));
+        disappearance = new LaserTurret("disappearance"){{
+            requirements(Category.turret, with(Items.copper, 1900, Items.lead, 1400, Items.graphite, 1600, Items.surgeAlloy, 1060, Items.silicon, 800));
             shootEffect = Fx.shootBigSmoke2;
             shootCone = 40f;
-            recoilAmount = 6f;
+            recoilAmount = 4f;
             size = 6;
-            shootShake = 3f;
+            shootShake = 5f;
             range = 37.5f * Vars.tilesize;
-            reloadTime = 2.5f * Time.toSeconds;
-            firingMoveFract = 0.5f;
-            shootDuration = 50.0f + 5 * Time.toSeconds;
+            reloadTime = 6f * Time.toSeconds;
+            shootDuration = 10f * Time.toSeconds;
+            restitution = 0.01f;
+            cooldown = 0.05f;
+            heatColor = Pal.turretHeat;
             powerUse = 26f;
             shootSound = Sounds.laserbig;
             loopSound = Sounds.beam;
             loopSoundVolume = 2.5f;
 
             shootType = new LightningContinuousLaserBulletType(170){{
-                length = 360f;
-                width = 17f;
+                length = 380f;
+                width = 15f;
                 hitEffect = Fx.hitMeltdown;
                 hitColor = Pal.meltdownHit;
                 status = StatusEffects.melting;
@@ -601,29 +622,30 @@ public class SnTurrets implements ContentList{
                 lightning = 2;
                 lightningDamage = 30;
                 lightningLength = 25;
-                lightningCone = 160;
+                lightningCone = 90;
                 lightningColor = Pal.meltdownHit;
 
                 incendChance = 0.4f;
                 incendSpread = 5f;
                 incendAmount = 1;
-                ammoMultiplier = 1f;
             }};
+            health = 240 * size * size;
+            consumes.add(new ConsumeCoolant(0.5f)).update(false);
         }};
         //endregion 6x6
         //region 7x7
         halberd = new ModPowerTurret("halberd"){{
-            requirements(Category.turret, with(Items.copper, 2400, Items.metaglass, 1200, Items.lead, 1120, Items.silicon, 1200, Items.plastanium, 980, SnItems.nobium, 750, SnItems.fors, 710, SnItems.enojie, 690));
+            requirements(Category.turret, with(Items.copper, 2800, Items.metaglass, 1700, Items.lead, 1520, Items.silicon, 1200, Items.plastanium, 980, SnItems.nobium, 750, SnItems.enojie, 690));
             range = 350f;
             shots = 1;
             chargeTime = 145f;
-            rotateSpeed = 1.6F;
-            chargeMaxDelay = 140f;
+            rotateSpeed = 1.6f;
+            chargeMaxDelay = 110f;
             chargeEffects = 15;
             recoilAmount = 8f;
-            reloadTime = 345f;
+            reloadTime = 20f * Time.toSeconds;
             cooldown = 10f;
-            powerUse = 24f;
+            powerUse = 30f;
             shootShake = 8f;
             shootEffect = SnFx.galebardShoot;
             smokeEffect = Fx.none;
@@ -637,14 +659,14 @@ public class SnTurrets implements ContentList{
             shootSound = Sounds.laser;
             alternate = false;
 
-            shootType = new LaserBulletType(2500){{
+            shootType = new LaserBulletType(4500){{
                 colors = new Color[]{Pal.meltdownHit.cpy().a(0.4f), Pal.meltdownHit, Color.white};
                 despawnEffect = Fx.none;
                 lifetime = 60f;
                 drawSize = 440f;
                 collidesAir = false;
                 length = 370f;
-                width = 60.0F;
+                width = 60f;
             }};
         }};
         pinwheel = new Turret360("pinwheel") {{
