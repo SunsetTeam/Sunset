@@ -1,29 +1,40 @@
 package sunset.world.blocks.defense.turrets;
 
-import arc.graphics.*;
-import arc.graphics.g2d.*;
-import arc.math.*;
-import arc.struct.*;
-import arc.util.*;
-import mindustry.*;
-import mindustry.annotations.Annotations.*;
-import mindustry.content.*;
-import mindustry.entities.*;
-import mindustry.entities.bullet.*;
-import mindustry.gen.*;
-import mindustry.graphics.*;
-import mindustry.type.*;
+import arc.graphics.Color;
+import arc.graphics.g2d.Draw;
+import arc.graphics.g2d.Lines;
+import arc.graphics.g2d.TextureRegion;
+import arc.math.Mathf;
+import arc.struct.Seq;
+import arc.util.Time;
+import arc.util.Tmp;
+import mindustry.Vars;
+import mindustry.annotations.Annotations.Load;
+import mindustry.content.Fx;
+import mindustry.content.StatusEffects;
+import mindustry.entities.Effect;
+import mindustry.entities.bullet.BulletType;
+import mindustry.gen.Sounds;
+import mindustry.gen.Teamc;
+import mindustry.gen.Tex;
+import mindustry.graphics.Layer;
+import mindustry.graphics.Pal;
+import mindustry.type.Liquid;
 import mindustry.ui.Bar;
-import mindustry.world.blocks.defense.turrets.*;
-import mindustry.world.meta.*;
+import mindustry.world.blocks.defense.turrets.PowerTurret;
+import mindustry.world.consumers.ConsumeLiquidBase;
+import mindustry.world.consumers.ConsumeType;
+import mindustry.world.meta.Stat;
+import mindustry.world.meta.StatUnit;
+import mindustry.world.meta.StatValues;
 import sunset.SnVars;
-import sunset.content.*;
-import sunset.utils.*;
+import sunset.utils.Utils;
 
-import static arc.Core.settings;
+import static arc.graphics.g2d.Draw.color;
+import static arc.graphics.g2d.Lines.stroke;
 
 public class EMPFacility extends PowerTurret {
-    public Seq<Core> parts = new Seq<>();
+    public Seq<Core> cores = new Seq<>();
     public boolean hasSpinners;
     public Color lightningColor;
     public float zapAngleRand, spinUp, spinDown, rangeExtention, lightningStroke = 3.5f;
@@ -40,7 +51,13 @@ public class EMPFacility extends PowerTurret {
         shootSound = Sounds.release;
         shootEffect = Fx.none;
         cooldown = 0.5f;
-        //parts.add(new Core(2.5f));
+        //cores.add(new Core(2.5f));
+    }
+
+    @Override
+    public void init() {
+        consumes.powerCond(powerUse, TurretBuild::isShooting);
+        super.init();
     }
 
     @Override
@@ -64,6 +81,9 @@ public class EMPFacility extends PowerTurret {
                 }
             }).padTop(-9).left().get().background(Tex.underline);
         });
+
+        stats.remove(Stat.booster);
+        stats.add(Stat.input, StatValues.boosters(reloadTime, consumes.<ConsumeLiquidBase>get(ConsumeType.liquid).amount, coolantMultiplier, false, l -> consumes.liquidfilters.get(l.id)));
     }
 
     @Override
@@ -75,6 +95,12 @@ public class EMPFacility extends PowerTurret {
                 () -> Mathf.clamp(entity.reload / reloadTime)
         ));
     }
+
+    public Effect ShootEffect = new Effect (22, e -> {
+        color(Pal.lancerLaser);
+        stroke(e.fout() * 2f);
+        Lines.circle(e.x, e.y, this.range);
+    });
 
     public static class Core {
         public float rotationMul = 12f;
@@ -104,6 +130,7 @@ public class EMPFacility extends PowerTurret {
 
             Draw.rect(top, x, y);
 
+            //this.drawTeamTop();
         }
 
         @Override
@@ -123,13 +150,15 @@ public class EMPFacility extends PowerTurret {
 
         @Override
         protected void shoot(BulletType type) {
+
             targets.clear();
 
             targets = Utils.allNearbyEnemiesOld(team, x, y, range + rangeExtention);
 
-            if(targets.size > 0) {
-                for(int i = 0; i < shots; i++) {
-                    Core part = parts.random();
+            if (targets.size > 0) {
+                for (int i = 0; i < shots; i++) {
+
+                    Core part = cores.random();
                     Teamc target = targets.random();
 
                     Tmp.v1.trns(rotation * part.rotationMul, part.xOffset, part.yOffset);
@@ -139,22 +168,25 @@ public class EMPFacility extends PowerTurret {
                     float shootX = x + Tmp.v1.x + Tmp.v2.x, shootY = y + Tmp.v1.y + Tmp.v2.y;
                     float sX = target.x() + Tmp.v3.x, sY = target.y() + Tmp.v3.y;
 
-                    float shootAngle = Angles.angle(shootX, shootY, sX, sY);
+                    /*float shootAngle = Angles.angle(shootX, shootY, sX, sY);
+
                     float dist = Mathf.dst(shootX, shootY, sX, sY);
 
-                    SnFx.fakeLightning.at(shootX, shootY, shootAngle, lightningColor, new Object[]{dist, lightningStroke, team});
+                    SnFx.fakeLightning.at(shootX, shootY, shootAngle, lightningColor, new Object[] {dist, lightningStroke, team});*/
+
                     shootSound.at(shootX, shootY, Mathf.random(0.9f, 1.1f));
-                    shootEffect.at(shootX, shootY, shootAngle, lightningColor);
-                    if(shootShake > 0f) {
+
+                    if (shootShake > 0f) {
                         Effect.shake(shootShake, shootShake, this);
                     }
                     final float spawnX = sX, spawnY = sY;
                     Time.run(3f, () -> {
-                        for(int j = 0; j < zaps; j++) {
+                        for (int j = 0; j < zaps; j++) {
                             shootType.create(this, team, spawnX, spawnY, ((360f / zaps) * j) + Mathf.range(zapAngleRand));
                         }
                     });
                 }
+                ShootEffect.at(x, y, 0, lightningColor);
             }
         }
 

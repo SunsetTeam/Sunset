@@ -204,9 +204,9 @@ public class SnCrafting implements ContentList{
         }};
         //endregion standard
 		testCrafter = new GenericCrafter("test-crafter") {{
-				size = 2;
-				outputItem = new ItemStack(Items.lead, 4);
-				consumes.items(with(Items.lead, 2));
-			}};
+            size = 2;
+            outputItem = new ItemStack(Items.lead, 4);
+            consumes.items(with(Items.lead, 2));
+        }};
     }
 }
