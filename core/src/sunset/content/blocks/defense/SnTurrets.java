@@ -534,7 +534,6 @@ public class SnTurrets implements ContentList{
             spread = 18f;
             rotateSpeed = 0;
             powerBullet = SnBullets.powerLight;
-            debug = true;//TODO off this when done
         }};
         //endregion 5x5
         //region 6x6
@@ -694,7 +693,6 @@ public class SnTurrets implements ContentList{
             spread = 22.5f;
             rotateSpeed = 5;
             powerBullet = SnBullets.powerRocket;
-            debug = true;//TODO off this when done
         }};
         //endregion 7x7
         //region missile
@@ -956,6 +954,5 @@ public class SnTurrets implements ContentList{
             powerUse = 25;
         }};*/
         //endregion synthesis
-        //endregion special
     }
 }
