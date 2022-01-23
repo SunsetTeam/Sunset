@@ -615,7 +615,7 @@ public class SnTurrets implements ContentList{
                 width = 15f;
                 hitEffect = Fx.hitMeltdown;
                 hitColor = Pal.meltdownHit;
-                status = StatusEffects.melting;
+                status = SnStatusEffects.incineration;
                 drawSize = 52.5f*Vars.tilesize;
 
                 lightning = 2;

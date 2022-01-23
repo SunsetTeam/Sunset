@@ -24,7 +24,7 @@ public class SnProjectors implements ContentList {
             consumes.power(4.4f);
             size = 5;
             reload = 15f * Time.toSeconds;
-            range = 15f * Vars.tilesize;
+            range = 17f * Vars.tilesize;
             healPercent = 20f;
             repairHealth = 250f;
             phaseBoost = 15f;

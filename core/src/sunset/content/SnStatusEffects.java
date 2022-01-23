@@ -25,7 +25,7 @@ public class SnStatusEffects implements ContentList {
             molecula,
 
             //stackable
-            overheat;
+            overheat, incineration;
 
     @Override
     public void load() {
@@ -184,6 +184,27 @@ public class SnStatusEffects implements ContentList {
                 Draw.rect(wrap, camera.position.x, camera.position.y, camera.width, camera.height);
                 //Vars.renderer.effectBuffer.blit(Shaders.screenspace);
                 Draw.color();
+            }
+        };
+
+        //region stackable
+        incineration = new StackableStatusEffect("incineration") {
+            {
+                color = Color.valueOf("BD4E17");
+                maxStacks = 20;
+                healthMultipliers.addAll(0.97f, 0.96f, 0.95f, 0.94f, 0.93f, 0.92f,
+                        0.88f, 0.86f, 0.83f, 0.80f, 0.79f,
+                        0.75f, 0.71f, 0.67f, 0.60f,
+                        0.55f, 0.50f, 0.39f,
+                        0.21f, 0.11f,
+                        0.04f);
+                speedMultipliers.addAll(0.97f, 0.97f, 0.97f, 0.97f, 0.98f,
+                        0.95f, 0.95f, 0.95f, 0.974f, 0.93f,
+                        0.93f, 0.93f, 0.93f, 0.92f, 0.92f,
+                        0.91f, 0.91f, 0.91f, 0.90f, 0.89f, 0.85f);
+                healthMultiplier = 0.97f;
+                speedMultiplier = 0.97f;
+                color = SnPal.incineration;
             }
         };
         //endregion stackable
