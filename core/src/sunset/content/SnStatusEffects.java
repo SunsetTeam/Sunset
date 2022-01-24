@@ -1,37 +1,34 @@
 package sunset.content;
 
-import arc.graphics.Color;
-import arc.graphics.g2d.Draw;
-import arc.graphics.g2d.TextureRegion;
-import mindustry.Vars;
-import mindustry.content.Fx;
-import mindustry.content.StatusEffects;
-import mindustry.ctype.ContentList;
-import mindustry.gen.Unit;
-import mindustry.graphics.Layer;
-import mindustry.graphics.Pal;
-import mindustry.type.StatusEffect;
-import sunset.graphics.SnPal;
-import sunset.type.StackableStatusEffect;
+import arc.graphics.*;
+import arc.graphics.g2d.*;
+import mindustry.*;
+import mindustry.content.*;
+import mindustry.ctype.*;
+import mindustry.gen.*;
+import mindustry.graphics.*;
+import mindustry.type.*;
+import sunset.graphics.*;
+import sunset.type.*;
 
-import static arc.Core.camera;
+import static arc.Core.*;
 
-public class SnStatusEffects implements ContentList {
+public class SnStatusEffects implements ContentList{
     public static StatusEffect
-            //common
-            frostbite, stun, starBuff, galaxyDebuff, electricalShort, reloading, viscous, inferno,
+    //common
+    frostbite, stun, starBuff, galaxyDebuff, electricalShort, reloading, viscous, inferno,
 
-            //only reactive
-            molecula,
+    //only reactive
+    molecula,
 
-            //stackable
-            overheat, incineration;
+    //stackable
+    overheat, incineration;
 
     @Override
-    public void load() {
+    public void load(){
 
         //region common
-        frostbite = new StatusEffect("frostbite") {{
+        frostbite = new StatusEffect("frostbite"){{
             color = Color.valueOf("6ecdec");
             damage = 0.17f;
             speedMultiplier = 0.4f;
@@ -48,13 +45,13 @@ public class SnStatusEffects implements ContentList {
             });
         }};
 
-        stun = new StatusEffect("stun") {{
+        stun = new StatusEffect("stun"){{
             color = Color.valueOf("392f17");
             speedMultiplier = 0f;
             disarm = true;
         }};//no sprite
 
-        starBuff = new StatusEffect("star-buff") {{
+        starBuff = new StatusEffect("star-buff"){{
             color = Pal.surge;
             speedMultiplier = 1.3f;
             healthMultiplier = 1.15f;
@@ -62,13 +59,13 @@ public class SnStatusEffects implements ContentList {
             reloadMultiplier = 1.1f;
         }};
 
-        galaxyDebuff = new StatusEffect("galaxy-debuff") {{
+        galaxyDebuff = new StatusEffect("galaxy-debuff"){{
             speedMultiplier = 0.8f;
             damageMultiplier = 0.9f;
             reloadMultiplier = 0.8f;
         }};//no sprite
 
-        electricalShort = new StatusEffect("electric-short") {{
+        electricalShort = new StatusEffect("electric-short"){{
             effectChance = 100;
             speedMultiplier = 0;
             disarm = true;
@@ -78,30 +75,30 @@ public class SnStatusEffects implements ContentList {
             init(() -> {
                 opposite(StatusEffects.shocked);
                 affinity(StatusEffects.wet, ((unit, result, time) -> {
-                    unit.damagePierce(unit.health/4);
+                    unit.damagePierce(unit.health / 4);
                     result.set(reloading, 300);
                 }));
                 affinity(StatusEffects.freezing, ((unit, result, time) -> {
-                    unit.damagePierce(unit.health/2);
+                    unit.damagePierce(unit.health / 2);
                     result.set(reloading, 600);
                 }));
             });
         }};
 
-        reloading = new StatusEffect("reboot") {{
+        reloading = new StatusEffect("reboot"){{
             speedMultiplier = 0;
             disarm = true;
             color = Color.valueOf("047070");
         }};
 
-        viscous = new StatusEffect("viscous") {{
+        viscous = new StatusEffect("viscous"){{
             color = Color.valueOf("721A1A");
             speedMultiplier = 0.94f;
             effect = SnFx.viscous;
             effectChance = 0.09f;
         }};//no sprite
 
-        inferno = new StatusEffect("inferno") {{
+        inferno = new StatusEffect("inferno"){{
             color = SnPal.redfire1;
             effect = SnFx.redFlame;
             effectChance = 0.3f;
@@ -116,7 +113,7 @@ public class SnStatusEffects implements ContentList {
         }};//no sprite
         //endregion common
         //region only reactive
-        molecula = new StatusEffect("molecula") {{
+        molecula = new StatusEffect("molecula"){{
             color = Color.valueOf("3DD957");
             permanent = true;
             effect = Fx.heal;
@@ -146,33 +143,48 @@ public class SnStatusEffects implements ContentList {
         }};
         //endregion only reactive
         //region stackable
-        overheat = new StackableStatusEffect("overheat") {
+        overheat = new StackableStatusEffect("overheat"){
             boolean draw = false;
+
             {
                 color = Color.valueOf("FF30000");
                 maxStacks = 20;
-                healthMultipliers.addAll(0.99f, 0.98f, 0.97f, 0.96f, 0.95f, 0.94f, //-0.01
-                        0.92f, 0.90f, 0.86f, 0.84f, 0.82f, //-0.02
-                        0.79f, 0.76f, 0.73f, 0.70f, //-0.03
-                        0.65f, 0.60f, 0.55f, //-0.05
-                        0.47f, 0.39f); //-0.08
-                speedMultipliers.addAll(0.99f, 0.99f, 0.99f, 0.99f, 0.98f,
-                        0.98f, 0.98f, 0.98f, 0.97f, 0.96f,
-                        0.96f, 0.96f, 0.95f, 0.94f, 0.93f,
-                        0.93f, 0.93f, 0.92f, 0.91f, 0.90f);
+                stackEntries(
+                stackEntry().healthMultiplier(0.99f).speedMultiplier(0.99f),
+                stackEntry().healthMultiplier(0.98f).speedMultiplier(0.99f),
+                stackEntry().healthMultiplier(0.97f).speedMultiplier(0.99f),
+                stackEntry().healthMultiplier(0.96f).speedMultiplier(0.99f),
+                stackEntry().healthMultiplier(0.95f).speedMultiplier(0.98f),
+                stackEntry().healthMultiplier(0.94f).speedMultiplier(0.98f),
+                stackEntry().healthMultiplier(0.92f).speedMultiplier(0.98f),
+                stackEntry().healthMultiplier(0.90f).speedMultiplier(0.98f),
+                stackEntry().healthMultiplier(0.86f).speedMultiplier(0.97f),
+                stackEntry().healthMultiplier(0.84f).speedMultiplier(0.96f),
+                stackEntry().healthMultiplier(0.82f).speedMultiplier(0.96f),
+                stackEntry().healthMultiplier(0.79f).speedMultiplier(0.96f),
+                stackEntry().healthMultiplier(0.76f).speedMultiplier(0.95f),
+                stackEntry().healthMultiplier(0.73f).speedMultiplier(0.94f),
+                stackEntry().healthMultiplier(0.70f).speedMultiplier(0.93f),
+                stackEntry().healthMultiplier(0.65f).speedMultiplier(0.93f),
+                stackEntry().healthMultiplier(0.60f).speedMultiplier(0.93f),
+                stackEntry().healthMultiplier(0.55f).speedMultiplier(0.92f),
+                stackEntry().healthMultiplier(0.47f).speedMultiplier(0.91f),
+                stackEntry().healthMultiplier(0.39f).speedMultiplier(0.90f),
+                null
+                );
                 healthMultiplier = 0.99f;
                 speedMultiplier = 0.99f;
                 color = Color.red;
             }
 
             @Override
-            public void drawStack(Unit unit, int stackCount) {
-                if (draw) return;
+            public void drawStack(Unit unit, int stackCount){
+                if(draw) return;
                 Vars.renderer.effectBuffer.begin();
 
                 draw = true;
                 unit.draw();
-                draw=false;
+                draw = false;
 
                 Vars.renderer.effectBuffer.end();
 
@@ -180,7 +192,7 @@ public class SnStatusEffects implements ContentList {
 
                 Draw.color(color, (stackCount / 2f) / maxStacks);
                 TextureRegion wrap = Draw.wrap(Vars.renderer.effectBuffer.getTexture());
-                wrap.flip(false,true);
+                wrap.flip(false, true);
                 Draw.rect(wrap, camera.position.x, camera.position.y, camera.width, camera.height);
                 //Vars.renderer.effectBuffer.blit(Shaders.screenspace);
                 Draw.color();
@@ -188,25 +200,38 @@ public class SnStatusEffects implements ContentList {
         };
 
         //region stackable
-        incineration = new StackableStatusEffect("incineration") {
-            {
-                color = Color.valueOf("BD4E17");
-                maxStacks = 20;
-                healthMultipliers.addAll(0.97f, 0.96f, 0.95f, 0.94f, 0.93f, 0.92f,
-                        0.88f, 0.86f, 0.83f, 0.80f, 0.79f,
-                        0.75f, 0.71f, 0.67f, 0.60f,
-                        0.55f, 0.50f, 0.39f,
-                        0.21f, 0.11f,
-                        0.04f);
-                speedMultipliers.addAll(0.97f, 0.97f, 0.97f, 0.97f, 0.98f,
-                        0.95f, 0.95f, 0.95f, 0.974f, 0.93f,
-                        0.93f, 0.93f, 0.93f, 0.92f, 0.92f,
-                        0.91f, 0.91f, 0.91f, 0.90f, 0.89f, 0.85f);
-                healthMultiplier = 0.97f;
-                speedMultiplier = 0.97f;
-                color = SnPal.incineration;
-            }
-        };
+        incineration = new StackableStatusEffect("incineration"){{
+            color = Color.valueOf("BD4E17");
+            maxStacks = 20;
+            stackEntries(
+            stackEntry().health(0.97f).speed(0.97f),
+            stackEntry().health(0.96f).speed(0.97f),
+            stackEntry().health(0.95f).speed(0.97f),
+            stackEntry().health(0.94f).speed(0.97f),
+            stackEntry().health(0.93f).speed(0.98f),
+            stackEntry().health(0.92f).speed(0.95f),
+            stackEntry().health(0.88f).speed(0.95f),
+            stackEntry().health(0.86f).speed(0.95f),
+            stackEntry().health(0.83f).speed(0.974f),
+            stackEntry().health(0.80f).speed(0.93f),
+            stackEntry().health(0.79f).speed(0.93f),
+            stackEntry().health(0.75f).speed(0.93f),
+            stackEntry().health(0.71f).speed(0.93f),
+            stackEntry().health(0.67f).speed(0.92f),
+            stackEntry().health(0.60f).speed(0.92f),
+            stackEntry().health(0.55f).speed(0.91f),
+            stackEntry().health(0.50f).speed(0.91f),
+            stackEntry().health(0.39f).speed(0.91f),
+            stackEntry().health(0.21f).speed(0.90f),
+            stackEntry().health(0.11f).speed(0.89f),
+            stackEntry().health(0.04f).speed(0.85f),
+            null
+            );
+            healthMultiplier = 0.97f;
+            speedMultiplier = 0.97f;
+            color = SnPal.incineration;
+        }};
         //endregion stackable
     }
+
 }
