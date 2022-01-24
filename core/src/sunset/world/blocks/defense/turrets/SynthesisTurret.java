@@ -232,8 +232,8 @@ public class SynthesisTurret extends ItemTurret {
         //secondary armor (passive)
         @Override
         public float handleDamage(float amount) {
-            if (secondaryArmor != 0) {
-                return Math.max(amount - secondaryArmor, minArmorDamage * amount); //TODO make my own variant of secondary armor applying (% and etc...)
+            if (secondaryArmor != 0 | this.health < maxHealth / 10) {
+                return Math.max(amount - secondaryArmor, minArmorDamage * amount);
             } else return super.handleDamage(amount);
         }
 
