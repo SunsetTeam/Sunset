@@ -1,6 +1,5 @@
 package sunset.content;
 
-import arc.util.Time;
 import mindustry.ai.types.*;
 import mindustry.annotations.Annotations.EntityDef;
 import mindustry.content.Fx;
@@ -388,9 +387,9 @@ public class SnUnitTypes implements ContentList{
                 recoil = 5f;
                 shake = 2f;
                 ejectEffect = Fx.casing3;
-                inaccuracy = 4f;
+                inaccuracy = 9f;
                 shots = 2;
-                shotDelay = 5f;
+                shotDelay = 12f;
                 shootSound = Sounds.bang;
                 bullet = SnBullets.largeHelicopterMissile;
             }},
@@ -413,10 +412,10 @@ public class SnUnitTypes implements ContentList{
                 shake = 3f;
                 x = 25f;
                 y = 8f;
-                reload = 4f * Time.toSeconds;
-                shotDelay = 15f;
+                reload = 30f;
+                shotDelay = 4f;
                 shots = 2;
-                inaccuracy = 8f;
+                inaccuracy = 0.5f;
                 shootSound = Sounds.shootBig;
                 bullet = SnBullets.largeHelicopterGun;
             }},
