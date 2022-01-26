@@ -273,7 +273,7 @@ public class SnTurrets implements ContentList{
             targetAir = true;
             shootSound = Sounds.flame;
         }};
-        eternity = new ItemTurret("eternity"){{
+        eternity = new ModItemTurret("eternity"){{
             requirements(Category.turret, with(SnItems.fors, 230, Items.plastanium, 100, Items.graphite, 60, Items.surgeAlloy, 30));
             ammo(
             Items.plastanium, SnBullets.smallPlastaniumBullet,
@@ -642,7 +642,7 @@ public class SnTurrets implements ContentList{
             chargeMaxDelay = 110f;
             chargeEffects = 15;
             recoilAmount = 8f;
-            reloadTime = 20f * Time.toSeconds;
+            reloadTime = 8f * Time.toSeconds;
             cooldown = 10f;
             powerUse = 30f;
             shootShake = 8f;

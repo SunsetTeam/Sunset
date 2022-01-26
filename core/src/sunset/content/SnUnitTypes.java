@@ -274,14 +274,14 @@ public class SnUnitTypes implements ContentList{
             );
             weapons.add(
             new WeaponExt("laser-gun"){{
-                rotate = false;
+                rotate = true;
                 mirror = true;
                 shake = 2f;
-                x = -21f;
-                y = -1f;
+                x = -18f;
+                y = -4f;
                 reload = 20f;
                 shotDelay = 1f;
-                shootY = 3;
+                shootY = 7f;
                 shots = 1;
                 inaccuracy = 3f;
                 shootSound = Sounds.laser;
@@ -312,6 +312,7 @@ public class SnUnitTypes implements ContentList{
                 y = 18f;
                 layerOffset = -0.01f;
                 top = false;
+                shootY = 4f;
                 reload = 37f;
                 shotDelay = 4f;
                 shots = 5;
@@ -382,13 +383,13 @@ public class SnUnitTypes implements ContentList{
                 mirror = true;
                 x = 9f;
                 y = 4f;
-                spacing = 5;
                 reload = 50f;
                 recoil = 5f;
                 shake = 2f;
                 ejectEffect = Fx.casing3;
                 inaccuracy = 4f;
-                shots = 3;
+                shots = 2;
+                shotDelay = 5f;
                 shootSound = Sounds.bang;
                 bullet = SnBullets.largeHelicopterMissile;
             }},
@@ -504,6 +505,7 @@ public class SnUnitTypes implements ContentList{
                 shake = 4f;
                 x = 0f;
                 y = 8f;
+                layerOffset = -0.01f;
                 recoil = 4f;
                 reload = 7f;
                 shots = 1;
