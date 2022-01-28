@@ -190,7 +190,7 @@ public class SnStatusEffects implements ContentList {
         //region stackable
         incineration = new StackableStatusEffect("incineration") {
             {
-                color = SnPal.incineration;
+                color = Color.valueOf("130000");
                 maxStacks = 20;
                 healthMultipliers.addAll(0.99f, 0.96f, 0.95f, 0.94f, 0.93f, 0.92f,
                         0.88f, 0.86f, 0.83f, 0.80f, 0.79f,
@@ -204,6 +204,7 @@ public class SnStatusEffects implements ContentList {
                         0.91f, 0.91f, 0.91f, 0.90f, 0.89f, 0.85f);
                 healthMultiplier = 0.99f;
                 speedMultiplier = 0.99f;
+                color = SnPal.incineration;
             }
         };
         //endregion stackable
