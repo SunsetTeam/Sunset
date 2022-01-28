@@ -610,13 +610,14 @@ public class SnTurrets implements ContentList{
             loopSound = Sounds.beam;
             loopSoundVolume = 2.5f;
 
-            shootType = new LightningContinuousLaserBulletType(170){{
-                length = 500f;
+            shootType = new LightningContinuousLaserBulletType(160){{
+                length = 55f * Vars.tilesize;
                 width = 15f;
+                drawSize = 60f * Vars.tilesize;
                 hitEffect = Fx.hitMeltdown;
                 hitColor = Pal.meltdownHit;
                 status = SnStatusEffects.incineration;
-                drawSize = 550f;
+                statusDuration = 5f * Time.toSeconds;
 
                 lightning = 2;
                 lightningDamage = 30;
