@@ -599,7 +599,7 @@ public class SnTurrets implements ContentList{
             recoilAmount = 5f;
             size = 6;
             shootShake = 5f;
-            range = 47f * Vars.tilesize;
+            range = 50f * Vars.tilesize;
             reloadTime = 5f * Time.toSeconds;
             shootDuration = 10f * Time.toSeconds;
             restitution = 0.01f;
@@ -611,12 +611,12 @@ public class SnTurrets implements ContentList{
             loopSoundVolume = 2.5f;
 
             shootType = new LightningContinuousLaserBulletType(170){{
-                length = 55.5f * Vars.tilesize;
+                length = 70f * Vars.tilesize;
                 width = 15f;
                 hitEffect = Fx.hitMeltdown;
                 hitColor = Pal.meltdownHit;
                 status = SnStatusEffects.incineration;
-                drawSize = 56f * Vars.tilesize;
+                drawSize = 71f * Vars.tilesize;
 
                 lightning = 2;
                 lightningDamage = 30;
