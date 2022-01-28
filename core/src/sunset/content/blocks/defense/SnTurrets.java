@@ -595,12 +595,12 @@ public class SnTurrets implements ContentList{
         disappearance = new LaserTurret("disappearance"){{
             requirements(Category.turret, with(Items.copper, 1900, Items.lead, 1400, Items.graphite, 1600, Items.surgeAlloy, 1060, Items.silicon, 800));
             shootEffect = Fx.shootBigSmoke2;
-            shootCone = 40f;
-            recoilAmount = 4f;
+            shootCone = 45f;
+            recoilAmount = 5f;
             size = 6;
             shootShake = 5f;
-            range = 37.5f * Vars.tilesize;
-            reloadTime = 6f * Time.toSeconds;
+            range = 30f * Vars.tilesize;
+            reloadTime = 5f * Time.toSeconds;
             shootDuration = 10f * Time.toSeconds;
             restitution = 0.01f;
             cooldown = 0.05f;
@@ -611,16 +611,16 @@ public class SnTurrets implements ContentList{
             loopSoundVolume = 2.5f;
 
             shootType = new LightningContinuousLaserBulletType(170){{
-                length = 380f;
+                length = 55.5f * Vars.tilesize;
                 width = 15f;
                 hitEffect = Fx.hitMeltdown;
                 hitColor = Pal.meltdownHit;
                 status = SnStatusEffects.incineration;
-                drawSize = 52.5f*Vars.tilesize;
+                drawSize = 56f * Vars.tilesize;
 
                 lightning = 2;
                 lightningDamage = 30;
-                lightningLength = 25;
+                lightningLength = 30 * Vars.tilesize;
                 lightningCone = 90;
                 lightningColor = Pal.meltdownHit;
 
