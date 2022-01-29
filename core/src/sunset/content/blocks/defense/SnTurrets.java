@@ -622,7 +622,7 @@ public class SnTurrets implements ContentList{
 
                 lightning = 2;
                 lightningDamage = 30;
-                lightningLength = 30 * Vars.tilesize;
+                lightningLength = 25;
                 lightningCone = 90;
                 lightningColor = Pal.meltdownHit;
 
