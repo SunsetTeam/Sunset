@@ -107,7 +107,7 @@ public class SnUnitTypes implements ContentList{
             health = 310;
             hitSize = 20;
             speed = 2.9f;
-            rotateSpeed = 4.6f;
+            rotateSpeed = 4.5f;
             accel = 0.04f;
             drag = 0.016f;
             commandLimit = 3;
@@ -170,7 +170,7 @@ public class SnUnitTypes implements ContentList{
             health = 690;
             hitSize = 30;
             speed = 2.6f;
-            rotateSpeed = 4.1f;
+            rotateSpeed = 3.9f;
             accel = 0.08f;
             drag = 0.03f;
             commandLimit = 4;
@@ -236,7 +236,7 @@ public class SnUnitTypes implements ContentList{
             health = 6900;
             hitSize = 40;
             speed = 2.3f;
-            rotateSpeed = 3.6f;
+            rotateSpeed = 3.3f;
             accel = 0.06f;
             drag = 0.04f;
             commandLimit = 4;
@@ -275,7 +275,7 @@ public class SnUnitTypes implements ContentList{
             weapons.add(
             new WeaponExt("laser-gun"){{
                 rotate = true;
-                rotateSpeed = 5.4f;
+                rotateSpeed = 4.2f;
                 mirror = true;
                 shake = 2f;
                 x = -18f;
@@ -326,7 +326,7 @@ public class SnUnitTypes implements ContentList{
             health = 19700;
             hitSize = 70;
             speed = 2.1f;
-            rotateSpeed = 3f;
+            rotateSpeed = 2.6f;
             accel = 0.06f;
             drag = 0.04f;
             commandLimit = 5;
@@ -441,7 +441,7 @@ public class SnUnitTypes implements ContentList{
             health = 57000;
             hitSize = 90;
             speed = 1.5f;
-            rotateSpeed = 2.6f;
+            rotateSpeed = 2.1f;
             accel = 0.05f;
             drag = 0.04f;
             commandLimit = 6;
@@ -488,7 +488,6 @@ public class SnUnitTypes implements ContentList{
             new WeaponExt("large-shrapnel-gun"){{
                 rotate = false;
                 mirror = true;
-                rotateSpeed = 3f;
                 x = 30f;
                 y = 47f;
                 layerOffset = -0.01f;
@@ -504,6 +503,7 @@ public class SnUnitTypes implements ContentList{
             new WeaponExt("gigant-minigun"){{
                 rotate = true;
                 mirror = false;
+                rotateSpeed = 2.5f;
                 shake = 4f;
                 x = 0f;
                 y = 8f;

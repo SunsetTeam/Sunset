@@ -17,8 +17,8 @@ import mindustry.graphics.Drawf;
 import mindustry.graphics.Pal;
 
 public class LightningContinuousLaserBulletType extends BulletType {
-    public float length = 220f;
-    public float shake = 1f;
+    public float length = 0f;
+    public float shake = 0f;
     public float fadeTime = 16f;
     public float lightStroke = 40f;
     public float spaceMag = 35f;

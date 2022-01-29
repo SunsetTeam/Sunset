@@ -612,6 +612,7 @@ public class SnTurrets implements ContentList{
 
             shootType = new LightningContinuousLaserBulletType(160){{
                 length = 55f * Vars.tilesize;
+                shake = 4f;
                 width = 15f;
                 drawSize = 60f * Vars.tilesize;
                 hitEffect = Fx.hitMeltdown;
