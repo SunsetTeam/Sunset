@@ -171,6 +171,10 @@ public class StackableStatusEffect extends StatusEffect{
         statuses.add(entry);
     }
 
+    public StatusEffect stack(int index){
+        return stacks.get(index);
+    }
+
     private static final class StackableEntryStatusEffect extends StatusEffect{
 
 
@@ -264,14 +268,14 @@ public class StackableStatusEffect extends StatusEffect{
         }
 
         public void applyOn(StackableEntryStatusEffect effect){
-           effect.damageMultiplier=damageMultiplier;
-           effect.healthMultiplier=healthMultiplier;
-           effect.speedMultiplier=speedMultiplier;
-           effect.reloadMultiplier=reloadMultiplier;
-           effect.buildSpeedMultiplier=buildSpeedMultiplier;
-           effect.dragMultiplier=dragMultiplier;
-           effect.transitionDamage=transitionDamage;
-           effect.disarm=disarm.enabled();
+            effect.damageMultiplier=damageMultiplier;
+            effect.healthMultiplier=healthMultiplier;
+            effect.speedMultiplier=speedMultiplier;
+            effect.reloadMultiplier=reloadMultiplier;
+            effect.buildSpeedMultiplier=buildSpeedMultiplier;
+            effect.dragMultiplier=dragMultiplier;
+            effect.transitionDamage=transitionDamage;
+            effect.disarm=disarm.enabled();
         }
 
         public StackEntry damageMultiplier(float damageMultiplier){
