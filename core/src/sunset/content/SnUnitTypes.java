@@ -60,7 +60,7 @@ public class SnUnitTypes implements ContentList{
             health = 140;
             hitSize = 15;
             speed = 3.2f;
-            rotateSpeed = 5.4f;
+            rotateSpeed = 5f;
             accel = 0.04f;
             drag = 0.016f;
             commandLimit = 3;
@@ -107,7 +107,7 @@ public class SnUnitTypes implements ContentList{
             health = 310;
             hitSize = 20;
             speed = 2.9f;
-            rotateSpeed = 5f;
+            rotateSpeed = 4.5f;
             accel = 0.04f;
             drag = 0.016f;
             commandLimit = 3;
@@ -170,7 +170,7 @@ public class SnUnitTypes implements ContentList{
             health = 690;
             hitSize = 30;
             speed = 2.6f;
-            rotateSpeed = 4.6f;
+            rotateSpeed = 3.9f;
             accel = 0.08f;
             drag = 0.03f;
             commandLimit = 4;
@@ -236,7 +236,7 @@ public class SnUnitTypes implements ContentList{
             health = 6900;
             hitSize = 40;
             speed = 2.3f;
-            rotateSpeed = 4.1f;
+            rotateSpeed = 3.3f;
             accel = 0.06f;
             drag = 0.04f;
             commandLimit = 4;
@@ -274,14 +274,15 @@ public class SnUnitTypes implements ContentList{
             );
             weapons.add(
             new WeaponExt("laser-gun"){{
-                rotate = false;
+                rotate = true;
+                rotateSpeed = 4.2f;
                 mirror = true;
                 shake = 2f;
-                x = -21f;
-                y = -1f;
+                x = -18f;
+                y = -4f;
                 reload = 20f;
                 shotDelay = 1f;
-                shootY = 3;
+                shootY = 7f;
                 shots = 1;
                 inaccuracy = 3f;
                 shootSound = Sounds.laser;
@@ -312,6 +313,7 @@ public class SnUnitTypes implements ContentList{
                 y = 18f;
                 layerOffset = -0.01f;
                 top = false;
+                shootY = 4f;
                 reload = 37f;
                 shotDelay = 4f;
                 shots = 5;
@@ -324,7 +326,7 @@ public class SnUnitTypes implements ContentList{
             health = 19700;
             hitSize = 70;
             speed = 2.1f;
-            rotateSpeed = 3.6f;
+            rotateSpeed = 2.6f;
             accel = 0.06f;
             drag = 0.04f;
             commandLimit = 5;
@@ -382,13 +384,13 @@ public class SnUnitTypes implements ContentList{
                 mirror = true;
                 x = 9f;
                 y = 4f;
-                spacing = 5;
                 reload = 50f;
                 recoil = 5f;
                 shake = 2f;
                 ejectEffect = Fx.casing3;
-                inaccuracy = 4f;
-                shots = 3;
+                inaccuracy = 9f;
+                shots = 2;
+                shotDelay = 12f;
                 shootSound = Sounds.bang;
                 bullet = SnBullets.largeHelicopterMissile;
             }},
@@ -399,7 +401,7 @@ public class SnUnitTypes implements ContentList{
                 x = 20f;
                 y = 27f;
                 reload = 40f;
-                shotDelay = 4f;
+                shotDelay = 5f;
                 shots = 2;
                 inaccuracy = 0.5f;
                 shootSound = Sounds.shootBig;
@@ -412,7 +414,7 @@ public class SnUnitTypes implements ContentList{
                 x = 25f;
                 y = 8f;
                 reload = 30f;
-                shotDelay = 4f;
+                shotDelay = 5f;
                 shots = 2;
                 inaccuracy = 0.5f;
                 shootSound = Sounds.shootBig;
@@ -439,7 +441,7 @@ public class SnUnitTypes implements ContentList{
             health = 57000;
             hitSize = 90;
             speed = 1.5f;
-            rotateSpeed = 3f;
+            rotateSpeed = 2.1f;
             accel = 0.05f;
             drag = 0.04f;
             commandLimit = 6;
@@ -501,9 +503,11 @@ public class SnUnitTypes implements ContentList{
             new WeaponExt("gigant-minigun"){{
                 rotate = true;
                 mirror = false;
+                rotateSpeed = 2.5f;
                 shake = 4f;
                 x = 0f;
                 y = 8f;
+                layerOffset = -0.01f;
                 recoil = 4f;
                 reload = 7f;
                 shots = 1;

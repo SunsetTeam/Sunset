@@ -169,7 +169,7 @@ public class SnCrafting implements ContentList{
             consumes.power(2.5f);
         }};
         crystallizer = new GenericCrafter("crystallizer"){{
-            requirements(Category.crafting, with(Items.lead, 130, Items.thorium, 110, Items.silicon, 120, SnItems.nobium, 90, Items.plastanium, 75));
+            requirements(Category.crafting, with(Items.lead, 130, Items.metaglass, 110, Items.silicon, 120, Items.plastanium, 75));
 
             craftEffect = SnFx.crystalyze;
             updateEffect = SnFx.crystalyzeSmall;
