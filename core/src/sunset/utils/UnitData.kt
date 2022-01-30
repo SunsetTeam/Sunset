@@ -45,7 +45,7 @@ object UnitData {
                 if (invalidUnit(Groups.unit.getByID(id))) data.remove(id)
             }
         }
-        Events.on(WorldLoadEvent::class.java) { e: WorldLoadEvent? -> data.clear() }
+        Events.on(WorldLoadEvent::class.java) { data.clear() }
         Events.on(UnitDestroyEvent::class.java) { e: UnitDestroyEvent -> data.remove(e.unit.id) }
     }
 
@@ -57,8 +57,9 @@ object UnitData {
         return unit == null || !unit.isValid || unit.isNull || Groups.unit.getByID(unit.id) == null
     }
 
+    private var dataKeysAmount = 0
     class DataKey<T> internal constructor(def: Prov<T?>?) {
-        internal val id: Int = totalId++
+        internal val id: Int = dataKeysAmount++
         private val def: Prov<T?> = def ?: Prov { null }
 
         operator fun get(unit: Unit?): T? {
@@ -67,10 +68,6 @@ object UnitData {
 
         operator fun set(unit: Unit?, value: T?) {
             setData(unit, this, value)
-        }
-
-        companion object {
-            private var totalId = 0
         }
 
     }

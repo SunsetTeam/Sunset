@@ -28,7 +28,7 @@ import static mindustry.Vars.*;
  * Instead of {@code update (Unit, float)}, override the {@code updateStack (Unit, float, int)} method.
  * Instead of {@code draw (Unit)}, override the {@code drawStack (Unit, int)} method.
  */
-public class StackableStatusEffect extends StatusEffect{
+public class StackableStatusEffect extends PublicStatusEffect{
 
     public static final float unset = Float.NEGATIVE_INFINITY;
     public final Seq<StackEntry> stackEntries = new Seq<>();
@@ -53,14 +53,16 @@ public class StackableStatusEffect extends StatusEffect{
     public BoolSeq disarmedArray = new BoolSeq();
     /** Damage per tick for each stack level. */
     public FloatSeq damageArray = new FloatSeq();
-    private StackableStatusEffectValue displayer;
+    private StackableStatusEffectValue statsViewer;
+    public StacksDrawer stacksDrawer=null;
+    public StacksUpdater stacksUpdater=null;
     private final AStats aStats = new AStats(){
         @Override
         public void display(Table table){
-            if(displayer == null){
+            if(statsViewer == null){
                 setupDisplayer();
             }
-            displayer.display(table);
+            statsViewer.display(table);
         }
     };
 
@@ -85,7 +87,7 @@ public class StackableStatusEffect extends StatusEffect{
     }
 
     public void setupDisplayer(){
-        displayer = new StackableStatusEffectValue(this);
+        statsViewer = new StackableStatusEffectValue(this);
     }
 
     /** @implNote, when initialized, creates a status effect for each overlay level. */
@@ -99,7 +101,7 @@ public class StackableStatusEffect extends StatusEffect{
         }
         Vars.content.setCurrentMod(ModVars.modInfo);
         for(int i = 0; i < maxStacks; i++){
-            stacks.add(new StackableEntryStatusEffect(this,i));
+            stacks.add(new StackableEntryStatusEffect(this, i));
         }
         Vars.content.setCurrentMod(null);
     }
@@ -108,14 +110,16 @@ public class StackableStatusEffect extends StatusEffect{
      * Called to handle affected units. Transfers
      * information about the remaining time and the degree of overlap.
      */
-    public void updateStack(Unit unit, float time, int stackCount){
+    public final void updateStack(Unit unit, float time, int stackIndex){
+        if (stacksUpdater!=null)stacksUpdater.update(unit,time,stackIndex);
     }
 
     /**
      * Called to render the units on which the effect is applied. Transfers
      * information about the remaining time.
      */
-    public void drawStack(Unit unit, int stackCount){
+    public final void drawStack(Unit unit, int stackIndex){
+        if (stacksDrawer!=null)stacksDrawer.draw(unit,stackIndex);
     }
 
     /**
@@ -170,9 +174,15 @@ public class StackableStatusEffect extends StatusEffect{
         StackableStatusEntry entry = new StackableStatusEntry(this, stackCount, duration);
         statuses.add(entry);
     }
-
+    public interface StacksUpdater{
+        void update(Unit unit,float time,int stackIndex);
+    }
     public StatusEffect stack(int index){
         return stacks.get(index);
+    }
+
+    public interface StacksDrawer{
+        void draw(Unit unit, int stackIndex);
     }
 
     private static final class StackableEntryStatusEffect extends StatusEffect{
@@ -180,6 +190,7 @@ public class StackableStatusEffect extends StatusEffect{
 
         private final StackableStatusEffect parent;
         private final int index;
+
         public StackableEntryStatusEffect(StackableStatusEffect parent, int index){
             super(parent.name + index);
             this.parent = parent;
@@ -195,40 +206,40 @@ public class StackableStatusEffect extends StatusEffect{
         }
 
         @Override
-        public boolean isHidden () {
+        public boolean isHidden(){
             return true;
         }
 
         // redirecting calls to various methods effect status
         // to method calls of the parent (given) status effect
         @Override
-        public void update (Unit unit,float time){
+        public void update(Unit unit, float time){
             super.update(unit, time);
             parent.updateStack(unit, time, index + 1);
         }
 
         @Override
-        public void draw (Unit unit){
+        public void draw(Unit unit){
             parent.drawStack(unit, index + 1);
         }
 
         @Override
-        public boolean reactsWith (StatusEffect effect){
+        public boolean reactsWith(StatusEffect effect){
             return parent.reactsWith(effect);
         }
 
         @Override
-        public boolean applyTransition (Unit unit, StatusEffect to, StatusEntry entry,float time){
+        public boolean applyTransition(Unit unit, StatusEffect to, StatusEntry entry, float time){
             return parent.applyTransition(unit, to, entry, time);
         }
 
         @Override
-        public String emoji () {
+        public String emoji(){
             return parent.emoji();
         }
 
         @Override
-        public TechTree.TechNode node () {
+        public TechTree.TechNode node(){
             return parent.node();
         }
     }
@@ -268,14 +279,14 @@ public class StackableStatusEffect extends StatusEffect{
         }
 
         public void applyOn(StackableEntryStatusEffect effect){
-            effect.damageMultiplier=damageMultiplier;
-            effect.healthMultiplier=healthMultiplier;
-            effect.speedMultiplier=speedMultiplier;
-            effect.reloadMultiplier=reloadMultiplier;
-            effect.buildSpeedMultiplier=buildSpeedMultiplier;
-            effect.dragMultiplier=dragMultiplier;
-            effect.transitionDamage=transitionDamage;
-            effect.disarm=disarm.enabled();
+            effect.damageMultiplier = damageMultiplier;
+            effect.healthMultiplier = healthMultiplier;
+            effect.speedMultiplier = speedMultiplier;
+            effect.reloadMultiplier = reloadMultiplier;
+            effect.buildSpeedMultiplier = buildSpeedMultiplier;
+            effect.dragMultiplier = dragMultiplier;
+            effect.transitionDamage = transitionDamage;
+            effect.disarm = disarm.enabled();
         }
 
         public StackEntry damageMultiplier(float damageMultiplier){
@@ -348,6 +359,7 @@ public class StackableStatusEffect extends StatusEffect{
             this.dragMultiplier = dragMultiplier;
             return this;
         }
+
         enum DisarmState{
             unset, enabled, disabled;
 

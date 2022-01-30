@@ -13,7 +13,7 @@ import sunset.type.*;
 
 import static arc.Core.*;
 
-public class SnStatusEffects implements ContentList{
+class SnStatusEffects_ implements ContentList{
     public static StatusEffect
     //common
     frostbite, stun, starBuff, galaxyDebuff, electricalShort, reloading, viscous, inferno,
@@ -175,27 +175,26 @@ public class SnStatusEffects implements ContentList{
                 healthMultiplier = 0.99f;
                 speedMultiplier = 0.99f;
                 color = Color.red;
-            }
 
-            @Override
-            public void drawStack(Unit unit, int stackCount){
-                if(draw) return;
-                Vars.renderer.effectBuffer.begin();
+                stacksDrawer=(unit,stackIndex)->{
+                    if(draw) return;
+                    Vars.renderer.effectBuffer.begin();
 
-                draw = true;
-                unit.draw();
-                draw = false;
+                    draw = true;
+                    unit.draw();
+                    draw = false;
 
-                Vars.renderer.effectBuffer.end();
+                    Vars.renderer.effectBuffer.end();
 
-                Draw.z((unit.isFlying() ? Layer.flyingUnit : Layer.groundUnit) + 1);
+                    Draw.z((unit.isFlying() ? Layer.flyingUnit : Layer.groundUnit) + 1);
 
-                Draw.color(color, (stackCount / 2f) / maxStacks);
-                TextureRegion wrap = Draw.wrap(Vars.renderer.effectBuffer.getTexture());
-                wrap.flip(false, true);
-                Draw.rect(wrap, camera.position.x, camera.position.y, camera.width, camera.height);
-                //Vars.renderer.effectBuffer.blit(Shaders.screenspace);
-                Draw.color();
+                    Draw.color(color, (stackIndex / 2f) / maxStacks);
+                    TextureRegion wrap = Draw.wrap(Vars.renderer.effectBuffer.getTexture());
+                    wrap.flip(false, true);
+                    Draw.rect(wrap, camera.position.x, camera.position.y, camera.width, camera.height);
+                    //Vars.renderer.effectBuffer.blit(Shaders.screenspace);
+                    Draw.color();
+                };
             }
         };
 
