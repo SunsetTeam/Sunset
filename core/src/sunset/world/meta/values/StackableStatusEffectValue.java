@@ -93,7 +93,7 @@ public class StackableStatusEffectValue implements StatValue {
     }
 
     private StatusEffect stack() {
-        return effect.stacks.get(currentStack);
+        return effect.stack(currentStack);
     }
 
     private void setupTop(Table table) {
