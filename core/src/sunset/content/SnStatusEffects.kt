@@ -167,7 +167,7 @@ class SnStatusEffects : ContentList {
                 draw = false
                 Vars.renderer.effectBuffer.end()
                 Draw.z((if (unit.isFlying) Layer.flyingUnit else Layer.groundUnit) + 1)
-                Draw.color(color, stackIndex.toFloat() / maxStacks() / 2f)
+                Draw.color(color, (stackIndex+1f) / maxStacks())
                 val wrap = Draw.wrap(Vars.renderer.effectBuffer.texture)
                 wrap.flip(false, true)
                 Draw.rect(wrap, Core.camera.position.x, Core.camera.position.y, Core.camera.width, Core.camera.height)
