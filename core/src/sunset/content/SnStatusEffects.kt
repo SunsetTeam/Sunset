@@ -130,7 +130,6 @@ class SnStatusEffects : ContentList {
 
         overheat = stackableStatusEffect("overheat") {
             color = "FF30000".color()
-            maxStacks = 20
             stackEntries(
                 stackEntry(health=0.99f,speed=0.99f),
                 stackEntry(health=0.98f,speed=0.99f),
@@ -168,7 +167,7 @@ class SnStatusEffects : ContentList {
                 draw = false
                 Vars.renderer.effectBuffer.end()
                 Draw.z((if (unit.isFlying) Layer.flyingUnit else Layer.groundUnit) + 1)
-                Draw.color(color, stackIndex.toFloat() / maxStacks / 2f)
+                Draw.color(color, stackIndex.toFloat() / maxStacks() / 2f)
                 val wrap = Draw.wrap(Vars.renderer.effectBuffer.texture)
                 wrap.flip(false, true)
                 Draw.rect(wrap, Core.camera.position.x, Core.camera.position.y, Core.camera.width, Core.camera.height)
@@ -181,7 +180,6 @@ class SnStatusEffects : ContentList {
         //region stackable
         incineration = stackableStatusEffect("incineration") {
             color = "BD4E17".color()
-            maxStacks = 20
             stackEntries(
                 stackEntry(health = 0.97f, speed = 0.97f),
                 stackEntry(health = 0.96f, speed = 0.97f),

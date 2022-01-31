@@ -33,8 +33,7 @@ public class StackableStatusEffect extends PublicStatusEffect{
     public static final float unset = Float.NEGATIVE_INFINITY;
     public final Seq<StackEntry> stackEntries = new Seq<>();
     private final Seq<StatusEffect> stacks = new Seq<>();
-    /** The maximum number of overlays. */
-    public int maxStacks = 1;
+
     /** Damage multipliers for each stack level. */
     public FloatSeq damageMultipliers = new FloatSeq();
     /** Health multipliers for each stack level. */
@@ -65,7 +64,9 @@ public class StackableStatusEffect extends PublicStatusEffect{
             statsViewer.display(table);
         }
     };
-
+public int maxStacks(){
+    return stacks.size;
+}
     public StackableStatusEffect(String name){
         super(name);
         stats = aStats.copy(stats);
@@ -94,13 +95,12 @@ public class StackableStatusEffect extends PublicStatusEffect{
     @Override
     public void init(){
         super.init();
-        stacks.setSize(maxStacks);
 
         for(StackEntry entry : stackEntries){
             entry.checkDefs(this);
         }
         Vars.content.setCurrentMod(ModVars.modInfo);
-        for(int i = 0; i < maxStacks; i++){
+        for(int i = 0; i < stackEntries.size; i++){
             stacks.add(new StackableEntryStatusEffect(this, i));
         }
         Vars.content.setCurrentMod(null);
@@ -136,11 +136,8 @@ public class StackableStatusEffect extends PublicStatusEffect{
             fieldStatuses = unit.getClass().getField("statuses");
             fieldStatuses.setAccessible(true);
             statuses = (Seq<StatusEntry>)fieldStatuses.get(unit);
-        }catch(NoSuchFieldException e){
-            // The field may not appear, then we just think that the unit does not support the effects
-            return;
         }catch(Throwable e){
-            Log.err(e);
+           throw new RuntimeException(e);
         }
         boolean foundStandard = statuses.remove(e -> e.effect == this);
         StackableStatusEntry prev = (StackableStatusEntry)statuses.find(e ->

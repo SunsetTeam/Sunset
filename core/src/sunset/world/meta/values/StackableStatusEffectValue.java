@@ -4,6 +4,7 @@ import arc.Core;
 import arc.func.Floatp;
 import arc.func.Prov;
 import arc.graphics.Color;
+import arc.math.*;
 import arc.scene.Action;
 import arc.scene.Element;
 import arc.scene.actions.Actions;
@@ -36,23 +37,16 @@ public class StackableStatusEffectValue implements StatValue {
             return () -> persent.get() + "%";
         }
     }
-
-    private String format(String key, String val) {
-        return "[lightgray]" + Core.bundle.get(key) + ":[] " + val;
-    }
-
     private void clickNext() {
         currentStack++;
-        if (currentStack < effect.maxStacks) {
-        } else {
-            currentStack = effect.maxStacks - 1;
+        if(currentStack >= effect.maxStacks()){
+            currentStack = effect.maxStacks() - 1;
         }
     }
 
     private void clickPrev() {
         currentStack--;
-        if (currentStack > -1) {
-        } else {
+        if(currentStack <0){
             currentStack = 0;
         }
     }
@@ -81,7 +75,7 @@ public class StackableStatusEffectValue implements StatValue {
 
         table.button("<", this::clickPrev).disabled(button->currentStack==0);
         table.table(this::setupTop).align(Align.center).pad(3);
-        table.button(">", this::clickNext).disabled(button -> currentStack >= effect.maxStacks-1).row();
+        table.button(">", this::clickNext).disabled(button -> currentStack >= effect.maxStacks()-1).row();
         table.defaults().colspan(3);
         buildFieldKey(table, "stat.damagemultiplier", percent(true, () -> stack().damageMultiplier)).row();
         buildFieldKey(table, "stat.healthmultiplier", percent(true, () -> stack().healthMultiplier)).row();
@@ -98,7 +92,7 @@ public class StackableStatusEffectValue implements StatValue {
 
     private void setupTop(Table table) {
 
-        String format = Core.bundle.format("stat.sse-description", "\n\n\n", effect.maxStacks);
+        String format = Core.bundle.format("stat.sse-description", "\n\n\n", effect.maxStacks());
         String[] strings = format.split("\n\n\n");
         table.table(t -> {
 

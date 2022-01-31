@@ -148,7 +148,6 @@ class SnStatusEffects_ implements ContentList{
 
             {
                 color = Color.valueOf("FF30000");
-                maxStacks = 20;
                 stackEntries(
                 stackEntry().healthMultiplier(0.99f).speedMultiplier(0.99f),
                 stackEntry().healthMultiplier(0.98f).speedMultiplier(0.99f),
@@ -188,7 +187,7 @@ class SnStatusEffects_ implements ContentList{
 
                     Draw.z((unit.isFlying() ? Layer.flyingUnit : Layer.groundUnit) + 1);
 
-                    Draw.color(color, (stackIndex / 2f) / maxStacks);
+                    Draw.color(color, (stackIndex / 2f) / maxStacks());
                     TextureRegion wrap = Draw.wrap(Vars.renderer.effectBuffer.getTexture());
                     wrap.flip(false, true);
                     Draw.rect(wrap, camera.position.x, camera.position.y, camera.width, camera.height);
@@ -201,7 +200,6 @@ class SnStatusEffects_ implements ContentList{
         //region stackable
         incineration = new StackableStatusEffect("incineration"){{
             color = Color.valueOf("BD4E17");
-            maxStacks = 20;
             stackEntries(
             stackEntry().health(0.97f).speed(0.97f),
             stackEntry().health(0.96f).speed(0.97f),
