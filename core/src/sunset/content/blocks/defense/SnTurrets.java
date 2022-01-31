@@ -620,18 +620,18 @@ public class SnTurrets implements ContentList{
                 status = SnStatusEffects.incineration;
                 statusDuration = 5f * Time.toSeconds;
 
-                lightning = 2;
-                lightningDamage = 30;
-                lightningLength = 40;
-                lightningCone = 95;
+                lightning = 1;
+                lightningDamage = 40;
+                lightningLength = 50;
+                lightningCone = 120;
                 lightningColor = Pal.meltdownHit;
 
-                incendChance = 1f;
-                incendSpread = 8f;
+                incendChance = 0.7f;
+                incendSpread = 6f;
                 incendAmount = 3;
             }};
             health = 240 * size * size;
-            consumes.add(new ConsumeCoolant(0.5f)).update(false);
+            consumes.add(new ConsumeCoolant(1.1f)).update(false);
         }};
         //endregion 6x6
         //region 7x7
