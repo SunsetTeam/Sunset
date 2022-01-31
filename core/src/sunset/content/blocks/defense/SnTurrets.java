@@ -30,25 +30,7 @@ import sunset.entities.bullet.EnergySphereBulletType;
 import sunset.entities.bullet.LightningContinuousLaserBulletType;
 import sunset.graphics.SnPal;
 import sunset.type.MissileType;
-import arc.graphics.*;
-import arc.math.geom.*;
-import arc.struct.*;
-import arc.util.*;
-import mindustry.*;
-import mindustry.content.*;
-import mindustry.ctype.*;
-import mindustry.entities.bullet.*;
-import mindustry.gen.*;
-import mindustry.graphics.*;
-import mindustry.type.*;
-import mindustry.world.*;
-import mindustry.world.blocks.defense.turrets.*;
 import mindustry.world.consumers.ConsumeCoolant;
-import mindustry.world.meta.*;
-import sunset.content.*;
-import sunset.entities.bullet.*;
-import sunset.graphics.*;
-import sunset.type.*;
 import sunset.world.blocks.defense.turrets.*;
 
 import static mindustry.type.ItemStack.with;
@@ -511,8 +493,11 @@ public class SnTurrets implements ContentList{
             targetGround = true;
             drawLight = true;
             chargeTime = 20;
+            powerBullet = SnBullets.powerRocket;
+            chargeShots = 3;
+            debug = true;
         }};
-        defibrillator = new Turret360("defibrillator") {{
+        defibrillator = new AnimationTurret360("defibrillator") {{
             requirements(Category.turret, with(Items.copper, 650, Items.graphite, 550, Items.titanium, 600, Items.thorium, 600, SnItems.flameid, 650, SnItems.fors, 700));
             ammo(
                     SnItems.nobium, SnBullets.defLight
@@ -530,10 +515,11 @@ public class SnTurrets implements ContentList{
             shootSound = Sounds.spark;
             targetAir = false;
             targetGround = true;
-            drawLight = true;
             spread = 18f;
             rotateSpeed = 0;
             powerBullet = SnBullets.powerLight;
+            chargeShots = 3;
+            debug = true;
         }};
         //endregion 5x5
         //region 6x6
@@ -687,12 +673,13 @@ public class SnTurrets implements ContentList{
             shootSound = Sounds.shootBig;
             targetAir = false;
             targetGround = true;
-            drawLight = true;
-            rotate = true;
+            rotateTurret = true;
             shootShake = 2;
             spread = 22.5f;
             rotateSpeed = 5;
             powerBullet = SnBullets.powerRocket;
+            chargeShots = 3;
+            debug = true;
         }};
         //endregion 7x7
         //region missile

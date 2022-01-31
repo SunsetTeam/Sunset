@@ -28,7 +28,7 @@ public class ModItemTurret extends ItemTurret {
 
     public BulletType powerBullet;
     public boolean debug = false;
-    public int chargeShots = 3;
+    public int chargeShots;
 
     public ModItemTurret(String name) {
         super(name);
@@ -108,7 +108,7 @@ public class ModItemTurret extends ItemTurret {
 
         @Override
         public void bullet(BulletType type, float angle) {
-            if (powerBullet != null & totalShoots == 2) {
+            if (powerBullet != null && totalShoots == 0) {
                 float lifeScl = type.scaleVelocity ? Mathf.clamp(Mathf.dst(x + tr.x, y + tr.y, targetPos.x, targetPos.y) / type.range(), minRange / type.range(), range / type.range()) : 1f;
                 powerBullet.create(this, team, x + tr.x, y + tr.y, angle, 1f + Mathf.range(velocityInaccuracy), lifeScl);
             } else {

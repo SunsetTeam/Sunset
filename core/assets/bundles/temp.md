@@ -197,3 +197,86 @@
                 }}.create(entity, entity.x, entity.y, (float) Math.random());//problem with this angle
             }, 3, Core.bundle.get("stat.sunset.powerShot"));
         //}
+
+
+package sunset.world.blocks.defense.turrets;
+
+import arc.graphics.Blending;
+import arc.graphics.g2d.Draw;
+import arc.graphics.g2d.TextureRegion;
+import arc.math.Interp;
+import arc.math.Mathf;
+import arc.util.Tmp;
+import mindustry.annotations.Annotations.Load;
+import mindustry.graphics.Layer;
+
+import static arc.Core.atlas;
+
+public class AnimationTurret360 extends Turret360{
+@Load("@-side-h-" + 2)
+public TextureRegion[] sideRegionsHorizontal = new TextureRegion[2];
+@Load("@-side-v-" + 2)
+public TextureRegion[] sideRegionsVertical = new TextureRegion[2];
+@Load("@-turret")
+public TextureRegion turretRegion;
+
+    public float pullTime = 60f, closeTime = 90f;
+    //public float baseLightSpacing = 30f, holyLightDelay = 20f, holyLightSpacing = 10f;
+    public float xOpen = 3f, yOpen = -2f;
+    //public Color lightColor = Pal.surge;
+    //public float lightOpactiy = 0.7f;
+
+    public AnimationTurret360(String name) {
+        super(name);
+        recoilAmount = 0;
+    }
+
+    public class AT360 extends T360 {
+        protected float chargeTimer/*, charge*/;
+        //protected boolean animation;
+
+        @Override
+        public void draw() {
+
+            float totalTime = chargeTime + closeTime;
+            float openAmount = Mathf.curve(chargeTimer, 0f, pullTime);
+            float closeAmount = Mathf.curve(chargeTimer, chargeTime, totalTime);
+            float openX = xOpen * Interp.pow2Out.apply(openAmount) - xOpen * Interp.pow2In.apply(closeAmount);
+            float openY = yOpen * Interp.pow2Out.apply(openAmount) - yOpen * Interp.pow2In.apply(closeAmount);
+
+            Tmp.v1.trns(rotation - 90, -openX, y);//left
+            Tmp.v2.trns(rotation - 90, openX, y);//right
+            Tmp.v3.trns(rotation - 90, x, openY);//up
+            Tmp.v4.trns(rotation - 90, x, -openY);//down
+
+            float[] sXPre1 = {Tmp.v1.x, Tmp.v2.x};
+            float[] sYPre1 = {Tmp.v1.y, Tmp.v2.y};
+            float[] sX1 = {sXPre1[0] + x, sXPre1[1] + x};
+            float[] sY1 = {sYPre1[0] + y, sYPre1[1] + y};
+
+            float[] sXPre2 = {Tmp.v3.x, Tmp.v4.x};
+            float[] sYPre2 = {Tmp.v3.y, Tmp.v4.y};
+            float[] sX2 = {sXPre2[0] + x, sXPre2[1] + x};
+            float[] sY2 = {sYPre2[0] + y, sYPre2[1] + y};
+
+            tr2.trns(rotation, -recoil);
+            float tx = x + tr2.x, ty = y + tr2.y;
+
+            Draw.z(Layer.turret);
+            Draw.rect(turretRegion, tx, ty, rotation - 90f);
+            for (int i = 0; i < 2; i++) {
+                Draw.rect(sideRegionsHorizontal[i], sX1[i], sY1[i], rotation - 90f);
+                Draw.rect(sideRegionsVertical[i], sX2[i], sY2[i], rotation - 90f);
+            }
+
+            if (atlas.isFound(heatRegion) && heat > 0.00001f) {
+                Draw.color(heatColor, heat);
+                Draw.blend(Blending.additive);
+                Draw.rect(heatRegion, tx, ty, rotation - 90f);
+                Draw.blend();
+                Draw.color();
+            }
+        }
+    }
+
+}
