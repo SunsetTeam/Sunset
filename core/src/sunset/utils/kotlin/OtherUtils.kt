@@ -1,5 +1,6 @@
 package sunset.utils.kotlin
 
+import arc.graphics.Color
 import arc.struct.*
 
 //Map set region
@@ -23,4 +24,6 @@ operator fun IntIntMap.set(key: Int, value: Int) = put(key, value)
 
 
 
-//Seq set region
+
+inline fun String.color()= Color.valueOf(this)!!
+inline fun Int.color()= Color(this)

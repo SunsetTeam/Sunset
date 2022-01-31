@@ -17,6 +17,11 @@ public class MockEnvironmentBlock extends Block{
     }
 
     @Override
+    public boolean isHidden(){
+        return true;
+    }
+
+    @Override
     public void createIcons(MultiPacker packer){
 //        super.createIcons(packer);
     }

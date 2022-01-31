@@ -19,7 +19,7 @@ public class SnWaves{
         this(-2);
         species(
         line(SnUnitTypes.wind, SnUnitTypes.wind, SnUnitTypes.wind, SnUnitTypes.wind, SnUnitTypes.wind),
-        line(SnUnitTypes.torpedo1, SnUnitTypes.torpedo1, SnUnitTypes.torpedo1, SnUnitTypes.torpedo1, SnUnitTypes.torpedo1),
+        line(SnUnitTypes.plankton, SnUnitTypes.plankton, SnUnitTypes.plankton, SnUnitTypes.plankton, SnUnitTypes.plankton),
         line(SnUnitTypes.wind, SnUnitTypes.wind, SnUnitTypes.wind, SnUnitTypes.wind, SnUnitTypes.wind),
         line(SnUnitTypes.wind, SnUnitTypes.wind, SnUnitTypes.wind, SnUnitTypes.wind, SnUnitTypes.wind),
         line(SnUnitTypes.wind, SnUnitTypes.wind, SnUnitTypes.wind, SnUnitTypes.wind, SnUnitTypes.wind),

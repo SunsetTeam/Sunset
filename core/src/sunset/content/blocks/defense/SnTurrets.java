@@ -255,7 +255,7 @@ public class SnTurrets implements ContentList{
             targetAir = true;
             shootSound = Sounds.flame;
         }};
-        eternity = new ItemTurret("eternity"){{
+        eternity = new ModItemTurret("eternity"){{
             requirements(Category.turret, with(SnItems.fors, 230, Items.plastanium, 100, Items.graphite, 60, Items.surgeAlloy, 30));
             ammo(
             Items.plastanium, SnBullets.smallPlastaniumBullet,
@@ -581,12 +581,12 @@ public class SnTurrets implements ContentList{
         disappearance = new LaserTurret("disappearance"){{
             requirements(Category.turret, with(Items.copper, 1900, Items.lead, 1400, Items.graphite, 1600, Items.surgeAlloy, 1060, Items.silicon, 800));
             shootEffect = Fx.shootBigSmoke2;
-            shootCone = 40f;
-            recoilAmount = 4f;
+            shootCone = 45f;
+            recoilAmount = 5f;
             size = 6;
             shootShake = 5f;
-            range = 37.5f * Vars.tilesize;
-            reloadTime = 6f * Time.toSeconds;
+            range = 50f * Vars.tilesize;
+            reloadTime = 5f * Time.toSeconds;
             shootDuration = 10f * Time.toSeconds;
             restitution = 0.01f;
             cooldown = 0.05f;
@@ -596,26 +596,28 @@ public class SnTurrets implements ContentList{
             loopSound = Sounds.beam;
             loopSoundVolume = 2.5f;
 
-            shootType = new LightningContinuousLaserBulletType(170){{
-                length = 380f;
+            shootType = new LightningContinuousLaserBulletType(160){{
+                length = 55f * Vars.tilesize;
+                shake = 4f;
                 width = 15f;
+                drawSize = 60f * Vars.tilesize;
                 hitEffect = Fx.hitMeltdown;
                 hitColor = Pal.meltdownHit;
-                status = StatusEffects.melting;
-                drawSize = 52.5f*Vars.tilesize;
+                status = SnStatusEffects.incineration;
+                statusDuration = 5f * Time.toSeconds;
 
-                lightning = 2;
-                lightningDamage = 30;
-                lightningLength = 25;
-                lightningCone = 90;
+                lightning = 1;
+                lightningDamage = 40;
+                lightningLength = 50;
+                lightningCone = 120;
                 lightningColor = Pal.meltdownHit;
 
-                incendChance = 0.4f;
-                incendSpread = 5f;
-                incendAmount = 1;
+                incendChance = 0.7f;
+                incendSpread = 6f;
+                incendAmount = 3;
             }};
             health = 240 * size * size;
-            consumes.add(new ConsumeCoolant(0.5f)).update(false);
+            consumes.add(new ConsumeCoolant(1.1f)).update(false);
         }};
         //endregion 6x6
         //region 7x7
@@ -628,7 +630,7 @@ public class SnTurrets implements ContentList{
             chargeMaxDelay = 110f;
             chargeEffects = 15;
             recoilAmount = 8f;
-            reloadTime = 20f * Time.toSeconds;
+            reloadTime = 8f * Time.toSeconds;
             cooldown = 10f;
             powerUse = 30f;
             shootShake = 8f;

@@ -64,6 +64,9 @@ public class SnPal {
     //other
     chainLaser = Pal.surge,
 
+    //status-effects
+    incineration = Color.valueOf("130000"),
+
     //planets
     azaria = Color.valueOf("5F0A0A"),
     azariaClouds = Color.valueOf("785C5C");

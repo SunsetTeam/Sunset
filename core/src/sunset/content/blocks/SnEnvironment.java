@@ -258,6 +258,7 @@ public class SnEnvironment implements ContentList {
             eruptionEffect = new Effect(30f, Fx.ballfire.renderer);
         }};
         //endregion special
+
         //region hidden
         hotSlag1 = new MockEnvironmentBlock("hotSlag1") {{
             replacement=Blocks.slag;
