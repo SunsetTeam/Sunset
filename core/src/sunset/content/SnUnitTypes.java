@@ -41,7 +41,7 @@ public class SnUnitTypes implements ContentList{
     //wheel
     wheel1, wheel2, wheel3, wheel4, wheel5,
     //torpedo
-    torpedo1, torpedo2, torpedo3, torpedo4,torpedo5,
+    plankton, torpedo2, torpedo3, torpedo4,torpedo5,
     //misc
     router,
     //freezing
@@ -1049,7 +1049,7 @@ public class SnUnitTypes implements ContentList{
         }};
         //endregion wheel
         //region torpedo
-        plankton = new UnitTypeExt("Plankton") {{
+        plankton = new UnitTypeExt("plankton") {{
             speed = 2.1f;
             rotateSpeed = 7;
             drag = 0.5f;
