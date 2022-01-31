@@ -26,8 +26,8 @@ public class SnPower implements ContentList{
             requirements(Category.power, with(Items.copper, 110, Items.titanium, 70, Items.lead, 120, Items.silicon, 55, Items.metaglass, 70));
             powerProduction = 11f;
             itemDuration = 220f;
-            minLiquidEfficiency = 0.2f;
-            maxLiquidGenerate = 0.4f;
+            //minLiquidEfficiency = 0.2f;
+            //maxLiquidGenerate = 0.4f;
             liquidCapacity = 50;
             hasLiquids = true;
             hasItems = false;
@@ -35,7 +35,7 @@ public class SnPower implements ContentList{
             ambientSound = Sounds.steam;
             ambientSoundVolume = 0.03f;
 
-            consumes.liquid(Liquids.oil, 0.11f);
+            consumes.liquid(Liquids.oil, 0.10f);
         }};
 
         advrtgGenerator = new DecayGenerator("advance-rtg-generator"){{
