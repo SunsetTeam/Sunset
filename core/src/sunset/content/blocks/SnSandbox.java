@@ -26,6 +26,8 @@ public class SnSandbox implements ContentList {
         }};
 
         darkMatterProcessor = new LogicBlock("dark-matter-processor"){{
+            requirements(Category.distribution, BuildVisibility.sandboxOnly, ItemStack.empty);
+            
             range = 50 * Vars.tilesize;
             instructionsPerTick = 99999;
             maxInstructionScale = 99999;

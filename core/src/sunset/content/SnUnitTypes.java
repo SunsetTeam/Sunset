@@ -41,7 +41,7 @@ public class SnUnitTypes implements ContentList{
     //wheel
     wheel1, wheel2, wheel3, wheel4, wheel5,
     //torpedo
-    torpedo1, torpedo2, torpedo3, torpedo4,torpedo5,
+    plankton, torpedo2, torpedo3, torpedo4,torpedo5,
     //misc
     router,
     //freezing
@@ -1049,7 +1049,7 @@ public class SnUnitTypes implements ContentList{
         }};
         //endregion wheel
         //region torpedo
-        torpedo1 = new UnitTypeExt("torpedo-t1") {{
+        plankton = new UnitTypeExt("plankton") {{
             speed = 2.1f;
             rotateSpeed = 7;
             drag = 0.5f;
@@ -1063,7 +1063,7 @@ public class SnUnitTypes implements ContentList{
             commandRadius = 48;
             visualElevation = -1;
             weapons.add(
-                    new WeaponExt("plasma-gun") {{
+                    new WeaponExt("plankton-mount") {{
                         bullet = SnBullets.plasmaArt;
                         rotate = true;
                         top = true;
@@ -1104,7 +1104,7 @@ public class SnUnitTypes implements ContentList{
             immunities.add(StatusEffects.wet);
             immunities.add(StatusEffects.freezing);
         }};
-        torpedo2 = new UnitTypeExt("torpedo-t2") {{
+        torpedo2 = new UnitTypeExt("neocardina") {{
             speed = 2;
             rotateSpeed = 6.9f;
             drag = 0.7f;
