@@ -7,7 +7,6 @@ import mindustry.Vars
 import mindustry.content.Fx
 import mindustry.content.StatusEffects
 import mindustry.ctype.ContentList
-import mindustry.entities.units.StatusEntry
 import mindustry.graphics.Layer
 import mindustry.graphics.Pal
 import mindustry.type.StatusEffect
@@ -127,7 +126,6 @@ class SnStatusEffects : ContentList {
         }
         //endregion only reactive
         //region stackable
-
         overheat = stackableStatusEffect("overheat") {
             color = "FF30000".color()
             stackEntries(
@@ -176,8 +174,6 @@ class SnStatusEffects : ContentList {
             }
 
         }
-
-        //region stackable
         incineration = stackableStatusEffect("incineration") {
             color = "BD4E17".color()
             stackEntries(

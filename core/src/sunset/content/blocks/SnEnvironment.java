@@ -161,7 +161,7 @@ public class SnEnvironment implements ContentList {
 
         granite = new Floor("granite") {{
             variants = 3;
-            attributes.set(Attribute.spores, 0.2f);
+            attributes.set(Attribute.water, -0.4f);
             wall = crimsonPine;
         }};
 

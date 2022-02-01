@@ -10,11 +10,14 @@ import mindustry.annotations.Annotations.Load;
 import mindustry.entities.bullet.BulletType;
 import mindustry.graphics.Drawf;
 import mindustry.graphics.Layer;
+import mindustry.graphics.Pal;
 import mindustry.ui.Bar;
 import mindustry.world.blocks.defense.turrets.ItemTurret;
 import mma.graphics.ADrawf;
 import sunset.SnVars;
 import sunset.utils.Utils;
+
+import static mindustry.Vars.tilesize;
 
 /** Item turret with useful things.
  * Features:
@@ -48,6 +51,12 @@ public class ModItemTurret extends ItemTurret {
                 () -> entity.team.color,
                 () -> Mathf.clamp(entity.reload / reloadTime)
         ));
+    }
+
+    @Override
+    public void drawPlace(int x, int y, int rotation, boolean valid) {
+        Drawf.dashCircle(x * tilesize + offset, y * tilesize + offset, range, Pal.placing);
+        if (minRange > 0) Drawf.dashCircle(x, y, minRange, Pal.health);
     }
 
     public Cons<TurretBuild> lightDrawer = tile -> {

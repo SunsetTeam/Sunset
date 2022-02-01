@@ -29,7 +29,7 @@ public class SnUnitBlocks implements ContentList {
         upgradedAirFactory = new UnitFactory("upgraded-air-factory") {{
             requirements(Category.units, with(SnItems.fors, 80, Items.copper, 70));
             plans = Seq.with(
-                    new UnitPlan(SnUnitTypes.wind, 70f * 15, with(SnItems.fors, 15, Items.silicon, 20))
+                    new UnitPlan(SnUnitTypes.copterT1, 70f * 15, with(SnItems.fors, 15, Items.silicon, 20))
 //                    new UnitPlan(SnUnitTypes.comet, 60f * 40, with(Items.silicon, 30, SnItems.naturite, 20))
             );
             size = 3;
@@ -39,7 +39,7 @@ public class SnUnitBlocks implements ContentList {
         upgradedGroundFactory = new UnitFactory("upgraded-ground-factory") {{
             requirements(Category.units, with(SnItems.fors, 80, Items.copper, 70, Items.lead, 65));
             plans = Seq.with(
-                    new UnitPlan(SnUnitTypes.mirage, 75f * 15, with(Items.silicon, 20, SnItems.fors, 15))
+                    new UnitPlan(SnUnitTypes.berserkT1, 75f * 15, with(Items.silicon, 20, SnItems.fors, 15))
             );
             size = 3;
             consumes.power(2.5f);
@@ -56,9 +56,9 @@ public class SnUnitBlocks implements ContentList {
             constructTime = 65f * 10f;
 
             upgrades.addAll(
-                    new UnitType[]{SnUnitTypes.wind, SnUnitTypes.thunder},
+                    new UnitType[]{SnUnitTypes.copterT1, SnUnitTypes.copterT2},
 //                    new UnitType[]{SnUnitTypes.comet, SnUnitTypes.satelite},
-                    new UnitType[]{SnUnitTypes.mirage, SnUnitTypes.vision}
+                    new UnitType[]{SnUnitTypes.berserkT1, SnUnitTypes.berserkT2}
             );
         }};
 
@@ -72,8 +72,8 @@ public class SnUnitBlocks implements ContentList {
             constructTime = 65f * 30f;
 
             upgrades.addAll(
-                    new UnitType[]{SnUnitTypes.thunder, SnUnitTypes.nadir},
-                    new UnitType[]{SnUnitTypes.satelite, SnUnitTypes.planet}
+                    new UnitType[]{SnUnitTypes.copterT2, SnUnitTypes.copterT3},
+                    new UnitType[]{SnUnitTypes.bufferT2, SnUnitTypes.bufferT3}
             );
         }};
 
@@ -92,8 +92,8 @@ public class SnUnitBlocks implements ContentList {
 
 
             upgrades.addAll(
-                    new UnitType[]{SnUnitTypes.nadir, SnUnitTypes.halo},
-                    new UnitType[]{SnUnitTypes.planet, SnUnitTypes.star}
+                    new UnitType[]{SnUnitTypes.copterT3, SnUnitTypes.copterT4},
+                    new UnitType[]{SnUnitTypes.bufferT3, SnUnitTypes.bufferT4}
             );
         }};
 
@@ -111,8 +111,8 @@ public class SnUnitBlocks implements ContentList {
 
 
             upgrades.addAll(
-                    new UnitType[]{SnUnitTypes.halo, SnUnitTypes.mudflow},
-                    new UnitType[]{SnUnitTypes.star, SnUnitTypes.galaxy}
+                    new UnitType[]{SnUnitTypes.copterT4, SnUnitTypes.copterT6},
+                    new UnitType[]{SnUnitTypes.bufferT4, SnUnitTypes.bufferT5}
             );
         }};
         //endregion reconstructors

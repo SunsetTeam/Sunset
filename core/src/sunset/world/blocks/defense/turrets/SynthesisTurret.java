@@ -1,7 +1,5 @@
 package sunset.world.blocks.defense.turrets;
 
-import acontent.world.meta.AStat;
-import acontent.world.meta.AStatCat;
 import arc.Core;
 import arc.graphics.Color;
 import arc.graphics.g2d.Draw;
@@ -22,7 +20,6 @@ import mindustry.graphics.Pal;
 import mindustry.ui.Bar;
 import mindustry.world.blocks.defense.turrets.ItemTurret;
 import mindustry.world.meta.Stat;
-import mindustry.world.meta.StatCat;
 import sunset.SnVars;
 import sunset.content.SnFx;
 import sunset.graphics.SnPal;
@@ -57,7 +54,7 @@ public class SynthesisTurret extends ItemTurret {
     }
 
     @Override
-    public void init(){
+    public void init() {
         consumes.powerCond(powerUse, TurretBuild::isShooting);
 
         super.init();
@@ -85,9 +82,7 @@ public class SynthesisTurret extends ItemTurret {
     }
 
     @Override
-    public void drawPlace(int x, int y, int rotation, boolean valid){
-        super.drawPlace(x, y, rotation, valid);
-
+    public void drawPlace(int x, int y, int rotation, boolean valid) {
         Drawf.dashCircle(x * tilesize + offset, y * tilesize + offset, range, Pal.placing);
         if (minRange > 0) Drawf.dashCircle(x, y, minRange, Pal.health);
     }
@@ -168,15 +163,15 @@ public class SynthesisTurret extends ItemTurret {
             if (minRange > 0) Drawf.dashCircle(x, y, minRange, Pal.health);
         }
 
-        //armor zone
-        //primary armor (active)
+        //region armor zone
+        //region primary armor (active)
         @Override
         public void created() {
             super.created();
             shield = maxShield = health;
         }
 
-        public void drawShield(){
+        public void drawShield() {
             float alpha = shieldAlpha;
             float radius = block.size * Vars.tilesize * 1.3f;
             Draw.z(Layer.blockOver);
@@ -185,12 +180,12 @@ public class SynthesisTurret extends ItemTurret {
         }
 
         @Override
-        public void damage(float amount){
+        public void damage(float amount) {
             rawDamage(Math.max(amount - primaryArmor, minArmorDamage * amount));
         }
 
         @Override
-        public void damagePierce(float amount, boolean withEffect){
+        public void damagePierce(float amount, boolean withEffect) {
             float pre = hitTime;
 
             rawDamage(amount);
@@ -198,7 +193,7 @@ public class SynthesisTurret extends ItemTurret {
             if(!withEffect) hitTime = pre;
         }
 
-        protected void rawDamage(float amount){
+        protected void rawDamage(float amount) {
             boolean hadShields = shield > 0.0001f;
 
             if(hadShields) shieldAlpha = 1f;
@@ -209,7 +204,7 @@ public class SynthesisTurret extends ItemTurret {
             hitTime = 1f;
             amount -= shieldDamage;
 
-            if(amount > 0){
+            if(amount > 0) {
                 health -= amount;
                 if(health <= 0 && !dead()) kill();
 
@@ -218,25 +213,27 @@ public class SynthesisTurret extends ItemTurret {
         }
 
         @Override
-        public void write(Writes write){
+        public void write(Writes write) {
             super.write(write);
             write.f(shield);
         }
 
         @Override
-        public void read(Reads read, byte revision){
+        public void read(Reads read, byte revision) {
             super.read(read, revision);
             shield = read.f();
         }
-
-        //secondary armor (passive)
+        //endregion primary armor (active)
+        //region secondary armor (passive)
         @Override
         public float handleDamage(float amount) {
             if (secondaryArmor != 0 | this.health < maxHealth / 10) {
                 return Math.max(amount - secondaryArmor, minArmorDamage * amount);
-            } else return super.handleDamage(amount);
+            } else return Math.max(amount - secondaryArmor / 10, minArmorDamage * amount);
         }
 
         //TODO make a visual display of the secondary armor
+        //endregion secondary armor (passive)
+        //endregion armor zone
     }
 }
