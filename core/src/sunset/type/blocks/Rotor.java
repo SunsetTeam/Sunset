@@ -3,11 +3,13 @@ package sunset.type.blocks;
 import arc.Core;
 import arc.graphics.g2d.Draw;
 import arc.graphics.g2d.TextureRegion;
+import arc.math.Angles;
+import arc.math.Mathf;
 import arc.math.geom.Vec2;
 import arc.util.Time;
 import arc.util.Tmp;
+import mindustry.content.Fx;
 import mindustry.gen.Unit;
-import mindustry.graphics.Layer;
 import mma.ModVars;
 
 public class Rotor {
@@ -19,6 +21,10 @@ public class Rotor {
 
     public int rotorCount = 1;
     public boolean underUnit=false;
+
+    public float smokeChance = 0.3f;
+    public float smokeX = 0f;
+    public float smokeY = 0f;
 
     public TextureRegion rotorRegion, topRegion, outlineRegion;
 
@@ -34,6 +40,9 @@ public class Rotor {
 
     public void drawOutline(Unit unit,boolean drawTop) {
         Vec2 rotor = Tmp.v1.trns(unit.rotation - 90, offsetX, offsetY).add(unit);
+        float rotorX = offsetX + Angles.trnsx(unit.rotation - 90, smokeX, smokeY);
+        float rotorY = offsetY + Angles.trnsy(unit.rotation - 90, smokeX, smokeY);
+
         float z = Draw.z();
         if (underUnit)Draw.z(z-0.001f);
 
@@ -44,6 +53,12 @@ public class Rotor {
         }
         if (drawTop){
             Draw.rect(topRegion, rotor.x, rotor.y, unit.rotation - 90);
+        }
+        if(unit.health <= 0 || unit.dead()) {
+            if (Mathf.chanceDelta(smokeChance)) {
+                Fx.fallSmoke.at(rotorX, rotorY);
+                Fx.burning.at(rotorX, rotorY);
+            }
         }
         Draw.z(z);
     }
