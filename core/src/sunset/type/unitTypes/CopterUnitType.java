@@ -26,9 +26,7 @@ public class CopterUnitType extends SnUnitType implements ImageGenerator{
     public float unitFallRotateSpeed = 6f;
     public Effect smokeFx = Fx.none;
     public Effect burningFx = Fx.none;
-    public float smokeChance = 0f;
-    public float smokeX = 0f;
-    public float smokeY = 0f;
+
 
     public CopterUnitType(String name){
         super(name);
@@ -46,16 +44,11 @@ public class CopterUnitType extends SnUnitType implements ImageGenerator{
     @Override
     public void update(Unit unit){
         super.update(unit);
-        Vec2 rotor = Tmp.v1.trns(unit.rotation - 90, smokeX, smokeY).add(unit);
         if(unit.health <= 0 || unit.dead()){
             unit.rotation += Time.delta * (fallSpeed * 2000);
             unit.rotation = Time.time * unitFallRotateSpeed;
-            if(Mathf.chanceDelta(smokeChance)){
-                smokeFx.at(smokeX, smokeY);
-                burningFx.at(smokeX, smokeY);
             }
         }
-    }
 
     @Override
     public void draw(Unit unit){

@@ -71,9 +71,7 @@ public class SnUnitTypes implements ContentList{
             unitFallRotateSpeed = 6f;
             smokeFx = Fx.fallSmoke;
             burningFx = Fx.burning;
-            smokeChance = 0.2f;
-            smokeX = 0f;
-            smokeY = 2f;
+
 
             rotors.add(
             new Rotor("rotor-small"){{
@@ -119,9 +117,6 @@ public class SnUnitTypes implements ContentList{
             unitFallRotateSpeed = 5.7f;
             smokeFx = Fx.fallSmoke;
             burningFx = Fx.burning;
-            smokeChance = 0.3f;
-            smokeX = 0f;
-            smokeY = 2f;
 
             rotors.add(
             new Rotor("rotor-medium"){{
@@ -181,9 +176,6 @@ public class SnUnitTypes implements ContentList{
             unitFallRotateSpeed = 5f;
             smokeFx = Fx.fallSmoke;
             burningFx = Fx.burning;
-            smokeChance = 0.4f;
-            smokeX = 0f;
-            smokeY = 8f;
 
             rotors.add(
             new Rotor("rotor-mini"){{
@@ -248,9 +240,6 @@ public class SnUnitTypes implements ContentList{
             unitFallRotateSpeed = 3.7f;
             smokeFx = Fx.fallSmoke;
             burningFx = Fx.burning;
-            smokeChance = 0.3f;
-            smokeX = 0f;
-            smokeY = 0f;
 
             rotors.add(
             new Rotor("rotor-small2"){{
@@ -337,9 +326,6 @@ public class SnUnitTypes implements ContentList{
             unitFallRotateSpeed = 3.1f;
             smokeFx = Fx.fallSmoke;
             burningFx = Fx.burning;
-            smokeChance = 0.4f;
-            smokeX = 0f;
-            smokeY = 0f;
             rotors(
             new Rotor("rotor-medium2"){{
                 offsetX = -15;
@@ -453,9 +439,6 @@ public class SnUnitTypes implements ContentList{
             unitFallRotateSpeed = 2.6f;
             smokeFx = Fx.fallSmoke;
             burningFx = Fx.burning;
-            smokeChance = 0.5f;
-            smokeX = 0f;
-            smokeY = 0f;
 
             rotors.add(
             new Rotor("rotor-medium"){{
