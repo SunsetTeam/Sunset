@@ -68,10 +68,6 @@ public class HycleGenerator extends SnPlanetGenerator{
         if(Simplex.noise3d(seed, 3, 0.5f, scl, sector.tile.v.x + 1, sector.tile.v.y, sector.tile.v.z)*nmag + poles > 0.55f*addscl){
             ores.add(SnEnvironment.oreFors);
         }
-
-        if(Simplex.noise3d(seed, 2, 0.5f, scl, sector.tile.v.x + 1, sector.tile.v.y, sector.tile.v.z)*nmag + poles > 0.8f*addscl){
-            ores.add(SnEnvironment.orePlanatrium);
-        }
     }
 
 /*
@@ -86,9 +82,4 @@ public class HycleGenerator extends SnPlanetGenerator{
     }
 
  */
-
-    @Override
-    protected void setupTree(){
-        block = rand.chance(0.5) ? SnEnvironment.crimsontree : SnEnvironment.crimsontreedead;
-    }
 }
