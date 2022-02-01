@@ -91,14 +91,14 @@ public class BurnoutGenerator extends SnPlanetGenerator{
 
         if(value > 0.12f && !Mathf.within(x, y, fspawn.x, fspawn.y, 12 + rrscl)){
             boolean deep = value > 0.12f + 0.1f && !Mathf.within(x, y, fspawn.x, fspawn.y, 15 + rrscl);
-            boolean spore = floor != SnEnvironment.burningash && floor != SnEnvironment.obsidian;
+            boolean spore = floor != SnEnvironment.burningAsh && floor != SnEnvironment.obsidian;
             //do not place rivers on ice, they're frozen
             //ignore pre-existing liquids
-            if(!(floor == SnEnvironment.ash || floor == Blocks.slag || floor == SnEnvironment.burningash || floor.asFloor().isLiquid)){
+            if(!(floor == SnEnvironment.ash || floor == Blocks.slag || floor == SnEnvironment.burningAsh || floor.asFloor().isLiquid)){
                 floor = spore ?
                 (deep ? Blocks.slag : SnEnvironment.ash) :
                 (deep ? SnEnvironment.ash :
-                (floor == SnEnvironment.burningash ? Blocks.darksand : SnEnvironment.obsidian));
+                (floor == SnEnvironment.burningAsh ? Blocks.darksand : SnEnvironment.obsidian));
             }
         }
     }
@@ -114,7 +114,7 @@ public class BurnoutGenerator extends SnPlanetGenerator{
 
     @Override
     protected void passTiles(int x, int y){
-        if(floor == SnEnvironment.burningash){
+        if(floor == SnEnvironment.burningAsh){
             if(Math.abs(0.5f - noise(x - 90, y, 4, 0.8, 65)) > 0.02){
                 floor = Blocks.slag;
             }
