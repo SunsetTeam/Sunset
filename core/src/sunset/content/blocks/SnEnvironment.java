@@ -21,20 +21,27 @@ public class SnEnvironment implements ContentList {
     oreFors, orePlanatrium, oreFlameid, oreColdent,
 
     //floors 
-    crimsongrass, crimsondirt, crimsonswamp, crimsonsand, crimsonsandwater,
-    crimsonwater, crimsondeepwater, crimsonice, crimsonsnow, crimsonicesnow,
-    crimsonmoss, granite,
-    orangesand, obsidian, ash, burningash,
+    crimsonGrass, crimsonDirt, crimsonSand, crimsonSwamp, crimsonMoss,
+    crimsonSandWater, crimsonWater, crimsonDeepWater,
+    crimsonSnow, crimsonIce, crimsonIceSnow,
+    granite,
+
+    orangeSand, stoneSand,
+    obsidian, ash, burningAsh,
 
     //static walls 
-    crimsondirtwall, crimsongrasswall, crimsonsandwall, granitewall, stonesandwall, stonesand,
-    orangesandwall, obsidianwall, ashwall,
+    crimsonGrassWall, crimsonDirtWall, crimsonSandWall,
+    crimsonSnowWall, crimsonIceWall,
+    graniteWall,
+
+    orangeSandWall, stoneSandWall,
+    obsidianWall, ashWall,
     
     //pines
-    crimsonpine,
+    crimsonPine,
     
     //trees
-    crimsontree, crimsontreedead,
+    crimsonTree, crimsonTreeDead,
     
     //special
     geyser,
@@ -69,15 +76,21 @@ public class SnEnvironment implements ContentList {
         }};
         //endregion ores
         //region floors
-        crimsongrass = new Floor("crimson-grass") {{
+        crimsonGrass = new Floor("crimson-grass") {{
             variants = 3;
-            wall = crimsongrasswall;
+            wall = crimsonGrassWall;
         }};
-        crimsondirt = new Floor("crimson-dirt") {{
+        crimsonDirt = new Floor("crimson-dirt") {{
             variants = 3;
-            wall = crimsondirtwall;
+            wall = crimsonDirtWall;
         }};
-        crimsonswamp = new Floor("crimson-swamp") {{
+        crimsonSand = new Floor("crimson-sand") {{
+            itemDrop = Items.sand;
+            playerUnmineable = true;
+            variants = 3;
+            wall = crimsonSandWall;
+        }};
+        crimsonSwamp = new Floor("crimson-swamp") {{
             speedMultiplier = 0.4f;
             variants = 3;
             liquidDrop = SnLiquids.burheyna;
@@ -88,13 +101,13 @@ public class SnEnvironment implements ContentList {
             drownTime = 700f;
             albedo = 0.5f;
         }};
-        crimsonsand = new Floor("crimson-sand") {{
-            itemDrop = Items.sand;
-            playerUnmineable = true;
+        crimsonMoss = new Floor("crimson-moss") {{
             variants = 3;
-            wall = crimsonsandwall;
+            attributes.set(Attribute.spores, 0.2f);
+            wall = crimsonPine;
         }};
-        crimsonsandwater = new Floor("crimson-sand-water") {{
+
+        crimsonSandWater = new Floor("crimson-sand-water") {{
             speedMultiplier = 0.9f;
             variants = 0;
             liquidDrop = SnLiquids.burheyna;
@@ -105,7 +118,7 @@ public class SnEnvironment implements ContentList {
             cacheLayer = CacheLayer.water;
             albedo = 0.5f;
         }};
-        crimsonwater = new Floor("crimson-water") {{
+        crimsonWater = new Floor("crimson-water") {{
             speedMultiplier = 0.8f;
             variants = 0;
             liquidDrop = SnLiquids.burheyna;
@@ -116,7 +129,7 @@ public class SnEnvironment implements ContentList {
             cacheLayer = CacheLayer.water;
             albedo = 0.5f;
         }};
-        crimsondeepwater = new Floor("crimson-deep-water") {{
+        crimsonDeepWater = new Floor("crimson-deep-water") {{
             speedMultiplier = 0.5f;
             variants = 0;
             liquidDrop = SnLiquids.burheyna;
@@ -128,46 +141,50 @@ public class SnEnvironment implements ContentList {
             cacheLayer = CacheLayer.water;
             albedo = 0.5f;
         }};
-        crimsonice = new Floor("crimson-ice") {{
+
+        crimsonSnow = new Floor("crimson-snow") {{
+            variants = 3;
+            attributes.set(Attribute.water, 0.2f);
+        }};
+        crimsonIce = new Floor("crimson-ice") {{
             variants = 3;
             dragMultiplier = 0.25f;
             speedMultiplier = 0.85f;
             attributes.set(Attribute.water, 0.38f);
+            wall = crimsonIceWall;
         }};
-        crimsonsnow = new Floor("crimson-snow") {{
-            variants = 3;
-            attributes.set(Attribute.water, 0.2f);
-        }};
-        crimsonicesnow = new Floor("crimson-icesnow") {{
+        crimsonIceSnow = new Floor("crimson-icesnow") {{
             variants = 3;
             dragMultiplier = 0.55f;
             attributes.set(Attribute.water, 0.28f);
         }};
-        crimsonmoss = new Floor("crimson-moss") {{
-            variants = 3;
-            attributes.set(Attribute.spores, 0.2f);
-            wall = crimsonpine;
-        }};
+
         granite = new Floor("granite") {{
             variants = 3;
-            attributes.set(Attribute.water, 0.2f);
-            wall = crimsonpine;
+            attributes.set(Attribute.water, -0.4f);
+            wall = crimsonPine;
         }};
-        orangesand = new Floor("orange-sand") {{
+
+        orangeSand = new Floor("orange-sand") {{
             itemDrop = Items.sand;
             playerUnmineable = true;
             variants = 3;
-            wall = orangesandwall;
+            wall = orangeSandWall;
         }};
+        stoneSand = new Floor("stone-sand") {{
+            variants = 3;
+            wall = stoneSandWall;
+        }};
+
         obsidian = new Floor("obsidian") {{
             variants = 3;
-            wall = obsidianwall;
+            wall = obsidianWall;
         }};
         ash = new Floor("ash") {{
             variants = 3;
-            wall = ashwall;
+            wall = ashWall;
         }};
-        burningash = new Floor("burning-ash") {{
+        burningAsh = new Floor("burning-ash") {{
             variants = 2;
             attributes.set(Attribute.heat, 0.55f);
             attributes.set(Attribute.water, -0.55f);
@@ -178,44 +195,51 @@ public class SnEnvironment implements ContentList {
         }};
         //endregion floors
         //region static walls
-        crimsondirtwall = new StaticWall("crimson-dirt-wall") {{
+        crimsonGrassWall = new StaticWall("crimson-grass-wall") {{
             variants = 2;
         }};
-        crimsongrasswall = new StaticWall("crimson-grass-wall") {{
+        crimsonDirtWall = new StaticWall("crimson-dirt-wall") {{
             variants = 2;
         }};
-        crimsonsandwall = new StaticWall("crimson-sand-wall") {{
+        crimsonSandWall = new StaticWall("crimson-sand-wall") {{
             variants = 2;
         }};
-        granitewall = new StaticWall("granite-wall") {{
+
+        crimsonSnowWall = new StaticWall("crimson-snow-wall") {{
+            variants = 2;
+        }};
+        crimsonIceWall = new StaticWall("crimson-ice-wall") {{
+            variants = 2;
+        }};
+
+        graniteWall = new StaticWall("granite-wall") {{
             variants = 3;
         }};
-        stonesandwall = new StaticWall("stone-sand-wall") {{
+
+        orangeSandWall = new StaticWall("orange-sand-wall") {{
             variants = 2;
         }};
-        stonesand = new Floor("stone-sand") {{
-            variants = 3;
-        }};
-        orangesandwall = new StaticWall("orange-sand-wall") {{
+        stoneSandWall = new StaticWall("stone-sand-wall") {{
             variants = 2;
         }};
-        obsidianwall = new StaticWall("obsidian-wall") {{
+
+        obsidianWall = new StaticWall("obsidian-wall") {{
             variants = 2;
         }};
-        ashwall = new StaticWall("ash-wall") {{
+        ashWall = new StaticWall("ash-wall") {{
             variants = 2;
         }};
         //endregion static walls
         //region trees
-        crimsontree = new StaticTree("crimson-tree") {{
+        crimsonTree = new StaticTree("crimson-tree") {{
             variants = 0;
         }};
-        crimsontreedead = new StaticTree("crimson-tree-dead") {{
+        crimsonTreeDead = new StaticTree("crimson-tree-dead") {{
             variants = 0;
         }};
         //endregion trees
         //region pines
-        crimsonpine = new StaticTree("crimson-pine") {{
+        crimsonPine = new StaticTree("crimson-pine") {{
             variants = 0;
         }};
         //endregion pines

@@ -14,7 +14,7 @@ public class SnPlanets implements ContentList{
     //stars
     magma,
     //planets
-    burnout, azaria, hycle, rime;
+    burnout, azaria, rime;
 
     @Override
     public void load(){
@@ -39,6 +39,27 @@ public class SnPlanets implements ContentList{
         }};
         //endregion stars
         //region planets
+        azaria = new Planet("azaria", SnPlanets.magma, 1f, 3){{
+            meshLoader = () -> new HexMesh(this, 6);
+            generator = new AzariaGenerator();
+            radius = 1.03f;
+            atmosphereRadIn = 0.03f;
+            atmosphereRadOut = 0.4f;
+            orbitRadius = 58f;
+            orbitTime = 30f;
+            rotateTime = Time.toHours;
+            accessible = true;
+            startSector = 1;
+            //lightColor = Color.valueOf("B3E3BA");
+            atmosphereColor = Color.valueOf("68181C");
+            hasAtmosphere = true;
+            alwaysUnlocked = true;
+            landCloudColor = SnPal.azaria.cpy().a(0.5f);
+            /*cloudMeshLoader = () -> new MultiMesh(
+                    new HexSkyMesh(this, 11, 0.11f, 0.13f, 5, new Color().set(SnPal.azariaClouds).mul(0.9f).a(0.75f), 2, 0.45f, 0.9f, 0.38f)
+            );*/
+        }};
+
         burnout = new Planet("burnout", SnPlanets.magma, 0.7f, 3){{
             meshLoader = () -> new HexMesh(this, 6);
             generator = new BurnoutGenerator();
@@ -77,24 +98,6 @@ public class SnPlanets implements ContentList{
             cloudMeshLoader = () -> new MultiMesh(
             new HexSkyMesh(this, 11, 0.11f, 0.13f, 5, new Color().set(SnPal.azariaClouds).mul(0.9f).a(0.75f), 2, 0.45f, 0.9f, 0.38f)
             );
-        }};
-
-        hycle = new Planet("hycle", SnPlanets.azaria, 0.4f, 2){{
-            meshLoader = () -> new HexMesh(this, 6);
-            generator = new HycleGenerator();
-            radius = 0.4f;
-            atmosphereRadIn = 0.01f;
-            atmosphereRadOut = 0.012f;
-            orbitRadius = 12f;
-            orbitTime = 50f;
-            rotateTime = 24f * Time.toHours;
-            accessible = true;
-            startSector = 16;
-            //lightColor = Color.valueOf("B3E3BA");
-            atmosphereColor = Color.valueOf("8A8A8A");
-            hasAtmosphere = true;
-            alwaysUnlocked = true;
-            landCloudColor = Color.valueOf("B5B5B5");
         }};
 
         rime = new Planet("rime", SnPlanets.magma, 0.9f, 3){{
