@@ -18,12 +18,12 @@ public class SnWaves{
     public SnWaves(){
         this(-2);
         species(
-        line(SnUnitTypes.wind, SnUnitTypes.wind, SnUnitTypes.wind, SnUnitTypes.wind, SnUnitTypes.wind),
-        line(SnUnitTypes.plankton, SnUnitTypes.plankton, SnUnitTypes.plankton, SnUnitTypes.plankton, SnUnitTypes.plankton),
-        line(SnUnitTypes.wind, SnUnitTypes.wind, SnUnitTypes.wind, SnUnitTypes.wind, SnUnitTypes.wind),
-        line(SnUnitTypes.wind, SnUnitTypes.wind, SnUnitTypes.wind, SnUnitTypes.wind, SnUnitTypes.wind),
-        line(SnUnitTypes.wind, SnUnitTypes.wind, SnUnitTypes.wind, SnUnitTypes.wind, SnUnitTypes.wind),
-        line(SnUnitTypes.wind, SnUnitTypes.wind, SnUnitTypes.wind, SnUnitTypes.wind, SnUnitTypes.wind)
+        line(SnUnitTypes.copterT1, SnUnitTypes.copterT1, SnUnitTypes.copterT1, SnUnitTypes.copterT1, SnUnitTypes.copterT1),
+        line(SnUnitTypes.yellowT1, SnUnitTypes.yellowT1, SnUnitTypes.yellowT1, SnUnitTypes.yellowT1, SnUnitTypes.yellowT1),
+        line(SnUnitTypes.copterT1, SnUnitTypes.copterT1, SnUnitTypes.copterT1, SnUnitTypes.copterT1, SnUnitTypes.copterT1),
+        line(SnUnitTypes.copterT1, SnUnitTypes.copterT1, SnUnitTypes.copterT1, SnUnitTypes.copterT1, SnUnitTypes.copterT1),
+        line(SnUnitTypes.copterT1, SnUnitTypes.copterT1, SnUnitTypes.copterT1, SnUnitTypes.copterT1, SnUnitTypes.copterT1),
+        line(SnUnitTypes.copterT1, SnUnitTypes.copterT1, SnUnitTypes.copterT1, SnUnitTypes.copterT1, SnUnitTypes.copterT1)
         );
     }
 
