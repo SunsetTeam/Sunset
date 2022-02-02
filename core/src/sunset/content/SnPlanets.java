@@ -60,7 +60,7 @@ public class SnPlanets implements ContentList{
         }};
 
         azaria = new Planet("azaria", SnPlanets.magma, 1f, 3){{
-            meshLoader = () -> new HexMesh(this, 5);
+            meshLoader = () -> new HexMesh(this, 6);
             generator = new AzariaGenerator();
             radius = 1.03f;
             atmosphereRadIn = 0.03f;
@@ -85,7 +85,7 @@ public class SnPlanets implements ContentList{
             generator = new HycleGenerator();
             radius = 0.4f;
             atmosphereRadIn = 0.01f;
-            atmosphereRadOut = 0.02f;
+            atmosphereRadOut = 0.04f;
             orbitRadius = 9f;
             orbitTime = 13f;
             rotateTime = 24f * Time.toHours;
