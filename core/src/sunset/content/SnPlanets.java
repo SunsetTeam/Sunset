@@ -47,7 +47,7 @@ public class SnPlanets implements ContentList{
             atmosphereRadIn = 0.02f;
             atmosphereRadOut = 0.17f;
             sectorApproxRadius = 3;
-            orbitRadius = 33;
+            orbitRadius = 31;
             orbitTime = 45f;
             rotateTime = 2f * Time.toHours;
             accessible = true;
@@ -60,12 +60,12 @@ public class SnPlanets implements ContentList{
         }};
 
         azaria = new Planet("azaria", SnPlanets.magma, 1f, 3){{
-            meshLoader = () -> new HexMesh(this, 6);
+            meshLoader = () -> new HexMesh(this, 5);
             generator = new AzariaGenerator();
             radius = 1.03f;
             atmosphereRadIn = 0.03f;
             atmosphereRadOut = 0.4f;
-            orbitRadius = 58f;
+            orbitRadius = 57f;
             orbitTime = 30f;
             rotateTime = 1f * Time.toHours;
             accessible = true;
@@ -81,13 +81,13 @@ public class SnPlanets implements ContentList{
         }};
 
         hycle = new Planet("hycle", SnPlanets.azaria, 0.4f, 2){{
-            meshLoader = () -> new HexMesh(this, 6);
+            meshLoader = () -> new HexMesh(this, 5);
             generator = new HycleGenerator();
             radius = 0.4f;
             atmosphereRadIn = 0.01f;
-            atmosphereRadOut = 0.012f;
-            orbitRadius = 12f;
-            orbitTime = 50f;
+            atmosphereRadOut = 0.02f;
+            orbitRadius = 9f;
+            orbitTime = 13f;
             rotateTime = 24f * Time.toHours;
             accessible = true;
             startSector = 16;
@@ -116,6 +116,5 @@ public class SnPlanets implements ContentList{
             landCloudColor = Color.valueOf("00A6FF");
         }};
         //endregion planets
-
     }
 }
