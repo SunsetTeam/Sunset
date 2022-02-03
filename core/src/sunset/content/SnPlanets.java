@@ -1,29 +1,22 @@
 package sunset.content;
 
-import arc.graphics.Color;
+import arc.graphics.*;
+import arc.math.*;
 import arc.util.Time;
-import mindustry.ctype.ContentList;
-import mindustry.graphics.g3d.HexMesh;
-import mindustry.graphics.g3d.HexSkyMesh;
-import mindustry.graphics.g3d.MultiMesh;
-import mindustry.graphics.g3d.SunMesh;
-import mindustry.type.Planet;
-import sunset.graphics.SnPal;
-import sunset.maps.generators.AzariaGenerator;
-import sunset.maps.generators.BurnoutGenerator;
-import sunset.maps.generators.RimeGenerator;
+import mindustry.ctype.*;
+import mindustry.graphics.g3d.*;
+import mindustry.type.*;
+import sunset.graphics.*;
+import sunset.maps.generators.*;
 
 public class SnPlanets implements ContentList{
     public static Planet
     //stars
     magma,
-    //testing stars
-    testA,
-    a1, a2, a3, a4, a5,
-    testB,
-    b1, b2, b3, b4, b5,
     //planets
-    azaria, burnout, rime;
+    azaria, burnout, rime, 
+    //satellites
+    hycle;
 
     @Override
     public void load(){
@@ -47,9 +40,6 @@ public class SnPlanets implements ContentList{
            // lightColor = Color.valueOf("F5E14E");
         }};
         //endregion stars
-        //region testing stars
-
-        //endregion testing stars
         //region planets
         azaria = new Planet("azaria", magma, 1f, 3){{
             meshLoader = () -> new HexMesh(this, 6);
@@ -57,9 +47,9 @@ public class SnPlanets implements ContentList{
             radius = 1.03f;
             atmosphereRadIn = 0.03f;
             atmosphereRadOut = 0.4f;
-            orbitRadius = 58f;
+            orbitRadius = 57f;
             orbitTime = 30f;
-            rotateTime = Time.toHours;
+            rotateTime = 1f * Time.toHours;
             accessible = true;
             startSector = 1;
             //lightColor = Color.valueOf("B3E3BA");
@@ -109,5 +99,24 @@ public class SnPlanets implements ContentList{
             landCloudColor = Color.valueOf("00A6FF");
         }};
         //endregion planets
+        //region satellites
+        hycle = new Planet("hycle", SnPlanets.azaria, 0.4f, 2){{
+            meshLoader = () -> new HexMesh(this, 5);
+            generator = new HycleGenerator();
+            radius = 0.4f;
+            atmosphereRadIn = 0.01f;
+            atmosphereRadOut = 0.04f;
+            orbitRadius = 9f;
+            orbitTime = 13f;
+            rotateTime = 24f * Time.toHours;
+            accessible = true;
+            startSector = 16;
+            //lightColor = Color.valueOf("B3E3BA");
+            atmosphereColor = Color.valueOf("8A8A8A");
+            hasAtmosphere = true;
+            alwaysUnlocked = true;
+            landCloudColor = Color.valueOf("B5B5B5");
+        }};
+        //endregion satellites
     }
 }
