@@ -51,7 +51,7 @@ public class SnPlanets implements ContentList{
 
         //endregion testing stars
         //region planets
-        azaria = new Planet("azaria", SnPlanets.magma, 1f, 3){{
+        azaria = new Planet("azaria", magma, 1f, 3){{
             meshLoader = () -> new HexMesh(this, 6);
             generator = new AzariaGenerator();
             radius = 1.03f;
@@ -67,12 +67,12 @@ public class SnPlanets implements ContentList{
             hasAtmosphere = true;
             alwaysUnlocked = true;
             landCloudColor = SnPal.azaria.cpy().a(0.5f);
-            /*cloudMeshLoader = () -> new MultiMesh(
+            cloudMeshLoader = () -> new MultiMesh(
                     new HexSkyMesh(this, 11, 0.11f, 0.13f, 5, new Color().set(SnPal.azariaClouds).mul(0.9f).a(0.75f), 2, 0.45f, 0.9f, 0.38f)
-            );*/
+            );
         }};
 
-        burnout = new Planet("burnout", SnPlanets.magma, 0.7f, 3){{
+        burnout = new Planet("burnout", magma, 0.7f, 3){{
             meshLoader = () -> new HexMesh(this, 6);
             generator = new BurnoutGenerator();
             radius = 0.87f;
@@ -91,7 +91,7 @@ public class SnPlanets implements ContentList{
             landCloudColor = Color.valueOf("D65318");
         }};
 
-        rime = new Planet("rime", SnPlanets.magma, 0.9f, 3){{
+        rime = new Planet("rime", magma, 0.9f, 3){{
             meshLoader = () -> new HexMesh(this, 6);
             generator = new RimeGenerator();
             radius = 1;
