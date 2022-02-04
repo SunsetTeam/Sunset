@@ -40,8 +40,6 @@ public class Rotor {
 
     public void drawOutline(Unit unit,boolean drawTop) {
         Vec2 rotor = Tmp.v1.trns(unit.rotation - 90, offsetX, offsetY).add(unit);
-        float rotorX = offsetX + Angles.trnsx(unit.rotation - 90, smokeX, smokeY);
-        float rotorY = offsetY + Angles.trnsy(unit.rotation - 90, smokeX, smokeY);
 
         float z = Draw.z();
         if (underUnit)Draw.z(z-0.001f);
@@ -54,19 +52,16 @@ public class Rotor {
         if (drawTop){
             Draw.rect(topRegion, rotor.x, rotor.y, unit.rotation - 90);
         }
-        if(unit.health <= 0 || unit.dead()) {
-            if (Mathf.chanceDelta(smokeChance)) {
-                Fx.fallSmoke.at(rotorX, rotorY);
-                Fx.burning.at(rotorX, rotorY);
-            }
-        }
         Draw.z(z);
     }
 
     public void draw(Unit unit) {
         drawOutline(unit,true);
 
+
         Vec2 rotor = Tmp.v1.trns(unit.rotation - 90, offsetX, offsetY).add(unit);
+        float rotorSmokeX = rotor.x + Angles.trnsx(unit.rotation - 90, smokeX, smokeY);
+        float rotorSmokeY = rotor.y + Angles.trnsy(unit.rotation - 90, smokeX, smokeY);
 
         float z = Draw.z();
         if (underUnit)Draw.z(z-0.001f);
@@ -74,6 +69,12 @@ public class Rotor {
         for (int i = 0; i < rotorCount; i++) {
             float angle = (i * 360f / rotorCount + (Time.time * rotorRotateSpeed) % 360);
             Draw.rect(rotorRegion, rotor.x, rotor.y, angle);
+        }
+        if(unit.health <= 0 || unit.dead()) {
+            if (Mathf.chanceDelta(smokeChance)) {
+                Fx.fallSmoke.at(rotorSmokeX, rotorSmokeY);
+                Fx.burning.at(rotorSmokeX, rotorSmokeY);
+            }
         }
         Draw.rect(topRegion, rotor.x, rotor.y, unit.rotation - 90);
 

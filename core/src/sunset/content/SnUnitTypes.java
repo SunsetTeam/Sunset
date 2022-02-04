@@ -30,12 +30,12 @@ import sunset.type.weapons.WeaponExt;
 public class SnUnitTypes implements ContentList{
     public static UnitType
     //ground
-    berserkT1, berserkT2, berserkT3, berserkT4, berserkT5, berserkT6,
+    mirage, vision, illusion, soothSayer, seer, abyssEye,
     wheelT1, wheelT2, wheelT3, wheelT4, wheelT5, wheelT6,
     freezingT1,
     //air
-    copterT1, copterT2, copterT3, copterT4, copterT5, copterT6,
-    bufferT1, bufferT2, bufferT3, bufferT4, bufferT5, bufferT6,
+    wind, thunder, nadir, halo, mudflow, parhelion,
+    bufferT1, satelite, planet, star, galaxy, bufferT6,
     //misc
     router;
     //naval
@@ -53,7 +53,7 @@ public class SnUnitTypes implements ContentList{
     public void load() {
         //region ground
         //region berserk
-        berserkT1 = new BerserkUnitType("mirage"){{
+        mirage = new BerserkUnitType("mirage"){{
             health = 320;
             speed = 1f;
             rotateSpeed = 3f;
@@ -93,7 +93,7 @@ public class SnUnitTypes implements ContentList{
             }}
             );
         }};
-        berserkT2 = new BerserkUnitType("vision"){{
+        vision = new BerserkUnitType("vision"){{
             health = 980;
             speed = 0.9f;
             rotateSpeed = 2f;
@@ -123,7 +123,7 @@ public class SnUnitTypes implements ContentList{
             }}
             );
         }};
-        berserkT3 = new BerserkUnitType("illusion"){{
+        illusion = new BerserkUnitType("illusion"){{
             health = 1400;
             speed = 0.7f;
             rotateSpeed = 2.4f;
@@ -178,7 +178,7 @@ public class SnUnitTypes implements ContentList{
             }}
             );
         }};
-        berserkT4 = new BerserkUnitType("soothSayer"){{
+        soothSayer = new BerserkUnitType("soothSayer"){{
             health = 9700;
             speed = 0.57f;
             rotateSpeed = 2.1f;
@@ -241,7 +241,7 @@ public class SnUnitTypes implements ContentList{
             }}
             );
         }};
-        berserkT5 = new BerserkUnitType("seer"){{
+        seer = new BerserkUnitType("seer"){{
             health = 25900;
             speed = 0.53f;
             rotateSpeed = 1.8f;
@@ -267,7 +267,7 @@ public class SnUnitTypes implements ContentList{
             legSplashDamage = 45;
             legSplashRange = 40;
         }};
-        berserkT6 = new BerserkUnitType("abyssEye"){{
+        abyssEye = new BerserkUnitType("abyssEye"){{
             health = 70000;
             speed = 0.45f;
             rotateSpeed = 1.5f;
@@ -428,7 +428,7 @@ public class SnUnitTypes implements ContentList{
         //endregion ground
         //region air
         //region copters
-        copterT1 = new CopterUnitType("copter-t1"){{
+        wind = new CopterUnitType("wind"){{
             health = 140;
             hitSize = 15;
             speed = 3.2f;
@@ -473,7 +473,7 @@ public class SnUnitTypes implements ContentList{
                 bullet = SnBullets.basicHelicopterGun;
             }});
         }};
-        copterT2 = new CopterUnitType("copter-t2"){{
+        thunder = new CopterUnitType("thunder"){{
             health = 310;
             hitSize = 20;
             speed = 2.9f;
@@ -533,7 +533,7 @@ public class SnUnitTypes implements ContentList{
                 bullet = SnBullets.mediumHelicopterGun;
             }});
         }};
-        copterT3 = new CopterUnitType("copter-t3"){{
+        nadir = new CopterUnitType("nadir"){{
             health = 690;
             hitSize = 30;
             speed = 2.6f;
@@ -596,7 +596,7 @@ public class SnUnitTypes implements ContentList{
                 bullet = SnBullets.copterEnergySphere;
             }});
         }};
-        copterT4 = new CopterUnitType("copter-t4"){{
+        halo = new CopterUnitType("copter-t4"){{
             health = 6900;
             hitSize = 40;
             speed = 2.3f;
@@ -683,7 +683,7 @@ public class SnUnitTypes implements ContentList{
                 bullet = SnBullets.bigHelicopterGun;
             }});
         }};
-        copterT5 = new CopterUnitType("copter-t5"){{
+        mudflow = new CopterUnitType("mudflow"){{
             health = 57000;
             hitSize = 90;
             speed = 1.5f;
@@ -791,7 +791,7 @@ public class SnUnitTypes implements ContentList{
                         bullet = SnBullets.bigCopterEnergySphere;
                     }});
         }};
-        copterT6 = new CopterUnitType("copter-t6"){{
+        parhelion = new CopterUnitType("parhelion"){{
             health = 19700;
             hitSize = 70;
             speed = 2.1f;
@@ -905,7 +905,7 @@ public class SnUnitTypes implements ContentList{
         //endregion copters
         //region buffers
         //there should be a bufferT1 here
-        bufferT2 = new UnitTypeExt("buffer-t2"){{
+        satelite = new UnitTypeExt("satelite"){{
             health = 470;
             hitSize = 17;
             speed = 3f;
@@ -934,7 +934,7 @@ public class SnUnitTypes implements ContentList{
                 range = 180;
             }});
         }};
-        bufferT3 = new UnitTypeExt("buffer-t3"){{
+        planet = new UnitTypeExt("planet"){{
             health = 980;
             hitSize = 23;
             speed = 2.9f;
@@ -965,7 +965,7 @@ public class SnUnitTypes implements ContentList{
                 range = 310;
             }});
         }};
-        bufferT4 = new UnitTypeExt("buffer-t4"){{
+        star = new UnitTypeExt("star"){{
             health = 5800;
             hitSize = 55;
             speed = 2.7f;
@@ -1014,7 +1014,7 @@ public class SnUnitTypes implements ContentList{
                 laserLayer = Layer.flyingUnit;
             }});
         }};
-        bufferT5 = new UnitTypeExt("buffer-t5"){{
+        galaxy = new UnitTypeExt("galaxy"){{
             health = 20000;
             hitSize = 80;
             speed = 2.4f;
