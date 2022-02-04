@@ -2,10 +2,14 @@ package sunset.world.blocks.defense.turrets;
 
 import arc.Core;
 import arc.math.Mathf;
+import mindustry.graphics.Drawf;
+import mindustry.graphics.Pal;
 import mindustry.ui.Bar;
 import mindustry.world.blocks.defense.turrets.LaserTurret;
 import sunset.SnVars;
 import sunset.utils.Utils;
+
+import static mindustry.Vars.tilesize;
 
 /** Laser turret with useful things.
  * Features:
@@ -16,6 +20,12 @@ public class ModLaserTurret extends LaserTurret {
 
     public ModLaserTurret(String name) {
         super(name);
+    }
+
+    @Override
+    public void drawPlace(int x, int y, int rotation, boolean valid) {
+        Drawf.dashCircle(x * tilesize + offset, y * tilesize + offset, range, Pal.placing);
+        if (minRange > 0) Drawf.dashCircle(x, y, minRange, Pal.health);
     }
 
     @Override
