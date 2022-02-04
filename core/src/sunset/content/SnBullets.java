@@ -2209,7 +2209,7 @@ public class SnBullets implements ContentList {
                 Unit u = Units.closestEnemy(b.team, b.x, b.y, range(),
                         unit -> Angles.within(b.rotation(), b.angleTo(unit.x, unit.y), 10));
                 if (u != null) {
-                    shootEffect.at(b.x, b.y, b.rotation(), lightningColor, new Vec2().set(u.x, u.y));
+                    shootEffect.at(b.x, b.y, b.rotation(), lightningColor, new Vec2(u.x,u.y));
                     u.damagePierce(b.damage);
                     ((StackableStatusEffect) status).apply(u, statusDuration);
                 } else {
