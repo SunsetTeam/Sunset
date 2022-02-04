@@ -187,7 +187,7 @@ class SnStatusEffects_ implements ContentList{
 
                     Draw.z((unit.isFlying() ? Layer.flyingUnit : Layer.groundUnit) + 1);
 
-                    Draw.color(color, (stackIndex / 2f) / maxStacks());
+                    Draw.color(color, (stackIndex+1f) / maxStacks()/2f);
                     TextureRegion wrap = Draw.wrap(Vars.renderer.effectBuffer.getTexture());
                     wrap.flip(false, true);
                     Draw.rect(wrap, camera.position.x, camera.position.y, camera.width, camera.height);

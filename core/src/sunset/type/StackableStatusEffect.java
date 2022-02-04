@@ -10,10 +10,7 @@ import mindustry.entities.units.*;
 import mindustry.gen.*;
 import mindustry.type.*;
 import mma.*;
-import sunset.entities.units.*;
 import sunset.world.meta.values.*;
-
-import java.lang.reflect.*;
 
 import static mindustry.Vars.*;
 
@@ -32,7 +29,7 @@ public class StackableStatusEffect extends PublicStatusEffect{
 
     public static final float unset = Float.NEGATIVE_INFINITY;
     public final Seq<StackEntry> stackEntries = new Seq<>();
-    private final Seq<StatusEffect> stacks = new Seq<>();
+    private final Seq<StackableEntryStatusEffect> stacks = new Seq<>();
 
     /** Damage multipliers for each stack level. */
     public FloatSeq damageMultipliers = new FloatSeq();
@@ -52,9 +49,9 @@ public class StackableStatusEffect extends PublicStatusEffect{
     public BoolSeq disarmedArray = new BoolSeq();
     /** Damage per tick for each stack level. */
     public FloatSeq damageArray = new FloatSeq();
+    public StacksDrawer stacksDrawer = null;
+    public StacksUpdater stacksUpdater = null;
     private StackableStatusEffectValue statsViewer;
-    public StacksDrawer stacksDrawer=null;
-    public StacksUpdater stacksUpdater=null;
     private final AStats aStats = new AStats(){
         @Override
         public void display(Table table){
@@ -64,12 +61,14 @@ public class StackableStatusEffect extends PublicStatusEffect{
             statsViewer.display(table);
         }
     };
-public int maxStacks(){
-    return stacks.size;
-}
+
     public StackableStatusEffect(String name){
         super(name);
         stats = aStats.copy(stats);
+    }
+
+    public int maxStacks(){
+        return stacks.size;
     }
 
     public void stackEntries(StackEntry... stackEntries){
@@ -111,7 +110,7 @@ public int maxStacks(){
      * information about the remaining time and the degree of overlap.
      */
     public final void updateStack(Unit unit, float time, int stackIndex){
-        if (stacksUpdater!=null)stacksUpdater.update(unit,time,stackIndex);
+        if(stacksUpdater != null) stacksUpdater.update(unit, time, stackIndex);
     }
 
     /**
@@ -119,7 +118,7 @@ public int maxStacks(){
      * information about the remaining time.
      */
     public final void drawStack(Unit unit, int stackIndex){
-        if (stacksDrawer!=null)stacksDrawer.draw(unit,stackIndex);
+        if(stacksDrawer != null) stacksDrawer.draw(unit, stackIndex);
     }
 
     /**
@@ -127,26 +126,29 @@ public int maxStacks(){
      * increases the number of overlays of this effect by 1.
      */
     public void apply(Unit unit, float duration){
-        // We have to use reflection, since there are several classes that describe
-        // units (at least - UnitEntity and UnitMech), and these classes have nothing in common
-        // an interface that would have a statuses field (well, or I'm blind).
-        Field fieldStatuses;
-        Seq<StatusEntry> statuses = null;
-        try{
-            fieldStatuses = unit.getClass().getField("statuses");
-            fieldStatuses.setAccessible(true);
-            statuses = (Seq<StatusEntry>)fieldStatuses.get(unit);
-        }catch(Throwable e){
-           throw new RuntimeException(e);
-        }
+        Seq<StatusEntry> statuses = getStatusEntries(unit);
+
         boolean foundStandard = statuses.remove(e -> e.effect == this);
-        StackableStatusEntry prev = (StackableStatusEntry)statuses.find(e ->
-        (e instanceof StackableStatusEntry) && ((StackableStatusEntry)e).baseEffect == this);
+
+       /* StackableStatusEntry prev = (StackableStatusEntry)statuses.find(e ->
+        (e instanceof StackableStatusEntry statusEntry) && statusEntry.baseEffect == this);
         if(prev == null){
             applyEffect(statuses, unit, duration, foundStandard ? 2 : 1);
         }else{
             prev.stack();
+        }*/
+    }
+
+    public Seq<StatusEntry> getStatusEntries(Unit unit){
+        Seq<StatusEntry> statuses;
+        try{
+            statuses = Reflect.get(unit, unit.getClass().getField("statuses"));
+        }catch(NoSuchFieldException e){
+            throw new RuntimeException("Conflicts with mod \"" + unit.type.minfo.mod.name + "\"(unit: " + unit.type.name + ")", e);
+        }catch(Throwable e){
+            throw new RuntimeException(e);
         }
+        return statuses;
     }
 
     protected void applyEffect(Seq<StatusEntry> statuses, Unit unit, float duration, int stackCount){
@@ -168,14 +170,25 @@ public int maxStacks(){
                 }
             }
         }
-        StackableStatusEntry entry = new StackableStatusEntry(this, stackCount, duration);
-        statuses.add(entry);
+        /*StackableStatusEntry entry = new StackableStatusEntry(this, stackCount, duration);
+        statuses.add(entry);*/
     }
-    public interface StacksUpdater{
-        void update(Unit unit,float time,int stackIndex);
-    }
-    public StatusEffect stack(int index){
+
+    public StackableEntryStatusEffect stack(int index){
         return stacks.get(index);
+    }
+
+    @Override
+    public boolean applyTransition(Unit unit, StatusEffect to, StatusEntry entry, float time){
+        if(to instanceof StackableEntryStatusEffect child && child.parent == this){
+            entry.set(child.next(), entry.time / 2f + time / 2f);
+            return true;
+        }
+        return super.applyTransition(unit, to, entry, time);
+    }
+
+    public interface StacksUpdater{
+        void update(Unit unit, float time, int stackIndex);
     }
 
     public interface StacksDrawer{
@@ -212,12 +225,12 @@ public int maxStacks(){
         @Override
         public void update(Unit unit, float time){
             super.update(unit, time);
-            parent.updateStack(unit, time, index + 1);
+            parent.updateStack(unit, time, index);
         }
 
         @Override
         public void draw(Unit unit){
-            parent.drawStack(unit, index + 1);
+            parent.drawStack(unit, index);
         }
 
         @Override
@@ -227,6 +240,10 @@ public int maxStacks(){
 
         @Override
         public boolean applyTransition(Unit unit, StatusEffect to, StatusEntry entry, float time){
+            if(to == parent){
+                entry.set(next(), time / 2f + entry.time / 2f);
+                return true;
+            }
             return parent.applyTransition(unit, to, entry, time);
         }
 
@@ -238,6 +255,10 @@ public int maxStacks(){
         @Override
         public TechTree.TechNode node(){
             return parent.node();
+        }
+
+        public StackableEntryStatusEffect next(){
+            return parent.stack(Math.min(parent.maxStacks() - 1, index + 1));
         }
     }
 
