@@ -39,7 +39,6 @@ public class SnUnitTypes implements ContentList{
     //misc
     router;
     //naval
-    @EntityDef({Unitc.class, WaterMovec.class})
     public static UnitType yellowT1, yellowT2, yellowT3, yellowT4, yellowT5;
     //other
     @EntityDef({Unitc.class, Deliverc.class})
@@ -47,7 +46,7 @@ public class SnUnitTypes implements ContentList{
     //@EntityDef({Unitc.class, FireFighterc.class})
     public static UnitType comet;
     @EntityDef({Unitc.class, Segmentc.class})
-    public static UnitType snakeT1;
+    public static UnitType snake;
 
     @Override
     public void load() {
@@ -1483,7 +1482,7 @@ public class SnUnitTypes implements ContentList{
             }});
         }};
         //region snake
-        snakeT1 = new SegmentUnitType("snake-t1"){{
+        snake = new SegmentUnitType("snake1"){{
             lengthSnake = 5;
             health = 3000f;
             hitSize = 30f;

@@ -60,8 +60,6 @@ public class Rotor {
 
 
         Vec2 rotor = Tmp.v1.trns(unit.rotation - 90, offsetX, offsetY).add(unit);
-        float rotorSmokeX = rotor.x + Angles.trnsx(unit.rotation - 90, smokeX, smokeY);
-        float rotorSmokeY = rotor.y + Angles.trnsy(unit.rotation - 90, smokeX, smokeY);
 
         float z = Draw.z();
         if (underUnit)Draw.z(z-0.001f);
@@ -72,6 +70,8 @@ public class Rotor {
         }
         if(unit.health <= 0 || unit.dead()) {
             if (Mathf.chanceDelta(smokeChance)) {
+                float rotorSmokeX = rotor.x + Angles.trnsx(unit.rotation - 90, smokeX, smokeY);
+                float rotorSmokeY = rotor.y + Angles.trnsy(unit.rotation - 90, smokeX, smokeY);
                 Fx.fallSmoke.at(rotorSmokeX, rotorSmokeY);
                 Fx.burning.at(rotorSmokeX, rotorSmokeY);
             }
