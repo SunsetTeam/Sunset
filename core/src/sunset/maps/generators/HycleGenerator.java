@@ -42,9 +42,9 @@ public class HycleGenerator extends SnPlanetGenerator{
                 {Blocks.charr, Blocks.charr, Blocks.basalt, Blocks.stone, Blocks.charr, Blocks.basalt, Blocks.dacite, Blocks.hotrock, SnEnvironment.granite, Blocks.basalt, Blocks.stone, Blocks.dacite, Blocks.charr},
                 {Blocks.stone, Blocks.basalt, Blocks.basalt, Blocks.basalt, Blocks.charr, Blocks.stone, Blocks.charr, Blocks.basalt, Blocks.basalt, Blocks.basalt, Blocks.basalt, Blocks.dacite, Blocks.charr},
                 {Blocks.charr, Blocks.basalt, Blocks.ice, Blocks.stone, Blocks.dacite, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.ice, Blocks.ice, SnEnvironment.granite, Blocks.basalt, Blocks.basalt},
-                {Blocks.stone, Blocks.ice, SnEnvironment.granite, Blocks.ice, Blocks.ice, Blocks.basalt, SnEnvironment.granite, Blocks.ice, Blocks.charr, Blocks.basalt, Blocks.charr, Blocks.charr, Blocks.basalt},
-                {Blocks.charr, Blocks.ice, Blocks.ice, Blocks.ice, Blocks.ice, Blocks.ice, Blocks.basalt, Blocks.basalt, Blocks.ice, Blocks.ice, Blocks.ice, Blocks.ice, SnEnvironment.granite},
-                {Blocks.ice, Blocks.ice, Blocks.ice, Blocks.ice, Blocks.ice, Blocks.ice, Blocks.ice, Blocks.ice, Blocks.ice, Blocks.ice, Blocks.ice, Blocks.ice, Blocks.ice}
+                {Blocks.stone, Blocks.basalt, SnEnvironment.granite, SnEnvironment.granite,  Blocks.stone, Blocks.basalt, SnEnvironment.granite, SnEnvironment.granite, Blocks.charr, Blocks.basalt, Blocks.charr, Blocks.charr, Blocks.basalt},
+                {Blocks.charr, Blocks.ice, Blocks.stone, Blocks.stone, Blocks.ice, Blocks.ice, Blocks.basalt, Blocks.basalt, SnEnvironment.granite, Blocks.ice, Blocks.ice, Blocks.ice, SnEnvironment.granite},
+                {Blocks.ice, Blocks.ice, Blocks.ice, Blocks.stone, Blocks.stone, Blocks.stone, Blocks.ice, Blocks.ice, Blocks.ice, Blocks.ice, Blocks.ice, Blocks.ice, Blocks.ice}
         };
 
         dec = ObjectMap.of(
