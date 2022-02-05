@@ -30,10 +30,10 @@ public class RimeGenerator extends SnPlanetGenerator{
         );
 
         dec = ObjectMap.of(
-        Blocks.ice, Blocks.ice,
-        SnEnvironment.glacier3, SnEnvironment.glacier3,
-        Blocks.ice, Blocks.ice,
-        Blocks.iceSnow, Blocks.iceSnow
+        Blocks.ice, Blocks.snowBoulder,
+        Blocks.ice, Blocks.snowBoulder,
+        Blocks.ice, Blocks.snowBoulder,
+        Blocks.iceSnow, Blocks.snowBoulder
         );
     }
 

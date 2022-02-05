@@ -36,17 +36,17 @@ public class SnUnitTypes implements ContentList{
     //air
     wind, thunder, nadir, halo, mudflow, parhelion,
     bufferT1, satelite, planet, star, galaxy, bufferT6,
+    //naval
+    yellowT1, yellowT2, yellowT3, yellowT4, yellowT5,
     //misc
     router;
-    //naval
-    public static UnitType yellowT1, yellowT2, yellowT3, yellowT4, yellowT5;
     //other
     @EntityDef({Unitc.class, Deliverc.class})
     public static UnitType courier;
     //@EntityDef({Unitc.class, FireFighterc.class})
     public static UnitType comet;
     @EntityDef({Unitc.class, Segmentc.class})
-    public static UnitType snake;
+    public static UnitType snake1;
 
     @Override
     public void load() {
@@ -1115,10 +1115,11 @@ public class SnUnitTypes implements ContentList{
                         shootStatus = StatusEffects.shocked;
                     }}
             );*/
+            constructor = UnitWaterMove::create;
             immunities.add(StatusEffects.wet);
             immunities.add(StatusEffects.freezing);
         }};
-        yellowT2 = new UnitTypeExt("yellow-t2") {{
+        /*yellowT2 = new UnitTypeExt("yellow-t2") {{
             speed = 2;
             rotateSpeed = 6.9f;
             drag = 0.7f;
@@ -1131,7 +1132,7 @@ public class SnUnitTypes implements ContentList{
             commandLimit = 5;
             commandRadius = 48;
             visualElevation = -1;
-            /*weapons.add(
+            weapons.add(
                     new WeaponExt("rocket-launcher") {{
                         bullet = SnBullets.rocketArt;
                         mirror = true;
@@ -1171,7 +1172,8 @@ public class SnUnitTypes implements ContentList{
                         shootStatus = StatusEffects.disarmed;
                         shootStatusDuration = 30;
                     }}
-            );*/
+            );
+            constructor = UnitWaterMove::create;
             immunities.add(StatusEffects.wet);
             immunities.add(StatusEffects.freezing);
         }};
@@ -1188,7 +1190,7 @@ public class SnUnitTypes implements ContentList{
             commandLimit = 5;
             commandRadius = 48;
             visualElevation = -1;
-            /*weapons.add(
+            weapons.add(
                     new WeaponExt("laser-gun") {{
                         bullet = SnBullets.laserGun2;
                         mirror = true;
@@ -1245,7 +1247,8 @@ public class SnUnitTypes implements ContentList{
                         shootStatus = StatusEffects.disarmed;
                         shootStatusDuration = 30;
                     }}
-            );*/
+            );
+            constructor = UnitWaterMove::create;
             immunities.add(StatusEffects.wet);
             immunities.add(StatusEffects.freezing);
         }};
@@ -1262,7 +1265,7 @@ public class SnUnitTypes implements ContentList{
             commandLimit = 5;
             commandRadius = 48;
             visualElevation = -1;
-            /*weapons.add(
+            weapons.add(
                     new WeaponExt("big-rocket-launcher") {{
                         bullet = SnBullets.bigRocketArt;
                         mirror = false;
@@ -1319,7 +1322,8 @@ public class SnUnitTypes implements ContentList{
                         shootStatus = StatusEffects.disarmed;
                         shootStatusDuration = 30;
                     }}
-            );*/
+            );
+            constructor = UnitWaterMove::create;
             immunities.add(StatusEffects.wet);
             immunities.add(StatusEffects.freezing);
         }};
@@ -1336,7 +1340,7 @@ public class SnUnitTypes implements ContentList{
             commandLimit = 5;
             commandRadius = 48;
             visualElevation = -1;
-            /*weapons.add(
+            weapons.add(
                     new WeaponExt("big-machinegun") {{
                         bullet = SnBullets.bigMachineBullet;
                         rotate = true;
@@ -1413,10 +1417,11 @@ public class SnUnitTypes implements ContentList{
                         shootStatus = StatusEffects.disarmed;
                         shootStatusDuration = 30;
                     }}
-            );*/
+            );
+            constructor = UnitWaterMove::create;
             immunities.add(StatusEffects.wet);
             immunities.add(StatusEffects.freezing);
-        }};
+        }};*/
         //there should be a yellowT6 here
         //endregion yellow
         //endregion naval
@@ -1482,7 +1487,7 @@ public class SnUnitTypes implements ContentList{
             }});
         }};
         //region snake
-        snake = new SegmentUnitType("snake1"){{
+        snake1 = new SegmentUnitType("snake1"){{
             lengthSnake = 5;
             health = 3000f;
             hitSize = 30f;

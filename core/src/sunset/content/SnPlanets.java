@@ -1,13 +1,19 @@
 package sunset.content;
 
-import arc.graphics.*;
-import arc.math.*;
+import arc.graphics.Color;
 import arc.util.Time;
-import mindustry.ctype.*;
-import mindustry.graphics.g3d.*;
-import mindustry.type.*;
-import sunset.graphics.*;
-import sunset.maps.generators.*;
+import mindustry.ctype.ContentList;
+import mindustry.graphics.g3d.HexMesh;
+import mindustry.graphics.g3d.HexSkyMesh;
+import mindustry.graphics.g3d.MultiMesh;
+import mindustry.graphics.g3d.SunMesh;
+import mindustry.type.Planet;
+import sunset.graphics.SnPal;
+import sunset.maps.generators.AzariaGenerator;
+import sunset.maps.generators.BurnoutGenerator;
+import sunset.maps.generators.HycleGenerator;
+import sunset.maps.generators.RimeGenerator;
+import sunset.type.planets.SnPlanet;
 
 public class SnPlanets implements ContentList{
     public static Planet
@@ -21,7 +27,7 @@ public class SnPlanets implements ContentList{
     @Override
     public void load(){
         //region stars
-        magma = new Planet("magma", null, 4f, 0){{
+        magma = new SnPlanet("magma", null, 4f, 0){{
             bloom = true;
             accessible = false;
             hasAtmosphere = true;
@@ -41,7 +47,7 @@ public class SnPlanets implements ContentList{
         }};
         //endregion stars
         //region planets
-        azaria = new Planet("azaria", magma, 1f, 3){{
+        azaria = new SnPlanet("azaria", magma, 1f, 3){{
             meshLoader = () -> new HexMesh(this, 6);
             generator = new AzariaGenerator();
             radius = 1.03f;
@@ -49,7 +55,7 @@ public class SnPlanets implements ContentList{
             atmosphereRadOut = 0.4f;
             orbitRadius = 57f;
             orbitTime = 30f;
-            rotateTime = 1f * Time.toHours;
+            rotateTime = Time.toHours;
             accessible = true;
             startSector = 1;
             //lightColor = Color.valueOf("B3E3BA");
@@ -62,7 +68,7 @@ public class SnPlanets implements ContentList{
             );
         }};
 
-        burnout = new Planet("burnout", magma, 0.7f, 3){{
+        burnout = new SnPlanet("burnout", magma, 0.7f, 3){{
             meshLoader = () -> new HexMesh(this, 6);
             generator = new BurnoutGenerator();
             radius = 0.87f;
@@ -81,7 +87,7 @@ public class SnPlanets implements ContentList{
             landCloudColor = Color.valueOf("D65318");
         }};
 
-        rime = new Planet("rime", magma, 0.9f, 3){{
+        rime = new SnPlanet("rime", magma, 0.9f, 3){{
             meshLoader = () -> new HexMesh(this, 6);
             generator = new RimeGenerator();
             radius = 1;
@@ -100,7 +106,7 @@ public class SnPlanets implements ContentList{
         }};
         //endregion planets
         //region satellites
-        hycle = new Planet("hycle", SnPlanets.azaria, 0.4f, 2){{
+        hycle = new SnPlanet("hycle", azaria, 0.4f, 2){{
             meshLoader = () -> new HexMesh(this, 5);
             generator = new HycleGenerator();
             radius = 0.4f;

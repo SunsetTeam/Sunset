@@ -48,10 +48,10 @@ public class HycleGenerator extends SnPlanetGenerator{
         };
 
         dec = ObjectMap.of(
-                Blocks.stone, Blocks.basalt,
-                Blocks.basalt, Blocks.stone,
-                SnEnvironment.granite, Blocks.charr,
-                Blocks.charr, Blocks.charr
+                Blocks.stone, Blocks.boulder,
+                Blocks.basalt, Blocks.boulder,
+                SnEnvironment.granite, Blocks.boulder,
+                Blocks.charr, Blocks.boulder
         );
 
         tars = ObjectMap.of(

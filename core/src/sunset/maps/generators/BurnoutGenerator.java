@@ -35,10 +35,10 @@ public class BurnoutGenerator extends SnPlanetGenerator{
         );
 
         dec = ObjectMap.of(
-        Blocks.darksand, Blocks.darksand,
-        Blocks.charr, Blocks.charr,
-        Blocks.craters, Blocks.craters,
-        Blocks.basalt, Blocks.basalt
+        Blocks.darksand, Blocks.sandBoulder,
+        Blocks.darksand, Blocks.sandBoulder,
+        Blocks.basalt, Blocks.boulder,
+        Blocks.basalt, Blocks.boulder
         );
     }
 
