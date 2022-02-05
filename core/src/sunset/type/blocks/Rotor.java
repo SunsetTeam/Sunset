@@ -57,8 +57,6 @@ public class Rotor {
 
     public void draw(Unit unit) {
         drawOutline(unit,true);
-
-
         Vec2 rotor = Tmp.v1.trns(unit.rotation - 90, offsetX, offsetY).add(unit);
 
         float z = Draw.z();
