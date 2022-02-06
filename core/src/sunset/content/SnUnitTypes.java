@@ -1123,6 +1123,7 @@ public class SnUnitTypes implements ContentList{
             );*/
             immunities.add(StatusEffects.wet);
             immunities.add(StatusEffects.freezing);
+            constructor = UnitWaterMove::create;
         }};
         yellowT2 = new UnitTypeExt("yellow-t2") {{
             speed = 2;
@@ -1180,6 +1181,7 @@ public class SnUnitTypes implements ContentList{
             );*/
             immunities.add(StatusEffects.wet);
             immunities.add(StatusEffects.freezing);
+            constructor = UnitWaterMove::create;
         }};
         yellowT3 = new UnitTypeExt("yellow-t3") {{
             speed = 1.7f;
@@ -1254,6 +1256,7 @@ public class SnUnitTypes implements ContentList{
             );*/
             immunities.add(StatusEffects.wet);
             immunities.add(StatusEffects.freezing);
+            constructor = UnitWaterMove::create;
         }};
 
         yellowT4 = new UnitTypeExt("yellow-t4") {{
@@ -1329,6 +1332,7 @@ public class SnUnitTypes implements ContentList{
             );*/
             immunities.add(StatusEffects.wet);
             immunities.add(StatusEffects.freezing);
+            constructor = UnitWaterMove::create;
         }};
 
         yellowT5 = new UnitTypeExt("yellow-t5") {{
@@ -1424,6 +1428,7 @@ public class SnUnitTypes implements ContentList{
             );*/
             immunities.add(StatusEffects.wet);
             immunities.add(StatusEffects.freezing);
+            constructor = UnitWaterMove::create;
         }};
         //there should be a yellowT6 here
         //endregion yellow
