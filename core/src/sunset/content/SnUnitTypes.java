@@ -36,7 +36,7 @@ public class SnUnitTypes implements ContentList{
     freezingT1,
     //air
     wind, thunder, nadir, halo, mudflow, parhelion,
-    bufferT1, satelite, planet, star, galaxy, bufferT6,
+    bufferT1, satellite, planet, star, galaxy, bufferT6,
     engineT1,
     //misc
     router,
@@ -834,7 +834,7 @@ public class SnUnitTypes implements ContentList{
                         rotorRotateSpeed = -27f;
                         rotorCount = 4;
                     }},
-                    new Rotor("rotor-gigant") {{
+                    new Rotor("rotor-giant") {{
                         offsetX = 0;
                         offsetY = 8;
                         rotorRotateSpeed = 26f;
@@ -858,7 +858,7 @@ public class SnUnitTypes implements ContentList{
                         shootSound = Sounds.shotgun;
                         bullet = SnBullets.shrapnelCopterGun;
                     }},
-                    new WeaponExt("gigant-minigun") {{
+                    new WeaponExt("giant-machine-gun") {{
                         rotate = true;
                         mirror = false;
                         rotateSpeed = 2.5f;
@@ -873,7 +873,7 @@ public class SnUnitTypes implements ContentList{
                         shootSound = Sounds.shootBig;
                         bullet = SnBullets.giantHelicopterGun;
                     }},
-                    new WeaponExt("gigant-rocket-launcher") {{
+                    new WeaponExt("giant-rocket-launcher") {{
                         rotate = false;
                         mirror = true;
                         shake = 3f;
@@ -909,7 +909,7 @@ public class SnUnitTypes implements ContentList{
         //endregion copters
         //region buffers
         //there should be a bufferT1 here
-        satelite = new UnitTypeExt("satelite") {{
+        satellite = new UnitTypeExt("satellite") {{
             health = 470;
             hitSize = 17;
             speed = 3f;

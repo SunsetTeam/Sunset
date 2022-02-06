@@ -73,7 +73,7 @@ public class SnUnitBlocks implements ContentList {
 
             upgrades.addAll(
                     new UnitType[]{SnUnitTypes.thunder, SnUnitTypes.nadir},
-                    new UnitType[]{SnUnitTypes.satelite, SnUnitTypes.planet}
+                    new UnitType[]{SnUnitTypes.satellite, SnUnitTypes.planet}
             );
         }};
 
