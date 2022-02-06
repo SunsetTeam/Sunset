@@ -1846,6 +1846,11 @@ public class SnBullets implements ContentList {
             length = 180f;
             width = 50f;
             damage = 145;
+            serrationLenScl = 10f;
+            serrationSpaceOffset = 70f;
+            serrationFadeOffset = 0f;
+            serrations = 15;
+            serrationWidth = 7f;
             shootEffect = SnFx.copterShoot;
             fromColor = SnPal.copterLaser;
             toColor = SnPal.copterLaserBack;

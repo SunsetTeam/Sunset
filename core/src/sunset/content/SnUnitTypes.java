@@ -443,9 +443,6 @@ public class SnUnitTypes implements ContentList{
             range = 130;
 
             unitFallRotateSpeed = 6f;
-            smokeFx = Fx.fallSmoke;
-            burningFx = Fx.burning;
-
 
             rotors.add(
                     new Rotor("rotor-small") {{
@@ -489,8 +486,6 @@ public class SnUnitTypes implements ContentList{
             range = 145;
 
             unitFallRotateSpeed = 5.7f;
-            smokeFx = Fx.fallSmoke;
-            burningFx = Fx.burning;
 
             rotors.add(
                     new Rotor("rotor-medium") {{
@@ -548,8 +543,6 @@ public class SnUnitTypes implements ContentList{
             range = 145;
 
             unitFallRotateSpeed = 5f;
-            smokeFx = Fx.fallSmoke;
-            burningFx = Fx.burning;
 
             rotors.add(
                     new Rotor("rotor-mini") {{
@@ -751,6 +744,7 @@ public class SnUnitTypes implements ContentList{
                         inaccuracy = 9f;
                         shots = 2;
                         shotDelay = 12f;
+                        shootX = -1f;
                         shootSound = Sounds.bang;
                         bullet = SnBullets.largeHelicopterMissile;
                     }},
@@ -771,7 +765,7 @@ public class SnUnitTypes implements ContentList{
                         rotate = false;
                         mirror = true;
                         shake = 3f;
-                        x = 25f;
+                        x = -25f;
                         y = 8f;
                         reload = 30f;
                         shotDelay = 5f;
@@ -792,7 +786,7 @@ public class SnUnitTypes implements ContentList{
                         reload = 20f;
                         shotDelay = 1f;
                         shots = 3;
-                        inaccuracy = 3f;
+                        inaccuracy = 6f;
                         shootSound = Sounds.missile;
                         bullet = SnBullets.smallHelicopterMissile;
                     }});
@@ -842,14 +836,12 @@ public class SnUnitTypes implements ContentList{
                     }}
             );
 
-            weapons.add(
+            weapons.addAll(
                     new WeaponExt("large-shrapnel-gun") {{
                         rotate = false;
-                        mirror = true;
-                        x = 30f;
-                        y = 47f;
-                        layerOffset = -0.01f;
-                        top = false;
+                        mirror = false;
+                        x = 0f;
+                        y = 45f;
                         reload = 65f;
                         recoil = 7f;
                         shake = 4f;
@@ -859,12 +851,12 @@ public class SnUnitTypes implements ContentList{
                         bullet = SnBullets.shrapnelCopterGun;
                     }},
                     new WeaponExt("giant-machine-gun") {{
-                        rotate = true;
+                        rotate = false;
                         mirror = false;
                         rotateSpeed = 2.5f;
                         shake = 4f;
                         x = 0f;
-                        y = 8f;
+                        y = 51f;
                         layerOffset = -0.01f;
                         recoil = 4f;
                         reload = 7f;
@@ -877,11 +869,11 @@ public class SnUnitTypes implements ContentList{
                         rotate = false;
                         mirror = true;
                         shake = 3f;
-                        x = 45f;
-                        y = 40f;
-                        recoil = 3f;
-                        layerOffset = -0.01f;
+                        x = 28f;
+                        y = 52f;
                         top = false;
+                        layerOffset = -0.01f;
+                        recoil = 3f;
                         reload = 55f;
                         shotDelay = 4f;
                         shots = 2;
@@ -891,13 +883,24 @@ public class SnUnitTypes implements ContentList{
                     }},
                     new WeaponExt("medium-energy-sphere-generator") {{
                         rotate = false;
-                        mirror = false;
+                        mirror = true;
                         shake = 2f;
-                        x = 0f;
-                        y = 48f;
+                        x = 44f;
+                        y = 9f;
                         recoil = 4f;
-                        layerOffset = -0.01f;
-                        top = false;
+                        reload = 40f;
+                        shotDelay = 1f;
+                        shots = 1;
+                        inaccuracy = 3f;
+                        shootSound = Sounds.spark;
+                        bullet = SnBullets.bigCopterEnergySphere;
+                    }},
+                    new WeaponExt("medium-energy-sphere-generator") {{
+                        rotate = false;
+                        mirror = true;
+                        shake = 2f;
+                        x = 30f;
+                        y = 40f;
                         reload = 40f;
                         shotDelay = 1f;
                         shots = 1;

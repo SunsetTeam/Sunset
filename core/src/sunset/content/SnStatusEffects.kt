@@ -177,32 +177,33 @@ class SnStatusEffects : ContentList {
         incineration = stackableStatusEffect("incineration") {
             color = "BD4E17".color()
             stackEntries(
-                stackEntry(health = 0.97f, speed = 0.97f),
-                stackEntry(health = 0.96f, speed = 0.97f),
-                stackEntry(health = 0.95f, speed = 0.97f),
-                stackEntry(health = 0.94f, speed = 0.97f),
-                stackEntry(health = 0.93f, speed = 0.98f),
-                stackEntry(health = 0.92f, speed = 0.95f),
-                stackEntry(health = 0.88f, speed = 0.95f),
-                stackEntry(health = 0.86f, speed = 0.95f),
-                stackEntry(health = 0.83f, speed = 0.974f),
-                stackEntry(health = 0.80f, speed = 0.93f),
-                stackEntry(health = 0.79f, speed = 0.93f),
-                stackEntry(health = 0.75f, speed = 0.93f),
-                stackEntry(health = 0.71f, speed = 0.93f),
-                stackEntry(health = 0.67f, speed = 0.92f),
-                stackEntry(health = 0.60f, speed = 0.92f),
-                stackEntry(health = 0.55f, speed = 0.91f),
-                stackEntry(health = 0.50f, speed = 0.91f),
-                stackEntry(health = 0.39f, speed = 0.91f),
-                stackEntry(health = 0.21f, speed = 0.90f),
-                stackEntry(health = 0.11f, speed = 0.89f),
-                stackEntry(health = 0.04f, speed = 0.85f),
+                stackEntry(health = 0.97f, speed = 0.97f, damage = 1f),
+                stackEntry(health = 0.96f, speed = 0.97f, damage = 3f),
+                stackEntry(health = 0.95f, speed = 0.97f, damage = 6f),
+                stackEntry(health = 0.94f, speed = 0.97f, damage = 9f),
+                stackEntry(health = 0.93f, speed = 0.98f, damage = 10f),
+                stackEntry(health = 0.92f, speed = 0.95f, damage = 13f),
+                stackEntry(health = 0.88f, speed = 0.95f, damage = 16f),
+                stackEntry(health = 0.86f, speed = 0.95f, damage = 19f),
+                stackEntry(health = 0.83f, speed = 0.974f, damage = 22f),
+                stackEntry(health = 0.80f, speed = 0.93f, damage = 25f),
+                stackEntry(health = 0.79f, speed = 0.93f, damage = 28f),
+                stackEntry(health = 0.75f, speed = 0.93f, damage = 30f),
+                stackEntry(health = 0.71f, speed = 0.93f, damage = 33f),
+                stackEntry(health = 0.67f, speed = 0.92f, damage = 35f),
+                stackEntry(health = 0.60f, speed = 0.92f, damage = 38f),
+                stackEntry(health = 0.55f, speed = 0.91f, damage = 40f),
+                stackEntry(health = 0.50f, speed = 0.91f, damage = 43f),
+                stackEntry(health = 0.39f, speed = 0.91f, damage = 45f),
+                stackEntry(health = 0.21f, speed = 0.90f, damage = 46f),
+                stackEntry(health = 0.11f, speed = 0.89f, damage = 48f),
+                stackEntry(health = 0.04f, speed = 0.85f, damage = 50f),
                 null
             )
             healthMultiplier = 0.97f
             speedMultiplier = 0.97f
-            color = SnPal.incineration
+            damage = 5f
+            color = Color.black
         }
         //endregion stackable
     }
