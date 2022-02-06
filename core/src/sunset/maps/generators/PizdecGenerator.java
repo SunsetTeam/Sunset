@@ -1,9 +1,9 @@
 package sunset.maps.generators;
 
-import arc.func.*;
-import arc.graphics.*;
-import arc.math.geom.*;
-import mindustry.maps.generators.*;
+import arc.func.Func2;
+import arc.graphics.Color;
+import arc.math.geom.Vec3;
+import mindustry.maps.generators.PlanetGenerator;
 
 public class PizdecGenerator extends PlanetGenerator{
     private final Func2<PizdecGenerator,Vec3,Float> heightProv;

@@ -1,10 +1,11 @@
 package sunset.maps.generators;
 
-import arc.struct.*;
-import arc.util.noise.*;
-import mindustry.content.*;
-import mindustry.world.*;
-import sunset.content.blocks.*;
+import arc.struct.ObjectMap;
+import arc.struct.Seq;
+import arc.util.noise.Simplex;
+import mindustry.content.Blocks;
+import mindustry.world.Block;
+import sunset.content.blocks.SnEnvironment;
 
 public class RimeGenerator extends SnPlanetGenerator{
     public RimeGenerator(){

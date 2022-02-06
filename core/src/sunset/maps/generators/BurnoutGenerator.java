@@ -1,14 +1,17 @@
 package sunset.maps.generators;
 
-import arc.math.*;
-import arc.math.geom.*;
-import arc.struct.*;
-import arc.util.noise.*;
-import mindustry.content.*;
-import mindustry.graphics.g3d.PlanetGrid.*;
-import mindustry.type.*;
-import mindustry.world.*;
-import sunset.content.blocks.*;
+import arc.math.Mathf;
+import arc.math.geom.Vec3;
+import arc.struct.ObjectMap;
+import arc.struct.Seq;
+import arc.util.noise.Noise;
+import arc.util.noise.Ridged;
+import arc.util.noise.Simplex;
+import mindustry.content.Blocks;
+import mindustry.graphics.g3d.PlanetGrid.Ptile;
+import mindustry.type.Sector;
+import mindustry.world.Block;
+import sunset.content.blocks.SnEnvironment;
 
 public class BurnoutGenerator extends SnPlanetGenerator{
     public BurnoutGenerator(){

@@ -21,6 +21,7 @@ import sunset.gen.Deliverc;
 import sunset.gen.Segmentc;
 import sunset.type.BerserkStage;
 import sunset.type.ammo.LiquidAmmoType;
+import sunset.type.blocks.Engine;
 import sunset.type.blocks.Rotor;
 import sunset.type.unitTypes.*;
 import sunset.type.weapons.ChainWeapon;
@@ -35,7 +36,8 @@ public class SnUnitTypes implements ContentList{
     freezingT1,
     //air
     wind, thunder, nadir, halo, mudflow, parhelion,
-    bufferT1, satelite, planet, star, galaxy, bufferT6,
+    bufferT1, satellite, planet, star, galaxy, bufferT6,
+    engineT1,
     //naval
     yellowT1, yellowT2, yellowT3, yellowT4, yellowT5,
     //misc
@@ -52,7 +54,7 @@ public class SnUnitTypes implements ContentList{
     public void load() {
         //region ground
         //region berserk
-        mirage = new BerserkUnitType("mirage"){{
+        mirage = new BerserkUnitType("mirage") {{
             health = 320;
             speed = 1f;
             rotateSpeed = 3f;
@@ -69,7 +71,7 @@ public class SnUnitTypes implements ContentList{
             legTrns = 0.5f;
             legMoveSpace = 1.3f;
 
-            weapons.add(new SnWeapon("mirage-gun"){{
+            weapons.add(new SnWeapon("mirage-gun") {{
                 reload = 30f;
                 x = 5;
                 range = 100;
@@ -80,19 +82,19 @@ public class SnUnitTypes implements ContentList{
                 bullet = SnBullets.mirageGunBullet;
             }});
             stages.add(
-            new BerserkStage(){{
-                healthMaximum = 0.4f;
-                bulletWidthMultiplier = 2f;
-                effect = StatusEffects.overclock;
-            }},
-            new BerserkStage(){{
-                healthMaximum = 0.15f;
-                bulletWidthMultiplier = 3f;
-                effect = StatusEffects.burning;
-            }}
+                    new BerserkStage() {{
+                        healthMaximum = 0.4f;
+                        bulletWidthMultiplier = 2f;
+                        effect = StatusEffects.overclock;
+                    }},
+                    new BerserkStage() {{
+                        healthMaximum = 0.15f;
+                        bulletWidthMultiplier = 3f;
+                        effect = StatusEffects.burning;
+                    }}
             );
         }};
-        vision = new BerserkUnitType("vision"){{
+        vision = new BerserkUnitType("vision") {{
             health = 980;
             speed = 0.9f;
             rotateSpeed = 2f;
@@ -595,7 +597,7 @@ public class SnUnitTypes implements ContentList{
                 bullet = SnBullets.copterEnergySphere;
             }});
         }};
-        halo = new CopterUnitType("copter-t4"){{
+        halo = new CopterUnitType("halo"){{
             health = 6900;
             hitSize = 40;
             speed = 2.3f;
@@ -904,7 +906,7 @@ public class SnUnitTypes implements ContentList{
         //endregion copters
         //region buffers
         //there should be a bufferT1 here
-        satelite = new UnitTypeExt("satelite"){{
+        satellite = new UnitTypeExt("satelite"){{
             health = 470;
             hitSize = 17;
             speed = 3f;
@@ -1426,7 +1428,7 @@ public class SnUnitTypes implements ContentList{
         //endregion yellow
         //endregion naval
         //region misc
-        router = new UnitTypeExt("router"){
+        router = new UnitTypeExt("router") {
             {
                 health = 2000000;
                 speed = 2.85f;
@@ -1438,13 +1440,13 @@ public class SnUnitTypes implements ContentList{
             }
 
             @Override
-            public boolean isHidden(){
+            public boolean isHidden() {
                 return true;
             }
         };
         //endregion misc
         //region other
-        courier = new UncontrollableUnitType("courier"){{
+        courier = new UncontrollableUnitType("courier") {{
             speed = 3.9f;
             flying = true;
             itemCapacity = 100;
@@ -1454,7 +1456,7 @@ public class SnUnitTypes implements ContentList{
             //constructor = UnitEntity::create;
         }};
         //comet = new UncontrollableUnitType("comet"){{
-        comet = new UnitTypeExt("comet"){{
+        comet = new UnitTypeExt("comet") {{
             health = 150;
             hitSize = 10;
             speed = 3.1f;
@@ -1473,7 +1475,7 @@ public class SnUnitTypes implements ContentList{
 
             constructor = UnitEntity::create;
 
-            weapons.add(new WeaponExt("sprite"){{
+            weapons.add(new WeaponExt("sprite") {{
                 ai = new ExtinguishWeaponAI();
                 rotate = true;
                 mirror = false;
@@ -1500,6 +1502,49 @@ public class SnUnitTypes implements ContentList{
             defaultController = SegmentAI.wrapper(FlyingAI::new);
         }};
         //endregion snake
+
+        engineT1 = new EngineUnitType("engine-t1") {{
+            health = 140;
+            hitSize = 15;
+            speed = 3.2f;
+            rotateSpeed = 5f;
+            accel = 0.04f;
+            drag = 0.016f;
+            commandLimit = 3;
+            flying = true;
+            circleTarget = false;
+            range = 130;
+
+            engines(
+                    new Engine("small-engine") {{
+                        engineX = 0f;
+                        engineY = -5f;
+                        engineSize = 3f;
+                        engineAngle = 180f;
+                    }},
+
+                    new Engine("small-engine") {{
+                        engineX = 0f;
+                        engineY = -14f;
+                        engineSize = 1f;
+                        engineAngle = 140f;
+                    }},
+
+                    new Engine("small-engine") {{
+                        engineX = 0f;
+                        engineY = -10f;
+                        engineSize = 3f;
+                        engineAngle = 0f;
+                    }},
+
+                    new Engine("small-engine") {{
+                        engineX = 10f;
+                        engineY = 5f;
+                        engineSize = 2f;
+                        engineAngle = 220f;
+                    }});
+        }};
+
         //endregion other
     }
 }

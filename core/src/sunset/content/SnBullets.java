@@ -959,6 +959,9 @@ public class SnBullets implements ContentList {
 
                 weaveScale = 9f;
                 weaveMag = 1f;
+
+                collidesAir = true;
+                collidesGround = true;
             }};
             fragCone = 90f;
             fragBullets = 5;
@@ -1004,6 +1007,9 @@ public class SnBullets implements ContentList {
 
                 weaveScale = 6f;
                 weaveMag = 1f;
+
+                collidesAir = true;
+                collidesGround = true;
             }};
             fragBullets = 2;
 
@@ -1049,6 +1055,9 @@ public class SnBullets implements ContentList {
 
                 weaveScale = 9f;
                 weaveMag = 1f;
+
+                collidesAir = true;
+                collidesGround = true;
             }};
             fragCone = 90f;
             fragBullets = 4;
@@ -1097,6 +1106,9 @@ public class SnBullets implements ContentList {
 
                 weaveScale = 6f;
                 weaveMag = 1f;
+
+                collidesAir = true;
+                collidesGround = true;
             }};
             fragBullets = 4;
 
@@ -1408,14 +1420,14 @@ public class SnBullets implements ContentList {
             frontColor = SnPal.redBomb;
             backColor = SnPal.redBombBack;
         }};
-        mediumEnergySphere = new BasicBulletType(3f, 30) {{
+        mediumEnergySphere = new BasicBulletType(3f, 40) {{
             sprite = "sunset-circle-bullet";
             shrinkX = 0f;
             shrinkY = 0f;
             lifetime = 50f;
-            height = 8f;
-            width = 8f;
-            hitEffect = SnFx.mediumEnergySphereHit;
+            height = 9f;
+            width = 9f;
+            despawnEffect = SnFx.mediumEnergySphereHit;
             frontColor = SnPal.redBomb;
             backColor = SnPal.redBombBack;
 
@@ -1424,7 +1436,7 @@ public class SnBullets implements ContentList {
             trailLength = 4;
             trailEffect = Fx.artilleryTrail;
 
-            fragBullet = new LaserBulletType(10) {{
+            fragBullet = new LaserBulletType(20) {{
                 colors = new Color[]{SnPal.redBomb.cpy().a(0.4f), SnPal.redBomb, Color.white};
                 width = 20f;
                 lifetime = 15f;
@@ -1834,6 +1846,11 @@ public class SnBullets implements ContentList {
             length = 180f;
             width = 50f;
             damage = 145;
+            serrationLenScl = 10f;
+            serrationSpaceOffset = 70f;
+            serrationFadeOffset = 0f;
+            serrations = 15;
+            serrationWidth = 7f;
             shootEffect = SnFx.copterShoot;
             fromColor = SnPal.copterLaser;
             toColor = SnPal.copterLaserBack;

@@ -125,7 +125,7 @@ public class SnTurrets implements ContentList{
         //endregion 1x1
         //region 2x2
         excellence = new ModPowerTurret("excellence"){{
-            requirements(Category.turret, with(SnItems.fors, 150, Items.lead, 70, Items.silicon, 40));
+            requirements(Category.turret, with(SnItems.fors, 140, Items.lead, 70, Items.silicon, 40));
             size = 2;
             reloadTime = 50f;
             range = 175f;
@@ -145,7 +145,7 @@ public class SnTurrets implements ContentList{
         carbine = new ChainLightningTurret("carbine"){{
             requirements(Category.turret, with(Items.copper, 150, Items.lead, 140, Items.surgeAlloy, 60, SnItems.nobium, 90, SnItems.naturite, 120));
             range = 132.2f;
-            damage = 1.5f;
+            damage = 1.4f;
             health = 900;
             size = 2;
             shootCone = 6f;
@@ -175,7 +175,7 @@ public class SnTurrets implements ContentList{
             targetGround = false;
         }};
         reflection = new ModItemTurret("reflection"){{
-            requirements(Category.turret, with(Items.copper, 100, SnItems.fors, 60, SnItems.naturite, 55, SnItems.nobium, 45));
+            requirements(Category.turret, with(Items.copper, 95, SnItems.fors, 55, SnItems.naturite, 50, SnItems.nobium, 35));
             ammo(
             Items.sporePod, SnBullets.heavySporePodPoison,
             SnItems.naturite, SnBullets.heavyNaturitePoison,

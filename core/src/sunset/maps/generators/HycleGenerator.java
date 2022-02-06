@@ -1,31 +1,11 @@
 package sunset.maps.generators;
 
-import arc.graphics.Color;
-import arc.math.Angles;
-import arc.math.Mathf;
-import arc.math.Rand;
-import arc.math.geom.*;
-import arc.struct.FloatSeq;
 import arc.struct.ObjectMap;
-import arc.struct.ObjectSet;
 import arc.struct.Seq;
-import arc.util.*;
-import arc.util.noise.*;
-import arc.util.noise.Ridged;
-import mindustry.ai.Astar;
-import mindustry.ai.BaseRegistry.BasePart;
+import arc.util.noise.Simplex;
 import mindustry.content.Blocks;
-import mindustry.game.*;
-import mindustry.graphics.g3d.PlanetGrid.Ptile;
-import mindustry.maps.generators.*;
-import mindustry.type.Sector;
 import mindustry.world.Block;
-import mindustry.world.Tile;
-import mindustry.world.TileGen;
-import mindustry.world.Tiles;
 import sunset.content.blocks.SnEnvironment;
-
-import static mindustry.Vars.*;
 
 public class HycleGenerator extends SnPlanetGenerator{
 
@@ -64,22 +44,8 @@ public class HycleGenerator extends SnPlanetGenerator{
     protected void setupOres(Seq<Block> ores, float poles, float nmag, float scl, float addscl){
         super.setupOres(ores, poles, nmag, scl, addscl);
 
-
         if(Simplex.noise3d(seed, 3, 0.5f, scl, sector.tile.v.x + 1, sector.tile.v.y, sector.tile.v.z)*nmag + poles > 0.55f*addscl){
             ores.add(SnEnvironment.oreFors);
         }
     }
-
-/*
-    @Override
-    protected void passTiles(int x, int y){
-
-        if(floor == Blocks.dacite){
-            if(Math.abs(0.5f - noise(x - 90, y, 4, 0.8, 65)) > 0.02){
-                floor = SnEnvironment.crimsonmoss;
-            }
-        }
-    }
-
- */
 }
