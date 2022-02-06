@@ -21,6 +21,7 @@ import sunset.gen.Deliverc;
 import sunset.gen.Segmentc;
 import sunset.type.BerserkStage;
 import sunset.type.ammo.LiquidAmmoType;
+import sunset.type.blocks.Engine;
 import sunset.type.blocks.Rotor;
 import sunset.type.unitTypes.*;
 import sunset.type.weapons.ChainWeapon;
@@ -36,10 +37,11 @@ public class SnUnitTypes implements ContentList{
     //air
     wind, thunder, nadir, halo, mudflow, parhelion,
     bufferT1, satelite, planet, star, galaxy, bufferT6,
+    engineT1,
     //misc
-    router;
+    router,
     //naval
-    public static UnitType yellowT1, yellowT2, yellowT3, yellowT4, yellowT5;
+    yellowT1, yellowT2, yellowT3, yellowT4, yellowT5;
     //other
     @EntityDef({Unitc.class, Deliverc.class})
     public static UnitType courier;
@@ -52,7 +54,7 @@ public class SnUnitTypes implements ContentList{
     public void load() {
         //region ground
         //region berserk
-        mirage = new BerserkUnitType("mirage"){{
+        mirage = new BerserkUnitType("mirage") {{
             health = 320;
             speed = 1f;
             rotateSpeed = 3f;
@@ -69,7 +71,7 @@ public class SnUnitTypes implements ContentList{
             legTrns = 0.5f;
             legMoveSpace = 1.3f;
 
-            weapons.add(new SnWeapon("mirage-gun"){{
+            weapons.add(new SnWeapon("mirage-gun") {{
                 reload = 30f;
                 x = 5;
                 range = 100;
@@ -80,19 +82,19 @@ public class SnUnitTypes implements ContentList{
                 bullet = SnBullets.mirageGunBullet;
             }});
             stages.add(
-            new BerserkStage(){{
-                healthMaximum = 0.4f;
-                bulletWidthMultiplier = 2f;
-                effect = StatusEffects.overclock;
-            }},
-            new BerserkStage(){{
-                healthMaximum = 0.15f;
-                bulletWidthMultiplier = 3f;
-                effect = StatusEffects.burning;
-            }}
+                    new BerserkStage() {{
+                        healthMaximum = 0.4f;
+                        bulletWidthMultiplier = 2f;
+                        effect = StatusEffects.overclock;
+                    }},
+                    new BerserkStage() {{
+                        healthMaximum = 0.15f;
+                        bulletWidthMultiplier = 3f;
+                        effect = StatusEffects.burning;
+                    }}
             );
         }};
-        vision = new BerserkUnitType("vision"){{
+        vision = new BerserkUnitType("vision") {{
             health = 980;
             speed = 0.9f;
             rotateSpeed = 2f;
@@ -111,18 +113,18 @@ public class SnUnitTypes implements ContentList{
             legBaseOffset = 2f;
 
             weapons.add(
-            new SnWeapon("vision-gun"){{
-                reload = 30f;
-                x = 6;
-                y = -0.3f;
-                alternate = true;
-                mirror = true;
-                inaccuracy = 2f;
-                bullet = SnBullets.mirageGunBullet;
-            }}
+                    new SnWeapon("vision-gun") {{
+                        reload = 30f;
+                        x = 6;
+                        y = -0.3f;
+                        alternate = true;
+                        mirror = true;
+                        inaccuracy = 2f;
+                        bullet = SnBullets.mirageGunBullet;
+                    }}
             );
         }};
-        illusion = new BerserkUnitType("illusion"){{
+        illusion = new BerserkUnitType("illusion") {{
             health = 1400;
             speed = 0.7f;
             rotateSpeed = 2.4f;
@@ -141,43 +143,43 @@ public class SnUnitTypes implements ContentList{
             legBaseOffset = 4f;
 
             weapons.add(
-            new SnWeapon("illusion-gun"){{
-                reload = 40;
-                x = 8;
-                y = -2;
-                alternate = false;
-                mirror = true;
-                inaccuracy = 3f;
-                bullet = new BerserkLaserBulletType(){{
-                    hitEffect = despawnEffect = Fx.none;
-                    instantDisappear = true;
-                    damage = 30;
-                    shots = 4;
-                    shotDelay = 7f;
-                    lifetime = 15f;
-                    fragBullets = 14;
-                    keepVelocity = true;
-                    fragBullet = new BasicBulletType(4f, 30f){{
-                        lifetime = 13f;
-                        keepVelocity = true;
-                    }};
-                    fragVelocityMin = 0.85f;
-                    fragVelocityMax = 1.25f;
-                    fragLifeMin = 0.85f;
-                    fragLifeMax = 1.25f;
-                    fragCone = 6f;
-                }};
-            }},
-            new SnWeapon("iliusion-lasergun"){{
-                reload = 60f;
-                bullet = new BerserkLaserBulletType(){{
-                    damage = 12;
-                    lifetime = 30f;
-                }};
-            }}
+                    new SnWeapon("illusion-gun") {{
+                        reload = 40;
+                        x = 8;
+                        y = -2;
+                        alternate = false;
+                        mirror = true;
+                        inaccuracy = 3f;
+                        bullet = new BerserkLaserBulletType() {{
+                            hitEffect = despawnEffect = Fx.none;
+                            instantDisappear = true;
+                            damage = 30;
+                            shots = 4;
+                            shotDelay = 7f;
+                            lifetime = 15f;
+                            fragBullets = 14;
+                            keepVelocity = true;
+                            fragBullet = new BasicBulletType(4f, 30f) {{
+                                lifetime = 13f;
+                                keepVelocity = true;
+                            }};
+                            fragVelocityMin = 0.85f;
+                            fragVelocityMax = 1.25f;
+                            fragLifeMin = 0.85f;
+                            fragLifeMax = 1.25f;
+                            fragCone = 6f;
+                        }};
+                    }},
+                    new SnWeapon("iliusion-lasergun") {{
+                        reload = 60f;
+                        bullet = new BerserkLaserBulletType() {{
+                            damage = 12;
+                            lifetime = 30f;
+                        }};
+                    }}
             );
         }};
-        soothSayer = new BerserkUnitType("soothSayer"){{
+        soothSayer = new BerserkUnitType("soothSayer") {{
             health = 9700;
             speed = 0.57f;
             rotateSpeed = 2.1f;
@@ -201,46 +203,47 @@ public class SnUnitTypes implements ContentList{
             legSplashDamage = 37;
             legSplashRange = 30;
             weapons.add(
-            new SnWeapon("soothSayer-lasergun"){{
-                reload = 75f;
-                x = 12;
-                y = -3;
-                alternate = false;
-                mirror = true;
-                inaccuracy = 3f;
-                bullet = new BerserkLaserBulletType(){{
-                    hitEffect = despawnEffect = Fx.none;
-                    instantDisappear = true;
-                    damage = 120;
-                    shots = 6;
-                    shotDelay = 12f;
-                    lifetime = 30f;
-                    fragBullets = 8;
-                    keepVelocity = true;
-                    fragBullet = new BasicBulletType(4f, 50f){{
-                        lifetime = 13f;
-                        keepVelocity = true;
-                    }};
-                    fragVelocityMin = 0.85f;
-                    fragVelocityMax = 1.25f;
-                    fragLifeMin = 0.85f;
-                    fragLifeMax = 1.25f;
-                    fragCone = 6f;
-                    }
-                };
-            }},
-            new SnWeapon("soothSayer-gun"){{
-                reload = 40f;
-                x = 12f;
-                y = 4f;
-                bullet = new BerserkLaserBulletType(){{
-                    lifetime = 30;
-                    damage = 4f;
-                }};
-            }}
+                    new SnWeapon("soothSayer-lasergun") {{
+                        reload = 75f;
+                        x = 12;
+                        y = -3;
+                        alternate = false;
+                        mirror = true;
+                        inaccuracy = 3f;
+                        bullet = new BerserkLaserBulletType() {
+                            {
+                                hitEffect = despawnEffect = Fx.none;
+                                instantDisappear = true;
+                                damage = 120;
+                                shots = 6;
+                                shotDelay = 12f;
+                                lifetime = 30f;
+                                fragBullets = 8;
+                                keepVelocity = true;
+                                fragBullet = new BasicBulletType(4f, 50f) {{
+                                    lifetime = 13f;
+                                    keepVelocity = true;
+                                }};
+                                fragVelocityMin = 0.85f;
+                                fragVelocityMax = 1.25f;
+                                fragLifeMin = 0.85f;
+                                fragLifeMax = 1.25f;
+                                fragCone = 6f;
+                            }
+                        };
+                    }},
+                    new SnWeapon("soothSayer-gun") {{
+                        reload = 40f;
+                        x = 12f;
+                        y = 4f;
+                        bullet = new BerserkLaserBulletType() {{
+                            lifetime = 30;
+                            damage = 4f;
+                        }};
+                    }}
             );
         }};
-        seer = new BerserkUnitType("seer"){{
+        seer = new BerserkUnitType("seer") {{
             health = 25900;
             speed = 0.53f;
             rotateSpeed = 1.8f;
@@ -266,7 +269,7 @@ public class SnUnitTypes implements ContentList{
             legSplashDamage = 45;
             legSplashRange = 40;
         }};
-        abyssEye = new BerserkUnitType("abyssEye"){{
+        abyssEye = new BerserkUnitType("abyssEye") {{
             health = 70000;
             speed = 0.45f;
             rotateSpeed = 1.5f;
@@ -294,12 +297,12 @@ public class SnUnitTypes implements ContentList{
         }};
         //endregion berserk
         //region wheel
-        wheelT1 = new WheelUnitType("wheel-t1"){{
+        wheelT1 = new WheelUnitType("wheel-t1") {{
             health = 80;
             speed = 3.5f;
             rotateSpeed = baseRotateSpeed = 2.75f;
             drag = 0.075f;
-            weapons.add(new WeaponExt("wheel1-minigun"){{
+            weapons.add(new WeaponExt("wheel1-minigun") {{
                 reload = 5.5f;
                 inaccuracy = 4f;
                 rotate = true;
@@ -308,12 +311,12 @@ public class SnUnitTypes implements ContentList{
                 x = y = 0;
             }});
         }};
-        wheelT2 = new WheelUnitType("wheel-t2"){{
+        wheelT2 = new WheelUnitType("wheel-t2") {{
             health = 420;
             speed = 3.4f;
             rotateSpeed = baseRotateSpeed = 2.66f;
             drag = 0.075f;
-            weapons.add(new WeaponExt("wheel2-shotgun"){{
+            weapons.add(new WeaponExt("wheel2-shotgun") {{
                 reload = 48f;
                 inaccuracy = 0f;
                 rotate = true;
@@ -322,12 +325,12 @@ public class SnUnitTypes implements ContentList{
                 x = y = 0;
             }});
         }};
-        wheelT3 = new WheelUnitType("wheel-t3"){{
+        wheelT3 = new WheelUnitType("wheel-t3") {{
             health = 890;
             speed = 3.2f;
             rotateSpeed = baseRotateSpeed = 2.33f;
             drag = 0.075f;
-            weapons.add(new WeaponExt("wheel3-burst"){{
+            weapons.add(new WeaponExt("wheel3-burst") {{
                 reload = 65f;
                 inaccuracy = 1f;
                 rotate = true;
@@ -337,12 +340,12 @@ public class SnUnitTypes implements ContentList{
                 x = y = 0;
             }});
         }};
-        wheelT4 = new WheelUnitType("wheel-t4"){{
+        wheelT4 = new WheelUnitType("wheel-t4") {{
             health = 6800;
             speed = 3.1f;
             rotateSpeed = baseRotateSpeed = 2.25f;
             drag = 0.075f;
-            weapons.add(new WeaponExt("wheel4-shotgun"){{
+            weapons.add(new WeaponExt("wheel4-shotgun") {{
                 reload = 92f;
                 rotate = true;
                 mirror = false;
@@ -350,7 +353,7 @@ public class SnUnitTypes implements ContentList{
                 shootSound = Sounds.shootBig;
                 x = y = 0;
             }});
-            weapons.add(new WeaponExt("wheel4-burst"){{
+            weapons.add(new WeaponExt("wheel4-burst") {{
                 reload = 56f;
                 inaccuracy = 3f;
                 alternate = true;
@@ -361,12 +364,12 @@ public class SnUnitTypes implements ContentList{
                 x = -3;
             }});
         }};
-        wheelT5 = new WheelUnitType("wheel-t5"){{
+        wheelT5 = new WheelUnitType("wheel-t5") {{
             health = 19400;
             speed = 3f;
             rotateSpeed = baseRotateSpeed = 2f;
             drag = 0.075f;
-            weapons.add(new WeaponExt("wheel5-flame"){{
+            weapons.add(new WeaponExt("wheel5-flame") {{
                 reload = 7f;
                 rotate = true;
                 mirror = false;
@@ -374,7 +377,7 @@ public class SnUnitTypes implements ContentList{
                 shootSound = Sounds.flame;
                 x = y = 0;
             }});
-            weapons.add(new WeaponExt("wheel5-bullet"){{
+            weapons.add(new WeaponExt("wheel5-bullet") {{
                 reload = 149f;
                 inaccuracy = 1f;
                 alternate = true;
@@ -391,7 +394,7 @@ public class SnUnitTypes implements ContentList{
         //there should be a wheelT6 here
         //endregion wheel
         //region freezing
-        freezingT1 = new UnitTypeExt("freezing-t1"){{
+        freezingT1 = new UnitTypeExt("freezing-t1") {{
             defaultController = SuicideAI::new;
             constructor = UnitTypes.pulsar.constructor;
             speed = 1f;
@@ -402,14 +405,14 @@ public class SnUnitTypes implements ContentList{
 
             immunities.add(StatusEffects.freezing);
 
-            weapons.add(new SnWeapon(){{
+            weapons.add(new SnWeapon() {{
                 reload = 20f;
                 shootCone = 180f;
                 ejectEffect = Fx.freezing;
                 shootSound = Sounds.explosion;
                 x = shootY = 0f;
                 mirror = false;
-                bullet = new BombBulletType(0f, 0f, "clear"){{
+                bullet = new BombBulletType(0f, 0f, "clear") {{
                     hitEffect = Fx.pulverize;
                     lifetime = 10f;
                     speed = 1f;
@@ -427,7 +430,7 @@ public class SnUnitTypes implements ContentList{
         //endregion ground
         //region air
         //region copters
-        wind = new CopterUnitType("wind"){{
+        wind = new CopterUnitType("wind") {{
             health = 140;
             hitSize = 15;
             speed = 3.2f;
@@ -445,34 +448,34 @@ public class SnUnitTypes implements ContentList{
 
 
             rotors.add(
-            new Rotor("rotor-small"){{
-                offsetX = 0;
-                offsetY = 2;
-                rotorRotateSpeed = -27f;
-                rotorCount = 2;
-            }},
-            new Rotor("rotor-small"){{
-                offsetX = 0;
-                offsetY = 2;
-                rotorRotateSpeed = 27f;
-                rotorCount = 2;
-            }}
+                    new Rotor("rotor-small") {{
+                        offsetX = 0;
+                        offsetY = 2;
+                        rotorRotateSpeed = -27f;
+                        rotorCount = 2;
+                    }},
+                    new Rotor("rotor-small") {{
+                        offsetX = 0;
+                        offsetY = 2;
+                        rotorRotateSpeed = 27f;
+                        rotorCount = 2;
+                    }}
             );
 
             weapons.add(
-            new WeaponExt("small-minigun"){{
-                rotate = false;
-                mirror = true;
-                x = 5f;
-                y = 2f;
-                shots = 1;
-                inaccuracy = 1;
-                reload = 5.5f;
-                shootSound = Sounds.pew;
-                bullet = SnBullets.basicHelicopterGun;
-            }});
+                    new WeaponExt("small-minigun") {{
+                        rotate = false;
+                        mirror = true;
+                        x = 5f;
+                        y = 2f;
+                        shots = 1;
+                        inaccuracy = 1;
+                        reload = 5.5f;
+                        shootSound = Sounds.pew;
+                        bullet = SnBullets.basicHelicopterGun;
+                    }});
         }};
-        thunder = new CopterUnitType("thunder"){{
+        thunder = new CopterUnitType("thunder") {{
             health = 310;
             hitSize = 20;
             speed = 2.9f;
@@ -490,49 +493,49 @@ public class SnUnitTypes implements ContentList{
             burningFx = Fx.burning;
 
             rotors.add(
-            new Rotor("rotor-medium"){{
-                offsetX = 0;
-                offsetY = 2;
-                rotorRotateSpeed = -27f;
-                rotorCount = 2;
-            }},
-            new Rotor("rotor-medium"){{
-                offsetX = 0;
-                offsetY = 2;
-                rotorRotateSpeed = 27f;
-                rotorCount = 2;
-            }});
+                    new Rotor("rotor-medium") {{
+                        offsetX = 0;
+                        offsetY = 2;
+                        rotorRotateSpeed = -27f;
+                        rotorCount = 2;
+                    }},
+                    new Rotor("rotor-medium") {{
+                        offsetX = 0;
+                        offsetY = 2;
+                        rotorRotateSpeed = 27f;
+                        rotorCount = 2;
+                    }});
 
             weapons.add(
-            new WeaponExt("missile-mount-small"){{
-                rotate = false;
-                mirror = true;
-                x = 3f;
-                y = -2f;
-                spacing = 3f;
-                reload = 28f;
-                shake = 1f;
-                recoil = 3f;
-                inaccuracy = 5f;
-                velocityRnd = 0.2f;
-                shots = 1;
-                shootSound = Sounds.missile;
-                bullet = SnBullets.helicopterMissile;
-            }},
+                    new WeaponExt("missile-mount-small") {{
+                        rotate = false;
+                        mirror = true;
+                        x = 3f;
+                        y = -2f;
+                        spacing = 3f;
+                        reload = 28f;
+                        shake = 1f;
+                        recoil = 3f;
+                        inaccuracy = 5f;
+                        velocityRnd = 0.2f;
+                        shots = 1;
+                        shootSound = Sounds.missile;
+                        bullet = SnBullets.helicopterMissile;
+                    }},
 
-            new WeaponExt("medium-minigun"){{
-                rotate = false;
-                mirror = true;
-                x = -6f;
-                y = 5f;
-                shots = 1;
-                inaccuracy = 1;
-                reload = 7f;
-                shootSound = Sounds.pew;
-                bullet = SnBullets.mediumHelicopterGun;
-            }});
+                    new WeaponExt("medium-minigun") {{
+                        rotate = false;
+                        mirror = true;
+                        x = -6f;
+                        y = 5f;
+                        shots = 1;
+                        inaccuracy = 1;
+                        reload = 7f;
+                        shootSound = Sounds.pew;
+                        bullet = SnBullets.mediumHelicopterGun;
+                    }});
         }};
-        nadir = new CopterUnitType("nadir"){{
+        nadir = new CopterUnitType("nadir") {{
             health = 690;
             hitSize = 30;
             speed = 2.6f;
@@ -549,53 +552,53 @@ public class SnUnitTypes implements ContentList{
             burningFx = Fx.burning;
 
             rotors.add(
-            new Rotor("rotor-mini"){{
-                offsetX = 0;
-                offsetY = -9;
-                rotorRotateSpeed = -27f;
-                rotorCount = 3;
-            }},
-            new Rotor("rotor-big"){{
-                offsetX = 0;
-                offsetY = 9;
-                rotorRotateSpeed = 28f;
-                rotorCount = 3;
-            }}
+                    new Rotor("rotor-mini") {{
+                        offsetX = 0;
+                        offsetY = -9;
+                        rotorRotateSpeed = -27f;
+                        rotorCount = 3;
+                    }},
+                    new Rotor("rotor-big") {{
+                        offsetX = 0;
+                        offsetY = 9;
+                        rotorRotateSpeed = 28f;
+                        rotorCount = 3;
+                    }}
             );
             weapons.add(
-            new WeaponExt("missile-launch"){{
-                rotate = false;
-                mirror = true;
-                x = 9f;
-                y = 3f;
-                spacing = 3f;
-                reload = 40f;
-                shake = 1f;
-                recoil = 5f;
-                inaccuracy = 5f;
-                velocityRnd = 0.2f;
-                shots = 1;
-                shootSound = Sounds.missile;
-                bullet = SnBullets.clusterRocket;
-            }},
+                    new WeaponExt("missile-launch") {{
+                        rotate = false;
+                        mirror = true;
+                        x = 9f;
+                        y = 3f;
+                        spacing = 3f;
+                        reload = 40f;
+                        shake = 1f;
+                        recoil = 5f;
+                        inaccuracy = 5f;
+                        velocityRnd = 0.2f;
+                        shots = 1;
+                        shootSound = Sounds.missile;
+                        bullet = SnBullets.clusterRocket;
+                    }},
 
-            new WeaponExt("small-energy-shpere-generator"){{
-                rotate = false;
-                mirror = false;
-                x = 0f;
-                y = 16f;
-                layerOffset = -0.01f;
-                top = false;
-                reload = 25f;
-                shake = 1f;
-                recoil = 2f;
-                inaccuracy = 3f;
-                shots = 1;
-                shootSound = Sounds.spark;
-                bullet = SnBullets.copterEnergySphere;
-            }});
+                    new WeaponExt("small-energy-shpere-generator") {{
+                        rotate = false;
+                        mirror = false;
+                        x = 0f;
+                        y = 16f;
+                        layerOffset = -0.01f;
+                        top = false;
+                        reload = 25f;
+                        shake = 1f;
+                        recoil = 2f;
+                        inaccuracy = 3f;
+                        shots = 1;
+                        shootSound = Sounds.spark;
+                        bullet = SnBullets.copterEnergySphere;
+                    }});
         }};
-        halo = new CopterUnitType("copter-t4"){{
+        halo = new CopterUnitType("halo") {{
             health = 6900;
             hitSize = 40;
             speed = 2.3f;
@@ -613,76 +616,189 @@ public class SnUnitTypes implements ContentList{
             burningFx = Fx.burning;
 
             rotors.add(
-            new Rotor("rotor-small2"){{
-                offsetX = 0;
-                offsetY = -15;
-                rotorRotateSpeed = 27f;
-                rotorCount = 3;
-            }},
-            new Rotor("rotor-medium3"){{
-                offsetX = -13;
-                offsetY = 10;
-                rotorRotateSpeed = -27f;
-                rotorCount = 4;
-            }},
-            new Rotor("rotor-medium3"){{
-                offsetX = 13;
-                offsetY = 10;
-                rotorRotateSpeed = 27f;
-                rotorCount = 4;
-            }}
+                    new Rotor("rotor-small2") {{
+                        offsetX = 0;
+                        offsetY = -15;
+                        rotorRotateSpeed = 27f;
+                        rotorCount = 3;
+                    }},
+                    new Rotor("rotor-medium3") {{
+                        offsetX = -13;
+                        offsetY = 10;
+                        rotorRotateSpeed = -27f;
+                        rotorCount = 4;
+                    }},
+                    new Rotor("rotor-medium3") {{
+                        offsetX = 13;
+                        offsetY = 10;
+                        rotorRotateSpeed = 27f;
+                        rotorCount = 4;
+                    }}
             );
             weapons.add(
-            new WeaponExt("laser-gun"){{
-                rotate = true;
-                rotateSpeed = 4.2f;
-                mirror = true;
-                shake = 2f;
-                x = -18f;
-                y = -4f;
-                reload = 20f;
-                shotDelay = 1f;
-                shootY = 7f;
-                shots = 1;
-                inaccuracy = 3f;
-                shootSound = Sounds.laser;
-                bullet = SnBullets.laserGun;
-            }},
-            new WeaponExt("big-rocket-launcher"){{
-                rotate = false;
-                mirror = true;
-                x = 17f;
-                y = 17f;
-                layerOffset = -0.01f;
-                top = false;
-                spacing = 4;
-                reload = 40f;
-                recoil = 5f;
-                shake = 2f;
-                ejectEffect = Fx.casing3;
-                inaccuracy = 1.3f;
-                shots = 3;
-                shootSound = Sounds.bang;
-                bullet = SnBullets.bigHelicopterMissile;
-            }},
-            new WeaponExt("large-salvo"){{
-                rotate = false;
-                mirror = false;
-                shake = 3f;
-                x = 0f;
-                y = 18f;
-                layerOffset = -0.01f;
-                top = false;
-                shootY = 4f;
-                reload = 37f;
-                shotDelay = 4f;
-                shots = 5;
-                inaccuracy = 0.5f;
-                shootSound = Sounds.shootBig;
-                bullet = SnBullets.bigHelicopterGun;
-            }});
+                    new WeaponExt("laser-gun") {{
+                        rotate = true;
+                        rotateSpeed = 4.2f;
+                        mirror = true;
+                        shake = 2f;
+                        x = -18f;
+                        y = -4f;
+                        reload = 20f;
+                        shotDelay = 1f;
+                        shootY = 7f;
+                        shots = 1;
+                        inaccuracy = 3f;
+                        shootSound = Sounds.laser;
+                        bullet = SnBullets.laserGun;
+                    }},
+                    new WeaponExt("big-rocket-launcher") {{
+                        rotate = false;
+                        mirror = true;
+                        x = 17f;
+                        y = 17f;
+                        layerOffset = -0.01f;
+                        top = false;
+                        spacing = 4;
+                        reload = 40f;
+                        recoil = 5f;
+                        shake = 2f;
+                        ejectEffect = Fx.casing3;
+                        inaccuracy = 1.3f;
+                        shots = 3;
+                        shootSound = Sounds.bang;
+                        bullet = SnBullets.bigHelicopterMissile;
+                    }},
+                    new WeaponExt("large-salvo") {{
+                        rotate = false;
+                        mirror = false;
+                        shake = 3f;
+                        x = 0f;
+                        y = 18f;
+                        layerOffset = -0.01f;
+                        top = false;
+                        shootY = 4f;
+                        reload = 37f;
+                        shotDelay = 4f;
+                        shots = 5;
+                        inaccuracy = 0.5f;
+                        shootSound = Sounds.shootBig;
+                        bullet = SnBullets.bigHelicopterGun;
+                    }});
         }};
-        mudflow = new CopterUnitType("mudflow"){{
+        mudflow = new CopterUnitType("mudflow") {{
+            health = 19700;
+            hitSize = 70;
+            speed = 2.1f;
+            rotateSpeed = 2.6f;
+            accel = 0.06f;
+            drag = 0.04f;
+            commandLimit = 5;
+            flying = true;
+            circleTarget = false;
+            range = 175f;
+
+            unitFallRotateSpeed = 3.1f;
+            smokeFx = Fx.fallSmoke;
+            burningFx = Fx.burning;
+            rotors(
+                    new Rotor("rotor-medium2") {{
+                        offsetX = -15;
+                        offsetY = 20;
+                        rotorRotateSpeed = -27f;
+                        rotorCount = 3;
+                    }},
+                    new Rotor("rotor-medium2") {{
+                        offsetX = -15;
+                        offsetY = 20;
+                        rotorRotateSpeed = 27f;
+                        rotorCount = 3;
+                    }},
+                    new Rotor("rotor-medium2") {{
+                        offsetX = 15;
+                        offsetY = 20;
+                        rotorRotateSpeed = 27f;
+                        rotorCount = 3;
+                    }},
+                    new Rotor("rotor-medium2") {{
+                        offsetX = 15;
+                        offsetY = 20;
+                        rotorRotateSpeed = -27f;
+                        rotorCount = 3;
+                    }},
+                    new Rotor("rotor-big2") {{
+                        offsetX = 0;
+                        offsetY = -14;
+                        rotorRotateSpeed = -27f;
+                        rotorCount = 4;
+                    }},
+                    new Rotor("rotor-big2") {{
+                        offsetX = 0;
+                        offsetY = -14;
+                        rotorRotateSpeed = 27f;
+                        rotorCount = 4;
+                    }}
+            );
+            weapons.add(
+                    new WeaponExt("large-rocket-launcher") {{
+                        rotate = false;
+                        mirror = true;
+                        x = 9f;
+                        y = 4f;
+                        reload = 50f;
+                        recoil = 5f;
+                        shake = 2f;
+                        ejectEffect = Fx.casing3;
+                        inaccuracy = 9f;
+                        shots = 2;
+                        shotDelay = 12f;
+                        shootSound = Sounds.bang;
+                        bullet = SnBullets.largeHelicopterMissile;
+                    }},
+                    new SnWeapon("big-salvo") {{
+                        rotate = false;
+                        mirror = true;
+                        shake = 3f;
+                        x = 20f;
+                        y = 27f;
+                        reload = 40f;
+                        shotDelay = 5f;
+                        shots = 2;
+                        inaccuracy = 0.5f;
+                        shootSound = Sounds.shootBig;
+                        bullet = SnBullets.largeHelicopterGun;
+                    }},
+                    new SnWeapon("big-salvo") {{
+                        rotate = false;
+                        mirror = true;
+                        shake = 3f;
+                        x = 25f;
+                        y = 8f;
+                        reload = 30f;
+                        shotDelay = 5f;
+                        shots = 2;
+                        inaccuracy = 0.5f;
+                        shootSound = Sounds.shootBig;
+                        bullet = SnBullets.largeHelicopterGun;
+                    }},
+                    new SnWeapon("small-missile-launcher") {{
+                        rotate = false;
+                        mirror = false;
+                        shake = 3f;
+                        x = 0f;
+                        y = 35f;
+                        xRand = 5f;
+                        layerOffset = -0.01f;
+                        top = false;
+                        reload = 20f;
+                        shotDelay = 1f;
+                        shots = 3;
+                        inaccuracy = 3f;
+                        shootSound = Sounds.missile;
+                        bullet = SnBullets.smallHelicopterMissile;
+                    }});
+        }};
+
+        parhelion = new CopterUnitType("parhelion") {{
             health = 57000;
             hitSize = 90;
             speed = 1.5f;
@@ -700,25 +816,25 @@ public class SnUnitTypes implements ContentList{
             burningFx = Fx.burning;
 
             rotors.add(
-                    new Rotor("rotor-medium"){{
+                    new Rotor("rotor-medium") {{
                         offsetX = 0;
                         offsetY = -35;
                         rotorRotateSpeed = -27f;
                         rotorCount = 6;
                     }},
-                    new Rotor("rotor-big"){{
+                    new Rotor("rotor-big") {{
                         offsetX = -30;
                         offsetY = 23;
                         rotorRotateSpeed = -27f;
                         rotorCount = 4;
                     }},
-                    new Rotor("rotor-big"){{
+                    new Rotor("rotor-big") {{
                         offsetX = 30;
                         offsetY = 23;
                         rotorRotateSpeed = -27f;
                         rotorCount = 4;
                     }},
-                    new Rotor("rotor-gigant"){{
+                    new Rotor("rotor-gigant") {{
                         offsetX = 0;
                         offsetY = 8;
                         rotorRotateSpeed = 26f;
@@ -727,7 +843,7 @@ public class SnUnitTypes implements ContentList{
             );
 
             weapons.add(
-                    new WeaponExt("large-shrapnel-gun"){{
+                    new WeaponExt("large-shrapnel-gun") {{
                         rotate = false;
                         mirror = true;
                         x = 30f;
@@ -742,7 +858,7 @@ public class SnUnitTypes implements ContentList{
                         shootSound = Sounds.shotgun;
                         bullet = SnBullets.shrapnelCopterGun;
                     }},
-                    new WeaponExt("gigant-minigun"){{
+                    new WeaponExt("gigant-minigun") {{
                         rotate = true;
                         mirror = false;
                         rotateSpeed = 2.5f;
@@ -757,7 +873,7 @@ public class SnUnitTypes implements ContentList{
                         shootSound = Sounds.shootBig;
                         bullet = SnBullets.giantHelicopterGun;
                     }},
-                    new WeaponExt("gigant-rocket-launcher"){{
+                    new WeaponExt("gigant-rocket-launcher") {{
                         rotate = false;
                         mirror = true;
                         shake = 3f;
@@ -773,7 +889,7 @@ public class SnUnitTypes implements ContentList{
                         shootSound = Sounds.missile;
                         bullet = SnBullets.bigClusterRocket;
                     }},
-                    new WeaponExt("medium-energy-sphere-generator"){{
+                    new WeaponExt("medium-energy-sphere-generator") {{
                         rotate = false;
                         mirror = false;
                         shake = 2f;
@@ -790,121 +906,10 @@ public class SnUnitTypes implements ContentList{
                         bullet = SnBullets.bigCopterEnergySphere;
                     }});
         }};
-        parhelion = new CopterUnitType("parhelion"){{
-            health = 19700;
-            hitSize = 70;
-            speed = 2.1f;
-            rotateSpeed = 2.6f;
-            accel = 0.06f;
-            drag = 0.04f;
-            commandLimit = 5;
-            flying = true;
-            circleTarget = false;
-            range = 175f;
-
-            unitFallRotateSpeed = 3.1f;
-            smokeFx = Fx.fallSmoke;
-            burningFx = Fx.burning;
-            rotors(
-            new Rotor("rotor-medium2"){{
-                offsetX = -15;
-                offsetY = 20;
-                rotorRotateSpeed = -27f;
-                rotorCount = 3;
-            }},
-            new Rotor("rotor-medium2"){{
-                offsetX = -15;
-                offsetY = 20;
-                rotorRotateSpeed = 27f;
-                rotorCount = 3;
-            }},
-            new Rotor("rotor-medium2"){{
-                offsetX = 15;
-                offsetY = 20;
-                rotorRotateSpeed = 27f;
-                rotorCount = 3;
-            }},
-            new Rotor("rotor-medium2"){{
-                offsetX = 15;
-                offsetY = 20;
-                rotorRotateSpeed = -27f;
-                rotorCount = 3;
-            }},
-            new Rotor("rotor-big2"){{
-                offsetX = 0;
-                offsetY = -14;
-                rotorRotateSpeed = -27f;
-                rotorCount = 4;
-            }},
-            new Rotor("rotor-big2"){{
-                offsetX = 0;
-                offsetY = -14;
-                rotorRotateSpeed = 27f;
-                rotorCount = 4;
-            }}
-            );
-            weapons.add(
-            new WeaponExt("large-rocket-launcher"){{
-                rotate = false;
-                mirror = true;
-                x = 9f;
-                y = 4f;
-                reload = 50f;
-                recoil = 5f;
-                shake = 2f;
-                ejectEffect = Fx.casing3;
-                inaccuracy = 9f;
-                shots = 2;
-                shotDelay = 12f;
-                shootSound = Sounds.bang;
-                bullet = SnBullets.largeHelicopterMissile;
-            }},
-            new SnWeapon("big-salvo"){{
-                rotate = false;
-                mirror = true;
-                shake = 3f;
-                x = 20f;
-                y = 27f;
-                reload = 40f;
-                shotDelay = 5f;
-                shots = 2;
-                inaccuracy = 0.5f;
-                shootSound = Sounds.shootBig;
-                bullet = SnBullets.largeHelicopterGun;
-            }},
-            new SnWeapon("big-salvo"){{
-                rotate = false;
-                mirror = true;
-                shake = 3f;
-                x = 25f;
-                y = 8f;
-                reload = 30f;
-                shotDelay = 5f;
-                shots = 2;
-                inaccuracy = 0.5f;
-                shootSound = Sounds.shootBig;
-                bullet = SnBullets.largeHelicopterGun;
-            }},
-            new SnWeapon("small-missile-launcher"){{
-                rotate = false;
-                mirror = false;
-                shake = 3f;
-                x = 0f;
-                y = 35f;
-                layerOffset = -0.01f;
-                top = false;
-                reload = 20f;
-                shotDelay = 1f;
-                shots = 3;
-                inaccuracy = 3f;
-                shootSound = Sounds.missile;
-                bullet = SnBullets.smallHelicopterMissile;
-            }});
-        }};
         //endregion copters
         //region buffers
         //there should be a bufferT1 here
-        satelite = new UnitTypeExt("satelite"){{
+        satelite = new UnitTypeExt("satelite") {{
             health = 470;
             hitSize = 17;
             speed = 3f;
@@ -922,7 +927,7 @@ public class SnUnitTypes implements ContentList{
 
             constructor = UnitEntity::create;
 
-            weapons.add(new ChainWeapon("satellite"){{
+            weapons.add(new ChainWeapon("satellite") {{
                 damageTick = 0.2f;
                 healTick = 0.7f;
                 alternate = false;
@@ -933,7 +938,7 @@ public class SnUnitTypes implements ContentList{
                 range = 180;
             }});
         }};
-        planet = new UnitTypeExt("planet"){{
+        planet = new UnitTypeExt("planet") {{
             health = 980;
             hitSize = 23;
             speed = 2.9f;
@@ -952,7 +957,7 @@ public class SnUnitTypes implements ContentList{
 
             constructor = UnitEntity::create;
 
-            weapons.add(new ChainWeapon("planet"){{
+            weapons.add(new ChainWeapon("planet") {{
                 damageTick = 0.7f;
                 healTick = 1.8f;
                 maxChainLength = 8;
@@ -964,7 +969,7 @@ public class SnUnitTypes implements ContentList{
                 range = 310;
             }});
         }};
-        star = new UnitTypeExt("star"){{
+        star = new UnitTypeExt("star") {{
             health = 5800;
             hitSize = 55;
             speed = 2.7f;
@@ -987,7 +992,7 @@ public class SnUnitTypes implements ContentList{
 
             abilities.add(new StatusFieldAbility(SnStatusEffects.starBuff, StatusEffects.none, 180, 8 * 24));
 
-            weapons.add(new WeaponExt("star-gun"){{
+            weapons.add(new WeaponExt("star-gun") {{
                 x = 0;
                 y = -12;
                 mirror = false;
@@ -999,7 +1004,7 @@ public class SnUnitTypes implements ContentList{
                 recoil = 3.5f;
                 bullet = SnBullets.starStunBullet;
             }});
-            weapons.add(new ChainWeapon("galaxy-weak"){{
+            weapons.add(new ChainWeapon("galaxy-weak") {{
                 damageTick = 0f;
                 healTick = 2.2f;
                 maxChainLength = 3;
@@ -1013,7 +1018,7 @@ public class SnUnitTypes implements ContentList{
                 laserLayer = Layer.flyingUnit;
             }});
         }};
-        galaxy = new UnitTypeExt("galaxy"){{
+        galaxy = new UnitTypeExt("galaxy") {{
             health = 20000;
             hitSize = 80;
             speed = 2.4f;
@@ -1036,7 +1041,7 @@ public class SnUnitTypes implements ContentList{
 
             abilities.add(new StatusFieldAbility(SnStatusEffects.starBuff, SnStatusEffects.galaxyDebuff, 180, 8 * 24));
 
-            weapons.add(new WeaponExt("galaxy-segment"){{
+            weapons.add(new WeaponExt("galaxy-segment") {{
                 mirror = true;
                 alternate = true;
                 rotate = true;
@@ -1048,7 +1053,7 @@ public class SnUnitTypes implements ContentList{
                 bullet = SnBullets.galaxyKnockbackBullet;
             }});
 
-            weapons.add(new PointDefenseWeapon("galaxy-weak"){{
+            weapons.add(new PointDefenseWeapon("galaxy-weak") {{
                 mirror = true;
                 alternate = true;
                 rotate = true;
@@ -1064,6 +1069,7 @@ public class SnUnitTypes implements ContentList{
         //endregion air
         //region naval
         //region yellow
+
         yellowT1 = new UnitTypeExt("yellow-t1") {{
             speed = 2.1f;
             rotateSpeed = 7;
@@ -1249,6 +1255,7 @@ public class SnUnitTypes implements ContentList{
             immunities.add(StatusEffects.wet);
             immunities.add(StatusEffects.freezing);
         }};
+
         yellowT4 = new UnitTypeExt("yellow-t4") {{
             speed = 1.5f;
             rotateSpeed = 5.9f;
@@ -1323,6 +1330,7 @@ public class SnUnitTypes implements ContentList{
             immunities.add(StatusEffects.wet);
             immunities.add(StatusEffects.freezing);
         }};
+
         yellowT5 = new UnitTypeExt("yellow-t5") {{
             speed = 1.1f;
             rotateSpeed = 5.4f;
@@ -1421,7 +1429,7 @@ public class SnUnitTypes implements ContentList{
         //endregion yellow
         //endregion naval
         //region misc
-        router = new UnitTypeExt("router"){
+        router = new UnitTypeExt("router") {
             {
                 health = 2000000;
                 speed = 2.85f;
@@ -1433,13 +1441,13 @@ public class SnUnitTypes implements ContentList{
             }
 
             @Override
-            public boolean isHidden(){
+            public boolean isHidden() {
                 return true;
             }
         };
         //endregion misc
         //region other
-        courier = new UncontrollableUnitType("courier"){{
+        courier = new UncontrollableUnitType("courier") {{
             speed = 3.9f;
             flying = true;
             itemCapacity = 100;
@@ -1449,7 +1457,7 @@ public class SnUnitTypes implements ContentList{
             //constructor = UnitEntity::create;
         }};
         //comet = new UncontrollableUnitType("comet"){{
-        comet = new UnitTypeExt("comet"){{
+        comet = new UnitTypeExt("comet") {{
             health = 150;
             hitSize = 10;
             speed = 3.1f;
@@ -1468,7 +1476,7 @@ public class SnUnitTypes implements ContentList{
 
             constructor = UnitEntity::create;
 
-            weapons.add(new WeaponExt("sprite"){{
+            weapons.add(new WeaponExt("sprite") {{
                 ai = new ExtinguishWeaponAI();
                 rotate = true;
                 mirror = false;
@@ -1482,7 +1490,8 @@ public class SnUnitTypes implements ContentList{
             }});
         }};
         //region snake
-        snake = new SegmentUnitType("snake1"){{
+        /*
+        snake = new SegmentUnitType("snake1") {{
             lengthSnake = 5;
             health = 3000f;
             hitSize = 30f;
@@ -1494,7 +1503,52 @@ public class SnUnitTypes implements ContentList{
             flying = true;
             defaultController = SegmentAI.wrapper(FlyingAI::new);
         }};
+
+         */
         //endregion snake
+
+        engineT1 = new EngineUnitType("engineT1") {{
+            health = 140;
+            hitSize = 15;
+            speed = 3.2f;
+            rotateSpeed = 5f;
+            accel = 0.04f;
+            drag = 0.016f;
+            commandLimit = 3;
+            flying = true;
+            circleTarget = false;
+            range = 130;
+
+            engines(
+                    new Engine("small-engine") {{
+                        engineX = 0f;
+                        engineY = -5f;
+                        engineSize = 3f;
+                        engineAngle = 180f;
+                    }},
+
+                    new Engine("small-engine") {{
+                        engineX = 0f;
+                        engineY = -14f;
+                        engineSize = 1f;
+                        engineAngle = 140f;
+                    }},
+
+                    new Engine("small-engine") {{
+                        engineX = 0f;
+                        engineY = -10f;
+                        engineSize = 3f;
+                        engineAngle = 0f;
+                    }},
+
+                    new Engine("small-engine") {{
+                        engineX = 10f;
+                        engineY = 5f;
+                        engineSize = 2f;
+                        engineAngle = 220f;
+                    }});
+        }};
+
         //endregion other
     }
 }
