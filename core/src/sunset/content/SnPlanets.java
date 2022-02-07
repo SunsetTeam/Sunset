@@ -54,7 +54,7 @@ public class SnPlanets implements ContentList{
             atmosphereRadIn = 0.03f;
             atmosphereRadOut = 0.4f;
             orbitRadius = 57f;
-            orbitTime = 30f;
+            //orbitTime = 30f;
             rotateTime = Time.toHours;
             accessible = true;
             startSector = 1;
@@ -76,7 +76,7 @@ public class SnPlanets implements ContentList{
             atmosphereRadOut = 0.17f;
             sectorApproxRadius = 3;
             orbitRadius = 33;
-            orbitTime = 45f;
+            //orbitTime = 45f;
             rotateTime = 2f * Time.toHours;
             accessible = true;
             startSector = 20;
@@ -94,7 +94,7 @@ public class SnPlanets implements ContentList{
             atmosphereRadIn = 0.02f;
             atmosphereRadOut = 0.32f;
             orbitRadius = 85;
-            orbitTime = 40f;
+            //orbitTime = 40f;
             rotateTime = 40f * Time.toMinutes;
             accessible = true;
             startSector = 1;

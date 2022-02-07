@@ -19,10 +19,12 @@ public class SnSandbox implements ContentList {
     public void load() {
         multiSource = new SnMultiSource("multi-source"){{
             requirements(Category.distribution, BuildVisibility.sandboxOnly, ItemStack.empty);
+            hideDetails = false;
         }};
 
         multiVoid = new SnMultiVoid("multi-void"){{
             requirements(Category.distribution, BuildVisibility.sandboxOnly, ItemStack.empty);
+            hideDetails = false;
         }};
 
         darkMatterProcessor = new LogicBlock("dark-matter-processor"){{
@@ -32,6 +34,7 @@ public class SnSandbox implements ContentList {
             range = 50 * Vars.tilesize;
             instructionsPerTick = 99999;
             maxInstructionScale = 99999;
+            hideDetails = false;
         }};
 
         darkMatterDisplay = new LogicDisplay("dark-matter-display"){{
@@ -39,6 +42,7 @@ public class SnSandbox implements ContentList {
 
             displaySize = 240;
             size = 9;
+            hideDetails = false;
         }};
 }
 }
