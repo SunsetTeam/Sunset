@@ -871,7 +871,6 @@ public class SnUnitTypes implements ContentList{
                         shake = 3f;
                         x = 28f;
                         y = 52f;
-                        top = false;
                         layerOffset = -0.01f;
                         recoil = 3f;
                         reload = 55f;
@@ -882,7 +881,7 @@ public class SnUnitTypes implements ContentList{
                         bullet = SnBullets.bigClusterRocket;
                     }},
                     new WeaponExt("medium-energy-sphere-generator") {{
-                        rotate = false;
+                        rotate = true;
                         mirror = true;
                         shake = 2f;
                         x = 44f;
@@ -896,7 +895,7 @@ public class SnUnitTypes implements ContentList{
                         bullet = SnBullets.bigCopterEnergySphere;
                     }},
                     new WeaponExt("medium-energy-sphere-generator") {{
-                        rotate = false;
+                        rotate = true;
                         mirror = true;
                         shake = 2f;
                         x = 30f;
