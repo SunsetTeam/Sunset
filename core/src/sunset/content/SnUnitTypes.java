@@ -1,5 +1,6 @@
 package sunset.content;
 
+import arc.util.Time;
 import mindustry.ai.types.*;
 import mindustry.annotations.Annotations.EntityDef;
 import mindustry.content.Fx;
@@ -7,6 +8,7 @@ import mindustry.content.Liquids;
 import mindustry.content.StatusEffects;
 import mindustry.content.UnitTypes;
 import mindustry.ctype.ContentList;
+import mindustry.entities.bullet.ArtilleryBulletType;
 import mindustry.entities.bullet.BasicBulletType;
 import mindustry.entities.bullet.BombBulletType;
 import mindustry.gen.*;
@@ -1058,7 +1060,7 @@ public class SnUnitTypes implements ContentList{
                 y = -6;
                 reload = 3;
                 range = 420;
-//                damage = 80;
+                //damage = 80;
             }});
         }};
         //there should be a bufferT6 here
@@ -1066,57 +1068,63 @@ public class SnUnitTypes implements ContentList{
         //endregion air
         //region naval
         //region yellow
-        yellowT1 = new UnitTypeExt("yellow-t1") {{
-            speed = 2.1f;
+        yellowT1 = new SnUnitType("yellow-t1") {{
+            speed = 1.2f;
             rotateSpeed = 7;
-            drag = 0.5f;
+            drag = 0.3f;
             hitSize = 10;
-            accel = 0.7f;
+            accel = 0.21f;
             health = 180;
             range = 160;
-            armor = 120;
-            faceTarget = false;
+            armor = 20;
+            faceTarget = true;
             commandLimit = 5;
             commandRadius = 48;
             visualElevation = -1;
-            /*weapons.add(
-                    new WeaponExt("plankton-mount") {{
-                        bullet = SnBullets.plasmaArt;
+            weapons.addAll(
+                    new WeaponExt("small-autocannon") {{
+                        //name = "";
+                        bullet = SnBullets.smallShell;
                         rotate = true;
                         top = true;
                         rotateSpeed = 30;
-                        reload = 35;
-                        shots = 5;
-                        spacing = 15;
-                        inaccuracy = 2;
-                        x = 3.5f;
-                        y = 0;
-                        firstShotDelay = 20;
-                        shootCone = 3;
-                        cooldownTime = 15;
-                        ignoreRotation = true;
-                        shootSound = Sounds.lasershoot;
-                        shootStatus = StatusEffects.shocked;
-                    }},
-                    new WeaponExt("torpedo-gun") {{
-                        bullet = SnBullets.torpedo1;
-                        mirror = false;
-                        rotate = true;
-                        top = false;
-                        rotateSpeed = 30;
-                        reload = 35;
+                        reload = 0.5f * Time.toSeconds;
                         shots = 1;
                         spacing = 15;
-                        inaccuracy = 5;
-                        x = y = 0;
-                        firstShotDelay = 30;
-                        shootCone = 6;
-                        cooldownTime = 15;
+                        inaccuracy = 7;
+                        x = 3.9f;
+                        y = -3.5f;
+                        shootCone = 3;
+                        cooldownTime = 0.5f * Time.toSeconds;
                         ignoreRotation = true;
-                        shootSound = Sounds.lasershoot;
+                        shootSound = Sounds.shoot;
                         shootStatus = StatusEffects.shocked;
-                    }}
-            );*/
+                    }}/*,
+                    new WeaponExt("mini-mortar") {{
+                        bullet = new ArtilleryBulletType(3f, 30, "shell") {{
+                            hitEffect = Fx.flakExplosion;
+                            knockback = 0.8f;
+                            lifetime = 80f;
+                            width = height = 11f;
+                            collidesTiles = false;
+                            splashDamageRadius = 30f * 0.75f;
+                            splashDamage = 40f;
+                        }};
+                        rotate = true;
+                        top = true;
+                        rotateSpeed = 16;
+                        reload = 3 * Time.toSeconds;
+                        shots = 1;
+                        spacing = 9;
+                        inaccuracy = 3;
+                        x = 0f;
+                        y = 1f;
+                        shootCone = 3;
+                        cooldownTime = Time.toSeconds;
+                        ignoreRotation = true;
+                        shootSound = Sounds.artillery;
+                    }}*/
+            );
             constructor = UnitWaterMove::create;
             immunities.add(StatusEffects.wet);
             immunities.add(StatusEffects.freezing);

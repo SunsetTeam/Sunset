@@ -21,6 +21,7 @@ import sunset.graphics.SnPal;
 import sunset.type.StackableStatusEffect;
 
 public class SnBullets implements ContentList {
+    //region definitions
     public static BulletType
         //standard
         heavyStandardDense, heavyStandardThorium, heavyStandardIncendiary, standardBlastBig, standardForsBig,
@@ -32,6 +33,7 @@ public class SnBullets implements ContentList {
         wheel1Bullet, wheel2Shotgun, wheel3Burst, wheel4Shotgun,  wheel5Bullet,
         mirageGunBullet,
         machineBullet, bigMachineBullet,
+        smallShell,
         //rocket
         smallBlueMissile, smallEnojieMissile, mediumEnojieMissile,
         powerRocket,
@@ -83,6 +85,7 @@ public class SnBullets implements ContentList {
         temp;
         //exoticBullets (new) I will make it later... I must make more bullets (soulBullet, iceSpike, and more)
         //spiralPlastanium, spiralSurge, spiralFors, spiralThorium, spiralSmall;
+    //endregion definitions
 
     @Override
     public void load() {
@@ -467,6 +470,28 @@ public class SnBullets implements ContentList {
             height = 3;
             pierce = true;
             pierceBuilding = true;
+        }};
+        smallShell = new BasicBulletType() {{
+            lifetime = 14.6f;
+            speed = 11;
+            damage = 7;
+            drawSize = 6.1f;
+            pierceCap = 3;
+            ammoMultiplier = 2;
+            reloadMultiplier = 1.1f;
+            buildingDamageMultiplier = 0.6f;
+            //recoil = 0;
+            width = 5.7f;
+            height = 8.7f;
+            pierce = true;
+            pierceBuilding = false;
+            shootEffect = Fx.shootSmall;
+            smokeEffect = Fx.shootSmallSmoke;
+            collidesAir = absorbable = false;
+            trailEffect = SnFx.acTrail;
+            //trailColor = Pal.lightTrail;
+            splashDamage = 15;
+            splashDamageRadius = 3 * Vars.tilesize;
         }};
         //endregion  standard
         //region rocket
@@ -2104,7 +2129,7 @@ public class SnBullets implements ContentList {
         }};
         //endregion laser art
         //region torpedo
-        torpedo1 = new BasicBulletType(2, 120) {{
+        /*torpedo1 = new BasicBulletType(2, 120) {{
             lifetime = 80;
             drawSize = 9.2f;
             pierceCap = -1;
@@ -2203,7 +2228,7 @@ public class SnBullets implements ContentList {
             layer = Layer.scorch;
             splashDamage = 60;
             splashDamageRadius = 11.25f * Vars.tilesize;
-        }};
+        }};*/
         //endregion torpedo
         //endregion special
         //region misc and testing

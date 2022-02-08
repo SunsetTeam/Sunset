@@ -12,7 +12,7 @@ import mindustry.graphics.Drawf;
 import mindustry.type.Weapon;
 import mindustry.world.meta.Stat;
 import mindustry.world.meta.StatValue;
-import sunset.type.weapons.*;
+import sunset.type.weapons.CustomWeapon;
 import sunset.world.meta.SnStatValues;
 
 /**
