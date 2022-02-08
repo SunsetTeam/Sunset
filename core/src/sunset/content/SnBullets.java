@@ -1902,9 +1902,9 @@ public class SnBullets implements ContentList {
             lifetime = 45f;
             splashDamageRadius = 90f;
             splashDamage = 80f;
-            height = 14f;
-            width = 14f;
-            LightningChance = 0.3f;
+            height = 13f;
+            width = 13f;
+            LightningChance = 0.2f;
             lightning = 3;
             lightningLength = 8;
             lightningColor = SnPal.copterLaser;

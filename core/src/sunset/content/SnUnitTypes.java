@@ -553,7 +553,7 @@ public class SnUnitTypes implements ContentList{
                     }},
                     new Rotor("rotor-big") {{
                         offsetX = 0;
-                        offsetY = 9;
+                        offsetY = 8;
                         rotorRotateSpeed = 28f;
                         rotorCount = 3;
                     }}
@@ -581,7 +581,6 @@ public class SnUnitTypes implements ContentList{
                         x = 0f;
                         y = 16f;
                         layerOffset = -0.01f;
-                        top = false;
                         reload = 25f;
                         shake = 1f;
                         recoil = 2f;
@@ -650,7 +649,6 @@ public class SnUnitTypes implements ContentList{
                         x = 17f;
                         y = 17f;
                         layerOffset = -0.01f;
-                        top = false;
                         spacing = 4;
                         reload = 40f;
                         recoil = 5f;
@@ -668,7 +666,6 @@ public class SnUnitTypes implements ContentList{
                         x = 0f;
                         y = 18f;
                         layerOffset = -0.01f;
-                        top = false;
                         shootY = 4f;
                         reload = 37f;
                         shotDelay = 4f;
@@ -782,7 +779,6 @@ public class SnUnitTypes implements ContentList{
                         y = 35f;
                         xRand = 5f;
                         layerOffset = -0.01f;
-                        top = false;
                         reload = 20f;
                         shotDelay = 1f;
                         shots = 3;
@@ -899,7 +895,7 @@ public class SnUnitTypes implements ContentList{
                         mirror = true;
                         shake = 2f;
                         x = 30f;
-                        y = 40f;
+                        y = 45f;
                         reload = 40f;
                         shotDelay = 1f;
                         shots = 1;
