@@ -9,6 +9,7 @@ import arc.math.geom.Vec2;
 import arc.util.Time;
 import arc.util.Tmp;
 import mindustry.content.Fx;
+import mindustry.entities.Effect;
 import mindustry.gen.Unit;
 import mma.ModVars;
 
@@ -25,6 +26,8 @@ public class Rotor {
     public float smokeChance = 0.3f;
     public float smokeX = 0f;
     public float smokeY = 0f;
+    public Effect smokeEffect = Fx.fallSmoke;
+    public Effect burningEffect = Fx.burning;
 
     public TextureRegion rotorRegion, topRegion, outlineRegion;
 
@@ -70,8 +73,8 @@ public class Rotor {
             if (Mathf.chanceDelta(smokeChance)) {
                 float rotorSmokeX = rotor.x + Angles.trnsx(unit.rotation - 90, smokeX, smokeY);
                 float rotorSmokeY = rotor.y + Angles.trnsy(unit.rotation - 90, smokeX, smokeY);
-                Fx.fallSmoke.at(rotorSmokeX, rotorSmokeY);
-                Fx.burning.at(rotorSmokeX, rotorSmokeY);
+                smokeEffect.at(rotorSmokeX, rotorSmokeY);
+                burningEffect.at(rotorSmokeX, rotorSmokeY);
             }
         }
         Draw.rect(topRegion, rotor.x, rotor.y, unit.rotation - 90);

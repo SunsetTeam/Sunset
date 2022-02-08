@@ -1860,8 +1860,9 @@ public class SnBullets implements ContentList {
         }};
         //T6
         giantHelicopterGun = new BasicBulletType(5f, 75) {{
-            width = 16f;
-            height = 21f;
+            hitSize = 5;
+            width = 17f;
+            height = 24f;
             lifetime = 55f;
             hitEffect = Fx.flakExplosion;
             shootEffect = Fx.shootSmall;
@@ -1870,7 +1871,7 @@ public class SnBullets implements ContentList {
         shrapnelCopterGun = new ShrapnelBulletType() {{
             length = 180f;
             width = 50f;
-            damage = 145;
+            damage = 165;
             serrationLenScl = 10f;
             serrationSpaceOffset = 70f;
             serrationFadeOffset = 0f;
@@ -1883,7 +1884,7 @@ public class SnBullets implements ContentList {
             collidesGround = true;
         }};
         bigClusterRocket = new MissileBulletType(4.5f, 10, "missile-large") {{
-            width = 16f;
+            width = 14f;
             height = 18f;
             shrinkY = 0f;
             drag = -0.003f;
@@ -1922,14 +1923,14 @@ public class SnBullets implements ContentList {
             fragCone = 90f;
             fragBullets = 3;
         }};
-        bigCopterEnergySphere = new LightningSphereBulletType(3f, 7, "sunset-circle-bullet") {{
-            lifetime = 45f;
+        bigCopterEnergySphere = new LightningSphereBulletType(4f, 7, "sunset-circle-bullet") {{
+            lifetime = 50f;
             splashDamageRadius = 90f;
             splashDamage = 80f;
-            height = 14f;
-            width = 14f;
-            LightningChance = 0.4f;
-            lightning = 4;
+            height = 13f;
+            width = 13f;
+            LightningChance = 0.2f;
+            lightning = 3;
             lightningLength = 8;
             lightningColor = SnPal.copterLaser;
             lightningDamage = 30f;

@@ -40,8 +40,8 @@ public class Engine {
 
         Draw.color(engineColor == null ? unit.team.color : engineColor);
         Fill.circle(
-                unit.x + Angles.trnsx(unit.rotation - engineAngle, engineX, engineY),
-                unit.y + Angles.trnsy(unit.rotation - engineAngle, engineX, engineY),
+                unit.x + Angles.trnsx(unit.rotation - 90f, engineX, engineY),
+                unit.y + Angles.trnsy(unit.rotation - 90f, engineX, engineY),
                 (engineSize + Mathf.absin(Time.time, 2f, engineSize / 4f)) * scale
         );
         Draw.color(engineColorInner);

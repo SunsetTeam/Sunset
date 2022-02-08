@@ -7,7 +7,6 @@ import static mindustry.content.Items.*;
 import static mindustry.content.Liquids.oil;
 import static sunset.content.SnItems.*;
 import static sunset.content.SnLiquids.burheyna;
-import static sunset.content.blocks.defense.SnTurrets.*;
 
 public class SnTechTree extends TechTreeManager implements ContentList {
     @Override

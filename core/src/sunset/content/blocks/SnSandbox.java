@@ -28,7 +28,7 @@ public class SnSandbox implements ContentList {
         }};
 
         darkMatterProcessor = new LogicBlock("dark-matter-processor"){{
-            requirements(Category.distribution, BuildVisibility.sandboxOnly, ItemStack.empty);
+            requirements(Category.logic, BuildVisibility.sandboxOnly, ItemStack.empty);
 
             size = 1;
             range = 50 * Vars.tilesize;
@@ -38,7 +38,7 @@ public class SnSandbox implements ContentList {
         }};
 
         darkMatterDisplay = new LogicDisplay("dark-matter-display"){{
-            requirements(Category.distribution, BuildVisibility.sandboxOnly, ItemStack.empty);
+            requirements(Category.logic, BuildVisibility.sandboxOnly, ItemStack.empty);
 
             displaySize = 240;
             size = 9;
