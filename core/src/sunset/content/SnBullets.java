@@ -1846,7 +1846,7 @@ public class SnBullets implements ContentList {
         shrapnelCopterGun = new ShrapnelBulletType() {{
             length = 180f;
             width = 50f;
-            damage = 145;
+            damage = 165;
             serrationLenScl = 10f;
             serrationSpaceOffset = 70f;
             serrationFadeOffset = 0f;
@@ -1899,7 +1899,7 @@ public class SnBullets implements ContentList {
             fragBullets = 3;
         }};
         bigCopterEnergySphere = new LightningSphereBulletType(4f, 7, "sunset-circle-bullet") {{
-            lifetime = 45f;
+            lifetime = 50f;
             splashDamageRadius = 90f;
             splashDamage = 80f;
             height = 13f;

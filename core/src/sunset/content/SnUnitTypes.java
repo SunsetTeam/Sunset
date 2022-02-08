@@ -834,7 +834,7 @@ public class SnUnitTypes implements ContentList{
 
             weapons.addAll(
                     new WeaponExt("large-shrapnel-gun") {{
-                        rotate = false;
+                        rotate = true;
                         mirror = false;
                         x = 0f;
                         y = 45f;

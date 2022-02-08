@@ -227,11 +227,11 @@ public class SnEnvironment implements ContentList {
         }};
 
         jadestoneWall = new StaticWall("jadestone-wall") {{
-            variants = 3;
+            variants = 2;
         }};
 
         gJadestoneWall = new StaticWall("g-jadestone-wall") {{
-            variants = 3;
+            variants = 2;
         }};
 
         orangeSandWall = new StaticWall("orange-sand-wall") {{
