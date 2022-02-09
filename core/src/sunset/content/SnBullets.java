@@ -471,10 +471,11 @@ public class SnBullets implements ContentList {
             pierce = true;
             pierceBuilding = true;
         }};
+
         smallShell = new BasicBulletType() {{
             lifetime = 14.6f;
             speed = 11;
-            damage = 7;
+            damage = 10;
             drawSize = 6.1f;
             pierceCap = 3;
             ammoMultiplier = 2;

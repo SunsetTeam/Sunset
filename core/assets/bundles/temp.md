@@ -1,11 +1,3 @@
-//1x1 4
-//2x2 6
-//3x3 7
-//4x4 7
-//5x5 5+1
-//6x6 3
-//7x7 1+1
-
     empHit = new Effect(35, e -> {
         randLenVectors(e.id, 6, 4f + e.fin() * 8f, (x, y) -> {
             Draw.color(Color.valueOf("7FFFD4"), Color.valueOf("32D0DC"), e.fin());
@@ -279,4 +271,49 @@ public TextureRegion turretRegion;
         }
     }
 
-}
+    }
+
+
+    new WeaponExt("small-autocannon") {{
+    //name = "";
+    bullet = SnBullets.smallShell;
+    rotate = true;
+    top = true;
+    rotateSpeed = 30;
+    reload = 0.5f * Time.toSeconds;
+    shots = 1;
+    spacing = 15;
+    inaccuracy = 7;
+    x = 3.9f;
+    y = -3.5f;
+    shootCone = 3;
+    cooldownTime = 0.5f * Time.toSeconds;
+    ignoreRotation = true;
+    shootSound = Sounds.shoot;
+    shootStatus = StatusEffects.shocked;
+    }},
+    new WeaponExt("mini-mortar") {{
+    bullet = new ArtilleryBulletType(4f, 30, "shell") {{
+    hitEffect = Fx.flakExplosion;
+    knockback = 0.8f;
+    lifetime = 40f;
+    width = 7;
+    height = 11f;
+    collidesTiles = false;
+    splashDamageRadius = 5f * Vars.tilesize;
+    splashDamage = 20f;
+    }};
+    rotate = true;
+    top = true;
+    rotateSpeed = 16;
+    reload = 3 * Time.toSeconds;
+    shots = 1;
+    spacing = 9;
+    inaccuracy = 3;
+    x = 0f;
+    y = 1f;
+    shootCone = 3;
+    cooldownTime = Time.toSeconds;
+    ignoreRotation = true;
+    shootSound = Sounds.artillery;
+    }}
