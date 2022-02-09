@@ -24,8 +24,6 @@ import static mindustry.Vars.*;
 public class CopterUnitType extends SnUnitType implements ImageGenerator{
     public final Seq<Rotor> rotors = new Seq<>();
     public float unitFallRotateSpeed = 6f;
-    public Effect smokeFx = Fx.none;
-    public Effect burningFx = Fx.none;
 
 
     public CopterUnitType(String name){
