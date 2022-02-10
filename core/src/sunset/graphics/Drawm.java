@@ -4,8 +4,10 @@ import arc.graphics.*;
 import arc.graphics.g2d.*;
 import arc.math.*;
 import arc.math.geom.*;
+import arc.scene.ui.layout.Scl;
 import arc.struct.*;
 import mindustry.graphics.*;
+import mindustry.ui.Fonts;
 
 import static arc.graphics.g2d.Draw.*;
 
@@ -38,4 +40,23 @@ public class Drawm{
         Fill.circle(x + bx, y + by, _size * miniRadius);
     }
 
+    public static void drawLabel(Position pos, float textSize, Color color, String text){
+        Font font = Fonts.outline;
+        boolean ints = font.usesIntegerPositions();
+        font.getData().setScale(textSize / Scl.scl(1.0f));
+        font.setUseIntegerPositions(false);
+
+        font.setColor(color);
+
+        float z = Draw.z();
+        Draw.z(z+1.f);
+        FontCache cache = font.getCache();
+        cache.clear();
+        GlyphLayout layout = cache.addText(text, pos.getX(), pos.getY());
+        font.draw(text, pos.getX()- layout.width / 2f, pos.getY()- layout.height / 2f);
+        Draw.z(z);
+
+        font.setUseIntegerPositions(ints);
+        font.getData().setScale(1);
+    }
 }

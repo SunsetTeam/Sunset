@@ -28,6 +28,7 @@ public class SnBlocks implements ContentList{
     new SnProduction(),
     new SnSandbox(),
     new SnUnitBlocks(),
+    new SnLasers(),
     new SnTests(),
     };
 

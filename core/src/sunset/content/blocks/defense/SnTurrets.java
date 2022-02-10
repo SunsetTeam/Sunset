@@ -387,6 +387,7 @@ public class SnTurrets implements ContentList{
         }};
         //endregion 4x4
         //region 5x5
+        /*
         pressure = new ItemTurret("pressure"){{
             requirements(Category.turret, with(SnItems.fors, 600, Items.silicon, 500, Items.plastanium, 450, Items.graphite, 400, Items.surgeAlloy, 300, SnItems.naturite, 100));
             ammo(
@@ -413,6 +414,8 @@ public class SnTurrets implements ContentList{
             shootSound = Sounds.flame;
             consumes.power(7f);
         }};
+
+         */
 
         field = new ModItemTurret("field"){{
             requirements(Category.turret, with(Items.copper, 1200, Items.lead, 800, Items.plastanium, 350, Items.thorium, 400, SnItems.fors, 400, SnItems.nobium, 300));
@@ -571,6 +574,7 @@ public class SnTurrets implements ContentList{
             health = 160 * size * size;
             coolantUsage = 0.9f;
         }};
+        /*
         disappearance = new LaserTurret("disappearance"){{
             requirements(Category.turret, with(Items.copper, 1900, Items.lead, 1400, Items.graphite, 1600, Items.surgeAlloy, 1060, Items.silicon, 800));
             shootEffect = Fx.shootBigSmoke2;
@@ -612,6 +616,8 @@ public class SnTurrets implements ContentList{
             health = 240 * size * size;
             consumes.add(new ConsumeCoolant(1.1f)).update(false);
         }};
+
+         */
         //endregion 6x6
         //region 7x7
         halberd = new ModPowerTurret("halberd"){{
@@ -649,6 +655,7 @@ public class SnTurrets implements ContentList{
                 width = 60f;
             }};
         }};
+        /*
         pinwheel = new Turret360("pinwheel") {{
             requirements(Category.turret, with(Items.copper, 900, Items.lead, 900, Items.silicon, 710, Items.titanium, 800, Items.thorium, 750, Items.surgeAlloy, 450, SnItems.planatrium, 450, SnItems.fors, 870, SnItems.enojie, 200));
             ammo(
@@ -676,6 +683,8 @@ public class SnTurrets implements ContentList{
             chargeShots = 3;
             debug = true;
         }};
+
+         */
         //endregion 7x7
         //region missile
         sunrise = new MissileSiloTurret("sunrise"){{
