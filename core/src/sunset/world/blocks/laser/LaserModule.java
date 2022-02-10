@@ -116,7 +116,7 @@ public class LaserModule {
                 outp.laserModule.removeInput(self);
         }
         Log.info("removing, inputs: @, outputs: @", input.size, output.size);
-        throw null;
+//        throw null;
     }
 
     //in case of reducing size of msav, write and read coordinates of blocks
@@ -136,12 +136,14 @@ public class LaserModule {
 
     public void read(Reads r){
         //inputs
-        for (int i = 0; i < r.i(); i++){
+        int size = r.i();
+        for (int i = 0; i < size; i++){
             LaserBlockBuild inp = (LaserBlockBuild) Vars.world.build(r.i());
             input.add(inp);
         }
         //outputs
-        for (int i = 0; i < r.i(); i++){
+        size=r.i();
+        for (int i = 0; i < size; i++){
             LaserBlockBuild outp = (LaserBlockBuild) Vars.world.build(r.i());
             output.add(outp);
         }

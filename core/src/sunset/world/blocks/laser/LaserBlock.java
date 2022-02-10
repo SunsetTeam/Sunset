@@ -15,6 +15,10 @@ import mindustry.world.Block;
 import mindustry.world.Tile;
 import sunset.graphics.Drawm;
 
+import java.time.*;
+import java.time.format.*;
+import java.util.*;
+
 public class LaserBlock extends Block {
     public boolean consumesLaser = true;
     public boolean outputsLaser = false;
@@ -33,6 +37,8 @@ public class LaserBlock extends Block {
     @Annotations.Load("@-edge1")
     public TextureRegion nodeEdgeLight;
 
+    protected static DateTimeFormatter dateTime = DateTimeFormatter.ofPattern("MM-dd-yyyy HH:mm:ss"),
+    autosaveDate = DateTimeFormatter.ofPattern("MM-dd-yyyy_HH-mm-ss");
     public LaserBlock(String name) {
         super(name);
     }
@@ -51,6 +57,7 @@ public class LaserBlock extends Block {
             laserModule.maxLinks = maxLinks;
             drawer = new LaserBlockDrawer(this);
             drawer.initRegions(nodeBase, nodeTop, nodeEdgeDark, nodeEdgeLight, nodeLens);
+
             return super.init(tile, team, shouldAdd, rotation);
         }
 
