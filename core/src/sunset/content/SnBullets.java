@@ -41,7 +41,8 @@ public class SnBullets implements ContentList {
         //artillery
         artilleryFors, artilleryBlast,
         wheel4Artillery,
-        plasmaArt, rocketArt, bigRocketArt, heavyRocketArt,
+        plasmaArt, rocketArt, bigRocketArt, heavyRocketArt,//todo: use this
+        mortarBullet, salvoArt,
         //flak
         sporePodPoisonBullet, bigSporePodPoison, heavySporePodPoison,
         naturitePoisonBullet, bigNaturitePoison, heavyNaturitePoison,
@@ -79,7 +80,7 @@ public class SnBullets implements ContentList {
         empBullet, empBulletEvo,
         naturiteBolt1, naturiteBolt2, naturiteBolt3, naturiteBolt4, naturiteBolt5,
         laserArtThorium, laserArtPhase, laserArtEnojie, laserArtReneubite,
-        torpedo1, torpedo2, torpedo3, torpedo4, torpedo5,
+        smallTorpedo,
         //misc and testing
         emptyBullet, overheatBullet,
         temp;
@@ -473,7 +474,7 @@ public class SnBullets implements ContentList {
         }};
 
         smallShell = new BasicBulletType() {{
-            lifetime = 14.6f;
+            lifetime = 0.25f * Time.toSeconds;
             speed = 11;
             damage = 10;
             drawSize = 6.1f;
@@ -810,6 +811,42 @@ public class SnBullets implements ContentList {
             shrinkY = 0f;
             hitSound = Sounds.explosion;
             trailChance = 0.2f;
+        }};
+
+        mortarBullet = new ArtilleryBulletType(4f, 30, "shell") {{
+            hitEffect = Fx.flakExplosion;
+            knockback = 0.8f;
+            lifetime = 0.7f * Time.toSeconds;
+            width = 7;
+            height = 11f;
+            collidesTiles = false;
+            splashDamageRadius = 5f * Vars.tilesize;
+            splashDamage = 20f;
+            fragBullets = 5;
+            fragBullet = new FlakBulletType(6, 0) {{
+                collidesGround = true;
+                collidesAir = false;
+                splashDamage = 22;
+                splashDamageRadius = 13 * Vars.tilesize;
+                sprite = "sunset-red-mine";
+                backColor = SnPal.yellowTrail;
+                frontColor = SnPal.yellowTrailBack;
+                spin = 0.5f;
+                height = width = 11f;
+                lifetime = 3.7f * Time.toSeconds;
+                shrinkX = shrinkY = 0.5f;
+                drag = 0.07f;
+            }};
+        }};
+        salvoArt = new ArtilleryBulletType(5f, 29, "shell") {{
+            frontColor = SnPal.yellowTrail;
+            backColor = SnPal.yellowTrailBack;
+            width = 7f;
+            height = 12f;
+            shootEffect = Fx.shootBig2;
+            smokeEffect = Fx.shootBigSmoke2;
+            ammoMultiplier = 2.1f;
+            lifetime = 0.7f * Time.toSeconds;
         }};
         //endregion  artillery
         //region flak
@@ -2131,8 +2168,9 @@ public class SnBullets implements ContentList {
         }};
         //endregion laser art
         //region torpedo
-        /*torpedo1 = new BasicBulletType(2, 120) {{
-            lifetime = 80;
+        smallTorpedo = new BasicBulletType(2, 120) {{
+            //sprite = "small-torpedo";
+            lifetime = 1.4f * Time.toSeconds;
             drawSize = 9.2f;
             pierceCap = -1;
             inaccuracy = 1;
@@ -2150,87 +2188,9 @@ public class SnBullets implements ContentList {
             layer = Layer.scorch;
             splashDamage = 40;
             splashDamageRadius = 10 * Vars.tilesize;
+            width = 6f;
+            height = 12f;
         }};
-        torpedo2 = new BasicBulletType(2, 140) {{
-            lifetime = 80;
-            drawSize = 9.2f;
-            pierceCap = -1;
-            inaccuracy = 1;
-            ammoMultiplier = 1;
-            reloadMultiplier = 3;
-            buildingDamageMultiplier = 0.9f;
-            recoil = 0;
-            pierce = true;
-            pierceBuilding = false;
-            shootEffect = smokeEffect = Fx.none;
-            collidesAir = absorbable = false;
-            trailColor = Pal.lightTrail;
-            keepVelocity = true;
-            collideFloor = true;
-            layer = Layer.scorch;
-            splashDamage = 60;
-            splashDamageRadius = 11.25f * Vars.tilesize;
-        }};
-        torpedo3 = new BasicBulletType(2, 280) {{
-            lifetime = 80;
-            drawSize = 9.2f;
-            pierceCap = -1;
-            inaccuracy = 1;
-            ammoMultiplier = 1;
-            reloadMultiplier = 3;
-            buildingDamageMultiplier = 0.9f;
-            recoil = 0;
-            pierce = true;
-            pierceBuilding = false;
-            shootEffect = smokeEffect = Fx.none;
-            collidesAir = absorbable = false;
-            trailColor = Pal.lightTrail;
-            keepVelocity = true;
-            collideFloor = true;
-            layer = Layer.scorch;
-            splashDamage = 60;
-            splashDamageRadius = 11.25f * Vars.tilesize;
-        }};
-        torpedo4 = new BasicBulletType(2, 500) {{
-            lifetime = 80;
-            drawSize = 9.2f;
-            pierceCap = -1;
-            inaccuracy = 1;
-            ammoMultiplier = 1;
-            reloadMultiplier = 3;
-            buildingDamageMultiplier = 0.9f;
-            recoil = 0;
-            pierce = true;
-            pierceBuilding = false;
-            shootEffect = smokeEffect = Fx.none;
-            collidesAir = absorbable = false;
-            trailColor = Pal.lightTrail;
-            keepVelocity = true;
-            collideFloor = true;
-            layer = Layer.scorch;
-            splashDamage = 60;
-            splashDamageRadius = 11.25f * Vars.tilesize;
-        }};
-        torpedo5 = new BasicBulletType(2, 690) {{
-            lifetime = 80;
-            drawSize = 9.2f;
-            pierceCap = -1;
-            inaccuracy = 1;
-            ammoMultiplier = 1;
-            reloadMultiplier = 3;
-            buildingDamageMultiplier = 0.9f;
-            recoil = 0;
-            pierce = true;
-            pierceBuilding = false;
-            shootEffect = smokeEffect = Fx.none;
-            collidesAir = absorbable = false;
-            trailColor = Pal.lightTrail;
-            keepVelocity = true;
-            collideFloor = true;
-            layer = Layer.scorch;
-            splashDamage = 60;
-            splashDamageRadius = 11.25f * Vars.tilesize;
-        }};*/
         //endregion torpedo
         //endregion special
         //region misc and testing

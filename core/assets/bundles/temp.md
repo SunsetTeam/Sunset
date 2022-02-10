@@ -275,7 +275,6 @@ public TextureRegion turretRegion;
 
 
     new WeaponExt("small-autocannon") {{
-    //name = "";
     bullet = SnBullets.smallShell;
     rotate = true;
     top = true;
@@ -317,3 +316,141 @@ public TextureRegion turretRegion;
     ignoreRotation = true;
     shootSound = Sounds.artillery;
     }}
+
+    new WeaponExt("small-autocannon") {{
+    bullet = SnBullets.smallShell;
+    mirror = false;
+    rotate = true;
+    top = true;
+    rotateSpeed = 30;
+    reload = 0.5f * Time.toSeconds;
+    shots = 1;
+    spacing = 15;
+    inaccuracy = 7;
+    x = 0f;
+    y = 2.3f;
+    shootCone = 3;
+    cooldownTime = 0.5f * Time.toSeconds;
+    ignoreRotation = true;
+    shootSound = Sounds.shoot;
+    shootStatus = StatusEffects.shocked;
+    }},
+    new WeaponExt("small-autocannon") {{
+    bullet = SnBullets.smallShell;
+    mirror = false;
+    rotate = true;
+    top = true;
+    rotateSpeed = 30;
+    reload = 0.5f * Time.toSeconds;
+    shots = 1;
+    spacing = 15;
+    inaccuracy = 7;
+    x = 0f;
+    y = -4.3f;
+    shootCone = 3;
+    cooldownTime = 0.5f * Time.toSeconds;
+    ignoreRotation = true;
+    shootSound = Sounds.shoot;
+    shootStatus = StatusEffects.shocked;
+    }}
+
+    /*torpedo1 = new BasicBulletType(2, 120) {{
+    lifetime = 80;
+    drawSize = 9.2f;
+    pierceCap = -1;
+    inaccuracy = 1;
+    ammoMultiplier = 1;
+    reloadMultiplier = 3;
+    buildingDamageMultiplier = 0.9f;
+    recoil = 0;
+    pierce = true;
+    pierceBuilding = false;
+    shootEffect = smokeEffect = Fx.none;
+    collidesAir = absorbable = false;
+    keepVelocity = true;
+    trailColor = Pal.lightTrail;
+    collideFloor = true;
+    layer = Layer.scorch;
+    splashDamage = 40;
+    splashDamageRadius = 10 * Vars.tilesize;
+    }};
+    torpedo2 = new BasicBulletType(2, 140) {{
+    lifetime = 80;
+    drawSize = 9.2f;
+    pierceCap = -1;
+    inaccuracy = 1;
+    ammoMultiplier = 1;
+    reloadMultiplier = 3;
+    buildingDamageMultiplier = 0.9f;
+    recoil = 0;
+    pierce = true;
+    pierceBuilding = false;
+    shootEffect = smokeEffect = Fx.none;
+    collidesAir = absorbable = false;
+    trailColor = Pal.lightTrail;
+    keepVelocity = true;
+    collideFloor = true;
+    layer = Layer.scorch;
+    splashDamage = 60;
+    splashDamageRadius = 11.25f * Vars.tilesize;
+    }};
+    torpedo3 = new BasicBulletType(2, 280) {{
+    lifetime = 80;
+    drawSize = 9.2f;
+    pierceCap = -1;
+    inaccuracy = 1;
+    ammoMultiplier = 1;
+    reloadMultiplier = 3;
+    buildingDamageMultiplier = 0.9f;
+    recoil = 0;
+    pierce = true;
+    pierceBuilding = false;
+    shootEffect = smokeEffect = Fx.none;
+    collidesAir = absorbable = false;
+    trailColor = Pal.lightTrail;
+    keepVelocity = true;
+    collideFloor = true;
+    layer = Layer.scorch;
+    splashDamage = 60;
+    splashDamageRadius = 11.25f * Vars.tilesize;
+    }};
+    torpedo4 = new BasicBulletType(2, 500) {{
+    lifetime = 80;
+    drawSize = 9.2f;
+    pierceCap = -1;
+    inaccuracy = 1;
+    ammoMultiplier = 1;
+    reloadMultiplier = 3;
+    buildingDamageMultiplier = 0.9f;
+    recoil = 0;
+    pierce = true;
+    pierceBuilding = false;
+    shootEffect = smokeEffect = Fx.none;
+    collidesAir = absorbable = false;
+    trailColor = Pal.lightTrail;
+    keepVelocity = true;
+    collideFloor = true;
+    layer = Layer.scorch;
+    splashDamage = 60;
+    splashDamageRadius = 11.25f * Vars.tilesize;
+    }};
+    torpedo5 = new BasicBulletType(2, 690) {{
+    lifetime = 80;
+    drawSize = 9.2f;
+    pierceCap = -1;
+    inaccuracy = 1;
+    ammoMultiplier = 1;
+    reloadMultiplier = 3;
+    buildingDamageMultiplier = 0.9f;
+    recoil = 0;
+    pierce = true;
+    pierceBuilding = false;
+    shootEffect = smokeEffect = Fx.none;
+    collidesAir = absorbable = false;
+    trailColor = Pal.lightTrail;
+    keepVelocity = true;
+    collideFloor = true;
+    layer = Layer.scorch;
+    splashDamage = 60;
+    splashDamageRadius = 11.25f * Vars.tilesize;
+    }};*/

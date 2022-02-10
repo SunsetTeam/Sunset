@@ -13,7 +13,7 @@ import sunset.world.blocks.sandbox.SnMultiVoid;
 public class SnSandbox implements ContentList {
     public static Block
 
-    multiSource, multiVoid, darkMatterProcessor, darkMatterDisplay;
+    multiSource, multiVoid, superProcessor, superDisplay;
 
     @Override
     public void load() {
@@ -27,7 +27,7 @@ public class SnSandbox implements ContentList {
             hideDetails = false;
         }};
 
-        darkMatterProcessor = new LogicBlock("dark-matter-processor"){{
+        superProcessor = new LogicBlock("super-processor"){{
             requirements(Category.logic, BuildVisibility.sandboxOnly, ItemStack.empty);
 
             size = 1;
@@ -37,7 +37,7 @@ public class SnSandbox implements ContentList {
             hideDetails = false;
         }};
 
-        darkMatterDisplay = new LogicDisplay("dark-matter-display"){{
+        superDisplay = new LogicDisplay("super-display"){{
             requirements(Category.logic, BuildVisibility.sandboxOnly, ItemStack.empty);
 
             displaySize = 240;

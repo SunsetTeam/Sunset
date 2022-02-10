@@ -14,12 +14,12 @@ import sunset.world.blocks.defense.projectors.DeflectorProjector;
 import static mindustry.type.ItemStack.with;
 
 public class SnProjectors implements ContentList {
-    public static Block hugeRestoringProjector, forceDome, deflectorProjector;
+    public static Block hugeRestoringDome, forceDome, deflectorProjector;
 
     @Override
     public void load() {
 
-        hugeRestoringProjector = new RepairStation("huge-restoring-projector"){{
+        hugeRestoringDome = new RepairStation("huge-restoring-dome"){{
             requirements(Category.effect, with(Items.lead, 560, Items.titanium, 255, Items.silicon, 140, SnItems.nobium, 100));
             consumes.power(4.4f);
             size = 5;
