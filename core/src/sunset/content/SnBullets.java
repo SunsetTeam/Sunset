@@ -1897,19 +1897,19 @@ public class SnBullets implements ContentList {
             pierceCap = 5;
         }};
         //T6
-        giantHelicopterGun = new BasicBulletType(5f, 75) {{
-            hitSize = 5;
+        giantHelicopterGun = new BasicBulletType(6.4f, 75) {{
+            hitSize = 6;
             width = 17f;
             height = 24f;
-            lifetime = 55f;
+            lifetime = 49f;
             hitEffect = Fx.flakExplosion;
             shootEffect = Fx.shootSmall;
             smokeEffect = Fx.shootSmallSmoke;
         }};
         shrapnelCopterGun = new ShrapnelBulletType() {{
-            length = 180f;
+            length = 190f;
             width = 50f;
-            damage = 165;
+            damage = 170;
             serrationLenScl = 10f;
             serrationSpaceOffset = 70f;
             serrationFadeOffset = 0f;

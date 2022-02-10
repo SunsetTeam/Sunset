@@ -559,7 +559,7 @@ public class SnUnitTypes implements ContentList{
                 rotorRotateSpeed = -27f;
                 rotorCount = 3;
             }},
-            new Rotor("rotor-big") {{
+            new Rotor("rotor-big3") {{
                 offsetX = 0;
                 offsetY = 8;
                 rotorRotateSpeed = 28f;
@@ -612,8 +612,6 @@ public class SnUnitTypes implements ContentList{
             range = 170f;
 
             unitFallRotateSpeed = 3.7f;
-            smokeFx = Fx.fallSmoke;
-            burningFx = Fx.burning;
 
             rotors.add(
             new Rotor("rotor-small2") {{
@@ -696,8 +694,6 @@ public class SnUnitTypes implements ContentList{
             range = 175f;
 
             unitFallRotateSpeed = 3.1f;
-            smokeFx = Fx.fallSmoke;
-            burningFx = Fx.burning;
             rotors(
             new Rotor("rotor-medium2") {{
                 offsetX = -15;
@@ -809,8 +805,6 @@ public class SnUnitTypes implements ContentList{
             circleTarget = false;
 
             unitFallRotateSpeed = 2.6f;
-            smokeFx = Fx.fallSmoke;
-            burningFx = Fx.burning;
 
             rotors.add(
             new Rotor("rotor-medium") {{
@@ -842,6 +836,7 @@ public class SnUnitTypes implements ContentList{
             weapons.addAll(
             new WeaponExt("large-shrapnel-gun") {{
                 rotate = true;
+                rotateSpeed = 3f;
                 mirror = false;
                 x = 0f;
                 y = 45f;
@@ -885,6 +880,7 @@ public class SnUnitTypes implements ContentList{
             }},
             new WeaponExt("medium-energy-sphere-generator") {{
                 rotate = true;
+                rotateSpeed = 6f;
                 mirror = true;
                 shake = 2f;
                 x = 44f;
@@ -899,6 +895,7 @@ public class SnUnitTypes implements ContentList{
             }},
             new WeaponExt("medium-energy-sphere-generator") {{
                 rotate = true;
+                rotateSpeed = 6f;
                 mirror = true;
                 shake = 2f;
                 x = 30f;
@@ -1524,31 +1521,28 @@ public class SnUnitTypes implements ContentList{
                         engineX = 0f;
                         engineY = -5f;
                         engineSize = 3f;
-                        engineAngle = 180f;
                     }},
 
                     new Engine("small-engine") {{
                         engineX = 0f;
                         engineY = -14f;
                         engineSize = 1f;
-                        engineAngle = 140f;
                     }},
 
                     new Engine("small-engine") {{
                         engineX = 0f;
                         engineY = -10f;
                         engineSize = 3f;
-                        engineAngle = 0f;
+                        engineY1 = -10f;
+                        engineX1 = 3f;
                     }},
 
                     new Engine("small-engine") {{
                         engineX = 10f;
                         engineY = 5f;
                         engineSize = 2f;
-                        engineAngle = 220f;
                     }});
         }};
-
         //endregion other
     }
 }
