@@ -19,7 +19,8 @@ public class Engine {
     public float engineSize = 2.5f;
     public float engineX = 0f;
     public float engineY = -4f;
-    public float engineAngle = 180f;
+    public float engineX1 = 0f;
+    public float engineY1 = -4f;
     public @Nullable
     Color engineColor = null;
     public Color engineColorInner = Color.white;
@@ -46,8 +47,8 @@ public class Engine {
         );
         Draw.color(engineColorInner);
         Fill.circle(
-                unit.x + Angles.trnsx(unit.rotation - engineAngle, engineX  - 1f, engineY - 1f),
-                unit.y + Angles.trnsy(unit.rotation - engineAngle, engineX  - 1f, engineY - 1f),
+                unit.x + Angles.trnsx(unit.rotation - 90f, engineX1  - 1f, engineY1 - 1f),
+                unit.y + Angles.trnsy(unit.rotation - 90f, engineX1  - 1f, engineY1 - 1f),
                 (engineSize + Mathf.absin(Time.time, 2f, engineSize / 4f)) / 2f  * scale
         );
         Draw.color();
