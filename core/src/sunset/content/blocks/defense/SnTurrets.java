@@ -413,7 +413,6 @@ public class SnTurrets implements ContentList {
             shootSound = Sounds.flame;
             consumes.power(7f);
         }};
-
         field = new ModItemTurret("field") {{
             requirements(Category.turret, with(Items.copper, 1200, Items.lead, 800, Items.plastanium, 350, Items.thorium, 400, SnItems.fors, 400, SnItems.nobium, 300));
             ammo(
