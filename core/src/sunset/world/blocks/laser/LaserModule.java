@@ -15,7 +15,9 @@ public class LaserModule {
     /** links for block*/
     int maxLinks = 4;
     /** all input and output lasers */
-    public Seq<LaserBlockBuild> input, output;
+    public Seq<LaserLink> input, output;
+    /** Needs for saving */
+    public boolean init = false;
     public float in = 0f, out = 0f;
     public LaserBlockBuild self;
 
@@ -25,11 +27,24 @@ public class LaserModule {
         output = new Seq<>();
     }
 
+    public void init(){
+        init = true;
+        for (LaserLink l : input){
+            if(l.build == null)
+                l.build = (LaserBlockBuild) Vars.world.build(l.pos);
+        }
+        for (LaserLink l : output){
+            if(l.build == null)
+                l.build = (LaserBlockBuild) Vars.world.build(l.pos);
+        }
+    }
+
     public void update(){
         if(((LaserBlock)self.block).consumesLaser) {
             in = 0f;
             //get laser charge from all inputs
-            for (LaserBlockBuild b : input) {
+            for (LaserLink l : input) {
+                LaserBlockBuild b = (LaserBlockBuild) Vars.world.build(l.pos);
                 in += b.laserModule.out;
             }
         }
@@ -58,27 +73,39 @@ public class LaserModule {
     }
 
     public void addInput(LaserBlockBuild build){
-        input.add(build);
+        LaserLink l = new LaserLink(build.pos());
+        l.build = build;
+        input.add(l);
     }
 
     public void removeInput(LaserBlockBuild build){
-        input.remove(build);
+        input.remove(link -> {
+            return link.build == build;
+        });
     }
 
     public void addOutput(LaserBlockBuild build){
-        output.add(build);
+        LaserLink l = new LaserLink(build.pos());
+        l.build = build;
+        output.add(l);
     }
 
     public void removeOutput(LaserBlockBuild build){
-        output.remove(build);
+        output.remove(link -> {
+            return link.build == build;
+        });
     }
 
     public boolean inputHas(LaserBlockBuild build){
-        return input.contains(build);
+        return input.contains(link -> {
+            return link.build == build;
+        });
     }
 
     public boolean outputHas(LaserBlockBuild build){
-        return output.contains(build);
+        return output.contains(link -> {
+            return link.build == build;
+        });
     }
 
     public void linkTo(LaserBlockBuild acceptor){
@@ -107,45 +134,42 @@ public class LaserModule {
 
     //call this when destroy self
     public void clear(){
-        for (LaserBlockBuild inp : input){
-            if(inp != null)
-                inp.laserModule.removeOutput(self);
+        for (LaserLink inp : input){
+            inp.build.laserModule.removeOutput(self);
         }
-        for (LaserBlockBuild outp : output){
-            if (outp != null)
-                outp.laserModule.removeInput(self);
+        for (LaserLink outp : output){
+            outp.build.laserModule.removeInput(self);
         }
         Log.info("removing, inputs: @, outputs: @", input.size, output.size);
-//        throw null;
+        //throw null;
     }
 
-    //in case of reducing size of msav, write and read coordinates of blocks
     public void write(Writes w){
         Log.info("-----------\nWriting Laser module\nblockId: @", self.id);
         w.i(input.size);
-        for (LaserBlockBuild inp : input){
+        for (LaserLink l : input){
+            LaserBlockBuild inp = l.build;
             w.i(inp.pos());
             Log.info("input: @", inp.pos());
         }
         w.i(output.size);
-        for (LaserBlockBuild outp : output){
+        for (LaserLink l : output){
+            LaserBlockBuild outp = l.build;
             w.i(outp.pos());
-            Log.info("input: @", outp.pos());
+            Log.info("output: @", outp.pos());
         }
     }
 
     public void read(Reads r){
         //inputs
-        int size = r.i();
-        for (int i = 0; i < size; i++){
-            LaserBlockBuild inp = (LaserBlockBuild) Vars.world.build(r.i());
-            input.add(inp);
+        int inputSize = r.i();
+        for (int i = 0; i < inputSize; i++){
+            input.add(new LaserLink(r.i()));
         }
         //outputs
-        size=r.i();
-        for (int i = 0; i < size; i++){
-            LaserBlockBuild outp = (LaserBlockBuild) Vars.world.build(r.i());
-            output.add(outp);
+        int outputSize = r.i();
+        for (int i = 0; i < outputSize; i++) {
+            output.add(new LaserLink(r.i()));
         }
     }
 }

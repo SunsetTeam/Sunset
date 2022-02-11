@@ -45,7 +45,8 @@ public class LaserBlockDrawer {
         Draw.draw(Layer.blockOver, () -> {
             //todo rewrite 'if else if else if else if'
             float offset = self.block.offset;
-            for (LaserBlockBuild other : self.laserModule.input){
+            for (LaserLink l : self.laserModule.input){
+                LaserBlockBuild other = l.build;
                 //from right
                 if (self.x < other.x - offset) {
                     right = true;
@@ -69,7 +70,8 @@ public class LaserBlockDrawer {
             LaserBlockBuild start, end;
 
             //indicators for drawing edges and lenses
-            for (LaserBlockBuild other : self.laserModule.output) {
+            for (LaserLink l : self.laserModule.output) {
+                LaserBlockBuild other = l.build;
                 start = self;
                 end = other;
 

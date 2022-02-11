@@ -49,6 +49,8 @@ public class LaserBlock extends Block {
 
         @Override
         public void updateTile(){
+            if (!laserModule.init)
+                laserModule.init();
             laserModule.update();
         }
 

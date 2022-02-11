@@ -97,10 +97,12 @@ public class LaserNode extends LaserBlock{
         @Override
         public void drawConfigure(){
             Drawf.select(x, y, tile.block().size * Vars.tilesize / 2f + 2f, Pal.accent);
-            for (LaserBlockBuild link : laserModule.output){
+            for (LaserLink l : laserModule.output){
+                LaserBlockBuild link = l.build;
                 Drawf.select(link.x, link.y, link.block().size * Vars.tilesize / 2f + 2f + Mathf.absin(Time.time, 4f, 1f), Pal.place);
             }
-            for (LaserBlockBuild link : laserModule.input){
+            for (LaserLink l : laserModule.input){
+                LaserBlockBuild link = l.build;
                 Drawf.select(link.x, link.y, link.block().size * Vars.tilesize / 2f + 2f + Mathf.absin(Time.time, 4f, 1f), Pal.breakInvalid);
             }
         }
