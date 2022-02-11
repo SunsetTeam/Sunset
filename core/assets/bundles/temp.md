@@ -191,26 +191,26 @@
         //}
 
 
-package sunset.world.blocks.defense.turrets;
-
-import arc.graphics.Blending;
-import arc.graphics.g2d.Draw;
-import arc.graphics.g2d.TextureRegion;
-import arc.math.Interp;
-import arc.math.Mathf;
-import arc.util.Tmp;
-import mindustry.annotations.Annotations.Load;
-import mindustry.graphics.Layer;
-
-import static arc.Core.atlas;
-
-public class AnimationTurret360 extends Turret360{
-@Load("@-side-h-" + 2)
-public TextureRegion[] sideRegionsHorizontal = new TextureRegion[2];
-@Load("@-side-v-" + 2)
-public TextureRegion[] sideRegionsVertical = new TextureRegion[2];
-@Load("@-turret")
-public TextureRegion turretRegion;
+    package sunset.world.blocks.defense.turrets;
+    
+    import arc.graphics.Blending;
+    import arc.graphics.g2d.Draw;
+    import arc.graphics.g2d.TextureRegion;
+    import arc.math.Interp;
+    import arc.math.Mathf;
+    import arc.util.Tmp;
+    import mindustry.annotations.Annotations.Load;
+    import mindustry.graphics.Layer;
+    
+    import static arc.Core.atlas;
+    
+    public class AnimationTurret360 extends Turret360{
+    @Load("@-side-h-" + 2)
+    public TextureRegion[] sideRegionsHorizontal = new TextureRegion[2];
+    @Load("@-side-v-" + 2)
+    public TextureRegion[] sideRegionsVertical = new TextureRegion[2];
+    @Load("@-turret")
+    public TextureRegion turretRegion;
 
     public float pullTime = 60f, closeTime = 90f;
     //public float baseLightSpacing = 30f, holyLightDelay = 20f, holyLightSpacing = 10f;
@@ -275,46 +275,37 @@ public TextureRegion turretRegion;
 
 
     new WeaponExt("small-autocannon") {{
-    bullet = SnBullets.smallShell;
-    rotate = true;
-    top = true;
-    rotateSpeed = 30;
-    reload = 0.5f * Time.toSeconds;
-    shots = 1;
-    spacing = 15;
-    inaccuracy = 7;
-    x = 3.9f;
-    y = -3.5f;
-    shootCone = 3;
-    cooldownTime = 0.5f * Time.toSeconds;
-    ignoreRotation = true;
-    shootSound = Sounds.shoot;
-    shootStatus = StatusEffects.shocked;
+        bullet = SnBullets.smallShell;
+        rotate = true;
+        top = true;
+        rotateSpeed = 30;
+        reload = 0.5f * Time.toSeconds;
+        shots = 1;
+        spacing = 15;
+        inaccuracy = 7;
+        x = 3.9f;
+        y = -3.5f;
+        shootCone = 3;
+        cooldownTime = 0.5f * Time.toSeconds;
+        ignoreRotation = true;
+        shootSound = Sounds.shoot;
+        shootStatus = StatusEffects.shocked;
     }},
     new WeaponExt("mini-mortar") {{
-    bullet = new ArtilleryBulletType(4f, 30, "shell") {{
-    hitEffect = Fx.flakExplosion;
-    knockback = 0.8f;
-    lifetime = 40f;
-    width = 7;
-    height = 11f;
-    collidesTiles = false;
-    splashDamageRadius = 5f * Vars.tilesize;
-    splashDamage = 20f;
-    }};
-    rotate = true;
-    top = true;
-    rotateSpeed = 16;
-    reload = 3 * Time.toSeconds;
-    shots = 1;
-    spacing = 9;
-    inaccuracy = 3;
-    x = 0f;
-    y = 1f;
-    shootCone = 3;
-    cooldownTime = Time.toSeconds;
-    ignoreRotation = true;
-    shootSound = Sounds.artillery;
+        bullet = SnBullets.mortarBullet;
+        rotate = true;
+        top = true;
+        rotateSpeed = 16;
+        reload = 3 * Time.toSeconds;
+        shots = 1;
+        spacing = 9;
+        inaccuracy = 3;
+        x = 0f;
+        y = 1f;
+        shootCone = 3;
+        cooldownTime = Time.toSeconds;
+        ignoreRotation = true;
+        shootSound = Sounds.artillery;
     }}
 
     new WeaponExt("small-autocannon") {{

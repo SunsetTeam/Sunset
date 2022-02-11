@@ -1087,36 +1087,39 @@ public class SnUnitTypes implements ContentList{
             weapons.addAll(
             new WeaponExt("small-autocannon") {{
                 bullet = SnBullets.smallShell;
+                mirror = false;
                 rotate = true;
                 top = true;
-                rotateSpeed = 30;
+                rotateSpeed = 16;
                 reload = 0.5f * Time.toSeconds;
                 shots = 1;
                 spacing = 15;
                 inaccuracy = 7;
-                x = 3.9f;
-                y = -3.5f;
+                x = 0f;
+                y = 2.3f;
                 shootCone = 3;
                 cooldownTime = 0.5f * Time.toSeconds;
                 ignoreRotation = true;
                 shootSound = Sounds.shoot;
                 shootStatus = StatusEffects.shocked;
             }},
-            new WeaponExt("mini-mortar") {{
-                bullet = SnBullets.mortarBullet;
+            new WeaponExt("small-autocannon") {{
+                bullet = SnBullets.smallShell;
+                mirror = false;
                 rotate = true;
                 top = true;
                 rotateSpeed = 16;
-                reload = 3 * Time.toSeconds;
+                reload = 0.5f * Time.toSeconds;
                 shots = 1;
-                spacing = 9;
-                inaccuracy = 3;
+                spacing = 15;
+                inaccuracy = 7;
                 x = 0f;
-                y = 1f;
+                y = -4.3f;
                 shootCone = 3;
-                cooldownTime = Time.toSeconds;
+                cooldownTime = 0.5f * Time.toSeconds;
                 ignoreRotation = true;
-                shootSound = Sounds.artillery;
+                shootSound = Sounds.shoot;
+                shootStatus = StatusEffects.shocked;
             }}
             );
             constructor = UnitWaterMove::create;
@@ -1142,15 +1145,14 @@ public class SnUnitTypes implements ContentList{
                 mirror = true;
                 rotate = true;
                 top = true;
-                rotateSpeed = 30;
+                rotateSpeed = 6.7f;
                 reload = 45;
-                shots = 4;
-                spacing = 1;
+                shots = 3;
                 inaccuracy = 5;
+                shotDelay = 0.25f * Time.toSeconds;
                 x = 5.1f;
                 y = -3;
                 xRand = 5;
-                firstShotDelay = 0;
                 shootCone = 1;
                 cooldownTime = 0.09f * Time.toSeconds;
                 ignoreRotation = true;
@@ -1162,8 +1164,8 @@ public class SnUnitTypes implements ContentList{
                 mirror = false;
                 rotate = true;
                 top = false;
-                rotateSpeed = 30;
-                reload = 0.6f * Time.toSeconds;
+                rotateSpeed = 6.7f;
+                reload = 1.2f * Time.toSeconds;
                 shots = 1;
                 inaccuracy = 2;
                 x = 0;

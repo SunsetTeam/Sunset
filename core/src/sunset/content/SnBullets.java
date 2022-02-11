@@ -2169,7 +2169,6 @@ public class SnBullets implements ContentList {
         //endregion laser art
         //region torpedo
         smallTorpedo = new BasicBulletType(2, 120) {{
-            //sprite = "small-torpedo";
             lifetime = 1.4f * Time.toSeconds;
             drawSize = 9.2f;
             pierceCap = -1;
@@ -2188,8 +2187,8 @@ public class SnBullets implements ContentList {
             layer = Layer.scorch;
             splashDamage = 40;
             splashDamageRadius = 10 * Vars.tilesize;
-            width = 6f;
-            height = 12f;
+            width = 8f;
+            height = 13f;
         }};
         //endregion torpedo
         //endregion special
