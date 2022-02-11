@@ -142,6 +142,7 @@ public class SnBlocks implements ContentList{
                 targetAir = true;
                 unlocked = true;
                 alwaysUnlocked = true;
+                hideDetails = false;
             }};
             //endregion testing
             new MissileSiloCommander("launch-tower"){{

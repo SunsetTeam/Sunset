@@ -589,6 +589,15 @@ public class SnFx {
         Drawf.light(e.x, e.y, 5, Pal.meltdownHit, e.fout());
     }),//fanatic
 
+    //region yellow ships
+    acTrail = new Effect(50, e -> {
+        color(SnPal.yellowTrailBack);
+        Fill.circle(e.x, e.y, e.rotation * e.fout());
+        color(SnPal.yellowTrail);
+        Fill.circle(e.x, e.y, e.rotation * e.fout());
+    }),
+    //endregion yellow ships
+
     //region turrets 360
     redFlame = new Effect(20f, 95f, e -> {
         Draw.color(SnPal.redfire1, SnPal.redfire2, Pal.lightPyraFlame, e.fin());

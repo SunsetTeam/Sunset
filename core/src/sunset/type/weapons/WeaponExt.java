@@ -9,11 +9,14 @@ import sunset.ai.weapon.WeaponAI;
 /** Weapon with improvements: with its own AI, with reload processing, with the search for a mirror weapon. */
 public class WeaponExt extends CustomWeapon {
     public WeaponAI ai = new BaseWeaponAI();
+
     public WeaponExt(String name) {
         super(name);
     }
+    public WeaponExt() {
+    }
+    /** Returns the weapon that is mirrored to the given one. If mirror == false, then it will return null. */
     WeaponExt mirrorWeapon = this; //this - ещё не искалось, null - не было найдено
-    /** Returns the weapon that is mirrored to the given one. If mirror == false, then it will return null.*/
     public WeaponExt mirrorWeapon(Unit unit) {
         if(mirrorWeapon == this) {
             if(mirror) {
@@ -28,8 +31,8 @@ public class WeaponExt extends CustomWeapon {
         }
         return mirrorWeapon;
     }
-    protected long lastShootTime = 0;
     /** Is this weapon ready to fire? Considers the alternate variable. */
+    protected long lastShootTime = 0;
     protected boolean readyToShoot(Unit unit) {
         return (Time.millis() - lastShootTime > (reload / 60 * 1000))
                 && (!mirror || !alternate || Time.millis() - mirrorWeapon(unit).lastShootTime > reload / 60 * 500);

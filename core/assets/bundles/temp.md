@@ -1,11 +1,3 @@
-//1x1 4
-//2x2 6
-//3x3 7
-//4x4 7
-//5x5 5+1
-//6x6 3
-//7x7 1+1
-
     empHit = new Effect(35, e -> {
         randLenVectors(e.id, 6, 4f + e.fin() * 8f, (x, y) -> {
             Draw.color(Color.valueOf("7FFFD4"), Color.valueOf("32D0DC"), e.fin());
@@ -199,26 +191,26 @@
         //}
 
 
-package sunset.world.blocks.defense.turrets;
-
-import arc.graphics.Blending;
-import arc.graphics.g2d.Draw;
-import arc.graphics.g2d.TextureRegion;
-import arc.math.Interp;
-import arc.math.Mathf;
-import arc.util.Tmp;
-import mindustry.annotations.Annotations.Load;
-import mindustry.graphics.Layer;
-
-import static arc.Core.atlas;
-
-public class AnimationTurret360 extends Turret360{
-@Load("@-side-h-" + 2)
-public TextureRegion[] sideRegionsHorizontal = new TextureRegion[2];
-@Load("@-side-v-" + 2)
-public TextureRegion[] sideRegionsVertical = new TextureRegion[2];
-@Load("@-turret")
-public TextureRegion turretRegion;
+    package sunset.world.blocks.defense.turrets;
+    
+    import arc.graphics.Blending;
+    import arc.graphics.g2d.Draw;
+    import arc.graphics.g2d.TextureRegion;
+    import arc.math.Interp;
+    import arc.math.Mathf;
+    import arc.util.Tmp;
+    import mindustry.annotations.Annotations.Load;
+    import mindustry.graphics.Layer;
+    
+    import static arc.Core.atlas;
+    
+    public class AnimationTurret360 extends Turret360{
+    @Load("@-side-h-" + 2)
+    public TextureRegion[] sideRegionsHorizontal = new TextureRegion[2];
+    @Load("@-side-v-" + 2)
+    public TextureRegion[] sideRegionsVertical = new TextureRegion[2];
+    @Load("@-turret")
+    public TextureRegion turretRegion;
 
     public float pullTime = 60f, closeTime = 90f;
     //public float baseLightSpacing = 30f, holyLightDelay = 20f, holyLightSpacing = 10f;
@@ -279,4 +271,177 @@ public TextureRegion turretRegion;
         }
     }
 
-}
+    }
+
+
+    new WeaponExt("small-autocannon") {{
+        bullet = SnBullets.smallShell;
+        rotate = true;
+        top = true;
+        rotateSpeed = 30;
+        reload = 0.5f * Time.toSeconds;
+        shots = 1;
+        spacing = 15;
+        inaccuracy = 7;
+        x = 3.9f;
+        y = -3.5f;
+        shootCone = 3;
+        cooldownTime = 0.5f * Time.toSeconds;
+        ignoreRotation = true;
+        shootSound = Sounds.shoot;
+        shootStatus = StatusEffects.shocked;
+    }},
+    new WeaponExt("mini-mortar") {{
+        bullet = SnBullets.mortarBullet;
+        rotate = true;
+        top = true;
+        rotateSpeed = 16;
+        reload = 3 * Time.toSeconds;
+        shots = 1;
+        spacing = 9;
+        inaccuracy = 3;
+        x = 0f;
+        y = 1f;
+        shootCone = 3;
+        cooldownTime = Time.toSeconds;
+        ignoreRotation = true;
+        shootSound = Sounds.artillery;
+    }}
+
+    new WeaponExt("small-autocannon") {{
+    bullet = SnBullets.smallShell;
+    mirror = false;
+    rotate = true;
+    top = true;
+    rotateSpeed = 30;
+    reload = 0.5f * Time.toSeconds;
+    shots = 1;
+    spacing = 15;
+    inaccuracy = 7;
+    x = 0f;
+    y = 2.3f;
+    shootCone = 3;
+    cooldownTime = 0.5f * Time.toSeconds;
+    ignoreRotation = true;
+    shootSound = Sounds.shoot;
+    shootStatus = StatusEffects.shocked;
+    }},
+    new WeaponExt("small-autocannon") {{
+    bullet = SnBullets.smallShell;
+    mirror = false;
+    rotate = true;
+    top = true;
+    rotateSpeed = 30;
+    reload = 0.5f * Time.toSeconds;
+    shots = 1;
+    spacing = 15;
+    inaccuracy = 7;
+    x = 0f;
+    y = -4.3f;
+    shootCone = 3;
+    cooldownTime = 0.5f * Time.toSeconds;
+    ignoreRotation = true;
+    shootSound = Sounds.shoot;
+    shootStatus = StatusEffects.shocked;
+    }}
+
+    /*torpedo1 = new BasicBulletType(2, 120) {{
+    lifetime = 80;
+    drawSize = 9.2f;
+    pierceCap = -1;
+    inaccuracy = 1;
+    ammoMultiplier = 1;
+    reloadMultiplier = 3;
+    buildingDamageMultiplier = 0.9f;
+    recoil = 0;
+    pierce = true;
+    pierceBuilding = false;
+    shootEffect = smokeEffect = Fx.none;
+    collidesAir = absorbable = false;
+    keepVelocity = true;
+    trailColor = Pal.lightTrail;
+    collideFloor = true;
+    layer = Layer.scorch;
+    splashDamage = 40;
+    splashDamageRadius = 10 * Vars.tilesize;
+    }};
+    torpedo2 = new BasicBulletType(2, 140) {{
+    lifetime = 80;
+    drawSize = 9.2f;
+    pierceCap = -1;
+    inaccuracy = 1;
+    ammoMultiplier = 1;
+    reloadMultiplier = 3;
+    buildingDamageMultiplier = 0.9f;
+    recoil = 0;
+    pierce = true;
+    pierceBuilding = false;
+    shootEffect = smokeEffect = Fx.none;
+    collidesAir = absorbable = false;
+    trailColor = Pal.lightTrail;
+    keepVelocity = true;
+    collideFloor = true;
+    layer = Layer.scorch;
+    splashDamage = 60;
+    splashDamageRadius = 11.25f * Vars.tilesize;
+    }};
+    torpedo3 = new BasicBulletType(2, 280) {{
+    lifetime = 80;
+    drawSize = 9.2f;
+    pierceCap = -1;
+    inaccuracy = 1;
+    ammoMultiplier = 1;
+    reloadMultiplier = 3;
+    buildingDamageMultiplier = 0.9f;
+    recoil = 0;
+    pierce = true;
+    pierceBuilding = false;
+    shootEffect = smokeEffect = Fx.none;
+    collidesAir = absorbable = false;
+    trailColor = Pal.lightTrail;
+    keepVelocity = true;
+    collideFloor = true;
+    layer = Layer.scorch;
+    splashDamage = 60;
+    splashDamageRadius = 11.25f * Vars.tilesize;
+    }};
+    torpedo4 = new BasicBulletType(2, 500) {{
+    lifetime = 80;
+    drawSize = 9.2f;
+    pierceCap = -1;
+    inaccuracy = 1;
+    ammoMultiplier = 1;
+    reloadMultiplier = 3;
+    buildingDamageMultiplier = 0.9f;
+    recoil = 0;
+    pierce = true;
+    pierceBuilding = false;
+    shootEffect = smokeEffect = Fx.none;
+    collidesAir = absorbable = false;
+    trailColor = Pal.lightTrail;
+    keepVelocity = true;
+    collideFloor = true;
+    layer = Layer.scorch;
+    splashDamage = 60;
+    splashDamageRadius = 11.25f * Vars.tilesize;
+    }};
+    torpedo5 = new BasicBulletType(2, 690) {{
+    lifetime = 80;
+    drawSize = 9.2f;
+    pierceCap = -1;
+    inaccuracy = 1;
+    ammoMultiplier = 1;
+    reloadMultiplier = 3;
+    buildingDamageMultiplier = 0.9f;
+    recoil = 0;
+    pierce = true;
+    pierceBuilding = false;
+    shootEffect = smokeEffect = Fx.none;
+    collidesAir = absorbable = false;
+    trailColor = Pal.lightTrail;
+    keepVelocity = true;
+    collideFloor = true;
+    layer = Layer.scorch;
+    splashDamage = 60;
+    splashDamageRadius = 11.25f * Vars.tilesize;
+    }};*/

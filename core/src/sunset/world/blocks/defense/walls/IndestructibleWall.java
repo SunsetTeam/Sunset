@@ -19,6 +19,7 @@ public class IndestructibleWall extends Wall {
         chanceDeflect = 1;
         buildVisibility = BuildVisibility.sandboxOnly;
         category = Category.defense;
+        hideDetails = false;
     }
     public class IndestructibleBuild extends WallBuild implements ControlBlock {
         public @Nullable BlockUnitc unit;

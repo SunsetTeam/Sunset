@@ -9,7 +9,7 @@ import mma.ModVars;
 public class SnUnitType extends UnitType {
     public SnUnitType(String name) {
         super(name);
-        outlines= ModVars.packSprites;
+        outlines = ModVars.packSprites;
         if (constructor == null) {
             constructor = EntityMapping.map(name);
         }
@@ -18,7 +18,7 @@ public class SnUnitType extends UnitType {
     @Override
     public void load() {
         super.load();
-//        loadIcon();
+        //loadIcon();
         shadowRegion = Core.atlas.find(name + "-shadow", shadowRegion);
     }
 
