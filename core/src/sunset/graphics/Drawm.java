@@ -4,8 +4,10 @@ import arc.graphics.*;
 import arc.graphics.g2d.*;
 import arc.math.*;
 import arc.math.geom.*;
+import arc.scene.ui.layout.Scl;
 import arc.struct.*;
 import mindustry.graphics.*;
+import mindustry.ui.Fonts;
 
 import static arc.graphics.g2d.Draw.*;
 
@@ -37,5 +39,4 @@ public class Drawm{
         color(c1, c2, Mathf.sin(size));
         Fill.circle(x + bx, y + by, _size * miniRadius);
     }
-
 }
