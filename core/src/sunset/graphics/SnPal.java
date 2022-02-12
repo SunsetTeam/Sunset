@@ -16,7 +16,7 @@ public class SnPal {
     lightningHeal = Color.green,
     lightningDamage = Color.red,
 
-    //yellow trail
+    //yellow ships
     yellowTrailBack = Color.valueOf("FDF59A62"),
     yellowTrail = Color.valueOf("FDF59AFF"),
 
@@ -33,19 +33,19 @@ public class SnPal {
     copterLaserBack = Color.valueOf("ea8878"),
     copterLaser = Color.valueOf("feb380"),
 
-    //Poison bullets
+    //poison bullets
     poisonBulletBack = Color.valueOf("D6E7A5"),
     poisonBullet = Color.valueOf("F2FCD2"),
 
-    //Blue bullets
+    //blue bullets
     blueBullet = Color.valueOf("A4DAE7"),
     blueBulletBack = Color.valueOf("97E2A7"),
 
-    //Nobium bullets
+    //nobium bullets
     nobiumBullet = Color.valueOf("EDEDED"),
     nobiumBulletBack = Color.valueOf("E4E4E4"), //E1E1E1
 
-    //Enojie bullets
+    //enojie bullets
     enojieBullet = Color.valueOf("A4ECB3"),
     enojieBulletBack = Color.valueOf("98D5E3"),
 

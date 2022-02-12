@@ -1,9 +1,9 @@
 package sunset.world.blocks.environment;
 
-import arc.func.*;
-import mindustry.graphics.*;
-import mindustry.world.*;
-import mindustry.world.meta.*;
+import arc.func.Prov;
+import mindustry.graphics.MultiPacker;
+import mindustry.world.Block;
+import mindustry.world.meta.BuildVisibility;
 
 public class MockEnvironmentBlock extends Block{
     public Block replacement;
@@ -12,8 +12,10 @@ public class MockEnvironmentBlock extends Block{
         super(name);
         buildVisibility = BuildVisibility.debugOnly;
         inEditor = false;
-        outlineIcon=false;
-        minfo.mod=null;
+        outlineIcon = false;
+        minfo.mod = null;
+        description = "No";
+        details = "No";
     }
 
     @Override
@@ -23,7 +25,7 @@ public class MockEnvironmentBlock extends Block{
 
     @Override
     public void createIcons(MultiPacker packer){
-//        super.createIcons(packer);
+        //super.createIcons(packer);
     }
 
     @Override
@@ -34,7 +36,6 @@ public class MockEnvironmentBlock extends Block{
         if (replacement==null){
             throw new IllegalArgumentException("replacement cannot be null");
         }
-//        super.init();
-
+        //super.init();
     }
 }
