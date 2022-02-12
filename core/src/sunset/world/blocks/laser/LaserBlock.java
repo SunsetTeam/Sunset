@@ -37,10 +37,11 @@ public class LaserBlock extends Block {
     @Annotations.Load("@-edge1")
     public TextureRegion nodeEdgeLight;
 
-    protected static DateTimeFormatter dateTime = DateTimeFormatter.ofPattern("MM-dd-yyyy HH:mm:ss"),
-    autosaveDate = DateTimeFormatter.ofPattern("MM-dd-yyyy_HH-mm-ss");
+    //protected static DateTimeFormatter dateTime = DateTimeFormatter.ofPattern("MM-dd-yyyy HH:mm:ss"),
+    //autosaveDate = DateTimeFormatter.ofPattern("MM-dd-yyyy_HH-mm-ss");
     public LaserBlock(String name) {
         super(name);
+        clipSize = 500f;
     }
 
     public class LaserBlockBuild extends Building{

@@ -5,6 +5,7 @@ public class LaserConsumer extends LaserNode{
         super(name);
         consumesLaser = true;
         outputsLaser = false;
+        configurable = false;
     }
     public class LaserConsumerBuild extends LaserNodeBuild{
         //consume everything for now
