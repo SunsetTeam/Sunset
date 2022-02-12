@@ -21,7 +21,7 @@ public class SnLasers implements ContentList {
             requirements(Category.distribution, ItemStack.with(Items.copper, 1));
             size = 2;
             buildVisibility = BuildVisibility.sandboxOnly;
-
+            maxLinks = 8;
         }};
         laserSource = new LaserSource("laser-source"){{
             outputsLaser = true;

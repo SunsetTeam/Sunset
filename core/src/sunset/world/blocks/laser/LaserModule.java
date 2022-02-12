@@ -47,11 +47,11 @@ public class LaserModule {
                 LaserBlockBuild b = (LaserBlockBuild) Vars.world.build(l.pos);
                 in += b.laserModule.out;
             }
+            //consume
+            in -= self.getLaserConsumption();
         }
 
         if(((LaserBlock)self.block).outputsLaser){
-            //consume
-            in -= self.getLaserConsumption();
             //in no outputs mode we save output energy because block can't 'vaporize' light
             if (output.size > 0 || !(((LaserBlock)self.block).overheats))
                 out = 0f;
@@ -123,9 +123,11 @@ public class LaserModule {
             acceptor.laserModule.removeInput(self);
             return;
         }
-        //nothing other
-        addOutput(acceptor);
-        acceptor.laserModule.addInput(self);
+        //nothing other: link
+        if(checkFreeLinks() && acceptor.laserModule.checkFreeLinks()) {
+            addOutput(acceptor);
+            acceptor.laserModule.addInput(self);
+        }
     }
 
     public boolean checkFreeLinks(){

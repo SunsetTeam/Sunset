@@ -9,6 +9,7 @@ import mindustry.gen.Sounds;
 import mindustry.type.ItemStack;
 import mindustry.type.LiquidStack;
 import mindustry.world.meta.BlockFlag;
+import mindustry.world.meta.BlockStatus;
 
 //this class is slightly modified GenericCrafter
 public class LaserCrafter extends LaserBlock{
@@ -70,7 +71,16 @@ public class LaserCrafter extends LaserBlock{
         @Override
         public boolean consValid(){
             //if consValid and enough of laser energy
-            return super.consValid() && (consumesLaser ? laserModule.in >= 0 : true);
+            return super.consValid() && laserModule.in >= 0;
+        }
+
+        @Override
+        public BlockStatus status(){
+            if (cons.status() == BlockStatus.active){
+                if(laserModule.in < 0)
+                    return BlockStatus.noInput;
+            }
+            return cons.status();
         }
 
         @Override

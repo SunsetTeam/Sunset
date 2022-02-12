@@ -67,7 +67,7 @@ public class LaserBlock extends Block {
         @Override
         public void draw(){
             drawer.draw();
-            //Drawm.drawLabel(Tmp.v1.set(x + 8, y + 8), 0.23f, Pal.accent, Strings.format("Inputs: @\nOutputs: @\nInput laser: @\nOutput laser: @", laserModule.input.size, laserModule.output.size, laserModule.in, laserModule.out));
+            Drawm.drawLabel(Tmp.v1.set(x + 8, y + 8), 0.23f, Pal.accent, Strings.format("Inputs: @\nOutputs: @\nInput laser: @\nOutput laser: @", laserModule.input.size, laserModule.output.size, laserModule.in, laserModule.out));
         }
 
         // override by superclasses

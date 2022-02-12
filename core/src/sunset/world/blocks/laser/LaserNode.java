@@ -49,29 +49,23 @@ public class LaserNode extends LaserBlock{
         //check for laser consumption
         if(((LaserBlock) other.block).consumesLaser) {
             Log.info("Consumes laser");
-            //check for free links
-            if (build.laserModule.checkFreeLinks() && other.laserModule.checkFreeLinks()) {
-                Log.info("Has free links");
-                //check for staying in range
-                Tmp.v1.set(tx, ty);
-                Tmp.v2.set(ox, oy);
-                Tmp.v2.sub(Tmp.v1);
-                if (Tmp.v2.len() < range) {
-                    Log.info("In range");
-                    //check for staying on 'straight' line with other block
-                    float offset = Vars.tilesize / 2f * Math.max(build.block().size, other.block().size);
-                    if(Math.abs(ox - tx) < offset || Math.abs(oy - ty) < offset){
-                        Log.info("Link confirmed");
-                        return true;
-                    }
-                    else
-                        Log.info("Coordinates are not the same, x: @, y: @, ox: @, oy: @", tx, ty, ox, oy);
+            //check for staying in range
+            Tmp.v1.set(tx, ty);
+            Tmp.v2.set(ox, oy);
+            Tmp.v2.sub(Tmp.v1);
+            if (Tmp.v2.len() < range) {
+                Log.info("In range");
+                //check for staying on 'straight' line with other block
+                float offset = Vars.tilesize / 2f * Math.max(build.block().size, other.block().size);
+                if(Math.abs(ox - tx) < offset || Math.abs(oy - ty) < offset){
+                    Log.info("Link confirmed");
+                    return true;
                 }
                 else
-                    Log.info("Not in range");
+                    Log.info("Coordinates are not the same, x: @, y: @, ox: @, oy: @", tx, ty, ox, oy);
             }
             else
-                Log.info("Hasn't free links");
+                Log.info("Not in range");
         }
         else
             Log.info("Don't consume laser");

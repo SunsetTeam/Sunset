@@ -39,4 +39,24 @@ public class Drawm{
         color(c1, c2, Mathf.sin(size));
         Fill.circle(x + bx, y + by, _size * miniRadius);
     }
+
+    public static void drawLabel(Position pos, float textSize, Color color, String text){
+        Font font = Fonts.outline;
+        boolean ints = font.usesIntegerPositions();
+        font.getData().setScale(textSize / Scl.scl(1.0f));
+        font.setUseIntegerPositions(false);
+
+        font.setColor(color);
+
+        float z = Draw.z();
+        Draw.z(z+1.f);
+        FontCache cache = font.getCache();
+        cache.clear();
+        GlyphLayout layout = cache.addText(text, pos.getX(), pos.getY());
+        font.draw(text, pos.getX()- layout.width / 2f, pos.getY()- layout.height / 2f);
+        Draw.z(z);
+
+        font.setUseIntegerPositions(ints);
+        font.getData().setScale(1);
+    }
 }
