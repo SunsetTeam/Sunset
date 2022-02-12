@@ -13,6 +13,8 @@ import mindustry.graphics.Pal;
 import mindustry.io.TypeIO;
 import mindustry.world.Block;
 import mindustry.world.Tile;
+import mma.MMAMod;
+import mma.graphics.ADrawf;
 import sunset.graphics.Drawm;
 
 import java.time.*;
@@ -67,7 +69,7 @@ public class LaserBlock extends Block {
         @Override
         public void draw(){
             drawer.draw();
-            Drawm.drawLabel(Tmp.v1.set(x + 8, y + 8), 0.23f, Pal.accent, Strings.format("Inputs: @\nOutputs: @\nInput laser: @\nOutput laser: @", laserModule.input.size, laserModule.output.size, laserModule.in, laserModule.out));
+            ADrawf.drawText(x, y + 24, 0.24f, Pal.accent, Strings.format("Inputs: @\nOutputs: @\nInput laser: @\nOutput laser: @", laserModule.input.size, laserModule.output.size, laserModule.in, laserModule.out));
         }
 
         // override by superclasses
