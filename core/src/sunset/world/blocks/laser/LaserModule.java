@@ -66,10 +66,6 @@ public class LaserModule {
             if (output.size > 0)
                 out /= output.size;
         }
-
-        if (((LaserBlock)self.block).overheats && out > ((LaserBlock)self.block).maxCharge){
-            Damage.tileDamage(null, self.tileX(), self.tileY(), 1f, self.health);
-        }
     }
 
     public void addInput(LaserBlockBuild build){
@@ -142,6 +138,11 @@ public class LaserModule {
         float threshold = ((LaserBlock)self.block).maxCharge;
         threshold /= 2;
         return out / threshold;
+    }
+
+    //return charge for indicating in bars and for overheating
+    public float getCharge(){
+        return Math.max(in, out);
     }
 
     //call this when destroy self

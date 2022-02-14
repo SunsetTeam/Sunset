@@ -1,6 +1,5 @@
 package sunset.world.blocks.laser;
 
-import arc.Core;
 import arc.graphics.g2d.Draw;
 import arc.graphics.g2d.TextureRegion;
 import arc.math.Mathf;
@@ -10,12 +9,15 @@ import arc.util.Time;
 import arc.util.Tmp;
 
 import mindustry.Vars;
-import mindustry.annotations.Annotations;
 import mindustry.gen.Building;
+import mindustry.gen.Tex;
 import mindustry.graphics.Drawf;
 import mindustry.graphics.Layer;
 import mindustry.graphics.Pal;
+import mindustry.ui.Bar;
+import mma.ModVars;
 
+/** Laser node. Used for transfering lasers from block to block. */
 public class LaserNode extends LaserBlock{
     /** Enable range restrictions. */
     public boolean enableRange = true;
@@ -38,6 +40,28 @@ public class LaserNode extends LaserBlock{
             LaserBlockBuild build = (LaserBlockBuild) Vars.world.build(n);
             tile.laserModule.linkTo(build);
         });
+    }
+
+    @Override
+    public void setBars(){
+        super.setBars();
+        bars.add("laser-energy", (LaserBlockBuild entity) -> new Bar(()->{
+            return "Energy: " + entity.laserModule.getCharge() + "/" + maxCharge;
+        },
+        ()->{
+            if(entity.heat > 0f)
+                return Pal.health;
+
+            return Pal.accent;
+        },
+        ()->{
+            return entity.laserModule.getCharge() / ((LaserBlock)entity.block).maxCharge;
+        }));
+    }
+
+    @Override
+    public TextureRegion[] icons(){
+        return ModVars.packSprites ? new TextureRegion[]{nodeBase, nodeTop, nodeAllEdge} : new TextureRegion[]{region};
     }
     public boolean linkValid(LaserBlockBuild build, LaserBlockBuild other){
         //debug, sorry for mess
