@@ -134,6 +134,16 @@ public class LaserModule {
         return (input.size + output.size) < maxLinks;
     }
 
+    //this will be mostly used for drawing
+    //from 0f to 1f
+    public float getIntensity(){
+        if (out <= 0)
+            return 0;
+        float threshold = ((LaserBlock)self.block).maxCharge;
+        threshold /= 2;
+        return out / threshold;
+    }
+
     //call this when destroy self
     public void clear(){
         for (LaserLink inp : input){
