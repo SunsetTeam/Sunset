@@ -53,6 +53,13 @@ class SnStatusEffects : ContentList {
             damageMultiplier = 0.9f
             reloadMultiplier = 0.8f
         } //no sprite
+
+        radiation = statusEffect("radiation") {
+            speedMultiplier = 0.5f
+            damageMultiplier = 0.6f
+            reloadMultiplier = 0.4f
+            damageMultiplier = 10f;
+        } //no sprite
         electricalShort = statusEffect("electric-short") {
             effectChance = 100f
             speedMultiplier = 0f
@@ -204,6 +211,23 @@ class SnStatusEffects : ContentList {
             speedMultiplier = 0.97f
             damage = 5f
             color = Color.black
+
+            var draw = true
+            stacksDrawer = StacksDrawer { unit, stackIndex ->
+                if (draw) return@StacksDrawer
+                Vars.renderer.effectBuffer.begin()
+                draw = true
+                unit.draw()
+                draw = false
+                Vars.renderer.effectBuffer.end()
+                Draw.z((if (unit.isFlying) Layer.flyingUnit else Layer.groundUnit) + 1)
+                Draw.color(color, (stackIndex+1f) / maxStacks())
+                val wrap = Draw.wrap(Vars.renderer.effectBuffer.texture)
+                wrap.flip(false, true)
+                Draw.rect(wrap, Core.camera.position.x, Core.camera.position.y, Core.camera.width, Core.camera.height)
+                //Vars.renderer.effectBuffer.blit(Shaders.screenspace);
+                Draw.color()
+            }
         }
         //endregion stackable
     }
@@ -218,6 +242,7 @@ class SnStatusEffects : ContentList {
         lateinit var reloading: StatusEffect
         lateinit var viscous: StatusEffect
         lateinit var inferno: StatusEffect
+        lateinit var radiation: StatusEffect
 
         //only reactive
         lateinit var molecula: StatusEffect

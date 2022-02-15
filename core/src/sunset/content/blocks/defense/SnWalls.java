@@ -1,12 +1,17 @@
 package sunset.content.blocks.defense;
 
+import arc.util.Time;
 import mindustry.ctype.ContentList;
 import mindustry.type.Category;
+import mindustry.type.ItemStack;
 import mindustry.world.Block;
 import mindustry.world.blocks.defense.Wall;
+import mindustry.world.meta.BuildVisibility;
 import sunset.content.SnItems;
+import sunset.content.SnStatusEffects;
 import sunset.world.blocks.defense.walls.IndestructibleWall;
 import sunset.world.blocks.defense.walls.SnWall;
+import sunset.world.blocks.environment.RadiationDebris;
 
 import static mindustry.type.ItemStack.with;
 
@@ -16,6 +21,8 @@ public class SnWalls implements ContentList{
     forsWall, forsWallLarge,
     naturiteWall, naturiteWallLarge,
     enojiewall, enojieWallLarge,
+
+    radiationWallSmall,
 
     indestructibleWall, indestructibleWallLarge;
 
@@ -67,13 +74,25 @@ public class SnWalls implements ContentList{
             absorbLasers = true;
             schematicPriority = 10;
         }};
+
+        radiationWallSmall = new RadiationDebris("radiation-wall-small"){{
+            requirements(Category.defense, BuildVisibility.sandboxOnly, with(SnItems.planatrium, 6));
+            size = 2;
+            variants = 3;
+            buildCostMultiplier = 2f;
+            radiationStatus = SnStatusEffects.radiation;
+            radiationDuration = 5f * Time.toSeconds;
+            range = 20f;
+        }};
         //endregion
 
         indestructibleWall = new IndestructibleWall("indestructible-wall"){{
             size = 1;
+            placeableLiquid = true;
         }};
         indestructibleWallLarge = new IndestructibleWall("indestructible-wall-large"){{
             size = 2;
+            placeableLiquid = true;
         }};
     }
 

@@ -75,12 +75,10 @@ public class RepairStation extends MendProjector {
         }
 
         private void runHealing(){
-
             Units.nearby(team,x,y,realRange(),u->{
                 u.heal(repairHealth + phaseHeat * phaseBoost / 100f * efficiency());
                 Fx.heal.at(u.x, u.y, u.hitSize, baseColor);
             });
-
 
             indexer.eachBlock(this, realRange(), Building::damaged, other -> {
                 other.heal(other.maxHealth() * (healPercent + phaseHeat * phaseBoost) / 100f * efficiency());

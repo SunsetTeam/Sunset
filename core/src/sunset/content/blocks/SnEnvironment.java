@@ -20,7 +20,7 @@ public class SnEnvironment implements ContentList {
     //ores
     oreFors, orePlanatrium, oreFlameid, oreColdent,
 
-    //floors 
+    //floors
     crimsonGrass, crimsonDirt, crimsonSand, crimsonSwamp, crimsonMoss,
     crimsonSandWater, crimsonWater, crimsonDeepWater,
     crimsonSnow, crimsonIce, crimsonIceSnow,
@@ -166,7 +166,7 @@ public class SnEnvironment implements ContentList {
         granite = new Floor("granite") {{
             variants = 3;
             attributes.set(Attribute.water, -0.4f);
-            wall = crimsonPine;
+            wall = graniteWall;
         }};
 
         jadestone = new Floor("jadestone") {{
