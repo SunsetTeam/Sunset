@@ -10,20 +10,21 @@ import mindustry.type.ItemStack;
 import mindustry.type.LiquidStack;
 import mindustry.world.meta.BlockFlag;
 import mindustry.world.meta.BlockStatus;
+import mindustry.world.meta.StatUnit;
+import sunset.world.meta.SnStat;
 
-//this class is slightly modified GenericCrafter
+/** Slightly modified GenericCrafter for using lasers. */
 public class LaserCrafter extends LaserBlock{
     public @Nullable ItemStack outputItem;
     public @Nullable ItemStack[] outputItems;
     public @Nullable LiquidStack outputLiquid;
 
+    /** Craft time. In ticks. */
     public float craftTime = 80f;
     public Effect craftEffect = Fx.none;
     public Effect updateEffect = Fx.none;
     public float updateEffectChance = 0.04f;
     public float warmupSpeed = 0.019f;
-
-    public float laserConsumption = 0f;
 
     public LaserCrafter(String name) {
         super(name);

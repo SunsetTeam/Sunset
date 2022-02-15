@@ -1,11 +1,16 @@
 package sunset.world.blocks.laser;
 
 import arc.Core;
+import arc.graphics.Blending;
+import arc.graphics.Color;
 import arc.graphics.g2d.Draw;
 import arc.graphics.g2d.TextureRegion;
+import arc.math.Mathf;
+import arc.util.Time;
 import mindustry.Vars;
 import mindustry.graphics.Drawf;
 import mindustry.graphics.Layer;
+import mindustry.graphics.Pal;
 import sunset.world.blocks.laser.LaserBlock.LaserBlockBuild;
 
 /** Drawer class for LaserBlockBuild
@@ -136,19 +141,26 @@ public class LaserBlockDrawer {
                 ex = sx;
                 ey = end.y + endOffset;
             }
-            Drawf.laser(self.team, Core.atlas.find("minelaser"), Core.atlas.find("minelaser-end"), sx, sy, ex, ey, 0.75f + (start.block.size - 1) / 4f);
+            float scale = Mathf.clamp(self.laserModule.getIntensity() * 0.75f, 0f, 0.75f)  + (start.block.size - 1) / 4f + Mathf.sin(Time.time / 100f) * 0.1f;
+            if (self.laserModule.out <= 0)
+                scale = 0;
+            Drawf.laser(self.team, Core.atlas.find("minelaser"), Core.atlas.find("minelaser-end"), sx, sy, ex, ey, scale);
+            Drawf.light(null, sx, sy, ex, ey, scale * 8f, Pal.accent, 0.25f);
         }
-
+        Draw.color(Color.white, Color.red, self.heat);
         Draw.z(Layer.blockOver - 1f);
         drawLenses(top, right, left, down);
         drawEdges(!top, !right, !left, !down);
         Draw.z(z);
+        Draw.reset();
     }
 
     public void drawBase(){
+        Draw.color(Color.white, Color.red, self.heat);
         Draw.rect(baseRegion, self.x, self.y);
         if(topRegion != null)
             Draw.rect(topRegion, self.x, self.y);
+        Draw.reset();
     }
 
     public void drawEdges(boolean top, boolean right, boolean left, boolean down){

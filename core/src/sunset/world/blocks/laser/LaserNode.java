@@ -1,6 +1,5 @@
 package sunset.world.blocks.laser;
 
-import arc.Core;
 import arc.graphics.g2d.Draw;
 import arc.graphics.g2d.TextureRegion;
 import arc.math.Mathf;
@@ -10,12 +9,15 @@ import arc.util.Time;
 import arc.util.Tmp;
 
 import mindustry.Vars;
-import mindustry.annotations.Annotations;
 import mindustry.gen.Building;
+import mindustry.gen.Tex;
 import mindustry.graphics.Drawf;
 import mindustry.graphics.Layer;
 import mindustry.graphics.Pal;
+import mindustry.ui.Bar;
+import mma.ModVars;
 
+/** Laser node. Used for transfering lasers from block to block. */
 public class LaserNode extends LaserBlock{
     /** Enable range restrictions. */
     public boolean enableRange = true;
@@ -39,6 +41,28 @@ public class LaserNode extends LaserBlock{
             tile.laserModule.linkTo(build);
         });
     }
+
+    @Override
+    public void setBars(){
+        super.setBars();
+        bars.add("laser-energy", (LaserBlockBuild entity) -> new Bar(()->{
+            return "Energy: " + entity.laserModule.getCharge() + "/" + maxCharge;
+        },
+        ()->{
+            if(entity.heat > 0f)
+                return Pal.health;
+
+            return Pal.accent;
+        },
+        ()->{
+            return entity.laserModule.getCharge() / ((LaserBlock)entity.block).maxCharge;
+        }));
+    }
+
+    @Override
+    public TextureRegion[] icons(){
+        return ModVars.packSprites ? new TextureRegion[]{nodeBase, nodeTop, nodeAllEdge} : new TextureRegion[]{region};
+    }
     public boolean linkValid(LaserBlockBuild build, LaserBlockBuild other){
         //debug, sorry for mess
         Log.info("--------");
@@ -49,11 +73,11 @@ public class LaserNode extends LaserBlock{
         //check for laser consumption
         if(((LaserBlock) other.block).consumesLaser) {
             Log.info("Consumes laser");
-            //check for staying in range
+            //check for staying in range or ignore (bcz range was disabled)
             Tmp.v1.set(tx, ty);
             Tmp.v2.set(ox, oy);
             Tmp.v2.sub(Tmp.v1);
-            if (Tmp.v2.len() < range) {
+            if (Tmp.v2.len() < range || !enableRange) {
                 Log.info("In range");
                 //check for staying on 'straight' line with other block
                 float offset = Vars.tilesize / 2f * Math.max(build.block().size, other.block().size);
@@ -71,6 +95,7 @@ public class LaserNode extends LaserBlock{
             Log.info("Don't consume laser");
         return false;
     }
+    @Override
     public void drawPlace(int x, int y, int rotation, boolean valid){
         Draw.color(Pal.placing);
         //draw range if we can
@@ -83,13 +108,22 @@ public class LaserNode extends LaserBlock{
         public void drawSelect(){
             super.drawSelect();
             Draw.color(Pal.placing);
+            Draw.z(Layer.blockOver);
             //draw range if we can
             if(enableRange){
-                Drawf.circles(x * Vars.tilesize + offset, y * Vars.tilesize + offset, range);
+                Drawf.circles(x, y, range);
             }
+            Draw.reset();
         }
         @Override
         public void drawConfigure(){
+            Draw.color(Pal.placing);
+            Draw.z(Layer.blockOver);
+            //draw range if we can
+            if(enableRange){
+                Drawf.circles(x, y, range);
+            }
+            Draw.reset();
             Drawf.select(x, y, tile.block().size * Vars.tilesize / 2f + 2f, Pal.accent);
             for (LaserLink l : laserModule.output){
                 LaserBlockBuild link = l.build;
