@@ -3,7 +3,6 @@ package sunset.content.blocks.defense;
 import arc.util.Time;
 import mindustry.ctype.ContentList;
 import mindustry.type.Category;
-import mindustry.type.ItemStack;
 import mindustry.world.Block;
 import mindustry.world.blocks.defense.Wall;
 import mindustry.world.meta.BuildVisibility;
@@ -81,8 +80,6 @@ public class SnWalls implements ContentList{
             variants = 3;
             buildCostMultiplier = 2f;
             radiationStatus = SnStatusEffects.radiation;
-            radiationDuration = 5f * Time.toSeconds;
-            range = 20f;
         }};
         //endregion
 
