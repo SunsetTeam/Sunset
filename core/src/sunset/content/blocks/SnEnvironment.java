@@ -1,14 +1,17 @@
 package sunset.content.blocks;
 
-import arc.graphics.*;
+import arc.graphics.Color;
 import arc.util.Time;
-import mindustry.ctype.*;
 import mindustry.content.*;
+import mindustry.ctype.ContentList;
 import mindustry.entities.Effect;
-import mindustry.graphics.*;
-import mindustry.world.*;
-import mindustry.world.blocks.environment.*;
-import mindustry.world.meta.*;
+import mindustry.graphics.CacheLayer;
+import mindustry.world.Block;
+import mindustry.world.blocks.environment.Floor;
+import mindustry.world.blocks.environment.OreBlock;
+import mindustry.world.blocks.environment.StaticTree;
+import mindustry.world.blocks.environment.StaticWall;
+import mindustry.world.meta.Attribute;
 import sunset.content.SnItems;
 import sunset.content.SnLiquids;
 import sunset.content.SnStatusEffects;
@@ -30,6 +33,8 @@ public class SnEnvironment implements ContentList {
 
     orangeSand, stoneSand,
     obsidian, ash, burningAsh,
+
+    blablabla,
 
     //static walls 
     crimsonGrassWall, crimsonDirtWall, crimsonSandWall,
@@ -203,6 +208,8 @@ public class SnEnvironment implements ContentList {
             lightRadius = 28f;
             lightColor = Color.orange.cpy().a(0.15f);
         }};
+
+        blablabla = new TDFloor("blablabla");
         //endregion floors
         //region static walls
         crimsonGrassWall = new StaticWall("crimson-grass-wall") {{
@@ -279,32 +286,32 @@ public class SnEnvironment implements ContentList {
 
         //region hidden
         hotSlag1 = new MockEnvironmentBlock("hotSlag1") {{
-            replacement=Blocks.slag;
+            replacement = Blocks.slag;
             Color.valueOf(mapColor,"FD7738");
             //only for burnout planet generator
         }};
         hotSlag2 = new MockEnvironmentBlock("hotSlag2") {{
-            replacement=Blocks.slag;
+            replacement = Blocks.slag;
             Color.valueOf(mapColor,"FF6324");
             //only for burnout planet generator
         }};
         hotSlag3 = new MockEnvironmentBlock("hotSlag3") {{
-            replacement=Blocks.slag;
+            replacement = Blocks.slag;
             Color.valueOf(mapColor,"FF591A");
             //only for burnout planet generator
         }};
         glacier1 = new MockEnvironmentBlock("glacier1") {{
-            replacement=Blocks.snow;
+            replacement = Blocks.snow;
             Color.valueOf(mapColor,"5ECBD9");
             //only for rime planet generator
         }};
         glacier2 = new MockEnvironmentBlock("glacier2") {{
-            replacement=Blocks.ice;
+            replacement = Blocks.ice;
             Color.valueOf(mapColor,"94DDE6");
             //only for rime planet generator
         }};
         glacier3 = new MockEnvironmentBlock("glacier3") {{
-            replacement=Blocks.snow;
+            replacement = Blocks.snow;
             Color.valueOf(mapColor,"8AE4F0");
             //only for rime planet generator
         }};

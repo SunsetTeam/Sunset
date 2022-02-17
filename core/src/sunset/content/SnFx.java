@@ -500,13 +500,6 @@ public class SnFx {
         });
     }),
 
-    torpedoTrail = new Effect(30, e -> {
-        color(Color.lightGray);
-        randLenVectors(e.id, 15, 2 + e.fin() * 5, (x, y) -> {
-            Fill.circle(e.x + x, e.y + y, e.fin() * 1.9f);
-        });
-    }),
-
     hitReneubiteBullet = new Effect(14, e -> {
         color(Color.white, SnPal.renBlast1, e.fin());
 
@@ -590,9 +583,9 @@ public class SnFx {
     }),//fanatic
 
     //region yellow ships
-    acTrail = new Effect(50, e -> {
-        color(SnPal.yellowTrailBack);
-        Fill.circle(e.x, e.y, e.rotation * e.fout());
+    acTrail = new Effect(30, e -> {
+        /*color(SnPal.yellowTrailBack);
+        Fill.circle(e.x, e.y, e.rotation * e.fout());*/
         color(SnPal.yellowTrail);
         Fill.circle(e.x, e.y, e.rotation * e.fout());
     }),

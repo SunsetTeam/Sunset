@@ -888,6 +888,7 @@ public class SnTurrets implements ContentList {
             coolantUsage = 1.55f;
             //consumes.power(9.2f);
             powerUse = 9.2f;
+            burstSpacing = 5f;
         }};
         synthesis4 = new SynthesisTurret("synthesis-4") {{
             requirements(Category.turret, ItemStack.mult(synthesis1.requirements, 4));
@@ -915,6 +916,7 @@ public class SnTurrets implements ContentList {
             coolantUsage = 0.9f;
             //consumes.power(11.3f);
             powerUse = 11.3f;
+            burstSpacing = 2f;
         }};
         synthesis5 = new SynthesisTurret("synthesis-5") {{
             requirements(Category.turret, ItemStack.mult(synthesis1.requirements, 5));
@@ -943,6 +945,7 @@ public class SnTurrets implements ContentList {
             coolantUsage = 3.2f;
             //consumes.power(25);
             powerUse = 25;
+            burstSpacing = 3f;
         }};*/
         //endregion synthesis
     }
