@@ -10,32 +10,28 @@ import sunset.content.SnItems;
 import sunset.world.blocks.laser.*;
 
 public class SnLasers implements ContentList {
-    public static Block laserNode, laserSource, laserCrafter, laserGenerator, laserSuppressor;
+    public static Block laserNode, laserCrafter, laserGenerator, laserSuppressor;
     @Override
     public void load() {
         laserNode = new LaserNode("laser-node"){{
             consumesLaser = true;
             outputsLaser = true;
-            //todo
-            localizedName = "Laser node";
             requirements(Category.distribution, ItemStack.with(Items.copper, 1));
             size = 2;
             buildVisibility = BuildVisibility.sandboxOnly;
-
+            maxLinks = 8;
         }};
+        /*
         laserSource = new LaserSource("laser-source"){{
             outputsLaser = true;
             consumesLaser = false;
             overheats = false;
-            //todo
-            localizedName = "Laser source";
             requirements(Category.distribution, ItemStack.with(Items.copper, 1));
             size = 1;
             buildVisibility = BuildVisibility.sandboxOnly;
         }};
+         */
         laserCrafter = new LaserCrafter("laser-crafter"){{
-            //todo
-            localizedName = "Laser crafter";
             requirements(Category.distribution, ItemStack.with(Items.copper, 1));
             size = 1;
             buildVisibility = BuildVisibility.sandboxOnly;
@@ -48,8 +44,6 @@ public class SnLasers implements ContentList {
             outputItem = new ItemStack(Items.graphite, 1);
         }};
         laserGenerator = new LaserGenerator("laser-starter"){{
-            //todo
-            localizedName = "Laser starter";
             requirements(Category.distribution, ItemStack.with(Items.copper, 1));
             size = 2;
             maxLinks = 8;
@@ -63,8 +57,6 @@ public class SnLasers implements ContentList {
             consumes.power(30f);
         }};
         laserSuppressor = new LaserConsumer("laser-suppressor"){{
-            //todo
-            localizedName = "Laser suppressor";
             requirements(Category.distribution, ItemStack.with(Items.copper, 1));
             size = 2;
             buildVisibility = BuildVisibility.sandboxOnly;

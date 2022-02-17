@@ -47,11 +47,11 @@ public class LaserModule {
                 LaserBlockBuild b = (LaserBlockBuild) Vars.world.build(l.pos);
                 in += b.laserModule.out;
             }
+            //consume
+            in -= self.getLaserConsumption();
         }
 
         if(((LaserBlock)self.block).outputsLaser){
-            //consume
-            in -= self.getLaserConsumption();
             //in no outputs mode we save output energy because block can't 'vaporize' light
             if (output.size > 0 || !(((LaserBlock)self.block).overheats))
                 out = 0f;
@@ -65,10 +65,6 @@ public class LaserModule {
 
             if (output.size > 0)
                 out /= output.size;
-        }
-
-        if (((LaserBlock)self.block).overheats && out > ((LaserBlock)self.block).maxCharge){
-            Damage.tileDamage(null, self.tileX(), self.tileY(), 1f, self.health);
         }
     }
 
@@ -123,13 +119,30 @@ public class LaserModule {
             acceptor.laserModule.removeInput(self);
             return;
         }
-        //nothing other
-        addOutput(acceptor);
-        acceptor.laserModule.addInput(self);
+        //nothing other: link
+        if(checkFreeLinks() && acceptor.laserModule.checkFreeLinks()) {
+            addOutput(acceptor);
+            acceptor.laserModule.addInput(self);
+        }
     }
 
     public boolean checkFreeLinks(){
         return (input.size + output.size) < maxLinks;
+    }
+
+    //this will be mostly used for drawing
+    //from 0f to 1f
+    public float getIntensity(){
+        if (out <= 0)
+            return 0;
+        float threshold = ((LaserBlock)self.block).maxCharge;
+        threshold /= 2;
+        return out / threshold;
+    }
+
+    //return charge for indicating in bars and for overheating
+    public float getCharge(){
+        return Math.max(in, out);
     }
 
     //call this when destroy self

@@ -579,7 +579,7 @@ public class SnTurrets implements ContentList {
             shootShake = 5f;
             range = 50f * Vars.tilesize;
             reloadTime = 5f * Time.toSeconds;
-            shootDuration = 10f * Time.toSeconds;
+            shootDuration = 11f * Time.toSeconds;
             restitution = 0.01f;
             cooldown = 0.05f;
             heatColor = Pal.turretHeat;
@@ -596,7 +596,7 @@ public class SnTurrets implements ContentList {
                 hitEffect = Fx.hitMeltdown;
                 hitColor = Pal.meltdownHit;
                 status = SnStatusEffects.incineration;
-                statusDuration = 5f * Time.toSeconds;
+                statusDuration = 9f * Time.toSeconds;
 
                 lightning = 1;
                 lightningDamage = 40;
