@@ -36,14 +36,13 @@ public class RadiationDebris extends Wall {
 
     public class RadiationDebrisBuild extends Building implements Ranged {
         Unit unit;
-        public Posc posc;
 
         public float range() {
             return range;
         }
 
         public void updateTile() {
-            if (unit.inRange(posc)) unit.apply(radiationStatus, radiationDuration);
+            unit.apply(radiationStatus, radiationDuration);
         }
 
         @Override

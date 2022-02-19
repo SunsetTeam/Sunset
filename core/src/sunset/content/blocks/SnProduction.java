@@ -6,6 +6,8 @@ import mindustry.type.*;
 import mindustry.world.*;
 import mindustry.world.blocks.production.*;
 import mindustry.world.draw.*;
+import mindustry.world.meta.Attribute;
+import mindustry.world.meta.Env;
 import sunset.content.*;
 import sunset.type.blocks.*;
 import sunset.world.blocks.production.raw.*;
@@ -15,6 +17,8 @@ import static mindustry.type.ItemStack.*;
 /** This category is for blocks that produce raw products. (Such as cultivator, drill etc.) */
 public class SnProduction implements ContentList{
     public static Block
+    //pumps
+    mechanicalWaterExtractor,
     //crafters
     advancedCultivator,
 
@@ -26,6 +30,19 @@ public class SnProduction implements ContentList{
 
     @Override
     public void load(){
+        mechanicalWaterExtractor = new SolidPump("mechanical-water-extractor"){{
+            requirements(Category.production, with(Items.metaglass, 30, Items.graphite, 30, Items.lead, 30, SnItems.fors, 30));
+            result = SnLiquids.burheyna;
+            pumpAmount = 0.12f;
+            size = 2;
+            liquidCapacity = 35f;
+            rotateSpeed = 1.5f;
+            attribute = SnAttribute.burheyna;
+            envRequired |= Env.groundWater;
+
+            consumes.power(2f);
+        }};
+
         //region crafters
         advancedCultivator = new AttributeCrafter("advanced-cultivator"){{
             requirements(Category.production, with(Items.copper, 200, Items.lead, 200, Items.silicon, 180, Items.metaglass, 140, Items.titanium, 170, Items.phaseFabric, 155));

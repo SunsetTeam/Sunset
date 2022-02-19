@@ -9,6 +9,7 @@ import mindustry.graphics.*;
 import mindustry.world.*;
 import mindustry.world.blocks.environment.*;
 import mindustry.world.meta.*;
+import sunset.content.SnAttribute;
 import sunset.content.SnItems;
 import sunset.content.SnLiquids;
 import sunset.content.SnStatusEffects;
@@ -154,24 +155,24 @@ public class SnEnvironment implements ContentList {
             variants = 3;
             dragMultiplier = 0.25f;
             speedMultiplier = 0.85f;
-            attributes.set(Attribute.water, 0.38f);
+            attributes.set(SnAttribute.burheyna, 0.38f);
             wall = crimsonIceWall;
         }};
         crimsonIceSnow = new Floor("crimson-icesnow") {{
             variants = 3;
             dragMultiplier = 0.55f;
-            attributes.set(Attribute.water, 0.28f);
+            attributes.set(SnAttribute.burheyna, 0.28f);
         }};
 
         granite = new Floor("granite") {{
             variants = 3;
-            attributes.set(Attribute.water, -0.4f);
+            attributes.set(SnAttribute.burheyna, -0.4f);
             wall = graniteWall;
         }};
 
         jadestone = new Floor("jadestone") {{
             variants = 3;
-            attributes.set(Attribute.water, -0.1f);
+            attributes.set(SnAttribute.burheyna, -0.1f);
             wall = jadestoneWall;
         }};
 
