@@ -32,6 +32,7 @@ public class ModItemTurret extends ItemTurret {
     public BulletType powerBullet;
     public boolean debug = false;
     public int chargeShots;
+    public boolean reloadBar = true;
 
     public ModItemTurret(String name) {
         super(name);
@@ -46,11 +47,13 @@ public class ModItemTurret extends ItemTurret {
     @Override
     public void setBars() {
         super.setBars();
-        SnVars.settings.registerReloadBarBlock(this, (ItemTurretBuild entity) -> new Bar(
-                () -> Core.bundle.format("bar.sunset-reload", Utils.stringsFixed(Mathf.clamp(entity.reload / reloadTime) * 100f)),
-                () -> entity.team.color,
-                () -> Mathf.clamp(entity.reload / reloadTime)
-        ));
+        if (reloadBar) {
+            SnVars.settings.registerReloadBarBlock(this, (ItemTurretBuild entity) -> new Bar(
+                    () -> Core.bundle.format("bar.sunset-reload", Utils.stringsFixed(Mathf.clamp(entity.reload / reloadTime) * 100f)),
+                    () -> entity.team.color,
+                    () -> Mathf.clamp(entity.reload / reloadTime)
+            ));
+        }
     }
 
     @Override

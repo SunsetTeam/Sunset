@@ -17,6 +17,7 @@ import static mindustry.Vars.tilesize;
  * 2)
  * */
 public class ModLaserTurret extends LaserTurret {
+    public boolean reloadBar = true;
 
     public ModLaserTurret(String name) {
         super(name);
@@ -31,10 +32,12 @@ public class ModLaserTurret extends LaserTurret {
     @Override
     public void setBars() {
         super.setBars();
-        SnVars.settings.registerReloadBarBlock(this,(LaserTurretBuild entity) -> new Bar(
-                () -> Core.bundle.format("bar.sunset-reload", Utils.stringsFixed(Mathf.clamp(entity.reload / reloadTime) * 100f)),
-                () -> entity.team.color,
-                () -> Mathf.clamp(entity.reload / reloadTime)
-        ));
+        if (reloadBar) {
+            SnVars.settings.registerReloadBarBlock(this,(LaserTurretBuild entity) -> new Bar(
+                    () -> Core.bundle.format("bar.sunset-reload", Utils.stringsFixed(Mathf.clamp(entity.reload / reloadTime) * 100f)),
+                    () -> entity.team.color,
+                    () -> Mathf.clamp(entity.reload / reloadTime)
+            ));
+        }
     }
 }
