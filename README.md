@@ -18,9 +18,41 @@ Sprites: Saigo no-nozomi, MissionaryPoseBest, Snake, Mak, NotTheGrawxz, Toxin\
 Sounds: King-Silicon\
 Ost: Saigo no-nozomi\
 Maps: Saigo no-nozomi\
-Plot: Tabyretka
 
 # Contributors
-Darkness, Def-Try\
+Darkness, Def-Try, Tabyretka\
+
+# PC Build Guide
+
+* 1.Download intelijIDEA.
+
+* 2.Clone this repository.
+
+* 3.When importing is end, go to Intelij console and type:
+
+Windows      |  MacOSX       | Linux
+------------ | ------------- | -------------
+gradlew jar  | ./gradlew jar | ./gradlew jar
+
+* 4.When compilation is end, your build will be in "build/libs"
+Download
+
+# Android Build Guide
+
+* 1.Download intelijIDEA.
+
+* 2.Download `Build-Tools 30.0.1`
+
+* 3.Clone this repository.
+
+* 4.When importing is end, go to Intelij console and type:
+   
+Windows      |  MacOSX       | Linux
+------------ | ------------- | -------------
+gradlew deploy  | ./gradlew deploy | ./gradlew deploy
+
+* 5.When compilation is end, your build will be in "build/libs"
+Download
+
 
 
