@@ -1,11 +1,13 @@
 package sunset.content;
 
+import arc.func.Cons;
 import arc.graphics.Color;
 import arc.graphics.g2d.Draw;
 import arc.graphics.g2d.Fill;
 import arc.math.Angles;
 import arc.math.geom.Vec2;
 import arc.util.Time;
+import arc.util.Tmp;
 import mindustry.Vars;
 import mindustry.content.*;
 import mindustry.ctype.ContentList;
@@ -14,13 +16,17 @@ import mindustry.entities.bullet.*;
 import mindustry.gen.Bullet;
 import mindustry.gen.Sounds;
 import mindustry.gen.Unit;
+import mindustry.gen.Unitc;
 import mindustry.graphics.Layer;
 import mindustry.graphics.Pal;
+import mindustry.world.blocks.defense.turrets.Turret.TurretBuild;
 import sunset.entities.bullet.*;
 import sunset.graphics.SnPal;
 import sunset.type.StackableStatusEffect;
+import sunset.utils.Utils.Targeting;
 
 public class SnBullets implements ContentList {
+    public static Cons<Bullet> posHoming;
     //region definitions
     public static BulletType
         //standard
@@ -92,6 +98,27 @@ public class SnBullets implements ContentList {
 
     @Override
     public void load() {
+
+        posHoming = bullet -> {
+            if(bullet.fdata() != 1 && bullet.collided.size < 2){
+                Tmp.v1.set(bullet.x, bullet.y);
+                if(bullet.owner instanceof TurretBuild) {
+                    Tmp.v1.set(((TurretBuild) bullet.owner).targetPos.x, ((TurretBuild) bullet.owner).targetPos.y);
+                }
+                else if (bullet.owner instanceof Unitc){
+                    Tmp.v1.set(((Unitc) bullet.owner).aimX(), ((Unitc) bullet.owner).aimY());
+                }
+                else if(bullet.owner instanceof Targeting){
+                    Tmp.v1.set(((Targeting) bullet.owner).targetPos());
+                }
+                bullet.vel.setAngle(Angles.moveToward(bullet.rotation(), bullet.angleTo(Tmp.v1.x, Tmp.v1.y), Time.delta * 261f * bullet.fin()));
+                //stop homing in after reaching cursor
+                if(bullet.within(Tmp.v1.x, Tmp.v1.y, bullet.hitSize)){
+                    bullet.fdata = 1;
+                }
+            }
+        };
+
         //region shell
         //region standard
         heavyStandardDense = new BasicBulletType(8f, 105, "bullet") {{
@@ -1699,7 +1726,6 @@ public class SnBullets implements ContentList {
         //endregion flame
         //region reverse-bullets
         naturiteReversBullet = new ReverseBulletType(3f, 40f) {{
-            reloadMultiplier = 0.90f;
             width = 15;
             height = 14;
             lifetime = 130;
@@ -1708,14 +1734,15 @@ public class SnBullets implements ContentList {
             trailWidth = 0;
             trailLength = 0;
             rotateVisualMag = 0.6f;
-            rotScaleMin = 0.2f;
+            rotScaleMin = 0.3f;
+            rotateMag = 1.3f;
             rotScaleMax = 1f;
             rotateRight = false;
             reverseRotScale = false;
             hitEffect = Fx.hitFuse;
             despawnEffect = Fx.smeltsmoke;
-            frontColor = SnPal.yellowTrail;
-            backColor = SnPal.yellowTrailBack;
+            frontColor = SnPal.copterLaser;
+            backColor = SnPal.copterLaserBack;
             drag = 0.008f;
             pierceCap = 4;
         }};
