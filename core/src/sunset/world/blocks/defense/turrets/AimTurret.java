@@ -1,15 +1,14 @@
 package sunset.world.blocks.defense.turrets;
 
 import mindustry.gen.Posc;
-import mindustry.world.blocks.defense.turrets.ItemTurret;
 
-public class AimTurret extends ItemTurret {
+public class AimTurret extends ModItemTurret {
 
     public AimTurret(String name) {
         super(name);
     }
 
-    public class AimTurretBuild extends ItemTurretBuild{
+    public class AimTurretBuild extends ModItemTurretBuild{
 
         @Override
         public void updateTile() {

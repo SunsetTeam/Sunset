@@ -373,13 +373,12 @@ public class SnTurrets implements ContentList {
             health = 3000;
             size = 4;
             shots = 5;
-            reloadTime = 8f * Time.toSeconds;
-            range = 20 * Vars.tilesize;;
+            reloadTime = 4f * Time.toSeconds;
+            range = 160;
             recoilAmount = 4f;
             cooldown = 0.03f;
-            inaccuracy = 6f;
+            inaccuracy = 3f;
             rotateSpeed = 4f;
-            shootCone = 4f;
             shootSound = Sounds.missile;
             ammoUseEffect = Fx.casing1;
             targetAir = true;

@@ -488,22 +488,23 @@ public class SnBullets implements ContentList {
         }};
         //endregion  standard
         //region rocket
-        nobiumAimMissile = new MissileBulletType(3, 40){{
+        nobiumAimMissile = new BasicBulletType(3, 40){{
             despawnEffect = Fx.fireSmoke;
             hitEffect = Fx.fire;
-            incendAmount = 10;
+            incendAmount = 7;
             status = StatusEffects.burning;
             statusDuration = 5 * Time.toSeconds;
-            maxRange = 20 * Vars.tilesize;
+            maxRange = 160;
             width = 8;
             height = 10;
             hitSize = 12;
-            lifetime = 10f * Time.toSeconds;
+            lifetime = 150;
             homingPower = 0.15f;
             homingRange = 0;
             homingDelay = 35;
             hitEffect = Fx.hitFuse;
-            trailLength = 0;
+            trailWidth = 2f;
+            trailLength = 2;
             weaveScale = 4;
             weaveMag = 3;
             knockback = 3;
