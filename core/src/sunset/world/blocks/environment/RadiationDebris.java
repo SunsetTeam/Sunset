@@ -3,7 +3,9 @@ package sunset.world.blocks.environment;
 import arc.Core;
 import arc.util.Time;
 import arc.util.Tmp;
+import mindustry.content.Fx;
 import mindustry.content.StatusEffects;
+import mindustry.entities.Units;
 import mindustry.gen.*;
 import mindustry.graphics.Drawf;
 import mindustry.logic.Ranged;
@@ -35,14 +37,25 @@ public class RadiationDebris extends Wall {
     }
 
     public class RadiationDebrisBuild extends Building implements Ranged {
-        Unit unit;
 
         public float range() {
             return range;
         }
 
+        @Override
         public void updateTile() {
-            unit.apply(radiationStatus, radiationDuration);
+            Units.nearby(team,x,y,range(), u->{
+                u.apply(radiationStatus, radiationDuration);
+            });
+
+            Units.nearbyEnemies(team,x,y,range(), u->{
+                u.apply(radiationStatus, radiationDuration);
+            });
+
+            Units.nearby(team,x,y,range(), u->{
+                u.apply(radiationStatus, radiationDuration);
+            });
+            
         }
 
         @Override

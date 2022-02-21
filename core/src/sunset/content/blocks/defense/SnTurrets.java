@@ -40,10 +40,10 @@ public class SnTurrets implements ContentList {
     excellence, carbine, pulsation, reflection,
 
     //3x3
-    major, burner, trigger, eternity,
+    major, burner, eternity, hemrus, trigger,
 
     //4x4
-    admiral, scorpio, flood, chain,
+    admiral, scorpio, ammirus, flood, chain,
 
     //5x5
     pressure, field, sniper, fanatic, defibrillator,
@@ -275,6 +275,23 @@ public class SnTurrets implements ContentList {
             targetAir = true;
             shootSound = Sounds.flame;
         }};
+        hemrus = new ReverseTurret("hemrus") {{
+            requirements(Category.turret, with(SnItems.fors, 250, Items.plastanium, 90, Items.graphite, 60));
+            ammo(
+                    SnItems.naturite, SnBullets.smallPlastaniumBullet
+            );
+            health = 1780;
+            size = 3;
+            range = 225f;
+            reloadTime = 40f;
+            recoilAmount = 4f;
+            inaccuracy = 2f;
+            rotateSpeed = 4.6f;
+            shootCone = 25f;
+            shots = 1;
+            shootShake = 2f;
+            shootSound = Sounds.shootBig;
+        }};
         trigger = new PowerTurret("trigger") {{
             requirements(Category.turret, with(Items.silicon, 275, Items.titanium, 125, SnItems.enojie, 45));
             size = 3;
@@ -343,6 +360,27 @@ public class SnTurrets implements ContentList {
             rotateSpeed = 5f;
             shootCone = 3f;
             shootSound = Sounds.flame;
+            ammoUseEffect = Fx.casing1;
+            targetAir = true;
+            targetGround = true;
+        }};
+
+        ammirus = new AimTurret("ammirus") {{
+            requirements(Category.turret, with(Items.copper, 700, SnItems.fors, 570, Items.plastanium, 475, SnItems.nobium, 470));
+            ammo(
+                    SnItems.nobium, SnBullets.nobiumAimMissile
+            );
+            health = 3000;
+            size = 4;
+            shots = 5;
+            reloadTime = 8f * Time.toSeconds;
+            range = 20 * Vars.tilesize;;
+            recoilAmount = 4f;
+            cooldown = 0.03f;
+            inaccuracy = 6f;
+            rotateSpeed = 4f;
+            shootCone = 4f;
+            shootSound = Sounds.missile;
             ammoUseEffect = Fx.casing1;
             targetAir = true;
             targetGround = true;

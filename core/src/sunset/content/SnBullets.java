@@ -35,7 +35,7 @@ public class SnBullets implements ContentList {
         machineBullet, bigMachineBullet,
         smallShell,
         //rocket
-        smallBlueMissile, smallEnojieMissile, mediumEnojieMissile,
+        nobiumAimMissile, smallBlueMissile, smallEnojieMissile, mediumEnojieMissile,
         powerRocket,
         thoriumPowerRocket, forsPowerRocket,//todo: use this
         //artillery
@@ -68,6 +68,8 @@ public class SnBullets implements ContentList {
         //flame
         heavyCoalFlame, heavyPyraFlame, flameidFlame,
         wheel5Flame,
+        //reverse-bullets
+        naturiteReversBullet,
         infernoFlame,//todo: use this
         //copters
         basicHelicopterGun,
@@ -486,6 +488,27 @@ public class SnBullets implements ContentList {
         }};
         //endregion  standard
         //region rocket
+        nobiumAimMissile = new MissileBulletType(3, 40){{
+            despawnEffect = Fx.fireSmoke;
+            hitEffect = Fx.fire;
+            incendAmount = 10;
+            status = StatusEffects.burning;
+            statusDuration = 5 * Time.toSeconds;
+            maxRange = 20 * Vars.tilesize;
+            width = 8;
+            height = 10;
+            hitSize = 12;
+            lifetime = 10f * Time.toSeconds;
+            homingPower = 0.15f;
+            homingRange = 0;
+            homingDelay = 35;
+            hitEffect = Fx.hitFuse;
+            trailLength = 0;
+            weaveScale = 4;
+            weaveMag = 3;
+            knockback = 3;
+            drag = 0.0015f;
+        }};
         smallBlueMissile = new BasicBulletType(5f, 15, "missile") {{//yes
             shrinkX = 0f;
             shrinkY = 0f;
@@ -1673,6 +1696,30 @@ public class SnBullets implements ContentList {
             colorTo = Pal.lightPyraFlame;*/
         }};
         //endregion flame
+        //region reverse-bullets
+        naturiteReversBullet = new ReverseBulletType(3f, 40f) {{
+            reloadMultiplier = 0.90f;
+            width = 15;
+            height = 14;
+            lifetime = 130;
+            homingPower = 0.05f;
+            homingRange = 50f;
+            trailWidth = 0;
+            trailLength = 0;
+            rotateMag = 1;
+            rotateVisualMag = 0.6f;
+            rotScaleMin = 0.2f;
+            rotScaleMax = 1f;
+            rotateRight = false;
+            reverseRotScale = false;
+            hitEffect = Fx.hitFuse;
+            despawnEffect = Fx.smeltsmoke;
+            frontColor = SnPal.yellowTrail;
+            backColor = SnPal.yellowTrailBack;
+            drag = 0.008f;
+            pierceCap = 4;
+        }};
+        //endregion reverse-bullets
         //region copters
         //T1
         basicHelicopterGun = new BasicBulletType(4.7f, 10) {{

@@ -18,6 +18,7 @@ public class SnVars extends ModVars {
     //core region
     private static final Seq<Runnable> onLoad = new Seq<>();
     private static final ContentList[] snContent = Seq.<ContentList>with(
+            new SnTeams(),
             new SnItems(),
             new SnStatusEffects(),
             new SnLiquids(),
