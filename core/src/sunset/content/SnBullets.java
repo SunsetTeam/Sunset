@@ -1699,6 +1699,8 @@ public class SnBullets implements ContentList {
         //endregion flame
         //region reverse-bullets
         naturiteReversBullet = new ReverseBulletType(3f, 40f) {{
+            other = naturiteReversBullet;
+
             reloadMultiplier = 0.90f;
             width = 15;
             height = 14;

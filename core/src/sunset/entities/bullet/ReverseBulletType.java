@@ -14,25 +14,18 @@ import mindustry.gen.Entityc;
 import mindustry.logic.Ranged;
 
 public class ReverseBulletType extends BasicBulletType {
+    public BulletType other = null;
     public float rotateTotalAngle = 360;
     public boolean rotateRight = true;
-    public float rotateMag = 0f, rotScaling = 0, rotScaleMin = 0, rotScaleMax = 0, rotateVisualMag = 0;
+    public float rotateMag = 1f, rotScaling = 1f, rotScaleMin = 0.1f, rotScaleMax = 1, rotateVisualMag = 1f;
     public boolean reverseRotScale = false, stayInRange = false;
-    public BulletType other = null;
 
-
-    public ReverseBulletType(float speed, float damage, String bulletSprite) {
+    public ReverseBulletType(float speed, float damage) {
         super(speed, damage);
-        sprite = bulletSprite;
         hittable = false;
         reflectable = false;
         absorbable = false;
     }
-
-    public ReverseBulletType(float speed, float damage){
-        this(speed, damage, "bullet");
-    }
-
     @Override
     public void draw(Bullet b) {
 
@@ -75,5 +68,4 @@ public class ReverseBulletType extends BasicBulletType {
     public Bullet createReverse(@Nullable Entityc owner, Team team, float x, float y, float angle, float damage, float velocityScl, float lifetimeScl, Object data) {
         return super.create(owner, team, x, y, angle, damage, velocityScl, lifetimeScl, data);
     }
-
 }

@@ -101,6 +101,7 @@ public class SnProduction implements ContentList{
             hardnessDrillMultiplier = 8;
             liquidBoost = 3.86f;
             itemCountMultiplier = 0.5f;
+            canDump = true;
             consumes.liquid(Liquids.water, 0.15f).boost();
             drillItems(
             new DrillItem(Items.graphite, 1f),

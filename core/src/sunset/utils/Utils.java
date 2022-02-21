@@ -276,4 +276,10 @@ public class Utils{
     public static float Pow3(float a){
         return a * a * a;
     }
+
+    public interface Targeting {
+        default Vec2 targetPos() {
+            return null;
+        }
+    }
 }

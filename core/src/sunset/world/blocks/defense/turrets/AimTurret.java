@@ -9,7 +9,6 @@ public class AimTurret extends ModItemTurret {
     }
 
     public class AimTurretBuild extends ModItemTurretBuild{
-
         @Override
         public void updateTile() {
             super.updateTile();
