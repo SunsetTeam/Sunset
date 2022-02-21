@@ -16,6 +16,10 @@ public class AimBulletType extends BasicBulletType {
     public boolean homing = true;
     public BulletType bullet;
 
+    public AimBulletType(float speed, float damage){
+        super(speed, damage);
+    }
+
 
     public void targetPos(Bullet bullet) {
         if (homing) {
@@ -29,7 +33,6 @@ public class AimBulletType extends BasicBulletType {
                     Tmp.v1.set(((Targeting) bullet.owner).targetPos());
                 }
                 bullet.vel.setAngle(Angles.moveToward(bullet.rotation(), bullet.angleTo(Tmp.v1.x, Tmp.v1.y), Time.delta * 261f * bullet.fin()));
-                //stop homing in after reaching cursor
                 if (bullet.within(Tmp.v1.x, Tmp.v1.y, bullet.hitSize)) {
                     bullet.fdata = 1;
                 }

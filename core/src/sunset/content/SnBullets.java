@@ -488,7 +488,7 @@ public class SnBullets implements ContentList {
         }};
         //endregion  standard
         //region rocket
-        nobiumAimMissile = new BasicBulletType(3, 40){{
+        nobiumAimMissile = new AimBulletType(3f, 40f){{
             despawnEffect = Fx.fireSmoke;
             hitEffect = Fx.fire;
             incendAmount = 7;
@@ -1699,8 +1699,6 @@ public class SnBullets implements ContentList {
         //endregion flame
         //region reverse-bullets
         naturiteReversBullet = new ReverseBulletType(3f, 40f) {{
-            other = naturiteReversBullet;
-
             reloadMultiplier = 0.90f;
             width = 15;
             height = 14;
@@ -1709,7 +1707,6 @@ public class SnBullets implements ContentList {
             homingRange = 50f;
             trailWidth = 0;
             trailLength = 0;
-            rotateMag = 1;
             rotateVisualMag = 0.6f;
             rotScaleMin = 0.2f;
             rotScaleMax = 1f;

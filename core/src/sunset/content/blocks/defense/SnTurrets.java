@@ -275,7 +275,7 @@ public class SnTurrets implements ContentList {
             targetAir = true;
             shootSound = Sounds.flame;
         }};
-        hemrus = new ReverseTurret("hemrus") {{
+        hemrus = new ItemTurret("hemrus") {{
             requirements(Category.turret, with(SnItems.fors, 250, Items.plastanium, 90, Items.graphite, 60));
             ammo(
                     SnItems.naturite, SnBullets.smallPlastaniumBullet
