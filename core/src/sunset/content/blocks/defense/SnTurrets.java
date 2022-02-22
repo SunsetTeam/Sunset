@@ -364,7 +364,6 @@ public class SnTurrets implements ContentList {
             targetAir = true;
             targetGround = true;
         }};
-
         ammirus = new ModItemTurret("ammirus") {{
             requirements(Category.turret, with(Items.copper, 700, SnItems.fors, 570, Items.plastanium, 475, SnItems.nobium, 470));
             ammo(

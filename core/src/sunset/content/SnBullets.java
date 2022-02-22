@@ -1,13 +1,11 @@
 package sunset.content;
 
-import arc.func.Cons;
 import arc.graphics.Color;
 import arc.graphics.g2d.Draw;
 import arc.graphics.g2d.Fill;
 import arc.math.Angles;
 import arc.math.geom.Vec2;
 import arc.util.Time;
-import arc.util.Tmp;
 import mindustry.Vars;
 import mindustry.content.*;
 import mindustry.ctype.ContentList;
@@ -16,14 +14,11 @@ import mindustry.entities.bullet.*;
 import mindustry.gen.Bullet;
 import mindustry.gen.Sounds;
 import mindustry.gen.Unit;
-import mindustry.gen.Unitc;
 import mindustry.graphics.Layer;
 import mindustry.graphics.Pal;
-import mindustry.world.blocks.defense.turrets.Turret.TurretBuild;
 import sunset.entities.bullet.*;
 import sunset.graphics.SnPal;
 import sunset.type.StackableStatusEffect;
-import sunset.utils.Utils.Targeting;
 
 public class SnBullets implements ContentList {
     //region definitions
@@ -495,9 +490,9 @@ public class SnBullets implements ContentList {
         //region rocket
         nobiumAimMissile = new AimBulletType(3f, 40f){{
             sprite = "missile";
-            width = 10;
+            width = 9;
             height = 13;
-            lifetime = 160;
+            lifetime = 170;
             status = StatusEffects.burning;
             statusDuration = 5 * Time.toSeconds;
             frontColor = SnPal.nobiumBullet;
@@ -511,7 +506,7 @@ public class SnBullets implements ContentList {
             trailChance = 0.2f;
             weaveScale = 4;
             weaveMag = 3;
-            drag = 0.0015f;
+            drag = 0.0020f;
         }};
         smallBlueMissile = new BasicBulletType(5f, 15, "missile") {{//yes
             shrinkX = 0f;
@@ -1702,11 +1697,13 @@ public class SnBullets implements ContentList {
         //endregion flame
         //region reverse-bullets
         naturiteReversBullet = new ReverseBulletType(3f, 45f) {{
-            width = 15;
+            sprite = "sunset-copter-bomb";
+            width = 15f;
             height = 14;
             lifetime = 140;
             homingPower = 0.05f;
             homingRange = 50f;
+            spin = 12f;
             trailWidth = 0;
             trailLength = 0;
             pierceCap = 6;
@@ -1715,8 +1712,6 @@ public class SnBullets implements ContentList {
             rotScaleMax = 0f;
             rotateRight = true;
             stayInRange = true;
-            hitEffect = Fx.hitFuse;
-            despawnEffect = Fx.smeltsmoke;
             frontColor = SnPal.copterLaser;
             backColor = SnPal.copterLaserBack;
             drag = -0.001f;
