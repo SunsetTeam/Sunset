@@ -7,8 +7,10 @@ import arc.util.Tmp;
 import mindustry.entities.Units;
 import mindustry.entities.bullet.BasicBulletType;
 import mindustry.gen.Bullet;
+import mindustry.gen.Posc;
 import mindustry.gen.Teamc;
 import mindustry.gen.Unitc;
+import mindustry.logic.Ranged;
 import mindustry.world.blocks.defense.turrets.Turret.TurretBuild;
 import sunset.utils.Utils.Targeting;
 
@@ -55,20 +57,21 @@ public class AimBulletType extends BasicBulletType {
             }
         }
 
-        if (bullet.fdata() != 1 && bullet.collided.size < 2) {
-            Tmp.v1.set(bullet.x, bullet.y);
-            if (bullet.owner instanceof TurretBuild) {
-                Tmp.v1.set(((TurretBuild) bullet.owner).targetPos.x, ((TurretBuild) bullet.owner).targetPos.y);
-            } else if (bullet.owner instanceof Unitc) {
-                Tmp.v1.set(((Unitc) bullet.owner).aimX(), ((Unitc) bullet.owner).aimY());
-            } else if (bullet.owner instanceof Targeting) {
-                Tmp.v1.set(((Targeting) bullet.owner).targetPos());
-            }
-            bullet.vel.setAngle(Angles.moveToward(bullet.rotation(), bullet.angleTo(Tmp.v1.x, Tmp.v1.y), Time.delta * 261f * bullet.fin()));
+        if(!(bullet.owner instanceof Ranged)) return;
+        Tmp.v1.set(bullet.x, bullet.y);
 
-            if (bullet.within(Tmp.v1.x, Tmp.v1.y, bullet.hitSize)) {
-                bullet.fdata = 1;
-            }
+        if(bullet.owner instanceof Targeting){
+            Tmp.v1.set(((Targeting) bullet.owner).targetPos());
         }
+        else if(bullet.owner instanceof TurretBuild) {
+            Tmp.v1.set(((TurretBuild) bullet.owner).targetPos.x, ((TurretBuild) bullet.owner).targetPos.y);
+        }
+        else if (bullet.owner instanceof Unitc){
+            Tmp.v1.set(((Unitc) bullet.owner).aimX(), ((Unitc) bullet.owner).aimY());
+        }
+        Tmp.v3.set(((Posc) bullet.owner()).x(), ((Posc) bullet.owner()).y());
+        Tmp.v1.sub(Tmp.v3).clamp(0, ((Ranged) bullet.owner).range()).add(Tmp.v3);
+        bullet.vel.add(Tmp.v2.trns(bullet.angleTo(Tmp.v1), bullet.type.homingPower * Time.delta)).clamp(0, bullet.type.speed);
+        if(bullet.dst(Tmp.v3.x, Tmp.v3.y) >= ((Ranged) bullet.owner).range() + bullet.type.speed + 3) bullet.time += bullet.lifetime/100 * Time.delta;
     }
 }

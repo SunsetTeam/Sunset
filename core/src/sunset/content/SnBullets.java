@@ -495,21 +495,23 @@ public class SnBullets implements ContentList {
         //region rocket
         nobiumAimMissile = new AimBulletType(3f, 40f){{
             sprite = "missile";
-            width = 8;
-            height = 10;
+            width = 10;
+            height = 13;
             lifetime = 160;
             status = StatusEffects.burning;
             statusDuration = 5 * Time.toSeconds;
             frontColor = SnPal.nobiumBullet;
             backColor = SnPal.nobiumBulletBack;
-            homingPower = 0.05f;
+            maxRange = 190;
+            homingPower = 0.08f;
             homingRange = 0;
             trailColor = SnPal.nobiumBulletBack;
             trailWidth = 2f;
             trailLength = 2;
-            trailChance = 0.3f;
+            trailChance = 0.2f;
             weaveScale = 4;
             weaveMag = 3;
+            drag = 0.0015f;
         }};
         smallBlueMissile = new BasicBulletType(5f, 15, "missile") {{//yes
             shrinkX = 0f;
@@ -1702,7 +1704,7 @@ public class SnBullets implements ContentList {
         naturiteReversBullet = new ReverseBulletType(3f, 45f) {{
             width = 15;
             height = 14;
-            lifetime = 310;
+            lifetime = 140;
             homingPower = 0.05f;
             homingRange = 50f;
             trailWidth = 0;
