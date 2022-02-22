@@ -494,29 +494,22 @@ public class SnBullets implements ContentList {
         //endregion  standard
         //region rocket
         nobiumAimMissile = new AimBulletType(3f, 40f){{
-            despawnEffect = Fx.fireSmoke;
-            hitEffect = Fx.fire;
-            incendAmount = 7;
-            status = StatusEffects.burning;
-            statusDuration = 5 * Time.toSeconds;
-            maxRange = 100;
-            frontColor = SnPal.nobiumBullet;
-            backColor = SnPal.nobiumBulletBack;
+            sprite = "missile";
             width = 8;
             height = 10;
-            hitSize = 12;
-            lifetime = 150;
-            homingPower = 0.15f;
+            lifetime = 160;
+            status = StatusEffects.burning;
+            statusDuration = 5 * Time.toSeconds;
+            frontColor = SnPal.nobiumBullet;
+            backColor = SnPal.nobiumBulletBack;
+            homingPower = 0.05f;
             homingRange = 0;
-            homingDelay = 35;
-            hitEffect = Fx.hitFuse;
             trailColor = SnPal.nobiumBulletBack;
             trailWidth = 2f;
             trailLength = 2;
+            trailChance = 0.3f;
             weaveScale = 4;
             weaveMag = 3;
-            knockback = 3;
-            drag = 0.0015f;
         }};
         smallBlueMissile = new BasicBulletType(5f, 15, "missile") {{//yes
             shrinkX = 0f;
@@ -1709,7 +1702,7 @@ public class SnBullets implements ContentList {
         naturiteReversBullet = new ReverseBulletType(3f, 45f) {{
             width = 15;
             height = 14;
-            lifetime = 250;
+            lifetime = 310;
             homingPower = 0.05f;
             homingRange = 50f;
             trailWidth = 0;
@@ -1718,13 +1711,13 @@ public class SnBullets implements ContentList {
             rotateMag = 5;
             rotScaleMin = 0f;
             rotScaleMax = 0f;
-            rotateRight = false;
-            reverseRotScale = false;
+            rotateRight = true;
+            stayInRange = true;
             hitEffect = Fx.hitFuse;
             despawnEffect = Fx.smeltsmoke;
             frontColor = SnPal.copterLaser;
             backColor = SnPal.copterLaserBack;
-            drag = 0.008f;
+            drag = -0.001f;
         }};
         //endregion reverse-bullets
         //region copters

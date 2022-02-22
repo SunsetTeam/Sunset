@@ -365,7 +365,7 @@ public class SnTurrets implements ContentList {
             targetGround = true;
         }};
 
-        ammirus = new AimTurret("ammirus") {{
+        ammirus = new ModItemTurret("ammirus") {{
             requirements(Category.turret, with(Items.copper, 700, SnItems.fors, 570, Items.plastanium, 475, SnItems.nobium, 470));
             ammo(
                     SnItems.nobium, SnBullets.nobiumAimMissile
@@ -379,6 +379,8 @@ public class SnTurrets implements ContentList {
             cooldown = 0.03f;
             inaccuracy = 3f;
             rotateSpeed = 4f;
+            shootShake = 2f;
+            burstSpacing = 4f;
             shootSound = Sounds.missile;
             ammoUseEffect = Fx.casing1;
             targetAir = true;

@@ -17,7 +17,7 @@ public class ReverseBulletType extends BasicBulletType {
     public BulletType other = null;
     public float rotateTotalAngle = 360;
     public boolean rotateRight = true;
-    public float rotateMag = 1f, rotScaling = 1f, rotScaleMin = 0.1f, rotScaleMax = 1, rotateVisualMag = 1f;
+    public float rotateMag = 0, rotScaling = 0, rotScaleMin = 0, rotScaleMax = 0, rotateVisualMag = 0;
     public boolean reverseRotScale = false, stayInRange = false;
 
     public ReverseBulletType(float speed, float damage) {
