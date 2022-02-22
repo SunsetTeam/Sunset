@@ -499,7 +499,9 @@ public class SnBullets implements ContentList {
             incendAmount = 7;
             status = StatusEffects.burning;
             statusDuration = 5 * Time.toSeconds;
-            maxRange = 160;
+            maxRange = 100;
+            frontColor = SnPal.nobiumBullet;
+            backColor = SnPal.nobiumBulletBack;
             width = 8;
             height = 10;
             hitSize = 12;
@@ -508,6 +510,7 @@ public class SnBullets implements ContentList {
             homingRange = 0;
             homingDelay = 35;
             hitEffect = Fx.hitFuse;
+            trailColor = SnPal.nobiumBulletBack;
             trailWidth = 2f;
             trailLength = 2;
             weaveScale = 4;
@@ -1703,18 +1706,18 @@ public class SnBullets implements ContentList {
         }};
         //endregion flame
         //region reverse-bullets
-        naturiteReversBullet = new ReverseBulletType(3f, 40f) {{
+        naturiteReversBullet = new ReverseBulletType(3f, 45f) {{
             width = 15;
             height = 14;
-            lifetime = 130;
+            lifetime = 250;
             homingPower = 0.05f;
             homingRange = 50f;
             trailWidth = 0;
             trailLength = 0;
-            rotateVisualMag = 0.6f;
-            rotScaleMin = 0.3f;
-            rotateMag = 1.3f;
-            rotScaleMax = 1f;
+            pierceCap = 6;
+            rotateMag = 5;
+            rotScaleMin = 0f;
+            rotScaleMax = 0f;
             rotateRight = false;
             reverseRotScale = false;
             hitEffect = Fx.hitFuse;
@@ -1722,7 +1725,6 @@ public class SnBullets implements ContentList {
             frontColor = SnPal.copterLaser;
             backColor = SnPal.copterLaserBack;
             drag = 0.008f;
-            pierceCap = 4;
         }};
         //endregion reverse-bullets
         //region copters
