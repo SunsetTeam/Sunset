@@ -14,11 +14,11 @@ import mindustry.gen.Entityc;
 import mindustry.logic.Ranged;
 
 public class ReverseBulletType extends BasicBulletType {
-    public BulletType other = null;
     public float rotateTotalAngle = 360;
     public boolean rotateRight = true;
-    public float rotateMag = 0, rotScaling = 0, rotScaleMin = 0, rotScaleMax = 0, rotateVisualMag = 0;
-    public boolean reverseRotScale = false, stayInRange = false;
+    public float rotateMag = 0, rotateScaling = 0, rotateScaleMin = 0, rotateScaleMax = 0, rotateVisualMag = 0;
+    public boolean reverseRotScale = false, inRange = false;
+    public BulletType other = null;
 
     public ReverseBulletType(float speed, float damage) {
         super(speed, damage);
@@ -51,16 +51,15 @@ public class ReverseBulletType extends BasicBulletType {
         super.update(b);
 
         if (rotateMag > 0) {
-            b.vel.rotate(rotateMag * Mathf.clamp(reverseRotScale ? b.fout() : b.fin(), rotScaleMin, rotScaleMax) * (rotateRight ? -1 : 1) * Time.delta * rotScaling);
+            b.vel.rotate(rotateMag * Mathf.clamp(reverseRotScale ? b.fout() : b.fin(), rotateScaleMin, rotateScaleMax) * (rotateRight ? -1 : 1) * Time.delta * rotateScaling);
         }
 
-        if(stayInRange && b.owner instanceof Ranged && b.dst(((Ranged) b.owner).x(), ((Ranged) b.owner).y()) > ((Ranged) b.owner).range()) b.rotation(b.angleTo(((Ranged) b.owner).x(), ((Ranged) b.owner).y()));
-
+        if(inRange && b.owner instanceof Ranged && b.dst(((Ranged) b.owner).x(), ((Ranged) b.owner).y()) > ((Ranged) b.owner).range()) b.rotation(b.angleTo(((Ranged) b.owner).x(), ((Ranged) b.owner).y()));
     }
 
     @Override
     public Bullet create(@Nullable Entityc owner, Team team, float x, float y, float angle, float damage, float velocityScl, float lifetimeScl, Object data) {
-        if (other != null && Mathf.randomSeed((int) Time.time * 2, 0, 1) > 0.4 && other instanceof ReverseBulletType) {
+        if (other != null && Mathf.randomSeed((int) Time.time * 2, 0, 1) > 0.6 && other instanceof ReverseBulletType) {
             return ((ReverseBulletType) other).createReverse(owner, team, x, y, angle, damage, velocityScl, lifetimeScl, data);
         } else return super.create(owner, team, x, y, angle, damage, velocityScl, lifetimeScl, data);
     }

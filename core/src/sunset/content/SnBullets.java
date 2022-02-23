@@ -1710,7 +1710,7 @@ public class SnBullets implements ContentList {
             pierceCap = 6;
             rotateMag = 5;
             rotateRight = true;
-            stayInRange = true;
+            inRange = true;
             frontColor = SnPal.copterLaser;
             backColor = SnPal.copterLaserBack;
             drag = 0.001f;
