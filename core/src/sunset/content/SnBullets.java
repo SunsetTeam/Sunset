@@ -492,7 +492,7 @@ public class SnBullets implements ContentList {
             sprite = "missile";
             width = 9;
             height = 13;
-            lifetime = 170;
+            lifetime = 200;
             status = StatusEffects.burning;
             statusDuration = 5 * Time.toSeconds;
             frontColor = SnPal.nobiumBullet;
@@ -1700,10 +1700,10 @@ public class SnBullets implements ContentList {
             sprite = "sunset-copter-bomb";
             width = 15f;
             height = 15;
-            lifetime = 180;
+            lifetime = 140;
             homingPower = 0.05f;
             homingRange = 50f;
-            spin = 12f;
+            spin = 5f;
             shrinkX = 0f;
             shrinkY = 0f;
             trailWidth = 0;
