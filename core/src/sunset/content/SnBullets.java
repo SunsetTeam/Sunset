@@ -1700,7 +1700,7 @@ public class SnBullets implements ContentList {
             sprite = "sunset-copter-bomb";
             width = 15f;
             height = 15;
-            lifetime = 140;
+            lifetime = 180;
             homingPower = 0.05f;
             homingRange = 50f;
             spin = 12f;
