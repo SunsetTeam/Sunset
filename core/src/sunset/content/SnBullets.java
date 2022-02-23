@@ -69,7 +69,7 @@ public class SnBullets implements ContentList {
         heavyCoalFlame, heavyPyraFlame, flameidFlame,
         wheel5Flame,
         //reverse-bullets
-        naturiteReversBullet,
+        naturiteReversBulletA, naturiteReversBulletB,
         infernoFlame,//todo: use this
         //copters
         basicHelicopterGun,
@@ -490,8 +490,8 @@ public class SnBullets implements ContentList {
         //region rocket
         nobiumAimMissile = new AimBulletType(3f, 40f){{
             sprite = "missile";
-            width = 9;
-            height = 13;
+            width = 12;
+            height = 15;
             lifetime = 200;
             status = StatusEffects.burning;
             statusDuration = 5 * Time.toSeconds;
@@ -501,9 +501,8 @@ public class SnBullets implements ContentList {
             homingPower = 0.09f;
             homingRange = 0;
             trailColor = SnPal.nobiumBulletBack;
-            trailWidth = 2f;
-            trailLength = 2;
-            trailChance = 0.2f;
+            trailWidth = 3f;
+            trailLength = 5;
             weaveScale = 4;
             weaveMag = 3;
             drag = 0.0020f;
@@ -1696,11 +1695,32 @@ public class SnBullets implements ContentList {
         }};
         //endregion flame
         //region reverse-bullets
-        naturiteReversBullet = new ReverseBulletType(3f, 55f) {{
+        naturiteReversBulletA = new ReverseBulletType(3f, 55f) {{
+            other = naturiteReversBulletB;
             sprite = "sunset-copter-bomb";
             width = 15f;
             height = 15;
-            lifetime = 200;
+            lifetime = 145;
+            homingPower = 0.05f;
+            homingRange = 50f;
+            spin = 5f;
+            shrinkX = 0f;
+            shrinkY = 0f;
+            trailWidth = 0;
+            trailLength = 0;
+            pierceCap = 6;
+            rotateMag = 5;
+            rotateRight = true;
+            stayInRange = true;
+            frontColor = SnPal.copterLaser;
+            backColor = SnPal.copterLaserBack;
+            drag = 0.01f;
+        }};
+        naturiteReversBulletB = new ReverseBulletType(3f, 55f) {{
+            sprite = "sunset-copter-bomb";
+            width = 15f;
+            height = 15;
+            lifetime = 145;
             homingPower = 0.05f;
             homingRange = 50f;
             spin = 5f;

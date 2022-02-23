@@ -278,7 +278,7 @@ public class SnTurrets implements ContentList {
         hemrus = new ItemTurret("hemrus") {{
             requirements(Category.turret, with(SnItems.fors, 250, Items.plastanium, 90, Items.graphite, 60));
             ammo(
-                    SnItems.naturite, SnBullets.naturiteReversBullet
+                    SnItems.naturite, SnBullets.naturiteReversBulletA
             );
             health = 1780;
             size = 3;
@@ -372,8 +372,8 @@ public class SnTurrets implements ContentList {
             health = 3000;
             size = 4;
             shots = 5;
-            reloadTime = 5 * Time.toSeconds;
-            range = 30 * Vars.tilesize;
+            reloadTime = 5.5f * Time.toSeconds;
+            range = 35 * Vars.tilesize;
             recoilAmount = 4f;
             cooldown = 0.03f;
             inaccuracy = 3f;
