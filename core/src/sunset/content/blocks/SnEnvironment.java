@@ -173,7 +173,6 @@ public class SnEnvironment implements ContentList {
         jadestone = new Floor("jadestone") {{
             variants = 3;
             attributes.set(SnAttribute.burheyna, -0.1f);
-            wall = jadestoneWall;
         }};
 
         orangeSand = new Floor("orange-sand") {{

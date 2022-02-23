@@ -1714,7 +1714,7 @@ public class SnBullets implements ContentList {
             stayInRange = true;
             frontColor = SnPal.copterLaser;
             backColor = SnPal.copterLaserBack;
-            drag = -0.001f;
+            drag = 0.01f;
         }};
         //endregion reverse-bullets
         //region copters
