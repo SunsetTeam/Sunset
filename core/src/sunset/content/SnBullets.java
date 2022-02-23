@@ -1696,11 +1696,11 @@ public class SnBullets implements ContentList {
         }};
         //endregion flame
         //region reverse-bullets
-        naturiteReversBullet = new ReverseBulletType(3f, 45f) {{
+        naturiteReversBullet = new ReverseBulletType(3f, 55f) {{
             sprite = "sunset-copter-bomb";
             width = 15f;
             height = 15;
-            lifetime = 140;
+            lifetime = 200;
             homingPower = 0.05f;
             homingRange = 50f;
             spin = 5f;
