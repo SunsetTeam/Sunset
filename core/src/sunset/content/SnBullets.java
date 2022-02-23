@@ -69,7 +69,7 @@ public class SnBullets implements ContentList {
         heavyCoalFlame, heavyPyraFlame, flameidFlame,
         wheel5Flame,
         //reverse-bullets
-        naturiteReversBulletA, naturiteReversBulletB,
+        naturiteReversBullet,
         infernoFlame,//todo: use this
         //copters
         basicHelicopterGun,
@@ -1695,8 +1695,7 @@ public class SnBullets implements ContentList {
         }};
         //endregion flame
         //region reverse-bullets
-        naturiteReversBulletA = new ReverseBulletType(3f, 55f) {{
-            other = naturiteReversBulletB;
+        naturiteReversBullet = new ReverseBulletType(3f, 55f) {{
             sprite = "sunset-copter-bomb";
             width = 15f;
             height = 15;
@@ -1714,27 +1713,7 @@ public class SnBullets implements ContentList {
             stayInRange = true;
             frontColor = SnPal.copterLaser;
             backColor = SnPal.copterLaserBack;
-            drag = 0.01f;
-        }};
-        naturiteReversBulletB = new ReverseBulletType(3f, 55f) {{
-            sprite = "sunset-copter-bomb";
-            width = 15f;
-            height = 15;
-            lifetime = 145;
-            homingPower = 0.05f;
-            homingRange = 50f;
-            spin = 5f;
-            shrinkX = 0f;
-            shrinkY = 0f;
-            trailWidth = 0;
-            trailLength = 0;
-            pierceCap = 6;
-            rotateMag = 5;
-            rotateRight = true;
-            stayInRange = true;
-            frontColor = SnPal.copterLaser;
-            backColor = SnPal.copterLaserBack;
-            drag = 0.01f;
+            drag = 0.001f;
         }};
         //endregion reverse-bullets
         //region copters

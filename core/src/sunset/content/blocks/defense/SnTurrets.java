@@ -278,7 +278,7 @@ public class SnTurrets implements ContentList {
         hemrus = new ItemTurret("hemrus") {{
             requirements(Category.turret, with(SnItems.fors, 250, Items.plastanium, 90, Items.graphite, 60));
             ammo(
-                    SnItems.naturite, SnBullets.naturiteReversBulletA
+                    SnItems.naturite, SnBullets.naturiteReversBullet
             );
             health = 1780;
             size = 3;
