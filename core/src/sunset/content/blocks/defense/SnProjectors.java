@@ -23,9 +23,9 @@ public class SnProjectors implements ContentList {
             requirements(Category.effect, with(Items.lead, 560, Items.titanium, 255, Items.silicon, 140, SnItems.nobium, 100));
             consumes.power(4.4f);
             size = 5;
-            reload = 15f * Time.toSeconds;
-            range = 26f * Vars.tilesize;
-            healPercent = 20f;
+            reload = 6f * Time.toSeconds;
+            range = 30f * Vars.tilesize;
+            healPercent = 25f;
             repairHealth = 250f;
             phaseBoost = 15f;
             health = 80 * size * size;

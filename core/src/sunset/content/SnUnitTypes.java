@@ -686,7 +686,7 @@ public class SnUnitTypes implements ContentList{
             health = 19700;
             hitSize = 70;
             speed = 2.1f;
-            rotateSpeed = 2.6f;
+            rotateSpeed = 2.2f;
             accel = 0.06f;
             drag = 0.04f;
             commandLimit = 5;
@@ -796,7 +796,7 @@ public class SnUnitTypes implements ContentList{
             health = 57000;
             hitSize = 90;
             speed = 1.5f;
-            rotateSpeed = 2.1f;
+            rotateSpeed = 1.6f;
             accel = 0.05f;
             drag = 0.04f;
             commandLimit = 6;

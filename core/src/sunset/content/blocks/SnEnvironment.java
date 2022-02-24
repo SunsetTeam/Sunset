@@ -5,6 +5,11 @@ import arc.util.Time;
 import mindustry.content.*;
 import mindustry.ctype.ContentList;
 import mindustry.entities.Effect;
+import mindustry.graphics.*;
+import mindustry.world.*;
+import mindustry.world.blocks.environment.*;
+import mindustry.world.meta.*;
+import sunset.content.SnAttribute;
 import mindustry.graphics.CacheLayer;
 import mindustry.world.Block;
 import mindustry.world.blocks.environment.Floor;
@@ -157,25 +162,24 @@ public class SnEnvironment implements ContentList {
             variants = 3;
             dragMultiplier = 0.25f;
             speedMultiplier = 0.85f;
-            attributes.set(Attribute.water, 0.38f);
+            attributes.set(SnAttribute.burheyna, 0.38f);
             wall = crimsonIceWall;
         }};
         crimsonIceSnow = new Floor("crimson-icesnow") {{
             variants = 3;
             dragMultiplier = 0.55f;
-            attributes.set(Attribute.water, 0.28f);
+            attributes.set(SnAttribute.burheyna, 0.28f);
         }};
 
         granite = new Floor("granite") {{
             variants = 3;
-            attributes.set(Attribute.water, -0.4f);
+            attributes.set(SnAttribute.burheyna, -0.4f);
             wall = graniteWall;
         }};
 
         jadestone = new Floor("jadestone") {{
             variants = 3;
-            attributes.set(Attribute.water, -0.1f);
-            wall = jadestoneWall;
+            attributes.set(SnAttribute.burheyna, -0.1f);
         }};
 
         orangeSand = new Floor("orange-sand") {{

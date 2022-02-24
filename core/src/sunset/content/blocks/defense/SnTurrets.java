@@ -40,10 +40,10 @@ public class SnTurrets implements ContentList {
     excellence, carbine, pulsation, reflection,
 
     //3x3
-    major, burner, trigger, eternity,
+    major, burner, eternity, hemrus, trigger,
 
     //4x4
-    admiral, scorpio, flood, chain, drr,
+    admiral, scorpio, ammirus, flood, chain, drr,
 
     //5x5
     pressure, field, sniper, fanatic, defibrillator,
@@ -65,7 +65,7 @@ public class SnTurrets implements ContentList {
     public void load() {
         //region 1x1
         sting = new ModPowerTurret("sting") {{
-            requirements(Category.turret, with(SnItems.fors, 50, Items.lead, 20));
+            requirements(Category.turret, with(SnItems.fors, 50, Items.lead, 30));
             health = 400;
             reloadTime = 40f;
             range = 95f;
@@ -83,7 +83,7 @@ public class SnTurrets implements ContentList {
             chargeEffect = SnFx.smallEnergySphereCharge;
         }};
         spine = new ModItemTurret("spine") {{
-            requirements(Category.turret, with(Items.copper, 55, Items.lead, 25));
+            requirements(Category.turret, with(Items.copper, 55, Items.graphite, 25));
             ammo(
             Items.graphite, SnBullets.lightBlastGraphite,
             Items.silicon, SnBullets.lightBlastSilicon
@@ -100,7 +100,7 @@ public class SnTurrets implements ContentList {
             targetAir = true;
         }};
         eagle = new ItemTurret("eagle") {{
-            requirements(Category.turret, with(Items.copper, 60, Items.titanium, 40, SnItems.naturite, 25));
+            requirements(Category.turret, with(Items.titanium, 40, SnItems.naturite, 25));
             ammo(
             Items.sporePod, SnBullets.sporePodPoisonBullet,
             SnItems.naturite, SnBullets.naturitePoisonBullet
@@ -125,7 +125,7 @@ public class SnTurrets implements ContentList {
         //endregion 1x1
         //region 2x2
         excellence = new ModPowerTurret("excellence") {{
-            requirements(Category.turret, with(SnItems.fors, 140, Items.lead, 70, Items.silicon, 40));
+            requirements(Category.turret, with(SnItems.fors, 70, Items.lead, 60, Items.silicon, 40));
             size = 2;
             reloadTime = 50f;
             range = 175f;
@@ -157,7 +157,7 @@ public class SnTurrets implements ContentList {
             laserColor = SnPal.chainLaser;
         }};
         pulsation = new ItemTurret("pulsation") {{
-            requirements(Category.turret, with(Items.copper, 95, Items.graphite, 85, Items.lead, 70, SnItems.planatrium, 35));
+            requirements(Category.turret, with(SnItems.fors, 95, Items.graphite, 85, Items.lead, 70, SnItems.planatrium, 35));
             ammo(
             Items.lead, SnBullets.leadSap,
             Items.sporePod, SnBullets.sporeSap,
@@ -175,9 +175,9 @@ public class SnTurrets implements ContentList {
             targetGround = false;
         }};
         reflection = new ModItemTurret("reflection") {{
-            requirements(Category.turret, with(Items.copper, 95, SnItems.fors, 55, SnItems.naturite, 50, SnItems.nobium, 35));
+            requirements(Category.turret, with(Items.copper, 95, SnItems.fors, 55, SnItems.naturite, 50, SnItems.nobium, 25));
             ammo(
-            Items.sporePod, SnBullets.heavySporePodPoison,
+            Items.sporePod, SnBullets.heavyPlastaniumPoison,
             SnItems.naturite, SnBullets.heavyNaturitePoison,
             SnItems.nobium, SnBullets.heavyNobiumPoison
             );
@@ -275,8 +275,25 @@ public class SnTurrets implements ContentList {
             targetAir = true;
             shootSound = Sounds.flame;
         }};
+        hemrus = new ItemTurret("hemrus") {{
+            requirements(Category.turret, with(SnItems.fors, 250, Items.plastanium, 90, Items.graphite, 60));
+            ammo(
+                    SnItems.naturite, SnBullets.naturiteReversBullet
+            );
+            health = 1780;
+            size = 3;
+            range = 225f;
+            reloadTime = 4 * Time.toSeconds;
+            recoilAmount = 4f;
+            inaccuracy = 2f;
+            rotateSpeed = 4.6f;
+            shootCone = 25f;
+            shots = 1;
+            shootShake = 2f;
+            shootSound = Sounds.shootBig;
+        }};
         trigger = new PowerTurret("trigger") {{
-            requirements(Category.turret, with(Items.silicon, 275, Items.titanium, 125, SnItems.enojie, 75));
+            requirements(Category.turret, with(Items.silicon, 275, Items.titanium, 125, SnItems.enojie, 45));
             size = 3;
             powerUse = 9f;
             range = 340f;
@@ -320,7 +337,7 @@ public class SnTurrets implements ContentList {
             targetAir = false;
 
             speedupPerShot = 0.16f;
-            maxReloadMultiplier = 1.6f;
+            maxReloadMultiplier = 1.7f;
         }};
         scorpio = new ModItemTurret("scorpio") {{
             requirements(Category.turret, with(Items.copper, 600, SnItems.fors, 560, Items.plastanium, 480, SnItems.nobium, 450, SnItems.naturite, 400));
@@ -347,8 +364,29 @@ public class SnTurrets implements ContentList {
             targetAir = true;
             targetGround = true;
         }};
+        ammirus = new ModItemTurret("ammirus") {{
+            requirements(Category.turret, with(Items.copper, 700, SnItems.fors, 570, Items.plastanium, 475, SnItems.nobium, 470));
+            ammo(
+                    SnItems.nobium, SnBullets.nobiumAimMissile
+            );
+            health = 3000;
+            size = 4;
+            shots = 5;
+            reloadTime = 5.5f * Time.toSeconds;
+            range = 35 * Vars.tilesize;
+            recoilAmount = 4f;
+            cooldown = 0.03f;
+            inaccuracy = 3f;
+            rotateSpeed = 4f;
+            shootShake = 2f;
+            burstSpacing = 4f;
+            shootSound = Sounds.missile;
+            ammoUseEffect = Fx.casing1;
+            targetAir = true;
+            targetGround = true;
+        }};
         flood = new LiquidTurretExt("flood") {{
-            requirements(Category.turret, with(Items.metaglass, 230, Items.lead, 500, Items.titanium, 330, Items.thorium, 190, SnItems.fors, 180));
+            requirements(Category.turret, with(Items.metaglass, 230, Items.lead, 370f, Items.titanium, 330, Items.thorium, 190, SnItems.fors, 180));
             ammo(
             Liquids.water, SnBullets.floodWaterShot,
             Liquids.slag, SnBullets.floodSlagShot,
@@ -454,7 +492,7 @@ public class SnTurrets implements ContentList {
             health = 160 * size * size;
         }};
         sniper = new ModItemTurret("sniper") {{
-            requirements(Category.turret, with(Items.copper, 1200, Items.surgeAlloy, 600, SnItems.naturite, 500, Items.silicon, 400));
+            requirements(Category.turret, with(Items.copper, 1200, SnItems.fors, 700, Items.surgeAlloy, 600, SnItems.naturite, 500, Items.silicon, 400, SnItems.nobium, 250));
             ammo(
             Items.surgeAlloy, SnBullets.sniperSurge
             );
@@ -544,10 +582,10 @@ public class SnTurrets implements ContentList {
             chargeEffect = SnFx.tridentCharge;
             category = Category.turret;
             buildVisibility = BuildVisibility.shown;
-            shootType = new EnergySphereBulletType(1.75f, 240f) {{
+            shootType = new EnergySphereBulletType(1.75f, 290f) {{
                 hitSize = 8f;
                 splashDamage = 1280f;
-                splashDamageRadius = 112f;
+                splashDamageRadius = 7 * Vars.tilesize;
                 lightningDamage = 48f;
                 lightningPeriod = 30f;
                 lightningLength = 192;
@@ -557,7 +595,7 @@ public class SnTurrets implements ContentList {
             }};
         }};
         radius = new MinigunTurret("radius") {{
-            requirements(Category.turret, with(Items.copper, 2000, Items.graphite, 1500, Items.surgeAlloy, 1050, Items.plastanium, 855, SnItems.enojie, 620));
+            requirements(Category.turret, with(Items.copper, 2500, Items.graphite, 1700, Items.surgeAlloy, 1450, Items.plastanium, 955, SnItems.enojie, 620));
             ammo(
             Items.graphite, SnBullets.heavyStandardDense,
             Items.pyratite, SnBullets.heavyStandardIncendiary,
@@ -586,7 +624,7 @@ public class SnTurrets implements ContentList {
             coolantUsage = 0.9f;
         }};
         disappearance = new LaserTurret("disappearance") {{
-            requirements(Category.turret, with(Items.copper, 1900, Items.lead, 1400, Items.graphite, 1600, Items.surgeAlloy, 1060, Items.silicon, 800));
+            requirements(Category.turret, with(Items.copper, 2400, Items.lead, 1800, Items.graphite, 1500, Items.surgeAlloy, 1460, Items.silicon, 1200, SnItems.enojie, 700));
             shootEffect = Fx.shootBigSmoke2;
             shootCone = 45f;
             recoilAmount = 5f;
@@ -603,7 +641,7 @@ public class SnTurrets implements ContentList {
             loopSound = Sounds.beam;
             loopSoundVolume = 2.5f;
 
-            shootType = new LightningContinuousLaserBulletType(160) {{
+            shootType = new LightningContinuousLaserBulletType(150) {{
                 length = 55f * Vars.tilesize;
                 shake = 4f;
                 width = 15f;
@@ -629,7 +667,7 @@ public class SnTurrets implements ContentList {
         //endregion 6x6
         //region 7x7
         halberd = new ModPowerTurret("halberd") {{
-            requirements(Category.turret, with(Items.copper, 2800, Items.metaglass, 1700, Items.lead, 1520, Items.silicon, 1200, Items.plastanium, 980, SnItems.nobium, 750, SnItems.enojie, 690));
+            requirements(Category.turret, with(Items.copper, 3800, Items.metaglass, 2700, Items.lead, 2520, Items.silicon, 2200, Items.plastanium, 1480, SnItems.enojie, 1390));
             range = 350f;
             shots = 1;
             chargeTime = 145f;
@@ -653,7 +691,7 @@ public class SnTurrets implements ContentList {
             shootSound = Sounds.laser;
             alternate = false;
 
-            shootType = new LaserBulletType(4500) {{
+            shootType = new LaserBulletType(7500) {{
                 colors = new Color[]{Pal.meltdownHit.cpy().a(0.4f), Pal.meltdownHit, Color.white};
                 despawnEffect = Fx.none;
                 lifetime = 60f;
