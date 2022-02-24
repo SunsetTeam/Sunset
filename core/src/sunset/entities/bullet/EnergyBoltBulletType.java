@@ -19,15 +19,11 @@ public class EnergyBoltBulletType extends LaserBoltBulletType{
 
         lifetime = 35;
         ammoMultiplier = 1;
-        buildingDamageMultiplier = this.damage * 0.5f;
+        buildingDamageMultiplier = 0.5f;
         healPercent = 0.001f;
 
-        reflectable = true;
         absorbable = false;
-        pierceBuilding = true;
-        pierce = true;
-        scaleVelocity = true;
-        collides = true;
+        reflectable = pierceBuilding = pierce = scaleVelocity = collides = true;
 
         shootEffect = Fx.shootHeal;
         smokeEffect = Fx.hitLaser;

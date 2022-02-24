@@ -34,8 +34,6 @@ public class SnEnvironment implements ContentList {
     orangeSand, stoneSand,
     obsidian, ash, burningAsh,
 
-    blablabla,
-
     //static walls 
     crimsonGrassWall, crimsonDirtWall, crimsonSandWall,
     crimsonSnowWall, crimsonIceWall,
@@ -208,8 +206,6 @@ public class SnEnvironment implements ContentList {
             lightRadius = 28f;
             lightColor = Color.orange.cpy().a(0.15f);
         }};
-
-        blablabla = new TDFloor("blablabla");
         //endregion floors
         //region static walls
         crimsonGrassWall = new StaticWall("crimson-grass-wall") {{
@@ -277,7 +273,7 @@ public class SnEnvironment implements ContentList {
             statusDuration = 120f;
             cacheLayer = CacheLayer.water;
             speedMultiplier = 0.9f;
-            variants = 0;
+            variants = 2;
             liquidDrop = Liquids.water;
             steamEffect = new Effect(30f, Fx.steam.renderer);
             eruptionEffect = new Effect(30f, Fx.ballfire.renderer);

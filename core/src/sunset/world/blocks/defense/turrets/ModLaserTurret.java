@@ -19,8 +19,15 @@ import static mindustry.Vars.tilesize;
 public class ModLaserTurret extends LaserTurret {
     public boolean reloadBar = true;
 
+    public String faction;
+    public String subFaction;
+    public String branch;
+
     public ModLaserTurret(String name) {
         super(name);
+        this.faction = "null";
+        this.subFaction = "null";
+        this.branch = "null";
     }
 
     @Override

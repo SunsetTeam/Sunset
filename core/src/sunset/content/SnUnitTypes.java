@@ -1086,7 +1086,8 @@ public class SnUnitTypes implements ContentList{
             commandRadius = 48;
             visualElevation = -1;
             weapons.addAll(
-            new WeaponExt("small-autocannon") {{
+            new WeaponExt("small-autocannon") {
+                {
                 bullet = SnBullets.smallShell;
                 mirror = false;
                 rotate = true;

@@ -35,7 +35,7 @@ public class SnBullets implements ContentList {
         machineBullet, bigMachineBullet,
         //rocket
         smallBlueMissile, smallEnojieMissile, mediumEnojieMissile,
-        powerRocket,
+        powerRocket, drrRocket,
         thoriumPowerRocket, forsPowerRocket,//unused
         //artillery
         artilleryFors, artilleryBlast,
@@ -587,10 +587,29 @@ public class SnBullets implements ContentList {
             frontColor = SnPal.redfire1;
             backColor = SnPal.redfire2;
             hitEffect = despawnEffect = Fx.blastExplosion;
-            trailEffect = SnFx.bigRocketTrail;
+            trailEffect = Fx.missileTrail;
             pierce = true;
             pierceBuilding = true;
             pierceCap = 3;
+        }};
+
+        drrRocket = new MissileBulletType(11f, 1200) {{
+            width = 15f;
+            height = 25f;
+            drag = -0.05f;
+            homingRange = 25 * Vars.tilesize;
+            homingPower = 15f;
+            splashDamageRadius = 25 * Vars.tilesize;
+            splashDamage = 500;
+            keepVelocity = true;
+            hitSound = Sounds.explosion;
+            lifetime = 0.7f * Time.toSeconds;
+            frontColor = SnPal.redfire1;
+            backColor = SnPal.redfire2;
+            hitEffect = despawnEffect = Fx.blastExplosion;
+            trailEffect = Fx.missileTrail;
+            pierce = pierceBuilding = true;
+            pierceCap = 5;
         }};
 
         thoriumPowerRocket = new MissileBulletType(3, 465) {{

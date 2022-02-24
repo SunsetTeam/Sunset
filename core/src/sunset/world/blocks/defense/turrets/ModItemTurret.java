@@ -34,8 +34,15 @@ public class ModItemTurret extends ItemTurret {
     public int chargeShots;
     public boolean reloadBar = true;
 
+    public String faction;
+    public String subFaction;
+    public String branch;
+
     public ModItemTurret(String name) {
         super(name);
+        this.faction = "null";
+        this.subFaction = "null";
+        this.branch = "null";
         drawLight = false;
     }
 

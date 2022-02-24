@@ -43,7 +43,7 @@ public class SnTurrets implements ContentList {
     major, burner, trigger, eternity,
 
     //4x4
-    admiral, scorpio, flood, chain,
+    admiral, scorpio, flood, chain, drr,
 
     //5x5
     pressure, field, sniper, fanatic, defibrillator,
@@ -385,6 +385,22 @@ public class SnTurrets implements ContentList {
             liquidUse = 0.5f;
             laserColor = SnPal.chainLaser;
         }};
+        drr = new ModItemTurret("drr") {{
+            hideDetails = false;
+            size = 4;
+            health = 14000;
+            buildVisibility = BuildVisibility.sandboxOnly;
+            ammo(SnItems.flameid, SnBullets.drrRocket);
+            range = 50 * Vars.tilesize;
+            reloadTime = 0.5f * Time.toSeconds;
+            shots = 5;
+            burstSpacing = 0.1f * Time.toSeconds;
+            category = Category.turret;
+            inaccuracy = spread = 0;
+            shootShake = 2f;
+            shootSound = Sounds.missile;
+            shootEffect = Fx.fireSmoke;
+        }};
         //endregion 4x4
         //region 5x5
         pressure = new ItemTurret("pressure") {{
@@ -483,7 +499,6 @@ public class SnTurrets implements ContentList {
             rotateSpeed = 2;
             shootCone = 4;
             shootSound = Sounds.shootBig;
-            //ammoUseEffect = Fx.dynamicExplosion;
             targetAir = false;
             targetGround = true;
             drawLight = true;
@@ -824,7 +839,7 @@ public class SnTurrets implements ContentList {
             size = 4;
             health = 350 * size;
             reloadTime = 1.33f * Time.toSeconds;
-            range = 20 * Vars.tilesize;
+            range = 25 * Vars.tilesize;
             shots = 1;
             shootCone = 3;
             shootSound = Sounds.railgun;
@@ -849,7 +864,7 @@ public class SnTurrets implements ContentList {
             size = 5;
             health = synthesis1.health * size;
             reloadTime = 1.25f * Time.toSeconds;
-            range = 25 * Vars.tilesize;
+            range = 30 * Vars.tilesize;
             shots = 1;
             shootCone = 4;
             shootSound = Sounds.railgun;
@@ -874,12 +889,12 @@ public class SnTurrets implements ContentList {
             size = 6;
             health = synthesis1.health * size;
             reloadTime = 1 * Time.toSeconds;
-            range = 32 * Vars.tilesize;
+            range = 40 * Vars.tilesize;
             shots = 3;
             shootCone = 3;
             shootSound = Sounds.railgun;
-            speed = 2;
             shootShake = 5;
+            minRange = 7 * Vars.tilesize;
             maxAmmo = 30;
             spread = 0.1f;
             recoilAmount = 2.1f;
@@ -902,12 +917,12 @@ public class SnTurrets implements ContentList {
             size = 7;
             health = synthesis1.health * size;
             reloadTime = 1.66f * Time.toSeconds;
-            range = 40 * Vars.tilesize;
+            range = 48 * Vars.tilesize;
             shots = 3;
             shootCone = 1;
             shootSound = Sounds.railgun;
-            speed = 5;
             shootShake = 10;
+            minRange = 10 * Vars.tilesize;
             maxAmmo = 30;
             spread = 0;
             recoilAmount = 5;
@@ -934,9 +949,8 @@ public class SnTurrets implements ContentList {
             shots = 5;
             shootCone = 2.1f;
             shootSound = Sounds.release;
-            speed = 5;
             shootShake = 13;
-            minRange = 70;
+            minRange = 15 * Vars.tilesize;
             maxAmmo = 30;
             spread = 0.2f;
             recoilAmount = 9;

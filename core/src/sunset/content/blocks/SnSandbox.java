@@ -1,19 +1,22 @@
 package sunset.content.blocks;
 
 import mindustry.Vars;
-import mindustry.ctype.*;
-import mindustry.type.*;
-import mindustry.world.*;
+import mindustry.ctype.ContentList;
+import mindustry.type.Category;
+import mindustry.type.ItemStack;
+import mindustry.world.Block;
 import mindustry.world.blocks.logic.LogicBlock;
 import mindustry.world.blocks.logic.LogicDisplay;
-import mindustry.world.meta.*;
+import mindustry.world.meta.BuildVisibility;
+import sunset.world.blocks.sandbox.InfoTestBlock;
 import sunset.world.blocks.sandbox.SnMultiSource;
 import sunset.world.blocks.sandbox.SnMultiVoid;
 
 public class SnSandbox implements ContentList {
     public static Block
 
-    multiSource, multiVoid, superProcessor, superDisplay;
+    multiSource, multiVoid, superProcessor, superDisplay,
+    info;
 
     @Override
     public void load() {
@@ -44,5 +47,10 @@ public class SnSandbox implements ContentList {
             size = 9;
             hideDetails = false;
         }};
-}
+
+        info = new InfoTestBlock("info") {{
+            size = 3;
+            health = 300;
+        }};
+    }
 }
