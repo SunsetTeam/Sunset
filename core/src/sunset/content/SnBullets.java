@@ -490,9 +490,9 @@ public class SnBullets implements ContentList {
         //region rocket
         nobiumAimMissile = new AimBulletType(3f, 40f){{
             sprite = "missile";
-            width = 12;
-            height = 15;
-            lifetime = 200;
+            width = 13;
+            height = 16;
+            lifetime = 250;
             status = StatusEffects.burning;
             statusDuration = 5 * Time.toSeconds;
             frontColor = SnPal.nobiumBullet;
@@ -501,8 +501,9 @@ public class SnBullets implements ContentList {
             homingPower = 0.09f;
             homingRange = 0;
             trailColor = SnPal.nobiumBulletBack;
-            trailWidth = 3f;
-            trailLength = 5;
+            trailEffect = SnFx.aimMissileTrail;
+            trailRotation = true;
+            trailInterval = 0.5f;
             weaveScale = 4;
             weaveMag = 3;
             drag = 0.0020f;
@@ -1891,7 +1892,7 @@ public class SnBullets implements ContentList {
             fragBullets = 1;
             fragCone = 0.0001f;
         }};
-        largeHelicopterMissile = new BasicBulletType(6.3f, 13, "missile-large") {{
+        largeHelicopterMissile = new BasicBulletType(6.3f, 40, "missile-large") {{
             width = 14f;
             height = 17f;
             hitShake = 3f;
@@ -1921,7 +1922,7 @@ public class SnBullets implements ContentList {
             hitEffect = Fx.blastExplosion;
             despawnEffect = Fx.blastExplosion;
             homingRange = 100;
-            homingPower = 1f;
+            homingPower = 0.6f;
             weaveScale = 4f;
             weaveMag = 2f;
             pierce = true;
