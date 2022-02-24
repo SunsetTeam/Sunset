@@ -24,7 +24,10 @@ public class SnStatusEffects implements ContentList {
             greened,
 
             //stackable
-            overheat;
+            overheat,
+
+            //special
+            universityLaserSlow;
 
     @Override
     public void load() {
@@ -172,5 +175,11 @@ public class SnStatusEffects implements ContentList {
             }
         };
         //endregion stackable
+        //region special
+        universityLaserSlow = new StatusEffect("universityLaserSlow"){{
+            speedMultiplier = 0.1f;
+            dragMultiplier = 0.3f;
+        }};
+        //endregion special
     }
 }

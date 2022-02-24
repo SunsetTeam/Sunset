@@ -24,7 +24,7 @@ public class SnUnitTypes implements ContentList{
     //attack copters
     wind, thunder, nadir, halo, parhelion, mudflow,
     //buffers
-    satelite, planet, star, galaxy,
+    satelite, planet, star, galaxy, universe,
     //berserk
     mirage, vision, illusion, soothSayer, seer, abyssEye,
     //wheel
@@ -644,7 +644,7 @@ public class SnUnitTypes implements ContentList{
 
             constructor = UnitEntity::create;
 
-            abilities.add(new StatusFieldAbility(SnStatusEffects.starBuff, StatusEffects.none, 180, 8 * 24));
+            abilities.add(new StatusFieldAbility(SnStatusEffects.starBuff, StatusEffects.none, 180, 8 * 20));
 
             weapons.add(new WeaponExt("star-gun"){{
                 x = 0;
@@ -716,6 +716,48 @@ public class SnUnitTypes implements ContentList{
                 reload = 3;
                 range = 420;
                 damage = 80;
+            }});
+        }};
+        universe = new UnitTypeExt("universe"){{
+            health = 58000;
+            hitSize = 96;
+            speed = 1.8f;
+            accel = 0.05f;
+            drag = 0.066f;
+
+            flying = true;
+            circleTarget = false;
+            range = 460;
+
+            engineOffset = 33f;
+            engineSize = 12f;
+
+            itemCapacity = 270;
+            commandLimit = 6;
+
+            defaultController = FlyingWeaponAI::new;
+
+            constructor = UnitEntity::create;
+
+            abilities.add(new StatusFieldAbility(SnStatusEffects.starBuff, SnStatusEffects.galaxyDebuff, 960, 8 * 32));
+
+            weapons.add(new WeaponExt("starEater"){{
+                shootSound = Sounds.laserblast;
+                chargeSound = Sounds.lasercharge;
+                mirror = false;
+                rotate = true;
+                x = 0;
+                y = 16;
+                shootX = 0;
+                shootY = 8;
+                reload = 360f;
+                recoil = 0f;
+                cooldownTime = 360f;
+                firstShotDelay = 45f;
+                parentizeEffects = true;
+                shootStatus = SnStatusEffects.universityLaserSlow;
+                rotateShooting = false;
+                bullet = SnBullets.universeLaserBullet;
             }});
         }};
         //endregion buffers

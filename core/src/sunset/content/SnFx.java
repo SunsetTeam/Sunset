@@ -9,6 +9,7 @@ import arc.graphics.g2d.Lines;
 import arc.math.Angles;
 import arc.math.Interp;
 import arc.math.Mathf;
+import arc.math.Rand;
 import arc.math.geom.Position;
 import arc.math.geom.Vec2;
 import arc.struct.Seq;
@@ -31,6 +32,8 @@ import static arc.math.Angles.randLenVectors;
 import static mindustry.Vars.tilesize;
 
 public class SnFx {
+    private static final Rand rand = new Rand();
+
     public static final Effect
     //region
     enojieCraft = new Effect(55, e -> {
@@ -590,6 +593,24 @@ public class SnFx {
             }
         };
         Angles.randLenVectors(e.id, 4, e.finpow() * 20, e.rotation, 360, floatc21);
+    }),
+
+    univerityLaserCharge = new Effect(45, e -> {
+        rand.setSeed(e.id);
+        float sum = 0;
+        Vec2 pos = new Vec2(), tmp = new Vec2();
+        for(int i = 0; i < 32; i++) {
+            float rnd = rand.nextFloat();
+            Draw.color(Pal.surge);
+            Draw.alpha(e.fin() * ((32-i)/32f));
+            tmp.set(0, sum * 21).setAngle(e.rotation);
+            pos.set(e.x, e.y).add(tmp);
+            float len = (rnd*2-1)*e.fin()*21;
+            tmp.set(0, len).setAngle(e.rotation + (len > 0 ? 90 : -90));
+            pos.add(tmp);
+            Fill.circle(pos.x, pos.y, 12 * e.fin());
+            sum += rnd;
+        }
     }),
     //endregion
     //region special

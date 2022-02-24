@@ -4,14 +4,14 @@ import arc.graphics.Color;
 import arc.graphics.g2d.Draw;
 import arc.graphics.g2d.Fill;
 import arc.math.Angles;
+import arc.math.Mathf;
 import arc.math.geom.Vec2;
+import arc.util.Log;
 import mindustry.content.*;
 import mindustry.ctype.ContentList;
 import mindustry.entities.Units;
 import mindustry.entities.bullet.*;
-import mindustry.gen.Bullet;
-import mindustry.gen.Sounds;
-import mindustry.gen.Unit;
+import mindustry.gen.*;
 import mindustry.graphics.Pal;
 import sunset.entities.bullet.*;
 import sunset.graphics.SnPal;
@@ -45,7 +45,7 @@ public class SnBullets implements ContentList {
     smallPlastaniumBulletFrag, smallPlastaniumBullet, smallPyratiteBullet, smallSurgeAlloyBullet, smallBlueMissileFrag, smallBlueMissile, smallForsSpine, smallEnojieMissile,
     //units
     basicHelicopterGun, mediumHelicopterGun, helicopterMissile, clusterRocketSmall, clusterRocket, copterEnergySphere, bigHelicopterGunFrag, bigHelicopterGun, bigHelicopterMissile, laserGun, laserHelicopterFrag, largeHelicopterGun, largeHelicopterMissile, smallHelicopterMissiles, shrapnelCopterGun, gigantHelicopterGun, bigClusterRocketSmall, bigClusterRocket, bigCopterEnergySphere,
-    cometWaterShot, starStunBullet, galaxyKnockbackBullet,
+    cometWaterShot, starStunBullet, galaxyKnockbackBullet, universeLaserBullet,
     wheel1Bullet, wheel2Shotgun, wheel3Burst, wheel4Shotgun, wheel4Artillery, wheel5Flame, wheel5Bullet, mirageGunBullet,
     //misc
     emptyBullet, overheatBullet,
@@ -1377,6 +1377,30 @@ public class SnBullets implements ContentList {
             public void update(Bullet b) {
                 if (b.timer(0, 1f)) {
                     trailEffect.at(b.x, b.y, b.rotation(), 3f);
+                }
+            }
+        };
+        universeLaserBullet = new LaserBulletType(){{
+            length = 420f;
+            damage = 470f;
+            width = 90f;
+            lifetime = 40f;
+            largeHit = true;
+            status = SnStatusEffects.universityLaserSlow;
+            statusDuration = 180f;
+            lightColor = lightningColor = Pal.surge;
+            shootEffect = SnFx.univerityLaserCharge;
+            colors = new Color[]{ Pal.surge.cpy().a(0.4f), Pal.surge };
+        }
+            double stunChance = 0.075;
+            float stunDuration = 480f;
+
+            @Override
+            public void hitEntity(Bullet b, Hitboxc entity, float health) {
+                super.hitEntity(b, entity, health);
+                if(Mathf.chance(stunChance) && entity instanceof Unit) {
+                    Log.info("Hit " + entity);
+                    ((Unit)entity).apply(SnStatusEffects.stun, stunDuration);
                 }
             }
         };
