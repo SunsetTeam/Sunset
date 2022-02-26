@@ -15,7 +15,7 @@ import sunset.world.meta.*;
 
 public class MinigunTurret extends ItemTurret{
     public float inaccuracyUp = 0f;
-    public float maxShootTime = 20f;
+    public float totalShootingTime = 20f;
     public AStats aStats = new AStats();
 
     public MinigunTurret(String name){
@@ -27,9 +27,9 @@ public class MinigunTurret extends ItemTurret{
     public void setBars(){
         super.setBars();
         bars.add("sunset-heat", (MinigunTurret.MinigunTurretBuild entity) -> new Bar(
-        () -> Core.bundle.format("bar.sunset-heat", Utils.stringsFixed(Mathf.clamp(entity.reload / maxShootTime) * 100f)),
+        () -> Core.bundle.format("bar.sunset-heat", Utils.stringsFixed(Mathf.clamp(entity.reload / totalShootingTime) * 100f)),
         () -> entity.team.color,
-        () -> Mathf.clamp(entity.reload / maxShootTime)
+        () -> Mathf.clamp(entity.reload / totalShootingTime)
         ));
     }
 
@@ -41,17 +41,24 @@ public class MinigunTurret extends ItemTurret{
 
     public class MinigunTurretBuild extends ItemTurretBuild{
         boolean isShoot = false;
-        float totalShootingTime = 0;
-
-        @Override
-        public void bullet(BulletType type, float angle){
-            super.bullet(type, angle + Mathf.range(inaccuracyUp * totalShootingTime));
-        }
-
         @Override
         protected void shoot(BulletType type){
             isShoot = false;
             super.shoot(type);
+        }
+        @Override
+        protected void updateShooting(){
+            boolean canShoot = reload + delta() * peekAmmo().reloadMultiplier * baseReloadSpeed() >= reloadTime && !charging;
+            this.isShoot = canShoot;
+            super.updateShooting();
+            if(!canShoot || isShoot) return;
+            totalShootingTime += Time.delta;
+        }
+
+
+        @Override
+        public void bullet(BulletType type, float angle){
+            super.bullet(type, angle + Mathf.range(inaccuracyUp * totalShootingTime));
         }
 
         @Override
@@ -71,15 +78,6 @@ public class MinigunTurret extends ItemTurret{
         public void draw(){
             super.draw();
             ADrawf.drawText(this, "totalShootingTime: " + totalShootingTime);
-        }
-
-        @Override
-        protected void updateShooting(){
-            boolean canShoot = reload + delta() * peekAmmo().reloadMultiplier * baseReloadSpeed() >= reloadTime && !charging;
-            this.isShoot = canShoot;
-            super.updateShooting();
-            if(!canShoot || isShoot) return;
-            totalShootingTime += Time.delta;
         }
 
         @Override

@@ -7,7 +7,7 @@ buildscript {
 
         aciVersion = "ddba381caf1"
 
-        modCoreVersion = "19cdb23aea5"
+        modCoreVersion = "8dbf4593d2e"
 
         kotlinVersion="1.5.21"
 

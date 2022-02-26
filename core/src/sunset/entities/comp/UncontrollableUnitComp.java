@@ -53,7 +53,7 @@ abstract class UncontrollableUnitComp implements Unitc{
     @Override
     @Annotations.Replace
     public void controller(UnitController controller){
-        if(validControllerType(controller)){
+        if(validController(controller)){
             this.controller = controller;
             if(controller.unit() != self()) controller.unit(self());
         }

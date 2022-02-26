@@ -1,65 +1,72 @@
 package sunset.content.blocks.defense;
 
-import static mindustry.type.ItemStack.with;
-
+import arc.util.Time;
 import mindustry.ctype.ContentList;
 import mindustry.type.Category;
 import mindustry.world.Block;
 import mindustry.world.blocks.defense.Wall;
+import mindustry.world.meta.BuildVisibility;
 import sunset.content.SnItems;
-import sunset.world.blocks.defense.walls.AntiPierceWall;
+import sunset.content.SnStatusEffects;
 import sunset.world.blocks.defense.walls.IndestructibleWall;
-import sunset.world.blocks.defense.walls.SelfHealWall;
+import sunset.world.blocks.defense.walls.SnWall;
+import sunset.world.blocks.environment.RadiationDebris;
 
-public class SnWalls implements ContentList {
+import static mindustry.type.ItemStack.with;
+
+public class SnWalls implements ContentList{
     public static Block
 
-            forsWall, forsWallLarge,
-            naturiteWall, naturiteWallLarge,
-            enojiewall, enojieWallLarge,
+    forsWall, forsWallLarge,
+    naturiteWall, naturiteWallLarge,
+    enojiewall, enojieWallLarge,
 
-            indestructibleWall, indestructibleWallLarge;
+    radiationWallSmall,
+
+    indestructibleWall, indestructibleWallLarge;
 
     @Override
-    public void load() {
-        forsWall = new Wall("fors-wall") {{
+    public void load(){
+        forsWall = new Wall("fors-wall"){{
             requirements(Category.defense, with(SnItems.fors, 6));
             size = 1;
             health = 990;
         }};
-        forsWallLarge = new Wall("fors-wall-large") {{
+        forsWallLarge = new Wall("fors-wall-large"){{
             requirements(Category.defense, with(SnItems.fors, 24));
             health = forsWall.health * 4;
             size = 2;
         }};
-
-        naturiteWall = new SelfHealWall("naturite-wall") {{
+        //region heal
+        naturiteWall = new SnWall("naturite-wall"){{
             requirements(Category.defense, with(SnItems.naturite, 6));
             size = 1;
             health = 810;
-            heal = 0.5f;
+            healAmount(0.5f);
         }};
-        naturiteWallLarge = new SelfHealWall("naturite-wall-large") {{
+        naturiteWallLarge = new SnWall("naturite-wall-large"){{
             requirements(Category.defense, with(SnItems.naturite, 24));
             health = naturiteWall.health * 4;
-            heal = 2f;
+            healAmount(2f);
             size = 2;
         }};
+        //endregion
+        //region AntiPierceWall
 
-        enojiewall = new AntiPierceWall("enojie-wall") {{
+        enojiewall = new SnWall("enojie-wall"){{
             requirements(Category.defense, with(SnItems.enojie, 6));
-            pierceDebuff = 2;
-            damageDebuff = 0.85f;
+            pierceMultiplier = 2;
+            collidedDamageMultiplier = 0.85f;
             size = 1;
             health = 1225;
             insulated = true;
             absorbLasers = true;
             schematicPriority = 10;
         }};
-        enojieWallLarge = new AntiPierceWall("enojie-wall-large") {{
+        enojieWallLarge = new SnWall("enojie-wall-large"){{
             requirements(Category.defense, with(SnItems.enojie, 24));
-            pierceDebuff = 5;
-            damageDebuff = 0.7225f;
+            pierceMultiplier = 5;
+            collidedDamageMultiplier = 0.7225f;
             health = enojiewall.health * 4;
             size = 2;
             insulated = true;
@@ -67,11 +74,23 @@ public class SnWalls implements ContentList {
             schematicPriority = 10;
         }};
 
-        indestructibleWall = new IndestructibleWall("indestructible-wall") {{
-            size = 1;
-        }};
-        indestructibleWallLarge = new IndestructibleWall("indestructible-wall-large") {{
+        radiationWallSmall = new RadiationDebris("radiation-wall-small"){{
+            requirements(Category.defense, BuildVisibility.sandboxOnly, with(SnItems.planatrium, 6));
             size = 2;
+            variants = 3;
+            buildCostMultiplier = 2f;
+            radiationStatus = SnStatusEffects.radiation;
+        }};
+        //endregion
+
+        indestructibleWall = new IndestructibleWall("indestructible-wall"){{
+            size = 1;
+            placeableLiquid = true;
+        }};
+        indestructibleWallLarge = new IndestructibleWall("indestructible-wall-large"){{
+            size = 2;
+            placeableLiquid = true;
         }};
     }
+
 }

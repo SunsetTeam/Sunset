@@ -29,7 +29,8 @@ public class StatusFieldAbility extends Ability implements StatValue {
 
     @Override
     public void update(Unit unit){
-        timer += Time.delta;
+        //Wrong code
+        /*timer += Time.delta;
 
         if(timer >= reload){
             SnFx.statusField.at(unit.x, unit.y, range);
@@ -41,7 +42,7 @@ public class StatusFieldAbility extends Ability implements StatValue {
                 }
             });
             timer = 0f;
-        }
+        }*/
     }
 
     @Override

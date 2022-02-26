@@ -12,6 +12,10 @@ import mma.world.draw.*;
 import sunset.content.*;
 import sunset.world.draw.*;
 
+import arc.math.Interp;
+import arc.graphics.g2d.TextureRegion;
+import arc.Core;
+import arc.graphics.g2d.Draw;
 import static mindustry.type.ItemStack.with;
 
 public class SnCrafting implements ContentList{
@@ -20,7 +24,8 @@ public class SnCrafting implements ContentList{
     //advanced
     advancedCompressor, advancedWeaver, advancedKiln, advancedSurge, advancedCryomixer,
     //standard
-    collider, purifier, crystallizer, enojieKiln;
+    collider, purifier, crystallizer, enojieKiln,
+	  testCrafter;
 
     @Override
     public void load(){
@@ -145,6 +150,26 @@ public class SnCrafting implements ContentList{
             consumes.liquid(SnLiquids.burheyna, 0.4f);
             consumes.power(3.5f);
         }};
+        crystallizer = new GenericCrafter("crystallizer"){{
+            requirements(Category.crafting, with(Items.lead, 130, Items.metaglass, 110, Items.silicon, 120, Items.plastanium, 25));
+
+            craftEffect = SnFx.crystalyze;
+            updateEffect = SnFx.crystalyzeSmall;
+            hasItems = true;
+            itemCapacity = 30;
+            liquidCapacity = 30f;
+            outputItem = new ItemStack(SnItems.naturite, 2);
+            craftTime = 34f;
+            size = 3;
+            hasPower = true;
+            drawer = new DrawSmelter(){{
+                flameColor = Color.valueOf("F9ECA3");
+            }};
+
+            consumes.item(Items.sand, 3);
+            consumes.liquid(Liquids.water, 0.17f);
+            consumes.power(2f);
+        }};
         purifier = new GenericCrafter("purifier"){{
             requirements(Category.crafting, with(Items.copper, 110, Items.titanium, 95, Items.silicon, 80, Items.plastanium, 65));
 
@@ -160,31 +185,11 @@ public class SnCrafting implements ContentList{
             ambientSound = Sounds.grinding;
             ambientSoundVolume = 0.025f;
 
-            consumes.items(with(Items.titanium, 3, Items.thorium, 2, SnItems.fors, 1));
+            consumes.items(with(Items.titanium, 3, Items.thorium, 1, SnItems.fors, 1));
             consumes.power(2.5f);
         }};
-        crystallizer = new GenericCrafter("crystallizer"){{
-            requirements(Category.crafting, with(Items.lead, 130, Items.thorium, 110, Items.silicon, 120, SnItems.nobium, 90, Items.plastanium, 75));
-
-            craftEffect = SnFx.crystalyze;
-            updateEffect = SnFx.crystalyzeSmall;
-            hasItems = true;
-            itemCapacity = 30;
-            liquidCapacity = 30f;
-            outputItem = new ItemStack(SnItems.naturite, 2);
-            craftTime = 34f;
-            size = 3;
-            hasPower = true;
-            drawer = new DrawSmelter(){{
-                flameColor = Color.valueOf("F9ECA3");
-            }};
-
-            consumes.item(Items.sand, 4);
-            consumes.liquid(Liquids.water, 0.20f);
-            consumes.power(2.7f);
-        }};
         enojieKiln = new GenericCrafter("enojie-kiln"){{
-            requirements(Category.crafting, with(Items.lead, 200, SnItems.nobium, 150, Items.graphite, 140, Items.silicon, 120, Items.surgeAlloy, 80));
+            requirements(Category.crafting, with(Items.lead, 180, SnItems.nobium, 150, Items.graphite, 140, Items.silicon, 120, Items.surgeAlloy, 80));
 
             outputItem = new ItemStack(SnItems.enojie, 2);
             craftTime = 69f;
@@ -194,9 +199,14 @@ public class SnCrafting implements ContentList{
             craftEffect = SnFx.enojieCraft;
             updateEffect = SnFx.enojieBurn;
 
-            consumes.items(with(SnItems.nobium, 2, SnItems.planatrium, 3, Items.metaglass, 1));
+            consumes.items(with(SnItems.nobium, 1, SnItems.planatrium, 3, Items.metaglass, 1));
             consumes.power(5.3f);
         }};
         //endregion standard
+		testCrafter = new GenericCrafter("test-crafter") {{
+            size = 2;
+            outputItem = new ItemStack(Items.lead, 4);
+            consumes.items(with(Items.lead, 2));
+        }};
     }
 }

@@ -1,40 +1,32 @@
 package sunset.type.unitTypes;
 
-import arc.Core;
-import arc.graphics.Color;
-import arc.graphics.Pixmap;
-import arc.graphics.g2d.Draw;
-import arc.graphics.gl.FrameBuffer;
-import arc.math.Mathf;
-import arc.math.geom.Vec2;
-import arc.struct.Seq;
-import arc.util.Time;
-import arc.util.Tmp;
-import mindustry.content.Fx;
-import mindustry.entities.Effect;
-import mindustry.gen.Unit;
-import mindustry.gen.UnitEntity;
-import mindustry.graphics.Pal;
-import mindustry.world.blocks.environment.Floor;
-import mma.type.ImageGenerator;
-import mma.type.pixmap.PixmapProcessor;
-import sunset.SnVars;
-import sunset.type.blocks.Rotor;
-import sunset.utils.PixmapRotator;
+import arc.*;
+import arc.graphics.*;
+import arc.graphics.g2d.*;
+import arc.graphics.gl.*;
+import arc.math.*;
+import arc.math.geom.*;
+import arc.struct.*;
+import arc.util.*;
+import mindustry.content.*;
+import mindustry.entities.*;
+import mindustry.gen.*;
+import mindustry.graphics.*;
+import mindustry.world.blocks.environment.*;
+import mma.type.*;
+import mma.type.pixmap.*;
+import sunset.*;
+import sunset.type.blocks.*;
+import sunset.utils.*;
 
-import static mindustry.Vars.renderer;
-import static mindustry.Vars.world;
+import static mindustry.Vars.*;
 
-public class CopterUnitType extends SnUnitType implements ImageGenerator {
+public class CopterUnitType extends SnUnitType implements ImageGenerator{
     public final Seq<Rotor> rotors = new Seq<>();
     public float unitFallRotateSpeed = 6f;
-    public Effect smokeFx = Fx.none;
-    public Effect burningFx = Fx.none;
-    public float smokeChance = 0f;
-    public float smokeX = 0f;
-    public float smokeY = 0f;
 
-    public CopterUnitType(String name) {
+
+    public CopterUnitType(String name){
         super(name);
 
         constructor = UnitEntity::create;
@@ -43,35 +35,37 @@ public class CopterUnitType extends SnUnitType implements ImageGenerator {
         engineSize = 0f;
     }
 
+    public void rotors(Rotor... rotors){
+        this.rotors.set(rotors);
+    }
+
     @Override
-    public void update(Unit unit) {
+    public void update(Unit unit){
         super.update(unit);
-        Vec2 rotor = Tmp.v1.trns(unit.rotation - 90, smokeX, smokeY).add(unit);
-        if (unit.health <= 0 || unit.dead()) {
+        if(unit.health <= 0 || unit.dead()){
             unit.rotation += Time.delta * (fallSpeed * 2000);
             unit.rotation = Time.time * unitFallRotateSpeed;
-            if (Mathf.chanceDelta(smokeChance)) {
-                smokeFx.at(smokeX, smokeY);
-                burningFx.at(smokeX, smokeY);
             }
         }
-    }
 
     @Override
-    public void draw(Unit unit) {
+    public void draw(Unit unit){
         super.draw(unit);
+        float z = unit.elevation > 0.5f ? (lowAltitude ? Layer.flyingUnitLow : Layer.flyingUnit) : groundLayer + Mathf.clamp(hitSize / 4000f, 0, 0.01f);
+        Draw.z(z);
         drawRotor(unit);
+        Draw.reset();
     }
 
-    public void drawRotor(Unit unit) {
+    public void drawRotor(Unit unit){
         applyColor(unit);
         rotors.each(rotor -> rotor.draw(unit));
         Draw.reset();
     }
 
     @Override
-    public void drawShadow(Unit unit) {
-        if (!SnVars.settings.advancedShadows()) {
+    public void drawShadow(Unit unit){
+        if(!SnVars.settings.advancedShadows()){
 
             super.drawShadow(unit);
             return;
@@ -98,22 +92,23 @@ public class CopterUnitType extends SnUnitType implements ImageGenerator {
         unit.shadowAlpha = unit.shadowAlpha < 0 ? dest : Mathf.approachDelta(unit.shadowAlpha, dest, 0.11f);
         Draw.color(Pal.shadow, Pal.shadow.a * unit.shadowAlpha);
 
-        Draw.rect(Draw.wrap(buffer.getTexture()),Core.camera.position.x+shadowTX * e,Core.camera.position.y+ shadowTY * e,
-                Core.camera.width,-Core.camera.height);
+        Draw.rect(Draw.wrap(buffer.getTexture()), Core.camera.position.x + shadowTX * e, Core.camera.position.y + shadowTY * e,
+        Core.camera.width, -Core.camera.height);
         Draw.color();
     }
 
     @Override
-    public void load() {
+    public void load(){
         super.load();
         rotors.each(Rotor::load);
         shadowRegion = Core.atlas.find(name + "-no-rotors", shadowRegion);
     }
 
     @Override
-    public Pixmap generate(Pixmap icon, PixmapProcessor processor) {
+    public Pixmap generate(Pixmap icon, PixmapProcessor processor){
         processor.save(icon, name + "-no-rotors");
-        for (Rotor rotor : rotors) {
+        Pixmap realIcon;
+        for(Rotor rotor : rotors){
 //            Pixmap rotreg = PixmapProcessor.outline(processor.get(rotor.rotorRegion));
             Pixmap rotreg = processor.get(rotor.rotorRegion);
 //            Pixmap top = processor.get(rotor.topRegion).outline(Pal.darkerMetal,3);
@@ -122,14 +117,23 @@ public class CopterUnitType extends SnUnitType implements ImageGenerator {
             processor.save(PixmapProcessor.outline(rotreg), rotor.name + "-outline");
             rotreg = PixmapProcessor.outline(fullRotor(rotreg, processor, rotor.rotorCount));
             processor.replace(rotor.topRegion, top);
-            int xoffset = (int) (rotor.offsetX / Draw.scl + icon.width / 2f);
-            int yoffset = (int) (-rotor.offsetY / Draw.scl + icon.height / 2f);
+            int xoffset = (int)(rotor.offsetX / Draw.scl + icon.width / 2f);
+            int yoffset = (int)(-rotor.offsetY / Draw.scl + icon.height / 2f);
             int rx = xoffset - rotreg.width / 2;
             int ry = yoffset - rotreg.height / 2;
             int tx = xoffset - top.width / 2;
             int ty = yoffset - top.height / 2;
 //            icon = processor.drawScaleAt(icon, rotreg, rx, ry);
+//            PixmapProcessor.drawScaleAt()
+            realIcon = icon;
+            if(rotor.underUnit){
+                icon = new Pixmap(icon.width, icon.height);
+//                icon=PixmapProcessor.drawScaleAt(rotreg,icon,rx,ry);
+            }
             icon.draw(rotreg, rx, ry, true);
+            if(rotor.underUnit){
+                icon.draw(realIcon, true);
+            }
 //            xoffset = (int) (rotor.offsetX / Draw.scl + icon.width / 2f);
 //            yoffset = (int) (-rotor.offsetY / Draw.scl + icon.height / 2f);
             icon.draw(top, tx, ty, true);
@@ -138,11 +142,11 @@ public class CopterUnitType extends SnUnitType implements ImageGenerator {
         return icon;
     }
 
-    private Pixmap fullRotor(Pixmap rotreg, PixmapProcessor processor, int count) {
+    private Pixmap fullRotor(Pixmap rotreg, PixmapProcessor processor, int count){
         int size = Math.max(rotreg.width, rotreg.height);
         Pixmap fullreg = new Pixmap(size, size);
-        for (int i = 0; i < count; i++) {
-            PixmapProcessor.drawCenter(fullreg, PixmapRotator.rotate(rotreg, i / (float) count * 360f));
+        for(int i = 0; i < count; i++){
+            PixmapProcessor.drawCenter(fullreg, PixmapRotator.rotate(rotreg, i / (float)count * 360f));
         }
         return fullreg;
     }

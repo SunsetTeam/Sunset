@@ -14,7 +14,6 @@ import mma.annotations.ModAnnotations.*;
 import sunset.content.*;
 import sunset.core.*;
 import sunset.gen.*;
-import sunset.type.*;
 import sunset.type.unitTypes.*;
 import sunset.utils.*;
 
@@ -66,6 +65,7 @@ public class Sunset extends MMAMod{
             sector.generator.map.mod = modInfo;
         }
         if(c instanceof UnitType type){
+            if(type.constructor == null) return;
             Unit unit = type.constructor.get();
             boolean uncontrollableType = type instanceof UncontrollableUnitType;
             boolean uncontrollableUnit = unit instanceof UncontrollableUnitc;

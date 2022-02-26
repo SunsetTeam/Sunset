@@ -31,7 +31,7 @@ public class SnSector extends Sector{
             if(!planet.name.endsWith(planetName)) return;
             String methodName = "generator";
             try{
-                Field field = Planet.class.getField(methodName);
+                Field field = Planet.class.getDeclaredField(methodName);
                 field.setAccessible(true);
                 Reflect.set(planet, field, new PizdecGenerator((generator, pos) -> {
                     float max = 4;

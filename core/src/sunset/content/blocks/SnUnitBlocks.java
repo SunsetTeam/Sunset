@@ -18,15 +18,15 @@ public class SnUnitBlocks implements ContentList {
     public static Block
 
             //factories
-            bigAirFactory, bigGroundFactory,
+            upgradedAirFactory, upgradedGroundFactory,
 
             //reconstructors
-            nobiumAdditiveReconstructor, nobiummultiplicativeReconstructor, nobiumExponentialReconstructor, nobiumTetrativeReconstructor;
+            upgradedAdditiveReconstructor, upgradedMultiplicativeReconstructor, upgradedExponentialReconstructor, upgradedTetrativeReconstructor;
 
     @Override
     public void load() {
         //region factories
-        bigAirFactory = new UnitFactory("big-air-factory") {{
+        upgradedAirFactory = new UnitFactory("upgraded-air-factory") {{
             requirements(Category.units, with(SnItems.fors, 80, Items.copper, 70));
             plans = Seq.with(
                     new UnitPlan(SnUnitTypes.wind, 70f * 15, with(SnItems.fors, 15, Items.silicon, 20))
@@ -36,22 +36,22 @@ public class SnUnitBlocks implements ContentList {
             consumes.power(2.5f);
         }};
 
-        bigGroundFactory = new UnitFactory("big-ground-factory") {{
+        upgradedGroundFactory = new UnitFactory("upgraded-ground-factory") {{
             requirements(Category.units, with(SnItems.fors, 80, Items.copper, 70, Items.lead, 65));
             plans = Seq.with(
-                    new UnitPlan(SnUnitTypes.mirage, 75f * 15, with(SnItems.nobium, 20, Items.silicon, 20, SnItems.fors, 15))
+                    new UnitPlan(SnUnitTypes.mirage, 75f * 15, with(Items.silicon, 20, SnItems.fors, 15))
             );
             size = 3;
             consumes.power(2.5f);
         }};
         //endregion factories
         //region reconstructors
-        nobiumAdditiveReconstructor = new Reconstructor("nobium-additive-reconstructor") {{
-            requirements(Category.units, with(SnItems.fors, 210, Items.copper, 230, SnItems.nobium, 100, Items.silicon, 90));
+        upgradedAdditiveReconstructor = new Reconstructor("upgraded-additive-reconstructor") {{
+            requirements(Category.units, with(SnItems.fors, 210, Items.copper, 230, SnItems.naturite, 100, Items.silicon, 90));
 
             size = 3;
             consumes.power(4f);
-            consumes.items(with(Items.silicon, 40, SnItems.nobium, 50));
+            consumes.items(with(Items.silicon, 40, SnItems.naturite, 50));
 
             constructTime = 65f * 10f;
 
@@ -62,8 +62,8 @@ public class SnUnitBlocks implements ContentList {
             );
         }};
 
-        nobiummultiplicativeReconstructor = new Reconstructor("nobium-multiplicative-reconstructor") {{
-            requirements(Category.units, with(SnItems.fors, 670, Items.copper, 530, SnItems.nobium, 400, Items.silicon, 390, Items.metaglass, 100));
+        upgradedMultiplicativeReconstructor = new Reconstructor("upgraded-multiplicative-reconstructor") {{
+            requirements(Category.units, with(SnItems.fors, 670, Items.copper, 530,  Items.silicon, 390, SnItems.nobium, 200, Items.metaglass, 100));
 
             size = 5;
             consumes.power(6f);
@@ -73,12 +73,12 @@ public class SnUnitBlocks implements ContentList {
 
             upgrades.addAll(
                     new UnitType[]{SnUnitTypes.thunder, SnUnitTypes.nadir},
-                    new UnitType[]{SnUnitTypes.satelite, SnUnitTypes.planet}
+                    new UnitType[]{SnUnitTypes.satellite, SnUnitTypes.planet}
             );
         }};
 
 
-        nobiumExponentialReconstructor = new Reconstructor("nobium-exponential-reconstructor") {{
+        upgradedExponentialReconstructor = new Reconstructor("upgraded-exponential-reconstructor") {{
             requirements(Category.units, with(SnItems.fors, 2100, Items.lead, 2000, SnItems.nobium, 1980, Items.silicon, 1420, SnItems.naturite, 700));
 
             size = 7;
@@ -97,7 +97,7 @@ public class SnUnitBlocks implements ContentList {
             );
         }};
 
-        nobiumTetrativeReconstructor = new Reconstructor("nobium-tetrative-reconstructor") {{
+        upgradedTetrativeReconstructor = new Reconstructor("upgraded-tetrative-reconstructor") {{
             requirements(Category.units, with(SnItems.nobium, 3900, Items.lead, 3500, Items.phaseFabric, 2880, Items.silicon, 2470, SnItems.enojie, 2300, SnItems.planatrium, 2100));
 
             size = 9;

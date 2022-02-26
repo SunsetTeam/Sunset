@@ -14,37 +14,38 @@ public class SnTechTree extends TechTreeManager implements ContentList {
         //region items and liquids
         node(lead, () -> {
             nodeProduce(fors, () -> {
-                nodeProduce(nobium, () -> {
-
-                });
+                nodeProduce(nobium, () -> {});
             });
             nodeProduce(planatrium, () -> {
-                nodeProduce(enojie, () -> {
-
-                });
+                nodeProduce(enojie, () -> {});
             });
-            nodeProduce(flameid, () -> {
-
-            });
-            nodeProduce(coldent, () -> {
-
-            });
+            nodeProduce(flameid, () -> {});
+            nodeProduce(coldent, () -> {});
         });
         nodeProduce(titanium, () -> {
-            nodeProduce(reneubite, () -> {
-
-            });
+            nodeProduce(reneubite, () -> {});
         });
         nodeProduce(sand, () -> {
-            nodeProduce(naturite, () -> {
-
-            });
+            nodeProduce(naturite, () -> {});
         });
         nodeProduce(oil, () -> {
-            nodeProduce(burheyna, () -> {
-
-            });
+            nodeProduce(burheyna, () -> {});
         });
         //endregion items and liquids
+        //region blocks
+        //region turrets
+        //node(duo), () -> {};
+
+        /*node(sting, () -> {
+            node(excellence, () -> {});
+        });
+        node(spine, () -> {});
+        node(eagle, () -> {
+            node(reflection, () -> {
+                node(scorpio, () -> {});
+            });
+        });*/
+        //endregion turrets
+        //endregion blocks
     }
 }
