@@ -41,7 +41,7 @@ public class SnWalls implements ContentList{
         naturiteWall = new SnWall("naturite-wall"){{
             requirements(Category.defense, with(SnItems.naturite, 6));
             size = 1;
-            health = 810;
+            health = 820;
             healAmount(0.5f);
         }};
         naturiteWallLarge = new SnWall("naturite-wall-large"){{
@@ -52,13 +52,12 @@ public class SnWalls implements ContentList{
         }};
         //endregion
         //region AntiPierceWall
-
         enojiewall = new SnWall("enojie-wall"){{
             requirements(Category.defense, with(SnItems.enojie, 6));
             pierceMultiplier = 2;
             collidedDamageMultiplier = 0.85f;
             size = 1;
-            health = 1225;
+            health = 1245;
             insulated = true;
             absorbLasers = true;
             schematicPriority = 10;
