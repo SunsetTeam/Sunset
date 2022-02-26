@@ -10,10 +10,8 @@ import mindustry.content.Liquids;
 import mindustry.content.StatusEffects;
 import mindustry.content.UnitTypes;
 import mindustry.ctype.ContentList;
-import mindustry.entities.bullet.ArtilleryBulletType;
 import mindustry.entities.bullet.BasicBulletType;
 import mindustry.entities.bullet.BombBulletType;
-import mindustry.entities.bullet.FlakBulletType;
 import mindustry.gen.Sounds;
 import mindustry.gen.UnitEntity;
 import mindustry.gen.UnitWaterMove;
@@ -23,11 +21,11 @@ import mindustry.type.UnitType;
 import mindustry.type.weapons.PointDefenseWeapon;
 import sunset.ai.*;
 import sunset.ai.weapon.ExtinguishWeaponAI;
+import sunset.entities.abilities.EffectLowHPAbility;
 import sunset.entities.abilities.StatusFieldAbility;
 import sunset.entities.bullet.BerserkLaserBulletType;
 import sunset.gen.Deliverc;
 import sunset.gen.Segmentc;
-import sunset.graphics.SnPal;
 import sunset.type.BerserkStage;
 import sunset.type.ammo.LiquidAmmoType;
 import sunset.type.blocks.Energy;
@@ -40,13 +38,15 @@ import sunset.type.weapons.WeaponExt;
 
 public class SnUnitTypes implements ContentList{
     public static UnitType
+    //attack copters
+    wind, thunder, nadir, halo, parhelion, mudflow,
+    //buffers
+    bufferT1, satellite, planet, star, galaxy, universe,
     //ground
     mirage, vision, illusion, soothSayer, seer, abyssEye,
     wheelT1, wheelT2, wheelT3, wheelT4, wheelT5, wheelT6,
     freezingT1,
     //air
-    wind, thunder, nadir, halo, mudflow, parhelion,
-    bufferT1, satellite, planet, star, galaxy, bufferT6,
     engineT1,
     //naval
     yellowT1, yellowT2, yellowT3, yellowT4, yellowT5,
@@ -804,7 +804,6 @@ public class SnUnitTypes implements ContentList{
 
             flying = true;
             circleTarget = false;
-
             unitFallRotateSpeed = 2.6f;
 
             rotors.add(
@@ -1067,7 +1066,49 @@ public class SnUnitTypes implements ContentList{
                 //damage = 80;
             }});
         }};
-        //there should be a bufferT6 here
+        universe = new UnitTypeExt("universe"){{
+            health = 58000;
+            hitSize = 88;
+            speed = 1.8f;
+            accel = 0.05f;
+            drag = 0.066f;
+
+            flying = true;
+            circleTarget = false;
+            range = 460;
+
+            engineOffset = 33f;
+            engineSize = 12f;
+
+            itemCapacity = 270;
+            commandLimit = 6;
+
+            defaultController = FlyingWeaponAI::new;
+
+            constructor = UnitEntity::create;
+
+            abilities.add(new StatusFieldAbility(SnStatusEffects.starBuff, SnStatusEffects.galaxyDebuff, 960, 8 * 32));
+            abilities.add(new EffectLowHPAbility(0.15f, 40*60, Vars.tilesize*24, 18*60f, SnStatusEffects.stun, SnFx.statusField));
+
+            weapons.add(new WeaponExt("universe-main"){{
+                shootSound = Sounds.laserblast;
+                chargeSound = Sounds.lasercharge;
+                mirror = false;
+                rotate = true;
+                x = 0;
+                y = 16;
+                shootX = 0;
+                shootY = 8;
+                reload = 360f;
+                recoil = 0f;
+                cooldownTime = 360f;
+                firstShotDelay = 90f;
+                parentizeEffects = true;
+                shootStatus = SnStatusEffects.universityLaserSlow;
+                rotateShooting = false;
+                bullet = SnBullets.universeLaserBullet;
+            }});
+        }};
         //endregion buffers
         //endregion air
         //region naval

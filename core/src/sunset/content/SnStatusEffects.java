@@ -17,10 +17,10 @@ class SnStatusEffects_ implements ContentList{
     public static StatusEffect
     //common
     frostbite, stun, starBuff, galaxyDebuff, electricalShort, reloading, viscous, inferno,
-
     //only reactive
     molecula,
-
+    //special
+    universityLaserSlow,
     //stackable
     overheat, incineration;
 
@@ -229,6 +229,12 @@ class SnStatusEffects_ implements ContentList{
             color = SnPal.incineration;
         }};
         //endregion stackable
+        //region special
+        universityLaserSlow = new StatusEffect("universityLaserSlow"){{
+            speedMultiplier = 0.1f;
+            dragMultiplier = 0.3f;
+        }};
+        //endregion special
     }
 
 }

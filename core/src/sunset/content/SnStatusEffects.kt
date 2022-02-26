@@ -19,7 +19,6 @@ import kotlin.Unit as KtUnit
 
 class SnStatusEffects : ContentList {
     override fun load() {
-
         //region common
         frostbite = statusEffect("frostbite") {
             color = "6ecdec".color()
@@ -53,7 +52,10 @@ class SnStatusEffects : ContentList {
             damageMultiplier = 0.9f
             reloadMultiplier = 0.8f
         } //no sprite
-
+        universityLaserSlow = statusEffect("universityLaserSlow") {
+            speedMultiplier = 0.1f
+            dragMultiplier = 0.3f
+        }
         radiation = statusEffect("radiation") {
             speedMultiplier = 0.5f
             damageMultiplier = 0.6f
@@ -238,6 +240,7 @@ class SnStatusEffects : ContentList {
         lateinit var stun: StatusEffect
         lateinit var starBuff: StatusEffect
         lateinit var galaxyDebuff: StatusEffect
+        lateinit var universityLaserSlow: StatusEffect
         lateinit var electricalShort: StatusEffect
         lateinit var reloading: StatusEffect
         lateinit var viscous: StatusEffect
