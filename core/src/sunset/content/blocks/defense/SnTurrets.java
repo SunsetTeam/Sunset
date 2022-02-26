@@ -11,6 +11,7 @@ import mindustry.content.Items;
 import mindustry.content.Liquids;
 import mindustry.ctype.ContentList;
 import mindustry.entities.bullet.LaserBulletType;
+import mindustry.entities.bullet.LightningBulletType;
 import mindustry.gen.Sounds;
 import mindustry.graphics.Pal;
 import mindustry.type.Category;
@@ -37,7 +38,7 @@ public class SnTurrets implements ContentList {
     sting, spine, eagle,
 
     //2x2
-    excellence, carbine, pulsation, reflection,
+    excellence, carbine, pulsation, reflection, discharge,
 
     //3x3
     major, burner, eternity, hemrus, trigger,
@@ -197,6 +198,27 @@ public class SnTurrets implements ContentList {
             ammoUseEffect = Fx.casing1;
             targetAir = true;
             targetGround = true;
+        }};
+        discharge = new PowerTurret("discharge"){{
+            requirements(Category.turret, with(Items.silicon, 150, Items.graphite, 75));
+            shootType = new LightningBulletType(){{
+                damage = 14;
+                lightningLength = 39;
+                collidesAir = false;
+                ammoMultiplier = 1f;
+            }};
+            reloadTime = 7.1f;
+            shootCone = 10f;
+            rotateSpeed = 8f;
+            powerUse = 5.2f;
+            targetAir = false;
+            range = 144f;
+            shootEffect = Fx.lightningShoot;
+            heatColor = Color.red;
+            recoilAmount = 1f;
+            size = 2;
+            health = 460;
+            shootSound = Sounds.spark;
         }};
         //endregion 2x2
         //region 3x3
