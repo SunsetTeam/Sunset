@@ -1,69 +1,52 @@
-package sunset.entities.abilities;
+package sunset.entities.abilities
 
-import arc.Core;
-import arc.scene.ui.layout.Table;
-import arc.util.Strings;
-import arc.util.Time;
-import mindustry.Vars;
-import mindustry.content.StatusEffects;
-import mindustry.entities.Units;
-import mindustry.entities.abilities.Ability;
-import mindustry.gen.Unit;
-import mindustry.type.StatusEffect;
-import mindustry.world.meta.StatValue;
-import sunset.utils.Utils;
-import sunset.content.SnFx;
+import arc.Core
+import mindustry.type.StatusEffect
+import mindustry.entities.abilities.Ability
+import mindustry.world.meta.StatValue
+import sunset.content.SnFx
+import arc.func.Cons
+import arc.scene.ui.layout.Table
+import arc.util.Strings
+import arc.util.Time
+import mindustry.Vars
+import mindustry.content.StatusEffects
+import mindustry.entities.Units
+import mindustry.gen.Unit
 
-public class StatusFieldAbility extends Ability implements StatValue {
-    public StatusEffect allyEffect, enemyEffect;
-    public float reload, range;
+class StatusFieldAbility(private val allyEffect: StatusEffect,
+                         private val enemyEffect: StatusEffect,
+                         private val reload: Float,
+                         private val range: Float) : Ability(), StatValue {
+    private var timer = 0f
 
-    protected float timer;
-
-    public StatusFieldAbility(StatusEffect allyEffect, StatusEffect enemyEffect, float reload, float range){
-        this.reload = reload;
-        this.range = range;
-        this.allyEffect = allyEffect;
-        this.enemyEffect = enemyEffect;
-    }
-
-    @Override
-    public void update(Unit unit){
-        //Wrong code
-        /*timer += Time.delta;
-
-        if(timer >= reload){
-            SnFx.statusField.at(unit.x, unit.y, range);
-            Units.nearby(null,unit.x, unit.y, range, other -> {
-                if (other.team.isEnemy(unit.team)) {
-                    other.apply(enemyEffect, reload);
-                } else {
-                    other.apply(allyEffect, reload);
-                }
-            });
-            timer = 0f;
-        }*/
-    }
-
-    @Override
-    public void display(Table table) {
-        table.row();
-        table.left().defaults().padLeft(6).left();
-
-        table.row();
-        table.add(Core.bundle.format("ability.statusfield-summary",
-                Strings.autoFixed(range / Vars.tilesize, 1)));
-        if(allyEffect != StatusEffects.none) {
-            table.row();
-            table.add(Core.bundle.format("ability.statusfield-ally",
-                    allyEffect.emoji(),
-                    allyEffect.localizedName));
+    override fun update(unit: Unit) {
+        timer += Time.delta
+        if (timer < reload) return
+        SnFx.statusField.at(unit.x, unit.y, range)
+        Units.nearby(null, unit.x, unit.y, range) {
+            it.apply(if (it.team.isEnemy(unit.team)) enemyEffect else allyEffect, reload)
         }
-        if(enemyEffect != StatusEffects.none) {
-            table.row();
+        timer = 0f
+    }
+
+    override fun display(table: Table) {
+        table.row()
+        table.left().defaults().padLeft(6f).left()
+        table.row()
+        table.add(Core.bundle.format("ability.statusfield-summary",
+                  Strings.autoFixed(range / Vars.tilesize, 1)))
+        if (allyEffect !== StatusEffects.none) {
+            table.row()
+            table.add(Core.bundle.format("ability.statusfield-ally",
+                      allyEffect.emoji(),
+                      allyEffect.localizedName))
+        }
+        if (enemyEffect !== StatusEffects.none) {
+            table.row()
             table.add(Core.bundle.format("ability.statusfield-enemy",
-                    enemyEffect.emoji(),
-                    enemyEffect.localizedName));
+                      enemyEffect.emoji(),
+                      enemyEffect.localizedName))
         }
     }
 }
