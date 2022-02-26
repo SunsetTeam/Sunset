@@ -503,6 +503,14 @@ public class SnFx {
         });
     }),
 
+    aimMissileTrail = new Effect(30f, 78f, e -> {
+        color(SnPal.nobiumBulletBack, Color.lightGray, Color.white,  e.fin() * e.fin());
+
+        randLenVectors(e.id, 8, 1.4f + e.finpow() * 32, e.rotation + 180, 12f, (x, y) -> {
+            Fill.circle(e.x + x, e.y + y, 0.37f + e.fout() * 2f);
+        });
+    }),
+
     torpedoTrail = new Effect(30, e -> {
         color(Color.lightGray);
         randLenVectors(e.id, 15, 2 + e.fin() * 5, (x, y) -> {
