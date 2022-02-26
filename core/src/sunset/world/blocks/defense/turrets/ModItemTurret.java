@@ -20,8 +20,8 @@ import sunset.utils.Utils;
 import static mindustry.Vars.tilesize;
 
 /** Item turret with useful things.
- * Features:
- * 1) reload bar
+ * Features:<p>
+ * 1) reload bar<p>
  * 2) power shot
  * */
 public class ModItemTurret extends ItemTurret {
@@ -66,7 +66,7 @@ public class ModItemTurret extends ItemTurret {
     @Override
     public void drawPlace(int x, int y, int rotation, boolean valid) {
         Drawf.dashCircle(x * tilesize + offset, y * tilesize + offset, range, Pal.placing);
-        if (minRange > 0) Drawf.dashCircle(x, y, minRange, Pal.health);
+        if (minRange > 0) Drawf.dashCircle(x * tilesize + offset, y* tilesize + offset, minRange, Pal.health);
     }
 
     public Cons<TurretBuild> lightDrawer = tile -> {

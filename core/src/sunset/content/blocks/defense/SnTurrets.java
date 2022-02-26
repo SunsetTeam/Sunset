@@ -31,7 +31,7 @@ import sunset.world.blocks.defense.turrets.*;
 
 import static mindustry.type.ItemStack.with;
 
-public class SnTurrets implements ContentList {
+public class SnTurrets implements ContentList {//todo: fanatic: ammo; defibrillator: requirements; pinwheel: requirements.
     public static Block
     //1x1
     sting, spine, eagle,
@@ -518,7 +518,9 @@ public class SnTurrets implements ContentList {
             consumes.powerCond(21f, TurretBuild::isActive);
         }};
         fanatic = new ModItemTurret("fanatic") {{
-            requirements(Category.turret, with(Items.titanium, 900, Items.thorium, 890, Items.plastanium, 700, SnItems.fors, 500, SnItems.naturite, 200));
+            requirements(Category.turret, with(
+            Items.copper, 700, Items.graphite, 580, Items.titanium, 900, Items.thorium, 890, Items.silicon, 570, Items.surgeAlloy, 430,
+            SnItems.fors, 570, SnItems.naturite, 410, SnItems.nobium, 310));
             ammo(
             Items.thorium, SnBullets.laserArtThorium,
             Items.phaseFabric, SnBullets.laserArtPhase,
@@ -558,8 +560,7 @@ public class SnTurrets implements ContentList {
             inaccuracy = 360;
             shootCone = 360;
             shootSound = Sounds.spark;
-            targetAir = false;
-            targetGround = true;
+            targetAir = targetGround = true;
             spread = 18f;
             rotateSpeed = 0;
             powerBullet = SnBullets.powerLight;
@@ -718,8 +719,7 @@ public class SnTurrets implements ContentList {
             inaccuracy = 0;
             shootCone = 360;
             shootSound = Sounds.shootBig;
-            targetAir = false;
-            targetGround = true;
+            targetAir = targetGround = true;
             rotateTurret = true;
             shootShake = 2;
             spread = 22.5f;
@@ -825,15 +825,8 @@ public class SnTurrets implements ContentList {
         discharger = new EMPFacility("discharger") {{
             requirements(
             Category.turret, with(
-            Items.copper, 1600,
-            Items.lead, 1500,
-            Items.metaglass, 1000,
-            Items.plastanium, 850,
-            Items.silicon, 1300,
-            Items.surgeAlloy, 910,
-            Items.phaseFabric, 780,
-            SnItems.enojie, 1100
-            ));
+            Items.copper, 1600, Items.lead, 1500, Items.titanium, 1100, Items.thorium, 900, Items.silicon, 1300, Items.plastanium, 850, Items.phaseFabric, 780, Items.surgeAlloy, 910, Items.metaglass, 1000,
+            SnItems.fors, 760, SnItems.enojie, 1100));
             size = 3;
             health = 980;
             powerUse = 9f;
@@ -849,7 +842,9 @@ public class SnTurrets implements ContentList {
             liquidCapacity = 60;
         }};
         dischargerEvo = new EMPFacility("discharger-evo") {{
-            requirements(Category.turret, ItemStack.mult(discharger.requirements, 2));
+            requirements(Category.turret, with(
+                    Items.copper, 2000, Items.lead, 1800, Items.thorium, 1200, Items.silicon, 1600, Items.plastanium, 910, Items.phaseFabric, 900, Items.surgeAlloy, 1100, Items.metaglass, 1100,
+                    SnItems.fors, 910, SnItems.planatrium, 1000, SnItems.enojie, 1500, SnItems.reneubite, 1000));
             size = 4;
             health = 1200;
             powerUse = 13.1f;

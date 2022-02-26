@@ -68,10 +68,10 @@ public class SynthesisTurret extends ItemTurret {
     @Override
     public void setStats() {
         //general
-        aStats.add(SnStat.health, health, StatUnit.none);
-        aStats.add(SnStat.size, "@x@", size, size);
+        aStats.add(SnStat.blockHealth, health, StatUnit.none);
+        aStats.add(SnStat.blockSize, "@x@", size, size);
         aStats.add(SnStat.buildTime, buildCost / 60, StatUnit.seconds);
-        aStats.add(SnStat.buildCost, StatValues.items(false, requirements));
+        aStats.add(SnStat.blockBuildCost, StatValues.items(false, requirements));
         //function
         aStats.add(SnStat.shootRange, range / tilesize, StatUnit.blocks);
         aStats.add(SnStat.minimalRange, minRange / tilesize, StatUnit.blocks);

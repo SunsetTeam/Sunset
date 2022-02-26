@@ -12,8 +12,8 @@ import sunset.utils.Utils;
 import static mindustry.Vars.tilesize;
 
 /** Power turret with useful things.
- * Features:
- * 1) reload bar
+ * Features:<p>
+ * 1) reload bar<p>
  * 2)
  * */
 public class ModPowerTurret extends PowerTurret {

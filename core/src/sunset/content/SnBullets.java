@@ -589,13 +589,13 @@ public class SnBullets implements ContentList {
             width = 15f;
             height = 25f;
             drag = -0.05f;
-            homingRange = 25 * Vars.tilesize;
-            homingPower = 15f;
+            homingRange = 20 * Vars.tilesize;
+            homingPower = 5f;
             splashDamageRadius = 25 * Vars.tilesize;
             splashDamage = 500;
             keepVelocity = true;
             hitSound = Sounds.explosion;
-            lifetime = 0.7f * Time.toSeconds;
+            lifetime = 0.6f * Time.toSeconds;
             frontColor = SnPal.redfire1;
             backColor = SnPal.redfire2;
             hitEffect = despawnEffect = Fx.blastExplosion;

@@ -5,11 +5,6 @@ import arc.util.Time;
 import mindustry.content.*;
 import mindustry.ctype.ContentList;
 import mindustry.entities.Effect;
-import mindustry.graphics.*;
-import mindustry.world.*;
-import mindustry.world.blocks.environment.*;
-import mindustry.world.meta.*;
-import sunset.content.SnAttribute;
 import mindustry.graphics.CacheLayer;
 import mindustry.world.Block;
 import mindustry.world.blocks.environment.Floor;
@@ -17,10 +12,12 @@ import mindustry.world.blocks.environment.OreBlock;
 import mindustry.world.blocks.environment.StaticTree;
 import mindustry.world.blocks.environment.StaticWall;
 import mindustry.world.meta.Attribute;
+import sunset.content.SnAttribute;
 import sunset.content.SnItems;
 import sunset.content.SnLiquids;
 import sunset.content.SnStatusEffects;
-import sunset.world.blocks.environment.*;
+import sunset.world.blocks.environment.Geyser;
+import sunset.world.blocks.environment.MockEnvironmentBlock;
 
 public class SnEnvironment implements ContentList {
     public static Block

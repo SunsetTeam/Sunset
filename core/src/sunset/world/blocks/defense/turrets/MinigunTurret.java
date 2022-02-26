@@ -52,7 +52,10 @@ public class MinigunTurret extends ItemTurret{
             this.isShoot = canShoot;
             super.updateShooting();
             if(!canShoot || isShoot) return;
-            totalShootingTime += Time.delta;
+            //if (totalShootingTime < 70) {
+                totalShootingTime += Time.delta;
+            //}
+
         }
 
 
