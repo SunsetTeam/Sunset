@@ -518,20 +518,19 @@ public class SnFx {
         });
     }),
 
-    univerityLaserCharge = new Effect(45, e -> {
+    univerityLaserCharge = new Effect(90, e -> {
         rand.setSeed(e.id);
         float sum = 0;
         Vec2 pos = new Vec2(), tmp = new Vec2();
         for(int i = 0; i < 32; i++) {
             float rnd = rand.nextFloat();
             Draw.color(Pal.surge);
-            Draw.alpha(e.fin() * ((32-i)/32f));
             tmp.set(0, sum * 21).setAngle(e.rotation);
-            pos.set(e.x, e.y).add(tmp);
+            pos.set(e.x, e.y).add(tmp.scl(e.foutpow()));
             float len = (rnd*2-1)*e.fin()*21;
             tmp.set(0, len).setAngle(e.rotation + (len > 0 ? 90 : -90));
-            pos.add(tmp);
-            Fill.circle(pos.x, pos.y, 12 * e.fin());
+            pos.add(tmp.scl(e.fout()));
+            Fill.circle(pos.x, pos.y, 18 * e.finpow());
             sum += rnd;
         }
     }),
@@ -801,21 +800,10 @@ public class SnFx {
     }),
     berserkLaserHitSmall = new Effect(20, e -> {
         Draw.color(Color.valueOf("CCCDDA"));
-        Floatc2 floatc2 = new Floatc2() {
-            @Override
-            public void get(float v, float v1) {
-                Fill.poly(e.x + v, e.y + v1, 4, 1.5f + e.fout() * 2f);
-            }
-        };
+        Floatc2 floatc2 = (v, v1) -> Fill.poly(e.x + v, e.y + v1, 4, 1.5f + e.fout() * 2f);
         Angles.randLenVectors(e.id, 4, e.finpow() * 20, e.rotation, 360, floatc2);
         Draw.color(Color.valueOf("FFFFFF"));
-        Floatc2 floatc21 = new Floatc2() {
-            @Override
-            public void get(float v, float v1) {
-                float angl = Mathf.angle(v, v1);
-                Lines.lineAngle(e.x + v, e.y + v1, angl, e.fout() * 1.5f);
-            }
-        };
+        Floatc2 floatc21 = (v, v1) -> Lines.lineAngle(e.x + v, e.y + v1, Mathf.angle(v, v1), e.fout() * 1.5f);
         Angles.randLenVectors(e.id, 4, e.finpow() * 20, e.rotation, 360, floatc21);
     });
     //endregion unused

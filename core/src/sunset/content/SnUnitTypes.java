@@ -1,6 +1,7 @@
 package sunset.content;
 
 import arc.util.Time;
+import mindustry.Vars;
 import mindustry.ai.types.FlyingAI;
 import mindustry.ai.types.SuicideAI;
 import mindustry.annotations.Annotations.EntityDef;
@@ -20,6 +21,7 @@ import mindustry.type.UnitType;
 import mindustry.type.weapons.PointDefenseWeapon;
 import sunset.ai.*;
 import sunset.ai.weapon.ExtinguishWeaponAI;
+import sunset.entities.abilities.EffectLowHPAbility;
 import sunset.entities.abilities.StatusFieldAbility;
 import sunset.entities.bullet.BerserkLaserBulletType;
 import sunset.gen.Deliverc;
@@ -1065,7 +1067,7 @@ public class SnUnitTypes implements ContentList{
         }};
         universe = new UnitTypeExt("universe"){{
             health = 58000;
-            hitSize = 96;
+            hitSize = 88;
             speed = 1.8f;
             accel = 0.05f;
             drag = 0.066f;
@@ -1085,6 +1087,7 @@ public class SnUnitTypes implements ContentList{
             constructor = UnitEntity::create;
 
             abilities.add(new StatusFieldAbility(SnStatusEffects.starBuff, SnStatusEffects.galaxyDebuff, 960, 8 * 32));
+            abilities.add(new EffectLowHPAbility(0.15f, 40*60, Vars.tilesize*24, 18*60f, SnStatusEffects.stun, SnFx.statusField));
 
             weapons.add(new WeaponExt("universe-main"){{
                 shootSound = Sounds.laserblast;
@@ -1098,7 +1101,7 @@ public class SnUnitTypes implements ContentList{
                 reload = 360f;
                 recoil = 0f;
                 cooldownTime = 360f;
-                firstShotDelay = 45f;
+                firstShotDelay = 90f;
                 parentizeEffects = true;
                 shootStatus = SnStatusEffects.universityLaserSlow;
                 rotateShooting = false;

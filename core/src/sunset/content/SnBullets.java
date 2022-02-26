@@ -2073,9 +2073,9 @@ public class SnBullets implements ContentList {
             }
         };
         universeLaserBullet = new LaserBulletType(){{
-            length = 420f;
+            length = 520f;
             damage = 470f;
-            width = 90f;
+            width = 105f;
             lifetime = 40f;
             largeHit = true;
             status = SnStatusEffects.universityLaserSlow;
