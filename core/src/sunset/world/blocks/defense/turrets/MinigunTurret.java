@@ -1,22 +1,22 @@
 package sunset.world.blocks.defense.turrets;
 
-import acontent.world.meta.*;
-import arc.*;
-import arc.math.*;
-import arc.util.*;
-import mindustry.entities.bullet.*;
-import mindustry.ui.*;
-import mindustry.world.blocks.defense.turrets.*;
-import mindustry.world.meta.*;
-import mma.graphics.*;
-import sunset.utils.*;
-import sunset.world.meta.*;
-
+import acontent.world.meta.AStats;
+import arc.Core;
+import arc.math.Mathf;
+import arc.util.Time;
+import mindustry.entities.bullet.BulletType;
+import mindustry.ui.Bar;
+import mindustry.world.blocks.defense.turrets.ItemTurret;
+import mindustry.world.meta.StatUnit;
+import mma.graphics.ADrawf;
+import sunset.utils.Utils;
+import sunset.world.meta.SnStat;
 
 public class MinigunTurret extends ItemTurret{
     public float inaccuracyUp = 0f;
-    public float totalShootingTime = 20f;
+    public float maxShootTime = 20f;
     public AStats aStats = new AStats();
+    public boolean debug = false;
 
     public MinigunTurret(String name){
         super(name);
@@ -27,9 +27,9 @@ public class MinigunTurret extends ItemTurret{
     public void setBars(){
         super.setBars();
         bars.add("sunset-heat", (MinigunTurret.MinigunTurretBuild entity) -> new Bar(
-        () -> Core.bundle.format("bar.sunset-heat", Utils.stringsFixed(Mathf.clamp(entity.reload / totalShootingTime) * 100f)),
+        () -> Core.bundle.format("bar.sunset-heat", Utils.stringsFixed(Mathf.clamp(entity.reload / maxShootTime) * 100f)),
         () -> entity.team.color,
-        () -> Mathf.clamp(entity.reload / totalShootingTime)
+        () -> Mathf.clamp(entity.reload / maxShootTime)
         ));
     }
 
@@ -41,6 +41,7 @@ public class MinigunTurret extends ItemTurret{
 
     public class MinigunTurretBuild extends ItemTurretBuild{
         boolean isShoot = false;
+        float totalShootingTime = 0;
         @Override
         protected void shoot(BulletType type){
             isShoot = false;
@@ -52,12 +53,10 @@ public class MinigunTurret extends ItemTurret{
             this.isShoot = canShoot;
             super.updateShooting();
             if(!canShoot || isShoot) return;
-            //if (totalShootingTime < 70) {
+            if (totalShootingTime < 70) {
                 totalShootingTime += Time.delta;
-            //}
-
+            }
         }
-
 
         @Override
         public void bullet(BulletType type, float angle){
@@ -80,12 +79,11 @@ public class MinigunTurret extends ItemTurret{
         @Override
         public void draw(){
             super.draw();
-            ADrawf.drawText(this, "totalShootingTime: " + totalShootingTime);
+            if (debug) ADrawf.drawText(this, "totalShootingTime: " + totalShootingTime);
         }
 
         @Override
         public BulletType useAmmo(){
-
             return super.useAmmo();
         }
     }

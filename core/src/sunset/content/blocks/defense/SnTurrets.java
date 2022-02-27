@@ -645,6 +645,8 @@ public class SnTurrets implements ContentList {//todo: fanatic: ammo; defibrilla
 
             health = 160 * size * size;
             coolantUsage = 0.9f;
+
+            debug = true;
         }};
         disappearance = new LaserTurret("disappearance") {{
             requirements(Category.turret, with(Items.copper, 2400, Items.lead, 1800, Items.graphite, 1500, Items.surgeAlloy, 1460, Items.silicon, 1200, SnItems.enojie, 700));
