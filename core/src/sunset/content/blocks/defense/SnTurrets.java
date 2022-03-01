@@ -11,11 +11,9 @@ import mindustry.content.Items;
 import mindustry.content.Liquids;
 import mindustry.ctype.ContentList;
 import mindustry.entities.bullet.LaserBulletType;
-import mindustry.entities.bullet.LightningBulletType;
 import mindustry.gen.Sounds;
 import mindustry.graphics.Pal;
 import mindustry.type.Category;
-import mindustry.type.ItemStack;
 import mindustry.world.Block;
 import mindustry.world.blocks.defense.turrets.ItemTurret;
 import mindustry.world.blocks.defense.turrets.LaserTurret;
@@ -32,7 +30,7 @@ import sunset.world.blocks.defense.turrets.*;
 
 import static mindustry.type.ItemStack.with;
 
-public class SnTurrets implements ContentList {//todo: fanatic: ammo; defibrillator: requirements; pinwheel: requirements.
+public class SnTurrets implements ContentList {
     public static Block
     //1x1
     sting, spine, eagle,
@@ -199,7 +197,7 @@ public class SnTurrets implements ContentList {//todo: fanatic: ammo; defibrilla
             targetAir = true;
             targetGround = true;
         }};
-        discharge = new PowerTurret("discharge"){{
+        /*discharge = new PowerTurret("discharge"){{
             requirements(Category.turret, with(Items.silicon, 150, Items.graphite, 75));
             shootType = new LightningBulletType(){{
                 damage = 14;
@@ -219,7 +217,7 @@ public class SnTurrets implements ContentList {//todo: fanatic: ammo; defibrilla
             size = 2;
             health = 460;
             shootSound = Sounds.spark;
-        }};
+        }};*/
         //endregion 2x2
         //region 3x3
         major = new MultiBarrelItemTurret("major") {{
@@ -491,9 +489,9 @@ public class SnTurrets implements ContentList {//todo: fanatic: ammo; defibrilla
         }};
         field = new ModItemTurret("field") {{
             requirements(Category.turret, with(Items.copper, 1200, Items.lead, 800, Items.plastanium, 350, Items.thorium, 400, SnItems.fors, 400, SnItems.nobium, 300));
-            ammo(
-            SnItems.fors, SnBullets.artilleryFors,
-            Items.blastCompound, SnBullets.artilleryBlast
+            ammo(//todo: phase-fabric, surge-alloy, enojie
+            SnItems.fors, SnBullets.artilleryFors, //no
+            Items.blastCompound, SnBullets.artilleryBlast //no
             );
             targetAir = true;
             targetGround = true;
@@ -543,13 +541,13 @@ public class SnTurrets implements ContentList {//todo: fanatic: ammo; defibrilla
             requirements(Category.turret, with(
             Items.copper, 700, Items.graphite, 580, Items.titanium, 900, Items.thorium, 890, Items.silicon, 570, Items.surgeAlloy, 430,
             SnItems.fors, 570, SnItems.naturite, 410, SnItems.nobium, 310));
-            ammo(
-            Items.thorium, SnBullets.laserArtThorium,
-            Items.phaseFabric, SnBullets.laserArtPhase,
-            SnItems.enojie, SnBullets.laserArtEnojie,
-            SnItems.reneubite, SnBullets.laserArtReneubite
+            ammo(//todo: blast-compound, thorium, reneubite, fors
+            Items.thorium, SnBullets.laserArtThorium, //yes
+            Items.phaseFabric, SnBullets.laserArtPhase, //no
+            SnItems.enojie, SnBullets.laserArtEnojie, //no
+            SnItems.reneubite, SnBullets.laserArtReneubite //yes
             );
-            health = 2300;
+            health = 4200;
             size = 5;
             shots = 1;
             reloadTime = 2.5f * Time.toSeconds;
@@ -568,6 +566,7 @@ public class SnTurrets implements ContentList {//todo: fanatic: ammo; defibrilla
         }};
         defibrillator = new Turret360("defibrillator") {{
             requirements(Category.turret, with(Items.copper, 650, Items.graphite, 550, Items.titanium, 600, Items.thorium, 600, SnItems.fors, 700));
+            //todo /\
             ammo(
                     SnItems.nobium, SnBullets.defLight
             );
@@ -642,10 +641,12 @@ public class SnTurrets implements ContentList {//todo: fanatic: ammo; defibrilla
             size = 6;
             shootCone = 24f;
             shootSound = Sounds.shootBig;
+            maxShootTime = 8.5f * Time.toSeconds;
 
             health = 160 * size * size;
             coolantUsage = 0.9f;
 
+            reloadBar = false;
             debug = true;
         }};
         disappearance = new LaserTurret("disappearance") {{
@@ -728,6 +729,7 @@ public class SnTurrets implements ContentList {//todo: fanatic: ammo; defibrilla
         }};
         pinwheel = new Turret360("pinwheel") {{
             requirements(Category.turret, with(Items.copper, 900, Items.lead, 900, Items.silicon, 710, Items.titanium, 800, Items.thorium, 750, Items.surgeAlloy, 450, SnItems.planatrium, 450, SnItems.fors, 870, SnItems.enojie, 200));
+            //todo /\
             ammo(
                     Items.thorium, SnBullets.thoriumFlak,
                     SnItems.fors, SnBullets.forsFlak

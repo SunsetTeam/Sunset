@@ -64,6 +64,7 @@ public class InfoTestBlock extends Block {
     public ObjectMap<Item, BulletType> ammoTypes = new ObjectMap<>();
     public int ammoPerShot = 1;
     public BulletType powerBullet;
+    public float maxShootTime = 120f;
     public float shieldHealth = 700;
     public float cooldownBrokenBase = 0.35f;
     public float liquidBoostIntensity = 1.6f;

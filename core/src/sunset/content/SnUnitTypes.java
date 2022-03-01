@@ -1127,12 +1127,11 @@ public class SnUnitTypes implements ContentList{
             commandRadius = 48;
             visualElevation = -1;
             weapons.addAll(
-            new WeaponExt("small-autocannon") {
+            /*new WeaponExt("small-autocannon") {
                 {
                 bullet = SnBullets.smallShell;
                 mirror = false;
-                rotate = true;
-                top = true;
+                rotate = top = true;
                 rotateSpeed = 16;
                 reload = 0.5f * Time.toSeconds;
                 shots = 1;
@@ -1144,18 +1143,16 @@ public class SnUnitTypes implements ContentList{
                 cooldownTime = 0.5f * Time.toSeconds;
                 ignoreRotation = true;
                 shootSound = Sounds.shoot;
-            }},
+            }},*/
             new WeaponExt("small-autocannon") {{
                 bullet = SnBullets.smallShell;
-                mirror = false;
-                rotate = true;
-                top = true;
+                mirror = rotate = top = flipSprite = true;
                 rotateSpeed = 16;
                 reload = 0.5f * Time.toSeconds;
                 shots = 1;
                 spacing = 15;
                 inaccuracy = 7;
-                x = 0f;
+                x = -3.9f;
                 y = -4.3f;
                 shootCone = 3;
                 cooldownTime = 0.5f * Time.toSeconds;
@@ -1221,7 +1218,7 @@ public class SnUnitTypes implements ContentList{
             immunities.add(StatusEffects.wet);
             immunities.add(StatusEffects.freezing);
         }};
-        /*yellowT3 = new SnUnitType("yellow-t3") {{
+        yellowT3 = new SnUnitType("yellow-t3") {{
             speed = 0.69f;
             rotateSpeed = 2;
             drag = 0.2f;
@@ -1246,11 +1243,12 @@ public class SnUnitTypes implements ContentList{
                 spacing = 2.2f;
                 inaccuracy = 5;
                 x = 0;
-                y = 4.6f;
+                y = 5.6f;
                 shootCone = 2.1f;
                 cooldownTime = 5;
                 ignoreRotation = true;
                 shootStatusDuration = 180;
+                shootSound = Sounds.spark;
             }},
             new WeaponExt("launcher") {{
                 bullet = SnBullets.trailRocket;
@@ -1258,22 +1256,23 @@ public class SnUnitTypes implements ContentList{
                 rotate = true;
                 top = true;
                 rotateSpeed = 3;
-                reload = 1.5f * Time.toSeconds;
+                reload = 1.1f * Time.toSeconds;
                 shots = 1;
                 spacing = 3;
                 inaccuracy = 6;
                 x = 7.2f;
-                y = -6.1f;
+                y = -9;
                 shootCone = 2.1f;
                 cooldownTime = 5;
                 ignoreRotation = true;
                 shootStatusDuration = 180;
+                shootSound = Sounds.missile;
             }}
             );
             constructor = UnitWaterMove::create;
             immunities.add(StatusEffects.wet);
             immunities.add(StatusEffects.freezing);
-        }};*/
+        }};
         /*yellowT4 = new SnUnitType("yellow-t4") {{
             speed = 1.5f;
             rotateSpeed = 5.9f;

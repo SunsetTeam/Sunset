@@ -111,8 +111,9 @@ public class SnStat {
     public static final AStat ammo = AStat.get("ammo", StatCat.function, 13);
     public static final AStat ammoUse = AStat.get("ammoUse", StatCat.function, 14);
     public static final AStat powerShot = AStat.get("powerShot", StatCat.function, 15);
-    public static final AStat shieldHealth = AStat.get("shieldHealth", StatCat.function, 16);
-    public static final AStat cooldownTime = AStat.get("cooldownTime", StatCat.function, 17);
+    public static final AStat overheatTime = AStat.get("overheat-time", StatCat.function, 16);
+    public static final AStat shieldHealth = AStat.get("shieldHealth", StatCat.function, 17);
+    public static final AStat cooldownTime = AStat.get("cooldownTime", StatCat.function, 18);
     //endregion Block
     //region Unit
     public static final AStat weapons = AStat.get("weapons", StatCat.function, 0);

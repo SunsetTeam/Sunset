@@ -1,6 +1,5 @@
 package sunset.content;
 
-
 import arc.func.Floatc2;
 import arc.graphics.Color;
 import arc.graphics.g2d.Draw;
@@ -30,7 +29,6 @@ import static arc.graphics.g2d.Draw.alpha;
 import static arc.graphics.g2d.Draw.color;
 import static arc.graphics.g2d.Lines.*;
 import static arc.math.Angles.randLenVectors;
-import static arc.math.Mathf.rand;
 import static mindustry.Vars.tilesize;
 
 public class SnFx {

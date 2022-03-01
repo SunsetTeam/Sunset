@@ -3,6 +3,7 @@ package sunset.content.blocks;
 import arc.Core;
 import arc.struct.ObjectMap;
 import arc.struct.ObjectSet;
+import arc.util.Time;
 import mindustry.Vars;
 import mindustry.ctype.ContentList;
 import mindustry.entities.abilities.Ability;
@@ -112,6 +113,7 @@ public class SnSandbox implements ContentList {
             //aStats.add(SnStat.ammo, StatValues.ammo(ObjectMap.of(this, ammoTypes)));
             aStats.add(SnStat.ammoUse, ammoPerShot, StatUnit.perShot);
             //aStats.add(SnStat.powerShot, StatValues.ammo(ObjectMap.of(this, powerBullet)));
+            aStats.add(SnStat.overheatTime, maxShootTime / Time.toSeconds, StatUnit.seconds);
             aStats.add(SnStat.shieldHealth, shieldHealth, StatUnit.none);
             aStats.add(SnStat.cooldownTime, (int) (shieldHealth / cooldownBrokenBase / 60f), StatUnit.seconds);
 
