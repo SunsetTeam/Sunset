@@ -20,6 +20,7 @@ public class IndestructibleWall extends Wall {
         buildVisibility = BuildVisibility.sandboxOnly;
         category = Category.defense;
         hideDetails = false;
+        placeableLiquid = true;
     }
     public class IndestructibleBuild extends WallBuild implements ControlBlock {
         public @Nullable BlockUnitc unit;

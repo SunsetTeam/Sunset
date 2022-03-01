@@ -64,7 +64,7 @@ public class SnPower implements ContentList{
             ambientSoundVolume = 0.03f;
             size = 4;
             health = 1300;
-            explosionRadius = 10;
+            explosionRadius = 15;
             explosionDamage = 1300;
             itemCapacity = 35;
             liquidCapacity = 70;
@@ -73,7 +73,7 @@ public class SnPower implements ContentList{
             explodeEffect = Fx.impactReactorExplosion;
             heating = 0.03f;
             consumes.item(SnItems.reneubite).optional(true, false);
-            consumes.liquid(SnLiquids.burheyna, heating / coolantPower).update(false);
+            consumes.liquid(Liquids.cryofluid, heating / coolantPower).update(false);
         }};
 
         planatriumReactor = new NuclearReactor("planatrium-reactor"){{

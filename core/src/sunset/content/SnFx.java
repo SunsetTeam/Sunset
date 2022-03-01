@@ -1,6 +1,5 @@
 package sunset.content;
 
-
 import arc.func.Floatc2;
 import arc.graphics.Color;
 import arc.graphics.g2d.Draw;
@@ -30,7 +29,6 @@ import static arc.graphics.g2d.Draw.alpha;
 import static arc.graphics.g2d.Draw.color;
 import static arc.graphics.g2d.Lines.*;
 import static arc.math.Angles.randLenVectors;
-import static arc.math.Mathf.rand;
 import static mindustry.Vars.tilesize;
 
 public class SnFx {
@@ -626,9 +624,9 @@ public class SnFx {
     }),//fanatic
 
     //region yellow ships
-    acTrail = new Effect(50, e -> {
-        color(SnPal.yellowTrailBack);
-        Fill.circle(e.x, e.y, e.rotation * e.fout());
+    acTrail = new Effect(30, e -> {
+        /*color(SnPal.yellowTrailBack);
+        Fill.circle(e.x, e.y, e.rotation * e.fout());*/
         color(SnPal.yellowTrail);
         Fill.circle(e.x, e.y, e.rotation * e.fout());
     }),

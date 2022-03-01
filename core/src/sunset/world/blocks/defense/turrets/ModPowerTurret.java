@@ -12,14 +12,22 @@ import sunset.utils.Utils;
 import static mindustry.Vars.tilesize;
 
 /** Power turret with useful things.
- * Features:
- * 1) reload bar
+ * Features:<p>
+ * 1) reload bar<p>
  * 2)
  * */
 public class ModPowerTurret extends PowerTurret {
+    public boolean reloadBar = true;
+
+    public String faction;
+    public String subFaction;
+    public String branch;
 
     public ModPowerTurret(String name) {
         super(name);
+        this.faction = "null";
+        this.subFaction = "null";
+        this.branch = "null";
     }
 
     @Override
@@ -31,10 +39,12 @@ public class ModPowerTurret extends PowerTurret {
     @Override
     public void setBars() {
         super.setBars();
-        SnVars.settings.registerReloadBarBlock(this,(PowerTurretBuild entity) -> new Bar(
-                () -> Core.bundle.format("bar.sunset-reload", Utils.stringsFixed(Mathf.clamp(entity.reload / reloadTime) * 100f)),
-                () -> entity.team.color,
-                () -> Mathf.clamp(entity.reload / reloadTime)
-        ));
+        if (reloadBar) {
+            SnVars.settings.registerReloadBarBlock(this,(PowerTurretBuild entity) -> new Bar(
+                    () -> Core.bundle.format("bar.sunset-reload", Utils.stringsFixed(Mathf.clamp(entity.reload / reloadTime) * 100f)),
+                    () -> entity.team.color,
+                    () -> Mathf.clamp(entity.reload / reloadTime)
+            ));
+        }
     }
 }

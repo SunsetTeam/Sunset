@@ -13,8 +13,8 @@ import mindustry.content.*;
 import mindustry.ctype.ContentList;
 import mindustry.entities.Units;
 import mindustry.entities.bullet.*;
-import mindustry.gen.*;
 import mindustry.gen.Bullet;
+import mindustry.gen.Hitboxc;
 import mindustry.gen.Sounds;
 import mindustry.gen.Unit;
 import mindustry.graphics.Layer;
@@ -36,16 +36,15 @@ public class SnBullets implements ContentList {
         wheel1Bullet, wheel2Shotgun, wheel3Burst, wheel4Shotgun,  wheel5Bullet,
         mirageGunBullet,
         machineBullet, bigMachineBullet,
-        smallShell,
         //rocket
-        nobiumAimMissile, smallBlueMissile, smallEnojieMissile, mediumEnojieMissile,
-        powerRocket,
-        thoriumPowerRocket, forsPowerRocket,//todo: use this
+        smallBlueMissile, smallEnojieMissile, mediumEnojieMissile,
+        powerRocket, drrRocket,
+        thoriumPowerRocket, forsPowerRocket,//unused
+        nobiumAimMissile,
         //artillery
         artilleryFors, artilleryBlast,
         wheel4Artillery,
-        plasmaArt, rocketArt, bigRocketArt, heavyRocketArt,//todo: use this
-        mortarBullet, salvoArt,
+        plasmaArt, rocketArt, bigRocketArt, heavyRocketArt,//unused
         //flak
         sporePodPoisonBullet, bigSporePodPoison, heavyPlastaniumPoison,
         naturitePoisonBullet, bigNaturitePoison, heavyNaturitePoison,
@@ -73,7 +72,7 @@ public class SnBullets implements ContentList {
         wheel5Flame,
         //reverse-bullets
         naturiteReversBullet,
-        infernoFlame,//todo: use this
+        infernoFlame,//unused
         //copters
         basicHelicopterGun,
         mediumHelicopterGun, helicopterMissile,
@@ -81,11 +80,16 @@ public class SnBullets implements ContentList {
         bigHelicopterGun, laserGun, bigHelicopterMissile,
         largeHelicopterGun, largeHelicopterMissile, smallHelicopterMissile,
         giantHelicopterGun, shrapnelCopterGun, bigClusterRocket, bigCopterEnergySphere,
+        //yellow ships
+        smallShell,
+        mortarBullet,//unused
+        salvoArt, smallTorpedo,
+        lightningBall, trailRocket,
         //special
         empBullet, empBulletEvo,
         naturiteBolt1, naturiteBolt2, naturiteBolt3, naturiteBolt4, naturiteBolt5,
         laserArtThorium, laserArtPhase, laserArtEnojie, laserArtReneubite,
-        smallTorpedo, universeLaserBullet,
+        universeLaserBullet,
         //misc and testing
         emptyBullet, overheatBullet,
         temp;
@@ -466,52 +470,9 @@ public class SnBullets implements ContentList {
             pierce = true;
             pierceBuilding = true;
         }};
-
-        smallShell = new BasicBulletType() {{
-            lifetime = 0.25f * Time.toSeconds;
-            speed = 11;
-            damage = 10;
-            drawSize = 6.1f;
-            pierceCap = 3;
-            ammoMultiplier = 2;
-            reloadMultiplier = 1.1f;
-            buildingDamageMultiplier = 0.6f;
-            //recoil = 0;
-            width = 5.7f;
-            height = 8.7f;
-            pierce = true;
-            pierceBuilding = false;
-            shootEffect = Fx.shootSmall;
-            smokeEffect = Fx.shootSmallSmoke;
-            collidesAir = absorbable = false;
-            trailEffect = SnFx.acTrail;
-            //trailColor = Pal.lightTrail;
-            splashDamage = 15;
-            splashDamageRadius = 3 * Vars.tilesize;
-        }};
         //endregion  standard
         //region rocket
-        nobiumAimMissile = new AimBulletType(3f, 55f){{
-            sprite = "missile";
-            width = 13;
-            height = 16;
-            lifetime = 250;
-            status = StatusEffects.burning;
-            statusDuration = 5 * Time.toSeconds;
-            frontColor = SnPal.nobiumBullet;
-            backColor = SnPal.nobiumBulletBack;
-            maxRange = 190;
-            homingPower = 0.09f;
-            homingRange = 0;
-            trailColor = SnPal.nobiumBulletBack;
-            trailEffect = SnFx.aimMissileTrail;
-            trailRotation = true;
-            trailInterval = 0.5f;
-            weaveScale = 4;
-            weaveMag = 3;
-            drag = 0.0020f;
-        }};
-        smallBlueMissile = new BasicBulletType(5f, 55, "missile") {{//yes
+        smallBlueMissile = new BasicBulletType(5f, 15, "missile") {{//yes
             shrinkX = 0f;
             shrinkY = 0f;
             lifetime = 45f;
@@ -622,10 +583,29 @@ public class SnBullets implements ContentList {
             frontColor = SnPal.redfire1;
             backColor = SnPal.redfire2;
             hitEffect = despawnEffect = Fx.blastExplosion;
-            trailEffect = SnFx.bigRocketTrail;
+            trailEffect = Fx.missileTrail;
             pierce = true;
             pierceBuilding = true;
             pierceCap = 3;
+        }};
+
+        drrRocket = new MissileBulletType(11f, 1200) {{
+            width = 15f;
+            height = 25f;
+            drag = -0.05f;
+            homingRange = 20 * Vars.tilesize;
+            homingPower = 5f;
+            splashDamageRadius = 25 * Vars.tilesize;
+            splashDamage = 500;
+            keepVelocity = true;
+            hitSound = Sounds.explosion;
+            lifetime = 0.6f * Time.toSeconds;
+            frontColor = SnPal.redfire1;
+            backColor = SnPal.redfire2;
+            hitEffect = despawnEffect = Fx.blastExplosion;
+            trailEffect = Fx.missileTrail;
+            pierce = pierceBuilding = true;
+            pierceCap = 5;
         }};
 
         thoriumPowerRocket = new MissileBulletType(3, 465) {{
@@ -668,6 +648,26 @@ public class SnBullets implements ContentList {
             pierceBuilding = true;
             pierceCap = 6;
         }};//unused
+        nobiumAimMissile = new AimBulletType(3f, 55f){{
+            sprite = "missile";
+            width = 13;
+            height = 16;
+            lifetime = 250;
+            status = StatusEffects.burning;
+            statusDuration = 5 * Time.toSeconds;
+            frontColor = SnPal.nobiumBullet;
+            backColor = SnPal.nobiumBulletBack;
+            maxRange = 190;
+            homingPower = 0.09f;
+            homingRange = 0;
+            trailColor = SnPal.nobiumBulletBack;
+            trailEffect = SnFx.aimMissileTrail;
+            trailRotation = true;
+            trailInterval = 0.5f;
+            weaveScale = 4;
+            weaveMag = 3;
+            drag = 0.0020f;
+        }};
         //endregion  rocket
         //region artillery
         artilleryFors = new ArtilleryBulletType(3.0f, 150, "shell") {{
@@ -825,42 +825,6 @@ public class SnBullets implements ContentList {
             shrinkY = 0f;
             hitSound = Sounds.explosion;
             trailChance = 0.2f;
-        }};
-
-        mortarBullet = new ArtilleryBulletType(4f, 30, "shell") {{
-            hitEffect = Fx.flakExplosion;
-            knockback = 0.8f;
-            lifetime = 0.7f * Time.toSeconds;
-            width = 7;
-            height = 11f;
-            collidesTiles = false;
-            splashDamageRadius = 5f * Vars.tilesize;
-            splashDamage = 20f;
-            fragBullets = 5;
-            fragBullet = new FlakBulletType(6, 0) {{
-                collidesGround = true;
-                collidesAir = false;
-                splashDamage = 22;
-                splashDamageRadius = 13 * Vars.tilesize;
-                sprite = "sunset-red-mine";
-                backColor = SnPal.yellowTrail;
-                frontColor = SnPal.yellowTrailBack;
-                spin = 0.5f;
-                height = width = 11f;
-                lifetime = 3.7f * Time.toSeconds;
-                shrinkX = shrinkY = 0.5f;
-                drag = 0.07f;
-            }};
-        }};
-        salvoArt = new ArtilleryBulletType(5f, 29, "shell") {{
-            frontColor = SnPal.yellowTrail;
-            backColor = SnPal.yellowTrailBack;
-            width = 7f;
-            height = 12f;
-            shootEffect = Fx.shootBig2;
-            smokeEffect = Fx.shootBigSmoke2;
-            ammoMultiplier = 2.1f;
-            lifetime = 0.7f * Time.toSeconds;
         }};
         //endregion  artillery
         //region flak
@@ -2014,7 +1978,105 @@ public class SnBullets implements ContentList {
             frontColor = SnPal.copterLaser;
             backColor = SnPal.copterLaserBack;
         }};
-        //endregion helicopter
+        //endregion copters
+        //region yellow ships
+        //T1
+        smallShell = new BasicBulletType() {{
+            lifetime = 0.25f * Time.toSeconds;
+            speed = 11;
+            damage = 10;
+            drawSize = 6.1f;
+            pierceCap = 3;
+            ammoMultiplier = 2;
+            reloadMultiplier = 1.1f;
+            buildingDamageMultiplier = 0.6f;
+            //recoil = 0;
+            width = 5.7f;
+            height = 8.7f;
+            pierce = true;
+            pierceBuilding = false;
+            shootEffect = Fx.shootSmall;
+            smokeEffect = Fx.shootSmallSmoke;
+            collidesAir = absorbable = false;
+            trailEffect = SnFx.acTrail;
+            //trailColor = Pal.lightTrail;
+            splashDamage = 15;
+            splashDamageRadius = 3 * Vars.tilesize;
+        }};
+
+        mortarBullet = new ArtilleryBulletType(4f, 30, "shell") {{
+            hitEffect = Fx.flakExplosion;
+            knockback = 0.8f;
+            lifetime = 0.7f * Time.toSeconds;
+            width = 7;
+            height = 11f;
+            collidesTiles = false;
+            splashDamageRadius = 5f * Vars.tilesize;
+            splashDamage = 20f;
+            fragBullets = 5;
+            fragBullet = new FlakBulletType(6, 0) {{
+                collidesGround = true;
+                collidesAir = false;
+                splashDamage = 22;
+                splashDamageRadius = 13 * Vars.tilesize;
+                sprite = "sunset-red-mine";
+                backColor = SnPal.yellowTrail;
+                frontColor = SnPal.yellowTrailBack;
+                spin = 0.5f;
+                height = width = 11f;
+                lifetime = 3.7f * Time.toSeconds;
+                shrinkX = shrinkY = 0.5f;
+                drag = 0.07f;
+            }};
+        }};//unused
+        //T2
+        salvoArt = new ArtilleryBulletType(5f, 29, "shell") {{
+            frontColor = SnPal.yellowTrail;
+            backColor = SnPal.yellowTrailBack;
+            width = 7f;
+            height = 12f;
+            shootEffect = Fx.shootBig2;
+            smokeEffect = Fx.shootBigSmoke2;
+            ammoMultiplier = 2.1f;
+            lifetime = 0.7f * Time.toSeconds;
+        }};
+        smallTorpedo = new TorpedoBulletType(2, 120) {{
+            lifetime = 1.6f * Time.toSeconds;
+            drawSize = 9.2f;
+            pierceCap = -1;
+            inaccuracy = 1;
+            ammoMultiplier = 1;
+            reloadMultiplier = 3;
+            buildingDamageMultiplier = 0.9f;
+            recoil = 0;
+            pierce = true;
+            pierceBuilding = false;
+            //splashDamage = 40;
+            //splashDamageRadius = 10 * Vars.tilesize;
+        }};
+        //T3
+        lightningBall = new ArtilleryLightningBulletType(180) {{
+            lightning = 5;
+            lightningColor = SnPal.yellowTrailBack;
+            maxRange = 320;
+        }};
+        trailRocket = new MissileBulletType(5, 210, "shell") {{
+            width = 13f;
+            height = 19f;
+            shrinkY = 0.1f;
+            drag = -0.003f;
+            lifetime = 65f;
+            splashDamageRadius = 45f;
+            splashDamage = 65f;
+            homingPower = 0.1f;
+            homingRange = 5 * Vars.tilesize;
+            homingDelay = Time.toSeconds;
+            trailColor = SnPal.yellowTrailBack;
+        }};
+        //T4
+        //T5
+        //T6
+        //endregion yellow ships
         //region buffer
         cometWaterShot = new ExtinguishBulletType(Liquids.water) {{
             lifetime = 30f;
@@ -2097,101 +2159,6 @@ public class SnBullets implements ContentList {
             }
         };
         //endregion buffer
-        //region berserk
-        mirageGunBullet = new BasicBulletType(12f, 15f) {{
-            hitEffect = despawnEffect = Fx.none;
-            instantDisappear = true;
-            lifetime = 12f;
-            fragBullets = 12;
-            keepVelocity = true;
-            fragBullet = new BasicBulletType(12f, 8f) {{
-                lifetime = 12f;
-                keepVelocity = true;
-            }};
-            fragVelocityMin = 0.85f;
-            fragVelocityMax = 1.25f;
-            fragLifeMin = 0.85f;
-            fragLifeMax = 1.25f;
-            fragCone = 6f;
-        }};
-        //endregion berserk
-        //region wheel
-        wheel1Bullet = new BasicBulletType(6.5f, 5f) {{
-            width = 7f;
-            height = 9f;
-            lifetime = 25f;
-            shootEffect = Fx.shootSmall;
-            smokeEffect = Fx.shootSmallSmoke;
-        }};
-        wheel2Shotgun = new BasicBulletType(11f, 7f) {{
-            hitEffect = despawnEffect = Fx.none;
-            instantDisappear = true;
-            lifetime = 11f;
-            fragBullets = 9;
-            keepVelocity = true;
-            fragBullet = new BasicBulletType(11f, 7f) {{
-                lifetime = 11f;
-                keepVelocity = true;
-            }};
-            fragVelocityMin = 0.7f;
-            fragVelocityMax = 1.3f;
-            fragLifeMin = 0.7f;
-            fragLifeMax = 1.3f;
-            fragCone = 16f;
-        }};
-        wheel3Burst = new BasicBulletType(11f, 43f) {{
-            lifetime = 24f;
-            status = StatusEffects.blasted;
-            splashDamage = 37f;
-            splashDamageRadius = 17f;
-            width = 8f;
-            height = 12f;
-        }};
-        wheel4Shotgun = new BasicBulletType(12f, 32f) {{
-            hitEffect = despawnEffect = Fx.none;
-            instantDisappear = true;
-            lifetime = 12f;
-            fragBullets = 12;
-            keepVelocity = true;
-            fragBullet = new BasicBulletType(12f, 32f) {{
-                lifetime = 12f;
-                keepVelocity = true;
-            }};
-            fragVelocityMin = 0.85f;
-            fragVelocityMax = 1.25f;
-            fragLifeMin = 0.85f;
-            fragLifeMax = 1.25f;
-            fragCone = 6f;
-        }};
-        wheel4Artillery = new ArtilleryBulletType(3f, 67f) {{
-            lifetime = 114f;
-            status = StatusEffects.blasted;
-            splashDamage = 79f;
-            splashDamageRadius = 29f;
-            width = 8f;
-            height = 12f;
-        }};
-        wheel5Flame = new BulletType(20f, 120f) {{
-            ammoMultiplier = 3f;
-            hitSize = 7f;
-            lifetime = 7f;
-            pierce = true;
-            statusDuration = 60f * 4;
-            shootEffect = SnFx.shootWheel5Flame;
-            hitEffect = Fx.hitFlameSmall;
-            despawnEffect = Fx.none;
-            status = StatusEffects.burning;
-            keepVelocity = false;
-            hittable = false;
-        }};
-        wheel5Bullet = new BasicBulletType(8f, 62) {{
-            width = 8f;
-            height = 14f;
-            shootEffect = Fx.shootBig;
-            pierceCap = 4;
-            pierceBuilding = true;
-        }};
-        //endregion wheel
         //region special
         //region EMP
         empBullet = new LightningBulletType() {{
@@ -2380,30 +2347,6 @@ public class SnBullets implements ContentList {
             statusDuration = 120;
         }};
         //endregion laser art
-        //region torpedo
-        smallTorpedo = new BasicBulletType(2, 120) {{
-            lifetime = 1.4f * Time.toSeconds;
-            drawSize = 9.2f;
-            pierceCap = -1;
-            inaccuracy = 1;
-            ammoMultiplier = 1;
-            reloadMultiplier = 3;
-            buildingDamageMultiplier = 0.9f;
-            recoil = 0;
-            pierce = true;
-            pierceBuilding = false;
-            shootEffect = smokeEffect = Fx.none;
-            collidesAir = absorbable = false;
-            keepVelocity = true;
-            trailColor = Pal.lightTrail;
-            collideFloor = true;
-            layer = Layer.scorch;
-            splashDamage = 40;
-            splashDamageRadius = 10 * Vars.tilesize;
-            width = 8f;
-            height = 13f;
-        }};
-        //endregion torpedo
         //endregion special
         //region misc and testing
         overheatBullet = new BasicBulletType(0.1f, 7, "error") {{

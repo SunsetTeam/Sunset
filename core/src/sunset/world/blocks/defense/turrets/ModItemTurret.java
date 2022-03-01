@@ -20,8 +20,8 @@ import sunset.utils.Utils;
 import static mindustry.Vars.tilesize;
 
 /** Item turret with useful things.
- * Features:
- * 1) reload bar
+ * Features:<p>
+ * 1) reload bar<p>
  * 2) power shot
  * */
 public class ModItemTurret extends ItemTurret {
@@ -32,9 +32,17 @@ public class ModItemTurret extends ItemTurret {
     public BulletType powerBullet;
     public boolean debug = false;
     public int chargeShots;
+    public boolean reloadBar = true;
+
+    public String faction;
+    public String subFaction;
+    public String branch;
 
     public ModItemTurret(String name) {
         super(name);
+        this.faction = "null";
+        this.subFaction = "null";
+        this.branch = "null";
         drawLight = false;
     }
 
@@ -46,17 +54,19 @@ public class ModItemTurret extends ItemTurret {
     @Override
     public void setBars() {
         super.setBars();
-        SnVars.settings.registerReloadBarBlock(this, (ItemTurretBuild entity) -> new Bar(
-                () -> Core.bundle.format("bar.sunset-reload", Utils.stringsFixed(Mathf.clamp(entity.reload / reloadTime) * 100f)),
-                () -> entity.team.color,
-                () -> Mathf.clamp(entity.reload / reloadTime)
-        ));
+        if (reloadBar) {
+            SnVars.settings.registerReloadBarBlock(this, (ItemTurretBuild entity) -> new Bar(
+                    () -> Core.bundle.format("bar.sunset-reload", Utils.stringsFixed(Mathf.clamp(entity.reload / reloadTime) * 100f)),
+                    () -> entity.team.color,
+                    () -> Mathf.clamp(entity.reload / reloadTime)
+            ));
+        }
     }
 
     @Override
     public void drawPlace(int x, int y, int rotation, boolean valid) {
         Drawf.dashCircle(x * tilesize + offset, y * tilesize + offset, range, Pal.placing);
-        if (minRange > 0) Drawf.dashCircle(x, y, minRange, Pal.health);
+        if (minRange > 0) Drawf.dashCircle(x * tilesize + offset, y* tilesize + offset, minRange, Pal.health);
     }
 
     public Cons<TurretBuild> lightDrawer = tile -> {

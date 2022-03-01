@@ -1,13 +1,18 @@
 package sunset.world.blocks.defense.turrets;
 
+import acontent.world.meta.AStats;
 import arc.Core;
 import arc.math.Mathf;
+import arc.struct.ObjectMap;
 import mindustry.entities.bullet.BulletType;
 import mindustry.ui.Bar;
 import mindustry.world.blocks.defense.turrets.ItemTurret;
+import mindustry.world.meta.Stat;
+import mindustry.world.meta.StatValues;
 import mma.graphics.ADrawf;
 import sunset.SnVars;
 import sunset.utils.Utils;
+import sunset.world.meta.SnStat;
 
 /** Turret that shoots 360 degrees and rotates optionally.
  * Extends from {@link ItemTurret} for correct work of power shoot.*/
@@ -18,12 +23,21 @@ public class Turret360 extends ItemTurret {
     public boolean debug = false;
     public int chargeShots;
 
+    public AStats aStats = new AStats();
+
     public Turret360(String name) {
         super(name);
+        stats = aStats.copy(stats);
         rotateTurret = false;
         shootCone = 360;
         shots = 4;
         spread = shootCone / shots;
+    }
+
+    @Override
+    public void setStats(){
+        super.setStats();
+        aStats.add(Stat.ammo, StatValues.ammo(ObjectMap.of(this, powerBullet)));
     }
 
     @Override

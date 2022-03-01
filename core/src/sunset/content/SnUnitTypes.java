@@ -28,6 +28,7 @@ import sunset.gen.Deliverc;
 import sunset.gen.Segmentc;
 import sunset.type.BerserkStage;
 import sunset.type.ammo.LiquidAmmoType;
+import sunset.type.blocks.Energy;
 import sunset.type.blocks.Engine;
 import sunset.type.blocks.Rotor;
 import sunset.type.unitTypes.*;
@@ -1113,8 +1114,8 @@ public class SnUnitTypes implements ContentList{
         //region naval
         //region yellow
         yellowT1 = new SnUnitType("yellow-t1") {{
-            speed = 1.2f;
-            rotateSpeed = 7;
+            speed = 1f;
+            rotateSpeed = 3.5f;
             drag = 0.13f;
             hitSize = 10;
             accel = 0.21f;
@@ -1126,11 +1127,11 @@ public class SnUnitTypes implements ContentList{
             commandRadius = 48;
             visualElevation = -1;
             weapons.addAll(
-            new WeaponExt("small-autocannon") {{
+            /*new WeaponExt("small-autocannon") {
+                {
                 bullet = SnBullets.smallShell;
                 mirror = false;
-                rotate = true;
-                top = true;
+                rotate = top = true;
                 rotateSpeed = 16;
                 reload = 0.5f * Time.toSeconds;
                 shots = 1;
@@ -1142,25 +1143,21 @@ public class SnUnitTypes implements ContentList{
                 cooldownTime = 0.5f * Time.toSeconds;
                 ignoreRotation = true;
                 shootSound = Sounds.shoot;
-                shootStatus = StatusEffects.shocked;
-            }},
+            }},*/
             new WeaponExt("small-autocannon") {{
                 bullet = SnBullets.smallShell;
-                mirror = false;
-                rotate = true;
-                top = true;
+                mirror = rotate = top = flipSprite = true;
                 rotateSpeed = 16;
                 reload = 0.5f * Time.toSeconds;
                 shots = 1;
                 spacing = 15;
                 inaccuracy = 7;
-                x = 0f;
+                x = -3.9f;
                 y = -4.3f;
                 shootCone = 3;
                 cooldownTime = 0.5f * Time.toSeconds;
                 ignoreRotation = true;
                 shootSound = Sounds.shoot;
-                shootStatus = StatusEffects.shocked;
             }}
             );
             constructor = UnitWaterMove::create;
@@ -1168,8 +1165,8 @@ public class SnUnitTypes implements ContentList{
             immunities.add(StatusEffects.freezing);
         }};
         yellowT2 = new SnUnitType("yellow-t2") {{
-            speed = 1.1f;
-            rotateSpeed = 7;
+            speed = 0.9f;
+            rotateSpeed = 2.8f;
             drag = 0.15f;
             hitSize = 15;
             accel = 0.21f;
@@ -1180,7 +1177,7 @@ public class SnUnitTypes implements ContentList{
             commandLimit = 5;
             commandRadius = 48;
             visualElevation = -1;
-            weapons.add(
+            weapons.addAll(
             new WeaponExt("small-art") {{
                 bullet = SnBullets.salvoArt;
                 mirror = true;
@@ -1190,7 +1187,7 @@ public class SnUnitTypes implements ContentList{
                 reload = 45;
                 shots = 3;
                 inaccuracy = 5;
-                shotDelay = 0.25f * Time.toSeconds;
+                shotDelay = 0.15f * Time.toSeconds;
                 x = 5.1f;
                 y = -3;
                 xRand = 5;
@@ -1198,7 +1195,6 @@ public class SnUnitTypes implements ContentList{
                 cooldownTime = 0.09f * Time.toSeconds;
                 ignoreRotation = true;
                 shootSound = Sounds.missile;
-                shootStatus = StatusEffects.blasted;
             }},
             new WeaponExt() {{
                 bullet = SnBullets.smallTorpedo;
@@ -1206,7 +1202,7 @@ public class SnUnitTypes implements ContentList{
                 rotate = true;
                 top = false;
                 rotateSpeed = 6.7f;
-                reload = 1.2f * Time.toSeconds;
+                reload = 1.3f * Time.toSeconds;
                 shots = 1;
                 inaccuracy = 2;
                 x = 0;
@@ -1215,7 +1211,6 @@ public class SnUnitTypes implements ContentList{
                 cooldownTime = 0.25f * Time.toSeconds;
                 ignoreRotation = true;
                 shootSound = Sounds.missile;
-                shootStatus = StatusEffects.disarmed;
                 shootStatusDuration = 30;
             }}
             );
@@ -1223,82 +1218,62 @@ public class SnUnitTypes implements ContentList{
             immunities.add(StatusEffects.wet);
             immunities.add(StatusEffects.freezing);
         }};
-        /*yellowT3 = new SnUnitType("yellow-t3") {{
-            speed = 1.7f;
-            rotateSpeed = 6.9f;
-            drag = 0.6f;
+        yellowT3 = new SnUnitType("yellow-t3") {{
+            speed = 0.69f;
+            rotateSpeed = 2;
+            drag = 0.2f;
             hitSize = 18;
             accel = 1;
             health = 1980;
             range = 350;
-            armor = 490;
-            faceTarget = false;
+            armor = 15;
+            faceTarget = true;
             commandLimit = 5;
             commandRadius = 48;
             visualElevation = -1;
-            weapons.add(
-            new WeaponExt("laser-gun") {{
-                bullet = SnBullets.laserGun2;
-                mirror = true;
+            weapons.addAll(
+            new WeaponExt("lightthrower") {{
+                bullet = SnBullets.lightningBall;
+                mirror = false;
                 rotate = true;
                 top = true;
-                rotateSpeed = 45;
-                reload = 60;
+                rotateSpeed = 2.8f;
+                reload = 2.6f * Time.toSeconds;
                 shots = 1;
-                spacing = 3;
-                inaccuracy = 6;
-                x = 5.8f;
-                y = 3;
-                firstShotDelay = 20;
+                spacing = 2.2f;
+                inaccuracy = 5;
+                x = 0;
+                y = 5.6f;
                 shootCone = 2.1f;
                 cooldownTime = 5;
                 ignoreRotation = true;
-                shootStatus = StatusEffects.slow;
                 shootStatusDuration = 180;
+                shootSound = Sounds.spark;
             }},
-            new WeaponExt("laser-continuous") {{
-                bullet = SnBullets.laserCGun;
+            new WeaponExt("launcher") {{
+                bullet = SnBullets.trailRocket;
                 mirror = true;
                 rotate = true;
                 top = true;
-                rotateSpeed = 50;
-                reload = 90;
+                rotateSpeed = 3;
+                reload = 1.1f * Time.toSeconds;
                 shots = 1;
-                spacing = 4.3f;
-                inaccuracy = 7.1f;
-                x = 7;
-                y = -2;
-                firstShotDelay = 0;
-                shootCone = 2.2f;
+                spacing = 3;
+                inaccuracy = 6;
+                x = 7.2f;
+                y = -9;
+                shootCone = 2.1f;
                 cooldownTime = 5;
                 ignoreRotation = true;
+                shootStatusDuration = 180;
                 shootSound = Sounds.missile;
-                shootStatus = StatusEffects.blasted;
-            }},
-            new WeaponExt("torpedo-gun") {{
-                bullet = SnBullets.torpedo3;
-                mirror = false;
-                rotate = true;
-                top = false;
-                rotateSpeed = 30;
-                reload = 35;
-                shots = 1;
-                inaccuracy = 2;
-                x = y = 0;
-                firstShotDelay = 20;
-                shootCone = 6;
-                cooldownTime = 15;
-                ignoreRotation = true;
-                shootSound = Sounds.missile;
-                shootStatus = StatusEffects.disarmed;
-                shootStatusDuration = 30;
             }}
             );
             constructor = UnitWaterMove::create;
             immunities.add(StatusEffects.wet);
             immunities.add(StatusEffects.freezing);
         }};
-        yellowT4 = new SnUnitType("yellow-t4") {{
+        /*yellowT4 = new SnUnitType("yellow-t4") {{
             speed = 1.5f;
             rotateSpeed = 5.9f;
             drag = 0.75f;
@@ -1312,68 +1287,13 @@ public class SnUnitTypes implements ContentList{
             commandRadius = 48;
             visualElevation = -1;
             weapons.add(
-            new WeaponExt("big-rocket-launcher") {{
-                bullet = SnBullets.bigRocketArt;
-                mirror = false;
-                rotate = true;
-                top = true;
-                rotateSpeed = 30;
-                reload = 45;
-                shots = 1;
-                spacing = 1;
-                inaccuracy = 5;
-                x = y = 0;
-                xRand = 5;
-                firstShotDelay = 0;
-                shootCone = 1;
-                cooldownTime = 5;
-                ignoreRotation = true;
-                shootSound = Sounds.missile;
-                shootStatus = StatusEffects.blasted;
-            }},
-            new WeaponExt("machinegun") {{
-                bullet = SnBullets.machineBullet;
-                rotate = true;
-                top = false;
-                rotateSpeed = 30;
-                reload = 35;
-                shots = 1;
-                inaccuracy = 2;
-                x = 9;
-                y = -5.3f;
-                firstShotDelay = 20;
-                shootCone = 6;
-                cooldownTime = 15;
-                ignoreRotation = true;
-                shootSound = Sounds.missile;
-                shootStatus = StatusEffects.disarmed;
-                shootStatusDuration = 30;
-            }},
-            new WeaponExt("torpedo-gun") {{
-                bullet = SnBullets.torpedo4;
-                mirror = true;
-                rotate = true;
-                top = false;
-                rotateSpeed = 30;
-                reload = 35;
-                shots = 1;
-                inaccuracy = 2;
-                x = 5;
-                y = 0;
-                firstShotDelay = 20;
-                shootCone = 6;
-                cooldownTime = 15;
-                ignoreRotation = true;
-                shootSound = Sounds.missile;
-                shootStatus = StatusEffects.disarmed;
-                shootStatusDuration = 30;
-            }}
+
             );
             constructor = UnitWaterMove::create;
             immunities.add(StatusEffects.wet);
             immunities.add(StatusEffects.freezing);
-        }};
-        yellowT5 = new SnUnitType("yellow-t5") {{
+        }};*/
+        /*yellowT5 = new SnUnitType("yellow-t5") {{
             speed = 1.1f;
             rotateSpeed = 5.4f;
             drag = 1;
