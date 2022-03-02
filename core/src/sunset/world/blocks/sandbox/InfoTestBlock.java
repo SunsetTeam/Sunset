@@ -128,8 +128,8 @@ public class InfoTestBlock extends Block {
         this.branch = "Blocks";
         stats = aStats.copy(stats);
         destructible = solid = update = true;
-        buildVisibility = BuildVisibility.sandboxOnly;
-        //buildVisibility = BuildVisibility.debugOnly;
+        //buildVisibility = BuildVisibility.sandboxOnly;
+        buildVisibility = BuildVisibility.debugOnly;
         category = Category.effect;
         hideDetails = false;
         health = 300;

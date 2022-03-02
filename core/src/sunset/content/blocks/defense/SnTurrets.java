@@ -447,7 +447,7 @@ public class SnTurrets implements ContentList {
             hideDetails = false;
             size = 4;
             health = 14000;
-            buildVisibility = BuildVisibility.sandboxOnly;
+            buildVisibility = BuildVisibility.debugOnly;
             ammo(SnItems.flameid, SnBullets.drrRocket);
             range = 50 * Vars.tilesize;
             reloadTime = 0.5f * Time.toSeconds;
