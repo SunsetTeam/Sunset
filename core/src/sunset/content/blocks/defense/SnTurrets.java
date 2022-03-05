@@ -295,7 +295,7 @@ public class SnTurrets implements ContentList {
             targetAir = true;
             shootSound = Sounds.flame;
         }};
-        hemrus = new ItemTurret("hemrus") {{
+        hemrus = new ModItemTurret("hemrus") {{
             requirements(Category.turret, with(SnItems.fors, 250, Items.plastanium, 90, Items.graphite, 60));
             ammo(
                     SnItems.naturite, SnBullets.naturiteReversBullet
@@ -461,7 +461,7 @@ public class SnTurrets implements ContentList {
         }};
         //endregion 4x4
         //region 5x5
-        pressure = new ItemTurret("pressure") {{
+        pressure = new ModItemTurret("pressure") {{
             requirements(Category.turret, with(SnItems.fors, 600, Items.silicon, 500, Items.plastanium, 450, Items.graphite, 400, Items.surgeAlloy, 300, SnItems.naturite, 100));
             ammo(
                     Items.plastanium, SnBullets.mediumPlastaniumBullet,
@@ -630,7 +630,7 @@ public class SnTurrets implements ContentList {
             coolantMultiplier = 0.5f;
             restitution = 0.15f;
             ammoUseEffect = Fx.casing3;
-            range = 50.0f*Time.delta;
+            range = 50.0f * Vars.tilesize;
             inaccuracy = 3f;
             inaccuracyUp = 0.4f;
             recoilAmount = 2.7f;
@@ -641,7 +641,7 @@ public class SnTurrets implements ContentList {
             size = 6;
             shootCone = 24f;
             shootSound = Sounds.shootBig;
-            maxShootTime = 8.5f * Time.toSeconds;
+            maxShootTime = 5f * Time.toSeconds;
 
             health = 160 * size * size;
             coolantUsage = 0.9f;

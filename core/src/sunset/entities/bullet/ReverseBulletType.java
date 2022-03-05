@@ -19,6 +19,9 @@ public class ReverseBulletType extends BasicBulletType {
     public float rotateMag = 0, rotateScaling = 0, rotateScaleMin = 0, rotateScaleMax = 0, rotateVisualMag = 0;
     public boolean reverseRotScale = false, inRange = false;
     public BulletType other = null;
+    public boolean reverseBullet = false;
+
+    private Bullet bullet;
 
     public ReverseBulletType(float speed, float damage) {
         super(speed, damage);
@@ -55,6 +58,12 @@ public class ReverseBulletType extends BasicBulletType {
         }
 
         if(inRange && b.owner instanceof Ranged && b.dst(((Ranged) b.owner).x(), ((Ranged) b.owner).y()) > ((Ranged) b.owner).range()) b.rotation(b.angleTo(((Ranged) b.owner).x(), ((Ranged) b.owner).y()));
+
+        if (reverseBullet) {
+            for (int i = 0; i < 5; i++) {
+                ((ReverseBulletType) other).createReverse(bullet.owner, bullet.team, bullet.x, bullet.y, i * 72 + bullet.rotation(), other.damage / 2, 0.75f, 1, 0);
+            }
+        }
     }
 
     @Override
@@ -62,6 +71,7 @@ public class ReverseBulletType extends BasicBulletType {
         if (other != null && Mathf.randomSeed((int) Time.time * 2, 0, 1) > 0.6 && other instanceof ReverseBulletType) {
             return ((ReverseBulletType) other).createReverse(owner, team, x, y, angle, damage, velocityScl, lifetimeScl, data);
         } else return super.create(owner, team, x, y, angle, damage, velocityScl, lifetimeScl, data);
+
     }
 
     public Bullet createReverse(@Nullable Entityc owner, Team team, float x, float y, float angle, float damage, float velocityScl, float lifetimeScl, Object data) {

@@ -1665,9 +1665,11 @@ public class SnBullets implements ContentList {
         //region reverse-bullets
         naturiteReversBullet = new ReverseBulletType(2.6f, 80f) {{
             sprite = "sunset-copter-bomb";
+            reverseBullet = true;
+            other = naturiteReversBullet;
             width = 15f;
             height = 15;
-            lifetime = 170;
+            lifetime = 200;
             homingPower = 0.05f;
             homingRange = 50f;
             spin = 5f;
@@ -1681,7 +1683,7 @@ public class SnBullets implements ContentList {
             inRange = true;
             frontColor = SnPal.copterLaser;
             backColor = SnPal.copterLaserBack;
-            drag = 0.001f;
+            drag = 0.0025f;
         }};
         //endregion reverse-bullets
         //region copters
@@ -1755,7 +1757,7 @@ public class SnBullets implements ContentList {
                 homingPower = 0.09f;
 
                 splashDamageRadius = 20f;
-                splashDamage = 20f;
+                splashDamage = 17f;
 
                 keepVelocity = false;
                 hitSound = Sounds.explosion;
@@ -1774,8 +1776,8 @@ public class SnBullets implements ContentList {
         copterEnergySphere = new BasicBulletType(3.3f, 13) {{
             sprite = "sunset-circle-bullet";
             lifetime = 40f;
-            splashDamageRadius = 17f;
-            splashDamage = 25f;
+            splashDamageRadius = 15f;
+            splashDamage = 23f;
             height = 10f;
             width = 10f;
             lightning = 4;
@@ -1809,7 +1811,7 @@ public class SnBullets implements ContentList {
         }};
         laserGun = new LaserBulletType() {{
             colors = new Color[]{SnPal.copterLaser.cpy().a(0.4f), SnPal.copterLaser, Color.white};
-            damage = 58;
+            damage = 55;
             width = 25f;
             lifetime = 15f;
             length = 135f;
@@ -1817,7 +1819,7 @@ public class SnBullets implements ContentList {
             collidesAir = true;
             collidesGround = true;
         }};
-        bigHelicopterMissile = new MissileBulletType(4.7f, 22) {{
+        bigHelicopterMissile = new MissileBulletType(4.7f, 20) {{
             width = 9f;
             height = 14f;
             shrinkY = 0f;
@@ -1826,7 +1828,7 @@ public class SnBullets implements ContentList {
             homingPower = 0.2f;
 
             splashDamageRadius = 40f;
-            splashDamage = 47f;
+            splashDamage = 40f;
 
             keepVelocity = false;
             hitSound = Sounds.explosion;
@@ -1859,7 +1861,7 @@ public class SnBullets implements ContentList {
             fragBullets = 1;
             fragCone = 0.0001f;
         }};
-        largeHelicopterMissile = new BasicBulletType(6.3f, 65, "missile-large") {{
+        largeHelicopterMissile = new BasicBulletType(6.3f, 60, "missile-large") {{
             width = 14f;
             height = 17f;
             hitShake = 3f;
@@ -1879,7 +1881,7 @@ public class SnBullets implements ContentList {
             trailRotation = true;
             trailInterval = 0.5f;
         }};
-        smallHelicopterMissile = new MissileBulletType(4.4f, 45) {{
+        smallHelicopterMissile = new MissileBulletType(4.4f, 40) {{
             width = 11f;
             height = 11f;
             shrinkY = 0f;
