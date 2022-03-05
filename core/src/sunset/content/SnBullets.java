@@ -1665,7 +1665,6 @@ public class SnBullets implements ContentList {
         //region reverse-bullets
         naturiteReversBullet = new ReverseBulletType(2.6f, 80f) {{
             sprite = "sunset-copter-bomb";
-            reverseBullet = true;
             other = naturiteReversBullet;
             width = 15f;
             height = 15;
