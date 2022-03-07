@@ -210,7 +210,7 @@ public class SnCrafting implements ContentList{
         giardSynthesizer = new GasCrafter("carburizing-furnace") {{
             requirements(Category.crafting, with(SnItems.fors, 155, Items.metaglass, 85, Items.silicon, 90, Items.graphite, 95));
             size = 3;
-            outputsGas = true;
+
             outputGas = new GasStack(SnGas.giard, 3f);
             hasItems = true;
             hasLiquids = false;

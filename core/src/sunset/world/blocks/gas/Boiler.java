@@ -1,11 +1,8 @@
 package sunset.world.blocks.gas;
 
 import arc.Core;
-import gas.GasStack;
-import gas.type.Gas;
 import gas.world.blocks.production.GenericCrafterWithGas;
 import mindustry.graphics.Pal;
-import mindustry.type.Liquid;
 import mindustry.ui.Bar;
 import mindustry.world.meta.Stat;
 
