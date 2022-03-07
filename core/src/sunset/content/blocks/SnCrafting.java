@@ -213,7 +213,9 @@ public class SnCrafting implements ContentList{
 
             outputGas = new GasStack(SnGas.giard, 3f);
             hasItems = true;
-            hasLiquids = false;
+            hasLiquids = true;
+            hasGasses = true;
+            gasCapacity = 50f;
             itemCapacity = 30;
             gasCapacity = 180f;
             craftTime = 5f;
