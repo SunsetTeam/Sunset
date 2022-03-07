@@ -213,10 +213,6 @@ public class SnEnvironment implements ContentList {
         }};
         //endregion floors
         //region static walls
-        testEnvBlock = new BreakableEnvWall("test-env-block") {{
-            health = 4;
-            variants = 3;
-        }};
         crimsonGrassWall = new StaticWall("crimson-grass-wall") {{
             variants = 2;
         }};
