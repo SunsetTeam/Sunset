@@ -40,12 +40,15 @@ public class SnEnvironment implements ContentList {
     //static walls 
     crimsonGrassWall, crimsonDirtWall, crimsonSandWall,
     crimsonSnowWall, crimsonIceWall,
-    graniteWall, testEnvBlock,
+    graniteWall,
 
     jadestoneWall, gJadestoneWall,
 
     orangeSandWall, stoneSandWall,
     obsidianWall, ashWall,
+    
+    //breakable environment walls
+    stagesWall,
     
     //pines
     crimsonPine,
@@ -255,6 +258,12 @@ public class SnEnvironment implements ContentList {
         }};
         ashWall = new StaticWall("ash-wall") {{
             variants = 2;
+        }};
+        //region breakable environment walls
+        stagesWall = new BreakableEnvWall("stages-wall") {{
+            variants = 1;
+            stages = 5;
+            health = 5150;
         }};
         //endregion static walls
         //region trees
