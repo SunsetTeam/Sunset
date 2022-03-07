@@ -6,7 +6,6 @@ import gas.world.blocks.production.GenericCrafterWithGas;
 import mindustry.graphics.Pal;
 import mindustry.ui.Bar;
 import mindustry.world.meta.Attribute;
-import mindustry.world.meta.Stat;
 
 public class GasCrafter extends GenericCrafterWithGas {
     @Nullable
@@ -22,26 +21,21 @@ public class GasCrafter extends GenericCrafterWithGas {
 
     @Override
     public void drawPlace(int x, int y, int rotation, boolean valid) {
-        drawPlaceText(Core.bundle.format("bar.efficiency",
-                (int)((baseEfficiency + Math.min(maxBoost, boostScale * sumAttribute(attribute, x, y))) * 100f)), x, y, valid);
+        if (attribute != null) {
+            drawPlaceText(Core.bundle.format("bar.efficiency", ((baseEfficiency + Math.min(maxBoost, boostScale * sumAttribute(attribute, x, y))) * 100f)), x, y, valid);
+        }
     }
 
     @Override
     public void setBars() {
         super.setBars();
-
-        bars.add("efficiency", (GasCrafterBuild entity) ->
-                new Bar(() ->
-                        Core.bundle.format("bar.efficiency", (int)(entity.efficiencyScale() * 100)),
-                        () -> Pal.lightOrange,
-                        entity::efficiencyScale));
-    }
-
-    @Override
-    public void setStats() {
-        super.setStats();
-
-        stats.add(Stat.affinities, attribute, boostScale * size * size);
+        if (attribute != null) {
+            bars.add("efficiency", (GasCrafterBuild entity) ->
+                    new Bar(() ->
+                            Core.bundle.format("bar.efficiency", (entity.efficiencyScale() * 100)),
+                            () -> Pal.lightOrange,
+                            entity::efficiencyScale));
+        }
     }
 
     public class GasCrafterBuild extends GenericCrafterWithGasBuild {
@@ -49,7 +43,9 @@ public class GasCrafter extends GenericCrafterWithGas {
 
         @Override
         public float getProgressIncrease(float base) {
-            return super.getProgressIncrease(base) * efficiencyScale();
+            if (attribute != null) {
+                return super.getProgressIncrease(base) * efficiencyScale();
+            } else return super.getProgressIncrease(base);
         }
 
         public float efficiencyScale() {
