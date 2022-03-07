@@ -207,7 +207,7 @@ public class SnCrafting implements ContentList{
             consumes.power(5.3f);
         }};
 
-        giardSynthesizer = new GasCrafter("carburizing-furnace") {{
+        giardSynthesizer = new GasCrafter("giard-synthesizer") {{
             requirements(Category.crafting, with(SnItems.fors, 155, Items.metaglass, 85, Items.silicon, 90, Items.graphite, 95));
             size = 3;
 
