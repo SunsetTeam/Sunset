@@ -929,8 +929,8 @@ public class SnUnitTypes implements ContentList{
             constructor = UnitEntity::create;
 
             weapons.add(new ChainWeapon("satellite") {{
-                damageTick = 0.2f;
-                healTick = 0.7f;
+                damageTick = 0.3f;
+                healTick = 0.8f;
                 alternate = false;
                 mirror = false;
                 rotate = false;
@@ -959,8 +959,8 @@ public class SnUnitTypes implements ContentList{
             constructor = UnitEntity::create;
 
             weapons.add(new ChainWeapon("planet") {{
-                damageTick = 0.7f;
-                healTick = 1.8f;
+                damageTick = 0.9f;
+                healTick = 2.6f;
                 maxChainLength = 8;
                 alternate = false;
                 mirror = false;
@@ -1007,7 +1007,7 @@ public class SnUnitTypes implements ContentList{
             }});
             weapons.add(new ChainWeapon("galaxy-weak") {{
                 damageTick = 0f;
-                healTick = 2.2f;
+                healTick = 6f;
                 maxChainLength = 3;
                 alternate = false;
                 mirror = true;
@@ -1062,7 +1062,9 @@ public class SnUnitTypes implements ContentList{
                 y = -6;
                 reload = 3;
                 range = 420;
-                //damage = 80;
+                bullet = new BasicBulletType(0, 80){{
+                    maxRange = 420;
+                }};
             }});
         }};
         universe = new UnitTypeExt("universe"){{
@@ -1474,7 +1476,7 @@ public class SnUnitTypes implements ContentList{
         //region misc
         router = new UnitTypeExt("router") {
             {
-                health = 2000000;
+                health = "ROUTER".hashCode();
                 speed = 2.85f;
                 hitSize = 16;
                 flying = true;

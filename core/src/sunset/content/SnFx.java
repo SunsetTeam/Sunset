@@ -30,7 +30,6 @@ import static arc.graphics.g2d.Draw.alpha;
 import static arc.graphics.g2d.Draw.color;
 import static arc.graphics.g2d.Lines.*;
 import static arc.math.Angles.randLenVectors;
-import static arc.math.Mathf.rand;
 import static mindustry.Vars.tilesize;
 
 public class SnFx {
@@ -516,6 +515,24 @@ public class SnFx {
         randLenVectors(e.id, 15, 2 + e.fin() * 5, (x, y) -> {
             Fill.circle(e.x + x, e.y + y, e.fin() * 1.9f);
         });
+    }),
+
+    galaxyMainHit = new Effect(45, e -> {
+        Draw.color(Pal.surge);
+        Draw.alpha(e.foutpow());
+        Draw.z(Layer.effect);
+
+        Lines.circle(e.x, e.y, 12);
+        Lines.circle(e.x, e.y, 8);
+        Fill.circle(e.x, e.y, 4);
+    }),
+
+    galaxyMainTrail = new Effect(45, e -> {
+        Draw.color(Pal.surge);
+        Draw.alpha(e.foutpow());
+        Draw.z(Layer.bullet);
+
+        Fill.poly(e.x, e.y, 4, 4, e.rotation);
     }),
 
     univerityLaserCharge = new Effect(90, e -> {

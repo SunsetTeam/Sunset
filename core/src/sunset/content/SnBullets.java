@@ -345,14 +345,6 @@ public class SnBullets implements ContentList {
                 }
             }
         };
-        galaxyKnockbackBullet = new BasicBulletType(12, 79) {{
-            lifetime = 36;
-            knockback = 384;
-            status = SnStatusEffects.stun;
-            statusDuration = 30;
-            height = 30;
-            width = 6;
-        }};
 
         wheel1Bullet = new BasicBulletType(6.5f, 5f) {{
             width = 7f;
@@ -2056,25 +2048,21 @@ public class SnBullets implements ContentList {
                 }
             }
         };
-        galaxyKnockbackBullet = new BasicBulletType(12, 79) {{
-            lifetime = 36;
+        galaxyKnockbackBullet = new PointBulletType(){{
+            speed = 420; //range
+            damage = 120;
             knockback = 384;
-            status = SnStatusEffects.stun;
-            trailEffect = SnFx.stuff;
-            statusDuration = 30;
-            height = 56;
-            width = 10;
-        }
-            @Override
-            public void update(Bullet b) {
-                if (b.timer(0, 1f)) {
-                    trailEffect.at(b.x, b.y, b.rotation(), 3f);
-                }
-            }
-        };
+            shootEffect = Fx.none;
+            smokeEffect = Fx.none;
+            trailEffect = SnFx.galaxyMainTrail;
+            hitEffect = SnFx.galaxyMainHit;
+            despawnEffect = SnFx.galaxyMainHit;
+            trailSpacing = 8;
+        }};
+
         universeLaserBullet = new LaserBulletType(){{
             length = 520f;
-            damage = 470f;
+            damage = 1470f;
             width = 105f;
             lifetime = 40f;
             largeHit = true;

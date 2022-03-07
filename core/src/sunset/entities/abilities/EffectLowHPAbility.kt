@@ -1,11 +1,15 @@
 package sunset.entities.abilities
 
+import arc.Core
+import arc.scene.ui.layout.Table
 import arc.util.Time
+import mindustry.Vars
 import mindustry.entities.Effect
 import mindustry.entities.Units
 import mindustry.entities.abilities.Ability
 import mindustry.gen.Unit
 import mindustry.type.StatusEffect
+import mindustry.world.meta.StatValue
 import kotlin.math.max
 
 class EffectLowHPAbility(private val threshold: Float,
@@ -13,7 +17,7 @@ class EffectLowHPAbility(private val threshold: Float,
                          private val range: Float,
                          private val duration: Float,
                          private val effect: StatusEffect,
-                         private val fx: Effect) : Ability() {
+                         private val fx: Effect) : Ability(), StatValue {
     private var lastHealth = -1f
     private var lastActvation = 0f
     private var lower = false
@@ -32,5 +36,17 @@ class EffectLowHPAbility(private val threshold: Float,
         }
         if(unit.healthf() >= threshold) lower = false
         lastHealth = unit.health()
+    }
+
+    override fun display(table: Table) {
+        table.row()
+        table.left().defaults().padLeft(6f).left()
+        table.row()
+        table.add(Core.bundle.format("ability.lowhpfield-summary",
+            threshold*100,
+            range / Vars.tilesize,
+            effect.emoji() + effect.localizedName,
+            duration / 60,
+            delay / 60));
     }
 }
