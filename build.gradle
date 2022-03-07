@@ -27,9 +27,9 @@ buildscript {
         classpath "com.github.Anuken.Mindustry:tools:$mindustryVersion"
         classpath "com.github.Anuken.Arc:packer:$mindustryVersion"
         classpath "com.github.Zelaux.ZelauxModCore:annotations:$modCoreVersion"
+        classpath "com.github.Zelaux.GasLibrary:core:a55948ec113566f3a3a4a1f1508d6f9f07161157"
 
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
-
     }
 }
 plugins {
@@ -103,6 +103,7 @@ dependencies {
     implementation "com.github.Zelaux.ZelauxModCore:core:$modCoreVersion"
     implementation "com.github.Zelaux.ZelauxModCore:plugins:$modCoreVersion"
     implementation "com.github.Zelaux:AdvancedContentInfo:$aciVersion"
+    implementation "com.github.Zelaux.GasLibrary:core:a55948ec113566f3a3a4a1f1508d6f9f07161157"
 }
 
 configure(project(":annotations")) {
@@ -174,6 +175,8 @@ project(":core") {
         implementation "com.github.Zelaux.ZelauxModCore:core:$modCoreVersion"
         implementation "com.github.Zelaux.ZelauxModCore:plugins:$modCoreVersion"
         implementation "com.github.Zelaux.ZelauxModCore:graphics:$modCoreVersion"
+        implementation "com.github.Zelaux.GasLibrary:core:a55948ec113566f3a3a4a1f1508d6f9f07161157"
+
         compileOnly "com.github.Zelaux.ZelauxModCore:annotations:$modCoreVersion"
 
         implementation "com.github.Zelaux:AdvancedContentInfo:$aciVersion"
@@ -263,6 +266,8 @@ project(":tools") {
 
         implementation "com.github.Zelaux.ZelauxModCore:core:$modCoreVersion"
         implementation "com.github.Zelaux.ZelauxModCore:tools:$modCoreVersion"
+        implementation "com.github.Zelaux.GasLibrary:core:a55948ec113566f3a3a4a1f1508d6f9f07161157"
+
 
         implementation "com.github.Anuken.Arc:packer:$mindustryVersion"
     }
@@ -282,6 +287,7 @@ project(":annotations") {
         implementation "com.github.Zelaux.ZelauxModCore:core:$modCoreVersion"
         implementation "com.github.Zelaux.ZelauxModCore:tools:$modCoreVersion"
         implementation "com.github.Zelaux.ZelauxModCore:annotations:$modCoreVersion"
+        implementation "com.github.Zelaux.GasLibrary:core:a55948ec113566f3a3a4a1f1508d6f9f07161157"
     }
 }
 

@@ -1,8 +1,13 @@
 package sunset.content.blocks;
 
 import arc.graphics.*;
+import gas.GasStack;
+import gas.world.blocks.production.GenericCrafterWithGas;
+import gas.world.consumers.ConsumeGas;
+import gas.world.draw.GasDrawArcSmelter;
 import mindustry.content.*;
 import mindustry.ctype.*;
+import mindustry.entities.effect.MultiEffect;
 import mindustry.gen.*;
 import mindustry.type.*;
 import mindustry.world.*;
@@ -24,7 +29,7 @@ public class SnCrafting implements ContentList{
     //advanced
     advancedCompressor, advancedWeaver, advancedKiln, advancedSurge, advancedCryomixer,
     //standard
-    collider, purifier, crystallizer, enojieKiln,
+    collider, purifier, crystallizer, enojieKiln, giardSynthesizer,
 	  testCrafter;
 
     @Override
@@ -167,7 +172,7 @@ public class SnCrafting implements ContentList{
             }};
 
             consumes.item(Items.sand, 3);
-            consumes.liquid(Liquids.water, 0.17f);
+            consumes.liquid(SnLiquids.burheyna, 0.17f);
             consumes.power(2f);
         }};
         purifier = new GenericCrafter("purifier"){{
@@ -201,6 +206,25 @@ public class SnCrafting implements ContentList{
 
             consumes.items(with(SnItems.nobium, 1, SnItems.planatrium, 3, Items.metaglass, 1));
             consumes.power(5.3f);
+        }};
+
+        giardSynthesizer = new GenericCrafterWithGas("carburizing-furnace") {{
+            requirements(Category.crafting, with(SnItems.fors, 155, Items.metaglass, 85, Items.silicon, 90, Items.graphite, 95));
+            size = 3;
+            outputGas = new GasStack(SnGas.giard, 3f);
+            hasItems = true;
+            hasLiquids = false;
+            itemCapacity = 30;
+            gasCapacity = 180f;
+            craftTime = 5f;
+            drawer = new GasDrawArcSmelter();
+            craftEffect = Fx.steam;
+            updateEffect = new MultiEffect(Fx.melting, Fx.fireSmoke);
+            consumes.items(with(SnItems.naturite, 1f));
+            consumes.liquid(SnLiquids.burheyna, 0.25f);
+            consumes.power(2f);
+
+
         }};
         //endregion standard
 		testCrafter = new GenericCrafter("test-crafter") {{

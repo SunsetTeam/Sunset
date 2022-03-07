@@ -20,6 +20,7 @@ public class SnVars extends ModVars {
     private static final ContentList[] snContent = Seq.<ContentList>with(
             new SnTeams(),
             new SnItems(),
+            new SnGas(),
             new SnStatusEffects(),
             new SnLiquids(),
             new SnBullets(),
