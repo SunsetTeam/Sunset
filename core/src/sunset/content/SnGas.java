@@ -11,7 +11,7 @@ public class SnGas implements ContentList {
     @Override
     public void load() {
         giard = new Gas("giard") {{
-            color = Color.valueOf("E4A9A9");
+            color = Color.valueOf("E17C7C");
             explosiveness = 0.07f;
             temperature = 0.3f;
             effect = StatusEffects.wet;

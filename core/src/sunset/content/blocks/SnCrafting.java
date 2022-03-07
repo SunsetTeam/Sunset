@@ -2,8 +2,6 @@ package sunset.content.blocks;
 
 import arc.graphics.*;
 import gas.GasStack;
-import gas.world.blocks.production.GenericCrafterWithGas;
-import gas.world.consumers.ConsumeGas;
 import gas.world.draw.GasDrawArcSmelter;
 import mindustry.content.*;
 import mindustry.ctype.*;
@@ -15,6 +13,7 @@ import mindustry.world.blocks.production.*;
 import mindustry.world.draw.*;
 import mma.world.draw.*;
 import sunset.content.*;
+import sunset.world.blocks.gas.GasCrafter;
 import sunset.world.draw.*;
 
 import arc.math.Interp;
@@ -208,9 +207,10 @@ public class SnCrafting implements ContentList{
             consumes.power(5.3f);
         }};
 
-        giardSynthesizer = new GenericCrafterWithGas("carburizing-furnace") {{
+        giardSynthesizer = new GasCrafter("carburizing-furnace") {{
             requirements(Category.crafting, with(SnItems.fors, 155, Items.metaglass, 85, Items.silicon, 90, Items.graphite, 95));
             size = 3;
+            outputsGas = true;
             outputGas = new GasStack(SnGas.giard, 3f);
             hasItems = true;
             hasLiquids = false;
@@ -223,8 +223,6 @@ public class SnCrafting implements ContentList{
             consumes.items(with(SnItems.naturite, 1f));
             consumes.liquid(SnLiquids.burheyna, 0.25f);
             consumes.power(2f);
-
-
         }};
         //endregion standard
 		testCrafter = new GenericCrafter("test-crafter") {{

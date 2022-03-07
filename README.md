@@ -17,10 +17,10 @@ Coder's: Slish, Nukleer Bomb, RePoweRED, Mr.Ricco, Zelaux\
 Sprites: Saigo no-nozomi, MissionaryPoseBest, Snake, Mak, NotTheGrawxz, Toxin\
 Sounds: King-Silicon\
 Ost: Saigo no-nozomi\
-Maps: Saigo no-nozomi\
+Maps: Saigo no-nozomi
 
 # Contributors
-Darkness, Def-Try, Tabyretka\
+Darkness, Def-Try, Tabyretka
 
 # PC Build Guide
 
