@@ -16,6 +16,7 @@ import sunset.content.SnAttribute;
 import sunset.content.SnItems;
 import sunset.content.SnLiquids;
 import sunset.content.SnStatusEffects;
+import sunset.world.blocks.environment.BreakableEnvWall;
 import sunset.world.blocks.environment.Geyser;
 import sunset.world.blocks.environment.MockEnvironmentBlock;
 
@@ -39,7 +40,7 @@ public class SnEnvironment implements ContentList {
     //static walls 
     crimsonGrassWall, crimsonDirtWall, crimsonSandWall,
     crimsonSnowWall, crimsonIceWall,
-    graniteWall,
+    graniteWall, testEnvBlock,
 
     jadestoneWall, gJadestoneWall,
 
@@ -209,6 +210,10 @@ public class SnEnvironment implements ContentList {
         }};
         //endregion floors
         //region static walls
+        testEnvBlock = new BreakableEnvWall("test-env-block") {{
+            health = 4;
+            variants = 3;
+        }};
         crimsonGrassWall = new StaticWall("crimson-grass-wall") {{
             variants = 2;
         }};
