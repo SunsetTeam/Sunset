@@ -53,7 +53,6 @@ public class ReverseBulletType extends BasicBulletType {
         if (rotateMag > 0) {
             b.vel.rotate(rotateMag * Mathf.clamp(reverseRotScale ? b.fout() : b.fin(), rotateScaleMin, rotateScaleMax) * (rotateRight ? -1 : 1) * Time.delta * rotateScaling);
         }
-
         if(inRange && b.owner instanceof Ranged && b.dst(((Ranged) b.owner).x(), ((Ranged) b.owner).y()) > ((Ranged) b.owner).range()) b.rotation(b.angleTo(((Ranged) b.owner).x(), ((Ranged) b.owner).y()));
     }
 

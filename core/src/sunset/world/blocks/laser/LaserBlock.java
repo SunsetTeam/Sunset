@@ -1,32 +1,18 @@
 package sunset.world.blocks.laser;
 
-import acontent.world.meta.AStat;
 import acontent.world.meta.AStats;
 import arc.graphics.g2d.TextureRegion;
-import arc.math.Mathf;
 import arc.util.Log;
-import arc.util.Strings;
-import arc.util.Tmp;
 import arc.util.io.Reads;
 import arc.util.io.Writes;
 import mindustry.annotations.Annotations;
 import mindustry.entities.Damage;
 import mindustry.game.Team;
 import mindustry.gen.Building;
-import mindustry.graphics.Pal;
-import mindustry.io.TypeIO;
-import mindustry.ui.Bar;
 import mindustry.world.Block;
 import mindustry.world.Tile;
 import mindustry.world.meta.StatUnit;
-import mma.MMAMod;
-import mma.graphics.ADrawf;
-import sunset.graphics.Drawm;
 import sunset.world.meta.SnStat;
-
-import java.time.*;
-import java.time.format.*;
-import java.util.*;
 
 /** Main class for all blocks related to lasers. */
 public class LaserBlock extends Block {

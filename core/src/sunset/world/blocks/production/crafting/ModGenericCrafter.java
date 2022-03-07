@@ -1,14 +1,11 @@
 package sunset.world.blocks.production.crafting;
 
-import arc.Core;
 import arc.graphics.g2d.Draw;
 import arc.graphics.g2d.TextureRegion;
 import arc.math.Interp;
 import mindustry.annotations.Annotations.Load;
 import mindustry.graphics.Drawf;
-import mindustry.world.blocks.production.Drill;
 import mindustry.world.blocks.production.GenericCrafter;
-import mma.ModVars;
 
 public class ModGenericCrafter extends GenericCrafter {
     @Load("@-rotator")
