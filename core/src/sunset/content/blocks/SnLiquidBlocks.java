@@ -38,7 +38,6 @@ public class SnLiquidBlocks implements ContentList {
             health = 110;
             placeableLiquid = true;
             hasShadow = false;
-            conduitReplacement = Blocks.pulseConduit;
         }};
 
         if (!ModVars.packSprites) {

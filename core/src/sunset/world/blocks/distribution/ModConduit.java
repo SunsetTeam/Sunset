@@ -10,16 +10,8 @@ import mindustry.world.blocks.liquid.Conduit;
 public class ModConduit extends Conduit {
     public boolean onLiquid = true;
 
-    public @Nullable Block conduitReplacement = null;
     public ModConduit (String name){
         super(name);
-    }
-
-    public void init(){
-        super.init();
-
-
-        if(conduitReplacement == null || !(conduitReplacement instanceof Conduit)) conduitReplacement = Blocks.bridgeConduit;
     }
 
     @Override
