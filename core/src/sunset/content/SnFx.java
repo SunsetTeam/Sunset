@@ -39,17 +39,17 @@ public class SnFx {
     enojieCraft = new Effect(55, e -> {
         randLenVectors(e.id, 6, 4f + e.fin() * 8f, (x, y) -> {
             color(Pal.heal);
-            Fill.square(e.x + x, e.y + y, e.fout() + 0.5f, 45);
+            Fill.square(e.x + x, e.y + y, e.fout() + 0.9f, 45);
         });
 
         color(Pal.heal);
         for (int i = 0; i < 4; i++) {
-            Drawf.tri(e.x, e.y, 4f, 28f * e.fout(), e.rotation + 90f * i + e.foutpow() * 100f);
+            Drawf.tri(e.x, e.y, 4f, 28f * e.fout(), e.rotation + 90f * i + e.foutpow() * 360f);
         }
 
         color();
         for (int i = 0; i < 4; i++) {
-            Drawf.tri(e.x, e.y, 2f, 13f * e.fout(), e.rotation + 90f * i + e.foutpow() * 100f);
+            Drawf.tri(e.x, e.y, 2f, 13f * e.fout(), e.rotation + 90f * i + e.foutpow() * 360f);
         }
     }),
 
@@ -382,21 +382,21 @@ public class SnFx {
 
         color(SnPal.aGray);
 
-        randLenVectors(e.id, 20, 4f + 45f * e.finpow(), (x, y) -> {
+        randLenVectors(e.id, 20, 4f + 50f * e.finpow(), (x, y) -> {
             Fill.circle(e.x + x, e.y + y, e.fout() * 5f + 0.8f);
             Fill.circle(e.x + x, e.y + y, e.fout() * 3f + 0.3f);
         });
 
         color(SnPal.aGray);
 
-        randLenVectors(e.id, 10, 2f + 20f * e.finpow(), (x, y) -> {
+        randLenVectors(e.id, 10, 2f + 35f * e.finpow(), (x, y) -> {
             Fill.circle(e.x + x, e.y + y, e.fout() * 4f + 0.4f);
         });
 
         color(Pal.missileYellowBack);
         stroke(e.fout());
 
-        randLenVectors(e.id + 1, 6, 1f + 29f * e.finpow(), (x, y) -> {
+        randLenVectors(e.id + 1, 6, 1f + 39f * e.finpow(), (x, y) -> {
             lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 2f + e.fout() * 6f);
         });
     }),
@@ -411,21 +411,21 @@ public class SnFx {
 
         color(SnPal.aGray);
 
-        randLenVectors(e.id, 24, 5f + 50f * e.finpow(), (x, y) -> {
+        randLenVectors(e.id, 24, 5f + 60f * e.finpow(), (x, y) -> {
             Fill.circle(e.x + x, e.y + y, e.fout() * 6f + 1f);
             Fill.circle(e.x + x, e.y + y, e.fout() * 4f + 0.6f);
         });
 
         color(SnPal.aGray);
 
-        randLenVectors(e.id, 10, 3f + 25f * e.finpow(), (x, y) -> {
+        randLenVectors(e.id, 10, 3f + 35f * e.finpow(), (x, y) -> {
             Fill.circle(e.x + x, e.y + y, e.fout() * 5f + 0.7f);
         });
 
         color(Pal.missileYellowBack);
         stroke(e.fout());
 
-        randLenVectors(e.id + 1, 8, 2f + 35f * e.finpow(), (x, y) -> {
+        randLenVectors(e.id + 1, 8, 2f + 45f * e.finpow(), (x, y) -> {
             lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 3f + e.fout() * 7f);
         });
     }),
@@ -440,20 +440,20 @@ public class SnFx {
 
         color(SnPal.aGray);
 
-        randLenVectors(e.id, 35, 8f + 60f * e.finpow(), (x, y) -> {
+        randLenVectors(e.id, 35, 8f + 70f * e.finpow(), (x, y) -> {
             Fill.circle(e.x + x, e.y + y, e.fout() * 8f + 2f);
             Fill.circle(e.x + x, e.y + y, e.fout() * 6f + 1f);
         });
 
         color(SnPal.aGray);
 
-        randLenVectors(e.id, 14, 4f + 30f * e.finpow(), (x, y) -> {
+        randLenVectors(e.id, 14, 4f + 40f * e.finpow(), (x, y) -> {
             Fill.circle(e.x + x, e.y + y, e.fout() * 7f + 0.9f);
         });
 
         color(Pal.bulletYellow);
 
-        randLenVectors(e.id, 7, 3f + 25f * e.finpow(), (x, y) -> {
+        randLenVectors(e.id, 7, 3f + 35f * e.finpow(), (x, y) -> {
             Fill.circle(e.x + x, e.y + y, e.fout() * 5f + 0.8f);
         });
 
@@ -476,20 +476,20 @@ public class SnFx {
 
         color(SnPal.aGray);
 
-        randLenVectors(e.id, 30, 7f + 55f * e.finpow(), (x, y) -> {
+        randLenVectors(e.id, 30, 7f + 65f * e.finpow(), (x, y) -> {
             Fill.circle(e.x + x, e.y + y, e.fout() * 7f + 1.3f);
             Fill.circle(e.x + x, e.y + y, e.fout() * 5f + 0.7f);
         });
 
         color(SnPal.aGray);
 
-        randLenVectors(e.id, 10, 3f + 25f * e.finpow(), (x, y) -> {
+        randLenVectors(e.id, 10, 3f + 35f * e.finpow(), (x, y) -> {
             Fill.circle(e.x + x, e.y + y, e.fout() * 6f + 0.9f);
         });
 
         color(Pal.bulletYellow);
 
-        randLenVectors(e.id, 5, 2f + 20f * e.finpow(), (x, y) -> {
+        randLenVectors(e.id, 5, 2f + 30f * e.finpow(), (x, y) -> {
             Fill.circle(e.x + x, e.y + y, e.fout() * 4f + 0.6f);
         });
 
