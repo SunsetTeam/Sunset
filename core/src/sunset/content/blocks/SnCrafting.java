@@ -220,7 +220,7 @@ public class SnCrafting implements ContentList{
             gasCapacity = 180f;
             craftTime = 5f;
             drawer = new GasDrawArcSmelter();
-            craftEffect = SnFx.steam;
+            craftEffect = SnFx.giardSynthesizerCraft;
             consumes.items(with(SnItems.naturite, 1f));
             consumes.liquid(SnLiquids.burheyna, 0.25f);
             consumes.power(2f);
