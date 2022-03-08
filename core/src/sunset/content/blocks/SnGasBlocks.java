@@ -27,7 +27,7 @@ public class SnGasBlocks implements ContentList {
 
     @Override
     public void load() {
-/*
+
         //sandbox
         gasSource = new GasSource("gas-source") {{
             requirements(Category.liquid, BuildVisibility.sandboxOnly, with());
@@ -118,7 +118,7 @@ public class SnGasBlocks implements ContentList {
             size = 3;
             gasCapacity = 140f;
         }};
-        */
+
 
     }
 }
