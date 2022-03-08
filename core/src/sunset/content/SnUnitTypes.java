@@ -78,6 +78,45 @@ public class SnUnitTypes implements ContentList{
             mechSideSway = 0.9f;
             mechStepShake = 1f;
             constructor = MechUnit::create;
+
+            weapons.addAll(
+            new SnWeapon("bastion-weapon"){{
+                rotate = false;
+                mirror = true;
+                top = false;
+                x = 36f;
+                y = -1f;
+                reload = 11f;
+                inaccuracy = 3f;
+                shootSound = Sounds.shootBig;
+            }},
+            new SnWeapon("bastion-art"){{
+                rotate = true;
+                mirror = false;
+                x = 0f;
+                y = -5f;
+                reload = 50f;
+                inaccuracy = 5f;
+                shots = 5;
+                shootSound = Sounds.artillery;
+            }},
+            new SnWeapon("bastion-fl"){{
+                rotate = false;
+                mirror = true;
+                x = 17f;
+                y = 19f;
+                layerOffset = -0.01f;
+                shootSound = Sounds.flame;
+            }},
+            new SnWeapon("bastion-fl"){{
+                rotate = false;
+                mirror = false;
+                x = 0f;
+                y = 24f;
+                layerOffset = -0.01f;
+                shootSound = Sounds.flame;
+            }}
+            );
         }};
         //endregion vanilla
         //region mod-units
