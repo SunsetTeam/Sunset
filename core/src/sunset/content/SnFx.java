@@ -44,12 +44,12 @@ public class SnFx {
 
         color(Pal.heal);
         for (int i = 0; i < 4; i++) {
-            Drawf.tri(e.x, e.y, 4f, 28f * e.fout(), i * 90);
+            Drawf.tri(e.x, e.y, 4f, 28f * e.fout(), e.rotation + 90f * i + e.foutpow() * 100f);
         }
 
         color();
         for (int i = 0; i < 4; i++) {
-            Drawf.tri(e.x, e.y, 2f, 13f * e.fout(), i * 90);
+            Drawf.tri(e.x, e.y, 2f, 13f * e.fout(), e.rotation + 90f * i + e.foutpow() * 100f);
         }
     }),
 
@@ -114,6 +114,14 @@ public class SnFx {
         randLenVectors(e.id, 7, 6.8f + e.fin() * 5f, (x, y) -> {
             color(Color.valueOf("5841A6"), e.color, e.fin());
             Fill.square(e.x + x, e.y + y, 0.5f + e.fout() * 2f, 45);
+        });
+    }),
+
+    giardSynthesizerCraft = new Effect(40f, e -> {
+        color(SnPal.giardGas);
+
+        randLenVectors(e.id, 4, 3f + e.fin() * 7f, (x, y) -> {
+            Fill.circle(e.x + x, e.y + y, 0.5f + e.fslope() * 1.8f);
         });
     }),
 

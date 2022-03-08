@@ -67,6 +67,9 @@ public class SnPal {
     //status-effects
     incineration = Color.valueOf("130000"),
 
+    //gas
+    giardGas = Color.valueOf("E17C7C"),
+
     //planets
     azaria = Color.valueOf("5F0A0A"),
     azariaClouds = Color.valueOf("785C5C");
