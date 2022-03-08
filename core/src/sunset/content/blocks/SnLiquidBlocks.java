@@ -1,5 +1,6 @@
 package sunset.content.blocks;
 
+import mindustry.content.Blocks;
 import mindustry.content.Items;
 import mindustry.ctype.ContentList;
 import mindustry.game.Team;
@@ -11,6 +12,7 @@ import mindustry.world.blocks.liquid.Conduit;
 import mindustry.world.blocks.production.Pump;
 import mma.*;
 import sunset.content.SnItems;
+import sunset.world.blocks.distribution.ModConduit;
 
 import static mindustry.type.ItemStack.with;
 
@@ -29,19 +31,14 @@ public class SnLiquidBlocks implements ContentList {
     public void load() {
 
         //region transportation
-        naturiteConduit = new Conduit("naturite-conduit") {{
+        naturiteConduit = new ModConduit("naturite-conduit") {{
             requirements(Category.liquid, with(Items.titanium, 2, Items.metaglass, 1, SnItems.naturite, 2));
             liquidCapacity = 18f;
             liquidPressure = 1.035f;
             health = 110;
             placeableLiquid = true;
             hasShadow = false;
-        }
-            @Override
-            public boolean canPlaceOn(Tile tile, Team team) {
-                return tile.floor().isLiquid;
-            }
-        };
+        }};
 
         if (!ModVars.packSprites) {
             nobiumConduit = new Conduit("nobium-conduit") {{
