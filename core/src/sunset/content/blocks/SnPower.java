@@ -1,6 +1,5 @@
 package sunset.content.blocks;
 
-import arc.graphics.Color;
 import gas.GasStack;
 import gas.world.draw.GasDrawSmelter;
 import mindustry.content.*;
@@ -11,8 +10,7 @@ import mindustry.world.*;
 import mindustry.world.blocks.power.*;
 import sunset.content.*;
 import sunset.graphics.SnPal;
-import sunset.world.blocks.gas.Boiler;
-import sunset.world.blocks.gas.PowerGenerateBoiler;
+import sunset.world.blocks.gas.ItemLiquidPowerGeneratorBoiler;
 import sunset.world.blocks.power.*;
 
 import static mindustry.type.ItemStack.*;
@@ -29,7 +27,7 @@ public class SnPower implements ContentList{
     public void load(){
         //region generators
 
-        boiler = new PowerGenerateBoiler("steam-kettle") {{
+        boiler = new ItemLiquidPowerGeneratorBoiler("steam-kettle") {{
             requirements(Category.power, with(Items.copper, 40, Items.lead, 60, Items.silicon, 30f));
             size = 3;
             warmupSpeed = 0.01f;

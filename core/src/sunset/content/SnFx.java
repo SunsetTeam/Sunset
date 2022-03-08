@@ -44,12 +44,12 @@ public class SnFx {
 
         color(Pal.heal);
         for (int i = 0; i < 4; i++) {
-            Drawf.tri(e.x, e.y, 4f, 28f * e.fout(), e.rotation + 90f * i + e.foutpow() * 360f);
+            Drawf.tri(e.x, e.y, 4f, 28f * e.fout(), e.rotation + 90f * i + e.foutpow() * 140f);
         }
 
         color();
         for (int i = 0; i < 4; i++) {
-            Drawf.tri(e.x, e.y, 2f, 13f * e.fout(), e.rotation + 90f * i + e.foutpow() * 360f);
+            Drawf.tri(e.x, e.y, 2f, 13f * e.fout(), e.rotation + 90f * i + e.foutpow() * 140f);
         }
     }),
 

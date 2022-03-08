@@ -10,6 +10,7 @@ import mindustry.type.Category;
 import mindustry.world.Block;
 import mindustry.world.meta.BuildVisibility;
 import sunset.content.SnItems;
+import sunset.world.blocks.gas.ModGasPipe;
 
 import static mindustry.type.ItemStack.with;
 
@@ -54,7 +55,7 @@ public class SnGasBlocks implements ContentList {
             junctionReplacement = gasJunction;
             bridgeReplacement = gasBridge;
         }};
-        naturiteGasPipe = new GasConduit("naturite-gas-pipe") {{
+        naturiteGasPipe = new ModGasPipe("naturite-gas-pipe") {{
             requirements(Category.liquid, with(SnItems.naturite, 1, SnItems.fors, 2));
             health = 50;
             size = 1;

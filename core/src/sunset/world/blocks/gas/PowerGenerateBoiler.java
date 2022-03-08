@@ -6,6 +6,8 @@ import arc.struct.EnumSet;
 import arc.util.Strings;
 import arc.util.io.Reads;
 import arc.util.io.Writes;
+import gas.gen.GasBuilding;
+import gas.world.blocks.power.GasPowerGenerator;
 import mindustry.gen.Building;
 import mindustry.graphics.Pal;
 import mindustry.ui.Bar;
@@ -16,11 +18,14 @@ import mindustry.world.meta.StatUnit;
 
 public class PowerGenerateBoiler extends Boiler{
 
-    /** The amount of power produced per tick in case of an efficiency of 1.0, which represents 100%. */
+    /**
+     * The amount of power produced per tick in case of an efficiency of 1.0, which represents 100%.
+     */
     public float powerProduction;
+
     public Stat generationType = Stat.basePowerGeneration;
 
-    public PowerGenerateBoiler(String name){
+    public PowerGenerateBoiler(String name) {
         super(name);
         sync = true;
         baseExplosiveness = 5f;
@@ -28,31 +33,28 @@ public class PowerGenerateBoiler extends Boiler{
     }
 
     @Override
-    public void setStats(){
+    public void setStats() {
         super.setStats();
         stats.add(generationType, powerProduction * 60.0f, StatUnit.powerSecond);
     }
 
     @Override
-    public void setBars(){
+    public void setBars() {
         super.setBars();
-
-        if(hasPower && outputsPower && !consumes.hasPower()){
-            bars.add("power", (PowerGenerator.GeneratorBuild entity) -> new Bar(() ->
-                    Core.bundle.format("bar.poweroutput",
-                            Strings.fixed(entity.getPowerProduction() * 60 * entity.timeScale(), 1)),
-                    () -> Pal.powerBar,
-                    () -> entity.productionEfficiency));
+        if (hasPower && outputsPower && !consumes.hasPower()) {
+            bars.add("power", (GasPowerGenerator.GasGeneratorBuild entity) -> new Bar(() -> Core.bundle.format("bar.poweroutput", Strings.fixed(entity.getPowerProduction() * 60 * entity.timeScale(), 1)), () -> Pal.powerBar, () -> entity.productionEfficiency));
         }
     }
 
     @Override
-    public boolean outputsItems(){
+    public boolean outputsItems() {
         return false;
     }
 
-    public class GeneratorBuild extends Building {
+    public class GasGeneratorBuild extends GasBuilding {
+
         public float generateTime;
+
         /**
          * The efficiency of the producer. An efficiency of 1.0 means 100%
          */

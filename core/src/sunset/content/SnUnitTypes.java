@@ -12,10 +12,7 @@ import mindustry.content.UnitTypes;
 import mindustry.ctype.ContentList;
 import mindustry.entities.bullet.BasicBulletType;
 import mindustry.entities.bullet.BombBulletType;
-import mindustry.gen.Sounds;
-import mindustry.gen.UnitEntity;
-import mindustry.gen.UnitWaterMove;
-import mindustry.gen.Unitc;
+import mindustry.gen.*;
 import mindustry.graphics.Layer;
 import mindustry.type.UnitType;
 import mindustry.type.weapons.PointDefenseWeapon;
@@ -38,6 +35,10 @@ import sunset.type.weapons.WeaponExt;
 
 public class SnUnitTypes implements ContentList{
     public static UnitType
+
+    //vanilla
+    bastion,
+
     //attack copters
     wind, thunder, nadir, halo, parhelion, mudflow,
     //buffers
@@ -62,6 +63,24 @@ public class SnUnitTypes implements ContentList{
 
     @Override
     public void load() {
+        //region vanilla
+        bastion = new UnitType("bastion"){{
+            health = 47000;
+            speed = 0.29f;
+            hitSize = 34f;
+            rotateSpeed = 1.3f;
+
+            armor = 18f;
+            mechStepParticles = true;
+            mechStepShake = 0.75f;
+            drownTimeMultiplier = 7f;
+            mechFrontSway = 2.3f;
+            mechSideSway = 0.9f;
+            mechStepShake = 1f;
+            constructor = MechUnit::create;
+        }};
+        //endregion vanilla
+        //region mod-units
         //region ground
         //region berserk
         mirage = new BerserkUnitType("mirage") {{
@@ -1509,5 +1528,6 @@ public class SnUnitTypes implements ContentList{
                     }});
         }};
         //endregion other
+        //endregion mod-units
     }
 }

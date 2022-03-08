@@ -1,13 +1,14 @@
-package sunset.world.blocks.distribution;
+package sunset.world.blocks.gas;
 
+import gas.world.blocks.gas.GasConduit;
 import mindustry.game.Team;
 import mindustry.world.Tile;
-import mindustry.world.blocks.liquid.Conduit;
 
-public class ModConduit extends Conduit {
+public class ModGasPipe extends GasConduit {
+
     public boolean onLiquid = true;
 
-    public ModConduit (String name){
+    public ModGasPipe (String name){
         super(name);
     }
 
