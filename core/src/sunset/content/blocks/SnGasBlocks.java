@@ -70,7 +70,7 @@ public class SnGasBlocks implements ContentList {
             junctionReplacement = gasJunction;
             bridgeReplacement = gasBridge;
         }};
-        armoredNobiumGasPipe = new GasArmoredConduit("plated-gas-pipe") {{
+        armoredNobiumGasPipe = new GasArmoredConduit("nobium-plated-gas-pipe") {{
             requirements(Category.liquid, with(Items.graphite, 2, SnItems.nobium, 5));
             health = 300;
             size = 1;
