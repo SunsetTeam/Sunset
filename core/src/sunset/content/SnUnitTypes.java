@@ -10,17 +10,22 @@ import mindustry.content.Liquids;
 import mindustry.content.StatusEffects;
 import mindustry.content.UnitTypes;
 import mindustry.ctype.ContentList;
+import mindustry.entities.bullet.ArtilleryBulletType;
 import mindustry.entities.bullet.BasicBulletType;
 import mindustry.entities.bullet.BombBulletType;
+import mindustry.entities.bullet.ShrapnelBulletType;
 import mindustry.gen.*;
 import mindustry.graphics.Layer;
+import mindustry.graphics.Pal;
 import mindustry.type.UnitType;
+import mindustry.type.Weapon;
 import mindustry.type.weapons.PointDefenseWeapon;
 import sunset.ai.*;
 import sunset.ai.weapon.ExtinguishWeaponAI;
 import sunset.entities.abilities.EffectLowHPAbility;
 import sunset.entities.abilities.StatusFieldAbility;
 import sunset.entities.bullet.BerserkLaserBulletType;
+import sunset.entities.bullet.SpawnArtilleryBulletType;
 import sunset.gen.Deliverc;
 import sunset.gen.Segmentc;
 import sunset.type.BerserkStage;
@@ -37,7 +42,7 @@ public class SnUnitTypes implements ContentList{
     public static UnitType
 
     //vanilla
-    bastion,
+    bastion, t6spooder,
 
     //attack copters
     wind, thunder, nadir, halo, parhelion, mudflow,
@@ -116,6 +121,100 @@ public class SnUnitTypes implements ContentList{
                 shootSound = Sounds.flame;
             }}
             );
+        }};
+        t6spooder = new UnitType("t6spooder"){{
+            //TODO: create actual stats. This one copied from "abyssEye"
+            health = 70000;
+            speed = 0.45f;
+            rotateSpeed = 1.5f;
+            drag = 0.125f;
+            hitSize = 71;
+            armor = 30f;
+            allowLegStep = true;
+            hovering = true;
+            groundLayer = Layer.legUnit;
+            visualElevation = 1.1f;
+
+            legCount = 8;
+            legMoveSpace = 0.9f;
+            legPairOffset = 3;
+            legLength = 70f;
+            legExtension = -27;
+            legBaseOffset = 4f;
+            landShake = 4f;
+            legLengthScl = 2f;
+            rippleScale = 4f;
+            legSpeed = 0.3f;
+
+            legSplashDamage = 70;
+            legSplashRange = 70;
+            
+            constructor = LegsUnit::create;
+
+            weapons.add(new Weapon("toxopid-cannon"){{
+                y = -14f;
+                x = 0f;
+                shootY = 22f;
+                mirror = false;
+                reload = 210;
+                shake = 10f;
+                recoil = 10f;
+                rotateSpeed = 1f;
+                ejectEffect = Fx.casing3;
+                shootSound = Sounds.artillery;
+                rotate = true;
+                shadow = 30f;
+
+                bullet = new ArtilleryBulletType(5f, 190){{
+                    hitEffect = Fx.sapExplosion;
+                    knockback = 3.9f;
+                    lifetime = 100f;
+                    width = height = 40f;
+                    collidesTiles = collides = true;
+                    ammoMultiplier = 4f;
+                    splashDamageRadius = 132f;
+                    splashDamage = 470f;
+                    backColor = Pal.sapBulletBack;
+                    frontColor = lightningColor = Pal.sapBullet;
+                    lightning = 6;
+                    lightningLength = 48;
+                    smokeEffect = Fx.shootBigSmoke2;
+                    hitShake = 21f;
+                    lightRadius = 65f;
+                    lightColor = Pal.sap;
+                    lightOpacity = 0.6f;
+
+                    status = StatusEffects.sapped;
+                    statusDuration = 60f * 10;
+
+                    fragLifeMin = 0.6f;
+                    fragBullets = 6;
+
+                    fragBullet = new SpawnArtilleryBulletType(3f, 95){{
+                        hitEffect = Fx.sapExplosion;
+                        knockback = 1.6f;
+                        lifetime = 60f;
+                        width = height = 30f;
+                        collidesTiles = false;
+                        splashDamageRadius = 90f;
+                        splashDamage = 210f;
+                        backColor = Pal.sapBulletBack;
+                        frontColor = lightningColor = Pal.sapBullet;
+                        lightning = 4;
+                        lightningLength = 9;
+                        smokeEffect = Fx.shootBigSmoke2;
+                        hitShake = 10f;
+                        lightRadius = 45f;
+                        lightColor = Pal.sap;
+                        lightOpacity = 0.5f;
+
+                        status = StatusEffects.sapped;
+                        statusDuration = 60f * 10;
+
+                        unitType = UnitTypes.crawler;
+                    }};
+                }};
+            }});
         }};
         //endregion vanilla
         //region mod-units
