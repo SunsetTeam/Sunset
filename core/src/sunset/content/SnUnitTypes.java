@@ -65,17 +65,16 @@ public class SnUnitTypes implements ContentList{
     public void load() {
         //region vanilla
         bastion = new UnitType("bastion"){{
-            health = 47000;
-            speed = 0.29f;
-            hitSize = 34f;
-            rotateSpeed = 1.3f;
+            health = 47500;
+            speed = 0.3f;
+            hitSize = 37f;
+            rotateSpeed = 1.4f;
 
             armor = 18f;
             mechStepParticles = true;
-            mechStepShake = 0.75f;
             drownTimeMultiplier = 7f;
-            mechFrontSway = 2.3f;
-            mechSideSway = 0.9f;
+            mechFrontSway = 2f;
+            mechSideSway = 0.8f;
             mechStepShake = 1f;
             constructor = MechUnit::create;
 
