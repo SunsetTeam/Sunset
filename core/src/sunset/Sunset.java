@@ -15,6 +15,8 @@ import sunset.content.*;
 import sunset.core.*;
 import sunset.gen.*;
 import sunset.type.unitTypes.*;
+import sunset.ui.SnModInfoDialog;
+import sunset.ui.SnModsDialog;
 import sunset.utils.*;
 
 import static mindustry.Vars.*;
@@ -49,10 +51,10 @@ public class Sunset extends MMAMod{
     @Override
     public void init(){
         super.init();
+        SnModsDialog.init(SnModInfoDialog::new);
         UnitData.init();
         AdvancedContentInfoDialog.init();
         Utils.setMenuUnit(SnUnitTypes.router);
-
     }
 
     @Override
