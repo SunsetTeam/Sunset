@@ -119,6 +119,5 @@ public class SnGasBlocks implements ContentList {
             gasCapacity = 140f;
         }};
 
-
     }
 }
