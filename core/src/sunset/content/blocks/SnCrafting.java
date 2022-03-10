@@ -148,7 +148,6 @@ public class SnCrafting implements ContentList{
             hasLiquids = true;
             ambientSound = Sounds.grinding;
             ambientSoundVolume = 0.025f;
-            drawer = new mma.world.draw.MultiDrawBlock(new DrawLiquid(), new DrawSmelter());
 
             consumes.items(with(Items.blastCompound, 3, Items.titanium, 2));
             consumes.liquid(SnLiquids.burheyna, 0.4f);
@@ -211,7 +210,7 @@ public class SnCrafting implements ContentList{
             requirements(Category.crafting, with(SnItems.fors, 155, Items.metaglass, 85, Items.silicon, 90, Items.graphite, 95));
             size = 3;
 
-            outputGas = new GasStack(SnGas.giard, 3f);
+            outputGas = new GasStack(SnGas.hyneris, 5f);
             hasItems = true;
             hasLiquids = true;
             hasGasses = true;
@@ -219,7 +218,6 @@ public class SnCrafting implements ContentList{
             itemCapacity = 30;
             gasCapacity = 180f;
             craftTime = 5f;
-            drawer = new GasDrawArcSmelter();
             craftEffect = SnFx.giardSynthesizerCraft;
             consumes.items(with(SnItems.naturite, 1f));
             consumes.liquid(SnLiquids.burheyna, 0.25f);
