@@ -61,6 +61,8 @@ public class SnBullets implements ContentList {
         defLight, powerLight,
         //sap
         leadSap, sporeSap, planatriumSap,
+        //t6 vanilla
+        t6sapBullet, t6crawlerBoom, 
         //energy sphere
         smallEnergySphere, mediumEnergySphere, bigEnergySphere,
         //liquid
@@ -2337,6 +2339,32 @@ public class SnBullets implements ContentList {
         }};
         //endregion laser art
         //endregion special
+        //region t6 vanilla
+        t6sapBullet = new SapFlyingBulletType(9f, 120){{
+            sprite = "missile-large";
+            lifetime = 24;
+            homingPower = 0.08f;
+            homingRange = 600f;
+            
+            frontColor = Color.white;
+            backColor = Pal.sap;
+            trailColor = Pal.sap;
+            trailWidth = 4f;
+            trailLength = 48;
+        }};
+        t6crawlerBoom = new BombBulletType(0f, 0f, "clear"){{
+            status = StatusEffects.sapped;
+            hitEffect = Fx.sapExplosion;
+            lifetime = 10f;
+            speed = 1f;
+            splashDamageRadius = 80f;
+            instantDisappear = true;
+            splashDamage = 210f;
+            killShooter = true;
+            hittable = false;
+            collidesAir = true;
+        }};
+        //endregion t6 vanilla
         //region misc and testing
         overheatBullet = new BasicBulletType(0.1f, 7, "error") {{
             //shootEffect = Fx.none;
