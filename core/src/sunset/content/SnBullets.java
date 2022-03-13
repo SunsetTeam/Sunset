@@ -40,7 +40,7 @@ public class SnBullets implements ContentList {
         smallBlueMissile, smallEnojieMissile, mediumEnojieMissile,
         powerRocket, drrRocket,
         thoriumPowerRocket, forsPowerRocket,//unused
-        nobiumAimMissile,
+        nobiumAimMissile, naturiteAimMissile, renubiteAimMissile,
         //artillery
         artilleryFors, artilleryBlast,
         wheel4Artillery,
@@ -71,7 +71,7 @@ public class SnBullets implements ContentList {
         heavyCoalFlame, heavyPyraFlame, flameidFlame,
         wheel5Flame,
         //reverse-bullets
-        naturiteReversBullet,
+        naturiteReversBullet, forsReversBullet, nobiumReversBullet,
         infernoFlame,//unused
         //copters
         basicHelicopterGun,
@@ -653,7 +653,51 @@ public class SnBullets implements ContentList {
             homingPower = 0.09f;
             homingRange = 0;
             trailColor = SnPal.nobiumBulletBack;
-            trailEffect = SnFx.aimMissileTrail;
+            trailEffect = SnFx.whiteAimMissileTrail;
+            trailRotation = true;
+            trailInterval = 0.5f;
+            pierce = true;
+            pierceCap = 5;
+            weaveScale = 4;
+            weaveMag = 3;
+            drag = 0.0020f;
+        }};
+
+        naturiteAimMissile = new AimBulletType(3f, 45f){{
+            sprite = "missile";
+            splashDamage = 40f;
+            splashDamageRadius = 20f;
+            width = 13;
+            height = 16;
+            lifetime = 250;
+            frontColor = Pal.bulletYellow;
+            backColor = Pal.bulletYellowBack;
+            maxRange = 190;
+            homingPower = 0.09f;
+            homingRange = 0;
+            trailColor = Pal.bulletYellow;
+            trailEffect = SnFx.yellowAimMissileTrail;
+            trailRotation = true;
+            trailInterval = 0.4f;
+            weaveScale = 4;
+            weaveMag = 3;
+            drag = 0.00020f;
+        }};
+
+        renubiteAimMissile = new AimBulletType(3f, 75f){{
+            sprite = "missile";
+            splashDamage = 50f;
+            splashDamageRadius = 30f;
+            width = 13;
+            height = 16;
+            lifetime = 250;
+            frontColor = SnPal.blueBullet;
+            backColor = SnPal.blueBulletBack;
+            maxRange = 190;
+            homingPower = 0.09f;
+            homingRange = 0;
+            trailColor = SnPal.blueBullet;
+            trailEffect = SnFx.blueAimMissileTrail;
             trailRotation = true;
             trailInterval = 0.5f;
             weaveScale = 4;
@@ -1655,12 +1699,12 @@ public class SnBullets implements ContentList {
         }};
         //endregion flame
         //region reverse-bullets
-        naturiteReversBullet = new ReverseBulletType(2.6f, 80f) {{
+        naturiteReversBullet = new ReverseBulletType(2.6f, 95f) {{
             sprite = "sunset-copter-bomb";
             other = naturiteReversBullet;
             width = 15f;
             height = 15;
-            lifetime = 200;
+            lifetime = 235;
             homingPower = 0.05f;
             homingRange = 50f;
             spin = 5f;
@@ -1674,6 +1718,50 @@ public class SnBullets implements ContentList {
             inRange = true;
             frontColor = SnPal.copterLaser;
             backColor = SnPal.copterLaserBack;
+            drag = 0.0025f;
+        }};
+
+        forsReversBullet = new ReverseBulletType(2.6f, 100f) {{
+            sprite = "sunset-copter-bomb";
+            other = forsReversBullet;
+            width = 15f;
+            height = 15;
+            lifetime = 235;
+            homingPower = 0.05f;
+            homingRange = 50f;
+            spin = 5f;
+            shrinkX = 0f;
+            shrinkY = 0f;
+            trailWidth = 0;
+            trailLength = 0;
+            pierceCap = 4;
+            rotateMag = 5;
+            rotateRight = true;
+            inRange = true;
+            frontColor = SnPal.redBomb;
+            backColor = SnPal.redBombBack;
+            drag = 0.0025f;
+        }};
+
+        nobiumReversBullet = new ReverseBulletType(2.6f, 135f) {{
+            sprite = "sunset-copter-bomb";
+            other = nobiumReversBullet;
+            width = 15f;
+            height = 15;
+            lifetime = 235;
+            homingPower = 0.05f;
+            homingRange = 50f;
+            spin = 5f;
+            shrinkX = 0f;
+            shrinkY = 0f;
+            trailWidth = 0;
+            trailLength = 0;
+            pierceCap = 7;
+            rotateMag = 5;
+            rotateRight = true;
+            inRange = true;
+            frontColor = SnPal.nobiumBullet;
+            backColor = SnPal.nobiumBulletBack;
             drag = 0.0025f;
         }};
         //endregion reverse-bullets

@@ -509,8 +509,24 @@ public class SnFx {
         });
     }),
 
-    aimMissileTrail = new Effect(30f, 78f, e -> {
+    whiteAimMissileTrail = new Effect(30f, 78f, e -> {
         color(SnPal.nobiumBulletBack, Color.lightGray, Color.white,  e.fin() * e.fin());
+
+        randLenVectors(e.id, 8, 1.4f + e.finpow() * 32, e.rotation + 180, 12f, (x, y) -> {
+            Fill.circle(e.x + x, e.y + y, 0.37f + e.fout() * 2f);
+        });
+    }),
+
+    yellowAimMissileTrail = new Effect(30f, 78f, e -> {
+        color(Pal.lightPyraFlame, Color.lightGray,  e.fin() * e.fin());
+
+        randLenVectors(e.id, 8, 1.4f + e.finpow() * 32, e.rotation + 180, 12f, (x, y) -> {
+            Fill.circle(e.x + x, e.y + y, 0.37f + e.fout() * 2f);
+        });
+    }),
+
+    blueAimMissileTrail = new Effect(30f, 78f, e -> {
+        color(SnPal.blueBullet, Color.blue,  e.fin() * e.fin());
 
         randLenVectors(e.id, 8, 1.4f + e.finpow() * 32, e.rotation + 180, 12f, (x, y) -> {
             Fill.circle(e.x + x, e.y + y, 0.37f + e.fout() * 2f);
