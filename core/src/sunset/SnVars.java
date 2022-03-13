@@ -9,7 +9,10 @@ import mindustry.ctype.MappableContent;
 import mindustry.game.EventType;
 import mma.ModVars;
 import sunset.content.*;
-import sunset.core.*;
+import sunset.core.SnLogic;
+import sunset.core.SnSettings;
+import sunset.core.SnSoundControl;
+import sunset.core.SnUI;
 
 import static mindustry.Vars.headless;
 
@@ -25,13 +28,13 @@ public class SnVars extends ModVars {
             new SnLiquids(),
             new SnBullets(),
             new SnUnitTypes(),
+            new SnOverride(),
             new SnBlocks(),
             //new SnLoadouts(),
             new SnWeathers(),
             new SnPlanets(),
             new SnSectorPresets(),
-            new SnTechTree()/*,
-            new SnTeams()*/
+            new SnTechTree()
     ).flatMap(contentList -> Seq.with(contentList instanceof SnBlocks b ? b.list : new ContentList[]{contentList})).toArray(ContentList.class);
     //end region
     public static SnLogic logic;

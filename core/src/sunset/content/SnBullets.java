@@ -20,6 +20,7 @@ import mindustry.gen.Unit;
 import mindustry.graphics.Layer;
 import mindustry.graphics.Pal;
 import sunset.entities.bullet.*;
+import sunset.gen.SnSounds;
 import sunset.graphics.SnPal;
 import sunset.type.StackableStatusEffect;
 
@@ -1975,8 +1976,10 @@ public class SnBullets implements ContentList {
         //region yellow ships
         //T1
         smallShell = new BasicBulletType() {{
-            lifetime = 0.25f * Time.toSeconds;
-            speed = 11;
+            frontColor = Color.valueOf("FBFFE8");
+            backColor = Color.valueOf("ECF97A");
+            lifetime = 0.31f * Time.toSeconds;
+            speed = 6.8f;
             damage = 10;
             drawSize = 6.1f;
             pierceCap = 3;
@@ -1984,10 +1987,8 @@ public class SnBullets implements ContentList {
             reloadMultiplier = 1.1f;
             buildingDamageMultiplier = 0.6f;
             //recoil = 0;
-            width = 5.7f;
-            height = 8.7f;
-            pierce = true;
-            pierceBuilding = false;
+            width = 6f;
+            height = 9f;
             shootEffect = Fx.shootSmall;
             smokeEffect = Fx.shootSmallSmoke;
             collidesAir = absorbable = false;
@@ -2023,18 +2024,23 @@ public class SnBullets implements ContentList {
             }};
         }};//unused
         //T2
-        salvoArt = new ArtilleryBulletType(5f, 29, "shell") {{
-            frontColor = SnPal.yellowTrail;
-            backColor = SnPal.yellowTrailBack;
-            width = 7f;
+        salvoArt = new ArtilleryBulletType(5f, 26, "shell") {{
+            frontColor = Color.valueOf("FBFFE8");
+            backColor = Color.valueOf("ECF97A");
+            width = 5.5f;
             height = 12f;
-            shootEffect = Fx.shootBig2;
-            smokeEffect = Fx.shootBigSmoke2;
+            shootEffect = Fx.none;
+            smokeEffect = Fx.none;
+            hitEffect = despawnEffect = Fx.hitYellowLaser;
+            trailEffect = Fx.artilleryTrail;
             ammoMultiplier = 2.1f;
-            lifetime = 0.7f * Time.toSeconds;
+            lifetime = Time.toSeconds;
         }};
-        smallTorpedo = new TorpedoBulletType(2, 120) {{
-            lifetime = 1.6f * Time.toSeconds;
+        smallTorpedo = new TorpedoBulletType(3, 60) {{
+            sprite = "missile";
+            frontColor = SnPal.bGray;
+            backColor = SnPal.bGray.a(5);
+            lifetime = 1.1f * Time.toSeconds;
             drawSize = 9.2f;
             pierceCap = -1;
             inaccuracy = 1;
@@ -2046,19 +2052,23 @@ public class SnBullets implements ContentList {
             pierceBuilding = false;
             //splashDamage = 40;
             //splashDamageRadius = 10 * Vars.tilesize;
+            hitSound = SnSounds.torpedo_explosion;
+            trailEffect = Fx.none;
         }};
         //T3
-        lightningBall = new ArtilleryLightningBulletType(180) {{
+        lightningBall = new ArtilleryLightningBulletType(50) {{
             lightning = 5;
             lightningColor = SnPal.yellowTrailBack;
             maxRange = 320;
+            hitEffect = SnFx.lbHit;
+            despawnEffect = Fx.none;
         }};
-        trailRocket = new MissileBulletType(5, 210, "shell") {{
-            width = 13f;
-            height = 19f;
-            shrinkY = 0.1f;
+        trailRocket = new MissileBulletType(5, 30) {{
+            width = 5f;
+            height = 8;
+            shrinkY = 0.7f;
             drag = -0.003f;
-            lifetime = 65f;
+            lifetime = 0.9f * Time.toSeconds;
             splashDamageRadius = 45f;
             splashDamage = 65f;
             homingPower = 0.1f;

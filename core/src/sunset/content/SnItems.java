@@ -1,8 +1,9 @@
 package sunset.content;
 
-import arc.graphics.*;
-import mindustry.ctype.*;
-import mindustry.type.*;
+import arc.graphics.Color;
+import mindustry.ctype.ContentList;
+import mindustry.type.Item;
+import sunset.type.Ammo;
 
 public class SnItems implements ContentList {
     public static Item
@@ -11,6 +12,7 @@ public class SnItems implements ContentList {
     //crafted
     naturite, nobium, enojie, reneubite;
 
+    public static Ammo testAmmo;
     @Override
     public void load() {
         //region raw

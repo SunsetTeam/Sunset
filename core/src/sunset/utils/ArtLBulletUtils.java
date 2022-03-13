@@ -28,7 +28,7 @@ import mindustry.graphics.Layer;
 import static sunset.entities.bullet.ArtilleryLightningBulletType.effectLifetime;
 import static sunset.entities.bullet.ArtilleryLightningBulletType.lColor;
 
-public class ArtLBulletUtils {
+public class ArtLBulletUtils {//todo: добавить свечение
     private static final Vec2 tmp1 = new Vec2(), tmp2 = new Vec2();
     private static Building furthest;
     public static final BulletType hitter = new BulletType() {{
@@ -58,6 +58,9 @@ public class ArtLBulletUtils {
             Vec2 next = lines.get(i + 1);
             Lines.line(cur.x, cur.y, next.x, next.y, false);
         }
+        /*for(Vec2 p : lines){
+            Fill.circle(p.x, p.y, Lines.getStroke() / 2f);
+        }*/
     })).layer(Layer.effect - 0.001f);
 
     //create lightning to the enemies in range.

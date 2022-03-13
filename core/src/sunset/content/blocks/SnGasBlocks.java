@@ -1,6 +1,5 @@
 package sunset.content.blocks;
 
-import arc.graphics.Color;
 import gas.world.blocks.gas.*;
 import gas.world.blocks.sandbox.GasSource;
 import gas.world.blocks.sandbox.GasVoid;
@@ -26,7 +25,7 @@ public class SnGasBlocks implements ContentList {
 
     @Override
     public void load() {
-
+/*
         //sandbox
         gasSource = new GasSource("gas-source") {{
             requirements(Category.liquid, BuildVisibility.sandboxOnly, with());
@@ -116,6 +115,6 @@ public class SnGasBlocks implements ContentList {
             health = 200;
             size = 3;
             gasCapacity = 140f;
-        }};
+        }};*/
     }
 }

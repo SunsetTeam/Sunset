@@ -11,6 +11,7 @@ import arc.math.Mathf;
 import arc.math.Rand;
 import arc.math.geom.Position;
 import arc.math.geom.Vec2;
+import arc.struct.ObjectMap;
 import arc.struct.Seq;
 import arc.util.Time;
 import arc.util.Tmp;
@@ -24,6 +25,8 @@ import sunset.graphics.Drawm;
 import sunset.graphics.SnPal;
 import sunset.utils.test.DrawFunc;
 import sunset.world.blocks.defense.turrets.SynthesisTurret;
+
+import java.util.Arrays;
 
 import static arc.graphics.g2d.Draw.alpha;
 import static arc.graphics.g2d.Draw.color;
@@ -517,13 +520,6 @@ public class SnFx {
         });
     }),
 
-    torpedoTrail = new Effect(30, e -> {
-        color(Color.lightGray);
-        randLenVectors(e.id, 15, 2 + e.fin() * 5, (x, y) -> {
-            Fill.circle(e.x + x, e.y + y, e.fin() * 1.9f);
-        });
-    }),
-
     galaxyMainHit = new Effect(45, e -> {
         Draw.color(Pal.surge);
         Draw.alpha(e.foutpow());
@@ -633,6 +629,7 @@ public class SnFx {
     }),
     //endregion green turrets
 
+    //region laser art
     laserArtHit = new Effect(20f, 50f, e -> {
         color(Pal.meltdownHit);
         stroke(e.fout() * 2);
@@ -648,6 +645,7 @@ public class SnFx {
 
         Drawf.light(e.x, e.y, 5, Pal.meltdownHit, e.fout());
     }),//fanatic
+    //endregion laser art
 
     //region yellow ships
     acTrail = new Effect(30, e -> {
@@ -656,6 +654,33 @@ public class SnFx {
         color(SnPal.yellowTrail);
         Fill.circle(e.x, e.y, e.rotation * e.fout());
     }),
+    lbHit = new Effect(30, e -> {
+        color(SnPal.lightningBall);
+        stroke(e.fout() * 5);
+        circle(e.x, e.y, e.fin(Interp.pow2Out) * 40);
+        rand.setSeed(e.id);
+        randLenVectors(e.id, 12, 8 + 60 * e.fin(Interp.pow5Out), (x, y) -> Fill.circle(e.x + x, e.y + y, e.fout(Interp.circleIn) * (6f + rand.random(6f))));
+        for (int i = 0; i < 4; i++) {
+            Drawf.tri(e.x, e.y, 2.4f, 90 * e.fout(), (i * 90) + 45 * e.fout(Interp.pow5Out));
+        }
+    }),
+    //crossBlast = new Effect(Mathf.clamp(size / 3f, 35f, 240f), size * 2, e -> {
+    //    color(color, Color.white, e.fout() * 0.55f);
+    //    Drawf.light(e.x, e.y, e.fout() * size, color, 0.7f);
+//
+    //    e.scaled(10f, i -> {
+    //        stroke(1.35f * i.fout());
+    //        circle(e.x, e.y, size * 0.7f * i.finpow());
+    //    });
+//
+    //    rand.setSeed(e.id);
+    //    float sizeDiv = size / 1.5f;
+    //    float randL = rand.random(sizeDiv);
+//
+    //    for(int i = 0; i < 4; i++){
+    //        DrawFunc.tri(e.x, e.y, size / 20 * (e.fout() * 3f + 1) / 4 * (e.fout(Interp.pow3In) + 0.5f) / 1.5f, (sizeDiv + randL) * Mathf.curve(e.fin(), 0, 0.05f) * e.fout(Interp.pow3), i * 90 + rotate);
+    //    }
+    //}),
     //endregion yellow ships
 
     //region turrets 360

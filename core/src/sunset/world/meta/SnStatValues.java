@@ -19,6 +19,9 @@ import mindustry.world.meta.Stat;
 import mindustry.world.meta.StatUnit;
 import mindustry.world.meta.StatValue;
 import mindustry.world.meta.StatValues;
+import sunset.content.affilitiation.SnBranches;
+import sunset.content.affilitiation.SnGuilds;
+import sunset.content.affilitiation.SnSubGuilds;
 import sunset.type.blocks.DrillItem;
 
 import static mindustry.Vars.content;
@@ -165,5 +168,31 @@ public class SnStatValues {
 
     private static TextureRegion icon(UnlockableContent t) {
         return t.uiIcon;
+    }
+
+    /*public static StatValue guild(String name, TextureRegion region) {
+        return table -> {
+            table.image(region).size(50);
+            table.add("   " + name).color(SnGuilds.color);
+            table.row();
+        };
+    }*/
+     public static StatValue affil(SnGuilds guild) {
+        return table -> {
+            table.image(guild.region()).size(25);
+            table.add("   " + guild.localizedName()).color(guild.color);
+        };
+     }
+    public static StatValue affil(SnSubGuilds subGuild) {
+        return table -> {
+            table.image(subGuild.region()).size(25);
+            table.add("   " + subGuild.localizedName()).color(subGuild.color);
+        };
+    }
+    public static StatValue affil(SnBranches branch) {
+        return table -> {
+            table.image(branch.region()).size(25);
+            table.add("   " + branch.localizedName()).color(branch.color);
+        };
     }
 }
