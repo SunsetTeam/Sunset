@@ -1,11 +1,13 @@
 package sunset.content;
 
+import arc.audio.Sound;
 import arc.util.Time;
 import mindustry.Vars;
 import mindustry.ai.types.FlyingAI;
 import mindustry.ai.types.SuicideAI;
 import mindustry.annotations.Annotations.EntityDef;
 import mindustry.content.Fx;
+import mindustry.content.Items;
 import mindustry.content.Liquids;
 import mindustry.content.StatusEffects;
 import mindustry.content.UnitTypes;
@@ -17,8 +19,10 @@ import mindustry.entities.bullet.ShrapnelBulletType;
 import mindustry.gen.*;
 import mindustry.graphics.Layer;
 import mindustry.graphics.Pal;
+import mindustry.type.StatusEffect;
 import mindustry.type.UnitType;
 import mindustry.type.Weapon;
+import mindustry.type.ammo.ItemAmmoType;
 import mindustry.type.weapons.PointDefenseWeapon;
 import sunset.ai.*;
 import sunset.ai.weapon.ExtinguishWeaponAI;
@@ -42,7 +46,7 @@ public class SnUnitTypes implements ContentList{
     public static UnitType
 
     //vanilla
-    bastion, t6spooder,
+    bastion, t6spooder, t6crawler,
 
     //attack copters
     wind, thunder, nadir, halo, parhelion, mudflow,
@@ -122,14 +126,45 @@ public class SnUnitTypes implements ContentList{
             }}
             );
         }};
-        t6spooder = new UnitType("t6spooder"){{
+        t6crawler = new UnitType("crawler"){{
+            defaultController = SuicideAI::new;
+
+            speed = 1f;
+            hitSize = 8f;
+            health = 175;
+            armor = 19f;
+            mechSideSway = 0.25f;
+            range = 60f;
+            constructor = MechUnit::create;
+
+            weapons.add(new Weapon(){{
+                shootOnDeath = true;
+                reload = 24f;
+                shootCone = 180f;
+                ejectEffect = Fx.none;
+                shootSound = Sounds.explosionbig;
+                x = shootY = 0f;
+                mirror = false;
+                bullet = SnBullets.t6crawlerBoom;
+            }});
+        }
+            /*
+            TODO заблокировать после отладки. Пока он должен быть виден, но в итоге - нет.
+            @Override 
+            public boolean unlocked() { return false; }
+            @Override
+            public boolean unlockedNow() { return false; }
+            @Override
+            public boolean unlockedNowHost() { return false; }*/
+        };
+        t6spooder = new UnitTypeExt("t6spooder"){{
             //TODO: create actual stats. This one copied from "abyssEye"
-            health = 70000;
-            speed = 0.45f;
+            health = 61000;
+            speed = 0.6f;
             rotateSpeed = 1.5f;
             drag = 0.125f;
             hitSize = 71;
-            armor = 30f;
+            armor = 26f;
             allowLegStep = true;
             hovering = true;
             groundLayer = Layer.legUnit;
@@ -151,16 +186,20 @@ public class SnUnitTypes implements ContentList{
             
             constructor = LegsUnit::create;
 
-            weapons.add(new Weapon("toxopid-cannon"){{
+            ammoType = new ItemAmmoType(SnItems.planatrium, 6);
+            buildSpeed = 1f;
+
+            weapons.add(
+            new SnWeapon("t6spooder-cannon"){{
                 y = -14f;
                 x = 0f;
                 shootY = 22f;
                 mirror = false;
-                reload = 210;
-                shake = 10f;
-                recoil = 10f;
-                rotateSpeed = 1f;
-                ejectEffect = Fx.casing3;
+                reload = 290;
+                shake = 15f;
+                recoil = 15f;
+                rotateSpeed = 0.8f;
+                ejectEffect = Fx.casing2;
                 shootSound = Sounds.artillery;
                 rotate = true;
                 shadow = 30f;
@@ -183,21 +222,21 @@ public class SnUnitTypes implements ContentList{
                     lightRadius = 65f;
                     lightColor = Pal.sap;
                     lightOpacity = 0.6f;
-
+        
                     status = StatusEffects.sapped;
                     statusDuration = 60f * 10;
-
+        
                     fragLifeMin = 0.6f;
                     fragBullets = 6;
-
-                    fragBullet = new SpawnArtilleryBulletType(3f, 95){{
+        
+                    fragBullet = new SpawnArtilleryBulletType(3f, 70){{
                         hitEffect = Fx.sapExplosion;
                         knockback = 1.6f;
                         lifetime = 60f;
                         width = height = 30f;
                         collidesTiles = false;
                         splashDamageRadius = 90f;
-                        splashDamage = 210f;
+                        splashDamage = 95f;
                         backColor = Pal.sapBulletBack;
                         frontColor = lightningColor = Pal.sapBullet;
                         lightning = 4;
@@ -207,14 +246,23 @@ public class SnUnitTypes implements ContentList{
                         lightRadius = 45f;
                         lightColor = Pal.sap;
                         lightOpacity = 0.5f;
-
+            
                         status = StatusEffects.sapped;
                         statusDuration = 60f * 10;
-
-                        unitType = UnitTypes.crawler;
+            
+                        unitType = SnUnitTypes.t6crawler;
                     }};
                 }};
-            }});
+            }},
+            new SnWeapon("t6spooder-sap"){{
+                x = 15;
+                reload = 10;
+                shootCone = 20f;
+                alternate = true;
+                bullet = SnBullets.t6sapBullet;
+                shootSound = Sounds.sap;
+            }}
+            );
         }};
         //endregion vanilla
         //region mod-units
