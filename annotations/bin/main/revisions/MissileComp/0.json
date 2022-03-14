@@ -1,0 +1,1 @@
+{fields:[{name:from,type:arc.math.geom.Vec2},{name:time,type:float},{name:to,type:arc.math.geom.Vec2},{name:type,type:sunset.type.MissileType},{name:x,type:float},{name:y,type:float}]}

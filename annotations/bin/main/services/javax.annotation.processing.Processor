@@ -1,0 +1,12 @@
+rpmod.annotations.ModAssetsFolders.AssetsFoldersProcessor
+
+rpmod.annotations.RulesEditDialog.RulesProcessor
+rpmod.annotations.ModTypeIO.ObjectReadProcessor
+rpmod.annotations.ModEntities.ModEntitiesProc
+gas.annotations.misc.GasLoadRegionProcessor
+rpmod.annotations.misc.ModLoadRegionProcessor
+rpmod.annotations.AdvancedStats.AStatCatProcessor
+rpmod.annotations.AdvancedStats.AStatProcessor
+rpmod.annotations.impl.ModAssetsProcess
+rpmod.annotations.remote.ModRemoteProcess
+rpmod.annotations.misc.LogicStatementProcessor

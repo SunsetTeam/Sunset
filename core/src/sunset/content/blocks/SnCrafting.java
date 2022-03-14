@@ -1,11 +1,8 @@
 package sunset.content.blocks;
 
 import arc.graphics.*;
-import gas.GasStack;
-import gas.world.draw.GasDrawArcSmelter;
 import mindustry.content.*;
 import mindustry.ctype.*;
-import mindustry.entities.effect.MultiEffect;
 import mindustry.gen.*;
 import mindustry.type.*;
 import mindustry.world.*;
@@ -13,13 +10,8 @@ import mindustry.world.blocks.production.*;
 import mindustry.world.draw.*;
 import mma.world.draw.*;
 import sunset.content.*;
-import sunset.world.blocks.gas.GasCrafter;
 import sunset.world.draw.*;
 
-import arc.math.Interp;
-import arc.graphics.g2d.TextureRegion;
-import arc.Core;
-import arc.graphics.g2d.Draw;
 import static mindustry.type.ItemStack.with;
 
 public class SnCrafting implements ContentList{
@@ -28,8 +20,8 @@ public class SnCrafting implements ContentList{
     //advanced
     advancedCompressor, advancedWeaver, advancedKiln, advancedSurge, advancedCryomixer,
     //standard
-    collider, purifier, crystallizer, enojieKiln, giardSynthesizer,
-	  testCrafter;
+    collider, purifier, crystallizer, enojieKiln,
+    testCrafter;
 
     @Override
     public void load(){
@@ -148,7 +140,6 @@ public class SnCrafting implements ContentList{
             hasLiquids = true;
             ambientSound = Sounds.grinding;
             ambientSoundVolume = 0.025f;
-            drawer = new mma.world.draw.MultiDrawBlock(new DrawLiquid(), new DrawSmelter());
 
             consumes.items(with(Items.blastCompound, 3, Items.titanium, 2));
             consumes.liquid(SnLiquids.burheyna, 0.4f);
@@ -205,25 +196,6 @@ public class SnCrafting implements ContentList{
 
             consumes.items(with(SnItems.nobium, 1, SnItems.planatrium, 3, Items.metaglass, 1));
             consumes.power(5.3f);
-        }};
-
-        giardSynthesizer = new GasCrafter("giard-synthesizer") {{
-            requirements(Category.crafting, with(SnItems.fors, 155, Items.metaglass, 85, Items.silicon, 90, Items.graphite, 95));
-            size = 3;
-
-            outputGas = new GasStack(SnGas.giard, 3f);
-            hasItems = true;
-            hasLiquids = true;
-            hasGasses = true;
-            gasCapacity = 50f;
-            itemCapacity = 30;
-            gasCapacity = 180f;
-            craftTime = 5f;
-            drawer = new GasDrawArcSmelter();
-            craftEffect = SnFx.giardSynthesizerCraft;
-            consumes.items(with(SnItems.naturite, 1f));
-            consumes.liquid(SnLiquids.burheyna, 0.25f);
-            consumes.power(2f);
         }};
         //endregion standard
 		testCrafter = new GenericCrafter("test-crafter") {{
