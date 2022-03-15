@@ -44,12 +44,12 @@ public class SnFx {
 
         color(Pal.heal);
         for (int i = 0; i < 4; i++) {
-            Drawf.tri(e.x, e.y, 4f, 28f * e.fout(), e.rotation + 90f * i + e.foutpow() * 360f);
+            Drawf.tri(e.x, e.y, 4f, 28f * e.fout(), e.rotation + 90f * i + e.foutpow() * 140f);
         }
 
         color();
         for (int i = 0; i < 4; i++) {
-            Drawf.tri(e.x, e.y, 2f, 13f * e.fout(), e.rotation + 90f * i + e.foutpow() * 360f);
+            Drawf.tri(e.x, e.y, 2f, 13f * e.fout(), e.rotation + 90f * i + e.foutpow() * 140f);
         }
     }),
 
@@ -509,8 +509,24 @@ public class SnFx {
         });
     }),
 
-    aimMissileTrail = new Effect(30f, 78f, e -> {
+    whiteAimMissileTrail = new Effect(30f, 78f, e -> {
         color(SnPal.nobiumBulletBack, Color.lightGray, Color.white,  e.fin() * e.fin());
+
+        randLenVectors(e.id, 8, 1.4f + e.finpow() * 32, e.rotation + 180, 12f, (x, y) -> {
+            Fill.circle(e.x + x, e.y + y, 0.37f + e.fout() * 2f);
+        });
+    }),
+
+    yellowAimMissileTrail = new Effect(30f, 78f, e -> {
+        color(Pal.lightPyraFlame, Color.lightGray,  e.fin() * e.fin());
+
+        randLenVectors(e.id, 8, 1.4f + e.finpow() * 32, e.rotation + 180, 12f, (x, y) -> {
+            Fill.circle(e.x + x, e.y + y, 0.37f + e.fout() * 2f);
+        });
+    }),
+
+    blueAimMissileTrail = new Effect(30f, 78f, e -> {
+        color(SnPal.blueBullet, Color.blue,  e.fin() * e.fin());
 
         randLenVectors(e.id, 8, 1.4f + e.finpow() * 32, e.rotation + 180, 12f, (x, y) -> {
             Fill.circle(e.x + x, e.y + y, 0.37f + e.fout() * 2f);

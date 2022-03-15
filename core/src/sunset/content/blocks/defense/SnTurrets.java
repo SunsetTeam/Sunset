@@ -298,7 +298,9 @@ public class SnTurrets implements ContentList {
         hemrus = new ModItemTurret("hemrus") {{
             requirements(Category.turret, with(SnItems.fors, 250, Items.plastanium, 90, Items.graphite, 60));
             ammo(
-                    SnItems.naturite, SnBullets.naturiteReversBullet
+                    SnItems.naturite, SnBullets.naturiteReversBullet,
+                    SnItems.fors, SnBullets.forsReversBullet,
+                    SnItems.nobium, SnBullets.nobiumReversBullet
             );
             health = 1780;
             size = 3;
@@ -387,7 +389,9 @@ public class SnTurrets implements ContentList {
         ammirus = new ModItemTurret("ammirus") {{
             requirements(Category.turret, with(Items.copper, 700, SnItems.fors, 570, Items.plastanium, 475, SnItems.nobium, 470));
             ammo(
-                    SnItems.nobium, SnBullets.nobiumAimMissile
+                    SnItems.nobium, SnBullets.nobiumAimMissile,
+                    SnItems.naturite, SnBullets.naturiteAimMissile,
+                    SnItems.reneubite, SnBullets.renubiteAimMissile
             );
             health = 3000;
             size = 4;

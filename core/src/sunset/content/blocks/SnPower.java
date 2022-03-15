@@ -1,8 +1,7 @@
 package sunset.content.blocks;
 
-import arc.graphics.Color;
-import gas.GasStack;
-import gas.world.draw.GasDrawSmelter;
+import gas.world.blocks.power.GasItemLiquidGenerator;
+import gas.world.consumers.ConsumeGas;
 import mindustry.content.*;
 import mindustry.ctype.*;
 import mindustry.gen.*;
@@ -10,9 +9,6 @@ import mindustry.type.*;
 import mindustry.world.*;
 import mindustry.world.blocks.power.*;
 import sunset.content.*;
-import sunset.graphics.SnPal;
-import sunset.world.blocks.gas.Boiler;
-import sunset.world.blocks.gas.PowerGenerateBoiler;
 import sunset.world.blocks.power.*;
 
 import static mindustry.type.ItemStack.*;
@@ -20,7 +16,7 @@ import static mindustry.type.ItemStack.*;
 public class SnPower implements ContentList{
     public static Block
     //generators
-    boiler, oilGenerator, advrtgGenerator, advThermalGenerator,
+    oilGenerator, advrtgGenerator, advThermalGenerator,
 
     //reactors
     differentialReactor, planatriumReactor;
@@ -28,26 +24,9 @@ public class SnPower implements ContentList{
     @Override
     public void load(){
         //region generators
-
-        boiler = new PowerGenerateBoiler("steam-kettle") {{
-            requirements(Category.power, with(Items.copper, 40, Items.lead, 60, Items.silicon, 30f));
-            size = 3;
-            warmupSpeed = 0.01f;
-            liquidAmount = 10f;
-            drawer = new GasDrawSmelter(){{
-                flameColor = SnPal.giardGas;
-            }};
-
-            powerProduction = 3f;
-            consumes.items(new ItemStack(Items.coal, 2));
-            consumes.liquid(SnLiquids.burheyna, liquidAmount / craftTime);
-            outputGas = new GasStack(SnGas.giard, liquidAmount * conversionMultiplier);
-        }};
-
         oilGenerator = new LiquidGenerator("oil-generator"){{
             requirements(Category.power, with(Items.copper, 110, Items.titanium, 70, Items.lead, 120, Items.silicon, 55, Items.metaglass, 70));
             powerProduction = 11f;
-            itemDuration = 220f;
             //minLiquidEfficiency = 0.2f;
             //maxLiquidGenerate = 0.4f;
             liquidCapacity = 50;
