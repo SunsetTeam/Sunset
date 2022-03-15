@@ -6,7 +6,7 @@ import mindustry.content.StatusEffects;
 import mindustry.ctype.ContentList;
 
 public class SnGas implements ContentList {
-    public static Gas hyneris;
+    public static Gas hyneris, ram;
 
     @Override
     public void load() {
@@ -14,6 +14,14 @@ public class SnGas implements ContentList {
             color = Color.valueOf("E17C7C");
             explosiveness = 0.07f;
             temperature = 0.3f;
+            effect = StatusEffects.wet;
+        }};
+
+        ram = new Gas("ram") {{
+            color = Color.valueOf("D1EFF6");
+            explosiveness = 0.1f;
+            flammability = 0.1f;
+            temperature = 0.4f;
             effect = StatusEffects.wet;
         }};
     }

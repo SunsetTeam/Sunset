@@ -17,6 +17,7 @@ import sunset.content.SnFx;
 import sunset.content.SnGas;
 import sunset.content.SnItems;
 import sunset.content.SnLiquids;
+import sunset.world.blocks.gas.ArmoredGasConduit;
 import sunset.world.blocks.gas.GasCrafter;
 import sunset.world.blocks.gas.ModGasPipe;
 
@@ -54,42 +55,34 @@ public class SnGasBlocks implements ContentList {
 
         //gas-transportation
         gasPipe = new GasConduit("gas-pipe") {{
-            requirements(Category.liquid, with(Items.graphite, 1, SnItems.fors, 2));
-            health = 50;
+            requirements(Category.liquid, with(Items.metaglass, 1, SnItems.fors, 2));
+            health = 55;
             size = 1;
             gasCapacity = 7.5f;
             junctionReplacement = gasJunction;
             bridgeReplacement = gasBridge;
         }};
-        armoredGasPipe = new GasArmoredConduit("plated-gas-pipe") {{
-            requirements(Category.liquid, with(SnItems.fors, 5, Items.graphite, 3));
-            health = 300;
+        armoredGasPipe = new ArmoredGasConduit("plated-gas-pipe") {{
+            requirements(Category.liquid, with(SnItems.fors, 3, Items.metaglass, 2, Items.graphite, 4f));
+            health = 200;
             size = 1;
             gasCapacity = 7.7f;
             junctionReplacement = gasJunction;
             bridgeReplacement = gasBridge;
         }};
         naturiteGasPipe = new ModGasPipe("naturite-gas-pipe") {{
-            requirements(Category.liquid, with(SnItems.naturite, 1, SnItems.fors, 2));
-            health = 50;
+            requirements(Category.liquid, with(Items.metaglass, 3, SnItems.naturite, 1, SnItems.fors, 2));
+            health = 80;
             size = 1;
             gasCapacity = 10f;
             junctionReplacement = gasJunction;
             bridgeReplacement = gasBridge;
         }};
         nobiumGasPipe = new GasConduit("nobium-gas-pipe") {{
-            requirements(Category.liquid, with(Items.graphite, 1, SnItems.nobium, 2));
-            health = 50;
+            requirements(Category.liquid, with(Items.metaglass, 2, SnItems.nobium, 2));
+            health = 125;
             size = 1;
             gasCapacity = 13f;
-            junctionReplacement = gasJunction;
-            bridgeReplacement = gasBridge;
-        }};
-        armoredNobiumGasPipe = new GasArmoredConduit("nobium-plated-gas-pipe") {{
-            requirements(Category.liquid, with(Items.graphite, 2, SnItems.nobium, 5));
-            health = 300;
-            size = 1;
-            gasCapacity = 13.5f;
             junctionReplacement = gasJunction;
             bridgeReplacement = gasBridge;
         }};
@@ -124,7 +117,6 @@ public class SnGasBlocks implements ContentList {
             hasGasses = true;
             range = 6;
         }};
-
         //storage
         gasStorage = new GasRouter("gas-storage"){{
             requirements(Category.liquid, with(Items.graphite, 15, SnItems.fors, 20));
