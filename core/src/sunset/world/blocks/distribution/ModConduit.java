@@ -2,9 +2,9 @@ package sunset.world.blocks.distribution;
 
 import mindustry.game.Team;
 import mindustry.world.Tile;
-import mindustry.world.blocks.liquid.Conduit;
+import mindustry.world.blocks.liquid.ArmoredConduit;
 
-public class ModConduit extends Conduit {
+public class ModConduit extends ArmoredConduit {
     public boolean onLiquid = true;
 
     public ModConduit (String name){
@@ -19,3 +19,4 @@ public class ModConduit extends Conduit {
         return false;
     }
 }
+
