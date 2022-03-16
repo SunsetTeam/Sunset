@@ -87,35 +87,39 @@ public class SnGasBlocks implements ContentList {
             bridgeReplacement = gasBridge;
         }};
         gasJunction = new GasJunction("gas-junction") {{
-            requirements(Category.liquid, with(Items.graphite, 2, SnItems.fors, 6));
+            requirements(Category.liquid, with(Items.graphite, 2, Items.metaglass, 3, SnItems.fors, 6));
             health = 75;
             size = 1;
             gasCapacity = 29f;
             hasLiquids = false;
         }};
         gasRouter = new GasRouter("gas-router") {{
-            requirements(Category.liquid, with(Items.graphite, 2, SnItems.fors, 6));
+            requirements(Category.liquid, with(Items.graphite, 2, Items.metaglass, 1, SnItems.fors, 6));
             health = 80;
             size = 1;
-            gasCapacity = 36f;
+            gasCapacity = 33f;
         }};
         gasBridge = new GasBridge("gas-bridge") {{
-            requirements(Category.liquid, with(Items.graphite, 7, SnItems.fors, 7));
+            requirements(Category.liquid, with(Items.graphite, 7, Items.metaglass, 9, SnItems.fors, 7));
             health = 85;
             size = 1;
-            gasCapacity = 35f;
+            gasCapacity = 36f;
+            hasPower = false;
             outputsGas = true;
             hasGasses = true;
             range = 6;
         }};
-        nobiumGasBridge = new GasExtendingBridge("nobium-gas-bridge") {{
-            requirements(Category.liquid, with(Items.graphite, 10, SnItems.nobium, 5));
-            health = 85;
+        nobiumGasBridge = new GasBridge("nobium-gas-bridge") {{
+            requirements(Category.liquid, with(Items.graphite, 10, Items.metaglass, 13, SnItems.nobium, 5));
+            health = 100;
+            range = 12;
             size = 1;
-            gasCapacity = 35f;
-            outputsGas = true;
-            hasGasses = true;
-            range = 6;
+            gasCapacity = 42f;
+            arrowPeriod = 0.9f;
+            arrowTimeScl = 2.75f;
+            hasPower = true;
+            pulse = true;
+            consumes.power(0.35f);
         }};
         //storage
         gasStorage = new GasRouter("gas-storage"){{
