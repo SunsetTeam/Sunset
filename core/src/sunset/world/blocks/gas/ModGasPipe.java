@@ -5,11 +5,11 @@ import mindustry.game.Team;
 import mindustry.world.Tile;
 
 public class ModGasPipe extends GasConduit {
-
     public boolean onLiquid = true;
 
     public ModGasPipe (String name){
         super(name);
+        leaks = false;
     }
 
     @Override

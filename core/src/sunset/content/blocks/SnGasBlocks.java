@@ -75,6 +75,7 @@ public class SnGasBlocks implements ContentList {
             health = 80;
             size = 1;
             gasCapacity = 10f;
+            placeableLiquid = true;
             junctionReplacement = gasJunction;
             bridgeReplacement = gasBridge;
         }};
