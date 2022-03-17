@@ -608,17 +608,22 @@ public class SnTurrets implements ContentList {
             chargeEffect = SnFx.tridentCharge;
             category = Category.turret;
             buildVisibility = BuildVisibility.shown;
-            shootType = new EnergySphereBulletType(1.75f, 290f) {{
-                hitSize = 8f;
-                splashDamage = 1280f;
-                splashDamageRadius = 7 * Vars.tilesize;
-                lightningDamage = 48f;
-                lightningPeriod = 30f;
-                lightningLength = 192;
+            shootType = new EnergySphereBulletType(2.5f, 290f) {{
+                hitSize = 9f;
+                splashDamage = 910f;
+                splashDamageRadius = 97f;
+                lightningPeriod = 10f;
+                lightningChance = 0.4f;
+                lightningLength = 111;
                 healPercent = 5f;
-                lifetime = 250f;
+                lightningDamage = 96;
+                lifetime = 480f;
+                frontColor = Pal.sap;
                 hitEffect = SnFx.tridentHit;
-            }};
+            }
+                @Override
+                public float continuousDamage() { return 720; };
+            };
         }};
         radius = new MinigunTurret("radius") {{
             requirements(Category.turret, with(Items.copper, 2500, Items.graphite, 1700, Items.surgeAlloy, 1450, Items.plastanium, 955, SnItems.enojie, 620));

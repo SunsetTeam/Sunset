@@ -1,42 +1,35 @@
 package sunset.graphics;
 
-import arc.graphics.*;
-import arc.graphics.g2d.*;
-import arc.math.*;
-import arc.math.geom.*;
-import arc.scene.ui.layout.Scl;
-import arc.struct.*;
-import mindustry.graphics.*;
-import mindustry.ui.Fonts;
+import arc.graphics.g2d.Fill;
+import arc.math.Mathf;
+import arc.math.Rand;
+import arc.math.geom.Vec2;
+import arc.util.Time;
 
-import static arc.graphics.g2d.Draw.*;
+public class Drawm {
+    private static Rand rand = new Rand();
+    private static Vec2 pos = new Vec2();
 
-public class Drawm{
-    public static void energySphere(long seed, float time, float fin, int amount,
-                                    float minSpeed, float maxSpeed, float mainRadius, float miniRadius,
-                                    Color c1, Color c2, float x, float y) {
-        Seq<Vec2> vecs = new Seq<>();
-        Angles.randLenVectors(seed, amount, minSpeed, maxSpeed, (xx, yy) -> vecs.add(new Vec2(xx, yy)));
-        vecs.each(vec -> {
-            float size = (vec.len() * time) % Mathf.PI2;
-            if (size < Mathf.PI) return;
-            miniEnergySphere(fin, mainRadius, miniRadius, c1, c2, x, y, vec.angleRad(), Mathf.PI2 - size);
-        });
-        color(Pal.surge, Color.white, 1 - fin);
-        Fill.circle(x, y, fin * mainRadius);
-        vecs.each(vec -> {
-            float size = (vec.len() * time) % Mathf.PI2;
-            if (size >= Mathf.PI) return;
-            miniEnergySphere(fin, mainRadius, miniRadius, c2, c1, x, y, vec.angleRad(), size);
-        });
+    public static void drawTrident(float atX, float atY, long seed, float globalScl) { 
+        draw(atX, atY, seed, 15, 
+             0.66f, 1.66f, // timeScl
+             3f, 5.5f, // len
+             1.5f, 3f, // rad
+             globalScl); 
     }
 
-    private static void miniEnergySphere(float fin, float mainRadius, float miniRadius, Color c1, Color c2, float x, float y, float angle, float size) {
-        float _size = (Mathf.sin(size) * 0.15f + 0.85f) * fin;
-        float len = Mathf.cos(size) * fin * (mainRadius + miniRadius);
-        float bx = Mathf.sin(angle) * len;
-        float by = Mathf.cos(angle) * len;
-        color(c1, c2, Mathf.sin(size));
-        Fill.circle(x + bx, y + by, _size * miniRadius);
+    private static void draw(float atX, float atY, long seed, int count, float timeSclMin, float timeSclMax, float lenMin, float lenMax, float radMin, float radMax, float globalScl) {
+        rand.setSeed(seed);
+
+        for(int i = 0; i < count; i++) {
+            float timeScl = rand.nextFloat() * (timeSclMax-timeSclMin) + timeSclMin;
+            float len = rand.nextFloat() * (lenMax-lenMin) + lenMin;
+            float rad = rand.nextFloat() * (radMax-radMin) + radMin;
+            float angle = rand.nextFloat() * Mathf.PI2;
+            float vecScl = Mathf.sin(timeScl * Time.time / 60);
+            float sizeScl = Mathf.cos(timeScl * Time.time / 60) / 5f + 0.9f;
+            pos.set(len * vecScl, 0).setAngleRad(angle).scl(globalScl);
+            Fill.circle(pos.x + atX, pos.y + atY, rad * globalScl * sizeScl);
+        }
     }
 }
