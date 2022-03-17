@@ -130,7 +130,7 @@ public class SnGasBlocks implements ContentList {
             gasCapacity = 320f;
         }};
 
-        gasContainer = new GasRouter("gas-сontainer"){{
+        gasContainer = new GasRouter("gas-container"){{
             requirements(Category.liquid, with(SnItems.fors, 30, Items.metaglass, 45));
             health = 600;
             size = 3;
