@@ -221,13 +221,15 @@ public class SnFx {
     }),
 
     tridentCharge = new Effect(210, e -> {
-        final Color c1 = Color.valueOf("eaecff"), c2 = Color.valueOf("ffeaec");
+        Draw.mixcol(Pal.sap, 0.95f);
+        Draw.z(Layer.bullet);
         float r = Mathf.degRad * e.rotation;
         float cx = e.x - Mathf.cos(r) * 12f;
         float cy = e.y - Mathf.sin(r) * 12f;
-        Draw.z(Layer.block);
-        Drawm.energySphere(e.id, e.time, e.fin(), 8, Mathf.PI / 120f, Mathf.PI / 30f, 8f, 1.5f, c1, c2, cx, cy);
+        Drawm.drawTrident(cx, cy, e.id, e.fin());
+        Draw.mixcol();
     }),
+
     tridentHit = new Effect(30, e -> {
         color(Pal.plastaniumFront);
 

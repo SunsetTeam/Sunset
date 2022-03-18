@@ -90,6 +90,9 @@ com_crashlytics_export_strings.xml
 .externalToolBuilders/
 *.launch
 
+## Visual Studio Code
+
+.vscode/
 ## NetBeans
 /nbproject/private/
 /android/nbproject/private/

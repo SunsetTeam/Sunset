@@ -38,6 +38,7 @@ public class SnLiquidBlocks implements ContentList {
             health = 110;
             placeableLiquid = true;
             hasShadow = false;
+            leaks = false;
         }};
 
         if (!ModVars.packSprites) {
