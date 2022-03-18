@@ -6,6 +6,7 @@ import mindustry.world.Tile;
 
 public class ModGasPipe extends GasConduit {
     public boolean onLiquid = true;
+    public boolean onFloor = true;
 
     public ModGasPipe (String name){
         super(name);
@@ -16,6 +17,10 @@ public class ModGasPipe extends GasConduit {
     public boolean canPlaceOn(Tile tile, Team team) {
         if(onLiquid){
             return tile.floor().isLiquid;
+        }
+
+        if(onFloor){
+            return tile.floor().isFloor();
         }
         return false;
     }
