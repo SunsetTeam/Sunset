@@ -11,7 +11,6 @@ import arc.math.Mathf;
 import arc.math.Rand;
 import arc.math.geom.Position;
 import arc.math.geom.Vec2;
-import arc.struct.ObjectMap;
 import arc.struct.Seq;
 import arc.util.Time;
 import arc.util.Tmp;
@@ -25,8 +24,6 @@ import sunset.graphics.Drawm;
 import sunset.graphics.SnPal;
 import sunset.utils.test.DrawFunc;
 import sunset.world.blocks.defense.turrets.SynthesisTurret;
-
-import java.util.Arrays;
 
 import static arc.graphics.g2d.Draw.alpha;
 import static arc.graphics.g2d.Draw.color;
@@ -198,25 +195,6 @@ public class SnFx {
         randLenVectors(e.id, 7, 25f * e.finpow(), e.rotation, 50f, (x, y) -> {
             lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), e.fin() * 5f + 2f);
         });
-    }),
-
-    redBomb = new Effect(30f, 70f, e -> {
-        color(SnPal.redBomb);
-        stroke(e.fout() * 2f);
-        float circleRad = 3f + e.finpow() * 40f;
-        circle(e.x, e.y, circleRad);
-
-        color(SnPal.redBomb);
-        for (int i = 0; i < 6; i++) {
-            Drawf.tri(e.x, e.y, 6f, 100f * e.fout(), i * 60);
-        }
-
-        color();
-        for (int i = 0; i < 6; i++) {
-            Drawf.tri(e.x, e.y, 3f, 35f * e.fout(), i * 60);
-        }
-
-        Drawf.light(e.x, e.y, circleRad * 1.5f, SnPal.redBomb, e.fout());
     }),
 
     heavyFlame = new Effect(64f, 80f, e -> {
@@ -646,21 +624,7 @@ public class SnFx {
     //endregion green turrets
 
     //region laser art
-    laserArtHit = new Effect(20f, 50f, e -> {
-        color(Pal.meltdownHit);
-        stroke(e.fout() * 2);
-        color(Pal.meltdownHit);
-        for (int i = 0; i < 2; i++) {
-            Drawf.tri(e.x, e.y, 1f, 40f * e.fout(), i * 50);
-        }
 
-        color();
-        for (int i = 0; i < 7; i++) {
-            Drawf.tri(e.x, e.y, 3f, 20f * e.fout(), i * 50);
-        }
-
-        Drawf.light(e.x, e.y, 5, Pal.meltdownHit, e.fout());
-    }),
     //endregion laser art
 
     //region yellow ships
@@ -680,23 +644,6 @@ public class SnFx {
             Drawf.tri(e.x, e.y, 2.4f, 90 * e.fout(), (i * 90) + 45 * e.fout(Interp.pow5Out));
         }
     }),
-    //crossBlast = new Effect(Mathf.clamp(size / 3f, 35f, 240f), size * 2, e -> {
-    //    color(color, Color.white, e.fout() * 0.55f);
-    //    Drawf.light(e.x, e.y, e.fout() * size, color, 0.7f);
-//
-    //    e.scaled(10f, i -> {
-    //        stroke(1.35f * i.fout());
-    //        circle(e.x, e.y, size * 0.7f * i.finpow());
-    //    });
-//
-    //    rand.setSeed(e.id);
-    //    float sizeDiv = size / 1.5f;
-    //    float randL = rand.random(sizeDiv);
-//
-    //    for(int i = 0; i < 4; i++){
-    //        DrawFunc.tri(e.x, e.y, size / 20 * (e.fout() * 3f + 1) / 4 * (e.fout(Interp.pow3In) + 0.5f) / 1.5f, (sizeDiv + randL) * Mathf.curve(e.fin(), 0, 0.05f) * e.fout(Interp.pow3), i * 90 + rotate);
-    //    }
-    //}),
     //endregion yellow ships
 
     //region turrets 360
@@ -906,6 +853,49 @@ public class SnFx {
                 Tmp.v1.set(1, 0).setToRandomDirection(rand).scl(circleRad);
                 DrawFunc.tri(e.x + Tmp.v1.x, e.y + Tmp.v1.y, rand.random(circleRad / 16, circleRad / 12) * e.fout(), rand.random(circleRad / 4, circleRad / 1.5f) * (1 + e.fin()) / 2, Tmp.v1.angle() - 180);
             }
+        });
+    }
+
+    //laser art
+    public static Effect laserArtFx(Color color) {
+        return laserArtFx(color, 100f, 35f, 6);
+    }
+    public static Effect laserArtFx(Color color, float lenght1, float lenght2) {
+        return laserArtFx(color, 100f, 35f, 6);
+    }
+    public static Effect laserArtFx(Color color, float lenght1, float lenght2, int beams) {
+        return new Effect(30f, 70f, e -> {
+            color(color);
+            stroke(e.fout() * 2f);
+            float circleRad = 3f + e.finpow() * 40f;
+            circle(e.x, e.y, circleRad);
+            color(color);
+            for (int i = 0; i < beams; i++) {
+                Drawf.tri(e.x, e.y, 6f, lenght1 * e.fout(), i * (360 / beams));
+            }
+            color();
+            for (int i = 0; i < beams; i++) {
+                Drawf.tri(e.x, e.y, 3f, lenght2 * e.fout(), i * (360 / beams));
+            }
+            Drawf.light(e.x, e.y, circleRad * 1.5f, color, e.fout());
+        });
+    }
+    public static Effect powerArtFx(Color color) {
+        return powerArtFx(color, 40f, 20f);
+    }
+    public static Effect powerArtFx(Color color, float lenght1, float lenght2) {
+        return new Effect(20f, 50f, e -> {
+            color(color);
+            stroke(e.fout() * 2);
+            color(color);
+            for (int i = 0; i < 2; i++) {
+                Drawf.tri(e.x, e.y, 1f, lenght1 * e.fout(), i * 50);
+            }
+            color();
+            for (int i = 0; i < 7; i++) {
+                Drawf.tri(e.x, e.y, 3f, lenght2 * e.fout(), i * 50);
+            }
+            Drawf.light(e.x, e.y, 5, color, e.fout());
         });
     }
 }

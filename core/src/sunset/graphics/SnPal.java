@@ -47,6 +47,9 @@ public class SnPal {
     enojieBullet = Color.valueOf("A4ECB3"),
     enojieBulletBack = Color.valueOf("98D5E3"),
     //endregion enojie bullets
+    //region laser art bullets
+    standardMissile = Color.valueOf("8B8BB7"),
+    //endregion laser art bullets
     //region special
     emp1 = Color.valueOf("7FFFD4"),
     emp2 = Color.valueOf("32D0DC"),
@@ -92,7 +95,7 @@ public class SnPal {
     //antiAir =
     //emp =
     //degree360 =
-    //laserArt =
+    //heavyArt =
     //aim =
     //boomerang =
     //sniper =

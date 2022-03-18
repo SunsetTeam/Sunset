@@ -1,6 +1,5 @@
 package sunset.content.blocks;
 
-import arc.graphics.Color;
 import gas.GasStack;
 import gas.world.blocks.gas.*;
 import gas.world.blocks.power.GasItemLiquidGenerator;

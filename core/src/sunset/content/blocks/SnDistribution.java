@@ -4,6 +4,7 @@ import mindustry.content.Items;
 import mindustry.ctype.ContentList;
 import mindustry.type.Category;
 import mindustry.world.Block;
+import mindustry.world.blocks.distribution.Conveyor;
 import mindustry.world.blocks.distribution.MassDriver;
 import mindustry.world.blocks.storage.StorageBlock;
 import mindustry.world.blocks.distribution.StackConveyor;

@@ -1,13 +1,11 @@
 package sunset.content;
 
-import arc.audio.Sound;
 import arc.util.Time;
 import mindustry.Vars;
 import mindustry.ai.types.FlyingAI;
 import mindustry.ai.types.SuicideAI;
 import mindustry.annotations.Annotations.EntityDef;
 import mindustry.content.Fx;
-import mindustry.content.Items;
 import mindustry.content.Liquids;
 import mindustry.content.StatusEffects;
 import mindustry.content.UnitTypes;
@@ -15,11 +13,9 @@ import mindustry.ctype.ContentList;
 import mindustry.entities.bullet.ArtilleryBulletType;
 import mindustry.entities.bullet.BasicBulletType;
 import mindustry.entities.bullet.BombBulletType;
-import mindustry.entities.bullet.ShrapnelBulletType;
 import mindustry.gen.*;
 import mindustry.graphics.Layer;
 import mindustry.graphics.Pal;
-import mindustry.type.StatusEffect;
 import mindustry.type.UnitType;
 import mindustry.type.Weapon;
 import mindustry.type.ammo.ItemAmmoType;
@@ -46,7 +42,7 @@ public class SnUnitTypes implements ContentList{
     public static UnitType
 
     //vanilla
-    bastion, t6spooder, t6crawler,
+    bastion, t6crawler, buffedCrawler,
 
     //attack copters
     wind, thunder, nadir, halo, parhelion, mudflow,
@@ -126,7 +122,7 @@ public class SnUnitTypes implements ContentList{
             }}
             );
         }};
-        t6crawler = new UnitType("crawler"){{
+        buffedCrawler = new UnitType("crawler"){{
             defaultController = SuicideAI::new;
 
             speed = 1f;
@@ -157,7 +153,7 @@ public class SnUnitTypes implements ContentList{
             @Override
             public boolean unlockedNowHost() { return false; }*/
         };
-        t6spooder = new UnitTypeExt("t6spooder"){{
+        t6crawler = new UnitTypeExt("t6-crawler"){{
             //TODO: create actual stats. This one copied from "abyssEye"
             health = 61000;
             speed = 0.6f;
@@ -250,7 +246,7 @@ public class SnUnitTypes implements ContentList{
                         status = StatusEffects.sapped;
                         statusDuration = 60f * 10;
             
-                        unitType = SnUnitTypes.t6crawler;
+                        unitType = SnUnitTypes.buffedCrawler;
                     }};
                 }};
             }},

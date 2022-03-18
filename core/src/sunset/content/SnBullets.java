@@ -33,17 +33,15 @@ public class SnBullets implements ContentList {
         bigBlastPlastanium, bigBlastBlast, bigBlastPyratite, maxBlastPlastanium, maxBlastBlast, maxBlastSurge, reneubiteBlast,
         reneubiteBullet,
         //bigHelicopterGun, bigHelicopterBullet, largeHelicopterBullet,
-        starStunBullet, galaxyKnockbackBullet,
         wheel1Bullet, wheel2Shotgun, wheel3Burst, wheel4Shotgun,  wheel5Bullet,
         mirageGunBullet,
-        machineBullet, bigMachineBullet,
+        machineBullet, bigMachineBullet,//unused
         //rocket
         smallBlueMissile, smallEnojieMissile, mediumEnojieMissile,
         powerRocket, drrRocket,
         thoriumPowerRocket, forsPowerRocket,//unused
         nobiumAimMissile, naturiteAimMissile, renubiteAimMissile,
         //artillery
-        artilleryFors, artilleryBlast,
         wheel4Artillery,
         plasmaArt, rocketArt, bigRocketArt, heavyRocketArt,//unused
         //flak
@@ -56,8 +54,8 @@ public class SnBullets implements ContentList {
         //shrapnel
         lightBlastGraphite, lightBlastSilicon,
         //laser
-        laserGun2,
-        laserCGun, bigCLaserGun,
+        laserGun2,//unused
+        laserCGun, bigCLaserGun,//unused
         //lightning
         defLight, powerLight,
         //sap
@@ -68,8 +66,7 @@ public class SnBullets implements ContentList {
         smallEnergySphere, mediumEnergySphere, bigEnergySphere,
         //liquid
         floodWaterShot, floodCryoShot, floodSlagShot, floodOilShot, floodBurheynaShot,
-        burheynaFrag,
-        cometWaterShot,
+        burheynaFrag,//unused
         //flame
         heavyCoalFlame, heavyPyraFlame, flameidFlame,
         wheel5Flame,
@@ -88,11 +85,14 @@ public class SnBullets implements ContentList {
         mortarBullet,//unused
         salvoArt, smallTorpedo,
         lightningBall, trailRocket,
+        //buffer
+        cometWaterShot, starStunBullet, galaxyKnockbackBullet, universeLaserBullet,
         //special
         empBullet, empBulletEvo,
         naturiteBolt1, naturiteBolt2, naturiteBolt3, naturiteBolt4, naturiteBolt5,
-        laserArtThorium, laserArtPhase, laserArtEnojie, laserArtReneubite,
-        universeLaserBullet,
+        graphiteShell, titaniumShell, thoriumShell, smallMissile,
+                standardMissile, laserArtB, laserArtC, laserArtD,
+        powerArtA, powerArtB, powerArtC, powerArtD,
         //misc and testing
         emptyBullet, overheatBullet,
         temp;
@@ -448,7 +448,7 @@ public class SnBullets implements ContentList {
             layer = Layer.scorch;
             splashDamage = 60;
             splashDamageRadius = 90;
-        }};
+        }};//unused
         bigMachineBullet = new BasicBulletType() {{
             lifetime = 32;
             speed = 11;
@@ -464,7 +464,7 @@ public class SnBullets implements ContentList {
             height = 3;
             pierce = true;
             pierceBuilding = true;
-        }};
+        }};//unused
         //endregion  standard
         //region rocket
         smallBlueMissile = new BasicBulletType(5f, 15, "missile") {{//yes
@@ -709,71 +709,6 @@ public class SnBullets implements ContentList {
         }};
         //endregion  rocket
         //region artillery
-        artilleryFors = new ArtilleryBulletType(3.0f, 150, "shell") {{
-            hitEffect = SnFx.redBomb;
-            knockback = 1f;
-            lifetime = 110f;
-            width = height = 25f;
-            collidesTiles = false;
-            collidesAir = true;
-            splashDamageRadius = 60f;
-            splashDamage = 150f;
-            fragBullet =  new FlakBulletType(3f, 90) {{
-                collidesGround = true;
-                collidesAir = false;
-                splashDamage = 120f;
-                splashDamageRadius = 10f;
-                sprite = "sunset-red-mine";
-                status = StatusEffects.electrified;
-                hitEffect = Fx.blastExplosion;
-                backColor = SnPal.redBomb;
-                frontColor = SnPal.redBombBack;
-                spin = 0.2f;
-                height = 10f;
-                width = 10f;
-                lifetime = 400f;
-                shrinkX = 0.2f;
-                shrinkY = 0.3f;
-                drag = 0.04f;
-            }};
-            fragBullets = 2;
-            backColor = SnPal.redBomb;
-            frontColor = SnPal.redBombBack;
-        }};
-        artilleryBlast = new ArtilleryBulletType(3.0f, 125, "shell") {{
-            hitEffect = SnFx.redBomb;
-            knockback = 1f;
-            lifetime = 110f;
-            width = height = 25f;
-            collidesTiles = false;
-            collidesAir = true;
-            splashDamageRadius = 70f;
-            splashDamage = 140f;
-            fragBullet = new FlakBulletType(2.9f, 30) {{
-                sprite = "sunset-red-mine";
-                collidesGround = true;
-                collidesAir = false;
-                splashDamage = 100f;
-                splashDamageRadius = 12f;
-                status = StatusEffects.electrified;
-                hitEffect = Fx.blastExplosion;
-                makeFire = true;
-                backColor = SnPal.redBomb;
-                frontColor = SnPal.redBombBack;
-                spin = 0.2f;
-                height = 10f;
-                width = 10f;
-                lifetime = 440f;
-                shrinkX = 0.2f;
-                shrinkY = 0.3f;
-                drag = 0.04f;
-            }};
-            fragBullets = 3;
-            makeFire = true;
-            backColor = SnPal.blastBullet;
-            frontColor = SnPal.blastBulletBack;
-        }};
-
         wheel4Artillery = new ArtilleryBulletType(3f, 67f) {{
             lifetime = 114f;
             status = StatusEffects.blasted;
@@ -798,7 +733,7 @@ public class SnBullets implements ContentList {
             height = 3;
             pierce = true;
             pierceBuilding = true;
-        }};
+        }};//unused
         rocketArt = new ArtilleryBulletType() {{
             backColor = Pal.missileYellowBack;
             frontColor = Pal.missileYellow;
@@ -820,7 +755,7 @@ public class SnBullets implements ContentList {
             shrinkY = 0f;
             hitSound = Sounds.explosion;
             trailChance = 0.2f;
-        }};
+        }};//unused
         bigRocketArt = new ArtilleryBulletType() {{
             backColor = Pal.missileYellowBack;
             frontColor = Pal.missileYellow;
@@ -842,7 +777,7 @@ public class SnBullets implements ContentList {
             shrinkY = 0f;
             hitSound = Sounds.explosion;
             trailChance = 0.2f;
-        }};
+        }};//unused
         heavyRocketArt = new ArtilleryBulletType() {{
             backColor = Pal.missileYellowBack;
             frontColor = Pal.missileYellow;
@@ -864,7 +799,7 @@ public class SnBullets implements ContentList {
             shrinkY = 0f;
             hitSound = Sounds.explosion;
             trailChance = 0.2f;
-        }};
+        }};//unused
         //endregion  artillery
         //region flak
         sporePodPoisonBullet = new FlakBulletType(4f, 5) {{
@@ -1424,20 +1359,20 @@ public class SnBullets implements ContentList {
             hitSize = 4;
             lifetime = 14;
             lightColor = Color.yellow;
-        }};
+        }};//unused
 
         laserCGun = new ContinuousLaserBulletType() {{
             damage = 500;
             hitSize = 3;
             drawSize = 220;
             lightColor = Color.yellow;
-        }};
+        }};//unused
         bigCLaserGun = new ContinuousLaserBulletType() {{
             damage = 1000;
             hitSize = 7;
             drawSize = 530;
             lightColor = Color.yellow;
-        }};
+        }};//unused
         //endregion laser
         //region lightning
         defLight = new LightningBulletType() {{
@@ -1624,7 +1559,7 @@ public class SnBullets implements ContentList {
             damage = 10f;
             fragBullets = 36;
             fragBullet = burheynaFrag;
-        }};
+        }};//unused
         //endregion liquid
         //region flame
         heavyCoalFlame = new BulletType(12f, 28f) {{
@@ -1699,7 +1634,7 @@ public class SnBullets implements ContentList {
             /*colorFrom = SnPal.redfire1;
             colorMid = SnPal.redfire2;
             colorTo = Pal.lightPyraFlame;*/
-        }};
+        }};//unused
         //endregion flame
         //region reverse-bullets
         naturiteReversBullet = new ReverseBulletType(2.6f, 95f) {{
@@ -2354,8 +2289,97 @@ public class SnBullets implements ContentList {
             trailEffect = Fx.artilleryTrail;
         }};
         //endregion synthesis
+        //region semi-laser art
+        graphiteShell = new ArtilleryBulletType(3, 70, "shell") {{
+            hitEffect = SnFx.laserArtFx(backColor, 40, 15, 3);
+            knockback = 0.9f;
+            lifetime = Time.toSeconds;
+            width = height = 14;
+            collidesTiles = false;
+            collidesAir = true;
+            splashDamageRadius = 7.5f * Vars.tilesize;
+            splashDamage = damage * 0.75f;
+            backColor = Items.graphite.color;
+            frontColor = backColor.a(5);
+        }};
+        titaniumShell = new ArtilleryBulletType(3, 80, "shell") {{
+            hitEffect = SnFx.laserArtFx(backColor, 40, 15, 3);
+            knockback = 0.9f;
+            lifetime = Time.toSeconds;
+            width = height = 14;
+            collidesTiles = false;
+            collidesAir = true;
+            splashDamageRadius = 3 * Vars.tilesize;
+            splashDamage = damage * 0.5f;
+            backColor = Items.titanium.color;
+            frontColor = backColor.a(5);
+            status = StatusEffects.freezing;
+            statusDuration = 0.5f * Time.toSeconds;
+        }};
+        thoriumShell = new ArtilleryBulletType(3, 100, "shell") {{
+            hitEffect = SnFx.laserArtFx(backColor, 40, 15, 3);
+            knockback = 0.9f;
+            lifetime = Time.toSeconds;
+            width = height = 14;
+            collidesTiles = false;
+            collidesAir = true;
+            splashDamageRadius = 15 * Vars.tilesize;
+            splashDamage = damage * 1.5f;
+            backColor = Items.thorium.color;
+            frontColor = backColor.a(5);
+            status = StatusEffects.blasted;
+            statusDuration = 3 * Time.toSeconds;
+        }};
+        smallMissile = new ArtilleryBulletType(3, 100, "shell") {{
+            hitEffect = SnFx.laserArtFx(backColor, 40, 15, 3);
+            knockback = 0.9f;
+            lifetime = Time.toSeconds;
+            width = height = 14;
+            collidesTiles = false;
+            collidesAir = true;
+            splashDamageRadius = 15 * Vars.tilesize;
+            splashDamage = damage * 1.5f;
+            backColor = SnPal.standardMissile;
+            frontColor = backColor.a(5);
+            status = SnStatusEffects.radiation;
+            statusDuration = 1.9f * Time.toSeconds;
+        }};
+        //endregion semi-laser art
         //region laser art
-        laserArtThorium = new ArtilleryBulletType(5, 200, "shell") {{
+        standardMissile = new ArtilleryBulletType(4, 150, "shell") {{
+            hitEffect = SnFx.laserArtFx(backColor, 110, 45);
+            knockback = 0.9f;
+            lifetime = 110f;
+            width = height = 25f;
+            collidesTiles = false;
+            collidesAir = true;
+            splashDamageRadius = 60f;
+            splashDamage = 150f;
+            fragBullet =  new FlakBulletType(3f, 90) {{
+                collidesGround = true;
+                collidesAir = false;
+                splashDamage = 120f;
+                splashDamageRadius = 10f;
+                sprite = "sunset-red-mine";
+                status = StatusEffects.electrified;
+                hitEffect = Fx.blastExplosion;
+                backColor = SnPal.redBomb;
+                frontColor = SnPal.redBombBack;
+                spin = 0.2f;
+                height = 10f;
+                width = 10f;
+                lifetime = 400f;
+                shrinkX = 0.2f;
+                shrinkY = 0.3f;
+                drag = 0.04f;
+            }};
+            fragBullets = 2;
+            backColor = SnPal.redBomb;
+            frontColor = SnPal.redBombBack;
+        }};
+        //endregion laser art
+        //region power art
+        powerArtA = new ArtilleryBulletType(5, 200, "shell") {{
             knockback = 3.4f;
             lifetime = 77;
             width = height = 12;
@@ -2363,10 +2387,11 @@ public class SnBullets implements ContentList {
             splashDamage = 430;
             fragBullets = 6;
             fragCone = 360;
+
             fragBullet = new ContinuousLaserBulletType(9.1f) {{
                 length = 35;
             }};
-            despawnEffect = hitEffect = SnFx.laserArtHit;
+            despawnEffect = hitEffect = SnFx.powerArtFx(trailColor);
 
             trailColor = Items.thorium.color;
             trailWidth = 4;
@@ -2375,67 +2400,7 @@ public class SnBullets implements ContentList {
             status = StatusEffects.blasted;
             statusDuration = 180;
         }};
-        laserArtPhase = new ArtilleryBulletType(5, 300, "shell") {{
-            knockback = 0.2f;
-            lifetime = 77;
-            width = height = 12;
-            splashDamageRadius = 3 * Vars.tilesize;
-            splashDamage = 150;
-            fragBullets = 6;
-            fragCone = 360;
-            fragBullet = new ContinuousLaserBulletType(8.75f) {{
-                length = 55;
-            }};
-            despawnEffect = hitEffect = SnFx.laserArtHit;
-
-            trailColor = Items.phaseFabric.color;
-            trailWidth = 4;
-            trailLength = 7;
-            trailEffect = Fx.artilleryTrail;
-            status = StatusEffects.corroded;
-            statusDuration = 300;
-        }};
-        laserArtReneubite = new ArtilleryBulletType(5, 450, "shell") {{
-            knockback = 2;
-            lifetime = 77;
-            width = height = 12;
-            splashDamageRadius = 6.25f * Vars.tilesize;
-            splashDamage = 100;
-            fragBullets = 6;
-            fragCone = 360;
-            fragBullet = new ContinuousLaserBulletType(20) {{
-                length = 40;
-            }};
-            despawnEffect = hitEffect = SnFx.laserArtHit;
-
-            trailColor = SnItems.reneubite.color;
-            trailWidth = 4;
-            trailLength = 7;
-            trailEffect = Fx.artilleryTrail;
-            status = StatusEffects.electrified;
-            statusDuration = 180;
-        }};
-        laserArtEnojie = new ArtilleryBulletType(5, 920, "shell") {{
-            knockback = 1;
-            lifetime = 77;
-            width = height = 12;
-            splashDamageRadius = 6.25f * Vars.tilesize;
-            splashDamage = 250;
-            fragBullets = 6;
-            fragCone = 360;
-            fragBullet = new ContinuousLaserBulletType(40) {{
-                length = 60;
-            }};
-            despawnEffect = hitEffect = SnFx.laserArtHit;
-
-            trailColor = SnItems.enojie.color;
-            trailWidth = 4;
-            trailLength = 7;
-            trailEffect = Fx.artilleryTrail;
-            status = SnStatusEffects.electricalShort;
-            statusDuration = 120;
-        }};
-        //endregion laser art
+        //endregion power art
         //endregion special
         //region t6 vanilla
         t6sapBullet = new SapFlyingBulletType(9f, 120){{

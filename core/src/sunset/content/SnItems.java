@@ -7,14 +7,16 @@ import sunset.type.Ammo;
 
 public class SnItems implements ContentList {
     public static Item
+    //items
     //raw
     fors, planatrium, flameid, coldent,
     //crafted
-    naturite, nobium, enojie, reneubite;
-
-    public static Ammo testAmmo;
+    naturite, nobium, enojie, reneubite,
+    //ammo
+    semiLaserArt;
     @Override
     public void load() {
+        //region items
         //region raw
         fors = new Item("fors", Color.valueOf("F3A39F")) {{
             cost = 2f;
@@ -57,5 +59,9 @@ public class SnItems implements ContentList {
             explosiveness = 0.7f;
         }};
         //endregion crafted
+        //endregion items
+        //region ammo
+        semiLaserArt = new Ammo("semi-laser-art");
+        //endregion ammo
     }
 }

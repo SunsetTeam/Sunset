@@ -1,34 +1,17 @@
 package sunset.content.blocks;
 
-import gas.GasStack;
-import gas.world.draw.GasDrawSmelter;
 import mindustry.content.Fx;
 import mindustry.content.Items;
 import mindustry.content.Liquids;
 import mindustry.ctype.ContentList;
 import mindustry.gen.Sounds;
 import mindustry.type.Category;
-import mindustry.type.ItemStack;
 import mindustry.world.Block;
 import mindustry.world.blocks.power.DecayGenerator;
 import mindustry.world.blocks.power.NuclearReactor;
-import sunset.content.SnGas;
 import sunset.content.SnItems;
-import sunset.content.SnLiquids;
-import sunset.graphics.SnPal;
-import sunset.world.blocks.gas.PowerGenerateBoiler;
 import sunset.world.blocks.power.LiquidGenerator;
 import sunset.world.blocks.power.ThermalGeneratorExt;
-import gas.world.blocks.power.GasItemLiquidGenerator;
-import gas.world.consumers.ConsumeGas;
-import mindustry.content.*;
-import mindustry.ctype.*;
-import mindustry.gen.*;
-import mindustry.type.*;
-import mindustry.world.*;
-import mindustry.world.blocks.power.*;
-import sunset.content.*;
-import sunset.world.blocks.power.*;
 
 import static mindustry.type.ItemStack.with;
 

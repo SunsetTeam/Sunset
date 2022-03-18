@@ -16,7 +16,7 @@ public enum SnBranches {
     antiAir,
     emp,
     degree360,
-    laserArt,
+    heavyArt,
     aim,
     boomerang,
     sniper,
