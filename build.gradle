@@ -434,7 +434,7 @@ task run {
 
 task mark {
     def time = LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:MM DD.MM.YYYY"));
-    String suffix = project.hasProperty("commit") ? " [Commit ${commit}]" : " [Local build: ${time}]"
+    String suffix = project.hasProperty("commit") ? " [commit_${commit}]" : " [local_${time}]"
     println "Version suffix${suffix}"
     def reader = new BufferedReader(new FileReader(new File(rootDir, "mod_raw.hjson")))
     def to = new File(rootDir, "mod.hjson")
