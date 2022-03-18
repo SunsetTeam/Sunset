@@ -240,7 +240,7 @@ public class SnFx {
     }),
 
     tridentCharge = new Effect(210, e -> {
-        Draw.mixcol(Pal.sap, 0.95f);
+        Draw.mixcol(Pal.sap, 0.25f);
         Draw.z(Layer.bullet);
         float r = Mathf.degRad * e.rotation;
         float cx = e.x - Mathf.cos(r) * 12f;
@@ -250,6 +250,9 @@ public class SnFx {
     }),
 
     tridentHit = new Effect(30, e -> {
+        //strange effect
+
+        /*
         color(Pal.plastaniumFront);
 
         e.scaled(7, i -> {
@@ -271,6 +274,7 @@ public class SnFx {
         });
 
         Drawf.light(e.x, e.y, 50f, Pal.shield, 0.8f * e.fout());
+        */
     }),
 
     sniperTrail = new Effect(12f, e -> {
