@@ -55,7 +55,8 @@ public class SnModsDialog extends ModsDialog {
     private Func2<LoadedMod, Runnable, BaseDialog> customDisplayer;
 
     public static void init(Func2<LoadedMod, Runnable, BaseDialog> customDisplayer) {
-         instance = new SnModsDialog(customDisplayer);
+        if(Vars.headless) return;
+        instance = new SnModsDialog(customDisplayer);
     }
 
     private SnModsDialog(Func2<LoadedMod, Runnable, BaseDialog> customDisplayer) {
