@@ -122,6 +122,7 @@ public class SnPlanets implements ContentList{
             hasAtmosphere = true;
             alwaysUnlocked = true;
             landCloudColor = Color.valueOf("B5B5B5");
+            camRadius = 0.7f
         }};
         //endregion satellites
     }
