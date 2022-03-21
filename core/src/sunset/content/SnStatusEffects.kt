@@ -60,7 +60,8 @@ class SnStatusEffects : ContentList {
             speedMultiplier = 0.5f
             damageMultiplier = 0.6f
             reloadMultiplier = 0.4f
-            damageMultiplier = 10f;
+            damageMultiplier = 10f
+            color = Pal.accent.cpy()
         } //no sprite
         electricalShort = statusEffect("electric-short") {
             effectChance = 100f

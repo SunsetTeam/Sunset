@@ -15,12 +15,11 @@ public class IndestructibleWall extends Wall {
     public IndestructibleWall(String name) {
         super(name);
         health = 1;
-        absorbLasers = true;
+        absorbLasers = placeableLiquid = instantDeconstruct = true;
         chanceDeflect = 1;
         buildVisibility = BuildVisibility.sandboxOnly;
         category = Category.defense;
         hideDetails = false;
-        placeableLiquid = true;
     }
     public class IndestructibleBuild extends WallBuild implements ControlBlock {
         public @Nullable BlockUnitc unit;

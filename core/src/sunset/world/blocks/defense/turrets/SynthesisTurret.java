@@ -53,10 +53,10 @@ public class SynthesisTurret extends ItemTurret {
 
     public SynthesisTurret(String name) {
         super(name);
-        stats = aStats.copy(stats);
         unitSort = (u, x, y) -> -u.armor;
         update = true;
         sync = true;
+        stats = aStats.copy(stats);
     }
 
     @Override

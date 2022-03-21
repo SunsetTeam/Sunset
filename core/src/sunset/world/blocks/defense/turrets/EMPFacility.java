@@ -1,5 +1,6 @@
 package sunset.world.blocks.defense.turrets;
 
+import acontent.world.meta.AStats;
 import arc.graphics.Color;
 import arc.graphics.g2d.Draw;
 import arc.graphics.g2d.Lines;
@@ -43,6 +44,7 @@ public class EMPFacility extends PowerTurret {
     public TextureRegion top;
     @Load("@-bottom")
     public TextureRegion bottom;
+    public AStats aStats = new AStats();
 
     public EMPFacility(String name) {
         super(name);
@@ -51,7 +53,7 @@ public class EMPFacility extends PowerTurret {
         shootSound = Sounds.release;
         shootEffect = Fx.none;
         cooldown = 0.5f;
-        //cores.add(new Core(2.5f));
+        stats = aStats.copy(stats);
     }
 
     @Override

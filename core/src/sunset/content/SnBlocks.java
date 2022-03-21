@@ -1,17 +1,24 @@
 package sunset.content;
 
-import mindustry.content.*;
-import mindustry.ctype.*;
-import mindustry.entities.bullet.*;
-import mindustry.gen.*;
-import mindustry.type.*;
-import mindustry.world.meta.*;
+import mindustry.content.Items;
+import mindustry.ctype.ContentList;
+import mindustry.entities.bullet.ArtilleryBulletType;
+import mindustry.entities.bullet.BasicBulletType;
+import mindustry.entities.bullet.BulletType;
+import mindustry.entities.bullet.LaserBulletType;
+import mindustry.gen.Sounds;
+import mindustry.type.Category;
+import mindustry.type.ItemStack;
+import mindustry.world.meta.BuildVisibility;
 import sunset.content.blocks.*;
-import sunset.content.blocks.defense.*;
-import sunset.entities.bullet.*;
-import sunset.world.blocks.defense.turrets.*;
+import sunset.content.blocks.defense.SnProjectors;
+import sunset.content.blocks.defense.SnTurrets;
+import sunset.content.blocks.defense.SnWalls;
+import sunset.entities.bullet.LightningContinuousLaserBulletType;
+import sunset.world.blocks.defense.turrets.MissileSiloCommander;
+import sunset.world.blocks.defense.turrets.ModItemTurret;
 
-import static mindustry.type.ItemStack.*;
+import static mindustry.type.ItemStack.with;
 
 public class SnBlocks implements ContentList{
     public ContentList[] list = {

@@ -4,7 +4,6 @@ import arc.Core;
 import arc.func.Floatp;
 import arc.func.Prov;
 import arc.graphics.Color;
-import arc.math.*;
 import arc.scene.Action;
 import arc.scene.Element;
 import arc.scene.actions.Actions;

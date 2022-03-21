@@ -1,13 +1,11 @@
 package sunset.content;
 
-import arc.audio.Sound;
 import arc.util.Time;
 import mindustry.Vars;
 import mindustry.ai.types.FlyingAI;
 import mindustry.ai.types.SuicideAI;
 import mindustry.annotations.Annotations.EntityDef;
 import mindustry.content.Fx;
-import mindustry.content.Items;
 import mindustry.content.Liquids;
 import mindustry.content.StatusEffects;
 import mindustry.content.UnitTypes;
@@ -15,17 +13,16 @@ import mindustry.ctype.ContentList;
 import mindustry.entities.bullet.ArtilleryBulletType;
 import mindustry.entities.bullet.BasicBulletType;
 import mindustry.entities.bullet.BombBulletType;
-import mindustry.entities.bullet.ShrapnelBulletType;
 import mindustry.gen.*;
 import mindustry.graphics.Layer;
 import mindustry.graphics.Pal;
-import mindustry.type.StatusEffect;
 import mindustry.type.UnitType;
 import mindustry.type.Weapon;
 import mindustry.type.ammo.ItemAmmoType;
 import mindustry.type.weapons.PointDefenseWeapon;
 import sunset.ai.*;
 import sunset.ai.weapon.ExtinguishWeaponAI;
+import sunset.content.affilitiation.SnGuilds;
 import sunset.entities.abilities.EffectLowHPAbility;
 import sunset.entities.abilities.StatusFieldAbility;
 import sunset.entities.bullet.BerserkLaserBulletType;
@@ -34,7 +31,6 @@ import sunset.gen.Deliverc;
 import sunset.gen.Segmentc;
 import sunset.type.BerserkStage;
 import sunset.type.ammo.LiquidAmmoType;
-import sunset.type.blocks.Energy;
 import sunset.type.blocks.Engine;
 import sunset.type.blocks.Rotor;
 import sunset.type.unitTypes.*;
@@ -1320,15 +1316,16 @@ public class SnUnitTypes implements ContentList{
         //region naval
         //region yellow
         yellowT1 = new SnUnitType("yellow-t1") {{
-            speed = 1f;
+            speed = 1;
             rotateSpeed = 3.5f;
             drag = 0.13f;
             hitSize = 10;
             accel = 0.21f;
-            health = 180;
+            health = 240;
             range = 160;
-            armor = 5;
+            armor = 7;
             faceTarget = true;
+            rotateShooting = false;
             commandLimit = 5;
             commandRadius = 48;
             visualElevation = -1;
@@ -1353,8 +1350,8 @@ public class SnUnitTypes implements ContentList{
             new WeaponExt("small-autocannon") {{
                 bullet = SnBullets.smallShell;
                 mirror = rotate = top = flipSprite = true;
-                rotateSpeed = 16;
-                reload = 0.5f * Time.toSeconds;
+                rotateSpeed = 14;
+                reload = 0.7f * Time.toSeconds;
                 shots = 1;
                 spacing = 15;
                 inaccuracy = 7;
@@ -1369,6 +1366,7 @@ public class SnUnitTypes implements ContentList{
             constructor = UnitWaterMove::create;
             immunities.add(StatusEffects.wet);
             immunities.add(StatusEffects.freezing);
+            guild = SnGuilds.weardius;
         }};
         yellowT2 = new SnUnitType("yellow-t2") {{
             speed = 0.9f;
@@ -1376,10 +1374,11 @@ public class SnUnitTypes implements ContentList{
             drag = 0.15f;
             hitSize = 15;
             accel = 0.21f;
-            health = 360;
+            health = 520;
             range = 205;
-            armor = 8;
+            armor = 15;
             faceTarget = true;
+            rotateShooting = false;
             commandLimit = 5;
             commandRadius = 48;
             visualElevation = -1;
@@ -1390,13 +1389,13 @@ public class SnUnitTypes implements ContentList{
                 rotate = true;
                 top = true;
                 rotateSpeed = 6.7f;
-                reload = 45;
+                reload = 2.3f * Time.toSeconds;
                 shots = 3;
                 inaccuracy = 5;
                 shotDelay = 0.15f * Time.toSeconds;
+                shootY = 2f;
                 x = 5.1f;
                 y = -3;
-                xRand = 5;
                 shootCone = 1;
                 cooldownTime = 0.09f * Time.toSeconds;
                 ignoreRotation = true;
@@ -1411,6 +1410,7 @@ public class SnUnitTypes implements ContentList{
                 reload = 1.3f * Time.toSeconds;
                 shots = 1;
                 inaccuracy = 2;
+                shootY = 7;
                 x = 0;
                 y = 0;
                 shootCone = 6;
@@ -1423,6 +1423,7 @@ public class SnUnitTypes implements ContentList{
             constructor = UnitWaterMove::create;
             immunities.add(StatusEffects.wet);
             immunities.add(StatusEffects.freezing);
+            guild = SnGuilds.weardius;
         }};
         yellowT3 = new SnUnitType("yellow-t3") {{
             speed = 0.69f;
@@ -1430,13 +1431,15 @@ public class SnUnitTypes implements ContentList{
             drag = 0.2f;
             hitSize = 18;
             accel = 1;
-            health = 1980;
+            health = 800;
             range = 350;
-            armor = 15;
+            armor = 26;
             faceTarget = true;
+            rotateShooting = false;
             commandLimit = 5;
             commandRadius = 48;
             visualElevation = -1;
+            hovering = true;
             weapons.addAll(
             new WeaponExt("lightthrower") {{
                 bullet = SnBullets.lightningBall;
@@ -1444,7 +1447,7 @@ public class SnUnitTypes implements ContentList{
                 rotate = true;
                 top = true;
                 rotateSpeed = 2.8f;
-                reload = 2.6f * Time.toSeconds;
+                reload = 2.5f * Time.toSeconds;
                 shots = 1;
                 spacing = 2.2f;
                 inaccuracy = 5;
@@ -1462,10 +1465,11 @@ public class SnUnitTypes implements ContentList{
                 rotate = true;
                 top = true;
                 rotateSpeed = 3;
-                reload = 1.1f * Time.toSeconds;
+                reload = Time.toSeconds;
                 shots = 1;
                 spacing = 3;
                 inaccuracy = 6;
+                shootY = 5;
                 x = 7.2f;
                 y = -9;
                 shootCone = 2.1f;
@@ -1478,6 +1482,7 @@ public class SnUnitTypes implements ContentList{
             constructor = UnitWaterMove::create;
             immunities.add(StatusEffects.wet);
             immunities.add(StatusEffects.freezing);
+            guild = SnGuilds.weardius;
         }};
         /*yellowT4 = new SnUnitType("yellow-t4") {{
             speed = 1.5f;

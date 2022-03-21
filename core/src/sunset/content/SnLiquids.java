@@ -1,9 +1,9 @@
 package sunset.content;
 
-import arc.graphics.*;
-import mindustry.content.*;
-import mindustry.ctype.*;
-import mindustry.type.*;
+import arc.graphics.Color;
+import mindustry.content.StatusEffects;
+import mindustry.ctype.ContentList;
+import mindustry.type.Liquid;
 
 public class SnLiquids implements ContentList {
     public static Liquid burheyna;

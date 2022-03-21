@@ -1,17 +1,19 @@
 package sunset.content.blocks;
 
-import gas.world.blocks.power.GasItemLiquidGenerator;
-import gas.world.consumers.ConsumeGas;
-import mindustry.content.*;
-import mindustry.ctype.*;
-import mindustry.gen.*;
-import mindustry.type.*;
-import mindustry.world.*;
-import mindustry.world.blocks.power.*;
-import sunset.content.*;
-import sunset.world.blocks.power.*;
+import mindustry.content.Fx;
+import mindustry.content.Items;
+import mindustry.content.Liquids;
+import mindustry.ctype.ContentList;
+import mindustry.gen.Sounds;
+import mindustry.type.Category;
+import mindustry.world.Block;
+import mindustry.world.blocks.power.DecayGenerator;
+import mindustry.world.blocks.power.NuclearReactor;
+import sunset.content.SnItems;
+import sunset.world.blocks.power.LiquidGenerator;
+import sunset.world.blocks.power.ThermalGeneratorExt;
 
-import static mindustry.type.ItemStack.*;
+import static mindustry.type.ItemStack.with;
 
 public class SnPower implements ContentList{
     public static Block

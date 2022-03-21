@@ -6,7 +6,7 @@ import mindustry.world.meta.StatCat;
 public class SnStat {
     /**
      * 1)General - main information like health or size.<p>
-     * 2)Affilitiation - the guild that the block/unit belongs to.<p>
+     * 2)Affilitiation - the name that the block/unit belongs to.<p>
      * 3)Power - power generation and consumption.<p>
      * 4)Liquids - liquid capacity etc.<p>
      * 5)Lasers - special info for the {@link sunset.world.blocks.laser.LaserBlock} and its derivatives.<p>
