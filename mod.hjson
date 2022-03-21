@@ -1,0 +1,18 @@
+name: sunset
+displayName: "[red]S[orange]u[yellow]ns[orange]e[red]t[]"
+author:
+"
+\n[#3da3ff]Coding:[] [#b61f10]Slish, Nukleer Bomb, RePoweRED, Darkness, Mr.Ricco, Zelaux, StaBU.[]
+\n[#ffd32f]Sprites:[] [#b61f10]MissionaryPoseBest, Saigo no-nozomi, Snake, Mak, NotTheGrawxz, Toxin, StaBU.[]
+\n[#17ac86]Sounds:[] [#b61f10]King-Silicon.[]
+\n[#17ac86]Ost:[] [#b61f10]Saigo no-nozomi.[]
+\n[#aeeb46]Maps:[] [#b61f10]Saigo no-nozomi.[]
+
+\n Contributors: Darkness, Def-Try, Tabyretka.
+"
+description: "[blue]Adds a lot of new content on type: 3 planets, new and upgraded turrets, factories, 50+ units, items, embodiment and more....."
+repo: SunsetTeam/Sunset
+main: sunset.Sunset
+minGameVersion: 135
+java: true
+version: 0.2.3A local_10:03 80.03.2022
