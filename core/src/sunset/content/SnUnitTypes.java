@@ -46,7 +46,7 @@ public class SnUnitTypes implements ContentList{
     public static UnitType
 
     //vanilla
-    bastion, t6spooder, t6crawler,
+    bastion, arahnus, buffedCrawler,
 
     //attack copters
     wind, thunder, nadir, halo, parhelion, mudflow,
@@ -126,7 +126,7 @@ public class SnUnitTypes implements ContentList{
             }}
             );
         }};
-        t6crawler = new UnitType("crawler"){{
+        buffedCrawler = new UnitType("buffed-crawler"){{
             defaultController = SuicideAI::new;
 
             speed = 1f;
@@ -157,7 +157,7 @@ public class SnUnitTypes implements ContentList{
             @Override
             public boolean unlockedNowHost() { return false; }*/
         };
-        t6spooder = new UnitTypeExt("t6spooder"){{
+        arahnus = new UnitTypeExt("arahnus"){{
             //TODO: create actual stats. This one copied from "abyssEye"
             health = 61000;
             speed = 0.6f;
@@ -190,7 +190,7 @@ public class SnUnitTypes implements ContentList{
             buildSpeed = 1f;
 
             weapons.add(
-            new SnWeapon("t6spooder-cannon"){{
+            new SnWeapon("arahnus-cannon"){{
                 y = -14f;
                 x = 0f;
                 shootY = 22f;
@@ -250,11 +250,11 @@ public class SnUnitTypes implements ContentList{
                         status = StatusEffects.sapped;
                         statusDuration = 60f * 10;
             
-                        unitType = SnUnitTypes.t6crawler;
+                        unitType = SnUnitTypes.buffedCrawler;
                     }};
                 }};
             }},
-            new SnWeapon("t6spooder-sap"){{
+            new SnWeapon("arahnus-sap"){{
                 x = 15;
                 reload = 10;
                 shootCone = 20f;

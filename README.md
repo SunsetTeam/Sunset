@@ -13,7 +13,7 @@ The third planet in the mod, the most difficult, has more content and size than 
 `[Data Deleted]`
 
 # Devs
-Coder's: Slish, Nukleer Bomb, RePoweRED, Mr.Ricco, Zelaux, StaBU\
+Coder's: Slish, Nukleer Bomb, RePoweRED, Mr.Ricco, Zelaux, LiptonIt, StaBU\
 Sprites: Saigo no-nozomi, MissionaryPoseBest, Snake, Mak, NotTheGrawxz, Toxin, StaBU\
 Sounds: King-Silicon\
 Ost: Saigo no-nozomi\

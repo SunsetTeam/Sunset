@@ -1704,6 +1704,8 @@ public class SnBullets implements ContentList {
         naturiteReversBullet = new ReverseBulletType(2.6f, 95f) {{
             sprite = "sunset-copter-bomb";
             other = naturiteReversBullet;
+            reverseNew = true;
+            reversAngle = 180;
             width = 15f;
             height = 15;
             lifetime = 235;
@@ -1717,7 +1719,6 @@ public class SnBullets implements ContentList {
             pierceCap = 6;
             rotateMag = 5;
             rotateRight = true;
-            inRange = true;
             frontColor = SnPal.copterLaser;
             backColor = SnPal.copterLaserBack;
             drag = 0.0025f;
@@ -1739,7 +1740,6 @@ public class SnBullets implements ContentList {
             pierceCap = 4;
             rotateMag = 5;
             rotateRight = true;
-            inRange = true;
             frontColor = SnPal.redBomb;
             backColor = SnPal.redBombBack;
             drag = 0.0025f;
@@ -1761,7 +1761,6 @@ public class SnBullets implements ContentList {
             pierceCap = 7;
             rotateMag = 5;
             rotateRight = true;
-            inRange = true;
             frontColor = SnPal.nobiumBullet;
             backColor = SnPal.nobiumBulletBack;
             drag = 0.0025f;
