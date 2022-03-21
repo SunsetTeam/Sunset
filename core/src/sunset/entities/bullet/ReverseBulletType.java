@@ -59,7 +59,7 @@ public class ReverseBulletType extends BasicBulletType {
 
         Effect.shake(despawnShake, despawnShake, b);
         if (reverseNew){
-            other.create(b, b.x, b.y, b.rotation() - reversAngle, 1, 1);
+            other.create(b, b.rotation() - reversAngle, 1, 1, 1f);
         }
     }
 
