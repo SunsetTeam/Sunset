@@ -20,7 +20,6 @@ import mindustry.world.consumers.ConsumeCoolant;
 import mindustry.world.meta.BlockFlag;
 import mindustry.world.meta.BuildVisibility;
 import sunset.content.*;
-import sunset.content.affilitiation.SnBranches;
 import sunset.content.affilitiation.SnGuilds;
 import sunset.entities.bullet.EnergySphereBulletType;
 import sunset.entities.bullet.LightningContinuousLaserBulletType;

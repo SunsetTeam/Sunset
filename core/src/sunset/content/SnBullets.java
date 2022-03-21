@@ -25,8 +25,6 @@ import sunset.gen.SnSounds;
 import sunset.graphics.SnPal;
 import sunset.type.StackableStatusEffect;
 
-import static arc.graphics.g2d.Draw.color;
-
 public class SnBullets implements ContentList {
     //region definitions
     public static BulletType
