@@ -22,7 +22,6 @@ import mindustry.type.ammo.ItemAmmoType;
 import mindustry.type.weapons.PointDefenseWeapon;
 import sunset.ai.*;
 import sunset.ai.weapon.ExtinguishWeaponAI;
-import sunset.content.affilitiation.SnGuilds;
 import sunset.entities.abilities.EffectLowHPAbility;
 import sunset.entities.abilities.StatusFieldAbility;
 import sunset.entities.bullet.BerserkLaserBulletType;
@@ -42,7 +41,7 @@ public class SnUnitTypes implements ContentList{
     public static UnitType
 
     //vanilla
-    bastion, t6crawler, buffedCrawler,
+    bastion, arahnus, buffedCrawler,
 
     //attack copters
     wind, thunder, nadir, halo, parhelion, mudflow,
@@ -153,7 +152,7 @@ public class SnUnitTypes implements ContentList{
             @Override
             public boolean unlockedNowHost() { return false; }*/
         };
-        t6crawler = new UnitTypeExt("t6-crawler"){{
+        arahnus = new UnitTypeExt("arahnus"){{
             //TODO: create actual stats. This one copied from "abyssEye"
             health = 61000;
             speed = 0.6f;
@@ -186,7 +185,7 @@ public class SnUnitTypes implements ContentList{
             buildSpeed = 1f;
 
             weapons.add(
-            new SnWeapon("t6spooder-cannon"){{
+            new SnWeapon("arahnus-cannon"){{
                 y = -14f;
                 x = 0f;
                 shootY = 22f;
@@ -250,7 +249,7 @@ public class SnUnitTypes implements ContentList{
                     }};
                 }};
             }},
-            new SnWeapon("t6spooder-sap"){{
+            new SnWeapon("arahnus-sap"){{
                 x = 15;
                 reload = 10;
                 shootCone = 20f;

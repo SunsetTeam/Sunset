@@ -18,7 +18,8 @@ jobs:
       - name: Make gradlew executable
         run: chmod +x ./gradlew
       - name: Build mod jar
-        run: ./gradlew deploy
+        run: |
+          ./gradlew deploy -Pcommit=$(git rev-parse --short "$GITHUB_SHA")
       - name: Upload built jar file
         uses: actions/upload-artifact@v2
         with:

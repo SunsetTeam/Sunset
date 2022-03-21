@@ -658,7 +658,7 @@ public class SnTurrets implements ContentList {
             category = Category.turret;
             buildVisibility = BuildVisibility.shown;
             shootType = new EnergySphereBulletType(2.5f, 290f) {{
-                hitSize = 9f;
+                hitSize = 10f;
                 splashDamage = 910f;
                 splashDamageRadius = 97f;
                 lightningPeriod = 10f;

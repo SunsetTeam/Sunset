@@ -37,7 +37,7 @@ public class EnergySphereBulletType extends BasicBulletType {
 
     @Override
     public void draw(Bullet b) {
-        Draw.mixcol(frontColor, 0.95f);
+        Draw.mixcol(frontColor, 0.25f);
         Draw.z(Layer.bullet);
         Drawm.drawTrident(b.x, b.y, b.id, 1);
         Draw.mixcol();

@@ -13,8 +13,8 @@ public class Drawm {
     public static void drawTrident(float atX, float atY, long seed, float globalScl) { 
         draw(atX, atY, seed, 15, 
              0.66f, 1.66f, // timeScl
-             3f, 5.5f, // len
-             1.5f, 3f, // rad
+             3f, 5f, // len
+             2.5f, 4f, // rad
              globalScl); 
     }
 
