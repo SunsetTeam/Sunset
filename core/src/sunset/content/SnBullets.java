@@ -1718,7 +1718,7 @@ public class SnBullets implements ContentList {
             trailLength = 0;
             pierceCap = 6;
             rotateMag = 5;
-            rotateRight = true;
+            rotRight = true;
             frontColor = SnPal.copterLaser;
             backColor = SnPal.copterLaserBack;
             drag = 0.0025f;
@@ -1739,7 +1739,7 @@ public class SnBullets implements ContentList {
             trailLength = 0;
             pierceCap = 4;
             rotateMag = 5;
-            rotateRight = true;
+            rotRight = true;
             frontColor = SnPal.redBomb;
             backColor = SnPal.redBombBack;
             drag = 0.0025f;
@@ -1760,7 +1760,7 @@ public class SnBullets implements ContentList {
             trailLength = 0;
             pierceCap = 7;
             rotateMag = 5;
-            rotateRight = true;
+            rotRight = true;
             frontColor = SnPal.nobiumBullet;
             backColor = SnPal.nobiumBulletBack;
             drag = 0.0025f;
