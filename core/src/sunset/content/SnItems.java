@@ -13,7 +13,9 @@ public class SnItems implements ContentList {
     //crafted
     naturite, nobium, enojie, reneubite,
     //ammo
-    semiLaserArt;
+    lightBurstMissile,
+    raMissile, empMissile, lightningMissile, lightMissile,
+    burstMissile, detonatorMissile, pointMissile, spotMissile;
     @Override
     public void load() {
         //region items
@@ -61,7 +63,17 @@ public class SnItems implements ContentList {
         //endregion crafted
         //endregion items
         //region ammo
-        semiLaserArt = new Ammo("semi-laser-art");
+
+        lightBurstMissile = new Ammo("light-burst-missile");
+        raMissile = new Ammo("ra-missile");
+        empMissile = new Ammo("emp-missile");
+        /*lightningMissile = new Ammo("lightning-missile");
+        lightMissile = new Ammo("light-missile");
+        burstMissile = new Ammo("burst-missile");
+        detonatorMissile = new Ammo("detonator-missile");
+        pointMissile = new Ammo("point-missile");
+        spotMissile = new Ammo("spot-missile");
+        */
         //endregion ammo
     }
 }

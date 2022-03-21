@@ -2,7 +2,6 @@ package sunset.content;
 
 import arc.struct.Seq;
 import arc.util.Structs;
-import mindustry.content.Blocks;
 import mindustry.ctype.ContentList;
 import mindustry.type.Item;
 import mindustry.type.ItemStack;
@@ -12,9 +11,7 @@ import java.util.Arrays;
 
 public class SnOverride implements ContentList {
     public void load() {
-        Blocks.duct.buildVisibility.visible();
-        Blocks.ductRouter.buildVisibility.visible();
-        Blocks.ductBridge.buildVisibility.visible();
+        //Your changes here.
     }
     private static void addReq(Block target, ItemStack... items){
         ItemStack[] newReq = new ItemStack[items.length + target.requirements.length];

@@ -32,7 +32,9 @@ public class SnCrafting implements ContentList{
     //advanced
     advancedCompressor, advancedWeaver, advancedKiln, advancedSurge, advancedCryomixer,
     //standard
-    collider, purifier, crystallizer, enojieKiln;
+    collider, purifier, crystallizer, enojieKiln,
+    //missile
+    missilecrafter, missilePlant;
 
     @Override
     public void load(){
@@ -209,5 +211,8 @@ public class SnCrafting implements ContentList{
             consumes.power(5.3f);
         }};
         //endregion standard
+        //region missile
+        // I need multicrafters to do this fine
+        //endregion missile
     }
 }

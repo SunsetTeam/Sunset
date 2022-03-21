@@ -1,7 +1,7 @@
 package sunset.content;
 
-import mindustry.ctype.*;
-import mindustry.type.*;
+import mindustry.ctype.ContentList;
+import mindustry.type.SectorPreset;
 
 public class SnSectorPresets implements ContentList {
     public static SectorPreset

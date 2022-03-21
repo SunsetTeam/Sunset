@@ -122,7 +122,7 @@ public class SnUnitTypes implements ContentList{
             }}
             );
         }};
-        buffedCrawler = new UnitType("crawler"){{
+        buffedCrawler = new UnitType("buffed-crawler"){{
             defaultController = SuicideAI::new;
 
             speed = 1f;

@@ -10,11 +10,14 @@ import mindustry.world.blocks.defense.ForceProjector;
 import sunset.content.SnItems;
 import sunset.world.blocks.defense.RepairStation;
 import sunset.world.blocks.defense.projectors.DeflectorProjector;
+import sunset.world.blocks.effect.Stand;
 
 import static mindustry.type.ItemStack.with;
 
 public class SnProjectors implements ContentList {
-    public static Block hugeRestoringDome, forceDome, deflectorProjector;
+    public static Block
+    hugeRestoringDome, forceDome, deflectorProjector,
+    testStand;
 
     @Override
     public void load() {
@@ -58,6 +61,10 @@ public class SnProjectors implements ContentList {
             cooldownBrokenBase = 1f;
             consumes.items(with(Items.phaseFabric, 3, SnItems.coldent, 5));
             consumes.power(20f);
+        }};
+
+        testStand = new Stand("stand-test") {{
+            spinSpeed = -2;
         }};
     }
 }

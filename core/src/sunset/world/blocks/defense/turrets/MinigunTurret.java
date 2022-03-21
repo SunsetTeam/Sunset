@@ -70,7 +70,7 @@ public class MinigunTurret extends ItemTurret {
 
         @Override
         public void bullet(BulletType type, float angle) {
-            super.bullet(type, angle + Mathf.range(inaccuracyUp * totalShootingTime));
+            super.bullet(type, angle + Mathf.range(inaccuracyUp * (totalShootingTime / 2)));
         }
 
         @Override

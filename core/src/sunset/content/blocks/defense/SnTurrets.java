@@ -53,7 +53,6 @@ public class SnTurrets implements ContentList {
 
     //7x7
     halberd, pinwheel,
-    inferno,//reserved
 
     //missile
     sunrise,//2x2
@@ -463,13 +462,13 @@ public class SnTurrets implements ContentList {
             liquidUse = 0.5f;
             laserColor = SnPal.chainLaser;
         }};
-        rockfall = new ModItemTurret("rockfall") {{
+        /*rockfall = new ModItemTurret("rockfall") {{
             requirements(Category.turret, with(Items.copper, 700, Items.lead, 700, Items.graphite, 500, Items.titanium, 880, Items.silicon, 600));
             ammo(
                 Items.graphite, SnBullets.graphiteShell,
                 Items.titanium, SnBullets.titaniumShell,
-                Items.thorium, SnBullets.thoriumShell//,
-                //SnItems.semiLaserArt, SnBullets.smallMissile
+                Items.thorium, SnBullets.thoriumShell,
+                SnItems.lightBurstMissile, SnBullets.lightBurstMissile
             );
             health = 3000;
             size = 4;
@@ -477,7 +476,7 @@ public class SnTurrets implements ContentList {
             range = 45f * Vars.tilesize;
             shots = 6;
             inaccuracy = 12;
-            velocityInaccuracy = 0.6f;
+            velocityInaccuracy = 0.3f;
             ammoEjectBack = 6f;
             cooldown = 0.9f;
             restitution = 0.01f;
@@ -488,7 +487,7 @@ public class SnTurrets implements ContentList {
             reloadTime = 2f * Time.toSeconds;
             guild = SnGuilds.kryonix;
             branch = SnBranches.heavyArt;
-        }};
+        }};*/
 
         drr = new ModItemTurret("drr") {{
             hideDetails = false;
@@ -536,13 +535,13 @@ public class SnTurrets implements ContentList {
             reloadBar = false;
             guild = SnGuilds.aymirus;
         }};
-        field = new ModItemTurret("field") {{
+        /*field = new ModItemTurret("field") {{
             requirements(Category.turret, with(Items.copper, 1200, Items.lead, 800, Items.plastanium, 350, Items.thorium, 400, SnItems.fors, 400, SnItems.nobium, 300));
-            ammo(//todo: phase-fabric, surge-alloy, enojie
-            /*SnItems.laserArtA, SnBullets.standardMissile,
-            SnItems.laserArtB, SnBullets.laserArtB,
-            SnItems.laserArtC, SnBullets.laserArtC,
-            SnItems.laserArtD, SnBullets.laserArtD*/
+            ammo(
+                SnItems.raMissile, SnBullets.raMissile,
+                SnItems.empMissile, SnBullets.empMissile//,
+                //SnItems.lightningMissile, SnBullets.lightningMissile,
+                //SnItems.lightMissile, SnBullets.lightMissile
             );
             health = 4000;
             size = 5;
@@ -561,7 +560,7 @@ public class SnTurrets implements ContentList {
             targetAir = false;
             targetGround = true;
             guild = SnGuilds.kryonix;
-        }};
+        }};*/
         sniper = new ModItemTurret("sniper") {{
             requirements(Category.turret, with(Items.copper, 1200, SnItems.fors, 700, Items.surgeAlloy, 600, SnItems.naturite, 500, Items.silicon, 400, SnItems.nobium, 250));
             ammo(
@@ -588,15 +587,15 @@ public class SnTurrets implements ContentList {
 
             consumes.powerCond(21f, TurretBuild::isActive);
         }};
-        fanatic = new ModItemTurret("fanatic") {{
+        /*fanatic = new ModItemTurret("fanatic") {{
             requirements(Category.turret, with(
             Items.copper, 700, Items.graphite, 580, Items.titanium, 900, Items.thorium, 890, Items.silicon, 570, Items.surgeAlloy, 430,
             SnItems.fors, 570, SnItems.naturite, 410, SnItems.nobium, 310));
-            ammo(//todo: blast-compound, thorium, reneubite, fors
-            /*SnItems.powerArtA, SnBullets.powerArtA,
-            SnItems.powerArtB, SnBullets.powerArtB,
-            SnItems.powerArtC, SnBullets.powerArtC,
-            SnItems.powerArtD, SnBullets.powerArtD*/
+            ammo(
+                //SnItems.burstMissile, SnBullets.burstMissile,
+                //SnItems.detonatorMissile, SnBullets.detonatorMissile,
+                //SnItems.pointMissile, SnBullets.pointMissile,
+                //SnItems.spotMissile, SnBullets.spotMissile
             );
             health = 4200;
             size = 5;
@@ -617,7 +616,7 @@ public class SnTurrets implements ContentList {
             shootSound = Sounds.shootBig;
             drawLight = true;
             guild = SnGuilds.kryonix;
-        }};
+        }};*/
         defibrillator = new Turret360("defibrillator") {{
             requirements(Category.turret, with(Items.copper, 650, Items.graphite, 550, Items.titanium, 600, Items.thorium, 600, SnItems.fors, 700));
             //todo /\

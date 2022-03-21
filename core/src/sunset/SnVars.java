@@ -14,6 +14,7 @@ import sunset.core.SnSettings;
 import sunset.core.SnSoundControl;
 import sunset.core.SnUI;
 
+import static mindustry.Vars.experimental;
 import static mindustry.Vars.headless;
 
 public class SnVars extends ModVars {
@@ -54,7 +55,7 @@ public class SnVars extends ModVars {
     }
 
     public static void init() {
-
+        experimental = true;
     }
 
     public static void load() {

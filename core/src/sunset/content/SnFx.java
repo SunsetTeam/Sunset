@@ -1,5 +1,6 @@
 package sunset.content;
 
+import arc.Core;
 import arc.func.Floatc2;
 import arc.graphics.Color;
 import arc.graphics.g2d.Draw;
@@ -550,15 +551,8 @@ public class SnFx {
             sum += rnd;
         }
     }),
-    //endregion
+    //endregion unorganized
     //region special
-    empHit = new Effect(35, e -> {
-        randLenVectors(e.id, 6, 4f + e.fin() * 8f, (x, y) -> {
-            Draw.color(Color.valueOf("7FFFD4"), Color.valueOf("32D0DC"), e.fin());
-            float circleRad = 2f + e.fin() * 10f;
-            Lines.circle(e.x, e.y, circleRad);
-        });
-    }),
     hitReneubiteBullet = new Effect(14, e -> {
         color(Color.white, SnPal.renBlast1, e.fin());
 
@@ -576,7 +570,7 @@ public class SnFx {
 
         Drawf.light(e.x, e.y, 20f, SnPal.renBlast2, 0.6f * e.fout());
     }),
-    //endregion unorganized
+    //endregion special
 
     //region green turrets
     greenInstTrail = new Effect(30, e -> {
@@ -625,9 +619,47 @@ public class SnFx {
     }),
     //endregion green turrets
 
-    //region laser art
-
-    //endregion laser art
+    //region heavy art
+    halfStarTrail = new Effect(50, e -> {
+        color(e.color);
+        Fill.circle(e.x, e.y, e.rotation * e.fout());
+        for (int i = 0; i < 8; i++) {
+            Drawf.tri(e.x, e.y, 5 * e.fout(), 4.4f * e.fout(), (i * 45));
+        }
+    }),
+    lbmTrail = new Effect(50, e -> {
+        color(e.color);
+        Fill.circle(e.x, e.y, e.rotation * e.fin());
+        color(e.color);
+        Fill.circle(e.x, e.y, e.rotation * e.fout());
+    }),
+    fieldHit = new Effect(15, e -> {
+        Draw.z(Layer.shields + 0.01f);
+        float radius = 8 + (Interp.pow2Out.apply(e.fout())) * 44;
+        color(Pal.accent.cpy());
+        if (Core.settings.getBool("animatedshields")) {
+            Fill.poly(e.x, e.y, 8, radius);
+        } else {
+            Lines.stroke(1.5f);
+            Draw.alpha(0.09f + Mathf.clamp(0.08f));
+            Fill.poly(e.x, e.y, 8, radius);
+            Draw.alpha(1);
+            Lines.poly(e.x, e.y, 8, radius);
+            Draw.reset();
+        }
+    }),
+    empHit = new Effect(20, e -> {
+        color(SnPal.emp1);
+        stroke(e.fout() * 2f);
+        float circleRad = 3f + e.finpow() * 40f;
+        circle(e.x, e.y, circleRad);
+        circle(e.x, e.y, circleRad / 2);
+        circle(e.x, e.y, circleRad / 4);
+        color(SnPal.emp2);
+        circle(e.x, e.y, circleRad / 8);
+        circle(e.x, e.y, circleRad / 16);
+    }),
+    //endregion heavy art
 
     //region yellow ships
     acTrail = new Effect(30, e -> {
@@ -858,14 +890,17 @@ public class SnFx {
         });
     }
 
-    //laser art
+    //heavy art
     public static Effect laserArtFx(Color color) {
-        return laserArtFx(color, 100f, 35f, 6);
+        return laserArtFx(color, 1, 100f, 35f, 6);
+    }
+    public static Effect laserArtFx(Color color, int rotateAngle) {
+        return laserArtFx(color, rotateAngle, 100f, 35f, 6);
     }
     public static Effect laserArtFx(Color color, float lenght1, float lenght2) {
-        return laserArtFx(color, 100f, 35f, 6);
+        return laserArtFx(color, 1, lenght1, lenght2, 6);
     }
-    public static Effect laserArtFx(Color color, float lenght1, float lenght2, int beams) {
+    public static Effect laserArtFx(Color color, int rotateAngle, float lenght1, float lenght2, int beams) {
         return new Effect(30f, 70f, e -> {
             color(color);
             stroke(e.fout() * 2f);
@@ -873,16 +908,16 @@ public class SnFx {
             circle(e.x, e.y, circleRad);
             color(color);
             for (int i = 0; i < beams; i++) {
-                Drawf.tri(e.x, e.y, 6f, lenght1 * e.fout(), i * (360 / beams));
+                Drawf.tri(e.x, e.y, 6f, lenght1 * e.fout(), (i * (360 / beams)) + rotateAngle * e.fout(Interp.pow5Out));
             }
             color();
             for (int i = 0; i < beams; i++) {
-                Drawf.tri(e.x, e.y, 3f, lenght2 * e.fout(), i * (360 / beams));
+                Drawf.tri(e.x, e.y, 3f, lenght2 * e.fout(), (i * (360 / beams)) + rotateAngle * e.fout(Interp.pow5Out));
             }
             Drawf.light(e.x, e.y, circleRad * 1.5f, color, e.fout());
         });
     }
-    public static Effect powerArtFx(Color color) {
+    /*public static Effect powerArtFx(Color color) {
         return powerArtFx(color, 40f, 20f);
     }
     public static Effect powerArtFx(Color color, float lenght1, float lenght2) {
@@ -899,5 +934,5 @@ public class SnFx {
             }
             Drawf.light(e.x, e.y, 5, color, e.fout());
         });
-    }
+    }*/
 }
