@@ -64,10 +64,10 @@ public class SnItems implements ContentList {
         //endregion items
         //region ammo
 
-        lightBurstMissile = new Ammo("light-burst-missile");
+        /*lightBurstMissile = new Ammo("light-burst-missile");
         raMissile = new Ammo("ra-missile");
         empMissile = new Ammo("emp-missile");
-        /*lightningMissile = new Ammo("lightning-missile");
+        lightningMissile = new Ammo("lightning-missile");
         lightMissile = new Ammo("light-missile");
         burstMissile = new Ammo("burst-missile");
         detonatorMissile = new Ammo("detonator-missile");
