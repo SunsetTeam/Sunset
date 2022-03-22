@@ -1,28 +1,31 @@
 package sunset.content;
 
+import arc.audio.Sound;
+import arc.graphics.Color;
 import arc.util.Time;
 import mindustry.Vars;
 import mindustry.ai.types.FlyingAI;
 import mindustry.ai.types.SuicideAI;
 import mindustry.annotations.Annotations.EntityDef;
 import mindustry.content.Fx;
+import mindustry.content.Items;
 import mindustry.content.Liquids;
 import mindustry.content.StatusEffects;
 import mindustry.content.UnitTypes;
 import mindustry.ctype.ContentList;
-import mindustry.entities.bullet.ArtilleryBulletType;
-import mindustry.entities.bullet.BasicBulletType;
-import mindustry.entities.bullet.BombBulletType;
+import mindustry.entities.bullet.*;
+import mindustry.entities.units.AIController;
 import mindustry.gen.*;
 import mindustry.graphics.Layer;
 import mindustry.graphics.Pal;
+import mindustry.type.StatusEffect;
 import mindustry.type.UnitType;
 import mindustry.type.Weapon;
 import mindustry.type.ammo.ItemAmmoType;
+import mindustry.type.ammo.PowerAmmoType;
 import mindustry.type.weapons.PointDefenseWeapon;
 import sunset.ai.*;
 import sunset.ai.weapon.ExtinguishWeaponAI;
-import sunset.content.affilitiation.SnGuilds;
 import sunset.entities.abilities.EffectLowHPAbility;
 import sunset.entities.abilities.StatusFieldAbility;
 import sunset.entities.bullet.BerserkLaserBulletType;
@@ -31,6 +34,7 @@ import sunset.gen.Deliverc;
 import sunset.gen.Segmentc;
 import sunset.type.BerserkStage;
 import sunset.type.ammo.LiquidAmmoType;
+import sunset.type.blocks.Energy;
 import sunset.type.blocks.Engine;
 import sunset.type.blocks.Rotor;
 import sunset.type.unitTypes.*;
@@ -54,6 +58,8 @@ public class SnUnitTypes implements ContentList{
     freezingT1,
     //air
     engineT1,
+    //hylight
+    light,
     //naval
     yellowT1, yellowT2, yellowT3, yellowT4, yellowT5,
     //misc
@@ -1316,16 +1322,15 @@ public class SnUnitTypes implements ContentList{
         //region naval
         //region yellow
         yellowT1 = new SnUnitType("yellow-t1") {{
-            speed = 1;
+            speed = 1f;
             rotateSpeed = 3.5f;
             drag = 0.13f;
             hitSize = 10;
             accel = 0.21f;
-            health = 240;
+            health = 180;
             range = 160;
-            armor = 7;
+            armor = 5;
             faceTarget = true;
-            rotateShooting = false;
             commandLimit = 5;
             commandRadius = 48;
             visualElevation = -1;
@@ -1350,8 +1355,8 @@ public class SnUnitTypes implements ContentList{
             new WeaponExt("small-autocannon") {{
                 bullet = SnBullets.smallShell;
                 mirror = rotate = top = flipSprite = true;
-                rotateSpeed = 14;
-                reload = 0.7f * Time.toSeconds;
+                rotateSpeed = 16;
+                reload = 0.5f * Time.toSeconds;
                 shots = 1;
                 spacing = 15;
                 inaccuracy = 7;
@@ -1366,7 +1371,6 @@ public class SnUnitTypes implements ContentList{
             constructor = UnitWaterMove::create;
             immunities.add(StatusEffects.wet);
             immunities.add(StatusEffects.freezing);
-            guild = SnGuilds.weardius;
         }};
         yellowT2 = new SnUnitType("yellow-t2") {{
             speed = 0.9f;
@@ -1374,11 +1378,10 @@ public class SnUnitTypes implements ContentList{
             drag = 0.15f;
             hitSize = 15;
             accel = 0.21f;
-            health = 520;
+            health = 360;
             range = 205;
-            armor = 15;
+            armor = 8;
             faceTarget = true;
-            rotateShooting = false;
             commandLimit = 5;
             commandRadius = 48;
             visualElevation = -1;
@@ -1389,13 +1392,13 @@ public class SnUnitTypes implements ContentList{
                 rotate = true;
                 top = true;
                 rotateSpeed = 6.7f;
-                reload = 2.3f * Time.toSeconds;
+                reload = 45;
                 shots = 3;
                 inaccuracy = 5;
                 shotDelay = 0.15f * Time.toSeconds;
-                shootY = 2f;
                 x = 5.1f;
                 y = -3;
+                xRand = 5;
                 shootCone = 1;
                 cooldownTime = 0.09f * Time.toSeconds;
                 ignoreRotation = true;
@@ -1410,7 +1413,6 @@ public class SnUnitTypes implements ContentList{
                 reload = 1.3f * Time.toSeconds;
                 shots = 1;
                 inaccuracy = 2;
-                shootY = 7;
                 x = 0;
                 y = 0;
                 shootCone = 6;
@@ -1423,7 +1425,6 @@ public class SnUnitTypes implements ContentList{
             constructor = UnitWaterMove::create;
             immunities.add(StatusEffects.wet);
             immunities.add(StatusEffects.freezing);
-            guild = SnGuilds.weardius;
         }};
         yellowT3 = new SnUnitType("yellow-t3") {{
             speed = 0.69f;
@@ -1431,15 +1432,13 @@ public class SnUnitTypes implements ContentList{
             drag = 0.2f;
             hitSize = 18;
             accel = 1;
-            health = 800;
+            health = 1980;
             range = 350;
-            armor = 26;
+            armor = 15;
             faceTarget = true;
-            rotateShooting = false;
             commandLimit = 5;
             commandRadius = 48;
             visualElevation = -1;
-            hovering = true;
             weapons.addAll(
             new WeaponExt("lightthrower") {{
                 bullet = SnBullets.lightningBall;
@@ -1447,7 +1446,7 @@ public class SnUnitTypes implements ContentList{
                 rotate = true;
                 top = true;
                 rotateSpeed = 2.8f;
-                reload = 2.5f * Time.toSeconds;
+                reload = 2.6f * Time.toSeconds;
                 shots = 1;
                 spacing = 2.2f;
                 inaccuracy = 5;
@@ -1465,11 +1464,10 @@ public class SnUnitTypes implements ContentList{
                 rotate = true;
                 top = true;
                 rotateSpeed = 3;
-                reload = Time.toSeconds;
+                reload = 1.1f * Time.toSeconds;
                 shots = 1;
                 spacing = 3;
                 inaccuracy = 6;
-                shootY = 5;
                 x = 7.2f;
                 y = -9;
                 shootCone = 2.1f;
@@ -1482,7 +1480,6 @@ public class SnUnitTypes implements ContentList{
             constructor = UnitWaterMove::create;
             immunities.add(StatusEffects.wet);
             immunities.add(StatusEffects.freezing);
-            guild = SnGuilds.weardius;
         }};
         /*yellowT4 = new SnUnitType("yellow-t4") {{
             speed = 1.5f;
@@ -1718,6 +1715,83 @@ public class SnUnitTypes implements ContentList{
                     }});
         }};
         //endregion other
+        //region hylight
+        light = new EngineUnitType("light") {{
+            health = 140;
+            hitSize = 15;
+            speed = 5.2f;
+            rotateSpeed = 5f;
+            accel = 0.04f;
+            drag = 0.016f;
+            commandLimit = 5;
+            flying = true;
+            circleTarget = true;
+            range = 130;
+            rotateShooting = false;
+            ammoType = new PowerAmmoType(450);
+
+            weapons.add(new SnWeapon("light-gun"){{
+                reload = 13f;
+                rotate = true;
+                mirror = true;
+                top = true;
+                x = 4f;
+                y = -1f;
+                shootSound = Sounds.sap;
+                spacing = 0f;
+
+                bullet = new SapBulletType(){{
+                    sapStrength = 0.45f;
+                    length = 20f;
+                    damage = 9f;
+                    shootEffect = Fx.shootSmall;
+                    hitColor = color = Color.valueOf("ffd37f");
+                    despawnEffect = Fx.none;
+                    width = 0.35f;
+                    lifetime = 12.5f;
+                    knockback = -0.25f;
+                }};
+            }});
+
+            engines(
+                    new Engine("small-engine") {{
+                        underUnit = true;
+                        engineX = -6.4f;
+                        engineY = 3.4f;
+                        engineSize = 1.8f;
+                        engineX1 = -5f;
+                        engineY1 = 4f;
+                    }},
+
+                    new Engine("small-engine") {{
+                        underUnit = true;
+                        engineX = 6.4f;
+                        engineY = 3.4f;
+                        engineSize = 1.8f;
+                        engineX1 = 7f;
+                        engineY1 = 4f;
+                    }},
+
+                    new Engine("small-engine") {{
+                        underUnit = true;
+                        engineX = -6.4f;
+                        engineY = -6.4f;
+                        engineSize = 1.8f;
+                        engineX1 = -5.3f;
+                        engineY1 = -5.3f;
+                    }},
+
+                    new Engine("small-engine") {{
+                        underUnit = true;
+                        engineX = 6.4f;
+                        engineY = -6.4f;
+                        engineSize = 1.8f;
+                        engineX1 = 7.3f;
+                        engineY1 = -5.3f;
+                    }});
+        }
+        };
+
         //endregion mod-units
     }
 }
