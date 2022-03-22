@@ -1,18 +1,24 @@
 package sunset.content;
 
-import arc.graphics.*;
-import mindustry.ctype.*;
-import mindustry.type.*;
+import arc.graphics.Color;
+import mindustry.ctype.ContentList;
+import mindustry.type.Item;
+import sunset.type.Ammo;
 
 public class SnItems implements ContentList {
     public static Item
+    //items
     //raw
     fors, planatrium, flameid, coldent,
     //crafted
-    naturite, nobium, enojie, reneubite;
-
+    naturite, nobium, enojie, reneubite,
+    //ammo
+    lightBurstMissile,
+    raMissile, empMissile, lightningMissile, lightMissile,
+    burstMissile, detonatorMissile, pointMissile, spotMissile;
     @Override
     public void load() {
+        //region items
         //region raw
         fors = new Item("fors", Color.valueOf("F3A39F")) {{
             cost = 2f;
@@ -55,5 +61,19 @@ public class SnItems implements ContentList {
             explosiveness = 0.7f;
         }};
         //endregion crafted
+        //endregion items
+        //region ammo
+
+        /*lightBurstMissile = new Ammo("light-burst-missile");
+        raMissile = new Ammo("ra-missile");
+        empMissile = new Ammo("emp-missile");
+        lightningMissile = new Ammo("lightning-missile");
+        lightMissile = new Ammo("light-missile");
+        burstMissile = new Ammo("burst-missile");
+        detonatorMissile = new Ammo("detonator-missile");
+        pointMissile = new Ammo("point-missile");
+        spotMissile = new Ammo("spot-missile");
+        */
+        //endregion ammo
     }
 }

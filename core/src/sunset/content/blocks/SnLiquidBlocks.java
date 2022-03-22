@@ -1,16 +1,13 @@
 package sunset.content.blocks;
 
-import mindustry.content.Blocks;
 import mindustry.content.Items;
 import mindustry.ctype.ContentList;
-import mindustry.game.Team;
 import mindustry.type.Category;
 import mindustry.world.Block;
-import mindustry.world.Tile;
-import mindustry.world.blocks.liquid.*;
 import mindustry.world.blocks.liquid.Conduit;
+import mindustry.world.blocks.liquid.LiquidRouter;
 import mindustry.world.blocks.production.Pump;
-import mma.*;
+import mma.ModVars;
 import sunset.content.SnItems;
 import sunset.world.blocks.distribution.ModConduit;
 
@@ -38,7 +35,6 @@ public class SnLiquidBlocks implements ContentList {
             health = 110;
             placeableLiquid = true;
             hasShadow = false;
-            leaks = false;
         }};
 
         if (!ModVars.packSprites) {

@@ -1,6 +1,5 @@
 package sunset.content.blocks.defense;
 
-import arc.util.Time;
 import mindustry.ctype.ContentList;
 import mindustry.type.Category;
 import mindustry.world.Block;

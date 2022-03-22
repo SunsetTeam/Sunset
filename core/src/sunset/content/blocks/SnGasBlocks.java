@@ -1,8 +1,10 @@
 package sunset.content.blocks;
 
-import arc.graphics.Color;
 import gas.GasStack;
-import gas.world.blocks.gas.*;
+import gas.world.blocks.gas.GasBridge;
+import gas.world.blocks.gas.GasConduit;
+import gas.world.blocks.gas.GasJunction;
+import gas.world.blocks.gas.GasRouter;
 import gas.world.blocks.power.GasItemLiquidGenerator;
 import gas.world.blocks.sandbox.GasSource;
 import gas.world.blocks.sandbox.GasVoid;
@@ -42,7 +44,6 @@ public class SnGasBlocks implements ContentList {
 
     @Override
     public void load() {
-
         //sandbox
         gasSource = new GasSource("gas-source") {{
             requirements(Category.liquid, BuildVisibility.sandboxOnly, with());
@@ -123,21 +124,21 @@ public class SnGasBlocks implements ContentList {
             consumes.power(0.35f);
         }};
         //storage
-        gasStorage = new GasRouter("gas-storage"){{
+        gasStorage = new GasRouter("gas-storage") {{
             requirements(Category.liquid, with(SnItems.fors, 15, Items.metaglass, 20));
             health = 260;
             size = 2;
             gasCapacity = 320f;
         }};
 
-        gasContainer = new GasRouter("gas-container"){{
+        gasContainer = new GasRouter("gas-container") {{
             requirements(Category.liquid, with(SnItems.fors, 30, Items.metaglass, 45));
             health = 600;
             size = 3;
             gasCapacity = 720f;
         }};
 
-        gasTank = new GasRouter("gas-tank"){{
+        gasTank = new GasRouter("gas-tank") {{
             requirements(Category.liquid, with(SnItems.fors, 115, Items.metaglass, 95, Items.thorium, 70));
             health = 1300;
             size = 4;

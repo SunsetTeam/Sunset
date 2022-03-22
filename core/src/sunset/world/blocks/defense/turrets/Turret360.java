@@ -13,6 +13,7 @@ import mma.graphics.ADrawf;
 import sunset.SnVars;
 import sunset.utils.Utils;
 import sunset.world.meta.SnStat;
+import sunset.world.meta.SnStatValues;
 
 /** Turret that shoots 360 degrees and rotates optionally.
  * Extends from {@link ItemTurret} for correct work of power shoot.*/
@@ -32,12 +33,13 @@ public class Turret360 extends ItemTurret {
         shootCone = 360;
         shots = 4;
         spread = shootCone / shots;
+        chargeShots = 1;
     }
 
     @Override
     public void setStats(){
         super.setStats();
-        aStats.add(Stat.ammo, StatValues.ammo(ObjectMap.of(this, powerBullet)));
+        aStats.add(SnStat.ammo, SnStatValues.powerBullet(ObjectMap.of(this, powerBullet), 0, chargeShots));
     }
 
     @Override

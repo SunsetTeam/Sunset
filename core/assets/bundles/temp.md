@@ -445,3 +445,12 @@
     splashDamage = 60;
     splashDamageRadius = 11.25f * Vars.tilesize;
     }};*/
+
+    laserArtA = new Ammo("laser-art-a");
+    laserArtB = new Ammo("laser-art-b");
+    laserArtC = new Ammo("laser-art-c");
+    laserArtD = new Ammo("laser-art-d");
+    powerArtA = new Ammo("power-art-a");
+    powerArtB = new Ammo("power-art-b");
+    powerArtC = new Ammo("power-art-c");
+    powerArtD = new Ammo("power-art-d");

@@ -1,18 +1,25 @@
 package sunset.content.blocks;
 
-import mindustry.content.*;
-import mindustry.ctype.*;
-import mindustry.type.*;
-import mindustry.world.*;
-import mindustry.world.blocks.production.*;
-import mindustry.world.draw.*;
-import mindustry.world.meta.Attribute;
+import mindustry.content.Fx;
+import mindustry.content.Items;
+import mindustry.content.Liquids;
+import mindustry.ctype.ContentList;
+import mindustry.type.Category;
+import mindustry.type.ItemStack;
+import mindustry.world.Block;
+import mindustry.world.blocks.production.AttributeCrafter;
+import mindustry.world.blocks.production.SolidPump;
+import mindustry.world.draw.DrawRotator;
 import mindustry.world.meta.Env;
-import sunset.content.*;
-import sunset.type.blocks.*;
-import sunset.world.blocks.production.raw.*;
+import sunset.content.SnAttribute;
+import sunset.content.SnFx;
+import sunset.content.SnItems;
+import sunset.content.SnLiquids;
+import sunset.type.blocks.DrillItem;
+import sunset.world.blocks.production.raw.DRDrill;
+import sunset.world.blocks.production.raw.PrecussionDrill;
 
-import static mindustry.type.ItemStack.*;
+import static mindustry.type.ItemStack.with;
 
 /** This category is for blocks that produce raw products. (Such as cultivator, drill etc.) */
 public class SnProduction implements ContentList{
