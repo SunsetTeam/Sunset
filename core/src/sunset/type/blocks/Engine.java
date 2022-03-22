@@ -21,6 +21,7 @@ public class Engine {
     public float engineY = -4f;
     public float engineX1 = 0f;
     public float engineY1 = -4f;
+    public boolean underUnit=false;
     public @Nullable
     Color engineColor = null;
     public Color engineColorInner = Color.white;
@@ -33,6 +34,8 @@ public class Engine {
         if(!unit.isFlying()) return;
 
         float scale = unit.elevation;
+        float z = Draw.z();
+        if (underUnit)Draw.z(z-0.001f);
 
         if(unit instanceof Trailc){
             Trail trail = ((Trailc)unit).trail();
@@ -52,5 +55,6 @@ public class Engine {
                 (engineSize + Mathf.absin(Time.time, 2f, engineSize / 4f)) / 2f  * scale
         );
         Draw.color();
+        Draw.z(z);
     }
 }

@@ -20,7 +20,8 @@ public class ReverseBulletType extends BasicBulletType {
     public float reversAngle = 180f;
     public boolean rotRight = true;
     public boolean reverseRotScl = false, inRange = false, reverseNew = false;
-    public BulletType other = null;
+    public @Nullable
+    BulletType other = null;
 
     public ReverseBulletType(float speed, float damage) {
         super(speed, damage);
