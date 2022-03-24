@@ -1,7 +1,12 @@
+import java.nio.charset.StandardCharsets
+import java.nio.file.FileSystems
+import java.nio.file.Files
+import java.nio.file.Paths
+import java.nio.file.StandardOpenOption
 import java.time.format.DateTimeFormatter
 
-buildscript {
-    ext {
+buildscript{
+    ext{
         mindustryVersion = 'v135'
 
         parserVersion = '3.22.1'
@@ -10,19 +15,19 @@ buildscript {
 
         modCoreVersion = "8dbf4593d2e"
 
-        kotlinVersion="1.5.21"
+        kotlinVersion = "1.5.21"
 
         sdkRoot = System.getenv("ANDROID_HOME") ?: System.getenv("ANDROID_SDK_ROOT")
     }
-    repositories {
+    repositories{
         mavenLocal()
         mavenCentral()
         google()
-        maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
-        maven { url 'https://jitpack.io' }
+        maven{ url "https://oss.sonatype.org/content/repositories/snapshots/" }
+        maven{ url 'https://jitpack.io' }
     }
 
-    dependencies {
+    dependencies{
         classpath "com.github.Anuken.Arc:arc-core:$mindustryVersion"
         classpath "com.github.Anuken.Mindustry:core:$mindustryVersion"
         classpath "com.github.Anuken.Mindustry:tools:$mindustryVersion"
@@ -33,19 +38,19 @@ buildscript {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
     }
 }
-plugins {
+plugins{
     id 'org.jetbrains.kotlin.jvm' version "$kotlinVersion"
     id "org.jetbrains.kotlin.kapt" version "$kotlinVersion"
 }
 apply plugin: "kotlin"
 version '1.0'
-allprojects {
+allprojects{
     apply plugin: "kotlin"
     apply plugin: 'maven-publish'
 
     group = "com.github.Sunset"
 
-    ext {
+    ext{
         arcModule = { String name ->
             //skip to last submodule
             if (name.contains(':')) name = name.split(':').last()
@@ -58,7 +63,7 @@ allprojects {
             def files = new File(rootDir, "annotations/src/main/java")
             files.eachFileRecurse(
                     groovy.io.FileType.FILES
-            ) { file ->
+            ){ file ->
                 if (file.name.endsWith(".java") && (file.text.contains(" extends ModBaseProcessor") || (file.text.contains(" extends AbstractProcessor") && !file.text.contains("abstract class")))) {
                     text.append(file.path.substring(files.path.length() + 1)).append("\n")
                 }
@@ -66,14 +71,34 @@ allprojects {
 
             processorFile.text = text.toString().replace(".java", "").replace("/", ".").replace("\\", ".")
         }
+        addModInfoFile={File archiveFile->
+
+            def time = LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:MM DD.MM.YYYY"));
+            String suffix = project.hasProperty("commit") ? " commit_${commit}" : " local_${time}"
+            println "Version suffix${suffix}"
+            def reader = new BufferedReader(new FileReader(new File(rootDir, "mod.hjson")))
+            // now append some extra content
+            def jarFile = FileSystems.newFileSystem(java.net.URI.create("jar:"+archiveFile.toURI()),new HashMap<>())
+            def modInfoFile = jarFile.getPath("mod.hjson");
+            try (Writer writer = Files.newBufferedWriter(modInfoFile, StandardCharsets.UTF_8, StandardOpenOption.CREATE)) {
+                reader.lines().forEach(s -> {
+                    writer.write(s)
+                    if (s.startsWith("version: ")) writer.write(suffix);
+                    writer.write('\n')
+                })
+            }
+            // close
+            reader.close()
+            jarFile.close()
+        }
     }
-    repositories {
+    repositories{
         mavenLocal()
         google()
         mavenCentral()
-        maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
-        maven { url "https://oss.sonatype.org/content/repositories/releases/" }
-        maven { url 'https://jitpack.io' }
+        maven{ url "https://oss.sonatype.org/content/repositories/snapshots/" }
+        maven{ url "https://oss.sonatype.org/content/repositories/releases/" }
+        maven{ url 'https://jitpack.io' }
     }
 
     compileKotlin{
@@ -81,7 +106,7 @@ allprojects {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
 
-    tasks.withType(JavaCompile) {
+    tasks.withType(JavaCompile){
         targetCompatibility = 8
         sourceCompatibility = JavaVersion.VERSION_16
         options.encoding = "UTF-8"
@@ -100,15 +125,15 @@ allprojects {
     }
 }
 
-dependencies {
+dependencies{
     implementation "com.github.Zelaux.ZelauxModCore:core:$modCoreVersion"
     implementation "com.github.Zelaux.ZelauxModCore:plugins:$modCoreVersion"
     implementation "com.github.Zelaux:AdvancedContentInfo:$aciVersion"
     implementation "com.github.Zelaux.GasLibrary:core:a55948ec113566f3a3a4a1f1508d6f9f07161157"
 }
 
-configure(project(":annotations")) {
-    tasks.withType(JavaCompile) {
+configure(project(":annotations")){
+    tasks.withType(JavaCompile){
         targetCompatibility = 8
         sourceCompatibility = 8
         options.fork = true
@@ -116,53 +141,53 @@ configure(project(":annotations")) {
 }
 
 //compile with java 8 compatibility for everything except the annotation project
-configure(subprojects - project(":annotations")) {
-    tasks.withType(JavaCompile) {
+configure(subprojects - project(":annotations")){
+    tasks.withType(JavaCompile){
         options.compilerArgs.addAll(['--release', '8'])
     }
 
-    tasks.withType(Javadoc) {
-        options {
+    tasks.withType(Javadoc){
+        options{
             addStringOption('Xdoclint:none', '-quiet')
             addStringOption('-release', '16')
         }
     }
 }
 
-project(":core") {
+project(":core"){
     apply plugin: "java-library"
     apply plugin: "kotlin"
     apply plugin: "kotlin-kapt"
 
-    kapt {
-        javacOptions {
+    kapt{
+        javacOptions{
             option("-source", "16")
             option("-target", "1.8")
         }
     }
 
     compileJava.options.fork = true
-    task preGen {
-        outputs.upToDateWhen { false }
+    task preGen{
+        outputs.upToDateWhen{ false }
         writeProcessors()
     }
 
-    task sourcesJar(type: Jar, dependsOn: classes) {
+    task sourcesJar(type: Jar, dependsOn: classes){
         archiveClassifier = 'sources'
         from sourceSets.main.allSource
     }
 
-    task assetsJar(type: Jar, dependsOn: ":tools:pack") {
+    task assetsJar(type: Jar, dependsOn: ":tools:pack"){
         archiveClassifier = 'assets'
-        from files("assets") {
+        from files("assets"){
             exclude "config", "cache", "music", "sounds"
         }
     }
-    artifacts {
+    artifacts{
         archives sourcesJar
         archives assetsJar
     }
-    dependencies {
+    dependencies{
         compileJava.dependsOn(preGen)
 
         compileOnly "org.lz4:lz4-java:1.7.1"
@@ -194,21 +219,21 @@ project(":core") {
 
     }
 
-    afterEvaluate {
-        task mergedJavadoc(type: Javadoc) {
+    afterEvaluate{
+        task mergedJavadoc(type: Javadoc){
             if (true) return null;
             def blacklist = [project(":annotations")]
             if (findProject(":android") != null) {
                 blacklist += project(":android")
             }
 
-            source rootProject.subprojects.collect { project ->
+            source rootProject.subprojects.collect{ project ->
                 if (!blacklist.contains(project) && project.hasProperty("sourceSets")) {
                     return project.sourceSets.main.allJava
                 }
             }
 
-            classpath = files(rootProject.subprojects.collect { project ->
+            classpath = files(rootProject.subprojects.collect{ project ->
                 if (!blacklist.contains(project) && project.hasProperty("sourceSets")) {
                     return project.sourceSets.main.compileClasspath
                 }
@@ -216,16 +241,16 @@ project(":core") {
             destinationDir = new File(buildDir, 'javadoc')
         }
     }
-    jar {
+    jar{
         exclude("sunset/entities/comp/**")
         exclude("sunset/codegen/**")
     }
 }
-project(":tests") {
+project(":tests"){
     apply plugin: "java"
     compileJava.options.fork = true
 
-    dependencies {
+    dependencies{
         testImplementation project(":core")
         testImplementation "com.github.Anuken.Arc:arc-core:$mindustryVersion"
         testImplementation "com.github.Anuken.Mindustry:core:$mindustryVersion"
@@ -240,20 +265,20 @@ project(":tests") {
 //        compileOnly "com.github.Zelaux.ZelauxModCore:annotations:$modCoreVersion"
     }
 
-    test {
+    test{
         //fork every test so mods don't interact with each other
         forkEvery = 1
         useJUnitPlatform()
         workingDir = new File("../core/assets")
-        testLogging {
+        testLogging{
             exceptionFormat = 'full'
             showStandardStreams = true
         }
     }
 }
-project(":tools") {
+project(":tools"){
     apply plugin: "java"
-    dependencies {
+    dependencies{
         implementation fileTree(dir: 'libs', include: ['*.jar'])
         implementation 'commons-io:commons-io:2.5'
 
@@ -273,9 +298,9 @@ project(":tools") {
         implementation "com.github.Anuken.Arc:packer:$mindustryVersion"
     }
 }
-project(":annotations") {
+project(":annotations"){
     apply plugin: "java-library"
-    dependencies {
+    dependencies{
         implementation 'com.squareup:javapoet:1.12.1'
         implementation "com.github.javaparser:javaparser-symbol-solver-core:$parserVersion"
 
@@ -296,17 +321,17 @@ task jarAndroid{
     dependsOn "jar"
 
     doLast{
-        if(!sdkRoot || !new File(sdkRoot).exists()) throw new GradleException("No valid Android SDK found. Ensure that ANDROID_HOME is set to your Android SDK directory.");
+        if (!sdkRoot || !new File(sdkRoot).exists()) throw new GradleException("No valid Android SDK found. Ensure that ANDROID_HOME is set to your Android SDK directory.");
 
         def platformRoot =
-                new File("$sdkRoot/platforms/").listFiles().sort().reverse().find{ f -> new File(f, "android.jar").exists()}
+                new File("$sdkRoot/platforms/").listFiles().sort().reverse().find{ f -> new File(f, "android.jar").exists() }
 
-        if(!platformRoot) throw new GradleException("No android.jar found. Ensure that you have an Android platform installed.")
+        if (!platformRoot) throw new GradleException("No android.jar found. Ensure that you have an Android platform installed.")
 
         //collect dependencies needed for desugaring
         def dependencies = (
                 project(":core").configurations.compileClasspath.asList() +
-                project(":core").configurations.runtimeClasspath.asList() +
+                        project(":core").configurations.runtimeClasspath.asList() +
                         [new File(platformRoot, "android.jar")]
         ).collect{ "--classpath $it.path" }.join(" ")
 
@@ -315,43 +340,48 @@ task jarAndroid{
                 .execute(null, new File("$buildDir/libs")).waitForProcessOutput(System.out, System.err)
     }
 }
-jar {
+jar{
     dependsOn "core:jar"
+//    dependsOn "mark"
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     archiveFileName = "${project.archivesBaseName}Desktop.jar"
-    from {
+    from{
 //        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
-        project(":core").fileTree("build/libs/core.jar").collect { it.isDirectory() ? it : zipTree(it) }
+        project(":core").fileTree("build/libs/core.jar").collect{ it.isDirectory() ? it : zipTree(it) }
     }
-    from {
-        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    from{
+        configurations.runtimeClasspath.collect{ it.isDirectory() ? it : zipTree(it) }
 //        project(":core").fileTree("build/libs/core.jar").collect { it.isDirectory() ? it : zipTree(it) }
     }
 
-    from(rootDir) {
-        include "mod.hjson"
-        include "mod.json"
+
+    from(rootDir){
+//        include "mod.hjson"
+//        include "mod.json"
         include "icon.png"
     }
 
-    from("core/assets/") {
+    from("core/assets/"){
         include "**"
+    }
+    doLast{
+        addModInfoFile(archiveFile.get().asFile)
     }
 }
 
-task deploy(type: Jar) {
+task deploy(type: Jar){
     dependsOn jarAndroid
     dependsOn jar
     archiveFileName = "${project.archivesBaseName}.jar"
 
-    from {
+    from{
         [zipTree("$buildDir/libs/${project.archivesBaseName}Desktop.jar"),
          zipTree("$buildDir/libs/${project.archivesBaseName}Android.jar")]
     }
 
-    doLast {
-        delete { delete "$buildDir/libs/${project.archivesBaseName}Desktop.jar" }
-        delete { delete "$buildDir/libs/${project.archivesBaseName}Android.jar" }
+    doLast{
+        delete{ delete "$buildDir/libs/${project.archivesBaseName}Desktop.jar" }
+        delete{ delete "$buildDir/libs/${project.archivesBaseName}Android.jar" }
     }
 }
 
@@ -380,22 +410,22 @@ def getdatadir() { //Returns Mindustry data directory path
     return ret
 }
 
-task mjar() {
+task mjar(){
     dependsOn "jar"
-    doFirst { }
-    ext {
+    doFirst{}
+    ext{
         acopy = { String intoPath ->
-            delete {
+            delete{
                 delete "${intoPath}/${project.archivesBaseName}Desktop.jar"
             }
-            copy {
+            copy{
                 from "$buildDir/libs/${project.archivesBaseName}Desktop.jar"
                 into intoPath
             }
             println "Moved to ${intoPath}"
         }
     }
-    doLast {
+    doLast{
         def modsDirectories = [];
         def file = new File(rootDir, "modsDirectories.txt");
 
@@ -417,36 +447,17 @@ task mjar() {
     }
 }
 
-task run {
+task run{
     dependsOn mjar
-    doLast {
+    doLast{
         def gamePath = temporaryDir.absolutePath + "\\Mindustry$mindustryVersion" + ".jar"
         def gameUrl = "https://github.com/Anuken/Mindustry/releases/download/$mindustryVersion" + "/Mindustry.jar"
         def gameFile = new File(gamePath)
         if (!gameFile.exists()) {
             println "Downloading Mindustry $mindustryVersion" + " to ${gamePath}"
-            new URL(gameUrl).withInputStream { i -> gameFile.withOutputStream { it << i } }
+            new URL(gameUrl).withInputStream{ i -> gameFile.withOutputStream{ it << i } }
             println "Done"
         }
-        javaexec { classpath = files(gamePath) }
+        javaexec{ classpath = files(gamePath) }
     }
 }
-
-task mark {
-    def time = LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:MM dd.MM.YYYY"));
-    String suffix = project.hasProperty("commit") ? " commit_${commit}" : " local_${time}"
-    println "Version suffix${suffix}"
-    def reader = new BufferedReader(new FileReader(new File(rootDir, "mod_raw.hjson")))
-    def to = new File(rootDir, "mod.hjson")
-    if(to.exists()) to.delete()
-    def writer = new PrintWriter("mod.hjson")
-    reader.lines().forEach(s -> {
-        if(s.startsWith("version: ")) s += suffix;
-        writer.println(s)
-    })
-    writer.close()
-    reader.close()
-}
-
-jar.dependsOn "mark"
-//task buildDex dependsOn "build", "dexify"

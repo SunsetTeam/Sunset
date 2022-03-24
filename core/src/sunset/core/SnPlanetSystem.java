@@ -32,11 +32,10 @@ public class SnPlanetSystem{
 
     private static void checkChanges(){
         updatePlanet(snStar);
-
         PlanetParams state = Vars.ui.planet.state;
         if(state.solarSystem == snStar){
             if(state.planet.minfo.mod != modInfo){
-                state.solarSystem = prevStar;
+                state.solarSystem = state.planet.solarSystem;
                 updateDialog();
             }
         }else{
