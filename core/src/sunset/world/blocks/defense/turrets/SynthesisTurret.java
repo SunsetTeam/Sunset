@@ -22,6 +22,7 @@ import mindustry.ui.Bar;
 import mindustry.world.blocks.defense.turrets.ItemTurret;
 import mindustry.world.consumers.ConsumeLiquidBase;
 import mindustry.world.consumers.ConsumeType;
+import mindustry.world.meta.Stat;
 import mindustry.world.meta.StatUnit;
 import mindustry.world.meta.StatValues;
 import sunset.SnVars;
@@ -68,28 +69,28 @@ public class SynthesisTurret extends ItemTurret {
     @Override
     public void setStats() {
         //general
-        aStats.add(SnStat.blockHealth, health, StatUnit.none);
-        aStats.add(SnStat.blockSize, "@x@", size, size);
-        aStats.add(SnStat.buildTime, buildCost / 60, StatUnit.seconds);
-        aStats.add(SnStat.blockBuildCost, StatValues.items(false, requirements));
+        aStats.add(Stat.health, health, StatUnit.none);
+        aStats.add(Stat.size, "@x@", size, size);
+        aStats.add(Stat.buildTime, buildCost / 60, StatUnit.seconds);
+        aStats.add(Stat.buildCost, StatValues.items(false, requirements));
         //function
-        aStats.add(SnStat.shootRange, range / tilesize, StatUnit.blocks);
+        aStats.add(Stat.shootRange, range / tilesize, StatUnit.blocks);
         aStats.add(SnStat.minimalRange, minRange / tilesize, StatUnit.blocks);
-        aStats.add(SnStat.inaccuracy, (int)inaccuracy, StatUnit.degrees);
-        aStats.add(SnStat.reload, 60f / (reloadTime) * (alternate ? 1 : shots), StatUnit.perSecond);
-        aStats.add(SnStat.targetsAir, targetAir);
-        aStats.add(SnStat.targetsGround, targetGround);
-        aStats.add(SnStat.ammoUse, ammoPerShot, StatUnit.perShot);
-        aStats.add(SnStat.ammo, StatValues.ammo(ammoTypes));
+        aStats.add(Stat.inaccuracy, (int)inaccuracy, StatUnit.degrees);
+        aStats.add(Stat.reload, 60f / (reloadTime) * (alternate ? 1 : shots), StatUnit.perSecond);
+        aStats.add(Stat.targetsAir, targetAir);
+        aStats.add(Stat.targetsGround, targetGround);
+        aStats.add(Stat.ammoUse, ammoPerShot, StatUnit.perShot);
+        aStats.add(Stat.ammo, StatValues.ammo(ammoTypes));
         //armor
         aStats.add(SnStat.primaryArmor, primaryArmor, StatUnit.none);
         aStats.add(SnStat.secondaryArmor, secondaryArmor, StatUnit.none);
         //power
-        aStats.add(SnStat.powerUse, powerUse * 60, StatUnit.powerSecond);
+        aStats.add(Stat.powerUse, powerUse * 60, StatUnit.powerSecond);
         //liquids
-        aStats.add(SnStat.liquidCapacity, liquidCapacity, StatUnit.liquidUnits);
+        aStats.add(Stat.liquidCapacity, liquidCapacity, StatUnit.liquidUnits);
         //optional
-        aStats.add(SnStat.booster, StatValues.boosters(reloadTime, consumes.<ConsumeLiquidBase>get(ConsumeType.liquid).amount, coolantMultiplier, true, l -> consumes.liquidfilters.get(l.id)));
+        aStats.add(Stat.booster, StatValues.boosters(reloadTime, consumes.<ConsumeLiquidBase>get(ConsumeType.liquid).amount, coolantMultiplier, true, l -> consumes.liquidfilters.get(l.id)));
 
         //super.setStats();
         //aStats.add(SnStat.primaryArmor, primaryArmor, StatUnit.none);

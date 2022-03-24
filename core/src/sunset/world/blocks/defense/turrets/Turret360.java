@@ -8,11 +8,9 @@ import mindustry.entities.bullet.BulletType;
 import mindustry.ui.Bar;
 import mindustry.world.blocks.defense.turrets.ItemTurret;
 import mindustry.world.meta.Stat;
-import mindustry.world.meta.StatValues;
 import mma.graphics.ADrawf;
 import sunset.SnVars;
 import sunset.utils.Utils;
-import sunset.world.meta.SnStat;
 import sunset.world.meta.SnStatValues;
 
 /** Turret that shoots 360 degrees and rotates optionally.
@@ -37,9 +35,9 @@ public class Turret360 extends ItemTurret {
     }
 
     @Override
-    public void setStats(){
+    public void setStats() {
         super.setStats();
-        aStats.add(SnStat.ammo, SnStatValues.powerBullet(ObjectMap.of(this, powerBullet), 0, chargeShots));
+        aStats.add(Stat.ammo, SnStatValues.powerBullet(ObjectMap.of(this, powerBullet), 0, chargeShots));
     }
 
     @Override
