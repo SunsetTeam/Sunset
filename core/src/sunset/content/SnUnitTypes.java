@@ -18,6 +18,7 @@ import mindustry.entities.units.AIController;
 import mindustry.gen.*;
 import mindustry.graphics.Layer;
 import mindustry.graphics.Pal;
+import mindustry.type.ItemStack;
 import mindustry.type.StatusEffect;
 import mindustry.type.UnitType;
 import mindustry.type.Weapon;
@@ -26,8 +27,12 @@ import mindustry.type.ammo.PowerAmmoType;
 import mindustry.type.weapons.PointDefenseWeapon;
 import sunset.ai.*;
 import sunset.ai.weapon.ExtinguishWeaponAI;
+import sunset.content.blocks.SnCrafting;
+import sunset.content.blocks.SnDistribution;
+import sunset.content.blocks.SnUnitBlocks;
 import sunset.entities.abilities.EffectLowHPAbility;
 import sunset.entities.abilities.StatusFieldAbility;
+import sunset.entities.abilities.OverdriveAbility;
 import sunset.entities.bullet.BerserkLaserBulletType;
 import sunset.entities.bullet.SpawnArtilleryBulletType;
 import sunset.gen.Deliverc;
@@ -41,6 +46,9 @@ import sunset.type.unitTypes.*;
 import sunset.type.weapons.ChainWeapon;
 import sunset.type.weapons.SnWeapon;
 import sunset.type.weapons.WeaponExt;
+import sunset.utils.UnitsUtils;
+import static sunset.utils.UnitsUtils.addUnitGroup;
+import static mindustry.type.ItemStack.with;
 
 public class SnUnitTypes implements ContentList{
     public static UnitType
@@ -49,9 +57,9 @@ public class SnUnitTypes implements ContentList{
     bastion, arahnus, buffedCrawler,
 
     //attack copters
-    wind, thunder, nadir, halo, parhelion, mudflow,
+    wind, thunder, nadir, halo, mudflow, parhelion,
     //buffers
-    bufferT1, satellite, planet, star, galaxy, universe,
+    comet, satellite, planet, star, galaxy, universe,
     //ground
     mirage, vision, illusion, soothSayer, seer, abyssEye,
     wheelT1, wheelT2, wheelT3, wheelT4, wheelT5, wheelT6,
@@ -67,10 +75,16 @@ public class SnUnitTypes implements ContentList{
     //other
     @EntityDef({Unitc.class, Deliverc.class})
     public static UnitType courier;
-    //@EntityDef({Unitc.class, FireFighterc.class})
-    public static UnitType comet;
     @EntityDef({Unitc.class, Segmentc.class})
     public static UnitType snake1;
+
+    void setupConstruction() {
+        UnitsUtils.init();
+        addUnitGroup(SnUnitBlocks.upgradedAirFactory, 20 * 60, with(Items.silicon, 30, SnItems.naturite, 20), 
+                     comet, satellite, planet, star, galaxy, universe);
+        addUnitGroup(SnUnitBlocks.upgradedAirFactory, 15 * 60, with(SnItems.fors, 15, Items.silicon, 20),
+                     wind, thunder, nadir, halo, mudflow, parhelion);
+    }
 
     @Override
     public void load() {
@@ -160,7 +174,6 @@ public class SnUnitTypes implements ContentList{
             public boolean unlockedNowHost() { return false; }*/
         };
         arahnus = new UnitTypeExt("arahnus"){{
-            //TODO: create actual stats. This one copied from "abyssEye"
             health = 61000;
             speed = 0.6f;
             rotateSpeed = 1.5f;
@@ -1116,7 +1129,38 @@ public class SnUnitTypes implements ContentList{
         }};
         //endregion copters
         //region buffers
-        //there should be a bufferT1 here
+        comet = new UnitTypeExt("comet") {{
+            health = 150;
+            hitSize = 10;
+            speed = 3.1f;
+            accel = 0.15f;
+            drag = 0.1f;
+
+            flying = true;
+            circleTarget = false;
+            range = 75;
+
+            itemCapacity = 20;
+            commandLimit = 4;
+            ammoType = new LiquidAmmoType(Liquids.water, 1);
+
+            defaultController = ExtinguishAI::wrapper;
+
+            constructor = UnitEntity::create;
+
+            weapons.add(new WeaponExt("sprite") {{
+                ai = new ExtinguishWeaponAI();
+                rotate = true;
+                mirror = false;
+                x = 0;
+                top = true;
+                inaccuracy = 4;
+                alternate = false;
+                reload = 2.5f;
+                shootSound = Sounds.spray;
+                bullet = SnBullets.cometWaterShot;
+            }});
+        }};
         satellite = new UnitTypeExt("satellite") {{
             health = 470;
             hitSize = 17;
@@ -1136,8 +1180,10 @@ public class SnUnitTypes implements ContentList{
             constructor = UnitEntity::create;
 
             weapons.add(new ChainWeapon("satellite") {{
-                damageTick = 0.3f;
+                damageTick = 0f;
                 healTick = 0.8f;
+                buildingBuff = 0.5f;
+
                 alternate = false;
                 mirror = false;
                 rotate = false;
@@ -1168,7 +1214,8 @@ public class SnUnitTypes implements ContentList{
             weapons.add(new ChainWeapon("planet") {{
                 damageTick = 0.9f;
                 healTick = 2.6f;
-                maxChainLength = 8;
+                buildingBuff = 1f;
+                maxChainLength = 3;
                 alternate = false;
                 mirror = false;
                 rotate = false;
@@ -1198,7 +1245,7 @@ public class SnUnitTypes implements ContentList{
 
             constructor = UnitEntity::create;
 
-            abilities.add(new StatusFieldAbility(SnStatusEffects.starBuff, StatusEffects.none, 180, 8 * 24));
+            abilities.add(new OverdriveAbility(0.75f, 8 * 60, 13 * Vars.tilesize));
 
             weapons.add(new WeaponExt("star-gun") {{
                 x = 0;
@@ -1214,7 +1261,8 @@ public class SnUnitTypes implements ContentList{
             }});
             weapons.add(new ChainWeapon("galaxy-weak") {{
                 damageTick = 0f;
-                healTick = 6f;
+                buildingBuff = 0f;
+                healTick = 6.5f;
                 maxChainLength = 3;
                 alternate = false;
                 mirror = true;
@@ -1627,39 +1675,6 @@ public class SnUnitTypes implements ContentList{
             defaultController = DeliverAI::wrapper;
             //constructor = UnitEntity::create;
         }};
-        //comet = new UncontrollableUnitType("comet"){{
-        comet = new UnitTypeExt("comet") {{
-            health = 150;
-            hitSize = 10;
-            speed = 3.1f;
-            accel = 0.15f;
-            drag = 0.1f;
-
-            flying = true;
-            circleTarget = false;
-            range = 75;
-
-            itemCapacity = 20;
-            commandLimit = 4;
-            ammoType = new LiquidAmmoType(Liquids.water, 1);
-
-            defaultController = ExtinguishAI::wrapper;
-
-            constructor = UnitEntity::create;
-
-            weapons.add(new WeaponExt("sprite") {{
-                ai = new ExtinguishWeaponAI();
-                rotate = true;
-                mirror = false;
-                x = 0;
-                top = true;
-                inaccuracy = 4;
-                alternate = false;
-                reload = 2.5f;
-                shootSound = Sounds.spray;
-                bullet = SnBullets.cometWaterShot;
-            }});
-        }};
         //region snake
         snake1 = new SegmentUnitType("snake1"){{
             lengthSnake = 5;
@@ -1793,5 +1808,6 @@ public class SnUnitTypes implements ContentList{
         };
 
         //endregion mod-units
+        setupConstruction();
     }
 }

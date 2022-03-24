@@ -28,19 +28,12 @@ public class SnUnitBlocks implements ContentList {
         //region factories
         upgradedAirFactory = new UnitFactory("upgraded-air-factory") {{
             requirements(Category.units, with(SnItems.fors, 80, Items.copper, 70));
-            plans = Seq.with(
-                    new UnitPlan(SnUnitTypes.wind, 70f * 15, with(SnItems.fors, 15, Items.silicon, 20))
-//                    new UnitPlan(SnUnitTypes.comet, 60f * 40, with(Items.silicon, 30, SnItems.naturite, 20))
-            );
             size = 3;
             consumes.power(2.5f);
         }};
 
         upgradedGroundFactory = new UnitFactory("upgraded-ground-factory") {{
             requirements(Category.units, with(SnItems.fors, 80, Items.copper, 70, Items.lead, 65));
-            plans = Seq.with(
-                    new UnitPlan(SnUnitTypes.mirage, 75f * 15, with(Items.silicon, 20, SnItems.fors, 15))
-            );
             size = 3;
             consumes.power(2.5f);
         }};
@@ -54,12 +47,6 @@ public class SnUnitBlocks implements ContentList {
             consumes.items(with(Items.silicon, 40, SnItems.naturite, 50));
 
             constructTime = 65f * 10f;
-
-            upgrades.addAll(
-                    new UnitType[]{SnUnitTypes.wind, SnUnitTypes.thunder},
-//                    new UnitType[]{SnUnitTypes.comet, SnUnitTypes.satelite},
-                    new UnitType[]{SnUnitTypes.mirage, SnUnitTypes.vision}
-            );
         }};
 
         upgradedMultiplicativeReconstructor = new Reconstructor("upgraded-multiplicative-reconstructor") {{
@@ -70,11 +57,6 @@ public class SnUnitBlocks implements ContentList {
             consumes.items(with(Items.silicon, 130, SnItems.nobium, 90, Items.metaglass, 40));
 
             constructTime = 65f * 30f;
-
-            upgrades.addAll(
-                    new UnitType[]{SnUnitTypes.thunder, SnUnitTypes.nadir},
-                    new UnitType[]{SnUnitTypes.satellite, SnUnitTypes.planet}
-            );
         }};
 
 
@@ -89,12 +71,6 @@ public class SnUnitBlocks implements ContentList {
 
             constructTime = 65f * 60f * 1.5f;
             liquidCapacity = 100f;
-
-
-            upgrades.addAll(
-                    new UnitType[]{SnUnitTypes.nadir, SnUnitTypes.halo},
-                    new UnitType[]{SnUnitTypes.planet, SnUnitTypes.star}
-            );
         }};
 
         upgradedTetrativeReconstructor = new Reconstructor("upgraded-tetrative-reconstructor") {{
@@ -108,12 +84,6 @@ public class SnUnitBlocks implements ContentList {
 
             constructTime = 65f * 65f * 4;
             liquidCapacity = 220f;
-
-
-            upgrades.addAll(
-                    new UnitType[]{SnUnitTypes.halo, SnUnitTypes.mudflow},
-                    new UnitType[]{SnUnitTypes.star, SnUnitTypes.galaxy}
-            );
         }};
         //endregion reconstructors
     }
