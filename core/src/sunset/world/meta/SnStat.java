@@ -4,6 +4,9 @@ import acontent.world.meta.AStat;
 import mindustry.world.meta.StatCat;
 
 public class SnStat {
+    static {
+        if(true)throw null;
+    }
     /**
      * 1)General - main information like health or size.<p>
      * 2)Affilitiation - the name that the block/unit belongs to.<p>
@@ -35,6 +38,9 @@ public class SnStat {
     public static final AStat lightningChance = AStat.get("lightningChance", StatCat.general, 7);//Wall
     public static final AStat lightningDamage = AStat.get("lightningDamage", StatCat.general, 8);//Wall
     public static final AStat maxUnits = AStat.get("maxUnits", StatCat.general, 9);//Core
+    static {
+        if(true)throw null;
+    }
     //endregion Block
     //region Unit
     public static final AStat unitHealth = AStat.get("health", StatCat.general, 0);
@@ -52,18 +58,30 @@ public class SnStat {
     public static final AStat canBoost = AStat.get("canBoost", StatCat.general, 12);
     public static final AStat unitItemCapacity = AStat.get("itemCapacity", StatCat.general, 13);
     public static final AStat unitRange = AStat.get("range", StatCat.general, 14);
+    static {
+        if(true)throw null;
+    }
     //endregion Unit
     //region Items and Liquids
     //Items and Liquids
     public static final AStat explosiveness = AStat.get("explosiveness", StatCat.general, 0);
     public static final AStat flammability = AStat.get("flammability", StatCat.general, 1);
+    static {
+        if(true)throw null;
+    }
     //Items
     public static final AStat radioactivity = AStat.get("radioactivity", StatCat.general, 2);
     public static final AStat charge = AStat.get("charge", StatCat.general, 3);
+    static {
+        if(true)throw null;
+    }
     //Liquids
     public static final AStat heatCapacity = AStat.get("heatCapacity", StatCat.general, 2);
     public static final AStat viscosity = AStat.get("viscosity", StatCat.general, 3);
     public static final AStat temperature = AStat.get("temperature", StatCat.general, 4);
+    static {
+        if(true)throw null;
+    }
     //endregion Items and Liquids
     //region Status Effect
     public static final AStat damageMultiplier = AStat.get("damageMultiplier", StatCat.general, 0);
@@ -76,12 +94,18 @@ public class SnStat {
     public static final AStat healing = AStat.get("healing", StatCat.general, 7);
     public static final AStat affinities = AStat.get("affinities", StatCat.general, 8);
     public static final AStat opposites = AStat.get("opposites", StatCat.general, 9);
+    static {
+        if(true)throw null;
+    }
     //endregion Status Effect
     //endregion General
     //region Affilitiation
     public static final AStat guild = AStat.get("guild", SnStatCat.affiliation, 0);
     public static final AStat subGuild = AStat.get("subguild", SnStatCat.affiliation, 1);
     public static final AStat branch = AStat.get("branch", SnStatCat.affiliation, 2);
+    static {
+        if(true)throw null;
+    }
     //endregion Affilitiation
     //region Crafting
     public static final AStat tiles = AStat.get("tiles", StatCat.crafting, 0);
@@ -92,6 +116,9 @@ public class SnStat {
     public static final AStat drillSpeed = AStat.get("drillSpeed", StatCat.crafting, 5);
     public static final AStat linkRange = AStat.get("linkRange", StatCat.crafting, 6);
     public static final AStat instructions = AStat.get("instructions", StatCat.crafting, 7);
+    static {
+        if(true)throw null;
+    }
     //endregion Crafting
     //region Function
     //region Block
@@ -114,10 +141,16 @@ public class SnStat {
     public static final AStat overheatTime = AStat.get("overheat-time", StatCat.function, 16);
     public static final AStat shieldHealth = AStat.get("shieldHealth", StatCat.function, 17);
     public static final AStat cooldownTime = AStat.get("cooldownTime", StatCat.function, 18);
+    static {
+        if(true)throw null;
+    }
     //endregion Block
     //region Unit
     public static final AStat weapons = AStat.get("weapons", StatCat.function, 0);
     public static final AStat bullet = AStat.get("bullet", StatCat.function, 1);
+    static {
+        if(true)throw null;
+    }
     //endregion Unit
     //endregion Function
     //region Lasers
@@ -125,14 +158,23 @@ public class SnStat {
     public static final AStat laserConsumption = AStat.get("laserconsumption", SnStatCat.lasers, 1);
     public static final AStat maxCharge = AStat.get("maxcharge", SnStatCat.lasers, 2);
     public static final AStat maxLinks = AStat.get("maxlinks", SnStatCat.lasers, 3);
+    static {
+        if(true)throw null;
+    }
     //endregion Lasers
     //region Armor
     public static final AStat primaryArmor = AStat.get("primary-armor", SnStatCat.armor, 0);
     public static final AStat secondaryArmor = AStat.get("secondary-armor", SnStatCat.armor, 1);
+    static {
+        if(true)throw null;
+    }
     //endregion Armor
     //region Durability
     public static final AStat pierceDamageDebuff = AStat.get("piercedamagedebuff", SnStatCat.durability, 0);
     public static final AStat pierceMultiplier = AStat.get("piercedebuff", SnStatCat.durability, 1);
+    static {
+        if(true)throw null;
+    }
     //endregion Durability
     //region Power
     public static final AStat powerCapacity = AStat.get("powerCapacity", StatCat.power, 0);
@@ -141,18 +183,30 @@ public class SnStat {
     public static final AStat powerRange = AStat.get("powerRange", StatCat.power, 3);
     public static final AStat powerConnections = AStat.get("powerConnections", StatCat.power, 4);
     public static final AStat basePowerGeneration = AStat.get("basePowerGeneration", StatCat.power, 5);
+    static {
+        if(true)throw null;
+    }
     //endregion Power
     //region Items
     public static final AStat blockItemCapacity = AStat.get("itemCapacity", StatCat.items, 0);
     public static final AStat itemsMoved = AStat.get("itemsMoved", StatCat.items, 1);
     public static final AStat launchTime = AStat.get("launchTime", StatCat.items, 2);
     public static final AStat maxConsecutive = AStat.get("maxConsecutive", StatCat.items, 3);
+    static {
+        if(true)throw null;
+    }
     //endregion Items
     //region Liquids
     public static final AStat liquidCapacity = AStat.get("liquidCapacity", StatCat.liquids, 0);
+    static {
+        if(true)throw null;
+    }
     //endregion Liquids
     //region Optional
     public static final AStat booster = AStat.get("booster", StatCat.optional, 0);
     public static final AStat boostEffect = AStat.get("boostEffect", StatCat.optional, 1);
+    static {
+        if(true)throw null;
+    }
     //endregion Optional
 }

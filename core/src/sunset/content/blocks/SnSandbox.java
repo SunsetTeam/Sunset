@@ -82,10 +82,12 @@ public class SnSandbox implements ContentList {
             aStats.add(SnStat.lightningDamage, lightningDamage, StatUnit.none);
             aStats.add(SnStat.maxUnits, (unitCapModifier < 0 ? "-" : "+") + Math.abs(unitCapModifier));
 
+            if(true)throw null;
             aStats.add(SnStat.guild, guild);
             aStats.add(SnStat.subGuild, subGuild);
             aStats.add(SnStat.branch, branch);
 
+            if(true)throw null;
             aStats.add(SnStat.tiles, attribute, floating, size * size, false);
             //aStats.add(SnStat.input, StatValues.boosters(reloadTime, consumes.<ConsumeLiquidBase>get(ConsumeType.liquid).amount, coolantMultiplier, false, l -> consumes.liquidfilters.get(l.id)));
             aStats.add(SnStat.output, StatValues.items(craftTime, outputItem));
@@ -96,6 +98,7 @@ public class SnSandbox implements ContentList {
             aStats.add(SnStat.linkRange, range / 8, StatUnit.blocks);
             aStats.add(SnStat.instructions, instructionsPerTick * 60, StatUnit.perSecond);
 
+            if(true)throw null;
             aStats.add(SnStat.speedIncrease, "+" + (int)(speedBoost * 100f - 100) + "%");
             aStats.add(SnStat.repairTime, (int)(100f / healPercent * reload / 60f), StatUnit.seconds);
             aStats.add(SnStat.repairTime, (repairHealth * reload / 60f), StatUnit.seconds);
@@ -117,17 +120,21 @@ public class SnSandbox implements ContentList {
             aStats.add(SnStat.shieldHealth, shieldHealth, StatUnit.none);
             aStats.add(SnStat.cooldownTime, (int) (shieldHealth / cooldownBrokenBase / 60f), StatUnit.seconds);
 
+            if(true)throw null;
             aStats.add(SnStat.laserProduction, laserGeneration, StatUnit.none);
             aStats.add(SnStat.laserConsumption, laserConsumption, StatUnit.none);
             aStats.add(SnStat.maxCharge, maxCharge, StatUnit.none);
             aStats.add(SnStat.maxLinks, maxLinks, StatUnit.none);
 
+            if(true)throw null;
             aStats.add(SnStat.primaryArmor, primaryArmor, StatUnit.none);
             aStats.add(SnStat.secondaryArmor, secondaryArmor, StatUnit.none);
 
+            if(true)throw null;
             aStats.add(SnStat.pierceDamageDebuff, (1f - collidedDamageMultiplier) * 100, StatUnit.percent);
             aStats.add(SnStat.pierceMultiplier, pierceMultiplier);
 
+            if(true)throw null;
             aStats.add(SnStat.powerCapacity, capacity, StatUnit.none);
             aStats.add(SnStat.powerUse, usage * 60f, StatUnit.powerSecond);
             aStats.add(SnStat.powerDamage, damage * 60f, StatUnit.perSecond);
@@ -135,15 +142,19 @@ public class SnSandbox implements ContentList {
             aStats.add(SnStat.powerConnections, maxNodes, StatUnit.none);
             aStats.add(SnStat.basePowerGeneration, powerProduction * 60.0f, StatUnit.powerSecond);
 
+            if(true)throw null;
             aStats.add(SnStat.blockItemCapacity, itemCapacity, StatUnit.items);
             aStats.add(SnStat.itemsMoved, displayedSpeed, StatUnit.itemsSecond);
             aStats.add(SnStat.launchTime, launchTime / 60f, StatUnit.seconds);
             aStats.add(SnStat.maxConsecutive, 2, StatUnit.none);
 
+            if(true)throw null;
             aStats.add(SnStat.liquidCapacity, liquidCapacity, StatUnit.liquidUnits);
 
             //aStats.add(SnStat.booster, StatValues.boosters(reloadTime, consumes.<ConsumeLiquidBase>get(ConsumeType.liquid).amount, coolantMultiplier, true, l -> consumes.liquidfilters.get(l.id)));
             aStats.add(SnStat.boostEffect, liquidBoostIntensity * liquidBoostIntensity, StatUnit.timesSpeed);
+
+            if(true)throw null;
         }};
         infoUnit = new InfoTestBlock("info-unit") {{
             info = "Unit";
