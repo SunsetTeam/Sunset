@@ -62,6 +62,7 @@ object Utils {
         throw IllegalArgumentException()
     }
 
+    @JvmStatic
     fun findFireTarget(x: Float, y: Float, team: Team, range: Float, unitFilter: Boolf<Unit?>, buildingFilter: Boolf<Building?>?): Posc? {
         var target: Posc? = null
         target = team.data().units.min({ unit -> unitFilter[unit] && unit.isBurning() }) { un -> un.healthf() * un.healthf() * un.dst2(x, y) }
@@ -83,6 +84,7 @@ object Utils {
     /**
      * Определяет, горит ли юнит.
      */
+    @JvmStatic
     fun Unit.isBurning(): Boolean {
         // Считаем, что эффект - горение, если он наносит урон и
         // среди его противоположностей есть вода. Такой подход позволит
@@ -97,6 +99,7 @@ object Utils {
      * Возвращает один из огней на блоке или null, если блок не горит.
      */
     @JvmName("getBuildingFire")
+    @JvmStatic
     fun Building.getFire(): Fire? {
         val offsetx = -(block.size - 1) / 2
         val offsety = -(block.size - 1) / 2
@@ -111,6 +114,7 @@ object Utils {
     /**
      * Принудительно устанавливает юнита в меню.
      */
+    @JvmStatic
     fun setMenuUnit(type: UnitType) {
         if (Vars.headless) return
         try {
@@ -134,6 +138,7 @@ object Utils {
     /**
      * Ищет коллизию, игнорируя некоторые цели.
      */
+    @JvmStatic
     fun linecast(hitter: Bullet, x: Float, y: Float, angle: Float, length: Float, predicate: Boolf<Healthc?>): Healthc? {
         val tmpBuilding = arrayOf<Building?>(null)
         val tmpUnit = arrayOf<Unit?>(null)
@@ -181,6 +186,7 @@ object Utils {
     /**
      * for EMP
      */
+    @JvmStatic
     fun trueEachBlock(wx: Float, wy: Float, range: Float, cons: Cons<Building>) {
 //        Units.nearbyBuildings(wx, wy, range, cons);
         collidedBlocks.clear()
@@ -200,6 +206,7 @@ object Utils {
         }
     }
 
+    @JvmStatic
     fun allNearbyEnemiesOld(team: Team, x: Float, y: Float, radius: Float): Seq<Teamc> {
         val targets = Seq<Teamc>()
         Units.nearbyEnemies(team, x - radius, y - radius, radius * 2f, radius * 2f) { unit: Unit ->
@@ -215,6 +222,7 @@ object Utils {
         return targets
     }
 
+    @JvmStatic
     fun allNearbyEnemies(team: Team, x: Float, y: Float, radius: Float, cons: Cons<Healthc?>) {
         Units.nearbyEnemies(team, x - radius, y - radius, radius * 2f, radius * 2f) { unit: Unit ->
             if (unit.within(x, y, radius + unit.hitSize / 2f) && !unit.dead) {
@@ -228,6 +236,7 @@ object Utils {
         }
     }
 
+    @JvmStatic
     fun checkForTargets(team: Team, x: Float, y: Float, radius: Float): Boolean {
         var check = false
         Units.nearbyEnemies(team, x - radius, y - radius, radius * 2f, radius * 2f) { unit: Unit ->
@@ -246,11 +255,12 @@ object Utils {
     /**
      * For reload bar.
      */
-    @Suppress("UnusedImport")
+    @JvmStatic
     fun Float.stringsFixed(): String {
         return Strings.autoFixed(this, 2)
     }
 
+    @JvmStatic
     fun mountX(unit: Unit, mount: WeaponMount): Float {
         val weapon = mount.weapon
         val rotation = unit.rotation - 90
@@ -258,6 +268,7 @@ object Utils {
         return unit.x + Angles.trnsx(rotation, weapon.x, weapon.y) + Angles.trnsx(weaponRotation, 0f, -mount.recoil)
     }
 
+    @JvmStatic
     fun mountY(unit: Unit, mount: WeaponMount): Float {
         val weapon = mount.weapon
         val rotation = unit.rotation - 90
@@ -266,6 +277,7 @@ object Utils {
     }
 
     // Some powers below because Math.Pow is VERY slow
+    @JvmStatic
     fun Float.pow3() = this * this * this
 
     interface Targeting {
