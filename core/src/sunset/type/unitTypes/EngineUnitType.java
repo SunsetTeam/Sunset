@@ -15,6 +15,7 @@ public class EngineUnitType extends SnUnitType{
     public EngineUnitType(String name){
         super(name);
 
+        lowAltitude = true;
         constructor = UnitEntity::create;
     }
 
@@ -24,8 +25,8 @@ public class EngineUnitType extends SnUnitType{
 
     public void draw(Unit unit){
         super.draw(unit);
-        //float z = unit.elevation > 0.5f ? (lowAltitude ? Layer.flyingUnitLow : Layer.flyingUnit) : groundLayer + Mathf.clamp(hitSize / 4000f, 0, 0.01f);
-        //Draw.z(z);
+        float z = unit.elevation > 0.1f ? (lowAltitude ? Layer.flyingUnitLow : Layer.flyingUnit) : groundLayer + Mathf.clamp(hitSize / 4000f, 0, 0.01f);
+        Draw.z(z);
         if(engineSize > 0) drawEngine(unit);
         Draw.reset();
     }

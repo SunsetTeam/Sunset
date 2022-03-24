@@ -1734,10 +1734,10 @@ public class SnUnitTypes implements ContentList{
         light = new EngineUnitType("light") {{
             health = 140;
             hitSize = 15;
-            speed = 5.2f;
-            rotateSpeed = 5f;
+            speed = 4f;
+            rotateSpeed = 4f;
             accel = 0.04f;
-            drag = 0.016f;
+            drag = 0.01f;
             commandLimit = 5;
             flying = true;
             circleTarget = true;
@@ -1749,7 +1749,6 @@ public class SnUnitTypes implements ContentList{
                 reload = 13f;
                 rotate = true;
                 mirror = true;
-                top = true;
                 x = 4f;
                 y = -1f;
                 shootSound = Sounds.sap;
@@ -1757,7 +1756,7 @@ public class SnUnitTypes implements ContentList{
 
                 bullet = new SapBulletType(){{
                     sapStrength = 0.45f;
-                    length = 20f;
+                    length = 60f;
                     damage = 9f;
                     shootEffect = Fx.shootSmall;
                     hitColor = color = Color.valueOf("ffd37f");
