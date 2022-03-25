@@ -12,19 +12,27 @@ import mindustry.world.blocks.power.NuclearReactor;
 import sunset.content.SnItems;
 import sunset.world.blocks.power.LiquidGenerator;
 import sunset.world.blocks.power.ThermalGeneratorExt;
+import sunset.world.blocks.power.WindTurbine;
 
 import static mindustry.type.ItemStack.with;
 
 public class SnPower implements ContentList{
     public static Block
     //generators
-    oilGenerator, advrtgGenerator, advThermalGenerator,
+    windTurbine, oilGenerator, advrtgGenerator, advThermalGenerator,
 
     //reactors
     differentialReactor, planatriumReactor;
 
     @Override
     public void load(){
+        windTurbine = new WindTurbine("wind-turbine"){{
+            requirements(Category.power, with(Items.copper, 30, Items.silicon, 20));
+            size = 2;
+            powerProduction = 1f;
+        }};
+
+
         //region generators
         oilGenerator = new LiquidGenerator("oil-generator"){{
             requirements(Category.power, with(Items.copper, 110, Items.titanium, 70, Items.lead, 120, Items.silicon, 55, Items.metaglass, 70));

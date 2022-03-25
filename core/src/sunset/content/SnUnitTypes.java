@@ -1719,8 +1719,6 @@ public class SnUnitTypes implements ContentList{
                         engineX = 0f;
                         engineY = -10f;
                         engineSize = 3f;
-                        engineY1 = -10f;
-                        engineX1 = 3f;
                     }},
 
                     new Engine("small-engine") {{
@@ -1773,8 +1771,7 @@ public class SnUnitTypes implements ContentList{
                         engineX = -6.4f;
                         engineY = 3.4f;
                         engineSize = 1.8f;
-                        engineX1 = -5f;
-                        engineY1 = 4f;
+                        innerOffsetY = 6f;
                     }},
 
                     new Engine("small-engine") {{
@@ -1782,8 +1779,6 @@ public class SnUnitTypes implements ContentList{
                         engineX = 6.4f;
                         engineY = 3.4f;
                         engineSize = 1.8f;
-                        engineX1 = 7f;
-                        engineY1 = 4f;
                     }},
 
                     new Engine("small-engine") {{
@@ -1791,8 +1786,6 @@ public class SnUnitTypes implements ContentList{
                         engineX = -6.4f;
                         engineY = -6.4f;
                         engineSize = 1.8f;
-                        engineX1 = -5.3f;
-                        engineY1 = -5.3f;
                     }},
 
                     new Engine("small-engine") {{
@@ -1800,8 +1793,6 @@ public class SnUnitTypes implements ContentList{
                         engineX = 6.4f;
                         engineY = -6.4f;
                         engineSize = 1.8f;
-                        engineX1 = 7.3f;
-                        engineY1 = -5.3f;
                     }});
         }
         };
