@@ -16,7 +16,6 @@ import mindustry.graphics.MultiPacker;
 import mindustry.type.Category;
 import mindustry.type.Liquid;
 import mindustry.world.blocks.defense.turrets.BaseTurret;
-import mindustry.world.blocks.power.DynamicConsumePower;
 import mindustry.world.consumers.ConsumeLiquidFilter;
 import mindustry.world.meta.BuildVisibility;
 import mindustry.world.meta.Stat;
@@ -67,14 +66,10 @@ public class ChainLightningTurret extends BaseTurret {
 
     @Override
     public void init() {
-        super.init();
-
-        consumes.add(new DynamicConsumePower(build -> {
-            ChainLightningTurretBuild tile = build.as();
-            return powerUse * (tile.shouldShoot ? tile.getBoost() : 0);
-        }));
+        consumes.powerCond(powerUse, ChainLightningTurretBuild::isActive);
         consumes.add(new ConsumeLiquidFilter(liquid -> liquid.temperature <= 0.5f && liquid.flammability < 0.1f, liquidUse)).update(false).boost();
         liquidCapacity = liquidUse * 60f;
+        super.init();
     }
 
     @Override
@@ -101,8 +96,6 @@ public class ChainLightningTurret extends BaseTurret {
     @Override
     public void setStats() {
         super.setStats();
-        stats.remove(Stat.powerUse);
-        stats.add(Stat.powerUse, powerUse * 60f, StatUnit.powerSecond);
         stats.add(Stat.targetsAir, targetAir);
         stats.add(Stat.targetsGround, targetGround);
         stats.add(Stat.damage, damage * 60f, StatUnit.perSecond);
@@ -119,15 +112,15 @@ public class ChainLightningTurret extends BaseTurret {
      */
     public class ChainLightningTurretBuild extends BaseTurretBuild {
         public final Seq<Unit> units = new Seq<>();
-        public boolean shouldShoot = false;
+        private boolean haveTarget = false;
+        private boolean shouldShoot = false;
         private float liquidBoost = 1f;
 
         private long boostEndTime = 0;
         private float boost = 0f;
 
-        public float getBoost() {
-            return Time.millis() <= boostEndTime ? Math.max(boost, 1) : 1;
-        }
+        public boolean isActive() { return haveTarget; }
+        public float getBoost() { return Time.millis() <= boostEndTime ? Math.max(boost, 1) : 1; }
 
         @Override
         public void applyBoost(float intensity, float duration) {
@@ -154,7 +147,8 @@ public class ChainLightningTurret extends BaseTurret {
                 unit = Units.closestEnemy(team, unit.x, unit.y, r,
                         u -> !units.contains(u) && u.checkTarget(targetAir, targetGround));
             }
-            shouldShoot = !units.isEmpty() && Angles.within(angleTo(units.first()), rotation, shootCone);
+            haveTarget = !units.isEmpty();
+            shouldShoot = haveTarget && Angles.within(angleTo(units.first()), rotation, shootCone) && efficiency() > 0.01f;
             // damage
             if (shouldShoot) {
                 float[] d = {damage * efficiency() * liquidBoost};
@@ -179,10 +173,11 @@ public class ChainLightningTurret extends BaseTurret {
             Draw.rect(baseRegion, x, y);
             if (shouldShoot) {
                 Draw.z(Layer.bullet);
+                float ef = Math.min(1f, efficiency());
                 Draw.mixcol(laserColor, 0.85f + Mathf.absin(0.8f, 0.15f));
                 float unitX = units.get(0).x, unitY = units.get(0).y, nextUnitX = unitX, nextUnitY = unitY;
                 float lw = laserWidth * 0.8f + Mathf.absin(4f, laserWidth * 0.2f);
-                Drawf.laser(team, laser, laserEnd, x, y, unitX, unitY, lw);
+                Drawf.laser(team, laser, laserEnd, x, y, unitX, unitY, lw * ef);
                 for (int i = 0; i < units.size - 1; i++) {
                     unitX = nextUnitX;
                     unitY = nextUnitY;
