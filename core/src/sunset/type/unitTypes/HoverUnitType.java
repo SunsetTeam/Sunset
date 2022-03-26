@@ -34,6 +34,7 @@ public class HoverUnitType extends UnitTypeExt{
         float z = unit.elevation > 0.1f ? (lowAltitude ? Layer.flyingUnitLow : Layer.flyingUnit) : groundLayer + Mathf.clamp(hitSize / 4000f, 0, 0.01f);
         Draw.z(z);
         if(drawHover) drawHover(unit);
+        Draw.reset();
     }
 
     public void drawHover(Unit unit){
