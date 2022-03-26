@@ -14,7 +14,6 @@ import mindustry.graphics.Pal;
 public class HoverUnitType extends UnitTypeExt{
     public boolean drawHover = true;
     public Color hoverBloomColor = Pal.engine;
-    public float alpha = 0.5f;
 
     public TextureRegion hoverRegion;
 
@@ -44,7 +43,7 @@ public class HoverUnitType extends UnitTypeExt{
             Draw.rect(hoverRegion, unit.x, unit.y, unit.rotation - 90);
         } else {
             Draw.blend(Blending.additive);
-            Draw.color(hoverBloomColor, alpha);
+            Draw.color(hoverBloomColor, 0.5f);
             Draw.rect(hoverRegion, unit.x, unit.y, unit.rotation - 90);
             Draw.blend();
         }
