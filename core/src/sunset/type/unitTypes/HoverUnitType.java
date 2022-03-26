@@ -19,6 +19,7 @@ public class HoverUnitType extends UnitTypeExt{
     public TextureRegion hoverRegion;
 
     public void load() {
+        super.load();
         hoverRegion = Core.atlas.find(name + "-hover");
     }
 
@@ -31,7 +32,7 @@ public class HoverUnitType extends UnitTypeExt{
 
     public void draw(Unit unit){
         super.draw(unit);
-        float z = unit.elevation > 0.1f ? (lowAltitude ? Layer.flyingUnitLow : Layer.flyingUnit) : groundLayer + Mathf.clamp(hitSize / 4000f, 0, 0.01f);
+        float z = unit.elevation > 0.5f ? (lowAltitude ? Layer.flyingUnitLow : Layer.flyingUnit) : groundLayer + Mathf.clamp(hitSize / 4000f, 0, 0.01f);
         Draw.z(z);
         if(drawHover) drawHover(unit);
         Draw.reset();
