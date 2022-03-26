@@ -41,11 +41,11 @@ public class HoverUnitType extends UnitTypeExt{
     public void drawHover(Unit unit){
         Draw.rect(hoverRegion, unit.x, unit.y, unit.rotation - 90);
         if(Core.settings.getBool("bloom")){
-            Draw.rect(hoverRegion, unit.x, unit.y, unit.rotation);
+            Draw.rect(hoverRegion, unit.x, unit.y, unit.rotation - 90);
         } else {
             Draw.blend(Blending.additive);
             Draw.color(hoverBloomColor, alpha);
-            Draw.rect(hoverRegion, unit.x, unit.y, unit.rotation);
+            Draw.rect(hoverRegion, unit.x, unit.y, unit.rotation - 90);
             Draw.blend();
         }
         Draw.reset();
