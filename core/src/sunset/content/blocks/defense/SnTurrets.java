@@ -653,7 +653,6 @@ public class SnTurrets implements ContentList {
             recoilAmount = 8f;
             chargeEffects = 1;
             powerUse = 38f;
-            chargeEffect = SnFx.tridentCharge;
             category = Category.turret;
             buildVisibility = BuildVisibility.shown;
             shootType = new EnergySphereBulletType(2.5f, 290f) {{
@@ -668,12 +667,22 @@ public class SnTurrets implements ContentList {
                 lifetime = 480f;
                 frontColor = Pal.sap;
                 hitEffect = SnFx.tridentHit;
+                //draw
+                count = 15;
+                timeSclMin = 0.66f;
+                timeSclMax = 1.66f;
+                lenMin = 3f;
+                lenMax = 5f;
+                radMin = 2.5f;
+                radMax = 4f;
             }
                 @Override
                 public float continuousDamage() { return 720; };
             };
             reloadBar = false;
         }};
+        ((ModPowerTurret)trident).chargeEffect = SnFx.energyCharge((EnergySphereBulletType)((ModPowerTurret)trident).shootType, 210);
+            
         radius = new MinigunTurret("radius") {{
             requirements(Category.turret, with(Items.copper, 2500, Items.graphite, 1700, Items.surgeAlloy, 1450, Items.plastanium, 955, SnItems.enojie, 620));
             ammo(

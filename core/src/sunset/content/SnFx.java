@@ -21,6 +21,7 @@ import mindustry.entities.effect.MultiEffect;
 import mindustry.graphics.Drawf;
 import mindustry.graphics.Layer;
 import mindustry.graphics.Pal;
+import sunset.entities.bullet.EnergySphereBulletType;
 import sunset.graphics.Drawm;
 import sunset.graphics.SnPal;
 import sunset.utils.test.DrawFunc;
@@ -219,16 +220,6 @@ public class SnFx {
         alpha(Mathf.clamp(e.fin() * 3f));
 
         Fill.circle(e.x, e.y, e.fout());
-    }),
-
-    tridentCharge = new Effect(210, e -> {
-        Draw.mixcol(Pal.sap, 0.25f);
-        Draw.z(Layer.bullet);
-        float r = Mathf.degRad * e.rotation;
-        float cx = e.x - Mathf.cos(r) * 12f;
-        float cy = e.y - Mathf.sin(r) * 12f;
-        Drawm.drawTrident(cx, cy, e.id, e.fin());
-        Draw.mixcol();
     }),
 
     tridentHit = new Effect(30, e -> {
@@ -893,7 +884,17 @@ public class SnFx {
             }
         });
     }
-
+    public static Effect energyCharge(EnergySphereBulletType type, float lifetime) {
+        return new Effect(lifetime, e -> {
+            Draw.mixcol(Pal.sap, 0.25f);
+            Draw.z(Layer.bullet);
+            float r = Mathf.degRad * e.rotation;
+            float cx = e.x - Mathf.cos(r) * 12f;
+            float cy = e.y - Mathf.sin(r) * 12f;
+            Drawm.drawTrident(cx, cy, e.id, type.count, type.timeSclMin, type.timeSclMax, type.lenMin, type.lenMax, type.radMin, type.radMax, e.fin());
+            Draw.mixcol();
+        });
+    }
     //heavy art
     public static Effect laserArtFx(Color color) {
         return laserArtFx(color, 1, 100f, 35f, 6);

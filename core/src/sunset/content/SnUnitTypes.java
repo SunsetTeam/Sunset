@@ -1319,9 +1319,10 @@ public class SnUnitTypes implements ContentList{
                 x = 36;
                 y = -6;
                 reload = 3;
-                range = 420;
                 bullet = new BasicBulletType(0, 80){{
                     maxRange = 420;
+                    speed = 420;
+                    lifetime = 1;
                 }};
             }});
         }};
@@ -1366,6 +1367,17 @@ public class SnUnitTypes implements ContentList{
                 shootStatus = SnStatusEffects.universityLaserSlow;
                 rotateShooting = false;
                 bullet = SnBullets.universeLaserBullet;
+            }});
+
+            weapons.add(new WeaponExt("galaxy-segment") {{
+                alternate = true;
+                mirror = true;
+                rotate = true;
+                x = 24;
+                shootCone = 2f;
+                range = 210;
+                reload = 60;
+                bullet = SnBullets.universeEnergySphere;
             }});
         }};
         //endregion buffers

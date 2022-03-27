@@ -10,15 +10,7 @@ public class Drawm {
     private static Rand rand = new Rand();
     private static Vec2 pos = new Vec2();
 
-    public static void drawTrident(float atX, float atY, long seed, float globalScl) { 
-        draw(atX, atY, seed, 15, 
-             0.66f, 1.66f, // timeScl
-             3f, 5f, // len
-             2.5f, 4f, // rad
-             globalScl); 
-    }
-
-    private static void draw(float atX, float atY, long seed, int count, float timeSclMin, float timeSclMax, float lenMin, float lenMax, float radMin, float radMax, float globalScl) {
+    public static void drawTrident(float atX, float atY, long seed, int count, float timeSclMin, float timeSclMax, float lenMin, float lenMax, float radMin, float radMax, float globalScl) {
         rand.setSeed(seed);
 
         for(int i = 0; i < count; i++) {

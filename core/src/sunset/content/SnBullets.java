@@ -87,7 +87,7 @@ public class SnBullets implements ContentList {
         salvoArt, smallTorpedo,
         lightningBall, trailRocket,
         //buffer
-        cometWaterShot, starStunBullet, galaxyKnockbackBullet, universeLaserBullet,
+        cometWaterShot, starStunBullet, galaxyKnockbackBullet, universeLaserBullet, universeEnergySphere,
         //special
         empBullet, empBulletEvo,
         naturiteBolt1, naturiteBolt2, naturiteBolt3, naturiteBolt4, naturiteBolt5,
@@ -1549,6 +1549,10 @@ public class SnBullets implements ContentList {
             }
         };
 
+        burheynaFrag = new LiquidBulletType(SnLiquids.burheyna){{
+            drag = 0.01f;
+        }};
+
         floodBurheynaShot = new ArtilleryLiquidBulletType(SnLiquids.burheyna) {{
             lifetime = 130f;
             speed = 3f;
@@ -2147,7 +2151,8 @@ public class SnBullets implements ContentList {
             }
         };
         galaxyKnockbackBullet = new PointBulletType(){{
-            speed = 420; //range
+            maxRange = speed = 420; //range
+            lifetime = 1;
             damage = 120;
             knockback = 384;
             shootEffect = Fx.none;
@@ -2159,9 +2164,10 @@ public class SnBullets implements ContentList {
         }};
 
         universeLaserBullet = new LaserBulletType(){{
-            length = 520f;
+            length = 660f;
             damage = 1470f;
-            width = 105f;
+            buildingDamageMultiplier = 0.2f;
+            width = 120f;
             lifetime = 40f;
             largeHit = true;
             status = SnStatusEffects.universityLaserSlow;
@@ -2177,10 +2183,40 @@ public class SnBullets implements ContentList {
             public void hitEntity(Bullet b, Hitboxc entity, float health) {
                 super.hitEntity(b, entity, health);
                 if(Mathf.chance(stunChance) && entity instanceof Unit) {
-                    Log.info("Hit " + entity);
                     ((Unit)entity).apply(SnStatusEffects.stun, stunDuration);
                 }
             }
+        };
+
+        universeEnergySphere = new EnergySphereBulletType(4f, 290f) {{
+            hitSize = 7f;
+            splashDamage = 430f;
+            splashDamageRadius = 56f;
+            lightningPeriod = 25f;
+            lightningChance = 0.3f;
+            lightningLength = 59;
+            healPercent = 10f;
+            lightningDamage = 42;
+            lifetime = 240f;
+            frontColor = Pal.surge;
+            //follow
+            followRadius = 367;
+            followFactor = 0.0375f;
+            followMultiplier = 0.5f;
+            distancePower = 4f;
+            weightPower = 0.5f;
+            minSpeedFactor = 0.75f;
+            //draw
+            count = 8;
+            timeSclMin = 0.8f;
+            timeSclMax = 2.5f;
+            lenMin = 1.5f;
+            lenMax = 4f;
+            radMin = 1f;
+            radMax = 3f;
+        }
+            @Override
+            public float continuousDamage() { return 160; };
         };
         //endregion buffer
         //region special

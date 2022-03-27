@@ -26,6 +26,14 @@ public class EnergySphereBulletType extends BasicBulletType {
     public float distancePower = 3.25f;
     public float weightPower = 0.5f;
     public float minSpeedFactor = 0.6f;
+    // draw settings
+    public int count;
+    public float timeSclMin;
+    public float timeSclMax;
+    public float lenMin;
+    public float lenMax;
+    public float radMin;
+    public float radMax;
 
     private float range;
 
@@ -39,7 +47,7 @@ public class EnergySphereBulletType extends BasicBulletType {
     public void draw(Bullet b) {
         Draw.mixcol(frontColor, 0.25f);
         Draw.z(Layer.bullet);
-        Drawm.drawTrident(b.x, b.y, b.id, 1);
+        Drawm.drawTrident(b.x, b.y, b.id, count, timeSclMin, timeSclMax, lenMin, lenMax, radMin, radMax, 1);
         Draw.mixcol();
     }
 
