@@ -680,9 +680,9 @@ public class SnTurrets implements ContentList {
                 public float continuousDamage() { return 720; };
             };
             reloadBar = false;
+            chargeEffect = SnFx.energyCharge((EnergySphereBulletType)shootType, 210);
         }};
-        ((ModPowerTurret)trident).chargeEffect = SnFx.energyCharge((EnergySphereBulletType)((ModPowerTurret)trident).shootType, 210);
-            
+
         radius = new MinigunTurret("radius") {{
             requirements(Category.turret, with(Items.copper, 2500, Items.graphite, 1700, Items.surgeAlloy, 1450, Items.plastanium, 955, SnItems.enojie, 620));
             ammo(

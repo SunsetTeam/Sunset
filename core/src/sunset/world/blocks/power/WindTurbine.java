@@ -1,24 +1,19 @@
 package sunset.world.blocks.power;
 
-import arc.Core;
-import arc.graphics.g2d.Draw;
-import arc.graphics.g2d.TextureRegion;
-import arc.math.Mathf;
-import arc.struct.EnumSet;
-import arc.util.Time;
-import mindustry.annotations.Annotations.Load;
-import mindustry.graphics.Drawf;
-import mindustry.world.Block;
-import mindustry.world.blocks.power.PowerGenerator;
-import mindustry.world.meta.Attribute;
-import mindustry.world.meta.Env;
-import mindustry.world.meta.StatUnit;
-import mma.ModVars;
-import sunset.content.SnAttribute;
+import arc.graphics.g2d.*;
+import arc.math.*;
+import arc.struct.*;
+import arc.util.*;
+import mindustry.annotations.Annotations.*;
+import mindustry.graphics.*;
+import mindustry.world.blocks.power.*;
+import mindustry.world.meta.*;
+import mma.*;
+import sunset.content.*;
 
-import static mindustry.Vars.state;
+import static mindustry.Vars.*;
 
-public class WindTurbine extends PowerGenerator {
+public class WindTurbine extends PowerGenerator{
 
     public float rotorRotateSpeed = 4f;
 
@@ -29,7 +24,7 @@ public class WindTurbine extends PowerGenerator {
     @Load("@-top")
     public TextureRegion topRegion;
 
-    public WindTurbine(String name) {
+    public WindTurbine(String name){
         super(name);
 
         flags = EnumSet.of();
@@ -37,7 +32,7 @@ public class WindTurbine extends PowerGenerator {
     }
 
     @Override
-    public TextureRegion[] icons() {
+    public TextureRegion[] icons(){
         return !ModVars.packSprites ? new TextureRegion[]{region} : new TextureRegion[]{region, bottomRegion, rotatorRegion, topRegion};
     }
 
@@ -48,19 +43,16 @@ public class WindTurbine extends PowerGenerator {
         stats.add(generationType, powerProduction * 60f, StatUnit.powerSecond);
     }
 
-    public class WindTurbineBuild extends GeneratorBuild {
+    public class WindTurbineBuild extends GeneratorBuild{
         @Override
         public void updateTile(){
-            productionEfficiency = enabled ?
-                    Mathf.maxZero(SnAttribute.wind.env() +
-                            (state.rules.lighting ?
-                                    1f - state.rules.ambientLight.a :
-                                    1f
-                            )) : 0f;
+            productionEfficiency = Mathf.maxZero(SnAttribute.wind.env() +
+                                                 (state.rules.lighting ? 1f - state.rules.ambientLight.a : 1f)
+            );
         }
 
         @Override
-        public void draw() {
+        public void draw(){
             Draw.rect(region, x, y);
             Draw.rect(bottomRegion, x, y);
             Drawf.spinSprite(rotatorRegion, x, y, Time.time * rotorRotateSpeed);

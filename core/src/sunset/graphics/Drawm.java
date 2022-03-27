@@ -9,7 +9,13 @@ import arc.util.Time;
 public class Drawm {
     private static Rand rand = new Rand();
     private static Vec2 pos = new Vec2();
-
+    public static void drawTrident(float atX, float atY, long seed, float globalScl) {
+        drawTrident(atX, atY, seed, 15,
+        0.66f, 1.66f, // timeScl
+        3f, 5f, // len
+        2.5f, 4f, // rad
+        globalScl);
+    }
     public static void drawTrident(float atX, float atY, long seed, int count, float timeSclMin, float timeSclMax, float lenMin, float lenMax, float radMin, float radMax, float globalScl) {
         rand.setSeed(seed);
 

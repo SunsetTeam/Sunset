@@ -1,6 +1,5 @@
 package sunset.content;
 
-import arc.audio.Sound;
 import arc.graphics.Color;
 import arc.util.Time;
 import mindustry.Vars;
@@ -14,12 +13,9 @@ import mindustry.content.StatusEffects;
 import mindustry.content.UnitTypes;
 import mindustry.ctype.ContentList;
 import mindustry.entities.bullet.*;
-import mindustry.entities.units.AIController;
 import mindustry.gen.*;
 import mindustry.graphics.Layer;
 import mindustry.graphics.Pal;
-import mindustry.type.ItemStack;
-import mindustry.type.StatusEffect;
 import mindustry.type.UnitType;
 import mindustry.type.Weapon;
 import mindustry.type.ammo.ItemAmmoType;
@@ -28,8 +24,6 @@ import mindustry.type.weapons.PointDefenseWeapon;
 import mindustry.world.meta.BlockFlag;
 import sunset.ai.*;
 import sunset.ai.weapon.ExtinguishWeaponAI;
-import sunset.content.blocks.SnCrafting;
-import sunset.content.blocks.SnDistribution;
 import sunset.content.blocks.SnUnitBlocks;
 import sunset.entities.abilities.EffectLowHPAbility;
 import sunset.entities.abilities.StatusFieldAbility;
@@ -40,7 +34,6 @@ import sunset.gen.Deliverc;
 import sunset.gen.Segmentc;
 import sunset.type.BerserkStage;
 import sunset.type.ammo.LiquidAmmoType;
-import sunset.type.blocks.Energy;
 import sunset.type.blocks.Engine;
 import sunset.type.blocks.Rotor;
 import sunset.type.unitTypes.*;
@@ -1719,27 +1712,27 @@ public class SnUnitTypes implements ContentList{
 
             engines(
                     new Engine("small-engine") {{
-                        engineX = 0f;
-                        engineY = -5f;
-                        engineSize = 3f;
+                        x = 0f;
+                        y = -5f;
+                        size = 3f;
                     }},
 
                     new Engine("small-engine") {{
-                        engineX = 0f;
-                        engineY = -14f;
-                        engineSize = 1f;
+                        x = 0f;
+                        y = -14f;
+                        size = 1f;
                     }},
 
                     new Engine("small-engine") {{
-                        engineX = 0f;
-                        engineY = -10f;
-                        engineSize = 3f;
+                        x = 0f;
+                        y = -10f;
+                        size = 3f;
                     }},
 
                     new Engine("small-engine") {{
-                        engineX = 10f;
-                        engineY = 5f;
-                        engineSize = 2f;
+                        x = 10f;
+                        y = 5f;
+                        size = 2f;
                     }});
         }};
 
@@ -1856,30 +1849,30 @@ public class SnUnitTypes implements ContentList{
             engines(
                     new Engine("small-engine") {{
                         underUnit = true;
-                        engineX = -6.2f;
-                        engineY = 3.2f;
-                        engineSize = 1.8f;
+                        x = -6.2f;
+                        y = 3.2f;
+                        size = 1.8f;
                     }},
 
                     new Engine("small-engine") {{
                         underUnit = true;
-                        engineX = 6.2f;
-                        engineY = 3.2f;
-                        engineSize = 1.8f;
+                        x = 6.2f;
+                        y = 3.2f;
+                        size = 1.8f;
                     }},
 
                     new Engine("small-engine") {{
                         underUnit = true;
-                        engineX = -6.4f;
-                        engineY = -6.4f;
-                        engineSize = 1.8f;
+                        x = -6.4f;
+                        y = -6.4f;
+                        size = 1.8f;
                     }},
 
                     new Engine("small-engine") {{
                         underUnit = true;
-                        engineX = 6.4f;
-                        engineY = -6.4f;
-                        engineSize = 1.8f;
+                        x = 6.4f;
+                        y = -6.4f;
+                        size = 1.8f;
                     }});
         }
         };

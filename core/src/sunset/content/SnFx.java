@@ -1,6 +1,6 @@
 package sunset.content;
 
-import arc.Core;
+import arc.*;
 import arc.func.Floatc2;
 import arc.graphics.Color;
 import arc.graphics.g2d.Draw;
@@ -18,6 +18,7 @@ import arc.util.Tmp;
 import mindustry.content.Fx;
 import mindustry.entities.Effect;
 import mindustry.entities.effect.MultiEffect;
+import mindustry.game.EventType.*;
 import mindustry.graphics.Drawf;
 import mindustry.graphics.Layer;
 import mindustry.graphics.Pal;
@@ -871,6 +872,7 @@ public class SnFx {
 
     //testing
     public static Effect circleOut(Color color, float range){
+        checkGameState();
         return new Effect(Mathf.clamp(range / 2, 45f, 360f), range * 1.5f, e -> {
             rand.setSeed(e.id);
 
@@ -885,6 +887,7 @@ public class SnFx {
         });
     }
     public static Effect energyCharge(EnergySphereBulletType type, float lifetime) {
+        checkGameState();
         return new Effect(lifetime, e -> {
             Draw.mixcol(Pal.sap, 0.25f);
             Draw.z(Layer.bullet);
@@ -895,6 +898,11 @@ public class SnFx {
             Draw.mixcol();
         });
     }
+
+    private static void checkGameState(){
+        if (gameLoaded)throw new IllegalStateException("You cannot create an effect after the game is loaded");
+    }
+
     //heavy art
     public static Effect laserArtFx(Color color) {
         return laserArtFx(color, 1, 100f, 35f, 6);
@@ -906,6 +914,7 @@ public class SnFx {
         return laserArtFx(color, 1, lenght1, lenght2, 6);
     }
     public static Effect laserArtFx(Color color, int rotateAngle, float lenght1, float lenght2, int beams) {
+        checkGameState();
         return new Effect(30f, 70f, e -> {
             color(color);
             stroke(e.fout() * 2f);
@@ -940,4 +949,9 @@ public class SnFx {
             Drawf.light(e.x, e.y, 5, color, e.fout());
         });
     }*/
+    private static boolean gameLoaded=false;
+    static {
+        Events.run(ClientLoadEvent.class,()->gameLoaded=true);
+        Events.run(ServerLoadEvent.class,()->gameLoaded=true);
+    }
 }

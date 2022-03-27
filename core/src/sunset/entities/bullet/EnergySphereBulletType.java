@@ -27,13 +27,13 @@ public class EnergySphereBulletType extends BasicBulletType {
     public float weightPower = 0.5f;
     public float minSpeedFactor = 0.6f;
     // draw settings
-    public int count;
-    public float timeSclMin;
-    public float timeSclMax;
-    public float lenMin;
-    public float lenMax;
-    public float radMin;
-    public float radMax;
+    public int count = 15;
+    public float timeSclMin = 0.66f;
+    public float timeSclMax = 1.66f;
+    public float lenMin = 3f;
+    public float lenMax = 5f;
+    public float radMin = 2.5f;
+    public float radMax = 4f;
 
     private float range;
 
