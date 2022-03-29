@@ -548,6 +548,7 @@ public class SnFx {
         }
     }),
     //endregion unorganized
+
     //region special
     hitReneubiteBullet = new Effect(14, e -> {
         color(Color.white, SnPal.renBlast1, e.fin());
@@ -664,7 +665,7 @@ public class SnFx {
         color(SnPal.yellowTrail);
         Fill.circle(e.x, e.y, e.rotation * e.fout());
     }),
-    lbHit = new Effect(30, e -> {
+    lbHit = new Effect(50, e -> {
         color(SnPal.lightningBall);
         stroke(e.fout() * 5);
         circle(e.x, e.y, e.fin(Interp.pow2Out) * 40);
@@ -674,6 +675,12 @@ public class SnFx {
             Drawf.tri(e.x, e.y, 2.4f, 90 * e.fout(), (i * 90) + 45 * e.fout(Interp.pow5Out));
         }
     }),
+    torpedoTrail = new Effect(20, e -> {
+        color(Color.white);
+        Fill.circle(e.x, e.y, 3.6f * e.fout());
+        color(e.color);
+        Fill.circle(e.x, e.y, 5 * e.fout());
+    }).layer(Layer.floor + 0.001f),
     //endregion yellow ships
 
     //region turrets 360

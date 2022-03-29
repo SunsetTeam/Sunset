@@ -2065,10 +2065,10 @@ public class SnBullets implements ContentList {
             ammoMultiplier = 2.1f;
             lifetime = Time.toSeconds;
         }};
-        smallTorpedo = new TorpedoBulletType(3, 60) {{
-            sprite = "missile";
-            frontColor = SnPal.bGray;
-            backColor = SnPal.bGray.a(5);
+        smallTorpedo = new BasicBulletType(3, 60, "mine-bullet") {{
+            backColor = SnPal.yellowTrail;
+            frontColor = Color.white;
+            mixColorTo = Color.white;
             lifetime = 1.1f * Time.toSeconds;
             drawSize = 9.2f;
             pierceCap = -1;
@@ -2079,10 +2079,21 @@ public class SnBullets implements ContentList {
             recoil = 0;
             pierce = true;
             pierceBuilding = false;
-            //splashDamage = 40;
-            //splashDamageRadius = 10 * Vars.tilesize;
+            splashDamage = 40;
+            splashDamageRadius = 10 * Vars.tilesize;
             hitSound = SnSounds.torpedo_explosion;
-            trailEffect = Fx.none;
+            trailEffect = SnFx.torpedoTrail;
+            trailChance = 1;
+            trailColor = Pal.surge;
+            weaveMag = 3f;
+            weaveScale = 5;
+            layer = Layer.floor + 0.002f;
+            width = height = 16;
+            collidesAir = absorbable = keepVelocity = false;
+            chargeShootEffect = despawnEffect = hitEffect = shootEffect = smokeEffect = Fx.none;
+            collideFloor = true;
+            shrinkX = 0;
+            shrinkY = 0;
         }};
         //T3
         lightningBall = new ArtilleryLightningBulletType(50) {{

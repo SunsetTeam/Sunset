@@ -1,17 +1,14 @@
 package sunset.entities.bullet;
 
 import arc.graphics.Color;
+import arc.graphics.g2d.Draw;
 import arc.graphics.g2d.Fill;
+import arc.math.Angles;
 import mindustry.content.Fx;
 import mindustry.entities.Effect;
 import mindustry.entities.bullet.BasicBulletType;
 import mindustry.gen.Bullet;
 import mindustry.graphics.Layer;
-import mindustry.graphics.Pal;
-
-import static arc.graphics.g2d.Draw.color;
-import static arc.graphics.g2d.Draw.reset;
-import static arc.math.Angles.randLenVectors;
 
 public class TorpedoBulletType extends BasicBulletType {
     protected Color mColor;
@@ -34,18 +31,20 @@ public class TorpedoBulletType extends BasicBulletType {
     }).layer(Layer.floor);*/
 
     public Effect torpedoTrail = new Effect(30, e -> {
-        color(tColor.a(95).clamp(), mColor, 0.5f);
-        randLenVectors(e.id, 15, 1 + e.fin(), (x, y) -> {
+        Draw.color(trailColor);
+        Fill.circle(e.x, e.y, e.rotation * e.fout());
+        Draw.color(tColor.a(95).clamp(), mColor, 0.5f);
+        Angles.randLenVectors(e.id, 15, 1 + e.fin(), (x, y) -> {
             Fill.circle(e.x + x, e.y + y, e.rotation * e.fin() * 1.9f);
         });
-        color(Pal.lightishOrange.a(25));
-        Fill.circle(e.x, e.y, e.rotation * e.fout() / 3);
+        //Draw.color(Pal.lightishOrange.a(25));
+        //Fill.circle(e.x, e.y, e.rotation * e.fout() / 3);
     }).layer(Layer.floor);
 
     @Override
     public void draw(Bullet b) {
-        torpedoTrail.at(b.x, b.y, trailRotation ? b.rotation() : trailParam, tColor);
         super.draw(b);
+        torpedoTrail.at(b.x, b.y, trailRotation ? b.rotation() : trailParam, tColor);
     }
     @Override
     public void update(Bullet b) {
