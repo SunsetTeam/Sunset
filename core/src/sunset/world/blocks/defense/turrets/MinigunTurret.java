@@ -7,6 +7,7 @@ import arc.util.Time;
 import mindustry.entities.bullet.BulletType;
 import mindustry.ui.Bar;
 import mindustry.world.blocks.defense.turrets.ItemTurret;
+import mindustry.world.meta.Stat;
 import mindustry.world.meta.StatUnit;
 import mma.graphics.ADrawf;
 import sunset.SnVars;
@@ -44,7 +45,7 @@ public class MinigunTurret extends ItemTurret {
     @Override
     public void setStats() {
         super.setStats();
-        aStats.add(SnStat.inaccuracy, inaccuracyUp, StatUnit.degrees);
+        aStats.add(Stat.inaccuracy, inaccuracyUp, StatUnit.degrees);
         aStats.add(SnStat.overheatTime, maxShootTime / Time.toSeconds, StatUnit.seconds);
     }
 
@@ -70,7 +71,7 @@ public class MinigunTurret extends ItemTurret {
 
         @Override
         public void bullet(BulletType type, float angle) {
-            super.bullet(type, angle + Mathf.range(inaccuracyUp * totalShootingTime));
+            super.bullet(type, angle + Mathf.range(inaccuracyUp * (totalShootingTime / 2)));
         }
 
         @Override

@@ -6,9 +6,11 @@ import mindustry.world.blocks.liquid.Conduit;
 
 public class ModConduit extends Conduit {
     public boolean onLiquid = true;
+    public boolean onFloor = true;
 
     public ModConduit (String name){
         super(name);
+        leaks = false;
     }
 
     @Override
@@ -16,6 +18,11 @@ public class ModConduit extends Conduit {
         if(onLiquid){
             return tile.floor().isLiquid;
         }
+
+        if(onFloor){
+            return tile.floor().isFloor();
+        }
         return false;
     }
 }
+

@@ -18,7 +18,7 @@ public class SnGas implements ContentList {
         }};
 
         ram = new Gas("ram") {{
-            color = Color.valueOf("D1EFF6");
+            color = Color.valueOf("8FE5FA");
             explosiveness = 0.1f;
             flammability = 0.1f;
             temperature = 0.4f;

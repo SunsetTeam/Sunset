@@ -2,13 +2,13 @@ package sunset.content.blocks;
 
 import mindustry.Vars;
 import mindustry.content.Items;
-import mindustry.ctype.*;
-import mindustry.type.*;
-import mindustry.world.*;
-import mindustry.world.blocks.logic.*;
+import mindustry.ctype.ContentList;
+import mindustry.type.Category;
+import mindustry.world.Block;
+import mindustry.world.blocks.logic.LogicBlock;
 import sunset.content.SnItems;
 
-import static mindustry.type.ItemStack.*;
+import static mindustry.type.ItemStack.with;
 
 public class SnLogicBlocks implements ContentList {
     public static Block

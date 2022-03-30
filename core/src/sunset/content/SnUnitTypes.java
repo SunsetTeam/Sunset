@@ -1,6 +1,6 @@
 package sunset.content;
 
-import arc.audio.Sound;
+import arc.graphics.Color;
 import arc.util.Time;
 import mindustry.Vars;
 import mindustry.ai.types.FlyingAI;
@@ -12,52 +12,58 @@ import mindustry.content.Liquids;
 import mindustry.content.StatusEffects;
 import mindustry.content.UnitTypes;
 import mindustry.ctype.ContentList;
-import mindustry.entities.bullet.ArtilleryBulletType;
-import mindustry.entities.bullet.BasicBulletType;
-import mindustry.entities.bullet.BombBulletType;
-import mindustry.entities.bullet.ShrapnelBulletType;
+import mindustry.entities.bullet.*;
 import mindustry.gen.*;
 import mindustry.graphics.Layer;
 import mindustry.graphics.Pal;
-import mindustry.type.StatusEffect;
 import mindustry.type.UnitType;
 import mindustry.type.Weapon;
 import mindustry.type.ammo.ItemAmmoType;
+import mindustry.type.ammo.PowerAmmoType;
 import mindustry.type.weapons.PointDefenseWeapon;
+import mindustry.world.meta.BlockFlag;
 import sunset.ai.*;
 import sunset.ai.weapon.ExtinguishWeaponAI;
+import sunset.content.blocks.SnUnitBlocks;
 import sunset.entities.abilities.EffectLowHPAbility;
 import sunset.entities.abilities.StatusFieldAbility;
+import sunset.entities.abilities.OverdriveAbility;
 import sunset.entities.bullet.BerserkLaserBulletType;
 import sunset.entities.bullet.SpawnArtilleryBulletType;
 import sunset.gen.Deliverc;
 import sunset.gen.Segmentc;
 import sunset.type.BerserkStage;
 import sunset.type.ammo.LiquidAmmoType;
-import sunset.type.blocks.Energy;
 import sunset.type.blocks.Engine;
 import sunset.type.blocks.Rotor;
 import sunset.type.unitTypes.*;
 import sunset.type.weapons.ChainWeapon;
 import sunset.type.weapons.SnWeapon;
 import sunset.type.weapons.WeaponExt;
+import sunset.utils.UnitsUtils;
+
+import static mindustry.Vars.tilePayload;
+import static sunset.utils.UnitsUtils.addUnitGroup;
+import static mindustry.type.ItemStack.with;
 
 public class SnUnitTypes implements ContentList{
     public static UnitType
 
     //vanilla
-    bastion, t6spooder, t6crawler,
+    bastion, arahnus, buffedCrawler,
 
     //attack copters
-    wind, thunder, nadir, halo, parhelion, mudflow,
+    wind, thunder, nadir, halo, mudflow, parhelion,
     //buffers
-    bufferT1, satellite, planet, star, galaxy, universe,
+    comet, satellite, planet, star, galaxy, universe,
     //ground
     mirage, vision, illusion, soothSayer, seer, abyssEye,
     wheelT1, wheelT2, wheelT3, wheelT4, wheelT5, wheelT6,
     freezingT1,
     //air
-    engineT1,
+    engineT1, hoverTest,
+    //hylight
+    light,
     //naval
     yellowT1, yellowT2, yellowT3, yellowT4, yellowT5,
     //misc
@@ -65,10 +71,16 @@ public class SnUnitTypes implements ContentList{
     //other
     @EntityDef({Unitc.class, Deliverc.class})
     public static UnitType courier;
-    //@EntityDef({Unitc.class, FireFighterc.class})
-    public static UnitType comet;
     @EntityDef({Unitc.class, Segmentc.class})
     public static UnitType snake1;
+
+    void setupConstruction() {
+        UnitsUtils.init();
+        addUnitGroup(SnUnitBlocks.upgradedAirFactory, 20 * 60, with(Items.silicon, 30, SnItems.naturite, 20), 
+                     comet, satellite, planet, star, galaxy, universe);
+        addUnitGroup(SnUnitBlocks.upgradedAirFactory, 15 * 60, with(SnItems.fors, 15, Items.silicon, 20),
+                     wind, thunder, nadir, halo, mudflow, parhelion);
+    }
 
     @Override
     public void load() {
@@ -126,7 +138,7 @@ public class SnUnitTypes implements ContentList{
             }}
             );
         }};
-        t6crawler = new UnitType("crawler"){{
+        buffedCrawler = new UnitType("buffed-crawler"){{
             defaultController = SuicideAI::new;
 
             speed = 1f;
@@ -157,8 +169,7 @@ public class SnUnitTypes implements ContentList{
             @Override
             public boolean unlockedNowHost() { return false; }*/
         };
-        t6spooder = new UnitTypeExt("t6spooder"){{
-            //TODO: create actual stats. This one copied from "abyssEye"
+        arahnus = new UnitTypeExt("arahnus"){{
             health = 61000;
             speed = 0.6f;
             rotateSpeed = 1.5f;
@@ -190,7 +201,7 @@ public class SnUnitTypes implements ContentList{
             buildSpeed = 1f;
 
             weapons.add(
-            new SnWeapon("t6spooder-cannon"){{
+            new SnWeapon("arahnus-cannon"){{
                 y = -14f;
                 x = 0f;
                 shootY = 22f;
@@ -250,11 +261,11 @@ public class SnUnitTypes implements ContentList{
                         status = StatusEffects.sapped;
                         statusDuration = 60f * 10;
             
-                        unitType = SnUnitTypes.t6crawler;
+                        unitType = SnUnitTypes.buffedCrawler;
                     }};
                 }};
             }},
-            new SnWeapon("t6spooder-sap"){{
+            new SnWeapon("arahnus-sap"){{
                 x = 15;
                 reload = 10;
                 shootCone = 20f;
@@ -1114,7 +1125,38 @@ public class SnUnitTypes implements ContentList{
         }};
         //endregion copters
         //region buffers
-        //there should be a bufferT1 here
+        comet = new UnitTypeExt("comet") {{
+            health = 150;
+            hitSize = 10;
+            speed = 3.1f;
+            accel = 0.15f;
+            drag = 0.1f;
+
+            flying = true;
+            circleTarget = false;
+            range = 75;
+
+            itemCapacity = 20;
+            commandLimit = 4;
+            ammoType = new LiquidAmmoType(Liquids.water, 1);
+
+            defaultController = ExtinguishAI::wrapper;
+
+            constructor = UnitEntity::create;
+
+            weapons.add(new WeaponExt("sprite") {{
+                ai = new ExtinguishWeaponAI();
+                rotate = true;
+                mirror = false;
+                x = 0;
+                top = true;
+                inaccuracy = 4;
+                alternate = false;
+                reload = 2.5f;
+                shootSound = Sounds.spray;
+                bullet = SnBullets.cometWaterShot;
+            }});
+        }};
         satellite = new UnitTypeExt("satellite") {{
             health = 470;
             hitSize = 17;
@@ -1134,8 +1176,10 @@ public class SnUnitTypes implements ContentList{
             constructor = UnitEntity::create;
 
             weapons.add(new ChainWeapon("satellite") {{
-                damageTick = 0.3f;
+                damageTick = 0f;
                 healTick = 0.8f;
+                buildingBuff = 0.5f;
+
                 alternate = false;
                 mirror = false;
                 rotate = false;
@@ -1166,7 +1210,8 @@ public class SnUnitTypes implements ContentList{
             weapons.add(new ChainWeapon("planet") {{
                 damageTick = 0.9f;
                 healTick = 2.6f;
-                maxChainLength = 8;
+                buildingBuff = 1f;
+                maxChainLength = 3;
                 alternate = false;
                 mirror = false;
                 rotate = false;
@@ -1196,7 +1241,7 @@ public class SnUnitTypes implements ContentList{
 
             constructor = UnitEntity::create;
 
-            abilities.add(new StatusFieldAbility(SnStatusEffects.starBuff, StatusEffects.none, 180, 8 * 24));
+            abilities.add(new OverdriveAbility(0.75f, 8 * 60, 13 * Vars.tilesize));
 
             weapons.add(new WeaponExt("star-gun") {{
                 x = 0;
@@ -1212,7 +1257,8 @@ public class SnUnitTypes implements ContentList{
             }});
             weapons.add(new ChainWeapon("galaxy-weak") {{
                 damageTick = 0f;
-                healTick = 6f;
+                buildingBuff = 0f;
+                healTick = 6.5f;
                 maxChainLength = 3;
                 alternate = false;
                 mirror = true;
@@ -1266,9 +1312,10 @@ public class SnUnitTypes implements ContentList{
                 x = 36;
                 y = -6;
                 reload = 3;
-                range = 420;
                 bullet = new BasicBulletType(0, 80){{
                     maxRange = 420;
+                    speed = 420;
+                    lifetime = 1;
                 }};
             }});
         }};
@@ -1313,6 +1360,17 @@ public class SnUnitTypes implements ContentList{
                 shootStatus = SnStatusEffects.universityLaserSlow;
                 rotateShooting = false;
                 bullet = SnBullets.universeLaserBullet;
+            }});
+
+            weapons.add(new WeaponExt("galaxy-segment") {{
+                alternate = true;
+                mirror = true;
+                rotate = true;
+                x = 24;
+                shootCone = 2f;
+                range = 210;
+                reload = 60;
+                bullet = SnBullets.universeEnergySphere;
             }});
         }};
         //endregion buffers
@@ -1625,39 +1683,6 @@ public class SnUnitTypes implements ContentList{
             defaultController = DeliverAI::wrapper;
             //constructor = UnitEntity::create;
         }};
-        //comet = new UncontrollableUnitType("comet"){{
-        comet = new UnitTypeExt("comet") {{
-            health = 150;
-            hitSize = 10;
-            speed = 3.1f;
-            accel = 0.15f;
-            drag = 0.1f;
-
-            flying = true;
-            circleTarget = false;
-            range = 75;
-
-            itemCapacity = 20;
-            commandLimit = 4;
-            ammoType = new LiquidAmmoType(Liquids.water, 1);
-
-            defaultController = ExtinguishAI::wrapper;
-
-            constructor = UnitEntity::create;
-
-            weapons.add(new WeaponExt("sprite") {{
-                ai = new ExtinguishWeaponAI();
-                rotate = true;
-                mirror = false;
-                x = 0;
-                top = true;
-                inaccuracy = 4;
-                alternate = false;
-                reload = 2.5f;
-                shootSound = Sounds.spray;
-                bullet = SnBullets.cometWaterShot;
-            }});
-        }};
         //region snake
         snake1 = new SegmentUnitType("snake1"){{
             lengthSnake = 5;
@@ -1687,32 +1712,172 @@ public class SnUnitTypes implements ContentList{
 
             engines(
                     new Engine("small-engine") {{
-                        engineX = 0f;
-                        engineY = -5f;
-                        engineSize = 3f;
+                        x = 0f;
+                        y = -5f;
+                        size = 3f;
                     }},
 
                     new Engine("small-engine") {{
-                        engineX = 0f;
-                        engineY = -14f;
-                        engineSize = 1f;
+                        x = 0f;
+                        y = -14f;
+                        size = 1f;
                     }},
 
                     new Engine("small-engine") {{
-                        engineX = 0f;
-                        engineY = -10f;
-                        engineSize = 3f;
-                        engineY1 = -10f;
-                        engineX1 = 3f;
+                        x = 0f;
+                        y = -10f;
+                        size = 3f;
                     }},
 
                     new Engine("small-engine") {{
-                        engineX = 10f;
-                        engineY = 5f;
-                        engineSize = 2f;
+                        x = 10f;
+                        y = 5f;
+                        size = 2f;
                     }});
         }};
+
+        hoverTest = new HoverUnitType("hover-test"){{
+            armor = 8f;
+            health = 6000;
+            speed = 1.2f;
+            rotateSpeed = 2f;
+            accel = 0.05f;
+            drag = 0.017f;
+            lowAltitude = false;
+            flying = true;
+            circleTarget = true;
+            engineOffset = 12f;
+            engineSize = 6f;
+            rotateShooting = false;
+            hitSize = 36f;
+            payloadCapacity = (3 * 3) * tilePayload;
+            buildSpeed = 2.5f;
+            buildBeamOffset = 23;
+            range = 140f;
+            targetAir = false;
+            targetFlags = new BlockFlag[]{BlockFlag.battery, BlockFlag.factory, null};
+            hoverBloomColor = Pal.darkestGray;
+
+            ammoType = new PowerAmmoType(3000);
+
+            weapons.add(
+                    new Weapon(){{
+                        x = y = 0f;
+                        mirror = false;
+                        reload = 55f;
+                        minShootVelocity = 0.01f;
+
+                        soundPitchMin = 1f;
+                        shootSound = Sounds.plasmadrop;
+
+                        bullet = new BasicBulletType(){{
+                            sprite = "large-bomb";
+                            width = height = 120/4f;
+
+                            maxRange = 30f;
+                            ignoreRotation = true;
+
+                            backColor = Pal.darkestGray;
+                            frontColor = Pal.darkestGray;
+                            mixColorTo = Pal.darkestGray;
+
+                            hitSound = Sounds.boom;
+
+                            shootCone = 280f;
+                            ejectEffect = Fx.hitFlamePlasma;
+                            hitShake = 5f;
+
+                            collidesAir = false;
+
+                            lifetime = 85f;
+
+                            despawnEffect = Fx.instBomb;
+                            hitEffect = Fx.massiveExplosion;
+                            keepVelocity = true;
+                            spin = 2f;
+
+                            shrinkX = shrinkY = 0.7f;
+
+                            speed = 0f;
+                            collides = false;
+
+                            healPercent = 15f;
+                            splashDamage = 220f;
+                            splashDamageRadius = 80f;
+                        }};
+                    }});
+        }};
+
         //endregion other
+        //region hylight
+        light = new EngineUnitType("light") {{
+            health = 140;
+            hitSize = 15;
+            speed = 4f;
+            rotateSpeed = 4f;
+            accel = 0.04f;
+            drag = 0.01f;
+            commandLimit = 5;
+            flying = true;
+            circleTarget = true;
+            range = 130;
+            rotateShooting = false;
+            ammoType = new PowerAmmoType(450);
+
+            weapons.add(new SnWeapon("light-gun"){{
+                reload = 13f;
+                rotate = true;
+                mirror = true;
+                x = 4f;
+                y = -1f;
+                shootSound = Sounds.sap;
+                spacing = 0f;
+
+                bullet = new SapBulletType(){{
+                    sapStrength = 0.45f;
+                    length = 60f;
+                    damage = 9f;
+                    shootEffect = Fx.shootSmall;
+                    hitColor = color = Color.valueOf("ffd37f");
+                    despawnEffect = Fx.none;
+                    width = 0.35f;
+                    lifetime = 12.5f;
+                    knockback = -0.25f;
+                }};
+            }});
+
+            engines(
+                    new Engine("small-engine") {{
+                        underUnit = true;
+                        x = -6.2f;
+                        y = 3.2f;
+                        size = 1.8f;
+                    }},
+
+                    new Engine("small-engine") {{
+                        underUnit = true;
+                        x = 6.2f;
+                        y = 3.2f;
+                        size = 1.8f;
+                    }},
+
+                    new Engine("small-engine") {{
+                        underUnit = true;
+                        x = -6.4f;
+                        y = -6.4f;
+                        size = 1.8f;
+                    }},
+
+                    new Engine("small-engine") {{
+                        underUnit = true;
+                        x = 6.4f;
+                        y = -6.4f;
+                        size = 1.8f;
+                    }});
+        }
+        };
+
         //endregion mod-units
+        setupConstruction();
     }
 }

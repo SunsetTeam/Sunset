@@ -6,6 +6,7 @@ import arc.math.Mathf;
 import arc.util.Nullable;
 import arc.util.Time;
 import arc.util.Tmp;
+import mindustry.entities.Effect;
 import mindustry.entities.bullet.BasicBulletType;
 import mindustry.entities.bullet.BulletType;
 import mindustry.game.Team;
@@ -14,11 +15,13 @@ import mindustry.gen.Entityc;
 import mindustry.logic.Ranged;
 
 public class ReverseBulletType extends BasicBulletType {
-    public float rotateTotalAngle = 360;
-    public boolean rotateRight = true;
-    public float rotateMag = 0, rotateScaling = 0, rotateScaleMin = 0, rotateScaleMax = 0, rotateVisualMag = 0;
-    public boolean reverseRotScale = false, inRange = false;
-    public BulletType other = null;
+    public float rotateMag = 0f, rotScl = 0f, rotSclMin = 0f, rotSclMax = 0f, rotVisualMag = 0f;
+    public float rotTotalAngle = 0f;
+    public float reversAngle = 180f;
+    public boolean rotRight = true;
+    public boolean reverseRotScl = false, inRange = false, reverseNew = false;
+    public @Nullable
+    BulletType other = null;
 
     public ReverseBulletType(float speed, float damage) {
         super(speed, damage);
@@ -32,8 +35,8 @@ public class ReverseBulletType extends BasicBulletType {
         float height = this.height * ((1f - shrinkY) + shrinkY * b.fout());
         float width = this.width * ((1f - shrinkX) + shrinkX * b.fout());
         float offset = -90 + (spin != 0 ? Mathf.randomSeed(b.id, 360f) + b.time * spin : 0f);
-        float scaling = reverseRotScale ? b.fout() : b.fin();
-        float rotation = b.rotation() + offset + rotateTotalAngle * rotateVisualMag * scaling % 360 * (rotateRight ? -1 : 1);
+        float scaling = reverseRotScl ? b.fout() : b.fin();
+        float rotation = b.rotation() + offset + rotTotalAngle * rotVisualMag * scaling % 360 * (rotRight ? -1 : 1);
 
         Color mix = Tmp.c1.set(mixColorFrom).lerp(mixColorTo, b.fin());
 
@@ -47,11 +50,25 @@ public class ReverseBulletType extends BasicBulletType {
         Draw.reset();
     }
 
+    @Override
+    public void despawned(Bullet b){
+        if(despawnHit){
+            hit(b);
+        }
+        despawnEffect.at(b.x, b.y, b.rotation(), hitColor);
+        despawnSound.at(b);
+
+        Effect.shake(despawnShake, despawnShake, b);
+        if (reverseNew){
+            other.create(b, b.rotation() - reversAngle, 1, 1, 1f);
+        }
+    }
+
     public void update(Bullet b) {
         super.update(b);
 
         if (rotateMag > 0) {
-            b.vel.rotate(rotateMag * Mathf.clamp(reverseRotScale ? b.fout() : b.fin(), rotateScaleMin, rotateScaleMax) * (rotateRight ? -1 : 1) * Time.delta * rotateScaling);
+            b.vel.rotate(rotateMag * Mathf.clamp(reverseRotScl ? b.fout() : b.fin(), rotSclMin, rotSclMax) * (rotRight ? -1 : 1) * Time.delta * rotScl);
         }
         if(inRange && b.owner instanceof Ranged && b.dst(((Ranged) b.owner).x(), ((Ranged) b.owner).y()) > ((Ranged) b.owner).range()) b.rotation(b.angleTo(((Ranged) b.owner).x(), ((Ranged) b.owner).y()));
     }

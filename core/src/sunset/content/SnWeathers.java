@@ -1,14 +1,14 @@
 package sunset.content;
 
-import arc.graphics.*;
-import arc.util.*;
+import arc.graphics.Color;
+import arc.util.Time;
 import mindustry.content.StatusEffects;
 import mindustry.content.Weathers;
-import mindustry.ctype.*;
-import mindustry.gen.*;
-import mindustry.type.*;
-import mindustry.type.weather.*;
-import mindustry.world.meta.*;
+import mindustry.ctype.ContentList;
+import mindustry.gen.Sounds;
+import mindustry.type.Weather;
+import mindustry.type.weather.ParticleWeather;
+import mindustry.world.meta.Attribute;
 import sunset.type.weather.Storm;
 
 public class SnWeathers implements ContentList {

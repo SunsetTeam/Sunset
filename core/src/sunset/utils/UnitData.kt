@@ -6,15 +6,14 @@
 
 package sunset.utils
 
-import arc.Events
-import arc.func.Prov
-import arc.struct.IntMap
-import mindustry.game.EventType
-import mindustry.game.EventType.UnitDestroyEvent
-import mindustry.game.EventType.WorldLoadEvent
-import mindustry.gen.Groups
+import arc.*
+import arc.func.*
+import arc.struct.*
+import mindustry.game.*
+import mindustry.game.EventType.*
+import mindustry.gen.*
 import mindustry.gen.Unit
-import sunset.utils.kotlin.set
+import sunset.utils.kotlin.*
 
 object UnitData {
     private val data = IntMap<IntMap<Any>>()
@@ -27,6 +26,7 @@ object UnitData {
     @JvmStatic
     fun <T> getData(unit: Unit?, key: DataKey<*>, def: Prov<T?>): T? {
         if (unit == null || invalidUnit(unit)) return null;
+        @Suppress("UNCHECKED_CAST")
         return (data[unit.id, { IntMap() }] as IntMap<T>)[key.id, def]
     }
 
@@ -58,6 +58,7 @@ object UnitData {
     }
 
     private var dataKeysAmount = 0
+
     class DataKey<T> internal constructor(def: Prov<T?>?) {
         internal val id: Int = dataKeysAmount++
         private val def: Prov<T?> = def ?: Prov { null }

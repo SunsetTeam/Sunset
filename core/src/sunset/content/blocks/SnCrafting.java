@@ -1,16 +1,28 @@
 package sunset.content.blocks;
 
-import arc.graphics.*;
-import mindustry.content.*;
-import mindustry.ctype.*;
-import mindustry.gen.*;
-import mindustry.type.*;
-import mindustry.world.*;
-import mindustry.world.blocks.production.*;
-import mindustry.world.draw.*;
-import mma.world.draw.*;
-import sunset.content.*;
-import sunset.world.draw.*;
+import arc.graphics.Color;
+import mindustry.content.Fx;
+import mindustry.content.Items;
+import mindustry.content.Liquids;
+import mindustry.ctype.ContentList;
+import mindustry.gen.Sounds;
+import mindustry.type.Category;
+import mindustry.type.ItemStack;
+import mindustry.type.LiquidStack;
+import mindustry.world.Block;
+import mindustry.world.blocks.production.GenericCrafter;
+import mindustry.world.blocks.production.LiquidConverter;
+import mindustry.world.draw.DrawGlow;
+import mindustry.world.draw.DrawMixer;
+import mindustry.world.draw.DrawRotator;
+import mindustry.world.draw.DrawSmelter;
+import mma.world.draw.MultiDrawSmelter;
+import sunset.content.SnFx;
+import sunset.content.SnItems;
+import sunset.content.SnLiquids;
+import sunset.world.draw.DrawAngleRotator;
+import sunset.world.draw.DrawModWeave;
+import sunset.world.draw.DrawSurge;
 
 import static mindustry.type.ItemStack.with;
 
@@ -21,7 +33,8 @@ public class SnCrafting implements ContentList{
     advancedCompressor, advancedWeaver, advancedKiln, advancedSurge, advancedCryomixer,
     //standard
     collider, purifier, crystallizer, enojieKiln,
-    testCrafter;
+    //missile
+    missilecrafter, missilePlant;
 
     @Override
     public void load(){
@@ -198,10 +211,8 @@ public class SnCrafting implements ContentList{
             consumes.power(5.3f);
         }};
         //endregion standard
-		testCrafter = new GenericCrafter("test-crafter") {{
-            size = 2;
-            outputItem = new ItemStack(Items.lead, 4);
-            consumes.items(with(Items.lead, 2));
-        }};
+        //region missile
+        // I need multicrafters to do this fine
+        //endregion missile
     }
 }

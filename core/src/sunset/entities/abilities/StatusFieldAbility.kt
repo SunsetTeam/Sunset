@@ -39,14 +39,14 @@ class StatusFieldAbility(private val allyEffect: StatusEffect,
         if (allyEffect !== StatusEffects.none) {
             table.row()
             table.add(Core.bundle.format("ability.statusfield-ally",
-                      allyEffect.emoji(),
-                      allyEffect.localizedName))
+                                         allyEffect.emoji(),
+                                         allyEffect.localizedName))
         }
         if (enemyEffect !== StatusEffects.none) {
             table.row()
             table.add(Core.bundle.format("ability.statusfield-enemy",
-                      enemyEffect.emoji(),
-                      enemyEffect.localizedName))
+                                         enemyEffect.emoji(),
+                                         enemyEffect.localizedName))
         }
     }
 }

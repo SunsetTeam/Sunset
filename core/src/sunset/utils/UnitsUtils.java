@@ -7,6 +7,7 @@ import mindustry.type.UnitType;
 import mindustry.world.Block;
 import mindustry.world.blocks.units.Reconstructor;
 import mindustry.world.blocks.units.UnitFactory;
+import sunset.content.blocks.SnUnitBlocks;
 
 /** Утилиты для удобной настройки улучшения и исследования юнитов. */
 public class UnitsUtils {
@@ -14,10 +15,11 @@ public class UnitsUtils {
 
     public static void init() {
         recs = new Reconstructor[]{
-            (Reconstructor) Blocks.additiveReconstructor,
-            (Reconstructor) Blocks.multiplicativeReconstructor,
-            (Reconstructor) Blocks.exponentialReconstructor,
-            (Reconstructor) Blocks.tetrativeReconstructor
+            (Reconstructor) SnUnitBlocks.upgradedAdditiveReconstructor,
+            (Reconstructor) SnUnitBlocks.upgradedMultiplicativeReconstructor,
+            (Reconstructor) SnUnitBlocks.upgradedExponentialReconstructor,
+            (Reconstructor) SnUnitBlocks.upgradedTetrativeReconstructor,
+            (Reconstructor) Blocks.tetrativeReconstructor //TODO: T6 reconstructor
         };
     }
 

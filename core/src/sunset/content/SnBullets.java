@@ -11,6 +11,7 @@ import arc.util.Time;
 import mindustry.Vars;
 import mindustry.content.*;
 import mindustry.ctype.ContentList;
+import mindustry.entities.Lightning;
 import mindustry.entities.Units;
 import mindustry.entities.bullet.*;
 import mindustry.gen.Bullet;
@@ -20,6 +21,7 @@ import mindustry.gen.Unit;
 import mindustry.graphics.Layer;
 import mindustry.graphics.Pal;
 import sunset.entities.bullet.*;
+import sunset.gen.SnSounds;
 import sunset.graphics.SnPal;
 import sunset.type.StackableStatusEffect;
 
@@ -32,17 +34,15 @@ public class SnBullets implements ContentList {
         bigBlastPlastanium, bigBlastBlast, bigBlastPyratite, maxBlastPlastanium, maxBlastBlast, maxBlastSurge, reneubiteBlast,
         reneubiteBullet,
         //bigHelicopterGun, bigHelicopterBullet, largeHelicopterBullet,
-        starStunBullet, galaxyKnockbackBullet,
         wheel1Bullet, wheel2Shotgun, wheel3Burst, wheel4Shotgun,  wheel5Bullet,
         mirageGunBullet,
-        machineBullet, bigMachineBullet,
+        machineBullet, bigMachineBullet,//unused
         //rocket
         smallBlueMissile, smallEnojieMissile, mediumEnojieMissile,
         powerRocket, drrRocket,
         thoriumPowerRocket, forsPowerRocket,//unused
         nobiumAimMissile, naturiteAimMissile, renubiteAimMissile,
         //artillery
-        artilleryFors, artilleryBlast,
         wheel4Artillery,
         plasmaArt, rocketArt, bigRocketArt, heavyRocketArt,//unused
         //flak
@@ -55,8 +55,8 @@ public class SnBullets implements ContentList {
         //shrapnel
         lightBlastGraphite, lightBlastSilicon,
         //laser
-        laserGun2,
-        laserCGun, bigCLaserGun,
+        laserGun2,//unused
+        laserCGun, bigCLaserGun,//unused
         //lightning
         defLight, powerLight,
         //sap
@@ -67,8 +67,7 @@ public class SnBullets implements ContentList {
         smallEnergySphere, mediumEnergySphere, bigEnergySphere,
         //liquid
         floodWaterShot, floodCryoShot, floodSlagShot, floodOilShot, floodBurheynaShot,
-        burheynaFrag,
-        cometWaterShot,
+        burheynaFrag,//unused
         //flame
         heavyCoalFlame, heavyPyraFlame, flameidFlame,
         wheel5Flame,
@@ -87,11 +86,14 @@ public class SnBullets implements ContentList {
         mortarBullet,//unused
         salvoArt, smallTorpedo,
         lightningBall, trailRocket,
+        //buffer
+        cometWaterShot, starStunBullet, galaxyKnockbackBullet, universeLaserBullet, universeEnergySphere,
         //special
         empBullet, empBulletEvo,
         naturiteBolt1, naturiteBolt2, naturiteBolt3, naturiteBolt4, naturiteBolt5,
-        laserArtThorium, laserArtPhase, laserArtEnojie, laserArtReneubite,
-        universeLaserBullet,
+        graphiteShell, titaniumShell, thoriumShell, lightBurstMissile,
+        raMissile, empMissile, lightningMissile, lightMissile,
+        burstMissile, detonatorMissile, pointMissile, spotMissile,
         //misc and testing
         emptyBullet, overheatBullet,
         temp;
@@ -447,7 +449,7 @@ public class SnBullets implements ContentList {
             layer = Layer.scorch;
             splashDamage = 60;
             splashDamageRadius = 90;
-        }};
+        }};//unused
         bigMachineBullet = new BasicBulletType() {{
             lifetime = 32;
             speed = 11;
@@ -463,7 +465,7 @@ public class SnBullets implements ContentList {
             height = 3;
             pierce = true;
             pierceBuilding = true;
-        }};
+        }};//unused
         //endregion  standard
         //region rocket
         smallBlueMissile = new BasicBulletType(5f, 15, "missile") {{//yes
@@ -708,71 +710,6 @@ public class SnBullets implements ContentList {
         }};
         //endregion  rocket
         //region artillery
-        artilleryFors = new ArtilleryBulletType(3.0f, 150, "shell") {{
-            hitEffect = SnFx.redBomb;
-            knockback = 1f;
-            lifetime = 110f;
-            width = height = 25f;
-            collidesTiles = false;
-            collidesAir = true;
-            splashDamageRadius = 60f;
-            splashDamage = 150f;
-            fragBullet =  new FlakBulletType(3f, 90) {{
-                collidesGround = true;
-                collidesAir = false;
-                splashDamage = 120f;
-                splashDamageRadius = 10f;
-                sprite = "sunset-red-mine";
-                status = StatusEffects.electrified;
-                hitEffect = Fx.blastExplosion;
-                backColor = SnPal.redBomb;
-                frontColor = SnPal.redBombBack;
-                spin = 0.2f;
-                height = 10f;
-                width = 10f;
-                lifetime = 400f;
-                shrinkX = 0.2f;
-                shrinkY = 0.3f;
-                drag = 0.04f;
-            }};
-            fragBullets = 2;
-            backColor = SnPal.redBomb;
-            frontColor = SnPal.redBombBack;
-        }};
-        artilleryBlast = new ArtilleryBulletType(3.0f, 125, "shell") {{
-            hitEffect = SnFx.redBomb;
-            knockback = 1f;
-            lifetime = 110f;
-            width = height = 25f;
-            collidesTiles = false;
-            collidesAir = true;
-            splashDamageRadius = 70f;
-            splashDamage = 140f;
-            fragBullet = new FlakBulletType(2.9f, 30) {{
-                sprite = "sunset-red-mine";
-                collidesGround = true;
-                collidesAir = false;
-                splashDamage = 100f;
-                splashDamageRadius = 12f;
-                status = StatusEffects.electrified;
-                hitEffect = Fx.blastExplosion;
-                makeFire = true;
-                backColor = SnPal.redBomb;
-                frontColor = SnPal.redBombBack;
-                spin = 0.2f;
-                height = 10f;
-                width = 10f;
-                lifetime = 440f;
-                shrinkX = 0.2f;
-                shrinkY = 0.3f;
-                drag = 0.04f;
-            }};
-            fragBullets = 3;
-            makeFire = true;
-            backColor = SnPal.blastBullet;
-            frontColor = SnPal.blastBulletBack;
-        }};
-
         wheel4Artillery = new ArtilleryBulletType(3f, 67f) {{
             lifetime = 114f;
             status = StatusEffects.blasted;
@@ -797,7 +734,7 @@ public class SnBullets implements ContentList {
             height = 3;
             pierce = true;
             pierceBuilding = true;
-        }};
+        }};//unused
         rocketArt = new ArtilleryBulletType() {{
             backColor = Pal.missileYellowBack;
             frontColor = Pal.missileYellow;
@@ -819,7 +756,7 @@ public class SnBullets implements ContentList {
             shrinkY = 0f;
             hitSound = Sounds.explosion;
             trailChance = 0.2f;
-        }};
+        }};//unused
         bigRocketArt = new ArtilleryBulletType() {{
             backColor = Pal.missileYellowBack;
             frontColor = Pal.missileYellow;
@@ -841,7 +778,7 @@ public class SnBullets implements ContentList {
             shrinkY = 0f;
             hitSound = Sounds.explosion;
             trailChance = 0.2f;
-        }};
+        }};//unused
         heavyRocketArt = new ArtilleryBulletType() {{
             backColor = Pal.missileYellowBack;
             frontColor = Pal.missileYellow;
@@ -863,7 +800,7 @@ public class SnBullets implements ContentList {
             shrinkY = 0f;
             hitSound = Sounds.explosion;
             trailChance = 0.2f;
-        }};
+        }};//unused
         //endregion  artillery
         //region flak
         sporePodPoisonBullet = new FlakBulletType(4f, 5) {{
@@ -1423,20 +1360,20 @@ public class SnBullets implements ContentList {
             hitSize = 4;
             lifetime = 14;
             lightColor = Color.yellow;
-        }};
+        }};//unused
 
         laserCGun = new ContinuousLaserBulletType() {{
             damage = 500;
             hitSize = 3;
             drawSize = 220;
             lightColor = Color.yellow;
-        }};
+        }};//unused
         bigCLaserGun = new ContinuousLaserBulletType() {{
             damage = 1000;
             hitSize = 7;
             drawSize = 530;
             lightColor = Color.yellow;
-        }};
+        }};//unused
         //endregion laser
         //region lightning
         defLight = new LightningBulletType() {{
@@ -1612,6 +1549,10 @@ public class SnBullets implements ContentList {
             }
         };
 
+        burheynaFrag = new LiquidBulletType(SnLiquids.burheyna){{
+            drag = 0.01f;
+        }};
+
         floodBurheynaShot = new ArtilleryLiquidBulletType(SnLiquids.burheyna) {{
             lifetime = 130f;
             speed = 3f;
@@ -1623,7 +1564,7 @@ public class SnBullets implements ContentList {
             damage = 10f;
             fragBullets = 36;
             fragBullet = burheynaFrag;
-        }};
+        }};//unused
         //endregion liquid
         //region flame
         heavyCoalFlame = new BulletType(12f, 28f) {{
@@ -1698,12 +1639,14 @@ public class SnBullets implements ContentList {
             /*colorFrom = SnPal.redfire1;
             colorMid = SnPal.redfire2;
             colorTo = Pal.lightPyraFlame;*/
-        }};
+        }};//unused
         //endregion flame
         //region reverse-bullets
         naturiteReversBullet = new ReverseBulletType(2.6f, 95f) {{
             sprite = "sunset-copter-bomb";
             other = naturiteReversBullet;
+            reverseNew = true;
+            reversAngle = 180;
             width = 15f;
             height = 15;
             lifetime = 235;
@@ -1716,8 +1659,7 @@ public class SnBullets implements ContentList {
             trailLength = 0;
             pierceCap = 6;
             rotateMag = 5;
-            rotateRight = true;
-            inRange = true;
+            rotRight = true;
             frontColor = SnPal.copterLaser;
             backColor = SnPal.copterLaserBack;
             drag = 0.0025f;
@@ -1738,8 +1680,7 @@ public class SnBullets implements ContentList {
             trailLength = 0;
             pierceCap = 4;
             rotateMag = 5;
-            rotateRight = true;
-            inRange = true;
+            rotRight = true;
             frontColor = SnPal.redBomb;
             backColor = SnPal.redBombBack;
             drag = 0.0025f;
@@ -1760,8 +1701,7 @@ public class SnBullets implements ContentList {
             trailLength = 0;
             pierceCap = 7;
             rotateMag = 5;
-            rotateRight = true;
-            inRange = true;
+            rotRight = true;
             frontColor = SnPal.nobiumBullet;
             backColor = SnPal.nobiumBulletBack;
             drag = 0.0025f;
@@ -2065,8 +2005,10 @@ public class SnBullets implements ContentList {
         //region yellow ships
         //T1
         smallShell = new BasicBulletType() {{
-            lifetime = 0.25f * Time.toSeconds;
-            speed = 11;
+            frontColor = Color.valueOf("FBFFE8");
+            backColor = Color.valueOf("ECF97A");
+            lifetime = 0.31f * Time.toSeconds;
+            speed = 6.8f;
             damage = 10;
             drawSize = 6.1f;
             pierceCap = 3;
@@ -2074,10 +2016,8 @@ public class SnBullets implements ContentList {
             reloadMultiplier = 1.1f;
             buildingDamageMultiplier = 0.6f;
             //recoil = 0;
-            width = 5.7f;
-            height = 8.7f;
-            pierce = true;
-            pierceBuilding = false;
+            width = 6f;
+            height = 9f;
             shootEffect = Fx.shootSmall;
             smokeEffect = Fx.shootSmallSmoke;
             collidesAir = absorbable = false;
@@ -2113,18 +2053,23 @@ public class SnBullets implements ContentList {
             }};
         }};//unused
         //T2
-        salvoArt = new ArtilleryBulletType(5f, 29, "shell") {{
-            frontColor = SnPal.yellowTrail;
-            backColor = SnPal.yellowTrailBack;
-            width = 7f;
+        salvoArt = new ArtilleryBulletType(5f, 26, "shell") {{
+            frontColor = Color.valueOf("FBFFE8");
+            backColor = Color.valueOf("ECF97A");
+            width = 5.5f;
             height = 12f;
-            shootEffect = Fx.shootBig2;
-            smokeEffect = Fx.shootBigSmoke2;
+            shootEffect = Fx.none;
+            smokeEffect = Fx.none;
+            hitEffect = despawnEffect = Fx.hitYellowLaser;
+            trailEffect = Fx.artilleryTrail;
             ammoMultiplier = 2.1f;
-            lifetime = 0.7f * Time.toSeconds;
+            lifetime = Time.toSeconds;
         }};
-        smallTorpedo = new TorpedoBulletType(2, 120) {{
-            lifetime = 1.6f * Time.toSeconds;
+        smallTorpedo = new BasicBulletType(3, 60, "mine-bullet") {{
+            backColor = SnPal.yellowTrail;
+            frontColor = Color.white;
+            mixColorTo = Color.white;
+            lifetime = 1.1f * Time.toSeconds;
             drawSize = 9.2f;
             pierceCap = -1;
             inaccuracy = 1;
@@ -2134,21 +2079,36 @@ public class SnBullets implements ContentList {
             recoil = 0;
             pierce = true;
             pierceBuilding = false;
-            //splashDamage = 40;
-            //splashDamageRadius = 10 * Vars.tilesize;
+            splashDamage = 40;
+            splashDamageRadius = 10 * Vars.tilesize;
+            hitSound = SnSounds.torpedo_explosion;
+            trailEffect = SnFx.torpedoTrail;
+            trailChance = 1;
+            trailColor = Pal.surge;
+            weaveMag = 3f;
+            weaveScale = 5;
+            layer = Layer.floor + 0.002f;
+            width = height = 16;
+            collidesAir = absorbable = keepVelocity = false;
+            chargeShootEffect = despawnEffect = hitEffect = shootEffect = smokeEffect = Fx.none;
+            collideFloor = true;
+            shrinkX = 0;
+            shrinkY = 0;
         }};
         //T3
-        lightningBall = new ArtilleryLightningBulletType(180) {{
+        lightningBall = new ArtilleryLightningBulletType(50) {{
             lightning = 5;
             lightningColor = SnPal.yellowTrailBack;
             maxRange = 320;
+            hitEffect = SnFx.lbHit;
+            despawnEffect = Fx.none;
         }};
-        trailRocket = new MissileBulletType(5, 210, "shell") {{
-            width = 13f;
-            height = 19f;
-            shrinkY = 0.1f;
+        trailRocket = new MissileBulletType(5, 30) {{
+            width = 5f;
+            height = 8;
+            shrinkY = 0.7f;
             drag = -0.003f;
-            lifetime = 65f;
+            lifetime = 0.9f * Time.toSeconds;
             splashDamageRadius = 45f;
             splashDamage = 65f;
             homingPower = 0.1f;
@@ -2202,7 +2162,8 @@ public class SnBullets implements ContentList {
             }
         };
         galaxyKnockbackBullet = new PointBulletType(){{
-            speed = 420; //range
+            maxRange = speed = 420; //range
+            lifetime = 1;
             damage = 120;
             knockback = 384;
             shootEffect = Fx.none;
@@ -2214,9 +2175,10 @@ public class SnBullets implements ContentList {
         }};
 
         universeLaserBullet = new LaserBulletType(){{
-            length = 520f;
+            length = 660f;
             damage = 1470f;
-            width = 105f;
+            buildingDamageMultiplier = 0.2f;
+            width = 120f;
             lifetime = 40f;
             largeHit = true;
             status = SnStatusEffects.universityLaserSlow;
@@ -2232,10 +2194,40 @@ public class SnBullets implements ContentList {
             public void hitEntity(Bullet b, Hitboxc entity, float health) {
                 super.hitEntity(b, entity, health);
                 if(Mathf.chance(stunChance) && entity instanceof Unit) {
-                    Log.info("Hit " + entity);
                     ((Unit)entity).apply(SnStatusEffects.stun, stunDuration);
                 }
             }
+        };
+
+        universeEnergySphere = new EnergySphereBulletType(4f, 290f) {{
+            hitSize = 7f;
+            splashDamage = 430f;
+            splashDamageRadius = 56f;
+            lightningPeriod = 25f;
+            lightningChance = 0.3f;
+            lightningLength = 59;
+            healPercent = 10f;
+            lightningDamage = 42;
+            lifetime = 240f;
+            frontColor = Pal.surge;
+            //follow
+            followRadius = 367;
+            followFactor = 0.0375f;
+            followMultiplier = 0.5f;
+            distancePower = 4f;
+            weightPower = 0.5f;
+            minSpeedFactor = 0.75f;
+            //draw
+            count = 8;
+            timeSclMin = 0.8f;
+            timeSclMax = 2.5f;
+            lenMin = 1.5f;
+            lenMax = 4f;
+            radMin = 1f;
+            radMax = 3f;
+        }
+            @Override
+            public float continuousDamage() { return 160; };
         };
         //endregion buffer
         //region special
@@ -2344,8 +2336,103 @@ public class SnBullets implements ContentList {
             trailEffect = Fx.artilleryTrail;
         }};
         //endregion synthesis
+        //region semi-laser art
+        graphiteShell = new ArtilleryBulletType(3, 70, "shell") {{
+            hitEffect = SnFx.laserArtFx(Items.graphite.color, 360, 40, 15, 3);
+            trailEffect = SnFx.halfStarTrail;
+            knockback = 0.9f;
+            lifetime = Time.toSeconds;
+            width = height = 14;
+            collidesTiles = false;
+            collidesAir = true;
+            splashDamageRadius = 7.5f * Vars.tilesize;
+            splashDamage = damage * 0.75f;
+            backColor = frontColor.a(0.7f);
+            frontColor = Items.graphite.color;
+        }};
+        titaniumShell = new ArtilleryBulletType(3, 80, "shell") {{
+            hitEffect = SnFx.laserArtFx(Items.titanium.color, 360, 40, 15, 3);
+            trailEffect = SnFx.halfStarTrail;
+            knockback = 0.9f;
+            lifetime = Time.toSeconds;
+            width = height = 14;
+            collidesTiles = false;
+            collidesAir = true;
+            splashDamageRadius = 3 * Vars.tilesize;
+            splashDamage = damage * 0.5f;
+            backColor = frontColor.a(0.7f);
+            frontColor = Items.titanium.color;
+            status = StatusEffects.freezing;
+            statusDuration = 0.5f * Time.toSeconds;
+        }};
+        thoriumShell = new ArtilleryBulletType(3, 100, "shell") {{
+            hitEffect = SnFx.laserArtFx(Items.thorium.color, 360, 40, 15, 3);
+            trailEffect = SnFx.halfStarTrail;
+            knockback = 0.9f;
+            lifetime = Time.toSeconds;
+            width = height = 14;
+            collidesTiles = false;
+            collidesAir = true;
+            splashDamageRadius = 15 * Vars.tilesize;
+            splashDamage = damage * 1.5f;
+            backColor = frontColor.a(0.7f);
+            frontColor = Items.thorium.color;
+            status = StatusEffects.blasted;
+            statusDuration = 3 * Time.toSeconds;
+        }};
+        lightBurstMissile = new ArtilleryBulletType(3, 100, "shell") {{
+            hitEffect = SnFx.laserArtFx(SnPal.standardMissile, 360, 40, 15, 3);
+            trailEffect = SnFx.lbmTrail;
+            knockback = 0.9f;
+            lifetime = Time.toSeconds;
+            width = height = 14;
+            collidesTiles = false;
+            collidesAir = true;
+            splashDamageRadius = 15 * Vars.tilesize;
+            splashDamage = damage * 1.5f;
+            backColor = frontColor.a(0.7f);
+            frontColor = SnPal.standardMissile;
+            status = SnStatusEffects.radiation;
+            statusDuration = 1.9f * Time.toSeconds;
+        }};
+        //endregion semi-laser art
         //region laser art
-        laserArtThorium = new ArtilleryBulletType(5, 200, "shell") {{
+        raMissile = new ArtilleryBulletType(4, 150, "shell") {{
+            hitEffect = SnFx.fieldHit;
+            despawnEffect = Fx.none;
+            knockback = 0.9f;
+            lifetime = 110f;
+            width = height = 25f;
+            collidesTiles = false;
+            collidesAir = true;
+            splashDamageRadius = 5.5f * Vars.tilesize;
+            splashDamage = damage * 0.25f;
+            backColor = Pal.shield.cpy();
+            frontColor = Pal.shield;
+            status = SnStatusEffects.radiation;
+            statusDuration = 3* Time.toSeconds;
+        }
+        @Override
+        public void update(Bullet b) {
+            for (int i = 0; i < 3; i++) Lightning.create(b, lightningColor, lightningDamage < 0 ? damage : lightningDamage, b.x, b.y, b.rotation() + Mathf.range(lightningCone/2) + lightningAngle, lightningLength + Mathf.random(lightningLengthRand));
+            }};
+        empMissile = new ArtilleryBulletType(4, 80, "shell") {{
+            hitEffect = SnFx.empHit;
+            despawnEffect = Fx.none;
+            knockback = 0.9f;
+            lifetime = 110f;
+            width = height = 25f;
+            collidesTiles = false;
+            collidesAir = true;
+            splashDamageRadius = 8 * Vars.tilesize;
+            splashDamage = damage * 0.15f;
+            backColor = SnPal.redBomb;
+            frontColor = SnPal.redBombBack;
+            status = SnStatusEffects.radiation;
+        }};
+        //endregion laser art
+        //region power art
+        burstMissile = new ArtilleryBulletType(5, 200, "shell") {{
             knockback = 3.4f;
             lifetime = 77;
             width = height = 12;
@@ -2353,10 +2440,11 @@ public class SnBullets implements ContentList {
             splashDamage = 430;
             fragBullets = 6;
             fragCone = 360;
+
             fragBullet = new ContinuousLaserBulletType(9.1f) {{
                 length = 35;
             }};
-            despawnEffect = hitEffect = SnFx.laserArtHit;
+            //despawnEffect = hitEffect = SnFx.powerArtFx(trailColor);
 
             trailColor = Items.thorium.color;
             trailWidth = 4;
@@ -2365,67 +2453,7 @@ public class SnBullets implements ContentList {
             status = StatusEffects.blasted;
             statusDuration = 180;
         }};
-        laserArtPhase = new ArtilleryBulletType(5, 300, "shell") {{
-            knockback = 0.2f;
-            lifetime = 77;
-            width = height = 12;
-            splashDamageRadius = 3 * Vars.tilesize;
-            splashDamage = 150;
-            fragBullets = 6;
-            fragCone = 360;
-            fragBullet = new ContinuousLaserBulletType(8.75f) {{
-                length = 55;
-            }};
-            despawnEffect = hitEffect = SnFx.laserArtHit;
-
-            trailColor = Items.phaseFabric.color;
-            trailWidth = 4;
-            trailLength = 7;
-            trailEffect = Fx.artilleryTrail;
-            status = StatusEffects.corroded;
-            statusDuration = 300;
-        }};
-        laserArtReneubite = new ArtilleryBulletType(5, 450, "shell") {{
-            knockback = 2;
-            lifetime = 77;
-            width = height = 12;
-            splashDamageRadius = 6.25f * Vars.tilesize;
-            splashDamage = 100;
-            fragBullets = 6;
-            fragCone = 360;
-            fragBullet = new ContinuousLaserBulletType(20) {{
-                length = 40;
-            }};
-            despawnEffect = hitEffect = SnFx.laserArtHit;
-
-            trailColor = SnItems.reneubite.color;
-            trailWidth = 4;
-            trailLength = 7;
-            trailEffect = Fx.artilleryTrail;
-            status = StatusEffects.electrified;
-            statusDuration = 180;
-        }};
-        laserArtEnojie = new ArtilleryBulletType(5, 920, "shell") {{
-            knockback = 1;
-            lifetime = 77;
-            width = height = 12;
-            splashDamageRadius = 6.25f * Vars.tilesize;
-            splashDamage = 250;
-            fragBullets = 6;
-            fragCone = 360;
-            fragBullet = new ContinuousLaserBulletType(40) {{
-                length = 60;
-            }};
-            despawnEffect = hitEffect = SnFx.laserArtHit;
-
-            trailColor = SnItems.enojie.color;
-            trailWidth = 4;
-            trailLength = 7;
-            trailEffect = Fx.artilleryTrail;
-            status = SnStatusEffects.electricalShort;
-            statusDuration = 120;
-        }};
-        //endregion laser art
+        //endregion power art
         //endregion special
         //region t6 vanilla
         t6sapBullet = new SapFlyingBulletType(9f, 120){{

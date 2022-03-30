@@ -14,7 +14,9 @@ import sunset.world.blocks.defense.projectors.DeflectorProjector;
 import static mindustry.type.ItemStack.with;
 
 public class SnProjectors implements ContentList {
-    public static Block hugeRestoringDome, forceDome, deflectorProjector;
+    public static Block
+    hugeRestoringDome, forceDome, deflectorProjector,
+    testStand;
 
     @Override
     public void load() {

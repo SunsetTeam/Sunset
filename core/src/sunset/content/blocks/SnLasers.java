@@ -6,8 +6,10 @@ import mindustry.type.Category;
 import mindustry.type.ItemStack;
 import mindustry.world.Block;
 import mindustry.world.meta.BuildVisibility;
-import sunset.content.SnItems;
-import sunset.world.blocks.laser.*;
+import sunset.world.blocks.laser.LaserConsumer;
+import sunset.world.blocks.laser.LaserCrafter;
+import sunset.world.blocks.laser.LaserGenerator;
+import sunset.world.blocks.laser.LaserNode;
 
 public class SnLasers implements ContentList {
     public static Block laserNode, laserCrafter, laserGenerator, laserSuppressor;

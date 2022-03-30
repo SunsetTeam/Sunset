@@ -1,5 +1,6 @@
 package sunset.world.blocks.defense.turrets;
 
+import acontent.world.meta.AStats;
 import arc.Core;
 import arc.func.Cons;
 import arc.graphics.Blending;
@@ -15,14 +16,20 @@ import mindustry.ui.Bar;
 import mindustry.world.blocks.defense.turrets.ItemTurret;
 import mma.graphics.ADrawf;
 import sunset.SnVars;
+import sunset.content.affilitiation.SnBranches;
+import sunset.content.affilitiation.SnGuilds;
+import sunset.content.affilitiation.SnSubGuilds;
 import sunset.utils.Utils;
+import sunset.world.meta.SnStat;
+import sunset.world.meta.SnStatValues;
 
 import static mindustry.Vars.tilesize;
 
 /** Item turret with useful things.
  * Features:<p>
  * 1) reload bar<p>
- * 2) power shot
+ * 2) power shot<p>
+ * 3) guilds
  * */
 public class ModItemTurret extends ItemTurret {
     @Load("@-light")
@@ -34,23 +41,23 @@ public class ModItemTurret extends ItemTurret {
     public int chargeShots;
     public boolean reloadBar = true;
 
-    public String faction;
-    public String subFaction;
-    public String branch;
+    public SnGuilds guild = SnGuilds.none;
+    public SnSubGuilds subGuild = SnSubGuilds.none;
+    public SnBranches branch = SnBranches.none;
+    public AStats aStats = new AStats();
 
     public ModItemTurret(String name) {
         super(name);
-        this.faction = "null";
-        this.subFaction = "null";
-        this.branch = "null";
         drawLight = false;
+        stats = aStats.copy(stats);
     }
-
     @Override
     public void setStats() {
         super.setStats();
+        if (guild != SnGuilds.none) aStats.add(SnStat.guild, SnStatValues.affil(guild));
+        if (subGuild != SnSubGuilds.none) aStats.add(SnStat.subGuild, SnStatValues.affil(subGuild));
+        if (branch != SnBranches.none) aStats.add(SnStat.branch, SnStatValues.affil(branch));
     }
-
     @Override
     public void setBars() {
         super.setBars();
@@ -62,7 +69,6 @@ public class ModItemTurret extends ItemTurret {
             ));
         }
     }
-
     @Override
     public void drawPlace(int x, int y, int rotation, boolean valid) {
         Drawf.dashCircle(x * tilesize + offset, y * tilesize + offset, range, Pal.placing);
@@ -102,7 +108,6 @@ public class ModItemTurret extends ItemTurret {
 
             if (debug) ADrawf.drawText(this, "Total Shoots: " + totalShoots);
         }
-
         @Override
         protected void updateShooting() {
             if (powerBullet != null) {
@@ -118,13 +123,11 @@ public class ModItemTurret extends ItemTurret {
                 super.updateShooting();
             }
         }
-
         @Override
         protected void shoot(BulletType type) {
             if (powerBullet != null) isShoot = false;
             super.shoot(type);
         }
-
         @Override
         public void bullet(BulletType type, float angle) {
             if (powerBullet != null && totalShoots == 0) {
