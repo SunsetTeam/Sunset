@@ -13,6 +13,7 @@ import mindustry.content.StatusEffects;
 import mindustry.content.UnitTypes;
 import mindustry.ctype.ContentList;
 import mindustry.entities.bullet.*;
+import mindustry.entities.effect.ParticleEffect;
 import mindustry.gen.*;
 import mindustry.graphics.Layer;
 import mindustry.graphics.Pal;
@@ -1736,7 +1737,7 @@ public class SnUnitTypes implements ContentList{
                     }});
         }};
 
-        hoverTest = new HoverUnitType("hover-test"){{
+        hoverTest = new ParticleUnitType("hover-test"){{
             armor = 8f;
             health = 6000;
             speed = 1.2f;
@@ -1759,6 +1760,12 @@ public class SnUnitTypes implements ContentList{
             hoverBloomColor = Pal.darkestGray;
 
             ammoType = new PowerAmmoType(3000);
+
+            particleEffects.add(
+                    new ParticleEffect(){{
+
+                    }}
+            );
 
             weapons.add(
                     new Weapon(){{
