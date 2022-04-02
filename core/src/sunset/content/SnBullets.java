@@ -11,6 +11,7 @@ import arc.util.Time;
 import mindustry.Vars;
 import mindustry.content.*;
 import mindustry.ctype.ContentList;
+import mindustry.entities.Effect;
 import mindustry.entities.Lightning;
 import mindustry.entities.Units;
 import mindustry.entities.bullet.*;
@@ -72,7 +73,7 @@ public class SnBullets implements ContentList {
         heavyCoalFlame, heavyPyraFlame, flameidFlame,
         wheel5Flame,
         //reverse-bullets
-        naturiteReversBullet, forsReversBullet, nobiumReversBullet,
+        naturiteReversBulletBack, naturiteReversBullet, forsReversBulletBack, forsReversBullet, nobiumReversBulletBack, nobiumReversBullet,
         infernoFlame,//unused
         //copters
         basicHelicopterGun,
@@ -1642,70 +1643,120 @@ public class SnBullets implements ContentList {
         }};//unused
         //endregion flame
         //region reverse-bullets
-        naturiteReversBullet = new ReverseBulletType(2.6f, 95f) {{
+
+        naturiteReversBulletBack = new ReverseBulletType(3f, 95f) {{
             sprite = "sunset-copter-bomb";
-            other = naturiteReversBullet;
-            reverseNew = true;
-            reversAngle = 180;
             width = 15f;
-            height = 15;
-            lifetime = 235;
+            height = 15f;
+            lifetime = 60;
             homingPower = 0.05f;
             homingRange = 50f;
             spin = 5f;
             shrinkX = 0f;
             shrinkY = 0f;
-            trailWidth = 0;
-            trailLength = 0;
             pierceCap = 6;
             rotateMag = 5;
-            rotRight = true;
             frontColor = SnPal.copterLaser;
             backColor = SnPal.copterLaserBack;
-            drag = 0.0025f;
+            drag = 0.02f;
         }};
 
-        forsReversBullet = new ReverseBulletType(2.6f, 100f) {{
+        naturiteReversBullet = new ReverseBulletType(3f, 97f) {{
             sprite = "sunset-copter-bomb";
-            other = forsReversBullet;
             width = 15f;
-            height = 15;
-            lifetime = 235;
+            height = 15f;
+            lifetime = 70;
             homingPower = 0.05f;
             homingRange = 50f;
             spin = 5f;
             shrinkX = 0f;
             shrinkY = 0f;
-            trailWidth = 0;
-            trailLength = 0;
+            pierceCap = 6;
+            rotateMag = 5;
+            frontColor = SnPal.copterLaser;
+            backColor = SnPal.copterLaserBack;
+            drag = 0.02f;
+        }
+            public void despawned(Bullet b){
+                naturiteReversBulletBack.create(b, b.x, b.y, b.rotation() - 180, 1f, 1f);
+            }
+        };
+
+        forsReversBulletBack = new ReverseBulletType(3f, 110f) {{
+            sprite = "sunset-copter-bomb";
+            width = 15f;
+            height = 15;
+            lifetime = 70;
+            homingPower = 0.05f;
+            homingRange = 50f;
+            spin = 5f;
+            shrinkX = 0f;
+            shrinkY = 0f;
             pierceCap = 4;
             rotateMag = 5;
-            rotRight = true;
             frontColor = SnPal.redBomb;
             backColor = SnPal.redBombBack;
-            drag = 0.0025f;
+            drag = 0.02f;
         }};
 
-        nobiumReversBullet = new ReverseBulletType(2.6f, 135f) {{
+        forsReversBullet = new ReverseBulletType(3f, 110f) {{
             sprite = "sunset-copter-bomb";
-            other = nobiumReversBullet;
             width = 15f;
             height = 15;
-            lifetime = 235;
+            lifetime = 70;
             homingPower = 0.05f;
             homingRange = 50f;
             spin = 5f;
             shrinkX = 0f;
             shrinkY = 0f;
-            trailWidth = 0;
-            trailLength = 0;
+            pierceCap = 4;
+            rotateMag = 5;
+            frontColor = SnPal.redBomb;
+            backColor = SnPal.redBombBack;
+            drag = 0.02f;
+        }
+            public void despawned(Bullet b){
+                forsReversBulletBack.create(b, b.x, b.y, b.rotation() - 180, 1f, 1f);
+            }
+        };
+
+        nobiumReversBulletBack = new ReverseBulletType(3f, 135f) {{
+            sprite = "sunset-copter-bomb";
+            width = 15f;
+            height = 15;
+            lifetime = 70;
+            homingPower = 0.2f;
+            homingRange = 50f;
+            spin = 5f;
+            shrinkX = 0f;
+            shrinkY = 0f;
             pierceCap = 7;
             rotateMag = 5;
-            rotRight = true;
             frontColor = SnPal.nobiumBullet;
             backColor = SnPal.nobiumBulletBack;
-            drag = 0.0025f;
+            drag = 0.02f;
         }};
+
+        nobiumReversBullet = new ReverseBulletType(3f, 135f) {{
+            sprite = "sunset-copter-bomb";
+            width = 15f;
+            height = 15;
+            lifetime = 70;
+            homingPower = 0.2f;
+            homingRange = 50f;
+            spin = 5f;
+            shrinkX = 0f;
+            shrinkY = 0f;
+            pierceCap = 7;
+            rotateMag = 5;
+            frontColor = SnPal.nobiumBullet;
+            backColor = SnPal.nobiumBulletBack;
+            drag = 0.02f;
+        }
+            public void despawned(Bullet b){
+                nobiumReversBulletBack.create(b, b.x, b.y, b.rotation() - 180, 1f, 1f);
+            }
+        };
         //endregion reverse-bullets
         //region copters
         //T1

@@ -158,12 +158,12 @@ public class SnFx {
         }
     }),
 
-    smallEnergySphereCharge = new Effect(17f, e -> {
+    smallEnergySphereCharge = new Effect(16f, e -> {
         color(SnPal.redBombBack);
         Fill.circle(e.x, e.y, e.fin() * 2f);
     }),
 
-    mediumEnergySphereCharge = new Effect(19f, e -> {
+    mediumEnergySphereCharge = new Effect(17f, e -> {
         color(SnPal.redBombBack);
         Fill.circle(e.x, e.y, e.fin() * 4f);
     }),
@@ -506,7 +506,7 @@ public class SnFx {
     }),
 
     blueAimMissileTrail = new Effect(30f, 78f, e -> {
-        color(SnPal.blueBullet, Color.blue,  e.fin() * e.fin());
+        color(SnPal.blueBullet, SnPal.blueBulletBack, e.fin() * e.fin());
 
         randLenVectors(e.id, 8, 1.4f + e.finpow() * 32, e.rotation + 180, 12f, (x, y) -> {
             Fill.circle(e.x + x, e.y + y, 0.37f + e.fout() * 2f);

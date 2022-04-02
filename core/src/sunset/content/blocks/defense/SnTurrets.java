@@ -708,7 +708,7 @@ public class SnTurrets implements ContentList {
             size = 6;
             shootCone = 24f;
             shootSound = Sounds.shootBig;
-            maxShootTime = 5f * Time.toSeconds;
+            maxShootTime = 3f * Time.toSeconds;
 
             health = 160 * size * size;
             coolantUsage = 0.9f;
