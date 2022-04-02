@@ -106,13 +106,13 @@ public class SnBullets implements ContentList {
     public void load() {
         //region shell
         //region standard
-        heavyStandardDense = new BasicBulletType(8f, 105, "bullet") {{
+        heavyStandardDense = new BasicBulletType(8f, 130, "bullet") {{
             hitSize = 5;
             width = 19f;
             height = 24f;
             shootEffect = Fx.shootBig;
         }};
-        heavyStandardThorium = new BasicBulletType(9.4f, 180, "bullet") {{
+        heavyStandardThorium = new BasicBulletType(9.4f, 220, "bullet") {{
             hitSize = 7;
             width = 20f;
             height = 27f;
@@ -121,7 +121,7 @@ public class SnBullets implements ContentList {
             pierceBuilding = true;
             knockback = 0.7f;
         }};
-        heavyStandardIncendiary = new BasicBulletType(7f, 115, "bullet") {{
+        heavyStandardIncendiary = new BasicBulletType(7f, 130, "bullet") {{
             hitSize = 7;
             width = 19f;
             height = 24f;
@@ -134,7 +134,7 @@ public class SnBullets implements ContentList {
             pierceBuilding = true;
             knockback = 0.9f;
         }};
-        standardBlastBig = new BasicBulletType(9f, 140, "bullet") {{
+        standardBlastBig = new BasicBulletType(9f, 170, "bullet") {{
             hitSize = 5;
             width = 19f;
             height = 24f;
@@ -147,7 +147,7 @@ public class SnBullets implements ContentList {
             pierceBuilding = true;
             knockback = 0.7f;
         }};
-        standardForsBig = new BasicBulletType(7.8f, 155, "bullet") {{
+        standardForsBig = new BasicBulletType(7.8f, 185, "bullet") {{
             hitSize = 7;
             width = 19f;
             height = 24f;
@@ -285,7 +285,7 @@ public class SnBullets implements ContentList {
             makeFire = true;
             collidesAir = false;
         }};
-        reneubiteBlast = new BasicBulletType(9f, 190) {{
+        reneubiteBlast = new BasicBulletType(9f, 245) {{
             hitSize = 7;
             width = height = 25;
             frontColor = SnPal.renBlast1;
@@ -1658,7 +1658,7 @@ public class SnBullets implements ContentList {
             rotateMag = 5;
             frontColor = SnPal.copterLaser;
             backColor = SnPal.copterLaserBack;
-            drag = 0.02f;
+            drag = 0.01f;
         }};
 
         naturiteReversBullet = new ReverseBulletType(3f, 97f) {{
@@ -1675,7 +1675,7 @@ public class SnBullets implements ContentList {
             rotateMag = 5;
             frontColor = SnPal.copterLaser;
             backColor = SnPal.copterLaserBack;
-            drag = 0.02f;
+            drag = 0.01f;
         }
             public void despawned(Bullet b){
                 naturiteReversBulletBack.create(b, b.x, b.y, b.rotation() - 180, 1f, 1f);
@@ -1696,7 +1696,7 @@ public class SnBullets implements ContentList {
             rotateMag = 5;
             frontColor = SnPal.redBomb;
             backColor = SnPal.redBombBack;
-            drag = 0.02f;
+            drag = 0.01f;
         }};
 
         forsReversBullet = new ReverseBulletType(3f, 110f) {{
@@ -1713,7 +1713,7 @@ public class SnBullets implements ContentList {
             rotateMag = 5;
             frontColor = SnPal.redBomb;
             backColor = SnPal.redBombBack;
-            drag = 0.02f;
+            drag = 0.01f;
         }
             public void despawned(Bullet b){
                 forsReversBulletBack.create(b, b.x, b.y, b.rotation() - 180, 1f, 1f);
@@ -1734,7 +1734,7 @@ public class SnBullets implements ContentList {
             rotateMag = 5;
             frontColor = SnPal.nobiumBullet;
             backColor = SnPal.nobiumBulletBack;
-            drag = 0.02f;
+            drag = 0.01f;
         }};
 
         nobiumReversBullet = new ReverseBulletType(3f, 135f) {{
@@ -1751,7 +1751,7 @@ public class SnBullets implements ContentList {
             rotateMag = 5;
             frontColor = SnPal.nobiumBullet;
             backColor = SnPal.nobiumBulletBack;
-            drag = 0.02f;
+            drag = 0.01f;
         }
             public void despawned(Bullet b){
                 nobiumReversBulletBack.create(b, b.x, b.y, b.rotation() - 180, 1f, 1f);

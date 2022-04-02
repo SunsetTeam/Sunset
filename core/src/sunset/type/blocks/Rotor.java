@@ -23,7 +23,7 @@ public class Rotor {
     public int rotorCount = 1;
     public boolean underUnit=false;
 
-    public float smokeChance = 0.3f;
+    public float smokeChance = 0.2f;
     public float smokeX = 0f;
     public float smokeY = 0f;
     public Effect smokeEffect = Fx.fallSmoke;
