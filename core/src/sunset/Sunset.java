@@ -108,9 +108,6 @@ public class Sunset extends MMAMod{
             }
         };*/
         super.loadContent();
-        Events.on(ClientLoadEvent.class, e -> {
-            Blocks.launchPad.unlock();
-        });
     }
 
 }
