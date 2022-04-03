@@ -4,6 +4,7 @@ import acontent.ui.*;
 import arc.*;
 import arc.struct.*;
 import mindustry.*;
+import mindustry.content.Blocks;
 import mindustry.core.*;
 import mindustry.ctype.*;
 import mindustry.game.EventType.*;
@@ -107,6 +108,9 @@ public class Sunset extends MMAMod{
             }
         };*/
         super.loadContent();
+        Events.on(ClientLoadEvent.class, e -> {
+            Blocks.launchPad.unlock();
+        });
     }
 
 }
