@@ -46,7 +46,7 @@ public class WeatherElements {
         for (int i = 0; i < Math.max(1, Math.round(Math.random() * lightning)); i++) {
             effects(x, y);
             Damage.damage(x, y, lightningDamageRadius, lightningDamage);
-            Lightning.create(Team.derelict, lightningColor, lightningDamage, x, y, (float) (Mathf.range(angleRand) * Math.random()), lightningLength + Mathf.random(lightningLengthRand));
+            Lightning.create(Team.derelict, lightningColor, lightningDamage, x - Vars.world.unitWidth(), y - Vars.world.unitHeight(), (float) (Mathf.range(angleRand) * Math.random()), lightningLength + Mathf.random(lightningLengthRand));
         }
     }
 }
