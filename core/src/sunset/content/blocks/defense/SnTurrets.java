@@ -693,7 +693,7 @@ public class SnTurrets implements ContentList {
             SnItems.fors, SnBullets.standardForsBig,
             SnItems.reneubite, SnBullets.reneubiteBlast
             );
-            reloadTime = 10f;
+            reloadTime = 4f;
             coolantMultiplier = 0.5f;
             restitution = 0.15f;
             ammoUseEffect = Fx.casing3;
