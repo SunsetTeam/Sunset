@@ -46,6 +46,7 @@ public class SnBullets implements ContentList {
         //artillery
         wheel4Artillery,
         plasmaArt, rocketArt, bigRocketArt, heavyRocketArt,//unused
+        shotgunArt,
         //flak
         sporePodPoisonBullet, bigSporePodPoison, heavyPlastaniumPoison,
         naturitePoisonBullet, bigNaturitePoison, heavyNaturitePoison,
@@ -59,7 +60,7 @@ public class SnBullets implements ContentList {
         laserGun2,//unused
         laserCGun, bigCLaserGun,//unused
         //lightning
-        defLight, powerLight,
+        defLight, powerLight, shotArtLight,
         //sap
         leadSap, sporeSap, planatriumSap,
         //t6 vanilla
@@ -802,6 +803,15 @@ public class SnBullets implements ContentList {
             hitSound = Sounds.explosion;
             trailChance = 0.2f;
         }};//unused
+        shotgunArt = new ArtilleryBulletType(4f, 40, "shell"){{
+            lifetime = 40f;
+            width = 10f;
+            height = 13f;
+            trailChance = 0.3f;
+            inaccuracy = 8f;
+            backColor = Pal.bulletYellowBack;
+            frontColor = Pal.bulletYellow;
+        }};
         //endregion  artillery
         //region flak
         sporePodPoisonBullet = new FlakBulletType(4f, 5) {{
@@ -1392,6 +1402,14 @@ public class SnBullets implements ContentList {
             shootEffect = hitEffect = despawnEffect = smokeEffect = Fx.none;
             lightningColor = SnPal.redfire1;
         }};
+        shotArtLight = new ArtilleryLightningBulletType(50f){{
+            hitShake = 3f;
+            lightning = 3;
+            lightningColor = SnPal.yellowTrailBack;
+            maxRange = 200;
+            hitEffect = SnFx.lbHit;
+            despawnEffect = Fx.none;
+        }};;
         //endregion lightning
         //region sap
         leadSap = new SapBulletType() {{

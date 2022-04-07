@@ -6,6 +6,7 @@ import arc.struct.EnumSet;
 import arc.struct.Seq;
 import arc.util.Time;
 import mindustry.Vars;
+import mindustry.content.Blocks;
 import mindustry.content.Fx;
 import mindustry.content.Items;
 import mindustry.content.Liquids;
@@ -38,10 +39,10 @@ public class SnTurrets implements ContentList {
     excellence, carbine, pulsation, reflection, discharge,
 
     //3x3
-    major, burner, eternity, hemrus, trigger,
+    major, burner, eternity, hemrus, artLightTurret, trigger,
 
     //4x4
-    admiral, scorpio, ammirus, flood, chain, rockfall,
+    shotgunTurret, admiral, scorpio, ammirus, flood, chain, rockfall,
     drr,
 
     //5x5
@@ -326,6 +327,24 @@ public class SnTurrets implements ContentList {
             reloadBar = false;
             guild = SnGuilds.aymirus;
         }};
+        artLightTurret = new ModPowerTurret("discharge"){{
+            requirements(Category.turret, with(Items.silicon, 150, Items.graphite, 75));
+            shootType = SnBullets.shotArtLight;
+            shots = 2;
+            inaccuracy = 6f;
+            reloadTime = 40f;
+            shootCone = 10f;
+            rotateSpeed = 6f;
+            powerUse = 4f;
+            targetAir = true;
+            range = 170f;
+            shootEffect = Fx.lightningShoot;
+            recoilAmount = 1f;
+            size = 2;
+            health = 460;
+            shootSound = Sounds.spark;
+            reloadBar = true;
+        }};
         trigger = new ModPowerTurret("trigger") {{
             requirements(Category.turret, with(Items.silicon, 275, Items.titanium, 125, SnItems.enojie, 45));
             size = 3;
@@ -339,6 +358,24 @@ public class SnTurrets implements ContentList {
         }};
         //endregion 3x3
         //region 4x4
+        shotgunTurret = new ModItemTurret("shotgun-turret"){{
+            requirements(Category.turret, with(Items.copper, 660, SnItems.fors, 400, Items.silicon, 300));
+            ammo(
+                    Items.copper, SnBullets.shotgunArt
+            );
+            shots = 5;
+            inaccuracy = 8f;
+            reloadTime = 60f;
+            ammoEjectBack = 5f;
+            ammoUseEffect = Fx.casing3Double;
+            ammoPerShot = 2;
+            cooldown = 0.03f;
+            restitution = 0.02f;
+            recoilAmount = 6f;
+            shootShake = 2f;
+            range = 170f;
+            minRange = 25f;
+        }};
         admiral = new MultiBarrelItemTurret("admiral") {{
             requirements(Category.turret, with(Items.copper, 1100, Items.titanium, 800, Items.silicon, 600, Items.surgeAlloy, 300, SnItems.naturite, 190));
             ammo(
