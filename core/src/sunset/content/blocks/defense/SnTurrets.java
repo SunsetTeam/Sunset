@@ -327,7 +327,7 @@ public class SnTurrets implements ContentList {
             reloadBar = false;
             guild = SnGuilds.aymirus;
         }};
-        artLightTurret = new ModPowerTurret("discharge"){{
+        artLightTurret = new ModPowerTurret("art-light-turret"){{
             requirements(Category.turret, with(Items.silicon, 150, Items.graphite, 75));
             shootType = SnBullets.shotArtLight;
             shots = 2;
