@@ -17,11 +17,13 @@ import mindustry.gen.Sounds;
 import mindustry.graphics.Pal;
 import mindustry.type.Category;
 import mindustry.world.Block;
+import mindustry.world.blocks.defense.turrets.PowerTurret;
 import mindustry.world.consumers.ConsumeCoolant;
 import mindustry.world.meta.BlockFlag;
 import mindustry.world.meta.BuildVisibility;
 import sunset.content.*;
 import sunset.content.affilitiation.SnGuilds;
+import sunset.entities.bullet.AcceleratingLaser;
 import sunset.entities.bullet.EnergySphereBulletType;
 import sunset.entities.bullet.LightningContinuousLaserBulletType;
 import sunset.graphics.SnPal;
@@ -33,7 +35,7 @@ import static mindustry.type.ItemStack.with;
 public class SnTurrets implements ContentList {
     public static Block
     //1x1
-    sting, spine, eagle,
+    accelLaserTurret, sting, spine, eagle,
 
     //2x2
     excellence, carbine, pulsation, reflection, discharge,
@@ -67,6 +69,25 @@ public class SnTurrets implements ContentList {
     @Override
     public void load() {
         //region 1x1
+        accelLaserTurret = new ModPowerTurret("accel-laser-turret"){{
+            requirements(Category.turret, with(SnItems.fors, 50, Items.lead, 30));
+            size = 1;
+            powerUse = 9f;
+            range = 340f;
+            reloadTime = 18f;
+            recoilAmount = 0f;
+            targetAir = true;
+            shots = 1;
+            inaccuracy = 5f;
+            shootType = new AcceleratingLaser(20f) {{
+                colors = new Color[]{Pal.meltdownHit.cpy().a(0.4f), Pal.meltdownHit, Color.white};
+                despawnEffect = Fx.none;
+                lifetime = 70f;
+                collidesAir = false;
+                length = 130f;
+                width = 20f;
+            }};
+        }};
         sting = new ModPowerTurret("sting") {{
             requirements(Category.turret, with(SnItems.fors, 50, Items.lead, 30));
             health = 400;
