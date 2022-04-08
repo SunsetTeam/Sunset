@@ -12,7 +12,6 @@ import mindustry.content.Fx;
 import mindustry.entities.Damage;
 import mindustry.entities.bullet.LaserBulletType;
 import mindustry.gen.Bullet;
-import mindustry.gen.Healthc;
 import mindustry.graphics.Drawf;
 
 public class AcceleratingLaser extends LaserBulletType {
@@ -49,7 +48,7 @@ public class AcceleratingLaser extends LaserBulletType {
             if (healPercent > 0) {
                 var build = Vars.world.buildWorld(x, y);
                 if (build != null && build.team == b.team) {
-                    if (build instanceof Healthc && build.damaged()) {
+                    if (build.damaged()) {
                         build.heal(healPercent / 100 * build.maxHealth);
                         Fx.healBlockFull.at(build.getX(), build.getY(), build.block.size, colors[0]);
                     }
@@ -60,18 +59,16 @@ public class AcceleratingLaser extends LaserBulletType {
 
     @Override
     public void draw(Bullet b) {
-
         float x = b.x + Angles.trnsx(b.rotation(), length * interp.apply(b.fin()));
-        float y = b.y + Angles.trnsy(b.rotation(), this.length * this.interp.apply(b.fin()));
-        //float sizeDiff = Mathf.absin(Time.time, 8, 1);
+        float y = b.y + Angles.trnsy(b.rotation(), length * interp.apply(b.fin()));
         float cwidth = width;
         float compound = 1f;
 
         for(Color color : colors) {
             Draw.color(color);
             Lines.stroke((cwidth *= lengthFalloff) * b.fout());
-            Lines.lineAngle(b.x, b.y, b.rotation(), length * this.interp.apply(b.fin()));
-            Drawf.tri(x, y, Lines.getStroke() * 1.22f, width, b.rotation());
+            Lines.lineAngle(b.x, b.y, b.rotation(), length * interp.apply(b.fin()));
+            Drawf.tri(x, y, Lines.getStroke() * 1.22f, cwidth * 2f + width / 2f, b.rotation());
         }
 
         Fill.circle(b.x, b.y, 1f * cwidth * b.fout());

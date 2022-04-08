@@ -85,7 +85,7 @@ public class SnTurrets implements ContentList {
                 lifetime = 70f;
                 collidesAir = false;
                 length = 130f;
-                width = 20f;
+                width = 30f;
             }};
         }};
         sting = new ModPowerTurret("sting") {{
