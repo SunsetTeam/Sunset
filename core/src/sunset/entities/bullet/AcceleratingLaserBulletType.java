@@ -14,10 +14,10 @@ import mindustry.entities.bullet.LaserBulletType;
 import mindustry.gen.Bullet;
 import mindustry.graphics.Drawf;
 
-public class AcceleratingLaser extends LaserBulletType {
+public class AcceleratingLaserBulletType extends LaserBulletType {
     public Interp interp = Interp.pow5In;
 
-    public AcceleratingLaser(float damage){
+    public AcceleratingLaserBulletType(float damage){
         this.damage = damage;
         this.speed = 0f;
 
@@ -38,7 +38,8 @@ public class AcceleratingLaser extends LaserBulletType {
 
     @Override
     public void update(Bullet b) {
-        float x = b.x + Angles.trnsx(b.rotation(), length * interp.apply(b.fin())), y = b.y + Angles.trnsy(b.rotation(), this.length * interp.apply(b.fin()));
+        float x = b.x + Angles.trnsx(b.rotation(), length * interp.apply(b.fin())) ;
+        float y = b.y + Angles.trnsy(b.rotation(), this.length * interp.apply(b.fin()));
         if (b.timer.get(0, 6.5F)) {
             despawnEffect.at(x, y, b.rotation() + 90);
             despawnEffect.at(x, y, b.rotation() - 90);

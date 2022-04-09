@@ -6,7 +6,6 @@ import arc.struct.EnumSet;
 import arc.struct.Seq;
 import arc.util.Time;
 import mindustry.Vars;
-import mindustry.content.Blocks;
 import mindustry.content.Fx;
 import mindustry.content.Items;
 import mindustry.content.Liquids;
@@ -17,13 +16,12 @@ import mindustry.gen.Sounds;
 import mindustry.graphics.Pal;
 import mindustry.type.Category;
 import mindustry.world.Block;
-import mindustry.world.blocks.defense.turrets.PowerTurret;
 import mindustry.world.consumers.ConsumeCoolant;
 import mindustry.world.meta.BlockFlag;
 import mindustry.world.meta.BuildVisibility;
 import sunset.content.*;
 import sunset.content.affilitiation.SnGuilds;
-import sunset.entities.bullet.AcceleratingLaser;
+import sunset.entities.bullet.AcceleratingLaserBulletType;
 import sunset.entities.bullet.EnergySphereBulletType;
 import sunset.entities.bullet.LightningContinuousLaserBulletType;
 import sunset.graphics.SnPal;
@@ -70,16 +68,16 @@ public class SnTurrets implements ContentList {
     public void load() {
         //region 1x1
         accelLaserTurret = new ModPowerTurret("accel-laser-turret"){{
-            requirements(Category.turret, with(SnItems.fors, 50, Items.lead, 30));
+            requirements(Category.turret, with(Items.copper, 40, Items.lead, 30, Items.silicon, 20));
             size = 1;
-            powerUse = 9f;
-            range = 340f;
+            powerUse = 3f;
+            range = 130f;
             reloadTime = 18f;
             recoilAmount = 0f;
             targetAir = true;
             shots = 1;
             inaccuracy = 5f;
-            shootType = new AcceleratingLaser(20f) {{
+            shootType = new AcceleratingLaserBulletType(20f) {{
                 colors = new Color[]{Pal.meltdownHit.cpy().a(0.4f), Pal.meltdownHit, Color.white};
                 despawnEffect = Fx.none;
                 lifetime = 70f;
@@ -165,7 +163,7 @@ public class SnTurrets implements ContentList {
             shootType = SnBullets.mediumEnergySphere;
             chargeTime = 30f;
             chargeMaxDelay = 30f;
-            powerUse = 2f;
+            powerUse = 3f;
             chargeEffect = SnFx.mediumEnergySphereCharge;
         }};
         carbine = new ChainLightningTurret("carbine") {{
