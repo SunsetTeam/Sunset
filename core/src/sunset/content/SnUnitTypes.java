@@ -1757,7 +1757,6 @@ public class SnUnitTypes implements ContentList{
             range = 140f;
             targetAir = false;
             targetFlags = new BlockFlag[]{BlockFlag.battery, BlockFlag.factory, null};
-            hoverBloomColor = Pal.darkestGray;
 
             ammoType = new PowerAmmoType(3000);
 

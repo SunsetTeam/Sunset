@@ -349,7 +349,7 @@ public class SnTurrets implements ContentList {
         artLightTurret = new ModPowerTurret("art-light-turret"){{
             requirements(Category.turret, with(Items.silicon, 150, Items.graphite, 75));
             shootType = SnBullets.shotArtLight;
-            shots = 2;
+            shots = 1;
             inaccuracy = 6f;
             reloadTime = 40f;
             shootCone = 10f;
@@ -383,7 +383,8 @@ public class SnTurrets implements ContentList {
                     Items.copper, SnBullets.shotgunArt
             );
             shots = 5;
-            inaccuracy = 8f;
+            inaccuracy = 13f;
+            velocityInaccuracy = 0.2f;
             reloadTime = 60f;
             ammoEjectBack = 5f;
             ammoUseEffect = Fx.casing3Double;
