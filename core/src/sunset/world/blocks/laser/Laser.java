@@ -42,7 +42,15 @@ public class Laser {
             Tmp.v1.set(0, 0).trns(angle, offset);
             //Log.info("tmpv1\nx: @\ny: @\noffset: @\nangle: @", Tmp.v1.x, Tmp.v1.y, offset, angle);
             Draw.alpha(charge);
-            Drawf.laser(null, Core.atlas.find("minelaser"), Core.atlas.find("minelaser-end"), start.x + Tmp.v1.x, start.y + Tmp.v1.y, end.x - Tmp.v1.x, end.y - Tmp.v1.y);
+            //Log.info("dst btwn end and start: @\noffset: @", end.dst(start), offset);
+            Tmp.v2.set(end.x - Tmp.v1.x, end.y - Tmp.v1.y);
+            //if we are too close to laser, draw from start to start
+            if(Tmp.v2.dst(start) <= offset){
+                Drawf.laser(null, Core.atlas.find("minelaser"), Core.atlas.find("minelaser-end"), start.x + Tmp.v1.x, start.y + Tmp.v1.y, start.x + Tmp.v1.x, start.y + Tmp.v1.y);
+            }
+            else{
+                Drawf.laser(null, Core.atlas.find("minelaser"), Core.atlas.find("minelaser-end"), start.x + Tmp.v1.x, start.y + Tmp.v1.y, end.x - Tmp.v1.x, end.y - Tmp.v1.y);
+            }
             Draw.reset();
             //change lens drawing in drawer
             if(target instanceof LaserBlock.LaserBlockBuild b){
@@ -85,9 +93,16 @@ public class Laser {
                 //for correct drawing
                 Tmp.v1.set(start.x, start.y);
                 float len = Tmp.v1.dst(entity.x(), entity.y());
-                Tmp.v1.trns(angle, len);
-                end.x = start.x + Tmp.v1.x;
-                end.y = start.y + Tmp.v1.y;
+                //Log.info("len :@", len);
+                if(len <= 0){
+                    end = start;
+                }
+                else{
+                    Tmp.v1.trns(angle, len);
+                    end.x = start.x + Tmp.v1.x;
+                    end.y = start.y + Tmp.v1.y;
+                }
+
                 //////////////
                 //this is for laser mechanic
                 if(target instanceof LaserBlock.LaserBlockBuild b){
