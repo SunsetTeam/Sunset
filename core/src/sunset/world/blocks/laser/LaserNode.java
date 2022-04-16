@@ -58,7 +58,7 @@ public class LaserNode extends LaserBlock {
                 self = block;
                 angle = 90f;
                 length = Math.max(Vars.world.width() * 8f, Vars.world.height() * 8f);
-                offset = size * 2f;
+                offset = size * 1.5f;
                 start.set(tile.x * 8f + block.block().offset, tile.y * 8f + block.block().offset);
             }});
             //left
@@ -66,7 +66,7 @@ public class LaserNode extends LaserBlock {
                 self = block;
                 angle = 180f;
                 length = Math.max(Vars.world.width() * 8f, Vars.world.height() * 8f);
-                offset = size * 2f;
+                offset = size * 1.5f;
                 start.set(tile.x * 8f + block.block().offset, tile.y * 8f + block.block().offset);
             }});
             //right
@@ -74,7 +74,7 @@ public class LaserNode extends LaserBlock {
                 self = block;
                 angle = 0f;
                 length = Math.max(Vars.world.width() * 8f, Vars.world.height() * 8f);
-                offset = size * 2f;
+                offset = size * 1.5f;
                 start.set(tile.x * 8f + block.block().offset, tile.y * 8f + block.block().offset);
             }});
             //down
@@ -82,7 +82,7 @@ public class LaserNode extends LaserBlock {
                 self = block;
                 angle = 270f;
                 length = Math.max(Vars.world.width() * 8f, Vars.world.height() * 8f);
-                offset = size * 2f;
+                offset = size * 1.5f;
                 start.set(tile.x * 8f + block.block().offset, tile.y * 8f + block.block().offset);
             }});
             return b;
