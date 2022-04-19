@@ -11,11 +11,11 @@ public class SnLiquids implements ContentList {
     @Override
     public void load() {
      
-        burheyna = new Liquid("burheyna", Color.valueOf("BB2222")) {{
-            viscosity = 0.8f;
+        burheyna = new Liquid("burheyna", Color.valueOf("cc445b")) {{
+            viscosity = 0.7f;
             explosiveness = 0.1f;
             heatCapacity = 0.5f;
-            barColor = Color.valueOf("B52525");
+            barColor = Color.valueOf("d14960");
             effect = StatusEffects.wet;
         }};
     }

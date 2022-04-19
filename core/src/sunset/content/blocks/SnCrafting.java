@@ -32,7 +32,7 @@ public class SnCrafting implements ContentList{
     //advanced
     advancedCompressor, advancedWeaver, advancedKiln, advancedSurge, advancedCryomixer,
     //standard
-    collider, purifier, crystallizer, enojieKiln,
+    collider, purifier, crystallizer, anzarKiln, enojieKiln,
     //missile
     missilecrafter, missilePlant;
 
@@ -140,7 +140,7 @@ public class SnCrafting implements ContentList{
         //endregion advanced
         //region standard
         collider = new GenericCrafter("collider"){{
-            requirements(Category.crafting, with(Items.copper, 105, Items.titanium, 100, Items.silicon, 65, SnItems.fors, 50));
+            requirements(Category.crafting, with(Items.copper, 105, SnItems.fors, 100, Items.silicon, 65));
 
             outputItem = new ItemStack(SnItems.reneubite, 3);
             //craftEffect = SnFx.;
@@ -154,12 +154,12 @@ public class SnCrafting implements ContentList{
             ambientSound = Sounds.grinding;
             ambientSoundVolume = 0.025f;
 
-            consumes.items(with(Items.blastCompound, 3, Items.titanium, 2));
+            consumes.items(with(Items.pyratite, 3, Items.graphite, 2));
             consumes.liquid(SnLiquids.burheyna, 0.4f);
             consumes.power(3.5f);
         }};
         crystallizer = new GenericCrafter("crystallizer"){{
-            requirements(Category.crafting, with(Items.lead, 130, Items.metaglass, 110, Items.silicon, 120, Items.plastanium, 25));
+            requirements(Category.crafting, with(Items.copper, 100, Items.lead, 130, Items.metaglass, 110, Items.silicon, 120));
 
             craftEffect = SnFx.crystalyze;
             updateEffect = SnFx.crystalyzeSmall;
@@ -178,8 +178,24 @@ public class SnCrafting implements ContentList{
             consumes.liquid(SnLiquids.burheyna, 0.17f);
             consumes.power(2f);
         }};
+        anzarKiln = new GenericCrafter("anzar-kiln"){{
+            requirements(Category.crafting, with(Items.copper, 120, Items.silicon, 70, SnItems.fors, 100, SnItems.naturite, 60));
+
+            hasItems = true;
+            itemCapacity = 30;
+            outputItem = new ItemStack(SnItems.naturite, 2);
+            craftTime = 40f;
+            size = 2;
+            hasPower = true;
+            drawer = new DrawSmelter(){{
+                flameColor = Color.valueOf("F9ECA3");
+            }};
+
+            consumes.items(with(SnItems.fors, 2, SnItems.naturite, 1));
+            consumes.power(3f);
+        }};
         purifier = new GenericCrafter("purifier"){{
-            requirements(Category.crafting, with(Items.copper, 110, Items.titanium, 95, Items.silicon, 80, Items.plastanium, 65));
+            requirements(Category.crafting, with(Items.copper, 110, SnItems.fors, 95, Items.silicon, 80, SnItems.anzar, 65));
 
             outputItem = new ItemStack(SnItems.nobium, 1);
             craftEffect = Fx.pulverize;
@@ -193,11 +209,11 @@ public class SnCrafting implements ContentList{
             ambientSound = Sounds.grinding;
             ambientSoundVolume = 0.025f;
 
-            consumes.items(with(Items.titanium, 3, Items.thorium, 1, SnItems.fors, 1));
+            consumes.items(with(SnItems.anzar, 3, SnItems.planatrium, 1, SnItems.fors, 1));
             consumes.power(2.5f);
         }};
         enojieKiln = new GenericCrafter("enojie-kiln"){{
-            requirements(Category.crafting, with(Items.lead, 180, SnItems.nobium, 150, Items.graphite, 140, Items.silicon, 120, Items.surgeAlloy, 80));
+            requirements(Category.crafting, with(Items.lead, 180, SnItems.nobium, 150, Items.graphite, 140, Items.silicon, 120, SnItems.fors, 80));
 
             outputItem = new ItemStack(SnItems.enojie, 2);
             craftTime = 69f;
