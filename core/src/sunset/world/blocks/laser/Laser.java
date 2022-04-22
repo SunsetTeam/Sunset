@@ -39,7 +39,7 @@ public class Laser {
     public void draw(){
         if (enabled){
             //Log.info("draw\nangle: @\nstart: @  @\nend: @  @", angle, start.x, start.y, end.x, end.y);
-            Tmp.v1.set(0, 0).trns(angle, offset);
+            Tmp.v1.trns(angle, offset);
             //Log.info("tmpv1\nx: @\ny: @\noffset: @\nangle: @", Tmp.v1.x, Tmp.v1.y, offset, angle);
             Draw.alpha(charge);
             //Log.info("dst btwn end and start: @\noffset: @", end.dst(start), offset);
