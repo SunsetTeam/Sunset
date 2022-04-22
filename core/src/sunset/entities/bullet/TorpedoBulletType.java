@@ -13,6 +13,16 @@ import mindustry.graphics.Layer;
 public class TorpedoBulletType extends BasicBulletType {
     protected Color mColor;
     protected Color tColor = Color.valueOf("929AEA");
+    public static final Effect defaultTorpedoTrail=new Effect(30, e -> {
+        Draw.color(e.<TorpedoBulletType>data().trailColor);
+        Fill.circle(e.x, e.y, e.rotation * e.fout());
+        Draw.color(e.<TorpedoBulletType>data().tColor.a(95).clamp(), e.<TorpedoBulletType>data().mColor, 0.5f);
+        Angles.randLenVectors(e.id, 15, 1 + e.fin(), (x, y) -> {
+            Fill.circle(e.x + x, e.y + y, e.rotation * e.fin() * 1.9f);
+        });
+        //Draw.color(Pal.lightishOrange.a(25));
+        //Fill.circle(e.x, e.y, e.rotation * e.fout() / 3);
+    }).layer(Layer.floor);
 
 
     public TorpedoBulletType (float speed, float damage) {
@@ -25,26 +35,12 @@ public class TorpedoBulletType extends BasicBulletType {
         sprite = "shell";
     }
 
-    /*public Effect torpedoTrail = new Effect(30, e -> {
-        color(tColor);
-        Fill.circle(e.x, e.y, e.rotation * e.fout());
-    }).layer(Layer.floor);*/
-
-    public Effect torpedoTrail = new Effect(30, e -> {
-        Draw.color(trailColor);
-        Fill.circle(e.x, e.y, e.rotation * e.fout());
-        Draw.color(tColor.a(95).clamp(), mColor, 0.5f);
-        Angles.randLenVectors(e.id, 15, 1 + e.fin(), (x, y) -> {
-            Fill.circle(e.x + x, e.y + y, e.rotation * e.fin() * 1.9f);
-        });
-        //Draw.color(Pal.lightishOrange.a(25));
-        //Fill.circle(e.x, e.y, e.rotation * e.fout() / 3);
-    }).layer(Layer.floor);
+    public Effect torpedoTrail = defaultTorpedoTrail;
 
     @Override
     public void draw(Bullet b) {
         super.draw(b);
-        torpedoTrail.at(b.x, b.y, trailRotation ? b.rotation() : trailParam, tColor);
+        torpedoTrail.at(b.x, b.y, trailRotation ? b.rotation() : trailParam, tColor,this);
     }
     @Override
     public void update(Bullet b) {

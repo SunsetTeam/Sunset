@@ -22,7 +22,7 @@ import mindustry.game.EventType.*;
 import mindustry.graphics.Drawf;
 import mindustry.graphics.Layer;
 import mindustry.graphics.Pal;
-import sunset.entities.bullet.EnergySphereBulletType;
+import sunset.entities.bullet.*;
 import sunset.graphics.Drawm;
 import sunset.graphics.SnPal;
 import sunset.utils.test.DrawFunc;
@@ -854,7 +854,8 @@ public class SnFx {
         Draw.color(Color.valueOf("FFFFFF"));
         Floatc2 floatc21 = (v, v1) -> Lines.lineAngle(e.x + v, e.y + v1, Mathf.angle(v, v1), e.fout() * 1.5f);
         Angles.randLenVectors(e.id, 4, e.finpow() * 20, e.rotation, 360, floatc21);
-    });
+    }),
+    nul=null;
     //endregion unused
 
     //region energy sphere utils

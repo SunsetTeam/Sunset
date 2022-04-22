@@ -1,20 +1,16 @@
 package sunset.entities.bullet;
 
-import arc.graphics.Color;
-import arc.graphics.g2d.Draw;
-import arc.graphics.g2d.Fill;
-import arc.graphics.g2d.Lines;
-import arc.math.Angles;
-import arc.math.Interp;
-import arc.math.Mathf;
-import mindustry.Vars;
-import mindustry.content.Fx;
-import mindustry.entities.Damage;
-import mindustry.entities.bullet.LaserBulletType;
-import mindustry.gen.Bullet;
-import mindustry.graphics.Drawf;
+import arc.graphics.*;
+import arc.graphics.g2d.*;
+import arc.math.*;
+import mindustry.*;
+import mindustry.content.*;
+import mindustry.entities.*;
+import mindustry.entities.bullet.*;
+import mindustry.gen.*;
+import mindustry.graphics.*;
 
-public class AcceleratingLaserBulletType extends LaserBulletType {
+public class AcceleratingLaserBulletType extends LaserBulletType{
     public Interp interp = Interp.pow5In;
 
     public AcceleratingLaserBulletType(float damage){
@@ -37,19 +33,21 @@ public class AcceleratingLaserBulletType extends LaserBulletType {
     }
 
     @Override
-    public void update(Bullet b) {
-        float x = b.x + Angles.trnsx(b.rotation(), length * interp.apply(b.fin())) ;
-        float y = b.y + Angles.trnsy(b.rotation(), this.length * interp.apply(b.fin()));
-        if (b.timer.get(0, 6.5F)) {
+    public void update(Bullet b){
+        float
+        x = b.x + Angles.trnsx(b.rotation(), length * interp.apply(b.fin())),
+        y = b.y + Angles.trnsy(b.rotation(), length * interp.apply(b.fin()));
+
+        if(b.timer.get(0, 6.5F)){
             despawnEffect.at(x, y, b.rotation() + 90);
             despawnEffect.at(x, y, b.rotation() - 90);
         }
-        if (b.time < lifetime && b.fin() > 0.5) {
+        if(b.time < lifetime && b.fin() > 0.5){
             Damage.damage(b.team, x, y, 8, damage);
-            if (healPercent > 0) {
+            if(healPercent > 0){
                 var build = Vars.world.buildWorld(x, y);
-                if (build != null && build.team == b.team) {
-                    if (build.damaged()) {
+                if(build != null && build.team == b.team){
+                    if(build.damaged()){
                         build.heal(healPercent / 100 * build.maxHealth);
                         Fx.healBlockFull.at(build.getX(), build.getY(), build.block.size, colors[0]);
                     }
@@ -59,13 +57,13 @@ public class AcceleratingLaserBulletType extends LaserBulletType {
     }
 
     @Override
-    public void draw(Bullet b) {
+    public void draw(Bullet b){
         float x = b.x + Angles.trnsx(b.rotation(), length * interp.apply(b.fin()));
         float y = b.y + Angles.trnsy(b.rotation(), length * interp.apply(b.fin()));
         float cwidth = width;
         float compound = 1f;
 
-        for(Color color : colors) {
+        for(Color color : colors){
             Draw.color(color);
             Lines.stroke((cwidth *= lengthFalloff) * b.fout());
             Lines.lineAngle(b.x, b.y, b.rotation(), length * interp.apply(b.fin()));
@@ -79,6 +77,7 @@ public class AcceleratingLaserBulletType extends LaserBulletType {
         Drawf.light(b.team, b.x, b.y, x, y, width * 1.4f, this.colors[0], 0.6f);
         Draw.reset();
     }
-    public void drawLight(Bullet b) {
+
+    public void drawLight(Bullet b){
     }
 }

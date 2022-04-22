@@ -11,7 +11,7 @@ buildscript{
 
         parserVersion = '3.22.1'
 
-        aciVersion = "8e8aca1c864"
+        aciVersion = "v1.5"
 
         modCoreVersion = "8dbf4593d2e"
 

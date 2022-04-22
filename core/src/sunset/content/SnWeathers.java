@@ -9,9 +9,8 @@ import mindustry.gen.Sounds;
 import mindustry.type.Weather;
 import mindustry.type.weather.ParticleWeather;
 import mindustry.world.meta.Attribute;
-import sunset.type.blocks.Rotor;
-import sunset.type.weather.Storm;
-import sunset.type.weather.WeatherElements;
+import sunset.type.weather.*;
+import sunset.type.weather.WeatherElement;
 
 public class SnWeathers implements ContentList {
     public static Weather
@@ -100,7 +99,7 @@ public class SnWeathers implements ContentList {
             soundVol = 0.25f;
 
             weatherElements.addAll(
-                    new WeatherElements("thunder") {{
+                    new WeatherElement("thunder") {{
                         lightningElement = true;
                         lightningChance = 0.07f;
                         lightning = 1;
