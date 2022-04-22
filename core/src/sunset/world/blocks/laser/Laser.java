@@ -114,7 +114,8 @@ public class Laser {
                 }
             }
             else{
-                Tmp.v1.setLength(length).setAngle(angle);
+//                Tmp.v1.setLength(length).setAngle(angle);
+                Tmp.v1.trns(angle,length);
                 end.set(start.x + Tmp.v1.x, start.y + Tmp.v1.y);
             }
         }
