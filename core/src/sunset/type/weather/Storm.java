@@ -15,7 +15,7 @@ import mindustry.type.weather.ParticleWeather;
 import sunset.gen.SnSounds;
 
 public class Storm extends ParticleWeather {
-    public final Seq<WeatherElements> weatherElements = new Seq<>();
+    public final Seq<WeatherElement> weatherElements = new Seq<>();
 
     public float lightningChance = 0.15f;
     public float stroke = 1f;

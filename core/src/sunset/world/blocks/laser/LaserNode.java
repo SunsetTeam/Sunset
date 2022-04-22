@@ -1,32 +1,22 @@
 package sunset.world.blocks.laser;
 
-import arc.Core;
-import arc.graphics.g2d.Draw;
-import arc.graphics.g2d.TextureRegion;
-import arc.math.Mathf;
-import arc.math.geom.Geometry;
-import arc.math.geom.Intersector;
-import arc.math.geom.Vec2;
-import arc.scene.ui.layout.Table;
-import arc.util.Log;
-import arc.util.io.Reads;
-import arc.util.io.Writes;
-import mindustry.Vars;
-import mindustry.content.Blocks;
-import mindustry.core.World;
-import mindustry.game.Team;
-import mindustry.gen.Building;
-import mindustry.gen.Healthc;
-import mindustry.gen.Icon;
-import mindustry.gen.Unit;
-import mindustry.graphics.Layer;
-import mindustry.world.Block;
-import mindustry.world.Build;
-import mindustry.world.Tile;
-import sunset.utils.Utils;
+import arc.*;
+import arc.graphics.g2d.*;
+import arc.math.*;
+import arc.math.geom.*;
+import arc.scene.ui.layout.*;
+import arc.util.*;
+import arc.util.io.*;
+import mindustry.*;
+import mindustry.game.*;
+import mindustry.gen.*;
+import mindustry.graphics.*;
+import mindustry.world.*;
 
-public class LaserNode extends LaserBlock {
-    public LaserNode(String name) {
+import static mindustry.Vars.*;
+
+public class LaserNode extends LaserBlock{
+    public LaserNode(String name){
         super(name);
         update = true;
         configurable = true;
@@ -34,7 +24,7 @@ public class LaserNode extends LaserBlock {
         clipSize = 500f;
         config(Integer.class, (LaserNodeBuild b, Integer value) -> {
             Log.info("config");
-            switch (value) {
+            switch(value){
                 case 0 -> b.leftOutput = !b.leftOutput;
                 case 1 -> b.topOutput = !b.topOutput;
                 case 2 -> b.rightOutput = !b.rightOutput;
@@ -42,51 +32,53 @@ public class LaserNode extends LaserBlock {
             }
         });
     }
+
     public class LaserNodeBuild extends LaserBlockBuild{
         boolean topOutput = false,
-                rightOutput = false,
-                downOutput = false,
-                leftOutput = false;
+        rightOutput = false,
+        downOutput = false,
+        leftOutput = false;
         Lasers lasers;
+
         @Override
         public Building init(Tile tile, Team team, boolean shouldAdd, int rotation){
             lasers = new Lasers();
             Building b = super.init(tile, team, shouldAdd, rotation);
-            LaserBlockBuild block = this;
             //top
             lasers.allLasers.add(new Laser(){{
-                self = block;
+                self = LaserNodeBuild.this;
                 angle = 90f;
-                length = Math.max(Vars.world.width() * 8f, Vars.world.height() * 8f);
+                length = Math.max(Vars.world.width() * tilesize, Vars.world.height() * tilesize);
                 offset = size * 1.5f;
-                start.set(tile.x * 8f + block.block().offset, tile.y * 8f + block.block().offset);
+                start.set(tile.x * tilesize + block().offset, tile.y * tilesize + block().offset);
             }});
             //left
             lasers.allLasers.add(new Laser(){{
-                self = block;
+                self = LaserNodeBuild.this;
                 angle = 180f;
-                length = Math.max(Vars.world.width() * 8f, Vars.world.height() * 8f);
+                length = Math.max(Vars.world.width() * tilesize, Vars.world.height() * tilesize);
                 offset = size * 1.5f;
-                start.set(tile.x * 8f + block.block().offset, tile.y * 8f + block.block().offset);
+                start.set(tile.x * tilesize + block().offset, tile.y * tilesize + block().offset);
             }});
             //right
             lasers.allLasers.add(new Laser(){{
-                self = block;
+                self = LaserNodeBuild.this;
                 angle = 0f;
-                length = Math.max(Vars.world.width() * 8f, Vars.world.height() * 8f);
+                length = Math.max(Vars.world.width() * tilesize, Vars.world.height() * tilesize);
                 offset = size * 1.5f;
-                start.set(tile.x * 8f + block.block().offset, tile.y * 8f + block.block().offset);
+                start.set(tile.x * tilesize + block().offset, tile.y * tilesize + block().offset);
             }});
             //down
             lasers.allLasers.add(new Laser(){{
-                self = block;
+                self = LaserNodeBuild.this;
                 angle = 270f;
-                length = Math.max(Vars.world.width() * 8f, Vars.world.height() * 8f);
+                length = Math.max(Vars.world.width() * tilesize, Vars.world.height() * tilesize);
                 offset = size * 1.5f;
-                start.set(tile.x * 8f + block.block().offset, tile.y * 8f + block.block().offset);
+                start.set(tile.x * tilesize + block().offset, tile.y * tilesize + block().offset);
             }});
             return b;
         }
+
         @Override
         public void updateTile(){
             laser.outputs = (leftOutput ? 1 : 0) + (topOutput ? 1 : 0) + (rightOutput ? 1 : 0) + (downOutput ? 1 : 0);
@@ -115,7 +107,8 @@ public class LaserNode extends LaserBlock {
         @Override
         public void updateTableAlign(Table t){
             float addPos = Mathf.ceil(this.block.size / 2f) - 1;
-            Vec2 pos = Core.input.mouseScreen((this.x) + addPos - 0.5f, this.y + addPos);            t.setSize(block.size * 12f);
+            Vec2 pos = Core.input.mouseScreen((this.x) + addPos - 0.5f, this.y + addPos);
+            t.setSize(block.size * 12f);
             t.setSize(this.block.size * 12f);
             t.setPosition(pos.x, pos.y, 0);
         }
@@ -123,26 +116,26 @@ public class LaserNode extends LaserBlock {
         @Override
         public void buildConfiguration(Table t){
             t.add();
-            t.button(Icon.up, ()->{
+            t.button(Icon.up, () -> {
                 Log.info("top");
                 //top = !top;
                 configure(1);
             });
             t.add().row();
-            t.button(Icon.left, ()->{
+            t.button(Icon.left, () -> {
                 Log.info("left");
                 //left = !left;
                 configure(0);
             });
             t.add();
-            t.button(Icon.right, ()->{
+            t.button(Icon.right, () -> {
                 Log.info("right");
                 //right = !right;
                 configure(2);
             });
             t.row();
             t.add();
-            t.button(Icon.down, ()->{
+            t.button(Icon.down, () -> {
                 Log.info("down");
                 //down = !down;
                 configure(3);
@@ -157,6 +150,7 @@ public class LaserNode extends LaserBlock {
             w.bool(rightOutput);
             w.bool(downOutput);
         }
+
         @Override
         public void read(Reads r, byte revision){
             leftOutput = r.bool();
