@@ -8,14 +8,25 @@ import arc.scene.ui.layout.*;
 import arc.util.*;
 import arc.util.io.*;
 import mindustry.*;
+import mindustry.annotations.Annotations.*;
 import mindustry.game.*;
 import mindustry.gen.*;
 import mindustry.graphics.*;
 import mindustry.world.*;
+import sunset.gen.*;
 
 import static mindustry.Vars.*;
 
+/*@Struct
+class LaserEnableStateStruct{
+    boolean right;
+    boolean top;
+    boolean left;
+    boolean down;
+}*/
+
 public class LaserNode extends LaserBlock{
+    @SuppressWarnings("PointlessBitwiseExpression")
     public LaserNode(String name){
         super(name);
         update = true;
@@ -24,13 +35,21 @@ public class LaserNode extends LaserBlock{
         clipSize = 500f;
         config(Integer.class, (LaserNodeBuild b, Integer value) -> {
             Log.info("config");
-            switch(value){
-                case 0 -> b.leftOutput = !b.leftOutput;
-                case 1 -> b.topOutput = !b.topOutput;
-                case 2 -> b.rightOutput = !b.rightOutput;
-                case 3 -> b.downOutput = !b.downOutput;
-            }
+            b.rightOutput = (value & 0b0001) >> 0 == 1;
+            b.topOutput = (value & 0b0010) >> 1 == 1;
+            b.leftOutput = (value & 0b0100) >> 2 == 1;
+            b.downOutput = (value & 0b1000) >> 3 == 1;
         });
+    }
+
+    @SuppressWarnings("PointlessBitwiseExpression")
+    protected static void configureState(LaserNodeBuild build, boolean right, boolean top, boolean left, boolean down){
+        int state = 0;
+        if(right) state += 1 << 0;
+        if(top) state += 1 << 1;
+        if(left) state += 1 << 2;
+        if(down) state += 1 << 3;
+        build.configure(state);
     }
 
     public class LaserNodeBuild extends LaserBlockBuild{
@@ -43,7 +62,7 @@ public class LaserNode extends LaserBlock{
         @Override
         public Building init(Tile tile, Team team, boolean shouldAdd, int rotation){
             lasers = new Lasers();
-            Building b = super.init(tile, team, shouldAdd, rotation);
+            super.init(tile, team, shouldAdd, rotation);
             //top
             lasers.allLasers.add(new Laser(){{
                 self = LaserNodeBuild.this;
@@ -76,7 +95,7 @@ public class LaserNode extends LaserBlock{
                 offset = size * 1.5f;
                 start.set(tile.x * tilesize + block().offset, tile.y * tilesize + block().offset);
             }});
-            return b;
+            return this;
         }
 
         @Override
@@ -118,28 +137,33 @@ public class LaserNode extends LaserBlock{
             t.add();
             t.button(Icon.up, () -> {
                 Log.info("top");
-                //top = !top;
-                configure(1);
+//                top = !top;
+                topOutput = !topOutput;
+                configureState();
             });
             t.add().row();
             t.button(Icon.left, () -> {
                 Log.info("left");
-                //left = !left;
-                configure(0);
+                leftOutput = !leftOutput;
+                configureState();
             });
             t.add();
             t.button(Icon.right, () -> {
                 Log.info("right");
-                //right = !right;
-                configure(2);
+                rightOutput = !rightOutput;
+                configureState();
             });
             t.row();
             t.add();
             t.button(Icon.down, () -> {
                 Log.info("down");
-                //down = !down;
-                configure(3);
+                downOutput = !downOutput;
+                configureState();
             });
+        }
+
+        private void configureState(){
+            LaserNode.configureState(this, rightOutput, topOutput, leftOutput, downOutput);
         }
 
         @Override
