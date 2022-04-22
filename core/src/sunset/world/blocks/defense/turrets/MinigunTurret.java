@@ -88,12 +88,6 @@ public class MinigunTurret extends ItemTurret {
         }
 
         @Override
-        public void draw() {
-            super.draw();
-            if (debug) ADrawf.drawText(this, "totalShootingTime: " + totalShootingTime);
-        }
-
-        @Override
         public BulletType useAmmo() {
             return super.useAmmo();
         }

@@ -4,6 +4,7 @@ import acontent.ui.*;
 import arc.*;
 import arc.struct.*;
 import mindustry.*;
+import mindustry.content.Blocks;
 import mindustry.core.*;
 import mindustry.ctype.*;
 import mindustry.game.EventType.*;

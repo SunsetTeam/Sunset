@@ -11,7 +11,7 @@ public class SnItems implements ContentList {
     //raw
     fors, planatrium, flameid, coldent,
     //crafted
-    naturite, nobium, enojie, reneubite,
+    naturite, nobium, anzar, enojie, reneubite,
     //ammo
     lightBurstMissile,
     raMissile, empMissile, lightningMissile, lightMissile,
@@ -20,14 +20,14 @@ public class SnItems implements ContentList {
     public void load() {
         //region items
         //region raw
-        fors = new Item("fors", Color.valueOf("F3A39F")) {{
-            cost = 2f;
+        fors = new Item("fors", Color.valueOf("d15361")) {{
+            cost = 3f;
             hardness = 3;
         }};
-        planatrium = new Item("planatrium", Color.valueOf("D57CED")) {{
+        planatrium = new Item("planatrium", Color.valueOf("a759af")) {{
             cost = 5f;
             hardness = 4;
-            explosiveness = 0.5f;
+            explosiveness = 0.2f;
             radioactivity = 1f;
         }};
         flameid = new Item("flameid", Color.valueOf("EA8878")) {{
@@ -41,22 +41,23 @@ public class SnItems implements ContentList {
         }};
         //endregion raw
         //region crafted
-        naturite = new Item("naturite", Color.valueOf("F2E878")) {{
-            flammability = 0.6f;
-            radioactivity = 0.1f;
+        naturite = new Item("naturite", Color.valueOf("e4d071")) {{
+            flammability = 0.3f;
             cost = 3f;
         }};
-        nobium = new Item("nobium", Color.valueOf("FFFFFF")) {{
-            cost = 4f;
-            radioactivity = 0.1f;
+        nobium = new Item("nobium", Color.valueOf("eeeded")) {{
+            cost = 5f;
         }};
-        enojie = new Item("enojie", Color.valueOf("99f2C7")) {{
+        anzar = new Item("anzar", Color.valueOf("feb380")){{
+            cost = 4f;
+        }};
+        enojie = new Item("enojie", Color.valueOf("75e0ac")) {{
             radioactivity = 0.8f;
-            explosiveness = 0.2f;
+            explosiveness = 0.06f;
             cost = 6f;
         }};
-        reneubite = new Item("reneubite", Color.valueOf("6173FF")) {{
-            cost = 4f;
+        reneubite = new Item("reneubite", Color.valueOf("87ceeb")) {{
+            cost = 3f;
             flammability = 0.8f;
             explosiveness = 0.7f;
         }};

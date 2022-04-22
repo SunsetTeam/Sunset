@@ -158,12 +158,12 @@ public class SnFx {
         }
     }),
 
-    smallEnergySphereCharge = new Effect(17f, e -> {
+    smallEnergySphereCharge = new Effect(16f, e -> {
         color(SnPal.redBombBack);
         Fill.circle(e.x, e.y, e.fin() * 2f);
     }),
 
-    mediumEnergySphereCharge = new Effect(19f, e -> {
+    mediumEnergySphereCharge = new Effect(17f, e -> {
         color(SnPal.redBombBack);
         Fill.circle(e.x, e.y, e.fin() * 4f);
     }),
@@ -506,7 +506,7 @@ public class SnFx {
     }),
 
     blueAimMissileTrail = new Effect(30f, 78f, e -> {
-        color(SnPal.blueBullet, Color.blue,  e.fin() * e.fin());
+        color(SnPal.blueBullet, SnPal.blueBulletBack, e.fin() * e.fin());
 
         randLenVectors(e.id, 8, 1.4f + e.finpow() * 32, e.rotation + 180, 12f, (x, y) -> {
             Fill.circle(e.x + x, e.y + y, 0.37f + e.fout() * 2f);
@@ -548,6 +548,7 @@ public class SnFx {
         }
     }),
     //endregion unorganized
+
     //region special
     hitReneubiteBullet = new Effect(14, e -> {
         color(Color.white, SnPal.renBlast1, e.fin());
@@ -664,7 +665,7 @@ public class SnFx {
         color(SnPal.yellowTrail);
         Fill.circle(e.x, e.y, e.rotation * e.fout());
     }),
-    lbHit = new Effect(30, e -> {
+    lbHit = new Effect(50, e -> {
         color(SnPal.lightningBall);
         stroke(e.fout() * 5);
         circle(e.x, e.y, e.fin(Interp.pow2Out) * 40);
@@ -674,6 +675,12 @@ public class SnFx {
             Drawf.tri(e.x, e.y, 2.4f, 90 * e.fout(), (i * 90) + 45 * e.fout(Interp.pow5Out));
         }
     }),
+    torpedoTrail = new Effect(20, e -> {
+        color(Color.white);
+        Fill.circle(e.x, e.y, 3.6f * e.fout());
+        color(e.color);
+        Fill.circle(e.x, e.y, 5 * e.fout());
+    }).layer(Layer.floor + 0.001f),
     //endregion yellow ships
 
     //region turrets 360

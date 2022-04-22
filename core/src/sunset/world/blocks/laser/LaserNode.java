@@ -1,157 +1,168 @@
 package sunset.world.blocks.laser;
 
+import arc.Core;
 import arc.graphics.g2d.Draw;
 import arc.graphics.g2d.TextureRegion;
 import arc.math.Mathf;
-import arc.math.geom.Point2;
+import arc.math.geom.Geometry;
+import arc.math.geom.Intersector;
+import arc.math.geom.Vec2;
+import arc.scene.ui.layout.Table;
 import arc.util.Log;
-import arc.util.Time;
-import arc.util.Tmp;
-
+import arc.util.io.Reads;
+import arc.util.io.Writes;
 import mindustry.Vars;
+import mindustry.content.Blocks;
+import mindustry.core.World;
+import mindustry.game.Team;
 import mindustry.gen.Building;
-import mindustry.gen.Tex;
-import mindustry.graphics.Drawf;
+import mindustry.gen.Healthc;
+import mindustry.gen.Icon;
+import mindustry.gen.Unit;
 import mindustry.graphics.Layer;
-import mindustry.graphics.Pal;
-import mindustry.ui.Bar;
-import mma.ModVars;
+import mindustry.world.Block;
+import mindustry.world.Build;
+import mindustry.world.Tile;
+import sunset.utils.Utils;
 
-/** Laser node. Used for transfering lasers from block to block. */
-public class LaserNode extends LaserBlock{
-    /** Enable range restrictions. */
-    public boolean enableRange = true;
-    /** Max range of node connection. */
-    public final float range = 10 * Vars.tilesize;
-    /** Max laser charge at which node will overheat and destroy. This will prevent abusing lasers in some ways. */
-    public float maxCharge = 20f;
+public class LaserNode extends LaserBlock {
     public LaserNode(String name) {
         super(name);
-        configurable = true;
-        consumesPower = false;
-        outputsPower = false;
         update = true;
-
+        configurable = true;
         solid = true;
-        config(Integer.class, (LaserBlockBuild tile, Integer n) -> {
-            //link to other laser block
-            Point2 a = Point2.unpack(n);
-            Log.info("X: @\nY: @", a.x * Vars.tilesize, a.y * Vars.tilesize);
-            LaserBlockBuild build = (LaserBlockBuild) Vars.world.build(n);
-            tile.laserModule.linkTo(build);
+        clipSize = 500f;
+        config(Integer.class, (LaserNodeBuild b, Integer value) -> {
+            Log.info("config");
+            switch (value) {
+                case 0 -> b.leftOutput = !b.leftOutput;
+                case 1 -> b.topOutput = !b.topOutput;
+                case 2 -> b.rightOutput = !b.rightOutput;
+                case 3 -> b.downOutput = !b.downOutput;
+            }
         });
     }
-
-    @Override
-    public void setBars(){
-        super.setBars();
-        bars.add("laser-energy", (LaserBlockBuild entity) -> new Bar(()->{
-            return "Energy: " + entity.laserModule.getCharge() + "/" + maxCharge;
-        },
-        ()->{
-            if(entity.heat > 0f)
-                return Pal.health;
-
-            return Pal.accent;
-        },
-        ()->{
-            return entity.laserModule.getCharge() / ((LaserBlock)entity.block).maxCharge;
-        }));
-    }
-
-    @Override
-    public TextureRegion[] icons(){
-        return ModVars.packSprites ? new TextureRegion[]{nodeBase, nodeTop, nodeAllEdge} : new TextureRegion[]{region};
-    }
-    public boolean linkValid(LaserBlockBuild build, LaserBlockBuild other){
-        //debug, sorry for mess
-        Log.info("--------");
-        float tx = build.x,
-                ty = build.y,
-                ox = other.x,
-                oy = other.y;
-        //check for laser consumption
-        if(((LaserBlock) other.block).consumesLaser) {
-            Log.info("Consumes laser");
-            //check for staying in range or ignore (bcz range was disabled)
-            Tmp.v1.set(tx, ty);
-            Tmp.v2.set(ox, oy);
-            Tmp.v2.sub(Tmp.v1);
-            if (Tmp.v2.len() < range || !enableRange) {
-                Log.info("In range");
-                //check for staying on 'straight' line with other block
-                float offset = Vars.tilesize / 2f * Math.max(build.block().size, other.block().size);
-                if(Math.abs(ox - tx) < offset || Math.abs(oy - ty) < offset){
-                    Log.info("Link confirmed");
-                    return true;
-                }
-                else
-                    Log.info("Coordinates are not the same, x: @, y: @, ox: @, oy: @", tx, ty, ox, oy);
-            }
-            else
-                Log.info("Not in range");
-        }
-        else
-            Log.info("Don't consume laser");
-        return false;
-    }
-    @Override
-    public void drawPlace(int x, int y, int rotation, boolean valid){
-        Draw.color(Pal.placing);
-        //draw range if we can
-        if(enableRange){
-            Drawf.circles(x * Vars.tilesize + offset, y * Vars.tilesize + offset, range);
-        }
-    }
     public class LaserNodeBuild extends LaserBlockBuild{
+        boolean topOutput = false,
+                rightOutput = false,
+                downOutput = false,
+                leftOutput = false;
+        Lasers lasers;
         @Override
-        public void drawSelect(){
-            super.drawSelect();
-            Draw.color(Pal.placing);
+        public Building init(Tile tile, Team team, boolean shouldAdd, int rotation){
+            lasers = new Lasers();
+            Building b = super.init(tile, team, shouldAdd, rotation);
+            LaserBlockBuild block = this;
+            //top
+            lasers.allLasers.add(new Laser(){{
+                self = block;
+                angle = 90f;
+                length = Math.max(Vars.world.width() * 8f, Vars.world.height() * 8f);
+                offset = size * 1.5f;
+                start.set(tile.x * 8f + block.block().offset, tile.y * 8f + block.block().offset);
+            }});
+            //left
+            lasers.allLasers.add(new Laser(){{
+                self = block;
+                angle = 180f;
+                length = Math.max(Vars.world.width() * 8f, Vars.world.height() * 8f);
+                offset = size * 1.5f;
+                start.set(tile.x * 8f + block.block().offset, tile.y * 8f + block.block().offset);
+            }});
+            //right
+            lasers.allLasers.add(new Laser(){{
+                self = block;
+                angle = 0f;
+                length = Math.max(Vars.world.width() * 8f, Vars.world.height() * 8f);
+                offset = size * 1.5f;
+                start.set(tile.x * 8f + block.block().offset, tile.y * 8f + block.block().offset);
+            }});
+            //down
+            lasers.allLasers.add(new Laser(){{
+                self = block;
+                angle = 270f;
+                length = Math.max(Vars.world.width() * 8f, Vars.world.height() * 8f);
+                offset = size * 1.5f;
+                start.set(tile.x * 8f + block.block().offset, tile.y * 8f + block.block().offset);
+            }});
+            return b;
+        }
+        @Override
+        public void updateTile(){
+            laser.outputs = (leftOutput ? 1 : 0) + (topOutput ? 1 : 0) + (rightOutput ? 1 : 0) + (downOutput ? 1 : 0);
+            super.updateTile();
+            lasers.getLeft().enabled = leftOutput;
+            lasers.getTop().enabled = topOutput;
+            lasers.getRight().enabled = rightOutput;
+            lasers.getDown().enabled = downOutput;
+            lasers.update();
+        }
+
+        @Override
+        public void draw(){
+            drawer.draw();
+            drawer.leftInput = leftOutput;
+            drawer.topInput = topOutput;
+            drawer.rightInput = rightOutput;
+            drawer.downInput = downOutput;
+            lasers.draw();
+            float z = Draw.z();
             Draw.z(Layer.blockOver);
-            //draw range if we can
-            if(enableRange){
-                Drawf.circles(x, y, range);
-            }
-            Draw.reset();
+            //block().drawPlaceText("Laser\nin: " + laser.in + "\nout: " + laser.out + "", tileX(), tileY(), true);
+            Draw.z(z);
+        }
+
+        @Override
+        public void updateTableAlign(Table t){
+            float addPos = Mathf.ceil(this.block.size / 2f) - 1;
+            Vec2 pos = Core.input.mouseScreen((this.x) + addPos - 0.5f, this.y + addPos);            t.setSize(block.size * 12f);
+            t.setSize(this.block.size * 12f);
+            t.setPosition(pos.x, pos.y, 0);
+        }
+
+        @Override
+        public void buildConfiguration(Table t){
+            t.add();
+            t.button(Icon.up, ()->{
+                Log.info("top");
+                //top = !top;
+                configure(1);
+            });
+            t.add().row();
+            t.button(Icon.left, ()->{
+                Log.info("left");
+                //left = !left;
+                configure(0);
+            });
+            t.add();
+            t.button(Icon.right, ()->{
+                Log.info("right");
+                //right = !right;
+                configure(2);
+            });
+            t.row();
+            t.add();
+            t.button(Icon.down, ()->{
+                Log.info("down");
+                //down = !down;
+                configure(3);
+            });
+        }
+
+        @Override
+        public void write(Writes w){
+            super.write(w);
+            w.bool(leftOutput);
+            w.bool(topOutput);
+            w.bool(rightOutput);
+            w.bool(downOutput);
         }
         @Override
-        public void drawConfigure(){
-            Draw.color(Pal.placing);
-            Draw.z(Layer.blockOver);
-            //draw range if we can
-            if(enableRange){
-                Drawf.circles(x, y, range);
-            }
-            Draw.reset();
-            Drawf.select(x, y, tile.block().size * Vars.tilesize / 2f + 2f, Pal.accent);
-            for (LaserLink l : laserModule.output){
-                LaserBlockBuild link = l.build;
-                Drawf.select(link.x, link.y, link.block().size * Vars.tilesize / 2f + 2f + Mathf.absin(Time.time, 4f, 1f), Pal.place);
-            }
-            for (LaserLink l : laserModule.input){
-                LaserBlockBuild link = l.build;
-                Drawf.select(link.x, link.y, link.block().size * Vars.tilesize / 2f + 2f + Mathf.absin(Time.time, 4f, 1f), Pal.breakInvalid);
-            }
-        }
-        @Override
-        public boolean onConfigureTileTapped(Building other) {
-            if (this == other){
-                deselect();
-                return false;
-            }
-            if(other instanceof LaserBlockBuild b){
-                //check
-                if(linkValid(this, b))
-                    configure(b.pos());
-                return false;
-            }
-            return true;
-        }
-        //save
-        @Override
-        public Object config(){
-            return laserModule.output;
+        public void read(Reads r, byte revision){
+            leftOutput = r.bool();
+            topOutput = r.bool();
+            rightOutput = r.bool();
+            downOutput = r.bool();
         }
     }
 }

@@ -157,7 +157,7 @@ public class SnEnvironment implements ContentList {
 
         crimsonSnow = new Floor("crimson-snow") {{
             variants = 3;
-            attributes.set(Attribute.water, 0.2f);
+            attributes.set(SnAttribute.burheyna, 0.2f);
         }};
         crimsonIce = new Floor("crimson-ice") {{
             variants = 3;

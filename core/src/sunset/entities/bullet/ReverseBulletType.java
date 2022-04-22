@@ -17,11 +17,8 @@ import mindustry.logic.Ranged;
 public class ReverseBulletType extends BasicBulletType {
     public float rotateMag = 0f, rotScl = 0f, rotSclMin = 0f, rotSclMax = 0f, rotVisualMag = 0f;
     public float rotTotalAngle = 0f;
-    public float reversAngle = 180f;
     public boolean rotRight = true;
-    public boolean reverseRotScl = false, inRange = false, reverseNew = false;
-    public @Nullable
-    BulletType other = null;
+    public boolean reverseRotScl = false, inRange = false;
 
     public ReverseBulletType(float speed, float damage) {
         super(speed, damage);
@@ -50,37 +47,13 @@ public class ReverseBulletType extends BasicBulletType {
         Draw.reset();
     }
 
-    @Override
-    public void despawned(Bullet b){
-        if(despawnHit){
-            hit(b);
-        }
-        despawnEffect.at(b.x, b.y, b.rotation(), hitColor);
-        despawnSound.at(b);
-
-        Effect.shake(despawnShake, despawnShake, b);
-        if (reverseNew){
-            other.create(b, b.rotation() - reversAngle, 1, 1, 1f);
-        }
-    }
-
     public void update(Bullet b) {
         super.update(b);
 
         if (rotateMag > 0) {
             b.vel.rotate(rotateMag * Mathf.clamp(reverseRotScl ? b.fout() : b.fin(), rotSclMin, rotSclMax) * (rotRight ? -1 : 1) * Time.delta * rotScl);
         }
+
         if(inRange && b.owner instanceof Ranged && b.dst(((Ranged) b.owner).x(), ((Ranged) b.owner).y()) > ((Ranged) b.owner).range()) b.rotation(b.angleTo(((Ranged) b.owner).x(), ((Ranged) b.owner).y()));
-    }
-
-    @Override
-    public Bullet create(@Nullable Entityc owner, Team team, float x, float y, float angle, float damage, float velocityScl, float lifetimeScl, Object data) {
-        if (other != null && Mathf.randomSeed((int) Time.time * 2, 0, 1) > 0.6 && other instanceof ReverseBulletType) {
-            return ((ReverseBulletType) other).createReverse(owner, team, x, y, angle, damage, velocityScl, lifetimeScl, data);
-        } else return super.create(owner, team, x, y, angle, damage, velocityScl, lifetimeScl, data);
-    }
-
-    public Bullet createReverse(@Nullable Entityc owner, Team team, float x, float y, float angle, float damage, float velocityScl, float lifetimeScl, Object data) {
-        return super.create(owner, team, x, y, angle, damage, velocityScl, lifetimeScl, data);
     }
 }

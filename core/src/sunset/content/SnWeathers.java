@@ -9,7 +9,9 @@ import mindustry.gen.Sounds;
 import mindustry.type.Weather;
 import mindustry.type.weather.ParticleWeather;
 import mindustry.world.meta.Attribute;
+import sunset.type.blocks.Rotor;
 import sunset.type.weather.Storm;
+import sunset.type.weather.WeatherElements;
 
 public class SnWeathers implements ContentList {
     public static Weather
@@ -70,29 +72,40 @@ public class SnWeathers implements ContentList {
         }};
 
         lightningStorm = new Storm("lightning-storm") {{
-            color = noiseColor = Color.valueOf("CACACA");
+            drawNoise = false;
             particleRegion = "particle";
-            drawNoise = true;
             useWindVector = true;
-            sizeMax = 30f;
-            sizeMin = 10f;
+
+            sizeMin = 18f;
+            sizeMax = 40;
             minAlpha = 0f;
             maxAlpha = 0.1f;
-            density = 1700f;
+            color = Color.valueOf("B24848");
+            stroke = 0.75f;
+            density = 7000f;
+            force = 1f;
+            yspeed = 4;
+            xspeed = 9;
             baseSpeed = 5.9f;
+            padding = 40f;
             attrs.set(Attribute.light, -0.40f);
-            attrs.set(Attribute.water, 0.2f);
+            attrs.set(SnAttribute.wind, 1f);
+            attrs.set(SnAttribute.burheyna, 0.2f);
             status = StatusEffects.wet;
             opacityMultiplier = 0.35f;
             force = 0.4f;
             duration = 3f * Time.toMinutes;
 
-            lightningScl = 40;
-            lightningLength = 9;
-            lightningDamage = 20f;
-
             sound = Sounds.rain;
             soundVol = 0.25f;
+
+            weatherElements.addAll(
+                    new WeatherElements("thunder") {{
+                        lightningElement = true;
+                        lightningChance = 0.07f;
+                        lightning = 1;
+                    }}
+            );
         }};
     }
 }

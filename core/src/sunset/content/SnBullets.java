@@ -11,6 +11,7 @@ import arc.util.Time;
 import mindustry.Vars;
 import mindustry.content.*;
 import mindustry.ctype.ContentList;
+import mindustry.entities.Effect;
 import mindustry.entities.Lightning;
 import mindustry.entities.Units;
 import mindustry.entities.bullet.*;
@@ -45,6 +46,7 @@ public class SnBullets implements ContentList {
         //artillery
         wheel4Artillery,
         plasmaArt, rocketArt, bigRocketArt, heavyRocketArt,//unused
+        shotgunArt,
         //flak
         sporePodPoisonBullet, bigSporePodPoison, heavyPlastaniumPoison,
         naturitePoisonBullet, bigNaturitePoison, heavyNaturitePoison,
@@ -58,7 +60,7 @@ public class SnBullets implements ContentList {
         laserGun2,//unused
         laserCGun, bigCLaserGun,//unused
         //lightning
-        defLight, powerLight,
+        defLight, powerLight, shotArtLight,
         //sap
         leadSap, sporeSap, planatriumSap,
         //t6 vanilla
@@ -72,7 +74,7 @@ public class SnBullets implements ContentList {
         heavyCoalFlame, heavyPyraFlame, flameidFlame,
         wheel5Flame,
         //reverse-bullets
-        naturiteReversBullet, forsReversBullet, nobiumReversBullet,
+        naturiteReversBulletBack, naturiteReversBullet, forsReversBulletBack, forsReversBullet, nobiumReversBulletBack, nobiumReversBullet,
         infernoFlame,//unused
         //copters
         basicHelicopterGun,
@@ -120,7 +122,7 @@ public class SnBullets implements ContentList {
             pierceBuilding = true;
             knockback = 0.7f;
         }};
-        heavyStandardIncendiary = new BasicBulletType(7f, 115, "bullet") {{
+        heavyStandardIncendiary = new BasicBulletType(7f, 105, "bullet") {{
             hitSize = 7;
             width = 19f;
             height = 24f;
@@ -284,7 +286,7 @@ public class SnBullets implements ContentList {
             makeFire = true;
             collidesAir = false;
         }};
-        reneubiteBlast = new BasicBulletType(9f, 190) {{
+        reneubiteBlast = new BasicBulletType(9f, 245) {{
             hitSize = 7;
             width = height = 25;
             frontColor = SnPal.renBlast1;
@@ -801,6 +803,15 @@ public class SnBullets implements ContentList {
             hitSound = Sounds.explosion;
             trailChance = 0.2f;
         }};//unused
+        shotgunArt = new ArtilleryBulletType(4f, 40, "shell"){{
+            lifetime = 40f;
+            width = 10f;
+            height = 13f;
+            trailChance = 0.3f;
+            inaccuracy = 8f;
+            backColor = Pal.bulletYellowBack;
+            frontColor = Pal.bulletYellow;
+        }};
         //endregion  artillery
         //region flak
         sporePodPoisonBullet = new FlakBulletType(4f, 5) {{
@@ -1391,6 +1402,14 @@ public class SnBullets implements ContentList {
             shootEffect = hitEffect = despawnEffect = smokeEffect = Fx.none;
             lightningColor = SnPal.redfire1;
         }};
+        shotArtLight = new ArtilleryLightningBulletType(50f){{
+            hitShake = 3f;
+            lightning = 3;
+            lightningColor = SnPal.yellowTrailBack;
+            maxRange = 200;
+            hitEffect = SnFx.lbHit;
+            despawnEffect = Fx.none;
+        }};;
         //endregion lightning
         //region sap
         leadSap = new SapBulletType() {{
@@ -1642,70 +1661,120 @@ public class SnBullets implements ContentList {
         }};//unused
         //endregion flame
         //region reverse-bullets
-        naturiteReversBullet = new ReverseBulletType(2.6f, 95f) {{
+
+        naturiteReversBulletBack = new ReverseBulletType(3f, 95f) {{
             sprite = "sunset-copter-bomb";
-            other = naturiteReversBullet;
-            reverseNew = true;
-            reversAngle = 180;
             width = 15f;
-            height = 15;
-            lifetime = 235;
+            height = 15f;
+            lifetime = 60;
             homingPower = 0.05f;
             homingRange = 50f;
             spin = 5f;
             shrinkX = 0f;
             shrinkY = 0f;
-            trailWidth = 0;
-            trailLength = 0;
             pierceCap = 6;
             rotateMag = 5;
-            rotRight = true;
             frontColor = SnPal.copterLaser;
             backColor = SnPal.copterLaserBack;
-            drag = 0.0025f;
+            drag = 0.01f;
         }};
 
-        forsReversBullet = new ReverseBulletType(2.6f, 100f) {{
+        naturiteReversBullet = new ReverseBulletType(3f, 97f) {{
             sprite = "sunset-copter-bomb";
-            other = forsReversBullet;
             width = 15f;
-            height = 15;
-            lifetime = 235;
+            height = 15f;
+            lifetime = 70;
             homingPower = 0.05f;
             homingRange = 50f;
             spin = 5f;
             shrinkX = 0f;
             shrinkY = 0f;
-            trailWidth = 0;
-            trailLength = 0;
+            pierceCap = 6;
+            rotateMag = 5;
+            frontColor = SnPal.copterLaser;
+            backColor = SnPal.copterLaserBack;
+            drag = 0.01f;
+        }
+            public void despawned(Bullet b){
+                naturiteReversBulletBack.create(b, b.x, b.y, b.rotation() - 180, 1f, 1f);
+            }
+        };
+
+        forsReversBulletBack = new ReverseBulletType(3f, 110f) {{
+            sprite = "sunset-copter-bomb";
+            width = 15f;
+            height = 15;
+            lifetime = 70;
+            homingPower = 0.05f;
+            homingRange = 50f;
+            spin = 5f;
+            shrinkX = 0f;
+            shrinkY = 0f;
             pierceCap = 4;
             rotateMag = 5;
-            rotRight = true;
             frontColor = SnPal.redBomb;
             backColor = SnPal.redBombBack;
-            drag = 0.0025f;
+            drag = 0.01f;
         }};
 
-        nobiumReversBullet = new ReverseBulletType(2.6f, 135f) {{
+        forsReversBullet = new ReverseBulletType(3f, 110f) {{
             sprite = "sunset-copter-bomb";
-            other = nobiumReversBullet;
             width = 15f;
             height = 15;
-            lifetime = 235;
+            lifetime = 70;
             homingPower = 0.05f;
             homingRange = 50f;
             spin = 5f;
             shrinkX = 0f;
             shrinkY = 0f;
-            trailWidth = 0;
-            trailLength = 0;
+            pierceCap = 4;
+            rotateMag = 5;
+            frontColor = SnPal.redBomb;
+            backColor = SnPal.redBombBack;
+            drag = 0.01f;
+        }
+            public void despawned(Bullet b){
+                forsReversBulletBack.create(b, b.x, b.y, b.rotation() - 180, 1f, 1f);
+            }
+        };
+
+        nobiumReversBulletBack = new ReverseBulletType(3f, 135f) {{
+            sprite = "sunset-copter-bomb";
+            width = 15f;
+            height = 15;
+            lifetime = 70;
+            homingPower = 0.2f;
+            homingRange = 50f;
+            spin = 5f;
+            shrinkX = 0f;
+            shrinkY = 0f;
             pierceCap = 7;
             rotateMag = 5;
-            rotRight = true;
             frontColor = SnPal.nobiumBullet;
             backColor = SnPal.nobiumBulletBack;
-            drag = 0.0025f;
+            drag = 0.01f;
         }};
+
+        nobiumReversBullet = new ReverseBulletType(3f, 135f) {{
+            sprite = "sunset-copter-bomb";
+            width = 15f;
+            height = 15;
+            lifetime = 70;
+            homingPower = 0.2f;
+            homingRange = 50f;
+            spin = 5f;
+            shrinkX = 0f;
+            shrinkY = 0f;
+            pierceCap = 7;
+            rotateMag = 5;
+            frontColor = SnPal.nobiumBullet;
+            backColor = SnPal.nobiumBulletBack;
+            drag = 0.01f;
+        }
+            public void despawned(Bullet b){
+                nobiumReversBulletBack.create(b, b.x, b.y, b.rotation() - 180, 1f, 1f);
+            }
+        };
         //endregion reverse-bullets
         //region copters
         //T1
@@ -2065,10 +2134,10 @@ public class SnBullets implements ContentList {
             ammoMultiplier = 2.1f;
             lifetime = Time.toSeconds;
         }};
-        smallTorpedo = new TorpedoBulletType(3, 60) {{
-            sprite = "missile";
-            frontColor = SnPal.bGray;
-            backColor = SnPal.bGray.a(5);
+        smallTorpedo = new BasicBulletType(3, 60, "mine-bullet") {{
+            backColor = SnPal.yellowTrail;
+            frontColor = Color.white;
+            mixColorTo = Color.white;
             lifetime = 1.1f * Time.toSeconds;
             drawSize = 9.2f;
             pierceCap = -1;
@@ -2079,10 +2148,21 @@ public class SnBullets implements ContentList {
             recoil = 0;
             pierce = true;
             pierceBuilding = false;
-            //splashDamage = 40;
-            //splashDamageRadius = 10 * Vars.tilesize;
+            splashDamage = 40;
+            splashDamageRadius = 10 * Vars.tilesize;
             hitSound = SnSounds.torpedo_explosion;
-            trailEffect = Fx.none;
+            trailEffect = SnFx.torpedoTrail;
+            trailChance = 1;
+            trailColor = Pal.surge;
+            weaveMag = 3f;
+            weaveScale = 5;
+            layer = Layer.floor + 0.002f;
+            width = height = 16;
+            collidesAir = absorbable = keepVelocity = false;
+            chargeShootEffect = despawnEffect = hitEffect = shootEffect = smokeEffect = Fx.none;
+            collideFloor = true;
+            shrinkX = 0;
+            shrinkY = 0;
         }};
         //T3
         lightningBall = new ArtilleryLightningBulletType(50) {{
