@@ -458,7 +458,7 @@ public class PayloadTurret extends PayloadBlock {
             if(!cheating()) payload = null;
             heat = 1f;
             shotCounter++;
-            if(chargeTime > 0){
+            /*if(chargeTime > 0){
 
                 tr.trns(rotation, shootLength);
                 chargeBeginEffect.at(x + tr.x, y + tr.y, rotation);
@@ -517,6 +517,8 @@ public class PayloadTurret extends PayloadBlock {
                 heat = 1f;
                 effects();
                 }
+
+             */
         }
 
         protected void bullet(BulletType type){
