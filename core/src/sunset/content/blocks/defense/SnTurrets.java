@@ -39,7 +39,7 @@ public class SnTurrets implements ContentList {
     excellence, carbine, pulsation, reflection, discharge,
 
     //3x3
-    major, burner, eternity, hemrus, artLightTurret, trigger,
+    major, burner, payloadTurret, eternity, hemrus, artLightTurret, trigger,
 
     //4x4
     shotgunTurret, admiral, scorpio, ammirus, flood, chain, rockfall,
@@ -299,6 +299,23 @@ public class SnTurrets implements ContentList {
             targetAir = true;
             shootSound = Sounds.flame;
             reloadBar = false;
+        }};
+        payloadTurret = new PayloadTurret("payload"){{
+            requirements(Category.turret, with(Items.metaglass, 75, Items.lead, 200, Items.graphite, 100));
+            ammo(
+            SnPayload.testRocket, SnBullets.bigHelicopterMissile
+            );
+            reloadTime = 20f;
+            health = 140 * size * size;
+            size = 3;
+            range = 100f;
+            reloadTime = 5f;
+            recoilAmount = 2f;
+            inaccuracy = 4f;
+            rotateSpeed = 7.5f;
+            shootCone = 25f;
+            targetAir = true;
+            shootSound = Sounds.missile;
         }};
         eternity = new ModItemTurret("eternity") {{
             requirements(Category.turret, with(SnItems.fors, 230, Items.plastanium, 100, Items.graphite, 60, Items.surgeAlloy, 30));

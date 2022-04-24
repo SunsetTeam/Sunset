@@ -27,6 +27,7 @@ public class SnVars extends ModVars {
             new SnGas(),
             new SnStatusEffects(),
             new SnLiquids(),
+            new SnPayload(),
             new SnBullets(),
             new SnBlocks(),
             new SnUnitTypes(),
