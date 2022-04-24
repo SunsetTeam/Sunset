@@ -3,15 +3,11 @@ package sunset.world.blocks.laser;
 import arc.Core;
 import arc.graphics.g2d.Draw;
 import arc.math.geom.Vec2;
-import arc.util.Log;
 import arc.util.Tmp;
-import mindustry.Vars;
 import mindustry.entities.Damage;
-import mindustry.gen.Building;
 import mindustry.gen.Healthc;
 import mindustry.graphics.Drawf;
 import sunset.utils.LaserUtils;
-import sunset.utils.Utils;
 
 public class Laser {
     public Vec2 start = new Vec2(),
@@ -25,7 +21,7 @@ public class Laser {
 
     public boolean enabled = true;
 
-    public LaserBlock.LaserBlockBuild self;
+    public LaserBlock.LaserBlockBuild build;
     //null if nothing found
     public Healthc target = null;
 
@@ -52,71 +48,73 @@ public class Laser {
                 Drawf.laser(null, Core.atlas.find("minelaser"), Core.atlas.find("minelaser-end"), start.x + Tmp.v1.x, start.y + Tmp.v1.y, end.x - Tmp.v1.x, end.y - Tmp.v1.y);
             }
             Draw.reset();
-            //change lens drawing in drawer
-            if(target instanceof LaserBlock.LaserBlockBuild b){
-                //Log.info("angle: @", angle);
-                //from right
-                if(angle > 135 && angle < 225){
-                    b.drawer.rightInput = true;
-                    //Log.info("from right");
-                }
-                //from down
-                if(angle > 45 && angle < 135){
-                    b.drawer.downInput = true;
-                    //Log.info("from down");
-                }
-                //from left
-                if((angle - 360 > -45 && angle - 360 <= 0) || (angle < 45)){
-                    b.drawer.leftInput = true;
-                    //Log.info("from left");
-                }
-                //from top
-                if(angle > 225 && angle < 315){
-                    b.drawer.topInput = true;
-                    //Log.info("from top");
-                }
-            }
+            if(enabled)
+                setTargetLenses();
         }
     }
 
-    public void update(){
-        charge = self.laser.out;
-        if(enabled){
-            //start offset vector
-            Tmp.v1.trns(angle, offset);
-            Healthc entity = LaserUtils.linecast(start.x + Tmp.v1.x, start.y + Tmp.v1.y, angle, length, false, true, boolf -> true);
-            target = entity;
-            //don't cast with yourself
-            if(self != null && target == self)
-                return;
-            if(target != null){
-                //for correct drawing
-                Tmp.v1.set(start.x, start.y);
-                float len = Tmp.v1.dst(entity.x(), entity.y());
-                //Log.info("len :@", len);
-                if(len <= 0){
-                    end = start;
-                }
-                else{
-                    Tmp.v1.trns(angle, len);
-                    end.x = start.x + Tmp.v1.x;
-                    end.y = start.y + Tmp.v1.y;
-                }
-
-                //////////////
-                //this is for laser mechanic
-                if(target instanceof LaserBlock.LaserBlockBuild b){
-                    b.laser.in += charge;
-                }
-                else{
-                    if(charge != 0)
-                        Damage.damage(null, target.x(), target.y(), 8f, damage * charge,false, true);
-                }
+    public void updateTile(){
+        charge = build.laser.out;
+        //start offset vector
+        Tmp.v1.trns(angle, offset);
+        Healthc entity = LaserUtils.linecast(start.x + Tmp.v1.x, start.y + Tmp.v1.y, angle, length, false, true, boolf -> true);
+        target = entity;
+        //don't cast with yourself
+        if(build != null && target == build)
+            return;
+        if(target != null){
+            //for correct drawing
+            Tmp.v1.set(start.x, start.y);
+            float len = Tmp.v1.dst(entity.x(), entity.y());
+            //Log.info("len :@", len);
+            if(len <= 0){
+                end = start;
             }
             else{
-//                Tmp.v1.setLength(length).setAngle(angle);
-                Tmp.v1.trns(angle,length);
-                end.set(start.x + Tmp.v1.x, start.y + Tmp.v1.y);
+                Tmp.v1.trns(angle, len);
+                end.x = start.x + Tmp.v1.x;
+                end.y = start.y + Tmp.v1.y;
+            }
+
+            //////////////
+            //this is for laser mechanic
+            if(target instanceof LaserBlock.LaserBlockBuild b && enabled){
+                b.laser.in += charge;
+            }
+            else{
+                if(charge != 0 && enabled)
+                    Damage.damage(null, target.x(), target.y(), 8f, damage * charge,false, true);
+            }
+        }
+        else{
+            Tmp.v1.trns(angle,length);
+            end.set(start.x + Tmp.v1.x, start.y + Tmp.v1.y);
+        }
+
+    }
+
+    public void setTargetLenses(){
+        if(target instanceof LaserBlock.LaserBlockBuild b){
+            //Log.info("angle: @", angle);
+            //from right
+            if(angle > 135 && angle < 225){
+                b.rightInput = true;
+                //Log.info("from right");
+            }
+            //from down
+            if(angle > 45 && angle < 135){
+                b.downInput = true;
+                //Log.info("from down");
+            }
+            //from left
+            if((angle - 360 > -45 && angle - 360 <= 0) || (angle < 45)){
+                b.leftInput = true;
+                //Log.info("from left");
+            }
+            //from top
+            if(angle > 225 && angle < 315){
+                b.topInput = true;
+                //Log.info("from top");
             }
         }
     }

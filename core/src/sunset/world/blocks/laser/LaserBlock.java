@@ -29,6 +29,14 @@ public class LaserBlock extends Block{
     public class LaserBlockBuild extends Building{
         LaserModule laser;
         LaserBlockDrawer drawer;
+        public boolean leftInput = false,
+                topInput = false,
+                rightInput = false,
+                downInput = false;
+        boolean topOutput = false,
+                rightOutput = false,
+                downOutput = false,
+                leftOutput = false;
 
         @Override
         public Building init(Tile tile, Team team, boolean shouldAdd, int rotation){
@@ -38,20 +46,18 @@ public class LaserBlock extends Block{
         }
 
         @Override
-        public void updateTile(){
+        public void update(){
+            super.update();
             laser.update();
         }
+
         @Override
         public void draw(){
             drawer.draw();
-            drawer.leftInput = false;
-            drawer.topInput = false;
-            drawer.rightInput = false;
-            drawer.downInput = false;
-            float z = Draw.z();
-            Draw.z(Layer.blockOver);
-            block().drawPlaceText("Laser\nin: " + laser.in + "\nout: " + laser.out + "", tileX(), tileY(), true);
-            Draw.z(z);
+            leftInput = false;
+            topInput = false;
+            rightInput = false;
+            downInput = false;
         }
 
         public float getLaserProduction(){

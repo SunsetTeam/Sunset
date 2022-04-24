@@ -26,7 +26,7 @@ public class SnLasers implements ContentList {
         }};
         rotato = new RotatableLaserNode("rotato"){{
             requirements(Category.distribution, ItemStack.with(Items.copper, 1));
-            size = 1;
+            size = 2;
             buildVisibility = BuildVisibility.sandboxOnly;
         }};
     }

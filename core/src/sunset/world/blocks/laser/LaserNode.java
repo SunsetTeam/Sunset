@@ -1,6 +1,7 @@
 package sunset.world.blocks.laser;
 
 import arc.*;
+import arc.graphics.Color;
 import arc.graphics.g2d.*;
 import arc.math.*;
 import arc.math.geom.*;
@@ -8,12 +9,10 @@ import arc.scene.ui.layout.*;
 import arc.util.*;
 import arc.util.io.*;
 import mindustry.*;
-import mindustry.annotations.Annotations.*;
 import mindustry.game.*;
 import mindustry.gen.*;
 import mindustry.graphics.*;
 import mindustry.world.*;
-import sunset.gen.*;
 
 import static mindustry.Vars.*;
 
@@ -53,19 +52,15 @@ public class LaserNode extends LaserBlock{
     }
 
     public class LaserNodeBuild extends LaserBlockBuild{
-        boolean topOutput = false,
-        rightOutput = false,
-        downOutput = false,
-        leftOutput = false;
         Lasers lasers;
-
+        boolean btnLeft, btnTop, btnRight, btnDown;
         @Override
         public Building init(Tile tile, Team team, boolean shouldAdd, int rotation){
             lasers = new Lasers();
             super.init(tile, team, shouldAdd, rotation);
             //top
             lasers.allLasers.add(new Laser(){{
-                self = LaserNodeBuild.this;
+                build = LaserNodeBuild.this;
                 angle = 90f;
                 length = Math.max(Vars.world.width() * tilesize, Vars.world.height() * tilesize);
                 offset = size * 1.5f;
@@ -73,7 +68,7 @@ public class LaserNode extends LaserBlock{
             }});
             //left
             lasers.allLasers.add(new Laser(){{
-                self = LaserNodeBuild.this;
+                build = LaserNodeBuild.this;
                 angle = 180f;
                 length = Math.max(Vars.world.width() * tilesize, Vars.world.height() * tilesize);
                 offset = size * 1.5f;
@@ -81,7 +76,7 @@ public class LaserNode extends LaserBlock{
             }});
             //right
             lasers.allLasers.add(new Laser(){{
-                self = LaserNodeBuild.this;
+                build = LaserNodeBuild.this;
                 angle = 0f;
                 length = Math.max(Vars.world.width() * tilesize, Vars.world.height() * tilesize);
                 offset = size * 1.5f;
@@ -89,7 +84,7 @@ public class LaserNode extends LaserBlock{
             }});
             //down
             lasers.allLasers.add(new Laser(){{
-                self = LaserNodeBuild.this;
+                build = LaserNodeBuild.this;
                 angle = 270f;
                 length = Math.max(Vars.world.width() * tilesize, Vars.world.height() * tilesize);
                 offset = size * 1.5f;
@@ -100,27 +95,28 @@ public class LaserNode extends LaserBlock{
 
         @Override
         public void updateTile(){
-            laser.outputs = (leftOutput ? 1 : 0) + (topOutput ? 1 : 0) + (rightOutput ? 1 : 0) + (downOutput ? 1 : 0);
             super.updateTile();
+            laser.outputs = (leftOutput ? 1 : 0) + (topOutput ? 1 : 0) + (rightOutput ? 1 : 0) + (downOutput ? 1 : 0);
             lasers.getLeft().enabled = leftOutput;
             lasers.getTop().enabled = topOutput;
             lasers.getRight().enabled = rightOutput;
             lasers.getDown().enabled = downOutput;
-            lasers.update();
+            lasers.updateTile();
         }
 
         @Override
         public void draw(){
-            drawer.draw();
-            drawer.leftInput = leftOutput;
-            drawer.topInput = topOutput;
-            drawer.rightInput = rightOutput;
-            drawer.downInput = downOutput;
+            btnLeft = leftInput && !leftOutput;
+            btnTop = topInput && !topOutput;
+            btnRight = rightInput && !rightOutput;
+            btnDown = downInput && !downOutput;
+            super.draw();
             lasers.draw();
-            float z = Draw.z();
-            Draw.z(Layer.blockOver);
-            //block().drawPlaceText("Laser\nin: " + laser.in + "\nout: " + laser.out + "", tileX(), tileY(), true);
-            Draw.z(z);
+            //float z = Draw.z();
+            //Draw.z(Layer.blockOver);
+            //трёхэтажный дебаг : )
+            //block().drawPlaceText("Laser\nin: " + laser.in + "\nout: " + laser.out + "\ntopIn: " + topInput + ", topOut: " + topOutput + ", leftIn: " + leftInput + ", leftOut: " + leftOutput + ", downIn: " + downInput + ", downOut: " + downOutput + ", rightIn: " + rightInput + ", rightOut: " + rightOutput + "", tileX(), tileY(), true);
+            //Draw.z(z);
         }
 
         @Override
@@ -137,21 +133,29 @@ public class LaserNode extends LaserBlock{
             t.add();
             t.button(Icon.up, () -> {
                 Log.info("top");
-//                top = !top;
                 topOutput = !topOutput;
                 configureState();
+            }).update(b -> {
+                b.setDisabled(btnTop);
+                b.setColor(topOutput ? Color.green : Color.red);
             });
             t.add().row();
             t.button(Icon.left, () -> {
                 Log.info("left");
                 leftOutput = !leftOutput;
                 configureState();
+            }).update(b -> {
+                b.setDisabled(btnLeft);
+                b.setColor(leftOutput ? Color.green : Color.red);
             });
             t.add();
             t.button(Icon.right, () -> {
                 Log.info("right");
                 rightOutput = !rightOutput;
                 configureState();
+            }).update(b -> {
+                b.setDisabled(btnRight);
+                b.setColor(rightOutput ? Color.green : Color.red);
             });
             t.row();
             t.add();
@@ -159,6 +163,9 @@ public class LaserNode extends LaserBlock{
                 Log.info("down");
                 downOutput = !downOutput;
                 configureState();
+            }).update(b -> {
+                b.setDisabled(btnDown);
+                b.setColor(downOutput ? Color.green : Color.red);
             });
         }
 
