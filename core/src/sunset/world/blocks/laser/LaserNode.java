@@ -53,7 +53,6 @@ public class LaserNode extends LaserBlock{
 
     public class LaserNodeBuild extends LaserBlockBuild{
         Lasers lasers;
-        boolean btnLeft, btnTop, btnRight, btnDown;
         @Override
         public Building init(Tile tile, Team team, boolean shouldAdd, int rotation){
             lasers = new Lasers();
@@ -106,10 +105,6 @@ public class LaserNode extends LaserBlock{
 
         @Override
         public void draw(){
-            btnLeft = leftInput && !leftOutput;
-            btnTop = topInput && !topOutput;
-            btnRight = rightInput && !rightOutput;
-            btnDown = downInput && !downOutput;
             super.draw();
             lasers.draw();
             //float z = Draw.z();
@@ -136,7 +131,7 @@ public class LaserNode extends LaserBlock{
                 topOutput = !topOutput;
                 configureState();
             }).update(b -> {
-                b.setDisabled(btnTop);
+                b.setDisabled(topInput && !topOutput);
                 b.setColor(topOutput ? Color.green : Color.red);
             });
             t.add().row();
@@ -145,7 +140,7 @@ public class LaserNode extends LaserBlock{
                 leftOutput = !leftOutput;
                 configureState();
             }).update(b -> {
-                b.setDisabled(btnLeft);
+                b.setDisabled(leftInput && !leftOutput);
                 b.setColor(leftOutput ? Color.green : Color.red);
             });
             t.add();
@@ -154,7 +149,7 @@ public class LaserNode extends LaserBlock{
                 rightOutput = !rightOutput;
                 configureState();
             }).update(b -> {
-                b.setDisabled(btnRight);
+                b.setDisabled(rightInput && !rightOutput);
                 b.setColor(rightOutput ? Color.green : Color.red);
             });
             t.row();
@@ -164,7 +159,7 @@ public class LaserNode extends LaserBlock{
                 downOutput = !downOutput;
                 configureState();
             }).update(b -> {
-                b.setDisabled(btnDown);
+                b.setDisabled(downInput && !downOutput);
                 b.setColor(downOutput ? Color.green : Color.red);
             });
         }
