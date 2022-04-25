@@ -48,8 +48,7 @@ public class Laser {
                 Drawf.laser(null, Core.atlas.find("minelaser"), Core.atlas.find("minelaser-end"), start.x + Tmp.v1.x, start.y + Tmp.v1.y, end.x - Tmp.v1.x, end.y - Tmp.v1.y);
             }
             Draw.reset();
-            if(enabled)
-                setTargetLenses();
+
         }
     }
 
@@ -75,6 +74,8 @@ public class Laser {
                 end.x = start.x + Tmp.v1.x;
                 end.y = start.y + Tmp.v1.y;
             }
+
+            setTargetLenses();
 
             //////////////
             //this is for laser mechanic
