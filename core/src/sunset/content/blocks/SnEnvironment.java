@@ -7,10 +7,7 @@ import mindustry.ctype.ContentList;
 import mindustry.entities.Effect;
 import mindustry.graphics.CacheLayer;
 import mindustry.world.Block;
-import mindustry.world.blocks.environment.Floor;
-import mindustry.world.blocks.environment.OreBlock;
-import mindustry.world.blocks.environment.StaticTree;
-import mindustry.world.blocks.environment.StaticWall;
+import mindustry.world.blocks.environment.*;
 import mindustry.world.meta.Attribute;
 import sunset.content.SnAttribute;
 import sunset.content.SnItems;
@@ -263,10 +260,10 @@ public class SnEnvironment implements ContentList {
         }};
         //endregion static walls
         //region trees
-        crimsonTree = new StaticTree("crimson-tree") {{
+        crimsonTree = new TreeBlock("crimson-tree") {{
             variants = 0;
         }};
-        crimsonTreeDead = new StaticTree("crimson-tree-dead") {{
+        crimsonTreeDead = new TreeBlock("crimson-tree-dead") {{
             variants = 0;
         }};
         //endregion trees
