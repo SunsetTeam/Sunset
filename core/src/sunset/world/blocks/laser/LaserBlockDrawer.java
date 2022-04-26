@@ -18,6 +18,7 @@ public class LaserBlockDrawer {
     }
 
     public void drawLenses(boolean left, boolean top, boolean right, boolean down){
+        build.block().lens.flip(false, true);
         if(left){
             Draw.rect(build.block().lens, build.x, build.y, 180);
         }
@@ -30,6 +31,7 @@ public class LaserBlockDrawer {
         else{
             Draw.rect(build.block().plugLight, build.x, build.y, 90);
         }
+        build.block().lens.flip(false, true);
         if(right){
             Draw.rect(build.block().lens, build.x, build.y);
         }
