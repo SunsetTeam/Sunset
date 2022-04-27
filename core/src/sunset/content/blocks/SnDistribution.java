@@ -9,6 +9,7 @@ import mindustry.world.blocks.distribution.StackConveyor;
 import mindustry.world.blocks.storage.StorageBlock;
 import sunset.content.SnItems;
 import sunset.content.SnUnitTypes;
+import sunset.world.blocks.distribution.ItemTeleporter;
 import sunset.world.blocks.units.Airport;
 
 import static mindustry.type.ItemStack.with;
@@ -22,7 +23,7 @@ public class SnDistribution implements ContentList {
             crypt,
 
             //special
-            airport;
+            airport, itemTeleporter;
 
     @Override
     public void load() {
@@ -60,6 +61,14 @@ public class SnDistribution implements ContentList {
             powerUse = 3.25f;
             itemCapacity = 1000;
             unitRequirements = with(Items.thorium, 60, SnItems.naturite, 40);
+        }};
+
+        itemTeleporter = new ItemTeleporter("item-teleporter"){{
+            category = Category.distribution;
+            itemCapacity = 110;
+            health = 100;
+            hasItems = true;
+            configurable = true;
         }};
         //endregion special
     }

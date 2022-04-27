@@ -245,8 +245,6 @@ public class PayloadTurret extends PayloadBlock {
         @Override
         public double sense(LAccess sensor){
             return switch(sensor){
-                case ammo -> totalAmmo;
-                case ammoCapacity -> maxAmmo;
                 case rotation -> rotation;
                 case shootX -> World.conv(targetPos.x);
                 case shootY -> World.conv(targetPos.y);
@@ -364,12 +362,6 @@ public class PayloadTurret extends PayloadBlock {
                         updateShooting();
                     }
                 }
-                if(!Angles.within(payRotation, rotation - 90f, 0.01f)){
-                    payRotation = Angles.moveToward(payRotation, rotation - 90f, payloadRotateSpeed * edelta());
-                    rotating = true;
-                }else{
-                    rotating = false;
-                }
             }else{
                 moveInPayload(false);
             }
@@ -458,67 +450,6 @@ public class PayloadTurret extends PayloadBlock {
             if(!cheating()) payload = null;
             heat = 1f;
             shotCounter++;
-            /*if(chargeTime > 0){
-
-                tr.trns(rotation, shootLength);
-                chargeBeginEffect.at(x + tr.x, y + tr.y, rotation);
-                chargeSound.at(x + tr.x, y + tr.y, 1);
-
-                for(int i = 0; i < chargeEffects; i++){
-                    Time.run(Mathf.random(chargeMaxDelay), () -> {
-                        if(dead) return;
-                        tr.trns(rotation, shootLength);
-                        chargeEffect.at(x + tr.x, y + tr.y, rotation);
-                    });
-                }
-
-                charging = true;
-
-                Time.run(chargeTime, () -> {
-                    if(dead) return;
-                    tr.trns(rotation, shootLength);
-                    recoil = recoilAmount;
-                    heat = 1f;
-                    effects();
-                    charging = false;
-                });
-
-                //when burst spacing is enabled, use the burst pattern
-            }else if(burstSpacing > 0.0001f){
-                for(int i = 0; i < shots; i++){
-                    int ii = i;
-                    Time.run(burstSpacing * i, () -> {
-                        if(dead || !hasAmmo()) return;
-                        tr.trns(rotation, shootLength, Mathf.range(xRand));
-                        bullet(type);
-                        effects();
-                        recoil = recoilAmount;
-                        heat = 1f;
-                    });
-                }
-
-            }else{
-                //otherwise, use the normal shot pattern(s)
-
-                if(alternate){
-                    float i = (shotCounter % shots) - (shots-1)/2f;
-
-                    tr.trns(rotation - 90, spread * i + Mathf.range(xRand), shootLength);
-                }else{
-                    tr.trns(rotation, shootLength, Mathf.range(xRand));
-
-                    for(int i = 0; i < shots; i++){
-                        bullet(type);
-                    }
-                }
-
-                shotCounter++;
-                recoil = recoilAmount;
-                heat = 1f;
-                effects();
-                }
-
-             */
         }
 
         protected void bullet(BulletType type){
