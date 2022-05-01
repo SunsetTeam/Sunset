@@ -28,13 +28,14 @@ public class SnLiquidBlocks implements ContentList {
     public void load() {
 
         //region transportation
-        naturiteConduit = new ModConduit("naturite-conduit") {{
+        naturiteConduit = new Conduit("naturite-conduit") {{
             requirements(Category.liquid, with(Items.titanium, 2, Items.metaglass, 1, SnItems.naturite, 2));
             liquidCapacity = 18f;
             liquidPressure = 1.035f;
             health = 110;
             placeableLiquid = true;
             hasShadow = false;
+            floating = true;
         }};
 
         if (!ModVars.packSprites) {

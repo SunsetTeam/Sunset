@@ -64,11 +64,13 @@ public class SnDistribution implements ContentList {
         }};
 
         itemTeleporter = new ItemTeleporter("item-teleporter"){{
-            category = Category.distribution;
+            requirements(Category.distribution, with(Items.copper, 1));
             itemCapacity = 110;
             health = 100;
             hasItems = true;
             configurable = true;
+            range = 15f;
+            consumes.power(5f);
         }};
         //endregion special
     }

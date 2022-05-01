@@ -31,7 +31,7 @@ public class SnGasBlocks implements ContentList {
     gasSource, gasVoid,
 
     //gas-transportation
-    gasPipe, armoredGasPipe, naturiteGasPipe, nobiumGasPipe, armoredNobiumGasPipe, gasJunction, gasRouter, gasBridge, nobiumGasBridge,
+    gasPipe, armoredGasPipe, nobiumGasPipe, armoredNobiumGasPipe, gasJunction, gasRouter, gasBridge, nobiumGasBridge,
 
     //storage
     gasStorage, gasContainer, gasTank,
@@ -68,15 +68,6 @@ public class SnGasBlocks implements ContentList {
             health = 200;
             size = 1;
             gasCapacity = 9.6f;
-            junctionReplacement = gasJunction;
-            bridgeReplacement = gasBridge;
-        }};
-        naturiteGasPipe = new ModGasPipe("naturite-gas-pipe") {{
-            requirements(Category.liquid, with(Items.metaglass, 1, SnItems.naturite, 3, SnItems.fors, 2));
-            health = 65;
-            size = 1;
-            gasCapacity = 13f;
-            placeableLiquid = true;
             junctionReplacement = gasJunction;
             bridgeReplacement = gasBridge;
         }};

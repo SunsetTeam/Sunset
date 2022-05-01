@@ -10,14 +10,18 @@ import arc.util.Time;
 import mindustry.Vars;
 import mindustry.gen.Building;
 import mindustry.graphics.Pal;
+import mindustry.logic.Ranged;
 import mindustry.type.Item;
 import mindustry.ui.Bar;
 import mindustry.world.*;
 import mindustry.world.meta.Stat;
 import mindustry.world.meta.StatUnit;
 
+import static mindustry.Vars.tilesize;
+
 public class ItemTeleporter extends Block {
     public int maxLink = 3;
+    public float range = 10f;
 
     public ItemTeleporter(String name) {
         super(name);
@@ -30,14 +34,17 @@ public class ItemTeleporter extends Block {
     public void setStats() {
         super.setStats();
         stats.add(Stat.powerConnections, (float)(maxLink - 1), StatUnit.none);
+        stats.add(Stat.range, range / tilesize, StatUnit.blocks);
     }
 
     public void setBars() {
         super.setBars();
-        bars.add("connections", (bar) -> new Bar(() -> Core.bundle.format("bar.powerlines", bar.block.size, maxLink), () -> Pal.accent, () -> (float)bar.block.size / (float)maxLink));
+        bars.add("connections", entity -> new Bar(
+                () -> Core.bundle.format("bar.powerlines", entity.block.size, maxLink),
+                () -> Pal.accent, () -> (float)entity.block.size / (float)maxLink));
     }
 
-    public class ItemTeleporterBuild extends Building {
+    public class ItemTeleporterBuild extends Building implements Ranged {
         public int linkRotation = 0;
         public Seq<Integer> b = new Seq();
 
@@ -122,6 +129,11 @@ public class ItemTeleporter extends Block {
             } else {
                 return false;
             }
+        }
+
+        @Override
+        public float range() {
+            return range;
         }
     }
 }
