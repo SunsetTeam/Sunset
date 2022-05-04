@@ -6,7 +6,7 @@ import mindustry.content.StatusEffects;
 import mindustry.ctype.ContentList;
 
 public class SnGas implements ContentList {
-    public static Gas hyneris, gyner;
+    public static Gas hyneris, gyner, arhelinium;
 
     @Override
     public void load() {
@@ -23,6 +23,10 @@ public class SnGas implements ContentList {
             flammability = 0.1f;
             temperature = 0.4f;
             effect = StatusEffects.wet;
+        }};
+        arhelinium = new Gas("arhelinium") {{
+           color = Color.valueOf("d18ffa"); //the color will be changed :)
+
         }};
     }
 }
