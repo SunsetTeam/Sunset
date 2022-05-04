@@ -8,64 +8,61 @@ import sunset.type.Ammo;
 public class SnItems implements ContentList {
     public static Item
     //items
-    //raw
-    fors, planatrium, flameid, coldent,
-    //crafted
-    naturite, nobium, anzar, enojie, reneubite,
+    //azaria
+    fors, erius, anzar, naturite, nedirium, reneubite, nobium, planatrium, yobut, yantai, enojii, zerinium,
+    //other
+    flameid, coldent,
     //ammo
     lightBurstMissile,
     raMissile, empMissile, lightningMissile, lightMissile,
     burstMissile, detonatorMissile, pointMissile, spotMissile;
+
     @Override
     public void load() {
-        //region items
-        //region raw
-        fors = new Item("fors", Color.valueOf("d15361")) {{
+        //azaria
+        fors = new Item("fors", Color.valueOf("ed606e")) {{
             cost = 3f;
             hardness = 3;
         }};
-        planatrium = new Item("planatrium", Color.valueOf("a554d6")) {{
-            cost = 5f;
-            hardness = 4;
-            explosiveness = 0.2f;
-            radioactivity = 1f;
-        }};
-        flameid = new Item("flameid", Color.valueOf("EA8878")) {{
-            cost = 4f;
-            flammability = 0.6f;
-            hardness = 4;
-        }};
-        coldent = new Item("coldent", Color.valueOf("BAF4F5FF")) {{
-            cost = 4f;
-            hardness = 4;
-        }};
-        //endregion raw
-        //region crafted
-        naturite = new Item("naturite", Color.valueOf("e4d071")) {{
-            flammability = 0.3f;
+        erius = new Item("erius", Color.valueOf("a0d2d6")) {{
             cost = 3f;
         }};
-        nobium = new Item("nobium", Color.valueOf("eeeded")) {{
-            cost = 5f;
+        anzar = new Item("anzar", Color.valueOf("feb380")) {{
+            cost = 3f;
         }};
-        anzar = new Item("anzar", Color.valueOf("feb380")){{
-            cost = 4f;
+        naturite = new Item("naturite", Color.valueOf("f3e979")) {{
+            cost = 3f;
         }};
-        enojie = new Item("enojie", Color.valueOf("75e0ac")) {{
-            radioactivity = 0.8f;
-            explosiveness = 0.06f;
-            cost = 6f;
+        nedirium = new Item("nedirium", Color.valueOf("ffffff")) {{
+            cost = 3f;
         }};
         reneubite = new Item("reneubite", Color.valueOf("87ceeb")) {{
             cost = 3f;
-            flammability = 0.8f;
-            explosiveness = 0.7f;
         }};
+        nobium = new Item("nobium", Color.valueOf("c1c4cb")) {{
+            cost = 3f;
+        }};
+        planatrium = new Item("planatrium", Color.valueOf("b287ec")) {{
+            cost = 3f;
+        }};
+        yobut = new Item("yobut", Color.valueOf("ff0000")) {{
+            cost = 3f;
+        }};
+        yantai = new Item("yantai", Color.valueOf("fbff93")) {{
+            cost = 3f;
+        }};
+        enojii = new Item("enojii", Color.valueOf("99f2c7")) {{
+            cost = 3f;
+        }};
+        zerinium = new Item("zerinium", Color.valueOf("ffffff")) {{
+            cost = 3f;
+        }};
+
         //endregion crafted
         //endregion items
         //region ammo
 
-        /*lightBurstMissile = new Ammo("light-burst-missile");
+        /* lightBurstMissile = new Ammo("light-burst-missile");
         raMissile = new Ammo("ra-missile");
         empMissile = new Ammo("emp-missile");
         lightningMissile = new Ammo("lightning-missile");
