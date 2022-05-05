@@ -127,7 +127,7 @@ public class SnProduction implements ContentList{
             updateEffect = Fx.pulverizeRed;
             updateEffectChance = 0.04f;
             drillEffect = Fx.mineHuge;
-            rotateSpeed = 5f;
+            rotateSpeed = 5.0f;
             warmupSpeed = 0.01f;
             itemCapacity = 50;
 
