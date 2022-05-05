@@ -11,8 +11,7 @@ public class SnItems implements ContentList {
     //azaria
     fors, erius, anzar, naturite, nedirium, reneubite, nobium, planatrium, yobut, yantai, enojii, zerinium,
     //other
-    //flameid, coldent, this will be done later
-    //ammo
+    flameid, coldent,
     lightBurstMissile,
     raMissile, empMissile, lightningMissile, lightMissile,
     burstMissile, detonatorMissile, pointMissile, spotMissile;
@@ -56,6 +55,12 @@ public class SnItems implements ContentList {
         }};
         zerinium = new Item("zerinium", Color.valueOf("ffffff")) {{
             cost = 3f;
+        }};
+        flameid = new Item("flameid", Color.valueOf("ffffff")) {{
+            cost = 3f;
+        }};
+        coldent = new Item("coldent", Color.valueOf("ffffff")) {{
+           cost = 3f;
         }};
         // test
         /*
