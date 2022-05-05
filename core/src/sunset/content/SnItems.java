@@ -11,7 +11,7 @@ public class SnItems implements ContentList {
     //azaria
     fors, erius, anzar, naturite, nedirium, reneubite, nobium, planatrium, yobut, yantai, enojii, zerinium,
     //other
-    flameid, coldent,
+    //flameid, coldent, this will be done later
     //ammo
     lightBurstMissile,
     raMissile, empMissile, lightningMissile, lightMissile,
@@ -58,11 +58,13 @@ public class SnItems implements ContentList {
             cost = 3f;
         }};
 
-        //endregion crafted
-        //endregion items
-        //region ammo
+        /*
 
-        /* lightBurstMissile = new Ammo("light-burst-missile");
+        endregion crafted
+        endregion items
+        region ammo
+
+        lightBurstMissile = new Ammo("light-burst-missile");
         raMissile = new Ammo("ra-missile");
         empMissile = new Ammo("emp-missile");
         lightningMissile = new Ammo("lightning-missile");
@@ -71,7 +73,9 @@ public class SnItems implements ContentList {
         detonatorMissile = new Ammo("detonator-missile");
         pointMissile = new Ammo("point-missile");
         spotMissile = new Ammo("spot-missile");
-        */
+
         //endregion ammo
+
+        */
     }
 }
