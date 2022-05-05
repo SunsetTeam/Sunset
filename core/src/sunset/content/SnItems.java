@@ -9,7 +9,7 @@ public class SnItems implements ContentList {
     public static Item
     //items
     //azaria
-    fors, erius, anzar, naturite, nedirium, reneubite, nobium, planatrium, yobut, yantai, enojie, zerinium,
+    fors, erius, anzar, naturite, nedirium, reneubite, nobium, planatrium, yobut, yantai, enojii, zerinium,
     //other
     //flameid, coldent, this will be done later
     //ammo
@@ -51,13 +51,13 @@ public class SnItems implements ContentList {
         yantai = new Item("yantai", Color.valueOf("fbff93")) {{
             cost = 3f;
         }};
-        enojie = new Item("enojii", Color.valueOf("99f2c7")) {{
+        enojii = new Item("enojii", Color.valueOf("99f2c7")) {{
             cost = 3f;
         }};
         zerinium = new Item("zerinium", Color.valueOf("ffffff")) {{
             cost = 3f;
         }};
-
+        // test
         /*
 
         endregion crafted
