@@ -53,6 +53,9 @@ public class SnStat {
     //empty
     //endregion Power
     //region Items
+    public static final AStat testItemStat1 = AStat.get("test-item-stat1", StatCat.items, 1);
+    public static final AStat testItemStat2 = AStat.get("test-item-stat2", StatCat.items, 2);
+    public static final AStat testItemStat3 = AStat.get("test-item-stat3", StatCat.items, 3);
     //empty
     //endregion Items
     //region Liquids
