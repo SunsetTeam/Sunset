@@ -4,6 +4,7 @@ import arc.graphics.Color;
 import mindustry.ctype.ContentList;
 import mindustry.type.Item;
 import sunset.type.Ammo;
+import sunset.type.SnItem;
 
 public class SnItems implements ContentList {
     public static Item
@@ -11,10 +12,10 @@ public class SnItems implements ContentList {
     //raw
     fors, erius, nedirium, planatrium,
     //crafting
-    anzar, naturite,  reneubite, nobium,  yobut, yantai, enojie, zerinium,
+    anzar, naturite,  reneubite, nobium,  azalia_bud, yantai, enojie, zerinium,
     //endregion azaria
     //other
-    flameid, coldent,
+    flameid, coldent, testItem,
     lightBurstMissile,
     raMissile, empMissile, lightningMissile, lightMissile,
     burstMissile, detonatorMissile, pointMissile, spotMissile;
@@ -50,7 +51,7 @@ public class SnItems implements ContentList {
             explosiveness = 0.2f;
             radioactivity = 1f;
         }};
-        yobut = new Item("yobut", Color.valueOf("ff0000")) {{
+        azalia_bud = new Item("azalia_bud", Color.valueOf("ff0000")) {{
             cost = 4f;
             flammability = 0.6f;
         }};
@@ -79,6 +80,11 @@ public class SnItems implements ContentList {
         }};
         //endregion other
         // test
+        testItem = new SnItem("test-item", Color.valueOf("000000")){{
+            testStat1 = 1f;
+            testStat2 = 0.54f;
+            testStat3 = 0.71f;
+        }};
         /*
 
         endregion crafted
