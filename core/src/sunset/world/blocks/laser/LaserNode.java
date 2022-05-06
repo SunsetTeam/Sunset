@@ -93,7 +93,7 @@ public class LaserNode extends LaserBlock{
         }
 
         @Override
-        public void updateTile(){
+        public void updateTile() {
             super.updateTile();
             laser.outputs = (leftOutput ? 1 : 0) + (topOutput ? 1 : 0) + (rightOutput ? 1 : 0) + (downOutput ? 1 : 0);
             lasers.getLeft().enabled = leftOutput;

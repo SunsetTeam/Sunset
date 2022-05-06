@@ -49,16 +49,15 @@ public class LaserBlock extends Block{
         public void update(){
             super.update();
             laser.update();
+            leftInput = false;
+            topInput = false;
+            rightInput = false;
+            downInput = false;
         }
 
         @Override
         public void draw(){
             drawer.draw();
-            leftInput = false;
-            topInput = false;
-            rightInput = false;
-            downInput = false;
-
         }
 
         public float getLaserProduction(){
