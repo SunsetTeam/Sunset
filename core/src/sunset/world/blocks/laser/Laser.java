@@ -48,7 +48,6 @@ public class Laser {
                 Drawf.laser(null, Core.atlas.find("minelaser"), Core.atlas.find("minelaser-end"), start.x + Tmp.v1.x, start.y + Tmp.v1.y, end.x - Tmp.v1.x, end.y - Tmp.v1.y);
             }
             Draw.reset();
-
         }
     }
 
@@ -75,16 +74,16 @@ public class Laser {
                 end.y = start.y + Tmp.v1.y;
             }
 
-            setTargetLenses();
-
-            //////////////
-            //this is for laser mechanic
-            if(target instanceof LaserBlock.LaserBlockBuild b && enabled){
-                b.laser.in += charge;
-            }
-            else{
-                if(charge != 0 && enabled)
+            if (enabled){
+                setTargetLenses();
+                //////////////
+                //this is for laser mechanic
+                if(target instanceof LaserBlock.LaserBlockBuild b){
+                    b.laser.in += charge;
+                }
+                else if(charge != 0){
                     Damage.damage(null, target.x(), target.y(), 8f, damage * charge,false, true);
+                }
             }
         }
         else{
@@ -122,6 +121,10 @@ public class Laser {
 
     public void start(Vec2 start){
         this.start.set(start);
+    }
+
+    public void start(float x, float y){
+        start.set(x, y);
     }
 
     public void end(Vec2 end){

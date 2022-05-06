@@ -9,13 +9,6 @@ public class Lasers {
     public Lasers(){
     }
 
-    @Deprecated
-    public void update(){
-        for (Laser laser : allLasers){
-            //laser.update();
-        }
-    }
-
     public void updateTile(){
         for (Laser laser : allLasers){
             laser.updateTile();

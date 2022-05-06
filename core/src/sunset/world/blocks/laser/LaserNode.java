@@ -107,11 +107,11 @@ public class LaserNode extends LaserBlock{
         public void draw(){
             super.draw();
             lasers.draw();
-            //float z = Draw.z();
-            //Draw.z(Layer.blockOver);
+            float z = Draw.z();
+            Draw.z(Layer.blockOver);
             //трёхэтажный дебаг : )
-            //block().drawPlaceText("Laser\nin: " + laser.in + "\nout: " + laser.out + "\ntopIn: " + topInput + ", topOut: " + topOutput + ", leftIn: " + leftInput + ", leftOut: " + leftOutput + ", downIn: " + downInput + ", downOut: " + downOutput + ", rightIn: " + rightInput + ", rightOut: " + rightOutput + "", tileX(), tileY(), true);
-            //Draw.z(z);
+            block().drawPlaceText("Laser\nin: " + laser.in + "\nout: " + laser.out + "\ntopIn: " + topInput + ", topOut: " + topOutput + ", leftIn: " + leftInput + ", leftOut: " + leftOutput + ", downIn: " + downInput + ", downOut: " + downOutput + ", rightIn: " + rightInput + ", rightOut: " + rightOutput + "", tileX(), tileY(), true);
+            Draw.z(z);
         }
 
         @Override
