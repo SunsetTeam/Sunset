@@ -105,13 +105,14 @@ public class LaserNode extends LaserBlock{
 
         @Override
         public void draw(){
-            super.draw();
+            drawer.draw();
             lasers.draw();
             float z = Draw.z();
             Draw.z(Layer.blockOver);
             //трёхэтажный дебаг : )
             block().drawPlaceText("Laser\nin: " + laser.in + "\nout: " + laser.out + "\ntopIn: " + topInput + ", topOut: " + topOutput + ", leftIn: " + leftInput + ", leftOut: " + leftOutput + ", downIn: " + downInput + ", downOut: " + downOutput + ", rightIn: " + rightInput + ", rightOut: " + rightOutput + "", tileX(), tileY(), true);
             Draw.z(z);
+            //Log.info("block draw, time: @", Time.time);
         }
 
         @Override
@@ -131,7 +132,9 @@ public class LaserNode extends LaserBlock{
                 topOutput = !topOutput;
                 configureState();
             }).update(b -> {
-                b.setDisabled(topInput && !topOutput);
+                //Log.info("button update, time: @", Time.time);
+                b.setDisabled(topInput);
+                topInput = false;
                 b.setColor(topOutput ? Color.green : Color.red);
             });
             t.add().row();
@@ -140,7 +143,8 @@ public class LaserNode extends LaserBlock{
                 leftOutput = !leftOutput;
                 configureState();
             }).update(b -> {
-                b.setDisabled(leftInput && !leftOutput);
+                b.setDisabled(leftInput);
+                leftInput = false;
                 b.setColor(leftOutput ? Color.green : Color.red);
             });
             t.add();
@@ -149,7 +153,8 @@ public class LaserNode extends LaserBlock{
                 rightOutput = !rightOutput;
                 configureState();
             }).update(b -> {
-                b.setDisabled(rightInput && !rightOutput);
+                b.setDisabled(rightInput);
+                rightInput = false;
                 b.setColor(rightOutput ? Color.green : Color.red);
             });
             t.row();
@@ -159,7 +164,8 @@ public class LaserNode extends LaserBlock{
                 downOutput = !downOutput;
                 configureState();
             }).update(b -> {
-                b.setDisabled(downInput && !downOutput);
+                b.setDisabled(downInput);
+                downInput = false;
                 b.setColor(downOutput ? Color.green : Color.red);
             });
         }

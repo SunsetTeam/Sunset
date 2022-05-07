@@ -2,6 +2,8 @@ package sunset.world.blocks.laser;
 
 import arc.graphics.g2d.Draw;
 import arc.graphics.g2d.TextureRegion;
+import arc.util.Log;
+import arc.util.Time;
 import mindustry.annotations.Annotations;
 import mindustry.game.Team;
 import mindustry.gen.Building;
@@ -49,15 +51,16 @@ public class LaserBlock extends Block{
         public void update(){
             super.update();
             laser.update();
-            leftInput = false;
-            topInput = false;
-            rightInput = false;
-            downInput = false;
+            //Log.info("block update, time: @", Time.time);
         }
 
         @Override
         public void draw(){
             drawer.draw();
+            leftInput = false;
+            topInput = false;
+            rightInput = false;
+            downInput = false;
         }
 
         public float getLaserProduction(){
