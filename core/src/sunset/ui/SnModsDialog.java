@@ -1,7 +1,6 @@
 package sunset.ui;
 
 import arc.*;
-import arc.util.Http.*;
 import arc.files.*;
 import arc.func.*;
 import arc.graphics.*;
@@ -14,6 +13,7 @@ import arc.scene.ui.*;
 import arc.scene.ui.layout.*;
 import arc.struct.*;
 import arc.util.*;
+import arc.util.Http.*;
 import arc.util.io.*;
 import arc.util.serialization.*;
 import mindustry.*;
@@ -26,11 +26,10 @@ import mindustry.io.*;
 import mindustry.mod.*;
 import mindustry.mod.Mods.*;
 import mindustry.ui.*;
-import mindustry.ui.dialogs.BaseDialog;
-import mindustry.ui.dialogs.ModsDialog;
+import mindustry.ui.dialogs.*;
 
 import java.io.*;
-import java.lang.reflect.Method;
+import java.lang.reflect.*;
 import java.text.*;
 import java.util.*;
 
@@ -38,7 +37,7 @@ import static mindustry.Vars.*;
 
 // Анюк опять всё понаprivateл, придётся copy-paste делать
 // patched ModsDialog class to add custom displayer for Sunset mod
-public class SnModsDialog extends ModsDialog {
+public class SnModsDialog extends ModsDialog{
     public static SnModsDialog instance;
 
     private ObjectMap<String, TextureRegion> textureCache = new ObjectMap<>();
@@ -52,17 +51,13 @@ public class SnModsDialog extends ModsDialog {
     private BaseDialog browser;
     private Table browserTable;
 
-    private Func2<LoadedMod, Runnable, BaseDialog> customDisplayer;
+    private Prov<BaseDialog> customDisplayer;
 
-    public static void init(Func2<LoadedMod, Runnable, BaseDialog> customDisplayer) {
-        if(Vars.headless) return;
-        instance = new SnModsDialog(customDisplayer);
-    }
-
-    private SnModsDialog(Func2<LoadedMod, Runnable, BaseDialog> customDisplayer) {
+    private SnModsDialog(Prov<BaseDialog> customDisplayer){
         super();
         cont.clear();
-        ui.mods = this;
+        //TODO normal using
+//        ui.mods = this;
         this.customDisplayer = customDisplayer;
 
         //region actual contructor code
@@ -90,11 +85,11 @@ public class SnModsDialog extends ModsDialog {
         browser.addCloseButton();
 
         Method m;
-        try {
+        try{
             m = BaseDialog.class.getDeclaredMethod("onResize", Runnable.class);
             m.setAccessible(true);
             m.invoke(browser, (Runnable)this::rebuildBrowser);
-        } catch (Throwable e) {
+        }catch(Throwable e){
             Log.err(e);
         }
 
@@ -114,6 +109,12 @@ public class SnModsDialog extends ModsDialog {
             }
         });
         //endregion actual contructor code
+    }
+
+    public static void init(Prov<BaseDialog> customDisplayer){
+        if(Vars.headless) return;
+        if(instance != null) throw new IllegalArgumentException("You cannot make SnModsDialog twice");
+        instance = new SnModsDialog(customDisplayer);
     }
 
     void modError(Throwable error){
@@ -344,10 +345,10 @@ public class SnModsDialog extends ModsDialog {
         ui.showInfoOnHidden("@mods.reloadexit", () -> Core.app.exit());
     }
 
-    private void showMod(LoadedMod mod) {
-        if(mod.name.equals("sunset")) {
-            customDisplayer.get(mod, () -> githubImportMod(mod.getRepo(), mod.isJava())).show();
-        } else {
+    private void showMod(LoadedMod mod){
+        if(mod.name.equals("sunset")){
+            customDisplayer.get().show();
+        }else{
             showModDef(mod);
         }
     }
@@ -480,7 +481,8 @@ public class SnModsDialog extends ModsDialog {
                                             Log.err(e);
                                         }
                                     });
-                                }, err -> {});
+                                }, err -> {
+                                });
                             }
 
                             var next = textureCache.get(repo);
@@ -502,7 +504,7 @@ public class SnModsDialog extends ModsDialog {
                 }, Styles.clearPartialt, () -> {
                     var sel = new BaseDialog(mod.name);
                     sel.cont.pane(p -> p.add(mod.description + "\n\n[accent]" + Core.bundle.get("editor.author") + "[lightgray] " + mod.author)
-                        .width(mobile ? 400f : 500f).wrap().pad(4f).labelAlign(Align.center, Align.left)).grow();
+                    .width(mobile ? 400f : 500f).wrap().pad(4f).labelAlign(Align.center, Align.left)).grow();
                     sel.buttons.defaults().size(150f, 54f).pad(2f);
                     sel.buttons.button("@back", Icon.left, () -> {
                         sel.clear();
@@ -520,7 +522,7 @@ public class SnModsDialog extends ModsDialog {
                     sel.keyDown(KeyCode.escape, sel::hide);
                     sel.keyDown(KeyCode.back, sel::hide);
                     sel.show();
-                }).width(438f).pad(4).growX().left().height(s + 8*2f).fillY();
+                }).width(438f).pad(4).growX().left().height(s + 8 * 2f).fillY();
 
                 if(++i % cols == 0) browserTable.row();
             }
@@ -539,7 +541,8 @@ public class SnModsDialog extends ModsDialog {
         try{
             Fi file = tmpDirectory.child(repo.replace("/", "") + ".zip");
             long len = result.getContentLength();
-            Floatc cons = len <= 0 ? f -> {} : p -> modImportProgress = p;
+            Floatc cons = len <= 0 ? f -> {
+            } : p -> modImportProgress = p;
 
             Streams.copyProgress(result.getResultAsStream(), file.write(false), len, 4096, cons);
 
@@ -618,6 +621,6 @@ public class SnModsDialog extends ModsDialog {
             }else{
                 handleMod(repo, loc);
             }
-         }, this::importFail);
+        }, this::importFail);
     }
 }

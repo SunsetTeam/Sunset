@@ -271,6 +271,11 @@ public class SnMultiSource extends Block{
                 super.configureAny(data.toBytes());
                 return;
             }
+            if(value instanceof Float power){
+                data.outputPower=power;
+                super.configureAny(data.toBytes());
+                return;
+            }
             super.configureAny(value);
         }
 
@@ -301,8 +306,8 @@ public class SnMultiSource extends Block{
 }
 
 class SourceData{
-    private static ByteWrites byteWrite = new ByteWrites();
-    private static ByteReads byteRead = new ByteReads();
+    private static final ByteWrites byteWrite = new ByteWrites();
+    private static final ByteReads byteRead = new ByteReads();
     protected IntSet outputItems = new IntSet();
     protected IntSet outputLiquids = new IntSet();
     protected float outputPower = 0;

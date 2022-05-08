@@ -16,7 +16,7 @@ import sunset.type.StackableStatusEffect
 import sunset.type.StackableStatusEffect.*
 import sunset.utils.kotlin.color
 import kotlin.Unit as KtUnit
-
+@Suppress("UNUSED_ANONYMOUS_PARAMETER")
 class SnStatusEffects : ContentList {
     override fun load() {
         //region common
@@ -268,6 +268,7 @@ private fun statusEffect(name: String, block: PublicStatusEffect.() -> KtUnit): 
     return effect;
 }
 
+@Suppress("unused")
 private fun StackableStatusEffect.stackEntryFull(
     damageMultiplier: Float = unset,
     healthMultiplier: Float = unset,
@@ -280,6 +281,7 @@ private fun StackableStatusEffect.stackEntryFull(
     return StackEntry(damageMultiplier, healthMultiplier, speedMultiplier, reloadMultiplier, buildSpeedMultiplier, dragMultiplier, transitionDamage)
 }
 
+@Suppress("unused","EXTENSION_SHADOWED_BY_MEMBER")
 private fun StackableStatusEffect.stackEntry(
     damage: Float = unset,
     health: Float = unset,

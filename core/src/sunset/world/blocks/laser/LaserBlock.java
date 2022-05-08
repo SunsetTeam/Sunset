@@ -1,16 +1,21 @@
 package sunset.world.blocks.laser;
 
+import arc.*;
 import arc.graphics.g2d.Draw;
 import arc.graphics.g2d.TextureRegion;
+import arc.struct.*;
 import arc.util.Log;
 import arc.util.Time;
+import mindustry.*;
 import mindustry.annotations.Annotations;
-import mindustry.game.Team;
-import mindustry.gen.Building;
+import mindustry.game.*;
+import mindustry.game.EventType.*;
+import mindustry.gen.*;
 import mindustry.graphics.Layer;
 import mindustry.world.Block;
 import mindustry.world.Tile;
 import mindustry.world.blocks.logic.LogicBlock;
+import sunset.gen.*;
 import sunset.graphics.Drawm;
 
 public class LaserBlock extends Block{
@@ -24,10 +29,23 @@ public class LaserBlock extends Block{
     public TextureRegion plugDark;
     @Annotations.Load("@-edge1")
     public TextureRegion plugLight;
+    static {
+        Events.run(Trigger.update,()->{
+            if (!Vars.state.isPlaying())return;
+            for(Building rawbuild : SnGroups.laserBuilds){
+                LaserBlockBuild build = (LaserBlockBuild)rawbuild;
+                build.leftInput = false;
+                build.topInput = false;
+                build.rightInput = false;
+                build.downInput = false;
+            }
+        });
+    }
     public LaserBlock(String name) {
         super(name);
 
     }
+    @SuppressWarnings("InnerClassMayBeStatic")
     public class LaserBlockBuild extends Building{
         LaserModule laser;
         LaserBlockDrawer drawer;
@@ -50,6 +68,10 @@ public class LaserBlock extends Block{
         @Override
         public void update(){
             super.update();
+            /*leftInput = false;
+            topInput = false;
+            rightInput = false;
+            downInput = false;*/
             laser.update();
             //Log.info("block update, time: @", Time.time);
         }
@@ -57,10 +79,6 @@ public class LaserBlock extends Block{
         @Override
         public void draw(){
             drawer.draw();
-            leftInput = false;
-            topInput = false;
-            rightInput = false;
-            downInput = false;
         }
 
         public float getLaserProduction(){
@@ -69,6 +87,30 @@ public class LaserBlock extends Block{
 
         public float getLaserConsumption(){
             return 0f;
+        }
+
+        @Override
+        public void add(){
+            if (!this.added) {
+                Groups.all.add(this);
+                Groups.build.add(this);
+                SnGroups.laserBuilds.add(this);
+                this.added = true;
+            }
+        }
+
+        @Override
+        public void remove(){
+            if (this.added) {
+                Groups.all.remove(this);
+                Groups.build.remove(this);
+                SnGroups.laserBuilds.remove(this);
+                if (this.sound != null) {
+                    this.sound.stop();
+                }
+
+                this.added = false;
+            }
         }
 
         @Override

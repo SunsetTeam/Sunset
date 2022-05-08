@@ -1,11 +1,12 @@
 package sunset.world.blocks.laser;
 
 import arc.*;
-import arc.graphics.Color;
+import arc.graphics.*;
 import arc.graphics.g2d.*;
 import arc.math.*;
 import arc.math.geom.*;
 import arc.scene.ui.layout.*;
+import arc.struct.*;
 import arc.util.*;
 import arc.util.io.*;
 import mindustry.*;
@@ -53,6 +54,7 @@ public class LaserNode extends LaserBlock{
 
     public class LaserNodeBuild extends LaserBlockBuild{
         Lasers lasers;
+
         @Override
         public Building init(Tile tile, Team team, boolean shouldAdd, int rotation){
             lasers = new Lasers();
@@ -93,14 +95,17 @@ public class LaserNode extends LaserBlock{
         }
 
         @Override
-        public void updateTile() {
+        public void updateTile(){
             super.updateTile();
             laser.outputs = (leftOutput ? 1 : 0) + (topOutput ? 1 : 0) + (rightOutput ? 1 : 0) + (downOutput ? 1 : 0);
-            lasers.getLeft().enabled = leftOutput;
-            lasers.getTop().enabled = topOutput;
-            lasers.getRight().enabled = rightOutput;
-            lasers.getDown().enabled = downOutput;
+            lasers.setEnabled(leftOutput, topOutput, rightOutput, downOutput);
             lasers.updateTile();
+        }
+
+        @Override
+        public void remove(){
+            super.remove();
+//            lasers.remove();
         }
 
         @Override
@@ -110,7 +115,10 @@ public class LaserNode extends LaserBlock{
             float z = Draw.z();
             Draw.z(Layer.blockOver);
             //трёхэтажный дебаг : )
-            block().drawPlaceText("Laser\nin: " + laser.in + "\nout: " + laser.out + "\ntopIn: " + topInput + ", topOut: " + topOutput + ", leftIn: " + leftInput + ", leftOut: " + leftOutput + ", downIn: " + downInput + ", downOut: " + downOutput + ", rightIn: " + rightInput + ", rightOut: " + rightOutput + "", tileX(), tileY(), true);
+//            ADrawf.drawText();
+            String output = Seq.with(downOutput, leftOutput, topOutput, rightOutput).toString("", it -> Mathf.num(it) + "");
+            String input = Seq.with(downInput, leftInput, topInput, rightInput).toString("", it -> Mathf.num(it) + "");
+            block().drawPlaceText("Laser\nin: " + laser.in + "\nout: " + laser.out + "\noutput: " + output + ",\n_input: " + input, tileX(), tileY(), true);
             Draw.z(z);
             //Log.info("block draw, time: @", Time.time);
         }
@@ -134,7 +142,7 @@ public class LaserNode extends LaserBlock{
             }).update(b -> {
                 //Log.info("button update, time: @", Time.time);
                 b.setDisabled(topInput);
-                topInput = false;
+//                topInput = false;
                 b.setColor(topOutput ? Color.green : Color.red);
             });
             t.add().row();
@@ -144,7 +152,7 @@ public class LaserNode extends LaserBlock{
                 configureState();
             }).update(b -> {
                 b.setDisabled(leftInput);
-                leftInput = false;
+//                leftInput = false;
                 b.setColor(leftOutput ? Color.green : Color.red);
             });
             t.add();
@@ -154,7 +162,7 @@ public class LaserNode extends LaserBlock{
                 configureState();
             }).update(b -> {
                 b.setDisabled(rightInput);
-                rightInput = false;
+//                rightInput = false;
                 b.setColor(rightOutput ? Color.green : Color.red);
             });
             t.row();
@@ -165,7 +173,7 @@ public class LaserNode extends LaserBlock{
                 configureState();
             }).update(b -> {
                 b.setDisabled(downInput);
-                downInput = false;
+//                downInput = false;
                 b.setColor(downOutput ? Color.green : Color.red);
             });
         }
@@ -175,20 +183,37 @@ public class LaserNode extends LaserBlock{
         }
 
         @Override
+        @SuppressWarnings("PointlessBitwiseExpression")
         public void write(Writes w){
             super.write(w);
-            w.bool(leftOutput);
-            w.bool(topOutput);
-            w.bool(rightOutput);
-            w.bool(downOutput);
+            int state = 0;
+            if(rightOutput) state += 1 << 0;
+            if(topOutput) state += 1 << 1;
+            if(leftOutput) state += 1 << 2;
+            if(downOutput) state += 1 << 3;
+            w.b(state);
         }
 
         @Override
+        public byte version(){
+            return 1;
+        }
+
+        @Override
+        @SuppressWarnings("PointlessBitwiseExpression")
         public void read(Reads r, byte revision){
-            leftOutput = r.bool();
-            topOutput = r.bool();
-            rightOutput = r.bool();
-            downOutput = r.bool();
+            if(revision == 0){
+                leftOutput = r.bool();
+                topOutput = r.bool();
+                rightOutput = r.bool();
+                downOutput = r.bool();
+                return;
+            }
+            byte value = r.b();
+            rightOutput = (value & 0b0001) >> 0 == 1;
+            topOutput = (value & 0b0010) >> 1 == 1;
+            leftOutput = (value & 0b0100) >> 2 == 1;
+            downOutput = (value & 0b1000) >> 3 == 1;
         }
     }
 }

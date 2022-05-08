@@ -4,20 +4,19 @@ import acontent.ui.*;
 import arc.*;
 import arc.struct.*;
 import mindustry.*;
-import mindustry.content.Blocks;
 import mindustry.core.*;
 import mindustry.ctype.*;
 import mindustry.game.EventType.*;
 import mindustry.gen.*;
 import mindustry.type.*;
+import mindustry.ui.*;
 import mma.*;
 import mma.annotations.ModAnnotations.*;
 import sunset.content.*;
 import sunset.core.*;
 import sunset.gen.*;
 import sunset.type.unitTypes.*;
-import sunset.ui.SnModInfoDialog;
-import sunset.ui.SnModsDialog;
+import sunset.ui.*;
 import sunset.utils.*;
 
 import static mindustry.Vars.*;
@@ -29,6 +28,8 @@ public class Sunset extends MMAMod{
 
     public Sunset(){
         super();
+//        SnFonts.loadDefaultFont();
+//        SnFonts.loadFonts();
         disableBlockOutline = true;
         SnVars.load();
         SnEntityMapping.init();
@@ -50,9 +51,15 @@ public class Sunset extends MMAMod{
     }
 
     @Override
-    public void init(){
+    public void init(){ 
         super.init();
-        SnModsDialog.init(SnModInfoDialog::new);
+        ModMetaDialogFinder.onNewListener(prev -> {
+//            Group parent = prev.parent;
+//            parent.removeChild(prev);
+            prev.hide(null);
+            new SunsetInfoDialog().show();
+        });
+//        SnModsDialog.init(SunsetInfoDialog::new);
         UnitData.init();
         AdvancedContentInfoDialog.init();
         Utils.setMenuUnit(SnUnitTypes.router);

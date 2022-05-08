@@ -1,26 +1,25 @@
 package sunset.world.blocks.laser;
 
-import arc.Core;
-import arc.graphics.g2d.Draw;
-import arc.math.geom.Vec2;
-import arc.util.Tmp;
-import mindustry.entities.Damage;
-import mindustry.gen.Healthc;
-import mindustry.graphics.Drawf;
-import sunset.utils.LaserUtils;
+import arc.*;
+import arc.graphics.g2d.*;
+import arc.math.geom.*;
+import arc.util.*;
+import mindustry.entities.*;
+import mindustry.gen.*;
+import mindustry.graphics.*;
+import sunset.type.*;
+import sunset.utils.*;
 
-public class Laser {
+public class Laser{
     public Vec2 start = new Vec2(),
-                end = new Vec2();
+    end = new Vec2();
 
     public float length = 16f, angle = 0f;
     public float size = 8f;
     public float offset = 3f;
     public float charge = 0f;
     public float damage = 1f;
-
     public boolean enabled = true;
-
     public LaserBlock.LaserBlockBuild build;
     //null if nothing found
     public Healthc target = null;
@@ -32,8 +31,12 @@ public class Laser {
         this.start = start;
     }
 
+    public int side(){
+        return BlockSide.sideForAngle(angle);
+    }
+
     public void draw(){
-        if (enabled){
+        if(enabled){
             //Log.info("draw\nangle: @\nstart: @  @\nend: @  @", angle, start.x, start.y, end.x, end.y);
             Tmp.v1.trns(angle, offset);
             //Log.info("tmpv1\nx: @\ny: @\noffset: @\nangle: @", Tmp.v1.x, Tmp.v1.y, offset, angle);
@@ -43,8 +46,7 @@ public class Laser {
             //if we are too close to laser, draw from start to start
             if(Tmp.v2.dst(start) <= offset){
                 Drawf.laser(null, Core.atlas.find("minelaser"), Core.atlas.find("minelaser-end"), start.x + Tmp.v1.x, start.y + Tmp.v1.y, start.x + Tmp.v1.x, start.y + Tmp.v1.y);
-            }
-            else{
+            }else{
                 Drawf.laser(null, Core.atlas.find("minelaser"), Core.atlas.find("minelaser-end"), start.x + Tmp.v1.x, start.y + Tmp.v1.y, end.x - Tmp.v1.x, end.y - Tmp.v1.y);
             }
             Draw.reset();
@@ -55,6 +57,7 @@ public class Laser {
         charge = build.laser.out;
         //start offset vector
         Tmp.v1.trns(angle, offset);
+        resetTargetInput();
         Healthc entity = LaserUtils.linecast(start.x + Tmp.v1.x, start.y + Tmp.v1.y, angle, length, false, true, boolf -> true);
         target = entity;
         //don't cast with yourself
@@ -62,32 +65,26 @@ public class Laser {
             return;
         if(target != null){
             //for correct drawing
-            Tmp.v1.set(start.x, start.y);
-            float len = Tmp.v1.dst(entity.x(), entity.y());
-            //Log.info("len :@", len);
-            if(len <= 0){
+            if(start.dst2(entity) == 0f){
                 end = start;
-            }
-            else{
-                Tmp.v1.trns(angle, len);
+            }else{
+                Tmp.v1.trns(angle, start.dst(entity.x(), entity.y()));
                 end.x = start.x + Tmp.v1.x;
                 end.y = start.y + Tmp.v1.y;
             }
 
-            if (enabled){
+            if(enabled){
                 setTargetLenses();
                 //////////////
                 //this is for laser mechanic
                 if(target instanceof LaserBlock.LaserBlockBuild b){
                     b.laser.in += charge;
-                }
-                else if(charge != 0){
-                    Damage.damage(null, target.x(), target.y(), 8f, damage * charge,false, true);
+                }else if(charge != 0){
+                    Damage.damage(null, target.x(), target.y(), 8f, damage * charge, false, true);
                 }
             }
-        }
-        else{
-            Tmp.v1.trns(angle,length);
+        }else{
+            Tmp.v1.trns(angle, length);
             end.set(start.x + Tmp.v1.x, start.y + Tmp.v1.y);
         }
 
@@ -96,31 +93,31 @@ public class Laser {
     public void setTargetLenses(){
         if(target instanceof LaserBlock.LaserBlockBuild b){
             //Log.info("angle: @", angle);
-            //from right
-            if(angle > 135 && angle < 225){
-                b.rightInput = true;
-                //Log.info("from right");
-            }
-            //from down
-            if(angle > 45 && angle < 135){
-                b.downInput = true;
-                //Log.info("from down");
-            }
-            //from left
-            if((angle - 360 > -45 && angle - 360 <= 0) || (angle < 45)){
-                b.leftInput = true;
-                //Log.info("from left");
-            }
-            //from top
-            if(angle > 225 && angle < 315){
-                b.topInput = true;
-                //Log.info("from top");
+            switch(BlockSide.sideForAngle(target.angleTo(build))){
+                case BlockSide.right -> b.rightInput = true;
+                case BlockSide.bottom -> b.downInput = true;
+                case BlockSide.left -> b.leftInput = true;
+                case BlockSide.top -> b.topInput = true;
+                default -> throw new IllegalStateException("Unexpected value: " + BlockSide.sideForAngle(target.angleTo(build)));
             }
         }
     }
 
+    public void resetTargetInput(){
+        /*if(target instanceof LaserBlock.LaserBlockBuild b && enabled){
+            //Log.info("angle: @", angle);
+            switch(BlockSide.sideForAngle(target.angleTo(build))){
+                case BlockSide.right -> b.rightInput = false;
+                case BlockSide.bottom -> b.downInput = false;
+                case BlockSide.left -> b.leftInput = false;
+                case BlockSide.top -> b.topInput = false;
+                default -> throw new IllegalStateException("Unexpected value: " + BlockSide.sideForAngle(target.angleTo(build)));
+            }
+        }*/
+    }
+
     public void start(Vec2 start){
-        this.start.set(start);
+        start(start.x, start.y);
     }
 
     public void start(float x, float y){
@@ -128,6 +125,14 @@ public class Laser {
     }
 
     public void end(Vec2 end){
-        this.end.set(end);
+        end(end.x, end.y);
+    }
+
+    public void end(float x, float y){
+        end.set(x, y);
+    }
+
+    public void remove(){
+        resetTargetInput();
     }
 }

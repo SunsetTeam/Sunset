@@ -50,6 +50,13 @@ public class FocusingPrism extends LaserBlock{
             super.draw();
             laserToTarget.draw();
         }
+
+        @Override
+        public void remove(){
+            super.remove();
+//            laserToTarget.remove();
+        }
+
         @Override
         public void buildConfiguration(Table table){
             Button lb = new ImageButton();

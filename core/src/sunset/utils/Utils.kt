@@ -31,6 +31,7 @@ typealias Unit = mindustry.gen.Unit
  */
 @Suppress("MemberVisibilityCanBePrivate")
 object Utils {
+    @JvmStatic
     private val rv = Vec2()
 
     @JvmStatic

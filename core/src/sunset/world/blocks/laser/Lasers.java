@@ -1,37 +1,65 @@
 package sunset.world.blocks.laser;
 
-import arc.struct.Seq;
+import arc.struct.*;
+import sunset.type.*;
 
-public class Lasers {
-    LaserBlock.LaserBlockBuild self;
+public class Lasers{
     public Seq<Laser> allLasers = new Seq<>();
+    LaserBlock.LaserBlockBuild self;
 
     public Lasers(){
     }
 
+    private static boolean isLeft(Laser laser){
+        return laser.angle == 180f;
+    }
+
     public void updateTile(){
-        for (Laser laser : allLasers){
+        for(Laser laser : allLasers){
             laser.updateTile();
         }
     }
+    public void remove(){
+
+        for(Laser laser : allLasers){
+            laser.remove();
+        }
+    }
+
     public void draw(){
-        for (Laser laser : allLasers){
+        for(Laser laser : allLasers){
             laser.draw();
         }
     }
-    public Laser getByAngle(float angle){
-        return allLasers.find(laser -> laser.angle == angle);
+
+    private Laser getBySide(int side){
+        return allLasers.find(laser -> laser.side() == side);
     }
+
     public Laser getLeft(){
-        return getByAngle(180f);
+        return getBySide(BlockSide.left);
     }
+
     public Laser getTop(){
-        return getByAngle(90f);
+        return getBySide(BlockSide.top);
     }
+
     public Laser getRight(){
-        return getByAngle(0f);
+        return getBySide(BlockSide.right);
     }
+
     public Laser getDown(){
-        return getByAngle(270f);
+        return getBySide(BlockSide.bottom);
+    }
+
+    public void setEnabled(boolean leftOutput, boolean topOutput, boolean rightOutput, boolean downOutput){
+        for(Laser laser : allLasers){
+            switch(laser.side()){
+                case BlockSide.right -> laser.enabled = rightOutput;
+                case BlockSide.top -> laser.enabled = topOutput;
+                case BlockSide.left -> laser.enabled = leftOutput;
+                case BlockSide.bottom -> laser.enabled = downOutput;
+            }
+        }
     }
 }
