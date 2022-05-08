@@ -65,7 +65,7 @@ object Utils {
 
     @JvmStatic
     fun findFireTarget(x: Float, y: Float, team: Team, range: Float, unitFilter: Boolf<Unit?>, buildingFilter: Boolf<Building?>?): Posc? {
-        var target: Posc? = null
+        var target: Posc?
         target = team.data().units.min({ unit -> unitFilter[unit] && unit.isBurning() }) { un -> un.healthf() * un.healthf() * un.dst2(x, y) }
         // если не нашли юнитов, то ищем постройки
         if (target == null) {

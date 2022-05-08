@@ -32,7 +32,8 @@ public class BerserkLaserBulletType extends BulletType{
         if(target != null){
             dst = Mathf.dst(b.x, b.y, target.x(), target.y());
         }else{
-            dst = maxLaserLength;
+            return;
+//            dst = maxLaserLength;
         }
         LaserData data = new LaserData(target, dst);
 //        b.data = new Object[]{target, dst};
@@ -110,6 +111,7 @@ public class BerserkLaserBulletType extends BulletType{
 
         @Nullable
         public static LaserData fromObject(Object object){
+            if (object==null)return null;
             if(object instanceof LaserData data) return data;
             return fromArray((Object[])object);
         }

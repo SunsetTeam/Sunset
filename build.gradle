@@ -1,4 +1,5 @@
 import java.nio.charset.StandardCharsets
+import java.nio.file.FileSystemAlreadyExistsException
 import java.nio.file.FileSystems
 import java.nio.file.Files
 import java.nio.file.Paths
@@ -78,7 +79,16 @@ allprojects{
             println "Version suffix${suffix}"
             def reader = new BufferedReader(new FileReader(new File(rootDir, "mod.hjson")))
             // now append some extra content
-            def jarFile = FileSystems.newFileSystem(java.net.URI.create("jar:"+archiveFile.toURI()),new HashMap<>())
+            def jarFile;
+            try{
+                jarFile=FileSystems.newFileSystem(java.nio.file.Path.of(java.net.URI.create(""+archiveFile.toURI())),new HashMap<>());
+            } catch (FileSystemAlreadyExistsException e){
+                e.printStackTrace()
+                jarFile=FileSystems.getFileSystem(java.net.URI.create("jar:"+archiveFile.toURI()))
+                jarFile.close()
+                jarFile=FileSystems.newFileSystem(java.net.URI.create("jar:"+archiveFile.toURI()),new HashMap<>());
+//                FileSystems
+            }
             def modInfoFile = jarFile.getPath("mod.hjson");
             try (Writer writer = Files.newBufferedWriter(modInfoFile, StandardCharsets.UTF_8, StandardOpenOption.CREATE)) {
                 reader.lines().forEach(s -> {
