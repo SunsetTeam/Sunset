@@ -12,7 +12,7 @@ import sunset.world.blocks.laser.LaserSource;
 import sunset.world.blocks.laser.RotatableLaserNode;
 
 public class SnLasers implements ContentList {
-    public static Block laserNode, laserSource, rotato, laserPrism;
+    public static Block laserNode, laserSource, rotato /*, laserPrism */;
     @Override
     public void load() {
         laserSource = new LaserSource("laser-starter"){{
@@ -30,10 +30,12 @@ public class SnLasers implements ContentList {
             size = 2;
             buildVisibility = BuildVisibility.sandboxOnly;
         }};
+        /*
         laserPrism = new FocusingPrism("focusing-prism"){{
             requirements(Category.distribution, ItemStack.with(Items.copper, 1));
             size = 2;
             buildVisibility = BuildVisibility.sandboxOnly;
         }};
+         */
     }
 }
