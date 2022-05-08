@@ -30,7 +30,7 @@ public class SunsetInfoDialog extends BaseDialog{
         super("@sninfo.title");
         addCloseListener();
         setupButtons();
-        cont.image(() -> Core.atlas.find(ModVars.fullName("sunset-dialog-icon"))).fill().row();
+        cont.image(() -> Core.atlas.find(ModVars.fullName("sunset-logo"))).fill().row();
 //        cont.label(() -> "[white]Sunset").with(l->l.getStyle().font=SnFonts.outline72);//.get().setFontScale(6);
 //        cont.row();
 //        cont.label(() -> "[gray]by Sunset Team[white]").get().setFontScale(1.5f);
