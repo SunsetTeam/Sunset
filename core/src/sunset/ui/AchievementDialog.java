@@ -1,57 +1,12 @@
 package sunset.ui;
 
-import arc.Core;
-import arc.Events;
-import arc.graphics.Color;
-import arc.graphics.g2d.Draw;
-import arc.graphics.g2d.Lines;
-import arc.input.KeyCode;
-import arc.math.Interp;
-import arc.math.Mathf;
-import arc.math.geom.Rect;
-import arc.scene.Element;
-import arc.scene.Group;
-import arc.scene.actions.Actions;
-import arc.scene.actions.RelativeTemporalAction;
-import arc.scene.event.ElementGestureListener;
-import arc.scene.event.InputEvent;
-import arc.scene.event.InputListener;
-import arc.scene.event.Touchable;
-import arc.scene.style.TextureRegionDrawable;
-import arc.scene.ui.ImageButton;
-import arc.scene.ui.Label;
-import arc.scene.ui.layout.Scl;
-import arc.scene.ui.layout.Table;
-import arc.struct.ObjectMap;
-import arc.struct.ObjectSet;
-import arc.struct.Seq;
-import arc.util.Align;
-import arc.util.Nullable;
-import arc.util.Scaling;
-import arc.util.Structs;
-import mindustry.content.TechTree;
-import mindustry.core.UI;
-import mindustry.game.EventType;
-import mindustry.game.Objectives;
-import mindustry.gen.Icon;
-import mindustry.gen.Sounds;
-import mindustry.gen.Tex;
-import mindustry.graphics.Pal;
-import mindustry.input.Binding;
-import mindustry.type.*;
-import mindustry.ui.ItemsDisplay;
-import mindustry.ui.Styles;
-import mindustry.ui.dialogs.BaseDialog;
-import mindustry.ui.layout.BranchTreeLayout;
-import mindustry.ui.layout.TreeLayout;
-import sunset.game.SnAchievement;
+import mindustry.ui.dialogs.*;
 
-import java.util.Arrays;
-
-import static mindustry.Vars.*;
-
-public class AchievementDialog extends BaseDialog {
-    public final float nodeSize = Scl.scl(60f);
+class AchievementDialog_ extends BaseDialog{
+    public AchievementDialog_(String title, DialogStyle style){
+        super(title, style);
+    }
+    /*public final float nodeSize = Scl.scl(60f);
     public ObjectSet<AchievementNode> nodes = new ObjectSet<>();
     public AchievementNode root = new AchievementNode(TechTree.root, null);
     public Rect bounds = new Rect();
@@ -616,5 +571,5 @@ public class AchievementDialog extends BaseDialog {
             Draw.reset();
             super.drawChildren();
         }
-    }
+    }*/
 }
