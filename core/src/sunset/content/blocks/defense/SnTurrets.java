@@ -33,7 +33,7 @@ import static mindustry.type.ItemStack.with;
 public class SnTurrets implements ContentList {
     public static Block
     //1x1
-    accelLaserTurret, sting, spine, eagle,
+    sting, spine, eagle,
 
     //2x2
     excellence, carbine, pulsation, reflection, discharge,
@@ -67,25 +67,6 @@ public class SnTurrets implements ContentList {
     @Override
     public void load() {
         //region 1x1
-        accelLaserTurret = new ModPowerTurret("accel-laser-turret"){{
-            requirements(Category.turret, with(Items.copper, 40, Items.lead, 30, Items.silicon, 20));
-            size = 1;
-            powerUse = 3f;
-            range = 130f;
-            reloadTime = 18f;
-            recoilAmount = 0f;
-            targetAir = true;
-            shots = 1;
-            inaccuracy = 5f;
-            shootType = new AcceleratingLaserBulletType(20f) {{
-                colors = new Color[]{Pal.meltdownHit.cpy().a(0.4f), Pal.meltdownHit, Color.white};
-                despawnEffect = Fx.none;
-                lifetime = 70f;
-                collidesAir = false;
-                length = 130f;
-                width = 30f;
-            }};
-        }};
         sting = new ModPowerTurret("sting") {{
             requirements(Category.turret, with(SnItems.fors, 50, Items.lead, 30));
             health = 400;
@@ -300,23 +281,6 @@ public class SnTurrets implements ContentList {
             shootSound = Sounds.flame;
             reloadBar = false;
         }};
-        payloadTurret = new PayloadTurret("payload"){{
-            requirements(Category.turret, with(Items.metaglass, 75, Items.lead, 200, Items.graphite, 100));
-            ammo(
-            SnPayload.testRocket, SnBullets.bigHelicopterMissile
-            );
-            reloadTime = 20f;
-            health = 140 * size * size;
-            size = 3;
-            range = 100f;
-            reloadTime = 5f;
-            recoilAmount = 2f;
-            inaccuracy = 4f;
-            rotateSpeed = 7.5f;
-            shootCone = 25f;
-            targetAir = true;
-            shootSound = Sounds.missile;
-        }};
         eternity = new ModItemTurret("eternity") {{
             requirements(Category.turret, with(SnItems.fors, 230, Items.plastanium, 100, Items.graphite, 60, Items.surgeAlloy, 30));
             ammo(
@@ -363,6 +327,7 @@ public class SnTurrets implements ContentList {
             reloadBar = false;
             guild = SnGuilds.aymirus;
         }};
+        /*
         artLightTurret = new ModPowerTurret("art-light-turret"){{
             requirements(Category.turret, with(Items.silicon, 150, Items.graphite, 75));
             shootType = SnBullets.shotArtLight;
@@ -381,6 +346,7 @@ public class SnTurrets implements ContentList {
             shootSound = Sounds.spark;
             reloadBar = true;
         }};
+         */
         trigger = new ModPowerTurret("trigger") {{
             requirements(Category.turret, with(Items.silicon, 275, Items.titanium, 125, SnItems.enojie, 45));
             size = 3;
@@ -394,6 +360,7 @@ public class SnTurrets implements ContentList {
         }};
         //endregion 3x3
         //region 4x4
+        /*
         shotgunTurret = new ModItemTurret("shotgun-turret"){{
             requirements(Category.turret, with(Items.copper, 660, SnItems.fors, 400, Items.silicon, 300));
             ammo(
@@ -413,6 +380,7 @@ public class SnTurrets implements ContentList {
             range = 170f;
             minRange = 25f;
         }};
+         */
         admiral = new MultiBarrelItemTurret("admiral") {{
             requirements(Category.turret, with(Items.copper, 1100, Items.titanium, 800, Items.silicon, 600, Items.surgeAlloy, 300, SnItems.naturite, 190));
             ammo(
