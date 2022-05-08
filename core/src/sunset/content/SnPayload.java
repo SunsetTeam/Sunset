@@ -14,10 +14,5 @@ public class SnPayload implements ContentList {
 
     @Override
     public void load(){
-        testRocket = new Ammunition("guardian-rocket"){{
-            requirements = with(Items.copper, 3, Items.lead, 3, Items.titanium, 4);
-
-            size = 3;
-        }};
     }
 }
