@@ -54,15 +54,15 @@ public class SnContentTranslation {
         ObjectSet<WrongTranslationType> enumSet = new ObjectSet<>();
 
         if (!map.containsKey(nameKey)) {
-            map.put(nameKey, invalidTranslation);
+            map.put(nameKey, invalidTranslation+"("+content.name+".name)");
             enumSet.add(WrongTranslationType.name);
         }
         if (!map.containsKey(descriptionName)) {
-            map.put(descriptionName, invalidTranslation);
+            map.put(descriptionName, invalidTranslation+"("+content.name+".description)");
             enumSet.add(WrongTranslationType.description);
         }
         if (!map.containsKey(detailsKey)) {
-            map.put(detailsKey, invalidTranslation);
+            map.put(detailsKey, invalidTranslation+"("+content.name+".details)");
             enumSet.add(WrongTranslationType.details);
         }
         if (enumSet.size > 0) {
