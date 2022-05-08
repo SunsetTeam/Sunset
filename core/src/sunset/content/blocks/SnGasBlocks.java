@@ -6,6 +6,7 @@ import gas.world.blocks.gas.GasConduit;
 import gas.world.blocks.gas.GasJunction;
 import gas.world.blocks.gas.GasRouter;
 import gas.world.blocks.power.GasItemLiquidGenerator;
+import gas.world.blocks.production.GasAttributeCrafter;
 import gas.world.blocks.sandbox.GasSource;
 import gas.world.blocks.sandbox.GasVoid;
 import gas.world.consumers.ConsumeGas;
@@ -15,10 +16,8 @@ import mindustry.type.Category;
 import mindustry.type.ItemStack;
 import mindustry.world.Block;
 import mindustry.world.meta.BuildVisibility;
-import sunset.content.SnFx;
-import sunset.content.SnGas;
-import sunset.content.SnItems;
-import sunset.content.SnLiquids;
+import mindustry.world.meta.Env;
+import sunset.content.*;
 import sunset.world.blocks.gas.ArmoredGasConduit;
 import sunset.world.blocks.gas.GasCrafter;
 import sunset.world.blocks.gas.ModGasPipe;
@@ -31,13 +30,13 @@ public class SnGasBlocks implements ContentList {
     gasSource, gasVoid,
 
     //gas-transportation
-    gasPipe, armoredGasPipe, nobiumGasPipe, armoredNobiumGasPipe, gasJunction, gasRouter, gasBridge, nobiumGasBridge,
+    gasPipe, armoredGasPipe, nobiumGasPipe, gasJunction, gasRouter, gasBridge, nobiumGasBridge,
 
     //storage
     gasStorage, gasContainer, gasTank,
 
     //crafting
-    giardSynthesizer,
+    giardWell,
 
     //power
     gasGenerator;
@@ -56,7 +55,7 @@ public class SnGasBlocks implements ContentList {
 
         //gas-transportation
         gasPipe = new GasConduit("gas-pipe") {{
-            requirements(Category.liquid, with(Items.metaglass, 1, SnItems.fors, 2));
+            requirements(Category.liquid, with(SnItems.erius, 2, SnItems.naturite, 1));
             health = 55;
             size = 1;
             gasCapacity = 9f;
@@ -64,50 +63,50 @@ public class SnGasBlocks implements ContentList {
             bridgeReplacement = gasBridge;
         }};
         armoredGasPipe = new ArmoredGasConduit("plated-gas-pipe") {{
-            requirements(Category.liquid, with(SnItems.fors, 2, Items.metaglass, 1, Items.graphite, 3f));
-            health = 200;
+            requirements(Category.liquid, with(SnItems.fors, 3, SnItems.erius, 2));
+            health = 250;
             size = 1;
             gasCapacity = 9.6f;
             junctionReplacement = gasJunction;
             bridgeReplacement = gasBridge;
         }};
         nobiumGasPipe = new GasConduit("nobium-gas-pipe") {{
-            requirements(Category.liquid, with(Items.metaglass, 2, SnItems.nobium, 2));
+            requirements(Category.liquid, with(SnItems.erius, 2, SnItems.nobium, 1));
             health = 125;
             size = 1;
-            gasCapacity = 17f;
+            gasCapacity = 15f;
             junctionReplacement = gasJunction;
             bridgeReplacement = gasBridge;
         }};
         gasJunction = new GasJunction("gas-junction") {{
-            requirements(Category.liquid, with(Items.graphite, 2, Items.metaglass, 1, SnItems.fors, 2));
+            requirements(Category.liquid, with(SnItems.naturite, 2, SnItems.erius, 2, SnItems.fors, 1));
             health = 75;
             size = 1;
-            gasCapacity = 30f;
+            gasCapacity = 17f;
             hasLiquids = false;
         }};
         gasRouter = new GasRouter("gas-router") {{
-            requirements(Category.liquid, with(Items.graphite, 4, Items.metaglass, 1, SnItems.fors, 3));
+            requirements(Category.liquid, with(SnItems.naturite, 4,  SnItems.erius, 2, SnItems.fors, 2));
             health = 80;
             size = 1;
-            gasCapacity = 35f;
+            gasCapacity = 20f;
         }};
         gasBridge = new GasBridge("gas-bridge") {{
-            requirements(Category.liquid, with(Items.graphite, 5, Items.metaglass, 9, SnItems.fors, 8));
+            requirements(Category.liquid, with(SnItems.naturite, 5,  SnItems.erius, 9, SnItems.fors, 4));
             health = 85;
             size = 1;
-            gasCapacity = 37f;
+            gasCapacity = 25f;
             hasPower = false;
             outputsGas = true;
             hasGasses = true;
             range = 6;
         }};
         nobiumGasBridge = new GasBridge("nobium-gas-bridge") {{
-            requirements(Category.liquid, with(Items.graphite, 8, Items.metaglass, 15, SnItems.nobium, 7));
+            requirements(Category.liquid, with(SnItems.anzar, 5, SnItems.erius, 15, SnItems.nobium, 7, SnItems.fors, 5f));
             health = 110;
             range = 12;
             size = 1;
-            gasCapacity = 45f;
+            gasCapacity = 40f;
             arrowPeriod = 0.9f;
             arrowTimeScl = 2.75f;
             hasPower = true;
@@ -116,43 +115,40 @@ public class SnGasBlocks implements ContentList {
         }};
         //storage
         gasStorage = new GasRouter("gas-storage") {{
-            requirements(Category.liquid, with(SnItems.fors, 15, Items.metaglass, 20));
+            requirements(Category.liquid, with(SnItems.fors, 15, SnItems.erius, 20));
             health = 260;
             size = 2;
             gasCapacity = 320f;
         }};
 
         gasContainer = new GasRouter("gas-container") {{
-            requirements(Category.liquid, with(SnItems.fors, 30, Items.metaglass, 45));
+            requirements(Category.liquid, with(SnItems.fors, 30, SnItems.erius, 45));
             health = 600;
             size = 3;
             gasCapacity = 720f;
         }};
 
         gasTank = new GasRouter("gas-tank") {{
-            requirements(Category.liquid, with(SnItems.fors, 115, Items.metaglass, 95, Items.thorium, 70));
+            requirements(Category.liquid, with(SnItems.fors, 115, SnItems.erius, 95, SnItems.nobium, 50));
             health = 1300;
             size = 4;
             gasCapacity = 1840f;
         }};
 
         //crafting
-        giardSynthesizer = new GasCrafter("giard-synthesizer") {{
-            requirements(Category.crafting, with(SnItems.fors, 155, Items.metaglass, 85, Items.silicon, 90, Items.graphite, 95));
-            size = 3;
+        giardWell = new GasCrafter("giard-well") {{
+            requirements(Category.crafting, with(SnItems.fors, 1));
+            size = 4;
+            attribute = SnAttribute.gas;
 
-            outputGas = new GasStack(SnGas.hyneris, 8f);
+            outputGas = new GasStack(SnGas.gyner, 9f);
             hasItems = true;
             hasLiquids = true;
             hasGasses = true;
-            gasCapacity = 50f;
-            itemCapacity = 30;
-            gasCapacity = 180f;
-            craftTime = 5f;
+            gasCapacity = 100f;
+            craftTime = 3f;
             craftEffect = SnFx.giardSynthesizerCraft;
-            consumes.items(with(SnItems.naturite, 1f));
-            consumes.liquid(SnLiquids.burheyna, 0.25f);
-            consumes.power(2f);
+            consumes.power(6f);
         }};
 
         //power

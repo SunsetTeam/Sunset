@@ -20,7 +20,7 @@ Ost: Saigo no-nozomi\
 Maps: Saigo no-nozomi
 
 # Contributors
-Darkness, Def-Try, Tabyretka
+None
 
 # PC Build Guide
 

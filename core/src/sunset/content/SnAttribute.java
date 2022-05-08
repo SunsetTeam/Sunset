@@ -6,5 +6,6 @@ public class SnAttribute {
     public static Attribute
     none = Attribute.add("none"),
     burheyna = Attribute.add("burheyna"),
-    wind = Attribute.add("wind");
+    wind = Attribute.add("wind"),
+    gas = Attribute.add("gas");
 }
