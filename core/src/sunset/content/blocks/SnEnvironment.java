@@ -89,6 +89,7 @@ public class SnEnvironment implements ContentList {
             oreThreshold = 0.921f;
             oreScale = 26.1234f;
              */
+            variants = 3;
             attributes.set(SnAttribute.gas, 1f);
         }};
         //endregion ores
@@ -285,10 +286,9 @@ public class SnEnvironment implements ContentList {
             isLiquid = true;
             status = StatusEffects.wet;
             statusDuration = 120f;
-            cacheLayer = CacheLayer.water;
             speedMultiplier = 0.9f;
             variants = 2;
-            liquidDrop = Liquids.water;
+            liquidDrop = SnLiquids.burheyna;
             steamEffect = new Effect(30f, Fx.steam.renderer);
             eruptionEffect = new Effect(30f, Fx.ballfire.renderer);
         }};

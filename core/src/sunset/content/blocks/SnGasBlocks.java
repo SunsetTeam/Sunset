@@ -6,7 +6,6 @@ import gas.world.blocks.gas.GasConduit;
 import gas.world.blocks.gas.GasJunction;
 import gas.world.blocks.gas.GasRouter;
 import gas.world.blocks.power.GasItemLiquidGenerator;
-import gas.world.blocks.production.GasAttributeCrafter;
 import gas.world.blocks.sandbox.GasSource;
 import gas.world.blocks.sandbox.GasVoid;
 import gas.world.consumers.ConsumeGas;
@@ -16,11 +15,10 @@ import mindustry.type.Category;
 import mindustry.type.ItemStack;
 import mindustry.world.Block;
 import mindustry.world.meta.BuildVisibility;
-import mindustry.world.meta.Env;
 import sunset.content.*;
 import sunset.world.blocks.gas.ArmoredGasConduit;
 import sunset.world.blocks.gas.GasCrafter;
-import sunset.world.blocks.gas.ModGasPipe;
+import sunset.world.blocks.gas.GasWell;
 
 import static mindustry.type.ItemStack.with;
 
@@ -136,7 +134,7 @@ public class SnGasBlocks implements ContentList {
         }};
 
         //crafting
-        giardWell = new GasCrafter("giard-well") {{
+        giardWell = new GasWell("giard-well") {{
             requirements(Category.crafting, with(SnItems.fors, 1));
             size = 4;
             attribute = SnAttribute.gas;
