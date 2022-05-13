@@ -12,7 +12,7 @@ public class SnItems implements ContentList {
     //raw
     fors, erius, nedirium, planatrium,
     //crafting
-    anzar, naturite,  reneubite, nobium,  yobut, yantai, enojie, zerinium,
+    anzar, naturite,  reneubite, nobium,  azalia_bud, yantai, enojie, zerinium,
     //endregion azaria
     //other
     flameid, coldent, testItem,
@@ -51,7 +51,7 @@ public class SnItems implements ContentList {
             explosiveness = 0.2f;
             radioactivity = 1f;
         }};
-        yobut = new Item("yobut", Color.valueOf("ff0000")) {{
+        azalia_bud = new Item("azalia_bud", Color.valueOf("ff0000")) {{
             cost = 4f;
             flammability = 0.6f;
         }};
