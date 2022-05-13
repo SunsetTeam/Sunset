@@ -21,12 +21,12 @@ public class SnEnvironment implements ContentList {
     public static Block
 
     //ores
-    oreFors, orePlanatrium, oreFlameid, oreColdent, gasDeposit,
+    oreFors, orePlanatrium, oreFlameid, oreColdent,
 
     //floors
     crimsonGrass, crimsonDirt, crimsonSand, crimsonSwamp, crimsonMoss,
     crimsonSandWater, crimsonWater, crimsonDeepWater,
-    crimsonSnow, crimsonIce, crimsonIceSnow,
+    crimsonSnow, gasDeposit, crimsonIce, crimsonIceSnow,
     granite,
 
     jadestone,
@@ -83,14 +83,6 @@ public class SnEnvironment implements ContentList {
             oreDefault = false;
             oreThreshold = 0.921f;
             oreScale = 26.1234f;
-        }};
-        gasDeposit = new Floor("gas-deposit") {{
-            /*oreDefault = false;
-            oreThreshold = 0.921f;
-            oreScale = 26.1234f;
-             */
-            variants = 3;
-            attributes.set(SnAttribute.gas, 1f);
         }};
         //endregion ores
         //region floors
@@ -157,6 +149,11 @@ public class SnEnvironment implements ContentList {
             drownTime = 160f;
             cacheLayer = CacheLayer.water;
             albedo = 0.5f;
+        }};
+
+        gasDeposit = new Floor("gas-deposit") {{
+            variants = 3;
+            attributes.set(SnAttribute.gas, 1f);
         }};
 
         crimsonSnow = new Floor("crimson-snow") {{
