@@ -19,11 +19,15 @@ public class SnLasers implements ContentList {
             requirements(Category.distribution, ItemStack.with(Items.copper, 1));
             size = 2;
             buildVisibility = BuildVisibility.sandboxOnly;
+            inputsLaser = false;
+            outputsLaser = true;
         }};
         laserNode = new LaserNode("laser-node"){{
             requirements(Category.distribution, ItemStack.with(Items.copper, 1));
             size = 2;
             buildVisibility = BuildVisibility.sandboxOnly;
+            inputsLaser = true;
+            outputsLaser = true;
         }};
         /*
         rotato = new RotatableLaserNode("rotato"){{

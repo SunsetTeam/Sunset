@@ -93,10 +93,10 @@ public class Laser{
             }
 
             if(enabled){
-                setTargetLenses();
                 //////////////
                 //this is for laser mechanic
-                if(target instanceof LaserBlock.LaserBlockBuild b){
+                if(target instanceof LaserBlock.LaserBlockBuild b && b.block().inputsLaser){
+                    setTargetLenses(b);
                     b.laser.in += charge;
                 }else if(charge != 0){
                     Damage.damage(null, target.x(), target.y(), 8f, damage * charge, false, true);
@@ -109,16 +109,14 @@ public class Laser{
 
     }
 
-    public void setTargetLenses(){
-        if(target instanceof LaserBlock.LaserBlockBuild b){
-            //Log.info("angle: @", angle);
-            switch(BlockSide.sideForAngle(target.angleTo(build))){
-                case BlockSide.right -> b.rightInput = true;
-                case BlockSide.bottom -> b.downInput = true;
-                case BlockSide.left -> b.leftInput = true;
-                case BlockSide.top -> b.topInput = true;
-                default -> throw new IllegalStateException("Unexpected value: " + BlockSide.sideForAngle(target.angleTo(build)));
-            }
+    public void setTargetLenses(LaserBlock.LaserBlockBuild b){
+        //Log.info("angle: @", angle);
+        switch(BlockSide.sideForAngle(target.angleTo(build))){
+            case BlockSide.right -> b.rightInput = true;
+            case BlockSide.bottom -> b.downInput = true;
+            case BlockSide.left -> b.leftInput = true;
+            case BlockSide.top -> b.topInput = true;
+            default -> throw new IllegalStateException("Unexpected value: " + BlockSide.sideForAngle(target.angleTo(build)));
         }
     }
 

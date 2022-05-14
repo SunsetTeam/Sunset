@@ -30,6 +30,12 @@ public class LaserBlock extends Block{
     public TextureRegion plugDark;
     @Annotations.Load("@-edge1")
     public TextureRegion plugLight;
+
+    public boolean inputsLaser = false;
+    public boolean outputsLaser = false;
+
+    public float laserProduction = 0f;
+    public float laserConsumption = 0f;
     //on preUpdate, default all side-vars
     static {
         Events.run(Trigger.update,()->{
@@ -114,6 +120,5 @@ public class LaserBlock extends Block{
         public LaserBlock block(){
             return (LaserBlock) this.block;
         }
-
     }
 }
