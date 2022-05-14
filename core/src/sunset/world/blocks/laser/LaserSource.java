@@ -1,5 +1,6 @@
 package sunset.world.blocks.laser;
 
+/** Laser source. Very raw*/
 public class LaserSource extends LaserNode{
     public LaserSource(String name) {
         super(name);

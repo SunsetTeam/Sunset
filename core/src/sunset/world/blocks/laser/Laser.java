@@ -10,18 +10,35 @@ import mindustry.graphics.*;
 import sunset.type.*;
 import sunset.utils.*;
 
+/**
+ * Laser class.
+ * Powers laser blocks, damages non-laser blocks and units.
+ * */
 public class Laser{
+    /** start vector (start + offset = laser start) */
     public Vec2 start = new Vec2(),
+    /** end vector (end - offset = laser end) */
     end = new Vec2();
 
-    public float length = 16f, angle = 0f;
+    /** laser length. */
+    public float length = 16f;
+    /** laser angle. In degrees. */
+    public float angle = 0f;
+    /** laser hit size. Currently, unused.
+     * todo use size to fix bug with casting blocks */
     public float size = 8f;
+    /** laser offset. Used for drawing. */
     public float offset = 3f;
+    /** laser charge. Taken from build.laser.out. Used to transfer charge from one laser build to another.
+     * If laser casts with non-laser blocks or units, they take damage in direct ratio with charge. */
     public float charge = 0f;
+    /** laser damage. */
     public float damage = 1f;
+    /** laser mode. */
     public boolean enabled = true;
     public LaserBlock.LaserBlockBuild build;
-    //null if nothing found
+    /** laser current target.
+     * todo maybe I should remove this?*/
     public Healthc target = null;
 
     public Laser(){
@@ -30,7 +47,10 @@ public class Laser{
     public Laser(Vec2 start){
         this.start = start;
     }
-
+    /**
+     * Returns the side laser turned.
+     * @see BlockSide
+     * */
     public int side(){
         return BlockSide.sideForAngle(angle);
     }
@@ -57,7 +77,6 @@ public class Laser{
         charge = build.laser.out;
         //start offset vector
         Tmp.v1.trns(angle, offset);
-        resetTargetInput();
         Healthc entity = LaserUtils.linecast(start.x + Tmp.v1.x, start.y + Tmp.v1.y, angle, length, false, true, boolf -> true);
         target = entity;
         //don't cast with yourself
@@ -103,18 +122,6 @@ public class Laser{
         }
     }
 
-    public void resetTargetInput(){
-        /*if(target instanceof LaserBlock.LaserBlockBuild b && enabled){
-            //Log.info("angle: @", angle);
-            switch(BlockSide.sideForAngle(target.angleTo(build))){
-                case BlockSide.right -> b.rightInput = false;
-                case BlockSide.bottom -> b.downInput = false;
-                case BlockSide.left -> b.leftInput = false;
-                case BlockSide.top -> b.topInput = false;
-                default -> throw new IllegalStateException("Unexpected value: " + BlockSide.sideForAngle(target.angleTo(build)));
-            }
-        }*/
-    }
 
     public void start(Vec2 start){
         start(start.x, start.y);
@@ -130,9 +137,5 @@ public class Laser{
 
     public void end(float x, float y){
         end.set(x, y);
-    }
-
-    public void remove(){
-        resetTargetInput();
     }
 }

@@ -14,6 +14,9 @@ import mindustry.Vars.*;
 
 import static mindustry.Vars.tilesize;
 
+/**
+ * unused (for now)
+ * */
 public class FocusingPrism extends LaserBlock{
     public FocusingPrism(String name) {
         super(name);

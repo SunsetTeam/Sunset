@@ -18,6 +18,7 @@ import mindustry.world.blocks.logic.LogicBlock;
 import sunset.gen.*;
 import sunset.graphics.Drawm;
 
+/** Base class for all laser blocks. */
 public class LaserBlock extends Block{
     @Annotations.Load("@-base")
     public TextureRegion base;
@@ -29,6 +30,7 @@ public class LaserBlock extends Block{
     public TextureRegion plugDark;
     @Annotations.Load("@-edge1")
     public TextureRegion plugLight;
+    //on preUpdate, default all side-vars
     static {
         Events.run(Trigger.update,()->{
             if (!Vars.state.isPlaying())return;
@@ -68,12 +70,7 @@ public class LaserBlock extends Block{
         @Override
         public void update(){
             super.update();
-            /*leftInput = false;
-            topInput = false;
-            rightInput = false;
-            downInput = false;*/
             laser.update();
-            //Log.info("block update, time: @", Time.time);
         }
 
         @Override

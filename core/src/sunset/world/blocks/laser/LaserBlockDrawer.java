@@ -2,6 +2,7 @@ package sunset.world.blocks.laser;
 
 import arc.graphics.g2d.*;
 
+/** Class used for drawing laser blocks. */
 public class LaserBlockDrawer{
     public LaserBlock.LaserBlockBuild build;
 

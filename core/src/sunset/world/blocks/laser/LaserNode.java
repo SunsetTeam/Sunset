@@ -25,6 +25,7 @@ class LaserEnableStateStruct{
     boolean down;
 }*/
 
+/** Class for laser-transferring blocks.*/
 public class LaserNode extends LaserBlock{
     @SuppressWarnings("PointlessBitwiseExpression")
     public LaserNode(String name){
@@ -57,7 +58,7 @@ public class LaserNode extends LaserBlock{
 
         @Override
         public Building init(Tile tile, Team team, boolean shouldAdd, int rotation){
-            lasers = new Lasers();
+            lasers = new Lasers(this);
             super.init(tile, team, shouldAdd, rotation);
             //top
             lasers.allLasers.add(new Laser(){{
@@ -100,12 +101,6 @@ public class LaserNode extends LaserBlock{
             laser.outputs = (leftOutput ? 1 : 0) + (topOutput ? 1 : 0) + (rightOutput ? 1 : 0) + (downOutput ? 1 : 0);
             lasers.setEnabled(leftOutput, topOutput, rightOutput, downOutput);
             lasers.updateTile();
-        }
-
-        @Override
-        public void remove(){
-            super.remove();
-//            lasers.remove();
         }
 
         @Override

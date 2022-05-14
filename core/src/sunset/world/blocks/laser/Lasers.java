@@ -3,26 +3,18 @@ package sunset.world.blocks.laser;
 import arc.struct.*;
 import sunset.type.*;
 
+/** Lasers class manages {@link Laser} for {@link LaserNode}*/
 public class Lasers{
     public Seq<Laser> allLasers = new Seq<>();
-    LaserBlock.LaserBlockBuild self;
+    LaserBlock.LaserBlockBuild build;
 
-    public Lasers(){
-    }
-
-    private static boolean isLeft(Laser laser){
-        return laser.angle == 180f;
+    public Lasers(LaserBlock.LaserBlockBuild build){
+        this.build = build;
     }
 
     public void updateTile(){
         for(Laser laser : allLasers){
             laser.updateTile();
-        }
-    }
-    public void remove(){
-
-        for(Laser laser : allLasers){
-            laser.remove();
         }
     }
 

@@ -4,6 +4,7 @@ import mindustry.game.Team;
 import mindustry.gen.Building;
 import mindustry.world.Tile;
 
+/** Rotato. Just for fun. */
 public class RotatableLaserNode extends LaserNode{
     public RotatableLaserNode(String name) {
         super(name);

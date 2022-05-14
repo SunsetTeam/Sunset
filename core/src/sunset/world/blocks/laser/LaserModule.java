@@ -1,6 +1,8 @@
 package sunset.world.blocks.laser;
 import sunset.world.blocks.laser.LaserBlock.LaserBlockBuild;
 
+/** Core class for laser mechanic.
+ * Consumes or products laser energy. Splits it to some sides. */
 public class LaserModule {
     public LaserBlockBuild self;
     public float in, out;
