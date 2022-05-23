@@ -46,9 +46,9 @@ public class ModPowerTurret extends PowerTurret {
         super.setBars();
         if (reloadBar) {
             SnVars.settings.registerReloadBarBlock(this,(PowerTurretBuild entity) -> new Bar(
-                    () -> Core.bundle.format("bar.sunset-reload", Utils.stringsFixed(Mathf.clamp(entity.reload / reloadTime) * 100f)),
+                    () -> Core.bundle.format("bar.sunset-reload", Utils.stringsFixed(Mathf.clamp(entity.reloadCounter / reload) * 100f)),
                     () -> entity.team.color,
-                    () -> Mathf.clamp(entity.reload / reloadTime)
+                    () -> Mathf.clamp(entity.reloadCounter / reload)
             ));
         }
     }

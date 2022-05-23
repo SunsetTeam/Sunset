@@ -1,20 +1,15 @@
 package sunset.content.blocks;
 
-import mindustry.content.Items;
-import mindustry.ctype.ContentList;
-import mindustry.type.Category;
-import mindustry.type.ItemStack;
-import mindustry.world.Block;
-import mindustry.world.meta.BuildVisibility;
-import sunset.world.blocks.laser.FocusingPrism;
-import sunset.world.blocks.laser.LaserNode;
-import sunset.world.blocks.laser.LaserSource;
-import sunset.world.blocks.laser.RotatableLaserNode;
+import mindustry.content.*;
+import mindustry.type.*;
+import mindustry.world.*;
+import mindustry.world.meta.*;
+import sunset.world.blocks.laser.*;
 
-public class SnLasers implements ContentList {
+public class SnLasers{
     public static Block laserNode, laserSource /*, rotato */ /*, laserPrism */;
-    @Override
-    public void load() {
+
+    public static void load(){
         laserSource = new LaserSource("laser-starter"){{
             requirements(Category.distribution, ItemStack.with(Items.copper, 1));
             size = 2;

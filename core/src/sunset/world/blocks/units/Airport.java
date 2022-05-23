@@ -15,7 +15,6 @@ import mindustry.type.*;
 import mindustry.ui.*;
 import mindustry.world.*;
 import mindustry.world.blocks.*;
-import mindustry.world.blocks.power.*;
 import mindustry.world.blocks.storage.*;
 import mindustry.world.meta.*;
 import sunset.content.*;
@@ -67,11 +66,10 @@ public class Airport extends StorageBlock{
     @Override
     public void init(){
 
-        consumes.add(new DynamicConsumePower(build -> {
-            AirportBuild tile = build.as();
+        consumePowerDynamic((AirportBuild tile) -> {
             return powerUse * (tile.shouldBuild ? tile.getBoost() : 0);
-        }));
-        consumes.items(unitRequirements);
+        });
+        consumeItems(unitRequirements);
         super.init();
     }
 
@@ -83,10 +81,10 @@ public class Airport extends StorageBlock{
     @Override
     public void setBars(){
         super.setBars();
-        bars.add("progress", (AirportBuild e) ->
+       addBar("progress", (AirportBuild e) ->
         new Bar("bar.progress", Pal.ammo, () -> e.construcionTime / unitBuildTime));
 
-        bars.add("units", (AirportBuild e) ->
+       addBar("units", (AirportBuild e) ->
         new Bar(
         //TODO: string
         () -> Core.bundle.format("bar.unitcap",
@@ -135,17 +133,17 @@ public class Airport extends StorageBlock{
                 for(Deliverc deliver : SnGroups.delivers){
                     if(deliver.base() != this) continue;
                     if(needUnits()){
-                        units.add(deliver.as());
+                        units.add(deliver.<DeliverUnit>as());
                     }else{
                         deliver.base(null);
                     }
                 }
             }
-            units.removeAll(d -> !d.added || !d.isValid());
+            units.removeAll(d -> !d.isAdded() || !d.isValid());
             if(needUnits()){
                 for(Deliverc deliver : SnGroups.delivers){
                     if(deliver.base() == null){
-                        units.add(deliver.as());
+                        units.add(deliver.<DeliverUnit>as());
                         deliver.set(this);
                     }
                     if(!needUnits()){
@@ -203,7 +201,7 @@ public class Airport extends StorageBlock{
         }
 
         @Override
-        public boolean onConfigureTileTapped(Building other){
+        public boolean onConfigureBuildTapped(Building other){
             if(this == other || (other != null && link == other.pos())){
                 configure(-1);
                 return false;

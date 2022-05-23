@@ -63,7 +63,7 @@ public class GasWell extends GasCrafter{
 
         @Override
         public void drawLight(){
-            Drawf.light(team, x, y, (40f + Mathf.absin(10f, 5f)) * Math.min(baseEfficiency, 2f) * size, Color.scarlet, 0.4f);
+            Drawf.light( x, y, (40f + Mathf.absin(10f, 5f)) * Math.min(baseEfficiency, 2f) * size, Color.scarlet, 0.4f);
         }
 
         @Override

@@ -87,6 +87,6 @@ public class DeliverAI extends FlyingAI{
         }
     }
     public static UnitController wrapper(){
-        return new FormationAIWrapper(new DeliverAI());
+        return new CommandAIWrapper(new DeliverAI());
     }
 }

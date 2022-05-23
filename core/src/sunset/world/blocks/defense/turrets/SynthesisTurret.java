@@ -1,49 +1,31 @@
 package sunset.world.blocks.defense.turrets;
 
-import acontent.world.meta.AStats;
-import arc.Core;
-import arc.graphics.Color;
-import arc.graphics.g2d.Draw;
-import arc.graphics.g2d.Fill;
-import arc.graphics.g2d.Lines;
-import arc.graphics.g2d.TextureRegion;
-import arc.math.Mathf;
-import arc.util.Time;
-import arc.util.Tmp;
-import arc.util.io.Reads;
-import arc.util.io.Writes;
-import mindustry.Vars;
-import mindustry.annotations.Annotations.Load;
-import mindustry.entities.bullet.BulletType;
-import mindustry.graphics.Drawf;
-import mindustry.graphics.Layer;
-import mindustry.graphics.Pal;
-import mindustry.ui.Bar;
-import mindustry.world.blocks.defense.turrets.ItemTurret;
-import mindustry.world.consumers.ConsumeLiquidBase;
-import mindustry.world.consumers.ConsumeType;
-import mindustry.world.meta.Stat;
-import mindustry.world.meta.StatUnit;
-import mindustry.world.meta.StatValues;
-import sunset.SnVars;
-import sunset.content.SnFx;
-import sunset.graphics.SnPal;
-import sunset.utils.Utils;
-import sunset.world.meta.SnStat;
+import acontent.world.meta.*;
+import arc.*;
+import arc.graphics.g2d.*;
+import arc.math.*;
+import arc.util.*;
+import arc.util.io.*;
+import mindustry.annotations.Annotations.*;
+import mindustry.entities.bullet.*;
+import mindustry.graphics.*;
+import mindustry.ui.*;
+import mindustry.world.blocks.defense.turrets.*;
+import mindustry.world.meta.*;
+import sunset.*;
+import sunset.content.*;
+import sunset.utils.*;
+import sunset.world.meta.*;
 
-import static mindustry.Vars.minArmorDamage;
-import static mindustry.Vars.tilesize;
+import static mindustry.Vars.*;
 
-public class SynthesisTurret extends ItemTurret {
-    @Load("@-liquid")
-    public TextureRegion liquid;
+public class SynthesisTurret extends ItemTurret{
     public float powerUse;
 
     public float maxReloadMultiplier = 0.5f;
     public float speedupPerShot = 0.125f;
     public float slowReloadTime = 70;
 
-    public boolean drawShields = true;
     public float primaryArmor = 0;
     public float maxShield = health;
     public float regenCooldown = 2 * Time.toSeconds;
@@ -52,7 +34,7 @@ public class SynthesisTurret extends ItemTurret {
 
     public AStats aStats = new AStats();
 
-    public SynthesisTurret(String name) {
+    public SynthesisTurret(String name){
         super(name);
         unitSort = (u, x, y) -> -u.armor;
         update = true;
@@ -61,13 +43,13 @@ public class SynthesisTurret extends ItemTurret {
     }
 
     @Override
-    public void init() {
-        consumes.powerCond(powerUse, TurretBuild::isShooting);
+    public void init(){
+        consumePowerCond(powerUse, TurretBuild::isShooting);
         super.init();
     }
 
     @Override
-    public void setStats() {
+    public void setStats(){
         //general
         aStats.add(Stat.health, health, StatUnit.none);
         aStats.add(Stat.size, "@x@", size, size);
@@ -77,7 +59,7 @@ public class SynthesisTurret extends ItemTurret {
         aStats.add(Stat.shootRange, range / tilesize, StatUnit.blocks);
         aStats.add(SnStat.minimalRange, minRange / tilesize, StatUnit.blocks);
         aStats.add(Stat.inaccuracy, (int)inaccuracy, StatUnit.degrees);
-        aStats.add(Stat.reload, 60f / (reloadTime) * (alternate ? 1 : shots), StatUnit.perSecond);
+        aStats.add(Stat.reload, 60f / (reload) * (shoot.shots), StatUnit.perSecond);
         aStats.add(Stat.targetsAir, targetAir);
         aStats.add(Stat.targetsGround, targetGround);
         aStats.add(Stat.ammoUse, ammoPerShot, StatUnit.perShot);
@@ -90,7 +72,7 @@ public class SynthesisTurret extends ItemTurret {
         //liquids
         aStats.add(Stat.liquidCapacity, liquidCapacity, StatUnit.liquidUnits);
         //optional
-        aStats.add(Stat.booster, StatValues.boosters(reloadTime, consumes.<ConsumeLiquidBase>get(ConsumeType.liquid).amount, coolantMultiplier, true, l -> consumes.liquidfilters.get(l.id)));
+        aStats.add(Stat.booster, StatValues.boosters(reload, coolant.amount, coolantMultiplier, true, l -> liquidFilter[l.id]));
 
         //super.setStats();
         //aStats.add(SnStat.primaryArmor, primaryArmor, StatUnit.none);
@@ -99,39 +81,38 @@ public class SynthesisTurret extends ItemTurret {
     }
 
     @Override
-    public void setBars() {
+    public void setBars(){
         super.setBars();
         SnVars.settings.registerReloadBarBlock(this, (SynthesisBuild entity) -> new Bar(
-                () -> Core.bundle.format("bar.sunset-reload", Utils.stringsFixed(Mathf.clamp(entity.reload / reloadTime) * 100f)),
-                () -> entity.team.color,
-                () -> Mathf.clamp(entity.reload / reloadTime)
+        () -> Core.bundle.format("bar.sunset-reload", Utils.stringsFixed(Mathf.clamp(entity.reloadCounter / reload) * 100f)),
+        () -> entity.team.color,
+        () -> Mathf.clamp(entity.reloadCounter / reload)
         ));
-        bars.add("shield", (SynthesisBuild entity) -> new Bar(Core.bundle.format("bar.shield"),
-                Pal.accent,
-                ()-> entity.shield / health));
+        addBar("shield", (SynthesisBuild entity) -> new Bar(Core.bundle.format("bar.shield"),
+        Pal.accent,
+        () -> entity.shield / health));
     }
 
     @Override
-    public void drawPlace(int x, int y, int rotation, boolean valid) {
+    public void drawPlace(int x, int y, int rotation, boolean valid){
         Drawf.dashCircle(x * tilesize + offset, y * tilesize + offset, range, Pal.placing);
-        if (minRange > 0) Drawf.dashCircle(x, y, minRange, Pal.health);
+        if(minRange > 0) Drawf.dashCircle(x, y, minRange, Pal.health);
     }
 
-    public class SynthesisBuild extends ItemTurretBuild {
+    public class SynthesisBuild extends ItemTurretBuild{
         public float speedupScl = 0f;
         public float slowDownReload = 0f;
-
+        public float shieldAlpha;
         float shield;
-        float shieldAlpha;
         float heat = 0f;
 
         @Override
-        public void updateTile() {
+        public void updateTile(){
             super.updateTile();
-            if (this.health < maxHealth / 10) {
-                if (slowDownReload >= 1f) {
+            if(this.health < maxHealth / 10){
+                if(slowDownReload >= 1f){
                     slowDownReload -= Time.delta;
-                } else speedupScl = Mathf.lerpDelta(speedupScl, 0f, 0.05f);
+                }else speedupScl = Mathf.lerpDelta(speedupScl, 0f, 0.05f);
             }
             shieldAlpha -= delta() / 15f;
             if(shieldAlpha < 0) shieldAlpha = 0f;
@@ -141,80 +122,54 @@ public class SynthesisTurret extends ItemTurret {
         }
 
         @Override
-        protected void updateShooting() {
-            if (this.health < maxHealth / 10) {
-                if (reload >= reloadTime && !charging) {
+        protected void updateShooting(){
+            if(this.health < maxHealth / 10){
+                if(reload >= reload && !charging()){
                     BulletType type = peekAmmo();
                     shoot(type);
-                    reload %= reloadTime;
-                } else {
+                    reload %= reload;
+                }else{
                     reload += (1 + speedupScl) * delta() * peekAmmo().reloadMultiplier * baseReloadSpeed();
                 }
-            } else {
+            }else{
                 super.updateShooting();
             }
         }
 
         @Override
-        protected void shoot(BulletType b) {
+        protected void shoot(BulletType b){
             super.shoot(b);
-            if (this.health < maxHealth / 10) {
+            if(this.health < maxHealth / 10){
                 slowDownReload = slowReloadTime;
-                if (speedupScl < maxReloadMultiplier) {
+                if(speedupScl < maxReloadMultiplier){
                     speedupScl += speedupPerShot;
-                } else speedupScl = maxReloadMultiplier;
-            } else {
+                }else speedupScl = maxReloadMultiplier;
+            }else{
                 super.shoot(b);
             }
         }
 
         @Override
-        public void draw() {
-            Draw.rect(baseRegion, x, y);
-            Draw.color();
-            Draw.z(Layer.turret);
-            tr2.trns(rotation, -recoil);
-            Drawf.shadow(region, x + tr2.x - elevation, y + tr2.y - elevation, rotation - 90);
-            drawer.get(this);
-
-            if (heatRegion != Core.atlas.find("error")) {
-                heatDrawer.get(this);
-            }
-
-            if (size > 2) Drawf.liquid(liquid, x + tr2.x, y + tr2.y, liquids.total() / liquidCapacity, SnPal.synthesis1);
-
-            if(shieldAlpha > 0 && drawShields) drawShield();
-        }
-
-        @Override
-        public void drawSelect() {
+        public void drawSelect(){
             Drawf.dashCircle(x, y, range, team.color);
-            if (minRange > 0) Drawf.dashCircle(x, y, minRange, Pal.health);
+            if(minRange > 0) Drawf.dashCircle(x, y, minRange, Pal.health);
         }
 
         //region armor zone
         //region primary armor (active)
         @Override
-        public void created() {
+        public void created(){
             super.created();
             shield = maxShield = health;
         }
 
-        public void drawShield() {
-            float alpha = shieldAlpha;
-            float radius = block.size * Vars.tilesize * 1.3f;
-            Draw.z(Layer.blockOver);
-            Fill.light(x, y, Lines.circleVertices(radius), radius, Tmp.c1.set(Pal.shield), Tmp.c2.set(Pal.shield).lerp(Color.white, Mathf.clamp(hitTime() / 2f)).a(Pal.shield.a * alpha));
-            Draw.reset();
-        }
-
         @Override
-        public void damage(float amount) {
+        public void damage(float amount){
             rawDamage(Math.max(amount - primaryArmor, minArmorDamage * amount));
         }
 
         @Override
-        public void damagePierce(float amount, boolean withEffect) {
+        public void damagePierce(float amount, boolean withEffect){
             float pre = hitTime;
 
             rawDamage(amount);
@@ -222,7 +177,7 @@ public class SynthesisTurret extends ItemTurret {
             if(!withEffect) hitTime = pre;
         }
 
-        protected void rawDamage(float amount) {
+        protected void rawDamage(float amount){
             boolean hadShields = shield > 0.0001f;
 
             if(hadShields) shieldAlpha = 1f;
@@ -233,7 +188,7 @@ public class SynthesisTurret extends ItemTurret {
             hitTime = 1f;
             amount -= shieldDamage;
 
-            if(amount > 0) {
+            if(amount > 0){
                 health -= amount;
                 if(health <= 0 && !dead()) kill();
 
@@ -242,23 +197,24 @@ public class SynthesisTurret extends ItemTurret {
         }
 
         @Override
-        public void write(Writes write) {
+        public void write(Writes write){
             super.write(write);
             write.f(shield);
         }
 
         @Override
-        public void read(Reads read, byte revision) {
+        public void read(Reads read, byte revision){
             super.read(read, revision);
             shield = read.f();
         }
+
         //endregion primary armor (active)
         //region secondary armor (passive)
         @Override
-        public float handleDamage(float amount) {
-            if (secondaryArmor != 0 | this.health < maxHealth / 10) {
+        public float handleDamage(float amount){
+            if(secondaryArmor != 0 | this.health < maxHealth / 10){
                 return Math.max(amount - secondaryArmor, minArmorDamage * amount);
-            } else return Math.max(amount - secondaryArmor / 10, minArmorDamage * amount);
+            }else return Math.max(amount - secondaryArmor / 10, minArmorDamage * amount);
         }
 
         //TODO make a visual display of the secondary armor

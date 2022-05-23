@@ -1,7 +1,6 @@
 package sunset.content.blocks;
 
 import mindustry.Vars;
-import mindustry.ctype.ContentList;
 import mindustry.type.Category;
 import mindustry.type.ItemStack;
 import mindustry.world.Block;
@@ -11,13 +10,12 @@ import mindustry.world.meta.BuildVisibility;
 import sunset.world.blocks.sandbox.SnMultiSource;
 import sunset.world.blocks.sandbox.SnMultiVoid;
 
-public class SnSandbox implements ContentList {
+public class SnSandbox {
     public static Block
     //main
     multiSource, multiVoid, superProcessor, superDisplay;
 
-    @Override
-    public void load() {
+    public static void load() {
         //region main
         multiSource = new SnMultiSource("multi-source"){{
             requirements(Category.distribution, BuildVisibility.sandboxOnly, ItemStack.empty);

@@ -19,7 +19,7 @@ abstract class FireFighterComp implements Entityc, UncontrollableUnitc,Unitc{
 
     @Override
     public void update(){
-        if(base != null && !(base.units.contains(this.<DeliverUnit>self()) && base.isValid() && base.added)){
+        if(base != null && !(base.units.contains(this.<DeliverUnit>self()) && base.isValid() && base.isAdded())){
             base = null;
         }
         if(base == null){

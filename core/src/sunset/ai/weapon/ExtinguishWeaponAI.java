@@ -30,7 +30,7 @@ public class ExtinguishWeaponAI extends BaseWeaponAI {
     }
 
     private Posc findTarget(Unit unit, WeaponMount mount) {
-        float range = mount.weapon.bullet.range();
+        float range = mount.weapon.bullet.range;
         float range2 = range * range;
         Vec2 point = tmpVec.set(mountX(unit,mount), mountY(unit,mount));
         return target = Utils.findFireTarget(unit.x, unit.y, unit.team, range, u -> point.dst2(u) < range2 && u != unit, b -> true);

@@ -55,7 +55,7 @@ public class SniperBulletType extends BasicBulletType {
             current.damage(damage * curDmgScale * (current instanceof Building ? buildingDamageMultiplier : 1));
             for(int i = 0; i < fragBullets; i++) {
                 float len = Mathf.random(fragVelocityMin, fragVelocityMax);
-                float a = b.rotation() + Mathf.range(fragCone / 2);
+                float a = b.rotation() + Mathf.range(fragRandomSpread / 2);
                 float fragDamage = damage/fragBullets*curDmgScale*(1-pierceDamageMultiplier);
                 Time.run(trailDelay * eIteration, runEffect(current.x(), current.y(), a, curSizeScale*len));
                 fragBullet.create(b, b.team, current.x(), current.y(), a, fragDamage, len,1, null);

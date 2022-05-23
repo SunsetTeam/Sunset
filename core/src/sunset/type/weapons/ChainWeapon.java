@@ -41,7 +41,7 @@ public class ChainWeapon<Targetc extends Posc & Healthc & Teamc> extends WeaponE
         // Should never shoot using the standard method.
         ai = new EmptyWeaponAI();
         bullet = SnBullets.emptyBullet;
-        firstShotDelay = Float.MAX_VALUE;
+        shoot.firstShotDelay = Float.MAX_VALUE;
         reload = Float.MAX_VALUE;
         recoil = 0;
     }
@@ -180,9 +180,9 @@ public class ChainWeapon<Targetc extends Posc & Healthc & Teamc> extends WeaponE
             float z = Draw.z();
             Draw.z(laserLayer); //TODO как-то пофиксить эффекты луча
             Draw.mixcol(chainColor, 0.4f);
-            Drawf.laser(unit.team, laser, laserEnd, weaponPos.x, weaponPos.y, units.get(0).x(), units.get(0).y());
+            Drawf.laser( laser, laserEnd, weaponPos.x, weaponPos.y, units.get(0).x(), units.get(0).y());
             for(int i = 0; i < units.size - 1; i++){
-                Drawf.laser(unit.team, laser, laserEnd,
+                Drawf.laser( laser, laserEnd,
                             units.get(i).x(), units.get(i).y(),
                             units.get(i + 1).x(), units.get(i + 1).y());
             }

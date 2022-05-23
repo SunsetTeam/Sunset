@@ -3,13 +3,12 @@ package sunset.content.blocks;
 import mindustry.content.Fx;
 import mindustry.content.Items;
 import mindustry.content.Liquids;
-import mindustry.ctype.ContentList;
 import mindustry.type.Category;
 import mindustry.type.ItemStack;
 import mindustry.world.Block;
 import mindustry.world.blocks.production.AttributeCrafter;
 import mindustry.world.blocks.production.SolidPump;
-import mindustry.world.draw.DrawRotator;
+import mindustry.world.draw.*;
 import mindustry.world.meta.Env;
 import sunset.content.SnAttribute;
 import sunset.content.SnFx;
@@ -22,7 +21,7 @@ import sunset.world.blocks.production.raw.PrecussionDrill;
 import static mindustry.type.ItemStack.with;
 
 /** This category is for blocks that produce raw products. (Such as cultivator, drill etc.) */
-public class SnProduction implements ContentList{
+public class SnProduction{
     public static Block
     //pumps
     mechanicalWaterExtractor,
@@ -35,8 +34,7 @@ public class SnProduction implements ContentList{
     percussionDrill,
     enojieDrill;
 
-    @Override
-    public void load(){
+    public static void load(){
         mechanicalWaterExtractor = new SolidPump("mechanical-water-extractor"){{
             requirements(Category.production, with(Items.metaglass, 30, Items.graphite, 30, Items.lead, 30, SnItems.fors, 30));
             result = SnLiquids.burheyna;
@@ -47,7 +45,7 @@ public class SnProduction implements ContentList{
             attribute = SnAttribute.burheyna;
             envRequired |= Env.groundWater;
 
-            consumes.power(2f);
+            consumePower(2f);
         }};
 
         //region crafters
@@ -57,13 +55,16 @@ public class SnProduction implements ContentList{
             health = 990;
             craftEffect = SnFx.cultivatorSmeltSmoke;
             craftTime = 200f;
-            drawer = new DrawRotator();
+            drawer = new DrawMulti(new DrawDefault(), new DrawRegion("-rotator"){{
+                spinSprite = true;
+                rotateSpeed = 2f;
+            }}, new DrawRegion("-top"));
             outputItem = new ItemStack(Items.sporePod, 6);
             itemCapacity = 30;
             liquidCapacity = 40f;
 
-            consumes.liquid(Liquids.water, 0.4f);
-            consumes.power(2f);
+            consumeLiquid(Liquids.water, 0.4f);
+            consumePower(2f);
         }};
         //endregion crafters
         //region drills
@@ -73,8 +74,8 @@ public class SnProduction implements ContentList{
             size = 2;
             hasPower = true;
             tier = 3;
-            consumes.power(0.6f);
-            consumes.liquid(Liquids.water, 0.07f).boost();
+            consumePower(0.6f);
+            consumeLiquid(Liquids.water, 0.07f).boost();
             m1 = 4;
         }};
 
@@ -92,8 +93,8 @@ public class SnProduction implements ContentList{
             warmupSpeed = 0.01f;
             itemCapacity = 40;
             liquidBoostIntensity = 1.9f;
-            consumes.power(4f);
-            consumes.liquid(Liquids.water, 0.13f).boost();
+            consumePower(4f);
+            consumeLiquid(Liquids.water, 0.13f).boost();
             m1 = 7;
             m2 = -7;
         }};
@@ -109,7 +110,7 @@ public class SnProduction implements ContentList{
             liquidBoost = 3.86f;
             itemCountMultiplier = 0.5f;
             canDump = true;
-            consumes.liquid(Liquids.water, 0.15f).boost();
+            consumeLiquid(Liquids.water, 0.15f).boost();
             drillItems(
             new DrillItem(Items.graphite, 1f),
             new DrillItem(Items.surgeAlloy, 1.25f),
@@ -133,8 +134,8 @@ public class SnProduction implements ContentList{
 
             liquidBoostIntensity = 1.7f;
 
-            consumes.power(3f);
-            consumes.liquid(Liquids.cryofluid, 0.4f).boost();
+            consumePower(3f);
+            consumeLiquid(Liquids.cryofluid, 0.4f).boost();
             m1 = 13;
         }};
         //endregion drills

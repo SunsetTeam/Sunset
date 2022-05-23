@@ -72,7 +72,7 @@ public class MissileSiloCommander extends Block {
     @Override
     public void setBars() {
         super.setBars();
-        bars.<MissileSiloCommanderBuild>add("connections", entity -> new Bar(() ->
+        this.<MissileSiloCommanderBuild>addBar("connections", entity -> new Bar(() ->
                 Core.bundle.format("bar.connections", entity.missilePositions.size, maxConnections),
                 () -> Pal.items,
                 () -> (float)entity.missilePositions.size / (float)maxConnections
@@ -167,7 +167,7 @@ public class MissileSiloCommander extends Block {
         }
 
         @Override
-        public boolean onConfigureTileTapped(Building other) {
+        public boolean onConfigureBuildTapped(Building other) {
             if (linkValid(this, other)) {
                 configure(other.pos());
                 return false;

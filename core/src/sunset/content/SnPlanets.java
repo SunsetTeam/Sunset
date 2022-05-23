@@ -2,7 +2,6 @@ package sunset.content;
 
 import arc.graphics.Color;
 import arc.util.Time;
-import mindustry.ctype.ContentList;
 import mindustry.graphics.g3d.HexMesh;
 import mindustry.graphics.g3d.HexSkyMesh;
 import mindustry.graphics.g3d.MultiMesh;
@@ -15,7 +14,7 @@ import sunset.maps.generators.HycleGenerator;
 import sunset.maps.generators.RimeGenerator;
 import sunset.type.planets.SnPlanet;
 
-public class SnPlanets implements ContentList{
+public class SnPlanets{
     public static Planet
     //stars
     magma,
@@ -24,8 +23,7 @@ public class SnPlanets implements ContentList{
     //satellites
     hycle;
 
-    @Override
-    public void load(){
+    public static void load(){
         //region stars
         magma = new SnPlanet("magma", null, 4f, 0){{
             bloom = true;

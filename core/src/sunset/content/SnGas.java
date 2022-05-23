@@ -3,13 +3,11 @@ package sunset.content;
 import arc.graphics.Color;
 import gas.type.Gas;
 import mindustry.content.StatusEffects;
-import mindustry.ctype.ContentList;
 
-public class SnGas implements ContentList {
+public class SnGas  {
     public static Gas hyneris, gyner, arhelinium;
 
-    @Override
-    public void load() {
+    public static void load() {
         hyneris = new Gas("hyneris") {{
             color = Color.valueOf("E17C7C");
             explosiveness = 0.07f;

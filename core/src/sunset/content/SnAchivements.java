@@ -7,9 +7,8 @@ import mindustry.ctype.*;
 import mindustry.world.blocks.storage.CoreBlock.*;
 import sunset.game.*;
 
-public class SnAchivements implements ContentList{
-    @Override
-    public void load(){
+public class SnAchivements{
+    public static void load(){
         new SnAchievementTab("test"){{
             achievement(new SnAchievement("first-copper"){
                 @Override

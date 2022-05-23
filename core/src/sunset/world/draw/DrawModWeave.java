@@ -1,23 +1,24 @@
 package sunset.world.draw;
 
-import arc.Core;
-import arc.math.Mathf;
+import arc.*;
 import arc.graphics.g2d.*;
-import mindustry.world.Block;
-import mindustry.world.blocks.production.GenericCrafter;
-import mindustry.world.draw.DrawBlock;
-import mindustry.graphics.Pal;
+import arc.math.*;
+import mindustry.*;
+import mindustry.gen.*;
+import mindustry.graphics.*;
+import mindustry.world.*;
+import mindustry.world.blocks.production.GenericCrafter.*;
+import mindustry.world.draw.*;
 
-import mindustry.Vars;
+public class DrawModWeave extends DrawBlock{
+    protected TextureRegion bottom;
+    protected TextureRegion weave;
+    protected TextureRegion top;
 
-public class DrawModWeave extends DrawBlock {
-  protected TextureRegion bottom;
-  protected TextureRegion weave;
-  protected TextureRegion top;
 
-  
-  @Override
-  public void draw(GenericCrafter.GenericCrafterBuild entity) {
+    @Override
+    public void draw(Building b){
+        GenericCrafterBuild entity = b.as();
         Draw.rect(bottom, entity.x, entity.y);
         Draw.rect(weave, entity.x, entity.y, entity.totalProgress);
         Draw.color(Pal.accent);
@@ -26,17 +27,18 @@ public class DrawModWeave extends DrawBlock {
         Draw.reset();
         Draw.rect(entity.block.region, entity.x, entity.y);
         Draw.rect(top, entity.x, entity.y);
-        }
+    }
 
-  @Override
-  public void load(Block block) {
-      bottom = Core.atlas.find(block.name + "-bottom");
-      weave = Core.atlas.find(block.name + "-weave");
-      top = Core.atlas.find(block.name + "-top");
-  }
-    
-  @Override
-  public TextureRegion[] icons(Block block) {
-      return new TextureRegion[]{bottom, block.region, weave, top};
-  }
+    @Override
+    public void load(Block block){
+        expectCrafter(block);
+        bottom = Core.atlas.find(block.name + "-bottom");
+        weave = Core.atlas.find(block.name + "-weave");
+        top = Core.atlas.find(block.name + "-top");
+    }
+
+    @Override
+    public TextureRegion[] icons(Block block){
+        return new TextureRegion[]{bottom, block.region, weave, top};
+    }
 }

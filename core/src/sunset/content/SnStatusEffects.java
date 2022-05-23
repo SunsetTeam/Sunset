@@ -13,7 +13,7 @@ import sunset.type.*;
 
 import static arc.Core.*;
 
-class SnStatusEffects_ implements ContentList{
+class SnStatusEffects_ {
     public static StatusEffect
     //common
     frostbite, stun, starBuff, galaxyDebuff, electricalShort, reloading, viscous, inferno,
@@ -24,8 +24,7 @@ class SnStatusEffects_ implements ContentList{
     //stackable
     overheat, incineration;
 
-    @Override
-    public void load(){
+    public static void load(){
 
         //region common
         frostbite = new StatusEffect("frostbite"){{

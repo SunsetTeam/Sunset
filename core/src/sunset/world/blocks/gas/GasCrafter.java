@@ -30,7 +30,7 @@ public class GasCrafter extends GenericCrafterWithGas {
     public void setBars() {
         super.setBars();
         if (attribute != null) {
-            bars.add("efficiency", (GasCrafterBuild entity) ->
+            addBar("efficiency", (GasCrafterBuild entity) ->
                     new Bar(() ->
                             Core.bundle.format("bar.efficiency", (entity.efficiencyScale() * 100)),
                             () -> Pal.lightOrange,

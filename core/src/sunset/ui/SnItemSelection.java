@@ -30,8 +30,8 @@ public class SnItemSelection{
         for(T item : items){
             if(!item.unlockedNow()) continue;
 
-            ImageButton button = cont.button(Tex.whiteui, Styles.clearToggleTransi, 24, () -> {
-                if(closeSelect) control.input.frag.config.hideConfig();
+            ImageButton button = cont.button(Tex.whiteui, Styles.clearTogglei, 24, () -> {
+                if(closeSelect) control.input.config.hideConfig();
             }).group(group).get();
             button.changed(() -> consumer.get(button.isChecked() ? item : returnOriginal ? holder.get() : null));
             button.getStyle().imageUp = new TextureRegionDrawable(item.uiIcon);

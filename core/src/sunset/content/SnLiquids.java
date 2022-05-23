@@ -2,14 +2,12 @@ package sunset.content;
 
 import arc.graphics.Color;
 import mindustry.content.StatusEffects;
-import mindustry.ctype.ContentList;
 import mindustry.type.Liquid;
 
-public class SnLiquids implements ContentList {
+public class SnLiquids {
     public static Liquid burheyna, sayang, messira, nabunium;
     //your stepfa
-    @Override
-    public void load() {
+    public static void load() {
      
         burheyna = new Liquid("burheyna", Color.valueOf("f54b68")) {
             {

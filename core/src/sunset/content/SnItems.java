@@ -1,12 +1,11 @@
 package sunset.content;
 
 import arc.graphics.Color;
-import mindustry.ctype.ContentList;
 import mindustry.type.Item;
 import sunset.type.Ammo;
 import sunset.type.SnItem;
 
-public class SnItems implements ContentList {
+public class SnItems {
     public static Item
     // region azaria
     //raw
@@ -20,8 +19,7 @@ public class SnItems implements ContentList {
     raMissile, empMissile, lightningMissile, lightMissile,
     burstMissile, detonatorMissile, pointMissile, spotMissile;
 
-    @Override
-    public void load() {
+    public static void load() {
         //region azaria
         fors = new Item("fors", Color.valueOf("ed606e")) {{
             cost = 2f;

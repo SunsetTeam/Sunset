@@ -6,7 +6,6 @@ import arc.graphics.g2d.Draw
 import mindustry.Vars
 import mindustry.content.Fx
 import mindustry.content.StatusEffects
-import mindustry.ctype.ContentList
 import mindustry.graphics.Layer
 import mindustry.graphics.Pal
 import mindustry.type.StatusEffect
@@ -16,9 +15,11 @@ import sunset.type.StackableStatusEffect
 import sunset.type.StackableStatusEffect.*
 import sunset.utils.kotlin.color
 import kotlin.Unit as KtUnit
+
 @Suppress("UNUSED_ANONYMOUS_PARAMETER")
-class SnStatusEffects : ContentList {
-    override fun load() {
+object SnStatusEffects {
+    @JvmStatic
+    fun load() {
         //region common
         frostbite = statusEffect("frostbite") {
             color = "6ecdec".color()
@@ -139,27 +140,27 @@ class SnStatusEffects : ContentList {
         overheat = stackableStatusEffect("overheat") {
             color = "FF30000".color()
             stackEntries(
-                stackEntry(health=0.99f,speed=0.99f),
-                stackEntry(health=0.98f,speed=0.99f),
-                stackEntry(health=0.97f,speed=0.99f),
-                stackEntry(health=0.96f,speed=0.99f),
-                stackEntry(health=0.95f,speed=0.98f),
-                stackEntry(health=0.94f,speed=0.98f),
-                stackEntry(health=0.92f,speed=0.98f),
-                stackEntry(health=0.90f,speed=0.98f),
-                stackEntry(health=0.86f,speed=0.97f),
-                stackEntry(health=0.84f,speed=0.96f),
-                stackEntry(health=0.82f,speed=0.96f),
-                stackEntry(health=0.79f,speed=0.96f),
-                stackEntry(health=0.76f,speed=0.95f),
-                stackEntry(health=0.73f,speed=0.94f),
-                stackEntry(health=0.70f,speed=0.93f),
-                stackEntry(health=0.65f,speed=0.93f),
-                stackEntry(health=0.60f,speed=0.93f),
-                stackEntry(health=0.55f,speed=0.92f),
-                stackEntry(health=0.47f,speed=0.91f),
-                stackEntry(health=0.39f,speed=0.90f),
-                null
+                    stackEntry(health = 0.99f, speed = 0.99f),
+                    stackEntry(health = 0.98f, speed = 0.99f),
+                    stackEntry(health = 0.97f, speed = 0.99f),
+                    stackEntry(health = 0.96f, speed = 0.99f),
+                    stackEntry(health = 0.95f, speed = 0.98f),
+                    stackEntry(health = 0.94f, speed = 0.98f),
+                    stackEntry(health = 0.92f, speed = 0.98f),
+                    stackEntry(health = 0.90f, speed = 0.98f),
+                    stackEntry(health = 0.86f, speed = 0.97f),
+                    stackEntry(health = 0.84f, speed = 0.96f),
+                    stackEntry(health = 0.82f, speed = 0.96f),
+                    stackEntry(health = 0.79f, speed = 0.96f),
+                    stackEntry(health = 0.76f, speed = 0.95f),
+                    stackEntry(health = 0.73f, speed = 0.94f),
+                    stackEntry(health = 0.70f, speed = 0.93f),
+                    stackEntry(health = 0.65f, speed = 0.93f),
+                    stackEntry(health = 0.60f, speed = 0.93f),
+                    stackEntry(health = 0.55f, speed = 0.92f),
+                    stackEntry(health = 0.47f, speed = 0.91f),
+                    stackEntry(health = 0.39f, speed = 0.90f),
+                    null
             )
             healthMultiplier = 0.99f
             speedMultiplier = 0.99f
@@ -175,7 +176,7 @@ class SnStatusEffects : ContentList {
                 draw = false
                 Vars.renderer.effectBuffer.end()
                 Draw.z((if (unit.isFlying) Layer.flyingUnit else Layer.groundUnit) + 1)
-                Draw.color(color, (stackIndex+1f) / maxStacks())
+                Draw.color(color, (stackIndex + 1f) / maxStacks())
                 val wrap = Draw.wrap(Vars.renderer.effectBuffer.texture)
                 wrap.flip(false, true)
                 Draw.rect(wrap, Core.camera.position.x, Core.camera.position.y, Core.camera.width, Core.camera.height)
@@ -187,28 +188,28 @@ class SnStatusEffects : ContentList {
         incineration = stackableStatusEffect("incineration") {
             color = "BD4E17".color()
             stackEntries(
-                stackEntry(health = 0.97f, speed = 0.97f),
-                stackEntry(health = 0.96f, speed = 0.97f),
-                stackEntry(health = 0.95f, speed = 0.97f),
-                stackEntry(health = 0.94f, speed = 0.97f),
-                stackEntry(health = 0.93f, speed = 0.98f),
-                stackEntry(health = 0.92f, speed = 0.95f),
-                stackEntry(health = 0.88f, speed = 0.95f),
-                stackEntry(health = 0.86f, speed = 0.95f),
-                stackEntry(health = 0.83f, speed = 0.974f),
-                stackEntry(health = 0.80f, speed = 0.93f),
-                stackEntry(health = 0.79f, speed = 0.93f),
-                stackEntry(health = 0.75f, speed = 0.93f),
-                stackEntry(health = 0.71f, speed = 0.93f),
-                stackEntry(health = 0.67f, speed = 0.92f),
-                stackEntry(health = 0.60f, speed = 0.92f),
-                stackEntry(health = 0.55f, speed = 0.91f),
-                stackEntry(health = 0.50f, speed = 0.91f),
-                stackEntry(health = 0.39f, speed = 0.91f),
-                stackEntry(health = 0.21f, speed = 0.90f),
-                stackEntry(health = 0.11f, speed = 0.89f),
-                stackEntry(health = 0.04f, speed = 0.85f),
-                null
+                    stackEntry(health = 0.97f, speed = 0.97f),
+                    stackEntry(health = 0.96f, speed = 0.97f),
+                    stackEntry(health = 0.95f, speed = 0.97f),
+                    stackEntry(health = 0.94f, speed = 0.97f),
+                    stackEntry(health = 0.93f, speed = 0.98f),
+                    stackEntry(health = 0.92f, speed = 0.95f),
+                    stackEntry(health = 0.88f, speed = 0.95f),
+                    stackEntry(health = 0.86f, speed = 0.95f),
+                    stackEntry(health = 0.83f, speed = 0.974f),
+                    stackEntry(health = 0.80f, speed = 0.93f),
+                    stackEntry(health = 0.79f, speed = 0.93f),
+                    stackEntry(health = 0.75f, speed = 0.93f),
+                    stackEntry(health = 0.71f, speed = 0.93f),
+                    stackEntry(health = 0.67f, speed = 0.92f),
+                    stackEntry(health = 0.60f, speed = 0.92f),
+                    stackEntry(health = 0.55f, speed = 0.91f),
+                    stackEntry(health = 0.50f, speed = 0.91f),
+                    stackEntry(health = 0.39f, speed = 0.91f),
+                    stackEntry(health = 0.21f, speed = 0.90f),
+                    stackEntry(health = 0.11f, speed = 0.89f),
+                    stackEntry(health = 0.04f, speed = 0.85f),
+                    null
             )
             healthMultiplier = 0.97f
             speedMultiplier = 0.97f
@@ -223,7 +224,7 @@ class SnStatusEffects : ContentList {
                 draw = false
                 Vars.renderer.effectBuffer.end()
                 Draw.z((if (unit.isFlying) Layer.flyingUnit else Layer.groundUnit) + 1)
-                Draw.color(color, (stackIndex+1f) / maxStacks())
+                Draw.color(color, (stackIndex + 1f) / maxStacks())
                 val wrap = Draw.wrap(Vars.renderer.effectBuffer.texture)
                 wrap.flip(false, true)
                 Draw.rect(wrap, Core.camera.position.x, Core.camera.position.y, Core.camera.width, Core.camera.height)
@@ -234,26 +235,24 @@ class SnStatusEffects : ContentList {
         //endregion stackable
     }
 
-    companion object {
-        //common
-        lateinit var frostbite: StatusEffect
-        lateinit var stun: StatusEffect
-        lateinit var starBuff: StatusEffect
-        lateinit var galaxyDebuff: StatusEffect
-        lateinit var universityLaserSlow: StatusEffect
-        lateinit var electricalShort: StatusEffect
-        lateinit var reloading: StatusEffect
-        lateinit var viscous: StatusEffect
-        lateinit var inferno: StatusEffect
-        lateinit var radiation: StatusEffect
+    //common
+    lateinit var frostbite: StatusEffect
+    lateinit var stun: StatusEffect
+    lateinit var starBuff: StatusEffect
+    lateinit var galaxyDebuff: StatusEffect
+    lateinit var universityLaserSlow: StatusEffect
+    lateinit var electricalShort: StatusEffect
+    lateinit var reloading: StatusEffect
+    lateinit var viscous: StatusEffect
+    lateinit var inferno: StatusEffect
+    lateinit var radiation: StatusEffect
 
-        //only reactive
-        lateinit var molecula: StatusEffect
+    //only reactive
+    lateinit var molecula: StatusEffect
 
-        //stackable
-        lateinit var overheat: StatusEffect
-        lateinit var incineration: StatusEffect
-    }
+    //stackable
+    lateinit var overheat: StatusEffect
+    lateinit var incineration: StatusEffect
 }
 
 private fun stackableStatusEffect(name: String, block: StackableStatusEffect.() -> KtUnit): StackableStatusEffect {
@@ -270,26 +269,26 @@ private fun statusEffect(name: String, block: PublicStatusEffect.() -> KtUnit): 
 
 @Suppress("unused")
 private fun StackableStatusEffect.stackEntryFull(
-    damageMultiplier: Float = unset,
-    healthMultiplier: Float = unset,
-    speedMultiplier: Float = unset,
-    reloadMultiplier: Float = unset,
-    buildSpeedMultiplier: Float = unset,
-    dragMultiplier: Float = unset,
-    transitionDamage: Float = unset
+        damageMultiplier: Float = unset,
+        healthMultiplier: Float = unset,
+        speedMultiplier: Float = unset,
+        reloadMultiplier: Float = unset,
+        buildSpeedMultiplier: Float = unset,
+        dragMultiplier: Float = unset,
+        transitionDamage: Float = unset
 ): StackEntry {
     return StackEntry(damageMultiplier, healthMultiplier, speedMultiplier, reloadMultiplier, buildSpeedMultiplier, dragMultiplier, transitionDamage)
 }
 
-@Suppress("unused","EXTENSION_SHADOWED_BY_MEMBER")
+@Suppress("unused", "EXTENSION_SHADOWED_BY_MEMBER")
 private fun StackableStatusEffect.stackEntry(
-    damage: Float = unset,
-    health: Float = unset,
-    speed: Float = unset,
-    reload: Float = unset,
-    buildSpeed: Float = unset,
-    drag: Float = unset,
-    transitionDamage: Float = unset
+        damage: Float = unset,
+        health: Float = unset,
+        speed: Float = unset,
+        reload: Float = unset,
+        buildSpeed: Float = unset,
+        drag: Float = unset,
+        transitionDamage: Float = unset
 ): StackEntry {
     return StackEntry(damage, health, speed, reload, buildSpeed, drag, transitionDamage)
 }

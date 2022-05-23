@@ -1,7 +1,6 @@
 package sunset.content.blocks;
 
 import mindustry.content.Items;
-import mindustry.ctype.ContentList;
 import mindustry.type.Category;
 import mindustry.world.Block;
 import mindustry.world.blocks.distribution.MassDriver;
@@ -14,7 +13,7 @@ import sunset.world.blocks.units.Airport;
 
 import static mindustry.type.ItemStack.with;
 
-public class SnDistribution implements ContentList {
+public class SnDistribution {
     public static Block
             //transportation
             enojieDriver, nobiumConveyor,
@@ -25,16 +24,15 @@ public class SnDistribution implements ContentList {
             //special
             airport, itemTeleporter;
 
-    @Override
-    public void load() {
+    public static void load() {
         //region transportation
         enojieDriver = new MassDriver("enojie-driver") {{
             requirements(Category.distribution, with(Items.titanium, 450, Items.thorium, 200, Items.surgeAlloy, 180, SnItems.nobium, 150, SnItems.enojie, 130));
             size = 5;
             itemCapacity = 230;
-            reloadTime = 240f;
+            reload = 240f;
             range = 560f;
-            consumes.power(6.0f);
+           consumePower(6.0f);
         }};
         nobiumConveyor = new StackConveyor("nobium-conveyor") {{
             requirements(Category.distribution, with(SnItems.nobium, 1, Items.silicon, 1, Items.graphite, 1));
@@ -70,7 +68,7 @@ public class SnDistribution implements ContentList {
             hasItems = true;
             configurable = true;
             range = 15f;
-            consumes.power(5f);
+           consumePower(5f);
         }};
         //endregion special
     }

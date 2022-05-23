@@ -1,9 +1,8 @@
 package sunset.content;
 
-import mindustry.ctype.ContentList;
 import mindustry.type.SectorPreset;
 
-public class SnSectorPresets implements ContentList {
+public class SnSectorPresets {
     public static SectorPreset
             //azaria
             oilfactory;
@@ -12,8 +11,7 @@ public class SnSectorPresets implements ContentList {
 
             //rime
 
-    @Override
-    public void load() {
+    public static void load() {
         //region azaria
         oilfactory = new SectorPreset("oil-factory", SnPlanets.azaria, 20) {{
             alwaysUnlocked = true;

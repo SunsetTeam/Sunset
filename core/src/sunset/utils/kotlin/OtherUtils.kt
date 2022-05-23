@@ -27,3 +27,4 @@ operator fun IntIntMap.set(key: Int, value: Int) = put(key, value)
 
 inline fun String.color()= Color.valueOf(this)!!
 inline fun Int.color()= Color(this)
+

@@ -1,39 +1,29 @@
 package sunset.world.blocks.defense.turrets;
 
-import arc.Core;
-import arc.graphics.g2d.Draw;
-import arc.graphics.g2d.TextureRegion;
-import arc.math.Mathf;
-import arc.math.geom.Position;
-import arc.math.geom.Vec2;
-import arc.util.Nullable;
-import arc.util.Tmp;
-import arc.util.io.Reads;
-import arc.util.io.Writes;
-import mindustry.Vars;
-import mindustry.annotations.Annotations.Load;
-import mindustry.content.Fx;
-import mindustry.content.UnitTypes;
-import mindustry.entities.Effect;
-import mindustry.gen.BlockUnitc;
-import mindustry.gen.Building;
-import mindustry.gen.Player;
-import mindustry.gen.Unit;
-import mindustry.graphics.Drawf;
-import mindustry.graphics.Layer;
-import mindustry.graphics.MultiPacker;
-import mindustry.graphics.Pal;
-import mindustry.type.Item;
-import mindustry.type.ItemStack;
-import mindustry.ui.Bar;
-import mindustry.world.Tile;
-import mindustry.world.blocks.ControlBlock;
-import mindustry.world.blocks.production.GenericCrafter;
-import mindustry.world.meta.Stat;
-import mma.ModVars;
-import mma.graphics.AFill;
-import sunset.type.MissileType;
-import sunset.world.meta.SnStatValues;
+import arc.*;
+import arc.graphics.g2d.*;
+import arc.math.*;
+import arc.math.geom.*;
+import arc.util.*;
+import arc.util.io.*;
+import mindustry.*;
+import mindustry.annotations.Annotations.*;
+import mindustry.content.*;
+import mindustry.entities.*;
+import mindustry.gen.*;
+import mindustry.graphics.*;
+import mindustry.type.*;
+import mindustry.ui.*;
+import mindustry.world.*;
+import mindustry.world.blocks.*;
+import mindustry.world.blocks.production.*;
+import mindustry.world.consumers.*;
+import mindustry.world.meta.*;
+import mma.*;
+import mma.graphics.*;
+import sunset.type.*;
+import sunset.utils.*;
+import sunset.world.meta.*;
 
 import static mindustry.Vars.tilesize;
 
@@ -91,10 +81,10 @@ public class MissileSiloTurret extends GenericCrafter {
     @Override
     public void setBars() {
         super.setBars();
-        bars.add("progress", (MissileSiloTurretBuild e) -> new Bar("bar.progress",
+        addBar("progress", (MissileSiloTurretBuild e) -> new Bar("bar.progress",
                 Pal.ammo,
                 () -> e.loaded == rockets.length ? 1f : e.progress));
-        bars.add("count", (MissileSiloTurretBuild e) -> new Bar(
+        addBar("count", (MissileSiloTurretBuild e) -> new Bar(
                 () -> Core.bundle.format("bar.missilecount", e.loaded, rockets.length),
                 () -> Pal.ammo,
                 () -> e.loaded / (float) rockets.length));
@@ -179,8 +169,12 @@ public class MissileSiloTurret extends GenericCrafter {
         @Override
         public int getMaximumAccepted(Item item) {
             int res = 0;
-            for (ItemStack i : consumes.getItem().items) {
-                if (i.item == item) res += i.amount;
+            for(Consume consumer : block.consumers){
+                if(consumer instanceof ConsumeItems items){
+                    for(ItemStack i : items.items){
+                        if(i.item == item) res += i.amount;
+                    }
+                }
             }
             return res * (rockets.length + 1);
         }
@@ -228,7 +222,7 @@ public class MissileSiloTurret extends GenericCrafter {
         @Override
         public void updateTile() {
             updateShooting();
-            if (consValid() && loaded < rockets.length) {
+            if (efficiency>0 && loaded < rockets.length) {
                 progress += getProgressIncrease(craftTime);
                 totalProgress += delta();
                 warmup = Mathf.lerpDelta(warmup, 1f, 0.02f);

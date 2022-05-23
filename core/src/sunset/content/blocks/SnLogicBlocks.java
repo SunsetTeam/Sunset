@@ -2,7 +2,6 @@ package sunset.content.blocks;
 
 import mindustry.Vars;
 import mindustry.content.Items;
-import mindustry.ctype.ContentList;
 import mindustry.type.Category;
 import mindustry.world.Block;
 import mindustry.world.blocks.logic.LogicBlock;
@@ -10,13 +9,12 @@ import sunset.content.SnItems;
 
 import static mindustry.type.ItemStack.with;
 
-public class SnLogicBlocks implements ContentList {
+public class SnLogicBlocks  {
     public static Block
 
     naturiteProcessor;
 
-    @Override
-    public void load() {
+    public static void load() {
     naturiteProcessor = new LogicBlock("naturite-processor") {{
         instructionsPerTick = 13;
         range = 25.0f* Vars.tilesize;

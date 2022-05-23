@@ -1,18 +1,9 @@
 package sunset.content;
 
-import mindustry.ctype.ContentList;
-import mma.type.TechTreeManager;
-
-import static mindustry.content.Items.*;
-import static mindustry.content.Liquids.oil;
-import static sunset.content.SnItems.*;
-import static sunset.content.SnLiquids.burheyna;
-
-public class SnTechTree extends TechTreeManager implements ContentList {
-    @Override
-    public void load() {
+public class SnTechTree{
+    public static void load(){
         //region items and liquids
-        node(lead, () -> {
+       /* node(lead, () -> {
             nodeProduce(fors, () -> {
                 nodeProduce(nobium, () -> {});
             });
@@ -30,7 +21,7 @@ public class SnTechTree extends TechTreeManager implements ContentList {
         });
         nodeProduce(oil, () -> {
             nodeProduce(burheyna, () -> {});
-        });
+        });*/
         //endregion items and liquids
         //region blocks
         //region turrets

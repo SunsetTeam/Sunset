@@ -1,7 +1,6 @@
 package sunset.entities.comp;
 
 import arc.struct.*;
-import mindustry.ai.formations.*;
 import mindustry.annotations.*;
 import mindustry.annotations.Annotations.*;
 import mindustry.entities.units.*;
@@ -30,18 +29,12 @@ abstract class UncontrollableUnitComp implements Unitc{
 
     @Final
     public boolean validController(UnitController controller){
-        return controller instanceof FormationAIWrapper wrapper && validControllerType(wrapper.wrapped);
+        return controller instanceof CommandAIWrapper wrapper && validControllerType(wrapper.wrapped);
     }
 
     public boolean validController(){
         return validController(controller());
     }
-
-    @Override
-    @Annotations.Replace
-    public void command(Formation formation, Seq<Unit> units){
-    }
-
     @Override
     @Annotations.MethodPriority(-1000)
     public void update(){

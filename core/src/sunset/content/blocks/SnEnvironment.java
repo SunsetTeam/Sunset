@@ -3,7 +3,6 @@ package sunset.content.blocks;
 import arc.graphics.Color;
 import arc.util.Time;
 import mindustry.content.*;
-import mindustry.ctype.ContentList;
 import mindustry.entities.Effect;
 import mindustry.graphics.CacheLayer;
 import mindustry.world.Block;
@@ -17,7 +16,7 @@ import sunset.world.blocks.environment.BreakableEnvWall;
 import sunset.world.blocks.environment.Geyser;
 import sunset.world.blocks.environment.MockEnvironmentBlock;
 
-public class SnEnvironment implements ContentList {
+public class SnEnvironment  {
     public static Block
 
     //ores
@@ -59,8 +58,7 @@ public class SnEnvironment implements ContentList {
     //hidden
     hotSlag1, hotSlag2, hotSlag3, glacier1, glacier2, glacier3;
 
-    @Override
-    public void load() {
+    public static void load() {
         //region ores
         oreFors = new OreBlock(SnItems.fors) {{
             oreDefault = false;

@@ -16,7 +16,6 @@ import mindustry.ui.Styles;
 import mindustry.ui.dialogs.BaseDialog;
 import mindustry.ui.dialogs.SettingsMenuDialog.SettingsTable;
 import mindustry.world.Block;
-import mindustry.world.meta.BlockBars;
 import mma.customArc.cfunc.Couple;
 
 import java.lang.reflect.Field;
@@ -36,12 +35,14 @@ public class SnSettings implements ApplicationListener {
         OrderedMap<String, Func<Building, Bar>> map;
         try {
 
-            Field field = BlockBars.class.getDeclaredField("bars");
+            Field field = Block.class.getDeclaredField("barMap");
             field.setAccessible(true);
+            //noinspection unchecked
             map = (OrderedMap<String, Func<Building, Bar>>) field.get(block);
         } catch (Exception e) {
             map = null;
         }
+        //noinspection unchecked
         reloadBarBlock.put(Couple.of(block, map), (Func<Building, Bar>) prov);
 
     }
@@ -65,7 +66,7 @@ public class SnSettings implements ApplicationListener {
 
     public void updateReloadBars() {
         boolean bar = reloadBar();
-        final String barName = "sunset-reload";
+        final String barName = "reload";
         for (ObjectMap.Entry<Couple<Block, OrderedMap<String, Func<Building, Bar>>>, Func<Building, Bar>> entry : reloadBarBlock) {
             Block block = entry.key.o1;
             OrderedMap<String, Func<Building, Bar>> map = entry.key.o2;
@@ -75,15 +76,15 @@ public class SnSettings implements ApplicationListener {
                 contains = map.containsKey(barName);
             } else {
                 try {
-                    block.bars.remove(barName);
+                    block.removeBar(barName);
                 } catch (Exception ignored) {
 
                 }
             }
             if (bar && !contains) {
-                block.bars.add(barName, barFunc);
+                block.addBar(barName, barFunc);
             } else if (!bar && contains) {
-                block.bars.remove(barName);
+                block.removeBar(barName);
             }
         }
     }

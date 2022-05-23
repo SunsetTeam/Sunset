@@ -16,7 +16,7 @@ public class ArtilleryLiquidBulletType extends LiquidBulletType {
         collidesTiles = false;
         collides = false;
         collidesAir = false;
-        scaleVelocity = true;
+        scaleLife = true;
     }
 
     @Override
@@ -25,14 +25,14 @@ public class ArtilleryLiquidBulletType extends LiquidBulletType {
         if(fragBullet != null){
             for(int i = 0; i < fragBullets; i++){
                 float len = Mathf.random(1f, 7f);
-                float a = b.rotation() + Mathf.range(fragCone/2) + fragAngle;
+                float a = b.rotation() + Mathf.range(fragRandomSpread/2) + fragAngle;
                 fragBullet.create(b, x + Angles.trnsx(a, len), y + Angles.trnsy(a, len), a, Mathf.random(fragVelocityMin, fragVelocityMax), Mathf.random(fragLifeMin, fragLifeMax));
             }
         }
     }
 
     @Override
-    public float range() {
+    public float calculateRange() {
         return speed * lifetime;
     }
 

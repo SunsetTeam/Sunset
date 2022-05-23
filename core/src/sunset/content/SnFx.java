@@ -39,6 +39,11 @@ public class SnFx {
 
     public static final Effect
     //region unorganized
+    hitYellowLaser = new Effect(8, e -> {
+        color(Color.white, Pal.lightTrail, e.fin());
+        stroke(0.5f + e.fout());
+        Lines.circle(e.x, e.y, e.fin() * 5f);
+    }),
     enojieCraft = new Effect(55, e -> {
         randLenVectors(e.id, 6, 4f + e.fin() * 8f, (x, y) -> {
             color(Pal.heal);
@@ -130,8 +135,8 @@ public class SnFx {
 
     galebardLaserCharge = new Effect(35f, e -> {
         color(Pal.meltdownHit);
-
-        randLenVectors(e.id, 5, 3f + 9f * e.fout(), e.rotation, 100f, (x, y) -> {
+        //chargeEffects = 15;
+        randLenVectors(e.id, 5*15, 3f + 9f * e.fout(), e.rotation, 100f, (x, y) -> {
             lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), e.fslope() * 6f + 4f);
         });
     }),
@@ -895,6 +900,9 @@ public class SnFx {
         });
     }
     public static Effect energyCharge(EnergySphereBulletType type, float lifetime) {
+        return energyCharge(type,lifetime,1);
+    }
+    public static Effect energyCharge(EnergySphereBulletType type, float lifetime,int amount) {
         checkGameState();
         return new Effect(lifetime, e -> {
             Draw.mixcol(Pal.sap, 0.25f);
@@ -902,7 +910,7 @@ public class SnFx {
             float r = Mathf.degRad * e.rotation;
             float cx = e.x - Mathf.cos(r) * 12f;
             float cy = e.y - Mathf.sin(r) * 12f;
-            Drawm.drawTrident(cx, cy, e.id, type.count, type.timeSclMin, type.timeSclMax, type.lenMin, type.lenMax, type.radMin, type.radMax, e.fin());
+            Drawm.drawTrident(cx, cy, e.id, type.count*amount, type.timeSclMin, type.timeSclMax, type.lenMin, type.lenMax, type.radMin, type.radMax, e.fin());
             Draw.mixcol();
         });
     }

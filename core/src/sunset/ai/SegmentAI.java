@@ -3,7 +3,6 @@ package sunset.ai;
 import arc.func.*;
 import arc.math.*;
 import arc.math.geom.*;
-import arc.util.*;
 import mindustry.entities.units.*;
 import sunset.ai.wrappers.*;
 import sunset.gen.*;
@@ -15,12 +14,12 @@ public class SegmentAI extends AIController{
         this.fallback = fallback;
     }
 
-    public static FormationAIWrapper wrapper(AIController fallback){
-        return new FormationAIWrapper(new SegmentAI(fallback));
+    public static CommandAIWrapper wrapper(AIController fallback){
+        return new CommandAIWrapper(new SegmentAI(fallback));
     }
 
-    public static Prov<FormationAIWrapper> wrapper(Prov<AIController> fallback){
-        return () -> new FormationAIWrapper(new SegmentAI(fallback.get()));
+    public static Prov<CommandAIWrapper> wrapper(Prov<AIController> fallback){
+        return () -> new CommandAIWrapper(new SegmentAI(fallback.get()));
     }
 
     @Override

@@ -59,18 +59,18 @@ public class SnMultiSource extends Block{
     @Override
     public void setBars(){
         super.setBars();
-        bars.remove("items");
-        bars.remove("liquid");
+        removeBar("items");
+        removeBar("liquid");
     }
 
 
     @Override
-    public void drawRequestConfig(BuildPlan req, Eachable<BuildPlan> list){
+    public void drawPlanConfig(BuildPlan req, Eachable<BuildPlan> list){
         Draw.rect(cross, req.drawx(), req.drawy());
         if(req.config instanceof Integer input){
             Point2 data = Point2.unpack(input);
-            drawRequestConfigCenter(req, content.item((short)data.x), name + "-center-0");
-            drawRequestConfigCenter(req, content.liquid((short)data.y), name + "-center-1");
+            drawPlanConfigCenter(req, content.item((short)data.x), name + "-center-0");
+            drawPlanConfigCenter(req, content.liquid((short)data.y), name + "-center-1");
         }
     }
 
@@ -139,7 +139,7 @@ public class SnMultiSource extends Block{
 
         @Override
         public void buildConfiguration(Table table){
-            ImageButtonStyle style = new ImageButtonStyle(Styles.clearTransi);
+            ImageButtonStyle style = new ImageButtonStyle(Styles.cleari);
             style.imageDisabledColor = Color.gray;
 
 
@@ -173,7 +173,7 @@ public class SnMultiSource extends Block{
             for(T item : items){
                 if(!item.unlockedNow()) continue;
 
-                cont.button(Tex.whiteui, Styles.clearToggleTransi, 24, () -> {
+                cont.button(Tex.whiteui, Styles.clearTogglei, 24, () -> {
                     consumer.get(item);
                 }).checked(b -> checked.get(item))
                 .update(b -> b.setChecked(checked.get(item)))
@@ -201,7 +201,7 @@ public class SnMultiSource extends Block{
         }
 
         @Override
-        public boolean onConfigureTileTapped(Building other){
+        public boolean onConfigureBuildTapped(Building other){
             if(this == other){
                 deselect();
                 return false;
