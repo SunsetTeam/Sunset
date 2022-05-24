@@ -16,23 +16,6 @@ public class SnVars extends ModVars{
 
     //core region
     private static final Seq<Runnable> onLoad = new Seq<>();
-    private static final Runnable[] snContent = Seq.<Runnable>with(
-    SnTeams::load,
-    SnItems::load,
-    SnGas::load,
-    SnStatusEffects::load,
-    SnLiquids::load,
-    SnPayload::load,
-    SnBullets::load,
-    SnUnitTypes::load,
-    new SnBlocks(),
-//    SnOverride::load,
-    //SnLoadouts::load,
-    SnWeathers::load,
-    SnPlanets::load,
-    SnSectorPresets::load,
-    SnTechTree::load
-    ).flatMap(contentList -> Seq.with(contentList instanceof SnBlocks b ? b.list : new Runnable[]{contentList})).toArray(Runnable.class);
     //end region
     public static SnLogic logic;
     public static SnSettings settings;
@@ -90,6 +73,23 @@ public class SnVars extends ModVars{
 
     @Override
     public void loadContent(){
+        Runnable[] snContent = Seq.<Runnable>with(
+        SnTeams::load,
+        SnItems::load,
+        SnGas::load,
+        SnStatusEffects::load,
+        SnLiquids::load,
+        SnPayload::load,
+        SnBullets::load,
+        SnUnitTypes::load,
+        new SnBlocks(),
+        //    SnOverride::load,
+        //SnLoadouts::load,
+        SnWeathers::load,
+        SnPlanets::load,
+        SnSectorPresets::load,
+        SnTechTree::load
+        ).flatMap(contentList -> Seq.with(contentList instanceof SnBlocks b ? b.list : new Runnable[]{contentList})).toArray(Runnable.class);
         for(Runnable runnable : snContent){
             runnable.run();
         }
