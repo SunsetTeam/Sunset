@@ -24,11 +24,12 @@ buildscript{
 
         parserVersion = '3.22.1'
 
-        modCoreVersion = "16127489bc0"
-
         aciVersion = "45ad8cd8ed9"
 
-        gasVersion = "f9c8820d9c5"
+        gasVersion = "2947b556cdc"
+
+        modCoreVersion = "901695bdca1"
+
 
         kotlinVersion = "1.6.0"
 //        kotlinVersion = "1.5.31"
@@ -314,6 +315,11 @@ project(":tools"){
         implementation 'commons-io:commons-io:2.5'
 
         implementation project(":core")
+
+        implementation arcModule("natives:natives-desktop")
+        implementation arcModule("natives:natives-freetype-desktop")
+        implementation arcModule("backends:backend-headless")
+
 
         implementation "com.github.javaparser:javaparser-symbol-solver-core:$parserVersion"
         implementation "$mindustryPath:core:$mindustryVersion"
