@@ -1683,6 +1683,7 @@ public class SnUnitTypes{
             flying = true;
             circleTarget = false;
             range = 130;
+            constructor = UnitEntity::create;
             engines.addAll(
             new UnitEngine(){{
                 x = 0f;
@@ -1801,6 +1802,7 @@ public class SnUnitTypes{
                 circleTarget = true;
                 range = 130;
                 faceTarget = false;
+                constructor = UnitEntity::create;
                 ammoType = new PowerAmmoType(450);
 
                 weapons.add(new SnWeapon("light-gun"){{
