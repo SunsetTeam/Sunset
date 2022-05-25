@@ -1,22 +1,15 @@
 package sunset.content.blocks;
 
 import arc.graphics.*;
-import arc.util.Time;
 import gas.GasStack;
-import gas.type.Gas;
-import gas.world.consumers.*;
 import mindustry.content.*;
 import mindustry.gen.*;
 import mindustry.type.*;
 import mindustry.world.*;
 import mindustry.world.blocks.production.*;
 import mindustry.world.draw.*;
-import mma.type.Recipe;
-import mma.world.blocks.production.MultiCrafter;
-import mma.world.draw.*;
 import sunset.content.*;
 import sunset.world.blocks.gas.*;
-import sunset.world.draw.*;
 
 import static mindustry.type.ItemStack.with;
 
@@ -25,7 +18,7 @@ public class SnCrafting{
     //standard
     anzarCaster, crystallizer, nobiumCaster, nobiumMagnetizer, collider, enojieSynthesizer, zeriniumZavod,
     //missile
-    missilecrafter, missilePlant;
+    missileCrafter, missilePlant;
 
     public static void load(){
         //region standard
