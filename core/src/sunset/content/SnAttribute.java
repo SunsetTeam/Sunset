@@ -7,5 +7,6 @@ public class SnAttribute {
     none = Attribute.add("none"),
     burheyna = Attribute.add("burheyna"),
     wind = Attribute.add("wind"),
-    gas = Attribute.add("gas");
+    gas = Attribute.add("gas"),
+    naturite = Attribute.add("naturite");
 }
