@@ -14,6 +14,7 @@ import mindustry.game.*;
 import mindustry.gen.*;
 import mindustry.graphics.*;
 import mindustry.world.*;
+import mma.ModVars;
 
 import static mindustry.Vars.*;
 
@@ -35,7 +36,7 @@ public class LaserNode extends LaserBlock{
         solid = true;
         clipSize = 500f;
         config(Integer.class, (LaserNodeBuild b, Integer value) -> {
-            Log.info("config");
+            //Log.info("config");
             b.rightOutput = (value & 0b0001) >> 0 == 1;
             b.topOutput = (value & 0b0010) >> 1 == 1;
             b.leftOutput = (value & 0b0100) >> 2 == 1;
@@ -131,7 +132,7 @@ public class LaserNode extends LaserBlock{
         public void buildConfiguration(Table t){
             t.add();
             t.button(Icon.up, () -> {
-                Log.info("top");
+                //Log.info("top");
                 topOutput = !topOutput;
                 configureState();
             }).update(b -> {
@@ -142,7 +143,7 @@ public class LaserNode extends LaserBlock{
             });
             t.add().row();
             t.button(Icon.left, () -> {
-                Log.info("left");
+                //Log.info("left");
                 leftOutput = !leftOutput;
                 configureState();
             }).update(b -> {
@@ -152,7 +153,7 @@ public class LaserNode extends LaserBlock{
             });
             t.add();
             t.button(Icon.right, () -> {
-                Log.info("right");
+                //Log.info("right");
                 rightOutput = !rightOutput;
                 configureState();
             }).update(b -> {
@@ -163,7 +164,7 @@ public class LaserNode extends LaserBlock{
             t.row();
             t.add();
             t.button(Icon.down, () -> {
-                Log.info("down");
+                //Log.info("down");
                 downOutput = !downOutput;
                 configureState();
             }).update(b -> {
