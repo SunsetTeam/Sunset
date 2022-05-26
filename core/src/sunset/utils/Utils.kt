@@ -212,6 +212,7 @@ object Utils {
     }
 
     @JvmStatic
+    @Deprecated("use allNearbyEnemies(team,x,y,radius,it->seq.add(it.<Teamc>as()))")
     fun allNearbyEnemiesOld(team: Team, x: Float, y: Float, radius: Float): Seq<Teamc> {
         val targets = Seq<Teamc>()
         Units.nearbyEnemies(team, x - radius, y - radius, radius * 2f, radius * 2f) { unit: Unit ->
@@ -228,7 +229,7 @@ object Utils {
     }
 
     @JvmStatic
-    fun allNearbyEnemies(team: Team, x: Float, y: Float, radius: Float, cons: Cons<Healthc?>) {
+    fun allNearbyEnemies(team: Team, x: Float, y: Float, radius: Float, cons: Cons<Healthc>) {
         Units.nearbyEnemies(team, x - radius, y - radius, radius * 2f, radius * 2f) { unit: Unit ->
             if (unit.within(x, y, radius + unit.hitSize / 2f) && !unit.dead) {
                 cons[unit]

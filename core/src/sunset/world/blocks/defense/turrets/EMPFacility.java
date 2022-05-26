@@ -26,7 +26,7 @@ import static arc.graphics.g2d.Lines.stroke;
 
 public class EMPFacility extends PowerTurret{
     public Seq<Core> cores = new Seq<>();
-//    public boolean hasSpinners;
+    //    public boolean hasSpinners;
     public Color lightningColor;
     public float zapAngleRand, spinUp, spinDown, rangeExtention, lightningStroke = 3.5f;
     public int zaps;
@@ -49,7 +49,7 @@ public class EMPFacility extends PowerTurret{
         shootEffect = Fx.none;
         cooldownTime = 0.5f;
         stats = aStats.copy(stats);
-        drawer=new DrawEMPFacility();
+        drawer = new DrawEMPFacility();
     }
 
     @Override
@@ -74,7 +74,7 @@ public class EMPFacility extends PowerTurret{
             }).padTop(-9).left().get().background(Tex.underline);
         });
 
-        stats.remove(Stat.booster);
+        if(coolant != null) stats.remove(Stat.booster);
         stats.add(Stat.input, StatValues.boosters(reload, coolant.amount, coolantMultiplier, false, l -> liquidFilter[l.id]));
     }
 
@@ -106,7 +106,7 @@ public class EMPFacility extends PowerTurret{
 
         @Override
         public void updateTile(){
-            if(!hasAmmo() || !isShooting() || !isActive() || efficiency ==0){
+            if(!hasAmmo() || !isShooting() || !isActive() || efficiency == 0){
                 speedScl = Mathf.lerpDelta(speedScl, 0, spinDown);
             }
             if(hasAmmo() && isShooting() && isActive() && efficiency > 0 && hasLiquids){
@@ -124,7 +124,7 @@ public class EMPFacility extends PowerTurret{
 
             targets.clear();
 
-            targets = Utils.allNearbyEnemiesOld(team, x, y, range + rangeExtention);
+            Utils.allNearbyEnemies(team, x, y, range + rangeExtention, it -> targets.add(it.<Teamc>as()));
 
             if(targets.size > 0){
                 for(int i = 0; i < shoot.shots; i++){
