@@ -167,19 +167,21 @@ public class ChainLightningTurret extends BaseTurret{
         public void draw(){
             Draw.rect(baseRegion, x, y);
             if(shouldShoot){
-                Draw.z(Layer.bullet);
-                float ef = Math.min(1f, efficiency());
-                Draw.mixcol(laserColor, 0.85f + Mathf.absin(0.8f, 0.15f));
-                float unitX = units.get(0).x, unitY = units.get(0).y, nextUnitX = unitX, nextUnitY = unitY;
-                float lw = laserWidth * 0.8f + Mathf.absin(4f, laserWidth * 0.2f);
-                Drawf.laser( laser, laserEnd, x, y, unitX, unitY, lw * ef);
-                for(int i = 0; i < units.size - 1; i++){
-                    unitX = nextUnitX;
-                    unitY = nextUnitY;
-                    nextUnitX = units.get(i + 1).x;
-                    nextUnitY = units.get(i + 1).y;
-                    Drawf.laser( laser, laserEnd, unitX, unitY, nextUnitX, nextUnitY, lw);
-                }
+//                Draw.z(Layer.bullet);
+                Draw.draw(Layer.bullet,()->{
+                    float ef = Math.min(1f, efficiency());
+                    Draw.mixcol(laserColor, 0.85f + Mathf.absin(0.8f, 0.15f));
+                    float unitX = units.get(0).x, unitY = units.get(0).y, nextUnitX = unitX, nextUnitY = unitY;
+                    float lw = laserWidth * 0.8f + Mathf.absin(4f, laserWidth * 0.2f);
+                    Drawf.laser(laser, laserEnd, x, y, unitX, unitY, lw * ef);
+                    for(int i = 0; i < units.size - 1; i++){
+                        unitX = nextUnitX;
+                        unitY = nextUnitY;
+                        nextUnitX = units.get(i + 1).x;
+                        nextUnitY = units.get(i + 1).y;
+                        Drawf.laser(laser, laserEnd, unitX, unitY, nextUnitX, nextUnitY, lw);
+                    }
+                });
             }
             Draw.mixcol();
             Drawf.shadow(region, x - (size / 2f), y - (size / 2f), rotation - 90);
