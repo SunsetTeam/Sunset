@@ -108,6 +108,7 @@ public class SnEnvironment  {
             statusDuration = 120f;
             drownTime = 700f;
             albedo = 0.5f;
+            attributes.set(SnAttribute.naturite, 0.3f);
         }};
         crimsonMoss = new Floor("crimson-moss") {{
             variants = 3;
@@ -124,6 +125,7 @@ public class SnEnvironment  {
             statusDuration = 120f;
             cacheLayer = CacheLayer.water;
             albedo = 0.5f;
+            attributes.set(SnAttribute.burheyna, 1.2f);
         }};
         crimsonWater = new Floor("crimson-water") {{
             speedMultiplier = 0.8f;
@@ -135,6 +137,7 @@ public class SnEnvironment  {
             statusDuration = 120f;
             cacheLayer = CacheLayer.water;
             albedo = 0.5f;
+            attributes.set(SnAttribute.naturite, 0.7f);
         }};
         crimsonDeepWater = new Floor("crimson-deep-water") {{
             speedMultiplier = 0.5f;
@@ -147,6 +150,7 @@ public class SnEnvironment  {
             drownTime = 160f;
             cacheLayer = CacheLayer.water;
             albedo = 0.5f;
+            attributes.set(SnAttribute.naturite, 1f);
         }};
 
         gasDeposit = new Floor("gas-deposit") {{

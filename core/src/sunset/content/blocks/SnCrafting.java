@@ -16,6 +16,7 @@ import mma.world.blocks.production.MultiCrafter;
 import mma.world.draw.*;
 import sunset.content.*;
 import sunset.world.blocks.gas.*;
+import sunset.world.blocks.production.crafting.AccelGenericCrafter;
 import sunset.world.draw.*;
 
 import static mindustry.type.ItemStack.with;
@@ -29,7 +30,7 @@ public class SnCrafting{
 
     public static void load(){
         //region standard
-        anzarCaster = new GenericCrafter("anzar-caster"){{
+        anzarCaster = new AccelGenericCrafter("anzar-caster"){{
             requirements(Category.crafting, with(SnItems.fors, 80, SnItems.naturite, 60, SnItems.erius, 40));
 
             hasItems = true;
@@ -50,7 +51,7 @@ public class SnCrafting{
 
             craftEffect = SnFx.crystalyze;
             updateEffect = SnFx.crystalyzeSmall;
-            minEfficiency = 1f - 0.0001f;
+            minEfficiency = 9f - 0.0001f;
             baseEfficiency = 0f;
             displayEfficiency = false;
             hasItems = true;
@@ -60,7 +61,7 @@ public class SnCrafting{
             craftTime = 40f;
             size = 3;
             hasPower = true;
-            attribute = SnAttribute.burheyna;
+            attribute = SnAttribute.naturite;
 
             consumePower(3.2f);
         }};
@@ -93,7 +94,7 @@ public class SnCrafting{
             outputItem = new ItemStack(SnItems.nobium, 14);
             craftEffect = Fx.pulverize;
             updateEffect = Fx.pulverizeSmall;
-            craftTime = 90f;
+            craftTime = 140f;
             itemCapacity = 40;
             size = 4;
             hasPower = true;
@@ -118,6 +119,7 @@ public class SnCrafting{
             gasCapacity = 40f;
             hasPower = true;
             hasLiquids = true;
+            hasItems = true;
             ambientSound = Sounds.grinding;
             ambientSoundVolume = 0.025f;
 
