@@ -13,6 +13,7 @@ import mindustry.gen.*;
 import mindustry.graphics.*;
 import mindustry.type.*;
 import mindustry.world.*;
+import mindustry.world.consumers.*;
 import mindustry.world.meta.*;
 import sunset.content.*;
 import sunset.content.affilitiation.*;
@@ -21,6 +22,7 @@ import sunset.entities.pattern.*;
 import sunset.graphics.*;
 import sunset.type.*;
 import sunset.world.blocks.defense.turrets.*;
+import sunset.world.consumers.*;
 
 import static mindustry.type.ItemStack.with;
 import static mma.ModVars.fullName;
@@ -190,8 +192,9 @@ public class SnTurrets{
             coolantMultiplier = 1.0f;
             rotateSpeed = 8.75f;
             powerUse = 5f;
-            liquidUse = 0.3f;
+            coolant = (ConsumeLiquidBase)consumeCoolant(0.3f).update(false).boost();
             laserColor = SnPal.chainLaser;
+            consume(new TimeScaleConsume());
         }};
         pulsation = new ModItemTurret("pulsation"){{
             requirements(Category.turret, with(SnItems.fors, 95, Items.graphite, 85, Items.lead, 70, SnItems.planatrium, 35));
@@ -536,8 +539,9 @@ public class SnTurrets{
             coolantMultiplier = 1.2f;
             rotateSpeed = 6.75f;
             consumePower(16f);
-            liquidUse = 0.5f;
+            coolant = (ConsumeLiquidBase)consumeCoolant(0.5f).update(false).boost();
             laserColor = SnPal.chainLaser;
+            consume(new TimeScaleConsume());
         }};
         /*rockfall = new ModItemTurret("rockfall") {{
             requirements(Category.turret, with(Items.copper, 700, Items.lead, 700, Items.graphite, 500, Items.titanium, 880, Items.silicon, 600));

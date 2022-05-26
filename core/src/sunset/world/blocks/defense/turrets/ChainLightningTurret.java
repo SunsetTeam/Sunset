@@ -11,10 +11,11 @@ import mindustry.gen.*;
 import mindustry.graphics.*;
 import mindustry.type.*;
 import mindustry.world.blocks.defense.turrets.*;
-import mindustry.world.consumers.*;
 import mindustry.world.meta.*;
 import mma.*;
 import sunset.world.meta.*;
+
+import static mindustry.Vars.tilesize;
 
 /**
  * Turret that attacks use constant
@@ -37,7 +38,7 @@ public class ChainLightningTurret extends BaseTurret{
     public float damageMultiplier = 0.9f;
     public boolean targetAir = true, targetGround = true;
     public float coolantMultiplier = 1.5f;
-    public float liquidUse = 0f;
+    //    public float liquidUse = 0f;
     public float shootCone = 0f;
     public float powerUse = 0f;
     @Load("block-@size")
@@ -58,9 +59,11 @@ public class ChainLightningTurret extends BaseTurret{
 
     @Override
     public void init(){
+        if(coolant == null){
+            throw new RuntimeException("Coolant cannot be null");
+        }
         consumePowerCond(powerUse, ChainLightningTurretBuild::isActive);
-        coolant = (ConsumeLiquidBase)consumeCoolant(liquidUse).update(false).boost();
-        liquidCapacity = liquidUse * 60f;
+        liquidCapacity = coolant.amount * 60f;
         super.init();
     }
 
@@ -94,7 +97,7 @@ public class ChainLightningTurret extends BaseTurret{
         stats.add(Stat.booster, SnStatValues.boosterLiquidList(
         liquid -> liquid.temperature <= 0.5f && liquid.flammability < 0.1f,
         liquid -> {
-            float used = Math.min(liquidUse, Math.max(0, (1f / coolantMultiplier) / liquid.heatCapacity));
+            float used = Math.min(coolant.amount, Math.max(0, (1f / coolantMultiplier) / liquid.heatCapacity));
             return 1f + (used * liquid.heatCapacity * coolantMultiplier);
         }, "bullet.damagefactor"));
     }
@@ -108,30 +111,30 @@ public class ChainLightningTurret extends BaseTurret{
         private boolean shouldShoot = false;
         private float liquidBoost = 1f;
 
-        private long boostEndTime = 0;
-        private float boost = 0f;
-
         public boolean isActive(){
             return haveTarget;
         }
 
         public float getBoost(){
-            return Time.millis() <= boostEndTime ? Math.max(boost, 1) : 1;
-        }
-
-        @Override
-        public void applyBoost(float intensity, float duration){
-            boostEndTime = Time.millis() + (long)(duration * 1000f / 60f);
-            boost = intensity;
+            return timeScale();
         }
 
         @Override
         public void updateTile(){
             //liquid
-            if(shouldShoot){
+            if(shouldShoot && coolant != null){
+                float maxUsed = coolant.amount;
+
                 Liquid liquid = liquids.current();
-                float used = Math.min(Math.min(liquids.get(liquid), liquidUse), Math.max(0, (1f / coolantMultiplier) / liquid.heatCapacity));
+
+                float used = Math.min(Math.min(liquids.get(liquid), maxUsed * Time.delta), Math.max(0, (1f / coolantMultiplier) / liquid.heatCapacity));
+
                 liquids.remove(liquid, used);
+
+                if(Mathf.chance(0.06 * used)){
+                    coolEffect.at(x + Mathf.range(size * tilesize / 2f), y + Mathf.range(size * tilesize / 2f));
+                }
+
                 liquidBoost = 1f + (used * liquid.heatCapacity * coolantMultiplier);
             }
             //recalculating units
@@ -145,7 +148,7 @@ public class ChainLightningTurret extends BaseTurret{
                 u -> !units.contains(u) && u.checkTarget(targetAir, targetGround));
             }
             haveTarget = !units.isEmpty();
-            shouldShoot = haveTarget && Angles.within(angleTo(units.first()), rotation, shootCone) && efficiency() > 0.01f;
+            shouldShoot = haveTarget && Angles.within(angleTo(units.first()), rotation, shootCone) && efficiency > 0.01f;
             // damage
             if(shouldShoot){
                 float[] d = {damage * efficiency() * liquidBoost};
@@ -158,11 +161,6 @@ public class ChainLightningTurret extends BaseTurret{
             if(units.size > 0){
                 rotation = Angles.moveToward(rotation, angleTo(units.first()), rotateSpeed * edelta());
             }
-        }
-
-        @Override
-        public float efficiency(){
-            return super.efficiency() * getBoost();
         }
 
         @Override
