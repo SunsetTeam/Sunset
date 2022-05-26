@@ -15,6 +15,7 @@ import mindustry.graphics.Layer;
 import mindustry.world.Block;
 import mindustry.world.Tile;
 import mindustry.world.blocks.logic.LogicBlock;
+import mma.ModVars;
 import sunset.gen.*;
 import sunset.graphics.Drawm;
 
@@ -30,6 +31,8 @@ public class LaserBlock extends Block{
     public TextureRegion plugDark;
     @Annotations.Load("@-edge1")
     public TextureRegion plugLight;
+    @Annotations.Load("@-all-edge")
+    public TextureRegion allEdge;
 
     public boolean inputsLaser = false;
     public boolean outputsLaser = false;
@@ -51,8 +54,13 @@ public class LaserBlock extends Block{
     }
     public LaserBlock(String name) {
         super(name);
-
     }
+
+    @Override
+    public TextureRegion[] icons(){
+        return !ModVars.packSprites ? new TextureRegion[]{region} : new TextureRegion[]{base, allEdge, top};
+    }
+
     @SuppressWarnings("InnerClassMayBeStatic")
     public class LaserBlockBuild extends Building{
         LaserModule laser;
