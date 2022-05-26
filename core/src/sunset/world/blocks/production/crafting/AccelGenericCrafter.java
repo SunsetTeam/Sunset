@@ -31,22 +31,20 @@ public class AccelGenericCrafter extends GenericCrafter {
         }
 
         addBar("sunset-acceleration", (AccelGenericCrafterBuild entity) -> new Bar(
-                () -> Core.bundle.format("bar.sunset-acceleration", Mathf.round(entity.getSpeed() * 100f)),
+                () -> Core.bundle.format("bar.sunset-acceleration", Mathf.round(60 * entity.timeScale())),
                 () -> Pal.bar,
-                entity::getSpeed
+                entity::progress
         ));
     }
 
     public class AccelGenericCrafterBuild extends GenericCrafterBuild{
-        public Interp interp;
 
+        @Override
         public void updateTile(){
             if(efficiency > 0){
 
-                float s = getSpeed();
-
-                progress += getProgressIncrease(craftTime) * s;
-                warmup = Mathf.approachDelta(warmup, warmupTarget(), warmupSpeed) * s;
+                progress += getProgressIncrease(craftTime);
+                warmup = Mathf.approachDelta(warmup, warmupTarget(), warmupSpeed);
 
                 //continuously output based on efficiency
                 if(outputLiquids != null){
@@ -66,15 +64,13 @@ public class AccelGenericCrafter extends GenericCrafter {
             //TODO may look bad, revert to edelta() if so
             totalProgress += warmup * Time.delta;
 
+            progress = Mathf.pow(warmup, 5f);
+
             if(progress >= 1f){
                 craft();
             }
 
             dumpOutputs();
-        }
-
-        public float getSpeed(){
-            return totalProgress;
         }
     }
 }

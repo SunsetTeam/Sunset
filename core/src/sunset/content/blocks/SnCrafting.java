@@ -115,16 +115,15 @@ public class SnCrafting{
             craftTime = 25f;
             size = 3;
             itemCapacity = 15;
-            liquidCapacity = 40f;
-            gasCapacity = 40f;
+            gasCapacity = 30f;
             hasPower = true;
-            hasLiquids = true;
+            hasGasses = true;
             hasItems = true;
             ambientSound = Sounds.grinding;
             ambientSoundVolume = 0.025f;
 
             consumeItem(SnItems.nedirium, 1);
-            consumeGasses(new GasStack(SnGas.gyner, 6f / 60f), new GasStack(SnGas.arhelinium, 4f / 60f));
+            consumeGasses(new GasStack(SnGas.gyner, 6f / 60f)/*, new GasStack(SnGas.arhelinium, 4f / 60f)*/);
             consumePower(4.6f);
         }};
 /*
