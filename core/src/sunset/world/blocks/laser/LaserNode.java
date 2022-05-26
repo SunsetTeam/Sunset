@@ -131,15 +131,14 @@ public class LaserNode extends LaserBlock{
         @Override
         public void buildConfiguration(Table t){
             t.add();
+            float size = 48f;
             t.button(Icon.up, () -> {
-                //Log.info("top");
                 topOutput = !topOutput;
                 configureState();
-            }).update(b -> {
-                //Log.info("button update, time: @", Time.time);
-                b.setDisabled(topInput);
-//                topInput = false;
-                b.setColor(topOutput ? Color.green : Color.red);
+            }).size(size).update((b) -> {
+                b.setDisabled(topInput&& !topOutput);
+                b.getStyle().imageUpColor=topOutput ? Color.lime : Color.valueOf("f25555");
+//                b.setColor();
             });
             t.add().row();
             t.button(Icon.left, () -> {
@@ -147,9 +146,9 @@ public class LaserNode extends LaserBlock{
                 leftOutput = !leftOutput;
                 configureState();
             }).update(b -> {
-                b.setDisabled(leftInput);
-//                leftInput = false;
-                b.setColor(leftOutput ? Color.green : Color.red);
+                b.setDisabled(leftInput&& !leftOutput);
+                b.getStyle().imageUpColor=leftOutput ? Color.lime : Color.valueOf("f25555");
+//                b.setColor(left ? Color.lime : Color.valueOf("f25555"));
             });
             t.add();
             t.button(Icon.right, () -> {
@@ -157,9 +156,9 @@ public class LaserNode extends LaserBlock{
                 rightOutput = !rightOutput;
                 configureState();
             }).update(b -> {
-                b.setDisabled(rightInput);
-//                rightInput = false;
-                b.setColor(rightOutput ? Color.green : Color.red);
+                b.setDisabled(rightInput && !rightOutput);
+                b.getStyle().imageUpColor=rightOutput ? Color.lime : Color.valueOf("f25555");
+//                b.setColor(right ? Color.lime : Color.valueOf("f25555"));
             });
             t.row();
             t.add();
@@ -168,9 +167,9 @@ public class LaserNode extends LaserBlock{
                 downOutput = !downOutput;
                 configureState();
             }).update(b -> {
-                b.setDisabled(downInput);
-//                downInput = false;
-                b.setColor(downOutput ? Color.green : Color.red);
+                b.setDisabled(downInput && !downOutput);
+                b.getStyle().imageUpColor=downOutput ? Color.lime : Color.valueOf("f25555");
+//                b.setColor(down ? Color.lime : Color.valueOf("f25555"));
             });
         }
 

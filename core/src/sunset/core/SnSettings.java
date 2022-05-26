@@ -16,6 +16,7 @@ import mindustry.ui.Styles;
 import mindustry.ui.dialogs.BaseDialog;
 import mindustry.ui.dialogs.SettingsMenuDialog.SettingsTable;
 import mindustry.world.Block;
+import mma.*;
 import mma.customArc.cfunc.Couple;
 
 import java.lang.reflect.Field;
@@ -32,6 +33,7 @@ public class SnSettings implements ApplicationListener {
     }
 
     public <T extends Building> void registerReloadBarBlock(Block block, Func<T, Bar> prov) {
+        if (ModVars.packSprites)return;
         OrderedMap<String, Func<Building, Bar>> map;
         try {
 

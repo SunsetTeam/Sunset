@@ -30,7 +30,7 @@ public class SnVars extends ModVars{
      * Used to load SnVars to computer memory causing the static block work.
      */
     public static void create(){
-        settings = new SnSettings();
+
     }
 
     public static void init(){

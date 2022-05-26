@@ -10,6 +10,8 @@ import mindustry.game.EventType.*;
 import mindustry.gen.*;
 import mindustry.type.*;
 import mindustry.ui.*;
+import mindustry.ui.dialogs.*;
+import mindustry.world.*;
 import mma.*;
 import mma.annotations.ModAnnotations.*;
 import sunset.content.*;
@@ -23,11 +25,26 @@ import static mindustry.Vars.*;
 import static mma.ModVars.*;
 
 @ModAssetsAnnotation
+@DependenciesAnnotation
 public class Sunset extends MMAMod{
 
-
+boolean validDependencies;
     public Sunset(){
         super();
+        validDependencies = SnDependencies.valid();
+        if (!validDependencies){
+            if (!headless){
+                /*Events.run(ClientLoadEvent.class,()->{
+                    new BaseDialog("sunset-error"){{
+                       cont.add("Please download or enable GasLibrary.");
+                       addCloseButton();
+                       addCloseListener();
+                    }};
+                });*/
+
+            }
+            return;
+        }
 //        SnFonts.loadDefaultFont();
 //        SnFonts.loadFonts();
         disableBlockOutline = true;
@@ -51,7 +68,8 @@ public class Sunset extends MMAMod{
     }
 
     @Override
-    public void init(){ 
+    public void init(){
+        if (!validDependencies)return;
         super.init();
         ModMetaDialogFinder.onNewListener(prev -> {
 //            Group parent = prev.parent;
@@ -98,8 +116,18 @@ public class Sunset extends MMAMod{
         }
     }
 
+
     @Override
     public void loadContent(){
+        if (!validDependencies){
+            modInfo= mods.getMod(getClass());
+            new Block("error"){{
+               minfo.error="@sunset-no-gas-library-error";
+               modInfo.erroredContent.add(this);
+            }};
+            return;
+        }
+
         if(!headless){
             SnVars.inTry(SnMusics::load);
             SnVars.inTry(SnSounds::load);

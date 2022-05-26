@@ -109,7 +109,7 @@ public class EMPFacility extends PowerTurret{
             if(!hasAmmo() || !isShooting() || !isActive() || efficiency ==0){
                 speedScl = Mathf.lerpDelta(speedScl, 0, spinDown);
             }
-            if(hasAmmo() && isShooting() && isActive() && efficiency > 0){
+            if(hasAmmo() && isShooting() && isActive() && efficiency > 0 && hasLiquids){
                 Liquid liquid = liquids.current();
                 speedScl = Mathf.lerpDelta(speedScl, 1, spinUp * peekAmmo().reloadMultiplier * liquid.heatCapacity * coolantMultiplier * edelta());
             }

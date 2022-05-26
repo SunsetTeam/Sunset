@@ -472,6 +472,10 @@ task mjar(){
             modsDirectories.add("classic");
         }
         for(String directory : modsDirectories){
+            if (directory.startsWith("#") || directory.startsWith("//")){
+                println "Directory \"$directory\" was skipped."
+                continue
+            }
             if(directory.equals("classic")){
                 directory = getdatadir() + "mods";
             }
