@@ -4,6 +4,7 @@ import arc.Core;
 import arc.math.Interp;
 import arc.math.Mathf;
 import arc.util.Time;
+import mindustry.gen.Building;
 import mindustry.graphics.Pal;
 import mindustry.ui.Bar;
 import mindustry.world.blocks.production.GenericCrafter;
@@ -73,7 +74,7 @@ public class AccelGenericCrafter extends GenericCrafter {
         }
 
         public float getSpeed(){
-            return interp.apply(totalProgress);
+            return totalProgress;
         }
     }
 }
