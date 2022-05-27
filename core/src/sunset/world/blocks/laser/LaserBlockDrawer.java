@@ -1,24 +1,23 @@
 package sunset.world.blocks.laser;
 
 import arc.graphics.g2d.*;
+import mindustry.world.Block;
 
 /** Class used for drawing laser blocks. */
 public class LaserBlockDrawer{
-    public LaserBlock.LaserBlockBuild build;
-
-    public LaserBlockDrawer(LaserBlock.LaserBlockBuild self){
-        this.build = self;
+    public void load(LaserBlock block){
+        //override
     }
 
-    public void drawBase(){
+    public void drawBase(LaserBlock.LaserBlockBuild build){
         Draw.rect(build.block().base, build.x, build.y);
     }
 
-    public void drawTop(){
+    public void drawTop(LaserBlock.LaserBlockBuild build){
         Draw.rect(build.block().top, build.x, build.y);
     }
 
-    public void drawLenses(boolean left, boolean top, boolean right, boolean down){
+    public void drawLenses(LaserBlock.LaserBlockBuild build, boolean left, boolean top, boolean right, boolean down){
         build.block().lens.flip(false, true);
         if(left){
             Draw.rect(build.block().lens, build.x, build.y, 180);
@@ -43,12 +42,12 @@ public class LaserBlockDrawer{
         }
     }
 
-    public void draw(){
-        drawBase();
-        drawLenses(build.leftInput || build.leftOutput,
+    public void draw(LaserBlock.LaserBlockBuild build){
+        drawBase(build);
+        drawLenses(build, build.leftInput || build.leftOutput,
         build.topInput || build.topOutput,
         build.rightInput || build.rightOutput,
         build.downInput || build.downOutput);
-        drawTop();
+        drawTop(build);
     }
 }
