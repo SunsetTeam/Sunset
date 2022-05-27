@@ -1,5 +1,6 @@
 package sunset.world.blocks.laser;
 
+import arc.Core;
 import arc.graphics.g2d.TextureRegion;
 import arc.math.Mathf;
 import arc.util.Log;
@@ -57,7 +58,7 @@ public class LaserCrafter extends LaserBlock{
     public void setBars(){
         super.setBars();
         addBar("laserCharge", (LaserCrafterBuild entity) ->
-            new Bar(() -> "Laser charge: " + (entity.laser.out + entity.getLaserConsumption()) + "/" + entity.getLaserConsumption(),
+            new Bar(() -> Core.bundle.format("bar.laser-charge", entity.laser.out + entity.getLaserConsumption(), entity.getLaserConsumption()),
                     ()-> Pal.accent,
                     () -> (entity.laser.out + entity.getLaserConsumption()) / entity.getLaserConsumption())
         );
