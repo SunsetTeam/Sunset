@@ -51,7 +51,8 @@ public class SnCrafting{
 
             craftEffect = SnFx.crystalyze;
             updateEffect = SnFx.crystalyzeSmall;
-            minEfficiency = 9f - 0.0001f;
+            minEfficiency = -1f;
+            maxBoost = 1f;
             baseEfficiency = 0f;
             displayEfficiency = false;
             hasItems = true;
@@ -151,8 +152,8 @@ public class SnCrafting{
             consumePower(10f);
         }};
 
-
         zeriniumZavod = new GasCrafter("zerinium-zavod"){{
+            requirements(Category.crafting, with(SnItems.erius, 180, SnItems.nobium, 160, SnItems.anzar, 155, SnItems.enojie, 40));
             size = 4;
             itemCapacity = 45;
             gasCapacity = 40f;
