@@ -11,7 +11,6 @@ buildscript{
         mindustryPath = "com.github.Anuken.MindustryJitpack"
         mindustryVersionFull = '68f053f409c999f0a66bc6ac30760c331b2c0d6c'
         mindustryVersion = mindustryVersionFull.substring(0, 10)
-        mindustryVersionOld = "v135"
         arcVersion = "ef9d6ac655"
 //        arcVersion = "916c5a77"
 
@@ -28,7 +27,7 @@ buildscript{
 
         gasVersion = "2947b556cdc"
 
-        modCoreVersion = "83364c47cb9"
+        modCoreVersion = "e27df2d276d"
 
 
         kotlinVersion = "1.6.0"
@@ -224,6 +223,7 @@ project(":core"){
         compileOnly arcModule("extensions:arcnet")
 
         implementation "com.github.Zelaux.ZelauxModCore:core:$modCoreVersion"
+        implementation "com.github.Zelaux.ZelauxModCore:blocks:$modCoreVersion"
         implementation "com.github.Zelaux.ZelauxModCore:plugins:$modCoreVersion"
         implementation "com.github.Zelaux.ZelauxModCore:graphics:$modCoreVersion"
 

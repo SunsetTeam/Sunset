@@ -67,28 +67,11 @@ private BaseDialog currentContent;
             if(mobile && showImport) buttons.row();
             if(showImport) buttons.button("@mods.browser.reinstall", Icon.download, reinstaller);
         }
-        Seq<UnlockableContent> all = Seq.with(content.getContentMap()).<Content>flatten().select(c -> c.minfo.mod == modInfo && c instanceof UnlockableContent).as();
+        Seq<UnlockableContent> all = Seq.with(content.getContentMap()).<Content>flatten().select(c -> c.minfo.mod == modInfo && c instanceof UnlockableContent && !((UnlockableContent)c).isHidden()).as();
         if(all.any()){
             buttons.row();
             buttons.button("@mods.viewcontent", Icon.book, () -> {
-                BaseDialog d = new BaseDialog(modInfo.meta.displayName());
-                d.cont.pane(cs -> {
-                    int i = 0;
-                    for(UnlockableContent c : all){
-                        cs.button(new TextureRegionDrawable(c.uiIcon), Styles.cleari, iconMed, () -> {
-                            ui.content.show(c);
-                        }).size(50f).with(im -> {
-                            var click = im.getClickListener();
-                            im.update(() -> im.getImage().color.lerp(!click.isOver() ? Color.lightGray : Color.white, 0.4f * Time.delta));
-
-                        }).tooltip(c.localizedName);
-
-                        if(++i % (int)Math.min(Core.graphics.getWidth() / Scl.scl(110), 14) == 0) cs.row();
-                    }
-                }).grow();
-                d.addCloseButton();
-                d.show();
-                this.resized(d::hide);
+                showContentDialog(all);
 //                currentContent = d;
             }).colspan(buttons.getColumns()).center().size(300, 50).pad(4);
         }
@@ -101,5 +84,26 @@ private BaseDialog currentContent;
         buttons.button("@sninfo.discord", Icon.discord, () -> Core.app.openURI("https://discord.gg/M5pGCYDsVn"));
         buttons.row();
         buttons.button("@back", Icon.left, this::hide).colspan(buttons.getColumns()).center();
+    }
+
+    private void showContentDialog(Seq<UnlockableContent> all){
+        BaseDialog d = new BaseDialog(modInfo.meta.displayName());
+        d.cont.pane(cs -> {
+            int i = 0;
+            for(UnlockableContent c : all){
+                cs.button(new TextureRegionDrawable(c.uiIcon), Styles.cleari, iconMed, () -> {
+                    ui.content.show(c);
+                }).size(50f).with(im -> {
+                    var click = im.getClickListener();
+                    im.update(() -> im.getImage().color.lerp(!click.isOver() ? Color.lightGray : Color.white, 0.4f * Time.delta));
+
+                }).tooltip(c.localizedName);
+
+                if(++i % (int)Math.min(Core.graphics.getWidth() / Scl.scl(110), 14) == 0) cs.row();
+            }
+        }).grow();
+        d.addCloseButton();
+        d.show();
+        this.resized(d::hide);
     }
 }

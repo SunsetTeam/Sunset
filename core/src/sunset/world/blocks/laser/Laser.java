@@ -65,9 +65,15 @@ public class Laser{
             Tmp.v2.set(end.x - Tmp.v1.x, end.y - Tmp.v1.y);
             //if we are too close to laser, draw from start to start
             if(Tmp.v2.dst(start) <= offset){
-                Drawf.laser(Core.atlas.find("minelaser"), Core.atlas.find("sunset-als-laser-end"), Core.atlas.find("sunset-als-laser-end"), start.x + Tmp.v1.x, start.y + Tmp.v1.y, start.x + Tmp.v1.x, start.y + Tmp.v1.y);
+                Drawf.laser(Core.atlas.find("minelaser"), Core.atlas.find("sunset-als-laser-end"), Core.atlas.find("sunset-als-laser-end"),
+                start.x + Tmp.v1.x, start.y + Tmp.v1.y,
+                start.x + Tmp.v1.x, start.y + Tmp.v1.y
+                );
             }else{
-                Drawf.laser(Core.atlas.find("minelaser"), Core.atlas.find("sunset-als-laser-end"), Core.atlas.find("sunset-als-laser-end"), start.x + Tmp.v1.x, start.y + Tmp.v1.y, end.x - Tmp.v1.x, end.y - Tmp.v1.y);
+                Drawf.laser(Core.atlas.find("minelaser"), Core.atlas.find("sunset-als-laser-end"), Core.atlas.find("sunset-als-laser-end"),
+                start.x + Tmp.v1.x, start.y + Tmp.v1.y,
+                end.x - Tmp.v1.x, end.y - Tmp.v1.y
+                );
             }
             Draw.reset();
         }
@@ -77,7 +83,7 @@ public class Laser{
         charge = build.laser.out;
         //start offset vector
         Tmp.v1.trns(angle, offset);
-        Healthc entity = LaserUtils.linecast(start.x + Tmp.v1.x, start.y + Tmp.v1.y, angle, length, false, true, boolf -> true);
+        Healthc entity = LaserUtils.linecast(start.x + Tmp.v1.x, start.y + Tmp.v1.y, angle, length, false, true, healthc -> true);
         target = entity;
         //don't cast with yourself
         if(build != null && target == build)
