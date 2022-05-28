@@ -125,7 +125,7 @@ public class SnEnvironment  {
             statusDuration = 120f;
             cacheLayer = CacheLayer.water;
             albedo = 0.5f;
-            attributes.set(SnAttribute.burheyna, 1.2f);
+            attributes.set(SnAttribute.naturite, 1.2f);
         }};
         crimsonWater = new Floor("crimson-water") {{
             speedMultiplier = 0.8f;
