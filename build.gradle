@@ -262,8 +262,9 @@ project(":core"){
             println "Done"
             gasVersionFile.writeString(gasVersion)
         }
-
-        include(libFolder.child("GasLibrary.jar").file().canonicalPath)
+        from(libFolder.file()){
+            include("GasLibrary.jar")
+        }
         exclude("sunset/entities/comp/**")
         exclude("sunset/codegen/**")
     }
