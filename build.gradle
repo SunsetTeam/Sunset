@@ -19,13 +19,13 @@ buildscript{
         //mindustryPath = "com.github.Anuken.Mindustry"
         //mindustryVersion = 'v135'
         //arcVersion=mindustryVersion
-        jabelVersion="0.6.0"
+        jabelVersion = "0.6.0"
 
         parserVersion = '3.22.1'
 
         aciVersion = "45ad8cd8ed9"
 
-        gasVersion = "2947b556cdc"
+        gasVersion = "27b10c13f7e"
 
         modCoreVersion = "e27df2d276d"
 
@@ -243,35 +243,27 @@ project(":core"){
 //        annotationProcessor 'com.github.Anuken:jabel:34e4c172e65b3928cd9eabe1993654ea79c409cd'
 
     }
-
-    afterEvaluate{
-        task mergedJavadoc(type: Javadoc){
-            if(true) return null;
-            def blacklist = [project(":annotations")]
-            if(findProject(":android") != null){
-                blacklist += project(":android")
-            }
-
-            source rootProject.subprojects.collect{ project ->
-                if(!blacklist.contains(project) && project.hasProperty("sourceSets")){
-                    return project.sourceSets.main.allJava
-                }
-            }
-
-            classpath = files(rootProject.subprojects.collect{ project ->
-                if(!blacklist.contains(project) && project.hasProperty("sourceSets")){
-                    return project.sourceSets.main.compileClasspath
-                }
-            })
-            destinationDir = new File(buildDir, 'javadoc')
-        }
-    }
     jar{
         duplicatesStrategy = DuplicatesStrategy.EXCLUDE
         from{
-
             configurations.runtimeClasspath.collect{ it.isDirectory() ? it : zipTree(it) }
         }
+        def libFolder = new arc.files.Fi(buildDir).child("gasLibrary")
+        def gasVersionFile = libFolder.child("version.txt")
+        if(!gasVersionFile.exists()){
+            gasVersionFile.writeString("")
+        }
+        if(gasVersionFile.readString() != gasVersion){
+            def libUrl = "https://jitpack.io/com/github/Zelaux/GasLibrary/build/$gasVersion/build-${gasVersion}.jar"
+            def libFile = libFolder.child("GasLibrary.jar")
+
+            println "Downloading GasLibrary $gasVersion" + " to ${libFile.file().canonicalPath}"
+            new URL(libUrl).withInputStream{ i -> libFile.file().withOutputStream{ it << i } }
+            println "Done"
+            gasVersionFile.writeString(gasVersion)
+        }
+
+        include(libFolder.child("GasLibrary.jar").file().canonicalPath)
         exclude("sunset/entities/comp/**")
         exclude("sunset/codegen/**")
     }
@@ -472,7 +464,7 @@ task mjar(){
             modsDirectories.add("classic");
         }
         for(String directory : modsDirectories){
-            if (directory.startsWith("#") || directory.startsWith("//")){
+            if(directory.startsWith("#") || directory.startsWith("//")){
                 println "Directory \"$directory\" was skipped."
                 continue
             }
