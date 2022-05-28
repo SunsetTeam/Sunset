@@ -3,16 +3,22 @@ package sunset;
 import acontent.ui.*;
 import arc.*;
 import arc.files.*;
+import arc.math.*;
+import arc.scene.actions.*;
+import arc.scene.event.*;
+import arc.scene.ui.layout.*;
 import arc.struct.*;
 import arc.util.*;
 import mindustry.*;
 import mindustry.core.*;
+import mindustry.core.GameState.*;
 import mindustry.ctype.*;
 import mindustry.game.EventType.*;
 import mindustry.gen.*;
 import mindustry.mod.*;
 import mindustry.mod.Mods.*;
 import mindustry.type.*;
+import mindustry.ui.*;
 import mma.*;
 import mma.annotations.ModAnnotations.*;
 import sunset.content.*;
@@ -34,27 +40,17 @@ public class Sunset extends MMAMod{
     public Sunset(){
         super();
         validDependencies = SnDependencies.valid();
-        if(!validDependencies){
-            if(!SnDependencies.existsGasLibraryJava()){
-                Fi file = modDirectory.child("GasLibrary.jar");
-                file.write(getClass().getClassLoader().getResourceAsStream("GasLibrary.jar"), false);
-                Log.debug("[Sunset] Loading mod @", file);
-                LoadedMod mod = Reflect.invoke(Mods.class, mods, "loadMod", new Object[]{file}, Fi.class);
-                Seq<LoadedMod> mods = Reflect.get(Mods.class, Vars.mods, "mods");
-                mods.add(mod);
-            }
-            if(!headless){
-                /*Events.run(ClientLoadEvent.class,()->{
-                    new BaseDialog("sunset-error"){{
-                       cont.add("Please download or enable GasLibrary.");
-                       addCloseButton();
-                       addCloseListener();
-                    }};
-                });*/
-
-            }
-            return;
+        if(!validDependencies && !SnDependencies.existsGasLibraryJava()){
+            Fi file = modDirectory.child("GasLibrary.jar");
+            file.write(getClass().getClassLoader().getResourceAsStream("GasLibrary.jar"), false);
+            Log.debug("[Sunset] Loading mod @", file);
+            LoadedMod mod = Reflect.invoke(Mods.class, mods, "loadMod", new Object[]{file}, Fi.class);
+            Seq<LoadedMod> mods = Reflect.get(Mods.class, Vars.mods, "mods");
+            mods.add(mod);
+            validDependencies = SnDependencies.valid();
         }
+        if(!validDependencies) return;
+
 //        SnFonts.loadDefaultFont();
 //        SnFonts.loadFonts();
         disableBlockOutline = true;
@@ -91,6 +87,29 @@ public class Sunset extends MMAMod{
         UnitData.init();
         AdvancedContentInfoDialog.init();
         Utils.setMenuUnit(SnUnitTypes.router);
+        if(!mobile){
+            Events.run(ClientLoadEvent.class, () -> {
+                float duration = 90f;
+                Table t = new Table(Styles.black3);
+                t.touchable = Touchable.disabled;
+                t.margin(8f).button("test-sunset-achievements",  () -> {
+                    new SnAchievementDialog().show();
+                }).minSize(64f,32f);
+//            t.update(() -> t.setPosition(Core.graphics.getWidth()/2f, Core.graphics.getHeight()/2f, Align.center));
+                State[] state = {Vars.state.getState()};
+                t.update(() -> {
+                    t.setPosition(0, 0);
+                    if(state[0] != Vars.state.getState()){
+                        t.remove();
+                    }
+                });
+                t.actions(Actions.fadeOut(duration, Interp.pow4In), Actions.remove());
+                t.pack();
+                t.act(0.1f);
+                t.touchable=Touchable.enabled;
+                Core.scene.add(t);
+            });
+        }
     }
 
     @Override
@@ -133,6 +152,7 @@ public class Sunset extends MMAMod{
             modInfo = mods.getMod(getClass());
             new ErrorContent(){{
                 minfo.error = "@sunset-gas-library-disabled";
+                minfo.sourceFile = new Fi("error-content");
                 modInfo.erroredContent.add(this);
             }};
             return;
