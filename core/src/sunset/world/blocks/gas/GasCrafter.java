@@ -3,9 +3,14 @@ package sunset.world.blocks.gas;
 import arc.Core;
 import arc.util.Nullable;
 import gas.world.blocks.production.GenericCrafterWithGas;
+import mindustry.game.Team;
 import mindustry.graphics.Pal;
 import mindustry.ui.Bar;
+import mindustry.world.Tile;
+import mindustry.world.blocks.production.AttributeCrafter;
 import mindustry.world.meta.Attribute;
+import mindustry.world.meta.Stat;
+import sunset.content.SnAttribute;
 
 public class GasCrafter extends GenericCrafterWithGas {
     @Nullable
@@ -28,7 +33,6 @@ public class GasCrafter extends GenericCrafterWithGas {
 
     @Override
     public void setBars() {
-        super.setBars();
         if (attribute != null) {
             addBar("efficiency", (GasCrafterBuild entity) ->
                     new Bar(() ->
@@ -48,17 +52,18 @@ public class GasCrafter extends GenericCrafterWithGas {
             } else return super.getProgressIncrease(base);
         }
 
-        public float efficiencyScale() {
+        public float efficiencyScale(){
             return baseEfficiency + Math.min(maxBoost, boostScale * attrsum) + attribute.env();
         }
 
         @Override
-        public void pickedUp() {
+        public void pickedUp(){
             attrsum = 0f;
+            warmup = 0f;
         }
 
         @Override
-        public void onProximityUpdate() {
+        public void onProximityUpdate(){
             super.onProximityUpdate();
 
             attrsum = sumAttribute(attribute, tile.x, tile.y);

@@ -30,7 +30,7 @@ public class SnCrafting{
 
     public static void load(){
         //region standard
-        anzarCaster = new AccelGenericCrafter("anzar-caster"){{
+        anzarCaster = new GenericCrafter("anzar-caster"){{
             requirements(Category.crafting, with(SnItems.fors, 80, SnItems.naturite, 60, SnItems.erius, 40));
 
             hasItems = true;
@@ -51,7 +51,8 @@ public class SnCrafting{
 
             craftEffect = SnFx.crystalyze;
             updateEffect = SnFx.crystalyzeSmall;
-            minEfficiency = 9f - 0.0001f;
+            minEfficiency = -1f;
+            maxBoost = 1f;
             baseEfficiency = 0f;
             displayEfficiency = false;
             hasItems = true;
@@ -94,7 +95,7 @@ public class SnCrafting{
             outputItem = new ItemStack(SnItems.nobium, 14);
             craftEffect = Fx.pulverize;
             updateEffect = Fx.pulverizeSmall;
-            craftTime = 140f;
+            craftTime = 150f;
             itemCapacity = 40;
             size = 4;
             hasPower = true;
@@ -123,7 +124,7 @@ public class SnCrafting{
             ambientSoundVolume = 0.025f;
 
             consumeItem(SnItems.nedirium, 1);
-            consumeGasses(new GasStack(SnGas.gyner, 6f / 60f)/*, new GasStack(SnGas.arhelinium, 4f / 60f)*/);
+            consumeGasses(new GasStack(SnGas.gyner, 6f / 60f), new GasStack(SnGas.arhelinium, 4f / 60f));
             consumePower(4.6f);
         }};
 /*
@@ -151,8 +152,8 @@ public class SnCrafting{
             consumePower(10f);
         }};
 
-
         zeriniumZavod = new GasCrafter("zerinium-zavod"){{
+            requirements(Category.crafting, with(SnItems.erius, 180, SnItems.nobium, 160, SnItems.anzar, 155, SnItems.enojie, 40));
             size = 4;
             itemCapacity = 45;
             gasCapacity = 40f;

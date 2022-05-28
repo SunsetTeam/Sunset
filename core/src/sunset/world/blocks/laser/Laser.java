@@ -37,8 +37,7 @@ public class Laser{
     /** laser mode. */
     public boolean enabled = true;
     public LaserBlock.LaserBlockBuild build;
-    /** laser current target.
-     * todo maybe I should remove this?*/
+    /** laser current target. */
     public Healthc target = null;
 
     public Laser(){
@@ -59,23 +58,23 @@ public class Laser{
         if(enabled){
             //Log.info("draw\nangle: @\nstart: @  @\nend: @  @", angle, start.x, start.y, end.x, end.y);
             Tmp.v1.trns(angle, offset);
+            if(target instanceof Building b){
+                Tmp.v3.trns(angle, offset + (b.block().size - 2) * Vars.tilesize);
+            }
+            else if(target instanceof Unit u){
+                Tmp.v3.trns(angle, offset + u.hitSize / 2f);
+            }
+
             //Log.info("tmpv1\nx: @\ny: @\noffset: @\nangle: @", Tmp.v1.x, Tmp.v1.y, offset, angle);
             Draw.alpha(charge);
             //Log.info("dst btwn end and start: @\noffset: @", end.dst(start), offset);
-            Tmp.v2.set(end.x - Tmp.v1.x, end.y - Tmp.v1.y);
+            Tmp.v2.set(end.x - Tmp.v2.x, end.y - Tmp.v2.y);
             //if we are too close to laser, draw from start to start
             if(Tmp.v2.dst(start) <= offset){
-                Drawf.laser(Core.atlas.find("minelaser"), Core.atlas.find("sunset-als-laser-end"), Core.atlas.find("sunset-als-laser-end"),
-                start.x + Tmp.v1.x, start.y + Tmp.v1.y,
-                start.x + Tmp.v1.x, start.y + Tmp.v1.y
-                );
+                Drawf.laser(Core.atlas.find("minelaser"), Core.atlas.find("sunset-als-laser-end"), Core.atlas.find("sunset-als-laser-end"), start.x + Tmp.v1.x, start.y + Tmp.v1.y, start.x + Tmp.v1.x, start.y + Tmp.v1.y);
             }else{
-                Drawf.laser(Core.atlas.find("minelaser"), Core.atlas.find("sunset-als-laser-end"), Core.atlas.find("sunset-als-laser-end"),
-                start.x + Tmp.v1.x, start.y + Tmp.v1.y,
-                end.x - Tmp.v1.x, end.y - Tmp.v1.y
-                );
+                Drawf.laser(Core.atlas.find("minelaser"), Core.atlas.find("sunset-als-laser-end"), Core.atlas.find("sunset-als-laser-end"), start.x + Tmp.v1.x, start.y + Tmp.v1.y, end.x - Tmp.v3.x, end.y - Tmp.v3.y);
             }
-            Draw.reset();
         }
     }
 
@@ -83,20 +82,15 @@ public class Laser{
         charge = build.laser.out;
         //start offset vector
         Tmp.v1.trns(angle, offset);
-        Healthc entity = LaserUtils.linecast(start.x + Tmp.v1.x, start.y + Tmp.v1.y, angle, length, false, true, healthc -> true);
-        target = entity;
+        Healthc entity = target = LaserUtils.linecast(start.x + Tmp.v1.x, start.y + Tmp.v1.y, angle, length, false, true, boolf -> true);
         //don't cast with yourself
         if(build != null && target == build)
             return;
         if(target != null){
             //for correct drawing
-            if(start.dst2(entity) == 0f){
-                end = start;
-            }else{
-                Tmp.v1.trns(angle, start.dst(entity.x(), entity.y()));
-                end.x = start.x + Tmp.v1.x;
-                end.y = start.y + Tmp.v1.y;
-            }
+            Tmp.v1.trns(angle, start.dst(entity.x(), entity.y()));
+            end.x = start.x + Tmp.v1.x;
+            end.y = start.y + Tmp.v1.y;
 
             if(enabled){
                 //////////////

@@ -39,6 +39,8 @@ public class LaserBlock extends Block{
 
     public float laserProduction = 0f;
     public float laserConsumption = 0f;
+
+    public LaserBlockDrawer drawer = new LaserBlockDrawer();
     //on preUpdate, default all side-vars
     static {
         Events.run(Trigger.update,()->{
@@ -57,6 +59,12 @@ public class LaserBlock extends Block{
     }
 
     @Override
+    public void load(){
+        super.load();
+        drawer.load(this);
+    }
+
+    @Override
     public TextureRegion[] icons(){
         return !ModVars.packSprites ? new TextureRegion[]{region} : new TextureRegion[]{base, allEdge, top};
     }
@@ -64,7 +72,6 @@ public class LaserBlock extends Block{
     @SuppressWarnings("InnerClassMayBeStatic")
     public class LaserBlockBuild extends Building{
         LaserModule laser;
-        LaserBlockDrawer drawer;
         public boolean leftInput = false,
                 topInput = false,
                 rightInput = false,
@@ -77,7 +84,6 @@ public class LaserBlock extends Block{
         @Override
         public Building init(Tile tile, Team team, boolean shouldAdd, int rotation){
             laser = new LaserModule(this);
-            drawer = new LaserBlockDrawer(this);
             return super.init(tile, team, shouldAdd, rotation);
         }
 
@@ -89,7 +95,7 @@ public class LaserBlock extends Block{
 
         @Override
         public void draw(){
-            drawer.draw();
+            drawer.draw(this);
         }
 
         public float getLaserProduction(){

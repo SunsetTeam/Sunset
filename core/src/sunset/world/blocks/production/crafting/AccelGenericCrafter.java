@@ -33,11 +33,12 @@ public class AccelGenericCrafter extends GenericCrafter {
         addBar("sunset-acceleration", (AccelGenericCrafterBuild entity) -> new Bar(
                 () -> Core.bundle.format("bar.sunset-acceleration", Mathf.round(60 * entity.timeScale())),
                 () -> Pal.bar,
-                entity::progress
+                () -> entity.productionEfficiency
         ));
     }
 
     public class AccelGenericCrafterBuild extends GenericCrafterBuild{
+        public float productionEfficiency = 0.0f;
 
         @Override
         public void updateTile(){
@@ -64,13 +65,17 @@ public class AccelGenericCrafter extends GenericCrafter {
             //TODO may look bad, revert to edelta() if so
             totalProgress += warmup * Time.delta;
 
-            progress = Mathf.pow(warmup, 5f);
+            productionEfficiency = Mathf.pow(warmup, 5f);
 
             if(progress >= 1f){
                 craft();
             }
 
             dumpOutputs();
+        }
+
+        public float getProgress(){
+            return progress * productionEfficiency;
         }
     }
 }

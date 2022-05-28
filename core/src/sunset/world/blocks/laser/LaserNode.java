@@ -106,16 +106,16 @@ public class LaserNode extends LaserBlock{
 
         @Override
         public void draw(){
-            drawer.draw();
+            drawer.draw(this);
             lasers.draw();
             float z = Draw.z();
             Draw.z(Layer.blockOver);
             //трёхэтажный дебаг : )
 //            ADrawf.drawText();
-            String output = Seq.with(downOutput, leftOutput, topOutput, rightOutput).toString("", it -> Mathf.num(it) + "");
-            String input = Seq.with(downInput, leftInput, topInput, rightInput).toString("", it -> Mathf.num(it) + "");
-            block().drawPlaceText("Laser\nin: " + laser.in + "\nout: " + laser.out + "\noutput: " + output + ",\n_input: " + input, tileX(), tileY(), true);
-            Draw.z(z);
+            //String output = Seq.with(downOutput, leftOutput, topOutput, rightOutput).toString("", it -> Mathf.num(it) + "");
+           // String input = Seq.with(downInput, leftInput, topInput, rightInput).toString("", it -> Mathf.num(it) + "");
+            //block().drawPlaceText("Laser\nin: " + laser.in + "\nout: " + laser.out + "\noutput: " + output + ",\n_input: " + input, tileX(), tileY(), true);
+            //Draw.z(z);
             //Log.info("block draw, time: @", Time.time);
         }
 
