@@ -1,6 +1,6 @@
 package sunset.content;
 
-import mma.type.TechTreeContext;
+import mma.tools.*;
 
 import static mindustry.content.TechTree.nodeProduce;
 import static mindustry.content.TechTree.nodeRoot;
@@ -9,7 +9,7 @@ import static sunset.content.SnItems.*;
 import static sunset.content.SnGas.*;
 import static sunset.content.SnLiquids.*;
 
-public class SnTechTree extends TechTreeContext {
+public class SnTechTree{
 
     public static void load(){
         SnPlanets.azaria.techTree = nodeRoot("azaria", testCore, () -> {

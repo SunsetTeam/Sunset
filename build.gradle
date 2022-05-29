@@ -27,7 +27,7 @@ buildscript{
 
         gasVersion = "27b10c13f7e"
 
-        modCoreVersion = "e27df2d276d"
+        modCoreVersion = "e20557aee1d"
 
 
         kotlinVersion = "1.6.0"
@@ -224,7 +224,7 @@ project(":core"){
 
         implementation "com.github.Zelaux.ZelauxModCore:core:$modCoreVersion"
         implementation "com.github.Zelaux.ZelauxModCore:blocks:$modCoreVersion"
-        implementation "com.github.Zelaux.ZelauxModCore:plugins:$modCoreVersion"
+        implementation "com.github.Zelaux.ZelauxModCore:utils:$modCoreVersion"
         implementation "com.github.Zelaux.ZelauxModCore:graphics:$modCoreVersion"
 
         compileOnly "com.github.Zelaux.GasLibrary:core:$gasVersion"
