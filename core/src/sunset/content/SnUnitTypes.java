@@ -1636,6 +1636,7 @@ public class SnUnitTypes{
         //region azaria - coreUnits
         testCoreUnit = new UnitTypeExt("test-coreUnit"){{
             aiController = BuilderAI::new;
+            constructor = UnitEntity::create;
             isEnemy = false;
 
             targetPriority = 1;
