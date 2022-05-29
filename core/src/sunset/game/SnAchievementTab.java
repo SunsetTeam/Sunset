@@ -1,15 +1,23 @@
 package sunset.game;
 
 import arc.*;
+import arc.graphics.*;
 import arc.scene.ui.layout.*;
 import arc.struct.*;
+import arc.util.*;
 import mindustry.graphics.*;
-import mindustry.ui.*;
+import mma.*;
+import sunset.ui.*;
 
 public class SnAchievementTab{
     public static final Seq<SnAchievementTab> tabs = new Seq<>();
+
+    static{
+        ModListener.updaters.add(SnAchievementTab::updateAchievements);
+    }
+
     public final String name;
-    public String iconname="error";
+    public String iconname = "error";
     public Seq<SnAchievement> achievements = new Seq<>();
     public boolean hasProgress = true;
 
@@ -18,8 +26,16 @@ public class SnAchievementTab{
         tabs.add(this);
     }
 
+    private static void updateAchievements(){
+        for(SnAchievementTab tab : tabs){
+            for(SnAchievement achievement : tab.achievements){
+                achievement.check();
+            }
+        }
+    }
+
     protected <T extends SnAchievement> T achievement(T achievement){
-        achievement.parent=this;
+        achievement.parent = this;
         achievements.add(achievement);
         return achievement;
     }
@@ -29,10 +45,20 @@ public class SnAchievementTab{
     }
 
     public void buildTable(Table table){
-        table.image(Core.atlas.find(iconname)).fillX().row();
-        table.labelWrap(localized());
+        table.image(Core.atlas.find(iconname)).minSize(64f).row();
+        table.table(t -> {
+            t.label(this::localized)/*.update(l->{
+                Log.info("t(@, @)",l.getPrefWidth(),l.getPrefHeight());
+            })*/.growX().fillY();
+        });
         if(!hasProgress) return;
-        table.add(new Bar("@progress", Pal.accent, this::progress)).pad(3).padTop(6).size(500f, 40f);
+        table.row();
+        table.add("|").color(Color.clear).row();
+        table.add(new SnBar("@progress", Pal.accent, this::progress)).pad(3).padTop(6).update(bar -> {
+            float aspect = 40f / 500f;
+//            Log.info("t(@, @)", bar.getPrefWidth(), bar.getPrefHeight());
+            bar.setHeight(bar.getWidth() * aspect);
+        }).growX();
 //        table.add(new ProgressBar(0f, 1f, 1f / achievements.size, false));
     }
 
@@ -41,9 +67,9 @@ public class SnAchievementTab{
     }
 
     public void buildContent(Table table){
-
+        table.align(Align.top);
         for(SnAchievement achievement : achievements){
-            table.table(achievement::display).grow().row();
+            table.table(achievement::display).top().fillY().growX().row();
         }
     }
   /*  protected  SnAchievement achievement(T achievement){

@@ -76,6 +76,7 @@ public class Sunset extends MMAMod{
     @Override
     public void init(){
         if(!validDependencies) return;
+        SnAchivements.load();
         super.init();
         ModMetaDialogFinder.onNewListener(prev -> {
 //            Group parent = prev.parent;
@@ -90,20 +91,21 @@ public class Sunset extends MMAMod{
         if(!mobile){
             Events.run(ClientLoadEvent.class, () -> {
                 float duration = 90f;
-                Table t = new Table(Styles.black3);
+                Table t = new Table();
                 t.touchable = Touchable.disabled;
                 t.margin(8f).button("test-sunset-achievements",  () -> {
                     new SnAchievementDialog().show();
-                }).minSize(64f,32f);
+                }).visible(Vars.state::isMenu).minSize(64f,32f);
 //            t.update(() -> t.setPosition(Core.graphics.getWidth()/2f, Core.graphics.getHeight()/2f, Align.center));
                 State[] state = {Vars.state.getState()};
                 t.update(() -> {
                     t.setPosition(0, 0);
-                    if(state[0] != Vars.state.getState()){
-                        t.remove();
-                    }
+//                    t.visible=;
+                    /*if(state[0] != Vars.state.getState()){
+//                        t.remove();
+                    }*/
                 });
-                t.actions(Actions.fadeOut(duration, Interp.pow4In), Actions.remove());
+//                t.actions(Actions.fadeOut(duration, Interp.pow4In), Actions.remove());
                 t.pack();
                 t.act(0.1f);
                 t.touchable=Touchable.enabled;
