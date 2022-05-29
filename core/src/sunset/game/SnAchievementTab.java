@@ -9,7 +9,7 @@ import mindustry.ui.*;
 public class SnAchievementTab{
     public static final Seq<SnAchievementTab> tabs = new Seq<>();
     public final String name;
-    public String iconname;
+    public String iconname="error";
     public Seq<SnAchievement> achievements = new Seq<>();
     public boolean hasProgress = true;
 
