@@ -51,9 +51,10 @@ public class SnCrafting{
 
             craftEffect = SnFx.crystalyze;
             updateEffect = SnFx.crystalyzeSmall;
-            minEfficiency = -1f;
-            maxBoost = 1f;
+            minEfficiency = 9f - 0.0001f;
             baseEfficiency = 0f;
+            floating = true;
+            placeableLiquid = true;
             displayEfficiency = false;
             hasItems = true;
             itemCapacity = 30;
@@ -62,6 +63,7 @@ public class SnCrafting{
             craftTime = 40f;
             size = 3;
             hasPower = true;
+            squareSprite = false;
             attribute = SnAttribute.naturite;
 
             consumePower(3.2f);
