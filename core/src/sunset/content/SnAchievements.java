@@ -13,7 +13,7 @@ import sunset.game.*;
 
 import java.util.*;
 
-public class SnAchivements{
+public class SnAchievements{
     public static void load(){
         new SnAchievementTab("sn-achievements.items"){{
             for(Item item : Vars.content.items()){
@@ -74,7 +74,7 @@ public class SnAchivements{
         resetAchievements();
     }
 
-    private static void resetAchievements(){
+    public static void resetAchievements(){
         HashMap<String, Object> values = Reflect.get(Settings.class, Core.settings, "values");
         for(String key : values.keySet().toArray(new String[0])){
             if(key.startsWith("sn-achievement")){

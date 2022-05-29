@@ -3,8 +3,6 @@ package sunset;
 import acontent.ui.*;
 import arc.*;
 import arc.files.*;
-import arc.math.*;
-import arc.scene.actions.*;
 import arc.scene.event.*;
 import arc.scene.ui.layout.*;
 import arc.struct.*;
@@ -18,7 +16,6 @@ import mindustry.gen.*;
 import mindustry.mod.*;
 import mindustry.mod.Mods.*;
 import mindustry.type.*;
-import mindustry.ui.*;
 import mma.*;
 import mma.annotations.ModAnnotations.*;
 import sunset.content.*;
@@ -76,7 +73,7 @@ public class Sunset extends MMAMod{
     @Override
     public void init(){
         if(!validDependencies) return;
-        SnAchivements.load();
+        SnAchievements.load();
         super.init();
         ModMetaDialogFinder.onNewListener(prev -> {
 //            Group parent = prev.parent;

@@ -3,9 +3,9 @@ package sunset.ui;
 import arc.*;
 import arc.scene.event.*;
 import arc.scene.ui.*;
-import arc.util.*;
 import mindustry.gen.*;
 import mindustry.ui.dialogs.*;
+import sunset.content.*;
 import sunset.game.*;
 
 public class SnAchievementDialog extends BaseDialog{
@@ -25,6 +25,7 @@ public class SnAchievementDialog extends BaseDialog{
             table.image(Core.atlas.find("sn-achivements-icon")).left();
             table.add("@sn-achivements.title").left();
             table.add().growX();
+            table.button("RESET", SnAchievements::resetAchievements);
             table.label(() -> Core.bundle.format("@sn.acheivements.completed", countCompleted()));
             table.button(Icon.exit, this::hide).size(32f).right();
         }).top().growX().row();
@@ -62,7 +63,7 @@ public class SnAchievementDialog extends BaseDialog{
 
 //                    float maxY2 = Reflect.get(ScrollPane.class, scrollPane, "maxY");
 //                    Log.info("max(@, @) scrollY=@",maxY,maxY2,scrollY);
-                    scrollPane.setScrollYForce(scrollY );
+                    scrollPane.setScrollYForce(scrollY);
                 });
                 pane.row();
             }
