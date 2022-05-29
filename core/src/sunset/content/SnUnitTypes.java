@@ -12,6 +12,7 @@ import mindustry.gen.*;
 import mindustry.graphics.*;
 import mindustry.type.*;
 import mindustry.type.ammo.*;
+import mindustry.type.unit.ErekirUnitType;
 import mindustry.type.weapons.*;
 import mindustry.world.meta.*;
 import sunset.ai.*;
@@ -26,6 +27,7 @@ import sunset.type.unitTypes.*;
 import sunset.type.weapons.*;
 
 import static mindustry.Vars.tilePayload;
+import static mindustry.Vars.tilesize;
 
 public class SnUnitTypes{
     public static UnitType
@@ -47,6 +49,8 @@ public class SnUnitTypes{
     light,
     //naval
     yellowT1, yellowT2, yellowT3, yellowT4, yellowT5,
+    //region azaria - coreUnits
+    testCoreUnit,
     //misc
     router;
     //other
@@ -1629,6 +1633,56 @@ public class SnUnitTypes{
         //there should be a yellowT6 here
         //endregion yellow
         //endregion naval
+        //region azaria - coreUnits
+        testCoreUnit = new UnitTypeExt("test-coreUnit"){{
+            aiController = BuilderAI::new;
+            isEnemy = false;
+
+            targetPriority = 1;
+            health = 250f;
+            speed = 3.9f;
+            rotateSpeed = 4f;
+            drag = 0.04f;
+            accel = 0.06f;
+            armor = 2f;
+            buildSpeed = 0.6f;
+
+            lowAltitude = false;
+            flying = true;
+
+            mineSpeed = 5.7f;
+            mineTier = 2;
+            mineWalls = true;
+            mineFloor = true;
+            itemCapacity = 40;
+
+            engineOffset = 3f;
+            hitSize = 10f;
+            alwaysUnlocked = true;
+
+            weapons.add(new Weapon("missile-launcher-uc"){{
+                alternate = true;
+                reload = 25f;
+                x = 2.4f;
+                y = -0.7f;
+
+                bullet = new AimBulletType(3f, 15){{
+                    sprite = "missile";
+                    width = 6f;
+                    height = 10f;
+                    lifetime = 140f;
+                    frontColor = Pal.bulletYellow;
+                    backColor = Pal.bulletYellowBack;
+                    trailColor = Pal.bulletYellow;
+                    trailEffect = SnFx.smallYellowAimMissileTrail;
+                    trailRotation = true;
+                    trailInterval = 0.4f;
+                    weaveScale = 3;
+                    weaveMag = 2;
+                }};
+            }});
+        }};
+        //endregion azaria - coreUnits
         //region misc
         router = new UnitTypeExt("router"){
             {

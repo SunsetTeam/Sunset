@@ -510,6 +510,14 @@ public class SnFx {
         });
     }),
 
+   smallYellowAimMissileTrail = new Effect(27f, 70f, e -> {
+        color(Pal.lightPyraFlame, Color.lightGray,  e.fin() * e.fin());
+
+        randLenVectors(e.id, 6, 1f + e.finpow() * 20, e.rotation + 180, 10f, (x, y) -> {
+            Fill.circle(e.x + x, e.y + y, 0.37f + e.fout() * 2f);
+        });
+    }),
+
     blueAimMissileTrail = new Effect(30f, 78f, e -> {
         color(SnPal.blueBullet, SnPal.blueBulletBack, e.fin() * e.fin());
 
