@@ -111,7 +111,8 @@ public abstract class SnAchievement{
             info.add(description()).grow();
         }).grow();
         table.label(() -> {
-            return unlocked() ? "@completed" : stringProgress();
+//            return unlocked() ? "@completed" : stringProgress();
+            return (unlocked() ? "[accent]" :"")+ stringProgress();
         });
     }
 

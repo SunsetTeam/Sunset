@@ -25,7 +25,7 @@ public class SnAchievementDialog extends BaseDialog{
             table.image(Core.atlas.find("sn-achivements-icon")).left();
             table.add("@sn-achivements.title").left();
             table.add().growX();
-            table.button("RESET", SnAchievements::resetAchievements);
+            table.button("RESET", SnAchievements::resetAchievements).fillX();
             table.label(() -> Core.bundle.format("@sn.acheivements.completed", countCompleted()));
             table.button(Icon.exit, this::hide).size(32f).right();
         }).top().growX().row();

@@ -53,12 +53,11 @@ public class SnAchievementTab{
         });
         if(!hasProgress) return;
         table.row();
-        table.add("|").color(Color.clear).row();
         table.add(new SnBar("@progress", Pal.accent, this::progress)).pad(3).padTop(6).update(bar -> {
             float aspect = 40f / 500f;
 //            Log.info("t(@, @)", bar.getPrefWidth(), bar.getPrefHeight());
             bar.setHeight(bar.getWidth() * aspect);
-        }).growX();
+        }).growX().fillY();
 //        table.add(new ProgressBar(0f, 1f, 1f / achievements.size, false));
     }
 
@@ -68,7 +67,7 @@ public class SnAchievementTab{
 
     public void buildContent(Table table){
         table.align(Align.top);
-        for(SnAchievement achievement : achievements){
+        for(SnAchievement achievement : achievements.copy().sort(it->it.unlocked()?1:0)){
             table.table(achievement::display).top().fillY().growX().row();
         }
     }
