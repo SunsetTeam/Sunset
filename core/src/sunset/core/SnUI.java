@@ -5,7 +5,7 @@ import arc.KeyBinds.*;
 import arc.assets.*;
 import arc.scene.style.*;
 import mma.core.*;
-import mma.tools.*;
+import mma.utils.*;
 import sunset.game.SnEventType.*;
 
 import static arc.Core.bundle;
@@ -21,7 +21,6 @@ public class SnUI extends ModUI implements Loadable{
     public void init(){
         super.init();
         ManyPlanetSystems.init();
-//        SnPlanetSystem.setup();
 
         Core.app.post(() ->
         Core.app.post(() -> Core.app.post(() -> {
