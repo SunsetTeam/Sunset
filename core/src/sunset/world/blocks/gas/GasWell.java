@@ -13,7 +13,7 @@ import mindustry.world.meta.Attribute;
 import mindustry.world.meta.Stat;
 import sunset.content.SnAttribute;
 
-public class GasWell extends GasAttributeCrafter {
+public class GasWell extends GasCrafter {
 
     public Effect generateEffect = Fx.none;
     public float effectChance = 0.05f;
@@ -50,7 +50,7 @@ public class GasWell extends GasAttributeCrafter {
         return tile.getLinkedTilesAs(this, tempTiles).sumf(other -> other.floor().attributes.get(attribute)) > 0.01f;
     }
 
-    public class GasWellBuild extends GasAttributeCrafterBuild {
+    public class GasWellBuild extends GasCrafterBuild {
         public float sum;
 
         @Override
