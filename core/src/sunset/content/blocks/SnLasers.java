@@ -51,7 +51,9 @@ public class SnLasers {
 
             craftEffect = Fx.smeltsmoke;
             drawer = new LaserKilnDrawer(){{
-                heatColor = new Color[]{Pal.darkerGray, Pal.darkPyraFlame, Pal.lightPyraFlame};
+                startColor = Pal.darkerGray;
+                midColor = Pal.darkPyraFlame;
+                endColor = Pal.lightPyraFlame;
             }};
         }};
         /*
