@@ -1,41 +1,82 @@
 package sunset.content;
 
-public class SnTechTree{
-    public static void load(){
-        //region items and liquids
-       /* node(lead, () -> {
-            nodeProduce(fors, () -> {
-                nodeProduce(nobium, () -> {});
-            });
-            nodeProduce(planatrium, () -> {
-                nodeProduce(enojie, () -> {});
-            });
-            nodeProduce(flameid, () -> {});
-            nodeProduce(coldent, () -> {});
-        });
-        nodeProduce(titanium, () -> {
-            nodeProduce(reneubite, () -> {});
-        });
-        nodeProduce(sand, () -> {
-            nodeProduce(naturite, () -> {});
-        });
-        nodeProduce(oil, () -> {
-            nodeProduce(burheyna, () -> {});
-        });*/
-        //endregion items and liquids
-        //region blocks
-        //region turrets
-        //node(duo), () -> {};
+import arc.struct.Seq;
+import mindustry.game.Objectives;
 
-        /*node(sting, () -> {
-            node(excellence, () -> {});
-        });
-        node(spine, () -> {});
-        node(eagle, () -> {
-            node(reflection, () -> {
-                node(scorpio, () -> {});
+import static mindustry.content.TechTree.*;
+import static mindustry.content.TechTree.node;
+import static sunset.content.blocks.SnCore.*;
+import static sunset.content.blocks.SnCrafting.*;
+import static sunset.content.SnItems.*;
+import static sunset.content.SnGas.*;
+import static sunset.content.SnLiquids.*;
+
+public class SnTechTree{
+
+    public static void load(){
+        SnPlanets.azaria.techTree = nodeRoot("azaria", testCore, () -> {
+            //region crafting
+            node(crystallizer, () -> {
+                node(anzarCaster, () -> {
+                    node(nobiumCaster, () -> {
+                        node(nobiumMagnetizer, () -> {
+                            node(enojieSynthesizer, () -> {
+                            });
+                            node(zeriniumZavod, () -> {
+                            });
+                        });
+                    });
+                    node(collider, () -> {
+                    });
+                });
             });
-        });*/
+            //endregion crafting
+
+            //region items and liquids
+            nodeProduce(fors, () -> {
+                nodeProduce(burheyna, () -> {
+                    nodeProduce(messira, () -> {
+                    });
+                });
+
+                nodeProduce(erius, () -> {
+                    nodeProduce(nedirium, () -> {
+                        nodeProduce(nobium, () -> {
+                            nodeProduce(planatrium, () -> {
+                                nodeProduce(arhelinium, () -> {
+                                });
+                                nodeProduce(enojie, () -> {
+                                });
+                                nodeProduce(zerinium, () -> {
+                                });
+                            });
+                        });
+                        nodeProduce(reneubite, () -> {
+                        });
+                    });
+
+                    nodeProduce(hyneris, () -> {
+                    });
+                });
+
+                nodeProduce(gyner, () -> {
+                });
+
+                nodeProduce(azalia_bud, () -> {
+                    nodeProduce(sayang, () -> {
+                        nodeProduce(yantai, () -> {
+                        });
+                        nodeProduce(nabunium, () -> {
+                        });
+                    });
+                });
+
+                nodeProduce(naturite, () -> {
+                    nodeProduce(anzar, () -> {
+                    });
+                });
+            });
+        });
         //endregion turrets
         //endregion blocks
     }

@@ -11,7 +11,6 @@ buildscript{
         mindustryPath = "com.github.Anuken.MindustryJitpack"
         mindustryVersionFull = '68f053f409c999f0a66bc6ac30760c331b2c0d6c'
         mindustryVersion = mindustryVersionFull.substring(0, 10)
-        mindustryVersionOld = "v135"
         arcVersion = "ef9d6ac655"
 //        arcVersion = "916c5a77"
 
@@ -20,15 +19,15 @@ buildscript{
         //mindustryPath = "com.github.Anuken.Mindustry"
         //mindustryVersion = 'v135'
         //arcVersion=mindustryVersion
-        jabelVersion="0.6.0"
+        jabelVersion = "0.6.0"
 
         parserVersion = '3.22.1'
 
         aciVersion = "45ad8cd8ed9"
 
-        gasVersion = "2947b556cdc"
+        gasVersion = "27b10c13f7e"
 
-        modCoreVersion = "83364c47cb9"
+        modCoreVersion = "e20557aee1d"
 
 
         kotlinVersion = "1.6.0"
@@ -224,7 +223,8 @@ project(":core"){
         compileOnly arcModule("extensions:arcnet")
 
         implementation "com.github.Zelaux.ZelauxModCore:core:$modCoreVersion"
-        implementation "com.github.Zelaux.ZelauxModCore:plugins:$modCoreVersion"
+        implementation "com.github.Zelaux.ZelauxModCore:blocks:$modCoreVersion"
+        implementation "com.github.Zelaux.ZelauxModCore:utils:$modCoreVersion"
         implementation "com.github.Zelaux.ZelauxModCore:graphics:$modCoreVersion"
 
         compileOnly "com.github.Zelaux.GasLibrary:core:$gasVersion"
@@ -243,34 +243,27 @@ project(":core"){
 //        annotationProcessor 'com.github.Anuken:jabel:34e4c172e65b3928cd9eabe1993654ea79c409cd'
 
     }
-
-    afterEvaluate{
-        task mergedJavadoc(type: Javadoc){
-            if(true) return null;
-            def blacklist = [project(":annotations")]
-            if(findProject(":android") != null){
-                blacklist += project(":android")
-            }
-
-            source rootProject.subprojects.collect{ project ->
-                if(!blacklist.contains(project) && project.hasProperty("sourceSets")){
-                    return project.sourceSets.main.allJava
-                }
-            }
-
-            classpath = files(rootProject.subprojects.collect{ project ->
-                if(!blacklist.contains(project) && project.hasProperty("sourceSets")){
-                    return project.sourceSets.main.compileClasspath
-                }
-            })
-            destinationDir = new File(buildDir, 'javadoc')
-        }
-    }
     jar{
         duplicatesStrategy = DuplicatesStrategy.EXCLUDE
         from{
-
             configurations.runtimeClasspath.collect{ it.isDirectory() ? it : zipTree(it) }
+        }
+        def libFolder = new arc.files.Fi(buildDir).child("gasLibrary")
+        def gasVersionFile = libFolder.child("version.txt")
+        if(!gasVersionFile.exists()){
+            gasVersionFile.writeString("")
+        }
+        if(gasVersionFile.readString() != gasVersion){
+            def libUrl = "https://jitpack.io/com/github/Zelaux/GasLibrary/build/$gasVersion/build-${gasVersion}.jar"
+            def libFile = libFolder.child("GasLibrary.jar")
+
+            println "Downloading GasLibrary $gasVersion" + " to ${libFile.file().canonicalPath}"
+            new URL(libUrl).withInputStream{ i -> libFile.file().withOutputStream{ it << i } }
+            println "Done"
+            gasVersionFile.writeString(gasVersion)
+        }
+        from(libFolder.file()){
+            include("GasLibrary.jar")
         }
         exclude("sunset/entities/comp/**")
         exclude("sunset/codegen/**")
@@ -472,7 +465,7 @@ task mjar(){
             modsDirectories.add("classic");
         }
         for(String directory : modsDirectories){
-            if (directory.startsWith("#") || directory.startsWith("//")){
+            if(directory.startsWith("#") || directory.startsWith("//")){
                 println "Directory \"$directory\" was skipped."
                 continue
             }

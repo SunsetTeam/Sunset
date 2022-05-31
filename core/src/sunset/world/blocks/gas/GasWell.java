@@ -3,6 +3,7 @@ package sunset.world.blocks.gas;
 import arc.Core;
 import arc.graphics.Color;
 import arc.math.Mathf;
+import gas.world.blocks.production.GasAttributeCrafter;
 import mindustry.content.Fx;
 import mindustry.entities.Effect;
 import mindustry.game.Team;
@@ -12,7 +13,7 @@ import mindustry.world.meta.Attribute;
 import mindustry.world.meta.Stat;
 import sunset.content.SnAttribute;
 
-public class GasWell extends GasCrafter{
+public class GasWell extends GasCrafter {
 
     public Effect generateEffect = Fx.none;
     public float effectChance = 0.05f;
