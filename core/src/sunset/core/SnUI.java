@@ -5,7 +5,7 @@ import arc.KeyBinds.*;
 import arc.assets.*;
 import arc.scene.style.*;
 import mma.core.*;
-import mma.tools.*;
+import mma.utils.ManyPlanetSystems;
 import sunset.game.SnEventType.*;
 
 import static arc.Core.bundle;
