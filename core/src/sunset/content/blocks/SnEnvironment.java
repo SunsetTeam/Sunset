@@ -20,11 +20,14 @@ public class SnEnvironment  {
     public static Block
 
     //ores
-    oreFors, orePlanatrium, oreFlameid, oreColdent,
+    oreFors, oreErius, oreNedirium, orePlanatrium, oreFlameid, oreColdent,
+
+    naturiteShard,
 
     //floors
+    chromakey,
     crimsonGrass, crimsonDirt, crimsonSand, crimsonSwamp, crimsonMoss,
-    crimsonSandWater, crimsonWater, crimsonDeepWater,
+    burheynaLiquidFloor,
     crimsonSnow, gasDeposit, crimsonIce, crimsonIceSnow,
     granite,
 
@@ -33,12 +36,14 @@ public class SnEnvironment  {
     orangeSand, stoneSand,
     obsidian, ash, burningAsh,
 
-    //static walls 
+    //static walls
+    greenStoneWall, jadestoneWall, gJadestoneWall,
+
+    yelliteWall, darkYelliteWall,
+
     crimsonGrassWall, crimsonDirtWall, crimsonSandWall,
     crimsonSnowWall, crimsonIceWall,
     graniteWall,
-
-    jadestoneWall, gJadestoneWall,
 
     orangeSandWall, stoneSandWall,
     obsidianWall, ashWall,
@@ -47,7 +52,7 @@ public class SnEnvironment  {
     stagesWall,
     
     //pines
-    crimsonPine,
+    crimsonPine, jadePlant,
     
     //trees
     crimsonTree, crimsonTreeDead,
@@ -65,6 +70,18 @@ public class SnEnvironment  {
             oreThreshold = 0.921f;
             oreScale = 26.1234f;
         }};
+        oreErius = new OreBlock(SnItems.erius) {{
+            oreDefault = false;
+            oreThreshold = 0.921f;
+            oreScale = 26.1234f;
+        }};
+        /*
+        oreNedirium = new OreBlock(SnItems.nedirium) {{
+            oreDefault = false;
+            oreThreshold = 0.921f;
+            oreScale = 26.1234f;
+        }};
+         */
         orePlanatrium = new OreBlock(SnItems.planatrium) {{
             oreDefault = false;
             oreThreshold = 0.921f;
@@ -82,8 +99,15 @@ public class SnEnvironment  {
             oreThreshold = 0.921f;
             oreScale = 26.1234f;
         }};
+
+        naturiteShard = new OverlayFloor("naturite-shard"){{
+           variants = 3;
+        }};
         //endregion ores
         //region floors
+        chromakey = new Floor("chromakey"){{
+            variants = 1;
+        }};
         crimsonGrass = new Floor("crimson-grass") {{
             variants = 3;
             wall = crimsonGrassWall;
@@ -114,20 +138,7 @@ public class SnEnvironment  {
             variants = 3;
             wall = crimsonPine;
         }};
-
-        crimsonSandWater = new Floor("crimson-sand-water") {{
-            speedMultiplier = 0.9f;
-            variants = 0;
-            liquidDrop = SnLiquids.burheyna;
-            liquidMultiplier = 0.7f;
-            isLiquid = true;
-            status = SnStatusEffects.viscous;
-            statusDuration = 120f;
-            cacheLayer = CacheLayer.water;
-            albedo = 0.5f;
-            attributes.set(SnAttribute.naturite, 1f);
-        }};
-        crimsonWater = new Floor("crimson-water") {{
+        burheynaLiquidFloor = new Floor("burheyna-floor") {{
             speedMultiplier = 0.8f;
             variants = 0;
             liquidDrop = SnLiquids.burheyna;
@@ -139,20 +150,6 @@ public class SnEnvironment  {
             albedo = 0.5f;
             attributes.set(SnAttribute.naturite, 1f);
         }};
-        crimsonDeepWater = new Floor("crimson-deep-water") {{
-            speedMultiplier = 0.5f;
-            variants = 0;
-            liquidDrop = SnLiquids.burheyna;
-            liquidMultiplier = 1.1f;
-            isLiquid = true;
-            status = SnStatusEffects.viscous;
-            statusDuration = 120f;
-            drownTime = 160f;
-            cacheLayer = CacheLayer.water;
-            albedo = 0.5f;
-            attributes.set(SnAttribute.naturite, 1f);
-        }};
-
         gasDeposit = new Floor("gas-deposit") {{
             variants = 3;
             attributes.set(SnAttribute.gas, 1f);
@@ -216,6 +213,27 @@ public class SnEnvironment  {
         }};
         //endregion floors
         //region static walls
+
+        greenStoneWall = new StaticWall("green-stone-wall"){{
+            variants = 2;
+        }};
+
+        jadestoneWall = new StaticWall("jadestone-wall") {{
+            variants = 2;
+        }};
+
+        gJadestoneWall = new StaticWall("g-jadestone-wall") {{
+            variants = 2;
+        }};
+
+        yelliteWall = new StaticWall("yellite-wall"){{
+            variants = 2;
+        }};
+
+        darkYelliteWall = new StaticWall("dark-yellite-wall"){{
+            variants = 2;
+        }};
+
         crimsonGrassWall = new StaticWall("crimson-grass-wall") {{
             variants = 2;
         }};
@@ -235,14 +253,6 @@ public class SnEnvironment  {
 
         graniteWall = new StaticWall("granite-wall") {{
             variants = 3;
-        }};
-
-        jadestoneWall = new StaticWall("jadestone-wall") {{
-            variants = 2;
-        }};
-
-        gJadestoneWall = new StaticWall("g-jadestone-wall") {{
-            variants = 2;
         }};
 
         orangeSandWall = new StaticWall("orange-sand-wall") {{
@@ -276,6 +286,12 @@ public class SnEnvironment  {
         //region pines
         crimsonPine = new StaticTree("crimson-pine") {{
             variants = 0;
+        }};
+
+        jadePlant = new Prop("jade-plant") {{
+            variants = 0;
+            breakable = false;
+            alwaysReplace = false;
         }};
         //endregion pines
         //region special
