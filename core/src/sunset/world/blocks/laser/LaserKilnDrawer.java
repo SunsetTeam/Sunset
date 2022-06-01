@@ -6,11 +6,15 @@ import arc.graphics.g2d.Draw;
 import arc.graphics.g2d.TextureRegion;
 import arc.util.Log;
 import mindustry.graphics.Layer;
+import mindustry.graphics.Pal;
 
 /** Drawer only used for multikiln. */
 public class LaserKilnDrawer extends LaserBlockDrawer{
     public TextureRegion flame;
-    public Color[] heatColor = new Color[]{Color.darkGray, Color.red, Color.white};
+    public Color startColor = Pal.darkerGray,
+            midColor = Color.red,
+            endColor = Color.white;
+
     @Override
     public void load(LaserBlock block){
         flame = Core.atlas.find(block.name + "-flame");
@@ -21,8 +25,7 @@ public class LaserKilnDrawer extends LaserBlockDrawer{
         super.draw(b);
         Draw.draw(Layer.effect - 0.001f, ()->{
             Draw.alpha(1f);
-            //todo this is bad
-            Draw.color(heatColor[0], heatColor[1], heatColor[2], b.warmup());
+            Draw.color(startColor, midColor, endColor, b.warmup());
             Draw.rect(flame, b.x, b.y);
             Draw.reset();
         });
