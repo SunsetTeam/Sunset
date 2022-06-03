@@ -4,6 +4,7 @@ import arc.graphics.*;
 import arc.util.Time;
 import gas.GasStack;
 import gas.type.Gas;
+import gas.world.blocks.production.GenericCrafterWithGas;
 import gas.world.consumers.*;
 import mindustry.content.*;
 import mindustry.gen.*;
@@ -109,7 +110,7 @@ public class SnCrafting{
             consumePower(7f);
         }};
 
-        collider = new GasCrafter("collider"){{
+        collider = new GenericCrafterWithGas("collider"){{
             requirements(Category.crafting, with(SnItems.fors, 105, SnItems.erius, 100, SnItems.anzar, 65));
 
             outputItem = new ItemStack(SnItems.reneubite, 1);
@@ -154,7 +155,7 @@ public class SnCrafting{
             consumePower(10f);
         }};
 
-        zeriniumZavod = new GasCrafter("zerinium-zavod"){{
+        zeriniumZavod = new GenericCrafterWithGas("zerinium-zavod"){{
             requirements(Category.crafting, with(SnItems.erius, 180, SnItems.nobium, 160, SnItems.anzar, 155, SnItems.enojie, 40));
             size = 4;
             itemCapacity = 45;

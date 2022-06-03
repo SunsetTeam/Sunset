@@ -16,7 +16,7 @@ public class SnCore {
 
     public static void load(){
         testCore = new CoreBlock("test-core"){{
-            requirements(Category.effect, BuildVisibility.editorOnly, with(SnItems.fors, 1000, SnItems.erius, 1000));
+            requirements(Category.effect, BuildVisibility.sandboxOnly, with(SnItems.fors, 1000, SnItems.erius, 1000));
             alwaysUnlocked = true;
             isFirstTier = true;
 

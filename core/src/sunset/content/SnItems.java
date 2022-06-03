@@ -22,30 +22,32 @@ public class SnItems {
     public static void load() {
         //region azaria
         fors = new Item("fors", Color.valueOf("ed606e")) {{
-            cost = 2f;
+            cost = 1.4f;
             hardness = 3;
         }};
         erius = new Item("erius", Color.valueOf("a0d2d6")) {{
-            cost = 2f;
-        }};
-        anzar = new Item("anzar", Color.valueOf("feb380")) {{
-            cost = 3f;
+            cost = 1.2f;
+            hardness = 2;
         }};
         naturite = new Item("naturite", Color.valueOf("f3e979")) {{
+            cost = 1.8f;
+        }};
+        anzar = new Item("anzar", Color.valueOf("feb380")) {{
             cost = 2f;
         }};
         nedirium = new Item("nedirium", Color.valueOf("ffffff")) {{
             cost = 3f;
+            hardness = 4;
         }};
         reneubite = new Item("reneubite", Color.valueOf("87ceeb")) {{
-            cost = 3f;
+            cost = 3.5f;
         }};
         nobium = new Item("nobium", Color.valueOf("c1c4cb")) {{
             cost = 5f;
         }};
         planatrium = new Item("planatrium", Color.valueOf("b287ec")) {{
             cost = 5f;
-            hardness = 4;
+            hardness = 5;
             explosiveness = 0.2f;
             radioactivity = 1f;
         }};
@@ -54,7 +56,7 @@ public class SnItems {
             flammability = 0.6f;
         }};
         yantai = new Item("yantai", Color.valueOf("fbff93")) {{
-            cost = 5f;
+            cost = 4.3f;
         }};
         enojie = new Item("enojie", Color.valueOf("99f2c7")) {{
             cost = 6f;
