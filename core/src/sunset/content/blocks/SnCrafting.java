@@ -4,6 +4,7 @@ import arc.graphics.*;
 import arc.util.Time;
 import gas.GasStack;
 import gas.type.Gas;
+import gas.world.blocks.production.GasGenericCrafter;
 import gas.world.blocks.production.GenericCrafterWithGas;
 import gas.world.consumers.*;
 import mindustry.content.*;
@@ -52,8 +53,6 @@ public class SnCrafting{
 
             craftEffect = SnFx.crystalyze;
             updateEffect = SnFx.crystalyzeSmall;
-            minEfficiency = 9f - 0.0001f;
-            baseEfficiency = 0f;
             floating = true;
             placeableLiquid = true;
             displayEfficiency = false;
@@ -65,18 +64,18 @@ public class SnCrafting{
             size = 3;
             hasPower = true;
             squareSprite = false;
-            attribute = SnAttribute.naturite;
 
+            consumeLiquid(SnLiquids.burheyna, 3f / 60f);
             consumePower(3.2f);
         }};
 
         nobiumCaster = new GenericCrafter("nobium-caster"){{
             requirements(Category.crafting, with(SnItems.fors, 110, SnItems.erius, 95, SnItems.naturite, 80, SnItems.anzar, 65));
 
-            outputItem = new ItemStack(SnItems.nobium, 4);
+            outputItem = new ItemStack(SnItems.nobium, 3);
             craftEffect = Fx.pulverize;
             updateEffect = Fx.pulverizeSmall;
-            craftTime = 45f;
+            craftTime = 50f;
             itemCapacity = 25;
             size = 3;
             hasPower = true;
@@ -95,10 +94,10 @@ public class SnCrafting{
         nobiumMagnetizer = new GenericCrafter("nobium-magnetizer"){{
             requirements(Category.crafting, with(SnItems.fors, 190, SnItems.erius, 150, SnItems.anzar, 100, SnItems.nobium, 40));
 
-            outputItem = new ItemStack(SnItems.nobium, 14);
+            outputItem = new ItemStack(SnItems.nobium, 10);
             craftEffect = Fx.pulverize;
             updateEffect = Fx.pulverizeSmall;
-            craftTime = 150f;
+            craftTime = 200f;
             itemCapacity = 40;
             size = 4;
             hasPower = true;
@@ -110,7 +109,7 @@ public class SnCrafting{
             consumePower(7f);
         }};
 
-        collider = new GenericCrafterWithGas("collider"){{
+        collider = new GasGenericCrafter("collider"){{
             requirements(Category.crafting, with(SnItems.fors, 105, SnItems.erius, 100, SnItems.anzar, 65));
 
             outputItem = new ItemStack(SnItems.reneubite, 1);
@@ -155,7 +154,7 @@ public class SnCrafting{
             consumePower(10f);
         }};
 
-        zeriniumZavod = new GenericCrafterWithGas("zerinium-zavod"){{
+        zeriniumZavod = new GasGenericCrafter("zerinium-zavod"){{
             requirements(Category.crafting, with(SnItems.erius, 180, SnItems.nobium, 160, SnItems.anzar, 155, SnItems.enojie, 40));
             size = 4;
             itemCapacity = 45;

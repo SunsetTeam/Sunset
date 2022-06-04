@@ -132,7 +132,6 @@ public class SnEnvironment  {
             statusDuration = 120f;
             drownTime = 700f;
             albedo = 0.5f;
-            attributes.set(SnAttribute.naturite, 0.3f);
         }};
         crimsonMoss = new Floor("crimson-moss") {{
             variants = 3;
@@ -148,7 +147,6 @@ public class SnEnvironment  {
             statusDuration = 120f;
             cacheLayer = CacheLayer.water;
             albedo = 0.5f;
-            attributes.set(SnAttribute.naturite, 1f);
         }};
         gasDeposit = new Floor("gas-deposit") {{
             variants = 3;
