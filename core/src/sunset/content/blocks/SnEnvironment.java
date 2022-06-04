@@ -94,12 +94,6 @@ public class SnEnvironment implements ContentList {
             variants = 3;
             wall = crimsonDirtWall;
         }};
-        crimsonSand = new Floor("crimson-sand") {{
-            itemDrop = Items.sand;
-            playerUnmineable = true;
-            variants = 3;
-            wall = crimsonSandWall;
-        }};
         crimsonSwamp = new Floor("crimson-swamp") {{
             speedMultiplier = 0.4f;
             variants = 3;
@@ -114,41 +108,6 @@ public class SnEnvironment implements ContentList {
         crimsonMoss = new Floor("crimson-moss") {{
             variants = 3;
             wall = crimsonPine;
-        }};
-
-        crimsonSandWater = new Floor("crimson-sand-water") {{
-            speedMultiplier = 0.9f;
-            variants = 0;
-            liquidDrop = SnLiquids.burheyna;
-            liquidMultiplier = 0.7f;
-            isLiquid = true;
-            status = SnStatusEffects.viscous;
-            statusDuration = 120f;
-            cacheLayer = CacheLayer.water;
-            albedo = 0.5f;
-        }};
-        crimsonWater = new Floor("crimson-water") {{
-            speedMultiplier = 0.8f;
-            variants = 0;
-            liquidDrop = SnLiquids.burheyna;
-            liquidMultiplier = 1.1f;
-            isLiquid = true;
-            status = SnStatusEffects.viscous;
-            statusDuration = 120f;
-            cacheLayer = CacheLayer.water;
-            albedo = 0.5f;
-        }};
-        crimsonDeepWater = new Floor("crimson-deep-water") {{
-            speedMultiplier = 0.5f;
-            variants = 0;
-            liquidDrop = SnLiquids.burheyna;
-            liquidMultiplier = 1.1f;
-            isLiquid = true;
-            status = SnStatusEffects.viscous;
-            statusDuration = 120f;
-            drownTime = 160f;
-            cacheLayer = CacheLayer.water;
-            albedo = 0.5f;
         }};
 
         gasDeposit = new Floor("gas-deposit") {{
@@ -173,45 +132,12 @@ public class SnEnvironment implements ContentList {
             attributes.set(SnAttribute.burheyna, 0.28f);
         }};
 
-        granite = new Floor("granite") {{
-            variants = 3;
-            attributes.set(SnAttribute.burheyna, -0.4f);
-            wall = graniteWall;
-        }};
-
         jadestone = new Floor("jadestone") {{
             variants = 3;
             attributes.set(SnAttribute.burheyna, -0.1f);
         }};
 
-        orangeSand = new Floor("orange-sand") {{
-            itemDrop = Items.sand;
-            playerUnmineable = true;
-            variants = 3;
-            wall = orangeSandWall;
-        }};
-        stoneSand = new Floor("stone-sand") {{
-            variants = 3;
-            wall = stoneSandWall;
-        }};
 
-        obsidian = new Floor("obsidian") {{
-            variants = 3;
-            wall = obsidianWall;
-        }};
-        ash = new Floor("ash") {{
-            variants = 3;
-            wall = ashWall;
-        }};
-        burningAsh = new Floor("burning-ash") {{
-            variants = 2;
-            attributes.set(Attribute.heat, 0.55f);
-            attributes.set(Attribute.water, -0.55f);
-
-            emitLight = true;
-            lightRadius = 28f;
-            lightColor = Color.orange.cpy().a(0.15f);
-        }};
         //endregion floors
         //region static walls
         crimsonGrassWall = new StaticWall("crimson-grass-wall") {{
@@ -231,9 +157,6 @@ public class SnEnvironment implements ContentList {
             variants = 2;
         }};
 
-        graniteWall = new StaticWall("granite-wall") {{
-            variants = 3;
-        }};
 
         jadestoneWall = new StaticWall("jadestone-wall") {{
             variants = 2;
@@ -243,19 +166,6 @@ public class SnEnvironment implements ContentList {
             variants = 2;
         }};
 
-        orangeSandWall = new StaticWall("orange-sand-wall") {{
-            variants = 2;
-        }};
-        stoneSandWall = new StaticWall("stone-sand-wall") {{
-            variants = 2;
-        }};
-
-        obsidianWall = new StaticWall("obsidian-wall") {{
-            variants = 2;
-        }};
-        ashWall = new StaticWall("ash-wall") {{
-            variants = 2;
-        }};
         //region breakable environment walls
         stagesWall = new BreakableEnvWall("stages-wall") {{
             variants = 1;

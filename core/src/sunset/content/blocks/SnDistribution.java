@@ -44,11 +44,6 @@ public class SnDistribution implements ContentList {
         }};
         //endregion transportation
         //region storage
-        crypt = new StorageBlock("crypt") {{
-            requirements(Category.effect, with(Items.titanium, 350, SnItems.naturite, 200));
-            size = 5;
-            itemCapacity = 3500;
-        }};
         //endregion storage
         //region special
         airport = new Airport("airport") {{

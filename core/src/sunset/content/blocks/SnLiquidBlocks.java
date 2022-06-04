@@ -48,12 +48,6 @@ public class SnLiquidBlocks implements ContentList {
         }
         //endregion transportation
         //region storage
-        liquidWell = new LiquidRouter("liquid-well") {{
-            requirements(Category.liquid, with(Items.titanium, 110, Items.metaglass, 90, Items.thorium, 75));
-            size = 4;
-            liquidCapacity = 3100f;
-            health = 1270;
-        }};
         //endregion storage
         //region special
         naturitePump = new Pump("naturite-pump") {{

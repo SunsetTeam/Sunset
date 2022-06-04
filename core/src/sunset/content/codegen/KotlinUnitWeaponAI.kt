@@ -1,4 +1,4 @@
-package sunset.codegen
+package sunset.content.codegen
 
 import mindustry.entities.Predict
 import mindustry.entities.units.AIController

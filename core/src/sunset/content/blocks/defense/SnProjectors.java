@@ -21,19 +21,6 @@ public class SnProjectors implements ContentList {
     @Override
     public void load() {
 
-        hugeRestoringDome = new RepairStation("huge-restoring-dome"){{
-            requirements(Category.effect, with(Items.lead, 560, Items.titanium, 255, Items.silicon, 140, SnItems.nobium, 100));
-            consumes.power(4.4f);
-            size = 5;
-            reload = 5f * Time.toSeconds;
-            range = 30f * Vars.tilesize;
-            healPercent = 25f;
-            repairHealth = 250f;
-            phaseBoost = 15f;
-            health = 80 * size * size;
-            consumes.item(SnItems.nobium).boost();
-        }};
-
         forceDome = new ForceProjector("force-dome") {{
             requirements(Category.effect, with(Items.titanium, 600, Items.thorium, 480, Items.silicon, 300, SnItems.naturite, 250, SnItems.nobium, 240, SnItems.enojie, 210));
             size = 5;
