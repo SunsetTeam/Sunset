@@ -1,4 +1,4 @@
-package sunset.content.codegen;
+package sunset.codegen;
 
 import arc.math.geom.*;
 import mindustry.entities.*;

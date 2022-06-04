@@ -522,7 +522,135 @@ public class SnUnitTypes implements ContentList{
         }};
         //endregion berserk
         //region wheel
+        wheelT1 = new WheelUnitType("wheel-t1") {{
+            health = 80;
+            speed = 3.5f;
+            rotateSpeed = baseRotateSpeed = 2.75f;
+            drag = 0.075f;
+            weapons.add(new WeaponExt("wheel1-minigun") {{
+                reload = 5.5f;
+                inaccuracy = 4f;
+                rotate = true;
+                mirror = false;
+                bullet = SnBullets.wheel1Bullet;
+                x = y = 0;
+            }});
+        }};
+        wheelT2 = new WheelUnitType("wheel-t2") {{
+            health = 420;
+            speed = 3.4f;
+            rotateSpeed = baseRotateSpeed = 2.66f;
+            drag = 0.075f;
+            weapons.add(new WeaponExt("wheel2-shotgun") {{
+                reload = 48f;
+                inaccuracy = 0f;
+                rotate = true;
+                mirror = false;
+                bullet = SnBullets.wheel2Shotgun;
+                x = y = 0;
+            }});
+        }};
+        wheelT3 = new WheelUnitType("wheel-t3") {{
+            health = 890;
+            speed = 3.2f;
+            rotateSpeed = baseRotateSpeed = 2.33f;
+            drag = 0.075f;
+            weapons.add(new WeaponExt("wheel3-burst") {{
+                reload = 65f;
+                inaccuracy = 1f;
+                rotate = true;
+                mirror = false;
+                bullet = SnBullets.wheel3Burst;
+                shootSound = Sounds.shootBig;
+                x = y = 0;
+            }});
+        }};
+        wheelT4 = new WheelUnitType("wheel-t4") {{
+            health = 6800;
+            speed = 3.1f;
+            rotateSpeed = baseRotateSpeed = 2.25f;
+            drag = 0.075f;
+            weapons.add(new WeaponExt("wheel4-shotgun") {{
+                reload = 92f;
+                rotate = true;
+                mirror = false;
+                bullet = SnBullets.wheel4Shotgun;
+                shootSound = Sounds.shootBig;
+                x = y = 0;
+            }});
+            weapons.add(new WeaponExt("wheel4-burst") {{
+                reload = 56f;
+                inaccuracy = 3f;
+                alternate = true;
+                rotate = true;
+                bullet = SnBullets.wheel4Artillery;
+                shootSound = Sounds.shootBig;
+                y = -6;
+                x = -3;
+            }});
+        }};
+        wheelT5 = new WheelUnitType("wheel-t5") {{
+            health = 19400;
+            speed = 3f;
+            rotateSpeed = baseRotateSpeed = 2f;
+            drag = 0.075f;
+            weapons.add(new WeaponExt("wheel5-flame") {{
+                reload = 7f;
+                rotate = true;
+                mirror = false;
+                bullet = SnBullets.wheel5Flame;
+                shootSound = Sounds.flame;
+                x = y = 0;
+            }});
+            weapons.add(new WeaponExt("wheel5-bullet") {{
+                reload = 149f;
+                inaccuracy = 1f;
+                alternate = true;
+                rotate = true;
+                rotateShooting = true;
+                shots = 9;
+                shotDelay = 5f;
+                bullet = SnBullets.wheel5Bullet;
+                shootSound = Sounds.shootBig;
+                y = -12;
+                x = -6;
+            }});
+        }};
+        //there should be a wheelT6 here
+        //endregion wheel
+        //region freezing
+        freezingT1 = new UnitTypeExt("freezing-t1") {{
+            defaultController = SuicideAI::new;
+            constructor = UnitTypes.pulsar.constructor;
+            speed = 1f;
+            hitSize = 8f;
+            health = 500;
+            mechSideSway = 0.25f;
+            range = 40f;
 
+            immunities.add(StatusEffects.freezing);
+
+            weapons.add(new SnWeapon() {{
+                reload = 20f;
+                shootCone = 180f;
+                ejectEffect = Fx.freezing;
+                shootSound = Sounds.explosion;
+                x = shootY = 0f;
+                mirror = false;
+                bullet = new BombBulletType(0f, 0f, "clear") {{
+                    hitEffect = Fx.pulverize;
+                    lifetime = 10f;
+                    speed = 1f;
+                    status = StatusEffects.freezing;
+                    splashDamageRadius = 90f;
+                    instantDisappear = true;
+                    splashDamage = 12f;
+                    killShooter = true;
+                    hittable = false;
+                    collidesAir = true;
+                }};
+            }});
+        }};
         //endregion freezing
         //endregion ground
         //region air

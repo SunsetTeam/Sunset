@@ -42,7 +42,86 @@ public class SnCrafting implements ContentList{
     @Override
     public void load(){
         //region advanced
+        advancedKiln = new GenericCrafter("advanced-kiln"){{
+            requirements(Category.crafting, with(Items.titanium, 150, Items.graphite, 80, Items.metaglass, 80, Items.silicon, 60, Items.plastanium, 35));
 
+            size = 3;
+            health = 1200;
+            craftEffect = Fx.smeltsmoke;
+            craftTime = 95f;
+            outputItem = new ItemStack(Items.metaglass, 9);
+            itemCapacity = 15;
+            drawer = new MultiDrawSmelter(){{
+                flameColor = Color.valueOf("ffc099");
+                flameRadius *= 1f / 2f;
+                flameRadiusIn *= 1f / 2f;
+                flameRadiusMag *= 1f / 1.5f;
+                flameRadiusInMag *= 1f / 1.5f;
+                flamePoints(
+                new FlamePoint(1f / 3f, 1f / 3f),
+                new FlamePoint(1f - 1f / 3f, 1f / 3f),
+                new FlamePoint(1f / 3f, 1f - 1f / 3f),
+                new FlamePoint(1f - 1f / 3f, 1f - 1f / 3f),
+                new FlamePoint(0.5f, 0.5f, 0.9f)
+                );
+                drawTopOnce = true;
+            }};
+            liquidCapacity = 100f;
+
+            consumes.items(with(Items.lead, 7, Items.sand, 5));
+            consumes.liquid(Liquids.water, 0.75f);
+            consumes.power(7f);
+        }};
+        advancedCompressor = new GenericCrafter("advanced-compressor"){{
+            requirements(Category.crafting, with(Items.titanium, 150, Items.graphite, 120, Items.silicon, 110, Items.metaglass, 80, Items.plastanium, 60));
+
+            size = 3;
+            craftEffect = SnFx.modPlasticBurn;
+            craftTime = 60f;
+            outputItem = new ItemStack(Items.plastanium, 5);
+            drawer = new DrawGlow();
+            itemCapacity = 20;
+            liquidCapacity = 20f;
+            absorbLasers = true;
+            consumes.items(with(Items.titanium, 9));
+            consumes.liquid(Liquids.oil, 0.35f);
+            consumes.power(5.3f);
+        }};
+        advancedWeaver = new GenericCrafter("advanced-weaver"){{
+            requirements(Category.crafting, with(Items.lead, 190, Items.thorium, 160, Items.silicon, 145, Items.titanium, 80, Items.phaseFabric, 70));
+            size = 3;
+            health = 890;
+            craftEffect = SnFx.weaverSmeltsmoke;
+            craftTime = 180f;
+            outputItem = new ItemStack(Items.phaseFabric, 6);
+            drawer = new DrawModWeave();
+            itemCapacity = 50;
+            liquidCapacity = 30f;
+
+            ambientSound = Sounds.techloop;
+            ambientSoundVolume = 0.04f;
+
+            consumes.items(with(Items.sand, 22, Items.thorium, 10));
+            consumes.liquid(Liquids.cryofluid, 0.3f);
+            consumes.power(6.1f);
+        }};
+        advancedCryomixer = new LiquidConverter("advanced-cryomixer"){{
+            requirements(Category.crafting, with(Items.lead, 180, Items.graphite, 90, SnItems.coldent, 60, Items.metaglass, 40));
+            outputLiquid = new LiquidStack(Liquids.cryofluid, 1f);
+            craftTime = 40f;
+            size = 4;
+            hasPower = true;
+            hasItems = true;
+            hasLiquids = true;
+            rotate = false;
+            solid = true;
+            outputsLiquid = true;
+            drawer = new DrawMixer();
+
+            consumes.power(2.5f);
+            consumes.item(SnItems.coldent);
+            consumes.liquid(Liquids.water, 1f);
+        }};
         advancedSurge = new GenericCrafter("advanced-surge"){{
             requirements(Category.crafting, with(Items.thorium, 280, Items.silicon, 200, Items.lead, 160, Items.surgeAlloy, 130, Items.plastanium, 110));
 
