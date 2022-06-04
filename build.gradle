@@ -27,7 +27,7 @@ buildscript{
 
         gasVersion = "27b10c13f7e"
 
-        modCoreVersion = "e20557aee1d"
+        modCoreVersion = "858c094f008"
 
 
         kotlinVersion = "1.6.0"

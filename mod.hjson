@@ -12,7 +12,7 @@ author:
 "
 description: "[blue]Adds a lot of new content on type: 3 planets, new and upgraded turrets, factories, 50+ units, items, embodiment and more....."
 repo: SunsetTeam/Sunset
-main: sunset.Sunset
+main: "sunset.Sunset"
 minGameVersion: 136
 java: true
 dependencies: [

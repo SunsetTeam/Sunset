@@ -28,8 +28,6 @@ import sunset.utils.*;
 import static mindustry.Vars.*;
 import static mma.ModVars.modInfo;
 
-@ModAssetsAnnotation
-@DependenciesAnnotation
 public class Sunset extends MMAMod{
 
     boolean validDependencies;
