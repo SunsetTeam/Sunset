@@ -31,7 +31,7 @@ public class SnEnvironment  {
     crimsonSnow, gasDeposit, crimsonIce, crimsonIceSnow,
     granite,
 
-    jadestone,
+    greenStone, jadestone,
 
     orangeSand, stoneSand,
     obsidian, ash, burningAsh,
@@ -39,7 +39,7 @@ public class SnEnvironment  {
     //static walls
     greenStoneWall, jadestoneWall, gJadestoneWall,
 
-    yelliteWall, darkYelliteWall,
+    yelliteWall, sayangWall, darkYelliteWall,
 
     crimsonGrassWall, crimsonDirtWall, crimsonSandWall,
     crimsonSnowWall, crimsonIceWall,
@@ -176,6 +176,10 @@ public class SnEnvironment  {
             wall = graniteWall;
         }};
 
+        greenStone = new Floor("green-stone"){{
+            variants = 3;
+        }};
+
         jadestone = new Floor("jadestone") {{
             variants = 3;
             attributes.set(SnAttribute.burheyna, -0.1f);
@@ -228,10 +232,13 @@ public class SnEnvironment  {
             variants = 2;
         }};
 
-        darkYelliteWall = new StaticWall("dark-yellite-wall"){{
+        sayangWall = new StaticWall("sayang-wall"){{
             variants = 2;
         }};
 
+        darkYelliteWall = new StaticWall("dark-yellite-wall"){{
+            variants = 2;
+        }};
         crimsonGrassWall = new StaticWall("crimson-grass-wall") {{
             variants = 2;
         }};
