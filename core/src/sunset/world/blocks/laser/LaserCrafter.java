@@ -89,7 +89,7 @@ public class LaserCrafter extends LaserBlock{
         @Override
         public void updateTile(){
             super.updateTile();
-            Log.info("warmup: @\nwarmupSpeed: @\ndelta: @", warmup, warmupSpeed, Time.delta);
+            //Log.info("warmup: @\nwarmupSpeed: @\ndelta: @", warmup, warmupSpeed, Time.delta);
             if(efficiency() > 0 && laser.out >= 0){
                 progress += getProgressIncrease(craftTime);
                 warmup = Mathf.approachDelta(warmup, 1f, warmupSpeed);
