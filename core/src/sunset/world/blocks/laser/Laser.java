@@ -65,7 +65,7 @@ public class Laser{
         if(enabled){
             Tmp.v1.trns(angle, offset);
             if(target instanceof Building b){
-                Tmp.v3.trns(angle, offset + (b.block().size - 1) / 2f * Vars.tilesize);
+                Tmp.v3.trns(angle, offset + (Math.max(0, b.block().size - 2)) / 2f * Vars.tilesize);
             }
             else if(target instanceof Unit u){
                 Tmp.v3.trns(angle, offset + u.hitSize / 2f);
@@ -76,8 +76,9 @@ public class Laser{
 
             Draw.alpha(charge);
             Tmp.v2.set(end.x - Tmp.v3.x, end.y - Tmp.v3.y);
+            Tmp.v4.set(start.x + Tmp.v1.x, start.y + Tmp.v1.y);
             //if we are too close to laser, draw from start to start
-            if(Tmp.v2.dst(start) <= offset){
+            if(Tmp.v2.dst(Tmp.v4) <= offset){
                 Drawf.laser(Core.atlas.find("minelaser"), Core.atlas.find("sunset-als-laser-end"), Core.atlas.find("sunset-als-laser-end"), start.x + Tmp.v1.x, start.y + Tmp.v1.y, start.x + Tmp.v1.x, start.y + Tmp.v1.y);
             }else{
                 Drawf.laser(Core.atlas.find("minelaser"), Core.atlas.find("sunset-als-laser-end"), Core.atlas.find("sunset-als-laser-end"), start.x + Tmp.v1.x, start.y + Tmp.v1.y, end.x - Tmp.v3.x, end.y - Tmp.v3.y);

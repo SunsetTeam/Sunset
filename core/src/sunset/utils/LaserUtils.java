@@ -5,7 +5,6 @@ import arc.math.Mathf;
 import arc.math.geom.Geometry;
 import arc.math.geom.Rect;
 import arc.math.geom.Vec2;
-import arc.util.Log;
 import mindustry.core.World;
 import mindustry.entities.Units;
 import mindustry.gen.Building;
