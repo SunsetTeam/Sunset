@@ -28,7 +28,6 @@ public class LaserUtils {
         tr.trns(angle, length);
         World.raycastEachWorld(x, y, x + tr.x, y + tr.y, (cx, cy) -> {
             Tile t = world.tile(cx, cy);
-            Log.info("cx: @\ncy: @\ntileX: @\ntileY: @", cx, cy, t.worldx(), t.worldy());
             if(t.block() instanceof StaticWall){
                 tmpTile[0] = t;
                 return true;
@@ -84,7 +83,8 @@ public class LaserUtils {
             other.width += expand * 2;
             other.height += expand * 2;
 
-            if(Geometry.raycastRect(x, y, x2, y2, other) != null) tmpUnit[0] = e;
+            if(Geometry.raycastRect(x, y, x2, y2, other) != null)
+                tmpUnit[0] = e;
         });
 
         if(tmpBuilding[0] != null && tmpUnit[0] != null){
@@ -93,12 +93,10 @@ public class LaserUtils {
             else
                 return tmpBuilding[0];
         }
-        else{
-            if(tmpBuilding[0] != null)
-                return tmpBuilding[0];
-            if(tmpUnit[0] != null)
-                return tmpUnit[0];
+        else if(tmpBuilding[0] != null){
+            return tmpBuilding[0];
         }
-        return null;
+        else
+            return tmpUnit[0];
     }
 }

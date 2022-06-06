@@ -85,7 +85,6 @@ public class Laser{
             }else{
                 Drawf.laser(Core.atlas.find("minelaser"), Core.atlas.find("sunset-als-laser-end"), Core.atlas.find("sunset-als-laser-end"), start.x + Tmp.v1.x, start.y + Tmp.v1.y, end.x - Tmp.v3.x, end.y - Tmp.v3.y);
             }
-            Log.info("endX: @\nendY: @", end.x, end.y);
         }
     }
 
@@ -117,7 +116,6 @@ public class Laser{
             Tile t = LaserUtils.linecastStaticWalls(start.x + Tmp.v1.x, start.y + Tmp.v1.y, angle, length);
             //cast with static walls
             if(t != null){
-                //Log.info("angle: @\nstartX: @\nstartY: @\ntileX: @\ntileY: @", angle, start.x, start.y, t.worldx(), t.worldy());
                 Tmp.v1.trns(angle, start.dst(t.worldx(), t.worldy()));
                 end.x = start.x + Tmp.v1.x;
                 end.y = start.y + Tmp.v1.y;
