@@ -63,10 +63,9 @@ public class Laser{
 
     public void draw(){
         if(enabled){
-            //Log.info("draw\nangle: @\nstart: @  @\nend: @  @", angle, start.x, start.y, end.x, end.y);
             Tmp.v1.trns(angle, offset);
             if(target instanceof Building b){
-                Tmp.v3.trns(angle, offset + (b.block().size - 2) * Vars.tilesize);
+                Tmp.v3.trns(angle, offset + (b.block().size - 1) / 2f * Vars.tilesize);
             }
             else if(target instanceof Unit u){
                 Tmp.v3.trns(angle, offset + u.hitSize / 2f);
@@ -75,9 +74,7 @@ public class Laser{
                 Tmp.v3.trns(angle, offset);
             }
 
-            //Log.info("tmpv1\nx: @\ny: @\noffset: @\nangle: @", Tmp.v1.x, Tmp.v1.y, offset, angle);
             Draw.alpha(charge);
-            //Log.info("dst btwn end and start: @\noffset: @", end.dst(start), offset);
             Tmp.v2.set(end.x - Tmp.v3.x, end.y - Tmp.v3.y);
             //if we are too close to laser, draw from start to start
             if(Tmp.v2.dst(start) <= offset){
