@@ -2,14 +2,19 @@ package sunset.world.blocks.laser;
 
 import arc.*;
 import arc.graphics.g2d.*;
+import arc.math.Mathf;
 import arc.math.geom.*;
 import arc.util.*;
 import mindustry.*;
 import mindustry.entities.*;
 import mindustry.gen.*;
 import mindustry.graphics.*;
+import mindustry.world.Tile;
+import sunset.content.SnBlocks;
+import sunset.content.blocks.defense.SnWalls;
 import sunset.type.*;
 import sunset.utils.*;
+import sunset.world.blocks.defense.walls.SnWall;
 
 /**
  * Laser class.
@@ -40,6 +45,7 @@ public class Laser{
     public LaserBlock.LaserBlockBuild build;
     /** laser current target. */
     public Healthc target = null;
+    public boolean onStaticWall = false;
 
     public Laser(){
     }
@@ -65,17 +71,21 @@ public class Laser{
             else if(target instanceof Unit u){
                 Tmp.v3.trns(angle, offset + u.hitSize / 2f);
             }
+            else if(onStaticWall){
+                Tmp.v3.trns(angle, offset);
+            }
 
             //Log.info("tmpv1\nx: @\ny: @\noffset: @\nangle: @", Tmp.v1.x, Tmp.v1.y, offset, angle);
             Draw.alpha(charge);
             //Log.info("dst btwn end and start: @\noffset: @", end.dst(start), offset);
-            Tmp.v2.set(end.x - Tmp.v2.x, end.y - Tmp.v2.y);
+            Tmp.v2.set(end.x - Tmp.v3.x, end.y - Tmp.v3.y);
             //if we are too close to laser, draw from start to start
             if(Tmp.v2.dst(start) <= offset){
                 Drawf.laser(Core.atlas.find("minelaser"), Core.atlas.find("sunset-als-laser-end"), Core.atlas.find("sunset-als-laser-end"), start.x + Tmp.v1.x, start.y + Tmp.v1.y, start.x + Tmp.v1.x, start.y + Tmp.v1.y);
             }else{
                 Drawf.laser(Core.atlas.find("minelaser"), Core.atlas.find("sunset-als-laser-end"), Core.atlas.find("sunset-als-laser-end"), start.x + Tmp.v1.x, start.y + Tmp.v1.y, end.x - Tmp.v3.x, end.y - Tmp.v3.y);
             }
+            Log.info("endX: @\nendY: @", end.x, end.y);
         }
     }
 
@@ -83,13 +93,13 @@ public class Laser{
         charge = build.laser.out;
         //start offset vector
         Tmp.v1.trns(angle, offset);
-        Healthc entity = target = LaserUtils.linecast(start.x + Tmp.v1.x, start.y + Tmp.v1.y, angle, length, false, true, boolf -> true);
+        target = LaserUtils.linecast(start.x + Tmp.v1.x, start.y + Tmp.v1.y, angle, length, false, true, boolf -> true);
         //don't cast with yourself
         if(build != null && target == build)
             return;
         if(target != null){
             //for correct drawing
-            Tmp.v1.trns(angle, start.dst(entity.x(), entity.y()));
+            Tmp.v1.trns(angle, start.dst(target.x(), target.y()));
             end.x = start.x + Tmp.v1.x;
             end.y = start.y + Tmp.v1.y;
 
@@ -104,8 +114,20 @@ public class Laser{
                 }
             }
         }else{
-            Tmp.v1.trns(angle, length);
-            end.set(start.x + Tmp.v1.x, start.y + Tmp.v1.y);
+            Tile t = LaserUtils.linecastStaticWalls(start.x + Tmp.v1.x, start.y + Tmp.v1.y, angle, length);
+            //cast with static walls
+            if(t != null){
+                //Log.info("angle: @\nstartX: @\nstartY: @\ntileX: @\ntileY: @", angle, start.x, start.y, t.worldx(), t.worldy());
+                Tmp.v1.trns(angle, start.dst(t.worldx(), t.worldy()));
+                end.x = start.x + Tmp.v1.x;
+                end.y = start.y + Tmp.v1.y;
+                onStaticWall = true;
+            }
+            else{
+                Tmp.v1.trns(angle, length);
+                end.set(start.x + Tmp.v1.x, start.y + Tmp.v1.y);
+                onStaticWall = false;
+            }
         }
 
     }
