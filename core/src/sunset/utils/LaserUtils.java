@@ -28,7 +28,7 @@ public class LaserUtils {
         tr.trns(angle, length);
         World.raycastEachWorld(x, y, x + tr.x, y + tr.y, (cx, cy) -> {
             Tile t = world.tile(cx, cy);
-            if(t.block() instanceof StaticWall){
+            if(t != null && t.block() instanceof StaticWall){
                 tmpTile[0] = t;
                 return true;
             }
