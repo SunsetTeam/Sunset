@@ -140,7 +140,6 @@ public class Sunset extends MMAMod{
         if(c instanceof UnlockableContent){
             UnlockableContent content = (UnlockableContent)c;
             SnContentTranslation.checkContent(content);
-
         }
     }
 
