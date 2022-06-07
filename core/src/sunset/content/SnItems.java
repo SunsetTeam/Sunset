@@ -1,6 +1,7 @@
 package sunset.content;
 
 import arc.graphics.Color;
+import arc.struct.Seq;
 import mindustry.type.Item;
 import sunset.type.Ammo;
 import sunset.type.SnItem;
@@ -18,6 +19,8 @@ public class SnItems {
     lightBurstMissile,
     raMissile, empMissile, lightningMissile, lightMissile,
     burstMissile, detonatorMissile, pointMissile, spotMissile;
+
+    public static final Seq<Item> azariaItems = new Seq<>();
 
     public static void load() {
         //region azaria
@@ -104,5 +107,10 @@ public class SnItems {
         //endregion ammo
 
         */
+
+        azariaItems.addAll(
+                fors, erius, naturite, anzar, nedirium, reneubite, nobium, planatrium, azalia_bud,
+                yantai, enojie, zerinium
+        );
     }
 }
