@@ -161,7 +161,7 @@ public class SnEnvironment  {
             cacheLayer = CacheLayer.water;
             drownTime = 210f;
             albedo = 0.5f;
-            attributes.set(SnAttribute.thermalBurheyna, 0f);
+            attributes.set(SnAttribute.thermalBurheyna, 1f);
         }};
         gasDeposit = new Floor("gas-deposit") {{
             variants = 3;

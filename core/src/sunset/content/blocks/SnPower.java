@@ -23,7 +23,7 @@ public class SnPower{
         thermalEvaporator = new ThermalGenerator("thermal-evaporator"){{
             requirements(Category.power, with(SnItems.fors, 60, SnItems.erius, 40));
             powerProduction = 2.5f;
-            displayEfficiency = false;
+            displayEfficiency = true;
             spinners = false;
             size = 2;
             floating = true;
@@ -36,7 +36,7 @@ public class SnPower{
         oxidativeCombustionGenerator = new GasConsumeGenerator("oxidative-combustion-generator"){{
             requirements(Category.power, with(SnItems.fors, 120, SnItems.erius, 100, SnItems.anzar, 70));
             size = 2;
-            powerProduction = 5.4f;
+            powerProduction = 5.9f;
 
             hasGasses = true;
             hasItems = true;

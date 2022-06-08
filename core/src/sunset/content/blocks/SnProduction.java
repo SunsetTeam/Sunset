@@ -37,7 +37,7 @@ public class SnProduction{
         //region drills
         streamlinedDrill = new Drill("streamlined-drill"){{
             requirements(Category.production, with(SnItems.fors, 30, SnItems.erius, 15));
-            drillTime = 180;
+            drillTime = 167;
             size = 2;
             hasPower = true;
             itemCapacity = 20;
