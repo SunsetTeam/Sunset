@@ -27,33 +27,21 @@ public class SnProduction{
     mechanicalWaterExtractor,
 
     //drills
-    firstDrill;
+    streamlinedDrill, destructiveDrill, thermoPlasmDrill;
 
     public static void load(){
-        mechanicalWaterExtractor = new SolidPump("mechanical-water-extractor"){{
-            requirements(Category.production, with(Items.metaglass, 30, Items.graphite, 30, Items.lead, 30, SnItems.fors, 30));
-            result = SnLiquids.burheyna;
-            pumpAmount = 0.12f;
-            size = 2;
-            liquidCapacity = 35f;
-            rotateSpeed = 1.5f;
-            attribute = SnAttribute.burheyna;
-            envRequired |= Env.groundWater;
-
-            consumePower(2f);
-        }};
 
         //region crafters
         //endregion crafters
         //region drills
-        firstDrill = new DRDrill("first-drill"){{
+        streamlinedDrill = new DRDrill("streamlined-drill"){{
             requirements(Category.production, with(SnItems.fors, 30, SnItems.erius, 15));
             drillTime = 305;
             size = 2;
             hasPower = true;
             tier = 3;
             consumePower(0.65f);
-            consumeLiquid(SnLiquids.messira, 3f / 60f).boost();
+            consumeLiquid(SnLiquids.burheyna, 3f / 60f).boost();
             m1 = 4;
         }};
         //endregion drills
