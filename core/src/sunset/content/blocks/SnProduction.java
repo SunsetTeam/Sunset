@@ -7,6 +7,7 @@ import mindustry.type.Category;
 import mindustry.type.ItemStack;
 import mindustry.world.Block;
 import mindustry.world.blocks.production.AttributeCrafter;
+import mindustry.world.blocks.production.Drill;
 import mindustry.world.blocks.production.SolidPump;
 import mindustry.world.draw.*;
 import mindustry.world.meta.Env;
@@ -34,15 +35,15 @@ public class SnProduction{
         //region crafters
         //endregion crafters
         //region drills
-        streamlinedDrill = new DRDrill("streamlined-drill"){{
+        streamlinedDrill = new Drill("streamlined-drill"){{
             requirements(Category.production, with(SnItems.fors, 30, SnItems.erius, 15));
-            drillTime = 305;
+            drillTime = 180;
             size = 2;
             hasPower = true;
+            itemCapacity = 20;
             tier = 3;
             consumePower(0.65f);
             consumeLiquid(SnLiquids.burheyna, 3f / 60f).boost();
-            m1 = 4;
         }};
         //endregion drills
     }
