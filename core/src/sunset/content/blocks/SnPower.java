@@ -22,25 +22,31 @@ public class SnPower{
     public static void load(){
         thermalEvaporator = new ThermalGenerator("thermal-evaporator"){{
             requirements(Category.power, with(SnItems.fors, 60, SnItems.erius, 40));
-            powerProduction = 2.5f;
+            powerProduction = 2.5f / 9;
             displayEfficiencyScale = 1f / 9f;
             minEfficiency = 9f - 0.0001f;
             spinners = false;
             size = 2;
             floating = true;
+            placeableLiquid = true;
             ambientSound = Sounds.hum;
             ambientSoundVolume = 0.06f;
             attribute = SnAttribute.thermalBurheyna;
         }};
 
         oxidativeCombustionGenerator = new GasConsumeGenerator("oxidative-combustion-generator"){{
+            requirements(Category.power, with(SnItems.fors, 120, SnItems.erius, 100, SnItems.anzar, 70));
+            size = 2;
             powerProduction = 5.4f;
 
             hasGasses = true;
             hasItems = true;
+            hasPower = true;
             itemCapacity = 20;
             gasCapacity = 35f;
             itemDuration = 140f;
+            ambientSound = Sounds.smelter;
+            ambientSoundVolume = 0.06f;
 
             consumeGas(SnGas.hyneris, 5f / 60f);
             consumeItem(SnItems.azalia_bud, 2);
