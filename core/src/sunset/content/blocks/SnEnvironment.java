@@ -143,9 +143,11 @@ public class SnEnvironment  {
             liquidDrop = SnLiquids.burheyna;
             liquidMultiplier = 1.1f;
             isLiquid = true;
+
             status = SnStatusEffects.viscous;
             statusDuration = 120f;
             cacheLayer = CacheLayer.water;
+            drownTime = 180f;
             albedo = 0.5f;
         }};
         thermalBurheyna = new Floor("burheyna-thermal-floor") {{
@@ -157,8 +159,9 @@ public class SnEnvironment  {
             status = SnStatusEffects.viscous;
             statusDuration = 120f;
             cacheLayer = CacheLayer.water;
+            drownTime = 210f;
             albedo = 0.5f;
-            attributes.set(SnAttribute.thermalBurheyna, 1f);
+            attributes.set(SnAttribute.thermalBurheyna, 0f);
         }};
         gasDeposit = new Floor("gas-deposit") {{
             variants = 3;
