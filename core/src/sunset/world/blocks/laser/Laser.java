@@ -77,6 +77,7 @@ public class Laser{
             Draw.alpha(charge);
             Tmp.v2.set(end.x - Tmp.v3.x, end.y - Tmp.v3.y);
             Tmp.v4.set(start.x + Tmp.v1.x, start.y + Tmp.v1.y);
+
             //if we are too close to laser, draw from start to start
             if(Tmp.v2.dst(Tmp.v4) <= offset){
                 Drawf.laser(Core.atlas.find("minelaser"), Core.atlas.find("sunset-als-laser-end"), Core.atlas.find("sunset-als-laser-end"), start.x + Tmp.v1.x, start.y + Tmp.v1.y, start.x + Tmp.v1.x, start.y + Tmp.v1.y);
