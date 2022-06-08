@@ -27,7 +27,7 @@ public class SnEnvironment  {
     //floors
     chromakey,
     crimsonGrass, crimsonDirt, crimsonSand, crimsonSwamp, crimsonMoss,
-    burheynaLiquidFloor,
+    burheynaLiquidFloor, thermalBurheyna,
     crimsonSnow, gasDeposit, crimsonIce, crimsonIceSnow,
     granite,
 
@@ -143,12 +143,14 @@ public class SnEnvironment  {
             liquidDrop = SnLiquids.burheyna;
             liquidMultiplier = 1.1f;
             isLiquid = true;
+
             status = SnStatusEffects.viscous;
             statusDuration = 120f;
             cacheLayer = CacheLayer.water;
+            drownTime = 180f;
             albedo = 0.5f;
         }};
-        burheynaLiquidFloor = new Floor("burheyna-thermal-floor") {{
+        thermalBurheyna = new Floor("burheyna-thermal-floor") {{
             speedMultiplier = 0.8f;
             variants = 0;
             liquidDrop = SnLiquids.burheyna;
@@ -157,8 +159,9 @@ public class SnEnvironment  {
             status = SnStatusEffects.viscous;
             statusDuration = 120f;
             cacheLayer = CacheLayer.water;
+            drownTime = 210f;
             albedo = 0.5f;
-            attributes.set(SnAttribute.thermalBurheyna, 1f);
+            attributes.set(SnAttribute.thermalBurheyna, 0.25f);
         }};
         gasDeposit = new Floor("gas-deposit") {{
             variants = 3;
