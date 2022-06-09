@@ -36,7 +36,7 @@ public class SnBlocks implements Runnable{
     SnSandbox::load,
     SnUnitBlocks::load,
     SnLasers::load,
-    //SnGasBlocks::load,
+    SnGasBlocks::load,
     SnTests::load,
     };
 
