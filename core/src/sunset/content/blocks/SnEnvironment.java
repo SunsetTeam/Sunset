@@ -75,13 +75,14 @@ public class SnEnvironment  {
             oreThreshold = 0.921f;
             oreScale = 26.1234f;
         }};
-        /*
-        oreNedirium = new OreBlock(SnItems.nedirium) {{
+
+        oreNedirium = new OreBlock("ore-wall-nedirium", SnItems.nedirium) {{
+            wallOre = true;
             oreDefault = false;
             oreThreshold = 0.921f;
             oreScale = 26.1234f;
         }};
-         */
+
         orePlanatrium = new OreBlock(SnItems.planatrium) {{
             oreDefault = false;
             oreThreshold = 0.921f;
