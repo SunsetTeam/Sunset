@@ -28,7 +28,8 @@ public class SnItems implements ContentList {
             hardness = 3;
         }};
         erius = new Item("erius", Color.valueOf("a0d2d6")) {{
-            cost = 2f;
+            cost = 2f;            
+            hardness = 2;
         }};
         anzar = new Item("anzar", Color.valueOf("feb380")) {{
             cost = 3f;
@@ -38,6 +39,7 @@ public class SnItems implements ContentList {
         }};
         nedirium = new Item("nedirium", Color.valueOf("ffffff")) {{
             cost = 3f;
+            hardness = 4;
         }};
         reneubite = new Item("reneubite", Color.valueOf("87ceeb")) {{
             cost = 3f;
