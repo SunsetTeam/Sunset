@@ -19,9 +19,16 @@ import static mindustry.type.ItemStack.with;
 public class SnPower{
     public static Block
 
-    //generatorss
-    thermalEvaporator, oxidativeCombustionGenerator, chemicalReactor;
+    //nodes
+    plasmaNode, plasmaNodeLarge, PlasmaDistributor, PlasmaDistributorLarge,
 
+    //specialBlocks
+
+    //generatorss
+    thermalEvaporator, oxidativeCombustionGenerator, chemicalReactor, planatriumReactor,
+
+    //special reactors
+    advancedPlanatriumReactor, nabuniumReactor, thermoplasmReactor, bioReactor;
 
     public static void load(){
         thermalEvaporator = new ThermalGenerator("thermal-evaporator"){{

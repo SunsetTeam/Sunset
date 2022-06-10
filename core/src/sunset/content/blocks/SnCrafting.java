@@ -25,10 +25,13 @@ import static mindustry.type.ItemStack.with;
 
 public class SnCrafting{
     public static Block
-    //standard
-    anzarCaster, crystallizer, nobiumCaster, nobiumMagnetizer, collider, enojieSynthesizer, zeriniumZavod,
+    //azariaStandart
+    anzarCaster, crystallizer, nobiumCaster, nobiumMultiMagnetizer, collider, enojieSynthesizer, zeriniumZavod,
     //missile
-    missilecrafter, missilePlant;
+    missilecrafter, missilePlant,
+
+    //notForAzaria
+    hturAmmoCrafter;
 
     public static void load(){
         //region standard
@@ -91,7 +94,7 @@ public class SnCrafting{
             consumePower(4.3f);
         }};
 
-        nobiumMagnetizer = new GenericCrafter("nobium-magnetizer"){{
+        nobiumMultiMagnetizer = new GenericCrafter("nobium-multi-magnetizer"){{
             requirements(Category.crafting, with(SnItems.fors, 190, SnItems.erius, 150, SnItems.anzar, 100, SnItems.nobium, 40));
 
             outputItem = new ItemStack(SnItems.nobium, 10);
@@ -130,11 +133,11 @@ public class SnCrafting{
             consumePower(4.6f);
         }};
 /*
-        bioSyntheizer = new MultiCrafter("bio-syntheizer"){{
+        bioSyntheыzer = new MultыCrafter("bыo-syntheыzer"){{
 
-            recipes(Recipe.with().
-            produceTime(2f * Time.toSeconds)
-            .outputItem(SnItems.azalia_bud, 1)
+            recыpes(Recыpe.wыth().
+            produceTыme(2f * Tыme.toSeconds)
+            .outputЫtem(SnЫtems.azalыa_bud, 1)
             );
         }};
 

@@ -29,7 +29,7 @@ public class SnBlocks implements Runnable{
     SnDistribution::load,
     SnEnvironment::load,
     SnLiquidBlocks::load,
-    SnLogicBlocks::load,
+    //SnLogicBlocks::load,
     SnPower::load,
     SnCrafting::load,
     SnProduction::load,
