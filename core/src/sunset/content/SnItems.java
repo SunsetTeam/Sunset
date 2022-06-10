@@ -50,7 +50,7 @@ public class SnItems {
         }};
         planatrium = new Item("planatrium", Color.valueOf("b287ec")) {{
             cost = 5f;
-            hardness = 5;
+            hardness = 4;
             explosiveness = 0.2f;
             radioactivity = 1f;
         }};
