@@ -43,11 +43,14 @@ public class SnUnitTypes{
     mirage, vision, illusion, soothSayer, seer, abyssEye,
     wheelT1, wheelT2, wheelT3, wheelT4, wheelT5, wheelT6,
     freezingT1,
+    //air
+    engineT1, hoverTest,
+    //hylight
     light,
     //naval
     yellowT1, yellowT2, yellowT3, yellowT4, yellowT5,
     //region azaria - coreUnits
-    petal, bud, snag,
+    testCoreUnit,
     //misc
     router;
     //other
@@ -1631,7 +1634,7 @@ public class SnUnitTypes{
         //endregion yellow
         //endregion naval
         //region azaria - coreUnits
-        petal = new UnitTypeExt("test-coreUnit"){{
+        testCoreUnit = new UnitTypeExt("test-coreUnit"){{
             aiController = BuilderAI::new;
             constructor = UnitEntity::create;
             isEnemy = false;
@@ -1722,6 +1725,193 @@ public class SnUnitTypes{
             flying = true;
             controller = u -> SegmentAI.wrapper(new FlyingAI());
         }};
+        //endregion snake
+
+        engineT1 = new SnUnitType("engine-t1"){{
+            health = 140;
+            hitSize = 15;
+            speed = 3.2f;
+            rotateSpeed = 5f;
+            accel = 0.04f;
+            drag = 0.016f;
+            //commandLimit = 3;
+            flying = true;
+            circleTarget = false;
+            range = 130;
+            constructor = UnitEntity::create;
+            engines.addAll(
+            new UnitEngine(){{
+                x = 0f;
+                y = -5f;
+                radius = 3f;
+            }},
+
+            new UnitEngine(){{
+                x = 0f;
+                y = -14f;
+                radius = 1f;
+            }},
+
+            new UnitEngine(){{
+                x = 0f;
+                y = -10f;
+                radius = 3f;
+            }},
+
+            new UnitEngine(){{
+                x = 10f;
+                y = 5f;
+                radius = 2f;
+            }});
+        }};
+
+        hoverTest = new ParticleUnitType("hover-test"){{
+            armor = 8f;
+            health = 6000;
+            speed = 1.2f;
+            rotateSpeed = 2f;
+            accel = 0.05f;
+            drag = 0.017f;
+            lowAltitude = false;
+            flying = true;
+            circleTarget = true;
+            engineOffset = 12f;
+            engineSize = 6f;
+            faceTarget = false;
+            hitSize = 36f;
+            payloadCapacity = (3 * 3) * tilePayload;
+            buildSpeed = 2.5f;
+            buildBeamOffset = 23;
+            range = 140f;
+            targetAir = false;
+            targetFlags = new BlockFlag[]{BlockFlag.battery, BlockFlag.factory, null};
+
+            ammoType = new PowerAmmoType(3000);
+
+            particleEffects.add(
+            new ParticleEffect(){{
+
+            }}
+            );
+
+            weapons.add(
+            new Weapon(){{
+                x = y = 0f;
+                mirror = false;
+                reload = 55f;
+                minShootVelocity = 0.01f;
+
+                soundPitchMin = 1f;
+                shootSound = Sounds.plasmadrop;
+
+                bullet = new BasicBulletType(){{
+                    sprite = "large-bomb";
+                    width = height = 120 / 4f;
+
+                    maxRange = 30f;
+                    ignoreRotation = true;
+
+                    backColor = Pal.darkestGray;
+                    frontColor = Pal.darkestGray;
+                    mixColorTo = Pal.darkestGray;
+
+                    hitSound = Sounds.boom;
+
+                    shootCone = 280f;
+                    ejectEffect = Fx.hitFlamePlasma;
+                    hitShake = 5f;
+
+                    collidesAir = false;
+
+                    lifetime = 85f;
+
+                    despawnEffect = Fx.instBomb;
+                    hitEffect = Fx.massiveExplosion;
+                    keepVelocity = true;
+                    spin = 2f;
+
+                    shrinkX = shrinkY = 0.7f;
+
+                    speed = 0f;
+                    collides = false;
+
+                    healPercent = 15f;
+                    splashDamage = 220f;
+                    splashDamageRadius = 80f;
+                }};
+            }});
+        }};
+
+        //endregion other
+        //region hylight
+        light = new SnUnitType("light"){
+            {
+                health = 140;
+                hitSize = 15;
+                speed = 4f;
+                rotateSpeed = 4f;
+                accel = 0.04f;
+                drag = 0.01f;
+                //commandLimit = 5;
+                flying = true;
+                circleTarget = true;
+                range = 130;
+                faceTarget = false;
+                constructor = UnitEntity::create;
+                ammoType = new PowerAmmoType(450);
+
+                weapons.add(new SnWeapon("light-gun"){{
+                    reload = 13f;
+                    rotate = true;
+                    mirror = true;
+                    x = 4f;
+                    y = -1f;
+                    shootSound = Sounds.sap;
+                    //spacing = 0f;
+
+                    bullet = new SapBulletType(){{
+                        sapStrength = 0.45f;
+                        length = 60f;
+                        damage = 9f;
+                        shootEffect = Fx.shootSmall;
+                        hitColor = color = Color.valueOf("ffd37f");
+                        despawnEffect = Fx.none;
+                        width = 0.35f;
+                        lifetime = 12.5f;
+                        knockback = -0.25f;
+                    }};
+                }});
+                //to add { underUnit = true;} look at UnitType.useEngineElevation
+                engines.addAll(
+                new UnitEngine(){{
+//                    underUnit = true;
+                    x = -6.2f;
+                    y = 3.2f;
+                    radius = 1.8f;
+                }},
+
+                new UnitEngine(){{
+//                    underUnit = true;
+                    x = 6.2f;
+                    y = 3.2f;
+                    radius = 1.8f;
+                }},
+
+                new UnitEngine(){{
+//                    underUnit = true;
+                    x = -6.4f;
+                    y = -6.4f;
+                    radius = 1.8f;
+                }},
+
+                new UnitEngine(){{
+//                    underUnit = true;
+                    x = 6.4f;
+                    y = -6.4f;
+                    radius = 1.8f;
+                }});
+            }
+        };
 
         //endregion mod-units
     }

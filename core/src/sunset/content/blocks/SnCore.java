@@ -26,11 +26,8 @@ public class SnCore {
             itemCapacity = 3000;
             thrusterLength = 40/4f;
 
-            unitType = SnUnitTypes.petal;
+            unitType = SnUnitTypes.testCoreUnit;
             unitCapModifier = 11;
         }};
-        /* multiUnitCore = new ZalupahiuCoreBlock(name "tvoya-mamka")
-        * summon = new ZalupahiuUnitType
-        * /kill @e */
     }
 }
