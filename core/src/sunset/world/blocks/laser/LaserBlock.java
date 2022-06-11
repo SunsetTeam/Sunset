@@ -37,6 +37,9 @@ public class LaserBlock extends Block{
     public boolean inputsLaser = false;
     public boolean outputsLaser = false;
 
+    public boolean heats = false;
+    public float heatLaserLimit = 50f;
+
     public float laserProduction = 0f;
     public float laserConsumption = 0f;
 

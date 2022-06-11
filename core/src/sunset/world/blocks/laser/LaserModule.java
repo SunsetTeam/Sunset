@@ -1,4 +1,6 @@
 package sunset.world.blocks.laser;
+import mindustry.entities.Damage;
+import mindustry.world.Tile;
 import sunset.world.blocks.laser.LaserBlock.LaserBlockBuild;
 
 /** Core class for laser mechanic.
@@ -25,6 +27,10 @@ public class LaserModule {
         out += build.getLaserProduction();
         if(outputs != 0 && build.block().outputsLaser){
             out /= outputs;
+        }
+        if(build.block().heats && in > build.block().heatLaserLimit){
+            Tile t = build.tile;
+            Damage.tileDamage(null, t.x, t.y, 1f, in * in);
         }
         in = 0f;
     }
