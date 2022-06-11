@@ -12,6 +12,7 @@ import sunset.content.SnAttribute;
 import sunset.content.SnItems;
 import sunset.content.SnLiquids;
 import sunset.content.SnStatusEffects;
+import sunset.graphics.SnShaders;
 import sunset.world.blocks.environment.BreakableEnvWall;
 import sunset.world.blocks.environment.Geyser;
 import sunset.world.blocks.environment.MockEnvironmentBlock;
@@ -129,7 +130,6 @@ public class SnEnvironment  {
             liquidDrop = SnLiquids.burheyna;
             liquidMultiplier = 0.4f;
             isLiquid = true;
-            status = SnStatusEffects.viscous;
             statusDuration = 120f;
             drownTime = 700f;
             albedo = 0.5f;
@@ -144,8 +144,6 @@ public class SnEnvironment  {
             liquidDrop = SnLiquids.burheyna;
             liquidMultiplier = 1.1f;
             isLiquid = true;
-
-            status = SnStatusEffects.viscous;
             statusDuration = 120f;
             cacheLayer = CacheLayer.water;
             drownTime = 180f;
@@ -157,9 +155,8 @@ public class SnEnvironment  {
             liquidDrop = SnLiquids.burheyna;
             liquidMultiplier = 1f;
             isLiquid = true;
-            status = SnStatusEffects.viscous;
             statusDuration = 120f;
-            cacheLayer = CacheLayer.water;
+            cacheLayer = SnShaders.burheynaLayer;
             drownTime = 210f;
             albedo = 0.5f;
             attributes.set(SnAttribute.thermalBurheyna, 0.25f);

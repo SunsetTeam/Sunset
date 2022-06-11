@@ -1662,7 +1662,6 @@ public class SnBullets {
             trailEffect = despawnEffect = Fx.none;
             shootEffect = SnFx.redFlame;
             hitEffect = SnFx.redFlameHit;
-            status = SnStatusEffects.inferno;
             statusDuration = 60f * 3;
             keepVelocity = false;
             hittable = false;
@@ -2330,15 +2329,13 @@ public class SnBullets {
         }};
         //endregion EMP
         //region synthesis
-        naturiteBolt1 = new EnergyBoltBulletType(11, 890) {{
-            status = SnStatusEffects.molecula;
+        naturiteBolt1 = new EnergyBoltBulletType(11, 890) {{;
             lifetime = 7;
             inaccuracy = 7;
             width = 10;
             height = 35;
         }};
         naturiteBolt2 = new EnergyBoltBulletType(14, 1570) {{
-            status = SnStatusEffects.molecula;
             lifetime = 6;
             inaccuracy = 11;
             width = 10;
@@ -2346,14 +2343,12 @@ public class SnBullets {
             fragBullets = 3;
             fragRandomSpread = 35;
             fragBullet = new LaserBoltBulletType(12, 880) {{
-                status = SnStatusEffects.molecula;
                 lifetime = 30;
                 backColor = Pal.heal;
                 frontColor = Color.white;
             }};
         }};
         naturiteBolt3 = new EnergyBoltBulletType(12, 2100) {{
-            status = SnStatusEffects.molecula;
             lifetime = 12;
             inaccuracy = 21;
             width = 10;
@@ -2367,7 +2362,6 @@ public class SnBullets {
             }};
         }};
         naturiteBolt4 = new EnergyBoltBulletType(17, 2750) {{
-            status = SnStatusEffects.molecula;
             lifetime = 16;
             inaccuracy = 2;
             width = 10;
@@ -2375,7 +2369,6 @@ public class SnBullets {
             fragBullets = 6;
             fragRandomSpread = 360;
             fragBullet = new LaserBoltBulletType(12, 880) {{
-                status = SnStatusEffects.molecula;
                 lifetime = 7.5f;
                 backColor = Pal.heal;
                 frontColor = Color.white;
@@ -2402,7 +2395,6 @@ public class SnBullets {
                 fragBullets = 12;
                 fragRandomSpread = 360;
                 fragBullet = new EnergyBoltBulletType(15, 1500) {{
-                    status = SnStatusEffects.molecula;
                     lifetime = 8f;
                     width = 8;
                     height = 33;
@@ -2472,7 +2464,6 @@ public class SnBullets {
             splashDamage = damage * 1.5f;
             backColor = frontColor.a(0.7f);
             frontColor = SnPal.standardMissile;
-            status = SnStatusEffects.radiation;
             statusDuration = 1.9f * Time.toSeconds;
         }};
         //endregion semi-laser art
@@ -2489,7 +2480,6 @@ public class SnBullets {
             splashDamage = damage * 0.25f;
             backColor = Pal.shield.cpy();
             frontColor = Pal.shield;
-            status = SnStatusEffects.radiation;
             statusDuration = 3* Time.toSeconds;
         }
         @Override
@@ -2508,7 +2498,6 @@ public class SnBullets {
             splashDamage = damage * 0.15f;
             backColor = SnPal.redBomb;
             frontColor = SnPal.redBombBack;
-            status = SnStatusEffects.radiation;
         }};
         //endregion laser art
         //region power art

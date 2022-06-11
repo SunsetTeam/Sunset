@@ -16,9 +16,6 @@ public class SnLiquidBlocks  {
     public static Block
             //transportation
             naturiteConduit, nobiumConduit,
-
-            //storage
-            liquidWell, 
     
             //extraction
             naturitePump;
@@ -45,14 +42,6 @@ public class SnLiquidBlocks  {
             }};
         }
         //endregion transportation
-        //region storage
-        liquidWell = new LiquidRouter("liquid-well") {{
-            requirements(Category.liquid, with(Items.titanium, 110, Items.metaglass, 90, Items.thorium, 75));
-            size = 4;
-            liquidCapacity = 3100f;
-            health = 1270;
-        }};
-        //endregion storage
         //region special
         naturitePump = new Pump("naturite-pump") {{
             requirements(Category.liquid, with(Items.copper, 120, Items.metaglass, 110, Items.silicon, 40, Items.titanium, 70, SnItems.naturite, 60));
