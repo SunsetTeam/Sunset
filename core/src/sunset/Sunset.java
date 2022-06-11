@@ -21,7 +21,7 @@ import mma.annotations.ModAnnotations.*;
 import sunset.content.*;
 import sunset.core.*;
 import sunset.gen.*;
-import sunset.graphics.SnShaders;
+//import sunset.graphics.SnShaders;
 import sunset.type.unitTypes.*;
 import sunset.ui.*;
 import sunset.utils.*;
@@ -40,9 +40,9 @@ public class Sunset extends MMAMod{
         super();
 //        Events.on(FileTreeInitEvent.class, e -> Core.app.post(SnShaders::load));
 
-        Events.on(DisposeEvent.class, e -> {
-            SnShaders.dispose();
-        });
+//        Events.on(DisposeEvent.class, e -> {
+//            SnShaders.dispose();
+//        });
         validDependencies = SnDependencies.valid();
         if(!validDependencies && !SnDependencies.existsGasLibraryJava()){
             Fi file = modDirectory.child("GasLibrary.jar");
