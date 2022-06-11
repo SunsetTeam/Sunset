@@ -55,6 +55,7 @@ public class SnUnitTypes{
     public static UnitType courier;
     @EntityDef({Unitc.class, Segmentc.class})
     public static UnitType snake1;
+    public static UnitType testCoreUnit;
 
     public static void load(){
         //region vanilla
