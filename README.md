@@ -3,7 +3,7 @@
 
 ## Planets
 ### Azaria
-First planet in Sunset. He has a lot of content units, turrets and more.
+First planet in Sunset. It has a lot of content units, turrets and more.
 ### Burnout
 The second planet in the mod, the smallest planet, it is already more complex and has the least content.
 ### Rime
