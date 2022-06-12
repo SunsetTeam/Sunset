@@ -38,7 +38,6 @@ public class SnUnitTypes{
     comet, satellite, planet, star, galaxy, universe,
     //ground
     mirage, vision, illusion, soothSayer, seer, abyssEye,
-    wheelT1, wheelT2, wheelT3, wheelT4, wheelT5, wheelT6,
     freezingT1,
     light,
     //naval
@@ -300,103 +299,6 @@ public class SnUnitTypes{
             legSplashRange = 70;
         }};
         //endregion berserk
-        //region wheel
-        wheelT1 = new WheelUnitType("wheel-t1"){{
-            health = 80;
-            speed = 3.5f;
-            rotateSpeed = baseRotateSpeed = 2.75f;
-            drag = 0.075f;
-            weapons.add(new WeaponExt("wheel1-minigun"){{
-                reload = 5.5f;
-                inaccuracy = 4f;
-                rotate = true;
-                mirror = false;
-                bullet = SnBullets.wheel1Bullet;
-                x = y = 0;
-            }});
-        }};
-        wheelT2 = new WheelUnitType("wheel-t2"){{
-            health = 420;
-            speed = 3.4f;
-            rotateSpeed = baseRotateSpeed = 2.66f;
-            drag = 0.075f;
-            weapons.add(new WeaponExt("wheel2-shotgun"){{
-                reload = 48f;
-                inaccuracy = 0f;
-                rotate = true;
-                mirror = false;
-                bullet = SnBullets.wheel2Shotgun;
-                x = y = 0;
-            }});
-        }};
-        wheelT3 = new WheelUnitType("wheel-t3"){{
-            health = 890;
-            speed = 3.2f;
-            rotateSpeed = baseRotateSpeed = 2.33f;
-            drag = 0.075f;
-            weapons.add(new WeaponExt("wheel3-burst"){{
-                reload = 65f;
-                inaccuracy = 1f;
-                rotate = true;
-                mirror = false;
-                bullet = SnBullets.wheel3Burst;
-                shootSound = Sounds.shootBig;
-                x = y = 0;
-            }});
-        }};
-        wheelT4 = new WheelUnitType("wheel-t4"){{
-            health = 6800;
-            speed = 3.1f;
-            rotateSpeed = baseRotateSpeed = 2.25f;
-            drag = 0.075f;
-            weapons.add(new WeaponExt("wheel4-shotgun"){{
-                reload = 92f;
-                rotate = true;
-                mirror = false;
-                bullet = SnBullets.wheel4Shotgun;
-                shootSound = Sounds.shootBig;
-                x = y = 0;
-            }});
-            weapons.add(new WeaponExt("wheel4-burst"){{
-                reload = 56f;
-                inaccuracy = 3f;
-                alternate = true;
-                rotate = true;
-                bullet = SnBullets.wheel4Artillery;
-                shootSound = Sounds.shootBig;
-                y = -6;
-                x = -3;
-            }});
-        }};
-        wheelT5 = new WheelUnitType("wheel-t5"){{
-            health = 19400;
-            speed = 3f;
-            rotateSpeed = baseRotateSpeed = 2f;
-            drag = 0.075f;
-            weapons.add(new WeaponExt("wheel5-flame"){{
-                reload = 7f;
-                rotate = true;
-                mirror = false;
-                bullet = SnBullets.wheel5Flame;
-                shootSound = Sounds.flame;
-                x = y = 0;
-            }});
-            weapons.add(new WeaponExt("wheel5-bullet"){{
-                reload = 149f;
-                inaccuracy = 1f;
-                alternate = true;
-                rotate = true;
-                faceTarget = true;
-                shoot.shots = 9;
-                shoot.shotDelay = 5f;
-                bullet = SnBullets.wheel5Bullet;
-                shootSound = Sounds.shootBig;
-                y = -12;
-                x = -6;
-            }});
-        }};
-        //there should be a wheelT6 here
-        //endregion wheel
         //region freezing
         freezingT1 = new UnitTypeExt("freezing-t1"){{
             controller = u -> new SuicideAI();
