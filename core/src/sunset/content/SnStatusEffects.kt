@@ -57,85 +57,7 @@ object SnStatusEffects {
             speedMultiplier = 0.1f
             dragMultiplier = 0.3f
         }
-        radiation = statusEffect("radiation") {
-            speedMultiplier = 0.5f
-            damageMultiplier = 0.6f
-            reloadMultiplier = 0.4f
-            damageMultiplier = 10f
-            color = Pal.accent.cpy()
-        } //no sprite
-        electricalShort = statusEffect("electric-short") {
-            effectChance = 100f
-            speedMultiplier = 0f
-            disarm = true
-            color = "0AFEFF".color()
-            reloadMultiplier = 0.3f
-            effect = Fx.freezing
-            init {
-                opposite(StatusEffects.shocked)
-                affinity(StatusEffects.wet) { unit, result, time ->
-                    unit.damagePierce(unit.health / 4)
-                    result.set(reloading, 300f)
-                }
-                affinity(StatusEffects.freezing) { unit, result, time ->
-                    unit.damagePierce(unit.health / 2)
-                    result.set(reloading, 600f)
-                }
-            }
-        }
-        reloading = statusEffect("reboot") {
-            speedMultiplier = 0f
-            disarm = true
-            color = "047070".color()
-        }
-        viscous = statusEffect("viscous") {
-            color = Color.valueOf("721A1A")
-            speedMultiplier = 0.94f
-            effect = SnFx.viscous
-            effectChance = 0.09f
-
-        } //no sprite
-        inferno = statusEffect("inferno") {
-            color = SnPal.redfire1
-            effect = SnFx.redFlame
-            effectChance = 0.3f
-            speedMultiplier = 1.1f
-            reloadMultiplier = 0.6f
-            healthMultiplier = 0.7f
-            damageMultiplier = 0.7f
-            init { opposite(frostbite) }
-        } //no sprite
         //endregion common
-        //region only reactive
-        molecula = statusEffect("molecula") {
-            color = "3DD957".color()
-            permanent = true
-            effect = Fx.heal
-            init {
-                opposite(StatusEffects.freezing, frostbite)
-                affinity(StatusEffects.overclock) { unit, result, time ->
-                    unit.damagePierce(600f)
-                    result.set(molecula, 300f)
-                }
-                affinity(StatusEffects.overdrive) { unit, result, time ->
-                    unit.damagePierce(600f)
-                    result.set(molecula, 300f)
-                }
-                affinity(StatusEffects.shielded) { unit, result, time ->
-                    unit.damagePierce(450f)
-                    result.set(molecula, 300f)
-                }
-                affinity(StatusEffects.blasted) { unit, result, time ->
-                    unit.damagePierce(30f)
-                    result.set(molecula, 300f)
-                }
-                affinity(StatusEffects.shocked) { unit, result, time ->
-                    unit.damagePierce(30f)
-                    result.set(molecula, 300f)
-                }
-            }
-        }
-        //endregion only reactive
         //region stackable
         overheat = stackableStatusEffect("overheat") {
             color = "FF30000".color()
@@ -242,13 +164,6 @@ object SnStatusEffects {
     lateinit var galaxyDebuff: StatusEffect
     lateinit var universityLaserSlow: StatusEffect
     lateinit var electricalShort: StatusEffect
-    lateinit var reloading: StatusEffect
-    lateinit var viscous: StatusEffect
-    lateinit var inferno: StatusEffect
-    lateinit var radiation: StatusEffect
-
-    //only reactive
-    lateinit var molecula: StatusEffect
 
     //stackable
     lateinit var overheat: StatusEffect

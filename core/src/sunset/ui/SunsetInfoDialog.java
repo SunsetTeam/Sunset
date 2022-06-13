@@ -79,7 +79,6 @@ private BaseDialog currentContent;
         buttons.button("@sninfo.github", Icon.github, () -> Core.app.openURI("https://github.com/SunsetTeam/Sunset"));
         buttons.button("@sninfo.youtube", Icon.link, () -> Core.app.openURI("https://www.youtube.com/channel/UCmjFTZiVIs_G2UMeOsFtMjQ"));
         buttons.button("@sninfo.vk", Icon.link, () -> Core.app.openURI("https://vk.com/fall_of_sun"));
-        buttons.row();
 
         buttons.button("@sninfo.discord", Icon.discord, () -> Core.app.openURI("https://discord.gg/M5pGCYDsVn"));
         buttons.row();
