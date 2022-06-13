@@ -20,8 +20,6 @@ import mindustry.world.consumers.ConsumeCoolant;
 import mindustry.world.meta.BlockFlag;
 import mindustry.world.meta.BuildVisibility;
 import sunset.content.*;
-import sunset.content.affilitiation.SnGuilds;
-import sunset.entities.bullet.AcceleratingLaserBulletType;
 import sunset.entities.bullet.EnergySphereBulletType;
 import sunset.entities.bullet.LightningContinuousLaserBulletType;
 import sunset.graphics.SnPal;
@@ -42,11 +40,11 @@ public class SnTurrets implements ContentList {
     major, burner, payloadTurret, eternity, hemrus, artLightTurret, trigger,
 
     //4x4
-    shotgunTurret, admiral, scorpio, ammirus, flood, chain, rockfall,
+    shotgunTurret, admiral, scorpio, ammirus, flood, chain,
     drr,
 
     //5x5
-    pressure, field, sniper, fanatic, defibrillator,
+    pressure, sniper, defibrillator,
 
     //6x6
     trident, disappearance, radius,
@@ -60,9 +58,7 @@ public class SnTurrets implements ContentList {
     dissector,//4x4
     art,//5x5
 
-    //EMP and synthesis
-    discharger, dischargerEvo,
-    synthesis1, synthesis2, synthesis3, synthesis4, synthesis5;
+    temp;
 
     @Override
     public void load() {
@@ -84,7 +80,6 @@ public class SnTurrets implements ContentList {
             chargeMaxDelay = 20f;
             powerUse = 1f;
             chargeEffect = SnFx.smallEnergySphereCharge;
-            guild = SnGuilds.aymirus;
         }};
         spine = new ModItemTurret("spine") {{
             requirements(Category.turret, with(Items.copper, 55, Items.graphite, 25));
@@ -203,7 +198,6 @@ public class SnTurrets implements ContentList {
             ammoUseEffect = Fx.casing1;
             targetAir = true;
             targetGround = true;
-            guild = SnGuilds.aymirus;
         }};
         discharge = new ModPowerTurret("discharge"){{
             requirements(Category.turret, with(Items.silicon, 150, Items.graphite, 75));
@@ -304,7 +298,6 @@ public class SnTurrets implements ContentList {
             burstSpacing = 3f;
             targetAir = true;
             shootSound = Sounds.flame;
-            guild = SnGuilds.aymirus;
         }};
         hemrus = new ModItemTurret("hemrus") {{
             requirements(Category.turret, with(SnItems.fors, 250, Items.plastanium, 90, Items.graphite, 60));
@@ -325,7 +318,6 @@ public class SnTurrets implements ContentList {
             shootShake = 2f;
             shootSound = Sounds.shootBig;
             reloadBar = false;
-            guild = SnGuilds.aymirus;
         }};
         /*
         artLightTurret = new ModPowerTurret("art-light-turret"){{
@@ -463,7 +455,6 @@ public class SnTurrets implements ContentList {
             ammoUseEffect = Fx.casing1;
             targetAir = true;
             targetGround = true;
-            guild = SnGuilds.aymirus;
         }};
         flood = new LiquidTurretExt("flood") {{
             requirements(Category.turret, with(Items.metaglass, 230, Items.lead, 370f, Items.titanium, 330, Items.thorium, 190, SnItems.fors, 180));
@@ -503,33 +494,6 @@ public class SnTurrets implements ContentList {
             liquidUse = 0.5f;
             laserColor = SnPal.chainLaser;
         }};
-        /*rockfall = new ModItemTurret("rockfall") {{
-            requirements(Category.turret, with(Items.copper, 700, Items.lead, 700, Items.graphite, 500, Items.titanium, 880, Items.silicon, 600));
-            ammo(
-                Items.graphite, SnBullets.graphiteShell,
-                Items.titanium, SnBullets.titaniumShell,
-                Items.thorium, SnBullets.thoriumShell,
-                SnItems.lightBurstMissile, SnBullets.lightBurstMissile
-            );
-            health = 3000;
-            size = 4;
-            itemCapacity = 20;
-            range = 45f * Vars.tilesize;
-            shots = 6;
-            inaccuracy = 12;
-            velocityInaccuracy = 0.3f;
-            ammoEjectBack = 6f;
-            cooldown = 0.9f;
-            restitution = 0.01f;
-            recoilAmount = 5.1f;
-            shootShake = 3;
-            targetAir = false;
-            targetGround = true;
-            reloadTime = 2f * Time.toSeconds;
-            guild = SnGuilds.kryonix;
-            branch = SnBranches.heavyArt;
-        }};*/
-
         drr = new ModItemTurret("drr") {{
             hideDetails = false;
             size = 4;
@@ -545,6 +509,7 @@ public class SnTurrets implements ContentList {
             shootShake = 2f;
             shootSound = Sounds.missile;
             shootEffect = Fx.fireSmoke;
+            baseExplosiveness = 10000;
         }};
         //endregion 4x4
         //region 5x5
@@ -574,34 +539,7 @@ public class SnTurrets implements ContentList {
             shootSound = Sounds.flame;
             consumes.power(7f);
             reloadBar = false;
-            guild = SnGuilds.aymirus;
         }};
-        /*field = new ModItemTurret("field") {{
-            requirements(Category.turret, with(Items.copper, 1200, Items.lead, 800, Items.plastanium, 350, Items.thorium, 400, SnItems.fors, 400, SnItems.nobium, 300));
-            ammo(
-                SnItems.raMissile, SnBullets.raMissile,
-                SnItems.empMissile, SnBullets.empMissile//,
-                //SnItems.lightningMissile, SnBullets.lightningMissile,
-                //SnItems.lightMissile, SnBullets.lightMissile
-            );
-            health = 4000;
-            size = 5;
-            itemCapacity = 40;
-            range = 46.25f * Vars.tilesize;
-            minRange = 6.875f * Vars.tilesize;
-            shots = 1;
-            inaccuracy = 4f;
-            velocityInaccuracy = 0.2f;
-            ammoEjectBack = 4f;
-            cooldown = 0.06f;
-            reloadTime = 0.84f * Time.toSeconds;
-            restitution = 0.02f;
-            recoilAmount = 4f;
-            shootShake = 2f;
-            targetAir = false;
-            targetGround = true;
-            guild = SnGuilds.kryonix;
-        }};*/
         sniper = new ModItemTurret("sniper") {{
             requirements(Category.turret, with(Items.copper, 1200, SnItems.fors, 700, Items.surgeAlloy, 600, SnItems.naturite, 500, Items.silicon, 400, SnItems.nobium, 250));
             ammo(
@@ -628,36 +566,6 @@ public class SnTurrets implements ContentList {
 
             consumes.powerCond(21f, TurretBuild::isActive);
         }};
-        /*fanatic = new ModItemTurret("fanatic") {{
-            requirements(Category.turret, with(
-            Items.copper, 700, Items.graphite, 580, Items.titanium, 900, Items.thorium, 890, Items.silicon, 570, Items.surgeAlloy, 430,
-            SnItems.fors, 570, SnItems.naturite, 410, SnItems.nobium, 310));
-            ammo(
-                //SnItems.burstMissile, SnBullets.burstMissile,
-                //SnItems.detonatorMissile, SnBullets.detonatorMissile,
-                //SnItems.pointMissile, SnBullets.pointMissile,
-                //SnItems.spotMissile, SnBullets.spotMissile
-            );
-            health = 4200;
-            size = 5;
-            itemCapacity = 40;
-            range = 47.5f * Vars.tilesize;
-            minRange = 10f * Vars.tilesize;
-            rotateSpeed = 2;
-            shots = 1;
-            inaccuracy = 7;
-            cooldown = 0.2f;
-            reloadTime = 2.5f * Time.toSeconds;
-            restitution = 0.07f;
-            recoilAmount = 1;
-            targetAir = false;
-            targetGround = true;
-            chargeTime = 20;
-            shootCone = 4;
-            shootSound = Sounds.shootBig;
-            drawLight = true;
-            guild = SnGuilds.kryonix;
-        }};*/
         defibrillator = new Turret360("defibrillator") {{
             requirements(Category.turret, with(Items.copper, 650, Items.graphite, 550, Items.titanium, 600, Items.thorium, 600, SnItems.fors, 700));
             //todo /\
@@ -799,7 +707,6 @@ public class SnTurrets implements ContentList {
             health = 240 * size * size;
             consumes.add(new ConsumeCoolant(1.1f)).update(false);
             reloadBar = false;
-            guild = SnGuilds.aymirus;
         }};
         //endregion 6x6
         //region 7x7
@@ -827,7 +734,6 @@ public class SnTurrets implements ContentList {
             targetAir = false;
             shootSound = Sounds.laser;
             alternate = false;
-            guild = SnGuilds.aymirus;
 
             shootType = new LaserBulletType(7500) {{
                 colors = new Color[]{Pal.meltdownHit.cpy().a(0.4f), Pal.meltdownHit, Color.white};
@@ -959,179 +865,5 @@ public class SnTurrets implements ContentList {
             buildVisibility = BuildVisibility.shown;
         }};
         //endregion missile
-        //region EMP and synthesis
-        discharger = new EMPFacility("discharger") {{
-            requirements(
-            Category.turret, with(
-            Items.copper, 1600, Items.lead, 1500, Items.titanium, 1100, Items.thorium, 900, Items.silicon, 1300, Items.plastanium, 850, Items.phaseFabric, 780, Items.surgeAlloy, 910, Items.metaglass, 1000,
-            SnItems.fors, 760, SnItems.enojie, 1100));
-            size = 3;
-            health = 980;
-            powerUse = 9f;
-            reloadTime = 11 * Time.toSeconds;
-            heatColor = Color.valueOf("7FFFD4");
-            chargeTime = 180;
-            shootType = SnBullets.empBullet;
-            range = 22.5f * Vars.tilesize;
-            shots = 10;
-            zaps = 1;
-            zapAngleRand = 360;
-            cores.add(new Core(1.2f));
-            liquidCapacity = 60;
-        }};
-        dischargerEvo = new EMPFacility("discharger-evo") {{
-            requirements(Category.turret, with(
-                    Items.copper, 2000, Items.lead, 1800, Items.thorium, 1200, Items.silicon, 1600, Items.plastanium, 910, Items.phaseFabric, 900, Items.surgeAlloy, 1100, Items.metaglass, 1100,
-                    SnItems.fors, 910, SnItems.planatrium, 1000, SnItems.enojie, 1500, SnItems.reneubite, 1000));
-            size = 4;
-            health = 1200;
-            powerUse = 13.1f;
-            reloadTime = 13 * Time.toSeconds;
-            heatColor = Color.valueOf("7FFFD4");
-            chargeTime = 300;
-            shootType = SnBullets.empBulletEvo;
-            range = 30 * Vars.tilesize;
-            shots = 20;
-            zaps = 1;
-            zapAngleRand = 360;
-            cores.add(new Core(5));
-            liquidCapacity = 120;
-        }};
-
-        /*synthesis1 = new SynthesisTurret("synthesis-1") {{
-            requirements(Category.turret, with(Items.copper, 120, Items.lead, 120, Items.titanium, 100));
-            ammo(
-            SnItems.naturite, SnBullets.naturiteBolt1
-            );
-            primaryArmor = 700;
-            regenCooldown = Time.toSeconds;
-            regenAmount = 70;
-            secondaryArmor = 50;
-            size = 4;
-            health = 350 * size;
-            reloadTime = 1.33f * Time.toSeconds;
-            range = 25 * Vars.tilesize;
-            shots = 1;
-            shootCone = 3;
-            shootSound = Sounds.railgun;
-            maxAmmo = 30;
-            spread = 3;
-            recoilAmount = 5;
-            restitution = 0.1f;
-            cooldown = 0.2f;
-            coolantUsage = 1.1f;
-            //consumes.power(3.8f);
-            powerUse = 3.8f;
-        }};
-        synthesis2 = new SynthesisTurret("synthesis-2") {{
-            requirements(Category.turret, ItemStack.mult(synthesis1.requirements, 2));
-            ammo(
-            SnItems.naturite, SnBullets.naturiteBolt2
-            );
-            primaryArmor = 875;
-            regenCooldown = Time.toSeconds;
-            regenAmount = 87.5f;
-            secondaryArmor = 120;
-            size = 5;
-            health = synthesis1.health * size;
-            reloadTime = 1.25f * Time.toSeconds;
-            range = 30 * Vars.tilesize;
-            shots = 1;
-            shootCone = 4;
-            shootSound = Sounds.railgun;
-            maxAmmo = 30;
-            spread = 5.1f;
-            recoilAmount = 3;
-            restitution = 1f;
-            cooldown = 0.01f;
-            coolantUsage = 1.7f;
-            //consumes.power(6.9f);
-            powerUse = 6.9f;
-        }};
-        synthesis3 = new SynthesisTurret("synthesis-3") {{
-            requirements(Category.turret, ItemStack.mult(synthesis1.requirements, 3));
-            ammo(
-            SnItems.naturite, SnBullets.naturiteBolt3
-            );
-            primaryArmor = 1050;
-            regenCooldown = Time.toSeconds;
-            regenAmount = 105;
-            secondaryArmor = 260;
-            size = 6;
-            health = synthesis1.health * size;
-            reloadTime = 1 * Time.toSeconds;
-            range = 40 * Vars.tilesize;
-            shots = 3;
-            shootCone = 3;
-            shootSound = Sounds.railgun;
-            shootShake = 5;
-            minRange = 7 * Vars.tilesize;
-            maxAmmo = 30;
-            spread = 0.1f;
-            recoilAmount = 2.1f;
-            restitution = 0.55f;
-            cooldown = 0.3f;
-            coolantUsage = 1.55f;
-            //consumes.power(9.2f);
-            powerUse = 9.2f;
-            burstSpacing = 5f;
-        }};
-        synthesis4 = new SynthesisTurret("synthesis-4") {{
-            requirements(Category.turret, ItemStack.mult(synthesis1.requirements, 4));
-            ammo(
-            SnItems.naturite, SnBullets.naturiteBolt4
-            );
-            primaryArmor = 1225;
-            regenCooldown = Time.toSeconds;
-            regenAmount = 82.5f;
-            secondaryArmor = 450;
-            size = 7;
-            health = synthesis1.health * size;
-            reloadTime = 1.66f * Time.toSeconds;
-            range = 48 * Vars.tilesize;
-            shots = 3;
-            shootCone = 1;
-            shootSound = Sounds.railgun;
-            shootShake = 10;
-            minRange = 10 * Vars.tilesize;
-            maxAmmo = 30;
-            spread = 0;
-            recoilAmount = 5;
-            restitution = 0.9f;
-            cooldown = 0.7f;
-            coolantUsage = 0.9f;
-            //consumes.power(11.3f);
-            powerUse = 11.3f;
-            burstSpacing = 2f;
-        }};
-        synthesis5 = new SynthesisTurret("synthesis-5") {{
-            requirements(Category.turret, ItemStack.mult(synthesis1.requirements, 5));
-            ammo(
-            SnItems.naturite, SnBullets.naturiteBolt5
-            );
-            primaryArmor = 1400;
-            regenCooldown = Time.toSeconds;
-            regenAmount = 100;
-            secondaryArmor = 600;
-            size = 8;
-            health = synthesis1.health * size;
-            reloadTime = 3 * Time.toSeconds;
-            range = 60 * Vars.tilesize;
-            shots = 5;
-            shootCone = 2.1f;
-            shootSound = Sounds.release;
-            shootShake = 13;
-            minRange = 15 * Vars.tilesize;
-            maxAmmo = 30;
-            spread = 0.2f;
-            recoilAmount = 9;
-            restitution = 1.3f;
-            cooldown = 0.85f;
-            coolantUsage = 3.2f;
-            //consumes.power(25);
-            powerUse = 25;
-            burstSpacing = 3f;
-        }};*/
-        //endregion synthesis
     }
 }

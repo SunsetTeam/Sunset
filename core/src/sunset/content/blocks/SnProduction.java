@@ -10,19 +10,20 @@ import mindustry.world.Block;
 import mindustry.world.blocks.production.AttributeCrafter;
 import mindustry.world.blocks.production.SolidPump;
 import mindustry.world.draw.DrawRotator;
+import mindustry.world.meta.BuildVisibility;
 import mindustry.world.meta.Env;
 import sunset.content.SnAttribute;
 import sunset.content.SnFx;
 import sunset.content.SnItems;
 import sunset.content.SnLiquids;
 import sunset.type.blocks.DrillItem;
-import sunset.world.blocks.production.raw.DRDrill;
+import sunset.world.blocks.production.raw.ModDrill;
 import sunset.world.blocks.production.raw.PrecussionDrill;
 
 import static mindustry.type.ItemStack.with;
 
 /** This category is for blocks that produce raw products. (Such as cultivator, drill etc.) */
-public class SnProduction implements ContentList{
+public class SnProduction implements ContentList {
     public static Block
     //pumps
     mechanicalWaterExtractor,
@@ -33,10 +34,11 @@ public class SnProduction implements ContentList{
     electroPneumaticDrill,
     magneticDrill,
     percussionDrill,
-    enojieDrill;
+    enojieDrill,
+    testDrill1, testDrill2;
 
     @Override
-    public void load(){
+    public void load() {
         mechanicalWaterExtractor = new SolidPump("mechanical-water-extractor"){{
             requirements(Category.production, with(Items.metaglass, 30, Items.graphite, 30, Items.lead, 30, SnItems.fors, 30));
             result = SnLiquids.burheyna;
@@ -67,7 +69,7 @@ public class SnProduction implements ContentList{
         }};
         //endregion crafters
         //region drills
-        electroPneumaticDrill = new DRDrill("electro-pneumatic-drill"){{
+        electroPneumaticDrill = new ModDrill("electro-pneumatic-drill"){{
             requirements(Category.production, with(Items.copper, 20, Items.graphite, 15, Items.silicon, 10));
             drillTime = 300;
             size = 2;
@@ -78,7 +80,7 @@ public class SnProduction implements ContentList{
             m1 = 4;
         }};
 
-        magneticDrill = new DRDrill("magnetic-drill"){{
+        magneticDrill = new ModDrill("magnetic-drill"){{
             requirements(Category.production, with(Items.copper, 70, Items.titanium, 90, Items.silicon, 60, SnItems.fors, 60, SnItems.nobium, 55));
             drillTime = 200;
             size = 4;
@@ -117,7 +119,7 @@ public class SnProduction implements ContentList{
             );
         }};
 
-        enojieDrill = new DRDrill("enojie-drill"){{
+        enojieDrill = new ModDrill("enojie-drill"){{
             requirements(Category.production, with(Items.copper, 410, Items.silicon, 380, SnItems.enojie, 370, Items.thorium, 200, Items.surgeAlloy, 190));
             drillTime = 150;
             size = 7;
@@ -136,6 +138,16 @@ public class SnProduction implements ContentList{
             consumes.power(3f);
             consumes.liquid(Liquids.cryofluid, 0.4f).boost();
             m1 = 13;
+        }};
+
+        testDrill1 = new ModDrill("test-drill-1") {{
+            size = 2;
+            buildVisibility = BuildVisibility.hidden;
+        }};
+        testDrill2 = new ModDrill("test-drill-2") {{
+            size = 2;
+            buildVisibility = BuildVisibility.hidden;
+            addTile = 1;
         }};
         //endregion drills
     }
