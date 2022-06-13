@@ -1,50 +1,46 @@
 package sunset.utils;
 
-import arc.func.Boolf;
-import arc.math.Mathf;
+import arc.func.*;
+import arc.math.*;
 import arc.math.geom.*;
-import arc.util.Log;
-import arc.util.Tmp;
-import mindustry.core.World;
-import mindustry.entities.Units;
-import mindustry.gen.Building;
-import mindustry.gen.Healthc;
-import mindustry.gen.Unit;
-import mindustry.world.Build;
-import mindustry.world.Tile;
-import mindustry.world.blocks.environment.StaticWall;
-import sunset.world.blocks.laser.LaserBlock;
+import arc.util.*;
+import mindustry.core.*;
+import mindustry.entities.*;
+import mindustry.gen.*;
+import mindustry.world.*;
+import mindustry.world.blocks.environment.*;
+import sunset.world.blocks.laser.*;
 
 import static mindustry.Vars.world;
 
 /** Temporary class for laser casts, gotta move elsewhere. */
-public class LaserUtils {
+public class LaserUtils{
     private static arc.math.geom.Rect rect = new Rect(),
-                                    hitrect = new Rect();
+    hitrect = new Rect();
     private static Vec2 tr = new Vec2();
     private static Building tmpBuilding;
     private static Unit tmpUnit;
     private static Tile tmpTile;
 
 
-    public static Tile linecastStaticWalls(float x, float y, float angle, float length) {
+    public static Tile linecastStaticWalls(float x, float y, float angle, float length){
         tmpTile = null;
 
         tr.trns(angle, length);
         World.raycastEachWorld(x, y, x + tr.x, y + tr.y, (cx, cy) -> {
             Tile tile = world.tile(cx, cy);
-            if (tile == null || !(tile.block() instanceof StaticWall)) {
+            if(tile == null || !(tile.block() instanceof StaticWall)){
                 Tile[] sideCollided = new Tile[4];
                 int i = 0;
-                for (Point2 p : Geometry.d4) {
+                for(Point2 p : Geometry.d4){
                     tile = world.tile(cx + p.x, cy + p.y);
-                    if (tile != null && tile.block() instanceof StaticWall && Intersector.intersectSegmentRectangle(x, y, x + tr.x, y + tr.y, tile.getHitbox(Tmp.r1))) {
+                    if(tile != null && tile.block() instanceof StaticWall && Intersector.intersectSegmentRectangle(x, y, x + tr.x, y + tr.y, tile.getHitbox(Tmp.r1))){
                         sideCollided[i] = tile;
                         i++;
                     }
                 }
                 tile = getClosest(x, y, sideCollided);
-                if (tile == null)
+                if(tile == null)
                     return false;
             }
             tmpTile = tile;
@@ -55,34 +51,36 @@ public class LaserUtils {
     }
 
     public static Tile getClosest(float x, float y, Tile[] tiles){
-        if(tiles[0] == null){
+        if(tiles.length==0 || tiles[0] == null){
             return null;
         }
         Tile best = tiles[0];
-        Tmp.v1.set(x, y);
-        for (int i = 1; i < tiles.length; i++){
+        float bestDst2 = tiles[0].dst2(x, y),dst2;
+        for(int i = 1; i < tiles.length; i++){
             if(tiles[i] == null)
                 break;
-            Tmp.v2.set(tiles[i].worldx(), tiles[i].worldy());
-            if(Tmp.v1.dst2(Tmp.v2) < Tmp.v1.dst2(best.worldx(), best.worldy())){
+            dst2 = tiles[i].dst2(best);
+            if(dst2 < bestDst2){
                 best = tiles[i];
+                bestDst2 = dst2;
             }
         }
         return best;
     }
 
     public static Healthc getClosest(float x, float y, Healthc[] entities){
-        if (entities[0] == null){
+        if(entities.length==0 || entities[0] == null){
             return null;
         }
         Healthc best = entities[0];
-        Tmp.v1.set(x, y);
-        for (int i = 1; i < entities.length; i++){
+        float bestDst2 = entities[0].dst2(x, y),dst2;
+        for(int i = 1; i < entities.length; i++){
             if(entities[i] == null)
                 break;
-            Tmp.v2.set(entities[i].x(), entities[i].y());
-            if (Tmp.v1.dst2(Tmp.v2) < Tmp.v1.dst2(best.x(), best.y())){
+            dst2 = entities[i].dst2(best);
+            if(dst2 < bestDst2){
                 best = entities[i];
+                bestDst2 = dst2;
             }
         }
         return best;
@@ -100,7 +98,7 @@ public class LaserUtils {
                 if(tile == null || !predicate.get(tile)){
                     Building[] sideCollided = new Building[4];
                     int i = 0;
-                    for (Point2 p : Geometry.d4){
+                    for(Point2 p : Geometry.d4){
                         tile = world.build(cx + p.x, cy + p.y);
                         if(tile != null && tile != build){
                             tile.hitbox(Tmp.r1);
@@ -110,7 +108,7 @@ public class LaserUtils {
                             }
                         }
                     }
-                    tile = (Building) getClosest(x, y, sideCollided);
+                    tile = (Building)getClosest(x, y, sideCollided);
                     if(tile == null)
                         return false;
                 }
@@ -157,11 +155,9 @@ public class LaserUtils {
                 return tmpUnit;
             else
                 return tmpBuilding;
-        }
-        else if(tmpBuilding != null){
+        }else if(tmpBuilding != null){
             return tmpBuilding;
-        }
-        else
+        }else
             return tmpUnit;
     }
 }

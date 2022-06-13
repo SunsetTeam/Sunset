@@ -3,7 +3,6 @@ package sunset.content;
 import arc.graphics.Color;
 import arc.struct.Seq;
 import mindustry.type.Item;
-import sunset.type.Ammo;
 import sunset.type.SnItem;
 
 public class SnItems {
@@ -12,7 +11,7 @@ public class SnItems {
     //raw
     fors, erius, nedirium, planatrium,
     //crafting
-    anzar, naturite,  reneubite, nobium,  azalia_bud, yantai, enojie, zerinium,
+    anzar, naturite,  reneubite, nobium, azaliaBud, yantai, enojie, zerinium,
     //endregion azaria
     //other
     flameid, coldent, testItem,
@@ -54,7 +53,7 @@ public class SnItems {
             explosiveness = 0.2f;
             radioactivity = 1f;
         }};
-        azalia_bud = new Item("azalia_bud", Color.valueOf("a52f49")) {{
+        azaliaBud = new Item("azalia-bud", Color.valueOf("a52f49")) {{
             cost = 4f;
             flammability = 0.6f;
         }};
@@ -109,7 +108,7 @@ public class SnItems {
         */
 
         azariaItems.addAll(
-                fors, erius, naturite, anzar, nedirium, reneubite, nobium, planatrium, azalia_bud,
+                fors, erius, naturite, anzar, nedirium, reneubite, nobium, planatrium, azaliaBud,
                 yantai, enojie, zerinium
         );
     }

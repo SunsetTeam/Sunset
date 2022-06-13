@@ -1,11 +1,8 @@
 package sunset.content;
 
-import arc.struct.Seq;
-import mindustry.game.Objectives;
-
 import static mindustry.content.TechTree.*;
 import static mindustry.content.TechTree.node;
-import static sunset.content.blocks.SnCore.*;
+import static sunset.content.blocks.SnOtherBlocks.*;
 import static sunset.content.blocks.SnCrafting.*;
 import static sunset.content.SnItems.*;
 import static sunset.content.SnGas.*;
@@ -62,7 +59,7 @@ public class SnTechTree{
                 nodeProduce(gyner, () -> {
                 });
 
-                nodeProduce(azalia_bud, () -> {
+                nodeProduce(azaliaBud, () -> {
                     nodeProduce(sayang, () -> {
                         nodeProduce(yantai, () -> {
                         });

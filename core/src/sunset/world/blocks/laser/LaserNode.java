@@ -79,11 +79,12 @@ public class LaserNode extends LaserBlock{
             lasers = new Lasers(this);
             super.init(tile, team, shouldAdd, rotation);
             //top
+            final float lasersOffset = size * 1.25f;
             lasers.allLasers.add(new Laser(){{
                 build = LaserNodeBuild.this;
                 angle = 90f;
                 length = Math.max(Vars.world.width() * tilesize, Vars.world.height() * tilesize);
-                offset = size * 1.25f;
+                offset = lasersOffset;
                 start.set(tile.x * tilesize + block().offset, tile.y * tilesize + block().offset);
             }});
             //left
@@ -91,7 +92,7 @@ public class LaserNode extends LaserBlock{
                 build = LaserNodeBuild.this;
                 angle = 180f;
                 length = Math.max(Vars.world.width() * tilesize, Vars.world.height() * tilesize);
-                offset = size * 1.25f;
+                offset = lasersOffset;
                 start.set(tile.x * tilesize + block().offset, tile.y * tilesize + block().offset);
             }});
             //right
@@ -99,7 +100,7 @@ public class LaserNode extends LaserBlock{
                 build = LaserNodeBuild.this;
                 angle = 0f;
                 length = Math.max(Vars.world.width() * tilesize, Vars.world.height() * tilesize);
-                offset = size * 1.25f;
+                offset = lasersOffset;
                 start.set(tile.x * tilesize + block().offset, tile.y * tilesize + block().offset);
             }});
             //down
@@ -107,7 +108,7 @@ public class LaserNode extends LaserBlock{
                 build = LaserNodeBuild.this;
                 angle = 270f;
                 length = Math.max(Vars.world.width() * tilesize, Vars.world.height() * tilesize);
-                offset = size * 1.25f;
+                offset = lasersOffset;
                 start.set(tile.x * tilesize + block().offset, tile.y * tilesize + block().offset);
             }});
             return this;

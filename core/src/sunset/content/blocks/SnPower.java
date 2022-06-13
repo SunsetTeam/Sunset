@@ -1,19 +1,12 @@
 package sunset.content.blocks;
 
 import gas.world.blocks.power.GasConsumeGenerator;
-import gas.world.blocks.production.GasGenericCrafter;
-import mindustry.content.*;
-import mindustry.entities.Damage;
-import mindustry.entities.Effect;
 import mindustry.gen.*;
 import mindustry.type.*;
 import mindustry.world.*;
 import mindustry.world.blocks.power.*;
 import sunset.content.*;
-import sunset.world.blocks.power.*;
 
-import static mindustry.Vars.state;
-import static mindustry.Vars.tilesize;
 import static mindustry.type.ItemStack.with;
 
 public class SnPower{
@@ -53,7 +46,7 @@ public class SnPower{
             ambientSoundVolume = 0.06f;
 
             consumeGas(SnGas.hyneris, 5f / 60f);
-            consumeItem(SnItems.azalia_bud, 2);
+            consumeItem(SnItems.azaliaBud, 2);
         }};
 
         chemicalReactor = new GasConsumeGenerator("chemical-reactor"){{

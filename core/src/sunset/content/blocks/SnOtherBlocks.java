@@ -11,7 +11,7 @@ import sunset.content.SnUnitTypes;
 
 import static mindustry.type.ItemStack.with;
 
-public class SnCore {
+public class SnOtherBlocks{
     public static Block testCore;
 
     public static void load(){
