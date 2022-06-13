@@ -13,6 +13,7 @@ import mindustry.*;
 import mindustry.game.*;
 import mindustry.gen.*;
 import mindustry.graphics.*;
+import mindustry.ui.Bar;
 import mindustry.world.*;
 import mma.ModVars;
 
@@ -43,6 +44,22 @@ public class LaserNode extends LaserBlock{
             b.downOutput = (value & 0b1000) >> 3 == 1;
         });
     }
+    @Override
+    public void setBars(){
+        super.setBars();
+        if(heats){
+            addBar("chargeBar", (LaserBlockBuild entity) ->
+                    new Bar(() -> Core.bundle.format("bar.laser-input", entity.laser.rawInput, entity.block().heatLaserLimit),
+                    () -> {
+                        if(entity.laser.rawInput < entity.block().heatLaserLimit){
+                            return Pal.powerBar;
+                        }
+                        else
+                            return Color.red;
+                    },
+                    () -> entity.laser.rawInput / entity.block().heatLaserLimit));
+        }
+    }
 
     @SuppressWarnings("PointlessBitwiseExpression")
     protected static void configureState(LaserNodeBuild build, boolean right, boolean top, boolean left, boolean down){
@@ -66,7 +83,7 @@ public class LaserNode extends LaserBlock{
                 build = LaserNodeBuild.this;
                 angle = 90f;
                 length = Math.max(Vars.world.width() * tilesize, Vars.world.height() * tilesize);
-                offset = size * 1.5f;
+                offset = size * 1.25f;
                 start.set(tile.x * tilesize + block().offset, tile.y * tilesize + block().offset);
             }});
             //left
@@ -74,7 +91,7 @@ public class LaserNode extends LaserBlock{
                 build = LaserNodeBuild.this;
                 angle = 180f;
                 length = Math.max(Vars.world.width() * tilesize, Vars.world.height() * tilesize);
-                offset = size * 1.5f;
+                offset = size * 1.25f;
                 start.set(tile.x * tilesize + block().offset, tile.y * tilesize + block().offset);
             }});
             //right
@@ -82,7 +99,7 @@ public class LaserNode extends LaserBlock{
                 build = LaserNodeBuild.this;
                 angle = 0f;
                 length = Math.max(Vars.world.width() * tilesize, Vars.world.height() * tilesize);
-                offset = size * 1.5f;
+                offset = size * 1.25f;
                 start.set(tile.x * tilesize + block().offset, tile.y * tilesize + block().offset);
             }});
             //down
@@ -90,7 +107,7 @@ public class LaserNode extends LaserBlock{
                 build = LaserNodeBuild.this;
                 angle = 270f;
                 length = Math.max(Vars.world.width() * tilesize, Vars.world.height() * tilesize);
-                offset = size * 1.5f;
+                offset = size * 1.25f;
                 start.set(tile.x * tilesize + block().offset, tile.y * tilesize + block().offset);
             }});
             return this;

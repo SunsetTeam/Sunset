@@ -12,6 +12,7 @@ import sunset.content.SnAttribute;
 import sunset.content.SnItems;
 import sunset.content.SnLiquids;
 import sunset.content.SnStatusEffects;
+//import sunset.graphics.SnShaders;
 import sunset.world.blocks.environment.BreakableEnvWall;
 import sunset.world.blocks.environment.Geyser;
 import sunset.world.blocks.environment.MockEnvironmentBlock;
@@ -27,11 +28,11 @@ public class SnEnvironment  {
     //floors
     chromakey,
     crimsonGrass, crimsonDirt, crimsonSand, crimsonSwamp, crimsonMoss,
-    burheynaLiquidFloor,
+    burheynaLiquidFloor, thermalBurheyna,
     crimsonSnow, gasDeposit, crimsonIce, crimsonIceSnow,
     granite,
 
-    jadestone,
+    greenStone, jadestone,
 
     orangeSand, stoneSand,
     obsidian, ash, burningAsh,
@@ -39,7 +40,7 @@ public class SnEnvironment  {
     //static walls
     greenStoneWall, jadestoneWall, gJadestoneWall,
 
-    yelliteWall, darkYelliteWall,
+    yelliteWall, sayangWall, darkYelliteWall,
 
     crimsonGrassWall, crimsonDirtWall, crimsonSandWall,
     crimsonSnowWall, crimsonIceWall,
@@ -75,13 +76,14 @@ public class SnEnvironment  {
             oreThreshold = 0.921f;
             oreScale = 26.1234f;
         }};
-        /*
-        oreNedirium = new OreBlock(SnItems.nedirium) {{
+
+        oreNedirium = new OreBlock("ore-wall-nedirium", SnItems.nedirium) {{
+            wallOre = true;
             oreDefault = false;
             oreThreshold = 0.921f;
             oreScale = 26.1234f;
         }};
-         */
+
         orePlanatrium = new OreBlock(SnItems.planatrium) {{
             oreDefault = false;
             oreThreshold = 0.921f;
@@ -128,7 +130,6 @@ public class SnEnvironment  {
             liquidDrop = SnLiquids.burheyna;
             liquidMultiplier = 0.4f;
             isLiquid = true;
-            status = SnStatusEffects.viscous;
             statusDuration = 120f;
             drownTime = 700f;
             albedo = 0.5f;
@@ -143,10 +144,22 @@ public class SnEnvironment  {
             liquidDrop = SnLiquids.burheyna;
             liquidMultiplier = 1.1f;
             isLiquid = true;
-            status = SnStatusEffects.viscous;
             statusDuration = 120f;
             cacheLayer = CacheLayer.water;
+            drownTime = 180f;
             albedo = 0.5f;
+        }};
+        thermalBurheyna = new Floor("burheyna-thermal-floor") {{
+            speedMultiplier = 0.8f;
+            variants = 0;
+            liquidDrop = SnLiquids.burheyna;
+            liquidMultiplier = 1f;
+            isLiquid = true;
+            statusDuration = 120f;
+            cacheLayer = CacheLayer.water;
+            drownTime = 210f;
+            albedo = 0.5f;
+            attributes.set(SnAttribute.thermalBurheyna, 0.25f);
         }};
         gasDeposit = new Floor("gas-deposit") {{
             variants = 3;
@@ -174,6 +187,10 @@ public class SnEnvironment  {
             variants = 3;
             attributes.set(SnAttribute.burheyna, -0.4f);
             wall = graniteWall;
+        }};
+
+        greenStone = new Floor("green-stone"){{
+            variants = 3;
         }};
 
         jadestone = new Floor("jadestone") {{
@@ -228,10 +245,13 @@ public class SnEnvironment  {
             variants = 2;
         }};
 
-        darkYelliteWall = new StaticWall("dark-yellite-wall"){{
+        sayangWall = new StaticWall("sayang-wall"){{
             variants = 2;
         }};
 
+        darkYelliteWall = new StaticWall("dark-yellite-wall"){{
+            variants = 2;
+        }};
         crimsonGrassWall = new StaticWall("crimson-grass-wall") {{
             variants = 2;
         }};

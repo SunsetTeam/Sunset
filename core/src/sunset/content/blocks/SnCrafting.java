@@ -45,7 +45,7 @@ public class SnCrafting{
             drawer = new DrawMulti(new DrawDefault(), new DrawFlame(Color.valueOf("f9eca3")));
 
             consumeItems(with(SnItems.fors, 1, SnItems.naturite, 1));
-            consumePower(2.3f);
+            consumePower(2f);
         }};
 
         crystallizer = new AttributeCrafter("crystallizer"){{
@@ -66,7 +66,7 @@ public class SnCrafting{
             squareSprite = false;
 
             consumeLiquid(SnLiquids.burheyna, 3f / 60f);
-            consumePower(3.2f);
+            consumePower(2.6f);
         }};
 
         nobiumCaster = new GenericCrafter("nobium-caster"){{

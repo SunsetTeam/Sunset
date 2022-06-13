@@ -46,7 +46,7 @@ public class SnGasBlocks{
             requirements(Category.liquid, with(SnItems.erius, 2, SnItems.naturite, 1));
             health = 55;
             size = 1;
-            gasCapacity = 9f;
+            gasCapacity = 11f;
             junctionReplacement = gasJunction;
             bridgeReplacement = gasBridge;
         }};
@@ -54,7 +54,7 @@ public class SnGasBlocks{
             requirements(Category.liquid, with(SnItems.fors, 3, SnItems.erius, 2));
             health = 250;
             size = 1;
-            gasCapacity = 9.6f;
+            gasCapacity = 11.6f;
             junctionReplacement = gasJunction;
             bridgeReplacement = gasBridge;
         }};
@@ -62,7 +62,7 @@ public class SnGasBlocks{
             requirements(Category.liquid, with(SnItems.erius, 2, SnItems.nobium, 1));
             health = 125;
             size = 1;
-            gasCapacity = 15f;
+            gasCapacity = 18f;
             junctionReplacement = gasJunction;
             bridgeReplacement = gasBridge;
         }};
@@ -70,20 +70,20 @@ public class SnGasBlocks{
             requirements(Category.liquid, with(SnItems.naturite, 2, SnItems.erius, 2, SnItems.fors, 1));
             health = 75;
             size = 1;
-            gasCapacity = 17f;
+            gasCapacity = 20f;
             hasLiquids = false;
         }};
         gasRouter = new GasRouter("gas-router"){{
             requirements(Category.liquid, with(SnItems.naturite, 4, SnItems.erius, 2, SnItems.fors, 2));
             health = 80;
             size = 1;
-            gasCapacity = 20f;
+            gasCapacity = 25f;
         }};
-        gasBridge = new GasBridge("gas-bridge"){{
+        gasBridge = new SnGasBridge("gas-bridge"){{
             requirements(Category.liquid, with(SnItems.naturite, 5, SnItems.erius, 9, SnItems.fors, 4));
             health = 85;
             size = 1;
-            gasCapacity = 25f;
+            gasCapacity = 30f;
             hasPower = false;
             outputsGas = true;
             hasGasses = true;
@@ -94,7 +94,7 @@ public class SnGasBlocks{
             health = 110;
             range = 12;
             size = 1;
-            gasCapacity = 40f;
+            gasCapacity = 45f;
             arrowPeriod = 0.9f;
             arrowTimeScl = 2.75f;
             hasPower = true;
@@ -106,21 +106,21 @@ public class SnGasBlocks{
             requirements(Category.liquid, with(SnItems.fors, 15, SnItems.erius, 20));
             health = 260;
             size = 2;
-            gasCapacity = 320f;
+            gasCapacity = 350f;
         }};
 
         gasContainer = new GasRouter("gas-container"){{
             requirements(Category.liquid, with(SnItems.fors, 30, SnItems.erius, 45));
             health = 600;
             size = 3;
-            gasCapacity = 720f;
+            gasCapacity = 760f;
         }};
 
         gasTank = new GasRouter("gas-tank"){{
             requirements(Category.liquid, with(SnItems.fors, 115, SnItems.erius, 95, SnItems.nobium, 50));
             health = 1300;
             size = 4;
-            gasCapacity = 1840f;
+            gasCapacity = 1880f;
         }};
 
         //crafting

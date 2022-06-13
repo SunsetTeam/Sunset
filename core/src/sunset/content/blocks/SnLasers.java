@@ -29,6 +29,7 @@ public class SnLasers {
             buildVisibility = BuildVisibility.sandboxOnly;
             inputsLaser = true;
             outputsLaser = true;
+            heats = true;
         }};
         multikiln = new LaserCrafter("multikiln"){{
             requirements(Category.distribution, ItemStack.with(Items.copper, 1));

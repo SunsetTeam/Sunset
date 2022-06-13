@@ -21,10 +21,12 @@ import mma.annotations.ModAnnotations.*;
 import sunset.content.*;
 import sunset.core.*;
 import sunset.gen.*;
+//import sunset.graphics.SnShaders;
 import sunset.type.unitTypes.*;
 import sunset.ui.*;
 import sunset.utils.*;
 
+import static arc.Core.app;
 import static mindustry.Vars.*;
 import static mma.ModVars.modInfo;
 
@@ -34,6 +36,11 @@ public class Sunset extends MMAMod{
 
     public Sunset(){
         super();
+//        Events.on(FileTreeInitEvent.class, e -> Core.app.post(SnShaders::load));
+
+//        Events.on(DisposeEvent.class, e -> {
+//            SnShaders.dispose();
+//        });
         validDependencies = SnDependencies.valid();
         if(!validDependencies && !SnDependencies.existsGasLibraryJava()){
             Fi file = modDirectory.child("GasLibrary.jar");
@@ -94,7 +101,7 @@ public class Sunset extends MMAMod{
 //            t.update(() -> t.setPosition(Core.graphics.getWidth()/2f, Core.graphics.getHeight()/2f, Align.center));
                 State[] state = {Vars.state.getState()};
                 t.update(() -> {
-                    t.setPosition(0, 0);
+                    t.setPosition(0, 162);
 //                    t.visible=;
                     /*if(state[0] != Vars.state.getState()){
 //                        t.remove();
@@ -138,7 +145,6 @@ public class Sunset extends MMAMod{
         if(c instanceof UnlockableContent){
             UnlockableContent content = (UnlockableContent)c;
             SnContentTranslation.checkContent(content);
-
         }
     }
 

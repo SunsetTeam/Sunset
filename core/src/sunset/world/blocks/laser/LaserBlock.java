@@ -1,6 +1,7 @@
 package sunset.world.blocks.laser;
 
 import arc.*;
+import arc.graphics.Color;
 import arc.graphics.g2d.Draw;
 import arc.graphics.g2d.TextureRegion;
 import arc.struct.*;
@@ -12,6 +13,8 @@ import mindustry.game.*;
 import mindustry.game.EventType.*;
 import mindustry.gen.*;
 import mindustry.graphics.Layer;
+import mindustry.graphics.Pal;
+import mindustry.ui.Bar;
 import mindustry.world.Block;
 import mindustry.world.Tile;
 import mindustry.world.blocks.logic.LogicBlock;
@@ -36,6 +39,9 @@ public class LaserBlock extends Block{
 
     public boolean inputsLaser = false;
     public boolean outputsLaser = false;
+
+    public boolean heats = false;
+    public float heatLaserLimit = 50f;
 
     public float laserProduction = 0f;
     public float laserConsumption = 0f;

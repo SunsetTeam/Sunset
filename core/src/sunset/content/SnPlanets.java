@@ -2,6 +2,7 @@ package sunset.content;
 
 import arc.graphics.Color;
 import arc.util.Time;
+import mindustry.content.Items;
 import mindustry.game.Team;
 import mindustry.graphics.g3d.HexMesh;
 import mindustry.graphics.g3d.HexSkyMesh;
@@ -33,7 +34,7 @@ public class SnPlanets{
             hasAtmosphere = true;
             orbitRadius = 145;
             meshLoader = () -> new SunMesh(
-            this, 7,
+            this, 5,
             10, 0.7, 1.9, 1.4, 1.6,
             0.9f,
             Color.valueOf("FF7700"),
@@ -75,7 +76,8 @@ public class SnPlanets{
                 r.coreDestroyClear = false;
                 r.onlyDepositCore = false;
             };
-
+            hiddenItems.addAll(Items.serpuloItems).removeAll(SnItems.azariaItems);
+            hiddenItems.addAll(Items.erekirItems).removeAll(SnItems.azariaItems);
         }};
 
         burnout = new SnPlanet("burnout", magma, 0.7f, 3){{

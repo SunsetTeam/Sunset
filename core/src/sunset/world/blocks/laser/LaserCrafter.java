@@ -1,6 +1,7 @@
 package sunset.world.blocks.laser;
 
 import arc.Core;
+import arc.graphics.Color;
 import arc.graphics.g2d.TextureRegion;
 import arc.math.Mathf;
 import arc.util.Log;
@@ -57,11 +58,21 @@ public class LaserCrafter extends LaserBlock{
     @Override
     public void setBars(){
         super.setBars();
-        addBar("laserCharge", (LaserCrafterBuild entity) ->
-            new Bar(() -> Core.bundle.format("bar.laser-charge", entity.laser.out + entity.getLaserConsumption(), entity.getLaserConsumption()),
-                    ()-> Pal.accent,
-                    () -> (entity.laser.out + entity.getLaserConsumption()) / entity.getLaserConsumption())
-        );
+        addBar("consumptionBar", (LaserBlockBuild entity) ->
+                new Bar(()-> entity.block().heats ? Core.bundle.format("bar.laser-input-heat", entity.laser.rawInput, entity.getLaserConsumption(), entity.block().heatLaserLimit) : Core.bundle.format("bar.laser-input", entity.laser.rawInput, entity.getLaserConsumption()),
+                        ()-> {
+                            if(entity.laser.rawInput < entity.getLaserConsumption())
+                                return Color.yellow;
+                            else if(entity.laser.rawInput == entity.getLaserConsumption())
+                                return Color.green;
+                            else {
+                                if(heats && entity.laser.rawInput > entity.block().heatLaserLimit)
+                                    return Color.red;
+                                else
+                                    return Color.orange;
+                            }
+                        },
+                        ()-> entity.laser.rawInput / entity.getLaserConsumption()));
     }
 
     public class LaserCrafterBuild extends LaserBlockBuild{
@@ -89,7 +100,7 @@ public class LaserCrafter extends LaserBlock{
         @Override
         public void updateTile(){
             super.updateTile();
-            Log.info("warmup: @\nwarmupSpeed: @\ndelta: @", warmup, warmupSpeed, Time.delta);
+            //Log.info("warmup: @\nwarmupSpeed: @\ndelta: @", warmup, warmupSpeed, Time.delta);
             if(efficiency() > 0 && laser.out >= 0){
                 progress += getProgressIncrease(craftTime);
                 warmup = Mathf.approachDelta(warmup, 1f, warmupSpeed);
