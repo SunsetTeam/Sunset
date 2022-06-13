@@ -23,7 +23,9 @@ operator fun IntFloatMap.set(key: Int, value: Float) = put(key, value)
 operator fun IntIntMap.set(key: Int, value: Int) = put(key, value)
 
 
+@Suppress("NOTHING_TO_INLINE")
+inline fun String.color(): Color = Color.valueOf(this)
 
+@Suppress("NOTHING_TO_INLINE")
+inline fun Int.color() = Color(this)
 
-inline fun String.color()= Color.valueOf(this)!!
-inline fun Int.color()= Color(this)

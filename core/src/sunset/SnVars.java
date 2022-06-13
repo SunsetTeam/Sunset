@@ -1,69 +1,47 @@
 package sunset;
 
-import arc.Events;
-import arc.struct.Seq;
-import arc.util.Log;
-import mindustry.Vars;
-import mindustry.ctype.ContentList;
-import mindustry.ctype.MappableContent;
-import mindustry.game.EventType;
-import mma.ModVars;
+import arc.*;
+import arc.struct.*;
+import arc.util.*;
+import mindustry.*;
+import mindustry.ctype.*;
+import mindustry.game.*;
+import mma.*;
 import sunset.content.*;
-import sunset.core.SnLogic;
-import sunset.core.SnSettings;
-import sunset.core.SnSoundControl;
-import sunset.core.SnUI;
+import sunset.core.*;
 
-import static mindustry.Vars.experimental;
-import static mindustry.Vars.headless;
+import static mindustry.Vars.*;
 
-public class SnVars extends ModVars {
+public class SnVars extends ModVars{
 
     //core region
     private static final Seq<Runnable> onLoad = new Seq<>();
-    private static final ContentList[] snContent = Seq.<ContentList>with(
-            new SnTeams(),
-            new SnItems(),
-            new SnGas(),
-            new SnStatusEffects(),
-            new SnLiquids(),
-            new SnPayload(),
-            new SnBullets(),
-            new SnBlocks(),
-            new SnUnitTypes(),
-            new SnOverride(),
-            //new SnLoadouts(),
-            new SnWeathers(),
-            new SnPlanets(),
-            new SnSectorPresets(),
-            new SnTechTree()
-    ).flatMap(contentList -> Seq.with(contentList instanceof SnBlocks b ? b.list : new ContentList[]{contentList})).toArray(ContentList.class);
     //end region
     public static SnLogic logic;
     public static SnSettings settings;
     public static SnSoundControl sound;
     public static SnUI ui;
 
-    static {
+    static{
         new SnVars();
     }
 
     /**
-     * just void method
+     * Used to load SnVars to computer memory causing the static block work.
      */
-    public static void create() {
+    public static void create(){
 
     }
 
-    public static void init() {
+    public static void init(){
         experimental = true;
     }
 
-    public static void load() {
+    public static void load(){
         onLoad.each(Runnable::run);
         onLoad.clear();
 
-        if (!headless) {
+        if(!headless){
             sound = new SnSoundControl();
             listener.add(ui = new SnUI());
         }
@@ -71,22 +49,22 @@ public class SnVars extends ModVars {
         listener.add(settings = new SnSettings());
     }
 
-    public static String realName(MappableContent content) {
+    public static String realName(MappableContent content){
         return content.minfo.mod == null ? content.name : content.name.substring(content.minfo.mod.name.length() + 1);
     }
 
     @Override
-    protected void onLoad(Runnable runnable) {
+    protected void onLoad(Runnable runnable){
         onLoad.add(runnable);
     }
 
     @Override
-    protected void showException(Throwable ex) {
+    protected void showException(Throwable ex){
         Log.err(ex);
-        if (headless) {
+        if(headless){
             return;
         }
-        if (Vars.ui == null) {
+        if(Vars.ui == null){
             Events.on(EventType.ClientLoadEvent.class, e -> showException(ex));
             return;
         }
@@ -94,12 +72,31 @@ public class SnVars extends ModVars {
     }
 
     @Override
-    public ContentList[] getContentList() {
-        return snContent;
+    public void loadContent(){
+        Runnable[] snContent = Seq.<Runnable>with(
+        SnTeams::load,
+        SnItems::load,
+        SnGas::load,
+        SnStatusEffects::load,
+        SnLiquids::load,
+        SnPayload::load,
+        SnBullets::load,
+        SnUnitTypes::load,
+        new SnBlocks(),
+        //    SnOverride::load,
+        //SnLoadouts::load,
+        SnWeathers::load,
+        SnPlanets::load,
+        SnSectorPresets::load,
+        SnTechTree::load
+        ).flatMap(contentList -> Seq.with(contentList instanceof SnBlocks b ? b.list : new Runnable[]{contentList})).toArray(Runnable.class);
+        for(Runnable runnable : snContent){
+            runnable.run();
+        }
     }
 
-//    @Override
-    public String getFullName(String name) {
+    //    @Override
+    public String getFullName(String name){
         return null;
     }
 }

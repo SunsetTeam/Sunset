@@ -2,12 +2,14 @@ package sunset.content;
 
 import arc.graphics.Color;
 import arc.util.Time;
-import mindustry.ctype.ContentList;
+import mindustry.content.Items;
+import mindustry.game.Team;
 import mindustry.graphics.g3d.HexMesh;
 import mindustry.graphics.g3d.HexSkyMesh;
 import mindustry.graphics.g3d.MultiMesh;
 import mindustry.graphics.g3d.SunMesh;
 import mindustry.type.Planet;
+import mindustry.world.meta.Attribute;
 import sunset.graphics.SnPal;
 import sunset.maps.generators.AzariaGenerator;
 import sunset.maps.generators.BurnoutGenerator;
@@ -15,7 +17,7 @@ import sunset.maps.generators.HycleGenerator;
 import sunset.maps.generators.RimeGenerator;
 import sunset.type.planets.SnPlanet;
 
-public class SnPlanets implements ContentList{
+public class SnPlanets{
     public static Planet
     //stars
     magma,
@@ -24,8 +26,7 @@ public class SnPlanets implements ContentList{
     //satellites
     hycle;
 
-    @Override
-    public void load(){
+    public static void load(){
         //region stars
         magma = new SnPlanet("magma", null, 4f, 0){{
             bloom = true;
@@ -33,7 +34,7 @@ public class SnPlanets implements ContentList{
             hasAtmosphere = true;
             orbitRadius = 145;
             meshLoader = () -> new SunMesh(
-            this, 7,
+            this, 5,
             10, 0.7, 1.9, 1.4, 1.6,
             0.9f,
             Color.valueOf("FF7700"),
@@ -66,6 +67,17 @@ public class SnPlanets implements ContentList{
             cloudMeshLoader = () -> new MultiMesh(
                     new HexSkyMesh(this, 11, 0.11f, 0.13f, 5, new Color().set(SnPal.azariaClouds).mul(0.9f).a(0.75f), 2, 0.45f, 0.9f, 0.38f)
             );
+
+            ruleSetter = r -> {
+                r.waveTeam = Team.crux;
+                r.placeRangeCheck = false;
+                r.showSpawns = true;
+                r.lighting = true;
+                r.coreDestroyClear = false;
+                r.onlyDepositCore = false;
+            };
+            hiddenItems.addAll(Items.serpuloItems).removeAll(SnItems.azariaItems);
+            hiddenItems.addAll(Items.erekirItems).removeAll(SnItems.azariaItems);
         }};
 
         burnout = new SnPlanet("burnout", magma, 0.7f, 3){{

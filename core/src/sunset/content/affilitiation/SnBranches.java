@@ -5,6 +5,8 @@ import arc.graphics.Color;
 import arc.graphics.g2d.TextureRegion;
 import mindustry.graphics.Pal;
 
+import static mma.ModVars.fullName;
+
 public enum SnBranches {
     none,
     green,
@@ -29,7 +31,7 @@ public enum SnBranches {
     public Color color = Pal.shield;
 
     public TextureRegion region() {
-        return Core.atlas.find("sunset-branch-" + name());
+        return Core.atlas.find(fullName("branch-" + name()));
     }
 
     public String localizedName() {

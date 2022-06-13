@@ -75,9 +75,10 @@ public class LightningContinuousLaserBulletType extends BulletType {
     }
 
     @Override
-    public float range(){
+    protected float calculateRange(){
         return Math.max(length, maxRange);
     }
+
 
     @Override
     public void init(){
@@ -120,7 +121,7 @@ public class LightningContinuousLaserBulletType extends BulletType {
 
         Tmp.v1.trns(b.rotation(), baseLen * 1.1f);
 
-        Drawf.light(b.team, b.x, b.y, b.x + Tmp.v1.x, b.y + Tmp.v1.y, lightStroke, lightColor, 0.7f);
+        Drawf.light( b.x, b.y, b.x + Tmp.v1.x, b.y + Tmp.v1.y, lightStroke, lightColor, 0.7f);
         Draw.reset();
     }
 

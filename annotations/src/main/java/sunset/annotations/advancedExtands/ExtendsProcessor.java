@@ -4,6 +4,7 @@ import arc.struct.*;
 import arc.util.*;
 import com.github.javaparser.*;
 import com.github.javaparser.ast.*;
+import com.github.javaparser.ast.Modifier;
 import com.github.javaparser.ast.Modifier.*;
 import com.github.javaparser.ast.body.*;
 import mindustry.annotations.*;
@@ -12,8 +13,10 @@ import mma.annotations.*;
 import sunset.annotations.SnAnnotations.*;
 
 import javax.annotation.processing.*;
+import javax.lang.model.element.*;
 import javax.tools.*;
 import java.io.*;
+import java.util.*;
 
 @SupportedAnnotationTypes("sunset.annotations.SnAnnotations.BothExtends")
 public class ExtendsProcessor extends ModBaseProcessor{
@@ -27,6 +30,11 @@ public class ExtendsProcessor extends ModBaseProcessor{
         }catch(Exception e){
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv){
+        return super.process(annotations, roundEnv);
     }
 
     @Override

@@ -42,7 +42,6 @@ import mindustry.world.blocks.payloads.Payload;
 import mindustry.world.blocks.payloads.PayloadBlock;
 import mindustry.world.consumers.ConsumeCoolant;
 import mindustry.world.consumers.ConsumeLiquidBase;
-import mindustry.world.consumers.ConsumeType;
 import mindustry.world.meta.Stat;
 import mindustry.world.meta.StatUnit;
 import mindustry.world.meta.StatValues;
@@ -50,8 +49,8 @@ import mindustry.world.*;
 import mma.ModVars;
 
 import static mindustry.Vars.tilesize;
-
-public class PayloadTurret extends PayloadBlock {
+//TODO update to v7
+ class PayloadTurret{}/* extends PayloadBlock {
     //after being logic-controlled and this amount of time passes, the turret will resume normal AI
     public final static float logicControlCooldown = 60 * 2;
 
@@ -80,11 +79,11 @@ public class PayloadTurret extends PayloadBlock {
     public float shootShake = 0f;
     public float shootLength = -1;
     public float xRand = 0f;
-    /** Currently used for artillery only. */
+    *//** Currently used for artillery only. *//*
     public float minRange = 0f;
     public float burstSpacing = 0;
     public boolean alternate = false;
-    /** If true, this turret will accurately target moving targets with respect to charge time. */
+    *//** If true, this turret will accurately target moving targets with respect to charge time. *//*
     public boolean accurateDelay = false;
     public boolean targetAir = true;
     public boolean targetGround = true;
@@ -95,9 +94,9 @@ public class PayloadTurret extends PayloadBlock {
     public float rotateSpeed = 5;
 
     public boolean acceptCoolant = true;
-    /** Effect displayed when coolant is used. */
+    *//** Effect displayed when coolant is used. *//*
     public Effect coolEffect = Fx.fuelburn;
-    /** How much reload is lowered by for each unit of liquid of heat capacity. */
+    *//** How much reload is lowered by for each unit of liquid of heat capacity. *//*
     public float coolantMultiplier = 5f;
     public float reloadTime = 10f;
 
@@ -159,7 +158,7 @@ public class PayloadTurret extends PayloadBlock {
         super.setStats();
 
         stats.add(Stat.inaccuracy, (int) inaccuracy, StatUnit.degrees);
-        stats.add(Stat.reload, 60f / (reloadTime) * (alternate ? 1 : shots), StatUnit.perSecond);
+        stats.add(Stat.reload, 60f / (reloadTime) * (alternate ? 1 : shoot.shots), StatUnit.perSecond);
         stats.add(Stat.targetsAir, targetAir);
         stats.add(Stat.targetsGround, targetGround);
         stats.add(Stat.ammo, StatValues.ammo(ammoTypes));
@@ -423,12 +422,12 @@ public class PayloadTurret extends PayloadBlock {
             }
         }
 
-        /** @return the ammo type that will be returned if useAmmo is called. */
+        *//** @return the ammo type that will be returned if useAmmo is called. *//*
         public BulletType peekAmmo(){
             return ammoTypes.get(payload.block());
         }
 
-        /** @return  whether the turret has ammo. */
+        *//** @return  whether the turret has ammo. *//*
         public boolean hasAmmo(){
             return payload != null && hasArrived();
         }
@@ -477,7 +476,7 @@ public class PayloadTurret extends PayloadBlock {
             if(dead) return;
 
             //alternate sides when using a double turret
-            float scl = (shots == 2 && alternate && shotCounter % 2 == 1 ? -1f : 1f);
+            float scl = (shoot.shots == 2 && alternate && shotCounter % 2 == 1 ? -1f : 1f);
 
             ammoUseEffect.at(x - Angles.trnsx(rotation, ammoEjectBack), y - Angles.trnsy(rotation, ammoEjectBack), rotation * scl);
         }
@@ -518,4 +517,4 @@ public class PayloadTurret extends PayloadBlock {
             return 1;
         }
     }
-}
+}*/

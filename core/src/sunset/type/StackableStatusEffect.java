@@ -213,6 +213,7 @@ public class StackableStatusEffect extends PublicStatusEffect{
             this.localizedName = this.parent.localizedName;
             this.description = this.parent.description;
             this.details = this.parent.details;
+            techNode=parent.techNode;
         }
 
         @Override
@@ -250,11 +251,6 @@ public class StackableStatusEffect extends PublicStatusEffect{
         @Override
         public String emoji(){
             return parent.emoji();
-        }
-
-        @Override
-        public TechTree.TechNode node(){
-            return parent.node();
         }
 
         public StackableEntryStatusEffect next(){

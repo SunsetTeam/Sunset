@@ -28,7 +28,7 @@ public class TorpedoBulletType extends BasicBulletType {
     public TorpedoBulletType (float speed, float damage) {
         super(speed, damage);
         collidesAir = absorbable = keepVelocity = false;
-        chargeShootEffect = despawnEffect = hitEffect = shootEffect = smokeEffect = trailEffect = Fx.none;
+        /*chargeShootEffect =*/ despawnEffect = hitEffect = shootEffect = smokeEffect = trailEffect = Fx.none;
         trailChance = 1;
         collideFloor = true;
         layer = Layer.floor;

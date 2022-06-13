@@ -3,7 +3,6 @@ package sunset.world.blocks.sandbox;
 import arc.func.*;
 import arc.graphics.*;
 import arc.graphics.g2d.*;
-import arc.math.geom.*;
 import arc.scene.style.*;
 import arc.scene.ui.ImageButton.*;
 import arc.scene.ui.*;
@@ -59,26 +58,26 @@ public class SnMultiSource extends Block{
     @Override
     public void setBars(){
         super.setBars();
-        bars.remove("items");
-        bars.remove("liquid");
+        removeBar("items");
+        removeBar("liquid");
     }
 
 
     @Override
-    public void drawRequestConfig(BuildPlan req, Eachable<BuildPlan> list){
+    public void drawPlanConfig(BuildPlan req, Eachable<BuildPlan> list){
         Draw.rect(cross, req.drawx(), req.drawy());
-        if(req.config instanceof Integer input){
+   /*     if(req.config instanceof Integer input){
             Point2 data = Point2.unpack(input);
-            drawRequestConfigCenter(req, content.item((short)data.x), name + "-center-0");
-            drawRequestConfigCenter(req, content.liquid((short)data.y), name + "-center-1");
-        }
+            drawPlanConfigCenter(req, content.item((short)data.x), name + "-center-0");
+            drawPlanConfigCenter(req, content.liquid((short)data.y), name + "-center-1");
+        }*/
     }
 
     @Override
     public boolean canReplace(Block other){
         if(other.alwaysReplace) return true;
         return other.replaceable && (other != this || rotate) && this.group != BlockGroup.none && (other.group == BlockGroup.transportation || other.group == BlockGroup.liquids) &&
-               (size == other.size || (size >= other.size && ((subclass != null && subclass == other.subclass) || group.anyReplace)));
+        (size == other.size || (size >= other.size && ((subclass != null && subclass == other.subclass) || group.anyReplace)));
     }
 
     public class MultiSourceBuild extends Building{
@@ -139,7 +138,7 @@ public class SnMultiSource extends Block{
 
         @Override
         public void buildConfiguration(Table table){
-            ImageButtonStyle style = new ImageButtonStyle(Styles.clearTransi);
+            ImageButtonStyle style = new ImageButtonStyle(Styles.cleari);
             style.imageDisabledColor = Color.gray;
 
 
@@ -173,7 +172,7 @@ public class SnMultiSource extends Block{
             for(T item : items){
                 if(!item.unlockedNow()) continue;
 
-                cont.button(Tex.whiteui, Styles.clearToggleTransi, 24, () -> {
+                cont.button(Tex.whiteui, Styles.clearTogglei, 24, () -> {
                     consumer.get(item);
                 }).checked(b -> checked.get(item))
                 .update(b -> b.setChecked(checked.get(item)))
@@ -201,7 +200,7 @@ public class SnMultiSource extends Block{
         }
 
         @Override
-        public boolean onConfigureTileTapped(Building other){
+        public boolean onConfigureBuildTapped(Building other){
             if(this == other){
                 deselect();
                 return false;
@@ -235,7 +234,7 @@ public class SnMultiSource extends Block{
                 counter.element++;
             });
             if(counter.element % width != 0){
-                counter.element+=width- counter.element % width;
+                counter.element += width - counter.element % width;
             }
             data.outputLiquids.each(id -> {
                 drawCons.get(counter, content.liquid(id).fullIcon);
@@ -253,6 +252,8 @@ public class SnMultiSource extends Block{
             }
             if(value instanceof Liquid liquid){
                 data.toggle(liquid);
+                Log.info("liquid: @(@)", liquid, data.outputLiquids.contains(liquid.id));
+//                System.out.println("liquid: "+liquid);
                 super.configure(data.toBytes());
                 return;
             }
@@ -272,7 +273,7 @@ public class SnMultiSource extends Block{
                 return;
             }
             if(value instanceof Float power){
-                data.outputPower=power;
+                data.outputPower = power;
                 super.configureAny(data.toBytes());
                 return;
             }
@@ -371,11 +372,14 @@ class SourceData{
         int itemAmount = read.i();
         for(int i = 0; i < itemAmount; i++){
             String name = TypeIO.readString(read);
-            name = SaveFileReader.fallback.get(name, name);
             Item item = content.getByName(ContentType.item, name);
             if(item == null){
-                Log.err("Cannot find item with name \"@\"", name);
-                continue;
+                name = SaveFileReader.fallback.get(name, name);
+                item = content.getByName(ContentType.item, name);
+                if(item == null){
+                    Log.err("Cannot find item with name \"@\"", name);
+                    continue;
+                }
             }
             outputItems.add(item.id);
         }
@@ -384,11 +388,14 @@ class SourceData{
         int liquidAmount = read.i();
         for(int i = 0; i < liquidAmount; i++){
             String name = TypeIO.readString(read);
-            name = SaveFileReader.fallback.get(name, name);
             Liquid liquid = content.getByName(ContentType.liquid, name);
             if(liquid == null){
-                Log.err("Cannot find liquid with name \"@\"", name);
-                continue;
+                name = SaveFileReader.fallback.get(name, name);
+                liquid = content.getByName(ContentType.liquid, name);
+                if(liquid == null){
+                    Log.err("Cannot find liquid with name \"@\"", name);
+                    continue;
+                }
             }
             outputLiquids.add(liquid.id);
         }

@@ -1,7 +1,6 @@
 package sunset.content.blocks;
 
 import mindustry.content.Items;
-import mindustry.ctype.ContentList;
 import mindustry.type.Category;
 import mindustry.world.Block;
 import mindustry.world.blocks.liquid.Conduit;
@@ -13,19 +12,15 @@ import sunset.world.blocks.distribution.ModConduit;
 
 import static mindustry.type.ItemStack.with;
 
-public class SnLiquidBlocks implements ContentList {
+public class SnLiquidBlocks  {
     public static Block
             //transportation
             naturiteConduit, nobiumConduit,
-
-            //storage
-            liquidWell, 
     
             //extraction
             naturitePump;
 
-    @Override
-    public void load() {
+    public static void load() {
 
         //region transportation
         naturiteConduit = new Conduit("naturite-conduit") {{
@@ -47,19 +42,11 @@ public class SnLiquidBlocks implements ContentList {
             }};
         }
         //endregion transportation
-        //region storage
-        liquidWell = new LiquidRouter("liquid-well") {{
-            requirements(Category.liquid, with(Items.titanium, 110, Items.metaglass, 90, Items.thorium, 75));
-            size = 4;
-            liquidCapacity = 3100f;
-            health = 1270;
-        }};
-        //endregion storage
         //region special
         naturitePump = new Pump("naturite-pump") {{
             requirements(Category.liquid, with(Items.copper, 120, Items.metaglass, 110, Items.silicon, 40, Items.titanium, 70, SnItems.naturite, 60));
             pumpAmount = 0.24f;
-            consumes.power(6.9f);
+            consumePower(6.9f);
             liquidCapacity = 100f;
             hasPower = true;
             size = 5;

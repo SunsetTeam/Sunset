@@ -1,6 +1,7 @@
 package sunset.world.blocks.laser;
 
 import arc.*;
+import arc.graphics.Color;
 import arc.graphics.g2d.Draw;
 import arc.graphics.g2d.TextureRegion;
 import arc.struct.*;
@@ -12,9 +13,12 @@ import mindustry.game.*;
 import mindustry.game.EventType.*;
 import mindustry.gen.*;
 import mindustry.graphics.Layer;
+import mindustry.graphics.Pal;
+import mindustry.ui.Bar;
 import mindustry.world.Block;
 import mindustry.world.Tile;
 import mindustry.world.blocks.logic.LogicBlock;
+import mma.ModVars;
 import sunset.gen.*;
 import sunset.graphics.Drawm;
 
@@ -30,12 +34,19 @@ public class LaserBlock extends Block{
     public TextureRegion plugDark;
     @Annotations.Load("@-edge1")
     public TextureRegion plugLight;
+    @Annotations.Load("@-all-edge")
+    public TextureRegion allEdge;
 
     public boolean inputsLaser = false;
     public boolean outputsLaser = false;
 
+    public boolean heats = false;
+    public float heatLaserLimit = 50f;
+
     public float laserProduction = 0f;
     public float laserConsumption = 0f;
+
+    public LaserBlockDrawer drawer = new LaserBlockDrawer();
     //on preUpdate, default all side-vars
     static {
         Events.run(Trigger.update,()->{
@@ -51,12 +62,22 @@ public class LaserBlock extends Block{
     }
     public LaserBlock(String name) {
         super(name);
-
     }
+
+    @Override
+    public void load(){
+        super.load();
+        drawer.load(this);
+    }
+
+    @Override
+    public TextureRegion[] icons(){
+        return !ModVars.packSprites ? new TextureRegion[]{region} : new TextureRegion[]{base, allEdge, top};
+    }
+
     @SuppressWarnings("InnerClassMayBeStatic")
     public class LaserBlockBuild extends Building{
         LaserModule laser;
-        LaserBlockDrawer drawer;
         public boolean leftInput = false,
                 topInput = false,
                 rightInput = false,
@@ -69,7 +90,6 @@ public class LaserBlock extends Block{
         @Override
         public Building init(Tile tile, Team team, boolean shouldAdd, int rotation){
             laser = new LaserModule(this);
-            drawer = new LaserBlockDrawer(this);
             return super.init(tile, team, shouldAdd, rotation);
         }
 
@@ -81,7 +101,7 @@ public class LaserBlock extends Block{
 
         @Override
         public void draw(){
-            drawer.draw();
+            drawer.draw(this);
         }
 
         public float getLaserProduction(){

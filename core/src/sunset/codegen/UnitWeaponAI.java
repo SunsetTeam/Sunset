@@ -43,13 +43,13 @@ class UnitWeaponAI extends AIController{
                 unit.isShooting |= ai.update(unit, mount);
             }else{
                 if(ret){
-                    mount.target = findTarget(mountX, mountY, weapon.bullet.range(), weapon.bullet.collidesAir, weapon.bullet.collidesGround);
+                    mount.target = findTarget(mountX, mountY, weapon.bullet.range, weapon.bullet.collidesAir, weapon.bullet.collidesGround);
                 }
 
                 boolean shoot = false;
 
                 if(mount.target != null){
-                    shoot = mount.target.within(mountX, mountY, weapon.bullet.range()) && shouldShoot();
+                    shoot = mount.target.within(mountX, mountY, weapon.bullet.range) && shouldShoot();
 
                     Vec2 to = Predict.intercept(unit, mount.target, weapon.bullet.speed);
                     mount.aimX = to.x;

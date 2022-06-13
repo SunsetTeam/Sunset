@@ -1,6 +1,5 @@
 package sunset.content.blocks.defense;
 
-import mindustry.ctype.ContentList;
 import mindustry.type.Category;
 import mindustry.world.Block;
 import mindustry.world.blocks.defense.Wall;
@@ -10,7 +9,7 @@ import sunset.world.blocks.defense.walls.SnWall;
 
 import static mindustry.type.ItemStack.with;
 
-public class SnWalls implements ContentList{
+public class SnWalls {
     public static Block
 
     forsWall, forsWallLarge,
@@ -19,8 +18,7 @@ public class SnWalls implements ContentList{
     
     indestructibleWall, indestructibleWallLarge;
 
-    @Override
-    public void load(){
+    public static void load(){
         forsWall = new Wall("fors-wall"){{
             requirements(Category.defense, with(SnItems.fors, 6));
             size = 1;

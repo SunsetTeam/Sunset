@@ -1,109 +1,69 @@
 package sunset.content.blocks;
 
-import mindustry.content.Fx;
-import mindustry.content.Items;
-import mindustry.content.Liquids;
-import mindustry.ctype.ContentList;
-import mindustry.gen.Sounds;
-import mindustry.type.Category;
-import mindustry.world.Block;
-import mindustry.world.blocks.power.DecayGenerator;
-import mindustry.world.blocks.power.NuclearReactor;
-import sunset.content.SnItems;
-import sunset.world.blocks.power.LiquidGenerator;
-import sunset.world.blocks.power.ThermalGeneratorExt;
-import sunset.world.blocks.power.WindTurbine;
+import gas.world.blocks.power.GasConsumeGenerator;
+import mindustry.gen.*;
+import mindustry.type.*;
+import mindustry.world.*;
+import mindustry.world.blocks.power.*;
+import sunset.content.*;
 
 import static mindustry.type.ItemStack.with;
 
-public class SnPower implements ContentList{
+public class SnPower{
     public static Block
-    //generators
-    windTurbine, oilGenerator, advrtgGenerator, advThermalGenerator,
 
-    //reactors
-    differentialReactor, planatriumReactor;
+    //generatorss
+    thermalEvaporator, oxidativeCombustionGenerator, chemicalReactor;
 
-    @Override
-    public void load(){
-        windTurbine = new WindTurbine("wind-turbine"){{
-            requirements(Category.power, with(Items.copper, 30, Items.silicon, 20));
+
+    public static void load(){
+        thermalEvaporator = new ThermalGenerator("thermal-evaporator"){{
+            requirements(Category.power, with(SnItems.fors, 60, SnItems.erius, 40));
+            powerProduction = 2.7f;
+            displayEfficiency = true;
+            spinners = false;
             size = 2;
-            powerProduction = 1f;
-        }};
-
-
-        //region generators
-        oilGenerator = new LiquidGenerator("oil-generator"){{
-            requirements(Category.power, with(Items.copper, 110, Items.titanium, 70, Items.lead, 120, Items.silicon, 55, Items.metaglass, 70));
-            powerProduction = 11f;
-            //minLiquidEfficiency = 0.2f;
-            //maxLiquidGenerate = 0.4f;
-            liquidCapacity = 50;
-            hasLiquids = true;
-            hasItems = false;
-            size = 3;
-            ambientSound = Sounds.steam;
-            ambientSoundVolume = 0.03f;
-
-            consumes.liquid(Liquids.oil, 0.10f);
-        }};
-
-        advrtgGenerator = new DecayGenerator("advance-rtg-generator"){{
-            requirements(Category.power, with(Items.lead, 240, Items.silicon, 185, Items.phaseFabric, 75, Items.plastanium, 125, Items.thorium, 130, SnItems.planatrium, 100));
-            size = 4;
-            powerProduction = 13.2f;
-            itemDuration = 55 * 12f;
-        }};
-
-        advThermalGenerator = new ThermalGeneratorExt("advanced-thermal-generator"){{
-            requirements(Category.power, with(Items.copper, 140, Items.graphite, 90, SnItems.naturite, 80, Items.silicon, 40, Items.metaglass, 60));
-            size = 3;
-            powerProduction = 2.8f;
-            attributeScale = 1.2352941f;
-            generateEffect = Fx.redgeneratespark;
             floating = true;
+            placeableLiquid = true;
             ambientSound = Sounds.hum;
             ambientSoundVolume = 0.06f;
-            consumes.liquid(Liquids.water, 0.35f);
-        }};
-        //endregion generators
-        //region reactors
-        differentialReactor = new NuclearReactor("differential-reactor"){{
-            requirements(Category.power, with(Items.copper, 200, Items.titanium, 120, Items.lead, 250, Items.silicon, 130, Items.metaglass, 100));
-            ambientSound = Sounds.steam;
-            ambientSoundVolume = 0.03f;
-            size = 4;
-            health = 1300;
-            explosionRadius = 15;
-            explosionDamage = 1300;
-            itemCapacity = 35;
-            liquidCapacity = 70;
-            itemDuration = 240f;
-            powerProduction = 40f;
-            explodeEffect = Fx.impactReactorExplosion;
-            heating = 0.03f;
-            consumes.item(SnItems.reneubite).optional(true, false);
-            consumes.liquid(Liquids.cryofluid, heating / coolantPower).update(false);
+            attribute = SnAttribute.thermalBurheyna;
         }};
 
-        planatriumReactor = new NuclearReactor("planatrium-reactor"){{
-            requirements(Category.power, with(Items.lead, 400, Items.silicon, 270, Items.graphite, 220, SnItems.planatrium, 200, SnItems.fors, 180, SnItems.nobium, 120));
-            ambientSound = Sounds.hum;
-            ambientSoundVolume = 0.24f;
-            size = 5;
-            explosionRadius = 21;
-            explosionDamage = 2100;
-            health = 3100;
-            itemCapacity = 50;
-            liquidCapacity = 80;
-            itemDuration = 280f;
-            powerProduction = 180f;
-            explodeEffect = Fx.reactorExplosion;
-            consumes.item(SnItems.planatrium);
-            heating = 0.07f;
-            consumes.liquid(Liquids.cryofluid, heating / coolantPower).update(false);
+        oxidativeCombustionGenerator = new GasConsumeGenerator("oxidative-combustion-generator"){{
+            requirements(Category.power, with(SnItems.fors, 120, SnItems.erius, 100, SnItems.naturite, 70));
+            size = 2;
+            powerProduction = 6.1f;
+
+            hasGasses = true;
+            hasItems = true;
+            hasPower = true;
+            hasLiquids = false;
+            itemCapacity = 20;
+            gasCapacity = 35f;
+            itemDuration = 100f;
+            ambientSound = Sounds.smelter;
+            ambientSoundVolume = 0.06f;
+
+            consumeGas(SnGas.hyneris, 5f / 60f);
+            consumeItem(SnItems.azaliaBud, 2);
         }};
-        //endregion reactors
+
+        chemicalReactor = new GasConsumeGenerator("chemical-reactor"){{
+            requirements(Category.power, with(SnItems.fors, 200, SnItems.erius, 190, SnItems.naturite, 140, SnItems.anzar, 110));
+            size = 3;
+            powerProduction = 13f;
+
+            hasGasses = true;
+            hasPower = true;
+            hasLiquids = true;
+            itemCapacity = 20;
+            gasCapacity = 35f;
+            ambientSound = Sounds.smelter;
+            ambientSoundVolume = 0.06f;
+
+            consumeGas(SnGas.gyner, 6f / 60f);
+            consumeLiquid(SnLiquids.sayang, 3f / 60f);
+        }};
     }
 }

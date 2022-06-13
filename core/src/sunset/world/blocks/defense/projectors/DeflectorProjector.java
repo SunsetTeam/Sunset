@@ -22,7 +22,6 @@ import mindustry.graphics.Pal;
 import mindustry.logic.Ranged;
 import mindustry.world.blocks.defense.ForceProjector;
 import mindustry.world.consumers.ConsumeLiquidFilter;
-import mindustry.world.consumers.ConsumeType;
 import mindustry.world.meta.BlockStatus;
 import mindustry.world.meta.Stat;
 import mindustry.world.meta.StatUnit;
@@ -104,7 +103,7 @@ public class DeflectorProjector extends ForceProjector {
 
         @Override
         public void updateTile() {
-            boolean phaseValid = consumes.get(ConsumeType.item).valid(this);
+            boolean phaseValid = itemConsumer != null && itemConsumer.efficiency(this) > 0;
 
             phaseHeat = Mathf.lerpDelta(phaseHeat, Mathf.num(phaseValid), 0.1f);
 
@@ -122,10 +121,13 @@ public class DeflectorProjector extends ForceProjector {
 
             if (buildup > 0) {
                 float scale = !broken ? cooldownNormal : cooldownBrokenBase;
-                ConsumeLiquidFilter cons = consumes.get(ConsumeType.liquid);
-                if (cons.valid(this)) {
-                    cons.update(this);
-                    scale *= (cooldownLiquid * (1f + (liquids.current().heatCapacity - 0.4f) * 0.9f));
+
+                //TODO I hate this system
+                if(coolantConsumer != null){
+                    if(coolantConsumer.efficiency(this) > 0){
+                        coolantConsumer.update(this);
+                        scale *= (cooldownLiquid * (1f + (liquids.current().heatCapacity - 0.4f) * 0.9f));
+                    }
                 }
 
                 buildup -= delta() * scale;
@@ -194,12 +196,6 @@ public class DeflectorProjector extends ForceProjector {
             }
 
             drawShield();
-        }
-        @Override
-        public BlockStatus status() {
-            /*if (!broken) return BlockStatus.active;
-            return BlockStatus.noInput;*/
-            return this.cons.status();
         }
     }
 

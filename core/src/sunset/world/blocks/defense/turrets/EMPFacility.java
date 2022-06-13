@@ -1,42 +1,32 @@
 package sunset.world.blocks.defense.turrets;
 
-import acontent.world.meta.AStats;
-import arc.graphics.Color;
-import arc.graphics.g2d.Draw;
-import arc.graphics.g2d.Lines;
-import arc.graphics.g2d.TextureRegion;
-import arc.math.Mathf;
-import arc.struct.Seq;
-import arc.util.Time;
-import arc.util.Tmp;
-import mindustry.Vars;
-import mindustry.annotations.Annotations.Load;
-import mindustry.content.Fx;
-import mindustry.content.StatusEffects;
-import mindustry.entities.Effect;
-import mindustry.entities.bullet.BulletType;
-import mindustry.gen.Sounds;
-import mindustry.gen.Teamc;
-import mindustry.gen.Tex;
-import mindustry.graphics.Layer;
-import mindustry.graphics.Pal;
-import mindustry.type.Liquid;
-import mindustry.ui.Bar;
-import mindustry.world.blocks.defense.turrets.PowerTurret;
-import mindustry.world.consumers.ConsumeLiquidBase;
-import mindustry.world.consumers.ConsumeType;
-import mindustry.world.meta.Stat;
-import mindustry.world.meta.StatUnit;
-import mindustry.world.meta.StatValues;
-import sunset.SnVars;
-import sunset.utils.Utils;
+import acontent.world.meta.*;
+import arc.graphics.*;
+import arc.graphics.g2d.*;
+import arc.math.*;
+import arc.struct.*;
+import arc.util.*;
+import mindustry.*;
+import mindustry.annotations.Annotations.*;
+import mindustry.content.*;
+import mindustry.entities.*;
+import mindustry.entities.bullet.*;
+import mindustry.gen.*;
+import mindustry.graphics.*;
+import mindustry.type.*;
+import mindustry.ui.*;
+import mindustry.world.blocks.defense.turrets.*;
+import mindustry.world.meta.*;
+import sunset.*;
+import sunset.utils.*;
+import sunset.world.draw.*;
 
 import static arc.graphics.g2d.Draw.color;
 import static arc.graphics.g2d.Lines.stroke;
 
-public class EMPFacility extends PowerTurret {
+public class EMPFacility extends PowerTurret{
     public Seq<Core> cores = new Seq<>();
-    public boolean hasSpinners;
+    //    public boolean hasSpinners;
     public Color lightningColor;
     public float zapAngleRand, spinUp, spinDown, rangeExtention, lightningStroke = 3.5f;
     public int zaps;
@@ -45,25 +35,25 @@ public class EMPFacility extends PowerTurret {
     @Load("@-bottom")
     public TextureRegion bottom;
     public AStats aStats = new AStats();
+    public Effect ShootEffect = new Effect(22, e -> {
+        color(Pal.lancerLaser);
+        stroke(e.fout() * 2f);
+        Lines.circle(e.x, e.y, this.range);
+    });
 
-    public EMPFacility(String name) {
+    public EMPFacility(String name){
         super(name);
         shootCone = 360f;
         lightningColor = Color.valueOf("7FFFD4");
         shootSound = Sounds.release;
         shootEffect = Fx.none;
-        cooldown = 0.5f;
+        cooldownTime = 0.5f;
         stats = aStats.copy(stats);
+        drawer = new DrawEMPFacility();
     }
 
     @Override
-    public void init() {
-        consumes.powerCond(powerUse, TurretBuild::isShooting);
-        super.init();
-    }
-
-    @Override
-    public void setStats() {
+    public void setStats(){
         super.setStats();
 
         stats.remove(Stat.inaccuracy);
@@ -78,69 +68,48 @@ public class EMPFacility extends PowerTurret {
                 t.add(arc.Core.bundle.format("bullet.lightning", zaps, shootType.damage));
                 t.row();
 
-                if(shootType.status != StatusEffects.none) {
+                if(shootType.status != StatusEffects.none){
                     t.add((shootType.minfo.mod == null ? shootType.status.emoji() : "") + "[stat]" + shootType.status.localizedName);
                 }
             }).padTop(-9).left().get().background(Tex.underline);
         });
 
-        stats.remove(Stat.booster);
-        stats.add(Stat.input, StatValues.boosters(reloadTime, consumes.<ConsumeLiquidBase>get(ConsumeType.liquid).amount, coolantMultiplier, false, l -> consumes.liquidfilters.get(l.id)));
+        if(coolant != null) stats.remove(Stat.booster);
+        stats.add(Stat.input, StatValues.boosters(reload, coolant.amount, coolantMultiplier, false, l -> liquidFilter[l.id]));
     }
 
     @Override
-    public void setBars() {
+    public void setBars(){
         super.setBars();
-        SnVars.settings.registerReloadBarBlock(this, (EMPFBuild entity) -> new Bar(
-                () -> arc.Core.bundle.format("bar.sunset-reload", Utils.stringsFixed(Mathf.clamp(entity.reload / reloadTime) * 100f)),
-                () -> entity.team.color,
-                () -> Mathf.clamp(entity.reload / reloadTime)
+        SnVars.settings.registerReloadBarBlock(this, (EMPFacilityBuild entity) -> new Bar(
+        () -> arc.Core.bundle.format("bar.sunset-reload", Utils.stringsFixed(Mathf.clamp(entity.reloadCounter / reload) * 100f)),
+        () -> entity.team.color,
+        () -> Mathf.clamp(entity.reloadCounter / reload)
         ));
     }
 
-    public Effect ShootEffect = new Effect (22, e -> {
-        color(Pal.lancerLaser);
-        stroke(e.fout() * 2f);
-        Lines.circle(e.x, e.y, this.range);
-    });
-
-    public static class Core {
+    public static class Core{
         public float rotationMul = 12f;
         public float radius = 4.25f;
         public float xOffset = 0;
         public float yOffset = 0f;
 
-        public Core(float radius) {
+        public Core(float radius){
             this.radius = radius;
         }
     }
 
-    public class EMPFBuild extends PowerTurretBuild {
+    public class EMPFacilityBuild extends PowerTurretBuild{
         protected Seq<Teamc> targets = new Seq<>();
         protected float speedScl;
 
 
         @Override
-        public void draw() {
-            Draw.rect(baseRegion, x, y);
-
-            Draw.z(Layer.turret);
-
-            TextureRegion r = hasSpinners ? bottom : region;
-
-            Draw.rect(r, x, y);
-
-            Draw.rect(top, x, y);
-
-            //this.drawTeamTop();
-        }
-
-        @Override
-        public void updateTile() {
-            if(!hasAmmo() || !isShooting() || !isActive() || !cons.valid()) {
+        public void updateTile(){
+            if(!hasAmmo() || !isShooting() || !isActive() || efficiency == 0){
                 speedScl = Mathf.lerpDelta(speedScl, 0, spinDown);
             }
-            if(hasAmmo() && isShooting() && isActive() && cons.valid()) {
+            if(hasAmmo() && isShooting() && isActive() && efficiency > 0 && hasLiquids){
                 Liquid liquid = liquids.current();
                 speedScl = Mathf.lerpDelta(speedScl, 1, spinUp * peekAmmo().reloadMultiplier * liquid.heatCapacity * coolantMultiplier * edelta());
             }
@@ -151,14 +120,14 @@ public class EMPFacility extends PowerTurret {
         }
 
         @Override
-        protected void shoot(BulletType type) {
+        protected void shoot(BulletType type){
 
             targets.clear();
 
-            targets = Utils.allNearbyEnemiesOld(team, x, y, range + rangeExtention);
+            Utils.allNearbyEnemies(team, x, y, range + rangeExtention, it -> targets.add(it.<Teamc>as()));
 
-            if (targets.size > 0) {
-                for (int i = 0; i < shots; i++) {
+            if(targets.size > 0){
+                for(int i = 0; i < shoot.shots; i++){
 
                     Core part = cores.random();
                     Teamc target = targets.random();
@@ -178,12 +147,12 @@ public class EMPFacility extends PowerTurret {
 
                     shootSound.at(shootX, shootY, Mathf.random(0.9f, 1.1f));
 
-                    if (shootShake > 0f) {
-                        Effect.shake(shootShake, shootShake, this);
+                    if(shake > 0f){
+                        Effect.shake(shake, shake, this);
                     }
                     final float spawnX = sX, spawnY = sY;
                     Time.run(3f, () -> {
-                        for (int j = 0; j < zaps; j++) {
+                        for(int j = 0; j < zaps; j++){
                             shootType.create(this, team, spawnX, spawnY, ((360f / zaps) * j) + Mathf.range(zapAngleRand));
                         }
                     });
@@ -193,11 +162,11 @@ public class EMPFacility extends PowerTurret {
         }
 
         @Override
-        protected void turnToTarget(float targetRot) {
+        protected void turnToTarget(float targetRot){
         }
 
         @Override
-        public boolean canControl() {
+        public boolean canControl(){
             return false;
         }
     }

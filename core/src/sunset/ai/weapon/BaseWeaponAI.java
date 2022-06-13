@@ -16,7 +16,7 @@ public class BaseWeaponAI extends WeaponAI {
     public boolean update(Unit unit, WeaponMount mount) {
         float mountX = mountX(unit, mount);
         float mountY = mountY(unit, mount);
-        Teamc target = Units.closestTarget(unit.team, mountX, mountY, mount.weapon.bullet.range(),
+        Teamc target = Units.closestTarget(unit.team, mountX, mountY, mount.weapon.bullet.range,
                 u -> u.checkTarget(mount.weapon.bullet.collidesAir, mount.weapon.bullet.collidesGround),
                 t -> mount.weapon.bullet.collidesGround);
         aim(target, unit, mount);
@@ -31,7 +31,7 @@ public class BaseWeaponAI extends WeaponAI {
             float mountX = mountX(unit, mount);
             float mountY = mountY(unit, mount);
             mount.shoot = target.within(mountX, mountY,
-                    mount.weapon.bullet.range());
+                    mount.weapon.bullet.range);
             mount.rotate = mount.shoot;
             Vec2 to = Predict.intercept(unit, target, mount.weapon.bullet.speed);
             mount.aimX = to.x;

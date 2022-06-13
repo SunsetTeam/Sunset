@@ -37,7 +37,7 @@ public class ItemTeleporter extends Block{
 
     public void setBars(){
         super.setBars();
-        bars.add("connections", entity -> new Bar(
+        addBar("connections", entity -> new Bar(
         () -> Core.bundle.format("bar.powerlines", entity.block.size, maxLink),
         () -> Pal.accent, () -> entity.block.size / (float)maxLink));
     }

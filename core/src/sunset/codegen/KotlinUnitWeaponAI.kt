@@ -36,11 +36,11 @@ private open class KotlinUnitWeaponAI : AIController() {
             }
 
             if (retarget) {
-                mount.target = findTarget(mountX, mountY, weapon.bullet.range(), weapon.bullet.collidesAir, weapon.bullet.collidesGround)
+                mount.target = findTarget(mountX, mountY, weapon.bullet.range, weapon.bullet.collidesAir, weapon.bullet.collidesGround)
             }
             var shoot = false
             if (mount.target != null) {
-                shoot = mount.target.within(mountX, mountY, weapon.bullet.range()) && shouldShoot()
+                shoot = mount.target.within(mountX, mountY, weapon.bullet.range) && shouldShoot()
                 val to = Predict.intercept(unit, mount.target, weapon.bullet.speed)
                 mount.aimX = to.x
                 mount.aimY = to.y

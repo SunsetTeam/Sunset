@@ -1,13 +1,20 @@
 sourceSets.main.java.srcDirs = ["src/"]
 
+jar{
 
+   /* duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    from{
+        configurations.runtimeClasspath.collect{ it.isDirectory() ? it : zipTree(it) }
+//        project(":core").fileTree("build/libs/core.jar").collect { it.isDirectory() ? it : zipTree(it) }
+    }*/
+}
 import arc.files.Fi
 import arc.graphics.Color
 import arc.graphics.Pixmap
 import arc.packer.TexturePacker
 import arc.struct.IntIntMap
 import arc.struct.IntMap
-import arc.util.async.Threads
+import arc.util.Threads
 
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
