@@ -13,6 +13,7 @@ import mindustry.*;
 import mindustry.game.*;
 import mindustry.gen.*;
 import mindustry.graphics.*;
+import mindustry.ui.Bar;
 import mindustry.world.*;
 import mma.ModVars;
 
@@ -42,6 +43,22 @@ public class LaserNode extends LaserBlock{
             b.leftOutput = (value & 0b0100) >> 2 == 1;
             b.downOutput = (value & 0b1000) >> 3 == 1;
         });
+    }
+    @Override
+    public void setBars(){
+        super.setBars();
+        if(heats){
+            addBar("chargeBar", (LaserBlockBuild entity) ->
+                    new Bar(() -> Core.bundle.format("bar.laser-input", entity.laser.rawInput, entity.block().heatLaserLimit),
+                    () -> {
+                        if(entity.laser.rawInput < entity.block().heatLaserLimit){
+                            return Pal.powerBar;
+                        }
+                        else
+                            return Color.red;
+                    },
+                    () -> entity.laser.rawInput / entity.block().heatLaserLimit));
+        }
     }
 
     @SuppressWarnings("PointlessBitwiseExpression")
