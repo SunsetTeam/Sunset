@@ -101,7 +101,7 @@ public class Laser{
             end.x = start.x + Tmp.v1.x;
             end.y = start.y + Tmp.v1.y;
 
-            if(enabled){
+            if(enabled && charge > 0f){
                 //////////////
                 //this is for laser mechanic
                 if(target instanceof LaserBlock.LaserBlockBuild b && b.block().inputsLaser){
