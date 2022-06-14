@@ -14,10 +14,7 @@ public class SnItems {
     anzar, naturite,  reneubite, nobium, azaliaBud, yantai, enojie, zerinium,
     //endregion azaria
     //other
-    flameid, coldent, testItem,
-    lightBurstMissile,
-    raMissile, empMissile, lightningMissile, lightMissile,
-    burstMissile, detonatorMissile, pointMissile, spotMissile;
+    flameid, coldent, testItem;
 
     public static final Seq<Item> azariaItems = new Seq<>();
 
@@ -87,25 +84,6 @@ public class SnItems {
             testStat2 = 0.54f;
             testStat3 = 0.71f;
         }};
-        /*
-
-        endregion crafted
-        endregion items
-        region ammo
-
-        lightBurstMissile = new Ammo("light-burst-missile");
-        raMissile = new Ammo("ra-missile");
-        empMissile = new Ammo("emp-missile");
-        lightningMissile = new Ammo("lightning-missile");
-        lightMissile = new Ammo("light-missile");
-        burstMissile = new Ammo("burst-missile");
-        detonatorMissile = new Ammo("detonator-missile");
-        pointMissile = new Ammo("point-missile");
-        spotMissile = new Ammo("spot-missile");
-
-        //endregion ammo
-
-        */
 
         azariaItems.addAll(
                 fors, erius, naturite, anzar, nedirium, reneubite, nobium, planatrium, azaliaBud,

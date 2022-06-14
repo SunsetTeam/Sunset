@@ -1,23 +1,10 @@
 package sunset.content.blocks;
 
-import mindustry.content.Fx;
-import mindustry.content.Items;
-import mindustry.content.Liquids;
 import mindustry.type.Category;
-import mindustry.type.ItemStack;
 import mindustry.world.Block;
-import mindustry.world.blocks.production.AttributeCrafter;
 import mindustry.world.blocks.production.Drill;
-import mindustry.world.blocks.production.SolidPump;
-import mindustry.world.draw.*;
-import mindustry.world.meta.Env;
-import sunset.content.SnAttribute;
-import sunset.content.SnFx;
 import sunset.content.SnItems;
 import sunset.content.SnLiquids;
-import sunset.type.blocks.DrillItem;
-import sunset.world.blocks.production.raw.DRDrill;
-import sunset.world.blocks.production.raw.PrecussionDrill;
 
 import static mindustry.type.ItemStack.with;
 

@@ -1,20 +1,17 @@
 package sunset.world.blocks.defense.turrets;
 
-import acontent.world.meta.*;
-import arc.*;
-import arc.graphics.g2d.*;
-import arc.math.*;
-import mindustry.annotations.Annotations.*;
-import mindustry.entities.*;
-import mindustry.entities.bullet.*;
-import mindustry.graphics.*;
-import mindustry.ui.*;
-import mindustry.world.blocks.defense.turrets.*;
-import mma.graphics.*;
-import sunset.*;
-import sunset.content.affilitiation.*;
-import sunset.utils.*;
-import sunset.world.meta.*;
+import acontent.world.meta.AStats;
+import arc.Core;
+import arc.math.Mathf;
+import mindustry.entities.Mover;
+import mindustry.entities.bullet.BulletType;
+import mindustry.graphics.Drawf;
+import mindustry.graphics.Pal;
+import mindustry.ui.Bar;
+import mindustry.world.blocks.defense.turrets.ItemTurret;
+import mma.graphics.ADrawf;
+import sunset.SnVars;
+import sunset.utils.Utils;
 
 import static mindustry.Vars.tilesize;
 
@@ -23,7 +20,7 @@ import static mindustry.Vars.tilesize;
  * Features:<p>
  * 1) reload bar<p>
  * 2) power shot<p>
- * 3) guilds
+ * 3)
  */
 public class ModItemTurret extends ItemTurret{
     public boolean drawLight;
@@ -33,9 +30,6 @@ public class ModItemTurret extends ItemTurret{
     public int chargeShots;
     public boolean reloadBar = true;
 
-    public SnGuilds guild = SnGuilds.none;
-    public SnSubGuilds subGuild = SnSubGuilds.none;
-    public SnBranches branch = SnBranches.none;
     public AStats aStats = new AStats();
 
     public ModItemTurret(String name){
@@ -47,9 +41,6 @@ public class ModItemTurret extends ItemTurret{
     @Override
     public void setStats(){
         super.setStats();
-        if(guild != SnGuilds.none) aStats.add(SnStat.guild, SnStatValues.affil(guild));
-        if(subGuild != SnSubGuilds.none) aStats.add(SnStat.subGuild, SnStatValues.affil(subGuild));
-        if(branch != SnBranches.none) aStats.add(SnStat.branch, SnStatValues.affil(branch));
     }
 
     @Override
