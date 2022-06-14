@@ -5,14 +5,13 @@ import arc.graphics.g2d.*;
 import arc.math.*;
 import arc.struct.*;
 import arc.util.*;
-import mindustry.annotations.Annotations.*;
 import mindustry.entities.*;
 import mindustry.gen.*;
 import mindustry.graphics.*;
 import mindustry.type.*;
 import mindustry.world.blocks.defense.turrets.*;
 import mindustry.world.meta.*;
-import mma.*;
+;
 import sunset.world.meta.*;
 
 import static mindustry.Vars.tilesize;
@@ -41,11 +40,8 @@ public class ChainLightningTurret extends BaseTurret{
     //    public float liquidUse = 0f;
     public float shootCone = 0f;
     public float powerUse = 0f;
-    @Load("block-@size")
     public TextureRegion baseRegion;
-    @Load("parallax-laser")
     public TextureRegion laser;
-    @Load("parallax-laser-end")
     public TextureRegion laserEnd;
     public float laserWidth = 0.7f;
     public Color laserColor;
@@ -79,7 +75,7 @@ public class ChainLightningTurret extends BaseTurret{
     @Override
     public TextureRegion[] icons(){
 //        return super.makeIconRegions();
-        return !ModVars.packSprites ? new TextureRegion[]{region} : new TextureRegion[]{baseRegion, region};
+        return  new TextureRegion[]{baseRegion, region};
     }
 
 

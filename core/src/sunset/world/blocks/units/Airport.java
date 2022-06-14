@@ -18,7 +18,7 @@ import mindustry.world.blocks.*;
 import mindustry.world.blocks.storage.*;
 import mindustry.world.meta.*;
 import sunset.content.*;
-import sunset.gen.*;
+
 
 import static mindustry.Vars.*;
 
@@ -84,16 +84,6 @@ public class Airport extends StorageBlock{
        addBar("progress", (AirportBuild e) ->
         new Bar("bar.progress", Pal.ammo, () -> e.construcionTime / unitBuildTime));
 
-       addBar("units", (AirportBuild e) ->
-        new Bar(
-        //TODO: string
-        () -> Core.bundle.format("bar.unitcap",
-        e.units.size,
-        maxUnitCount
-        ),
-        () -> Pal.power,
-        () -> (float)e.units.size / maxUnitCount
-        ));
     }
 
     @Override
@@ -107,7 +97,6 @@ public class Airport extends StorageBlock{
     }
 
     public class AirportBuild extends StorageBuild{
-        public final Seq<DeliverUnit> units = new Seq<>();
         public int link = 0;
         public float construcionTime = 0f;
         public boolean shouldBuild;
@@ -130,26 +119,7 @@ public class Airport extends StorageBlock{
         public void updateTile(){
             if(afterRead){
                 afterRead = false;
-                for(Deliverc deliver : SnGroups.delivers){
-                    if(deliver.base() != this) continue;
-                    if(needUnits()){
-                        units.add(deliver.<DeliverUnit>as());
-                    }else{
-                        deliver.base(null);
-                    }
-                }
-            }
-            units.removeAll(d -> !d.isAdded() || !d.isValid());
-            if(needUnits()){
-                for(Deliverc deliver : SnGroups.delivers){
-                    if(deliver.base() == null){
-                        units.add(deliver.<DeliverUnit>as());
-                        deliver.set(this);
-                    }
-                    if(!needUnits()){
-                        break;
-                    }
-                }
+
             }
             if(link == -1) return;
             Building linkBuild = world.build(link);
@@ -164,10 +134,6 @@ public class Airport extends StorageBlock{
                     items.remove(unitRequirements);
                     construcionTime %= unitBuildTime;
                     Unit u = SnUnitTypes.courier.spawn(team, x, y); //TODO починить тип юнита
-                    DeliverUnit deliverUnit = u.as();
-                    deliverUnit.set(this);
-//                    ((DeliverAI) u.controller()).setup(this);
-                    units.add(deliverUnit);
                 }
             }
             /*if (canDump==null) {
@@ -257,7 +223,7 @@ public class Airport extends StorageBlock{
         }
 
         public boolean needUnits(){
-            return units.size < maxUnitCount;
+            return 0 < maxUnitCount;
         }
     }
 }

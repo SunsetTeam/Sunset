@@ -7,8 +7,9 @@ import mindustry.*;
 import mindustry.content.*;
 import mindustry.entities.*;
 import mindustry.game.*;
+import mindustry.gen.*;
 import mindustry.graphics.*;
-import sunset.gen.*;
+
 
 public class WeatherElement{
 
@@ -24,7 +25,7 @@ public class WeatherElement{
     public float lightningShake = 15f;
     public Effect lightningEffect = Fx.lightning;
     public Effect lightningExplosion = Fx.massiveExplosion;
-    public Sound lightningSound = SnSounds.thunder;
+    public Sound lightningSound = Sounds.none;
     public Color lightningColor = Pal.lancerLaser;
 
     public WeatherElement(String name){

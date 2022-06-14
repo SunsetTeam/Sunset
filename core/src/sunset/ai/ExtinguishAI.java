@@ -10,7 +10,7 @@ import sunset.utils.*;
 import static mindustry.Vars.*;
 
 /** AI that is chasing burning allied buildings or units, if any. */
-public class ExtinguishAI extends FlyingWeaponAI{
+public class ExtinguishAI extends AIController{
     final Vec2 target = new Vec2();
     public float ticks = 15;
     Interval timer = new Interval(10);

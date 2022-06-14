@@ -27,7 +27,6 @@ buildscript{
 
         gasVersion = "27b10c13f7e"
 
-        modCoreVersion = "53d3c83c089"
 
 
         kotlinVersion = "1.6.0"
@@ -48,7 +47,6 @@ buildscript{
         classpath "$mindustryPath:core:$mindustryVersion"
         classpath "com.github.Anuken.Arc:packer:$arcVersion"
 
-        classpath "com.github.Zelaux.ZelauxModCore:annotations:$modCoreVersion"
         classpath "com.github.Zelaux.GasLibrary:core:$gasVersion"
 
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
@@ -150,8 +148,6 @@ allprojects{
 }
 /*
 dependencies{
-    implementation "com.github.Zelaux.ZelauxModCore:core:$modCoreVersion"
-    implementation "com.github.Zelaux.ZelauxModCore:plugins:$modCoreVersion"
     implementation "com.github.Zelaux:AdvancedContentInfo:$aciVersion"
     implementation "com.github.Zelaux.GasLibrary:core:$gasVersion"
 }*/
@@ -222,14 +218,9 @@ project(":core"){
         compileOnly arcModule("extensions:fx")
         compileOnly arcModule("extensions:arcnet")
 
-        implementation "com.github.Zelaux.ZelauxModCore:core:$modCoreVersion"
-        implementation "com.github.Zelaux.ZelauxModCore:blocks:$modCoreVersion"
-        implementation "com.github.Zelaux.ZelauxModCore:utils:$modCoreVersion"
-        implementation "com.github.Zelaux.ZelauxModCore:graphics:$modCoreVersion"
 
         compileOnly "com.github.Zelaux.GasLibrary:core:$gasVersion"
 
-        compileOnly "com.github.Zelaux.ZelauxModCore:annotations:$modCoreVersion"
 
         implementation "com.github.Zelaux:AdvancedContentInfo:$aciVersion"
 
@@ -285,9 +276,6 @@ project(":tests"){
         testImplementation arcModule("backends:backend-headless")
         testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:5.7.1"
 
-        testImplementation "com.github.Zelaux.ZelauxModCore:core:$modCoreVersion"
-        testImplementation "com.github.Zelaux.ZelauxModCore:plugins:$modCoreVersion"
-//        compileOnly "com.github.Zelaux.ZelauxModCore:annotations:$modCoreVersion"
     }
 
     test{
@@ -320,8 +308,6 @@ project(":tools"){
 
         implementation "com.github.Zelaux:AdvancedContentInfo:$aciVersion"
 
-        implementation "com.github.Zelaux.ZelauxModCore:core:$modCoreVersion"
-        implementation "com.github.Zelaux.ZelauxModCore:tools:$modCoreVersion"
 
         implementation "com.github.Zelaux.GasLibrary:core:$gasVersion"
 
@@ -340,9 +326,6 @@ project(":annotations"){
 
         implementation "com.github.Zelaux:AdvancedContentInfo:$aciVersion"
 
-        implementation "com.github.Zelaux.ZelauxModCore:core:$modCoreVersion"
-        implementation "com.github.Zelaux.ZelauxModCore:tools:$modCoreVersion"
-        implementation "com.github.Zelaux.ZelauxModCore:annotations:$modCoreVersion"
 
         implementation "com.github.Zelaux.GasLibrary:core:$gasVersion"
     }

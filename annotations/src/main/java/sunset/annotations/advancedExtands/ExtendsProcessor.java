@@ -1,26 +1,16 @@
 package sunset.annotations.advancedExtands;
 
-import arc.struct.*;
-import arc.util.*;
-import com.github.javaparser.*;
-import com.github.javaparser.ast.*;
-import com.github.javaparser.ast.Modifier;
-import com.github.javaparser.ast.Modifier.*;
-import com.github.javaparser.ast.body.*;
-import mindustry.annotations.*;
-import mindustry.annotations.util.*;
-import mma.annotations.*;
-import sunset.annotations.SnAnnotations.*;
-
 import javax.annotation.processing.*;
 import javax.lang.model.element.*;
-import javax.tools.*;
-import java.io.*;
 import java.util.*;
 
-@SupportedAnnotationTypes("sunset.annotations.SnAnnotations.BothExtends")
-public class ExtendsProcessor extends ModBaseProcessor{
-    static void write(CompilationUnit unit, String className){
+//@SupportedAnnotationTypes("sunset.annotations.SnAnnotations.BothExtends")
+public class ExtendsProcessor extends AbstractProcessor{
+    @Override
+    public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv){
+        return false;
+    }
+   /* static void write(CompilationUnit unit, String className){
         try{
 //            unit.setPackageDeclaration(packageName);
             JavaFileObject object = filer.createSourceFile(unit.getPackageDeclaration().get().getNameAsString() + "." + className);
@@ -98,5 +88,5 @@ public class ExtendsProcessor extends ModBaseProcessor{
     private void setName(ClassOrInterfaceDeclaration declaration, String className){
         declaration.setName(className)
         .getConstructors().forEach(c -> c.setName(className));
-    }
+    }*/
 }

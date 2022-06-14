@@ -2,37 +2,20 @@ package sunset;
 
 import acontent.ui.*;
 import arc.*;
-import arc.files.*;
 import arc.scene.event.*;
 import arc.scene.ui.layout.*;
-import arc.struct.*;
-import arc.util.*;
 import mindustry.*;
 import mindustry.core.*;
 import mindustry.core.GameState.*;
-import mindustry.ctype.*;
 import mindustry.game.EventType.*;
-import mindustry.gen.*;
 import mindustry.mod.*;
-import mindustry.mod.Mods.*;
-import mindustry.type.*;
-import mma.*;
-import mma.annotations.ModAnnotations.*;
 import sunset.content.*;
-import sunset.core.*;
-import sunset.gen.*;
-//import sunset.graphics.SnShaders;
-import sunset.type.unitTypes.*;
 import sunset.ui.*;
 import sunset.utils.*;
 
-import static arc.Core.app;
-import static mindustry.Vars.*;
-import static mma.ModVars.modInfo;
+import static mindustry.Vars.mobile;
 
-public class Sunset extends MMAMod{
-
-    boolean validDependencies;
+public class Sunset extends Mod{
 
     public Sunset(){
         super();
@@ -41,43 +24,12 @@ public class Sunset extends MMAMod{
 //        Events.on(DisposeEvent.class, e -> {
 //            SnShaders.dispose();
 //        });
-        validDependencies = SnDependencies.valid();
-        if(!validDependencies && !SnDependencies.existsGasLibraryJava()){
-            Fi file = modDirectory.child("GasLibrary.jar");
-            file.write(getClass().getClassLoader().getResourceAsStream("GasLibrary.jar"), false);
-            Log.debug("[Sunset] Loading mod @", file);
-            LoadedMod mod = Reflect.invoke(Mods.class, mods, "loadMod", new Object[]{file}, Fi.class);
-            Seq<LoadedMod> mods = Reflect.get(Mods.class, Vars.mods, "mods");
-            mods.add(mod);
-            validDependencies = SnDependencies.valid();
-        }
-        if(!validDependencies) return;
-
-//        SnFonts.loadDefaultFont();
-//        SnFonts.loadFonts();
-        disableBlockOutline = true;
         SnVars.load();
-        SnEntityMapping.init();
-        SnCall.registerPackets();
-        SnGroups.init();
-        Events.on(ResetEvent.class, e -> {
-            SnGroups.clear();
-        });
-        ModListener.updaters.add(() -> {
-            Seq<Deliverc> removed = new Seq<>();
-            for(Deliverc deliver : SnGroups.delivers){
-                if(Groups.unit.getByID(deliver.id()) == null){
-                    removed.add(deliver);
-                }
-            }
-            removed.each(SnGroups.delivers::remove);
-        });
 
     }
 
     @Override
     public void init(){
-        if(!validDependencies) return;
         SnAchievements.load();
         super.init();
         ModMetaDialogFinder.onNewListener(prev -> {
@@ -95,9 +47,9 @@ public class Sunset extends MMAMod{
                 float duration = 90f;
                 Table t = new Table();
                 t.touchable = Touchable.disabled;
-                t.margin(8f).button("test-sunset-achievements",  () -> {
+                t.margin(8f).button("test-sunset-achievements", () -> {
                     new SnAchievementDialog().show();
-                }).visible(Vars.state::isMenu).minSize(64f,32f);
+                }).visible(Vars.state::isMenu).minSize(64f, 32f);
 //            t.update(() -> t.setPosition(Core.graphics.getWidth()/2f, Core.graphics.getHeight()/2f, Align.center));
                 State[] state = {Vars.state.getState()};
                 t.update(() -> {
@@ -110,61 +62,15 @@ public class Sunset extends MMAMod{
 //                t.actions(Actions.fadeOut(duration, Interp.pow4In), Actions.remove());
                 t.pack();
                 t.act(0.1f);
-                t.touchable=Touchable.enabled;
+                t.touchable = Touchable.enabled;
                 Core.scene.add(t);
             });
-        }
-    }
-
-    @Override
-    protected void modContent(Content c){
-        super.modContent(c);
-        if(c instanceof MappableContent && !headless){
-            SnContentRegions.loadRegions((MappableContent)c);
-        }
-        if(c instanceof SectorPreset sector){
-            sector.generator.map.mod = modInfo;
-        }
-        if(c instanceof UnitType type){
-            if(type.constructor == null) return;
-            Unit unit = type.constructor.get();
-            boolean uncontrollableType = type instanceof UncontrollableUnitType;
-            boolean uncontrollableUnit = unit instanceof UncontrollableUnitc;
-            if(uncontrollableUnit && !uncontrollableType){
-                throw new IllegalArgumentException("uncontrollable unit named '" + type.name + "' must be of uncontrollable type");
-            }
-            if(!uncontrollableUnit && uncontrollableType){
-                throw new IllegalArgumentException("unit named '" + type.name + "' with uncontrollable type wust be implement uncontrollable component");
-            }
-        }
-    }
-
-    @Override
-    protected void created(Content c){
-        super.created(c);
-        if(c instanceof UnlockableContent){
-            UnlockableContent content = (UnlockableContent)c;
-            SnContentTranslation.checkContent(content);
         }
     }
 
 
     @Override
     public void loadContent(){
-        if(!validDependencies){
-            modInfo = mods.getMod(getClass());
-            new ErrorContent(){{
-                minfo.error = "@sunset-gas-library-disabled";
-                minfo.sourceFile = new Fi("error-content");
-                modInfo.erroredContent.add(this);
-            }};
-            return;
-        }
-
-        if(!headless){
-            SnVars.inTry(SnMusics::load);
-            SnVars.inTry(SnSounds::load);
-        }
         ContentLoader prev = Vars.content;
         /*content=new ContentLoader(){
             @Override

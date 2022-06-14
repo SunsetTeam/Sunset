@@ -15,7 +15,7 @@ import mindustry.gen.*;
 import mindustry.graphics.*;
 import mindustry.ui.Bar;
 import mindustry.world.*;
-import mma.ModVars;
+;
 
 import static mindustry.Vars.*;
 

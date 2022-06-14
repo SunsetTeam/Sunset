@@ -5,7 +5,7 @@ import arc.math.*;
 import arc.math.geom.*;
 import mindustry.entities.units.*;
 import sunset.ai.wrappers.*;
-import sunset.gen.*;
+
 
 public class SegmentAI extends AIController{
     private static Vec2 tmp = new Vec2();
@@ -24,13 +24,13 @@ public class SegmentAI extends AIController{
 
     @Override
     public boolean useFallback(){
-        return unit.<Segmentc>as().isHead();
+        return true;
     }
 
     @Override
     public void updateMovement(){
         this.unloadPayloads();
-        Segmentc unit = this.unit.as();
+        /*Segmentc unit = this.unit.as();
         //check segment
         //get unit
         Segmentc previous = unit.previous();
@@ -43,6 +43,6 @@ public class SegmentAI extends AIController{
 //            tmp.sub(unit).limit(unit.speed()* Time.delta).add(unit);
 //            unit.set(tmp);
             moveTo(tmp, 0.1f, 1f);
-        }
+        }*/
     }
 }

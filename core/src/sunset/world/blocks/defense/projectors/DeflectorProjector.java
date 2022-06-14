@@ -12,7 +12,6 @@ import arc.graphics.g2d.TextureRegion;
 import arc.math.Mathf;
 import arc.math.geom.Intersector;
 import arc.util.Time;
-import mindustry.annotations.Annotations.Load;
 import mindustry.content.Fx;
 import mindustry.gen.Bullet;
 import mindustry.gen.Groups;
@@ -30,7 +29,6 @@ import static mindustry.Vars.player;
 import static mindustry.Vars.tilesize;
 
 public class DeflectorProjector extends ForceProjector {
-    @Load("@-liquid")
     public TextureRegion liquid;
     public Color shieldColor = Color.valueOf("92a2dc");
     public static float chanceDeflect = 10;

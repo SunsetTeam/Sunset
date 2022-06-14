@@ -1,13 +1,11 @@
 package sunset.content.affilitiation;
 
-import arc.Core;
-import arc.graphics.Color;
-import arc.graphics.g2d.TextureRegion;
-import mindustry.graphics.Pal;
+import arc.*;
+import arc.graphics.*;
+import arc.graphics.g2d.*;
+import mindustry.graphics.*;
 
-import static mma.ModVars.fullName;
-
-public enum SnBranches {
+public enum SnBranches{
     none,
     green,
     yellow,
@@ -30,17 +28,18 @@ public enum SnBranches {
 
     public Color color = Pal.shield;
 
-    public TextureRegion region() {
-        return Core.atlas.find(fullName("branch-" + name()));
+    SnBranches(){
     }
 
-    public String localizedName() {
-        return Core.bundle.format("branch." + name().toLowerCase());
-    }
-
-    SnBranches() {}
-
-    SnBranches(Color color) {
+    SnBranches(Color color){
         this.color = color;
+    }
+
+    public TextureRegion region(){
+        return Core.atlas.find(("sunset-branch-" + name()));
+    }
+
+    public String localizedName(){
+        return Core.bundle.format("branch." + name().toLowerCase());
     }
 }

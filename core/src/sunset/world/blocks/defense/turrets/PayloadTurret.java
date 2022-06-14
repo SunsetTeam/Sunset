@@ -18,7 +18,6 @@ import arc.util.Time;
 import arc.util.Tmp;
 import arc.util.io.Reads;
 import arc.util.io.Writes;
-import mindustry.annotations.Annotations.Load;
 import mindustry.content.Fx;
 import mindustry.content.UnitTypes;
 import mindustry.core.World;
@@ -46,7 +45,7 @@ import mindustry.world.meta.Stat;
 import mindustry.world.meta.StatUnit;
 import mindustry.world.meta.StatValues;
 import mindustry.world.*;
-import mma.ModVars;
+;
 
 import static mindustry.Vars.tilesize;
 //TODO update to v7
@@ -113,9 +112,9 @@ import static mindustry.Vars.tilesize;
     protected Vec2 tr = new Vec2();
     protected Vec2 tr2 = new Vec2();
 
-    public @Load(value = "@-base", fallback = "block-@size")
+    public //@Load(value = "@-base", fallback = "block-@size")
     TextureRegion baseRegion;
-    public @Load("@-heat")
+    public //@Load("@-heat")
     TextureRegion heatRegion;
     public float elevation = -1f;
 

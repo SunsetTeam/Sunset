@@ -7,7 +7,7 @@ import arc.math.Mathf;
 import arc.util.Log;
 import arc.util.Nullable;
 import arc.util.Time;
-import mindustry.annotations.Annotations;
+;
 import mindustry.content.Fx;
 import mindustry.entities.Effect;
 import mindustry.graphics.Pal;

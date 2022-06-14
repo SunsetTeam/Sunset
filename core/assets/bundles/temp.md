@@ -199,17 +199,17 @@
     import arc.math.Interp;
     import arc.math.Mathf;
     import arc.util.Tmp;
-    import mindustry.annotations.Annotations.Load;
+    ;
     import mindustry.graphics.Layer;
     
     import static arc.Core.atlas;
     
     public class AnimationTurret360 extends Turret360{
-    @Load("@-side-h-" + 2)
+    //@Load("@-side-h-" + 2)
     public TextureRegion[] sideRegionsHorizontal = new TextureRegion[2];
-    @Load("@-side-v-" + 2)
+    //@Load("@-side-v-" + 2)
     public TextureRegion[] sideRegionsVertical = new TextureRegion[2];
-    @Load("@-turret")
+    //@Load("@-turret")
     public TextureRegion turretRegion;
 
     public float pullTime = 60f, closeTime = 90f;

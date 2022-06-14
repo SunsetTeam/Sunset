@@ -13,8 +13,8 @@ import mindustry.core.GameState;
 import mindustry.game.EventType;
 import mindustry.graphics.Layer;
 import mindustry.world.Tile;
-import mma.ModListener;
-import mma.graphics.ADrawf;
+;
+;
 import sunset.type.GeyserGroup;
 import sunset.world.blocks.environment.Geyser;
 
@@ -33,7 +33,7 @@ public class GeyserLogic {
     public GeyserLogic() {
         Events.run(EventType.WorldLoadEvent.class, this::reloadData);
 //        Events.run(EventType.Trigger.draw, this::debugDraw);
-        ModListener.updaters.add(this::update);
+//        ModListener.updaters.add(this::update);
     }
 
     private GeyserGroup randomGeyser() {
@@ -101,7 +101,7 @@ public class GeyserLogic {
 //            renderer.effectBuffer.blit(Shaders.shield);
             Tile tile = group.tiles.first();
 //            Log.info("draw gay ser#@(@)",i,group.tiles.size);
-            ADrawf.drawText(tile.worldx(), tile.worldy(), (i + 1) + ": " + group.state());
+//            ADrawf.drawText(tile.worldx(), tile.worldy(), (i + 1) + ": " + group.state());
         }
         Draw.reset();
     }

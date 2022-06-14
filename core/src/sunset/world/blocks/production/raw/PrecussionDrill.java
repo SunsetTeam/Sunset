@@ -7,7 +7,7 @@ import arc.graphics.g2d.*;
 import arc.math.*;
 import arc.util.*;
 import arc.util.io.*;
-import mindustry.annotations.Annotations.*;
+;
 import mindustry.content.*;
 import mindustry.entities.*;
 import mindustry.game.*;
@@ -18,7 +18,7 @@ import mindustry.ui.*;
 import mindustry.world.*;
 import mindustry.world.blocks.environment.*;
 import mindustry.world.meta.*;
-import mma.*;
+;
 import sunset.type.blocks.*;
 import sunset.world.consumers.*;
 
@@ -62,11 +62,11 @@ public class PrecussionDrill extends Block{
     public int tier = 5;
     public float powerUse = 1f;
     public Color heatColor = Color.valueOf("ff5512");
-    @Load("@-rim")
+    //@Load("@-rim")
     public TextureRegion rimRegion;
-    @Load("@-rotator")
+    //@Load("@-rotator")
     public TextureRegion rotatorRegion;
-    @Load("@-top")
+    //@Load("@-top")
     public TextureRegion topRegion;
 
     public float shakeIntensity = 3f;
@@ -121,7 +121,7 @@ public class PrecussionDrill extends Block{
 
     @Override
     public TextureRegion[] icons(){
-        return !ModVars.packSprites ? new TextureRegion[]{region} : new TextureRegion[]{region, rotatorRegion, topRegion};
+        return  new TextureRegion[]{region, rotatorRegion, topRegion};
     }
 
     @Override

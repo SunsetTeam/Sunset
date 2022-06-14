@@ -4,10 +4,10 @@ import arc.graphics.*;
 import arc.util.*;
 import mindustry.*;
 import mindustry.ai.types.*;
-import mindustry.annotations.Annotations.*;
 import mindustry.content.*;
 import mindustry.entities.bullet.*;
 import mindustry.entities.effect.*;
+import mindustry.entities.units.*;
 import mindustry.gen.*;
 import mindustry.graphics.*;
 import mindustry.type.*;
@@ -19,7 +19,7 @@ import sunset.ai.*;
 import sunset.ai.weapon.*;
 import sunset.entities.abilities.*;
 import sunset.entities.bullet.*;
-import sunset.gen.*;
+
 import sunset.type.*;
 import sunset.type.ammo.*;
 import sunset.type.blocks.*;
@@ -47,9 +47,7 @@ public class SnUnitTypes{
     //misc
     router;
     //other
-    @EntityDef({Unitc.class, Deliverc.class})
     public static UnitType courier;
-    @EntityDef({Unitc.class, Segmentc.class})
     public static UnitType snake1;
     public static UnitType testCoreUnit;
 
@@ -919,7 +917,7 @@ public class SnUnitTypes{
             itemCapacity = 100;
             //commandLimit = 6;
 
-            controller = u -> new FlyingWeaponAI();
+            controller = u -> new AIController();
 
             constructor = UnitEntity::create;
 
@@ -969,7 +967,7 @@ public class SnUnitTypes{
             itemCapacity = 180;
             //commandLimit = 6;
 
-            controller = u -> new FlyingWeaponAI();
+            controller = u -> new AIController();
 
             constructor = UnitEntity::create;
 
@@ -1018,7 +1016,7 @@ public class SnUnitTypes{
             itemCapacity = 270;
             //commandLimit = 6;
 
-            controller = u -> new FlyingWeaponAI();
+            controller = u -> new AIController();
 
             constructor = UnitEntity::create;
 

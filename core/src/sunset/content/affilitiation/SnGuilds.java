@@ -5,8 +5,6 @@ import arc.graphics.Color;
 import arc.graphics.g2d.TextureRegion;
 import mindustry.graphics.Pal;
 
-import static mma.ModVars.fullName;
-
 public enum SnGuilds {
     none,
     ancient,
@@ -23,7 +21,7 @@ public enum SnGuilds {
     public Color color = Pal.shield;
 
     public TextureRegion region() {
-        return Core.atlas.find(fullName("guild-" + name()));
+        return Core.atlas.find(("sunset-"+"guild-" + name()));
     }
 
     public String localizedName() {

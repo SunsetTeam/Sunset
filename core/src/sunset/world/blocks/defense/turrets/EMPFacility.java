@@ -7,7 +7,6 @@ import arc.math.*;
 import arc.struct.*;
 import arc.util.*;
 import mindustry.*;
-import mindustry.annotations.Annotations.*;
 import mindustry.content.*;
 import mindustry.entities.*;
 import mindustry.entities.bullet.*;
@@ -30,9 +29,7 @@ public class EMPFacility extends PowerTurret{
     public Color lightningColor;
     public float zapAngleRand, spinUp, spinDown, rangeExtention, lightningStroke = 3.5f;
     public int zaps;
-    @Load("@-top")
     public TextureRegion top;
-    @Load("@-bottom")
     public TextureRegion bottom;
     public AStats aStats = new AStats();
     public Effect ShootEffect = new Effect(22, e -> {

@@ -2,11 +2,12 @@ package sunset.ai;
 
 import arc.math.Mathf;
 import mindustry.entities.Units;
+import mindustry.entities.units.*;
 import mindustry.gen.*;
-import sunset.gen.*;
+
 
 /** AI that is chasing damaged allied units, if any. */
-public class HealAI extends FlyingWeaponAI{
+public class HealAI extends AIController{
     @Override
     public void updateMovement() {
         Unit u = Units.closest(unit.team, unit.x, unit.y,
