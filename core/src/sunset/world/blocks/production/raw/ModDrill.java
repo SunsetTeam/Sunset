@@ -6,7 +6,8 @@ import mindustry.annotations.Annotations.Load;
 import mindustry.world.blocks.production.Drill;
 import mma.ModVars;
 
-public class DRDrill extends Drill {
+/** Mod drill with optional second rotator.  2nd feature undone. */
+public class ModDrill extends Drill {
     @Load("@-top")
     public TextureRegion top;
     @Load("@-rotator0")
@@ -17,8 +18,9 @@ public class DRDrill extends Drill {
     public TextureRegion full;
     public int m1;
     public int m2;
+    public int addTile = 0;
 
-    public DRDrill(String name) {
+    public ModDrill(String name) {
         super(name);
         m1 = 2;
         m2 = -2;
@@ -31,7 +33,7 @@ public class DRDrill extends Drill {
                     new TextureRegion[]{bottom, rotatorRegion, secondRotator, region, top} :
                     new TextureRegion[]{bottom, rotatorRegion, region, top};
         }
-        return new TextureRegion[]{full};
+        return new TextureRegion[] {full};
     }
 
     @Override
@@ -39,7 +41,7 @@ public class DRDrill extends Drill {
         return super.makeIconRegions();
     }
 
-    public class DRDBuild extends DrillBuild {
+    public class ModDrillBuild extends DrillBuild {
         @Override
         public void draw() {
             Draw.rect(bottom, x, y);

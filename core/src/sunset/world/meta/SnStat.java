@@ -10,7 +10,7 @@ public class SnStat {
      * 3)Power - power generation and consumption.<p>
      * 4)Liquids - liquid capacity etc.<p>
      * 5)Lasers - special info for the {@link sunset.world.blocks.laser.LaserBlock} and its derivatives.<p>
-     * 6)Armor - special info for the {@link sunset.world.blocks.defense.turrets.SynthesisTurret}.<p>
+     * 6)Armor - currently unused.<p>
      * 7)Durability - special info for the {@link sunset.world.blocks.defense.walls.SnWall}.<p>
      * 8)Items - item capacity etc.<p>
      * 9)Crafting - resources needed to create something.<p>
