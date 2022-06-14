@@ -10,6 +10,7 @@ import com.github.javaparser.ast.body.*;
 import mindustry.annotations.*;
 import mindustry.annotations.util.*;
 import mma.annotations.*;
+import mma.annotations.SupportedAnnotationTypes;
 import sunset.annotations.SnAnnotations.*;
 
 import javax.annotation.processing.*;
@@ -18,7 +19,7 @@ import javax.tools.*;
 import java.io.*;
 import java.util.*;
 
-@SupportedAnnotationTypes("sunset.annotations.SnAnnotations.BothExtends")
+@SupportedAnnotationTypes(BothExtends.class)
 public class ExtendsProcessor extends ModBaseProcessor{
     static void write(CompilationUnit unit, String className){
         try{
