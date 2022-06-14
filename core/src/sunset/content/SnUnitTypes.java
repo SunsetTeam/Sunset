@@ -6,13 +6,12 @@ import mindustry.Vars;
 import mindustry.ai.types.FlyingAI;
 import mindustry.ai.types.SuicideAI;
 import mindustry.annotations.Annotations.EntityDef;
-import mindustry.content.Fx;
-import mindustry.content.Items;
-import mindustry.content.Liquids;
-import mindustry.content.StatusEffects;
-import mindustry.content.UnitTypes;
+import mindustry.content.*;
 import mindustry.ctype.ContentList;
-import mindustry.entities.bullet.*;
+import mindustry.entities.bullet.ArtilleryBulletType;
+import mindustry.entities.bullet.BasicBulletType;
+import mindustry.entities.bullet.BombBulletType;
+import mindustry.entities.bullet.SapBulletType;
 import mindustry.entities.effect.ParticleEffect;
 import mindustry.gen.*;
 import mindustry.graphics.Layer;
@@ -27,8 +26,8 @@ import sunset.ai.*;
 import sunset.ai.weapon.ExtinguishWeaponAI;
 import sunset.content.blocks.SnUnitBlocks;
 import sunset.entities.abilities.EffectLowHPAbility;
-import sunset.entities.abilities.StatusFieldAbility;
 import sunset.entities.abilities.OverdriveAbility;
+import sunset.entities.abilities.StatusFieldAbility;
 import sunset.entities.bullet.BerserkLaserBulletType;
 import sunset.entities.bullet.SpawnArtilleryBulletType;
 import sunset.gen.Deliverc;
@@ -44,8 +43,8 @@ import sunset.type.weapons.WeaponExt;
 import sunset.utils.UnitsUtils;
 
 import static mindustry.Vars.tilePayload;
-import static sunset.utils.UnitsUtils.addUnitGroup;
 import static mindustry.type.ItemStack.with;
+import static sunset.utils.UnitsUtils.addUnitGroup;
 
 public class SnUnitTypes implements ContentList{
     public static UnitType
@@ -63,7 +62,7 @@ public class SnUnitTypes implements ContentList{
     freezingT1,
     //air
     engineT1, hoverTest,
-    //hylight
+    //highlight
     light,
     //naval
     yellowT1, yellowT2, yellowT3, yellowT4, yellowT5,
@@ -77,7 +76,7 @@ public class SnUnitTypes implements ContentList{
 
     void setupConstruction() {
         UnitsUtils.init();
-        addUnitGroup(SnUnitBlocks.upgradedAirFactory, 20 * 60, with(Items.silicon, 30, SnItems.naturite, 20), 
+        addUnitGroup(SnUnitBlocks.upgradedAirFactory, 20 * 60, with(Items.silicon, 30, SnItems.naturite, 20),
                      comet, satellite, planet, star, galaxy, universe);
         addUnitGroup(SnUnitBlocks.upgradedAirFactory, 15 * 60, with(SnItems.fors, 15, Items.silicon, 20),
                      wind, thunder, nadir, halo, mudflow, parhelion);
