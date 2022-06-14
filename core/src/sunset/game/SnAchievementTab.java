@@ -6,14 +6,14 @@ import arc.scene.ui.layout.*;
 import arc.struct.*;
 import arc.util.*;
 import mindustry.graphics.*;
-;
+import mma.*;
 import sunset.ui.*;
 
 public class SnAchievementTab{
     public static final Seq<SnAchievementTab> tabs = new Seq<>();
 
     static{
-//        ModListener.updaters.add(SnAchievementTab::updateAchievements);
+        ModListener.updaters.add(SnAchievementTab::updateAchievements);
     }
 
     public final String name;

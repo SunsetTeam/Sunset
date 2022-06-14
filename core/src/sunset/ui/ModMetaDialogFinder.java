@@ -11,6 +11,7 @@ import mindustry.ui.dialogs.*;
 import java.util.*;
 
 import static mindustry.Vars.*;
+import static mma.ModVars.*;
 
 public class ModMetaDialogFinder{
     private static Dialog currentModInfoDialog = null;
@@ -31,14 +32,14 @@ public class ModMetaDialogFinder{
         init = true;
 
         Events.run(Trigger.update, () -> {
-            String description = "@erroe";
+            String description = modInfo.meta.description;
 //                modInfo.meta.description = descriptionBuilder.toString();
             if(Core.scene != null && !headless){
                 if(currentModInfoDialog != null && !currentModInfoDialog.isShown()){
                     currentModInfoDialog = null;
                 }
                 Dialog dialog = Core.scene.getDialog();
-                if(dialog instanceof BaseDialog && Objects.equals(dialog.title.getText().toString(), "@error")){
+                if(dialog instanceof BaseDialog && Objects.equals(dialog.title.getText().toString(), modInfo.meta.displayName())){
                     if(dialog == currentModInfoDialog){
                         return;
                     }

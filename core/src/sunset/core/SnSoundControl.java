@@ -5,7 +5,11 @@ import arc.audio.*;
 import arc.func.*;
 import arc.struct.*;
 import mindustry.game.*;
+import mindustry.type.*;
+import sunset.gen.*;
+
 import static mindustry.Vars.*;
+import static mma.ModVars.modInfo;
 
 public class SnSoundControl{
     public static final Seq<Music> snAmbientMusic = new Seq<>();
@@ -36,11 +40,21 @@ public class SnSoundControl{
         }
     }
 
-    private boolean isModMap(){return false;
+    private boolean isModMap(){
+        Sector sector = state.getSector();
+        if(sector != null){
+            return sector.planet.minfo.mod == modInfo;
+        }
+        return state.map != null && state.map.mod != null && state.map.mod == modInfo;
     }
 
 
     public void reload(){
+
+        snDarkMusic.addAll(SnMusics.acid_rain);
+        snAmbientMusic.addAll(SnMusics.storm, SnMusics.deceit, SnMusics.deceit);
+        snBossMusic.addAll(SnMusics.heavy_arsenal, SnMusics.cold_fire);
+
     }
 
     private static class MusicField{

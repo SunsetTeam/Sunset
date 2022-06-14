@@ -7,6 +7,7 @@ import arc.math.geom.*;
 import arc.util.*;
 import arc.util.io.*;
 import mindustry.*;
+import mindustry.annotations.Annotations.*;
 import mindustry.content.*;
 import mindustry.entities.*;
 import mindustry.gen.*;
@@ -18,8 +19,8 @@ import mindustry.world.blocks.*;
 import mindustry.world.blocks.production.*;
 import mindustry.world.consumers.*;
 import mindustry.world.meta.*;
-;
-;
+import mma.*;
+import mma.graphics.*;
 import sunset.type.*;
 import sunset.utils.*;
 import sunset.world.meta.*;
@@ -39,6 +40,7 @@ public class MissileSiloTurret extends GenericCrafter {
      * The position of the missiles in the silo relative to the block size. From (0, 0) to (1, 1).
      */
     public MissilePlace[] rockets = {new MissilePlace(0.5f, 0.5f)};
+    @Load("@-bottom")
     public TextureRegion baseRegion;
 
     public MissileSiloTurret(String name) {
@@ -60,7 +62,7 @@ public class MissileSiloTurret extends GenericCrafter {
 
     @Override
     public TextureRegion[] icons() {
-        return new TextureRegion[]{baseRegion, region};
+        return !ModVars.packSprites ? new TextureRegion[]{region} : new TextureRegion[]{baseRegion, region};
     }
 
 
@@ -161,6 +163,7 @@ public class MissileSiloTurret extends GenericCrafter {
 
         @Override
         public void drawActiveTerritory() {
+            AFill.donut(x,y,minRange,maxRange,1f,0);
         }
 
         @Override

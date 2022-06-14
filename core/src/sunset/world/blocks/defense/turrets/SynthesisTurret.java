@@ -6,7 +6,7 @@ import arc.graphics.g2d.*;
 import arc.math.*;
 import arc.util.*;
 import arc.util.io.*;
-;
+import mindustry.annotations.Annotations.*;
 import mindustry.entities.bullet.*;
 import mindustry.graphics.*;
 import mindustry.ui.*;

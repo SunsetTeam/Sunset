@@ -2,6 +2,7 @@ package sunset.world.blocks.payload;
 
 import arc.graphics.g2d.Draw;
 import arc.graphics.g2d.TextureRegion;
+import mindustry.annotations.Annotations.Load;
 import mindustry.entities.Damage;
 import mindustry.entities.Effect;
 import mindustry.gen.Building;
@@ -11,7 +12,7 @@ import mindustry.graphics.Layer;
 import mindustry.type.Category;
 import mindustry.world.Block;
 import mindustry.world.meta.BuildVisibility;
-;
+import mma.ModVars;
 import sunset.content.SnFx;
 
 import static mindustry.Vars.tilesize;
@@ -23,6 +24,7 @@ public class Ammunition extends Block {
 
     public float layer = Layer.block;
 
+    @Load("@name")
     public TextureRegion ammunitionRegion;
 
     public Ammunition(String name) {
@@ -36,7 +38,7 @@ public class Ammunition extends Block {
 
     @Override
     public TextureRegion[] icons(){
-        return  new TextureRegion[]{region, ammunitionRegion};
+        return !ModVars.packSprites ? new TextureRegion[]{region} : new TextureRegion[]{region, ammunitionRegion};
     }
 
     public class AmmunitionBuild extends Building {

@@ -2,18 +2,18 @@ package sunset.world.blocks.production.raw;
 
 import arc.graphics.g2d.Draw;
 import arc.graphics.g2d.TextureRegion;
-;
+import mindustry.annotations.Annotations.Load;
 import mindustry.world.blocks.production.Drill;
-;
+import mma.ModVars;
 
 public class DRDrill extends Drill {
-    //@Load("@-top")
+    @Load("@-top")
     public TextureRegion top;
-    //@Load("@-rotator0")
+    @Load("@-rotator0")
     public TextureRegion secondRotator;
-    //@Load("@-bottom")
+    @Load("@-bottom")
     public TextureRegion bottom;
-    //@Load("@-full")
+    @Load("@-full")
     public TextureRegion full;
     public int m1;
     public int m2;
@@ -26,16 +26,12 @@ public class DRDrill extends Drill {
 
     @Override
     public TextureRegion[] icons() {
-    /*    if (ModVars.packSprites) {
+        if (ModVars.packSprites) {
             return secondRotator.found() ?
                     new TextureRegion[]{bottom, rotatorRegion, secondRotator, region, top} :
                     new TextureRegion[]{bottom, rotatorRegion, region, top};
-        }*/
-//        return new TextureRegion[]{full}
-        ;
-        return secondRotator.found() ?
-        new TextureRegion[]{bottom, rotatorRegion, secondRotator, region, top} :
-        new TextureRegion[]{bottom, rotatorRegion, region, top};
+        }
+        return new TextureRegion[]{full};
     }
 
     @Override

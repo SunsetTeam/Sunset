@@ -2,7 +2,7 @@ package sunset.utils;
 
 import arc.graphics.Pixmap;
 import arc.util.Tmp;
-;
+import mma.type.pixmap.PixmapProcessor;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -12,7 +12,7 @@ public class PixmapRotator {
         final int size = Math.max(image.width, image.height);
 
         Pixmap rotated = new Pixmap(size, size);
-//        PixmapProcessor.drawCenter(rotated, image);
+        PixmapProcessor.drawCenter(rotated, image);
         Pixmap pixmap = rotated.copy();
         BufferedImage bufferedImage = new BufferedImage(size, size, Transparency.TRANSLUCENT);
         Graphics2D graphics = (Graphics2D) bufferedImage.createGraphics();

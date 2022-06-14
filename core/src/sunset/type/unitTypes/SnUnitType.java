@@ -5,7 +5,7 @@ import arc.Core;
 import mindustry.gen.EntityMapping;
 import mindustry.graphics.MultiPacker;
 import mindustry.type.UnitType;
-;
+import mma.ModVars;
 import sunset.content.affilitiation.SnBranches;
 import sunset.content.affilitiation.SnGuilds;
 import sunset.content.affilitiation.SnSubGuilds;
@@ -19,7 +19,7 @@ public class SnUnitType extends UnitType {
     public AStats aStats = new AStats();
     public SnUnitType(String name) {
         super(name);
-//        outlines = ModVars.packSprites;
+        outlines = ModVars.packSprites;
         if (constructor == null) {
             constructor = EntityMapping.map(name);
         }

@@ -31,6 +31,7 @@ import sunset.type.blocks.DrillItem;
 
 import static mindustry.Vars.content;
 import static mindustry.Vars.tilesize;
+import static mma.ModVars.fullName;
 
 public class SnStatValues {
     public static StatValue minMaxRange(float minRange, float maxRange) {
@@ -209,7 +210,7 @@ public class SnStatValues {
 
                 //no point in displaying unit icon twice
                 if(!compact && !(t instanceof PowerTurret)){
-                    table.image(Core.atlas.find(("sunset-"+"lightning"))).padRight(4).right().top().size(25);
+                    table.image(Core.atlas.find(fullName("lightning"))).padRight(4).right().top().size(25);
                     table.add(Core.bundle.format("stat.power-shot")).padRight(10).left().top();
 
                     //table.add().padRight(10).left();

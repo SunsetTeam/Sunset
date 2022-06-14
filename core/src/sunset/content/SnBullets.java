@@ -20,10 +20,13 @@ import mindustry.gen.Sounds;
 import mindustry.gen.Unit;
 import mindustry.graphics.Layer;
 import mindustry.graphics.Pal;
+import mma.*;
 import sunset.entities.bullet.*;
+import sunset.gen.SnSounds;
 import sunset.graphics.SnPal;
 import sunset.type.StackableStatusEffect;
 
+import static mma.ModVars.fullName;
 
 public class SnBullets {
     //region definitions
@@ -813,7 +816,7 @@ public class SnBullets {
         //endregion  artillery
         //region flak
         sporePodPoisonBullet = new FlakBulletType(4f, 5) {{
-            sprite = ("sunset-"+"circle-bullet");
+            sprite = fullName("circle-bullet");
             knockback = 0.2f;
             lifetime = 100f;
             width = 8f;
@@ -833,7 +836,7 @@ public class SnBullets {
             weaveMag = 1f;
         }};
         bigSporePodPoison = new FlakBulletType(3f, 16) {{
-            sprite = ("sunset-"+"circle-bullet");
+            sprite = fullName("circle-bullet");
             knockback = 0.5f;
             lifetime = 200f;
             width = 10f;
@@ -850,7 +853,7 @@ public class SnBullets {
             collidesGround = true;
 
             fragBullet = new FlakBulletType(2f, 8) {{
-                sprite = ("sunset-"+"circle-bullet");
+                sprite = fullName("circle-bullet");
                 lifetime = 250f;
                 splashDamage = 10f;
                 splashDamageRadius = 19f;
@@ -882,7 +885,7 @@ public class SnBullets {
             weaveMag = 1f;
         }};
         heavyPlastaniumPoison = new FlakBulletType(3f, 15) {{
-            sprite = ("sunset-"+"circle-bullet");
+            sprite = fullName("circle-bullet");
             knockback = 0.5f;
             lifetime = 250f;
             width = 13;
@@ -899,7 +902,7 @@ public class SnBullets {
             collidesGround = true;
 
             fragBullet = new FlakBulletType(2f, 8) {{
-                sprite = ("sunset-"+"circle-bullet");
+                sprite = fullName("circle-bullet");
                 lifetime = 250f;
                 splashDamage = 10f;
                 splashDamageRadius = 19f;
@@ -927,7 +930,7 @@ public class SnBullets {
         }};
 
         naturitePoisonBullet = new FlakBulletType(4f, 8) {{
-            sprite = ("sunset-"+"circle-bullet");
+            sprite = fullName("circle-bullet");
             knockback = 0.3f;
             lifetime = 100f;
             width = 8f;
@@ -947,7 +950,7 @@ public class SnBullets {
             weaveMag = 1f;
         }};
         bigNaturitePoison = new FlakBulletType(3f, 21) {{
-            sprite = ("sunset-"+"circle-bullet");
+            sprite = fullName("circle-bullet");
             knockback = 0.6f;
             lifetime = 200f;
             width = 10f;
@@ -964,7 +967,7 @@ public class SnBullets {
             collidesGround = true;
 
             fragBullet = new FlakBulletType(2f, 13) {{
-                sprite = ("sunset-"+"circle-bullet");
+                sprite = fullName("circle-bullet");
                 lifetime = 250f;
                 splashDamage = 15f;
                 splashDamageRadius = 14f;
@@ -999,7 +1002,7 @@ public class SnBullets {
             weaveMag = 1f;
         }};
         heavyNaturitePoison = new FlakBulletType(3f, 13) {{
-            sprite = ("sunset-"+"circle-bullet");
+            sprite = fullName("circle-bullet");
             knockback = 0.6f;
             lifetime = 250f;
             width = 13;
@@ -1016,7 +1019,7 @@ public class SnBullets {
             collidesGround = true;
 
             fragBullet = new FlakBulletType(2f, 5) {{
-                sprite = ("sunset-"+"circle-bullet");
+                sprite = fullName("circle-bullet");
                 lifetime = 150f;
                 splashDamage = 12f;
                 splashDamageRadius = 9f;
@@ -1043,7 +1046,7 @@ public class SnBullets {
         }};
 
         bigNobiumPoison = new FlakBulletType(3f, 19) {{
-            sprite = ("sunset-"+"circle-bullet");
+            sprite = fullName("circle-bullet");
             knockback = 0.4f;
             lifetime = 200f;
             width = 10f;
@@ -1060,7 +1063,7 @@ public class SnBullets {
             collidesGround = true;
 
             fragBullet = new FlakBulletType(2f, 11) {{
-                sprite = ("sunset-"+"circle-bullet");
+                sprite = fullName("circle-bullet");
                 lifetime = 150f;
                 splashDamage = 14f;
                 splashDamageRadius = 16f;
@@ -1098,7 +1101,7 @@ public class SnBullets {
             homingPower = 0.1f;
         }};
         heavyNobiumPoison = new FlakBulletType(3f, 14) {{
-            sprite = ("sunset-"+"circle-bullet");
+            sprite = fullName("circle-bullet");
             knockback = 0.4f;
             lifetime = 250f;
             width = 13;
@@ -1115,7 +1118,7 @@ public class SnBullets {
             collidesGround = true;
 
             fragBullet = new FlakBulletType(2f, 6) {{
-                sprite = ("sunset-"+"circle-bullet");
+                sprite = fullName("circle-bullet");
                 lifetime = 150f;
                 splashDamage = 10f;
                 splashDamageRadius = 11f;
@@ -1145,7 +1148,7 @@ public class SnBullets {
         }};
 
         bigPlastaniumPoison = new FlakBulletType(3f, 22) {{
-            sprite = ("sunset-"+"circle-bullet");
+            sprite = fullName("circle-bullet");
             knockback = 0.4f;
             lifetime = 200f;
             width = 10f;
@@ -1162,7 +1165,7 @@ public class SnBullets {
             collidesGround = true;
 
             fragBullet = new FlakBulletType(2f, 14) {{
-                sprite = ("sunset-"+"circle-bullet");
+                sprite = fullName("circle-bullet");
                 lifetime = 150f;
                 splashDamage = 17f;
                 splashDamageRadius = 25f;
@@ -1443,7 +1446,7 @@ public class SnBullets {
         //endregion sap
         //region energy sphere
         smallEnergySphere = new BasicBulletType(3f, 20) {{
-            sprite = ("sunset-"+"circle-bullet");
+            sprite = fullName("circle-bullet");
             shrinkX = 0f;
             shrinkY = 0f;
             lifetime = 30f;
@@ -1454,7 +1457,7 @@ public class SnBullets {
             backColor = SnPal.redBombBack;
         }};
         mediumEnergySphere = new BasicBulletType(3f, 60) {{
-            sprite = ("sunset-"+"circle-bullet");
+            sprite = fullName("circle-bullet");
             shrinkX = 0f;
             shrinkY = 0f;
             lifetime = 50f;
@@ -1481,7 +1484,7 @@ public class SnBullets {
             fragBullets = 1;
             fragRandomSpread = 0.0001f;
         }};
-        bigEnergySphere = new LightningSphereBulletType(4f, 88, ("sunset-"+"circle-bullet")) {{
+        bigEnergySphere = new LightningSphereBulletType(4f, 88, fullName("circle-bullet")) {{
             lifetime = 63f;
             splashDamageRadius = 45f;
             splashDamage = 80f;
@@ -1670,7 +1673,7 @@ public class SnBullets {
         //region reverse-bullets
 
         naturiteReversBulletBack = new ReverseBulletType(3f, 95f) {{
-            sprite = ("sunset-"+"copter-bomb");
+            sprite = fullName("copter-bomb");
             width = 15f;
             height = 15f;
             lifetime = 60;
@@ -1687,7 +1690,7 @@ public class SnBullets {
         }};
 
         naturiteReversBullet = new ReverseBulletType(3f, 97f) {{
-            sprite = ("sunset-"+"copter-bomb");
+            sprite = fullName("copter-bomb");
             width = 15f;
             height = 15f;
             lifetime = 70;
@@ -1708,7 +1711,7 @@ public class SnBullets {
         };
 
         forsReversBulletBack = new ReverseBulletType(3f, 110f) {{
-            sprite = ("sunset-"+"copter-bomb");
+            sprite = fullName("copter-bomb");
             width = 15f;
             height = 15;
             lifetime = 70;
@@ -1725,7 +1728,7 @@ public class SnBullets {
         }};
 
         forsReversBullet = new ReverseBulletType(3f, 110f) {{
-            sprite = ("sunset-"+"copter-bomb");
+            sprite = fullName("copter-bomb");
             width = 15f;
             height = 15;
             lifetime = 70;
@@ -1746,7 +1749,7 @@ public class SnBullets {
         };
 
         nobiumReversBulletBack = new ReverseBulletType(3f, 135f) {{
-            sprite = ("sunset-"+"copter-bomb");
+            sprite = fullName("copter-bomb");
             width = 15f;
             height = 15;
             lifetime = 70;
@@ -1763,7 +1766,7 @@ public class SnBullets {
         }};
 
         nobiumReversBullet = new ReverseBulletType(3f, 135f) {{
-            sprite = ("sunset-"+"copter-bomb");
+            sprite = fullName("copter-bomb");
             width = 15f;
             height = 15;
             lifetime = 70;
@@ -1871,7 +1874,7 @@ public class SnBullets {
             fragBullets = 5;
         }};
         copterEnergySphere = new BasicBulletType(3.3f, 13) {{
-            sprite = ("sunset-"+"circle-bullet");
+            sprite = fullName("circle-bullet");
             lifetime = 40f;
             splashDamageRadius = 15f;
             splashDamage = 23f;
@@ -2060,7 +2063,7 @@ public class SnBullets {
             fragRandomSpread = 90f;
             fragBullets = 3;
         }};
-        bigCopterEnergySphere = new LightningSphereBulletType(4f, 50, ("sunset-"+"circle-bullet")) {{
+        bigCopterEnergySphere = new LightningSphereBulletType(4f, 50, fullName("circle-bullet")) {{
             lifetime = 50f;
             splashDamageRadius = 90f;
             splashDamage = 80f;
@@ -2118,7 +2121,7 @@ public class SnBullets {
                 collidesAir = false;
                 splashDamage = 22;
                 splashDamageRadius = 13 * Vars.tilesize;
-                sprite = ("sunset-"+"red-mine");
+                sprite = fullName("red-mine");
                 backColor = SnPal.yellowTrail;
                 frontColor = SnPal.yellowTrailBack;
                 spin = 0.5f;
@@ -2157,7 +2160,7 @@ public class SnBullets {
             pierceBuilding = false;
             splashDamage = 40;
             splashDamageRadius = 10 * Vars.tilesize;
-//            hitSound = SnSounds.torpedo_explosion;
+            hitSound = SnSounds.torpedo_explosion;
             trailEffect = SnFx.torpedoTrail;
             trailChance = 1;
             trailColor = Pal.surge;

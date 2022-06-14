@@ -53,7 +53,7 @@ public class SnWeathers {
             noiseScale = 1000f;
             //TODO make new weather
 
-//            noisePath = ("sunset-"+"flood");
+//            noisePath = fullName("flood");
 //            noisePath = "flood";
             noisePath= ((ParticleWeather) Weathers.fog).noisePath;
             drawParticles = false;

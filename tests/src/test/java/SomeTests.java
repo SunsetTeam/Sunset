@@ -4,7 +4,7 @@ import arc.graphics.*;
 import arc.math.geom.*;
 import arc.struct.*;
 import arc.util.*;
-;
+import mma.type.pixmap.*;
 import sunset.utils.*;
 
 public class SomeTests{

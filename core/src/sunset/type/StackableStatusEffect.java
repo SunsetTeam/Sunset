@@ -9,7 +9,7 @@ import mindustry.content.*;
 import mindustry.entities.units.*;
 import mindustry.gen.*;
 import mindustry.type.*;
-;
+import mma.*;
 import sunset.world.meta.values.*;
 
 import static mindustry.Vars.*;
@@ -98,7 +98,7 @@ public class StackableStatusEffect extends PublicStatusEffect{
         for(StackEntry entry : stackEntries){
             entry.checkDefs(this);
         }
-//        Vars.content.setCurrentMod(ModVars.modInfo);
+        Vars.content.setCurrentMod(ModVars.modInfo);
         for(int i = 0; i < stackEntries.size; i++){
             stacks.add(new StackableEntryStatusEffect(this, i));
         }

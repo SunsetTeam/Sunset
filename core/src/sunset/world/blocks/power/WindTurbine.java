@@ -4,11 +4,11 @@ import arc.graphics.g2d.*;
 import arc.math.*;
 import arc.struct.*;
 import arc.util.*;
-;
+import mindustry.annotations.Annotations.*;
 import mindustry.graphics.*;
 import mindustry.world.blocks.power.*;
 import mindustry.world.meta.*;
-;
+import mma.*;
 import sunset.content.*;
 
 import static mindustry.Vars.*;
@@ -17,11 +17,11 @@ public class WindTurbine extends PowerGenerator{
 
     public float rotorRotateSpeed = 4f;
 
-//    //@Load("@-bottom")
+    @Load("@-bottom")
     public TextureRegion bottomRegion;
-//    //@Load("@-rotator")
+    @Load("@-rotator")
     public TextureRegion rotatorRegion;
-//    //@Load("@-top")
+    @Load("@-top")
     public TextureRegion topRegion;
 
     public WindTurbine(String name){
@@ -33,7 +33,7 @@ public class WindTurbine extends PowerGenerator{
 
     @Override
     public TextureRegion[] icons(){
-        return  new TextureRegion[]{region, bottomRegion, rotatorRegion, topRegion};
+        return !ModVars.packSprites ? new TextureRegion[]{region} : new TextureRegion[]{region, bottomRegion, rotatorRegion, topRegion};
     }
 
     @Override

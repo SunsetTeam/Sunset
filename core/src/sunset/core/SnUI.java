@@ -1,21 +1,26 @@
 package sunset.core;
 
 import arc.*;
+import arc.KeyBinds.*;
 import arc.assets.*;
 import arc.scene.style.*;
-import arc.util.*;
+import mma.core.*;
+import mma.utils.*;
 import sunset.game.SnEventType.*;
 
 import static arc.Core.bundle;
 import static mindustry.Vars.*;
 
-public class SnUI implements Loadable, Disposable, ApplicationListener{
+public class SnUI extends ModUI implements Loadable{
     public SnUI(){
+        super(new KeyBind[0]);
         Core.assets.load(this);
     }
 
     @Override
     public void init(){
+        super.init();
+        ManyPlanetSystems.init();
 
         Core.app.post(() ->
         Core.app.post(() -> Core.app.post(() -> {
@@ -30,10 +35,5 @@ public class SnUI implements Loadable, Disposable, ApplicationListener{
 
     @Override
     public void loadSync(){
-    }
-
-    @Override
-    public void dispose(){
-
     }
 }

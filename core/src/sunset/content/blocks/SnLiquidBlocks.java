@@ -6,7 +6,7 @@ import mindustry.world.Block;
 import mindustry.world.blocks.liquid.Conduit;
 import mindustry.world.blocks.liquid.LiquidRouter;
 import mindustry.world.blocks.production.Pump;
-;
+import mma.ModVars;
 import sunset.content.SnItems;
 import sunset.world.blocks.distribution.ModConduit;
 
@@ -33,12 +33,14 @@ public class SnLiquidBlocks  {
             floating = true;
         }};
 
-        nobiumConduit = new Conduit("nobium-conduit") {{
-            requirements(Category.liquid, with(SnItems.nobium, 2, Items.metaglass, 1));
-            liquidCapacity = 19f;
-            liquidPressure = 1.050f;
-            health = 100;
-        }};
+        if (!ModVars.packSprites) {
+            nobiumConduit = new Conduit("nobium-conduit") {{
+                requirements(Category.liquid, with(SnItems.nobium, 2, Items.metaglass, 1));
+                liquidCapacity = 19f;
+                liquidPressure = 1.050f;
+                health = 100;
+            }};
+        }
         //endregion transportation
         //region special
         naturitePump = new Pump("naturite-pump") {{

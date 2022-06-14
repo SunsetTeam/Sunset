@@ -4,12 +4,13 @@ import acontent.world.meta.*;
 import arc.*;
 import arc.graphics.g2d.*;
 import arc.math.*;
+import mindustry.annotations.Annotations.*;
 import mindustry.entities.*;
 import mindustry.entities.bullet.*;
 import mindustry.graphics.*;
 import mindustry.ui.*;
 import mindustry.world.blocks.defense.turrets.*;
-;
+import mma.graphics.*;
 import sunset.*;
 import sunset.content.affilitiation.*;
 import sunset.utils.*;
@@ -77,6 +78,7 @@ public class ModItemTurret extends ItemTurret{
         public void draw(){
             super.draw();
 
+            if(debug) ADrawf.drawText(this, "Total Shoots: " + totalShoots);
         }
 
         @Override

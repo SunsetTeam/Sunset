@@ -25,6 +25,7 @@ import sunset.world.blocks.defense.turrets.*;
 import sunset.world.consumers.*;
 
 import static mindustry.type.ItemStack.with;
+import static mma.ModVars.fullName;
 
 public class SnTurrets{
     public static Block
@@ -69,7 +70,7 @@ public class SnTurrets{
             ammoUseEffect = Fx.casing1;
             targetAir = true;
             shootType = new BasicBulletType(3f, 60) {{
-                sprite = ("sunset-"+"circle-bullet");
+                sprite = fullName("circle-bullet");
                 shrinkX = 0f;
                 shrinkY = 0f;
                 lifetime = 50f;

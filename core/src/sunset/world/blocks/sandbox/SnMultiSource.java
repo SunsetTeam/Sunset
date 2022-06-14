@@ -11,7 +11,7 @@ import arc.struct.*;
 import arc.util.*;
 import arc.util.io.*;
 import kotlin.jvm.internal.Ref.*;
-;
+import mindustry.annotations.Annotations.*;
 import mindustry.ctype.*;
 import mindustry.entities.units.*;
 import mindustry.gen.*;
@@ -20,18 +20,18 @@ import mindustry.type.*;
 import mindustry.ui.*;
 import mindustry.world.*;
 import mindustry.world.meta.*;
-;
+import mma.io.*;
 import org.jetbrains.annotations.*;
 import sunset.utils.*;
 
 import static mindustry.Vars.*;
 
 public class SnMultiSource extends Block{
-//    //@Load("@-cross")
+    @Load("@-cross")
     public TextureRegion cross;
-//    //@Load("@-liquid")
+    @Load("@-liquid")
     public TextureRegion liquidRegion;
-//    //@Load("@-item")
+    @Load("@-item")
     public TextureRegion itemRegion;
 
 
@@ -307,15 +307,21 @@ public class SnMultiSource extends Block{
 }
 
 class SourceData{
+    private static final ByteWrites byteWrite = new ByteWrites();
+    private static final ByteReads byteRead = new ByteReads();
     protected IntSet outputItems = new IntSet();
     protected IntSet outputLiquids = new IntSet();
     protected float outputPower = 0;
 
     public void fromBytes(byte[] bytes){
+        byteRead.setBytes(bytes);
+        read(byteRead);
     }
 
     public byte[] toBytes(){
-        return new byte[0];
+        byteWrite.reset();
+        write(byteWrite);
+        return byteWrite.getBytes();
     }
 
     public void write(Writes write){

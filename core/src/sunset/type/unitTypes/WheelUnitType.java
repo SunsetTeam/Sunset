@@ -2,7 +2,6 @@ package sunset.type.unitTypes;
 
 import arc.math.geom.*;
 import arc.util.*;
-import mindustry.entities.units.*;
 import mindustry.gen.*;
 import sunset.ai.*;
 
@@ -15,7 +14,7 @@ public class WheelUnitType extends SnUnitType{
 
     @Override
     public void init(){
-        controller = u -> new AIController();
+        controller = u -> new GroundWeaponAI();
         constructor = MechUnit::create;
         faceTarget = false;
         super.init();

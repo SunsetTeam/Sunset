@@ -9,9 +9,10 @@ import arc.struct.Seq;
 import mindustry.Vars;
 import mindustry.content.Fx;
 import mindustry.content.Liquids;
-import mindustry.gen.*;
+import mindustry.gen.WeatherState;
 import mindustry.type.Liquid;
 import mindustry.type.weather.ParticleWeather;
+import sunset.gen.SnSounds;
 
 public class Storm extends ParticleWeather {
     public final Seq<WeatherElement> weatherElements = new Seq<>();
@@ -20,7 +21,7 @@ public class Storm extends ParticleWeather {
     public float stroke = 1f;
 
     public Liquid liquids = Liquids.water;
-    public Sound sounds = Sounds.none;
+    public Sound sounds = SnSounds.thunder;
     public Color rainColor = Color.valueOf("F24949");
 
     public TextureRegion[] splashes = new TextureRegion[12];
@@ -76,8 +77,7 @@ public class Storm extends ParticleWeather {
                 if(lightningStrength > 1.2 && !Vars.headless) Vars.renderer.shake(lightningStrength, lightningStrength * 2);
 
                 if(lightningStrength > 3.3){
-//                    sound
-                    sound.play(lightningStrength / 5, (float) (0.6 + Math.random() * 0.6), Mathf.random(-0.6f, 1.2f));
+                    SnSounds.thunder.play(lightningStrength / 5, (float) (0.6 + Math.random() * 0.6), Mathf.random(-0.6f, 1.2f));
                 }
             }
         }
