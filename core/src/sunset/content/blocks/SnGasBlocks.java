@@ -79,7 +79,7 @@ public class SnGasBlocks{
             size = 1;
             gasCapacity = 25f;
         }};
-        gasBridge = new SnGasBridge("gas-bridge"){{
+        gasBridge = new GasBridge("gas-bridge"){{
             requirements(Category.liquid, with(SnItems.naturite, 5, SnItems.erius, 9, SnItems.fors, 4));
             health = 85;
             size = 1;
