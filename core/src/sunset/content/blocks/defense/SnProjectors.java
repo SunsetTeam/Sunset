@@ -14,8 +14,7 @@ import static mindustry.type.ItemStack.with;
 
 public class SnProjectors {
     public static Block
-    hugeRestoringDome, forceDome, deflectorProjector,
-    testStand;
+    hugeRestoringDome, forceDome, deflectorProjector;
 
     public static void load() {
 

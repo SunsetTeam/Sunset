@@ -3,7 +3,6 @@ package sunset.world.blocks.gas;
 import arc.Core;
 import arc.graphics.Color;
 import arc.math.Mathf;
-import gas.world.blocks.production.GasAttributeCrafter;
 import mindustry.content.Fx;
 import mindustry.entities.Effect;
 import mindustry.game.Team;

@@ -32,7 +32,7 @@ import static mma.ModVars.modInfo;
 
 public class Sunset extends MMAMod{
 
-    boolean validDependencies;
+//    boolean validDependencies;
 
     public Sunset(){
         super();
@@ -41,8 +41,8 @@ public class Sunset extends MMAMod{
 //        Events.on(DisposeEvent.class, e -> {
 //            SnShaders.dispose();
 //        });
-        validDependencies = SnDependencies.valid();
-        if(!validDependencies && !SnDependencies.existsGasLibraryJava()){
+     /*   validDependencies = SnDependencies.valid();
+        if(!validDependencies*//* && !SnDependencies.existsGasLibraryJava()*//*){
             Fi file = modDirectory.child("GasLibrary.jar");
             file.write(getClass().getClassLoader().getResourceAsStream("GasLibrary.jar"), false);
             Log.debug("[Sunset] Loading mod @", file);
@@ -51,7 +51,7 @@ public class Sunset extends MMAMod{
             mods.add(mod);
             validDependencies = SnDependencies.valid();
         }
-        if(!validDependencies) return;
+        if(!validDependencies) return;*/
 
 //        SnFonts.loadDefaultFont();
 //        SnFonts.loadFonts();
@@ -77,7 +77,7 @@ public class Sunset extends MMAMod{
 
     @Override
     public void init(){
-        if(!validDependencies) return;
+//        if(!validDependencies) return;
         SnAchievements.load();
         super.init();
         ModMetaDialogFinder.onNewListener(prev -> {
@@ -151,7 +151,7 @@ public class Sunset extends MMAMod{
 
     @Override
     public void loadContent(){
-        if(!validDependencies){
+        /*if(!validDependencies){
             modInfo = mods.getMod(getClass());
             new ErrorContent(){{
                 minfo.error = "@sunset-gas-library-disabled";
@@ -159,7 +159,7 @@ public class Sunset extends MMAMod{
                 modInfo.erroredContent.add(this);
             }};
             return;
-        }
+        }*/
 
         if(!headless){
             SnVars.inTry(SnMusics::load);

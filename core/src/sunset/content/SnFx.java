@@ -26,7 +26,6 @@ import sunset.entities.bullet.*;
 import sunset.graphics.Drawm;
 import sunset.graphics.SnPal;
 import sunset.utils.test.DrawFunc;
-import sunset.world.blocks.defense.turrets.SynthesisTurret;
 
 import static arc.graphics.g2d.Draw.alpha;
 import static arc.graphics.g2d.Draw.color;
@@ -582,95 +581,6 @@ public class SnFx {
     }),
     //endregion special
 
-    //region green turrets
-    greenInstTrail = new Effect(30, e -> {
-        for (int i = 0; i < 2; i++) {
-            color(i == 0 ? SnPal.synthesis1 : SnPal.synthesis2);
-
-            float m = i == 0 ? 1f : 0.5f;
-
-            float rot = e.rotation + 180f;
-            float w = 15f * e.fout() * m;
-            Drawf.tri(e.x, e.y, w, (30f + Mathf.randomSeedRange(e.id, 15f)) * m, rot);
-            Drawf.tri(e.x, e.y, w, 10f * m, rot + 180f);
-        }
-
-        Drawf.light(e.x, e.y, 60f, Pal.bulletYellowBack, 0.6f * e.fout());
-    }),//temporary unused
-    plasmaShot = new Effect(26, e -> {//TODO tune
-        color(SnPal.plasma1);
-        float length = !(e.data instanceof Float) ? 70f : (Float)e.data;
-        randLenVectors(e.id, 7, length, e.rotation, 0f, (x, y) -> {
-            lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), e.fout() * 9f);
-        });
-    }),//temporary unused
-    plasmaHit = new Effect(8, e -> {//TODO tune
-        color(SnPal.plasma1, SnPal.plasma2, e.fin());
-        stroke(0.5f + e.fout());
-        circle(e.x, e.y, e.fin() * 5f);
-    }),//temporary unused
-
-    blockShieldBreak = new Effect(35, e -> {
-        if(!(e.data instanceof SynthesisTurret.SynthesisBuild)) return;
-        SynthesisTurret.SynthesisBuild build = e.data();
-
-        float radius = build.block.size * build.block.size * 1.3f;
-
-        e.scaled(16f, c -> {
-            color(Pal.shield);
-            stroke(c.fout() * 2f + 0.1f);
-
-            randLenVectors(e.id, (int)(radius * 1.2f), radius / 2f + c.finpow() * radius * 1.25f, (x, y) -> lineAngle(c.x + x, c.y + y, Mathf.angle(x, y), c.fout() * 5 + 1f));
-        });
-
-        color(Pal.shield, e.fout());
-        stroke(e.fout());
-        Lines.circle(e.x, e.y, radius);
-    }),
-    //endregion green turrets
-
-    //region heavy art
-    halfStarTrail = new Effect(50, e -> {
-        color(e.color);
-        Fill.circle(e.x, e.y, e.rotation * e.fout());
-        for (int i = 0; i < 8; i++) {
-            Drawf.tri(e.x, e.y, 5 * e.fout(), 4.4f * e.fout(), (i * 45));
-        }
-    }),
-    lbmTrail = new Effect(50, e -> {
-        color(e.color);
-        Fill.circle(e.x, e.y, e.rotation * e.fin());
-        color(e.color);
-        Fill.circle(e.x, e.y, e.rotation * e.fout());
-    }),
-    fieldHit = new Effect(15, e -> {
-        Draw.z(Layer.shields + 0.01f);
-        float radius = 8 + (Interp.pow2Out.apply(e.fout())) * 44;
-        color(Pal.accent.cpy());
-        if (Core.settings.getBool("animatedshields")) {
-            Fill.poly(e.x, e.y, 8, radius);
-        } else {
-            Lines.stroke(1.5f);
-            Draw.alpha(0.09f + Mathf.clamp(0.08f));
-            Fill.poly(e.x, e.y, 8, radius);
-            Draw.alpha(1);
-            Lines.poly(e.x, e.y, 8, radius);
-            Draw.reset();
-        }
-    }),
-    empHit = new Effect(20, e -> {
-        color(SnPal.emp1);
-        stroke(e.fout() * 2f);
-        float circleRad = 3f + e.finpow() * 40f;
-        circle(e.x, e.y, circleRad);
-        circle(e.x, e.y, circleRad / 2);
-        circle(e.x, e.y, circleRad / 4);
-        color(SnPal.emp2);
-        circle(e.x, e.y, circleRad / 8);
-        circle(e.x, e.y, circleRad / 16);
-    }),
-    //endregion heavy art
-
     //region yellow ships
     acTrail = new Effect(30, e -> {
         /*color(SnPal.yellowTrailBack);
@@ -927,52 +837,6 @@ public class SnFx {
         if (gameLoaded)throw new IllegalStateException("You cannot create an effect after the game is loaded");
     }
 
-    //heavy art
-    public static Effect laserArtFx(Color color) {
-        return laserArtFx(color, 1, 100f, 35f, 6);
-    }
-    public static Effect laserArtFx(Color color, int rotateAngle) {
-        return laserArtFx(color, rotateAngle, 100f, 35f, 6);
-    }
-    public static Effect laserArtFx(Color color, float lenght1, float lenght2) {
-        return laserArtFx(color, 1, lenght1, lenght2, 6);
-    }
-    public static Effect laserArtFx(Color color, int rotateAngle, float lenght1, float lenght2, int beams) {
-        checkGameState();
-        return new Effect(30f, 70f, e -> {
-            color(color);
-            stroke(e.fout() * 2f);
-            float circleRad = 3f + e.finpow() * 40f;
-            circle(e.x, e.y, circleRad);
-            color(color);
-            for (int i = 0; i < beams; i++) {
-                Drawf.tri(e.x, e.y, 6f, lenght1 * e.fout(), (i * (360 / beams)) + rotateAngle * e.fout(Interp.pow5Out));
-            }
-            color();
-            for (int i = 0; i < beams; i++) {
-                Drawf.tri(e.x, e.y, 3f, lenght2 * e.fout(), (i * (360 / beams)) + rotateAngle * e.fout(Interp.pow5Out));
-            }
-            Drawf.light(e.x, e.y, circleRad * 1.5f, color, e.fout());
-        });
-    }
-    /*public static Effect powerArtFx(Color color) {
-        return powerArtFx(color, 40f, 20f);
-    }
-    public static Effect powerArtFx(Color color, float lenght1, float lenght2) {
-        return new Effect(20f, 50f, e -> {
-            color(color);
-            stroke(e.fout() * 2);
-            color(color);
-            for (int i = 0; i < 2; i++) {
-                Drawf.tri(e.x, e.y, 1f, lenght1 * e.fout(), i * 50);
-            }
-            color();
-            for (int i = 0; i < 7; i++) {
-                Drawf.tri(e.x, e.y, 3f, lenght2 * e.fout(), i * 50);
-            }
-            Drawf.light(e.x, e.y, 5, color, e.fout());
-        });
-    }*/
     private static boolean gameLoaded=false;
     static {
         Events.run(ClientLoadEvent.class,()->gameLoaded=true);

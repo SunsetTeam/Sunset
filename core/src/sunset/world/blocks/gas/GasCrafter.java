@@ -1,16 +1,15 @@
 package sunset.world.blocks.gas;
 
 import arc.Core;
-import gas.world.blocks.production.GasAttributeCrafter;
-import gas.world.blocks.production.GenericCrafterWithGas;
 import mindustry.game.Team;
 import mindustry.graphics.Pal;
 import mindustry.ui.Bar;
 import mindustry.world.Tile;
+import mindustry.world.blocks.production.*;
 import mindustry.world.meta.Attribute;
 import mindustry.world.meta.Stat;
 
-public class GasCrafter extends GenericCrafterWithGas {
+public class GasCrafter extends GenericCrafter{
     public Attribute attribute = Attribute.heat;
 
     public float baseEfficiency = 1f;
@@ -57,7 +56,7 @@ public class GasCrafter extends GenericCrafterWithGas {
         stats.add(baseEfficiency <= 0.0001f ? Stat.tiles : Stat.affinities, attribute, floating, boostScale * size * size, !displayEfficiency);
     }
 
-    public class GasCrafterBuild extends GenericCrafterWithGasBuild {
+    public class GasCrafterBuild extends GenericCrafterBuild {
 
         public float attrsum;
 

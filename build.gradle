@@ -25,7 +25,7 @@ buildscript{
 
         aciVersion = "45ad8cd8ed9"
 
-        gasVersion = "27b10c13f7e"
+//        gasVersion = "27b10c13f7e"
 
         modCoreVersion = "a61878d7029"
 
@@ -49,7 +49,7 @@ buildscript{
         classpath "com.github.Anuken.Arc:packer:$arcVersion"
 
         classpath "com.github.Zelaux.ZelauxModCore:annotations:$modCoreVersion"
-        classpath "com.github.Zelaux.GasLibrary:core:$gasVersion"
+//        classpath "com.github.Zelaux.GasLibrary:core:$gasVersion"
 
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
     }
@@ -227,7 +227,7 @@ project(":core"){
         implementation "com.github.Zelaux.ZelauxModCore:utils:$modCoreVersion"
         implementation "com.github.Zelaux.ZelauxModCore:graphics:$modCoreVersion"
 
-        compileOnly "com.github.Zelaux.GasLibrary:core:$gasVersion"
+//        compileOnly "com.github.Zelaux.GasLibrary:core:$gasVersion"
 
         compileOnly "com.github.Zelaux.ZelauxModCore:annotations:$modCoreVersion"
 
@@ -248,7 +248,7 @@ project(":core"){
         from{
             configurations.runtimeClasspath.collect{ it.isDirectory() ? it : zipTree(it) }
         }
-        def libFolder = new arc.files.Fi(buildDir).child("gasLibrary")
+        /*def libFolder = new arc.files.Fi(buildDir).child("gasLibrary")
         def gasVersionFile = libFolder.child("version.txt")
         if(!gasVersionFile.exists()){
             gasVersionFile.writeString("")
@@ -264,7 +264,7 @@ project(":core"){
         }
         from(libFolder.file()){
             include("GasLibrary.jar")
-        }
+        }*/
         exclude("sunset/entities/comp/**")
         exclude("sunset/codegen/**")
     }
@@ -323,12 +323,10 @@ project(":tools"){
         implementation "com.github.Zelaux.ZelauxModCore:core:$modCoreVersion"
         implementation "com.github.Zelaux.ZelauxModCore:tools:$modCoreVersion"
 
-        implementation "com.github.Zelaux.GasLibrary:core:$gasVersion"
+//        implementation "com.github.Zelaux.GasLibrary:core:$gasVersion"
 
 
         implementation "com.github.Anuken.Arc:packer:$arcVersion"
-
-//        annotationProcessor "com.github.Anuken:jabel:$jabelVersion"
     }
 }
 project(":annotations"){
@@ -346,7 +344,7 @@ project(":annotations"){
         implementation "com.github.Zelaux.ZelauxModCore:tools:$modCoreVersion"
         implementation "com.github.Zelaux.ZelauxModCore:annotations:$modCoreVersion"
 
-        implementation "com.github.Zelaux.GasLibrary:core:$gasVersion"
+//        implementation "com.github.Zelaux.GasLibrary:core:$gasVersion"
     }
 }
 

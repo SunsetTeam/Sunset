@@ -9,7 +9,6 @@ import mindustry.content.StatusEffects
 import mindustry.graphics.Layer
 import mindustry.graphics.Pal
 import mindustry.type.StatusEffect
-import sunset.graphics.SnPal
 import sunset.type.PublicStatusEffect
 import sunset.type.StackableStatusEffect
 import sunset.type.StackableStatusEffect.*
@@ -163,7 +162,6 @@ object SnStatusEffects {
     lateinit var starBuff: StatusEffect
     lateinit var galaxyDebuff: StatusEffect
     lateinit var universityLaserSlow: StatusEffect
-    lateinit var electricalShort: StatusEffect
 
     //stackable
     lateinit var overheat: StatusEffect
