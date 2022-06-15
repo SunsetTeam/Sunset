@@ -12,7 +12,7 @@ public class LaserWall extends LaserBlock{
         configurable = true;
 
     }
-    public class LaserWallBuild extends LaserBlockBuild{
+    public class LaserWallBuild extends LaserBuild{
         float multiplier = 1f;
 
         @Override

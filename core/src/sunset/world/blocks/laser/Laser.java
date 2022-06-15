@@ -2,7 +2,6 @@ package sunset.world.blocks.laser;
 
 import arc.*;
 import arc.graphics.g2d.*;
-import arc.math.Mathf;
 import arc.math.geom.*;
 import arc.util.*;
 import mindustry.*;
@@ -10,11 +9,9 @@ import mindustry.entities.*;
 import mindustry.gen.*;
 import mindustry.graphics.*;
 import mindustry.world.Tile;
-import sunset.content.SnBlocks;
-import sunset.content.blocks.defense.SnWalls;
 import sunset.type.*;
 import sunset.utils.*;
-import sunset.world.blocks.defense.walls.SnWall;
+import sunset.world.blocks.laser.LaserBlock.*;
 
 /**
  * Laser class.
@@ -42,7 +39,7 @@ public class Laser{
     public float damage = 1f;
     /** laser mode. */
     public boolean enabled = true;
-    public LaserBlock.LaserBlockBuild build;
+    public LaserBuild build;
     /** laser current target. */
     public Healthc target = null;
     public boolean onStaticWall = false;
@@ -104,7 +101,7 @@ public class Laser{
             if(enabled && charge > 0f){
                 //////////////
                 //this is for laser mechanic
-                if(target instanceof LaserBlock.LaserBlockBuild b && b.block().inputsLaser){
+                if(target instanceof LaserBuild b && b.block().inputsLaser){
                     setTargetLenses(b);
                     b.laser.in += charge;
                 }else if(charge != 0){
@@ -129,7 +126,7 @@ public class Laser{
 
     }
 
-    public void setTargetLenses(LaserBlock.LaserBlockBuild b){
+    public void setTargetLenses(LaserBuild b){
         //Log.info("angle: @", angle);
         switch(BlockSide.sideForAngle(target.angleTo(build))){
             case BlockSide.right -> b.rightInput = true;

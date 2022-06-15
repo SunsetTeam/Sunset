@@ -1,6 +1,5 @@
 package sunset.content.blocks;
 
-import arc.graphics.Color;
 import mindustry.content.Fx;
 import mindustry.content.Items;
 import mindustry.content.Liquids;
@@ -13,10 +12,10 @@ import mindustry.world.meta.BuildVisibility;
 import sunset.world.blocks.laser.*;
 
 public class SnLasers {
-    public static Block laserNode, laserSource /*, rotato */ /*, laserPrism *//*, laserWall*/, multikiln;
+    public static Block laserNode, laserSource /*, rotato */ /*, laserPrism *//*, laserWall*/, laserKiln;
 
     public static void load() {
-        laserSource = new LaserSource("laser-starter"){{
+        laserSource = new LaserSource("laser-source"){{
             requirements(Category.distribution, ItemStack.with(Items.copper, 1));
             size = 2;
             buildVisibility = BuildVisibility.sandboxOnly;
@@ -31,7 +30,7 @@ public class SnLasers {
             outputsLaser = true;
             heats = true;
         }};
-        multikiln = new LaserCrafter("multikiln"){{
+        laserKiln = new LaserCrafter("laser-kiln"){{
             requirements(Category.distribution, ItemStack.with(Items.copper, 1));
             size = 4;
             buildVisibility = BuildVisibility.sandboxOnly;

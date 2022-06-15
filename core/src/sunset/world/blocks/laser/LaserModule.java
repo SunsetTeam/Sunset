@@ -1,20 +1,19 @@
 package sunset.world.blocks.laser;
-import arc.util.Log;
 import mindustry.entities.Damage;
 import mindustry.world.Tile;
-import sunset.world.blocks.laser.LaserBlock.LaserBlockBuild;
+import sunset.world.blocks.laser.LaserBlock.LaserBuild;
 
 /** Core class for laser mechanic.
  * Consumes or produces laser energy. Splits it to some sides. */
 public class LaserModule {
-    public LaserBlockBuild build;
+    public LaserBuild build;
     /** Input and output. Used only for calculating. */
     public float in = 0f, out = 0f;
     /** 'Safe' analog of input. Used for drawing smth. */
     public float rawInput = in;
     public int outputs = 0;
 
-    public LaserModule(LaserBlockBuild build){
+    public LaserModule(LaserBuild build){
         this.build = build;
     }
 

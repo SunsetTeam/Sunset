@@ -6,8 +6,6 @@ import arc.graphics.g2d.*;
 import arc.math.*;
 import arc.math.geom.*;
 import arc.scene.ui.layout.*;
-import arc.struct.*;
-import arc.util.*;
 import arc.util.io.*;
 import mindustry.*;
 import mindustry.game.*;
@@ -15,7 +13,6 @@ import mindustry.gen.*;
 import mindustry.graphics.*;
 import mindustry.ui.Bar;
 import mindustry.world.*;
-import mma.ModVars;
 
 import static mindustry.Vars.*;
 
@@ -48,7 +45,7 @@ public class LaserNode extends LaserBlock{
     public void setBars(){
         super.setBars();
         if(heats){
-            addBar("chargeBar", (LaserBlockBuild entity) ->
+            addBar("chargeBar", (LaserBuild entity) ->
                     new Bar(() -> Core.bundle.format("bar.laser-input", entity.laser.rawInput, entity.block().heatLaserLimit),
                     () -> {
                         if(entity.laser.rawInput < entity.block().heatLaserLimit){
@@ -71,7 +68,7 @@ public class LaserNode extends LaserBlock{
         build.configure(state);
     }
 
-    public class LaserNodeBuild extends LaserBlockBuild{
+    public class LaserNodeBuild extends LaserBuild{
         Lasers lasers;
 
         @Override

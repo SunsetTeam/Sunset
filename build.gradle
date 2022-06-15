@@ -27,7 +27,7 @@ buildscript{
 
         gasVersion = "27b10c13f7e"
 
-        modCoreVersion = "53d3c83c089"
+        modCoreVersion = "a61878d7029"
 
 
         kotlinVersion = "1.6.0"
@@ -327,6 +327,8 @@ project(":tools"){
 
 
         implementation "com.github.Anuken.Arc:packer:$arcVersion"
+
+//        annotationProcessor "com.github.Anuken:jabel:$jabelVersion"
     }
 }
 project(":annotations"){

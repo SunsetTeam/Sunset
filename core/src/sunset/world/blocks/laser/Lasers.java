@@ -2,13 +2,14 @@ package sunset.world.blocks.laser;
 
 import arc.struct.*;
 import sunset.type.*;
+import sunset.world.blocks.laser.LaserBlock.*;
 
 /** Lasers class manages {@link Laser} for {@link LaserNode}*/
 public class Lasers{
     public Seq<Laser> allLasers = new Seq<>();
-    LaserBlock.LaserBlockBuild build;
+    LaserBuild build;
 
-    public Lasers(LaserBlock.LaserBlockBuild build){
+    public Lasers(LaserBuild build){
         this.build = build;
     }
 

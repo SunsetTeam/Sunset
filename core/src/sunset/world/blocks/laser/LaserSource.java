@@ -1,7 +1,6 @@
 package sunset.world.blocks.laser;
 
 import arc.Core;
-import arc.graphics.Color;
 import mindustry.graphics.Pal;
 import mindustry.ui.Bar;
 
@@ -13,7 +12,7 @@ public class LaserSource extends LaserNode{
     @Override
     public void setBars(){
         super.setBars();
-        addBar("chargeBar", (LaserBlockBuild entity) ->
+        addBar("chargeBar", (LaserBuild entity) ->
                 new Bar(() -> Core.bundle.format("bar.laser-output", entity.laser.out),
                         () -> Pal.powerBar,
                         () -> 1f));

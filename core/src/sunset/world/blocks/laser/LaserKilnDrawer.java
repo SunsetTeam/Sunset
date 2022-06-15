@@ -4,24 +4,24 @@ import arc.Core;
 import arc.graphics.Color;
 import arc.graphics.g2d.Draw;
 import arc.graphics.g2d.TextureRegion;
-import arc.util.Log;
 import mindustry.graphics.Layer;
 import mindustry.graphics.Pal;
+import sunset.world.blocks.laser.LaserBlock.*;
 
 /** Drawer only used for multikiln. */
-public class LaserKilnDrawer extends LaserBlockDrawer{
+public class LaserKilnDrawer extends LaserDraw{
     public TextureRegion flame;
     public Color startColor = Pal.darkerGray,
             midColor = Color.red,
             endColor = Color.white;
-
+/*
     @Override
     public void load(LaserBlock block){
         flame = Core.atlas.find(block.name + "-flame");
     }
 
     @Override
-    public void draw(LaserBlock.LaserBlockBuild b){
+    public void draw(LaserBuild b){
         super.draw(b);
         Draw.draw(Layer.effect - 0.001f, ()->{
             Draw.alpha(1f);
@@ -29,5 +29,5 @@ public class LaserKilnDrawer extends LaserBlockDrawer{
             Draw.rect(flame, b.x, b.y);
             Draw.reset();
         });
-    }
+    }*/
 }

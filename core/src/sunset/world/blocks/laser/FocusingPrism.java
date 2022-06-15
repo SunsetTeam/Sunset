@@ -1,16 +1,13 @@
 package sunset.world.blocks.laser;
 
-import arc.input.KeyCode;
 import arc.scene.ui.Button;
 import arc.scene.ui.ImageButton;
 import arc.scene.ui.layout.Table;
-import arc.util.Log;
 import mindustry.Vars;
 import mindustry.game.Team;
 import mindustry.gen.Building;
 import mindustry.gen.Icon;
 import mindustry.world.Tile;
-import mindustry.Vars.*;
 
 import static mindustry.Vars.tilesize;
 
@@ -24,7 +21,7 @@ public class FocusingPrism extends LaserBlock{
         update = true;
         configurable = true;
     }
-    public class FocusingPrismBuild extends LaserBlockBuild{
+    public class FocusingPrismBuild extends LaserBuild{
         Laser laserToTarget;
         float angle = 0f;
 

@@ -1,33 +1,22 @@
 package sunset.world.blocks.laser;
 
 import arc.*;
-import arc.graphics.Color;
-import arc.graphics.g2d.Draw;
 import arc.graphics.g2d.TextureRegion;
-import arc.struct.*;
-import arc.util.Log;
-import arc.util.Time;
 import mindustry.*;
 import mindustry.annotations.Annotations;
 import mindustry.game.*;
 import mindustry.game.EventType.*;
 import mindustry.gen.*;
-import mindustry.graphics.Layer;
-import mindustry.graphics.Pal;
-import mindustry.ui.Bar;
 import mindustry.world.Block;
 import mindustry.world.Tile;
-import mindustry.world.blocks.logic.LogicBlock;
+import mindustry.world.draw.*;
 import mma.ModVars;
 import sunset.gen.*;
-import sunset.graphics.Drawm;
 
 /** Base class for all laser blocks. */
 public class LaserBlock extends Block{
-    @Annotations.Load("@-base")
+ /*   @Annotations.Load("@-base")
     public TextureRegion base;
-    @Annotations.Load("@-top")
-    public TextureRegion top;
     @Annotations.Load("@-lens")
     public TextureRegion lens;
     @Annotations.Load("@-edge0")
@@ -36,7 +25,7 @@ public class LaserBlock extends Block{
     public TextureRegion plugLight;
     @Annotations.Load("@-all-edge")
     public TextureRegion allEdge;
-
+*/
     public boolean inputsLaser = false;
     public boolean outputsLaser = false;
 
@@ -46,13 +35,13 @@ public class LaserBlock extends Block{
     public float laserProduction = 0f;
     public float laserConsumption = 0f;
 
-    public LaserBlockDrawer drawer = new LaserBlockDrawer();
+    public DrawBlock drawer = new DrawMulti(new DrawRegion("-bottom"),new LaserDraw(),new DrawDefault());
     //on preUpdate, default all side-vars
     static {
         Events.run(Trigger.update,()->{
             if (!Vars.state.isPlaying())return;
             for(Building rawbuild : SnGroups.laserBuilds){
-                LaserBlockBuild build = (LaserBlockBuild)rawbuild;
+                LaserBuild build = (LaserBuild)rawbuild;
                 build.leftInput = false;
                 build.topInput = false;
                 build.rightInput = false;
@@ -72,11 +61,11 @@ public class LaserBlock extends Block{
 
     @Override
     public TextureRegion[] icons(){
-        return !ModVars.packSprites ? new TextureRegion[]{region} : new TextureRegion[]{base, allEdge, top};
+        return !ModVars.packSprites ? new TextureRegion[]{fullIcon} : drawer.icons(this);
     }
 
     @SuppressWarnings("InnerClassMayBeStatic")
-    public class LaserBlockBuild extends Building{
+    public class LaserBuild extends Building{
         LaserModule laser;
         public boolean leftInput = false,
                 topInput = false,

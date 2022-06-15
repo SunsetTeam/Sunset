@@ -73,12 +73,12 @@ public class SnGasBlocks{
             gasCapacity = 20f;
             hasLiquids = false;
         }};
-        gasRouter = new GasRouter("gas-router"){{
+        /*gasRouter = new GasRouter("gas-router"){{
             requirements(Category.liquid, with(SnItems.naturite, 4, SnItems.erius, 2, SnItems.fors, 2));
             health = 80;
             size = 1;
             gasCapacity = 25f;
-        }};
+        }};*/
         gasBridge = new GasBridge("gas-bridge"){{
             requirements(Category.liquid, with(SnItems.naturite, 5, SnItems.erius, 9, SnItems.fors, 4));
             health = 85;

@@ -9,7 +9,7 @@ import mindustry.entities.*;
 import mindustry.gen.*;
 import mindustry.world.*;
 import mindustry.world.blocks.environment.*;
-import sunset.world.blocks.laser.*;
+import sunset.world.blocks.laser.LaserBlock.*;
 
 import static mindustry.Vars.world;
 
@@ -86,7 +86,7 @@ public class LaserUtils{
         return best;
     }
 
-    public static Healthc linecast(LaserBlock.LaserBlockBuild build, float x, float y, float angle, float length, boolean collideAir, boolean collideGround, Boolf<Healthc> predicate){
+    public static Healthc linecast(LaserBuild build, float x, float y, float angle, float length, boolean collideAir, boolean collideGround, Boolf<Healthc> predicate){
         tmpBuilding = null;
         tmpUnit = null;
 
