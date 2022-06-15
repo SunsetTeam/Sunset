@@ -1,12 +1,11 @@
 package sunset.content.blocks;
 
-import gas.*;
 import gas.world.blocks.gas.*;
-import gas.world.blocks.power.*;
 import gas.world.blocks.sandbox.*;
 import mindustry.content.*;
 import mindustry.type.*;
 import mindustry.world.*;
+import mindustry.world.blocks.power.*;
 import mindustry.world.meta.*;
 import sunset.content.*;
 import sunset.world.blocks.gas.*;
@@ -19,7 +18,8 @@ public class SnGasBlocks{
     gasSource, gasVoid,
 
     //gas-transportation
-    gasPipe, armoredGasPipe, nobiumGasPipe, gasJunction, /*gasRouter,*/ gasBridge, nobiumGasBridge,
+    gasPipe, armoredGasPipe, nobiumGasPipe, gasJunction, /*gasRouter,*/
+    gasBridge, nobiumGasBridge,
 
     //storage
     gasStorage, gasContainer, gasTank,
@@ -46,7 +46,7 @@ public class SnGasBlocks{
             requirements(Category.liquid, with(SnItems.erius, 2, SnItems.naturite, 1));
             health = 55;
             size = 1;
-            gasCapacity = 11f;
+            liquidCapacity = 11f;
             junctionReplacement = gasJunction;
             bridgeReplacement = gasBridge;
         }};
@@ -54,7 +54,7 @@ public class SnGasBlocks{
             requirements(Category.liquid, with(SnItems.fors, 3, SnItems.erius, 2));
             health = 250;
             size = 1;
-            gasCapacity = 11.6f;
+            liquidCapacity = 11.6f;
             junctionReplacement = gasJunction;
             bridgeReplacement = gasBridge;
         }};
@@ -62,7 +62,7 @@ public class SnGasBlocks{
             requirements(Category.liquid, with(SnItems.erius, 2, SnItems.nobium, 1));
             health = 125;
             size = 1;
-            gasCapacity = 18f;
+            liquidCapacity = 18f;
             junctionReplacement = gasJunction;
             bridgeReplacement = gasBridge;
         }};
@@ -70,7 +70,7 @@ public class SnGasBlocks{
             requirements(Category.liquid, with(SnItems.naturite, 2, SnItems.erius, 2, SnItems.fors, 1));
             health = 75;
             size = 1;
-            gasCapacity = 20f;
+            liquidCapacity = 20f;
             hasLiquids = false;
         }};
         /*
@@ -78,17 +78,17 @@ public class SnGasBlocks{
             requirements(Category.liquid, with(SnItems.naturite, 4, SnItems.erius, 2, SnItems.fors, 2));
             health = 80;
             size = 1;
-            gasCapacity = 25f;
+            liquidCapacity = 25f;
         }};
          */
         gasBridge = new GasBridge("gas-bridge"){{
             requirements(Category.liquid, with(SnItems.naturite, 5, SnItems.erius, 9, SnItems.fors, 4));
             health = 85;
             size = 1;
-            gasCapacity = 30f;
+            liquidCapacity = 30f;
             hasPower = false;
-            outputsGas = true;
-            hasGasses = true;
+            outputsLiquid = true;
+            hasLiquids = true;
             range = 6;
         }};
         nobiumGasBridge = new GasBridge("nobium-gas-bridge"){{
@@ -96,7 +96,7 @@ public class SnGasBlocks{
             health = 110;
             range = 12;
             size = 1;
-            gasCapacity = 45f;
+            liquidCapacity = 45f;
             arrowPeriod = 0.9f;
             arrowTimeScl = 2.75f;
             hasPower = true;
@@ -108,21 +108,21 @@ public class SnGasBlocks{
             requirements(Category.liquid, with(SnItems.fors, 15, SnItems.erius, 20));
             health = 260;
             size = 2;
-            gasCapacity = 350f;
+            liquidCapacity = 350f;
         }};
 
         gasContainer = new GasRouter("gas-container"){{
             requirements(Category.liquid, with(SnItems.fors, 30, SnItems.erius, 45));
             health = 600;
             size = 3;
-            gasCapacity = 760f;
+            liquidCapacity = 760f;
         }};
 
         gasTank = new GasRouter("gas-tank"){{
             requirements(Category.liquid, with(SnItems.fors, 115, SnItems.erius, 95, SnItems.nobium, 50));
             health = 1300;
             size = 4;
-            gasCapacity = 1880f;
+            liquidCapacity = 1880f;
         }};
 
         //crafting
@@ -131,18 +131,18 @@ public class SnGasBlocks{
             size = 4;
             attribute = SnAttribute.gas;
 
-            outputGas = new GasStack(SnGas.gyner, 9f);
+            outputLiquid = new LiquidStack(SnGas.gyner, 9f);
             hasItems = true;
             hasLiquids = true;
-            hasGasses = true;
-            gasCapacity = 100f;
+//            hasLiquids = true;
+            liquidCapacity = 100f;
             craftTime = 3f;
             craftEffect = SnFx.giardSynthesizerCraft;
             consumePower(6f);
         }};
 
         //power
-        gasGenerator = new GasConsumeGenerator("gas-generator"){{
+        gasGenerator = new ConsumeGenerator("gas-generator"){{
             requirements(Category.power, with(Items.copper, 40, Items.lead, 60, Items.silicon, 30f));
             size = 3;
             itemDuration = 200f;
@@ -151,8 +151,11 @@ public class SnGasBlocks{
 
             powerProduction = 12f;
             consumeItems(new ItemStack(Items.coal, 2));
-            consumeLiquid(SnLiquids.burheyna, 0.6f);
-            consumeGas(SnGas.hyneris, 0.5f);
+//            consumeLiquid(SnLiquids.burheyna, 0.6f);
+            consumeLiquids(LiquidStack.with(
+            SnLiquids.burheyna, 0.6f,
+            SnGas.hyneris, 0.5f
+            ));
         }};
     }
 }

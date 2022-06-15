@@ -1,12 +1,6 @@
 package sunset.content.blocks;
 
 import arc.graphics.*;
-import arc.util.Time;
-import gas.GasStack;
-import gas.type.Gas;
-import gas.world.blocks.production.GasGenericCrafter;
-import gas.world.blocks.production.GenericCrafterWithGas;
-import gas.world.consumers.*;
 import mindustry.content.*;
 import mindustry.gen.*;
 import mindustry.type.*;
@@ -109,7 +103,7 @@ public class SnCrafting{
             consumePower(7f);
         }};
 
-        collider = new GasGenericCrafter("collider"){{
+        collider = new GenericCrafter("collider"){{
             requirements(Category.crafting, with(SnItems.fors, 105, SnItems.erius, 100, SnItems.anzar, 65));
 
             outputItem = new ItemStack(SnItems.reneubite, 1);
@@ -118,15 +112,15 @@ public class SnCrafting{
             craftTime = 25f;
             size = 3;
             itemCapacity = 15;
-            gasCapacity = 30f;
+            liquidCapacity = 30f;
             hasPower = true;
-            hasGasses = true;
+//            hasGasses = true;
             hasItems = true;
             ambientSound = Sounds.grinding;
             ambientSoundVolume = 0.025f;
 
             consumeItem(SnItems.nedirium, 1);
-            consumeGasses(new GasStack(SnGas.gyner, 6f / 60f), new GasStack(SnGas.arhelinium, 4f / 60f));
+            consumeLiquids(new LiquidStack(SnGas.gyner, 6f / 60f), new LiquidStack(SnGas.arhelinium, 4f / 60f));
             consumePower(4.6f);
         }};
 /*
@@ -154,18 +148,18 @@ public class SnCrafting{
             consumePower(10f);
         }};
 
-        zeriniumZavod = new GasGenericCrafter("zerinium-zavod"){{
+        zeriniumZavod = new GenericCrafter("zerinium-zavod"){{
             requirements(Category.crafting, with(SnItems.erius, 180, SnItems.nobium, 160, SnItems.anzar, 155, SnItems.enojie, 40));
             size = 4;
             itemCapacity = 45;
-            gasCapacity = 40f;
+            liquidCapacity = 40f;
             hasPower = true;
-            hasGasses = true;
+            hasLiquids = true;
 
             outputItem = new ItemStack(SnItems.zerinium, 1);
             craftTime = 37f;
             consumeItems(with(SnItems.anzar, 2, SnItems.planatrium, 3));
-            consumeGas(SnGas.gyner, 4f / 60f);
+            consumeLiquid(SnGas.gyner, 4f / 60f);
             consumePower(8f);
         }};
         //endregion standard

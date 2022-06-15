@@ -3,7 +3,6 @@ package sunset.content;
 import arc.*;
 import arc.graphics.g2d.*;
 import arc.util.*;
-import gas.content.*;
 import mindustry.*;
 import mindustry.content.*;
 import mindustry.ctype.*;
@@ -57,7 +56,7 @@ public class SnAchievements{
             }
         }};
         new SnAchievementTab("sn-achievements.gasses"){{
-            for(UnlockableContent gas : Vars.content.liquids().select(liquid -> liquid.gas).<UnlockableContent>as().addAll(Gasses.all())){
+            for(UnlockableContent gas : Vars.content.liquids().select(liquid -> liquid.gas).<UnlockableContent>as()){
                 achievement(new SnAchievement("first-"+gas.name){
                     @Override
                     protected boolean trigger(){

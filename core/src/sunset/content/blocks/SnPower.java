@@ -1,6 +1,5 @@
 package sunset.content.blocks;
 
-import gas.world.blocks.power.GasConsumeGenerator;
 import mindustry.gen.*;
 import mindustry.type.*;
 import mindustry.world.*;
@@ -30,40 +29,42 @@ public class SnPower{
             attribute = SnAttribute.thermalBurheyna;
         }};
 
-        oxidativeCombustionGenerator = new GasConsumeGenerator("oxidative-combustion-generator"){{
+        oxidativeCombustionGenerator = new ConsumeGenerator("oxidative-combustion-generator"){{
             requirements(Category.power, with(SnItems.fors, 120, SnItems.erius, 100, SnItems.naturite, 70));
             size = 2;
             powerProduction = 6.1f;
 
-            hasGasses = true;
+            hasLiquids = true;
             hasItems = true;
             hasPower = true;
             hasLiquids = false;
             itemCapacity = 20;
-            gasCapacity = 35f;
+            liquidCapacity = 35f;
             itemDuration = 100f;
             ambientSound = Sounds.smelter;
             ambientSoundVolume = 0.06f;
 
-            consumeGas(SnGas.hyneris, 5f / 60f);
+            consumeLiquid(SnGas.hyneris, 5f / 60f);
             consumeItem(SnItems.azaliaBud, 2);
         }};
 
-        chemicalReactor = new GasConsumeGenerator("chemical-reactor"){{
+        chemicalReactor = new ConsumeGenerator("chemical-reactor"){{
             requirements(Category.power, with(SnItems.fors, 200, SnItems.erius, 190, SnItems.naturite, 140, SnItems.anzar, 110));
             size = 3;
             powerProduction = 13f;
 
-            hasGasses = true;
+            hasLiquids = true;
             hasPower = true;
             hasLiquids = true;
             itemCapacity = 20;
-            gasCapacity = 35f;
+            liquidCapacity = 35f;
             ambientSound = Sounds.smelter;
             ambientSoundVolume = 0.06f;
 
-            consumeGas(SnGas.gyner, 6f / 60f);
-            consumeLiquid(SnLiquids.sayang, 3f / 60f);
+            consumeLiquids(LiquidStack.with(
+            SnGas.gyner, 6f / 60f,
+            SnLiquids.sayang, 3f / 60f
+            ));
         }};
     }
 }
