@@ -1,21 +1,15 @@
 package sunset.content;
 
-import mindustry.content.Items;
-import mindustry.entities.bullet.ArtilleryBulletType;
-import mindustry.entities.bullet.BasicBulletType;
-import mindustry.entities.bullet.BulletType;
-import mindustry.entities.bullet.LaserBulletType;
-import mindustry.gen.Sounds;
-import mindustry.type.Category;
-import mindustry.type.ItemStack;
-import mindustry.world.meta.BuildVisibility;
+import arc.util.*;
+import mindustry.content.*;
+import mindustry.entities.bullet.*;
+import mindustry.gen.*;
+import mindustry.type.*;
+import mindustry.world.meta.*;
 import sunset.content.blocks.*;
-import sunset.content.blocks.defense.SnProjectors;
-import sunset.content.blocks.defense.SnTurrets;
-import sunset.content.blocks.defense.SnWalls;
-import sunset.entities.bullet.LightningContinuousLaserBulletType;
-import sunset.world.blocks.defense.turrets.MissileSiloCommander;
-import sunset.world.blocks.defense.turrets.ModItemTurret;
+import sunset.content.blocks.defense.*;
+import sunset.entities.bullet.*;
+import sunset.world.blocks.defense.turrets.*;
 
 import static mindustry.type.ItemStack.with;
 
@@ -52,7 +46,7 @@ public class SnBlocks implements Runnable{
         load();
     }
 
-    private static final class SnTests {
+    private static final class SnTests{
         private static BulletType testBullet0,
         testBullet1,
         testBullet2,
@@ -60,6 +54,8 @@ public class SnBlocks implements Runnable{
         testBullet4;
 
         private static void loadBullets(){
+
+
             testBullet0 = new BasicBulletType(1, 1){{
                 lifetime = 400f;
                 hitEffect = SnFx.unused1;
@@ -131,6 +127,28 @@ public class SnBlocks implements Runnable{
 
         public static void load(){
             loadBullets();
+            new ConcentratorTurret("concent"){{
+                requirements(Category.turret, with(Items.copper, 2));
+                bulletType.speed=10f;
+//                bulletType.=10f;
+                totalSize=10;
+
+                buildTime = 10 * Time.toSeconds;
+                consumeItem(Items.copper, 20);
+                health = 780;
+                size = 2;
+                reload = 24f;
+                range = 370f;
+                recoil = 0.3f;
+                inaccuracy = 1.1f;
+                rotateSpeed = 7f;
+                shootSound = Sounds.pew;
+                targetAir = true;
+                unlocked = true;
+                alwaysUnlocked = true;
+                hideDetails = false;
+                itemCapacity=40;
+            }};
             //region testing
             new ModItemTurret("test-turret"){{
                 requirements(Category.turret, with(Items.copper, 2));
