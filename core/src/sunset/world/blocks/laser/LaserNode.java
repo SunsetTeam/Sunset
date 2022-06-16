@@ -76,7 +76,7 @@ public class LaserNode extends LaserBlock{
             lasers = new Lasers(this);
             super.init(tile, team, shouldAdd, rotation);
             //top
-            final float lasersOffset = size * 1.25f;
+            final float lasersOffset = size * tilesize;
             lasers.allLasers.add(new Laser(){{
                 build = LaserNodeBuild.this;
                 angle = 90f;

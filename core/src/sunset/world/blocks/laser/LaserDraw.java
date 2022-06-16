@@ -3,6 +3,7 @@ package sunset.world.blocks.laser;
 import arc.*;
 import arc.graphics.*;
 import arc.graphics.g2d.*;
+import arc.util.Log;
 import mindustry.gen.*;
 import mindustry.world.*;
 import mindustry.world.draw.*;
@@ -12,7 +13,7 @@ import sunset.world.blocks.laser.LaserBlock.*;
 
 /** Class used for drawing laser blocks. */
 public class LaserDraw extends DrawBlock implements ImageDrawBlockGenerator{
-    public TextureRegion base;
+    public TextureRegion bottom;
     public TextureRegion lens;
     public TextureRegion plugDark;
     public TextureRegion plugLight;
@@ -39,7 +40,7 @@ public class LaserDraw extends DrawBlock implements ImageDrawBlockGenerator{
     }
 
     public LaserBlock expectLaserBlock(Block block){
-        if(!(block instanceof LaserBlock laserBlock)) throw new ClassCastException("This drawer requires the block to be a GenericCrafter. Use a different drawer.");
+        if(!(block instanceof LaserBlock laserBlock)) throw new ClassCastException("This drawer requires the block to be a LaserBlock. Use a different drawer.");
         return laserBlock;
     }
 
@@ -47,11 +48,11 @@ public class LaserDraw extends DrawBlock implements ImageDrawBlockGenerator{
     public void load(Block block){
         //override
         expectLaserBlock(block);
-        allEdge = Core.atlas.find("" + block.name + "-all-edge");
-        base = Core.atlas.find("" + block.name + "-base");
-        lens = Core.atlas.find("" + block.name + "-lens");
-        plugDark = Core.atlas.find("" + block.name + "-light-edge");
-        plugLight = Core.atlas.find("" + block.name + "-dark-edge");
+        allEdge = Core.atlas.find(block.name + "-all-edge");
+        bottom = Core.atlas.find(block.name + "-bottom");
+        lens = Core.atlas.find(block.name + "-lens");
+        plugDark = Core.atlas.find(block.name + "-dark-edge");
+        plugLight = Core.atlas.find(block.name + "-light-edge");
     }
 
     @Override
@@ -93,5 +94,4 @@ public class LaserDraw extends DrawBlock implements ImageDrawBlockGenerator{
         build.rightInput || build.rightOutput,
         build.downInput || build.downOutput);
     }
-
 }

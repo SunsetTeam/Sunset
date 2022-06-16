@@ -95,7 +95,7 @@ public class LaserUtils{
         if(collideGround){
             World.raycastEachWorld(x, y, x + tr.x, y + tr.y, (cx, cy) -> {
                 Building tile = world.build(cx, cy);
-                if(tile == null || !predicate.get(tile)){
+                if(tile == null || !predicate.get(tile) || tile == build){
                     Building[] sideCollided = new Building[4];
                     int i = 0;
                     for(Point2 p : Geometry.d4){

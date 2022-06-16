@@ -127,6 +127,7 @@ public class SnBlocks implements Runnable{
 
         public static void load(){
             loadBullets();
+            /*
             new ConcentratorTurret("concent"){{
                 requirements(Category.turret, with(Items.copper, 2));
                 bulletType.speed=10f;
@@ -149,6 +150,8 @@ public class SnBlocks implements Runnable{
                 hideDetails = false;
                 itemCapacity=40;
             }};
+
+             */
             //region testing
             new ModItemTurret("test-turret"){{
                 requirements(Category.turret, with(Items.copper, 2));
