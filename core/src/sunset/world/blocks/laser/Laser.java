@@ -31,7 +31,7 @@ public class Laser{
      * todo use size to fix bug with casting blocks */
     public float size = 8f;
     /** laser offset. Used for drawing. */
-    public float offset = 16;
+    public float offset = 16f;
     /** laser charge. Taken from build.laser.out. Used to transfer charge from one laser build to another.
      * If laser casts with non-laser blocks or units, they take damage in direct ratio with charge. */
     public float charge = 0f;
@@ -65,10 +65,10 @@ public class Laser{
                 Tmp.v3.trns(angle, offset + (Math.max(0, b.block().size - 2)) / 2f * Vars.tilesize);
             }
             else if(target instanceof Unit u){
-                Tmp.v3.trns(angle, offset + u.hitSize / 2f);
+                Tmp.v3.trns(angle, offset + Math.max(0, u.hitSize / 2f - 16f));
             }
             else if(onStaticWall){
-                Tmp.v3.trns(angle, offset);
+                Tmp.v3.trns(angle, Vars.tilesize);
             }
 
             Draw.alpha(charge);
@@ -76,7 +76,7 @@ public class Laser{
             Tmp.v4.set(start.x + Tmp.v1.x, start.y + Tmp.v1.y);
 
             //if we are too close to laser, draw from start to start
-            if(Tmp.v2.dst(Tmp.v4) <= offset){
+            if(Tmp.v2.dst(Tmp.v4) <= offset * 0.25f){
                 Drawf.laser(Core.atlas.find("minelaser"), Core.atlas.find("sunset-laser-beam-end"), Core.atlas.find("sunset-laser-beam-end"), start.x + Tmp.v1.x, start.y + Tmp.v1.y, start.x + Tmp.v1.x, start.y + Tmp.v1.y);
             }else{
                 Drawf.laser(Core.atlas.find("minelaser"), Core.atlas.find("sunset-laser-beam-end"), Core.atlas.find("sunset-laser-beam-end"), start.x + Tmp.v1.x, start.y + Tmp.v1.y, end.x - Tmp.v3.x, end.y - Tmp.v3.y);
