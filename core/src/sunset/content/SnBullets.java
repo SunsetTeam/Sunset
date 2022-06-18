@@ -50,10 +50,7 @@ public class SnBullets {
         plasmaArt, rocketArt, bigRocketArt, heavyRocketArt,//unused
         shotgunArt,
         //flak
-        sporePodPoisonBullet, bigSporePodPoison, heavyPlastaniumPoison,
-        naturitePoisonBullet, bigNaturitePoison, heavyNaturitePoison,
-        bigNobiumPoison, heavyNobiumPoison,
-        bigPlastaniumPoison,
+        naturiteCircleBullet, anzarCircleBullet,
         smallPlastaniumBullet, mediumPlastaniumBullet, smallPyratiteBullet, smallSurgeAlloyBullet, smallForsSpine, smallNobiumSpine,
         thoriumFlak, forsFlak,
         //shrapnel
@@ -810,193 +807,7 @@ public class SnBullets {
         }};
         //endregion  artillery
         //region flak
-        sporePodPoisonBullet = new FlakBulletType(4f, 5) {{
-            sprite = fullName("circle-bullet");
-            knockback = 0.2f;
-            lifetime = 100f;
-            width = 8f;
-            height = 8f;
-            hitEffect = Fx.flakExplosion;
-            splashDamage = 9f;
-            splashDamageRadius = 25f;
-            shrinkX = 0.3f;
-            shrinkY = 0.3f;
-            drag = 0.04f;
-            frontColor = SnPal.poisonBullet;
-            backColor = SnPal.poisonBulletBack;
-            collidesAir = true;
-            collidesGround = true;
-
-            weaveScale = 8f;
-            weaveMag = 1f;
-        }};
-        bigSporePodPoison = new FlakBulletType(3f, 16) {{
-            sprite = fullName("circle-bullet");
-            knockback = 0.5f;
-            lifetime = 200f;
-            width = 10f;
-            height = 10f;
-            hitEffect = Fx.flakExplosion;
-            splashDamage = 19f;
-            splashDamageRadius = 37f;
-            shrinkX = 0f;
-            shrinkY = 0f;
-            drag = 0.015f;
-            frontColor = SnPal.poisonBullet;
-            backColor = SnPal.poisonBulletBack;
-            collidesAir = true;
-            collidesGround = true;
-
-            fragBullet = new FlakBulletType(2f, 8) {{
-                sprite = fullName("circle-bullet");
-                lifetime = 250f;
-                splashDamage = 10f;
-                splashDamageRadius = 19f;
-                height = 6f;
-                width = 6f;
-                hitEffect = Fx.flakExplosion;
-                frontColor = SnPal.poisonBullet;
-                backColor = SnPal.poisonBulletBack;
-
-                shrinkX = 0f;
-                shrinkY = 0f;
-                drag = 0.03f;
-
-                trailColor = SnPal.poisonBullet;
-                trailWidth = 2f;
-                trailLength = 10;
-
-                weaveScale = 9f;
-                weaveMag = 1f;
-            }};
-            fragRandomSpread = 90;
-            fragBullets = 4;
-
-            trailColor = SnPal.poisonBullet;
-            trailWidth = 4f;
-            trailLength = 31;
-
-            weaveScale = 9f;
-            weaveMag = 1f;
-        }};
-        heavyPlastaniumPoison = new FlakBulletType(3f, 15) {{
-            sprite = fullName("circle-bullet");
-            knockback = 0.5f;
-            lifetime = 250f;
-            width = 13;
-            height = 13f;
-            hitEffect = Fx.flakExplosion;
-            splashDamage = 16f;
-            splashDamageRadius = 35f;
-            shrinkX = 0.3f;
-            shrinkY = 0.3f;
-            drag = 0.02f;
-            frontColor = SnPal.poisonBullet;
-            backColor = SnPal.poisonBulletBack;
-            collidesAir = true;
-            collidesGround = true;
-
-            fragBullet = new FlakBulletType(2f, 8) {{
-                sprite = fullName("circle-bullet");
-                lifetime = 250f;
-                splashDamage = 10f;
-                splashDamageRadius = 19f;
-                height = 6f;
-                width = 6f;
-                hitEffect = Fx.flakExplosion;
-                frontColor = SnPal.poisonBullet;
-                backColor = SnPal.poisonBulletBack;
-
-                shrinkX = 0f;
-                shrinkY = 0f;
-                drag = 0.03f;
-
-                trailColor = SnPal.poisonBullet;
-                trailWidth = 2f;
-                trailLength = 10;
-
-                weaveScale = 9f;
-                weaveMag = 1f;
-            }};
-            fragBullets = 3;
-
-            weaveScale = 9f;
-            weaveMag = 1f;
-        }};
-
-        naturitePoisonBullet = new FlakBulletType(4f, 8) {{
-            sprite = fullName("circle-bullet");
-            knockback = 0.3f;
-            lifetime = 100f;
-            width = 8f;
-            height = 8f;
-            hitEffect = Fx.flakExplosion;
-            splashDamage = 9f;
-            splashDamageRadius = 24f;
-            shrinkX = 0.3f;
-            shrinkY = 0.3f;
-            drag = 0.04f;
-            frontColor = SnPal.poisonBullet;
-            backColor = SnPal.poisonBulletBack;
-            collidesAir = true;
-            collidesGround = true;
-
-            weaveScale = 8f;
-            weaveMag = 1f;
-        }};
-        bigNaturitePoison = new FlakBulletType(3f, 21) {{
-            sprite = fullName("circle-bullet");
-            knockback = 0.6f;
-            lifetime = 200f;
-            width = 10f;
-            height = 10f;
-            hitEffect = Fx.flakExplosion;
-            splashDamage = 24f;
-            splashDamageRadius = 30f;
-            shrinkX = 0f;
-            shrinkY = 0f;
-            drag = 0.015f;
-            frontColor = SnPal.poisonBullet;
-            backColor = SnPal.poisonBulletBack;
-            collidesAir = true;
-            collidesGround = true;
-
-            fragBullet = new FlakBulletType(2f, 13) {{
-                sprite = fullName("circle-bullet");
-                lifetime = 250f;
-                splashDamage = 15f;
-                splashDamageRadius = 14f;
-                height = 6f;
-                width = 6f;
-                hitEffect = Fx.flakExplosion;
-                frontColor = SnPal.poisonBullet;
-                backColor = SnPal.poisonBulletBack;
-
-                shrinkX = 0f;
-                shrinkY = 0f;
-                drag = 0.03f;
-
-                trailColor = SnPal.poisonBullet;
-                trailWidth = 2f;
-                trailLength = 10;
-
-                weaveScale = 9f;
-                weaveMag = 1f;
-
-                collidesAir = true;
-                collidesGround = true;
-            }};
-            fragRandomSpread = 90f;
-            fragBullets = 5;
-
-            trailColor = SnPal.poisonBullet;
-            trailWidth = 4f;
-            trailLength = 31;
-
-            weaveScale = 9f;
-            weaveMag = 1f;
-        }};
-        heavyNaturitePoison = new FlakBulletType(3f, 13) {{
+        naturiteCircleBullet = new FlakBulletType(3f, 13) {{
             sprite = fullName("circle-bullet");
             knockback = 0.6f;
             lifetime = 250f;
@@ -1034,165 +845,33 @@ public class SnBullets {
                 collidesAir = true;
                 collidesGround = true;
             }};
-            fragBullets = 2;
-
-            weaveScale = 9f;
-            weaveMag = 1f;
-        }};
-
-        bigNobiumPoison = new FlakBulletType(3f, 19) {{
-            sprite = fullName("circle-bullet");
-            knockback = 0.4f;
-            lifetime = 200f;
-            width = 10f;
-            height = 10f;
-            hitEffect = Fx.flakExplosion;
-            splashDamage = 22f;
-            splashDamageRadius = 27f;
-            shrinkX = 0f;
-            shrinkY = 0f;
-            drag = 0.015f;
-            frontColor = SnPal.poisonBullet;
-            backColor = SnPal.poisonBulletBack;
-            collidesAir = true;
-            collidesGround = true;
-
-            fragBullet = new FlakBulletType(2f, 11) {{
-                sprite = fullName("circle-bullet");
-                lifetime = 150f;
-                splashDamage = 14f;
-                splashDamageRadius = 16f;
-                height = 4f;
-                width = 4f;
-                hitEffect = Fx.flakExplosion;
-                frontColor = SnPal.poisonBullet;
-                backColor = SnPal.poisonBulletBack;
-
-                shrinkX = 0f;
-                shrinkY = 0f;
-                drag = 0.03f;
-
-                trailColor = SnPal.poisonBullet;
-                trailWidth = 2f;
-                trailLength = 10;
-
-                weaveScale = 9f;
-                weaveMag = 1f;
-
-                collidesAir = true;
-                collidesGround = true;
-            }};
-            fragRandomSpread = 90f;
             fragBullets = 4;
 
-            trailColor = SnPal.poisonBullet;
-            trailWidth = 4f;
-            trailLength = 31;
-
             weaveScale = 9f;
             weaveMag = 1f;
-
-            homingRange = 15f;
-            homingPower = 0.1f;
         }};
-        heavyNobiumPoison = new FlakBulletType(3f, 14) {{
+
+        anzarCircleBullet = new FlakBulletType(3f, 30) {{
             sprite = fullName("circle-bullet");
-            knockback = 0.4f;
+            knockback = 0.6f;
             lifetime = 250f;
             width = 13;
             height = 13f;
             hitEffect = Fx.flakExplosion;
-            splashDamage = 18f;
-            splashDamageRadius = 27f;
+            splashDamage = 21f;
+            splashDamageRadius = 25f;
             shrinkX = 0.3f;
             shrinkY = 0.3f;
+            trailLength = 4;
+            trailWidth = 2f;
             drag = 0.02f;
             frontColor = SnPal.poisonBullet;
             backColor = SnPal.poisonBulletBack;
             collidesAir = true;
             collidesGround = true;
 
-            fragBullet = new FlakBulletType(2f, 6) {{
-                sprite = fullName("circle-bullet");
-                lifetime = 150f;
-                splashDamage = 10f;
-                splashDamageRadius = 11f;
-                height = 6f;
-                width = 6f;
-                hitEffect = Fx.flakExplosion;
-                frontColor = SnPal.poisonBullet;
-                backColor = SnPal.poisonBulletBack;
-
-                shrinkX = 0.3f;
-                shrinkY = 0.3f;
-                drag = 0.04f;
-
-                weaveScale = 6f;
-                weaveMag = 1f;
-
-                collidesAir = true;
-                collidesGround = true;
-            }};
-            fragBullets = 4;
-
             weaveScale = 9f;
-            weaveMag = 1f;
-
-            homingRange = 15f;
-            homingPower = 0.1f;
-        }};
-
-        bigPlastaniumPoison = new FlakBulletType(3f, 22) {{
-            sprite = fullName("circle-bullet");
-            knockback = 0.4f;
-            lifetime = 200f;
-            width = 10f;
-            height = 10f;
-            hitEffect = Fx.flakExplosion;
-            splashDamage = 25f;
-            splashDamageRadius = 34f;
-            shrinkX = 0f;
-            shrinkY = 0f;
-            drag = 0.015f;
-            frontColor = SnPal.poisonBullet;
-            backColor = SnPal.poisonBulletBack;
-            collidesAir = true;
-            collidesGround = true;
-
-            fragBullet = new FlakBulletType(2f, 14) {{
-                sprite = fullName("circle-bullet");
-                lifetime = 150f;
-                splashDamage = 17f;
-                splashDamageRadius = 25f;
-                height = 4f;
-                width = 4f;
-                hitEffect = Fx.flakExplosion;
-                frontColor = SnPal.poisonBullet;
-                backColor = SnPal.poisonBulletBack;
-
-                shrinkX = 0f;
-                shrinkY = 0f;
-                drag = 0.3f;
-
-                trailColor = SnPal.poisonBullet;
-                trailWidth = 2f;
-                trailLength = 10;
-
-                weaveScale = 9f;
-                weaveMag = 1f;
-            }};
-            fragRandomSpread = 90f;
-            fragBullets = 6;
-
-            trailColor = SnPal.poisonBullet;
-            trailWidth = 4f;
-            trailLength = 31;
-
-            weaveScale = 9f;
-            weaveMag = 1f;
-
-            homingRange = 15f;
-            homingPower = 0.1f;
+            weaveMag = 3f;
         }};
 
         smallPlastaniumBullet = new BasicBulletType(5f, 45) {{//yes

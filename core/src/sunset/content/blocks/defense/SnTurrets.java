@@ -147,9 +147,8 @@ public class SnTurrets{
         reflection = new ModItemTurret("reflection") {{
             requirements(Category.turret, with(Items.copper, 95, SnItems.fors, 55, SnItems.naturite, 50, SnItems.nobium, 25));
             ammo(
-                    Items.sporePod, SnBullets.heavyPlastaniumPoison,
-                    SnItems.naturite, SnBullets.heavyNaturitePoison,
-                    SnItems.nobium, SnBullets.heavyNobiumPoison
+                    SnItems.naturite, SnBullets.naturiteCircleBullet,
+                    SnItems.anzar, SnBullets.anzarCircleBullet
             );
             health = 780;
             size = 2;

@@ -1350,12 +1350,12 @@ public class SnUnitTypes{
             drag = 0.04f;
             accel = 0.06f;
             armor = 2f;
-            buildSpeed = 0.6f;
+            buildSpeed = 0.43f;
 
             lowAltitude = false;
             flying = true;
 
-            mineSpeed = 5.7f;
+            mineSpeed = 5.3f;
             mineTier = 2;
             mineWalls = true;
             mineFloor = true;
@@ -1371,11 +1371,13 @@ public class SnUnitTypes{
                 x = 2.4f;
                 y = -0.7f;
 
-                bullet = new AimBulletType(3f, 15){{
+                bullet = new AimBulletType(3f, 14){{
                     sprite = "missile";
                     width = 6f;
                     height = 10f;
                     lifetime = 140f;
+                    homingPower = 0.2f;
+                    homingRange = 0;
                     frontColor = Pal.bulletYellow;
                     backColor = Pal.bulletYellowBack;
                     trailColor = Pal.bulletYellow;
