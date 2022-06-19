@@ -1,6 +1,7 @@
 package sunset.content.blocks;
 
 import arc.graphics.*;
+import arc.util.Time;
 import mindustry.content.*;
 import mindustry.gen.*;
 import mindustry.type.*;
@@ -20,7 +21,7 @@ import static mindustry.type.ItemStack.with;
 public class SnCrafting{
     public static Block
     //standard
-    anzarCaster, crystallizer, nobiumCaster, nobiumMagnetizer, collider, enojieSynthesizer, zeriniumZavod,
+    anzarCaster, crystallizer, nobiumCaster, nobiumMagnetizer, collider, enojieSynthesizer, zeriniumZavod, bioSynthesizer,
     //missile
     missilecrafter, missilePlant;
 
@@ -123,16 +124,22 @@ public class SnCrafting{
             consumeLiquids(new LiquidStack(SnGas.gyner, 6f / 60f), new LiquidStack(SnGas.arhelinium, 4f / 60f));
             consumePower(4.6f);
         }};
-/*
-        bioSyntheizer = new MultiCrafter("bio-syntheizer"){{
-
-            recipes(Recipe.with().
-            produceTime(2f * Time.toSeconds)
-            .outputItem(SnItems.azalia_bud, 1)
-            );
+        bioSynthesizer = new MultiCrafter("bio-synthesizer"){{
+            size = 3;
+            Recipe.with().produceTime(1.2f * Time.toSeconds)
+                    .output(new ItemStack(SnItems.yantai, 1), null)
+                    .consume(ItemStack.with(SnItems.nedirium, 2), LiquidStack.with(SnLiquids.sayang, 12/60));
+            Recipe.with().produceTime(1.3f * Time.toSeconds)
+                    .output(null, new LiquidStack(SnLiquids.nabunium, 12))
+                    .consume(ItemStack.with(SnItems.enojie, 1), LiquidStack.with(SnLiquids.sayang, 12/60, SnLiquids.messira, 12/60, SnGas.arhelinium, 12/60));
+            Recipe.with().produceTime(1.2f * Time.toSeconds)
+                    .output(new ItemStack(SnItems.enojie, 4), null)
+                    .consume(null, LiquidStack.with(SnLiquids.burheyna, 12/60, SnGas.hyneris, 12/60));
+            Recipe.with().produceTime(1.2f * Time.toSeconds)
+                    .output(new ItemStack(SnItems.naturite, 2), null)
+                    .consume(ItemStack.with(SnItems.fors, 1), LiquidStack.with(SnLiquids.burheyna, 32/60));
         }};
 
- */
         enojieSynthesizer = new GenericCrafter("enojie-synthesizer"){{
             requirements(Category.crafting, with(SnItems.erius, 200, SnItems.nobium, 150, SnItems.fors, 145, SnItems.anzar, 130));
 
