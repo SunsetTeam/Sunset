@@ -779,19 +779,15 @@ public class SnFx {
         Angles.randLenVectors(e.id, 4, e.finpow() * 20, e.rotation, 360, floatc21);
     }),
     alsLaserHit = new Effect(12, e -> {
-        color(Pal.meltdownHit);
-        stroke(e.fout() * 2f);
-        randLenVectors(e.id, 3, e.finpow() * 9f, e.rotation - 180f, 45f, ((x, y) -> {
-            float angle = Mathf.angle(x, y);
-            lineAngle(e.x + x, e.y + y, angle, e.fout() * 4f - 1);
-        }));
-        /*
-        randLenVectors(e.id, 2, e.finpow() * 18f, (x, y) -> {
-            float angle = Mathf.angle(x, y);
-            lineAngle(e.x + x, e.y + y, angle, e.fout() * 4f - 1);
-        });
-
-         */
+        if(e.data instanceof Float charge){
+            color(Pal.meltdownHit);
+            stroke(e.fout() * 2f);
+            alpha(charge);
+            randLenVectors(e.id, 3, e.finpow() * 9f, e.rotation - 180f, 45f, ((x, y) -> {
+                float angle = Mathf.angle(x, y);
+                lineAngle(e.x + x, e.y + y, angle, e.fout() * 4f - 1);
+            }));
+        }
     }),
     nul=null;
     //endregion unused

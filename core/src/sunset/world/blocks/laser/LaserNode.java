@@ -86,8 +86,7 @@ public class LaserNode extends LaserBlock{
                 build = LaserNodeBuild.this;
                 length = Math.max(Vars.world.width() * tilesize, Vars.world.height() * tilesize);
                 offset = lasersOffset;
-                Tmp.v1.trns(angle, offset); //offset for start
-                start.set(build.tile.x * tilesize + build.block().offset + Tmp.v1.x, build.tile.y * tilesize + build.block().offset + Tmp.v1.y);
+                start.set(build.tile.x * tilesize + build.block().offset, build.tile.y * tilesize + build.block().offset);
                 hitEffect = nodeHitEffect;
             }});
             //left
@@ -96,8 +95,7 @@ public class LaserNode extends LaserBlock{
                 build = LaserNodeBuild.this;
                 length = Math.max(Vars.world.width() * tilesize, Vars.world.height() * tilesize);
                 offset = lasersOffset;
-                Tmp.v1.trns(angle, offset); //offset for start
-                start.set(build.tile.x * tilesize + build.block().offset + Tmp.v1.x, build.tile.y * tilesize + build.block().offset + Tmp.v1.y);
+                start.set(build.tile.x * tilesize + build.block().offset, build.tile.y * tilesize + build.block().offset);
                 hitEffect = nodeHitEffect;
             }});
             //right
@@ -106,8 +104,7 @@ public class LaserNode extends LaserBlock{
                 build = LaserNodeBuild.this;
                 length = Math.max(Vars.world.width() * tilesize, Vars.world.height() * tilesize);
                 offset = lasersOffset;
-                Tmp.v1.trns(angle, offset); //offset for start
-                start.set(build.tile.x * tilesize + build.block().offset + Tmp.v1.x, build.tile.y * tilesize + build.block().offset + Tmp.v1.y);
+                start.set(build.tile.x * tilesize + build.block().offset, build.tile.y * tilesize + build.block().offset);
                 hitEffect = nodeHitEffect;
             }});
             //down
@@ -116,8 +113,7 @@ public class LaserNode extends LaserBlock{
                 build = LaserNodeBuild.this;
                 length = Math.max(Vars.world.width() * tilesize, Vars.world.height() * tilesize);
                 offset = lasersOffset;
-                Tmp.v1.trns(angle, offset); //offset for start
-                start.set(build.tile.x * tilesize + build.block().offset + Tmp.v1.x, build.tile.y * tilesize + build.block().offset + Tmp.v1.y);
+                start.set(build.tile.x * tilesize + build.block().offset, build.tile.y * tilesize + build.block().offset);
                 hitEffect = nodeHitEffect;
             }});
             return this;
