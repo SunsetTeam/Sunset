@@ -102,11 +102,11 @@ public class LaserUtils{
             return null;
         }
         Tile best = tiles[0];
-        float bestDst2 = Mathf.dst2(tiles[0].getX(), tiles[0].getY(), x, y), dst2;
+        float bestDst2 = Mathf.dst2(tiles[0].worldx(), tiles[0].worldy(), x, y), dst2;
         for(int i = 1; i < tiles.length; i++){
             if(tiles[i] == null)
                 break;
-            dst2 = Mathf.dst2(tiles[i].getX(), tiles[i].getY(), x, y);
+            dst2 = Mathf.dst2(tiles[i].worldx(), tiles[i].worldy(), x, y);
             if(dst2 < bestDst2){
                 best = tiles[i];
                 bestDst2 = dst2;
