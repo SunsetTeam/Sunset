@@ -1,27 +1,18 @@
 package sunset.entities.comp;
 
-import arc.math.geom.*;
-import arc.struct.*;
-import arc.util.io.*;
-import mindustry.annotations.*;
 import mindustry.annotations.Annotations.*;
-import mindustry.entities.*;
-import mindustry.entities.bullet.*;
 import mindustry.game.*;
 import mindustry.gen.*;
 import mindustry.graphics.*;
-import mindustry.world.*;
 import mma.annotations.ModAnnotations.*;
 import sunset.gen.*;
 import sunset.type.*;
 import sunset.world.blocks.defense.turrets.MagneticTurret.*;
 
-import static mindustry.Vars.*;
-
-/** {@link ConcentratorBullet}*/
+/** {@link BlockBullet}*/
 @Component()
-@EntityDef(value = {ConcentratorBulletc.class,Bulletc.class})
-abstract class ConcentratorBulletComp implements Bulletc{
+@EntityDef(value = {BlockBulletc.class,Bulletc.class})
+abstract class BlockBulletComp implements Bulletc{
     public Team bornTeam;
     @Import
     Team team;

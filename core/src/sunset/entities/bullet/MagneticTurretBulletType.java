@@ -6,7 +6,6 @@ import mindustry.entities.*;
 import mindustry.entities.bullet.*;
 import mindustry.game.*;
 import mindustry.gen.*;
-import mindustry.graphics.*;
 import sunset.gen.*;
 
 import static mindustry.Vars.*;
@@ -39,7 +38,7 @@ public class MagneticTurretBulletType extends BasicBulletType{
 
     @Override
     public void draw(Bullet b){
-        /*ConcentratorBullet bullet = b.as();
+        /*BlockBullet bullet = b.as();
         if(bullet.attackMode){
             backColor.set(Pal.redderDust);
             frontColor.set(Pal.redDust);
@@ -60,12 +59,12 @@ public class MagneticTurretBulletType extends BasicBulletType{
     @Override
     public void removed(Bullet b){
         super.removed(b);
-        ConcentratorBullet bullet = b.as();
+        BlockBullet bullet = b.as();
         bullet.buildOwner().removeBullet(bullet);
     }
 
     @Override
-    public final ConcentratorBullet create(Entityc owner, Team team, float x, float y, float angle, float damage, float velocityScl, float lifetimeScl, Object data, Mover mover, float aimX, float aimY){
+    public final BlockBullet create(Entityc owner, Team team, float x, float y, float angle, float damage, float velocityScl, float lifetimeScl, Object data, Mover mover, float aimX, float aimY){
         if(spawnUnit != null){
             //don't spawn units clientside!
             if(!net.client()){
@@ -85,7 +84,7 @@ public class MagneticTurretBulletType extends BasicBulletType{
             return null;
         }
 
-        ConcentratorBullet bullet = ConcentratorBullet.create();
+        BlockBullet bullet = BlockBullet.create();
         bullet.type = this;
         bullet.owner = owner;
 //        bullet.buildingOwner = owner;
@@ -122,62 +121,62 @@ public class MagneticTurretBulletType extends BasicBulletType{
 
     @Override
     public final @Nullable
-    ConcentratorBullet create(Teamc owner, float x, float y, float angle){
+    BlockBullet create(Teamc owner, float x, float y, float angle){
         return create(owner, owner.team(), x, y, angle);
     }
 
     @Override
     public final @Nullable
-    ConcentratorBullet create(Entityc owner, Team team, float x, float y, float angle){
+    BlockBullet create(Entityc owner, Team team, float x, float y, float angle){
         return create(owner, team, x, y, angle, 1f);
     }
 
     @Override
     public final @Nullable
-    ConcentratorBullet create(Entityc owner, Team team, float x, float y, float angle, float velocityScl){
+    BlockBullet create(Entityc owner, Team team, float x, float y, float angle, float velocityScl){
         return create(owner, team, x, y, angle, -1, velocityScl, 1f, null);
     }
 
     @Override
     public final @Nullable
-    ConcentratorBullet create(Entityc owner, Team team, float x, float y, float angle, float velocityScl, float lifetimeScl){
+    BlockBullet create(Entityc owner, Team team, float x, float y, float angle, float velocityScl, float lifetimeScl){
         return create(owner, team, x, y, angle, -1, velocityScl, lifetimeScl, null);
     }
 
 
     @Override
     public final @Nullable
-    ConcentratorBullet create(Entityc owner, Team team, float x, float y, float angle, float velocityScl, float lifetimeScl, Mover mover){
+    BlockBullet create(Entityc owner, Team team, float x, float y, float angle, float velocityScl, float lifetimeScl, Mover mover){
         return create(owner, team, x, y, angle, -1, velocityScl, lifetimeScl, null, mover);
     }
 
     @Override
     public final @Nullable
-    ConcentratorBullet create(Bullet parent, float x, float y, float angle){
+    BlockBullet create(Bullet parent, float x, float y, float angle){
         return create(parent.owner, parent.team, x, y, angle);
     }
 
     @Override
     public final @Nullable
-    ConcentratorBullet create(Bullet parent, float x, float y, float angle, float velocityScl, float lifeScale){
+    BlockBullet create(Bullet parent, float x, float y, float angle, float velocityScl, float lifeScale){
         return create(parent.owner, parent.team, x, y, angle, velocityScl, lifeScale);
     }
 
     @Override
     public final @Nullable
-    ConcentratorBullet create(Bullet parent, float x, float y, float angle, float velocityScl){
+    BlockBullet create(Bullet parent, float x, float y, float angle, float velocityScl){
         return create(parent.owner(), parent.team, x, y, angle, velocityScl);
     }
 
     @Override
     public final @Nullable
-    ConcentratorBullet create(@Nullable Entityc owner, Team team, float x, float y, float angle, float damage, float velocityScl, float lifetimeScl, Object data){
+    BlockBullet create(@Nullable Entityc owner, Team team, float x, float y, float angle, float damage, float velocityScl, float lifetimeScl, Object data){
         return create(owner, team, x, y, angle, damage, velocityScl, lifetimeScl, data, null);
     }
 
     @Override
     public final @Nullable
-    ConcentratorBullet create(@Nullable Entityc owner, Team team, float x, float y, float angle, float damage, float velocityScl, float lifetimeScl, Object data, @Nullable Mover mover){
+    BlockBullet create(@Nullable Entityc owner, Team team, float x, float y, float angle, float damage, float velocityScl, float lifetimeScl, Object data, @Nullable Mover mover){
         return create(owner, team, x, y, angle, damage, velocityScl, lifetimeScl, data, mover, -1f, -1f);
     }
 

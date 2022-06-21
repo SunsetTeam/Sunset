@@ -63,7 +63,7 @@ public class MagneticTurret extends Turret{
     private class BulletEntity{
         //        public final Trail trail = new Trail(bulletType.trailLength);
         public final MagneticTurretBulletType type;
-        public final ConcentratorBullet bullet;
+        public final BlockBullet bullet;
         public final Mover mover;
         //        public boolean attack = false;
         //        public int rounds;
@@ -77,7 +77,7 @@ public class MagneticTurret extends Turret{
             bullet.bornTeam = team;
         }
 
-        public BulletEntity(MagneticTurretBulletType type, ConcentratorBullet bullet, Mover mover){
+        public BulletEntity(MagneticTurretBulletType type, BlockBullet bullet, Mover mover){
             this.type = type;
             this.bullet = bullet;
             this.mover = mover;
@@ -135,7 +135,7 @@ public class MagneticTurret extends Turret{
         private final Seq<BulletEntity> bullets = new Seq<>(totalSize);
         private final Mover bulletMover = b__u__l__l__e__t -> {
             BulletEntity entity = bullets.find(it -> it.bullet == b__u__l__l__e__t);
-            ConcentratorBullet bullet = entity.bullet;
+            BlockBullet bullet = entity.bullet;
 
             /*if(entity.attack){
              *//*do some thing*//*
@@ -370,11 +370,11 @@ public class MagneticTurret extends Turret{
             super.read(read, revision);
         }
 
-        public void registerBullet(ConcentratorBullet bullet){
+        public void registerBullet(BlockBullet bullet){
             bullets.add(new BulletEntity(bulletType, bullet, bulletMover));
         }
 
-        public void removeBullet(ConcentratorBullet bullet){
+        public void removeBullet(BlockBullet bullet){
             if(bullet == null) return;
             bullets.remove(it -> it.bullet == bullet);
         }
