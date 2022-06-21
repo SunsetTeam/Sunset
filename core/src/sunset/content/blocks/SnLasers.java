@@ -51,11 +51,18 @@ public class SnLasers {
             itemCapacity = 20;
 
             craftEffect = Fx.smeltsmoke;
+
             drawer = new DrawMulti(new DrawRegion("-bottom"),new DrawFlame()/*new LaserKilnDrawer(){{
                 startColor = Pal.darkerGray;
                 midColor = Pal.darkPyraFlame;
                 endColor = Pal.lightPyraFlame;
             }}*/,new DrawDefault());
+            TODO
+            drawer = new DrawMulti(new DrawRegion("-bottom"), new LaserKilnDrawer(){{
+                startColor = Pal.darkerGray;
+                midColor = Pal.darkPyraFlame;
+                endColor = Pal.lightPyraFlame;
+            }}, new DrawDefault());
         }};
         /*
         laserWall = new LaserWall("laser-wall"){{

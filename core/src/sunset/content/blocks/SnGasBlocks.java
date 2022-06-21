@@ -15,7 +15,7 @@ import static mindustry.type.ItemStack.with;
 public class SnGasBlocks{
     public static Block
     //sandbox
-    gasSource, gasVoid,
+    /*gasSource,*/ gasVoid,
 
     //gas-transportation
     gasPipe, armoredGasPipe, nobiumGasPipe, gasJunction, /*gasRouter,*/
@@ -31,11 +31,13 @@ public class SnGasBlocks{
     gasGenerator;
 
     public static void load(){
+        /*
         //sandbox
         gasSource = new GasSource("gas-source"){{
             requirements(Category.liquid, BuildVisibility.sandboxOnly, with());
             alwaysUnlocked = true;
         }};
+         */
         gasVoid = new GasVoid("gas-void"){{
             requirements(Category.liquid, BuildVisibility.sandboxOnly, with());
             alwaysUnlocked = true;

@@ -3,6 +3,7 @@ package sunset.content;
 import arc.graphics.Color;
 import mindustry.content.StatusEffects;
 import mindustry.type.Liquid;
+import sunset.type.SayangLiquid;
 
 public class SnLiquids {
     public static Liquid burheyna, sayang, messira, nabunium;
@@ -17,7 +18,7 @@ public class SnLiquids {
                 barColor = Color.valueOf("d14960");
                 effect = StatusEffects.wet;
             }};
-        sayang = new Liquid("sayang", Color.valueOf("fdc25c")) {
+        sayang = new SayangLiquid("sayang", Color.valueOf("fdc25c"), Color.valueOf("CA8C20")) {
             {
                viscosity = 0.7f;
                explosiveness = 0.1f;
