@@ -10,6 +10,7 @@ import mindustry.type.LiquidStack;
 import mindustry.world.Block;
 import mindustry.world.draw.*;
 import mindustry.world.meta.BuildVisibility;
+import sunset.content.SnFx;
 import sunset.world.blocks.laser.*;
 
 public class SnLasers {
@@ -22,6 +23,7 @@ public class SnLasers {
             buildVisibility = BuildVisibility.sandboxOnly;
             inputsLaser = false;
             outputsLaser = true;
+            nodeHitEffect = SnFx.alsLaserHit;
         }};
         laserNode = new LaserNode("laser-node"){{
             requirements(Category.distribution, ItemStack.with(Items.copper, 1));
@@ -30,6 +32,7 @@ public class SnLasers {
             inputsLaser = true;
             outputsLaser = true;
             heats = true;
+            nodeHitEffect = SnFx.alsLaserHit;
         }};
         laserKiln = new LaserCrafter("laser-kiln"){{
             requirements(Category.distribution, ItemStack.with(Items.copper, 1));

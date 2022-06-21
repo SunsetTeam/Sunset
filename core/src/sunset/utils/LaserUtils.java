@@ -23,78 +23,8 @@ public class LaserUtils{
     private static Unit tmpUnit;
     private static Tile tmpTile;
 
-    private static void raycastStaticWallsWorld(float x1, float y1, float x2, float y2) {
-        int x = toTile(x1), dx = Math.abs(toTile(x2) - x), sx = x < toTile(x2) ? 1 : -1;
-        int y = toTile(y1), dy = Math.abs(toTile(y2) - y), sy = y < toTile(y2) ? 1 : -1;
-        int e2, err = dx - dy;
-
-        while (true) {
-            Tile tile = world.tile(x, y);
-            if (tile != null && tile.block() instanceof StaticWall) {
-                tmpTile = tile;
-                break;
-            } else {
-                Tile[] sideCollided = new Tile[4];
-                int i = 0;
-                for (Point2 p : Geometry.d4) {
-                    tile = world.tile(x + p.x, y + p.y);
-                    if (tile != null && tile.block() instanceof StaticWall && Intersector.intersectSegmentRectangle(x1, y1, x1 + tr.x, y1 + tr.y, tile.getHitbox(Tmp.r1))) {
-                        sideCollided[i] = tile;
-                        i++;
-                    }
-                }
-                tile = getClosest(x1, y1, sideCollided);
-                if (tile != null) {
-                    tmpTile = tile;
-                    break;
-                }
-            }
-
-
-            if (x == toTile(x2) && y == toTile(y2)) break;
-
-            e2 = 2 * err;
-            if (e2 > -dy) {
-                err = err - dy;
-                x = x + sx;
-            }
-
-            if (e2 < dx) {
-                err = err + dx;
-                y = y + sy;
-            }
-        }
-    }
-
-    public static Tile linecastStaticWalls(float x, float y, float angle, float length){
-        tmpTile = null;
-
-        tr.trns(angle, length);
-        raycastStaticWallsWorld(x, y, x + tr.x, y + tr.y);
-        /*
-        World.raycastEachWorld(x, y, x + tr.x, y + tr.y, (cx, cy) -> {
-            Tile tile = world.tile(cx, cy);
-            if(tile == null || !(tile.block() instanceof StaticWall)){
-                Tile[] sideCollided = new Tile[4];
-                int i = 0;
-                for(Point2 p : Geometry.d4){
-                    tile = world.tile(cx + p.x, cy + p.y);
-                    if(tile != null && tile.block() instanceof StaticWall && Intersector.intersectSegmentRectangle(x, y, x + tr.x, y + tr.y, tile.getHitbox(Tmp.r1))){
-                        sideCollided[i] = tile;
-                        i++;
-                    }
-                }
-                tile = getClosest(x, y, sideCollided);
-                if(tile == null)
-                    return false;
-            }
-            tmpTile = tile;
-            return true;
-        });
-
-         */
-
-        return tmpTile;
+    private static int toTile(float coord){
+        return Math.round(coord / Vars.tilesize);
     }
 
     public static Tile getClosest(float x, float y, Tile[] tiles){
@@ -133,13 +63,68 @@ public class LaserUtils{
         return best;
     }
 
-    private static int toTile(float coord){
-        return Math.round(coord / Vars.tilesize);
+    private static void raycastStaticWallsWorld(float x1, float y1, float x2, float y2){
+        raycastStaticWalls(x1, y1, toTile(x1), toTile(y1), toTile(x2), toTile(y2));
+    }
+
+    private static void raycastStaticWalls(float startX, float startY, int x1, int y1, int x2, int y2) {
+        int x = x1, dx = Math.abs(x2 - x), sx = x < x2 ? 1 : -1;
+        int y = y1, dy = Math.abs(y2 - y), sy = y < y2 ? 1 : -1;
+        int e2, err = dx - dy;
+
+        while (true) {
+            Tile tile = world.tile(x, y);
+            if (tile != null && tile.block() instanceof StaticWall) {
+                tmpTile = tile;
+                break;
+            } else {
+                Tile[] sideCollided = new Tile[4];
+                int i = 0;
+                for (Point2 p : Geometry.d4) {
+                    tile = world.tile(x + p.x, y + p.y);
+                    if (tile != null && tile.block() instanceof StaticWall && Intersector.intersectSegmentRectangle(startX, startY, startX + tr.x, startY + tr.y, tile.getHitbox(Tmp.r1))) {
+                        sideCollided[i] = tile;
+                        i++;
+                    }
+                }
+                tile = getClosest(x1, y1, sideCollided);
+                if (tile != null) {
+                    tmpTile = tile;
+                    break;
+                }
+            }
+
+
+            if (x == toTile(x2) && y == toTile(y2)) break;
+
+            e2 = 2 * err;
+            if (e2 > -dy) {
+                err = err - dy;
+                x = x + sx;
+            }
+
+            if (e2 < dx) {
+                err = err + dx;
+                y = y + sy;
+            }
+        }
+    }
+
+    public static Tile linecastStaticWalls(float x, float y, float angle, float length){
+        tmpTile = null;
+
+        tr.trns(angle, length);
+        raycastStaticWallsWorld(x, y, x + tr.x, y + tr.y);
+        return tmpTile;
     }
 
     private static void raycastEachWorld(Building build, float x1, float y1, float x2, float y2, Boolf<Healthc> predicate){
-        int x = toTile(x1), dx = Math.abs(toTile(x2) - x), sx = x < toTile(x2) ? 1 : -1;
-        int y = toTile(y1), dy = Math.abs(toTile(y2) - y), sy = y < toTile(y2) ? 1 : -1;
+        raycastEach(build, x1, y1, toTile(x1), toTile(y1), toTile(x2), toTile(y2), predicate);
+    }
+
+    private static void raycastEach(Building build, float startX, float startY, int x1, int y1, int x2, int y2, Boolf<Healthc> predicate){
+        int x = x1, dx = Math.abs(x2 - x), sx = x < x2 ? 1 : -1;
+        int y = y1, dy = Math.abs(y2 - y), sy = y < y2 ? 1 : -1;
         int e2, err = dx - dy;
 
         while(true){
@@ -155,7 +140,7 @@ public class LaserUtils{
                     tile = world.build(x + p.x, y + p.y);
                     if(tile != null && tile != build){
                         tile.hitbox(Tmp.r1);
-                        if(Intersector.intersectSegmentRectangle(x1, y1, x1 + tr.x, y1 + tr.y, Tmp.r1)){
+                        if(Intersector.intersectSegmentRectangle(startX, startY, startX + tr.x, startY + tr.y, Tmp.r1)){
                             sideCollided[i] = tile;
                             i++;
                         }
@@ -168,7 +153,7 @@ public class LaserUtils{
                 }
             }
 
-            if(x == toTile(x2) && y == toTile(y2)) break;
+            if(x == x2 && y == y2) break;
 
             e2 = 2 * err;
             if(e2 > -dy){
@@ -191,31 +176,6 @@ public class LaserUtils{
 
         if(collideGround){
             raycastEachWorld(build, x, y, x + tr.x, y + tr.y, predicate);
-
-            /*
-            World.raycastEachWorld(x, y, x + tr.x, y + tr.y, (cx, cy) -> {
-                Building tile = world.build(cx, cy);
-                if(tile == null || !predicate.get(tile) || tile == build){
-                    Building[] sideCollided = new Building[4];
-                    int i = 0;
-                    for(Point2 p : Geometry.d4){
-                        tile = world.build(cx + p.x, cy + p.y);
-                        if(tile != null && tile != build){
-                            tile.hitbox(Tmp.r1);
-                            if(Intersector.intersectSegmentRectangle(x, y, x + tr.x, y + tr.y, Tmp.r1)){
-                                sideCollided[i] = tile;
-                                i++;
-                            }
-                        }
-                    }
-                    tile = (Building)getClosest(x, y, sideCollided);
-                    if(tile == null)
-                        return false;
-                }
-                tmpBuilding = tile;
-                return true;
-            });
-             */
         }
 
         rect.setPosition(x, y).setSize(tr.x, tr.y);
