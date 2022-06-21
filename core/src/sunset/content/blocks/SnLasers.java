@@ -8,6 +8,7 @@ import mindustry.type.Category;
 import mindustry.type.ItemStack;
 import mindustry.type.LiquidStack;
 import mindustry.world.Block;
+import mindustry.world.draw.*;
 import mindustry.world.meta.BuildVisibility;
 import sunset.world.blocks.laser.*;
 
@@ -50,11 +51,11 @@ public class SnLasers {
             itemCapacity = 20;
 
             craftEffect = Fx.smeltsmoke;
-            drawer = new LaserKilnDrawer(){{
+            drawer = new DrawMulti(new DrawRegion("-bottom"),new DrawFlame()/*new LaserKilnDrawer(){{
                 startColor = Pal.darkerGray;
                 midColor = Pal.darkPyraFlame;
                 endColor = Pal.lightPyraFlame;
-            }};
+            }}*/,new DrawDefault());
         }};
         /*
         laserWall = new LaserWall("laser-wall"){{
