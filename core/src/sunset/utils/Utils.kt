@@ -66,7 +66,13 @@ object Utils {
         }
         throw IllegalArgumentException()
     }
-
+@JvmStatic
+fun forwardAngleDistance(angle1:Float, angle2:Float):Float=
+    if (angle1>angle2){
+        Angles.forwardDistance(angle1,angle2+360)
+    }else{
+        Angles.forwardDistance(angle1,angle2)
+    }
     @JvmStatic
     fun findFireTarget(x: Float, y: Float, team: Team, range: Float, unitFilter: Boolf<Unit?>, buildingFilter: Boolf<Building?>?): Posc? {
         var target: Posc?

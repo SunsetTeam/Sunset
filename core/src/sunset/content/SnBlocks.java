@@ -11,6 +11,7 @@ import sunset.content.blocks.defense.*;
 import sunset.entities.bullet.*;
 import sunset.world.blocks.defense.turrets.*;
 
+import static mindustry.Vars.tilesize;
 import static mindustry.type.ItemStack.with;
 
 public class SnBlocks implements Runnable{
@@ -127,10 +128,14 @@ public class SnBlocks implements Runnable{
 
         public static void load(){
             loadBullets();
-            /*
-            new ConcentratorTurret("concent"){{
+            new MagneticTurret("concent"){{
                 requirements(Category.turret, with(Items.copper, 2));
                 bulletType.speed=10f;
+                bulletType.damage=10f;
+                bulletType.splashDamage = 26f * 1.5f;
+                bulletType.splashDamageRadius = 1f*tilesize;
+                
+                bulletRadius=4*tilesize;
 //                bulletType.=10f;
                 totalSize=10;
 
@@ -139,7 +144,7 @@ public class SnBlocks implements Runnable{
                 health = 780;
                 size = 2;
                 reload = 24f;
-                range = 370f;
+                range = 46.25f*tilesize;
                 recoil = 0.3f;
                 inaccuracy = 1.1f;
                 rotateSpeed = 7f;
@@ -150,8 +155,6 @@ public class SnBlocks implements Runnable{
                 hideDetails = false;
                 itemCapacity=40;
             }};
-
-             */
             //region testing
             new ModItemTurret("test-turret"){{
                 requirements(Category.turret, with(Items.copper, 2));
