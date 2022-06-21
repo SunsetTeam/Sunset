@@ -13,7 +13,7 @@ import static mindustry.Vars.*;
 
 public class MagneticTurretBulletType extends BasicBulletType{
 //    public float pathFollowHomingPower = 0.025f;
-    public float pathFollowHomingPower = 0.125f;
+    public float pathFollowHomingPower = 0.5f;
 //    public float pathFollowHomingPower = 1f;
 
     {
@@ -39,14 +39,14 @@ public class MagneticTurretBulletType extends BasicBulletType{
 
     @Override
     public void draw(Bullet b){
-        ConcentratorBullet bullet = b.as();
+        /*ConcentratorBullet bullet = b.as();
         if(bullet.attackMode){
             backColor.set(Pal.redderDust);
             frontColor.set(Pal.redDust);
         }else{
             backColor.set(Pal.bulletYellowBack);
             frontColor.set(Pal.bulletYellow);
-        }
+        }*/
         super.draw(b);
 
     }

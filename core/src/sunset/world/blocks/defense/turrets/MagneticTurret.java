@@ -18,6 +18,7 @@ import mma.graphics.*;
 import org.jetbrains.annotations.*;
 import sunset.entities.bullet.*;
 import sunset.gen.*;
+import sunset.type.*;
 import sunset.utils.*;
 
 import static mindustry.Vars.tilesize;
@@ -87,7 +88,26 @@ public class MagneticTurret extends Turret{
 
         public void draw(){
 //            bulletType.draw(bullet);
-            if(bullet.attackMode){
+            switch(bullet.bulletState){
+
+                case backHome -> {
+                    Draw.color(Pal.accent);
+                }
+                case reloading -> {
+                    Draw.color(Color.grays(Angles.angleDist(bullet.startRotationAngle, bullet.building.angleTo(bullet)) / 180f));
+                }
+                case ready -> {
+                    Draw.color(Color.cyan);
+                }
+                case waitingForExitPoint -> {
+                    Draw.color(Pal.spore);
+                }
+                case attack -> {
+                    Draw.color(Pal.health);
+                }
+                default -> throw new IllegalStateException("Unexpected value: " + bullet.bulletState);
+            }
+           /* if(bullet.attackMode){
                 Draw.color(Pal.health);
             }else if(bullet.startRotationAngle == -1){
                 Draw.color(Pal.accent);
@@ -95,7 +115,7 @@ public class MagneticTurret extends Turret{
                 Draw.color(Color.cyan);
             }else{
                 Draw.color(Color.grays(Angles.angleDist(bullet.startRotationAngle, bullet.building.angleTo(bullet)) / 180f));
-            }
+            }*/
 //            Draw.color(bullet.attackMode ? Pal.health : Pal.heal);
             AFill.donut(bullet.x, bullet.y, (tilesize / 4f) * Mathf.absin(4f, 1f), tilesize / 2f);
             Draw.color();
@@ -131,22 +151,61 @@ public class MagneticTurret extends Turret{
             {
                 Vec2 target;
                 float homingPower;
-                if(!bullet.attackMode){
-                    float currentAngle = this.angleTo(bullet);
-                    Tmp.v2.trns(currentAngle + angleOffset * Mathf.sign(bullet.spin), radius).add(this);
-                    homingPower = entity.type.pathFollowHomingPower;
-                    target = Tmp.v2;
+                switch(bullet.bulletState){
+                    case attack -> {
+                        target = Tmp.v2.set(targetPos);
+                        homingPower = entity.type.homingPower;
+                    }
+                    case backHome, waitingForExitPoint -> {
+                        boolean waitingForExit = bullet.bulletState == BlockBulletState.waitingForExitPoint;
+                        float dstToObject = dst(waitingForExit?targetPos:bullet);
+                        float angleToObject = angleTo(waitingForExit?targetPos:bullet);
+                        if (dstToObject>radius+bulletRadiusTolerance || waitingForExit){
+                            float angle = (float)Math.toDegrees(Math.acos(radius / dstToObject));
+                            float requiredAngle = angleToObject + Mathf.sign(waitingForExit != bullet.spin) * angle;
+                            target = Tmp.v2.trns(requiredAngle, radius).add(this);
+                            if(waitingForExit){
+//                            float currentAngle = angleToObject + angleOffset * Mathf.sign(bullet.spin)/2f;
+                                Vec2 nextPosition = Tmp.v3.set(bullet).add(bullet.vel, Time.delta).sub(this);
+                                Vec2 currentPosition = Tmp.v4.set(bullet).sub(this);
+                                Vec2 requiredPosition = Tmp.v5.set(Tmp.v2).sub(this);
+                                if (bullet.spin){
+//                                    if(nextPosition.angleTo(currentPosition) > nextPosition.angleTo(requiredPosition)){
+                                    if(Utils.forwardAngleDistance(currentPosition.angle(),nextPosition.angle())>Utils.forwardAngleDistance(currentPosition.angle(),requiredPosition.angle())){
+                                        bullet.nextState();
+                                    }
+                                }else{
 
-//            if (velAngle)
-                }else{
-                    target = Tmp.v2.set(targetPos);
-                    homingPower = entity.type.homingPower;
+                                    if(Utils.backwardAngleDistance(currentPosition.angle(),nextPosition.angle())>Utils.forwardAngleDistance(currentPosition.angle(),requiredPosition.angle())){
+                                        bullet.nextState();
+                                    }
+                                }
+                                Tmp.v2.trns(this.angleTo(bullet) + angleOffset * Mathf.sign(bullet.spin), radius).add(this);
+//                            Tmp.v2.trns(currentAngle, radius).add(this);
+//                            homingPower = entity.type.pathFollowHomingPower;
+                            }
+                            homingPower = waitingForExit ? entity.type.pathFollowHomingPower : entity.type.homingPower;
+                        }else{
+                            float currentAngle = this.angleTo(bullet);
+                            Tmp.v2.trns(currentAngle + angleOffset * Mathf.sign(bullet.spin), radius).add(this);
+                            homingPower = entity.type.pathFollowHomingPower;
+                            target = Tmp.v2;
+                        }
+                    }
+                    case reloading, ready -> {
+                        float currentAngle = this.angleTo(bullet);
+                        Tmp.v2.trns(currentAngle + angleOffset * Mathf.sign(bullet.spin), radius).add(this);
+                        homingPower = entity.type.pathFollowHomingPower;
+                        target = Tmp.v2;
+                    }
+                    default -> throw new IllegalStateException("Unexpected value: " + bullet.bulletState);
                 }
+
                 bullet.vel.setAngle(Angles.moveToward(bullet.rotation(), bullet.angleTo(target), homingPower * Time.delta * 50f));
             }
             rangeChecking:
             {
-                if(bullet.attackMode){
+                if(bullet.bulletState == BlockBulletState.attack){
 //                    Vec2 shootPosition = Tmp.v1.set(targetPos).sub(bullet).rotate(-bullet.rotation()).add(bullet);
 
                     bullet.hitbox(Tmp.r1);
@@ -167,15 +226,17 @@ public class MagneticTurret extends Turret{
                     , bullet.lastX(), bullet.lastY, bullet.x, bullet.y,
                     targetLastX, targetLastY, targetPos.x, targetPos.y
                     )){
-                        bullet.attackMode = false;
+                        bullet.nextState();
+//                        bullet.attackMode = false;
                     }
 //                Vec2 nextPosition = Tmp.v2.set(bullet).add(bullet.vel);
 
 //                Geometry
                 }
             }
-            if(Mathf.equal(bullet.dst(this), bulletRadius, bulletRadiusTolerance) && !bullet.attackMode && entity.bullet.startRotationAngle == -1){
+            if(Mathf.equal(bullet.dst(this), bulletRadius, bulletRadiusTolerance) && bullet.bulletState == BlockBulletState.backHome){
                 bullet.startRotationAngle = aroundAngle;
+                bullet.nextState();
             }
 /*
             if (Mathf.equal(dstToBlock,radius, bulletRadiusTolerance) && ){
@@ -225,20 +286,21 @@ public class MagneticTurret extends Turret{
         }
 
         private void updateBehavior(@NotNull BulletEntity entity){
-            if(entity.bullet.startRotationAngle == -1 || entity.bullet.attackMode) return;
+            if(entity.bullet.bulletState.ordinal() > BlockBulletState.ready.ordinal()) return;
             float aroundAngle = Tmp.v1.set(entity.bullet).sub(this).angle();
 
-            if(Float.POSITIVE_INFINITY != entity.bullet.startRotationAngle){
-                float deltaAngle = Utils.forwardAngleDistance(entity.bullet.startRotationAngle, aroundAngle);
+            if(entity.bullet.bulletState == BlockBulletState.reloading){
+                float deltaAngle = (entity.bullet.spin) ?
+                Utils.forwardAngleDistance(entity.bullet.startRotationAngle, aroundAngle) :
+                Utils.backwardAngleDistance(entity.bullet.startRotationAngle, aroundAngle);
 //                System.out.println(deltaAngle);
-                if((deltaAngle >= 180 && !entity.bullet.attackMode)){
-                    entity.bullet.startRotationAngle = Float.POSITIVE_INFINITY;
+                if((deltaAngle >= 180)){
+                    entity.bullet.nextState();
                 }
             }
-            if(entity.bullet.startRotationAngle == Float.POSITIVE_INFINITY){
+            if(entity.bullet.bulletState == BlockBulletState.ready){
                 if(isShooting()){
-                    entity.bullet.startRotationAngle = -1;
-                    entity.bullet.attackMode = true;
+                    entity.bullet.nextState();
                 }
             }
         }
@@ -313,7 +375,7 @@ public class MagneticTurret extends Turret{
         }
 
         public void removeBullet(ConcentratorBullet bullet){
-            if (bullet==null)return;
+            if(bullet == null) return;
             bullets.remove(it -> it.bullet == bullet);
         }
     }

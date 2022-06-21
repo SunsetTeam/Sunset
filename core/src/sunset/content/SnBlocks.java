@@ -130,7 +130,7 @@ public class SnBlocks implements Runnable{
             loadBullets();
             new MagneticTurret("concent"){{
                 requirements(Category.turret, with(Items.copper, 2));
-                bulletType.speed=10f;
+                bulletType.speed=2f;
                 bulletType.damage=10f;
                 bulletType.splashDamage = 26f * 1.5f;
                 bulletType.splashDamageRadius = 1f*tilesize;

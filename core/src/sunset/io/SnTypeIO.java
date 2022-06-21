@@ -6,8 +6,7 @@ import mindustry.annotations.Annotations;
 import mindustry.annotations.Annotations.*;
 import mindustry.gen.*;
 import mma.io.ModTypeIO;
-import sunset.type.DeliverState;
-import sunset.type.MissileType;
+import sunset.type.*;
 import sunset.world.blocks.units.Airport;
 import sunset.world.blocks.units.FireFightersStation.*;
 
@@ -47,5 +46,11 @@ public class SnTypeIO extends ModTypeIO {
     }
     public static DeliverState readDeliverState(Reads read){
         return readEnum(read,DeliverState.values());
+    }
+    public static void writeBlockBulletState(Writes write, BlockBulletState state){
+        writeEnum(write,state);
+    }
+    public static BlockBulletState readBlockBulletState(Reads read){
+        return readEnum(read,BlockBulletState.values());
     }
 }

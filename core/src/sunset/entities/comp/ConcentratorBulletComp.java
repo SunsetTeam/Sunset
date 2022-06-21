@@ -16,7 +16,8 @@ import sunset.gen.*;
 import sunset.type.*;
 import sunset.world.blocks.defense.turrets.MagneticTurret.*;
 
-import static mindustry.Vars.world;
+import static mindustry.Vars.*;
+
 /** {@link ConcentratorBullet}*/
 @Component()
 @EntityDef(value = {ConcentratorBulletc.class,Bulletc.class})
@@ -33,8 +34,8 @@ abstract class ConcentratorBulletComp implements Bulletc{
     transient boolean keepAlive, absorbed, hit;
     @Import
     transient Trail trail;
-    boolean spin,attackMode;
-//    BlockBulletState bulletState;
+    boolean spin;
+    BlockBulletState bulletState=BlockBulletState.backHome;
     //    @Import
     Building building;
     @Import
@@ -59,6 +60,9 @@ abstract class ConcentratorBulletComp implements Bulletc{
         originalUpdate();
     }
 
+    public void nextState(){
+        bulletState=bulletState.next();
+    }
     @Override
     public void afterRead(){
         owner= building;
