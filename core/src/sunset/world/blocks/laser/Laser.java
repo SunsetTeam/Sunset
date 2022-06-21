@@ -90,10 +90,10 @@ public class Laser{
         charge = build.laser.out;
         //start offset vector
         Tmp.v1.trns(angle, offset);
-        target = LaserUtils.linecast(build, start.x + Tmp.v1.x, start.y + Tmp.v1.y, angle, length, false, true, boolf -> true);
+        target = LaserUtils.linecast(build, start.x + Tmp.v1.x, start.y + Tmp.v1.y, angle, length, false, true,null);
         if(target != null){
             //for correct drawing
-            Tmp.v1.trns(angle, start.dst(target.x(), target.y()));
+            Tmp.v1.trns(angle, start.dst(target));
             end.x = start.x + Tmp.v1.x;
             end.y = start.y + Tmp.v1.y;
 
