@@ -98,15 +98,15 @@ public class LaserUtils{
     }
 
     public static Tile getClosest(float x, float y, Tile[] tiles){
-        if(tiles.length==0 || tiles[0] == null){
+        if(tiles.length == 0 || tiles[0] == null){
             return null;
         }
         Tile best = tiles[0];
-        float bestDst2 = tiles[0].dst2(x, y),dst2;
+        float bestDst2 = Mathf.dst2(tiles[0].getX(), tiles[0].getY(), x, y),dst2;
         for(int i = 1; i < tiles.length; i++){
             if(tiles[i] == null)
                 break;
-            dst2 = tiles[i].dst2(best);
+            dst2 = Mathf.dst2(tiles[i].getX(), tiles[i].getY(), x, y);
             if(dst2 < bestDst2){
                 best = tiles[i];
                 bestDst2 = dst2;
@@ -116,15 +116,15 @@ public class LaserUtils{
     }
 
     public static Healthc getClosest(float x, float y, Healthc[] entities){
-        if(entities.length==0 || entities[0] == null){
+        if(entities.length == 0 || entities[0] == null){
             return null;
         }
         Healthc best = entities[0];
-        float bestDst2 = entities[0].dst2(x, y),dst2;
+        float bestDst2 = Mathf.dst2(entities[0].x(), entities[0].y(), x, y),dst2;
         for(int i = 1; i < entities.length; i++){
             if(entities[i] == null)
                 break;
-            dst2 = entities[i].dst2(best);
+            dst2 = Mathf.dst2(entities[i].x(), entities[i].y(), x, y);
             if(dst2 < bestDst2){
                 best = entities[i];
                 bestDst2 = dst2;
