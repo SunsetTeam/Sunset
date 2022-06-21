@@ -153,7 +153,7 @@ public class LaserUtils{
                 }
             }
 
-            if(x == toTile(x2) && y == toTile(y2)) break;
+            if(x == x2 && y == y2) break;
 
             e2 = 2 * err;
             if(e2 > -dy){

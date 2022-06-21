@@ -2,6 +2,7 @@ package sunset.world.blocks.laser;
 
 import arc.*;
 import arc.graphics.g2d.*;
+import arc.math.Mathf;
 import arc.math.geom.*;
 import arc.util.*;
 import mindustry.*;
