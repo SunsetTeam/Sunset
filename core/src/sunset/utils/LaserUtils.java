@@ -4,6 +4,7 @@ import arc.func.*;
 import arc.math.*;
 import arc.math.geom.*;
 import arc.util.*;
+import mindustry.Vars;
 import mindustry.core.*;
 import mindustry.entities.*;
 import mindustry.gen.*;
@@ -22,11 +23,55 @@ public class LaserUtils{
     private static Unit tmpUnit;
     private static Tile tmpTile;
 
+    private static void raycastStaticWallsWorld(float x1, float y1, float x2, float y2) {
+        int x = toTile(x1), dx = Math.abs(toTile(x2) - x), sx = x < toTile(x2) ? 1 : -1;
+        int y = toTile(y1), dy = Math.abs(toTile(y2) - y), sy = y < toTile(y2) ? 1 : -1;
+        int e2, err = dx - dy;
+
+        while (true) {
+            Tile tile = world.tile(x, y);
+            if (tile != null && tile.block() instanceof StaticWall) {
+                tmpTile = tile;
+                break;
+            } else {
+                Tile[] sideCollided = new Tile[4];
+                int i = 0;
+                for (Point2 p : Geometry.d4) {
+                    tile = world.tile(x + p.x, y + p.y);
+                    if (tile != null && tile.block() instanceof StaticWall && Intersector.intersectSegmentRectangle(x1, y1, x1 + tr.x, y1 + tr.y, tile.getHitbox(Tmp.r1))) {
+                        sideCollided[i] = tile;
+                        i++;
+                    }
+                }
+                tile = getClosest(x1, y1, sideCollided);
+                if (tile != null) {
+                    tmpTile = tile;
+                    break;
+                }
+            }
+
+
+            if (x == toTile(x2) && y == toTile(y2)) break;
+
+            e2 = 2 * err;
+            if (e2 > -dy) {
+                err = err - dy;
+                x = x + sx;
+            }
+
+            if (e2 < dx) {
+                err = err + dx;
+                y = y + sy;
+            }
+        }
+    }
 
     public static Tile linecastStaticWalls(float x, float y, float angle, float length){
         tmpTile = null;
 
         tr.trns(angle, length);
+        raycastStaticWallsWorld(x, y, x + tr.x, y + tr.y);
+        /*
         World.raycastEachWorld(x, y, x + tr.x, y + tr.y, (cx, cy) -> {
             Tile tile = world.tile(cx, cy);
             if(tile == null || !(tile.block() instanceof StaticWall)){
@@ -46,6 +91,8 @@ public class LaserUtils{
             tmpTile = tile;
             return true;
         });
+
+         */
 
         return tmpTile;
     }
@@ -86,6 +133,56 @@ public class LaserUtils{
         return best;
     }
 
+    private static int toTile(float coord){
+        return Math.round(coord / Vars.tilesize);
+    }
+
+    private static void raycastEachWorld(Building build, float x1, float y1, float x2, float y2, Boolf<Healthc> predicate){
+        int x = toTile(x1), dx = Math.abs(toTile(x2) - x), sx = x < toTile(x2) ? 1 : -1;
+        int y = toTile(y1), dy = Math.abs(toTile(y2) - y), sy = y < toTile(y2) ? 1 : -1;
+        int e2, err = dx - dy;
+
+        while(true){
+            Building tile = world.build(x, y);
+            if(tile != null && predicate.get(tile) && tile != build){
+                tmpBuilding = tile;
+                break;
+            }
+            else{
+                Building[] sideCollided = new Building[4];
+                int i = 0;
+                for(Point2 p : Geometry.d4){
+                    tile = world.build(x + p.x, y + p.y);
+                    if(tile != null && tile != build){
+                        tile.hitbox(Tmp.r1);
+                        if(Intersector.intersectSegmentRectangle(x1, y1, x1 + tr.x, y1 + tr.y, Tmp.r1)){
+                            sideCollided[i] = tile;
+                            i++;
+                        }
+                    }
+                }
+                tile = (Building)getClosest(x1, y1, sideCollided);
+                if(tile != null){
+                    tmpBuilding = tile;
+                    break;
+                }
+            }
+
+            if(x == toTile(x2) && y == toTile(y2)) break;
+
+            e2 = 2 * err;
+            if(e2 > -dy){
+                err -= dy;
+                x += sx;
+            }
+
+            if(e2 < dx){
+                err += dx;
+                y += sy;
+            }
+        }
+    }
+
     public static Healthc linecast(LaserBuild build, float x, float y, float angle, float length, boolean collideAir, boolean collideGround, Boolf<Healthc> predicate){
         tmpBuilding = null;
         tmpUnit = null;
@@ -93,6 +190,9 @@ public class LaserUtils{
         tr.trns(angle, length);
 
         if(collideGround){
+            raycastEachWorld(build, x, y, x + tr.x, y + tr.y, predicate);
+
+            /*
             World.raycastEachWorld(x, y, x + tr.x, y + tr.y, (cx, cy) -> {
                 Building tile = world.build(cx, cy);
                 if(tile == null || !predicate.get(tile) || tile == build){
@@ -115,6 +215,7 @@ public class LaserUtils{
                 tmpBuilding = tile;
                 return true;
             });
+             */
         }
 
         rect.setPosition(x, y).setSize(tr.x, tr.y);
