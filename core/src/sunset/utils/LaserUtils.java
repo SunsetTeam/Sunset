@@ -71,28 +71,6 @@ public class LaserUtils{
 
         tr.trns(angle, length);
         raycastStaticWallsWorld(x, y, x + tr.x, y + tr.y);
-        /*
-        World.raycastEachWorld(x, y, x + tr.x, y + tr.y, (cx, cy) -> {
-            Tile tile = world.tile(cx, cy);
-            if(tile == null || !(tile.block() instanceof StaticWall)){
-                Tile[] sideCollided = new Tile[4];
-                int i = 0;
-                for(Point2 p : Geometry.d4){
-                    tile = world.tile(cx + p.x, cy + p.y);
-                    if(tile != null && tile.block() instanceof StaticWall && Intersector.intersectSegmentRectangle(x, y, x + tr.x, y + tr.y, tile.getHitbox(Tmp.r1))){
-                        sideCollided[i] = tile;
-                        i++;
-                    }
-                }
-                tile = getClosest(x, y, sideCollided);
-                if(tile == null)
-                    return false;
-            }
-            tmpTile = tile;
-            return true;
-        });
-
-         */
 
         return tmpTile;
     }
@@ -185,31 +163,6 @@ public class LaserUtils{
 
         if(collideGround){
             raycastEachWorld(build, x, y, x + tr.x, y + tr.y, predicate);
-
-            /*
-            World.raycastEachWorld(x, y, x + tr.x, y + tr.y, (cx, cy) -> {
-                Building tile = world.build(cx, cy);
-                if(tile == null || !predicate.get(tile) || tile == build){
-                    Building[] sideCollided = new Building[4];
-                    int i = 0;
-                    for(Point2 p : Geometry.d4){
-                        tile = world.build(cx + p.x, cy + p.y);
-                        if(tile != null && tile != build){
-                            tile.hitbox(Tmp.r1);
-                            if(Intersector.intersectSegmentRectangle(x, y, x + tr.x, y + tr.y, Tmp.r1)){
-                                sideCollided[i] = tile;
-                                i++;
-                            }
-                        }
-                    }
-                    tile = (Building)getClosest(x, y, sideCollided);
-                    if(tile == null)
-                        return false;
-                }
-                tmpBuilding = tile;
-                return true;
-            });
-             */
         }
 
         rect.setPosition(x, y).setSize(tr.x, tr.y);
