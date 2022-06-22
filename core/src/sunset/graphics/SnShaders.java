@@ -6,9 +6,12 @@ import arc.graphics.*;
 import arc.graphics.g2d.*;
 import arc.graphics.gl.*;
 import arc.math.geom.*;
+import arc.util.*;
 import mindustry.*;
 import mindustry.graphics.*;
 import sunset.*;
+
+import static mindustry.Vars.renderer;
 
 public class SnShaders{
     public static RadarCircleLineShader radarCircleLine;
@@ -40,7 +43,7 @@ public class SnShaders{
         return new Vec2().set(position).sub(cameraOffset).scl(vec2(displayScale));
     }
 
-    public static class RadarCircleLineShader extends ModLoadShader{
+    public static class RadarCircleLineShader extends SnLoadShader{
         public final Color lightColor = new Color();
         private final Vec2 centerPosition = new Vec2();
         public float lightRadius = 1f;
@@ -83,8 +86,8 @@ public class SnShaders{
         }
     }
 
-    public static class ModLoadShader extends Shader{
-        public ModLoadShader(String fragment, String vertex){
+    public static class SnLoadShader extends Shader{
+        public SnLoadShader(String fragment, String vertex){
             super(load("" + vertex + ".vert"), load("" + fragment + ".frag"));
         }
 
@@ -107,5 +110,48 @@ public class SnShaders{
             setUniformf("u_resolution", vec2(Core.graphics.getWidth(), Core.graphics.getHeight()));
         }
 
+    }
+
+    public static class SnSurfaceShader extends SnLoadShader{
+        Texture noiseTex;
+
+        public SnSurfaceShader(String frag){
+            super(frag,"screenspace");
+            loadNoise();
+        }
+
+        public SnSurfaceShader(String vertRaw, String fragRaw){
+            super(vertRaw, fragRaw);
+            loadNoise();
+        }
+
+        public String textureName(){
+            return "noise";
+        }
+
+        public void loadNoise(){
+            Core.assets.load("sprites/" + textureName() + ".png", Texture.class).loaded = t -> {
+                ((Texture)t).setFilter(Texture.TextureFilter.linear);
+                ((Texture)t).setWrap(Texture.TextureWrap.repeat);
+            };
+        }
+
+        @Override
+        public void apply(){
+            setUniformf("u_campos", Core.camera.position.x - Core.camera.width / 2, Core.camera.position.y - Core.camera.height / 2);
+            setUniformf("u_resolution", Core.camera.width, Core.camera.height);
+            setUniformf("u_time", Time.time);
+
+            if(hasUniform("u_noise")){
+                if(noiseTex == null){
+                    noiseTex = Core.assets.get("sprites/" + textureName() + ".png", Texture.class);
+                }
+
+                noiseTex.bind(1);
+                renderer.effectBuffer.getTexture().bind(0);
+
+                setUniformi("u_noise", 1);
+            }
+        }
     }
 }

@@ -2,6 +2,8 @@ package sunset.world.blocks.laser;
 
 import arc.*;
 import arc.graphics.g2d.*;
+import arc.graphics.g2d.TextureAtlas.*;
+import arc.math.*;
 import arc.math.geom.*;
 import arc.util.*;
 import mindustry.*;
@@ -10,6 +12,7 @@ import mindustry.entities.*;
 import mindustry.gen.*;
 import mindustry.graphics.*;
 import mindustry.world.*;
+import mma.graphics.*;
 import sunset.type.*;
 import sunset.utils.*;
 import sunset.world.blocks.laser.LaserBlock.*;
@@ -52,6 +55,8 @@ public class Laser{
     public boolean onStaticWall = false;
     public Effect hitEffect = Fx.none;
 
+    AtlasRegion laserEndRegion = Core.atlas.find("sunset-laser-beam-end");
+
     public Laser(){
     }
 
@@ -64,32 +69,56 @@ public class Laser{
     }
 
     public void draw(){
-        if(enabled){
-            Tmp.v1.trns(angle, offset);
-            if(target instanceof Building b){
-                Tmp.v3.trns(angle, offset + (Math.max(0, b.block().size - 2)) / 2f * Vars.tilesize);
-            }else if(target instanceof Unit u){
-                Tmp.v3.trns(angle, offset + Math.max(0, u.hitSize / 2f - 16f));
-            }else if(onStaticWall){
-                Tmp.v3.trns(angle, Vars.tilesize);
-            }
-
-            Draw.alpha(charge);
-            Tmp.v2.set(end.x - Tmp.v3.x, end.y - Tmp.v3.y);
-            Tmp.v4.set(start.x + Tmp.v1.x, start.y + Tmp.v1.y);
-
-            //if we are too close to laser, draw from start to start
-            if(Tmp.v2.dst2(Tmp.v4) <= (offset * 0.25f)*(offset * 0.25f)){
-                Drawf.laser(Core.atlas.find("minelaser"), Core.atlas.find("sunset-laser-beam-end"), Core.atlas.find("sunset-laser-beam-end"),
-                start.x + Tmp.v1.x, start.y + Tmp.v1.y, start.x + Tmp.v1.x, start.y + Tmp.v1.y);
-            }else{
-                Drawf.laser(Core.atlas.find("minelaser"), Core.atlas.find("sunset-laser-beam-end"), Core.atlas.find("sunset-laser-beam-end"),
-                start.x + Tmp.v1.x, start.y + Tmp.v1.y, end.x - Tmp.v3.x, end.y - Tmp.v3.y);
-            }
+        if(!enabled){
+            return;
         }
+        Tmp.v1.trns(angle, offset);
+        Tmp.v3.setZero();
+
+        calculateEndOffset(Tmp.v3,0f);
+        Vec2 drawEnd = Tmp.v2.set(end).sub(Tmp.v3);
+
+        Vec2 drawStart = Tmp.v4.set(start).add(Tmp.v1);
+
+        Draw.alpha(charge);
+
+        //if we are too close to laser, draw from start to start
+        if(drawEnd.dst2(drawStart) <= (offset * 0.25f) * (offset * 0.25f)){
+            Drawf.laser(Core.atlas.find("minelaser"), laserEndRegion, laserEndRegion,
+            drawStart.x, drawStart.y, drawStart.x, drawStart.y);
+        }else{
+            Drawf.laser(Core.atlas.find("minelaser"), laserEndRegion, laserEndRegion,
+            drawStart.x, drawStart.y, drawEnd.x, drawEnd.y);
+        }
+        /*Draw.color(Pal.remove);
+        AFill.polyCircle(drawEnd.x, drawEnd.y, tilesize / 4f);
+        Draw.color(Pal.accent);
+        AFill.polyCircle(drawStart.x, drawStart.y, tilesize / 4f);*/
+        Draw.color();
+    }
+
+    public void calculateEndOffset(Vec2 endOffset,float extraLength){
+        endOffset.trns(angle,calculateEndOffset(extraLength));
+    }
+
+    public float calculateEndOffset(float extraLength){
+        if(target instanceof Building b){
+//                Tmp.v3.trns(angle,-b.block().sizeOffset*tilesize+b.block().offset);
+//                b.block().offset
+            return ModGeometry.sqrtDstByAngle((b.block().size * tilesize + laserEndRegion.width * Draw.scl) / 2f+extraLength, angle);
+//                Tmp.v3.trns(angle,  (b.block().size / 2f * Vars.tilesize));
+//                Tmp.v3.trns(angle, offset + (Math.max(0, b.block().size - 2)) / 2f * Vars.tilesize);
+        }else if(target instanceof Unit u){
+            return (u.hitSize + laserEndRegion.width * Draw.scl) / 2f+extraLength;
+//                Tmp.v3.trns(angle, offset + Math.max(0, u.hitSize / 2f - 16f));
+        }else if(onStaticWall){
+            return tilesize+extraLength;
+        }
+        return 0;
     }
 
     public void updateTile(){
+        if(!enabled) return;
         charge = build.laser.out;
         //start offset vector
         Tmp.v1.trns(angle, offset);
@@ -100,46 +129,32 @@ public class Laser{
             Tmp.v1.trns(angle, start.dst(target));
             end.x = start.x + Tmp.v1.x;
             end.y = start.y + Tmp.v1.y;
-
-            if(enabled && charge > 0f){
-                //////////////
-                //this is for laser mechanic
-                if(target instanceof LaserBuild b && b.block().inputsLaser){
-                    setTargetLenses(b);
-                    b.laser.in += charge;
-                }else if(charge != 0){
-                    Tmp.v2.set(0, 0);
-                    if(target instanceof Unit u){
-                        Tmp.v2.trns(angle, offset + Math.max(0, u.hitSize / 2f - 16f));
-                    }else if(onStaticWall){
-                        Tmp.v2.trns(angle, Vars.tilesize);
-                    }
-                    castEffectAt(hitEffect, end.x - Tmp.v2.x, end.y - Tmp.v2.y, angle, charge);
-                    Damage.damage(null, target.x(), target.y(), 8f, damage * charge, false, true);
-                }
-            }
-        }else if (onStaticWall){
-            if(enabled && charge > 0f){
-                Tmp.v2.trns(angle, tilesize);
-                castEffectAt(hitEffect, end.x - Tmp.v2.x, end.y - Tmp.v2.y, angle, charge);
+        }
+        if((onStaticWall || target != null) && charge > 0f){
+            //////////////
+            //this is for laser mechanic
+            if(target instanceof LaserBuild b && b.block().inputsLaser){
+                setTargetLenses(b);
+                b.laser.in += charge;
+            }else{
+                castEffectAtEnd();
+                if(target != null) Damage.damage(null, target.x(), target.y(), 8f, damage * charge, false, true);
             }
         }
-
     }
 
     private void findStaticWall(){
+        Tmp.v1.trns(angle, offset);
         Tile t = LaserUtils.linecastStaticWalls(start.x + Tmp.v1.x, start.y + Tmp.v1.y, angle, length);
         //cast with static walls
         if(t != null){
             Tmp.v1.trns(angle, start.dst(t.worldx(), t.worldy()));
-            end.x = start.x + Tmp.v1.x;
-            end.y = start.y + Tmp.v1.y;
             onStaticWall = true;
         }else{
             Tmp.v1.trns(angle, length);
-            end.set(start.x + Tmp.v1.x, start.y + Tmp.v1.y);
             onStaticWall = false;
         }
+        end.set(start).add(Tmp.v1);
     }
 
     public void setTargetLenses(LaserBuild b){
@@ -153,11 +168,11 @@ public class Laser{
         }
     }
 
-    private void castEffectAt(Effect e, float x, float y, float rot, Object data){
+    private void castEffectAtEnd(){
         //offset because of laser end sprite
-        float offset = 3f;
-        Tmp.v4.trns(angle, offset);
-        e.at(x + Tmp.v4.x, y + Tmp.v4.y, rot, data);
+        float length = calculateEndOffset(0f);
+        Tmp.v2.trns(angle,length-laserEndRegion.width/2f*Draw.scl);
+        hitEffect.at(end.x - Tmp.v2.x, end.y - Tmp.v2.y, angle, charge);
     }
 
 
