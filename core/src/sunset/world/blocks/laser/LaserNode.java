@@ -36,7 +36,7 @@ public class LaserNode extends LaserBlock{
         update = true;
         configurable = true;
         solid = true;
-        clipSize = 500f;
+//        clipSize = 500f;
         config(Integer.class, (LaserNodeBuild b, Integer value) -> {
             //Log.info("config");
             b.rightOutput = (value & 0b0001) >> 0 == 1;
