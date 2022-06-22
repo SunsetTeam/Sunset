@@ -123,9 +123,14 @@ public class LaserNode extends LaserBlock{
         }
 
         @Override
+        public void drawLasers(){
+            super.drawLasers();
+            lasers.draw();
+        }
+
+        @Override
         public void draw(){
             drawer.draw(this);
-            lasers.draw();
             float z = Draw.z();
             Draw.z(Layer.blockOver);
             //трёхэтажный дебаг : )

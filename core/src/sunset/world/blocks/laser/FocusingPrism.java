@@ -48,6 +48,11 @@ public class FocusingPrism extends LaserBlock{
         @Override
         public void draw(){
             super.draw();
+        }
+
+        @Override
+        public void drawLasers(){
+            super.drawLasers();
             laserToTarget.draw();
         }
 
