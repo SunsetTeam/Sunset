@@ -64,7 +64,7 @@ public class SnVars extends ModVars{
         if(headless){
             return;
         }
-        if(Vars.ui == null){
+        if(Vars.ui == null || Vars.ui.loadfrag==null){
             Events.on(EventType.ClientLoadEvent.class, e -> showException(ex));
             return;
         }
