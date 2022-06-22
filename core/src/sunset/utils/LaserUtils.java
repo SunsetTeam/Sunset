@@ -10,6 +10,8 @@ import mindustry.world.*;
 import mindustry.world.blocks.environment.*;
 import sunset.world.blocks.laser.LaserBlock.*;
 
+import java.util.*;
+
 import static mindustry.Vars.world;
 import static mindustry.core.World.toTile;
 
@@ -44,6 +46,7 @@ public class LaserUtils{
                     }
                 }
                 tile = getClosest(x1, y1, sideCollidedTile);
+                Arrays.fill(sideCollidedTile,null);
                 if(tile != null){
                     tmpTile = tile;
                     break;
@@ -134,6 +137,7 @@ public class LaserUtils{
                     }
                 }
                 tile = (Building)getClosest(x1, y1, sideCollidedBuilding);
+                Arrays.fill(sideCollidedBuilding,null);
                 if(tile != null){
                     tmpBuilding = tile;
                     break;
