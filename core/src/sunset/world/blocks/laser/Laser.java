@@ -101,7 +101,7 @@ public class Laser{
             if(target instanceof LaserBuild b && b.block().inputsLaser){
                 setTargetLenses(b);
                 b.laser.in += charge;
-            }else if(charge != 0){
+            }else if(charge > 0f){
                 Tmp.v2.set(0, 0);
                 if(target instanceof Unit u){
                     Tmp.v2.trns(angle, offset + Math.max(0, u.hitSize / 2f - 16f));
