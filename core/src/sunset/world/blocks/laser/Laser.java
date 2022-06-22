@@ -112,19 +112,6 @@ public class Laser{
         Tmp.v1.trns(angle, start.dst(target));
         end.x = start.x + Tmp.v1.x;
         end.y = start.y + Tmp.v1.y;
-        if(enabled && charge > 0f) {
-            //////////////
-            //this is for laser mechanic
-            if (target instanceof LaserBuild b && b.block().inputsLaser) {
-                setTargetLenses(b);
-                b.laser.in += charge;
-            } else {
-                Tmp.v2.setZero();
-                getEndOffset(Tmp.v2);
-                hitEffectAt(end.x - Tmp.v2.x, end.y - Tmp.v2.y);
-                Damage.damage(null, target.x(), target.y(), 8f, damage * charge, false, true);
-            }
-        }
     }
 
     private void staticWallCasted(Tile t){
@@ -133,10 +120,6 @@ public class Laser{
         Tmp.v1.trns(angle, start.dst(t.worldx(), t.worldy()));
         end.x = start.x + Tmp.v1.x;
         end.y = start.y + Tmp.v1.y;
-        if(enabled && charge > 0f){
-            Tmp.v2.trns(angle, tilesize / 2f);
-            hitEffectAt(end.x - Tmp.v2.x, end.y - Tmp.v2.y);
-        }
     }
 
     private void nothingCasted(){
@@ -146,6 +129,8 @@ public class Laser{
     }
 
     public void updateTile(){
+        if(!enabled)
+            return;
         charge = build.laser.out;
         //start offset vector
         Tmp.v1.trns(angle, tilesize * build.block().size / 2f);
@@ -167,6 +152,19 @@ public class Laser{
         }
         else{
             nothingCasted();
+        }
+        if((onStaticWall || target != null) && charge > 0f){
+            if (target instanceof LaserBuild b && b.block().inputsLaser) {
+                setTargetLenses(b);
+                b.laser.in += charge;
+            } else {
+                //spawn effect if static wall or wrong build...
+                getEndOffset(Tmp.v2);
+                hitEffectAt(end.x - Tmp.v2.x, end.y - Tmp.v2.y);
+                //if not static wall, do damage
+                if(target != null)
+                    Damage.damage(null, target.x(), target.y(), 8f, damage * charge, false, true);
+            }
         }
     }
     public void setTargetLenses(LaserBuild b){
