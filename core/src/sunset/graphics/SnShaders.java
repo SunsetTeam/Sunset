@@ -9,12 +9,14 @@ import arc.math.geom.*;
 import arc.util.*;
 import mindustry.*;
 import mindustry.graphics.*;
+import mindustry.graphics.Shaders.*;
 import sunset.*;
 
 import static mindustry.Vars.renderer;
 
 public class SnShaders{
     public static RadarCircleLineShader radarCircleLine;
+    public static SnSurfaceShader burheyna;
 
     static{
         Shaders.class.getName();
@@ -22,6 +24,12 @@ public class SnShaders{
 
     public static void init(){
         radarCircleLine=new RadarCircleLineShader();
+        burheyna = new SnSurfaceShader("burheyna");
+//        arkycite = new SnSurfaceShader("arkycite");
+//        mud = new SnSurfaceShader("mud");
+//        tar = new SnSurfaceShader("tar");
+//        slag = new SnSurfaceShader("slag");
+//        cryofluid = new SnSurfaceShader("cryofluid");
     }
 
     public static Vec2 getScreenSize(){
