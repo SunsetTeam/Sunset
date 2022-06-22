@@ -79,10 +79,12 @@ public class Laser{
             Tmp.v4.set(start.x + Tmp.v1.x, start.y + Tmp.v1.y);
 
             //if we are too close to laser, draw from start to start
-            if(Tmp.v2.dst(Tmp.v4) <= offset * 0.25f){
-                Drawf.laser(Core.atlas.find("minelaser"), Core.atlas.find("sunset-laser-beam-end"), Core.atlas.find("sunset-laser-beam-end"), start.x + Tmp.v1.x, start.y + Tmp.v1.y, start.x + Tmp.v1.x, start.y + Tmp.v1.y);
+            if(Tmp.v2.dst2(Tmp.v4) <= (offset * 0.25f)*(offset * 0.25f)){
+                Drawf.laser(Core.atlas.find("minelaser"), Core.atlas.find("sunset-laser-beam-end"), Core.atlas.find("sunset-laser-beam-end"),
+                start.x + Tmp.v1.x, start.y + Tmp.v1.y, start.x + Tmp.v1.x, start.y + Tmp.v1.y);
             }else{
-                Drawf.laser(Core.atlas.find("minelaser"), Core.atlas.find("sunset-laser-beam-end"), Core.atlas.find("sunset-laser-beam-end"), start.x + Tmp.v1.x, start.y + Tmp.v1.y, end.x - Tmp.v3.x, end.y - Tmp.v3.y);
+                Drawf.laser(Core.atlas.find("minelaser"), Core.atlas.find("sunset-laser-beam-end"), Core.atlas.find("sunset-laser-beam-end"),
+                start.x + Tmp.v1.x, start.y + Tmp.v1.y, end.x - Tmp.v3.x, end.y - Tmp.v3.y);
             }
         }
     }
@@ -116,6 +118,11 @@ public class Laser{
                     Damage.damage(null, target.x(), target.y(), 8f, damage * charge, false, true);
                 }
             }
+        }else if (onStaticWall){
+            if(enabled && charge > 0f){
+                Tmp.v2.trns(angle, tilesize);
+                castEffectAt(hitEffect, end.x - Tmp.v2.x, end.y - Tmp.v2.y, angle, charge);
+            }
         }
 
     }
@@ -127,10 +134,6 @@ public class Laser{
             Tmp.v1.trns(angle, start.dst(t.worldx(), t.worldy()));
             end.x = start.x + Tmp.v1.x;
             end.y = start.y + Tmp.v1.y;
-            if(enabled && charge > 0f){
-                Tmp.v2.trns(angle, tilesize);
-                castEffectAt(hitEffect, end.x - Tmp.v2.x, end.y - Tmp.v2.y, angle, charge);
-            }
             onStaticWall = true;
         }else{
             Tmp.v1.trns(angle, length);
