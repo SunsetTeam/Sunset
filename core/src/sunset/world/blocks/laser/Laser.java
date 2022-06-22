@@ -21,6 +21,7 @@ import static mindustry.Vars.tilesize;
  * Laser class.
  * Powers laser blocks, damages non-laser blocks and units.
  */
+@SuppressWarnings({"UnusedReturnValue", "SameParameterValue"})
 public class Laser{
     /** start vector (start + offset = laser start) */
     public Vec2 start = new Vec2(),
@@ -64,109 +65,93 @@ public class Laser{
         return BlockSide.sideForAngle(angle);
     }
 
-    private void getEndOffset(Vec2 v){
-        v.setZero();
+    private Vec2 getEndOffset(Vec2 endOffset){
+        endOffset.setZero();
         if(target instanceof Building b){
-            v.trns(angle, tilesize * b.block().size / 2f);
+            endOffset.trns(angle, tilesize * b.block().size / 2f);
         }else if(target instanceof Unit u){
-            v.trns(angle, u.hitSize / 2f);
+            endOffset.trns(angle, u.hitSize / 2f);
         }else if(onStaticWall){
-            v.trns(angle, Vars.tilesize / 2f);
+            endOffset.trns(angle, Vars.tilesize / 2f);
         }
+        return endOffset;
     }
 
-    private void getStartOffset(Vec2 v){
-        v.trns(angle, tilesize * build.block().size / 2f);
+    private Vec2 getStartOffset(Vec2 startOffset){
+        startOffset.trns(angle, tilesize * build.block().size / 2f);
+        return startOffset;
     }
 
     public void draw(){
-        if(!enabled){
+        if(!enabled || charge <= 0f){
             return;
         }
         Tmp.v6.trns(angle, laserEndRegion.width / 2f * Draw.scl);
 
         getStartOffset(Tmp.v1);
-        getEndOffset(Tmp.v3);
+        Vec2 drawStart = Tmp.v2.set(start).add(Tmp.v1).add(Tmp.v6);
 
-        Vec2 drawStart = Tmp.v2.set(start.x + Tmp.v1.x + Tmp.v6.x, start.y + Tmp.v1.y + Tmp.v6.y);
-        Vec2 drawEnd = Tmp.v4.set(end.x - Tmp.v3.x - Tmp.v6.x, end.y - Tmp.v3.y - Tmp.v6.y);
+        getEndOffset(Tmp.v1);
+        Vec2 drawEnd = Tmp.v4.set(end).sub(Tmp.v1).sub(Tmp.v6);
 
         Draw.alpha(charge);
 
         //if we are too close to laser, draw from start to start
         if(drawEnd.dst2(drawStart) <= tilesize){
             Drawf.laser(Core.atlas.find("minelaser"), laserEndRegion, laserEndRegion,
-                        drawStart.x, drawStart.y, drawStart.x, drawStart.y);
+            drawStart.x, drawStart.y, drawStart.x, drawStart.y);
         }else{
             Drawf.laser(Core.atlas.find("minelaser"), laserEndRegion, laserEndRegion,
-                        drawStart.x, drawStart.y, drawEnd.x, drawEnd.y);
+            drawStart.x, drawStart.y, drawEnd.x, drawEnd.y);
         }
         Draw.color();
     }
 
-    private void buildOrUnitCasted(){
+
+    public void updateTile(){
+        charge = build.laser.out;
         onStaticWall = false;
-        //for correct drawing
-        Tmp.v1.trns(angle, start.dst(target));
-        end.x = start.x + Tmp.v1.x;
-        end.y = start.y + Tmp.v1.y;
-        if(enabled && charge > 0f) {
-            //////////////
-            //this is for laser mechanic
-            if (target instanceof LaserBuild b && b.block().inputsLaser) {
-                setTargetLenses(b);
-                b.laser.in += charge;
-            } else {
-                Tmp.v2.setZero();
-                getEndOffset(Tmp.v2);
-                hitEffectAt(end.x - Tmp.v2.x, end.y - Tmp.v2.y);
+        target=null;
+        if(!enabled || charge <= 0f){
+//            charge=0f;
+            return;
+        }
+        //start offset vector
+        Vec2 drawStart = getStartOffset(Tmp.v2).add(start);
+
+        target = LaserUtils.linecast(build, drawStart.x, drawStart.y, angle, length, false, true, null);
+        Tile t = LaserUtils.linecastStaticWalls(drawStart.x, drawStart.y, angle, length);
+
+        //remove object target if static wall is closer
+        if(target != null && t != null && t.dst2(drawStart) <= target.dst2(drawStart)){
+            target = null;
+        }
+
+        if(target != null){
+            //cast with entity
+            //for correct drawing
+            end.trns(angle, start.dst(target)).add(start);
+        }else if(t != null){
+            //cast with static walls
+            onStaticWall = true;
+            end.trns(angle, start.dst(t.worldx(), t.worldy())).add(start);
+        }else{
+            end.trns(angle, length).add(start);
+            return;
+        }
+
+        if(target instanceof LaserBuild b && b.block().inputsLaser){
+            setTargetLenses(b);
+            b.laser.in += charge;
+        }else{
+            getEndOffset(Tmp.v2);
+            hitEffectAt(end.x - Tmp.v2.x, end.y - Tmp.v2.y);
+            if(target != null){
                 Damage.damage(null, target.x(), target.y(), 8f, damage * charge, false, true);
             }
         }
     }
 
-    private void staticWallCasted(Tile t){
-        onStaticWall = true;
-        //cast with static walls
-        Tmp.v1.trns(angle, start.dst(t.worldx(), t.worldy()));
-        end.x = start.x + Tmp.v1.x;
-        end.y = start.y + Tmp.v1.y;
-        if(enabled && charge > 0f){
-            Tmp.v2.trns(angle, tilesize / 2f);
-            hitEffectAt(end.x - Tmp.v2.x, end.y - Tmp.v2.y);
-        }
-    }
-
-    private void nothingCasted(){
-        onStaticWall = false;
-        Tmp.v1.trns(angle, length);
-        end.set(start.x + Tmp.v1.x, start.y + Tmp.v1.y);
-    }
-
-    public void updateTile(){
-        charge = build.laser.out;
-        //start offset vector
-        Tmp.v1.trns(angle, tilesize * build.block().size / 2f);
-        Vec2 drawStart = Tmp.v2.set(start.x + Tmp.v1.x, start.y + Tmp.v1.y);
-        target = LaserUtils.linecast(build, drawStart.x, drawStart.y, angle, length, false, true, null);
-        Tile t = LaserUtils.linecastStaticWalls(drawStart.x, drawStart.y, angle, length);
-        if(target != null && t != null){
-            if(target.dst2(drawStart) < t.dst2(drawStart)){
-                buildOrUnitCasted();
-            }
-            else
-                staticWallCasted(t);
-        }
-        else if(target != null){
-            buildOrUnitCasted();
-        }
-        else if(t != null){
-            staticWallCasted(t);
-        }
-        else{
-            nothingCasted();
-        }
-    }
     public void setTargetLenses(LaserBuild b){
         //Log.info("angle: @", angle);
         switch(BlockSide.sideForAngle(target.angleTo(build))){
