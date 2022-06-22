@@ -167,6 +167,7 @@ public class Sunset extends MMAMod{
             SnVars.inTry(SnMusics::load);
             SnVars.inTry(SnSounds::load);
         }
+        SnCacheLayer.init();
         ContentLoader prev = Vars.content;
         /*content=new ContentLoader(){
             @Override
