@@ -52,8 +52,6 @@ public class LaserBlock extends Block{
             }
         });
         Events.run(Trigger.draw,()->{
-            if (!Vars.state.isPlaying())return;
-
             Draw.draw(Layer.blockOver, () -> {
 
                 for(Building rawbuild : SnGroups.laserBuilds){
@@ -145,7 +143,7 @@ public class LaserBlock extends Block{
         }
 
         public void drawLasers(){
-            
+
         }
     }
 }
