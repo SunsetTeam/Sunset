@@ -119,7 +119,7 @@ public class Laser{
             } else {
                 Tmp.v2.setZero();
                 getEndOffset(Tmp.v2);
-                hitEffectAt(end.x - Tmp.v2.x, end.y - Tmp.v2.y, angle, charge);
+                hitEffectAt(end.x - Tmp.v2.x, end.y - Tmp.v2.y);
                 Damage.damage(null, target.x(), target.y(), 8f, damage * charge, false, true);
             }
         }
@@ -133,7 +133,7 @@ public class Laser{
         end.y = start.y + Tmp.v1.y;
         if(enabled && charge > 0f){
             Tmp.v2.trns(angle, tilesize / 2f);
-            hitEffectAt(end.x - Tmp.v2.x, end.y - Tmp.v2.y, angle, charge);
+            hitEffectAt(end.x - Tmp.v2.x, end.y - Tmp.v2.y);
         }
     }
 
@@ -147,10 +147,11 @@ public class Laser{
         charge = build.laser.out;
         //start offset vector
         Tmp.v1.trns(angle, tilesize * build.block().size / 2f);
-        target = LaserUtils.linecast(build, start.x + Tmp.v1.x, start.y + Tmp.v1.y, angle, length, false, true, null);
-        Tile t = LaserUtils.linecastStaticWalls(start.x + Tmp.v1.x, start.y + Tmp.v1.y, angle, length);
+        Vec2 drawStart = Tmp.v2.set(start.x + Tmp.v1.x, start.y + Tmp.v1.y);
+        target = LaserUtils.linecast(build, drawStart.x, drawStart.y, angle, length, false, true, null);
+        Tile t = LaserUtils.linecastStaticWalls(drawStart.x, drawStart.y, angle, length);
         if(target != null && t != null){
-            if(target.dst2(start.x + Tmp.v1.x, start.y + Tmp.v1.y) < t.dst2(start.x + Tmp.v1.x, start.y + Tmp.v1.y)){
+            if(target.dst2(drawStart) < t.dst2(drawStart)){
                 buildOrUnitCasted();
             }
             else
@@ -177,11 +178,8 @@ public class Laser{
         }
     }
 
-    private void hitEffectAt(float x, float y, float angle_, float charge_){
-        //offset because of laser end sprite
-        //Tmp.v2.trns(angle,laserEndRegion.width / 2f * Draw.scl);
-        Tmp.v2.setZero();
-        hitEffect.at(x - Tmp.v2.x, y - Tmp.v2.y, angle_, charge_);
+    private void hitEffectAt(float x, float y){
+        hitEffect.at(x, y, angle, charge);
     }
 
     public void start(Vec2 start){
