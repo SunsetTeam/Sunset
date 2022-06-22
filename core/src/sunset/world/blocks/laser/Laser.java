@@ -89,56 +89,71 @@ public class Laser{
         }
     }
 
+    private void buildOrUnitCasted(){
+        //for correct drawing
+        Tmp.v1.trns(angle, start.dst(target));
+        end.x = start.x + Tmp.v1.x;
+        end.y = start.y + Tmp.v1.y;
+
+        if(enabled && charge > 0f){
+            //////////////
+            //this is for laser mechanic
+            if(target instanceof LaserBuild b && b.block().inputsLaser){
+                setTargetLenses(b);
+                b.laser.in += charge;
+            }else if(charge != 0){
+                Tmp.v2.set(0, 0);
+                if(target instanceof Unit u){
+                    Tmp.v2.trns(angle, offset + Math.max(0, u.hitSize / 2f - 16f));
+                }else if(target instanceof Building b){
+                    Tmp.v2.trns(angle, offset + (Math.max(0, b.block().size - 2)) / 2f * Vars.tilesize);
+                }
+                castEffectAt(hitEffect, end.x - Tmp.v2.x, end.y - Tmp.v2.y, angle, charge);
+                Damage.damage(null, target.x(), target.y(), 8f, damage * charge, false, true);
+            }
+        }
+        onStaticWall = false;
+    }
+
+    private void staticWallCasted(Tile t){
+        //cast with static walls
+        Tmp.v1.trns(angle, start.dst(t.worldx(), t.worldy()));
+        end.x = start.x + Tmp.v1.x;
+        end.y = start.y + Tmp.v1.y;
+        if(enabled && charge > 0f){
+            Tmp.v2.trns(angle, tilesize);
+            castEffectAt(hitEffect, end.x - Tmp.v2.x, end.y - Tmp.v2.y, angle, charge);
+        }
+        onStaticWall = true;
+    }
+
+    private void nothingCasted(){
+        Tmp.v1.trns(angle, length);
+        end.set(start.x + Tmp.v1.x, start.y + Tmp.v1.y);
+        onStaticWall = false;
+    }
+
     public void updateTile(){
         charge = build.laser.out;
         //start offset vector
         Tmp.v1.trns(angle, offset);
         target = LaserUtils.linecast(build, start.x + Tmp.v1.x, start.y + Tmp.v1.y, angle, length, false, true, null);
-        findStaticWall();
-        if(target != null){
-            //for correct drawing
-            Tmp.v1.trns(angle, start.dst(target));
-            end.x = start.x + Tmp.v1.x;
-            end.y = start.y + Tmp.v1.y;
-
-            if(enabled && charge > 0f){
-                //////////////
-                //this is for laser mechanic
-                if(target instanceof LaserBuild b && b.block().inputsLaser){
-                    setTargetLenses(b);
-                    b.laser.in += charge;
-                }else if(charge != 0){
-                    Tmp.v2.set(0, 0);
-                    if(target instanceof Unit u){
-                        Tmp.v2.trns(angle, offset + Math.max(0, u.hitSize / 2f - 16f));
-                    }else if(onStaticWall){
-                        Tmp.v2.trns(angle, Vars.tilesize);
-                    }
-                    castEffectAt(hitEffect, end.x - Tmp.v2.x, end.y - Tmp.v2.y, angle, charge);
-                    Damage.damage(null, target.x(), target.y(), 8f, damage * charge, false, true);
-                }
-            }
-        }else if (onStaticWall){
-            if(enabled && charge > 0f){
-                Tmp.v2.trns(angle, tilesize);
-                castEffectAt(hitEffect, end.x - Tmp.v2.x, end.y - Tmp.v2.y, angle, charge);
-            }
-        }
-
-    }
-
-    private void findStaticWall(){
         Tile t = LaserUtils.linecastStaticWalls(start.x + Tmp.v1.x, start.y + Tmp.v1.y, angle, length);
-        //cast with static walls
-        if(t != null){
-            Tmp.v1.trns(angle, start.dst(t.worldx(), t.worldy()));
-            end.x = start.x + Tmp.v1.x;
-            end.y = start.y + Tmp.v1.y;
-            onStaticWall = true;
-        }else{
-            Tmp.v1.trns(angle, length);
-            end.set(start.x + Tmp.v1.x, start.y + Tmp.v1.y);
-            onStaticWall = false;
+        if(target != null && t != null){
+            if(target.dst2(start.x + Tmp.v1.x, start.y + Tmp.v1.y) < t.dst2(start.x + Tmp.v1.x, start.y + Tmp.v1.y)){
+                buildOrUnitCasted();
+            }
+            else
+                staticWallCasted(t);
+        }
+        else if(target != null){
+            buildOrUnitCasted();
+        }
+        else if(t != null){
+            staticWallCasted(t);
+        }
+        else{
+            nothingCasted();
         }
     }
 
