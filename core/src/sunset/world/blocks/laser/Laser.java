@@ -11,6 +11,7 @@ import mindustry.entities.*;
 import mindustry.gen.*;
 import mindustry.graphics.*;
 import mindustry.world.*;
+import mma.graphics.ModGeometry;
 import sunset.type.*;
 import sunset.utils.*;
 import sunset.world.blocks.laser.LaserBlock.*;
@@ -67,7 +68,7 @@ public class Laser{
     private void getEndOffset(Vec2 v){
         v.setZero();
         if(target instanceof Building b){
-            v.trns(angle, tilesize * b.block().size / 2f);
+            v.trns(angle, ModGeometry.sqrtDstByAngle(tilesize * b.block().size / 2f, angle));
         }else if(target instanceof Unit u){
             v.trns(angle, u.hitSize / 2f);
         }else if(onStaticWall){
@@ -93,8 +94,9 @@ public class Laser{
 
         Draw.alpha(charge);
 
+        float threshold = tilesize;
         //if we are too close to laser, draw from start to start
-        if(drawEnd.dst2(drawStart) <= tilesize){
+        if(drawEnd.dst2(drawStart) <= threshold * threshold){
             Drawf.laser(Core.atlas.find("minelaser"), laserEndRegion, laserEndRegion,
                         drawStart.x, drawStart.y, drawStart.x, drawStart.y);
         }else{
