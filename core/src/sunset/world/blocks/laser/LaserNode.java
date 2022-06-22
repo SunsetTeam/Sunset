@@ -80,12 +80,10 @@ public class LaserNode extends LaserBlock{
             lasers = new Lasers(this);
             super.init(tile, team, shouldAdd, rotation);
             //top
-            final float lasersOffset = size * tilesize * 0.75f;
             lasers.allLasers.add(new Laser(){{
                 angle = 90f;
                 build = LaserNodeBuild.this;
                 length = Math.max(Vars.world.width() * tilesize, Vars.world.height() * tilesize);
-                offset = lasersOffset;
                 start.set(build.tile.x * tilesize + build.block().offset, build.tile.y * tilesize + build.block().offset);
                 hitEffect = nodeHitEffect;
             }});
@@ -94,7 +92,6 @@ public class LaserNode extends LaserBlock{
                 angle = 180f;
                 build = LaserNodeBuild.this;
                 length = Math.max(Vars.world.width() * tilesize, Vars.world.height() * tilesize);
-                offset = lasersOffset;
                 start.set(build.tile.x * tilesize + build.block().offset, build.tile.y * tilesize + build.block().offset);
                 hitEffect = nodeHitEffect;
             }});
@@ -103,7 +100,6 @@ public class LaserNode extends LaserBlock{
                 angle = 0f;
                 build = LaserNodeBuild.this;
                 length = Math.max(Vars.world.width() * tilesize, Vars.world.height() * tilesize);
-                offset = lasersOffset;
                 start.set(build.tile.x * tilesize + build.block().offset, build.tile.y * tilesize + build.block().offset);
                 hitEffect = nodeHitEffect;
             }});
@@ -112,7 +108,6 @@ public class LaserNode extends LaserBlock{
                 angle = 270f;
                 build = LaserNodeBuild.this;
                 length = Math.max(Vars.world.width() * tilesize, Vars.world.height() * tilesize);
-                offset = lasersOffset;
                 start.set(build.tile.x * tilesize + build.block().offset, build.tile.y * tilesize + build.block().offset);
                 hitEffect = nodeHitEffect;
             }});
