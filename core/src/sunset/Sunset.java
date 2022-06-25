@@ -22,13 +22,14 @@ import sunset.content.*;
 import sunset.core.*;
 import sunset.gen.*;
 //import sunset.graphics.SnShaders;
+import sunset.graphics.*;
 import sunset.type.unitTypes.*;
 import sunset.ui.*;
 import sunset.utils.*;
 
 import static arc.Core.app;
 import static mindustry.Vars.*;
-import static mma.ModVars.modInfo;
+import static mma.ModVars.*;
 
 public class Sunset extends MMAMod{
 
@@ -162,9 +163,11 @@ public class Sunset extends MMAMod{
         }*/
 
         if(!headless){
+            SnVars.inTry(SnShaders::init);
             SnVars.inTry(SnMusics::load);
             SnVars.inTry(SnSounds::load);
         }
+        SnCacheLayer.init();
         ContentLoader prev = Vars.content;
         /*content=new ContentLoader(){
             @Override

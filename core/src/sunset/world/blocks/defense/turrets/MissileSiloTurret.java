@@ -29,9 +29,6 @@ import static mindustry.Vars.tilesize;
 
 public class MissileSiloTurret extends GenericCrafter {
 
-    static {
-    }
-
     public MissileType missile;
     public Effect launchEffect = Fx.none;
     public float maxRange;
@@ -177,6 +174,11 @@ public class MissileSiloTurret extends GenericCrafter {
                 }
             }
             return res * (rockets.length + 1);
+        }
+
+        @Override
+        public float maxRadius(){
+            return missile.splashDamageRadius;
         }
 
         public void tapTile(Player player, Tile tile) {

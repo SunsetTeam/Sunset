@@ -3,14 +3,14 @@ package sunset.io;
 import arc.util.io.Reads;
 import arc.util.io.Writes;
 import mindustry.annotations.Annotations;
-import mindustry.gen.Building;
+import mindustry.annotations.Annotations.*;
+import mindustry.gen.*;
 import mma.io.ModTypeIO;
-import sunset.type.DeliverState;
-import sunset.type.MissileType;
+import sunset.type.*;
 import sunset.world.blocks.units.Airport;
 import sunset.world.blocks.units.FireFightersStation.*;
 
-@Annotations.TypeIOHandler
+@TypeIOHandler
 public class SnTypeIO extends ModTypeIO {
     public static void writeMissileType(Writes write, MissileType type) {
         write.i(type == null ? -1 : type.id);
@@ -20,6 +20,9 @@ public class SnTypeIO extends ModTypeIO {
         int i = read.i();
         if (i == -1) return null;
         return MissileType.missileTypes.get(i);
+    }
+    public static mindustry.gen.Entityc readEntity(Reads read){
+        return ModTypeIO.readEntity(read);
     }
 
     public static void writeAirportBuild(Writes write, Airport.AirportBuild airportBuild) {
@@ -43,5 +46,11 @@ public class SnTypeIO extends ModTypeIO {
     }
     public static DeliverState readDeliverState(Reads read){
         return readEnum(read,DeliverState.values());
+    }
+    public static void writeBlockBulletState(Writes write, BlockBulletState state){
+        writeEnum(write,state);
+    }
+    public static BlockBulletState readBlockBulletState(Reads read){
+        return readEnum(read,BlockBulletState.values());
     }
 }

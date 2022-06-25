@@ -8,11 +8,9 @@ import mindustry.type.Category;
 import mindustry.type.ItemStack;
 import mindustry.type.LiquidStack;
 import mindustry.world.Block;
-import mindustry.world.draw.DrawDefault;
-import mindustry.world.draw.DrawMulti;
-import mindustry.world.draw.DrawRegion;
+import mindustry.world.draw.*;
 import mindustry.world.meta.BuildVisibility;
-import mma.world.draw.MultiDrawBlock;
+import sunset.content.SnFx;
 import sunset.world.blocks.laser.*;
 
 public class SnLasers {
@@ -25,6 +23,7 @@ public class SnLasers {
             buildVisibility = BuildVisibility.sandboxOnly;
             inputsLaser = false;
             outputsLaser = true;
+            nodeHitEffect = SnFx.alsLaserHit;
         }};
         laserNode = new LaserNode("laser-node"){{
             requirements(Category.distribution, ItemStack.with(Items.copper, 1));
@@ -33,6 +32,7 @@ public class SnLasers {
             inputsLaser = true;
             outputsLaser = true;
             heats = true;
+            nodeHitEffect = SnFx.alsLaserHit;
         }};
         laserKiln = new LaserCrafter("laser-kiln"){{
             requirements(Category.distribution, ItemStack.with(Items.copper, 1));
@@ -54,11 +54,12 @@ public class SnLasers {
             itemCapacity = 20;
 
             craftEffect = Fx.smeltsmoke;
-            drawer = new DrawMulti(new DrawRegion("-bottom"), new LaserKilnDrawer(){{
+
+            drawer = new DrawMulti(new DrawRegion("-bottom"),new DrawFlame()/*new LaserKilnDrawer(){{
                 startColor = Pal.darkerGray;
                 midColor = Pal.darkPyraFlame;
                 endColor = Pal.lightPyraFlame;
-            }}, new DrawDefault());
+            }}*/,new DrawDefault());
         }};
         /*
         laserWall = new LaserWall("laser-wall"){{

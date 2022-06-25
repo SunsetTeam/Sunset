@@ -10,6 +10,7 @@ public interface MissileSileBuild extends Buildingc {
     default void drawControlled() {
 
     }
+    float maxRadius();
      void drawActiveTerritory();
     void tapTile(Player player, Tile tile);
 }

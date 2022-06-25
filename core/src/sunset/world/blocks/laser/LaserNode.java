@@ -6,8 +6,11 @@ import arc.graphics.g2d.*;
 import arc.math.*;
 import arc.math.geom.*;
 import arc.scene.ui.layout.*;
+import arc.util.Tmp;
 import arc.util.io.*;
 import mindustry.*;
+import mindustry.content.Fx;
+import mindustry.entities.Effect;
 import mindustry.game.*;
 import mindustry.gen.*;
 import mindustry.graphics.*;
@@ -26,13 +29,14 @@ class LaserEnableStateStruct{
 
 /** Class for laser-transferring blocks.*/
 public class LaserNode extends LaserBlock{
+    public Effect nodeHitEffect = Fx.none;
     @SuppressWarnings("PointlessBitwiseExpression")
     public LaserNode(String name){
         super(name);
         update = true;
         configurable = true;
         solid = true;
-        clipSize = 500f;
+//        clipSize = 500f;
         config(Integer.class, (LaserNodeBuild b, Integer value) -> {
             //Log.info("config");
             b.rightOutput = (value & 0b0001) >> 0 == 1;
@@ -76,37 +80,36 @@ public class LaserNode extends LaserBlock{
             lasers = new Lasers(this);
             super.init(tile, team, shouldAdd, rotation);
             //top
-            final float lasersOffset = size * tilesize * 0.75f;
             lasers.allLasers.add(new Laser(){{
-                build = LaserNodeBuild.this;
                 angle = 90f;
+                build = LaserNodeBuild.this;
                 length = Math.max(Vars.world.width() * tilesize, Vars.world.height() * tilesize);
-                offset = lasersOffset;
-                start.set(tile.x * tilesize + block().offset, tile.y * tilesize + block().offset);
+                start.set(build.tile.x * tilesize + build.block().offset, build.tile.y * tilesize + build.block().offset);
+                hitEffect = nodeHitEffect;
             }});
             //left
             lasers.allLasers.add(new Laser(){{
-                build = LaserNodeBuild.this;
                 angle = 180f;
+                build = LaserNodeBuild.this;
                 length = Math.max(Vars.world.width() * tilesize, Vars.world.height() * tilesize);
-                offset = lasersOffset;
-                start.set(tile.x * tilesize + block().offset, tile.y * tilesize + block().offset);
+                start.set(build.tile.x * tilesize + build.block().offset, build.tile.y * tilesize + build.block().offset);
+                hitEffect = nodeHitEffect;
             }});
             //right
             lasers.allLasers.add(new Laser(){{
-                build = LaserNodeBuild.this;
                 angle = 0f;
+                build = LaserNodeBuild.this;
                 length = Math.max(Vars.world.width() * tilesize, Vars.world.height() * tilesize);
-                offset = lasersOffset;
-                start.set(tile.x * tilesize + block().offset, tile.y * tilesize + block().offset);
+                start.set(build.tile.x * tilesize + build.block().offset, build.tile.y * tilesize + build.block().offset);
+                hitEffect = nodeHitEffect;
             }});
             //down
             lasers.allLasers.add(new Laser(){{
-                build = LaserNodeBuild.this;
                 angle = 270f;
+                build = LaserNodeBuild.this;
                 length = Math.max(Vars.world.width() * tilesize, Vars.world.height() * tilesize);
-                offset = lasersOffset;
-                start.set(tile.x * tilesize + block().offset, tile.y * tilesize + block().offset);
+                start.set(build.tile.x * tilesize + build.block().offset, build.tile.y * tilesize + build.block().offset);
+                hitEffect = nodeHitEffect;
             }});
             return this;
         }
@@ -120,9 +123,14 @@ public class LaserNode extends LaserBlock{
         }
 
         @Override
+        public void drawLasers(){
+            super.drawLasers();
+            lasers.draw();
+        }
+
+        @Override
         public void draw(){
             drawer.draw(this);
-            lasers.draw();
             float z = Draw.z();
             Draw.z(Layer.blockOver);
             //трёхэтажный дебаг : )

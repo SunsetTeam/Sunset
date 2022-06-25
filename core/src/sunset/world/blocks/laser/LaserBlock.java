@@ -1,12 +1,15 @@
 package sunset.world.blocks.laser;
 
 import arc.*;
-import arc.graphics.g2d.TextureRegion;
+import arc.graphics.g2d.*;
+import arc.util.*;
 import mindustry.*;
 import mindustry.annotations.Annotations;
 import mindustry.game.*;
 import mindustry.game.EventType.*;
 import mindustry.gen.*;
+import mindustry.graphics.*;
+import mindustry.ui.*;
 import mindustry.world.Block;
 import mindustry.world.Tile;
 import mindustry.world.draw.*;
@@ -47,6 +50,15 @@ public class LaserBlock extends Block{
                 build.rightInput = false;
                 build.downInput = false;
             }
+        });
+        Events.run(Trigger.draw,()->{
+            Draw.draw(Layer.blockOver, () -> {
+
+                for(Building rawbuild : SnGroups.laserBuilds){
+                    LaserBuild build = (LaserBuild)rawbuild;
+                    build.drawLasers();
+                }
+            });
         });
     }
     public LaserBlock(String name) {
@@ -128,6 +140,10 @@ public class LaserBlock extends Block{
         @Override
         public LaserBlock block(){
             return (LaserBlock) this.block;
+        }
+
+        public void drawLasers(){
+
         }
     }
 }
