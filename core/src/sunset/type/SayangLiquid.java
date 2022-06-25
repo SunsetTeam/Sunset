@@ -16,7 +16,7 @@ public class SayangLiquid extends Liquid {
     public int puddles1 = 5;
     public int puddles2 = 2;
     public float puddleRot1 = 0.14f;
-    public float puddleRot2 = 0.9f;
+    public float puddleRot2 = 0.05f;
     public Color color1;
 
 
@@ -48,7 +48,7 @@ public class SayangLiquid extends Liquid {
             Fill.circle(
                     vx + Mathf.sin(Time.time + i * 532, sscl, smag),
                     vy + Mathf.sin(Time.time + i * 53, sscl, smag),
-                    f * rand.random(1f, 3.1f));
+                    f * rand.random(1f, 3.1f) * Time.time + rand.random(360));
         }
 
         Draw.z(z + 0.10f);
@@ -59,7 +59,7 @@ public class SayangLiquid extends Liquid {
             Fill.circle(
                     vx + Mathf.sin(Time.time + i * 532, sscl, smag),
                     vy + Mathf.sin(Time.time + i * 53, sscl, smag),
-                    f * rand.random(1.95f, 4.2f));
+                    f * rand.random(1.95f, 4.2f) * Time.time + rand.random(360));
 
         }
 
