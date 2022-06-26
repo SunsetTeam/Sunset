@@ -2,7 +2,9 @@ package sunset.world.blocks.laser;
 
 import arc.math.Mathf;
 import arc.scene.ui.layout.Table;
+import arc.util.*;
 import mindustry.Vars;
+import mindustry.entities.*;
 import mindustry.gen.Call;
 
 public class LaserWall extends LaserBlock{
@@ -23,19 +25,26 @@ public class LaserWall extends LaserBlock{
 
         @Override
         public void damage(float damage){
-            if (!this.dead()) {
-                float dm = Vars.state.rules.blockHealth(this.team);
-                if (Mathf.zero(dm)) {
-                    damage = this.health + 1.0F;
-                } else {
-                    damage /= (dm + multiplier);
-                }
+            if(dead()) return;
 
-                Call.tileDamage(this, this.health - this.handleDamage(damage));
-                if (this.health <= 0.0F) {
-                    Call.tileDestroyed(this);
-                }
+            float dm = Vars.state.rules.blockHealth(team);
+            lastDamageTime = Time.time;
 
+            if(Mathf.zero(dm)){
+                damage = health + 1;
+            }else{
+                damage = Damage.applyArmor(damage, block.armor) / dm;
+            }
+
+            //TODO handle this better on the client.
+            if(!Vars.net.client()){
+                health -= handleDamage(damage);
+            }
+
+            healthChanged();
+
+            if(health <= 0){
+                Call.buildDestroyed(self());
             }
         }
 

@@ -9,7 +9,7 @@ buildscript{
     ext{
         // v7
         mindustryPath = "com.github.Anuken.MindustryJitpack"
-        mindustryVersionFull = '68f053f409c999f0a66bc6ac30760c331b2c0d6c'
+        mindustryVersionFull = '6d5d45fdfa5888bcf26fc7245b27403ab54b184f'
         mindustryVersion = mindustryVersionFull.substring(0, 10)
         arcVersion = "ef9d6ac655"
 //        arcVersion = "916c5a77"

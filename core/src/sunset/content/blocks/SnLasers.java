@@ -14,7 +14,7 @@ import sunset.content.SnFx;
 import sunset.world.blocks.laser.*;
 
 public class SnLasers {
-    public static Block laserNode, laserSource /*, rotato */ /*, laserPrism *//*, laserWall*/, laserKiln;
+    public static Block laserNode, laserSource /*, rotato */ /*, laserPrism */, laserWall, laserKiln;
 
     public static void load() {
         laserSource = new LaserSource("laser-source"){{
@@ -61,7 +61,6 @@ public class SnLasers {
                 endColor = Pal.lightPyraFlame;
             }}*/,new DrawDefault());
         }};
-        /*
         laserWall = new LaserWall("laser-wall"){{
             requirements(Category.defense, ItemStack.with(Items.copper, 1));
             size = 2;
@@ -70,7 +69,6 @@ public class SnLasers {
             inputsLaser = true;
             outputsLaser = false;
         }};
-         */
         /*
         rotato = new RotatableLaserNode("rotato"){{
             requirements(Category.distribution, ItemStack.with(Items.copper, 1));
