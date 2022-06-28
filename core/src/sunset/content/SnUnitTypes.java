@@ -1,13 +1,16 @@
 package sunset.content;
 
 import arc.graphics.*;
+import arc.math.Mathf;
 import arc.util.*;
 import mindustry.*;
 import mindustry.ai.types.*;
 import mindustry.annotations.Annotations.*;
 import mindustry.content.*;
+import mindustry.entities.abilities.MoveEffectAbility;
 import mindustry.entities.bullet.*;
 import mindustry.entities.effect.*;
+import mindustry.entities.part.RegionPart;
 import mindustry.gen.*;
 import mindustry.graphics.*;
 import mindustry.type.*;
@@ -28,6 +31,7 @@ import sunset.type.weapons.*;
 
 import static mindustry.Vars.tilePayload;
 import static mindustry.Vars.tilesize;
+import static mindustry.gen.Nulls.unit;
 
 public class SnUnitTypes{
     public static UnitType
@@ -44,6 +48,8 @@ public class SnUnitTypes{
     yellowT1, yellowT2, yellowT3, yellowT4, yellowT5,
     //region azaria - coreUnits
     petal, bud, snag,
+    //hover
+    gleam,
     //misc
     router;
     //other
@@ -1390,6 +1396,66 @@ public class SnUnitTypes{
             }});
         }};
         //endregion azaria - coreUnits
+        //hover
+        gleam = new SnUnitType("gleam"){{
+            hovering = true;
+            health = 120;
+            hitSize = 13f;
+            shadowElevation = 0.3f;
+            armor = 1.4f;
+            engineSize = 0f;
+
+            drag = 0.09f;
+            speed = 2.6f;
+            rotateSpeed = 5f;
+
+            canHeal = true;
+
+            constructor = UnitEntity::create;
+
+            itemCapacity = 10;
+            parts.add(new RegionPart("-hover"){{
+                layer = 101f;
+                layerOffset = -0.001f;
+                color = Pal.heal;
+                outline = false;
+            }});
+            weapons.add(new WeaponExt("gleam-weapon"){{
+                x = -4.3f;
+                y = 2f;
+                top = true;
+                mirror = true;
+                outlines = false;
+                baseRotation = 3;
+                shootSound = Sounds.lasershoot;
+                reload = 25;
+                bullet = new MissileBulletType(3.4f, 10){{
+                    lifetime = 25f;
+                    healPercent = 1.2f;
+                    collidesTeam = true;
+                    backColor = Pal.heal;
+                    frontColor = Pal.heal;
+                    fragBullets = 5;
+                    trailEffect = Fx.chainEmp;
+                    trailColor = Pal.heal;
+                    trailInterval = 2;
+                    hitSound = Sounds.none;
+                    hitEffect = Fx.heal;
+                    fragBullet = new BasicBulletType(2.5f, 8){{
+                        lifetime = 45f;
+                        healPercent = 2.5f;
+                        collidesTeam = true;
+                        homingPower = 0.08f;
+                        homingRange = 45f;
+                        backColor = frontColor = trailColor = Pal.heal;
+                        weaveMag = 2.3f;
+                        weaveScale = 2f;
+                        trailEffect = Fx.trailFade;
+                        trailLength = 8;
+                    }};
+                }};
+            }});
+        }};
         //region misc
         router = new UnitTypeExt("router"){
             {
