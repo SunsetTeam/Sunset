@@ -17,7 +17,7 @@ public class SnPayloadBlocks {
 
     public static void load(){
 
-        zeusRocket = new Ammunition("zeus-rocket"){{
+        zeusRocket = new Ammunition("zeus-missile"){{
             buildVisibility = BuildVisibility.editorOnly;
             explosionRadius = 30;
             explosionDamage = 40;
