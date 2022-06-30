@@ -79,7 +79,6 @@ public class SnVars extends ModVars{
         SnGas::load,
         SnStatusEffects::load,
         SnLiquids::load,
-        SnPayload::load,
         SnBullets::load,
         SnUnitTypes::load,
         new SnBlocks(),

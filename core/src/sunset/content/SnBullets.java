@@ -13,13 +13,17 @@ import mindustry.content.*;
 import mindustry.entities.Effect;
 import mindustry.entities.Lightning;
 import mindustry.entities.Units;
+import mindustry.entities.abilities.MoveEffectAbility;
 import mindustry.entities.bullet.*;
+import mindustry.entities.effect.MultiEffect;
 import mindustry.gen.Bullet;
 import mindustry.gen.Hitboxc;
 import mindustry.gen.Sounds;
 import mindustry.gen.Unit;
 import mindustry.graphics.Layer;
 import mindustry.graphics.Pal;
+import mindustry.type.Weapon;
+import mindustry.type.unit.MissileUnitType;
 import mma.*;
 import sunset.entities.bullet.*;
 import sunset.gen.SnSounds;
@@ -35,6 +39,7 @@ public class SnBullets {
         forsBullet, eriusBullet,
         sniperSurge,
         //missile
+        zeusRocket,
         nobiumAimMissile, naturiteAimMissile, renubiteAimMissile,
         //artillery
         //flak
@@ -82,6 +87,7 @@ public class SnBullets {
             shootEffect = Fx.shootBig;
             trailLength = 4;
             trailWidth = 1.2f;
+            trailColor = SnPal.forsBulletBack;
             maxRange = 128;
             collidesGround = true;
             collidesAir = true;
@@ -91,6 +97,7 @@ public class SnBullets {
             height = 16f;
             backColor = SnPal.eriusBulletBack;
             frontColor = SnPal.eriusBullet;
+            trailColor = SnPal.eriusBulletBack;
             shootEffect = Fx.shootBig;
             trailLength = 5;
             trailWidth = 1.2f;
@@ -150,6 +157,52 @@ public class SnBullets {
         };
 
         //region missile
+        zeusRocket = new BasicBulletType(0f, 1){{
+            shootEffect = Fx.shootBig;
+            smokeEffect = SnFx.shootZeusMissile;
+
+            spawnUnit = new MissileUnitType("zeus-missile"){{
+                homingPower = 0.2f;
+                homingRange = 10f * Vars.tilesize;
+                speed = 5.4f;
+                maxRange = 6f;
+                lifetime = 4.7f * Time.toSeconds;
+                engineColor = trailColor = Pal.redLight;
+                engineLayer = Layer.effect;
+                engineSize = 3.1f;
+                engineOffset = 5f;
+                rotateSpeed = 0f;
+                trailColor = Pal.lightPyraFlame;
+                trailLength = 10;
+                lowAltitude = true;
+                collidesGround = false;
+                targetGround = false;
+                targetAir = true;
+                collidesAir = true;
+
+                health = 90;
+
+                weapons.add(new Weapon(){{
+                    shootCone = 360f;
+                    mirror = false;
+                    reload = 1f;
+                    deathExplosionEffect = Fx.massiveExplosion;
+                    shootOnDeath = true;
+                    shake = 4f;
+                    bullet = new ExplosionBulletType(200f, 20f){{
+                        hitColor = Pal.redLight;
+                        shootEffect = Fx.massiveExplosion;
+                    }};
+                }});
+
+                abilities.add(new MoveEffectAbility(){{
+                    effect = SnFx.zeuxRocketSmoke;
+                    y = -5f;
+                    interval = 7f;
+                }});
+            }};
+        }};
+
         nobiumAimMissile = new AimBulletType(3f, 55f){{
             sprite = "missile";
             width = 13;

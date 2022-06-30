@@ -18,13 +18,16 @@ import mindustry.gen.Sounds;
 import mindustry.graphics.Pal;
 import mindustry.type.Category;
 import mindustry.world.Block;
+import mindustry.world.blocks.defense.turrets.PayloadAmmoTurret;
 import mindustry.world.consumers.ConsumeLiquidBase;
+import mindustry.world.draw.DrawTurret;
 import mindustry.world.meta.BlockFlag;
 import mindustry.world.meta.BuildVisibility;
 import sunset.content.SnBullets;
 import sunset.content.SnFx;
 import sunset.content.SnItems;
 import sunset.content.SnLiquids;
+import sunset.content.blocks.SnPayloadBlocks;
 import sunset.entities.bullet.ArtilleryLightningBulletType;
 import sunset.entities.bullet.EnergySphereBulletType;
 import sunset.entities.pattern.ShootMultiBarrel;
@@ -42,7 +45,7 @@ public class SnTurrets{
     firstTurret, excellence, carbine, pulsation, reflection, discharge,
 
     //3x3
-    major, artLightTurret, trigger,
+    major, artLightTurret, zeus, trigger,
 
     //4x4
     shotgunTurret, admiral, ammirus, flood, chain,
@@ -67,6 +70,7 @@ public class SnTurrets{
 
         //region 2x2
         firstTurret = new ModItemTurret("firs-turret"){{
+            requirements(Category.turret, with(SnItems.fors, 50, SnItems.erius, 40));
             size = 2;
             reload = 37f;
             range = 16 * Vars.tilesize;
@@ -248,13 +252,36 @@ public class SnTurrets{
             rotateSpeed = 6f;
             consumePower(3.5f);
             targetAir = true;
-            range = 170f;
+            range = 190f;
             shootEffect = Fx.lightningShoot;
             recoil = 1f;
             size = 3;
             health = 460;
             shootSound = Sounds.spark;
             reloadBar = true;
+        }};
+
+        zeus = new PayloadAmmoTurret("h-zeus"){{
+            requirements(Category.turret, with(SnItems.fors, 170f, SnItems.erius, 150f, SnItems.anzar, 80f));
+            ammo(
+                    SnPayloadBlocks.zeusRocket, SnBullets.zeusRocket
+            );
+            size = 3;
+            shoot.shots = 1;
+            inaccuracy = 3f;
+            range = 23f * Vars.tilesize;
+            shootCone = 10f;
+            rotateSpeed = 5f;
+            reload = 20f;
+            recoil = 3f;
+            targetAir = true;
+            targetGround = false;
+            maxAmmo = 3;
+            consumePower(1f);
+
+            drawer = new DrawTurret("heavy-"){{
+
+            }};
         }};
 
         trigger = new ModPowerTurret("trigger") {{
