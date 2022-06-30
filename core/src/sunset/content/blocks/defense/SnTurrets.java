@@ -25,7 +25,9 @@ import sunset.content.SnBullets;
 import sunset.content.SnFx;
 import sunset.content.SnItems;
 import sunset.content.SnLiquids;
+import sunset.entities.bullet.ArtilleryLightningBulletType;
 import sunset.entities.bullet.EnergySphereBulletType;
+import sunset.entities.pattern.ShootMultiBarrel;
 import sunset.graphics.SnPal;
 import sunset.type.MissileType;
 import sunset.world.blocks.defense.turrets.*;
@@ -37,10 +39,10 @@ import static mma.ModVars.fullName;
 public class SnTurrets{
     public static Block
     //2x2
-    excellence, carbine, pulsation, reflection, discharge,
+    firstTurret, excellence, carbine, pulsation, reflection, discharge,
 
     //3x3
-    payloadTurret, artLightTurret, trigger,
+    major, artLightTurret, trigger,
 
     //4x4
     shotgunTurret, admiral, ammirus, flood, chain,
@@ -64,8 +66,28 @@ public class SnTurrets{
     public static void load() {
 
         //region 2x2
+        firstTurret = new ModItemTurret("firs-turret"){{
+            size = 2;
+            reload = 37f;
+            range = 16 * Vars.tilesize;
+            recoil = 1.4f;
+            inaccuracy = 4f;
+            rotateSpeed = 6f;
+            shootCone = 3f;
+            shootSound = Sounds.shoot;
+            ammoUseEffect = Fx.casing1;
+            targetAir = true;
+            targetGround = true;
+            ammo(
+                    SnItems.fors, SnBullets.forsBullet,
+                    SnItems.erius, SnBullets.eriusBullet
+            );
+
+            shoot.shotDelay = 4f;
+            shoot.shots = 3;
+        }};
         excellence = new ModPowerTurret("excellence") {{
-            requirements(Category.turret, with(SnItems.fors, 70, Items.lead, 60, Items.silicon, 40));
+            requirements(Category.turret, with(SnItems.fors, 70, SnItems.erius, 60, SnItems.naturite, 40));
             size = 2;
             reload = 50f;
             range = 175f;
@@ -75,7 +97,7 @@ public class SnTurrets{
             shootCone = 3f;
             shootSound = Sounds.laser;
             ammoUseEffect = Fx.casing1;
-            targetAir = true;
+            targetAir = false;
             shootType = new BasicBulletType(3f, 60) {{
                 sprite = fullName("circle-bullet");
                 shrinkX = 0f;
@@ -108,10 +130,33 @@ public class SnTurrets{
             }};//SnBullets.mediumEnergySphere;
             shoot.firstShotDelay = 30f;//chargeTime = 30f;
             //chargeMaxDelay = 30f;
-            consumePower(3f);
+            consumePower(2f);
+        }};
+        reflection = new ModItemTurret("reflection") {{
+            requirements(Category.turret, with(SnItems.fors, 85, SnItems.erius, 80, SnItems.naturite, 50));
+            ammo(
+                    SnItems.naturite, SnBullets.naturiteCircleBullet,
+                    SnItems.anzar, SnBullets.anzarCircleBullet
+            );
+            health = 780;
+            size = 2;
+            shoot.shots = 4;
+            reload = 55f;
+            range = 160f;
+            recoil = 1.1f;
+            cooldownTime = 0.02f;
+            velocityRnd = 0.2f;
+            recoilTime = ((recoilTime == -1) ? reload : recoilTime) / 0.01f;//restitution = 0.01f;
+            inaccuracy = 20f;
+            rotateSpeed = 7f;
+            shootCone = 2f;
+            shootSound = Sounds.flame;
+            ammoUseEffect = Fx.casing1;
+            targetAir = true;
+            targetGround = true;
         }};
         carbine = new ChainLightningTurret("carbine") {{
-            requirements(Category.turret, with(Items.copper, 150, Items.lead, 140, Items.surgeAlloy, 60, SnItems.nobium, 90, SnItems.naturite, 120));
+            requirements(Category.turret, with(SnItems.fors, 160, SnItems.erius, 140, SnItems.naturite, 60, SnItems.zerinium, 90));
             range = 132.2f;
             damage = 1.4f;
             health = 900;
@@ -144,54 +189,10 @@ public class SnTurrets{
             targetGround = false;
             reloadBar = false;
         }};
-        reflection = new ModItemTurret("reflection") {{
-            requirements(Category.turret, with(Items.copper, 95, SnItems.fors, 55, SnItems.naturite, 50, SnItems.nobium, 25));
-            ammo(
-                    SnItems.naturite, SnBullets.naturiteCircleBullet,
-                    SnItems.anzar, SnBullets.anzarCircleBullet
-            );
-            health = 780;
-            size = 2;
-            shoot.shots = 4;
-            reload = 55f;
-            range = 160f;
-            recoil = 1.1f;
-            cooldownTime = 0.02f;
-            velocityRnd = 0.2f;
-            recoilTime = ((recoilTime == -1) ? reload : recoilTime) / 0.01f;//restitution = 0.01f;
-            inaccuracy = 20f;
-            rotateSpeed = 7f;
-            shootCone = 2f;
-            shootSound = Sounds.flame;
-            ammoUseEffect = Fx.casing1;
-            targetAir = true;
-            targetGround = true;
-        }};
-        discharge = new ModPowerTurret("discharge") {{
-            requirements(Category.turret, with(Items.silicon, 150, Items.graphite, 75));
-            shootType = new LightningBulletType() {{
-                damage = 14;
-                lightningLength = 39;
-                collidesAir = false;
-                ammoMultiplier = 1f;
-            }};
-            reload = 7.1f;
-            shootCone = 10f;
-            rotateSpeed = 8f;
-            consumePower(5.2f);
-            targetAir = false;
-            range = 144f;
-            shootEffect = Fx.lightningShoot;
-            heatColor = Color.red;
-            recoil = 1f;
-            size = 2;
-            health = 460;
-            shootSound = Sounds.spark;
-            reloadBar = false;
-        }};
         //endregion 2x2
         //region 3x3
-       /* major = new MultiBarrelItemTurret("major"){{
+        /*
+        major = new MultiBarrelItemTurret("major"){{
             requirements(Category.turret, with(Items.plastanium, 175, Items.titanium, 75, Items.metaglass, 50, SnItems.naturite, 30));
             ammo(
             Items.blastCompound, SnBullets.bigBlastBlast,
@@ -226,27 +227,36 @@ public class SnTurrets{
 
             speedupPerShot = 0.15f;
             maxReloadMultiplier = 2f;
-        }};*/
-        /*
+        }};
+
+         */
+
         artLightTurret = new ModPowerTurret("art-light-turret"){{
-            requirements(Category.turret, with(Items.silicon, 150, Items.graphite, 75));
-            shootType = SnBullets.shotArtLight;
+            requirements(Category.turret, with(SnItems.fors, 150, SnItems.naturite, 100, SnItems.anzar, 75));
+            shootType = new ArtilleryLightningBulletType(50f){{
+                hitShake = 3f;
+                lightning = 3;
+                lightningColor = SnPal.yellowTrailBack;
+                maxRange = 200;
+                hitEffect = SnFx.lbHit;
+                despawnEffect = Fx.none;
+            }};
             shoot.shots = 1;
             inaccuracy = 6f;
             reload = 40f;
             shootCone = 10f;
             rotateSpeed = 6f;
-            consumePower(4f);
+            consumePower(3.5f);
             targetAir = true;
             range = 170f;
             shootEffect = Fx.lightningShoot;
             recoil = 1f;
-            size = 2;
+            size = 3;
             health = 460;
             shootSound = Sounds.spark;
             reloadBar = true;
         }};
-         */
+
         trigger = new ModPowerTurret("trigger") {{
             requirements(Category.turret, with(Items.silicon, 275, Items.titanium, 125, SnItems.enojie, 45));
             size = 3;
@@ -379,23 +389,6 @@ public class SnTurrets{
             laserColor = SnPal.chainLaser;
             consume(new TimeScaleConsume());
         }};
-        drr = new ModItemTurret("drr") {{
-            shoot = new ShootSpread(5, 0);
-            hideDetails = false;
-            size = 4;
-            health = 14000;
-            buildVisibility = BuildVisibility.debugOnly;
-            ammo(SnItems.flameid, SnBullets.drrRocket);
-            range = 50 * Vars.tilesize;
-            reload = 0.5f * Time.toSeconds;
-            shoot.shotDelay = 0.1f * Time.toSeconds;//burstSpacing = 0.1f * Time.toSeconds;
-            category = Category.turret;
-            inaccuracy = 0;
-
-            shake = 2f;
-            shootSound = Sounds.missile;
-            shootEffect = Fx.fireSmoke;
-        }};
         //endregion 4x4
         sniper = new ModItemTurret("sniper") {{
             requirements(Category.turret, with(Items.copper, 1200, SnItems.fors, 700, Items.surgeAlloy, 600, SnItems.naturite, 500, Items.silicon, 400, SnItems.nobium, 250));
@@ -492,42 +485,6 @@ public class SnTurrets{
                 ;
             };
             reloadBar = false;
-        }};
-
-        radius = new MinigunTurret("radius") {{
-            requirements(Category.turret, with(Items.copper, 2500, Items.graphite, 1700, Items.surgeAlloy, 1450, Items.plastanium, 955, SnItems.enojie, 620));
-            ammo(
-                    Items.graphite, SnBullets.heavyStandardDense,
-                    Items.pyratite, SnBullets.heavyStandardIncendiary,
-                    Items.thorium, SnBullets.heavyStandardThorium,
-                    Items.blastCompound, SnBullets.standardBlastBig,
-                    SnItems.fors, SnBullets.standardForsBig,
-                    SnItems.reneubite, SnBullets.reneubiteBlast
-            );
-            reload = 4f;
-            coolantMultiplier = 0.5f;
-            recoilTime = ((recoilTime == -1) ? reload : recoilTime) / 0.15f;//restitution = 0.15f;
-            ammoUseEffect = Fx.casing3;
-            range = 50.0f * Vars.tilesize;
-            inaccuracy = 3f;
-            inaccuracyUp = 0.4f;
-            recoil = 2.7f;
-
-            shoot = new ShootAlternate(16f) {{
-                shots = 2;
-            }};
-            shake = 4f;
-
-            size = 6;
-            shootCone = 24f;
-            shootSound = Sounds.shootBig;
-            maxShootTime = 3f * Time.toSeconds;
-
-            health = 160 * size * size;
-            coolant = consumeCoolant(0.9f);
-
-            reloadBar = false;
-            debug = true;
         }};
         //region 7x7
         halberd = new ModPowerTurret("halberd") {{

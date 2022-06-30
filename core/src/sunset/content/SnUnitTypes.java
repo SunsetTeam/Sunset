@@ -88,7 +88,6 @@ public class SnUnitTypes{
                 inaccuracy = 2f;
                 rotate = false;
                 mirror = true;
-                bullet = SnBullets.mirageGunBullet;
             }});
             stages.add(
             new BerserkStage(){{
@@ -129,7 +128,6 @@ public class SnUnitTypes{
                 alternate = true;
                 mirror = true;
                 inaccuracy = 2f;
-                bullet = SnBullets.mirageGunBullet;
             }}
             );
         }};
