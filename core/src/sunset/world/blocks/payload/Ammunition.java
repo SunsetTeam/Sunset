@@ -36,7 +36,7 @@ public class Ammunition extends Block {
 
     @Override
     public TextureRegion[] icons(){
-        return new TextureRegion[]{region, ammunitionRegion};
+        return new TextureRegion[]{ammunitionRegion, region};
     }
 
     public class AmmunitionBuild extends Building {
