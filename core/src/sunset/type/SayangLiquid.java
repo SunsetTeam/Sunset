@@ -38,9 +38,10 @@ public class SayangLiquid extends Liquid {
         Fill.circle(x + Mathf.sin(Time.time + id * 532, sscl, smag), y + Mathf.sin(Time.time + id * 53, sscl, smag), f * 8f);
 
         float length = f * 6f;
+        Draw.z(z + 0.05f);
         Draw.color(color1);
         for(int i = 0; i < puddles1; i++){
-            Tmp.v1.trns(rand.random(360f) + Time.time * puddleRot1 * rand.random(3.5f, 6.8f), rand.random(length));
+            Tmp.v1.trns(rand.random(360f) + Time.time * puddleRot1 * rand.random(3.5f, 6.8f) * (rand.nextBoolean() ? 1 : -1), rand.random(length));
             float vx = x + Tmp.v1.x, vy = y + Tmp.v1.y;
             float r = (Time.time + rand.random(80)) % 80;
             r = Math.abs((r * 2f) - 80) / 80;
@@ -54,7 +55,7 @@ public class SayangLiquid extends Liquid {
         Draw.z(z + 0.10f);
         Draw.color(color1, color, 0.15f);
         for(int i = 0; i < 2; i++){
-            Tmp.v1.trns(rand.random(360f) + Time.time * puddleRot2 * rand.random(2.5f, 5.8f), rand.random(length));
+            Tmp.v1.trns(rand.random(360f) + Time.time * puddleRot2 * rand.random(2.5f, 5.8f) * (rand.nextBoolean() ? 1 : -1), rand.random(length));
             float vx = x + Tmp.v1.x, vy = y + Tmp.v1.y;
             float r = (Time.time + rand.random(140)) % 120;
             r = Math.abs((r * 2f) - 120) / 120;
