@@ -2,6 +2,7 @@ package sunset.content.blocks;
 
 import mindustry.content.Blocks;
 import mindustry.content.Items;
+import mindustry.type.Category;
 import mindustry.world.Block;
 import mindustry.world.meta.BuildVisibility;
 import sunset.world.blocks.payload.Ammunition;
@@ -19,8 +20,11 @@ public class SnPayloadBlocks {
 
         zeusRocket = new Ammunition("zeus-missile"){{
             buildVisibility = BuildVisibility.sandboxOnly;
+            category = Category.units;
+
             explosionRadius = 30;
             explosionDamage = 40;
+            size = 3;
         }};
     }
 }

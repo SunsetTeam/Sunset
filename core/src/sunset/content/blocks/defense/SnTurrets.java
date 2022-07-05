@@ -269,14 +269,14 @@ public class SnTurrets{
             size = 3;
             shoot.shots = 1;
             inaccuracy = 3f;
-            range = 23f * Vars.tilesize;
+            range = 25f * Vars.tilesize;
             shootCone = 10f;
             rotateSpeed = 5f;
-            reload = 20f;
+            reload = 40f;
             recoil = 3f;
             targetAir = true;
             targetGround = false;
-            maxAmmo = 3;
+            maxAmmo = 2;
             consumePower(1f);
 
             drawer = new DrawTurret("heavy-"){{

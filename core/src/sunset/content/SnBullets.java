@@ -157,50 +157,19 @@ public class SnBullets {
         };
 
         //region missile
-        zeusRocket = new BasicBulletType(0f, 1){{
+        zeusRocket = new BasicBulletType(5.4f, 40f){{
             shootEffect = Fx.shootBig;
             smokeEffect = SnFx.shootZeusMissile;
-
-            spawnUnit = new MissileUnitType("zeus-missile"){{
-                homingPower = 0.2f;
-                homingRange = 10f * Vars.tilesize;
-                speed = 5.4f;
-                maxRange = 6f;
-                lifetime = 4.7f * Time.toSeconds;
-                engineColor = trailColor = Pal.redLight;
-                engineLayer = Layer.effect;
-                engineSize = 3.1f;
-                engineOffset = 5f;
-                rotateSpeed = 0f;
-                trailColor = Pal.lightPyraFlame;
-                trailLength = 10;
-                lowAltitude = true;
-                collidesGround = false;
-                targetGround = false;
-                targetAir = true;
-                collidesAir = true;
-
-                health = 90;
-
-                weapons.add(new Weapon(){{
-                    shootCone = 360f;
-                    mirror = false;
-                    reload = 1f;
-                    deathExplosionEffect = Fx.massiveExplosion;
-                    shootOnDeath = true;
-                    shake = 4f;
-                    bullet = new ExplosionBulletType(200f, 20f){{
-                        hitColor = Pal.redLight;
-                        shootEffect = Fx.massiveExplosion;
-                    }};
-                }});
-
-                abilities.add(new MoveEffectAbility(){{
-                    effect = SnFx.zeuxRocketSmoke;
-                    y = -5f;
-                    interval = 7f;
-                }});
-            }};
+            homingPower = 0.2f;
+            homingRange = 10f * Vars.tilesize;
+            maxRange = 210f;
+            lifetime = 4.7f * Time.toSeconds;
+            trailColor = Pal.lightPyraFlame;
+            trailLength = 10;
+            collidesGround = false;
+            collidesAir = true;
+            splashDamage = 200f;
+            splashDamageRadius = 40f;
         }};
 
         nobiumAimMissile = new AimBulletType(3f, 55f){{
