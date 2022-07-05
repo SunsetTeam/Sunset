@@ -21,7 +21,6 @@ public class SnPayloadBlocks {
         zeusRocket = new Ammunition("zeus-missile"){{
             buildVisibility = BuildVisibility.sandboxOnly;
             category = Category.units;
-
             explosionRadius = 30;
             explosionDamage = 40;
             size = 3;
