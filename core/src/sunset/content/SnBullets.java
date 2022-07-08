@@ -157,7 +157,7 @@ public class SnBullets {
         };
 
         //region missile
-        zeusRocket = new BasicBulletType(5.4f, 40f){{
+        zeusRocket = new BasicBulletType(5.4f, 30f){{
             shootEffect = Fx.shootBig;
             smokeEffect = SnFx.shootZeusMissile;
             homingPower = 0.2f;
@@ -165,11 +165,11 @@ public class SnBullets {
             maxRange = 210f;
             lifetime = 4.7f * Time.toSeconds;
             trailColor = Pal.lightPyraFlame;
-            trailLength = 10;
+            trailLength = 9;
             collidesGround = false;
             collidesAir = true;
-            splashDamage = 200f;
-            splashDamageRadius = 40f;
+            splashDamage = 130f;
+            splashDamageRadius = 30f;
         }};
 
         nobiumAimMissile = new AimBulletType(3f, 55f){{
