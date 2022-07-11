@@ -36,6 +36,8 @@ public class LaserNode extends LaserBlock{
         update = true;
         configurable = true;
         solid = true;
+        rotate = true;
+        rotateDraw = false;
 //        clipSize = 500f;
         config(Integer.class, (LaserNodeBuild b, Integer value) -> {
             //Log.info("config");
@@ -200,11 +202,14 @@ public class LaserNode extends LaserBlock{
             int state = LaserNode.getState(rightOutput, topOutput, leftOutput, downOutput);
             configure(state);
         }
-
+        //todo fix considering rotation
+        /*
         @Override
         public Integer config(){
             return LaserNode.getState(rightOutput, topOutput, leftOutput, downOutput);
         }
+
+         */
 
         @Override
         @SuppressWarnings("PointlessBitwiseExpression")
