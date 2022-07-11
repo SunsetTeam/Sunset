@@ -63,13 +63,13 @@ public class LaserNode extends LaserBlock{
     }
 
     @SuppressWarnings("PointlessBitwiseExpression")
-    protected static void configureState(LaserNodeBuild build, boolean right, boolean top, boolean left, boolean down){
+    protected static int getState(boolean right, boolean top, boolean left, boolean down){
         int state = 0;
         if(right) state += 1 << 0;
         if(top) state += 1 << 1;
         if(left) state += 1 << 2;
         if(down) state += 1 << 3;
-        build.configure(state);
+        return state;
     }
 
     public class LaserNodeBuild extends LaserBuild{
@@ -197,7 +197,13 @@ public class LaserNode extends LaserBlock{
         }
 
         private void configureState(){
-            LaserNode.configureState(this, rightOutput, topOutput, leftOutput, downOutput);
+            int state = LaserNode.getState(rightOutput, topOutput, leftOutput, downOutput);
+            configure(state);
+        }
+
+        @Override
+        public Integer config(){
+            return LaserNode.getState(rightOutput, topOutput, leftOutput, downOutput);
         }
 
         @Override
