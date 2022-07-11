@@ -186,6 +186,18 @@ public class SnFx {
         Drawf.light(e.x, e.y, 1.8f, SnPal.redBomb, e.fout());
     }),
 
+    shootZeusMissile = new Effect(100f, 250f, e -> {
+        color(Pal.darkPyraFlame);
+        alpha(0.5f);
+        rand.setSeed(e.id);
+        for(int i = 0; i < 25; i++){
+            Tmp.v1.trns(e.rotation + rand.range(14f), rand.random(e.finpow() * 90f)).add(rand.range(2f), rand.range(2f));
+            e.scaled(e.lifetime * rand.random(0.2f, 1f), b -> {
+                Fill.circle(e.x + Tmp.v1.x, e.y + Tmp.v1.y, b.fout() * 5f + 0.2f);
+            });
+        }
+    }),
+
     copterShoot = new Effect(12, e -> {
         color(SnPal.copterLaser, e.fin());
         stroke(e.fout() * 1.2f + 0.5f);
@@ -484,6 +496,26 @@ public class SnFx {
             lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 4f + e.fout() * 8f);
         });
     }),
+
+    zeuxRocketSmoke = new Effect(140f, 250f, b -> {
+        float intensity = 2f;
+
+        color(b.color, 0.7f);
+        for(int i = 0; i < 2; i++){
+            rand.setSeed(b.id*2 + i);
+            float lenScl = rand.random(0.3f, 0.8f);
+            int fi = i;
+            b.scaled(b.lifetime * lenScl, e -> {
+                randLenVectors(e.id + fi - 1, e.fin(Interp.pow10Out), (int)(2.4f * intensity), 9f * intensity, (x, y, in, out) -> {
+                    float fout = e.fout(Interp.pow5Out) * rand.random(0.3f, 0.8f);
+                    float rad = fout * ((1.5f + intensity) * 2f);
+
+                    Fill.circle(e.x + x, e.y + y, rad);
+                    Drawf.light(e.x + x, e.y + y, rad * 2f, b.color, 0.5f);
+                });
+            });
+        }
+    }).layer(Layer.bullet - 1f),
 
     bigRocketTrail = new Effect(36f, 78f, e -> {
         color(Pal.lightPyraFlame, Color.lightGray, e.fin() * e.fin());

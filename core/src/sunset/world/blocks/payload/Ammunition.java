@@ -22,11 +22,6 @@ public class Ammunition extends Block {
     public int explosionDamage = 70;
     public Effect explodeEffect = SnFx.sunriseMissileExplosion;
 
-    public float layer = Layer.block;
-
-    @Load("@name")
-    public TextureRegion ammunitionRegion;
-
     public Ammunition(String name) {
         super(name);
         health = 50;
@@ -36,20 +31,7 @@ public class Ammunition extends Block {
         buildVisibility = BuildVisibility.sandboxOnly;
     }
 
-    @Override
-    public TextureRegion[] icons(){
-        return !ModVars.packSprites ? new TextureRegion[]{region} : new TextureRegion[]{region, ammunitionRegion};
-    }
-
     public class AmmunitionBuild extends Building {
-        @Override
-        public void draw() {
-            Draw.z(layer);
-            Drawf.shadow(ammunitionRegion,x - layer, y - layer);
-            Draw.z(Layer.block);
-            Draw.rect(ammunitionRegion, x, y);
-        }
-
         @Override
         public void onDestroyed(){
             super.onDestroyed();

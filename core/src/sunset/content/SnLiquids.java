@@ -18,7 +18,7 @@ public class SnLiquids {
                 barColor = Color.valueOf("d14960");
                 effect = StatusEffects.wet;
             }};
-        sayang = new SayangLiquid("sayang", Color.valueOf("fdc25c"), Color.valueOf("CA8C20")) {
+        sayang = new SayangLiquid("sayang", Color.valueOf("fdc25c"), Color.valueOf("e5804b")) {
             {
                viscosity = 0.7f;
                explosiveness = 0.1f;

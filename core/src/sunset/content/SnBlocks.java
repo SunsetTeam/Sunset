@@ -16,6 +16,7 @@ import static mindustry.type.ItemStack.with;
 
 public class SnBlocks implements Runnable{
     public Runnable[] list = {
+    SnPayloadBlocks::load,
     SnProjectors::load,
     SnTurrets::load,
     SnWalls::load,
