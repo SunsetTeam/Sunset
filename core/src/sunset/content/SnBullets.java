@@ -39,6 +39,7 @@ public class SnBullets {
         forsBullet, eriusBullet,
         sniperSurge,
         //missile
+    //TODO replace by block version
         zeusRocket,
         nobiumAimMissile, naturiteAimMissile, renubiteAimMissile,
         //artillery

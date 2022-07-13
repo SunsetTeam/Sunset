@@ -9,9 +9,9 @@ buildscript{
     ext{
         // v7
         mindustryPath = "com.github.Anuken.MindustryJitpack"
-        mindustryVersionFull = '6d5d45fdfa5888bcf26fc7245b27403ab54b184f'
+        mindustryVersionFull = 'fa17da53c68cf2600b4640ff653cee2f48d50740'
         mindustryVersion = mindustryVersionFull.substring(0, 10)
-        arcVersion = "ef9d6ac655"
+        arcVersion = "b1b88883e2"
 //        arcVersion = "916c5a77"
 
 
@@ -27,7 +27,7 @@ buildscript{
 
 //        gasVersion = "27b10c13f7e"
 
-        modCoreVersion = "6341326406a"
+        modCoreVersion = "59185cba3b9"
 
 
         kotlinVersion = "1.6.0"

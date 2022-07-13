@@ -17,13 +17,13 @@ public class SayangLiquid extends Liquid {
     public int puddles2 = 2;
     public float puddleRot1 = 0.14f;
     public float puddleRot2 = 0.05f;
-    public Color color1;
+    public Color secondColor;
 
 
-    public SayangLiquid(String name, Color color, Color color1){
+    public SayangLiquid(String name, Color color, Color secondColor){
         super(name);
         this.color = new Color(color);
-        this.color1 = color1;
+        this.secondColor = secondColor;
     }
 
     @Override
@@ -39,7 +39,7 @@ public class SayangLiquid extends Liquid {
 
         float length = f * 6f;
         Draw.z(z + 0.05f);
-        Draw.color(color1);
+        Draw.color(secondColor);
         for(int i = 0; i < puddles1; i++){
             Tmp.v1.trns(rand.random(360f) + Time.time * puddleRot1 * rand.random(3.5f, 6.8f) * (rand.nextBoolean() ? 1 : -1), rand.random(length));
             float vx = x + Tmp.v1.x, vy = y + Tmp.v1.y;
@@ -53,7 +53,7 @@ public class SayangLiquid extends Liquid {
         }
 
         Draw.z(z + 0.10f);
-        Draw.color(color1, color, 0.15f);
+        Draw.color(secondColor, color, 0.15f);
         for(int i = 0; i < 2; i++){
             Tmp.v1.trns(rand.random(360f) + Time.time * puddleRot2 * rand.random(2.5f, 5.8f) * (rand.nextBoolean() ? 1 : -1), rand.random(length));
             float vx = x + Tmp.v1.x, vy = y + Tmp.v1.y;
