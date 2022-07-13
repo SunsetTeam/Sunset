@@ -1,23 +1,24 @@
 package sunset.world.blocks.laser;
 
 import arc.*;
+import arc.func.*;
 import arc.graphics.*;
 import arc.graphics.g2d.*;
 import arc.math.*;
 import arc.math.geom.*;
 import arc.scene.ui.layout.*;
-import arc.util.Tmp;
+import arc.util.*;
 import arc.util.io.*;
 import mindustry.*;
-import mindustry.content.Fx;
-import mindustry.entities.Effect;
+import mindustry.content.*;
+import mindustry.entities.*;
 import mindustry.game.*;
 import mindustry.gen.*;
 import mindustry.graphics.*;
-import mindustry.ui.Bar;
+import mindustry.ui.*;
 import mindustry.world.*;
 
-import static mindustry.Vars.*;
+import static mindustry.Vars.tilesize;
 
 /*@Struct
 class LaserEnableStateStruct{
@@ -27,9 +28,10 @@ class LaserEnableStateStruct{
     boolean down;
 }*/
 
-/** Class for laser-transferring blocks.*/
+/** Class for laser-transferring blocks. */
 public class LaserNode extends LaserBlock{
     public Effect nodeHitEffect = Fx.none;
+
     @SuppressWarnings("PointlessBitwiseExpression")
     public LaserNode(String name){
         super(name);
@@ -47,22 +49,6 @@ public class LaserNode extends LaserBlock{
             b.downOutput = (value & 0b1000) >> 3 == 1;
         });
     }
-    @Override
-    public void setBars(){
-        super.setBars();
-        if(heats){
-            addBar("chargeBar", (LaserBuild entity) ->
-                    new Bar(() -> Core.bundle.format("bar.laser-input", entity.laser.rawInput, entity.block().heatLaserLimit),
-                    () -> {
-                        if(entity.laser.rawInput < entity.block().heatLaserLimit){
-                            return Pal.powerBar;
-                        }
-                        else
-                            return Color.red;
-                    },
-                    () -> entity.laser.rawInput / entity.block().heatLaserLimit));
-        }
-    }
 
     @SuppressWarnings("PointlessBitwiseExpression")
     protected static int getState(boolean right, boolean top, boolean left, boolean down){
@@ -72,6 +58,51 @@ public class LaserNode extends LaserBlock{
         if(left) state += 1 << 2;
         if(down) state += 1 << 3;
         return state;
+    }
+
+    @Override
+    public void setBars(){
+        super.setBars();
+        if(heats){
+            addBar("chargeBar", (LaserBuild entity) ->
+            new Bar(() -> Core.bundle.format("bar.laser-input", entity.laser.rawInput, entity.block().heatLaserLimit),
+            () -> {
+                if(entity.laser.rawInput < entity.block().heatLaserLimit){
+                    return Pal.powerBar;
+                }else
+                    return Color.red;
+            },
+            () -> entity.laser.rawInput / entity.block().heatLaserLimit));
+        }
+    }
+
+    @Override
+    @SuppressWarnings("PointlessBitwiseExpression")
+    public Object pointConfig(Object objectConfig, Cons<Point2> transformer){
+        if(!(objectConfig instanceof Integer config)) return super.pointConfig(objectConfig, transformer);
+
+        boolean rightOutput = (config & 0b0001) >> 0 == 1;
+        boolean topOutput = (config & 0b0010) >> 1 == 1;
+        boolean leftOutput = (config & 0b0100) >> 2 == 1;
+        boolean downOutput = (config & 0b1000) >> 3 == 1;
+        transformer.get(Tmp.p1.set(1, 0));
+        int steps = (int)(Tmp.v1.set(Tmp.p1.x, Tmp.p1.y).angle() / 90);
+        return getState(
+        rotateBoolean(steps, rightOutput, topOutput, leftOutput, downOutput),
+        rotateBoolean(steps, topOutput, leftOutput, downOutput, rightOutput),
+        rotateBoolean(steps, leftOutput, downOutput, rightOutput, topOutput),
+        rotateBoolean(steps, downOutput, rightOutput, topOutput, leftOutput)
+        );
+    }
+
+    private boolean rotateBoolean(int steps, boolean step0, boolean step1, boolean step2, boolean step3){
+        return switch(steps%4){
+            case 0 -> step0;
+            case 1 -> step1;
+            case 2 -> step2;
+            case 3 -> step3;
+            default -> throw new IllegalStateException("Unexpected value: " + steps);
+        };
     }
 
     public class LaserNodeBuild extends LaserBuild{
@@ -138,7 +169,7 @@ public class LaserNode extends LaserBlock{
             //трёхэтажный дебаг : )
 //            ADrawf.drawText();
             //String output = Seq.with(downOutput, leftOutput, topOutput, rightOutput).toString("", it -> Mathf.num(it) + "");
-           // String input = Seq.with(downInput, leftInput, topInput, rightInput).toString("", it -> Mathf.num(it) + "");
+            // String input = Seq.with(downInput, leftInput, topInput, rightInput).toString("", it -> Mathf.num(it) + "");
             //block().drawPlaceText("Laser\nin: " + laser.in + "\nout: " + laser.out + "\noutput: " + output + ",\n_input: " + input, tileX(), tileY(), true);
             //Draw.z(z);
             //Log.info("block draw, time: @", Time.time);
@@ -161,8 +192,8 @@ public class LaserNode extends LaserBlock{
                 topOutput = !topOutput;
                 configureState();
             }).size(size).update((b) -> {
-                b.setDisabled(topInput&& !topOutput);
-                b.getStyle().imageUpColor=topOutput ? Color.lime : Color.valueOf("f25555");
+                b.setDisabled(topInput && !topOutput);
+                b.getStyle().imageUpColor = topOutput ? Color.lime : Color.valueOf("f25555");
 //                b.setColor();
             });
             t.add().row();
@@ -171,8 +202,8 @@ public class LaserNode extends LaserBlock{
                 leftOutput = !leftOutput;
                 configureState();
             }).update(b -> {
-                b.setDisabled(leftInput&& !leftOutput);
-                b.getStyle().imageUpColor=leftOutput ? Color.lime : Color.valueOf("f25555");
+                b.setDisabled(leftInput && !leftOutput);
+                b.getStyle().imageUpColor = leftOutput ? Color.lime : Color.valueOf("f25555");
 //                b.setColor(left ? Color.lime : Color.valueOf("f25555"));
             });
             t.add();
@@ -182,7 +213,7 @@ public class LaserNode extends LaserBlock{
                 configureState();
             }).update(b -> {
                 b.setDisabled(rightInput && !rightOutput);
-                b.getStyle().imageUpColor=rightOutput ? Color.lime : Color.valueOf("f25555");
+                b.getStyle().imageUpColor = rightOutput ? Color.lime : Color.valueOf("f25555");
 //                b.setColor(right ? Color.lime : Color.valueOf("f25555"));
             });
             t.row();
@@ -193,7 +224,7 @@ public class LaserNode extends LaserBlock{
                 configureState();
             }).update(b -> {
                 b.setDisabled(downInput && !downOutput);
-                b.getStyle().imageUpColor=downOutput ? Color.lime : Color.valueOf("f25555");
+                b.getStyle().imageUpColor = downOutput ? Color.lime : Color.valueOf("f25555");
 //                b.setColor(down ? Color.lime : Color.valueOf("f25555"));
             });
         }
@@ -202,14 +233,12 @@ public class LaserNode extends LaserBlock{
             int state = LaserNode.getState(rightOutput, topOutput, leftOutput, downOutput);
             configure(state);
         }
-        //todo fix considering rotation
-        /*
+
         @Override
         public Integer config(){
             return LaserNode.getState(rightOutput, topOutput, leftOutput, downOutput);
         }
 
-         */
 
         @Override
         @SuppressWarnings("PointlessBitwiseExpression")
