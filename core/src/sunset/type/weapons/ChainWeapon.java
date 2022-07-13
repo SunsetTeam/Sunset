@@ -8,9 +8,10 @@ import arc.math.geom.*;
 import arc.scene.ui.layout.*;
 import arc.struct.*;
 import arc.util.*;
-import mindustry.Vars;
+import kotlin.*;
 import mindustry.entities.*;
 import mindustry.entities.units.*;
+import mindustry.gen.Unit;
 import mindustry.gen.*;
 import mindustry.graphics.*;
 import mindustry.type.*;
@@ -19,11 +20,12 @@ import sunset.ai.weapon.*;
 import sunset.content.*;
 import sunset.utils.*;
 
-import static arc.graphics.Color.*;
+import static arc.graphics.Color.coral;
 
 //TODO так много generic'ов... Может на Kotlin перевести?
-public class ChainWeapon<Targetc extends Posc & Healthc & Teamc> extends WeaponExt implements StatValue{
-    public static final UnitData.DataKey<ObjectMap<WeaponMount, Seq>> chainWeaponDataKey = UnitData.dataKey(ObjectMap::new); // I HATE JAVA'S GENERICS!!! (1)
+public class ChainWeapon extends WeaponExt implements StatValue{
+    public static final UnitData.DataKey<ObjectMap<WeaponMount, Seq<Posc>>> chainWeaponDataKey = UnitData.dataKey(ObjectMap::new);
+    final static Posc[] target = new Posc[1];
     public int maxChainLength = 1;
     public float range = 120f;
     public float damageTick = 1f;
@@ -35,6 +37,9 @@ public class ChainWeapon<Targetc extends Posc & Healthc & Teamc> extends WeaponE
     public Color chainColor = coral.cpy();
     public boolean draw = false;
     TextureRegion laser, laserEnd;
+    float[] stats = new float[3];
+    float[] currentRange = new float[1];
+    final Posc[] currentTarget = new Posc[1];
 
     public ChainWeapon(String name){
         super(name);
@@ -46,26 +51,26 @@ public class ChainWeapon<Targetc extends Posc & Healthc & Teamc> extends WeaponE
         recoil = 0;
     }
 
-    Posc[] target = new Posc[1]; // WHERE IS GENERIC ARRAY?! I HATE JAVA'S GENERICS!!! (2) 
-    public Targetc getFirstTarget(WeaponMount mount, Unit unit) {
+    public Posc getFirstTarget(WeaponMount mount, Unit unit){
         Vec2 wpos = Tmp.v1.set(Utils.mountX(unit, mount), Utils.mountY(unit, mount));
         ChainWeapon weapon = (ChainWeapon)mount.weapon;
-        target[0] = (Targetc)Units.closest(null, wpos.x, wpos.y, weapon.range, u -> { // I HATE JAVA'S GENERICS!!! (3)
+        target[0] = Units.closest(null, wpos.x, wpos.y, weapon.range, u -> {
             if(unit == u) return false;
             if(u.team != unit.team && weapon.damageTick == 0) return false;
             if(u.team == unit.team && (weapon.healTick == 0 || !u.damaged())) return false;
             return mount.weapon.rotate || Angles.within(wpos.angleTo(u), unit.rotation + mount.rotation, mount.weapon.shootCone);
         });
-        if(target[0] != null) return (Targetc)target[0]; // I HATE JAVA'S GENERICS!!! (4)
-        if(weapon.buildingBuff != 0f) {
+
+        if(target[0] != null) return target[0];
+        if(weapon.buildingBuff != 0f){
             Units.nearbyBuildings(wpos.x, wpos.y, weapon.range, b -> {
                 if(b.team.isEnemy(unit.team)) return;
                 if(!mount.weapon.rotate && !Angles.within(wpos.angleTo(b), unit.rotation + mount.rotation, mount.weapon.shootCone)) return;
-                if(target != null && Mathf.chance(0.1)) return; // a bit of randomness
-                target[0] = (Targetc)b; // I HATE JAVA'S GENERICS!!! (5)
+                if(target[0] !=null && Mathf.chance(0.1))return; // a bit of randomness
+                target[0] = b;
             });
         }
-        return (Targetc)target[0]; // I HATE JAVA'S GENERICS!!! (6)
+        return target[0];
     }
 
     @Override
@@ -75,26 +80,26 @@ public class ChainWeapon<Targetc extends Posc & Healthc & Teamc> extends WeaponE
         laserEnd = Core.atlas.find("parallax-laser-end");
     }
 
-    private Seq<Targetc> getTargets(WeaponMount mount, Unit unit){
-        ObjectMap<WeaponMount, Seq<Targetc>> data = (ObjectMap<WeaponMount, Seq<Targetc>>)(Object)chainWeaponDataKey.get(unit); // I HATE JAVA'S GENERICS!!! (7)
+    private Seq<Posc> getTargets(WeaponMount mount, Unit unit){
+        ObjectMap<WeaponMount, Seq<Posc>> data = chainWeaponDataKey.get(unit);
         if(data == null) return null;
         return data.get(mount, Seq::new);
     }
 
-    float[] stats = new float[3];
     @Override
     public void update(Unit unit, WeaponMount mount){
-        Seq<Targetc> targets = getTargets(mount, unit);
+        Seq<Posc> targets = getTargets(mount, unit);
         if(targets == null) return;
         updateTargets(targets, mount, unit);
         stats[0] = damageTick;
         stats[1] = healTick;
         stats[2] = buildingBuff;
         targets.each(t -> {
-            if(unit.team().isEnemy(t.team())) {
-                t.damageContinuousPierce(stats[0]);
-            } else {
-                t.heal(stats[1] * Time.delta);
+            Healthc healthc = t.as();
+            if(unit.team().isEnemy(t.<Teamc>as().team())){
+                healthc.damageContinuousPierce(stats[0]);
+            }else{
+                healthc.heal(stats[1] * Time.delta);
                 if(t instanceof Building) ((Building)t).applyBoost(stats[2] + 1, 60);
             }
             stats[0] *= statsFactor;
@@ -103,33 +108,31 @@ public class ChainWeapon<Targetc extends Posc & Healthc & Teamc> extends WeaponE
         });
     }
 
-    float[] currentRange = new float[1];
-    Posc[] currentTarget = new Posc[1]; // WHERE IS GENERIC ARRAY?! I HATE JAVA'S GENERICS!!! (8) 
-    private void updateTargets(Seq<Targetc> targets, WeaponMount mount, Unit unit){
+    private void updateTargets(Seq<Posc> targets, WeaponMount mount, Unit unit){
         ChainWeapon weapon = (ChainWeapon)mount.weapon;
         targets.clear();
         currentRange[0] = range;
         currentTarget[0] = getFirstTarget(mount, unit);
         for(int unitsLeft = maxChainLength; unitsLeft > 0 && currentTarget[0] != null; unitsLeft--){
             currentRange[0] *= rangeFactor;
-            targets.add((Targetc)currentTarget[0]); // I HATE JAVA'S GENERICS!!! (9)
+            targets.add(currentTarget[0]);
             Tmp.v1.set(currentTarget[0]);
 
-            Targetc сt = (Targetc)Units.closest(null, currentTarget[0].x(), currentTarget[0].y(), currentRange[0], t -> { // I HATE JAVA'S GENERICS!!! (10) 
-                if(t == unit || targets.contains((Targetc)t)) return false;
+            Posc ct = Units.closest(null, currentTarget[0].x(), currentTarget[0].y(), currentRange[0], t -> {
+                if(t == unit || targets.contains(t)) return false;
                 if(!Tmp.v1.within(t, currentRange[0])) return false;
-                if(!unit.team.isEnemy(t.team)) return t.damaged() && weapon.healTick != 0; 
+                if(!unit.team.isEnemy(t.team)) return t.damaged() && weapon.healTick != 0;
                 return weapon.damageTick != 0;
             });
-            if(сt == null && weapon.buildingBuff != 0f) {
+            if(ct == null && weapon.buildingBuff != 0f){
                 Units.nearbyBuildings(currentTarget[0].x(), currentTarget[0].y(), weapon.range, b -> {
                     if(b.team.isEnemy(unit.team)) return;
                     if(!Tmp.v1.within(b, currentRange[0])) return;
-                    if(currentTarget != null && Mathf.chance(0.1)) return; // a bit of randomness
-                    currentTarget[0] = (Targetc)b; // I HATE JAVA'S GENERICS!!! (11)
+                    if(currentTarget[0] != null && Mathf.chance(0.1)) return; // a bit of randomness
+                    currentTarget[0] = b;
                 });
-            } else {
-                currentTarget[0] = сt;
+            }else{
+                currentTarget[0] = ct;
             }
             unitsLeft--;
         }
@@ -173,18 +176,18 @@ public class ChainWeapon<Targetc extends Posc & Healthc & Teamc> extends WeaponE
 
     @Override
     public void preDraw(WeaponMount mount, Unit unit){
-        Seq<Targetc> units = getTargets(mount, unit);
+        Seq<Posc> units = getTargets(mount, unit);
         Vec2 weaponPos = Tmp.v1.set(Utils.mountX(unit, mount), Utils.mountY(unit, mount));
         float angle = (units == null || units.isEmpty()) ? unit.rotation : weaponPos.angleTo(units.get(0));
         if(units != null && !units.isEmpty()){
             float z = Draw.z();
             Draw.z(laserLayer); //TODO как-то пофиксить эффекты луча
             Draw.mixcol(chainColor, 0.4f);
-            Drawf.laser( laser, laserEnd, weaponPos.x, weaponPos.y, units.get(0).x(), units.get(0).y());
+            Drawf.laser(laser, laserEnd, weaponPos.x, weaponPos.y, units.get(0).x(), units.get(0).y());
             for(int i = 0; i < units.size - 1; i++){
-                Drawf.laser( laser, laserEnd,
-                            units.get(i).x(), units.get(i).y(),
-                            units.get(i + 1).x(), units.get(i + 1).y());
+                Drawf.laser(laser, laserEnd,
+                units.get(i).x(), units.get(i).y(),
+                units.get(i + 1).x(), units.get(i + 1).y());
             }
             Draw.mixcol();
             Draw.z(z);
@@ -193,7 +196,8 @@ public class ChainWeapon<Targetc extends Posc & Healthc & Teamc> extends WeaponE
     }
 
     @Override
-    public void postDraw(WeaponMount mount, Unit unit) {}
+    public void postDraw(WeaponMount mount, Unit unit){
+    }
 
     @Override
     public void display(Table table){
