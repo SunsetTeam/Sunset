@@ -12,6 +12,7 @@ import arc.util.io.*;
 import mindustry.*;
 import mindustry.content.*;
 import mindustry.entities.*;
+import mindustry.entities.units.*;
 import mindustry.game.*;
 import mindustry.gen.*;
 import mindustry.graphics.*;
@@ -96,13 +97,32 @@ public class LaserNode extends LaserBlock{
     }
 
     private boolean rotateBoolean(int steps, boolean step0, boolean step1, boolean step2, boolean step3){
-        return switch(steps%4){
+        return switch(steps % 4){
             case 0 -> step0;
             case 1 -> step1;
             case 2 -> step2;
             case 3 -> step3;
             default -> throw new IllegalStateException("Unexpected value: " + steps);
         };
+    }
+
+    @Override
+    @SuppressWarnings("PointlessBitwiseExpression")
+    public void flipRotation(BuildPlan req, boolean x){
+        super.flipRotation(req, x);
+        /*if(!(req.config instanceof Integer config)) return;
+
+        boolean rightOutput = (config & 0b0001) >> 0 == 1;
+        boolean topOutput = (config & 0b0010) >> 1 == 1;
+        boolean leftOutput = (config & 0b0100) >> 2 == 1;
+        boolean downOutput = (config & 0b1000) >> 3 == 1;
+//        int steps = (int)(Tmp.v1.set(Tmp.p1.x, Tmp.p1.y).angle() / 90);
+        req.config = getState(
+        x ? leftOutput : rightOutput,
+        !x ? topOutput : downOutput,
+        x ? rightOutput : leftOutput,
+        !x ? downOutput:topOutput
+        );*/
     }
 
     public class LaserNodeBuild extends LaserBuild{
