@@ -224,6 +224,29 @@ public class SnFx {
         });
     }),
 
+    forsShootSmall = new Effect(9, e -> {
+        color(SnPal.forsBullet, SnPal.forsBulletBack, e.fin());
+        float w = 1.2f + 7 * e.fout();
+        Drawf.tri(e.x, e.y, w, 25f * e.fout(), e.rotation);
+        Drawf.tri(e.x, e.y, w, 4f * e.fout(), e.rotation + 180f);
+        color(SnPal.forsBullet, SnPal.forsBulletBack, e.fin());
+        randLenVectors(e.id, 4, e.finpow() * 7f, e.rotation, 10f, (x, y) -> {
+            Fill.circle(e.x + x, e.y + y, 0.5f + e.fout() * 2f);
+        });
+    }),
+
+    eriusShootSmall = new Effect(9, e -> {
+        color(SnPal.eriusBullet, SnPal.eriusBulletBack, e.fin());
+        float w = 1.2f + 7 * e.fout();
+        Drawf.tri(e.x, e.y, w, 25f * e.fout(), e.rotation);
+        Drawf.tri(e.x, e.y, w, 4f * e.fout(), e.rotation + 180f);
+        color(SnPal.eriusBullet, SnPal.eriusBulletBack, e.fin());
+        randLenVectors(e.id, 4, e.finpow() * 7f, e.rotation, 10f, (x, y) -> {
+            Fill.circle(e.x + x, e.y + y, 0.5f + e.fout() * 2f);
+        });
+    }),
+
+
     typhoonShootLiquid = new Effect(15f, 80f, e -> {
         color(e.color);
 
@@ -541,7 +564,7 @@ public class SnFx {
         });
     }),
 
-   smallYellowAimMissileTrail = new Effect(27f, 70f, e -> {
+    smallYellowAimMissileTrail = new Effect(27f, 70f, e -> {
         color(Pal.lightPyraFlame, Color.lightGray,  e.fin() * e.fin());
 
         randLenVectors(e.id, 6, 1f + e.finpow() * 20, e.rotation + 180, 10f, (x, y) -> {
@@ -693,6 +716,48 @@ public class SnFx {
          randLenVectors(e.id + 1, 8, 1f + 23f * e.finpow(), (x, y) -> {
              lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + e.fout() * 3f);
          });
+    }),
+
+    forsSmallExplosion = new Effect(25, e -> {
+        e.scaled(6, i -> {
+            stroke(2f * i.fout());
+            Lines.circle(e.x, e.y, 3f + i.fin() * 8f);
+        });
+
+        color(SnPal.forsBullet);
+
+        randLenVectors(e.id, 5, 2f + 15f * e.finpow(), (x, y) -> {
+            Fill.circle(e.x + x, e.y + y, e.fout() * 3f + 0.5f);
+            Fill.circle(e.x + x / 2f, e.y + y / 2f, e.fout());
+        });
+
+        color(SnPal.forsBullet, SnPal.forsBulletBack, Color.darkGray, e.fin());
+        stroke(1.5f * e.fout());
+
+        randLenVectors(e.id + 1, 6, 1f + 20f * e.finpow(), (x, y) -> {
+            lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + e.fout() * 2f);
+        });
+    }),
+
+    eriusSmallExplosion = new Effect(25, e -> {
+        e.scaled(6, i -> {
+            stroke(2f * i.fout());
+            Lines.circle(e.x, e.y, 3f + i.fin() * 8f);
+        });
+
+        color(SnPal.eriusBullet);
+
+        randLenVectors(e.id, 5, 2f + 15f * e.finpow(), (x, y) -> {
+            Fill.circle(e.x + x, e.y + y, e.fout() * 3f + 0.5f);
+            Fill.circle(e.x + x / 2f, e.y + y / 2f, e.fout());
+        });
+
+        color(SnPal.eriusBullet, SnPal.eriusBulletBack, Color.darkGray, e.fin());
+        stroke(1.5f * e.fout());
+
+        randLenVectors(e.id + 1, 6, 1f + 20f * e.finpow(), (x, y) -> {
+            lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + e.fout() * 2f);
+        });
     }),
     //endregion turrets 360
 

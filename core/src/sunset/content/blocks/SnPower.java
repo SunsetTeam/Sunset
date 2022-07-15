@@ -1,5 +1,6 @@
 package sunset.content.blocks;
 
+import mindustry.content.Blocks;
 import mindustry.gen.*;
 import mindustry.type.*;
 import mindustry.world.*;
@@ -20,7 +21,6 @@ public class SnPower{
             requirements(Category.power, with(SnItems.fors, 60, SnItems.erius, 40));
             powerProduction = 2.7f;
             displayEfficiency = true;
-            spinners = false;
             size = 2;
             floating = true;
             placeableLiquid = true;

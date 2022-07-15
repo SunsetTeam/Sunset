@@ -85,9 +85,10 @@ public class SnBullets {
             height = 14f;
             backColor = SnPal.forsBulletBack;
             frontColor = SnPal.forsBullet;
-            shootEffect = Fx.shootBig;
+            shootEffect = SnFx.forsShootSmall;
+            despawnEffect = SnFx.forsSmallExplosion;
             trailLength = 4;
-            trailWidth = 1.2f;
+            trailWidth = 2f;
             trailColor = SnPal.forsBulletBack;
             maxRange = 128;
             collidesGround = true;
@@ -98,10 +99,11 @@ public class SnBullets {
             height = 16f;
             backColor = SnPal.eriusBulletBack;
             frontColor = SnPal.eriusBullet;
-            trailColor = SnPal.eriusBulletBack;
-            shootEffect = Fx.shootBig;
+            shootEffect = SnFx.eriusShootSmall;
+            despawnEffect = SnFx.eriusSmallExplosion;
             trailLength = 5;
-            trailWidth = 1.2f;
+            trailWidth = 2f;
+            trailColor = SnPal.eriusBulletBack;
             maxRange = 140;
             collidesGround = true;
             collidesAir = true;
@@ -158,19 +160,19 @@ public class SnBullets {
         };
 
         //region missile
-        zeusRocket = new BasicBulletType(5.4f, 30f){{
+        zeusRocket = new SpriteMissileBulletType(5.4f, 30f, "zeus-missile"){{
             shootEffect = Fx.shootBig;
             smokeEffect = SnFx.shootZeusMissile;
-            homingPower = 0.2f;
-            homingRange = 10f * Vars.tilesize;
-            maxRange = 210f;
+            homingPower = 0.15f;
+            homingRange = 16f * Vars.tilesize;
+            maxRange = 200f;
             lifetime = 4.7f * Time.toSeconds;
             trailColor = Pal.lightPyraFlame;
             trailLength = 9;
             collidesGround = false;
             collidesAir = true;
             splashDamage = 130f;
-            splashDamageRadius = 30f;
+            splashDamageRadius = 35f;
         }};
 
         nobiumAimMissile = new AimBulletType(3f, 55f){{

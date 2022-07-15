@@ -7,7 +7,7 @@ public class SnPal {
     public static final Color
     //region bullets
     forsBullet = Color.valueOf("ed6060"),
-    forsBulletBack = Color.valueOf("bf3544"),
+    forsBulletBack = Color.valueOf("DC5A5A"),
     eriusBullet = Color.valueOf("91c4c8"),
     eriusBulletBack = Color.valueOf("6785a4"),
     //endregion bullets
