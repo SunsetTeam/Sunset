@@ -11,4 +11,14 @@ public class SnAnnotations{
         String[] classNames() default {};
         String packageName() default "\n\n";
     }
+
+    @Target(ElementType.TYPE)
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface TestAnnotation{
+    }
+    @Target(ElementType.TYPE)
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface DataKeyType{
+        Class<?> value();
+    }
 }
