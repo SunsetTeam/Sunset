@@ -152,7 +152,7 @@ public class ExtraDataProc extends ModBaseProcessor{
             saveRevisions(revisionsPath, revisions);
             UnitDataProc.generateSerializer(revisions, extraImports);
         }
-        throw new RuntimeException();
+        //throw new RuntimeException();
     }
 
 
