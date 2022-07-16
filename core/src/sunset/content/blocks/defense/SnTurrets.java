@@ -73,7 +73,7 @@ public class SnTurrets{
             requirements(Category.turret, with(SnItems.fors, 50, SnItems.erius, 40));
             size = 2;
             reload = 37f;
-            range = 16 * Vars.tilesize;
+            range = 19 * Vars.tilesize;
             recoil = 1.4f;
             inaccuracy = 4f;
             rotateSpeed = 6f;

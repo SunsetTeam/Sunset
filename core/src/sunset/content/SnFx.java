@@ -226,22 +226,14 @@ public class SnFx {
 
     forsShootSmall = new Effect(9, e -> {
         color(SnPal.forsBullet, SnPal.forsBulletBack, e.fin());
-        float w = 1.2f + 7 * e.fout();
-        Drawf.tri(e.x, e.y, w, 25f * e.fout(), e.rotation);
-        Drawf.tri(e.x, e.y, w, 4f * e.fout(), e.rotation + 180f);
-        color(SnPal.forsBullet, SnPal.forsBulletBack, e.fin());
-        randLenVectors(e.id, 4, e.finpow() * 7f, e.rotation, 10f, (x, y) -> {
+        randLenVectors(e.id, 5, e.finpow() * 7f, e.rotation, 10f, (x, y) -> {
             Fill.circle(e.x + x, e.y + y, 0.5f + e.fout() * 2f);
         });
     }),
 
     eriusShootSmall = new Effect(9, e -> {
         color(SnPal.eriusBullet, SnPal.eriusBulletBack, e.fin());
-        float w = 1.2f + 7 * e.fout();
-        Drawf.tri(e.x, e.y, w, 25f * e.fout(), e.rotation);
-        Drawf.tri(e.x, e.y, w, 4f * e.fout(), e.rotation + 180f);
-        color(SnPal.eriusBullet, SnPal.eriusBulletBack, e.fin());
-        randLenVectors(e.id, 4, e.finpow() * 7f, e.rotation, 10f, (x, y) -> {
+        randLenVectors(e.id, 5, e.finpow() * 7f, e.rotation, 10f, (x, y) -> {
             Fill.circle(e.x + x, e.y + y, 0.5f + e.fout() * 2f);
         });
     }),
@@ -719,6 +711,7 @@ public class SnFx {
     }),
 
     forsSmallExplosion = new Effect(25, e -> {
+        color(SnPal.forsBullet);
         e.scaled(6, i -> {
             stroke(2f * i.fout());
             Lines.circle(e.x, e.y, 3f + i.fin() * 8f);
@@ -733,13 +726,10 @@ public class SnFx {
 
         color(SnPal.forsBullet, SnPal.forsBulletBack, Color.darkGray, e.fin());
         stroke(1.5f * e.fout());
-
-        randLenVectors(e.id + 1, 6, 1f + 20f * e.finpow(), (x, y) -> {
-            lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + e.fout() * 2f);
-        });
     }),
 
     eriusSmallExplosion = new Effect(25, e -> {
+        color(SnPal.eriusBullet);
         e.scaled(6, i -> {
             stroke(2f * i.fout());
             Lines.circle(e.x, e.y, 3f + i.fin() * 8f);
@@ -754,10 +744,6 @@ public class SnFx {
 
         color(SnPal.eriusBullet, SnPal.eriusBulletBack, Color.darkGray, e.fin());
         stroke(1.5f * e.fout());
-
-        randLenVectors(e.id + 1, 6, 1f + 20f * e.finpow(), (x, y) -> {
-            lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + e.fout() * 2f);
-        });
     }),
     //endregion turrets 360
 
