@@ -11,6 +11,7 @@ buildscript{
         mindustryPath = "com.github.Anuken.MindustryJitpack"
         mindustryVersionFull = 'fa17da53c68cf2600b4640ff653cee2f48d50740'
         mindustryVersion = mindustryVersionFull.substring(0, 10)
+        testMindustryBuild = '22823' //regular versions are prefixed with 'v' (eg. 'v135'), BE versions has no prefix (eg. '22823')
         arcVersion = "b1b88883e2"
 //        arcVersion = "916c5a77"
 
@@ -88,26 +89,26 @@ allprojects{
         }
         addModInfoFile = { File archiveFile ->
 
-            def time = LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:MM DD.MM.YYYY"));
+            def time = LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:MM DD.MM.YYYY"))
             String suffix = project.hasProperty("commit") ? " commit_${commit}" : " local_${time}"
             println "Version suffix${suffix}"
             def reader = new BufferedReader(new FileReader(new File(rootDir, "mod.hjson")))
             // now append some extra content
-            def jarFile;
+            def jarFile
             try{
-                jarFile = FileSystems.newFileSystem(java.nio.file.Path.of(java.net.URI.create("" + archiveFile.toURI())), new HashMap<>());
+                jarFile = FileSystems.newFileSystem(java.nio.file.Path.of(URI.create("" + archiveFile.toURI())), new HashMap<>())
             }catch(FileSystemAlreadyExistsException e){
                 e.printStackTrace()
-                jarFile = FileSystems.getFileSystem(java.net.URI.create("jar:" + archiveFile.toURI()))
+                jarFile = FileSystems.getFileSystem(URI.create("jar:" + archiveFile.toURI()))
                 jarFile.close()
-                jarFile = FileSystems.newFileSystem(java.net.URI.create("jar:" + archiveFile.toURI()), new HashMap<>());
+                jarFile = FileSystems.newFileSystem(URI.create("jar:" + archiveFile.toURI()), new HashMap<>())
 //                FileSystems
             }
-            def modInfoFile = jarFile.getPath("mod.hjson");
+            def modInfoFile = jarFile.getPath("mod.hjson")
             try(Writer writer = Files.newBufferedWriter(modInfoFile, StandardCharsets.UTF_8, StandardOpenOption.CREATE)){
                 reader.lines().forEach(s -> {
                     writer.write(s)
-                    if(s.startsWith("version: ")) writer.write(suffix);
+                    if(s.startsWith("version: ")) writer.write(suffix)
                     writer.write('\n')
                 })
             }
@@ -352,7 +353,7 @@ task jarAndroid{
     dependsOn "jar"
 
     doLast{
-        if(!sdkRoot || !new File(sdkRoot).exists()) throw new GradleException("No valid Android SDK found. Ensure that ANDROID_HOME is set to your Android SDK directory.");
+        if(!sdkRoot || !new File(sdkRoot).exists()) throw new GradleException("No valid Android SDK found. Ensure that ANDROID_HOME is set to your Android SDK directory.")
 
         def platformRoot =
                 new File("$sdkRoot/platforms/").listFiles().sort().reverse().find{ f -> new File(f, "android.jar").exists() }
@@ -372,7 +373,7 @@ task jarAndroid{
     }
 }
 jar{
-    dependsOn.clear();
+    dependsOn.clear()
     dependsOn "core:jar"
 //    dependsOn "mark"
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
@@ -413,12 +414,12 @@ task deploy(type: Jar){
     }
 }
 
-def os(){ //Returns OS name
-    String s = System.getProperty("os.name");
-    return s == null ? "" : s;
+static def os(){ //Returns OS name
+    String s = System.getProperty("os.name")
+    return s == null ? "" : s
 }
 
-def getdatadir(){ //Returns Mindustry data directory path
+static def getdatadir(){ //Returns Mindustry data directory path
     def ret = System.getenv("MINDUSTRY_DATA_DIR")
     if(ret == null){
         def os = os()
@@ -432,7 +433,7 @@ def getdatadir(){ //Returns Mindustry data directory path
             }
             return System.getProperty("user.home") + "/.local/share/Mindustry/"
         }else if(os.contains("Mac")){
-            return System.getProperty("user.home") + "/Library/Application Support/Mindustry/";
+            return System.getProperty("user.home") + "/Library/Application Support/Mindustry/"
         }
     }
     return ret
@@ -454,15 +455,15 @@ task mjar(){
         }
     }
     doLast{
-        def modsDirectories = [];
-        def file = new File(rootDir, "modsDirectories.txt");
+        def modsDirectories = []
+        def file = new File(rootDir, "modsDirectories.txt")
 
         if(file.exists()){
-            BufferedReader reader = new BufferedReader(new FileReader(file));
+            BufferedReader reader = new BufferedReader(new FileReader(file))
             reader.lines().forEach(line -> modsDirectories.add(line))
-            reader.close();
+            reader.close()
         }else{
-            modsDirectories.add("classic");
+            modsDirectories.add("classic")
         }
         for(String directory : modsDirectories){
             if(directory.startsWith("#") || directory.startsWith("//")){
@@ -470,11 +471,11 @@ task mjar(){
                 continue
             }
             if(directory.equals("classic")){
-                directory = getdatadir() + "mods";
+                directory = getdatadir() + "mods"
             }
-            acopy(directory);
+            acopy(directory)
         }
-        def time = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss"));
+        def time = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss"))
         println "Build ended at: ${time}"
     }
 }
@@ -482,12 +483,13 @@ task mjar(){
 task run{
     dependsOn mjar
     doLast{
-        throw new RuntimeException("Does not work for Mindustry BE")
-        def gamePath = temporaryDir.absolutePath + "\\Mindustry$mindustryVersion" + ".jar"
-        def gameUrl = "https://github.com/Anuken/Mindustry/releases/download/$mindustryVersion" + "/Mindustry.jar"
+        def gamePath = "${temporaryDir.absolutePath}\\Mindustry${testMindustryBuild}.jar"
+        def gameUrl = testMindustryBuild.startsWith("v") ?
+            "https://github.com/Anuken/Mindustry/releases/download/${testMindustryBuild}/Mindustry.jar" :
+            "https://github.com/Anuken/MindustryBuilds/releases/download/${testMindustryBuild}/Mindustry-BE-Desktop-${testMindustryBuild}.jar"
         def gameFile = new File(gamePath)
-        if(!gameFile.exists()){
-            println "Downloading Mindustry $mindustryVersion" + " to ${gamePath}"
+        if (!gameFile.exists()) {
+            println "Downloading Mindustry ${testMindustryBuild} from ${gameUrl} to ${gamePath}"
             new URL(gameUrl).withInputStream{ i -> gameFile.withOutputStream{ it << i } }
             println "Done"
         }
