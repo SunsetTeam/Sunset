@@ -8,12 +8,11 @@ import arc.math.geom.*;
 import arc.scene.ui.layout.*;
 import arc.struct.*;
 import arc.util.*;
-import kotlin.*;
 import mindustry.entities.*;
 import mindustry.entities.units.*;
-import mindustry.gen.Unit;
 import mindustry.gen.*;
 import mindustry.graphics.*;
+import mindustry.io.*;
 import mindustry.type.*;
 import mindustry.world.meta.*;
 import sunset.ai.weapon.*;
@@ -24,8 +23,58 @@ import static arc.graphics.Color.coral;
 
 //TODO так много generic'ов... Может на Kotlin перевести?
 public class ChainWeapon extends WeaponExt implements StatValue{
-    public static final UnitData.DataKey<ObjectMap<WeaponMount, Seq<Posc>>> chainWeaponDataKey = UnitData.dataKey(ObjectMap::new);
+    public static final UnitData.DataKey<ObjectMap<WeaponMount, Seq<Posc>>> chainWeaponDataKey =
+    sunset.utils.UnitData.<ObjectMap<WeaponMount, Seq<Posc>>>dataKey(ObjectMap::new)
+    .shouldSave("chain-weapon", 0, (write, unit, obj) -> {
+        Seq<WeaponMount> mounts = obj.keys().toSeq();
+        int i = 0;
+        write.i(mounts.size);
+        for(int mountIndex : mounts.map(it -> Structs.indexOf(unit.mounts, it))){
+            WeaponMount mount = mounts.get(i);
+            write.i(mountIndex);
+
+            Seq<Posc> poscs = obj.get(mount);
+
+            write.i(poscs.size);
+            for(Posc entity : poscs){
+                if(entity instanceof Unit unitTarget){
+                    write.b(0);
+                    TypeIO.writeEntity(write, unitTarget);
+                }else if(entity instanceof Building building){
+                    write.b(1);
+                    TypeIO.writeBuilding(write, building);
+                }else{
+                    write.b(2);
+                }
+            }
+            i++;
+        }
+    }, (read, unit) -> {
+        ObjectMap<WeaponMount, Seq<Posc>> entries = new ObjectMap<>();
+
+        int size = read.i();
+        for(int __i__counter__ = 0; __i__counter__ < size; __i__counter__++){
+            int mountIndex = read.i();
+            WeaponMount mount = unit.mounts[mountIndex];
+            Seq<Posc> value = new Seq<>();
+            entries.put(mount, value);
+
+            int targetAmount = read.i();
+
+            for(int j = 0; j < targetAmount; j++){
+                byte b = read.b();
+                if(b == 0){
+                    value.add(TypeIO.readEntity(read).<Posc>as());
+                }else if(b == 1){
+                    value.add(TypeIO.readBuilding(read));
+                }
+            }
+        }
+        return entries;
+    });
+    ;
     final static Posc[] target = new Posc[1];
+    final Posc[] currentTarget = new Posc[1];
     public int maxChainLength = 1;
     public float range = 120f;
     public float damageTick = 1f;
@@ -39,7 +88,6 @@ public class ChainWeapon extends WeaponExt implements StatValue{
     TextureRegion laser, laserEnd;
     float[] stats = new float[3];
     float[] currentRange = new float[1];
-    final Posc[] currentTarget = new Posc[1];
 
     public ChainWeapon(String name){
         super(name);
@@ -66,7 +114,7 @@ public class ChainWeapon extends WeaponExt implements StatValue{
             Units.nearbyBuildings(wpos.x, wpos.y, weapon.range, b -> {
                 if(b.team.isEnemy(unit.team)) return;
                 if(!mount.weapon.rotate && !Angles.within(wpos.angleTo(b), unit.rotation + mount.rotation, mount.weapon.shootCone)) return;
-                if(target[0] !=null && Mathf.chance(0.1))return; // a bit of randomness
+                if(target[0] != null && Mathf.chance(0.1)) return; // a bit of randomness
                 target[0] = b;
             });
         }

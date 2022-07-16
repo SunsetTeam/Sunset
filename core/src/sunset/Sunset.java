@@ -18,6 +18,7 @@ import mindustry.mod.Mods.*;
 import mindustry.type.*;
 import mma.*;
 import mma.annotations.ModAnnotations.*;
+import sunset.annotations.SnAnnotations.*;
 import sunset.content.*;
 import sunset.core.*;
 import sunset.gen.*;
@@ -30,7 +31,7 @@ import sunset.utils.*;
 import static arc.Core.app;
 import static mindustry.Vars.*;
 import static mma.ModVars.*;
-
+@TestAnnotation
 public class Sunset extends MMAMod{
 
 //    boolean validDependencies;
