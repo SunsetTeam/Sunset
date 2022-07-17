@@ -147,7 +147,7 @@ public class SnTurrets{
                     mirror = true;
                     under = false;
                     moveX = 0.7f;
-                    moveY = -0.99f;
+                    moveY = -1f;
                 }});
             }};
         }};
