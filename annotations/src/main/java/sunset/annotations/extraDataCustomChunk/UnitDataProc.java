@@ -26,7 +26,7 @@ public class UnitDataProc{
         processGetMethod(declaration, revisions);
 //        processInitMethod(declaration, revisions);
 
-        System.out.println(declaration);
+//        System.out.println(declaration);
 
         CompilationUnit unit = new CompilationUnit("sunset.gen");
         unit.addImport(IntMap.class);
@@ -82,7 +82,7 @@ public class UnitDataProc{
                 LambdaExpr readCode = field.readCode.clone();
                 String funcType = Strings.format("(Func2<Reads,mindustry.gen.Unit, @>)", field.fullTypeName);
                 String statement = "tmpMap.put(" + key + ", (" + funcType + readCode.toString() + "));";
-                System.out.println(statement);
+//                System.out.println(statement);
                 stmt.addStatement(statement);
             });
             stmt.addStatement("readerMap.put(\"" + revision.key + "\", tmpMap);");

@@ -1,7 +1,7 @@
 /**
  * Allows you to store information about a specific unit, usually for AI work.
  */
-@file:JvmName("UnitData")
+@file:JvmName("UnitDataKt")
 @file:JvmMultifileClass
 
 package sunset.utils

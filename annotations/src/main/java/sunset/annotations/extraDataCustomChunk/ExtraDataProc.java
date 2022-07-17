@@ -119,11 +119,14 @@ public class ExtraDataProc extends ModBaseProcessor{
 //                                System.out.println("svar.descString(): "+svar.descString());
 //                                System.out.println(svar.e.asType());
 //                                System.out.println(svar.e.getConstantValue());
-                                saveField.fullTypeName = svar.tname().toString();
+//                                saveField.fullTypeName = svar.tname().toString();
+                                saveField.fullTypeName = "<any>";
                                 if(saveField.fullTypeName.equals("<any>")){
                                     saveField.fullTypeName = null;
                                     Tree type = variableTree.getType();
                                     if(type instanceof ParameterizedTypeTree){
+//                                        System.out.println("full-type: "+type);
+                                        //                                        System.out.println("inner-type: "+fullTypeName);
                                         saveField.fullTypeName = ((ParameterizedTypeTree)type).getTypeArguments().get(0).toString();
                                     }
                                 }
@@ -178,7 +181,7 @@ public class ExtraDataProc extends ModBaseProcessor{
                 jval.put("read", saveField.readCode.toString());
                 jval.put("fullTypeName", saveField.fullTypeName);
                 Fi path = folder.child(key + ".json");
-                System.out.println(path.absolutePath());
+//                System.out.println(path.absolutePath());
                 path.writeString(jval.toString());
             });
         }
@@ -267,8 +270,8 @@ public class ExtraDataProc extends ModBaseProcessor{
             }
             MemberSelectTree fieldAccess = (MemberSelectTree)methodSelect;
             if(!(fieldAccess.getExpression() instanceof MethodInvocationTree && isCreatingDataKey((MethodInvocationTree)fieldAccess.getExpression()))){
-                System.out.println("Second return");
-                System.out.println(fieldAccess);
+//                System.out.println("Second return");
+//                System.out.println(fieldAccess);
                 return;
             }
             if(!fieldAccess.getIdentifier().contentEquals("shouldSave")){
