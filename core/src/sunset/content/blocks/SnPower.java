@@ -1,19 +1,23 @@
 package sunset.content.blocks;
 
+import mindustry.content.Items;
 import mindustry.gen.*;
 import mindustry.type.*;
 import mindustry.world.*;
 import mindustry.world.blocks.power.*;
 import sunset.content.*;
+import sunset.world.blocks.power.LightningPowerNode;
 
 import static mindustry.type.ItemStack.with;
 
 public class SnPower{
     public static Block
 
-    //generatorss
-    thermalEvaporator, oxidativeCombustionGenerator, chemicalReactor;
+    //generators
+    thermalEvaporator, oxidativeCombustionGenerator, chemicalReactor,
 
+    //nodes
+    plasmaNode, plasmaNodeLarge;
 
     public static void load(){
         thermalEvaporator = new ThermalGenerator("thermal-evaporator"){{
@@ -65,6 +69,21 @@ public class SnPower{
             SnGas.gyner, 6f / 60f,
             SnLiquids.sayang, 3f / 60f
             ));
+        }};
+
+        plasmaNode = new LightningPowerNode("plasma-node"){{
+            requirements(Category.power, with(Items.copper, 5, Items.lead, 20));
+            consumePowerBuffered(2000f);
+            range = 9 * 8f;
+            thresholdPerTile = 100f / 8;
+        }};
+
+        plasmaNodeLarge = new LightningPowerNode("plasma-node-large"){{
+            requirements(Category.power, with(Items.titanium, 20, Items.lead, 50, Items.silicon, 30));
+            consumePowerBuffered(30000f);
+            size = 3;
+            range = 16 * 8f;
+            thresholdPerTile = 250f / 8;
         }};
     }
 }
