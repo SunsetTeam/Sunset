@@ -12,6 +12,7 @@ import mindustry.entities.bullet.BasicBulletType;
 import mindustry.entities.bullet.LaserBulletType;
 import mindustry.entities.bullet.LightningBulletType;
 import mindustry.entities.effect.MultiEffect;
+import mindustry.entities.part.RegionPart;
 import mindustry.entities.pattern.ShootAlternate;
 import mindustry.entities.pattern.ShootSpread;
 import mindustry.gen.Sounds;
@@ -73,7 +74,7 @@ public class SnTurrets{
             requirements(Category.turret, with(SnItems.fors, 50, SnItems.erius, 40));
             size = 2;
             reload = 37f;
-            range = 16 * Vars.tilesize;
+            range = 19 * Vars.tilesize;
             recoil = 1.4f;
             inaccuracy = 4f;
             rotateSpeed = 6f;
@@ -135,6 +136,20 @@ public class SnTurrets{
             shoot.firstShotDelay = 30f;//chargeTime = 30f;
             //chargeMaxDelay = 30f;
             consumePower(2f);
+            drawer = new DrawTurret("reinforced-"){{
+                parts.add(new RegionPart("-big-spine"){{
+                    mirror = true;
+                    under = false;
+                    moveX = 0.9f;
+                    moveY = -1f;
+                }});
+                parts.add(new RegionPart("-small-spine"){{
+                    mirror = true;
+                    under = false;
+                    moveX = 0.7f;
+                    moveY = -1f;
+                }});
+            }};
         }};
         reflection = new ModItemTurret("reflection") {{
             requirements(Category.turret, with(SnItems.fors, 85, SnItems.erius, 80, SnItems.naturite, 50));
