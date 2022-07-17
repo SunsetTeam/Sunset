@@ -14,4 +14,4 @@ repo: SunsetTeam/Sunset
 main: "sunset.Sunset"
 minGameVersion: 136
 java: true
-version: 0.2.3.5A
+version: 0.2.4A
