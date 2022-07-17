@@ -6,6 +6,7 @@ import arc.scene.style.*;
 import arc.scene.ui.layout.*;
 import arc.struct.*;
 import arc.util.*;
+import mindustry.Vars;
 import mindustry.ctype.*;
 import mindustry.gen.*;
 import mindustry.mod.Mods.*;
@@ -23,11 +24,11 @@ public class SunsetInfoDialog extends BaseDialog{
 
     static{
         try{
-            Method mod = ModsDialog.class.getDeclaredMethod("githubImportMod", String.class, boolean.class);
+            Method mod = ModsDialog.class.getDeclaredMethod("githubImportMod", String.class, boolean.class, String.class);
             mod.setAccessible(true);
             reinstaller = () -> {
                 try{
-                    mod.invoke(modInfo.getRepo(), modInfo.isJava());
+                    mod.invoke(ui.mods, modInfo.getRepo(), modInfo.isJava(), null);
                 }catch(IllegalAccessException | InvocationTargetException e){
                     throw new RuntimeException(e);
                 }
