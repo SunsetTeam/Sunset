@@ -17,7 +17,7 @@ public class SnPower{
     thermalEvaporator, oxidativeCombustionGenerator, chemicalReactor,
 
     //nodes
-    plasmaNode, plasmaNodeLarge;
+    plasmaNode, plasmaNodeLarge, plasmaDistributor, plasmaDistributorLarge;
 
     public static void load(){
         thermalEvaporator = new ThermalGenerator("thermal-evaporator"){{
@@ -71,19 +71,37 @@ public class SnPower{
             ));
         }};
 
-        plasmaNode = new LightningPowerNode("plasma-node"){{
+        plasmaNode = new LightningPowerNode("plasma-node", 0){{
             requirements(Category.power, with(Items.copper, 5, Items.lead, 20));
-            consumePowerBuffered(2000f);
-            range = 9 * 8f;
-            thresholdPerTile = 100f / 8;
+            consumePowerBuffered(4000f);
+            lightningRange = 16 * 8f;
+            thresholdPerTile = 25f / 8;
         }};
 
-        plasmaNodeLarge = new LightningPowerNode("plasma-node-large"){{
+        plasmaNodeLarge = new LightningPowerNode("plasma-node-large", 0){{
             requirements(Category.power, with(Items.titanium, 20, Items.lead, 50, Items.silicon, 30));
             consumePowerBuffered(30000f);
+            size = 2;
+            lightningRange = 29 * 8f;
+            thresholdPerTile = 60f / 8;
+        }};
+
+        plasmaDistributor = new LightningPowerNode("plasma-distributor", 12){{
+            requirements(Category.power, with(Items.copper, 5, Items.lead, 20));
+            size = 2;
+            consumePowerBuffered(7500f);
+            lightningRange = 9 * 8f;
+            laserRange = 7;
+            thresholdPerTile = 10f / 8;
+        }};
+
+        plasmaDistributorLarge = new LightningPowerNode("plasma-distributor-large", 24){{
+            requirements(Category.power, with(Items.titanium, 20, Items.lead, 50, Items.silicon, 30));
+            consumePowerBuffered(55000f);
             size = 3;
-            range = 16 * 8f;
-            thresholdPerTile = 250f / 8;
+            lightningRange = 16 * 8f;
+            laserRange = 12;
+            thresholdPerTile = 40f / 8;
         }};
     }
 }
