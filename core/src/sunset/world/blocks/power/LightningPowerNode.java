@@ -79,7 +79,9 @@ public class LightningPowerNode extends Battery {
 
             if(!nodes.isEmpty()) {
                 energyToSet[0] /= nodes.size + 1; // include "this" node
-                nodes.forEach(node -> {
+                for(int i = 0; i < nodes.size; i++) {
+                    LightningPowerNodeBuild node = nodes.get(i);
+
                     float capacity = powerCapacity(node), stored = powerStored(node);
                     float toSet = Math.min(capacity, energyToSet[0]); // don't "overcharge" other node
                     if(toSet <= stored) return; // don't decrease amount of energy in other node
@@ -89,7 +91,7 @@ public class LightningPowerNode extends Battery {
                     power.status -= toGive / thisCap;
 
                     SnFx.lightning(x, y, node.x, node.y, lightningColor, 3, 12f, lightningFx);
-                });
+                }
                 nodes.clear();
             }
         }
