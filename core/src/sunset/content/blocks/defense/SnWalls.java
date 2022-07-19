@@ -36,7 +36,7 @@ public class SnWalls {
             size = 1;
         }};
         eriusWalllarge = new Wall("erius-wall-large"){{
-            requirements(Category.defense, with(SnItems.erius, 18));
+            requirements(Category.defense, with(SnItems.erius, 16));
             health = eriusWall.health * 4;
             size = 2;
         }};
