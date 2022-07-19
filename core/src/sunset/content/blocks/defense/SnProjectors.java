@@ -14,11 +14,11 @@ import static mindustry.type.ItemStack.with;
 
 public class SnProjectors {
     public static Block
-    hugeRestoringDome, forceDome, deflectorProjector;
+    /*hugeRestoringDome,*/ forceDome, deflectorProjector;
 
     public static void load() {
 
-        hugeRestoringDome = new RepairStation("huge-restoring-dome"){{
+        /*hugeRestoringDome = new RepairStation("huge-restoring-dome"){{
             requirements(Category.effect, with(Items.lead, 560, Items.titanium, 255, Items.silicon, 140, SnItems.nobium, 100));
             consumePower(4.4f);
             size = 5;
@@ -29,7 +29,7 @@ public class SnProjectors {
             phaseBoost = 15f;
             health = 80 * size * size;
             consumeItem(SnItems.nobium).boost();
-        }};
+        }};*/
 
         forceDome = new ForceProjector("force-dome") {{
             requirements(Category.effect, with(Items.titanium, 600, Items.thorium, 480, Items.silicon, 300, SnItems.naturite, 250, SnItems.nobium, 240, SnItems.enojie, 210));
