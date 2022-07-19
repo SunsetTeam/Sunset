@@ -2,14 +2,10 @@ package sunset.content;
 
 import arc.graphics.Color;
 import arc.util.Time;
-import mindustry.content.Items;
+import mindustry.content.*;
 import mindustry.game.Team;
-import mindustry.graphics.g3d.HexMesh;
-import mindustry.graphics.g3d.HexSkyMesh;
-import mindustry.graphics.g3d.MultiMesh;
-import mindustry.graphics.g3d.SunMesh;
+import mindustry.graphics.g3d.*;
 import mindustry.type.Planet;
-import mindustry.world.meta.Attribute;
 import sunset.graphics.SnPal;
 import sunset.maps.generators.AzariaGenerator;
 import sunset.maps.generators.BurnoutGenerator;

@@ -61,14 +61,15 @@ public class SnLasers {
                 endColor = Pal.lightPyraFlame;
             }}*/,new DrawDefault());
         }};
-        /*laserWall = new LaserWall("laser-wall"){{
+        laserWall = new LaserWall("laser-wall"){{
             requirements(Category.defense, ItemStack.with(Items.copper, 1));
             size = 2;
             health = 1000;
             buildVisibility = BuildVisibility.sandboxOnly;
             inputsLaser = true;
             outputsLaser = false;
-        }};*/
+            heats = true;
+        }};
         /*
         rotato = new RotatableLaserNode("rotato"){{
             requirements(Category.distribution, ItemStack.with(Items.copper, 1));
