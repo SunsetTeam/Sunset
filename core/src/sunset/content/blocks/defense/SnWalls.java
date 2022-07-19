@@ -37,7 +37,7 @@ public class SnWalls {
         }};
         eriusWalllarge = new Wall("erius-wall-large"){{
             requirements(Category.defense, with(SnItems.erius, 18));
-            health = eriusWall.health * size;
+            health = eriusWall.health * 4;
             size = 2;
         }};
         //region heal
