@@ -13,10 +13,10 @@ import sunset.type.*;
 
 import static arc.Core.*;
 
-class SnStatusEffects_ implements ContentList{
+class SnStatusEffects_ {
     public static StatusEffect
     //common
-    frostbite, stun, starBuff, galaxyDebuff, electricalShort, reloading, viscous, inferno,
+    frostbite, stun, starBuff, galaxyDebuff,
     //only reactive
     molecula,
     //special
@@ -24,8 +24,7 @@ class SnStatusEffects_ implements ContentList{
     //stackable
     overheat, incineration;
 
-    @Override
-    public void load(){
+    public static void load(){
 
         //region common
         frostbite = new StatusEffect("frostbite"){{
@@ -64,84 +63,7 @@ class SnStatusEffects_ implements ContentList{
             damageMultiplier = 0.9f;
             reloadMultiplier = 0.8f;
         }};//no sprite
-
-        electricalShort = new StatusEffect("electric-short"){{
-            effectChance = 100;
-            speedMultiplier = 0;
-            disarm = true;
-            color = Color.valueOf("0AFEFF");
-            reloadMultiplier = 0.3f;
-            effect = Fx.freezing;
-            init(() -> {
-                opposite(StatusEffects.shocked);
-                affinity(StatusEffects.wet, ((unit, result, time) -> {
-                    unit.damagePierce(unit.health / 4);
-                    result.set(reloading, 300);
-                }));
-                affinity(StatusEffects.freezing, ((unit, result, time) -> {
-                    unit.damagePierce(unit.health / 2);
-                    result.set(reloading, 600);
-                }));
-            });
-        }};
-
-        reloading = new StatusEffect("reboot"){{
-            speedMultiplier = 0;
-            disarm = true;
-            color = Color.valueOf("047070");
-        }};
-
-        viscous = new StatusEffect("viscous"){{
-            color = Color.valueOf("721A1A");
-            speedMultiplier = 0.94f;
-            effect = SnFx.viscous;
-            effectChance = 0.09f;
-        }};//no sprite
-
-        inferno = new StatusEffect("inferno"){{
-            color = SnPal.redfire1;
-            effect = SnFx.redFlame;
-            effectChance = 0.3f;
-            speedMultiplier = 1.1f;
-            reloadMultiplier = 0.6f;
-            healthMultiplier = 0.7f;
-            damageMultiplier = 0.7f;
-
-            init(() -> {
-                opposite(frostbite);
-            });
-        }};//no sprite
         //endregion common
-        //region only reactive
-        molecula = new StatusEffect("molecula"){{
-            color = Color.valueOf("3DD957");
-            permanent = true;
-            effect = Fx.heal;
-            init(() -> {
-                opposite(StatusEffects.freezing, SnStatusEffects.frostbite);
-                affinity(StatusEffects.overclock, ((unit, result, time) -> {
-                    unit.damagePierce(600);
-                    result.set(molecula, 300);
-                }));
-                affinity(StatusEffects.overdrive, ((unit, result, time) -> {
-                    unit.damagePierce(600);
-                    result.set(molecula, 300);
-                }));
-                affinity(StatusEffects.shielded, ((unit, result, time) -> {
-                    unit.damagePierce(450);
-                    result.set(molecula, 300);
-                }));
-                affinity(StatusEffects.blasted, ((unit, result, time) -> {
-                    unit.damagePierce(30);
-                    result.set(molecula, 300);
-                }));
-                affinity(StatusEffects.shocked, ((unit, result, time) -> {
-                    unit.damagePierce(30);
-                    result.set(molecula, 300);
-                }));
-            });
-        }};
-        //endregion only reactive
         //region stackable
         overheat = new StackableStatusEffect("overheat"){
             boolean draw = false;

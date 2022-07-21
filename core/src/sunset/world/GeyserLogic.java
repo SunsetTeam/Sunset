@@ -57,7 +57,9 @@ public class GeyserLogic {
             tmpSet.clear();
             grabGeysers(tile, tmpSet);
             visited.addAll(tmpSet);
-            geysers.add(new GeyserGroup(tmpSet.asArray()));
+            if (tmpSet.size>0){
+                geysers.add(new GeyserGroup(tmpSet.toSeq()));
+            }
         });
         for (GeyserGroup geyser : geysers) {
             geyser.tiles.sort(Tile::pos);

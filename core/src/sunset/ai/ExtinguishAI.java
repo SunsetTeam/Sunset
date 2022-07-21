@@ -21,7 +21,7 @@ public class ExtinguishAI extends FlyingWeaponAI{
     }
 
     public static UnitController wrapper(){
-        return new FormationAIWrapper(new ExtinguishAI());
+        return new CommandAIWrapper(new ExtinguishAI());
     }
 
     @Override

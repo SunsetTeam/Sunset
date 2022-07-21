@@ -2,32 +2,52 @@ package sunset;
 
 import acontent.ui.*;
 import arc.*;
+import arc.scene.event.*;
+import arc.scene.ui.layout.*;
 import arc.struct.*;
 import mindustry.*;
 import mindustry.core.*;
+import mindustry.core.GameState.*;
 import mindustry.ctype.*;
 import mindustry.game.EventType.*;
 import mindustry.gen.*;
 import mindustry.type.*;
-import mindustry.ui.*;
 import mma.*;
-import mma.annotations.ModAnnotations.*;
+import sunset.annotations.SnAnnotations.*;
 import sunset.content.*;
 import sunset.core.*;
 import sunset.gen.*;
+import sunset.graphics.*;
 import sunset.type.unitTypes.*;
 import sunset.ui.*;
 import sunset.utils.*;
 
 import static mindustry.Vars.*;
 import static mma.ModVars.*;
-
-@ModAssetsAnnotation
+@TestAnnotation
 public class Sunset extends MMAMod{
 
+//    boolean validDependencies;
 
     public Sunset(){
         super();
+//        Events.on(FileTreeInitEvent.class, e -> Core.app.post(SnShaders::load));
+
+//        Events.on(DisposeEvent.class, e -> {
+//            SnShaders.dispose();
+//        });
+     /*   validDependencies = SnDependencies.valid();
+        if(!validDependencies*//* && !SnDependencies.existsGasLibraryJava()*//*){
+            Fi file = modDirectory.child("GasLibrary.jar");
+            file.write(getClass().getClassLoader().getResourceAsStream("GasLibrary.jar"), false);
+            Log.debug("[Sunset] Loading mod @", file);
+            LoadedMod mod = Reflect.invoke(Mods.class, mods, "loadMod", new Object[]{file}, Fi.class);
+            Seq<LoadedMod> mods = Reflect.get(Mods.class, Vars.mods, "mods");
+            mods.add(mod);
+            validDependencies = SnDependencies.valid();
+        }
+        if(!validDependencies) return;*/
+
 //        SnFonts.loadDefaultFont();
 //        SnFonts.loadFonts();
         disableBlockOutline = true;
@@ -51,7 +71,9 @@ public class Sunset extends MMAMod{
     }
 
     @Override
-    public void init(){ 
+    public void init(){
+//        if(!validDependencies) return;
+        SnAchievements.load();
         super.init();
         ModMetaDialogFinder.onNewListener(prev -> {
 //            Group parent = prev.parent;
@@ -63,6 +85,30 @@ public class Sunset extends MMAMod{
         UnitData.init();
         AdvancedContentInfoDialog.init();
         Utils.setMenuUnit(SnUnitTypes.router);
+        if(!mobile){
+            Events.run(ClientLoadEvent.class, () -> {
+                float duration = 90f;
+                Table t = new Table();
+                t.touchable = Touchable.disabled;
+                t.margin(8f).button("test-sunset-achievements",  () -> {
+                    new SnAchievementDialog().show();
+                }).visible(Vars.state::isMenu).minSize(64f,32f);
+//            t.update(() -> t.setPosition(Core.graphics.getWidth()/2f, Core.graphics.getHeight()/2f, Align.center));
+                State[] state = {Vars.state.getState()};
+                t.update(() -> {
+                    t.setPosition(0, 162);
+//                    t.visible=;
+                    /*if(state[0] != Vars.state.getState()){
+//                        t.remove();
+                    }*/
+                });
+//                t.actions(Actions.fadeOut(duration, Interp.pow4In), Actions.remove());
+                t.pack();
+                t.act(0.1f);
+                t.touchable=Touchable.enabled;
+                Core.scene.add(t);
+            });
+        }
     }
 
     @Override
@@ -94,16 +140,28 @@ public class Sunset extends MMAMod{
         if(c instanceof UnlockableContent){
             UnlockableContent content = (UnlockableContent)c;
             SnContentTranslation.checkContent(content);
-
         }
     }
 
+
     @Override
     public void loadContent(){
+        /*if(!validDependencies){
+            modInfo = mods.getMod(getClass());
+            new ErrorContent(){{
+                minfo.error = "@sunset-gas-library-disabled";
+                minfo.sourceFile = new Fi("error-content");
+                modInfo.erroredContent.add(this);
+            }};
+            return;
+        }*/
+
         if(!headless){
+            SnVars.inTry(SnShaders::init);
             SnVars.inTry(SnMusics::load);
             SnVars.inTry(SnSounds::load);
         }
+        SnCacheLayer.init();
         ContentLoader prev = Vars.content;
         /*content=new ContentLoader(){
             @Override

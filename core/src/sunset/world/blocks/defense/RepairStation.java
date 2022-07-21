@@ -57,12 +57,12 @@ public class RepairStation extends MendProjector {
         @Override
         public void updateTile() {
             smoothEfficiency = Mathf.lerpDelta(smoothEfficiency, efficiency(), 0.08f);
-            heat = Mathf.lerpDelta(heat, consValid() || cheating() ? 1f : 0f, 0.08f);
+            heat = Mathf.lerpDelta(heat, optionalEfficiency>0 || cheating() ? 1f : 0f, 0.08f);
             charge += heat * delta();
 
-            phaseHeat = Mathf.lerpDelta(phaseHeat, Mathf.num(cons.optionalValid()), 0.1f);
+            phaseHeat = Mathf.lerpDelta(phaseHeat, optionalEfficiency, 0.1f);
 
-            if(cons.optionalValid() && timer(timerUse, useTime) && efficiency() > 0){
+            if(optionalEfficiency>0 && timer(timerUse, useTime) && efficiency() > 0){
                 consume();
             }
 
@@ -127,7 +127,7 @@ public class RepairStation extends MendProjector {
 
         @Override
         public void drawLight(){
-            Drawf.light(team, x, y, lightRadius * smoothEfficiency, baseColor, 0.7f * smoothEfficiency);
+            Drawf.light( x, y, lightRadius * smoothEfficiency, baseColor, 0.7f * smoothEfficiency);
         }
 
         @Override

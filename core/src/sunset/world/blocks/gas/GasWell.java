@@ -12,7 +12,7 @@ import mindustry.world.meta.Attribute;
 import mindustry.world.meta.Stat;
 import sunset.content.SnAttribute;
 
-public class GasWell extends GasCrafter{
+public class GasWell extends GasCrafter {
 
     public Effect generateEffect = Fx.none;
     public float effectChance = 0.05f;
@@ -63,7 +63,7 @@ public class GasWell extends GasCrafter{
 
         @Override
         public void drawLight(){
-            Drawf.light(team, x, y, (40f + Mathf.absin(10f, 5f)) * Math.min(baseEfficiency, 2f) * size, Color.scarlet, 0.4f);
+            Drawf.light( x, y, (40f + Mathf.absin(10f, 5f)) * Math.min(baseEfficiency, 2f) * size, Color.scarlet, 0.4f);
         }
 
         @Override

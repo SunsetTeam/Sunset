@@ -1,61 +1,63 @@
 package sunset.content;
 
-import mindustry.content.Items;
-import mindustry.ctype.ContentList;
-import mindustry.entities.bullet.ArtilleryBulletType;
-import mindustry.entities.bullet.BasicBulletType;
-import mindustry.entities.bullet.BulletType;
-import mindustry.entities.bullet.LaserBulletType;
-import mindustry.gen.Sounds;
-import mindustry.type.Category;
-import mindustry.type.ItemStack;
-import mindustry.world.meta.BuildVisibility;
+import arc.util.*;
+import mindustry.content.*;
+import mindustry.entities.bullet.*;
+import mindustry.gen.*;
+import mindustry.type.*;
+import mindustry.world.meta.*;
 import sunset.content.blocks.*;
-import sunset.content.blocks.defense.SnProjectors;
-import sunset.content.blocks.defense.SnTurrets;
-import sunset.content.blocks.defense.SnWalls;
-import sunset.entities.bullet.LightningContinuousLaserBulletType;
-import sunset.world.blocks.defense.turrets.MissileSiloCommander;
-import sunset.world.blocks.defense.turrets.ModItemTurret;
+import sunset.content.blocks.defense.*;
+import sunset.entities.bullet.*;
+import sunset.world.blocks.defense.turrets.*;
 
+import static mindustry.Vars.tilesize;
 import static mindustry.type.ItemStack.with;
 
-public class SnBlocks implements ContentList{
-    public ContentList[] list = {
-    new SnProjectors(),
-    new SnTurrets(),
-    new SnWalls(),
+public class SnBlocks implements Runnable{
+    public Runnable[] list = {
+    SnPayloadBlocks::load,
+    SnProjectors::load,
+    SnTurrets::load,
+    SnWalls::load,
 
-    new SnDistribution(),
-    new SnEnvironment(),
-    new SnLiquidBlocks(),
-    new SnLogicBlocks(),
-    new SnPower(),
-    new SnCrafting(),
-    new SnProduction(),
-    new SnSandbox(),
-    new SnUnitBlocks(),
-    new SnLasers(),
-    new SnGasBlocks(),
-    new SnTests(),
+    SnOtherBlocks::load,
+    SnDistribution::load,
+    SnEnvironment::load,
+    SnLiquidBlocks::load,
+    SnLogicBlocks::load,
+    SnPower::load,
+    SnCrafting::load,
+    SnProduction::load,
+    SnSandbox::load,
+    SnUnitBlocks::load,
+    SnLasers::load,
+    SnGasBlocks::load,
+    SnTests::load,
     };
 
-    @Override
-    public void load(){
+    public static void load(){
         throw new RuntimeException("is must not invoked");
 //        for (ContentList blockList : list) {
 //            blockList.load();
 //        }
     }
 
-    private static final class SnTests implements ContentList{
+    @Override
+    public void run(){
+        load();
+    }
+
+    private static final class SnTests{
         private static BulletType testBullet0,
         testBullet1,
         testBullet2,
         testBullet3,
         testBullet4;
 
-        private void loadBullets(){
+        private static void loadBullets(){
+
+
             testBullet0 = new BasicBulletType(1, 1){{
                 lifetime = 400f;
                 hitEffect = SnFx.unused1;
@@ -67,38 +69,38 @@ public class SnBlocks implements ContentList{
             testBullet1 = new ArtilleryBulletType(5, 100){{
                 fragBullets = 6;
                 fragBullet = new LaserBulletType(50);
-                fragCone = 360;
+                fragRandomSpread = 360;
             }};
             testBullet2 = new BasicBulletType(5, 50){{
                 fragBullets = 3;
-                fragCone = 45;
+                fragRandomSpread = 45;
                 fragBullet = new BasicBulletType(5, 50){{
                     fragBullets = 3;
-                    fragCone = 45;
+                    fragRandomSpread = 45;
                     fragBullet = new BasicBulletType(5, 50){{
                         fragBullets = 3;
-                        fragCone = 45;
+                        fragRandomSpread = 45;
                         fragBullet = new BasicBulletType(5, 50){{
                             fragBullets = 3;
-                            fragCone = 45;
+                            fragRandomSpread = 45;
                             fragBullet = new BasicBulletType(5, 50){{
                                 fragBullets = 3;
-                                fragCone = 45;
+                                fragRandomSpread = 45;
                                 fragBullet = new BasicBulletType(5, 50){{
                                     fragBullets = 3;
-                                    fragCone = 45;
+                                    fragRandomSpread = 45;
                                     fragBullet = new BasicBulletType(5, 50){{
                                         fragBullets = 3;
-                                        fragCone = 45;
+                                        fragRandomSpread = 45;
                                         fragBullet = new BasicBulletType(5, 50){{
                                             fragBullets = 3;
-                                            fragCone = 45;
+                                            fragRandomSpread = 45;
                                             fragBullet = new BasicBulletType(5, 50){{
                                                 fragBullets = 3;
-                                                fragCone = 45;
+                                                fragRandomSpread = 45;
                                                 fragBullet = new BasicBulletType(5, 50){{
                                                     fragBullets = 360;
-                                                    fragCone = 360;
+                                                    fragRandomSpread = 360;
                                                     fragBullet = new LaserBulletType(100);
                                                 }};
                                             }};
@@ -125,9 +127,35 @@ public class SnBlocks implements ContentList{
             testBullet4 = null;
         }
 
-        @Override
-        public void load(){
+        public static void load(){
             loadBullets();
+            new MagneticTurret("concent"){{
+                requirements(Category.turret, with(Items.copper, 2));
+                bulletType.speed=2f;
+                bulletType.damage=10f;
+                bulletType.splashDamage = 26f * 1.5f;
+                bulletType.splashDamageRadius = 1f*tilesize;
+                
+                bulletRadius=4*tilesize;
+//                bulletType.=10f;
+                totalSize=10;
+
+                buildTime = 10 * Time.toSeconds;
+                consumeItem(Items.copper, 20);
+                health = 780;
+                size = 2;
+                reload = 24f;
+                range = 46.25f*tilesize;
+                recoil = 0.3f;
+                inaccuracy = 1.1f;
+                rotateSpeed = 7f;
+                shootSound = Sounds.pew;
+                targetAir = true;
+                unlocked = true;
+                alwaysUnlocked = true;
+                hideDetails = false;
+                itemCapacity=40;
+            }};
             //region testing
             new ModItemTurret("test-turret"){{
                 requirements(Category.turret, with(Items.copper, 2));
@@ -141,9 +169,9 @@ public class SnBlocks implements ContentList{
                 );
                 health = 780;
                 size = 2;
-                reloadTime = 24f;
+                reload = 24f;
                 range = 370f;
-                recoilAmount = 0.3f;
+                recoil = 0.3f;
                 inaccuracy = 1.1f;
                 rotateSpeed = 7f;
                 shootSound = Sounds.pew;

@@ -3,45 +3,49 @@ package sunset.content.blocks;
 import arc.graphics.Color;
 import arc.util.Time;
 import mindustry.content.*;
-import mindustry.ctype.ContentList;
 import mindustry.entities.Effect;
 import mindustry.graphics.CacheLayer;
-import mindustry.type.Category;
 import mindustry.world.Block;
 import mindustry.world.blocks.environment.*;
 import mindustry.world.meta.Attribute;
-import mindustry.world.meta.BuildVisibility;
 import sunset.content.SnAttribute;
 import sunset.content.SnItems;
 import sunset.content.SnLiquids;
 import sunset.content.SnStatusEffects;
+//import sunset.graphics.SnShaders;
+import sunset.graphics.*;
 import sunset.world.blocks.environment.BreakableEnvWall;
 import sunset.world.blocks.environment.Geyser;
 import sunset.world.blocks.environment.MockEnvironmentBlock;
 
-public class SnEnvironment implements ContentList {
+public class SnEnvironment  {
     public static Block
 
     //ores
-    oreFors, orePlanatrium, oreFlameid, oreColdent,
+    oreFors, oreErius, oreNedirium, orePlanatrium, oreFlameid, oreColdent,
+
+    naturiteShard,
 
     //floors
+    chromakey,
     crimsonGrass, crimsonDirt, crimsonSand, crimsonSwamp, crimsonMoss,
-    crimsonSandWater, crimsonWater, crimsonDeepWater,
+    burheynaLiquidFloor, thermalBurheyna,
     crimsonSnow, gasDeposit, crimsonIce, crimsonIceSnow,
     granite,
 
-    jadestone,
+    greenStone, jadestone,
 
     orangeSand, stoneSand,
     obsidian, ash, burningAsh,
 
-    //static walls 
+    //static walls
+    greenStoneWall, jadestoneWall, gJadestoneWall,
+
+    yelliteWall, sayangWall, darkYelliteWall,
+
     crimsonGrassWall, crimsonDirtWall, crimsonSandWall,
     crimsonSnowWall, crimsonIceWall,
     graniteWall,
-
-    jadestoneWall, gJadestoneWall,
 
     orangeSandWall, stoneSandWall,
     obsidianWall, ashWall,
@@ -50,7 +54,7 @@ public class SnEnvironment implements ContentList {
     stagesWall,
     
     //pines
-    crimsonPine,
+    crimsonPine, jadePlant,
     
     //trees
     crimsonTree, crimsonTreeDead,
@@ -61,14 +65,26 @@ public class SnEnvironment implements ContentList {
     //hidden
     hotSlag1, hotSlag2, hotSlag3, glacier1, glacier2, glacier3;
 
-    @Override
-    public void load() {
+    public static void load() {
         //region ores
         oreFors = new OreBlock(SnItems.fors) {{
             oreDefault = false;
             oreThreshold = 0.921f;
             oreScale = 26.1234f;
         }};
+        oreErius = new OreBlock(SnItems.erius) {{
+            oreDefault = false;
+            oreThreshold = 0.921f;
+            oreScale = 26.1234f;
+        }};
+
+        oreNedirium = new OreBlock("ore-wall-nedirium", SnItems.nedirium) {{
+            wallOre = true;
+            oreDefault = false;
+            oreThreshold = 0.921f;
+            oreScale = 26.1234f;
+        }};
+
         orePlanatrium = new OreBlock(SnItems.planatrium) {{
             oreDefault = false;
             oreThreshold = 0.921f;
@@ -86,8 +102,15 @@ public class SnEnvironment implements ContentList {
             oreThreshold = 0.921f;
             oreScale = 26.1234f;
         }};
+
+        naturiteShard = new OverlayFloor("naturite-shard"){{
+           variants = 3;
+        }};
         //endregion ores
         //region floors
+        chromakey = new Floor("chromakey"){{
+            variants = 1;
+        }};
         crimsonGrass = new Floor("crimson-grass") {{
             variants = 3;
             wall = crimsonGrassWall;
@@ -108,7 +131,6 @@ public class SnEnvironment implements ContentList {
             liquidDrop = SnLiquids.burheyna;
             liquidMultiplier = 0.4f;
             isLiquid = true;
-            status = SnStatusEffects.viscous;
             statusDuration = 120f;
             drownTime = 700f;
             albedo = 0.5f;
@@ -117,42 +139,29 @@ public class SnEnvironment implements ContentList {
             variants = 3;
             wall = crimsonPine;
         }};
-
-        crimsonSandWater = new Floor("crimson-sand-water") {{
-            speedMultiplier = 0.9f;
-            variants = 0;
-            liquidDrop = SnLiquids.burheyna;
-            liquidMultiplier = 0.7f;
-            isLiquid = true;
-            status = SnStatusEffects.viscous;
-            statusDuration = 120f;
-            cacheLayer = CacheLayer.water;
-            albedo = 0.5f;
-        }};
-        crimsonWater = new Floor("crimson-water") {{
+        burheynaLiquidFloor = new Floor("burheyna-floor") {{
             speedMultiplier = 0.8f;
             variants = 0;
             liquidDrop = SnLiquids.burheyna;
             liquidMultiplier = 1.1f;
             isLiquid = true;
-            status = SnStatusEffects.viscous;
             statusDuration = 120f;
-            cacheLayer = CacheLayer.water;
+            cacheLayer = SnCacheLayer.burheyna;
+            drownTime = 180f;
             albedo = 0.5f;
         }};
-        crimsonDeepWater = new Floor("crimson-deep-water") {{
-            speedMultiplier = 0.5f;
+        thermalBurheyna = new Floor("burheyna-thermal-floor") {{
+            speedMultiplier = 0.8f;
             variants = 0;
             liquidDrop = SnLiquids.burheyna;
-            liquidMultiplier = 1.1f;
+            liquidMultiplier = 1f;
             isLiquid = true;
-            status = SnStatusEffects.viscous;
             statusDuration = 120f;
-            drownTime = 160f;
-            cacheLayer = CacheLayer.water;
+            cacheLayer = SnCacheLayer.burheyna;
+            drownTime = 210f;
             albedo = 0.5f;
+            attributes.set(SnAttribute.thermalBurheyna, 0.25f);
         }};
-
         gasDeposit = new Floor("gas-deposit") {{
             variants = 3;
             attributes.set(SnAttribute.gas, 1f);
@@ -179,6 +188,10 @@ public class SnEnvironment implements ContentList {
             variants = 3;
             attributes.set(SnAttribute.burheyna, -0.4f);
             wall = graniteWall;
+        }};
+
+        greenStone = new Floor("green-stone"){{
+            variants = 3;
         }};
 
         jadestone = new Floor("jadestone") {{
@@ -216,6 +229,30 @@ public class SnEnvironment implements ContentList {
         }};
         //endregion floors
         //region static walls
+
+        greenStoneWall = new StaticWall("green-stone-wall"){{
+            variants = 2;
+        }};
+
+        jadestoneWall = new StaticWall("jadestone-wall") {{
+            variants = 2;
+        }};
+
+        gJadestoneWall = new StaticWall("g-jadestone-wall") {{
+            variants = 2;
+        }};
+
+        yelliteWall = new StaticWall("yellite-wall"){{
+            variants = 2;
+        }};
+
+        sayangWall = new StaticWall("sayang-wall"){{
+            variants = 2;
+        }};
+
+        darkYelliteWall = new StaticWall("dark-yellite-wall"){{
+            variants = 2;
+        }};
         crimsonGrassWall = new StaticWall("crimson-grass-wall") {{
             variants = 2;
         }};
@@ -237,14 +274,6 @@ public class SnEnvironment implements ContentList {
             variants = 3;
         }};
 
-        jadestoneWall = new StaticWall("jadestone-wall") {{
-            variants = 2;
-        }};
-
-        gJadestoneWall = new StaticWall("g-jadestone-wall") {{
-            variants = 2;
-        }};
-
         orangeSandWall = new StaticWall("orange-sand-wall") {{
             variants = 2;
         }};
@@ -258,14 +287,13 @@ public class SnEnvironment implements ContentList {
         ashWall = new StaticWall("ash-wall") {{
             variants = 2;
         }};
-        //endregion static walls
         //region breakable environment walls
         stagesWall = new BreakableEnvWall("stages-wall") {{
             variants = 1;
             stages = 5;
             health = 5150;
         }};
-        //endregion breakable environment walls
+        //endregion static walls
         //region trees
         crimsonTree = new TreeBlock("crimson-tree") {{
             variants = 0;
@@ -277,6 +305,12 @@ public class SnEnvironment implements ContentList {
         //region pines
         crimsonPine = new StaticTree("crimson-pine") {{
             variants = 0;
+        }};
+
+        jadePlant = new Prop("jade-plant") {{
+            variants = 0;
+            breakable = false;
+            alwaysReplace = false;
         }};
         //endregion pines
         //region special
@@ -293,6 +327,7 @@ public class SnEnvironment implements ContentList {
             eruptionEffect = new Effect(30f, Fx.ballfire.renderer);
         }};
         //endregion special
+
         //region hidden
         hotSlag1 = new MockEnvironmentBlock("hotSlag1") {{
             replacement = Blocks.slag;

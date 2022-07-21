@@ -7,8 +7,8 @@ import mindustry.gen.Building;
 import mindustry.ui.ItemImage;
 import mindustry.ui.MultiReqImage;
 import mindustry.ui.ReqImage;
+import mindustry.world.*;
 import mindustry.world.consumers.Consume;
-import mindustry.world.consumers.ConsumeType;
 import mindustry.world.meta.Stat;
 import mindustry.world.meta.Stats;
 import sunset.type.blocks.DrillItem;
@@ -22,9 +22,11 @@ public class DrillItemsConsume extends Consume {
     }
 
     @Override
-    public void applyItemFilter(Bits filter) {
-        for (DrillItem item : drillItems) {
-            filter.set(item.item.id);
+    public void apply(Block block){
+        super.apply(block);
+        block.hasItems=true;
+        for(DrillItem item : drillItems){
+            block.itemFilter[item.item.id]=true;
         }
     }
 
@@ -42,19 +44,10 @@ public class DrillItemsConsume extends Consume {
         table.add(image).size(8 * 4);
     }
 
-    @Override
-    public String getIcon() {
-        return "icon-item";
-    }
 
     @Override
     public void update(Building entity) {
 
-    }
-
-    @Override
-    public boolean isUpdate() {
-        return super.isUpdate();
     }
 
     @Override
@@ -70,17 +63,12 @@ public class DrillItemsConsume extends Consume {
     }
 
     @Override
-    public ConsumeType type() {
-        return ConsumeType.item;
-    }
-
-    @Override
-    public boolean valid(Building entity) {
+    public float efficiency(Building entity) {
         for (DrillItem drillItem : drillItems) {
             if (entity.items.has(drillItem.item, drillItem.amount)) {
-                return true;
+                return 1f;
             }
         }
-        return false;
+        return 0f;
     }
 }

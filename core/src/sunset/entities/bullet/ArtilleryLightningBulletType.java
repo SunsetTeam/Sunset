@@ -20,7 +20,7 @@ public class ArtilleryLightningBulletType extends BulletType {
         hitShake = 2f;
         hitSound = Sounds.spark;
         absorbable = keepVelocity = collides = false;
-        instantDisappear = collidesAir = collidesGround = scaleVelocity = true;
+        instantDisappear = collidesAir = collidesGround = scaleLife = true;
         lightning = 3;
         lightningDamage = damage;
         lightningLength = lightningLengthRand = 6;

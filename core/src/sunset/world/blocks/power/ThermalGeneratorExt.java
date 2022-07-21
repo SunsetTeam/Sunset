@@ -25,7 +25,7 @@ public class ThermalGeneratorExt extends ThermalGenerator {
     public class ThermalGeneratorBuildExt extends ThermalGeneratorBuild {
         @Override
         public void updateTile() {
-            if(cons.valid()) {
+            if(efficiency>0) {
                 productionEfficiency = sum * attributeScale + attribute.env();
             } else {
                 productionEfficiency = 0;

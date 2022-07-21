@@ -2,21 +2,37 @@ import java.nio.charset.StandardCharsets
 import java.nio.file.FileSystemAlreadyExistsException
 import java.nio.file.FileSystems
 import java.nio.file.Files
-import java.nio.file.Paths
 import java.nio.file.StandardOpenOption
 import java.time.format.DateTimeFormatter
 
 buildscript{
     ext{
-        mindustryVersion = 'v135'
+        // v7
+        mindustryPath = "com.github.Anuken.MindustryJitpack"
+        mindustryVersionFull = 'fa17da53c68cf2600b4640ff653cee2f48d50740'
+        mindustryVersion = mindustryVersionFull.substring(0, 10)
+        testMindustryBuild = '22823' //regular versions are prefixed with 'v' (eg. 'v135'), BE versions has no prefix (eg. '22823')
+        arcVersion = "b1b88883e2"
+//        arcVersion = "916c5a77"
+
+
+        // normal
+        //mindustryPath = "com.github.Anuken.Mindustry"
+        //mindustryVersion = 'v135'
+        //arcVersion=mindustryVersion
+        jabelVersion = "0.6.0"
 
         parserVersion = '3.22.1'
 
-        aciVersion = "v1.5"
+        aciVersion = "45ad8cd8ed9"
 
-        modCoreVersion = "c679d47d184"
+//        gasVersion = "27b10c13f7e"
 
-        kotlinVersion = "1.5.21"
+        modCoreVersion = "59185cba3b9"
+
+
+        kotlinVersion = "1.6.0"
+//        kotlinVersion = "1.5.31"
 
         sdkRoot = System.getenv("ANDROID_HOME") ?: System.getenv("ANDROID_SDK_ROOT")
     }
@@ -29,12 +45,12 @@ buildscript{
     }
 
     dependencies{
-        classpath "com.github.Anuken.Arc:arc-core:$mindustryVersion"
-        classpath "com.github.Anuken.Mindustry:core:$mindustryVersion"
-        classpath "com.github.Anuken.Mindustry:tools:$mindustryVersion"
-        classpath "com.github.Anuken.Arc:packer:$mindustryVersion"
+        classpath "com.github.Anuken.Arc:arc-core:$arcVersion"
+        classpath "$mindustryPath:core:$mindustryVersion"
+        classpath "com.github.Anuken.Arc:packer:$arcVersion"
+
         classpath "com.github.Zelaux.ZelauxModCore:annotations:$modCoreVersion"
-        classpath "com.github.Zelaux.GasLibrary:core:a55948ec113566f3a3a4a1f1508d6f9f07161157"
+//        classpath "com.github.Zelaux.GasLibrary:core:$gasVersion"
 
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
     }
@@ -43,7 +59,6 @@ plugins{
     id 'org.jetbrains.kotlin.jvm' version "$kotlinVersion"
     id "org.jetbrains.kotlin.kapt" version "$kotlinVersion"
 }
-apply plugin: "kotlin"
 version '1.0'
 allprojects{
     apply plugin: "kotlin"
@@ -54,8 +69,8 @@ allprojects{
     ext{
         arcModule = { String name ->
             //skip to last submodule
-            if (name.contains(':')) name = name.split(':').last()
-            return "com.github.Anuken.Arc:$name:$mindustryVersion"
+            if(name.contains(':')) name = name.split(':').last()
+            return "com.github.Anuken.Arc:$name:$arcVersion"
         }
         writeProcessors = {
             new File(rootDir, "annotations/src/main/resources/META-INF/services/").mkdirs()
@@ -65,35 +80,35 @@ allprojects{
             files.eachFileRecurse(
                     groovy.io.FileType.FILES
             ){ file ->
-                if (file.name.endsWith(".java") && (file.text.contains(" extends ModBaseProcessor") || (file.text.contains(" extends AbstractProcessor") && !file.text.contains("abstract class")))) {
+                if(file.name.endsWith(".java") && (file.text.contains(" extends ModBaseProcessor") || (file.text.contains(" extends AbstractProcessor") && !file.text.contains("abstract class")))){
                     text.append(file.path.substring(files.path.length() + 1)).append("\n")
                 }
             }
 
             processorFile.text = text.toString().replace(".java", "").replace("/", ".").replace("\\", ".")
         }
-        addModInfoFile={File archiveFile->
+        addModInfoFile = { File archiveFile ->
 
-            def time = LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:MM DD.MM.YYYY"));
+            def time = LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:MM DD.MM.YYYY"))
             String suffix = project.hasProperty("commit") ? " commit_${commit}" : " local_${time}"
             println "Version suffix${suffix}"
             def reader = new BufferedReader(new FileReader(new File(rootDir, "mod.hjson")))
             // now append some extra content
-            def jarFile;
+            def jarFile
             try{
-                jarFile=FileSystems.newFileSystem(java.nio.file.Path.of(java.net.URI.create(""+archiveFile.toURI())),new HashMap<>());
-            } catch (FileSystemAlreadyExistsException e){
+                jarFile = FileSystems.newFileSystem(java.nio.file.Path.of(URI.create("" + archiveFile.toURI())), new HashMap<>())
+            }catch(FileSystemAlreadyExistsException e){
                 e.printStackTrace()
-                jarFile=FileSystems.getFileSystem(java.net.URI.create("jar:"+archiveFile.toURI()))
+                jarFile = FileSystems.getFileSystem(URI.create("jar:" + archiveFile.toURI()))
                 jarFile.close()
-                jarFile=FileSystems.newFileSystem(java.net.URI.create("jar:"+archiveFile.toURI()),new HashMap<>());
+                jarFile = FileSystems.newFileSystem(URI.create("jar:" + archiveFile.toURI()), new HashMap<>())
 //                FileSystems
             }
-            def modInfoFile = jarFile.getPath("mod.hjson");
-            try (Writer writer = Files.newBufferedWriter(modInfoFile, StandardCharsets.UTF_8, StandardOpenOption.CREATE)) {
+            def modInfoFile = jarFile.getPath("mod.hjson")
+            try(Writer writer = Files.newBufferedWriter(modInfoFile, StandardCharsets.UTF_8, StandardOpenOption.CREATE)){
                 reader.lines().forEach(s -> {
                     writer.write(s)
-                    if (s.startsWith("version: ")) writer.write(suffix);
+                    if(s.startsWith("version: ")) writer.write(suffix)
                     writer.write('\n')
                 })
             }
@@ -134,13 +149,13 @@ allprojects{
         ])
     }
 }
-
+/*
 dependencies{
     implementation "com.github.Zelaux.ZelauxModCore:core:$modCoreVersion"
     implementation "com.github.Zelaux.ZelauxModCore:plugins:$modCoreVersion"
     implementation "com.github.Zelaux:AdvancedContentInfo:$aciVersion"
-    implementation "com.github.Zelaux.GasLibrary:core:a55948ec113566f3a3a4a1f1508d6f9f07161157"
-}
+    implementation "com.github.Zelaux.GasLibrary:core:$gasVersion"
+}*/
 
 configure(project(":annotations")){
     tasks.withType(JavaCompile){
@@ -209,18 +224,19 @@ project(":core"){
         compileOnly arcModule("extensions:arcnet")
 
         implementation "com.github.Zelaux.ZelauxModCore:core:$modCoreVersion"
-        implementation "com.github.Zelaux.ZelauxModCore:plugins:$modCoreVersion"
+        implementation "com.github.Zelaux.ZelauxModCore:blocks:$modCoreVersion"
+        implementation "com.github.Zelaux.ZelauxModCore:utils:$modCoreVersion"
         implementation "com.github.Zelaux.ZelauxModCore:graphics:$modCoreVersion"
-        implementation "com.github.Zelaux.GasLibrary:core:a55948ec113566f3a3a4a1f1508d6f9f07161157"
+
+//        compileOnly "com.github.Zelaux.GasLibrary:core:$gasVersion"
 
         compileOnly "com.github.Zelaux.ZelauxModCore:annotations:$modCoreVersion"
 
         implementation "com.github.Zelaux:AdvancedContentInfo:$aciVersion"
 
-        compileOnly "com.github.Anuken.Mindustry:core:$mindustryVersion"
-        compileOnly "com.github.Anuken.Mindustry:tools:$mindustryVersion"
+        compileOnly "$mindustryPath:core:$mindustryVersion"
 
-        annotationProcessor 'com.github.Anuken:jabel:34e4c172e65b3928cd9eabe1993654ea79c409cd'
+        annotationProcessor "com.github.Anuken:jabel:$jabelVersion"
         compileOnly project(":annotations")
 
         kapt project(":annotations")
@@ -228,30 +244,28 @@ project(":core"){
 //        annotationProcessor 'com.github.Anuken:jabel:34e4c172e65b3928cd9eabe1993654ea79c409cd'
 
     }
-
-    afterEvaluate{
-        task mergedJavadoc(type: Javadoc){
-            if (true) return null;
-            def blacklist = [project(":annotations")]
-            if (findProject(":android") != null) {
-                blacklist += project(":android")
-            }
-
-            source rootProject.subprojects.collect{ project ->
-                if (!blacklist.contains(project) && project.hasProperty("sourceSets")) {
-                    return project.sourceSets.main.allJava
-                }
-            }
-
-            classpath = files(rootProject.subprojects.collect{ project ->
-                if (!blacklist.contains(project) && project.hasProperty("sourceSets")) {
-                    return project.sourceSets.main.compileClasspath
-                }
-            })
-            destinationDir = new File(buildDir, 'javadoc')
-        }
-    }
     jar{
+        duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+        from{
+            configurations.runtimeClasspath.collect{ it.isDirectory() ? it : zipTree(it) }
+        }
+        /*def libFolder = new arc.files.Fi(buildDir).child("gasLibrary")
+        def gasVersionFile = libFolder.child("version.txt")
+        if(!gasVersionFile.exists()){
+            gasVersionFile.writeString("")
+        }
+        if(gasVersionFile.readString() != gasVersion){
+            def libUrl = "https://jitpack.io/com/github/Zelaux/GasLibrary/build/$gasVersion/build-${gasVersion}.jar"
+            def libFile = libFolder.child("GasLibrary.jar")
+
+            println "Downloading GasLibrary $gasVersion" + " to ${libFile.file().canonicalPath}"
+            new URL(libUrl).withInputStream{ i -> libFile.file().withOutputStream{ it << i } }
+            println "Done"
+            gasVersionFile.writeString(gasVersion)
+        }
+        from(libFolder.file()){
+            include("GasLibrary.jar")
+        }*/
         exclude("sunset/entities/comp/**")
         exclude("sunset/codegen/**")
     }
@@ -262,9 +276,11 @@ project(":tests"){
 
     dependencies{
         testImplementation project(":core")
-        testImplementation "com.github.Anuken.Arc:arc-core:$mindustryVersion"
-        testImplementation "com.github.Anuken.Mindustry:core:$mindustryVersion"
-        testImplementation "com.github.Anuken.Mindustry:server:$mindustryVersion"
+        testImplementation "com.github.Anuken.Arc:arc-core:$arcVersion"
+
+        testImplementation "$mindustryPath:core:$mindustryVersion"
+        //testImplementation "$mindustryPath:server:$mindustryVersion"
+
         testImplementation "org.junit.jupiter:junit-jupiter-params:5.7.1"
         testImplementation "org.junit.jupiter:junit-jupiter-api:5.7.1"
         testImplementation arcModule("backends:backend-headless")
@@ -294,18 +310,24 @@ project(":tools"){
 
         implementation project(":core")
 
+        implementation arcModule("natives:natives-desktop")
+        implementation arcModule("natives:natives-freetype-desktop")
+        implementation arcModule("backends:backend-headless")
+
+
         implementation "com.github.javaparser:javaparser-symbol-solver-core:$parserVersion"
-        implementation "com.github.Anuken.Mindustry:core:$mindustryVersion"
-        implementation "com.github.Anuken.Mindustry:tools:$mindustryVersion"
+        implementation "$mindustryPath:core:$mindustryVersion"
+//        implementation "com.github.Anuken.Mindustry:tools:$mindustryVersionOld"
 
         implementation "com.github.Zelaux:AdvancedContentInfo:$aciVersion"
 
         implementation "com.github.Zelaux.ZelauxModCore:core:$modCoreVersion"
         implementation "com.github.Zelaux.ZelauxModCore:tools:$modCoreVersion"
-        implementation "com.github.Zelaux.GasLibrary:core:a55948ec113566f3a3a4a1f1508d6f9f07161157"
+
+//        implementation "com.github.Zelaux.GasLibrary:core:$gasVersion"
 
 
-        implementation "com.github.Anuken.Arc:packer:$mindustryVersion"
+        implementation "com.github.Anuken.Arc:packer:$arcVersion"
     }
 }
 project(":annotations"){
@@ -315,15 +337,15 @@ project(":annotations"){
         implementation "com.github.javaparser:javaparser-symbol-solver-core:$parserVersion"
 
         implementation arcModule('arc-core')
-        implementation "com.github.Anuken.Mindustry:core:$mindustryVersion"
-        implementation "com.github.Anuken.Mindustry:tools:$mindustryVersion"
+        implementation "$mindustryPath:core:$mindustryVersion"
 
         implementation "com.github.Zelaux:AdvancedContentInfo:$aciVersion"
 
         implementation "com.github.Zelaux.ZelauxModCore:core:$modCoreVersion"
         implementation "com.github.Zelaux.ZelauxModCore:tools:$modCoreVersion"
         implementation "com.github.Zelaux.ZelauxModCore:annotations:$modCoreVersion"
-        implementation "com.github.Zelaux.GasLibrary:core:a55948ec113566f3a3a4a1f1508d6f9f07161157"
+
+//        implementation "com.github.Zelaux.GasLibrary:core:$gasVersion"
     }
 }
 
@@ -331,12 +353,12 @@ task jarAndroid{
     dependsOn "jar"
 
     doLast{
-        if (!sdkRoot || !new File(sdkRoot).exists()) throw new GradleException("No valid Android SDK found. Ensure that ANDROID_HOME is set to your Android SDK directory.");
+        if(!sdkRoot || !new File(sdkRoot).exists()) throw new GradleException("No valid Android SDK found. Ensure that ANDROID_HOME is set to your Android SDK directory.")
 
         def platformRoot =
                 new File("$sdkRoot/platforms/").listFiles().sort().reverse().find{ f -> new File(f, "android.jar").exists() }
 
-        if (!platformRoot) throw new GradleException("No android.jar found. Ensure that you have an Android platform installed.")
+        if(!platformRoot) throw new GradleException("No android.jar found. Ensure that you have an Android platform installed.")
 
         //collect dependencies needed for desugaring
         def dependencies = (
@@ -351,6 +373,7 @@ task jarAndroid{
     }
 }
 jar{
+    dependsOn.clear()
     dependsOn "core:jar"
 //    dependsOn "mark"
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
@@ -358,10 +381,6 @@ jar{
     from{
 //        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
         project(":core").fileTree("build/libs/core.jar").collect{ it.isDirectory() ? it : zipTree(it) }
-    }
-    from{
-        configurations.runtimeClasspath.collect{ it.isDirectory() ? it : zipTree(it) }
-//        project(":core").fileTree("build/libs/core.jar").collect { it.isDirectory() ? it : zipTree(it) }
     }
 
 
@@ -395,26 +414,26 @@ task deploy(type: Jar){
     }
 }
 
-def os() { //Returns OS name
-    String s = System.getProperty("os.name");
-    return s == null ? "" : s;
+static def os(){ //Returns OS name
+    String s = System.getProperty("os.name")
+    return s == null ? "" : s
 }
 
-def getdatadir() { //Returns Mindustry data directory path
+static def getdatadir(){ //Returns Mindustry data directory path
     def ret = System.getenv("MINDUSTRY_DATA_DIR")
-    if (ret == null) {
+    if(ret == null){
         def os = os()
-        if (os.contains("Windows")) {
+        if(os.contains("Windows")){
             return System.getenv("AppData") + "\\Mindustry\\"
-        } else if (os.contains("Linux") || os.contains("BSD")) {
-            if (System.getenv("XDG_DATA_HOME") != null) {
+        }else if(os.contains("Linux") || os.contains("BSD")){
+            if(System.getenv("XDG_DATA_HOME") != null){
                 String dir = System.getenv("XDG_DATA_HOME")
-                if (!dir.endsWith("/")) dir += "/"
+                if(!dir.endsWith("/")) dir += "/"
                 return dir + "Mindustry/"
             }
             return System.getProperty("user.home") + "/.local/share/Mindustry/"
-        } else if (os.contains("Mac")) {
-            return System.getProperty("user.home") + "/Library/Application Support/Mindustry/";
+        }else if(os.contains("Mac")){
+            return System.getProperty("user.home") + "/Library/Application Support/Mindustry/"
         }
     }
     return ret
@@ -436,23 +455,27 @@ task mjar(){
         }
     }
     doLast{
-        def modsDirectories = [];
-        def file = new File(rootDir, "modsDirectories.txt");
+        def modsDirectories = []
+        def file = new File(rootDir, "modsDirectories.txt")
 
-        if (file.exists()) {
-            BufferedReader reader = new BufferedReader(new FileReader(file));
+        if(file.exists()){
+            BufferedReader reader = new BufferedReader(new FileReader(file))
             reader.lines().forEach(line -> modsDirectories.add(line))
-            reader.close();
-        } else {
-            modsDirectories.add("classic");
+            reader.close()
+        }else{
+            modsDirectories.add("classic")
         }
-        for (String directory : modsDirectories) {
-            if (directory.equals("classic")) {
-                directory = getdatadir() + "mods";
+        for(String directory : modsDirectories){
+            if(directory.startsWith("#") || directory.startsWith("//")){
+                println "Directory \"$directory\" was skipped."
+                continue
             }
-            acopy(directory);
+            if(directory.equals("classic")){
+                directory = getdatadir() + "mods"
+            }
+            acopy(directory)
         }
-        def time = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss"));
+        def time = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss"))
         println "Build ended at: ${time}"
     }
 }
@@ -460,11 +483,13 @@ task mjar(){
 task run{
     dependsOn mjar
     doLast{
-        def gamePath = temporaryDir.absolutePath + "\\Mindustry$mindustryVersion" + ".jar"
-        def gameUrl = "https://github.com/Anuken/Mindustry/releases/download/$mindustryVersion" + "/Mindustry.jar"
+        def gamePath = "${temporaryDir.absolutePath}\\Mindustry${testMindustryBuild}.jar"
+        def gameUrl = testMindustryBuild.startsWith("v") ?
+            "https://github.com/Anuken/Mindustry/releases/download/${testMindustryBuild}/Mindustry.jar" :
+            "https://github.com/Anuken/MindustryBuilds/releases/download/${testMindustryBuild}/Mindustry-BE-Desktop-${testMindustryBuild}.jar"
         def gameFile = new File(gamePath)
         if (!gameFile.exists()) {
-            println "Downloading Mindustry $mindustryVersion" + " to ${gamePath}"
+            println "Downloading Mindustry ${testMindustryBuild} from ${gameUrl} to ${gamePath}"
             new URL(gameUrl).withInputStream{ i -> gameFile.withOutputStream{ it << i } }
             println "Done"
         }

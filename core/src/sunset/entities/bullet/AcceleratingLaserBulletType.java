@@ -74,7 +74,7 @@ public class AcceleratingLaserBulletType extends LaserBulletType{
         for(int i : Mathf.signs){
             Drawf.tri(b.x, b.y, sideWidth * b.fout() * cwidth, sideLength * compound, b.rotation() + sideAngle * i);
         }
-        Drawf.light(b.team, b.x, b.y, x, y, width * 1.4f, this.colors[0], 0.6f);
+        Drawf.light( b.x, b.y, x, y, width * 1.4f, this.colors[0], 0.6f);
         Draw.reset();
     }
 

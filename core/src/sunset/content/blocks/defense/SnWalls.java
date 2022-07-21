@@ -1,6 +1,5 @@
 package sunset.content.blocks.defense;
 
-import mindustry.ctype.ContentList;
 import mindustry.type.Category;
 import mindustry.world.Block;
 import mindustry.world.blocks.defense.Wall;
@@ -10,17 +9,17 @@ import sunset.world.blocks.defense.walls.SnWall;
 
 import static mindustry.type.ItemStack.with;
 
-public class SnWalls implements ContentList{
+public class SnWalls {
     public static Block
 
     forsWall, forsWallLarge,
+    eriusWall, eriusWalllarge,
     naturiteWall, naturiteWallLarge,
     enojiewall, enojieWallLarge,
     
     indestructibleWall, indestructibleWallLarge;
 
-    @Override
-    public void load(){
+    public static void load(){
         forsWall = new Wall("fors-wall"){{
             requirements(Category.defense, with(SnItems.fors, 6));
             size = 1;
@@ -29,6 +28,16 @@ public class SnWalls implements ContentList{
         forsWallLarge = new Wall("fors-wall-large"){{
             requirements(Category.defense, with(SnItems.fors, 24));
             health = forsWall.health * 4;
+            size = 2;
+        }};
+        eriusWall = new Wall("erius-wall"){{
+            requirements(Category.defense, with(SnItems.erius, 4));
+            health = 640;
+            size = 1;
+        }};
+        eriusWalllarge = new Wall("erius-wall-large"){{
+            requirements(Category.defense, with(SnItems.erius, 16));
+            health = eriusWall.health * 4;
             size = 2;
         }};
         //region heal

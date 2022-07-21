@@ -3,7 +3,6 @@ package sunset.content.blocks.defense;
 import arc.util.Time;
 import mindustry.Vars;
 import mindustry.content.Items;
-import mindustry.ctype.ContentList;
 import mindustry.type.Category;
 import mindustry.world.Block;
 import mindustry.world.blocks.defense.ForceProjector;
@@ -13,17 +12,15 @@ import sunset.world.blocks.defense.projectors.DeflectorProjector;
 
 import static mindustry.type.ItemStack.with;
 
-public class SnProjectors implements ContentList {
+public class SnProjectors {
     public static Block
-    hugeRestoringDome, forceDome, deflectorProjector,
-    testStand;
+    /*hugeRestoringDome,*/ forceDome, deflectorProjector;
 
-    @Override
-    public void load() {
+    public static void load() {
 
-        hugeRestoringDome = new RepairStation("huge-restoring-dome"){{
+        /*hugeRestoringDome = new RepairStation("huge-restoring-dome"){{
             requirements(Category.effect, with(Items.lead, 560, Items.titanium, 255, Items.silicon, 140, SnItems.nobium, 100));
-            consumes.power(4.4f);
+            consumePower(4.4f);
             size = 5;
             reload = 5f * Time.toSeconds;
             range = 30f * Vars.tilesize;
@@ -31,8 +28,8 @@ public class SnProjectors implements ContentList {
             repairHealth = 250f;
             phaseBoost = 15f;
             health = 80 * size * size;
-            consumes.item(SnItems.nobium).boost();
-        }};
+            consumeItem(SnItems.nobium).boost();
+        }};*/
 
         forceDome = new ForceProjector("force-dome") {{
             requirements(Category.effect, with(Items.titanium, 600, Items.thorium, 480, Items.silicon, 300, SnItems.naturite, 250, SnItems.nobium, 240, SnItems.enojie, 210));
@@ -43,8 +40,8 @@ public class SnProjectors implements ContentList {
             cooldownLiquid = 3f;
             cooldownBrokenBase = 1.1f;
 
-            consumes.items(with(SnItems.enojie, 2, SnItems.nobium, 2, Items.phaseFabric, 2));
-            consumes.power(15f);
+            consumeItems(with(SnItems.enojie, 2, SnItems.nobium, 2, Items.phaseFabric, 2));
+            consumePower(15f);
         }};
 
         deflectorProjector = new DeflectorProjector("deflector-projector") {{
@@ -58,8 +55,8 @@ public class SnProjectors implements ContentList {
             cooldownNormal = 2.1f;
             cooldownLiquid = 3.3f;
             cooldownBrokenBase = 1f;
-            consumes.items(with(Items.phaseFabric, 3, SnItems.coldent, 5));
-            consumes.power(20f);
+            consumeItems(with(Items.phaseFabric, 3, SnItems.coldent, 5));
+            consumePower(20f);
         }};
     }
 }

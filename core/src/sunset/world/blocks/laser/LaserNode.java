@@ -1,21 +1,25 @@
 package sunset.world.blocks.laser;
 
 import arc.*;
+import arc.func.*;
 import arc.graphics.*;
 import arc.graphics.g2d.*;
 import arc.math.*;
 import arc.math.geom.*;
 import arc.scene.ui.layout.*;
-import arc.struct.*;
 import arc.util.*;
 import arc.util.io.*;
 import mindustry.*;
+import mindustry.content.*;
+import mindustry.entities.*;
+import mindustry.entities.units.*;
 import mindustry.game.*;
 import mindustry.gen.*;
 import mindustry.graphics.*;
+import mindustry.ui.*;
 import mindustry.world.*;
 
-import static mindustry.Vars.*;
+import static mindustry.Vars.tilesize;
 
 /*@Struct
 class LaserEnableStateStruct{
@@ -25,17 +29,21 @@ class LaserEnableStateStruct{
     boolean down;
 }*/
 
-/** Class for laser-transferring blocks.*/
+/** Class for laser-transferring blocks. */
 public class LaserNode extends LaserBlock{
+    public Effect nodeHitEffect = Fx.none;
+
     @SuppressWarnings("PointlessBitwiseExpression")
     public LaserNode(String name){
         super(name);
         update = true;
         configurable = true;
         solid = true;
-        clipSize = 500f;
+        rotate = true;
+        rotateDraw = false;
+//        clipSize = 500f;
         config(Integer.class, (LaserNodeBuild b, Integer value) -> {
-            Log.info("config");
+            //Log.info("config");
             b.rightOutput = (value & 0b0001) >> 0 == 1;
             b.topOutput = (value & 0b0010) >> 1 == 1;
             b.leftOutput = (value & 0b0100) >> 2 == 1;
@@ -44,16 +52,80 @@ public class LaserNode extends LaserBlock{
     }
 
     @SuppressWarnings("PointlessBitwiseExpression")
-    protected static void configureState(LaserNodeBuild build, boolean right, boolean top, boolean left, boolean down){
+    protected static int getState(boolean right, boolean top, boolean left, boolean down){
         int state = 0;
         if(right) state += 1 << 0;
         if(top) state += 1 << 1;
         if(left) state += 1 << 2;
         if(down) state += 1 << 3;
-        build.configure(state);
+        return state;
     }
 
-    public class LaserNodeBuild extends LaserBlockBuild{
+    @Override
+    public void setBars(){
+        super.setBars();
+        if(heats){
+            addBar("chargeBar", (LaserBuild entity) ->
+            new Bar(() -> Core.bundle.format("bar.laser-input", entity.laser.rawInput, entity.block().heatLaserLimit),
+            () -> {
+                if(entity.laser.rawInput < entity.block().heatLaserLimit){
+                    return Pal.powerBar;
+                }else
+                    return Color.red;
+            },
+            () -> entity.laser.rawInput / entity.block().heatLaserLimit));
+        }
+    }
+
+    @Override
+    @SuppressWarnings("PointlessBitwiseExpression")
+    public Object pointConfig(Object objectConfig, Cons<Point2> transformer){
+        if(!(objectConfig instanceof Integer config)) return super.pointConfig(objectConfig, transformer);
+
+        boolean rightOutput = (config & 0b0001) >> 0 == 1;
+        boolean topOutput = (config & 0b0010) >> 1 == 1;
+        boolean leftOutput = (config & 0b0100) >> 2 == 1;
+        boolean downOutput = (config & 0b1000) >> 3 == 1;
+        transformer.get(Tmp.p1.set(1, 0));
+        int steps = (int)(Tmp.v1.set(Tmp.p1.x, Tmp.p1.y).angle() / 90);
+        return getState(
+        rotateBoolean(steps, rightOutput, topOutput, leftOutput, downOutput),
+        rotateBoolean(steps, topOutput, leftOutput, downOutput, rightOutput),
+        rotateBoolean(steps, leftOutput, downOutput, rightOutput, topOutput),
+        rotateBoolean(steps, downOutput, rightOutput, topOutput, leftOutput)
+        );
+    }
+
+    private boolean rotateBoolean(int steps, boolean step0, boolean step1, boolean step2, boolean step3){
+        return switch(steps % 4){
+            case 0 -> step0;
+            case 1 -> step1;
+            case 2 -> step2;
+            case 3 -> step3;
+            default -> throw new IllegalStateException("Unexpected value: " + steps);
+        };
+    }
+
+    @Override
+    @SuppressWarnings("PointlessBitwiseExpression")
+    public void flipRotation(BuildPlan req, boolean x){
+        super.flipRotation(req, x);
+        /*if(!(req.config instanceof Integer config)) return;
+
+        boolean rightOutput = (config & 0b0001) >> 0 == 1;
+        boolean topOutput = (config & 0b0010) >> 1 == 1;
+        boolean leftOutput = (config & 0b0100) >> 2 == 1;
+        boolean downOutput = (config & 0b1000) >> 3 == 1;
+//        int steps = (int)(Tmp.v1.set(Tmp.p1.x, Tmp.p1.y).angle() / 90);
+        req.config = getState(
+        x ? leftOutput : rightOutput,
+        !x ? topOutput : downOutput,
+        x ? rightOutput : leftOutput,
+        !x ? downOutput:topOutput
+        );*/
+    }
+
+    public class LaserNodeBuild extends LaserBuild{
         Lasers lasers;
 
         @Override
@@ -62,35 +134,35 @@ public class LaserNode extends LaserBlock{
             super.init(tile, team, shouldAdd, rotation);
             //top
             lasers.allLasers.add(new Laser(){{
-                build = LaserNodeBuild.this;
                 angle = 90f;
+                build = LaserNodeBuild.this;
                 length = Math.max(Vars.world.width() * tilesize, Vars.world.height() * tilesize);
-                offset = size * 1.5f;
-                start.set(tile.x * tilesize + block().offset, tile.y * tilesize + block().offset);
+                start.set(build.tile.x * tilesize + build.block().offset, build.tile.y * tilesize + build.block().offset);
+                hitEffect = nodeHitEffect;
             }});
             //left
             lasers.allLasers.add(new Laser(){{
-                build = LaserNodeBuild.this;
                 angle = 180f;
+                build = LaserNodeBuild.this;
                 length = Math.max(Vars.world.width() * tilesize, Vars.world.height() * tilesize);
-                offset = size * 1.5f;
-                start.set(tile.x * tilesize + block().offset, tile.y * tilesize + block().offset);
+                start.set(build.tile.x * tilesize + build.block().offset, build.tile.y * tilesize + build.block().offset);
+                hitEffect = nodeHitEffect;
             }});
             //right
             lasers.allLasers.add(new Laser(){{
-                build = LaserNodeBuild.this;
                 angle = 0f;
+                build = LaserNodeBuild.this;
                 length = Math.max(Vars.world.width() * tilesize, Vars.world.height() * tilesize);
-                offset = size * 1.5f;
-                start.set(tile.x * tilesize + block().offset, tile.y * tilesize + block().offset);
+                start.set(build.tile.x * tilesize + build.block().offset, build.tile.y * tilesize + build.block().offset);
+                hitEffect = nodeHitEffect;
             }});
             //down
             lasers.allLasers.add(new Laser(){{
-                build = LaserNodeBuild.this;
                 angle = 270f;
+                build = LaserNodeBuild.this;
                 length = Math.max(Vars.world.width() * tilesize, Vars.world.height() * tilesize);
-                offset = size * 1.5f;
-                start.set(tile.x * tilesize + block().offset, tile.y * tilesize + block().offset);
+                start.set(build.tile.x * tilesize + build.block().offset, build.tile.y * tilesize + build.block().offset);
+                hitEffect = nodeHitEffect;
             }});
             return this;
         }
@@ -104,17 +176,22 @@ public class LaserNode extends LaserBlock{
         }
 
         @Override
-        public void draw(){
-            drawer.draw();
+        public void drawLasers(){
+            super.drawLasers();
             lasers.draw();
+        }
+
+        @Override
+        public void draw(){
+            drawer.draw(this);
             float z = Draw.z();
             Draw.z(Layer.blockOver);
             //трёхэтажный дебаг : )
 //            ADrawf.drawText();
-            String output = Seq.with(downOutput, leftOutput, topOutput, rightOutput).toString("", it -> Mathf.num(it) + "");
-            String input = Seq.with(downInput, leftInput, topInput, rightInput).toString("", it -> Mathf.num(it) + "");
-            block().drawPlaceText("Laser\nin: " + laser.in + "\nout: " + laser.out + "\noutput: " + output + ",\n_input: " + input, tileX(), tileY(), true);
-            Draw.z(z);
+            //String output = Seq.with(downOutput, leftOutput, topOutput, rightOutput).toString("", it -> Mathf.num(it) + "");
+            // String input = Seq.with(downInput, leftInput, topInput, rightInput).toString("", it -> Mathf.num(it) + "");
+            //block().drawPlaceText("Laser\nin: " + laser.in + "\nout: " + laser.out + "\noutput: " + output + ",\n_input: " + input, tileX(), tileY(), true);
+            //Draw.z(z);
             //Log.info("block draw, time: @", Time.time);
         }
 
@@ -130,52 +207,58 @@ public class LaserNode extends LaserBlock{
         @Override
         public void buildConfiguration(Table t){
             t.add();
+            float size = 48f;
             t.button(Icon.up, () -> {
-                Log.info("top");
                 topOutput = !topOutput;
                 configureState();
-            }).update(b -> {
-                //Log.info("button update, time: @", Time.time);
-                b.setDisabled(topInput);
-//                topInput = false;
-                b.setColor(topOutput ? Color.green : Color.red);
+            }).size(size).update((b) -> {
+                b.setDisabled(topInput && !topOutput);
+                b.getStyle().imageUpColor = topOutput ? Color.lime : Color.valueOf("f25555");
+//                b.setColor();
             });
             t.add().row();
             t.button(Icon.left, () -> {
-                Log.info("left");
+                //Log.info("left");
                 leftOutput = !leftOutput;
                 configureState();
             }).update(b -> {
-                b.setDisabled(leftInput);
-//                leftInput = false;
-                b.setColor(leftOutput ? Color.green : Color.red);
+                b.setDisabled(leftInput && !leftOutput);
+                b.getStyle().imageUpColor = leftOutput ? Color.lime : Color.valueOf("f25555");
+//                b.setColor(left ? Color.lime : Color.valueOf("f25555"));
             });
             t.add();
             t.button(Icon.right, () -> {
-                Log.info("right");
+                //Log.info("right");
                 rightOutput = !rightOutput;
                 configureState();
             }).update(b -> {
-                b.setDisabled(rightInput);
-//                rightInput = false;
-                b.setColor(rightOutput ? Color.green : Color.red);
+                b.setDisabled(rightInput && !rightOutput);
+                b.getStyle().imageUpColor = rightOutput ? Color.lime : Color.valueOf("f25555");
+//                b.setColor(right ? Color.lime : Color.valueOf("f25555"));
             });
             t.row();
             t.add();
             t.button(Icon.down, () -> {
-                Log.info("down");
+                //Log.info("down");
                 downOutput = !downOutput;
                 configureState();
             }).update(b -> {
-                b.setDisabled(downInput);
-//                downInput = false;
-                b.setColor(downOutput ? Color.green : Color.red);
+                b.setDisabled(downInput && !downOutput);
+                b.getStyle().imageUpColor = downOutput ? Color.lime : Color.valueOf("f25555");
+//                b.setColor(down ? Color.lime : Color.valueOf("f25555"));
             });
         }
 
         private void configureState(){
-            LaserNode.configureState(this, rightOutput, topOutput, leftOutput, downOutput);
+            int state = LaserNode.getState(rightOutput, topOutput, leftOutput, downOutput);
+            configure(state);
         }
+
+        @Override
+        public Integer config(){
+            return LaserNode.getState(rightOutput, topOutput, leftOutput, downOutput);
+        }
+
 
         @Override
         @SuppressWarnings("PointlessBitwiseExpression")

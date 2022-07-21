@@ -1,62 +1,84 @@
 package sunset.world.blocks.laser;
 
 import arc.*;
-import arc.graphics.g2d.Draw;
-import arc.graphics.g2d.TextureRegion;
-import arc.struct.*;
-import arc.util.Log;
-import arc.util.Time;
+import arc.graphics.g2d.*;
+import arc.util.*;
 import mindustry.*;
 import mindustry.annotations.Annotations;
 import mindustry.game.*;
 import mindustry.game.EventType.*;
 import mindustry.gen.*;
-import mindustry.graphics.Layer;
+import mindustry.graphics.*;
+import mindustry.ui.*;
 import mindustry.world.Block;
 import mindustry.world.Tile;
-import mindustry.world.blocks.logic.LogicBlock;
+import mindustry.world.draw.*;
+import mma.ModVars;
 import sunset.gen.*;
-import sunset.graphics.Drawm;
 
 /** Base class for all laser blocks. */
 public class LaserBlock extends Block{
-    @Annotations.Load("@-base")
+ /*   @Annotations.Load("@-base")
     public TextureRegion base;
-    @Annotations.Load("@-top")
-    public TextureRegion top;
     @Annotations.Load("@-lens")
     public TextureRegion lens;
     @Annotations.Load("@-edge0")
     public TextureRegion plugDark;
     @Annotations.Load("@-edge1")
     public TextureRegion plugLight;
-
+    @Annotations.Load("@-all-edge")
+    public TextureRegion allEdge;
+*/
     public boolean inputsLaser = false;
     public boolean outputsLaser = false;
 
+    public boolean heats = false;
+    public float heatLaserLimit = 50f;
+
     public float laserProduction = 0f;
     public float laserConsumption = 0f;
+
+    public DrawBlock drawer = new DrawMulti(new DrawRegion("-bottom"),new LaserDraw(),new DrawDefault());
     //on preUpdate, default all side-vars
     static {
         Events.run(Trigger.update,()->{
             if (!Vars.state.isPlaying())return;
             for(Building rawbuild : SnGroups.laserBuilds){
-                LaserBlockBuild build = (LaserBlockBuild)rawbuild;
+                LaserBuild build = (LaserBuild)rawbuild;
                 build.leftInput = false;
                 build.topInput = false;
                 build.rightInput = false;
                 build.downInput = false;
             }
         });
+        Events.run(Trigger.draw,()->{
+            Draw.draw(Layer.blockOver, () -> {
+
+                for(Building rawbuild : SnGroups.laserBuilds){
+                    LaserBuild build = (LaserBuild)rawbuild;
+                    build.drawLasers();
+                }
+            });
+        });
     }
     public LaserBlock(String name) {
         super(name);
-
     }
+
+    @Override
+    public void load(){
+        super.load();
+        drawer.load(this);
+    }
+
+    @Override
+    public TextureRegion[] icons(){
+        return !ModVars.packSprites ? new TextureRegion[]{fullIcon} : drawer.icons(this);
+    }
+
     @SuppressWarnings("InnerClassMayBeStatic")
-    public class LaserBlockBuild extends Building{
+    public class LaserBuild extends Building{
         LaserModule laser;
-        LaserBlockDrawer drawer;
         public boolean leftInput = false,
                 topInput = false,
                 rightInput = false,
@@ -69,7 +91,6 @@ public class LaserBlock extends Block{
         @Override
         public Building init(Tile tile, Team team, boolean shouldAdd, int rotation){
             laser = new LaserModule(this);
-            drawer = new LaserBlockDrawer(this);
             return super.init(tile, team, shouldAdd, rotation);
         }
 
@@ -81,7 +102,7 @@ public class LaserBlock extends Block{
 
         @Override
         public void draw(){
-            drawer.draw();
+            drawer.draw(this);
         }
 
         public float getLaserProduction(){
@@ -119,6 +140,10 @@ public class LaserBlock extends Block{
         @Override
         public LaserBlock block(){
             return (LaserBlock) this.block;
+        }
+
+        public void drawLasers(){
+
         }
     }
 }

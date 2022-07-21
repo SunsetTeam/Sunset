@@ -5,6 +5,12 @@ import mindustry.graphics.Pal;
 
 public class SnPal {
     public static final Color
+    //region bullets
+    forsBullet = Color.valueOf("ed6060"),
+    forsBulletBack = Color.valueOf("DC5A5A"),
+    eriusBullet = Color.valueOf("91c4c8"),
+    eriusBulletBack = Color.valueOf("6785a4"),
+    //endregion bullets
     //region gray
     rGray = Color.valueOf("806262"),
     gGray = Color.valueOf("628062"),

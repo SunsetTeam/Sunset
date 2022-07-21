@@ -6,6 +6,7 @@ import arc.scene.ui.layout.*;
 import arc.struct.*;
 import mindustry.*;
 import mindustry.maps.*;
+import sunset.game.SnEventType.*;
 
 public abstract class SnAchievement{
     public static final StringMap emptyTags = new StringMap(){
@@ -90,11 +91,17 @@ public abstract class SnAchievement{
         if(Vars.headless) return;
         if(!unlocked() && trigger()){
             unlock();
+            onUnlocked();
+            Events.fire(new AchievementReveiveEvent(this));
         }
     }
 
+    protected void onUnlocked(){
+
+    }
+
     protected String stringProgress(){
-        return "0/1";
+        return unlocked() ? "1/1" : "0/1";
     }
 
     public void display(Table table){
@@ -104,7 +111,8 @@ public abstract class SnAchievement{
             info.add(description()).grow();
         }).grow();
         table.label(() -> {
-            return unlocked() ? "@completed" : stringProgress();
+//            return unlocked() ? "@completed" : stringProgress();
+            return (unlocked() ? "[accent]" :"")+ stringProgress();
         });
     }
 

@@ -4,7 +4,6 @@ import arc.graphics.Color;
 import arc.util.Time;
 import mindustry.content.StatusEffects;
 import mindustry.content.Weathers;
-import mindustry.ctype.ContentList;
 import mindustry.gen.Sounds;
 import mindustry.type.Weather;
 import mindustry.type.weather.ParticleWeather;
@@ -12,12 +11,11 @@ import mindustry.world.meta.Attribute;
 import sunset.type.weather.*;
 import sunset.type.weather.WeatherElement;
 
-public class SnWeathers implements ContentList {
+public class SnWeathers {
     public static Weather
             blizzard, flood, lightningStorm;
 
-    @Override
-    public void load() {
+    public static void load() {
         blizzard = new ParticleWeather("blizzard") {{
             color = noiseColor = Color.valueOf("F3F3F3");
             particleRegion = "particle";

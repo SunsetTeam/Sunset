@@ -4,6 +4,7 @@ import acontent.world.meta.AStats;
 import arc.Core;
 import arc.math.Mathf;
 import arc.util.Time;
+import mindustry.entities.*;
 import mindustry.entities.bullet.BulletType;
 import mindustry.ui.Bar;
 import mindustry.world.blocks.defense.turrets.ItemTurret;
@@ -28,16 +29,16 @@ public class MinigunTurret extends ItemTurret {
     @Override
     public void setBars() {
         super.setBars();
-        bars.add("sunset-heat", (MinigunTurret.MinigunTurretBuild entity) -> new Bar(
+        addBar("sunset-heat", (MinigunTurret.MinigunTurretBuild entity) -> new Bar(
         () -> Core.bundle.format("bar.sunset-heat", Utils.stringsFixed(Mathf.clamp(entity.totalShootingTime / maxShootTime) * 100f)),
         () -> entity.team.color,
         () -> Mathf.clamp(entity.totalShootingTime / maxShootTime)
         ));
         if (reloadBar) {
             SnVars.settings.registerReloadBarBlock(this, (ItemTurretBuild entity) -> new Bar(
-                    () -> Core.bundle.format("bar.sunset-reload", Utils.stringsFixed(Mathf.clamp(entity.reload / reloadTime) * 100f)),
+                    () -> Core.bundle.format("bar.sunset-reload", Utils.stringsFixed(Mathf.clamp(entity.reloadCounter / reload) * 100f)),
                     () -> entity.team.color,
-                    () -> Mathf.clamp(entity.reload / reloadTime)
+                    () -> Mathf.clamp(entity.reloadCounter / reload)
             ));
         }
     }
@@ -59,7 +60,7 @@ public class MinigunTurret extends ItemTurret {
         }
         @Override
         protected void updateShooting() {
-            boolean canShoot = reload + delta() * peekAmmo().reloadMultiplier * baseReloadSpeed() >= reloadTime && !charging;
+            boolean canShoot = reload + delta() * peekAmmo().reloadMultiplier * baseReloadSpeed() >= reload && !charging();
             this.isShoot = canShoot;
             super.updateShooting();
             if(!canShoot || isShoot) return;
@@ -70,8 +71,8 @@ public class MinigunTurret extends ItemTurret {
         }
 
         @Override
-        public void bullet(BulletType type, float angle) {
-            super.bullet(type, angle + Mathf.range(inaccuracyUp * (totalShootingTime / 2)));
+        protected void bullet(BulletType type, float xOffset, float yOffset, float angleOffset, Mover mover){
+            super.bullet(type, xOffset, yOffset, angleOffset + Mathf.range(inaccuracyUp * (totalShootingTime / 2)), mover);
         }
 
         @Override

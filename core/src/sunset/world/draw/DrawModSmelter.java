@@ -5,6 +5,7 @@ import arc.graphics.*;
 import arc.graphics.g2d.*;
 import arc.math.*;
 import arc.util.*;
+import mindustry.gen.*;
 import mindustry.graphics.*;
 import mindustry.world.*;
 import mindustry.world.blocks.production.GenericCrafter.*;
@@ -40,7 +41,8 @@ public class DrawModSmelter extends DrawBlock {
     }
 
     @Override
-    public void draw(GenericCrafterBuild build) {
+    public void draw(Building b) {
+        GenericCrafterBuild build=b.as();
         Draw.rect(build.block.region, build.x, build.y, build.block.rotate ? build.rotdeg() : 0);
 
         if(build.warmup > 0f && flameColor.a > 0.001f) {
@@ -67,7 +69,8 @@ public class DrawModSmelter extends DrawBlock {
     }
 
     @Override
-    public void drawLight(GenericCrafterBuild build) {
-        Drawf.light(build.team, build.x, build.y, (lightRadius + Mathf.absin(lightSinScl, lightSinMag)) * build.warmup * build.block.size, flameColor, lightAlpha);
+    public void drawLight(Building b) {
+        GenericCrafterBuild build=b.as();
+        Drawf.light( build.x, build.y, (lightRadius + Mathf.absin(lightSinScl, lightSinMag)) * build.warmup * build.block.size, flameColor, lightAlpha);
     }
 }

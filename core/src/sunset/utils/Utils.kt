@@ -20,11 +20,15 @@ import mindustry.gen.*
 import mindustry.graphics.*
 import mindustry.type.*
 import mindustry.ui.fragments.*
-import java.lang.IllegalArgumentException
 import kotlin.jvm.internal.Ref.*
 
 //import kotlin.Unit as KotlinUnit
 typealias Unit = mindustry.gen.Unit
+
+//@JvmStatic
+@JvmName("TODO")
+@JvmOverloads
+fun <T> TODO_(reason: String? = null): T = if (reason === null) TODO() else TODO(reason)
 
 /**
  * Набор различных static утилит.
@@ -51,10 +55,10 @@ object Utils {
     operator fun IntSet.get(index: Int): Int {
         var counter = 0
         val iterator = iterator()
-        if (index<0 || index>=size)throw IndexOutOfBoundsException()
-        while (iterator.hasNext){
+        if (index < 0 || index >= size) throw IndexOutOfBoundsException()
+        while (iterator.hasNext) {
             val value = iterator.next()
-            if (counter==index){
+            if (counter == index) {
                 iterator.reset()
                 return value
             }
@@ -62,7 +66,15 @@ object Utils {
         }
         throw IllegalArgumentException()
     }
-
+    @JvmStatic
+    fun forwardAngleDistance(angle1:Float, angle2:Float):Float=
+        if (angle1>angle2){
+            Angles.forwardDistance(angle1,angle2+360)
+        }else{
+            Angles.forwardDistance(angle1,angle2)
+        }
+    @JvmStatic
+    fun backwardAngleDistance(angle1:Float, angle2:Float):Float=if (angle1==angle2) 0f else 360f- forwardAngleDistance(angle1, angle2)
     @JvmStatic
     fun findFireTarget(x: Float, y: Float, team: Team, range: Float, unitFilter: Boolf<Unit?>, buildingFilter: Boolf<Building?>?): Posc? {
         var target: Posc?
@@ -145,7 +157,7 @@ object Utils {
         val tmpUnit = arrayOf<Unit?>(null)
         tr.trns(angle, length)
         if (hitter.type.collidesGround) {
-            Vars.world.raycastEachWorld(x, y, x + tr.x, y + tr.y) { cx: Int, cy: Int ->
+            World.raycastEachWorld(x, y, x + tr.x, y + tr.y) { cx: Int, cy: Int ->
                 val tile = Vars.world.build(cx, cy)
                 if (tile == null || tile.team === hitter.team || !predicate[tile]) return@raycastEachWorld false
                 tmpBuilding[0] = tile
@@ -208,6 +220,7 @@ object Utils {
     }
 
     @JvmStatic
+    @Deprecated("use allNearbyEnemies(team,x,y,radius,it->seq.add(it.<Teamc>as()))")
     fun allNearbyEnemiesOld(team: Team, x: Float, y: Float, radius: Float): Seq<Teamc> {
         val targets = Seq<Teamc>()
         Units.nearbyEnemies(team, x - radius, y - radius, radius * 2f, radius * 2f) { unit: Unit ->
@@ -224,7 +237,7 @@ object Utils {
     }
 
     @JvmStatic
-    fun allNearbyEnemies(team: Team, x: Float, y: Float, radius: Float, cons: Cons<Healthc?>) {
+    fun allNearbyEnemies(team: Team, x: Float, y: Float, radius: Float, cons: Cons<Healthc>) {
         Units.nearbyEnemies(team, x - radius, y - radius, radius * 2f, radius * 2f) { unit: Unit ->
             if (unit.within(x, y, radius + unit.hitSize / 2f) && !unit.dead) {
                 cons[unit]

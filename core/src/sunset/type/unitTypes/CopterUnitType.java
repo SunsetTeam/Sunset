@@ -83,7 +83,7 @@ public class CopterUnitType extends SnUnitType implements ImageGenerator{
         buffer.end();
 
 
-        float e = Math.max(unit.elevation, visualElevation) * (1f - unit.drownTime);
+        float e = Math.max(unit.elevation, shadowElevation) * (1f - unit.drownTime);
         float x = unit.x + shadowTX * e, y = unit.y + shadowTY * e;
         Floor floor = world.floorWorld(x, y);
 

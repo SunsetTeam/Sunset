@@ -2,22 +2,18 @@ package sunset.world.blocks.defense.turrets;
 
 import arc.*;
 import arc.math.*;
-import arc.math.geom.*;
-import arc.struct.*;
 import arc.util.*;
-import mindustry.*;
 import mindustry.entities.bullet.*;
 import mindustry.ui.*;
 import mindustry.world.blocks.defense.turrets.*;
 import sunset.*;
+import sunset.entities.pattern.*;
 import sunset.utils.*;
 
 /**
  * Describes a multi-barreled turret.
  */
 public class MultiBarrelItemTurret extends ItemTurret{
-    public Seq<Vec2> barrelPoints = new Seq<>();
-    public Seq<Vec2> ejectPoints = new Seq<>();
 
     // reload acceleration multiplier
     public float maxReloadMultiplier = 0.3f;
@@ -27,17 +23,18 @@ public class MultiBarrelItemTurret extends ItemTurret{
 
     public MultiBarrelItemTurret(String name){
         super(name);
+        UtilsKt.TODO("WAITING FOR PULL REQUEST(LOOK AT " + ShootMultiBarrel.class.getName() + ")");
     }
 
     @Override
     public void setBars(){
         super.setBars();
         SnVars.settings.registerReloadBarBlock(this, (MultiBarrelTurretBuild entity) -> new Bar(
-        () -> Core.bundle.format("bar.sunset-reload", Utils.stringsFixed(Mathf.clamp(entity.reload / reloadTime) * 100f)),
+        () -> Core.bundle.format("bar.sunset-reload", Utils.stringsFixed(Mathf.clamp(entity.reloadCounter / reload) * 100f)),
         () -> entity.team.color,
-        () -> Mathf.clamp(entity.reload / reloadTime)
+        () -> Mathf.clamp(entity.reloadCounter / reload)
         ));
-        bars.add("sunset-speedup", (MultiBarrelTurretBuild entity) -> new Bar(
+        addBar("sunset-speedup", (MultiBarrelTurretBuild entity) -> new Bar(
         () -> Core.bundle.format("bar.sunset-speedup", Utils.stringsFixed(Mathf.clamp(entity.speedupScl / maxReloadMultiplier) * 100f)),
         () -> entity.team.color,
         () -> Mathf.clamp(entity.speedupScl / maxReloadMultiplier)
@@ -57,48 +54,17 @@ public class MultiBarrelItemTurret extends ItemTurret{
         }
 
         @Override
-        protected void updateShooting(){
-            if(reload >= reloadTime){
-                BulletType type = peekAmmo();
-                shoot(type);
-                reload = 0f;
-            }else{
-                reload += (1 + speedupScl) * delta() * peekAmmo().reloadMultiplier * baseReloadSpeed();
-            }
-        }
-
-        @Override
         protected void shoot(BulletType type){
 
             slowDownReload = slowReloadTime;
-            if(speedupScl < maxReloadMultiplier){
-                speedupScl += speedupPerShot;
-            }else speedupScl = maxReloadMultiplier;
+            speedupScl = Math.min(speedupScl + speedupPerShot, maxReloadMultiplier);
 
-            for(int i = 0; i < barrelPoints.size; i++){
-                final int index = i;
-                Time.run(burstSpacing * i, () -> {
-                    if(!isValid() || !hasAmmo()) return;
-                    recoil = recoilAmount;
-                    Vec2 p = barrelPoints.get(index);
-                    tr.trns(rotation - 90, (p.x - 0.5f) * Vars.tilesize * size,
-                    (-p.y + 0.5f) * Vars.tilesize * size);
-                    bullet(type, rotation + Mathf.range(inaccuracy));
-                    p = new Vec2(ejectPoints.get(index));
-                    p.trns(rotation - 90, (p.x - 0.5f) * Vars.tilesize * size,
-                    (p.y - 0.5f) * Vars.tilesize * size);
-                    ammoUseEffect.at(x + p.x, y + p.y, ejectPoints.get(index).x > 0.5f ? rotation : rotation + 180f);
-                    effects();
-                    useAmmo();
-                    recoil = recoilAmount;
-                    heat = 1;
-                });
-            }
+
         }
-
+/*
         @Override
         protected void ejectEffects(){
             //effects in shoot()
-        }
+        }*/
     }
 }

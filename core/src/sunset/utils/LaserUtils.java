@@ -1,36 +1,172 @@
 package sunset.utils;
 
-import arc.func.Boolf;
-import arc.math.Mathf;
-import arc.math.geom.Geometry;
-import arc.math.geom.Rect;
-import arc.math.geom.Vec2;
-import mindustry.entities.Units;
-import mindustry.gen.Building;
-import mindustry.gen.Healthc;
-import mindustry.gen.Unit;
+import arc.func.*;
+import arc.math.*;
+import arc.math.geom.*;
+import arc.util.*;
+import mindustry.entities.*;
+import mindustry.gen.*;
+import mindustry.world.*;
+import mindustry.world.blocks.environment.*;
+import sunset.world.blocks.laser.LaserBlock.*;
+
+import java.util.*;
 
 import static mindustry.Vars.world;
+import static mindustry.core.World.toTile;
 
-/** временный класс для каста лазеров
- * котлин блять >:( */
-public class LaserUtils {
-    public static arc.math.geom.Rect rect = new Rect(),
-                                    hitrect = new Rect();
-    public static Vec2 tr = new Vec2();
-    public static Healthc linecast(float x, float y, float angle, float length, boolean collideAir, boolean collideGround, Boolf<Healthc> predicate){
-        final Building[] tmpBuilding = new Building[]{null};
-        final Unit[] tmpUnit = new Unit[]{null};
+/** Temporary class for laser casts, gotta move elsewhere. */
+public class LaserUtils{
+    static Building[] sideCollidedBuilding = new Building[4];
+    static Tile[] sideCollidedTile = new Tile[4];
+    private static arc.math.geom.Rect rect = new Rect(),
+    hitrect = new Rect();
+    private static Vec2 tr = new Vec2();
+    private static Building tmpBuilding;
+    private static Unit tmpUnit;
+    private static Tile tmpTile;
+
+    private static void raycastStaticWallsWorld(float x1, float y1, float x2, float y2){
+        int x = toTile(x1), dx = Math.abs(toTile(x2) - x), sx = x < toTile(x2) ? 1 : -1;
+        int y = toTile(y1), dy = Math.abs(toTile(y2) - y), sy = y < toTile(y2) ? 1 : -1;
+        int e2, err = dx - dy;
+
+        while(true){
+            Tile tile = world.tile(x, y);
+            if(tile != null && tile.block() instanceof StaticWall){
+                tmpTile = tile;
+                break;
+            }else{
+                int i = 0;
+                for(Point2 p : Geometry.d4){
+                    tile = world.tile(x + p.x, y + p.y);
+                    if(tile != null && tile.block() instanceof StaticWall && Intersector.intersectSegmentRectangle(x1, y1, x1 + tr.x, y1 + tr.y, tile.getHitbox(Tmp.r1))){
+                        sideCollidedTile[i] = tile;
+                        i++;
+                    }
+                }
+                tile = getClosest(x1, y1, sideCollidedTile);
+                Arrays.fill(sideCollidedTile,null);
+                if(tile != null){
+                    tmpTile = tile;
+                    break;
+                }
+            }
+
+
+            if(x == toTile(x2) && y == toTile(y2)) break;
+
+            e2 = 2 * err;
+            if(e2 > -dy){
+                err = err - dy;
+                x = x + sx;
+            }
+
+            if(e2 < dx){
+                err = err + dx;
+                y = y + sy;
+            }
+        }
+    }
+
+    public static Tile linecastStaticWalls(float x, float y, float angle, float length){
+        tmpTile = null;
+
+        tr.trns(angle, length);
+        raycastStaticWallsWorld(x, y, x + tr.x, y + tr.y);
+
+        return tmpTile;
+    }
+
+    public static Tile getClosest(float x, float y, Tile[] tiles){
+        if(tiles.length == 0 || tiles[0] == null){
+            return null;
+        }
+        Tile best = tiles[0];
+        float bestDst2 = Mathf.dst2(tiles[0].worldx(), tiles[0].worldy(), x, y), dst2;
+        for(int i = 1; i < tiles.length; i++){
+            if(tiles[i] == null)
+                break;
+            dst2 = Mathf.dst2(tiles[i].worldx(), tiles[i].worldy(), x, y);
+            if(dst2 < bestDst2){
+                best = tiles[i];
+                bestDst2 = dst2;
+            }
+        }
+        return best;
+    }
+
+    public static Healthc getClosest(float x, float y, Healthc[] entities){
+        if(entities.length == 0 || entities[0] == null){
+            return null;
+        }
+        Healthc best = entities[0];
+        float bestDst2 = Mathf.dst2(entities[0].x(), entities[0].y(), x, y), dst2;
+        for(int i = 1; i < entities.length; i++){
+            if(entities[i] == null)
+                break;
+            dst2 = Mathf.dst2(entities[i].x(), entities[i].y(), x, y);
+            if(dst2 < bestDst2){
+                best = entities[i];
+                bestDst2 = dst2;
+            }
+        }
+        return best;
+    }
+
+    private static void raycastEachWorld(Building build, float x1, float y1, float x2, float y2, Boolf<Healthc> predicate){
+        int x = toTile(x1), dx = Math.abs(toTile(x2) - x), sx = x < toTile(x2) ? 1 : -1;
+        int y = toTile(y1), dy = Math.abs(toTile(y2) - y), sy = y < toTile(y2) ? 1 : -1;
+        int e2, err = dx - dy;
+
+        while(true){
+            Building tile = world.build(x, y);
+            if(tile != null && (predicate == null || predicate.get(tile)) && tile != build){
+                tmpBuilding = tile;
+                break;
+            }else{
+                int i = 0;
+                for(Point2 p : Geometry.d4){
+                    tile = world.build(x + p.x, y + p.y);
+                    if(tile != null && tile != build){
+                        tile.hitbox(Tmp.r1);
+                        if(Intersector.intersectSegmentRectangle(x1, y1, x1 + tr.x, y1 + tr.y, Tmp.r1)){
+                            sideCollidedBuilding[i] = tile;
+                            i++;
+                        }
+                    }
+                }
+                tile = (Building)getClosest(x1, y1, sideCollidedBuilding);
+                Arrays.fill(sideCollidedBuilding,null);
+                if(tile != null){
+                    tmpBuilding = tile;
+                    break;
+                }
+            }
+
+            if(x == toTile(x2) && y == toTile(y2)) break;
+
+            e2 = 2 * err;
+            if(e2 > -dy){
+                err -= dy;
+                x += sx;
+            }
+
+            if(e2 < dx){
+                err += dx;
+                y += sy;
+            }
+        }
+    }
+
+    public static Healthc linecast(LaserBuild build, float x, float y, float angle, float length, boolean collideAir, boolean collideGround, @Nullable @org.jetbrains.annotations.Nullable Boolf<Healthc> predicate){
+        tmpBuilding = null;
+        tmpUnit = null;
 
         tr.trns(angle, length);
 
         if(collideGround){
-            world.raycastEachWorld(x, y, x + tr.x, y + tr.y, (cx, cy) -> {
-                Building tile = world.build(cx, cy);
-                if(tile == null || !predicate.get(tile)) return false;
-                tmpBuilding[0] = tile;
-                return true;
-            });
+            raycastEachWorld(build, x, y, x + tr.x, y + tr.y, predicate);
         }
 
         rect.setPosition(x, y).setSize(tr.x, tr.y);
@@ -52,7 +188,7 @@ public class LaserUtils {
         rect.height += expand * 2;
 
         Units.nearbyEnemies(null, rect, e -> {
-            if((tmpUnit[0] != null && e.dst2(x, y) > tmpUnit[0].dst2(x, y)) || !e.checkTarget(collideAir, collideGround) || !predicate.get(e))
+            if((tmpUnit != null && e.dst2(x, y) > tmpUnit.dst2(x, y)) || !e.checkTarget(collideAir, collideGround) || !(predicate == null || predicate.get(e)))
                 return;
 
             e.hitbox(hitrect);
@@ -62,21 +198,18 @@ public class LaserUtils {
             other.width += expand * 2;
             other.height += expand * 2;
 
-            if(Geometry.raycastRect(x, y, x2, y2, other) != null) tmpUnit[0] = e;
+            if(Geometry.raycastRect(x, y, x2, y2, other) != null)
+                tmpUnit = e;
         });
 
-        if(tmpBuilding[0] != null && tmpUnit[0] != null){
-            if(Mathf.dst2(x, y, tmpUnit[0].getX(), tmpUnit[0].getY()) <= Mathf.dst2(x, y, tmpBuilding[0].getX(), tmpBuilding[0].getY()))
-                return tmpUnit[0];
+        if(tmpBuilding != null && tmpUnit != null){
+            if(Mathf.dst2(x, y, tmpUnit.getX(), tmpUnit.getY()) <= Mathf.dst2(x, y, tmpBuilding.getX(), tmpBuilding.getY()))
+                return tmpUnit;
             else
-                return tmpBuilding[0];
-        }
-        else{
-            if(tmpBuilding[0] != null)
-                return tmpBuilding[0];
-            if(tmpUnit[0] != null)
-                return tmpUnit[0];
-        }
-        return null;
+                return tmpBuilding;
+        }else if(tmpBuilding != null){
+            return tmpBuilding;
+        }else
+            return tmpUnit;
     }
 }

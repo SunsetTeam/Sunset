@@ -36,7 +36,7 @@ public class FireFightersStation extends Block{
         @Override
         public void updateTile(){
             super.updateTile();
-            if(consValid() && units.size < maxUnitCount){
+            if(efficiency>0 && units.size < maxUnitCount){
                 units.add(unitType.spawn(team, x, y));
                 consume();
             }

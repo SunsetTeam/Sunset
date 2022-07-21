@@ -26,7 +26,7 @@ public class LiquidTurretExt extends LiquidTurret {
 
         @Override
         public boolean hasAmmo() {
-            return ammoTypes.get(liquids.current()) != null && liquids.total() >= ammoPerShot / ammoTypes.get(liquids.current()).ammoMultiplier;
+            return ammoTypes.get(liquids.current()) != null && liquids.currentAmount() >= ammoPerShot / ammoTypes.get(liquids.current()).ammoMultiplier;
         }
     }
 }
