@@ -177,6 +177,90 @@ public class SnBullets {
             splashDamageRadius = 35f;
         }};
 
+<<<<<<< HEAD
+=======
+        powerRocket = new MissileBulletType(7f, 920) {{
+            width = 10f;
+            height = 20f;
+            drag = -0.05f;
+            homingRange = 13 * Vars.tilesize;
+            homingPower = 6f;
+            splashDamageRadius = 20 * Vars.tilesize;
+            splashDamage = 380;
+            keepVelocity = true;
+            hitSound = Sounds.explosion;
+            trailChance = 0.7f;
+            lifetime = 0.7f * Time.toSeconds;
+            frontColor = SnPal.redfire1;
+            backColor = SnPal.redfire2;
+            hitEffect = despawnEffect = Fx.blastExplosion;
+            trailEffect = Fx.missileTrail;
+            pierce = true;
+            pierceBuilding = true;
+            pierceCap = 3;
+        }};
+
+        drrRocket = new MissileBulletType(11f, 1200) {{
+            width = 15f;
+            height = 25f;
+            drag = -0.05f;
+            homingRange = 20 * Vars.tilesize;
+            homingPower = 5f;
+            splashDamageRadius = 25 * Vars.tilesize;
+            splashDamage = 500;
+            keepVelocity = true;
+            hitSound = Sounds.explosion;
+            lifetime = 0.6f * Time.toSeconds;
+            frontColor = SnPal.redfire1;
+            backColor = SnPal.redfire2;
+            hitEffect = despawnEffect = Fx.blastExplosion;
+            trailEffect = Fx.missileTrail;
+            pierce = pierceBuilding = true;
+            pierceCap = 5;
+            killShooter = true;
+        }};
+
+        thoriumPowerRocket = new MissileBulletType(3, 465) {{
+            width = 5f;
+            height = 10f;
+            drag = -0.05f;
+            homingRange = 10 * Vars.tilesize;
+            homingPower = 7f;
+            splashDamageRadius = 9 * Vars.tilesize;
+            splashDamage = 190;
+            keepVelocity = true;
+            hitSound = Sounds.explosion;
+            trailChance = 0.7f;
+            lifetime = 1.6f * Time.toSeconds;
+            //frontColor = SnPal.redfire1;
+            //backColor = SnPal.redfire2;
+            hitEffect = despawnEffect = Fx.blastExplosion;
+            trailEffect = SnFx.bigRocketTrail;
+            pierce = true;
+            pierceBuilding = true;
+            pierceCap = 5;
+        }};//unused
+        forsPowerRocket = new MissileBulletType(5, 870) {{
+            width = 5f;
+            height = 10f;
+            drag = -0.05f;
+            homingRange = 13 * Vars.tilesize;
+            homingPower = 7f;
+            splashDamageRadius = 11 * Vars.tilesize;
+            splashDamage = 350;
+            keepVelocity = true;
+            hitSound = Sounds.explosion;
+            trailChance = 0.7f;
+            lifetime = Time.toSeconds;
+            //frontColor = SnPal.redfire1;
+            //backColor = SnPal.redfire2;
+            hitEffect = despawnEffect = Fx.blastExplosion;
+            trailEffect = SnFx.bigRocketTrail;
+            pierce = true;
+            pierceBuilding = true;
+            pierceCap = 6;
+        }};//unused
+>>>>>>> 4bbb2c4d0cfd02f079ca729588205378ad34206a
         nobiumAimMissile = new AimBulletType(3f, 55f){{
             sprite = "missile";
             width = 13;
@@ -1090,6 +1174,35 @@ public class SnBullets {
             public float continuousDamage() { return 160; };
         };
         //endregion buffer
+<<<<<<< HEAD
+=======
+        //region t6 vanilla
+        t6sapBullet = new SapFlyingBulletType(9f, 120){{
+            sprite = "missile-large";
+            lifetime = 24;
+            homingPower = 0.08f;
+            homingRange = 600f;
+            
+            frontColor = Color.white;
+            backColor = Pal.sap;
+            trailColor = Pal.sap;
+            trailWidth = 4f;
+            trailLength = 48;
+        }};
+        t6crawlerBoom = new BombBulletType(0f, 0f, "clear"){{
+            status = StatusEffects.sapped;
+            hitEffect = Fx.sapExplosion;
+            lifetime = 10f;
+            speed = 1f;
+            splashDamageRadius = 80f;
+            instantDisappear = true;
+            splashDamage = 210f;
+            killShooter = true;
+            hittable = false;
+            collidesAir = true;
+        }};
+        //endregion t6 vanilla
+>>>>>>> 4bbb2c4d0cfd02f079ca729588205378ad34206a
         //region misc and testing
         overheatBullet = new BasicBulletType(0.1f, 7, "error") {{
             //shootEffect = Fx.none;

@@ -56,6 +56,16 @@ object SnStatusEffects {
             speedMultiplier = 0.1f
             dragMultiplier = 0.3f
         }
+<<<<<<< HEAD
+=======
+        viscous = statusEffect("viscous") {
+            color = Color.valueOf("721A1A")
+            speedMultiplier = 0.94f
+            effect = SnFx.viscous
+            effectChance = 0.09f
+
+        } //no sprite
+>>>>>>> 4bbb2c4d0cfd02f079ca729588205378ad34206a
         //endregion common
         //region stackable
         overheat = stackableStatusEffect("overheat") {

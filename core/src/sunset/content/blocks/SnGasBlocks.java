@@ -1,5 +1,6 @@
 package sunset.content.blocks;
 
+<<<<<<< HEAD
 import gas.world.blocks.gas.*;
 import gas.world.blocks.sandbox.*;
 import mindustry.content.*;
@@ -7,6 +8,28 @@ import mindustry.type.*;
 import mindustry.world.*;
 import mindustry.world.blocks.power.*;
 import mindustry.world.meta.*;
+=======
+import gas.GasStack;
+import gas.world.blocks.gas.GasBridge;
+import gas.world.blocks.gas.GasConduit;
+import gas.world.blocks.gas.GasJunction;
+import gas.world.blocks.gas.GasRouter;
+import gas.world.blocks.power.GasItemLiquidGenerator;
+import gas.world.blocks.sandbox.GasSource;
+import gas.world.blocks.sandbox.GasVoid;
+import gas.world.consumers.ConsumeGas;
+import mindustry.content.Items;
+import mindustry.ctype.ContentList;
+import mindustry.type.Category;
+import mindustry.type.ItemStack;
+import mindustry.world.Block;
+import mindustry.world.meta.BuildVisibility;
+import mma.ModVars;
+import sunset.content.SnFx;
+import sunset.content.SnGas;
+import sunset.content.SnItems;
+import sunset.content.SnLiquids;
+>>>>>>> 4bbb2c4d0cfd02f079ca729588205378ad34206a
 import sunset.content.*;
 import sunset.world.blocks.gas.*;
 
