@@ -68,6 +68,7 @@ public class SnLasers {
             buildVisibility = BuildVisibility.sandboxOnly;
             inputsLaser = true;
             outputsLaser = false;
+            heats = true;
         }};
         /*
         rotato = new RotatableLaserNode("rotato"){{

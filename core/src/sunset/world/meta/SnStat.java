@@ -32,6 +32,7 @@ public class SnStat {
     //region Function
     public static final AStat maxControlled = AStat.get("maxcontroller", StatCat.function, 4);
     public static final AStat minimalRange = AStat.get("min-range", StatCat.function, 5);
+    public static final AStat lightningDiff = AStat.get("lightning-diff", StatCat.function, 14);
     public static final AStat powerShot = AStat.get("powerShot", StatCat.function, 15);
     public static final AStat overheatTime = AStat.get("overheat-time", StatCat.function, 16);
     //endregion Function

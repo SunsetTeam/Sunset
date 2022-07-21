@@ -13,6 +13,7 @@ public class SnWalls {
     public static Block
 
     forsWall, forsWallLarge,
+    eriusWall, eriusWalllarge,
     naturiteWall, naturiteWallLarge,
     enojiewall, enojieWallLarge,
     
@@ -27,6 +28,16 @@ public class SnWalls {
         forsWallLarge = new Wall("fors-wall-large"){{
             requirements(Category.defense, with(SnItems.fors, 24));
             health = forsWall.health * 4;
+            size = 2;
+        }};
+        eriusWall = new Wall("erius-wall"){{
+            requirements(Category.defense, with(SnItems.erius, 4));
+            health = 640;
+            size = 1;
+        }};
+        eriusWalllarge = new Wall("erius-wall-large"){{
+            requirements(Category.defense, with(SnItems.erius, 16));
+            health = eriusWall.health * 4;
             size = 2;
         }};
         //region heal

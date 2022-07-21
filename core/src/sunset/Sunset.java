@@ -2,33 +2,26 @@ package sunset;
 
 import acontent.ui.*;
 import arc.*;
-import arc.files.*;
 import arc.scene.event.*;
 import arc.scene.ui.layout.*;
 import arc.struct.*;
-import arc.util.*;
 import mindustry.*;
 import mindustry.core.*;
 import mindustry.core.GameState.*;
 import mindustry.ctype.*;
 import mindustry.game.EventType.*;
 import mindustry.gen.*;
-import mindustry.mod.*;
-import mindustry.mod.Mods.*;
 import mindustry.type.*;
 import mma.*;
-import mma.annotations.ModAnnotations.*;
 import sunset.annotations.SnAnnotations.*;
 import sunset.content.*;
 import sunset.core.*;
 import sunset.gen.*;
-//import sunset.graphics.SnShaders;
 import sunset.graphics.*;
 import sunset.type.unitTypes.*;
 import sunset.ui.*;
 import sunset.utils.*;
 
-import static arc.Core.app;
 import static mindustry.Vars.*;
 import static mma.ModVars.*;
 @TestAnnotation
