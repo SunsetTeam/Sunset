@@ -21,15 +21,8 @@ import static mindustry.Vars.tilesize;
  * 1) reload bar<p>
  * 2) power shot<p>
  * 3)
-<<<<<<< HEAD
  */
 public class ModItemTurret extends ItemTurret{
-=======
- * */
-public class ModItemTurret extends ItemTurret {
-    @Load("@-light")
-    public TextureRegion light;
->>>>>>> 4bbb2c4d0cfd02f079ca729588205378ad34206a
     public boolean drawLight;
 
     public BulletType powerBullet;
@@ -109,13 +102,5 @@ public class ModItemTurret extends ItemTurret {
                 super.bullet(type, xOffset, yOffset, angleOffset, mover);
             }
         }
-        //@Override
-        //public double sense(LAccess sensor) {
-        //    return switch (sensor) {
-        //        case currentPowerShots -> totalShoots;
-        //        case powerShots -> chargeShots;
-        //        default -> super.sense(sensor);
-        //    };
-        //}
     }
 }

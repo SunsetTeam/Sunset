@@ -5,11 +5,9 @@ import arc.util.Time;
 import mindustry.content.*;
 import mindustry.entities.Effect;
 import mindustry.graphics.CacheLayer;
-import mindustry.type.Category;
 import mindustry.world.Block;
 import mindustry.world.blocks.environment.*;
 import mindustry.world.meta.Attribute;
-import mindustry.world.meta.BuildVisibility;
 import sunset.content.SnAttribute;
 import sunset.content.SnItems;
 import sunset.content.SnLiquids;
@@ -289,14 +287,13 @@ public class SnEnvironment  {
         ashWall = new StaticWall("ash-wall") {{
             variants = 2;
         }};
-        //endregion static walls
         //region breakable environment walls
         stagesWall = new BreakableEnvWall("stages-wall") {{
             variants = 1;
             stages = 5;
             health = 5150;
         }};
-        //endregion breakable environment walls
+        //endregion static walls
         //region trees
         crimsonTree = new TreeBlock("crimson-tree") {{
             variants = 0;
@@ -330,6 +327,7 @@ public class SnEnvironment  {
             eruptionEffect = new Effect(30f, Fx.ballfire.renderer);
         }};
         //endregion special
+
         //region hidden
         hotSlag1 = new MockEnvironmentBlock("hotSlag1") {{
             replacement = Blocks.slag;

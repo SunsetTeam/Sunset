@@ -1,6 +1,5 @@
 package sunset.content;
 
-<<<<<<< HEAD
 import arc.graphics.*;
 import arc.math.Mathf;
 import arc.util.*;
@@ -12,21 +11,6 @@ import mindustry.entities.abilities.MoveEffectAbility;
 import mindustry.entities.bullet.*;
 import mindustry.entities.effect.*;
 import mindustry.entities.part.RegionPart;
-=======
-import arc.graphics.Color;
-import arc.util.Time;
-import mindustry.Vars;
-import mindustry.ai.types.FlyingAI;
-import mindustry.ai.types.SuicideAI;
-import mindustry.annotations.Annotations.EntityDef;
-import mindustry.content.*;
-import mindustry.ctype.ContentList;
-import mindustry.entities.bullet.ArtilleryBulletType;
-import mindustry.entities.bullet.BasicBulletType;
-import mindustry.entities.bullet.BombBulletType;
-import mindustry.entities.bullet.SapBulletType;
-import mindustry.entities.effect.ParticleEffect;
->>>>>>> 4bbb2c4d0cfd02f079ca729588205378ad34206a
 import mindustry.gen.*;
 import mindustry.graphics.*;
 import mindustry.type.*;
@@ -35,7 +19,6 @@ import mindustry.type.unit.ErekirUnitType;
 import mindustry.type.weapons.*;
 import mindustry.world.meta.*;
 import sunset.ai.*;
-<<<<<<< HEAD
 import sunset.ai.weapon.*;
 import sunset.entities.abilities.*;
 import sunset.entities.bullet.*;
@@ -43,32 +26,12 @@ import sunset.gen.*;
 import sunset.type.*;
 import sunset.type.ammo.*;
 import sunset.type.blocks.*;
-=======
-import sunset.ai.weapon.ExtinguishWeaponAI;
-import sunset.content.blocks.SnUnitBlocks;
-import sunset.entities.abilities.EffectLowHPAbility;
-import sunset.entities.abilities.OverdriveAbility;
-import sunset.entities.abilities.StatusFieldAbility;
-import sunset.entities.bullet.BerserkLaserBulletType;
-import sunset.entities.bullet.SpawnArtilleryBulletType;
-import sunset.gen.Deliverc;
-import sunset.gen.Segmentc;
-import sunset.type.BerserkStage;
-import sunset.type.ammo.LiquidAmmoType;
-import sunset.type.blocks.Engine;
-import sunset.type.blocks.Rotor;
->>>>>>> 4bbb2c4d0cfd02f079ca729588205378ad34206a
 import sunset.type.unitTypes.*;
 import sunset.type.weapons.*;
 
 import static mindustry.Vars.tilePayload;
-<<<<<<< HEAD
 import static mindustry.Vars.tilesize;
 import static mindustry.gen.Nulls.unit;
-=======
-import static mindustry.type.ItemStack.with;
-import static sunset.utils.UnitsUtils.addUnitGroup;
->>>>>>> 4bbb2c4d0cfd02f079ca729588205378ad34206a
 
 public class SnUnitTypes{
     public static UnitType
@@ -80,12 +43,6 @@ public class SnUnitTypes{
     //ground
     mirage, vision, illusion, soothSayer, seer, abyssEye,
     freezingT1,
-<<<<<<< HEAD
-=======
-    //air
-    engineT1, hoverTest,
-    //highlight
->>>>>>> 4bbb2c4d0cfd02f079ca729588205378ad34206a
     light,
     //naval
     yellowT1, yellowT2, yellowT3, yellowT4, yellowT5,
@@ -102,212 +59,7 @@ public class SnUnitTypes{
     public static UnitType snake1;
     public static UnitType testCoreUnit;
 
-<<<<<<< HEAD
     public static void load(){
-=======
-    void setupConstruction() {
-        UnitsUtils.init();
-        addUnitGroup(SnUnitBlocks.upgradedAirFactory, 20 * 60, with(Items.silicon, 30, SnItems.naturite, 20),
-                     comet, satellite, planet, star, galaxy, universe);
-        addUnitGroup(SnUnitBlocks.upgradedAirFactory, 15 * 60, with(SnItems.fors, 15, Items.silicon, 20),
-                     wind, thunder, nadir, halo, mudflow, parhelion);
-    }
-
-    @Override
-    public void load() {
-        //region vanilla
-        bastion = new UnitType("bastion"){{
-            health = 47500;
-            speed = 0.3f;
-            hitSize = 37f;
-            rotateSpeed = 1.4f;
-
-            armor = 18f;
-            mechStepParticles = true;
-            drownTimeMultiplier = 7f;
-            mechFrontSway = 2f;
-            mechSideSway = 0.8f;
-            mechStepShake = 1f;
-            constructor = MechUnit::create;
-
-            weapons.addAll(
-            new SnWeapon("bastion-weapon"){{
-                rotate = false;
-                mirror = true;
-                top = false;
-                x = 36f;
-                y = -1f;
-                reload = 11f;
-                inaccuracy = 3f;
-                shootSound = Sounds.shootBig;
-            }},
-            new SnWeapon("bastion-art"){{
-                rotate = true;
-                mirror = false;
-                x = 0f;
-                y = -5f;
-                reload = 50f;
-                inaccuracy = 5f;
-                shots = 5;
-                shootSound = Sounds.artillery;
-            }},
-            new SnWeapon("bastion-fl"){{
-                rotate = false;
-                mirror = true;
-                x = 17f;
-                y = 19f;
-                layerOffset = -0.01f;
-                shootSound = Sounds.flame;
-            }},
-            new SnWeapon("bastion-fl"){{
-                rotate = false;
-                mirror = false;
-                x = 0f;
-                y = 24f;
-                layerOffset = -0.01f;
-                shootSound = Sounds.flame;
-            }}
-            );
-        }};
-        buffedCrawler = new UnitType("buffed-crawler"){{
-            defaultController = SuicideAI::new;
-
-            speed = 1f;
-            hitSize = 8f;
-            health = 175;
-            armor = 19f;
-            mechSideSway = 0.25f;
-            range = 60f;
-            constructor = MechUnit::create;
-
-            weapons.add(new Weapon(){{
-                shootOnDeath = true;
-                reload = 24f;
-                shootCone = 180f;
-                ejectEffect = Fx.none;
-                shootSound = Sounds.explosionbig;
-                x = shootY = 0f;
-                mirror = false;
-                bullet = SnBullets.t6crawlerBoom;
-            }});
-        }
-            /*
-            TODO заблокировать после отладки. Пока он должен быть виден, но в итоге - нет.
-            @Override 
-            public boolean unlocked() { return false; }
-            @Override
-            public boolean unlockedNow() { return false; }
-            @Override
-            public boolean unlockedNowHost() { return false; }*/
-        };
-        arahnus = new UnitTypeExt("arahnus"){{
-            health = 61000;
-            speed = 0.6f;
-            rotateSpeed = 1.5f;
-            drag = 0.125f;
-            hitSize = 71;
-            armor = 26f;
-            allowLegStep = true;
-            hovering = true;
-            groundLayer = Layer.legUnit;
-            visualElevation = 1.1f;
-
-            legCount = 8;
-            legMoveSpace = 0.9f;
-            legPairOffset = 3;
-            legLength = 70f;
-            legExtension = -27;
-            legBaseOffset = 4f;
-            landShake = 4f;
-            legLengthScl = 2f;
-            rippleScale = 4f;
-            legSpeed = 0.3f;
-
-            legSplashDamage = 70;
-            legSplashRange = 70;
-            
-            constructor = LegsUnit::create;
-
-            ammoType = new ItemAmmoType(SnItems.planatrium, 6);
-            buildSpeed = 1f;
-
-            weapons.add(
-            new SnWeapon("arahnus-cannon"){{
-                y = -14f;
-                x = 0f;
-                shootY = 22f;
-                mirror = false;
-                reload = 290;
-                shake = 15f;
-                recoil = 15f;
-                rotateSpeed = 0.8f;
-                ejectEffect = Fx.casing2;
-                shootSound = Sounds.artillery;
-                rotate = true;
-                shadow = 30f;
-
-                bullet = new ArtilleryBulletType(5f, 190){{
-                    hitEffect = Fx.sapExplosion;
-                    knockback = 3.9f;
-                    lifetime = 100f;
-                    width = height = 40f;
-                    collidesTiles = collides = true;
-                    ammoMultiplier = 4f;
-                    splashDamageRadius = 132f;
-                    splashDamage = 470f;
-                    backColor = Pal.sapBulletBack;
-                    frontColor = lightningColor = Pal.sapBullet;
-                    lightning = 6;
-                    lightningLength = 48;
-                    smokeEffect = Fx.shootBigSmoke2;
-                    hitShake = 21f;
-                    lightRadius = 65f;
-                    lightColor = Pal.sap;
-                    lightOpacity = 0.6f;
-        
-                    status = StatusEffects.sapped;
-                    statusDuration = 60f * 10;
-        
-                    fragLifeMin = 0.6f;
-                    fragBullets = 6;
-        
-                    fragBullet = new SpawnArtilleryBulletType(3f, 70){{
-                        hitEffect = Fx.sapExplosion;
-                        knockback = 1.6f;
-                        lifetime = 60f;
-                        width = height = 30f;
-                        collidesTiles = false;
-                        splashDamageRadius = 90f;
-                        splashDamage = 95f;
-                        backColor = Pal.sapBulletBack;
-                        frontColor = lightningColor = Pal.sapBullet;
-                        lightning = 4;
-                        lightningLength = 9;
-                        smokeEffect = Fx.shootBigSmoke2;
-                        hitShake = 10f;
-                        lightRadius = 45f;
-                        lightColor = Pal.sap;
-                        lightOpacity = 0.5f;
-            
-                        status = StatusEffects.sapped;
-                        statusDuration = 60f * 10;
-            
-                        unitType = SnUnitTypes.buffedCrawler;
-                    }};
-                }};
-            }},
-            new SnWeapon("arahnus-sap"){{
-                x = 15;
-                reload = 10;
-                shootCone = 20f;
-                alternate = true;
-                bullet = SnBullets.t6sapBullet;
-                shootSound = Sounds.sap;
-            }}
-            );
-        }};
-        //endregion vanilla
->>>>>>> 4bbb2c4d0cfd02f079ca729588205378ad34206a
         //region mod-units
         //region ground
         //region berserk
