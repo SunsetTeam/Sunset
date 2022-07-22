@@ -31,11 +31,12 @@ public class LaserWallChain{
                 }
             }
         }
-        chainUpdater = true;
         chainedWalls.each(w -> {
-            if(w != build && w.laserChain.chainUpdater)
+            if(w.laserChain.chainUpdater)
                 chainUpdater = false;
         });
+        chainUpdater = true;
+        queue.clear();
     }
 
     public void updateCharge(){
