@@ -2,7 +2,7 @@ package sunset.content.blocks.defense;
 
 import arc.graphics.Color;
 import arc.math.geom.Vec2;
-import arc.struct.EnumSet;
+import arc.struct.*;
 import arc.util.Time;
 import mindustry.Vars;
 import mindustry.content.Fx;
@@ -10,11 +10,9 @@ import mindustry.content.Items;
 import mindustry.content.Liquids;
 import mindustry.entities.bullet.BasicBulletType;
 import mindustry.entities.bullet.LaserBulletType;
-import mindustry.entities.bullet.LightningBulletType;
 import mindustry.entities.effect.MultiEffect;
 import mindustry.entities.part.RegionPart;
 import mindustry.entities.pattern.ShootAlternate;
-import mindustry.entities.pattern.ShootSpread;
 import mindustry.gen.Sounds;
 import mindustry.graphics.Pal;
 import mindustry.type.Category;
@@ -22,8 +20,7 @@ import mindustry.world.Block;
 import mindustry.world.blocks.defense.turrets.PayloadAmmoTurret;
 import mindustry.world.consumers.ConsumeLiquidBase;
 import mindustry.world.draw.DrawTurret;
-import mindustry.world.meta.BlockFlag;
-import mindustry.world.meta.BuildVisibility;
+import mindustry.world.meta.*;
 import sunset.content.SnBullets;
 import sunset.content.SnFx;
 import sunset.content.SnItems;
@@ -31,11 +28,11 @@ import sunset.content.SnLiquids;
 import sunset.content.blocks.SnPayloadBlocks;
 import sunset.entities.bullet.ArtilleryLightningBulletType;
 import sunset.entities.bullet.EnergySphereBulletType;
-import sunset.entities.pattern.ShootMultiBarrel;
 import sunset.graphics.SnPal;
 import sunset.type.MissileType;
 import sunset.world.blocks.defense.turrets.*;
 import sunset.world.consumers.TimeScaleConsume;
+import sunset.world.meta.*;
 
 import static mindustry.type.ItemStack.with;
 import static mma.ModVars.fullName;
@@ -279,7 +276,7 @@ public class SnTurrets{
         zeus = new PayloadAmmoTurret("h-zeus"){{
             requirements(Category.turret, with(SnItems.fors, 170f, SnItems.erius, 150f, SnItems.anzar, 80f));
             ammo(
-                    SnPayloadBlocks.zeusRocket, SnBullets.zeusRocket
+                    SnPayloadBlocks.zeusRocket, SnBullets.blockBullet
             );
             size = 3;
             shoot.shots = 1;
@@ -682,5 +679,16 @@ public class SnTurrets{
             buildVisibility = BuildVisibility.shown;
         }};
         //endregion missile
+        changeStatsForBlockBullets();
+    }
+
+    private static void changeStatsForBlockBullets(){
+        Seq<PayloadAmmoTurret> turrets = Vars.content.blocks().select(b -> b instanceof PayloadAmmoTurret).as();
+        for(PayloadAmmoTurret turret : turrets){
+            turret.setStats();
+            Stats stats = turret.stats;
+            stats.remove(Stat.ammo);
+            stats.add(Stat.ammo, SnStatValues.ammo(turret.ammoTypes));
+        }
     }
 }
