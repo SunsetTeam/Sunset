@@ -3,14 +3,14 @@ package sunset.world.blocks.laser;
 import arc.struct.*;
 import arc.util.*;
 import sunset.world.blocks.laser.LaserWall.*;
-
+//TODO add updateChain function with filter in Utils
 public class LaserWallChain{
     public LaserWallBuild build;
     public boolean chainUpdater = true;
     Seq<LaserWallBuild> chainedWalls = new Seq<>();
 
-    public LaserWallChain(LaserWallBuild build_){
-        build = build_;
+    public LaserWallChain(LaserWallBuild build){
+        this.build = build;
     }
 
     public void updateChain(){
