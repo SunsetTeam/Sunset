@@ -8,10 +8,11 @@ import java.time.format.DateTimeFormatter
 buildscript{
     ext{
         // v7
-        mindustryPath = "com.github.Anuken.MindustryJitpack"
-        mindustryVersionFull = 'fa17da53c68cf2600b4640ff653cee2f48d50740'
-        mindustryVersion = mindustryVersionFull.substring(0, 10)
-        testMindustryBuild = '22823' //regular versions are prefixed with 'v' (eg. 'v135'), BE versions has no prefix (eg. '22823')
+        mindustryPath = "com.github.Anuken.Mindustry"
+        mindustryVersionFull = 'v136.1'
+//        mindustryVersion = mindustryVersionFull.substring(0, 10)
+        mindustryVersion = mindustryVersionFull
+        testMindustryBuild = mindustryVersion //regular versions are prefixed with 'v' (eg. 'v135'), BE versions has no prefix (eg. '22823')
         arcVersion = "b1b88883e2"
 //        arcVersion = "916c5a77"
 
@@ -28,7 +29,7 @@ buildscript{
 
 //        gasVersion = "27b10c13f7e"
 
-        modCoreVersion = "59185cba3b9"
+        modCoreVersion = "60285a04edb"
 
 
         kotlinVersion = "1.6.0"
