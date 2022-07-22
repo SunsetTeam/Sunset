@@ -26,8 +26,8 @@ public class SnWalls{
         }};
         forsWallLarge = new Wall("fors-wall-large"){{
             requirements(Category.defense, with(SnItems.fors, 24));
-            health = forsWall.health * 4;
             size = 2;
+            health = forsWall.health * size * size;
         }};
         eriusWall = new Wall("erius-wall"){{
             requirements(Category.defense, with(SnItems.erius, 4));
@@ -36,8 +36,8 @@ public class SnWalls{
         }};
         eriusWalllarge = new Wall("erius-wall-large"){{
             requirements(Category.defense, with(SnItems.erius, 16));
-            health = eriusWall.health * 4;
             size = 2;
+            health = eriusWall.health * size * size;
         }};
         //region heal
         naturiteWall = new SnWall("naturite-wall"){{
@@ -48,9 +48,9 @@ public class SnWalls{
         }};
         naturiteWallLarge = new SnWall("naturite-wall-large"){{
             requirements(Category.defense, with(SnItems.naturite, 24));
-            health = naturiteWall.health * 4;
             healAmount(2f);
             size = 2;
+            health = naturiteWall.health * size * size;
         }};
         //endregion
         //region AntiPierceWall
@@ -68,8 +68,8 @@ public class SnWalls{
             requirements(Category.defense, with(SnItems.enojie, 24));
             pierceMultiplier = 5;
             collidedDamageMultiplier = 0.7225f;
-            health = enojiewall.health * 4;
             size = 2;
+            health = enojiewall.health * size * size;
             insulated = true;
             absorbLasers = true;
             schematicPriority = 10;
