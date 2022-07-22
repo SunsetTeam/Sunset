@@ -2,38 +2,42 @@ package sunset.world.blocks.laser;
 
 import arc.*;
 import arc.graphics.g2d.*;
-import arc.math.Mathf;
+import arc.math.*;
 import arc.struct.*;
 import arc.util.*;
-import mindustry.Vars;
+import mindustry.*;
 import mindustry.entities.*;
 import mindustry.game.*;
 import mindustry.gen.*;
 import mindustry.graphics.*;
 import mindustry.ui.*;
 import mindustry.world.*;
+import sunset.utils.*;
+import sunset.utils.ChainOfBuilding.*;
 
 import static mindustry.Vars.tilesize;
 
 public class LaserWall extends LaserBlock{
-    Queue<LaserWallBuild> queue = new Queue<>();
     public float maxResist = 10f;
-    public LaserWall(String name) {
+
+    public LaserWall(String name){
         super(name);
         update = true;
     }
+
     @Override
     public void setBars(){
         super.setBars();
         addBar("resistBar", (LaserWallBuild w) -> new Bar(
-            ()-> Core.bundle.format("bar.laser-resist", w.resist, maxResist),
-            ()-> Pal.accent,
-            ()-> w.resist / maxResist
+        () -> Core.bundle.format("bar.laser-resist", w.resist, maxResist),
+        () -> Pal.accent,
+        () -> w.resist / maxResist
         ));
     }
-    public class LaserWallBuild extends LaserBuild{
+
+    public class LaserWallBuild extends LaserBuild implements BuildingWithChain{
         float resist = 0f,
-                drawResist = resist;
+        drawResist = resist;
         float additiveCharge = 0f;
         LaserWallChain laserChain;
 
@@ -59,6 +63,7 @@ public class LaserWall extends LaserBlock{
                 }
             }
         }
+
         @Override
         public void update(){
             super.update();
@@ -72,7 +77,7 @@ public class LaserWall extends LaserBlock{
             super.draw();
             //drawPlaceText("Multiplier: " + Mathf.round(resist, 1)  + "\n" + id + "\nAmount: " + laserNet.chainedWalls.size, tileX(), tileY(), true);
             //drawPlaceText(laserNet.chainUpdater ? "updater" : "", tileX(), tileY(), true);
-            Draw.draw(Layer.shields - 0.001f, ()-> {
+            Draw.draw(Layer.shields - 0.001f, () -> {
                 Draw.color(Pal.lancerLaser);
                 TextureRegion w = Core.atlas.white();
                 float size = block().size * tilesize * Math.min(drawResist, 1f);
@@ -107,7 +112,12 @@ public class LaserWall extends LaserBlock{
 
         @Override
         public LaserWall block(){
-            return (LaserWall) this.block;
+            return (LaserWall)this.block;
+        }
+
+        @Override
+        public ChainOfBuilding<?> chain(){
+            return laserChain;
         }
     }
 }
