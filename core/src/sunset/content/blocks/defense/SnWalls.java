@@ -1,22 +1,21 @@
 package sunset.content.blocks.defense;
 
-import mindustry.type.Category;
-import mindustry.world.Block;
-import mindustry.world.blocks.defense.Wall;
-import sunset.content.SnItems;
-import sunset.world.blocks.defense.walls.IndestructibleWall;
-import sunset.world.blocks.defense.walls.SnWall;
+import mindustry.type.*;
+import mindustry.world.*;
+import mindustry.world.blocks.defense.*;
+import sunset.content.*;
+import sunset.world.blocks.defense.walls.*;
 
 import static mindustry.type.ItemStack.with;
 
-public class SnWalls {
+public class SnWalls{
     public static Block
 
     forsWall, forsWallLarge,
     eriusWall, eriusWalllarge,
     naturiteWall, naturiteWallLarge,
     enojiewall, enojieWallLarge,
-    
+
     indestructibleWall, indestructibleWallLarge;
 
     public static void load(){
