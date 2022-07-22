@@ -1,27 +1,23 @@
 package sunset.world.blocks.power;
 
-import acontent.world.meta.AStats;
-import arc.Core;
-import arc.audio.Sound;
-import arc.graphics.Color;
-import arc.math.Mathf;
-import arc.struct.Seq;
-import arc.util.Log;
-import mindustry.Vars;
-import mindustry.content.Fx;
-import mindustry.core.UI;
-import mindustry.entities.Effect;
-import mindustry.gen.Building;
-import mindustry.gen.Sounds;
-import mindustry.graphics.Drawf;
-import mindustry.graphics.Pal;
-import mindustry.ui.Bar;
-import mindustry.world.blocks.power.PowerNode;
-import mindustry.world.meta.Stat;
-import mindustry.world.meta.StatUnit;
-import sunset.content.SnFx;
-import sunset.world.meta.SnStat;
-import sunset.world.meta.SnStatUnit;
+import acontent.world.meta.*;
+import arc.*;
+import arc.audio.*;
+import arc.graphics.*;
+import arc.math.*;
+import arc.struct.*;
+import arc.util.*;
+import mindustry.*;
+import mindustry.content.*;
+import mindustry.core.*;
+import mindustry.entities.*;
+import mindustry.gen.*;
+import mindustry.graphics.*;
+import mindustry.ui.*;
+import mindustry.world.blocks.power.*;
+import mindustry.world.meta.*;
+import sunset.content.*;
+import sunset.world.meta.*;
 
 import static mindustry.Vars.tilesize;
 
