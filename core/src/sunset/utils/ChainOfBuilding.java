@@ -5,7 +5,7 @@ import arc.struct.*;
 import mindustry.gen.*;
 import sunset.utils.ChainOfBuilding.*;
 
-public class ChainOfBuilding<T extends Building&BuildingWithChain>{
+public class ChainOfBuilding<T extends Building & BuildingWithChain>{
     protected final static Queue<Building> blockQueue = new Queue<>();
     public Boolf<Building> blockFilter;
     public Seq<T> chained = new Seq<>();
