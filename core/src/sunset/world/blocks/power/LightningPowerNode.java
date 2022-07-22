@@ -26,6 +26,8 @@ import sunset.world.meta.SnStatUnit;
 import static mindustry.Vars.tilesize;
 
 public class LightningPowerNode extends PowerNode {
+    public final int debugUpdateTimer = timers++;
+    final float debugUpdateTime = 40;
     // max lightning length
     public float lightningRange;
 
@@ -92,13 +94,11 @@ public class LightningPowerNode extends PowerNode {
         final Seq<LightningPowerNodeBuild> nodes = new Seq<>();
         final float[] energyToSet = new float[1];
 
-        int debugTick = 0;
 
         @Override
         public void update() {
             super.update();
-            if(debugTick++ < 40) return;
-            debugTick = 0;
+            if(!timer.get(debugUpdateTimer,debugUpdateTime)) return;
 
             float thisCap = powerCapacity(this), thisStored = powerStored(this);
             energyToSet[0] = thisStored; // include "this" node
