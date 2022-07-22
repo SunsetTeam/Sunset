@@ -6,17 +6,25 @@ import arc.graphics.g2d.Fill;
 import arc.math.Angles;
 import arc.math.Mathf;
 import arc.math.geom.Vec2;
+import arc.util.Log;
 import arc.util.Time;
 import mindustry.Vars;
 import mindustry.content.*;
+import mindustry.entities.Effect;
+import mindustry.entities.Lightning;
 import mindustry.entities.Units;
+import mindustry.entities.abilities.MoveEffectAbility;
 import mindustry.entities.bullet.*;
+import mindustry.entities.effect.MultiEffect;
 import mindustry.gen.Bullet;
 import mindustry.gen.Hitboxc;
 import mindustry.gen.Sounds;
 import mindustry.gen.Unit;
 import mindustry.graphics.Layer;
 import mindustry.graphics.Pal;
+import mindustry.type.Weapon;
+import mindustry.type.unit.MissileUnitType;
+import mma.*;
 import sunset.entities.bullet.*;
 import sunset.gen.SnSounds;
 import sunset.graphics.SnPal;
@@ -32,7 +40,7 @@ public class SnBullets {
         sniperSurge,
         //missile
     //TODO replace by block version
-        blockBullet,
+        zeusRocket,
         nobiumAimMissile, naturiteAimMissile, renubiteAimMissile,
         //artillery
         //flak
@@ -154,7 +162,7 @@ public class SnBullets {
         };
 
         //region missile
-        blockBullet = new SpriteMissileBulletType(5.4f, 30f, "zeus-missile"){{
+        zeusRocket = new SpriteMissileBulletType(5.4f, 30f, "zeus-missile"){{
             shootEffect = Fx.shootBig;
             smokeEffect = SnFx.shootZeusMissile;
             homingPower = 0.15f;
