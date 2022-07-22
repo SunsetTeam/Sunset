@@ -39,8 +39,6 @@ public class SnBullets {
         forsBullet, eriusBullet,
         sniperSurge,
         //missile
-    //TODO replace by block version
-        zeusRocket,
         nobiumAimMissile, naturiteAimMissile, renubiteAimMissile,
         //artillery
         //flak
@@ -162,20 +160,6 @@ public class SnBullets {
         };
 
         //region missile
-        zeusRocket = new SpriteMissileBulletType(5.4f, 30f, "zeus-missile"){{
-            shootEffect = Fx.shootBig;
-            smokeEffect = SnFx.shootZeusMissile;
-            homingPower = 0.15f;
-            homingRange = 16f * Vars.tilesize;
-            maxRange = 200f;
-            lifetime = 4.7f * Time.toSeconds;
-            trailColor = Pal.lightPyraFlame;
-            trailLength = 9;
-            collidesGround = false;
-            collidesAir = true;
-            splashDamage = 130f;
-            splashDamageRadius = 35f;
-        }};
 
         nobiumAimMissile = new AimBulletType(3f, 55f){{
             sprite = "missile";

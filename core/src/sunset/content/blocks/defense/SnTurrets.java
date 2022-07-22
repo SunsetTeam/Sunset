@@ -1,41 +1,31 @@
 package sunset.content.blocks.defense;
 
-import arc.graphics.Color;
-import arc.math.geom.Vec2;
-import arc.struct.EnumSet;
-import arc.util.Time;
-import mindustry.Vars;
-import mindustry.content.Fx;
-import mindustry.content.Items;
-import mindustry.content.Liquids;
-import mindustry.entities.bullet.BasicBulletType;
-import mindustry.entities.bullet.LaserBulletType;
-import mindustry.entities.bullet.LightningBulletType;
-import mindustry.entities.effect.MultiEffect;
-import mindustry.entities.part.RegionPart;
-import mindustry.entities.pattern.ShootAlternate;
-import mindustry.entities.pattern.ShootSpread;
-import mindustry.gen.Sounds;
-import mindustry.graphics.Pal;
-import mindustry.type.Category;
-import mindustry.world.Block;
-import mindustry.world.blocks.defense.turrets.PayloadAmmoTurret;
-import mindustry.world.consumers.ConsumeLiquidBase;
-import mindustry.world.draw.DrawTurret;
-import mindustry.world.meta.BlockFlag;
-import mindustry.world.meta.BuildVisibility;
-import sunset.content.SnBullets;
-import sunset.content.SnFx;
-import sunset.content.SnItems;
-import sunset.content.SnLiquids;
-import sunset.content.blocks.SnPayloadBlocks;
-import sunset.entities.bullet.ArtilleryLightningBulletType;
-import sunset.entities.bullet.EnergySphereBulletType;
-import sunset.entities.pattern.ShootMultiBarrel;
-import sunset.graphics.SnPal;
-import sunset.type.MissileType;
+import arc.graphics.*;
+import arc.math.geom.*;
+import arc.struct.*;
+import arc.util.*;
+import mindustry.*;
+import mindustry.content.*;
+import mindustry.entities.bullet.*;
+import mindustry.entities.effect.*;
+import mindustry.entities.part.*;
+import mindustry.entities.pattern.*;
+import mindustry.gen.*;
+import mindustry.graphics.*;
+import mindustry.type.*;
+import mindustry.world.*;
+import mindustry.world.blocks.defense.turrets.*;
+import mindustry.world.consumers.*;
+import mindustry.world.draw.*;
+import mindustry.world.meta.*;
+import sunset.content.*;
+import sunset.content.blocks.*;
+import sunset.entities.bullet.*;
+import sunset.graphics.*;
+import sunset.type.*;
 import sunset.world.blocks.defense.turrets.*;
-import sunset.world.consumers.TimeScaleConsume;
+import sunset.world.blocks.payload.*;
+import sunset.world.consumers.*;
 
 import static mindustry.type.ItemStack.with;
 import static mma.ModVars.fullName;
@@ -67,7 +57,7 @@ public class SnTurrets{
     dissector,//4x4
     art;//5x5
 
-    public static void load() {
+    public static void load(){
 
         //region 2x2
         firstTurret = new ModItemTurret("firs-turret"){{
@@ -84,14 +74,14 @@ public class SnTurrets{
             targetAir = true;
             targetGround = true;
             ammo(
-                    SnItems.fors, SnBullets.forsBullet,
-                    SnItems.erius, SnBullets.eriusBullet
+            SnItems.fors, SnBullets.forsBullet,
+            SnItems.erius, SnBullets.eriusBullet
             );
 
             shoot.shotDelay = 4f;
             shoot.shots = 3;
         }};
-        excellence = new ModPowerTurret("excellence") {{
+        excellence = new ModPowerTurret("excellence"){{
             requirements(Category.turret, with(SnItems.fors, 70, SnItems.erius, 60, SnItems.naturite, 40));
             size = 2;
             reload = 50f;
@@ -103,7 +93,7 @@ public class SnTurrets{
             shootSound = Sounds.laser;
             ammoUseEffect = Fx.casing1;
             targetAir = false;
-            shootType = new BasicBulletType(3f, 60) {{
+            shootType = new BasicBulletType(3f, 60){{
                 sprite = fullName("circle-bullet");
                 shrinkX = 0f;
                 shrinkY = 0f;
@@ -119,7 +109,7 @@ public class SnTurrets{
                 trailLength = 6;
                 trailEffect = Fx.artilleryTrail;
 
-                fragBullet = new LaserBulletType(40) {{
+                fragBullet = new LaserBulletType(40){{
                     colors = new Color[]{SnPal.redBomb.cpy().a(0.4f), SnPal.redBomb, Color.white};
                     width = 20f;
                     lifetime = 15f;
@@ -151,11 +141,11 @@ public class SnTurrets{
                 }});
             }};
         }};
-        reflection = new ModItemTurret("reflection") {{
+        reflection = new ModItemTurret("reflection"){{
             requirements(Category.turret, with(SnItems.fors, 85, SnItems.erius, 80, SnItems.naturite, 50));
             ammo(
-                    SnItems.naturite, SnBullets.naturiteCircleBullet,
-                    SnItems.anzar, SnBullets.anzarCircleBullet
+            SnItems.naturite, SnBullets.naturiteCircleBullet,
+            SnItems.anzar, SnBullets.anzarCircleBullet
             );
             health = 780;
             size = 2;
@@ -174,7 +164,7 @@ public class SnTurrets{
             targetAir = true;
             targetGround = true;
         }};
-        carbine = new ChainLightningTurret("carbine") {{
+        carbine = new ChainLightningTurret("carbine"){{
             requirements(Category.turret, with(SnItems.fors, 160, SnItems.erius, 140, SnItems.naturite, 60, SnItems.zerinium, 90));
             range = 132.2f;
             damage = 1.4f;
@@ -185,16 +175,16 @@ public class SnTurrets{
             coolantMultiplier = 1.0f;
             rotateSpeed = 8.75f;
             powerUse = 5f;
-            coolant = (ConsumeLiquidBase) consumeCoolant(0.3f).update(false).boost();
+            coolant = (ConsumeLiquidBase)consumeCoolant(0.3f).update(false).boost();
             laserColor = SnPal.chainLaser;
             consume(new TimeScaleConsume());
         }};
-        pulsation = new ModItemTurret("pulsation") {{
+        pulsation = new ModItemTurret("pulsation"){{
             requirements(Category.turret, with(SnItems.fors, 95, Items.graphite, 85, Items.lead, 70, SnItems.planatrium, 35));
             ammo(
-                    Items.lead, SnBullets.leadSap,
-                    Items.sporePod, SnBullets.sporeSap,
-                    SnItems.planatrium, SnBullets.planatriumSap
+            Items.lead, SnBullets.leadSap,
+            Items.sporePod, SnBullets.sporeSap,
+            SnItems.planatrium, SnBullets.planatriumSap
             );
             health = 780;
             size = 2;
@@ -278,8 +268,8 @@ public class SnTurrets{
 
         zeus = new PayloadAmmoTurret("h-zeus"){{
             requirements(Category.turret, with(SnItems.fors, 170f, SnItems.erius, 150f, SnItems.anzar, 80f));
-            ammo(
-                    SnPayloadBlocks.zeusRocket, SnBullets.zeusRocket
+            Ammunition.ammoAmmunition(this,
+            SnPayloadBlocks.zeusRocket
             );
             size = 3;
             shoot.shots = 1;
@@ -299,7 +289,7 @@ public class SnTurrets{
             }};
         }};
 
-        trigger = new ModPowerTurret("trigger") {{
+        trigger = new ModPowerTurret("trigger"){{
             requirements(Category.turret, with(Items.silicon, 275, Items.titanium, 125, SnItems.enojie, 45));
             size = 3;
             consumePower(9f);
@@ -368,12 +358,12 @@ public class SnTurrets{
             speedupPerShot = 0.16f;
             maxReloadMultiplier = 1.7f;
         }};*/
-        ammirus = new ModItemTurret("ammirus") {{
+        ammirus = new ModItemTurret("ammirus"){{
             requirements(Category.turret, with(Items.copper, 700, SnItems.fors, 570, Items.plastanium, 475, SnItems.nobium, 470));
             ammo(
-                    SnItems.nobium, SnBullets.nobiumAimMissile,
-                    SnItems.naturite, SnBullets.naturiteAimMissile,
-                    SnItems.reneubite, SnBullets.renubiteAimMissile
+            SnItems.nobium, SnBullets.nobiumAimMissile,
+            SnItems.naturite, SnBullets.naturiteAimMissile,
+            SnItems.reneubite, SnBullets.renubiteAimMissile
             );
             health = 3000;
             size = 4;
@@ -391,16 +381,16 @@ public class SnTurrets{
             targetAir = true;
             targetGround = true;
         }};
-        flood = new LiquidTurretExt("flood") {{
+        flood = new LiquidTurretExt("flood"){{
             shoot = new ShootAlternate();
 
             requirements(Category.turret, with(Items.metaglass, 230, Items.lead, 370f, Items.titanium, 330, Items.thorium, 190, SnItems.fors, 180));
             ammo(
-                    Liquids.water, SnBullets.floodWaterShot,
-                    Liquids.slag, SnBullets.floodSlagShot,
-                    Liquids.cryofluid, SnBullets.floodCryoShot,
-                    Liquids.oil, SnBullets.floodOilShot,
-                    SnLiquids.burheyna, SnBullets.floodBurheynaShot
+            Liquids.water, SnBullets.floodWaterShot,
+            Liquids.slag, SnBullets.floodSlagShot,
+            Liquids.cryofluid, SnBullets.floodCryoShot,
+            Liquids.oil, SnBullets.floodOilShot,
+            SnLiquids.burheyna, SnBullets.floodBurheynaShot
             );
             size = 4;
             reload = 45f;
@@ -416,7 +406,7 @@ public class SnTurrets{
             flags = EnumSet.of(BlockFlag.turret, BlockFlag.extinguisher);
             ammoPerShot = 15;
         }};
-        chain = new ChainLightningTurret("chain") {{
+        chain = new ChainLightningTurret("chain"){{
             requirements(Category.turret, with(Items.copper, 600, Items.lead, 500, Items.surgeAlloy, 460, SnItems.nobium, 450, SnItems.naturite, 400, SnItems.planatrium, 350));
             range = 168.0f;
             damage = 7.60f;
@@ -427,15 +417,15 @@ public class SnTurrets{
             coolantMultiplier = 1.2f;
             rotateSpeed = 6.75f;
             consumePower(16f);
-            coolant = (ConsumeLiquidBase) consumeCoolant(0.5f).update(false).boost();
+            coolant = (ConsumeLiquidBase)consumeCoolant(0.5f).update(false).boost();
             laserColor = SnPal.chainLaser;
             consume(new TimeScaleConsume());
         }};
         //endregion 4x4
-        sniper = new ModItemTurret("sniper") {{
+        sniper = new ModItemTurret("sniper"){{
             requirements(Category.turret, with(Items.copper, 1200, SnItems.fors, 700, Items.surgeAlloy, 600, SnItems.naturite, 500, Items.silicon, 400, SnItems.nobium, 250));
             ammo(
-                    Items.surgeAlloy, SnBullets.sniperSurge
+            Items.surgeAlloy, SnBullets.sniperSurge
             );
 
             ammoPerShot = 9;
@@ -483,7 +473,7 @@ public class SnTurrets{
         }};*/
         //endregion 5x5
         //region 6x6
-        trident = new ModPowerTurret("trident") {{
+        trident = new ModPowerTurret("trident"){{
             requirements(Category.turret, with(Items.copper, 1000, Items.lead, 810, Items.silicon, 790, Items.plastanium, 780, Items.surgeAlloy, 670, SnItems.enojie, 600, SnItems.nobium, 400, SnItems.planatrium, 370));
             health = 5400;
             range = 247f;
@@ -495,7 +485,7 @@ public class SnTurrets{
             consumePower(38f);
             category = Category.turret;
             buildVisibility = BuildVisibility.shown;
-            shootType = new EnergySphereBulletType(2.5f, 290f) {
+            shootType = new EnergySphereBulletType(2.5f, 290f){
                 {
                     hitSize = 10f;
                     splashDamage = 910f;
@@ -516,11 +506,11 @@ public class SnTurrets{
                     lenMax = 5f;
                     radMin = 2.5f;
                     radMax = 4f;
-                    chargeEffect = SnFx.energyCharge((EnergySphereBulletType) shootType, 210);
+                    chargeEffect = SnFx.energyCharge((EnergySphereBulletType)shootType, 210);
                 }
 
                 @Override
-                public float continuousDamage() {
+                public float continuousDamage(){
                     return 720;
                 }
 
@@ -529,7 +519,7 @@ public class SnTurrets{
             reloadBar = false;
         }};
         //region 7x7
-        halberd = new ModPowerTurret("halberd") {{
+        halberd = new ModPowerTurret("halberd"){{
             requirements(Category.turret, with(Items.copper, 3800, Items.metaglass, 2700, Items.lead, 2520, Items.silicon, 2200, Items.plastanium, 1480, SnItems.enojie, 1390));
             range = 350f;
             shoot.shots = 1;
@@ -552,7 +542,7 @@ public class SnTurrets{
             targetAir = false;
             shootSound = Sounds.laser;
 
-            shootType = new LaserBulletType(7500) {{
+            shootType = new LaserBulletType(7500){{
                 colors = new Color[]{Pal.meltdownHit.cpy().a(0.4f), Pal.meltdownHit, Color.white};
                 chargeEffect = new MultiEffect(SnFx.galebardLaserCharge, SnFx.galebardLaserChargeBegin);
                 despawnEffect = Fx.none;
@@ -591,12 +581,12 @@ public class SnTurrets{
         }};*/
         //endregion 7x7
         //region missile
-        sunrise = new MissileSiloTurret("sunrise") {{
+        sunrise = new MissileSiloTurret("sunrise"){{
             requirements(Category.turret, with(Items.copper, 180, Items.lead, 175, Items.graphite, 165, Items.silicon, 150));
             launchEffect = SnFx.missileLaunchSmall;
             size = 2;
             itemCapacity = 240;
-            missile = new MissileType(this) {{
+            missile = new MissileType(this){{
                 damage = 0f;
                 splashDamage = 590f;
                 splashDamageRadius = 105f;
@@ -612,12 +602,12 @@ public class SnTurrets{
             category = Category.turret;
             buildVisibility = BuildVisibility.shown;
         }};
-        spark = new MissileSiloTurret("spark") {{
+        spark = new MissileSiloTurret("spark"){{
             requirements(Category.turret, with(Items.copper, 290, Items.lead, 280, Items.graphite, 275, Items.silicon, 260, Items.plastanium, 255, SnItems.fors, 230));
             launchEffect = SnFx.missileLaunchMedium;
             size = 3;
             itemCapacity = 900;
-            missile = new MissileType(this) {{
+            missile = new MissileType(this){{
                 damage = 0f;
                 splashDamage = 4400f;
                 splashDamageRadius = 135f;
@@ -633,12 +623,12 @@ public class SnTurrets{
             category = Category.turret;
             buildVisibility = BuildVisibility.shown;
         }};
-        dissector = new MissileSiloTurret("dissector") {{
+        dissector = new MissileSiloTurret("dissector"){{
             requirements(Category.turret, with(Items.copper, 500, Items.lead, 510, Items.plastanium, 490, Items.silicon, 480, Items.graphite, 475, SnItems.fors, 430, SnItems.nobium, 400));
             launchEffect = SnFx.missileLaunchLarge;
             size = 4;
             itemCapacity = 2400;
-            missile = new MissileType(this) {{
+            missile = new MissileType(this){{
                 damage = 0f;
                 splashDamage = 17000f;
                 splashDamageRadius = 160f;
@@ -654,18 +644,18 @@ public class SnTurrets{
             category = Category.turret;
             buildVisibility = BuildVisibility.shown;
         }};
-        art = new MissileSiloTurret("art") {{
+        art = new MissileSiloTurret("art"){{
             requirements(Category.turret, with(Items.copper, 1400, Items.lead, 1300, Items.plastanium, 1010, Items.silicon, 980, Items.graphite, 975, Items.surgeAlloy, 800, SnItems.enojie, 750));
             launchEffect = SnFx.missileLaunchMedium;
             size = 5;
             itemCapacity = 2400;
             float p1 = 53f / 162f, p2 = 109f / 162f;
             rockets(new Vec2(p1, p1),
-                    new Vec2(p1, p2),
-                    new Vec2(p2, p1),
-                    new Vec2(p2, p2));
+            new Vec2(p1, p2),
+            new Vec2(p2, p1),
+            new Vec2(p2, p2));
 
-            missile = new MissileType(this) {{
+            missile = new MissileType(this){{
                 damage = 0f;
                 splashDamage = 7200f;
                 splashDamageRadius = 145f;
