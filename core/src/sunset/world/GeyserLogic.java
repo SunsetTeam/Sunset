@@ -5,40 +5,48 @@ import arc.graphics.g2d.*;
 import arc.math.*;
 import arc.struct.*;
 import arc.util.*;
+import arc.util.io.*;
 import mindustry.*;
 import mindustry.async.*;
 import mindustry.core.*;
 import mindustry.graphics.*;
+import mindustry.io.*;
+import mindustry.io.SaveFileReader.*;
 import mindustry.world.*;
 import mma.*;
 import mma.graphics.*;
 import sunset.type.*;
+import sunset.utils.*;
 import sunset.world.blocks.environment.*;
+
+import java.io.*;
 
 import static mindustry.Vars.*;
 
 @SuppressWarnings({"FieldCanBeLocal", "FieldMayBeFinal"})
-public class GeyserLogic implements AsyncProcess{
+public class GeyserLogic implements AsyncProcess, CustomChunk{
     private static final int effectTime = 20;
     private final Seq<GeyserGroup> geysers = new Seq<>();
     private final ObjectSet<Tile> tmpSet = new ObjectSet<>();
     private final Interval effects = new Interval();
+    private final float baseUpChance = 0.00015f;
+    private final float baseDownChance = 0.0001f;
     private float sumfactors;
-    private float baseUpChance = 0.00015f;
-    private float baseDownChance = 0.0001f;
-
     private boolean shouldUpdate = false;
+    private boolean loadedFromMapSave = false;
 
     public GeyserLogic(){
         Vars.asyncCore.processes.add(this);
 //        Events.run(EventType.WorldLoadEvent.class, this::reloadData);
 //        Events.run(EventType.Trigger.draw, this::debugDraw);
         ModListener.updaters.add(this::update);
+        SaveVersion.addCustomChunk("sunset-geyser-logic",this);
     }
 
     @Override
     public void init(){
-        shouldUpdate = true;
+        shouldUpdate = !loadedFromMapSave;
+        loadedFromMapSave=false;
     }
 
     @Override
@@ -140,4 +148,31 @@ public class GeyserLogic implements AsyncProcess{
     }
 
 
+    @Override
+    public void write(DataOutput stream) throws IOException{
+        stream.writeInt(geysers.size);
+        for(GeyserGroup geyser : geysers){
+            geyser.write(Writes.get(stream));
+        }
+//        UtilsKt.TODO();//Added write block
+    }
+
+    @Override
+    public void read(DataInput stream) throws IOException{
+
+        int geysersAmount = stream.readInt();
+        geysers.setSize(geysersAmount);
+        geysers.clear();
+        for(int i = 0; i < geysersAmount; i++){
+            geysers.add(new GeyserGroup(Reads.get(stream)));
+        }
+        updateFactors();
+        loadedFromMapSave=true;
+//        UtilsKt.TODO();//Added read block
+    }
+
+    @Override
+    public boolean shouldWrite(){
+        return geysers.any();
+    }
 }
