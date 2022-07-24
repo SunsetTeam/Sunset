@@ -37,12 +37,7 @@ public class SnPayloadBlocks{
                 trailLength = 9;
                 collidesGround = false;
                 collidesAir = true;
-                UtilsKt.TODO("Choose one of this things");
-                UtilsKt.TODO("this");
                 splashDamage = 130f;
-                splashDamageRadius = 35f;
-                UtilsKt.TODO("or this");
-                splashDamage = 40;
                 splashDamageRadius = 30;
             }};
             size = 3;
