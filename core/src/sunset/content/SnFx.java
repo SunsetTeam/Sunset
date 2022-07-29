@@ -167,9 +167,9 @@ public class SnFx {
         Fill.circle(e.x, e.y, e.fin() * 2f);
     }),
 
-    mediumEnergySphereCharge = new Effect(17f, e -> {
+    mediumEnergySphereCharge = new Effect(18f, e -> {
         color(SnPal.redBombBack);
-        Fill.circle(e.x, e.y, e.fin() * 4f);
+        Fill.circle(e.x, e.y, e.fin() * 3f);
     }),
     
     mediumEnergySphereHit = new Effect(20f, 50f, e -> {
