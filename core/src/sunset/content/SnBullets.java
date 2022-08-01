@@ -82,7 +82,7 @@ public class SnBullets {
         forsBulletFrag = new BasicBulletType(4f, 16, "bullet") {{
             width = 9f;
             height = 14f;
-            lifetime = 20f;
+            lifetime = 21f;
             backColor = SnPal.forsBulletBack;
             frontColor = SnPal.forsBullet;
             shootEffect = SnFx.forsShootSmall;
@@ -102,7 +102,7 @@ public class SnBullets {
         eriusBulletFrag = new BasicBulletType(5f, 13, "bullet") {{
             width = 9f;
             height = 16f;
-            lifetime = 20f;
+            lifetime = 21f;
             backColor = SnPal.eriusBulletBack;
             frontColor = SnPal.eriusBullet;
             shootEffect = SnFx.eriusShootSmall;
@@ -123,7 +123,8 @@ public class SnBullets {
         forsBullet = new BasicBulletType(5f, 13, "bullet") {{
             width = 7f;
             height = 12f;
-            lifetime = 15f;
+            lifetime = 16f;
+            drag = 0.04f;
             backColor = SnPal.forsBulletBack;
             frontColor = SnPal.forsBullet;
             shootEffect = SnFx.forsShootSmall;
@@ -140,13 +141,14 @@ public class SnBullets {
 
             fragBullet = forsBulletFrag;
             fragBullets = 1;
-            fragAngle = 90f;
+            fragAngle = 0.001f;
             fragVelocityMin = 0.7f;
         }};
         eriusBullet = new BasicBulletType(6f, 10, "bullet") {{
             width = 7f;
             height = 14f;
-            lifetime = 15f;
+            lifetime = 16f;
+            drag = 0.04f;
             backColor = SnPal.eriusBulletBack;
             frontColor = SnPal.eriusBullet;
             shootEffect = SnFx.eriusShootSmall;
@@ -163,7 +165,7 @@ public class SnBullets {
 
             fragBullet = eriusBulletFrag;
             fragBullets = 1;
-            fragAngle = 90f;
+            fragAngle = 0.001f;
             fragVelocityMin = 0.7f;
         }};
 
