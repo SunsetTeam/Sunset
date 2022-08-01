@@ -35,78 +35,136 @@ import static mma.ModVars.fullName;
 public class SnBullets {
     //region definitions
     public static BulletType
-        //standard
-        forsBullet, eriusBullet,
-        sniperSurge,
-        //missile
-        nobiumAimMissile, naturiteAimMissile, renubiteAimMissile,
-        //artillery
-        //flak
-        naturiteCircleBullet, anzarCircleBullet,
-        //shrapnel
-        //laser
-        //lightning
-        //sap
-        leadSap, sporeSap, planatriumSap,
-        //t6 vanilla
-        //energy sphere
-        mediumEnergySphere,
-        //liquid
-        floodWaterShot, floodCryoShot, floodSlagShot, floodOilShot, floodBurheynaShot,
-        burheynaFrag,//unused
-        //flame
-        //reverse-bullets
-        naturiteReversBulletBack, naturiteReversBullet, forsReversBulletBack, forsReversBullet, nobiumReversBulletBack, nobiumReversBullet,
-        //copters
-        basicHelicopterGun,
-        mediumHelicopterGun, helicopterMissile,
-        clusterRocket, copterEnergySphere,
-        bigHelicopterGun, laserGun, bigHelicopterMissile,
-        largeHelicopterGun, largeHelicopterMissile, smallHelicopterMissile,
-        giantHelicopterGun, shrapnelCopterGun, bigClusterRocket, bigCopterEnergySphere,
-        //yellow ships
-        smallShell,
-        salvoArt, smallTorpedo,
-        lightningBall, trailRocket,
-        //buffer
-        cometWaterShot, starStunBullet, galaxyKnockbackBullet, universeLaserBullet, universeEnergySphere,
-        //misc and testing
-        emptyBullet, overheatBullet,
-        temp;
+
+    //standard
+    forsBulletFrag, eriusBulletFrag, forsBullet, eriusBullet,
+    sniperSurge,
+    //missile
+    nobiumAimMissile, naturiteAimMissile, renubiteAimMissile,
+    //artillery
+    //flak
+    naturiteCircleBullet, anzarCircleBullet,
+    //shrapnel
+    //laser
+    //lightning
+    //sap
+    leadSap, sporeSap, planatriumSap,
+    //t6 vanilla
+    //energy sphere
+    mediumEnergySphere,
+    //liquid
+    floodWaterShot, floodCryoShot, floodSlagShot, floodOilShot, floodBurheynaShot,
+    burheynaFrag,//unused
+    //flame
+    //reverse-bullets
+    naturiteReversBulletBack, naturiteReversBullet, forsReversBulletBack, forsReversBullet, nobiumReversBulletBack, nobiumReversBullet,
+    //copters
+    basicHelicopterGun,
+    mediumHelicopterGun, helicopterMissile,
+    clusterRocket, copterEnergySphere,
+    bigHelicopterGun, laserGun, bigHelicopterMissile,
+    largeHelicopterGun, largeHelicopterMissile, smallHelicopterMissile,
+    giantHelicopterGun, shrapnelCopterGun, bigClusterRocket, bigCopterEnergySphere,
+    //yellow ships
+    smallShell,
+    salvoArt, smallTorpedo,
+    lightningBall, trailRocket,
+    //buffer
+    cometWaterShot, starStunBullet, galaxyKnockbackBullet, universeLaserBullet, universeEnergySphere,
+    //misc and testing
+    emptyBullet, overheatBullet,
+    temp;
     //endregion definitions
 
     public static void load() {
         //region shell
         //region standard
-        forsBullet = new BasicBulletType(5f, 16, "bullet") {{
+        forsBulletFrag = new BasicBulletType(4f, 16, "bullet") {{
             width = 9f;
             height = 14f;
-            lifetime = 37f;
+            lifetime = 20f;
             backColor = SnPal.forsBulletBack;
             frontColor = SnPal.forsBullet;
             shootEffect = SnFx.forsShootSmall;
             despawnEffect = SnFx.forsSmallExplosion;
             trailLength = 4;
-            trailWidth = 2.1f;
+            trailWidth = 2.16f;
             trailColor = SnPal.forsBulletBack;
-            maxRange = 128;
             collidesGround = true;
             collidesAir = true;
+
+            homingPower = 0.1f;
+            homingRange = 6 * Vars.tilesize;
+
+            weaveMag = 3;
+            weaveScale = 3;
         }};
-        eriusBullet = new BasicBulletType(6f, 13, "bullet") {{
+        eriusBulletFrag = new BasicBulletType(5f, 13, "bullet") {{
             width = 9f;
             height = 16f;
-            lifetime = 37f;
+            lifetime = 20f;
             backColor = SnPal.eriusBulletBack;
             frontColor = SnPal.eriusBullet;
             shootEffect = SnFx.eriusShootSmall;
             despawnEffect = SnFx.eriusSmallExplosion;
             trailLength = 5;
-            trailWidth = 2.1f;
+            trailWidth = 2.16f;
+            trailColor = SnPal.eriusBulletBack;
+            collidesGround = true;
+            collidesAir = true;
+
+            homingPower = 0.1f;
+            homingRange = 6 * Vars.tilesize;
+
+            weaveMag = 3;
+            weaveScale = 3;
+        }};
+
+        forsBullet = new BasicBulletType(5f, 13, "bullet") {{
+            width = 7f;
+            height = 12f;
+            lifetime = 15f;
+            backColor = SnPal.forsBulletBack;
+            frontColor = SnPal.forsBullet;
+            shootEffect = SnFx.forsShootSmall;
+            despawnEffect = SnFx.forsSmallExplosion;
+            trailLength = 2;
+            trailWidth = 1.7f;
+            trailColor = SnPal.forsBulletBack;
+            maxRange = 128;
+            collidesGround = true;
+            collidesAir = true;
+
+            weaveMag = 3;
+            weaveScale = 3;
+
+            fragBullet = forsBulletFrag;
+            fragBullets = 1;
+            fragAngle = 90f;
+            fragVelocityMin = 0.7f;
+        }};
+        eriusBullet = new BasicBulletType(6f, 10, "bullet") {{
+            width = 7f;
+            height = 14f;
+            lifetime = 15f;
+            backColor = SnPal.eriusBulletBack;
+            frontColor = SnPal.eriusBullet;
+            shootEffect = SnFx.eriusShootSmall;
+            despawnEffect = SnFx.eriusSmallExplosion;
+            trailLength = 3;
+            trailWidth = 1.7f;
             trailColor = SnPal.eriusBulletBack;
             maxRange = 140;
             collidesGround = true;
             collidesAir = true;
+
+            weaveMag = 3;
+            weaveScale = 3;
+
+            fragBullet = eriusBulletFrag;
+            fragBullets = 1;
+            fragAngle = 90f;
+            fragVelocityMin = 0.7f;
         }};
 
         sniperSurge = new SniperBulletType() {{

@@ -33,7 +33,7 @@ import static mma.ModVars.fullName;
 public class SnTurrets{
     public static Block
     //2x2
-    firstTurret, excellence, carbine, pulsation, reflection, discharge,
+    sway, excellence, carbine, pulsation, reflection, discharge,
 
     //3x3
     major, artLightTurret, zeus, trigger,
@@ -60,15 +60,15 @@ public class SnTurrets{
     public static void load(){
 
         //region 2x2
-        firstTurret = new ModItemTurret("firs-turret"){{
+        sway = new ModItemTurret("sway"){{
             requirements(Category.turret, with(SnItems.fors, 50, SnItems.erius, 40));
             size = 2;
             reload = 37f;
             range = 19 * Vars.tilesize;
             recoil = 1.4f;
-            inaccuracy = 4f;
+            inaccuracy = 9f;
             rotateSpeed = 6f;
-            shootCone = 3f;
+            shootCone = 15f;
             shootSound = Sounds.shoot;
             ammoUseEffect = Fx.casing1;
             targetAir = true;
@@ -77,9 +77,7 @@ public class SnTurrets{
             SnItems.fors, SnBullets.forsBullet,
             SnItems.erius, SnBullets.eriusBullet
             );
-
-            shoot.shotDelay = 4f;
-            shoot.shots = 3;
+            shoot.shots = 2;
         }};
         excellence = new ModPowerTurret("excellence"){{
             requirements(Category.turret, with(SnItems.fors, 70, SnItems.erius, 60, SnItems.naturite, 40));
@@ -93,6 +91,8 @@ public class SnTurrets{
             shootSound = Sounds.laser;
             ammoUseEffect = Fx.none;
             targetAir = false;
+            shoot.firstShotDelay = 30f;
+            consumePower(1.6f);
             shootType = new BasicBulletType(3f, 60){{
                 sprite = fullName("circle-bullet");
                 shrinkX = 0f;
@@ -122,10 +122,7 @@ public class SnTurrets{
                 fragRandomSpread = 0.0001f;
 
                 chargeEffect = SnFx.mediumEnergySphereCharge;
-            }};//SnBullets.mediumEnergySphere;
-            shoot.firstShotDelay = 30f;//chargeTime = 30f;
-            //chargeMaxDelay = 30f;
-            consumePower(2f);
+            }};
             drawer = new DrawTurret("reinforced-"){{
                 parts.add(new RegionPart("-big-spine"){{
                     mirror = true;

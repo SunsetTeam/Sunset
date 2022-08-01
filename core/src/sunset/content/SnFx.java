@@ -167,9 +167,9 @@ public class SnFx {
         Fill.circle(e.x, e.y, e.fin() * 2f);
     }),
 
-    mediumEnergySphereCharge = new Effect(18f, e -> {
+    mediumEnergySphereCharge = new Effect(19f, e -> {
         color(SnPal.redBombBack);
-        Fill.circle(e.x, e.y, e.fin() * 3f);
+        Fill.circle(e.x, e.y, e.fin() * 2.9f);
     }),
     
     mediumEnergySphereHit = new Effect(20f, 50f, e -> {
@@ -723,9 +723,6 @@ public class SnFx {
             Fill.circle(e.x + x, e.y + y, e.fout() * 3f + 0.5f);
             Fill.circle(e.x + x / 2f, e.y + y / 2f, e.fout());
         });
-
-        color(SnPal.forsBullet, SnPal.forsBulletBack, Color.darkGray, e.fin());
-        stroke(1.5f * e.fout());
     }),
 
     eriusSmallExplosion = new Effect(25, e -> {
