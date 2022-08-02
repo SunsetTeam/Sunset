@@ -36,7 +36,7 @@ public class SnTurrets{
     firstTurret, excellence, carbine, pulsation, reflection, discharge,
 
     //3x3
-    major, artLightTurret, zeus, trigger,
+    major, artLightTurret, zeus, trigger, flower,
 
     //4x4
     shotgunTurret, admiral, ammirus, flood, chain,
@@ -358,6 +358,20 @@ public class SnTurrets{
             speedupPerShot = 0.16f;
             maxReloadMultiplier = 1.7f;
         }};*/
+        flower = new FlowerTurret("flower"){{
+            requirements(Category.turret, with(SnItems.fors, 95, Items.graphite, 85, Items.lead, 70, SnItems.planatrium, 35));
+            size = 4;
+            health = 2800;
+            reload = 15;
+            range = 320;
+            shootCone = 3f;
+            shootSound = Sounds.bigshot;
+
+            ammo(
+                Items.copper, SnBullets.flowerMode1Bullet,
+                Items.coal, SnBullets.flowerMode2Bullet
+            );
+        }};
         ammirus = new ModItemTurret("ammirus"){{
             requirements(Category.turret, with(Items.copper, 700, SnItems.fors, 570, Items.plastanium, 475, SnItems.nobium, 470));
             ammo(

@@ -16,6 +16,7 @@ import mindustry.entities.Units;
 import mindustry.entities.abilities.MoveEffectAbility;
 import mindustry.entities.bullet.*;
 import mindustry.entities.effect.MultiEffect;
+import mindustry.entities.pattern.ShootSpread;
 import mindustry.gen.Bullet;
 import mindustry.gen.Hitboxc;
 import mindustry.gen.Sounds;
@@ -71,6 +72,7 @@ public class SnBullets {
         //buffer
         cometWaterShot, starStunBullet, galaxyKnockbackBullet, universeLaserBullet, universeEnergySphere,
         //misc and testing
+        flowerMode1Bullet, flowerMode2Bullet,
         emptyBullet, overheatBullet,
         temp;
     //endregion definitions
@@ -1075,6 +1077,40 @@ public class SnBullets {
         };
         //endregion buffer
         //region misc and testing
+        flowerMode1Bullet = new FlowerBulletType(){{
+            trailColor = Color.rgb(255,0, 64);
+            otherTrailColor = Color.rgb(255,0, 255);
+            damage = 130;
+            pierceCap = 1;
+            speed = 8f;
+            lifetime = 40f;
+            rotateFactorMin = -0.04f;
+            rotateFactorMax = 0.04f;
+            trailLength = 48;
+            trailWidth = 1.5f;
+            trailInterval = 4.5f;
+            trailEffect = SnFx.flowerTrail;
+            despawnEffect = SnFx.flowerTrail;
+            shoot = new ShootSpread(1, 0);
+        }};
+        flowerMode2Bullet = new FlowerBulletType(){{
+            trailColor = Color.rgb(255,64,0);
+            otherTrailColor = Color.rgb(255,255,0);
+            damage = 160;
+            pierceCap = 2;
+            speed = 6f;
+            lifetime = 45f;
+            rotateFactorMin = -0.08f;
+            rotateFactorMax = -0.06f;
+            trailLength = 48;
+            trailWidth = 1.5f;
+            trailInterval = 6f;
+            trailEffect = SnFx.flowerTrail;
+            despawnEffect = SnFx.flowerTrail;
+            shoot = new ShootSpread(8, 3);
+
+            reloadMultiplier = 0.125f;
+        }};
         overheatBullet = new BasicBulletType(0.1f, 7, "error") {{
             //shootEffect = Fx.none;
             hitEffect = Fx.none;

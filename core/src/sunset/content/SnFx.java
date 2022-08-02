@@ -748,6 +748,20 @@ public class SnFx {
     //endregion turrets 360
 
     //region tests
+    flowerTrail = new Effect(30f, e -> {
+        float ang = e.rotation * Mathf.degRad + e.fin() * Mathf.PI2, len1 = 6, len2 = 2;
+        float sin = Mathf.sin(ang), cos = Mathf.cos(ang);
+        Draw.color(Color.white, e.fout());
+        Fill.quad(e.x + sin * len1, e.y + cos * len1,
+                  e.x + cos * len2, e.y - sin * len2,
+                  e.x - sin * len1, e.y - cos * len1,
+                  e.x - cos * len2, e.y + sin * len2);
+        Fill.quad(e.x + sin * len2, e.y + cos * len2,
+                  e.x + cos * len1, e.y - sin * len1,
+                  e.x - sin * len2, e.y - cos * len2,
+                  e.x - cos * len1, e.y + sin * len1);
+    }),
+
     unused1 = new Effect(30f, 65f, e -> {
         color(SnPal.copterBomb);
         stroke(e.fout() * 2f);
