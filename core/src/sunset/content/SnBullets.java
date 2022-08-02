@@ -141,7 +141,7 @@ public class SnBullets {
 
             fragBullet = forsBulletFrag;
             fragBullets = 1;
-            fragAngle = 0.001f;
+            fragRandomSpread = 0.001f;
             fragVelocityMin = 0.7f;
         }};
         eriusBullet = new BasicBulletType(6f, 10, "bullet") {{
@@ -165,7 +165,7 @@ public class SnBullets {
 
             fragBullet = eriusBulletFrag;
             fragBullets = 1;
-            fragAngle = 0.001f;
+            fragRandomSpread = 0.001f;
             fragVelocityMin = 0.7f;
         }};
 
