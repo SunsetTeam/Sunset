@@ -34,28 +34,28 @@ public class SnItems {
         anzar = new Item("anzar", Color.valueOf("feb380")) {{
             cost = 2f;
         }};
+        azaliaBud = new Item("azalia-bud", Color.valueOf("a52f49")) {{
+            cost = 4f;
+            flammability = 0.6f;
+        }};
         nedirium = new Item("nedirium", Color.valueOf("e2ffd6")) {{
             cost = 3f;
             hardness = 4;
         }};
+        nobium = new Item("nobium", Color.valueOf("e2fbee")) {{
+            cost = 5f;
+        }};
         reneubite = new Item("reneubite", Color.valueOf("b0fbff")) {{
             cost = 3.5f;
         }};
-        nobium = new Item("nobium", Color.valueOf("e2fbee")) {{
-            cost = 5f;
+        yantai = new Item("yantai", Color.valueOf("ffed93")) {{
+            cost = 4.3f;
         }};
         planatrium = new Item("planatrium", Color.valueOf("b287ec")) {{
             cost = 5f;
             hardness = 4;
             explosiveness = 0.2f;
             radioactivity = 1f;
-        }};
-        azaliaBud = new Item("azalia-bud", Color.valueOf("a52f49")) {{
-            cost = 4f;
-            flammability = 0.6f;
-        }};
-        yantai = new Item("yantai", Color.valueOf("ffed93")) {{
-            cost = 4.3f;
         }};
         enojie = new Item("enojie", Color.valueOf("99f2c7")) {{
             cost = 6f;
