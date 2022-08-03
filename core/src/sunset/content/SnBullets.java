@@ -353,8 +353,8 @@ public class SnBullets {
             collidesAir = true;
             collidesGround = true;
 
-            weaveScale = 9f;
-            weaveMag = 3f;
+            weaveScale = 4f;
+            weaveMag = 4f;
         }};
 
         //endregion  flak
