@@ -61,7 +61,7 @@ public class SnEnvironment  {
     crimsonTree, crimsonTreeDead,
 
     //props
-    spiceProp,
+    spikeProp,
     
     //special
     geyser,
