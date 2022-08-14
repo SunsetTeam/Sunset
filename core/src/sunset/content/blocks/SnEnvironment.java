@@ -332,7 +332,7 @@ public class SnEnvironment  {
             status = StatusEffects.wet;
             statusDuration = 120f;
             speedMultiplier = 0.9f;
-            variants = 2;0
+            variants = 2;
             liquidDrop = SnLiquids.burheyna;
             steamEffect = new Effect(30f, Fx.steam.renderer);
             eruptionEffect = new Effect(30f, Fx.ballfire.renderer);
