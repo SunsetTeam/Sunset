@@ -5,21 +5,14 @@ import arc.graphics.g2d.Draw;
 import arc.graphics.g2d.TextureRegion;
 import arc.math.Mathf;
 import arc.util.Interval;
-import mindustry.annotations.Annotations;
 import mindustry.entities.Units;
-import mindustry.gen.Building;
-import mindustry.gen.Unit;
 import mindustry.graphics.Layer;
-import mindustry.world.Block;
 import mindustry.world.Tile;
-
-import static mindustry.Vars.tilesize;
-import static mindustry.gen.Nulls.unit;
+import mindustry.world.blocks.environment.TallBlock;
 
 
-public class SpikeProp extends Block {
+public class SpikeProp extends TallBlock {
     public transient Interval timer;
-    public final int timerMogus = timers++;
     public float touchRange;
     public float touchDamage;
 
@@ -33,9 +26,6 @@ public class SpikeProp extends Block {
         solid = true;
         clipSize = 90;
         customShadow = true;
-        breakable = false;
-        teamPassable = true;
-        update = true;
     }
 
     @Override
@@ -43,8 +33,6 @@ public class SpikeProp extends Block {
         super.init();
         hasShadow = true;
         breakable = false;
-        teamPassable = true;
-        update = true;
     }
 
     @Override
@@ -65,6 +53,12 @@ public class SpikeProp extends Block {
 
     @Override
     public void drawShadow(Tile tile){
+        //int timerMogus = timers++;
+        Units.nearby(null, tile.worldx(), tile.worldy(), touchRange, u -> {
+            if (u.moving() && !u.isFlying()) {
+                u.damage(touchDamage);
+            }
+        });
     }
 
     @Override
@@ -72,14 +66,17 @@ public class SpikeProp extends Block {
         return variants == 0 ? super.icons() : new TextureRegion[]{Core.atlas.find(name + "1")};
     }
 
-    public class SpikePropBuilding extends Building {
-        @Override
-        public void updateTile(){
-            Units.nearby(null, x, y, touchRange, u -> {
-                if (u.moving() && !u.isFlying() && timer.get(timerMogus, 10)) {
-                    u.damage(touchDamage);
-                }
-            });
-        }
+    /*@Override
+    public boolean updateRender(Tile tile){
+        return false;
     }
+
+    @Override
+    public void renderUpdate(UpdateState state){
+        Units.nearby(null, state.tile.worldx(), state.tile.worldy(), touchRange, u -> {
+            if (u.moving() && !u.isFlying() && timer.get(timerMogus, 10)) {
+                u.damage(touchDamage);
+            }
+        });
+    }*/
 }
