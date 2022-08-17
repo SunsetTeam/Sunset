@@ -65,18 +65,4 @@ public class SpikeProp extends TallBlock {
     public TextureRegion[] icons(){
         return variants == 0 ? super.icons() : new TextureRegion[]{Core.atlas.find(name + "1")};
     }
-
-    /*@Override
-    public boolean updateRender(Tile tile){
-        return false;
-    }
-
-    @Override
-    public void renderUpdate(UpdateState state){
-        Units.nearby(null, state.tile.worldx(), state.tile.worldy(), touchRange, u -> {
-            if (u.moving() && !u.isFlying() && timer.get(timerMogus, 10)) {
-                u.damage(touchDamage);
-            }
-        });
-    }*/
 }
