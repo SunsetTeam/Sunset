@@ -17,7 +17,7 @@ import sunset.graphics.*;
 import sunset.world.blocks.environment.BreakableEnvWall;
 import sunset.world.blocks.environment.Geyser;
 import sunset.world.blocks.environment.MockEnvironmentBlock;
-import sunset.world.blocks.environment.SpiceProp;
+import sunset.world.blocks.environment.SpikeProp;
 
 public class SnEnvironment  {
     public static Block
@@ -61,7 +61,7 @@ public class SnEnvironment  {
     crimsonTree, crimsonTreeDead,
 
     //props
-    spiceProp,
+    spikeProp,
     
     //special
     geyser,
@@ -307,7 +307,7 @@ public class SnEnvironment  {
         }};
         //endregion trees
         //region props
-        spiceProp = new SpiceProp("spice-boulder"){{
+        spikeProp = new SpikeProp("spice-boulder"){{
            variants = 3;
            touchDamage = 0.8f;
            touchRange = 10f;
