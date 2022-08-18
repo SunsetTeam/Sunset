@@ -125,7 +125,7 @@ public class SnFx {
     }),
 
     giardSynthesizerCraft = new Effect(40f, e -> {
-        color(SnPal.giardGas);
+        Draw.color(SnPal.giardGas);
 
         randLenVectors(e.id, 4, 3f + e.fin() * 7f, (x, y) -> {
             Fill.circle(e.x + x, e.y + y, 0.5f + e.fslope() * 1.8f);
@@ -149,7 +149,7 @@ public class SnFx {
     }),
 
     galebardShoot = new Effect(70f, e -> {
-        color(Pal.meltdownHit);
+        Draw.color(Pal.meltdownHit);
         stroke(e.fout() * 7f);
         circle(e.x, e.y, e.fin() * 50f);
         //Lines.square(e.x, e.y, e.fin() * 40f, 65);
@@ -163,20 +163,20 @@ public class SnFx {
     }),
 
     smallEnergySphereCharge = new Effect(16f, e -> {
-        color(SnPal.redBombBack);
+        Draw.color(SnPal.redBombBack);
         Fill.circle(e.x, e.y, e.fin() * 2f);
     }),
 
     mediumEnergySphereCharge = new Effect(19f, e -> {
-        color(SnPal.redBombBack);
+        Draw.color(SnPal.redBombBack);
         Fill.circle(e.x, e.y, e.fin() * 2.9f);
     }),
     
     mediumEnergySphereHit = new Effect(20f, 50f, e -> {
-        color(SnPal.redBomb);
+        Draw.color(SnPal.redBomb);
         stroke(e.fout() * 2f);
-        
-        color(SnPal.redBomb);
+
+        Draw.color(SnPal.redBomb);
         
         for (int i : Mathf.signs) {
             Drawf.tri(e.x, e.y, 9f * e.fout(), 20f, e.rotation + 80f * i);
@@ -199,7 +199,7 @@ public class SnFx {
     }),
 
     copterShoot = new Effect(12, e -> {
-        color(SnPal.copterLaser, e.fin());
+        Draw.color(SnPal.copterLaser, e.fin());
         stroke(e.fout() * 1.2f + 0.5f);
 
         randLenVectors(e.id, 7, 25f * e.finpow(), e.rotation, 50f, (x, y) -> {

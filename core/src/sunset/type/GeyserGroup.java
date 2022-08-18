@@ -60,7 +60,7 @@ public class GeyserGroup{
     }
 
     public void effect(){
-        Geyser geyser = (Geyser)tiles.get(0).floor();
+        Geyser geyser = (Geyser)tiles.get(0).overlay();
         Effect e = state.effect(geyser);
         float d = state.damage(geyser);
 

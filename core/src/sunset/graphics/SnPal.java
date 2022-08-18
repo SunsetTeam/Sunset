@@ -61,7 +61,7 @@ public class SnPal {
     emp2 = Color.valueOf("32D0DC"),
     synthesis1 = Color.valueOf("18B000"),
     synthesis2 = Color.valueOf("721A1A"),
-    plasma1 = Color.valueOf("86FF11C"),
+    plasma1 = Color.valueOf("86FF11"),
     plasma2 = Color.valueOf("BBFF80"),
     renBlast1 = Color.valueOf("6173FF"),
     renBlast2 = Color.valueOf("6239BD"),
@@ -88,27 +88,6 @@ public class SnPal {
     //taferot =
     //coyrant =
     //endregion guild
-    //region subguild
-
-    //endregion subguild
-    //region branch
-    //green =
-    //yellow =
-    //missile =
-    //chaingun =
-    //energySphere =
-    //flamethrower =
-    //antiAir =
-    //emp =
-    //degree360 =
-    //heavyArt =
-    //aim =
-    //boomerang =
-    //sniper =
-    //special =
-    //cLaser =
-    //machinegun =
-    //endregion branch
     //endregion affilitiation
     //region other
     chainLaser = Pal.surge;

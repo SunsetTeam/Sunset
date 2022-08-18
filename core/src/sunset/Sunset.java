@@ -21,6 +21,7 @@ import sunset.graphics.*;
 import sunset.type.unitTypes.*;
 import sunset.ui.*;
 import sunset.utils.*;
+import sunset.world.*;
 
 import static mindustry.Vars.*;
 import static mma.ModVars.*;
@@ -74,6 +75,7 @@ public class Sunset extends MMAMod{
     public void init(){
 //        if(!validDependencies) return;
         SnAchievements.load();
+        EnvironmentUpdateContainer.load();
         super.init();
         ModMetaDialogFinder.onNewListener(prev -> {
 //            Group parent = prev.parent;

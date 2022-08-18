@@ -21,7 +21,7 @@ object SnStatusEffects {
     fun load() {
         //region common
         frostbite = statusEffect("frostbite") {
-            color = "6ecdec".color()
+            color = Color.valueOf("6ecdec")
             damage = 0.17f
             speedMultiplier = 0.4f
             healthMultiplier = 0.7f
@@ -36,7 +36,7 @@ object SnStatusEffects {
             }
         }
         stun = statusEffect("stun") {
-            color = "392f17".color()
+            color = Color.valueOf("392f17")
             speedMultiplier = 0f
             disarm = true
         } //no sprite
@@ -59,7 +59,7 @@ object SnStatusEffects {
         //endregion common
         //region stackable
         overheat = stackableStatusEffect("overheat") {
-            color = "FF30000".color()
+            color = Color.valueOf("FF30000")
             stackEntries(
                     stackEntry(health = 0.99f, speed = 0.99f),
                     stackEntry(health = 0.98f, speed = 0.99f),
@@ -107,7 +107,7 @@ object SnStatusEffects {
 
         }
         incineration = stackableStatusEffect("incineration") {
-            color = "BD4E17".color()
+            color = Color.valueOf("BD4E17")
             stackEntries(
                     stackEntry(health = 0.97f, speed = 0.97f),
                     stackEntry(health = 0.96f, speed = 0.97f),
