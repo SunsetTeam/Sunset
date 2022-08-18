@@ -145,7 +145,7 @@ public class Laser{
             b.laser.in += charge;
         }
         else{
-            LaserModule lm = SnVars.logic.hybridLaserBlockLogic.hybridBuildings.get(target.buildOn());
+            LaserModule lm = SnVars.logic.hybridLaserBlockLogic.laserModule(target.buildOn());
             if(lm != null){
                 setTargetLenses(lm);
                 lm.in += charge;

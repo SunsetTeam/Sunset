@@ -92,7 +92,7 @@ public class LaserDraw extends DrawBlock implements ImageDrawBlockGenerator{
         if(b instanceof LaserBuild build)
             drawLenses(build, build.laser);
         else {
-            LaserModule laser = SnVars.logic.hybridLaserBlockLogic.hybridBuildings.get(b);
+            LaserModule laser = SnVars.logic.hybridLaserBlockLogic.laserModule(b);
             if(laser != null){
                 drawLenses(b, laser);
             }

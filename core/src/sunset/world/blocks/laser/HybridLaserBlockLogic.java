@@ -3,16 +3,20 @@ package sunset.world.blocks.laser;
 import arc.*;
 import arc.struct.*;
 import arc.struct.ObjectMap.*;
+import arc.util.*;
 import arc.util.io.*;
 import mindustry.*;
 import mindustry.async.*;
 import mindustry.game.*;
+import mindustry.game.EventType.*;
 import mindustry.gen.*;
 import mindustry.io.*;
 import mindustry.io.SaveFileReader.*;
+import mindustry.world.*;
 import mindustry.world.consumers.*;
 import mma.*;
 import org.jetbrains.annotations.*;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.*;
 
@@ -20,9 +24,26 @@ import java.io.*;
 @SuppressWarnings("ALL")
 public class HybridLaserBlockLogic implements AsyncProcess{
     public LaserModule[] hybridBuildings = new LaserModule[0];
-//    public ObjectMap<Building, LaserModule> hybridBuildings = new ObjectMap<>();
+    //    public ObjectMap<Building, LaserModule> hybridBuildings = new ObjectMap<>();
+    private ConsumeLaser[] blocksWithLasers = new ConsumeLaser[0];
 
     public HybridLaserBlockLogic(){
+        Runnable blockloader = () -> {
+
+            Seq<Block> blocks = Vars.content.blocks();
+            blocksWithLasers=new ConsumeLaser[blocks.size];
+            for(Block block : blocks){
+                for(Consume consume : block.consumers){
+                    if(consume instanceof ConsumeLaser c){
+                        blocksWithLasers[block.id]=c;
+                        break;
+                    }
+                }
+            }
+        };
+        Events.run(ClientLoadEvent.class, blockloader);
+        Events.run(ServerLoadEvent.class, blockloader);
+
         ModListener.updaters.add(this::update);
         Vars.asyncCore.processes.add(this);
 //        SaveVersion.addCustomChunk("sunset-hybrid-laser-blocks", this);
@@ -35,14 +56,11 @@ public class HybridLaserBlockLogic implements AsyncProcess{
     }
 
     private void addBlock(@Nullable Building b){
-        if(b == null)
+        if(b == null || blocksWithLasers[b.block().id]==null)
             return;
-        for(int i = 0; i < b.block().consumers.length; i++){
-            if(b.block().consumers[i] instanceof ConsumeLaser c){
-                hybridBuildings[b.tile.array()] = new LaserModule(b, c);
-                break;
-            }
-        }
+
+        hybridBuildings[b.tile.array()] = new LaserModule(b, blocksWithLasers[b.block().id]);
+
     }
 
     private void removeBlock(Building b){
@@ -79,5 +97,9 @@ public class HybridLaserBlockLogic implements AsyncProcess{
                 lm.downInput = false;
             }
         }
+    }
+
+    public LaserModule laserModule(Building b){
+        return hybridBuildings[b.tile.array()];
     }
 }

@@ -29,7 +29,7 @@ public class ConsumeLaser extends Consume{
     public void apply(Block block){
         //todo maybe add LaserDraw to block here?...
         block.addBar("requiredLaserCharge", (Building b) -> {
-            LaserModule lm = SnVars.logic.hybridLaserBlockLogic.hybridBuildings.get(b);
+            LaserModule lm = SnVars.logic.hybridLaserBlockLogic.laserModule(b);
             return new Bar(()-> {
                 if(heats){
                     return Core.bundle.format("bar.laser-input-heat", lm.out, consumption, heatLimit);
@@ -63,7 +63,7 @@ public class ConsumeLaser extends Consume{
 
     @Override
     public float efficiency(Building build){
-        LaserModule lm = SnVars.logic.hybridLaserBlockLogic.hybridBuildings.get(build);
+        LaserModule lm = SnVars.logic.hybridLaserBlockLogic.laserModule(build);
         if(lm != null){
             float e = lm.out / consumption;
             return e;
