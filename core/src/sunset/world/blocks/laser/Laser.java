@@ -11,6 +11,7 @@ import mindustry.entities.*;
 import mindustry.gen.*;
 import mindustry.graphics.*;
 import mindustry.world.*;
+import sunset.*;
 import sunset.type.*;
 import sunset.utils.*;
 import sunset.world.blocks.laser.LaserBlock.*;
@@ -34,7 +35,6 @@ public class Laser{
     public float angle = 0f;
     /**
      * laser hit size. Currently, unused.
-     * todo use size to fix bug with casting blocks
      */
     public float size = 8f;
     /**
@@ -141,24 +141,32 @@ public class Laser{
         }
 
         if(target instanceof LaserBuild b && b.block().inputsLaser){
-            setTargetLenses(b);
+            setTargetLenses(b.laser);
             b.laser.in += charge;
-        }else{
-            getEndOffset(Tmp.v2);
-            hitEffectAt(end.x - Tmp.v2.x, end.y - Tmp.v2.y);
-            if(target != null){
-                Damage.damage(null, target.x(), target.y(), 8f, damage * charge, false, true);
+        }
+        else{
+            LaserModule lm = SnVars.logic.hybridLaserBlockLogic.hybridBuildings.get(target.buildOn());
+            if(lm != null){
+                setTargetLenses(lm);
+                lm.in += charge;
+            }
+            else{
+                getEndOffset(Tmp.v2);
+                hitEffectAt(end.x - Tmp.v2.x, end.y - Tmp.v2.y);
+                if(target != null){
+                    Damage.damage(null, target.x(), target.y(), 8f, damage * charge, false, true);
+                }
             }
         }
     }
 
-    public void setTargetLenses(LaserBuild b){
+    public void setTargetLenses(LaserModule lm){
         //Log.info("angle: @", angle);
         switch(BlockSide.sideForAngle(target.angleTo(build))){
-            case BlockSide.right -> b.rightInput = true;
-            case BlockSide.bottom -> b.downInput = true;
-            case BlockSide.left -> b.leftInput = true;
-            case BlockSide.top -> b.topInput = true;
+            case BlockSide.right -> lm.rightInput = true;
+            case BlockSide.bottom -> lm.downInput = true;
+            case BlockSide.left -> lm.leftInput = true;
+            case BlockSide.top -> lm.topInput = true;
             default -> throw new IllegalStateException("Unexpected value: " + BlockSide.sideForAngle(target.angleTo(build)));
         }
     }

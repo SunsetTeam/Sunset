@@ -1,13 +1,17 @@
 package sunset.content.blocks;
 
+import arc.graphics.*;
 import mindustry.content.Fx;
 import mindustry.content.Items;
 import mindustry.content.Liquids;
+import mindustry.entities.bullet.*;
+import mindustry.entities.effect.*;
+import mindustry.gen.*;
 import mindustry.graphics.Pal;
-import mindustry.type.Category;
-import mindustry.type.ItemStack;
-import mindustry.type.LiquidStack;
+import mindustry.type.*;
 import mindustry.world.Block;
+import mindustry.world.blocks.defense.turrets.*;
+import mindustry.world.blocks.production.*;
 import mindustry.world.draw.*;
 import mindustry.world.meta.BuildVisibility;
 import sunset.content.SnFx;
@@ -34,33 +38,6 @@ public class SnLasers {
             heats = true;
             nodeHitEffect = SnFx.alsLaserHit;
         }};
-        laserKiln = new LaserCrafter("laser-kiln"){{
-            requirements(Category.distribution, ItemStack.with(Items.copper, 1));
-            size = 4;
-            buildVisibility = BuildVisibility.sandboxOnly;
-            inputsLaser = true;
-            outputsLaser = false;
-
-            hasItems = true;
-            hasLiquids = true;
-
-            consumeItems(ItemStack.with(Items.sand, 20, Items.coal, 10));
-            consumeLiquid(Liquids.nitrogen, 1);
-            outputItems = ItemStack.with(Items.silicon, 10);
-            outputLiquids = LiquidStack.with(Liquids.hydrogen, 1);
-            laserConsumption = 10f;
-            laserProduction = 0f;
-
-            itemCapacity = 20;
-
-            craftEffect = Fx.smeltsmoke;
-
-            drawer = new DrawMulti(new DrawRegion("-bottom"),new DrawFlame()/*new LaserKilnDrawer(){{
-                startColor = Pal.darkerGray;
-                midColor = Pal.darkPyraFlame;
-                endColor = Pal.lightPyraFlame;
-            }}*/,new DrawDefault());
-        }};
         laserWall = new LaserWall("laser-wall"){{
             requirements(Category.defense, ItemStack.with(Items.copper, 1));
             size = 2;
@@ -69,6 +46,16 @@ public class SnLasers {
             inputsLaser = true;
             outputsLaser = false;
             heats = true;
+        }};
+        laserKiln = new GenericCrafter("laser-kiln"){{
+            requirements(Category.distribution, ItemStack.with(Items.copper, 1));
+            size = 5;
+            itemCapacity = 15;
+            buildVisibility = BuildVisibility.sandboxOnly;
+            consume(new ConsumeLaser(10f, true, 50f));
+            consumeItems(ItemStack.with(Items.coal, 5, Items.sand, 10));
+            outputItems = ItemStack.with(Items.silicon, 15);
+            drawer = new DrawMulti(new DrawRegion("-bottom"),new LaserDraw(),new DrawDefault());
         }};
         /*
         rotato = new RotatableLaserNode("rotato"){{

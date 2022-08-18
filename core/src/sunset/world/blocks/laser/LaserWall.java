@@ -68,7 +68,7 @@ public class LaserWall extends LaserBlock{
         public void update(){
             super.update();
             laserChain.updateCharge();
-            resist = Mathf.map(additiveCharge, 0f, block().heatLaserLimit, 0f, maxResist);
+            resist = Mathf.map(additiveCharge, 0f, block().heatLimit, 0f, maxResist);
             drawResist = Mathf.lerp(drawResist, resist, 0.1f);
         }
 

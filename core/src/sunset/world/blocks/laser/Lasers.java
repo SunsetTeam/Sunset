@@ -14,6 +14,7 @@ public class Lasers{
     }
 
     public void updateTile(){
+        setEnabled(build.laser.leftOutput, build.laser.topOutput, build.laser.rightOutput, build.laser.downOutput);
         for(Laser laser : allLasers){
             laser.updateTile();
         }

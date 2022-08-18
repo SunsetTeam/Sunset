@@ -8,6 +8,7 @@ import mindustry.gen.*;
 import mindustry.world.*;
 import mindustry.world.draw.*;
 import mma.type.pixmap.*;
+import sunset.*;
 import sunset.type.*;
 import sunset.world.blocks.laser.LaserBlock.*;
 
@@ -39,15 +40,9 @@ public class LaserDraw extends DrawBlock implements ImageDrawBlockGenerator{
 //        Core.atlas.find()
     }
 
-    public LaserBlock expectLaserBlock(Block block){
-        if(!(block instanceof LaserBlock laserBlock)) throw new ClassCastException("This drawer requires the block to be a LaserBlock. Use a different drawer.");
-        return laserBlock;
-    }
-
     @Override
     public void load(Block block){
         //override
-        expectLaserBlock(block);
         allEdge = Core.atlas.find(block.name + "-all-edge");
         bottom = Core.atlas.find(block.name + "-bottom");
         lens = Core.atlas.find(block.name + "-lens");
@@ -60,8 +55,14 @@ public class LaserDraw extends DrawBlock implements ImageDrawBlockGenerator{
         return new TextureRegion[]{allEdge};
     }
 
-    protected void drawLenses(LaserBuild build, boolean left, boolean top, boolean right, boolean down){
-        LaserBlock block = build.block();
+    protected void drawLenses(Building build, LaserModule m){
+        drawLenses(build, m.leftInput || m.leftOutput,
+        m.topInput || m.topOutput,
+        m.rightInput || m.rightOutput,
+        m.downInput || m.downOutput);
+    }
+
+    protected void drawLenses(Building build, boolean left, boolean top, boolean right, boolean down){
         lens.flip(false, true);
         if(left){
             Draw.rect(lens, build.x, build.y, 180);
@@ -88,10 +89,13 @@ public class LaserDraw extends DrawBlock implements ImageDrawBlockGenerator{
 
     @Override
     public void draw(Building b){
-        LaserBuild build = b.<LaserBuild>as();
-        drawLenses(build, build.leftInput || build.leftOutput,
-        build.topInput || build.topOutput,
-        build.rightInput || build.rightOutput,
-        build.downInput || build.downOutput);
+        if(b instanceof LaserBuild build)
+            drawLenses(build, build.laser);
+        else {
+            LaserModule laser = SnVars.logic.hybridLaserBlockLogic.hybridBuildings.get(b);
+            if(laser != null){
+                drawLenses(b, laser);
+            }
+        }
     }
 }

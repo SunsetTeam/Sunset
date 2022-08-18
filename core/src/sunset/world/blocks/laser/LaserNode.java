@@ -43,11 +43,7 @@ public class LaserNode extends LaserBlock{
         rotateDraw = false;
 //        clipSize = 500f;
         config(Integer.class, (LaserNodeBuild b, Integer value) -> {
-            //Log.info("config");
-            b.rightOutput = (value & 0b0001) >> 0 == 1;
-            b.topOutput = (value & 0b0010) >> 1 == 1;
-            b.leftOutput = (value & 0b0100) >> 2 == 1;
-            b.downOutput = (value & 0b1000) >> 3 == 1;
+            b.laser.configOutput(value);
         });
     }
 
@@ -66,14 +62,14 @@ public class LaserNode extends LaserBlock{
         super.setBars();
         if(heats){
             addBar("chargeBar", (LaserBuild entity) ->
-            new Bar(() -> Core.bundle.format("bar.laser-input", entity.laser.rawInput, entity.block().heatLaserLimit),
+            new Bar(() -> Core.bundle.format("bar.laser-input", entity.laser.rawInput, entity.block().heatLimit),
             () -> {
-                if(entity.laser.rawInput < entity.block().heatLaserLimit){
+                if(entity.laser.rawInput < entity.block().heatLimit){
                     return Pal.powerBar;
                 }else
                     return Color.red;
             },
-            () -> entity.laser.rawInput / entity.block().heatLaserLimit));
+            () -> entity.laser.rawInput / entity.block().heatLimit));
         }
     }
 
@@ -170,8 +166,6 @@ public class LaserNode extends LaserBlock{
         @Override
         public void updateTile(){
             super.updateTile();
-            laser.outputs = (leftOutput ? 1 : 0) + (topOutput ? 1 : 0) + (rightOutput ? 1 : 0) + (downOutput ? 1 : 0);
-            lasers.setEnabled(leftOutput, topOutput, rightOutput, downOutput);
             lasers.updateTile();
         }
 
@@ -206,57 +200,58 @@ public class LaserNode extends LaserBlock{
 
         @Override
         public void buildConfiguration(Table t){
+            //todo refactor laser.somesideInput copy-paste somehow...
             t.add();
             float size = 48f;
             t.button(Icon.up, () -> {
-                topOutput = !topOutput;
+                laser.topOutput = !laser.topOutput;
                 configureState();
             }).size(size).update((b) -> {
-                b.setDisabled(topInput && !topOutput);
-                b.getStyle().imageUpColor = topOutput ? Color.lime : Color.valueOf("f25555");
+                b.setDisabled(laser.topInput && !laser.topOutput);
+                b.getStyle().imageUpColor = laser.topOutput ? Color.lime : Color.valueOf("f25555");
 //                b.setColor();
             });
             t.add().row();
             t.button(Icon.left, () -> {
                 //Log.info("left");
-                leftOutput = !leftOutput;
+                laser.leftOutput = !laser.leftOutput;
                 configureState();
             }).update(b -> {
-                b.setDisabled(leftInput && !leftOutput);
-                b.getStyle().imageUpColor = leftOutput ? Color.lime : Color.valueOf("f25555");
+                b.setDisabled(laser.leftInput && !laser.leftOutput);
+                b.getStyle().imageUpColor = laser.leftOutput ? Color.lime : Color.valueOf("f25555");
 //                b.setColor(left ? Color.lime : Color.valueOf("f25555"));
             });
             t.add();
             t.button(Icon.right, () -> {
                 //Log.info("right");
-                rightOutput = !rightOutput;
+                laser.rightOutput = !laser.rightOutput;
                 configureState();
             }).update(b -> {
-                b.setDisabled(rightInput && !rightOutput);
-                b.getStyle().imageUpColor = rightOutput ? Color.lime : Color.valueOf("f25555");
+                b.setDisabled(laser.rightInput && !laser.rightOutput);
+                b.getStyle().imageUpColor = laser.rightOutput ? Color.lime : Color.valueOf("f25555");
 //                b.setColor(right ? Color.lime : Color.valueOf("f25555"));
             });
             t.row();
             t.add();
             t.button(Icon.down, () -> {
                 //Log.info("down");
-                downOutput = !downOutput;
+                laser.downOutput = !laser.downOutput;
                 configureState();
             }).update(b -> {
-                b.setDisabled(downInput && !downOutput);
-                b.getStyle().imageUpColor = downOutput ? Color.lime : Color.valueOf("f25555");
+                b.setDisabled(laser.downInput && !laser.downOutput);
+                b.getStyle().imageUpColor = laser.downOutput ? Color.lime : Color.valueOf("f25555");
 //                b.setColor(down ? Color.lime : Color.valueOf("f25555"));
             });
         }
 
         private void configureState(){
-            int state = LaserNode.getState(rightOutput, topOutput, leftOutput, downOutput);
+            int state = LaserNode.getState(laser.rightOutput, laser.topOutput, laser.leftOutput, laser.downOutput);
             configure(state);
         }
 
         @Override
         public Integer config(){
-            return LaserNode.getState(rightOutput, topOutput, leftOutput, downOutput);
+            return LaserNode.getState(laser.rightOutput, laser.topOutput, laser.leftOutput, laser.downOutput);
         }
 
 
@@ -264,12 +259,7 @@ public class LaserNode extends LaserBlock{
         @SuppressWarnings("PointlessBitwiseExpression")
         public void write(Writes w){
             super.write(w);
-            int state = 0;
-            if(rightOutput) state += 1 << 0;
-            if(topOutput) state += 1 << 1;
-            if(leftOutput) state += 1 << 2;
-            if(downOutput) state += 1 << 3;
-            w.b(state);
+            laser.writeOutputs(w);
         }
 
         @Override
@@ -280,18 +270,8 @@ public class LaserNode extends LaserBlock{
         @Override
         @SuppressWarnings("PointlessBitwiseExpression")
         public void read(Reads r, byte revision){
-            if(revision == 0){
-                leftOutput = r.bool();
-                topOutput = r.bool();
-                rightOutput = r.bool();
-                downOutput = r.bool();
-                return;
-            }
-            byte value = r.b();
-            rightOutput = (value & 0b0001) >> 0 == 1;
-            topOutput = (value & 0b0010) >> 1 == 1;
-            leftOutput = (value & 0b0100) >> 2 == 1;
-            downOutput = (value & 0b1000) >> 3 == 1;
+            super.read(r, revision);
+            laser.readOutputs(r, revision);
         }
     }
 }
