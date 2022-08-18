@@ -98,13 +98,7 @@ public class HybridLaserBlockLogic implements CustomChunk, AsyncProcess{
         Reads r = Reads.get(stream);
         int buildingAmount = r.i();
         for(int i = 0; i < buildingAmount; i++){
-            Building b = Vars.world.build(r.i());
-            for(Consume consume : b.block().consumers){
-                if(consume instanceof ConsumeLaser c){
-                    hybridBuildings.put(b, new LaserModule(b, c));
-                    break;
-                }
-            }
+            addBlock(Vars.world.build(r.i()));
         }
         wasSaved = true;
     }
