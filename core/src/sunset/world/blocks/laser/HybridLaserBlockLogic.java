@@ -18,14 +18,14 @@ import java.io.*;
 
 /** Механика в разработке. Суть состоит в том, чтобы каждому блоку, который имеет этот ConsumeLaser, в HybridLaserBlockLogic назначить LaserModule, и, таким образом, сделать их де-факто лазерными блоками без LaserBuild, а далее обращаться к ним по мере надобности. */
 @SuppressWarnings("ALL")
-public class HybridLaserBlockLogic implements CustomChunk, AsyncProcess{
+public class HybridLaserBlockLogic implements  AsyncProcess{
     public ObjectMap<Building, LaserModule> hybridBuildings = new ObjectMap<>();
     public boolean wasSaved = false;
 
     public HybridLaserBlockLogic(){
         ModListener.updaters.add(this::update);
         Vars.asyncCore.processes.add(this);
-        SaveVersion.addCustomChunk("sunset-hybrid-laser-blocks", this);
+//        SaveVersion.addCustomChunk("sunset-hybrid-laser-blocks", this);
         Events.on(EventType.BlockBuildEndEvent.class, e -> {
             addBlock(e.tile.build);
         });
@@ -49,16 +49,10 @@ public class HybridLaserBlockLogic implements CustomChunk, AsyncProcess{
         hybridBuildings.remove(b);
     }
 
-    private void loadBlocks(){
-    }
-
     @Override
     public void init(){
-        if(!wasSaved){
-            hybridBuildings.clear();
-            Groups.build.each(b -> addBlock(b));
-        }
-        wasSaved =false;
+        hybridBuildings.clear();
+        Groups.build.each(b -> addBlock(b));
     }
 
     @Override
@@ -83,7 +77,7 @@ public class HybridLaserBlockLogic implements CustomChunk, AsyncProcess{
         }
     }
 
-    @Override
+    /*@Override
     public void write(DataOutput stream) throws IOException{
         Writes w = Writes.get(stream);
         w.i(hybridBuildings.size);
@@ -101,5 +95,5 @@ public class HybridLaserBlockLogic implements CustomChunk, AsyncProcess{
             addBlock(Vars.world.build(r.i()));
         }
         wasSaved = true;
-    }
+    }*/
 }
