@@ -18,9 +18,9 @@ import java.io.*;
 
 /** Механика в разработке. Суть состоит в том, чтобы каждому блоку, который имеет этот ConsumeLaser, в HybridLaserBlockLogic назначить LaserModule, и, таким образом, сделать их де-факто лазерными блоками без LaserBuild, а далее обращаться к ним по мере надобности. */
 @SuppressWarnings("ALL")
-public class HybridLaserBlockLogic implements  AsyncProcess{
-    public ObjectMap<Building, LaserModule> hybridBuildings = new ObjectMap<>();
-    public boolean wasSaved = false;
+public class HybridLaserBlockLogic implements AsyncProcess{
+    public LaserModule[] hybridBuildings = new LaserModule[0];
+//    public ObjectMap<Building, LaserModule> hybridBuildings = new ObjectMap<>();
 
     public HybridLaserBlockLogic(){
         ModListener.updaters.add(this::update);
@@ -39,61 +39,45 @@ public class HybridLaserBlockLogic implements  AsyncProcess{
             return;
         for(int i = 0; i < b.block().consumers.length; i++){
             if(b.block().consumers[i] instanceof ConsumeLaser c){
-                hybridBuildings.put(b, new LaserModule(b, c));
+                hybridBuildings[b.tile.array()] = new LaserModule(b, c);
                 break;
             }
         }
     }
 
     private void removeBlock(Building b){
-        hybridBuildings.remove(b);
+        hybridBuildings[b.tile.array()] = null;
     }
 
     @Override
     public void init(){
-        hybridBuildings.clear();
+        hybridBuildings = new LaserModule[Vars.world.width() * Vars.world.height()];
         Groups.build.each(b -> addBlock(b));
     }
 
     @Override
     public void reset(){
-        hybridBuildings.clear();
+        hybridBuildings = new LaserModule[0];
     }
 
     public void update(){
-        for(Entry<Building, LaserModule> e : hybridBuildings){
-            e.value.hybridBuildUpdate();
+        for(int i = 0; i < hybridBuildings.length; i++){
+            if(hybridBuildings[i] != null){
+                hybridBuildings[i].hybridBuildUpdate();
+            }
         }
     }
 
     @Override
     public void end(){
-        for(ObjectMap.Entry<Building, LaserModule> e : hybridBuildings){
-            LaserModule lm = e.value;
-            lm.leftInput = false;
-            lm.rightInput = false;
-            lm.topInput = false;
-            lm.downInput = false;
+        for(int i = 0; i < hybridBuildings.length; i++){
+            if(hybridBuildings[i] != null){
+                LaserModule lm = hybridBuildings[i];
+                lm.leftInput = false;
+                lm.rightInput = false;
+                lm.topInput = false;
+                lm.downInput = false;
+            }
         }
     }
-
-    /*@Override
-    public void write(DataOutput stream) throws IOException{
-        Writes w = Writes.get(stream);
-        w.i(hybridBuildings.size);
-        for(ObjectMap.Entry<Building,LaserModule> e : hybridBuildings){
-            w.i(e.key.pos());
-        }
-    }
-
-
-    @Override
-    public void read(DataInput stream){
-        Reads r = Reads.get(stream);
-        int buildingAmount = r.i();
-        for(int i = 0; i < buildingAmount; i++){
-            addBlock(Vars.world.build(r.i()));
-        }
-        wasSaved = true;
-    }*/
 }
