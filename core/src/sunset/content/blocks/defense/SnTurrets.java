@@ -62,6 +62,11 @@ public class SnTurrets{
         //region 2x2
         sway = new ModItemTurret("sway"){{
             requirements(Category.turret, with(SnItems.fors, 50, SnItems.erius, 40));
+            ammo(
+                    SnItems.fors, SnBullets.forsBullet,
+                    SnItems.erius, SnBullets.eriusBullet
+            );
+            shoot.shots = 3;
             size = 2;
             reload = 37f;
             range = 19 * Vars.tilesize;
@@ -73,11 +78,6 @@ public class SnTurrets{
             ammoUseEffect = Fx.casing1;
             targetAir = true;
             targetGround = true;
-            ammo(
-            SnItems.fors, SnBullets.forsBullet,
-            SnItems.erius, SnBullets.eriusBullet
-            );
-            shoot.shots = 2;
         }};
         excellence = new ModPowerTurret("excellence"){{
             requirements(Category.turret, with(SnItems.fors, 70, SnItems.erius, 60, SnItems.naturite, 40));

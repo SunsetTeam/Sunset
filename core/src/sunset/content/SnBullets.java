@@ -80,7 +80,7 @@ public class SnBullets {
     public static void load() {
         //region shell
         //region standard
-        forsBulletFrag = new BasicBulletType(4f, 16, "bullet") {{
+        forsBulletFrag = new BasicBulletType(4f, 15, "bullet") {{
             width = 9f;
             height = 14f;
             lifetime = 21f;
@@ -100,7 +100,7 @@ public class SnBullets {
             weaveMag = 3;
             weaveScale = 3;
         }};
-        eriusBulletFrag = new BasicBulletType(5f, 13, "bullet") {{
+        eriusBulletFrag = new BasicBulletType(5f, 12, "bullet") {{
             width = 9f;
             height = 16f;
             lifetime = 21f;
@@ -121,11 +121,11 @@ public class SnBullets {
             weaveScale = 3;
         }};
 
-        forsBullet = new BasicBulletType(5f, 13, "bullet") {{
+        forsBullet = new BasicBulletType(5f, 12, "bullet") {{
             width = 7f;
             height = 12f;
             lifetime = 16f;
-            drag = 0.04f;
+            drag = 0.08f;
             backColor = SnPal.forsBulletBack;
             frontColor = SnPal.forsBullet;
             shootEffect = SnFx.forsShootSmall;
@@ -145,11 +145,11 @@ public class SnBullets {
             fragRandomSpread = 0.001f;
             fragVelocityMin = 0.7f;
         }};
-        eriusBullet = new BasicBulletType(6f, 10, "bullet") {{
+        eriusBullet = new BasicBulletType(6f, 9, "bullet") {{
             width = 7f;
             height = 14f;
             lifetime = 16f;
-            drag = 0.04f;
+            drag = 0.08f;
             backColor = SnPal.eriusBulletBack;
             frontColor = SnPal.eriusBullet;
             shootEffect = SnFx.eriusShootSmall;
