@@ -135,7 +135,7 @@ public class LightningPowerNode extends PowerNode {
                             "; toGive=" + toGive);
                     if(toSet <= stored) {
                         debugSb.append(System.lineSeparator());
-                        return; // don't decrease amount of energy in other node
+                        continue; // don't decrease amount of energy in other node
                     }
                     debugSb.append(" - give!" + System.lineSeparator());
 
