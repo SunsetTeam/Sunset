@@ -16,7 +16,7 @@ import sunset.type.planets.SnPlanet;
 public class SnPlanets{
     public static Planet
     //stars
-    magma,
+    aquilae,
     //planets
     azaria, burnout, rime, 
     //satellites
@@ -24,7 +24,7 @@ public class SnPlanets{
 
     public static void load(){
         //region stars
-        magma = new SnPlanet("magma", null, 4f, 0){{
+        aquilae = new SnPlanet("UV Aquilae", null, 4f, 0){{
             bloom = true;
             accessible = false;
             hasAtmosphere = true;
@@ -33,18 +33,18 @@ public class SnPlanets{
             this, 5,
             10, 0.7, 1.9, 1.4, 1.6,
             0.9f,
-            Color.valueOf("FF7700"),
-            Color.valueOf("FFD738"),
-            Color.valueOf("FF5500"),
-            Color.valueOf("FF5500"),
+            Color.valueOf("F2F1D3"),
+            Color.valueOf("EAE8B3"),
+            Color.valueOf("DCDBB5"),
+            Color.valueOf("ECEBC7"),
             Color.valueOf("FFB514"),
-            Color.valueOf("F5EA58")
+            Color.valueOf("F1EFAB")
             );
            // lightColor = Color.valueOf("F5E14E");
         }};
         //endregion stars
         //region planets
-        azaria = new SnPlanet("azaria", magma, 1f, 3){{
+        azaria = new SnPlanet("azaria", aquilae, 1f, 3){{
             meshLoader = () -> new HexMesh(this, 6);
             generator = new AzariaGenerator();
             radius = 1.03f;
@@ -76,7 +76,7 @@ public class SnPlanets{
             hiddenItems.addAll(Items.erekirItems).removeAll(SnItems.azariaItems);
         }};
 
-        burnout = new SnPlanet("burnout", magma, 0.7f, 3){{
+        burnout = new SnPlanet("burnout", aquilae, 0.7f, 3){{
             meshLoader = () -> new HexMesh(this, 6);
             generator = new BurnoutGenerator();
             radius = 0.87f;
@@ -95,7 +95,7 @@ public class SnPlanets{
             landCloudColor = Color.valueOf("D65318");
         }};
 
-        rime = new SnPlanet("rime", magma, 0.9f, 3){{
+        rime = new SnPlanet("rime", aquilae, 0.9f, 3){{
             meshLoader = () -> new HexMesh(this, 6);
             generator = new RimeGenerator();
             radius = 1;
