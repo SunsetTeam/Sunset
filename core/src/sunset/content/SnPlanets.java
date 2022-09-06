@@ -37,7 +37,7 @@ public class SnPlanets{
             Color.valueOf("EAE8B3"),
             Color.valueOf("DCDBB5"),
             Color.valueOf("ECEBC7"),
-            Color.valueOf("FFB514"),
+            Color.valueOf("F9F8C3"),
             Color.valueOf("F1EFAB")
             );
            // lightColor = Color.valueOf("F5E14E");
