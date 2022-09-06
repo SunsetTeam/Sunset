@@ -24,7 +24,7 @@ public class SnPlanets{
 
     public static void load(){
         //region stars
-        aquilae = new SnPlanet("UV Aquilae", null, 4f, 0){{
+        aquilae = new SnPlanet("UV Aquilae", null, 5f, 0){{
             bloom = true;
             accessible = false;
             hasAtmosphere = true;
@@ -51,7 +51,7 @@ public class SnPlanets{
             radius = 1.03f;
             atmosphereRadIn = 0.03f;
             atmosphereRadOut = 0.4f;
-            orbitRadius = 57f;
+            orbitRadius = 63f;
             //orbitTime = 30f;
             rotateTime = Time.toHours;
             accessible = true;
@@ -84,7 +84,7 @@ public class SnPlanets{
             atmosphereRadIn = 0.02f;
             atmosphereRadOut = 0.17f;
             sectorApproxRadius = 3;
-            orbitRadius = 33;
+            orbitRadius = 39;
             //orbitTime = 45f;
             rotateTime = 2f * Time.toHours;
             accessible = true;
@@ -102,7 +102,7 @@ public class SnPlanets{
             radius = 1;
             atmosphereRadIn = 0.02f;
             atmosphereRadOut = 0.32f;
-            orbitRadius = 85;
+            orbitRadius = 91;
             //orbitTime = 40f;
             rotateTime = 40f * Time.toMinutes;
             accessible = true;
