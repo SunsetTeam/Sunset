@@ -29,6 +29,7 @@ public class SnPlanets{
             accessible = false;
             hasAtmosphere = true;
             orbitRadius = 145;
+            atmosphereColor = Color.valueOf("F9F8DB");
             meshLoader = () -> new SunMesh(
             this, 5,
             10, 0.7, 1.9, 1.4, 1.6,
