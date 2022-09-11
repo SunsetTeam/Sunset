@@ -167,7 +167,7 @@ public class SnFx {
         Fill.circle(e.x, e.y, e.fin() * 2f);
     }),
 
-    mediumEnergySphereCharge = new Effect(19f, e -> {
+    mediumEnergySphereCharge = new Effect(30f, e -> {
         Draw.color(SnPal.redBombBack);
         Fill.circle(e.x, e.y, e.fin() * 2.9f);
     }),
@@ -179,8 +179,8 @@ public class SnFx {
         Draw.color(SnPal.redBomb);
         
         for (int i : Mathf.signs) {
-            Drawf.tri(e.x, e.y, 9f * e.fout(), 20f, e.rotation + 80f * i);
-            Drawf.tri(e.x, e.y, 8f * e.fout(), 20f, e.rotation + 110f * i);
+            Drawf.tri(e.x, e.y, 9f * e.fout(), 8f, e.rotation + 80f * i);
+            Drawf.tri(e.x, e.y, 8f * e.fout(), 10f, e.rotation + 110f * i);
             
         }
         Drawf.light(e.x, e.y, 1.8f, SnPal.redBomb, e.fout());

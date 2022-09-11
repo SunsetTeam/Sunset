@@ -1,6 +1,7 @@
 package sunset.content;
 
 import arc.graphics.Color;
+import arc.math.Mathf;
 import arc.util.Time;
 import mindustry.content.*;
 import mindustry.game.Team;
@@ -28,20 +29,22 @@ public class SnPlanets{
             bloom = true;
             accessible = false;
             hasAtmosphere = true;
-            orbitRadius = 145;
-            atmosphereColor = Color.valueOf("F9F8DB");
+            atmosphereRadIn = 0.01f;
+            atmosphereRadOut = 0.1f;
+            atmosphereColor = Color.valueOf("f1f9f1");
             meshLoader = () -> new SunMesh(
-            this, 5,
+            this, 4,
             10, 0.7, 1.9, 1.4, 1.6,
-            0.9f,
-            Color.valueOf("F2F1D3"),
-            Color.valueOf("EAE8B3"),
-            Color.valueOf("DCDBB5"),
-            Color.valueOf("ECEBC7"),
-            Color.valueOf("F9F8C3"),
-            Color.valueOf("F1EFAB")
+                    1.18f,
+            Color.valueOf("a9a39f"),
+            Color.valueOf("b5afaa"),
+            Color.valueOf("b5afaa"),
+            Color.valueOf("c1c7c1"),
+            Color.valueOf("f1f9f1"),
+            Color.valueOf("d7ded7")
+
             );
-           // lightColor = Color.valueOf("F5E14E");
+           lightColor = Color.valueOf("f1f9f1");
         }};
         //endregion stars
         //region planets

@@ -111,10 +111,10 @@ public class SnTurrets{
 
                 fragBullet = new LaserBulletType(40){{
                     colors = new Color[]{SnPal.redBomb.cpy().a(0.4f), SnPal.redBomb, Color.white};
-                    width = 20f;
-                    lifetime = 15f;
-                    length = 60f;
-                    laserEffect = Fx.lancerLaserShootSmoke;
+                    width = 15f;
+                    lifetime = 20f;
+                    length = 46f;
+                    laserEffect = Fx.none;
                     collidesAir = true;
                     collidesGround = true;
                 }};
