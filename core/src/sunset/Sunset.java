@@ -3,6 +3,7 @@ package sunset;
 import acontent.ui.*;
 import arc.*;
 import arc.scene.event.*;
+import arc.scene.ui.Image;
 import arc.scene.ui.layout.*;
 import arc.struct.*;
 import mindustry.*;
@@ -23,6 +24,9 @@ import sunset.ui.*;
 import sunset.utils.*;
 import sunset.world.*;
 
+import javax.swing.*;
+
+import static arc.Core.scene;
 import static mindustry.Vars.*;
 import static mma.ModVars.*;
 @TestAnnotation
@@ -108,9 +112,15 @@ public class Sunset extends MMAMod{
                 t.pack();
                 t.act(0.1f);
                 t.touchable=Touchable.enabled;
-                Core.scene.add(t);
+                scene.add(t);
             });
         }
+        Events.on(ClientLoadEvent.class, e -> {
+            Table t = new Table();
+            t.add(new Image(Core.atlas.find("sunset-logo")));
+            t.pack();
+            scene.add(t.visible(() -> state.isMenu()));
+        });
     }
 
     @Override
