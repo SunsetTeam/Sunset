@@ -25,8 +25,6 @@ public class SnPayloadBlocks{
             buildVisibility = BuildVisibility.sandboxOnly;
             category = Category.units;
             bulletType = new AmmunitionBulletType(5.4f, 30f){{
-
-
                 shootEffect = Fx.shootBig;
                 smokeEffect = SnFx.shootZeusMissile;
                 homingPower = 0.15f;

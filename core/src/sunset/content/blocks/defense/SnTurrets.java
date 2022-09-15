@@ -36,10 +36,10 @@ public class SnTurrets{
     sway, excellence, carbine, pulsation, reflection, discharge,
 
     //3x3
-    major, artLightTurret, zeus, trigger, flower,
+    major, artLightTurret, zeus, stailer, trigger, flower,
 
     //4x4
-    shotgunTurret, admiral, ammirus, flood, chain,
+    shotgunTurret, admiral, aimus, flood, chain,
     drr,
 
     //5x5
@@ -297,6 +297,29 @@ public class SnTurrets{
             shootType = SnBullets.overheatBullet;
             reloadBar = false;
         }};
+
+        stailer = new ModItemTurret("stailer"){{
+            requirements(Category.turret, with(SnItems.fors, 160f, SnItems.erius, 155f, SnItems.naturite, 30f));
+            ammo(
+                    SnItems.fors, SnBullets.forsStailerAimMissile,
+                    SnItems.erius, SnBullets.eriusStailerAimMissile,
+                    SnItems.anzar, SnBullets.anzarStailerAimMissile
+            );
+            size = 3;
+            shoot.shots = 6;
+            velocityRnd = 0.15f;
+            reload = 30f;
+            shootCone = 35f;
+            rotateSpeed = 2f;
+            recoil = 1f;
+            shake = 2f;
+            range = 22 * Vars.tilesize;
+            inaccuracy = 25;
+            shootCone = 40;
+            targetGround = false;
+            targetAir = true;
+        }};
+
         //endregion 3x3
         //region 4x4
         /*
@@ -369,7 +392,7 @@ public class SnTurrets{
                 Items.coal, SnBullets.flowerMode2Bullet
             );
         }};
-        ammirus = new ModItemTurret("ammirus"){{
+        aimus = new ModItemTurret("aimus"){{
             requirements(Category.turret, with(Items.copper, 700, SnItems.fors, 570, Items.plastanium, 475, SnItems.nobium, 470));
             ammo(
             SnItems.nobium, SnBullets.nobiumAimMissile,

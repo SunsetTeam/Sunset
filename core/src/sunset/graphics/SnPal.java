@@ -10,6 +10,8 @@ public class SnPal {
     forsBulletBack = Color.valueOf("DC5A5A"),
     eriusBullet = Color.valueOf("91c4c8"),
     eriusBulletBack = Color.valueOf("6785a4"),
+    anzarBulletBack = Color.valueOf("ED9A61"),
+    anzarBullet = Color.valueOf("FAAE7A"),
     //endregion bullets
     //region gray
     rGray = Color.valueOf("806262"),

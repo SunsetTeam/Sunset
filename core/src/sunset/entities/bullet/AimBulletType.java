@@ -26,7 +26,6 @@ public class AimBulletType extends BasicBulletType {
 
         if(homingPower > 0.0001f && bullet.time >= homingDelay){
             Teamc target;
-            //home in on allies if possible
             if(healPercent > 0){
                 target = Units.closestTarget(null, bullet.x, bullet.y, homingRange,
                         e -> e.checkTarget(collidesAir, collidesGround) && e.team != bullet.team && !bullet.hasCollided(e.id),

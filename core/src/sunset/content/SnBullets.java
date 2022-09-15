@@ -40,7 +40,7 @@ public class SnBullets {
         forsBullet, forsBulletFrag, eriusBulletFrag, eriusBullet,
         sniperSurge,
         //missile
-        nobiumAimMissile, naturiteAimMissile, renubiteAimMissile,
+        forsStailerAimMissile, eriusStailerAimMissile, anzarStailerAimMissile, nobiumAimMissile, naturiteAimMissile, renubiteAimMissile,
         //artillery
         //flak
         naturiteCircleBullet, anzarCircleBullet,
@@ -125,7 +125,7 @@ public class SnBullets {
             width = 7f;
             height = 12f;
             lifetime = 16f;
-            drag = 0.08f;
+            drag = 0.1f;
             backColor = SnPal.forsBulletBack;
             frontColor = SnPal.forsBullet;
             shootEffect = SnFx.forsShootSmall;
@@ -149,7 +149,7 @@ public class SnBullets {
             width = 7f;
             height = 14f;
             lifetime = 16f;
-            drag = 0.08f;
+            drag = 0.1f;
             backColor = SnPal.eriusBulletBack;
             frontColor = SnPal.eriusBullet;
             shootEffect = SnFx.eriusShootSmall;
@@ -221,6 +221,74 @@ public class SnBullets {
         };
 
         //region missile
+        forsStailerAimMissile = new AimBulletType(5f, 9f){{
+            sprite = "missile";
+            width = 7;
+            height = 13;
+            lifetime = 90;
+            maxRange = 180;
+            homingPower = 0.0001f;
+            homingRange = 0;
+            drag = -0.02f;
+            weaveScale = 3;
+            weaveMag = 4;
+
+            trailColor = SnPal.forsBullet;
+            trailEffect = SnFx.forsStailerTrail;
+            trailRotation = true;
+            trailInterval = 0.5f;
+            collidesGround = false;
+            collidesAir = false;
+
+            frontColor = SnPal.forsBullet;
+            backColor = SnPal.forsBulletBack;
+        }};
+
+        eriusStailerAimMissile = new AimBulletType(5.5f, 8f){{
+            sprite = "missile";
+            width = 7;
+            height = 13;
+            lifetime = 90;
+            maxRange = 180;
+            homingPower = 0.0001f;
+            homingRange = 0;
+            drag = -0.02f;
+            weaveScale = 3;
+            weaveMag = 4;
+
+            trailColor = SnPal.eriusBullet;
+            trailEffect = SnFx.eriusStailerTrail;
+            trailRotation = true;
+            trailInterval = 0.5f;
+            collidesGround = false;
+            collidesAir = false;
+
+            frontColor = SnPal.eriusBullet;
+            backColor = SnPal.eriusBulletBack;
+        }};
+
+        anzarStailerAimMissile = new AimBulletType(4f, 11f){{
+            sprite = "missile";
+            width = 7;
+            height = 13;
+            lifetime = 90;
+            maxRange = 180;
+            homingPower = 0.0001f;
+            homingRange = 0;
+            drag = -0.02f;
+            weaveScale = 3;
+            weaveMag = 4;
+
+            trailColor = SnPal.anzarBullet;
+            trailEffect = SnFx.anzarStailerTrail;
+            trailRotation = true;
+            trailInterval = 0.5f;
+            collidesGround = false;
+            collidesAir = false;
+
+            frontColor = SnPal.anzarBullet;
+            backColor = SnPal.anzarBulletBack;
+        }};
 
         nobiumAimMissile = new AimBulletType(3f, 55f){{
             sprite = "missile";
