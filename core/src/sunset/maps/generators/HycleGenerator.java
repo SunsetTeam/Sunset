@@ -10,7 +10,7 @@ import sunset.content.blocks.SnEnvironment;
 public class HycleGenerator extends SnPlanetGenerator{
 
 // Blocks.basalt, Blocks.stone, Bloks.shale, Blocks.charr, Blocks.dacite, Blocks.ice, SnEnvironment.granite
-    public HycleGenerator(){
+    /*public HycleGenerator(){
         arr = new Block[][]{
                 {Blocks.stone, Blocks.stone, SnEnvironment.granite, Blocks.charr, Blocks.charr, Blocks.charr, Blocks.basalt, Blocks.stone, SnEnvironment.granite, Blocks.basalt, Blocks.basalt, Blocks.stone, SnEnvironment.granite},
                 {Blocks.stone, Blocks.stone, Blocks.charr, Blocks.basalt, Blocks.basalt, Blocks.charr, SnEnvironment.granite, Blocks.basalt, Blocks.stone, Blocks.charr, Blocks.stone, Blocks.stone, SnEnvironment.granite},
@@ -47,5 +47,5 @@ public class HycleGenerator extends SnPlanetGenerator{
         if(Simplex.noise3d(seed, 3, 0.5f, scl, sector.tile.v.x + 1, sector.tile.v.y, sector.tile.v.z)*nmag + poles > 0.55f*addscl){
             ores.add(SnEnvironment.oreFors);
         }
-    }
+    }*/
 }

@@ -9,7 +9,7 @@ public class SnTeams {
     public static Team aymirus;
 
     public static void load() {
-        aymirus = newTeam(5, "aymirus", Color.valueOf("CA514A"));
+        aymirus = newTeam(5, "aymirus", Color.valueOf("51e88b"));
     }
 
     private static Team newTeam(int id, String name, Color color) {

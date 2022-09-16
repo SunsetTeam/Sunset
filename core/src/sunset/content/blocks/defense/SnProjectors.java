@@ -55,7 +55,7 @@ public class SnProjectors {
             cooldownNormal = 2.1f;
             cooldownLiquid = 3.3f;
             cooldownBrokenBase = 1f;
-            consumeItems(with(Items.phaseFabric, 3, SnItems.coldent, 5));
+            consumeItems(with(Items.phaseFabric, 3/*, SnItems.coldent, 5*/));
             consumePower(20f);
         }};
     }

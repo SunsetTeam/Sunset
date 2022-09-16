@@ -10,7 +10,7 @@ import sunset.content.blocks.SnEnvironment;
 public class TestGenerator extends SnPlanetGenerator {
 
 
-    public TestGenerator() {
+    /*public TestGenerator() {
         arr = new Block[][]{//13 blocks
                 {SnEnvironment.burheynaLiquidFloor, SnEnvironment.burheynaLiquidFloor, SnEnvironment.crimsonDirt, SnEnvironment.burheynaLiquidFloor, SnEnvironment.burheynaLiquidFloor, SnEnvironment.crimsonDirt, SnEnvironment.burheynaLiquidFloor, SnEnvironment.burheynaLiquidFloor, SnEnvironment.burheynaLiquidFloor, SnEnvironment.crimsonSand, SnEnvironment.burheynaLiquidFloor, SnEnvironment.crimsonDirt, SnEnvironment.crimsonDirt},
                 {SnEnvironment.burheynaLiquidFloor, SnEnvironment.crimsonDirt, SnEnvironment.burheynaLiquidFloor, SnEnvironment.crimsonDirt, SnEnvironment.burheynaLiquidFloor, SnEnvironment.crimsonDirt, SnEnvironment.crimsonDirt, SnEnvironment.burheynaLiquidFloor, SnEnvironment.burheynaLiquidFloor, SnEnvironment.burheynaLiquidFloor, SnEnvironment.crimsonDirt, SnEnvironment.crimsonDirt, SnEnvironment.crimsonDirt},

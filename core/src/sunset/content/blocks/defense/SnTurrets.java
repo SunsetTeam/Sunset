@@ -519,8 +519,7 @@ public class SnTurrets{
             consumePower(38f);
             category = Category.turret;
             buildVisibility = BuildVisibility.shown;
-            shootType = new EnergySphereBulletType(2.5f, 290f){
-                {
+            shootType = new EnergySphereBulletType(2.5f, 290f){{
                     hitSize = 10f;
                     splashDamage = 910f;
                     splashDamageRadius = 97f;
@@ -542,13 +541,10 @@ public class SnTurrets{
                     radMax = 4f;
                     chargeEffect = SnFx.energyCharge((EnergySphereBulletType)shootType, 210);
                 }
-
                 @Override
                 public float continuousDamage(){
                     return 720;
                 }
-
-                ;
             };
             reloadBar = false;
         }};

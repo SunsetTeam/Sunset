@@ -12,7 +12,7 @@ import sunset.content.blocks.SnEnvironment;
 
 public class AzariaGenerator extends SnPlanetGenerator {
 
-    public AzariaGenerator() {
+    /*public AzariaGenerator() {
          arr = new Block[][]{//13 blocks
          {SnEnvironment.burheynaLiquidFloor, SnEnvironment.burheynaLiquidFloor, SnEnvironment.crimsonDirt, SnEnvironment.burheynaLiquidFloor, SnEnvironment.burheynaLiquidFloor, SnEnvironment.crimsonDirt, SnEnvironment.burheynaLiquidFloor, SnEnvironment.burheynaLiquidFloor, SnEnvironment.burheynaLiquidFloor, SnEnvironment.crimsonSand, SnEnvironment.burheynaLiquidFloor, Blocks.basalt, SnEnvironment.crimsonDirt},
          {SnEnvironment.burheynaLiquidFloor, SnEnvironment.crimsonDirt, SnEnvironment.burheynaLiquidFloor, SnEnvironment.crimsonDirt, SnEnvironment.burheynaLiquidFloor, SnEnvironment.crimsonDirt, Blocks.basalt, SnEnvironment.burheynaLiquidFloor, SnEnvironment.burheynaLiquidFloor, SnEnvironment.burheynaLiquidFloor, SnEnvironment.crimsonDirt, SnEnvironment.crimsonDirt, SnEnvironment.crimsonDirt},
@@ -86,5 +86,5 @@ public class AzariaGenerator extends SnPlanetGenerator {
                                 (floor == SnEnvironment.crimsonSand ? SnEnvironment.burheynaLiquidFloor : SnEnvironment.burheynaLiquidFloor));
             }
         }
-    }
+    }*/
 }

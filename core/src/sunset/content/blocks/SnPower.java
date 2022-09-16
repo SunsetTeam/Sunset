@@ -38,7 +38,6 @@ public class SnPower{
             size = 2;
             powerProduction = 6.1f;
 
-            hasLiquids = true;
             hasItems = true;
             hasPower = true;
             hasLiquids = false;
@@ -57,7 +56,6 @@ public class SnPower{
             size = 3;
             powerProduction = 13f;
 
-            hasLiquids = true;
             hasPower = true;
             hasLiquids = true;
             itemCapacity = 20;

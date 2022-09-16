@@ -35,7 +35,7 @@ public class SnPlanets{
             meshLoader = () -> new SunMesh(
             this, 4,
             10, 0.7, 1.9, 1.4, 1.6,
-                    1.18f,
+                    1.1f,
             Color.valueOf("a9a39f"),
             Color.valueOf("b5afaa"),
             Color.valueOf("b5afaa"),
@@ -48,7 +48,7 @@ public class SnPlanets{
         }};
         //endregion stars
         //region planets
-        azaria = new SnPlanet("azaria", aquilae, 1f, 3){{
+        /*azaria = new SnPlanet("azaria", aquilae, 1f, 3){{
             meshLoader = () -> new HexMesh(this, 6);
             generator = new AzariaGenerator();
             radius = 1.03f;
@@ -78,9 +78,9 @@ public class SnPlanets{
             };
             hiddenItems.addAll(Items.serpuloItems).removeAll(SnItems.azariaItems);
             hiddenItems.addAll(Items.erekirItems).removeAll(SnItems.azariaItems);
-        }};
+        }};*/
 
-        burnout = new SnPlanet("burnout", aquilae, 0.7f, 3){{
+        /*burnout = new SnPlanet("burnout", aquilae, 0.7f, 3){{
             meshLoader = () -> new HexMesh(this, 6);
             generator = new BurnoutGenerator();
             radius = 0.87f;
@@ -97,9 +97,9 @@ public class SnPlanets{
             hasAtmosphere = true;
             alwaysUnlocked = true;
             landCloudColor = Color.valueOf("D65318");
-        }};
+        }};*/
 
-        rime = new SnPlanet("rime", aquilae, 0.9f, 3){{
+        /*rime = new SnPlanet("rime", aquilae, 0.9f, 3){{
             meshLoader = () -> new HexMesh(this, 6);
             generator = new RimeGenerator();
             radius = 1;
@@ -115,10 +115,10 @@ public class SnPlanets{
             hasAtmosphere = true;
             alwaysUnlocked = true;
             landCloudColor = Color.valueOf("00A6FF");
-        }};
+        }};*/
         //endregion planets
         //region satellites
-        hycle = new SnPlanet("hycle", azaria, 0.4f, 2){{
+        /*hycle = new SnPlanet("hycle", azaria, 0.4f, 2){{
             meshLoader = () -> new HexMesh(this, 5);
             generator = new HycleGenerator();
             radius = 0.4f;
@@ -135,7 +135,7 @@ public class SnPlanets{
             alwaysUnlocked = true;
             landCloudColor = Color.valueOf("B5B5B5");
             camRadius = 0.7f;
-        }};
+        }};*/
         //endregion satellites
     }
 }

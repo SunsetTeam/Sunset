@@ -3,7 +3,7 @@ package sunset.content;
 import mindustry.type.SectorPreset;
 
 public class SnSectorPresets {
-    public static SectorPreset
+    /*public static SectorPreset
             //azaria
             oilfactory;
 
@@ -26,5 +26,5 @@ public class SnSectorPresets {
         //region rime
 
         //endregion rime
-    }
+    }*/
 }

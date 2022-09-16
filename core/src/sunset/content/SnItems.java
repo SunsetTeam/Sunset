@@ -11,10 +11,10 @@ public class SnItems {
     //raw
     fors, erius, nedirium, planatrium,
     //crafting
-    anzar, naturite,  reneubite, nobium, azaliaBud, yantai, enojie, zerinium,
+    anzar, naturite,  reneubite, nobium, azaliaBud, yantai, enojie, zerinium;
     //endregion azaria
     //other
-    flameid, coldent, testItem;
+    //flameid, coldent, testItem;
 
     public static final Seq<Item> azariaItems = new Seq<>();
 
@@ -68,7 +68,7 @@ public class SnItems {
         //endregion azaria
 
         //region other
-        flameid = new Item("flameid", Color.valueOf("ffffff")) {{
+        /*flameid = new Item("flameid", Color.valueOf("ffffff")) {{
             cost = 4f;
             flammability = 0.6f;
             hardness = 4;
@@ -88,6 +88,6 @@ public class SnItems {
         azariaItems.addAll(
                 fors, erius, naturite, anzar, nedirium, reneubite, nobium, planatrium, azaliaBud,
                 yantai, enojie, zerinium
-        );
+        );*/
     }
 }

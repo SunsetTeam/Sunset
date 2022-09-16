@@ -14,7 +14,7 @@ import mindustry.world.Block;
 import sunset.content.blocks.SnEnvironment;
 
 public class BurnoutGenerator extends SnPlanetGenerator{
-    public BurnoutGenerator(){
+    /*public BurnoutGenerator(){
 
         arr = new Block[][]{
         {SnEnvironment.hotSlag3, SnEnvironment.hotSlag2, SnEnvironment.hotSlag1, SnEnvironment.hotSlag1, Blocks.slag, Blocks.slag, Blocks.slag, Blocks.slag, Blocks.slag, Blocks.slag, Blocks.slag, Blocks.slag, Blocks.slag, Blocks.slag},
@@ -123,5 +123,5 @@ public class BurnoutGenerator extends SnPlanetGenerator{
             }
         }
         super.passTiles(x, y);
-    }
+    }*/
 }

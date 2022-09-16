@@ -84,10 +84,10 @@ public class SnVars extends ModVars{
         new SnBlocks(),
         //    SnOverride::load,
         //SnLoadouts::load,
-        SnWeathers::load,
-        SnPlanets::load,
-        SnSectorPresets::load,
-        SnTechTree::load
+        SnWeathers::load
+        //SnPlanets::load,
+        //SnSectorPresets::load,
+        //SnTechTree::load
         ).flatMap(contentList -> Seq.with(contentList instanceof SnBlocks b ? b.list : new Runnable[]{contentList})).toArray(Runnable.class);
         for(Runnable runnable : snContent){
             runnable.run();

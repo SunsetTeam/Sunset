@@ -6,13 +6,10 @@ import arc.scene.style.*;
 import arc.scene.ui.layout.*;
 import arc.struct.*;
 import arc.util.*;
-import mindustry.Vars;
 import mindustry.ctype.*;
 import mindustry.gen.*;
-import mindustry.mod.Mods.*;
 import mindustry.ui.*;
 import mindustry.ui.dialogs.*;
-import mma.*;
 
 import java.lang.reflect.*;
 
@@ -57,18 +54,14 @@ public class SunsetInfoDialog extends BaseDialog{
     }
 private BaseDialog currentContent;
     private void setupButtons(){
+        Seq<UnlockableContent> all = Seq.with(content.getContentMap()).<Content>flatten().select(c -> c.minfo.mod == modInfo && c instanceof UnlockableContent).as();
         buttons.defaults().size(210f, 64f);
-        if(!mobile){
-            buttons.button("@mods.openfolder", Icon.link, () -> Core.app.openFolder(modInfo.file.absolutePath()));
-        }
-
         if(modInfo.getRepo() != null){
             boolean showImport = !modInfo.hasSteamID();
             buttons.button("@mods.github.open", Icon.link, () -> Core.app.openURI("https://github.com/" + modInfo.getRepo()));
             if(mobile && showImport) buttons.row();
             if(showImport) buttons.button("@mods.browser.reinstall", Icon.download, reinstaller);
         }
-        Seq<UnlockableContent> all = Seq.with(content.getContentMap()).<Content>flatten().select(c -> c.minfo.mod == modInfo && c instanceof UnlockableContent && !((UnlockableContent)c).isHidden()).as();
         if(all.any()){
             buttons.row();
             buttons.button("@mods.viewcontent", Icon.book, () -> {

@@ -10,7 +10,7 @@ import static sunset.content.SnLiquids.*;
 
 public class SnTechTree{
 
-    public static void load(){
+    /*public static void load(){
         SnPlanets.azaria.techTree = nodeRoot("azaria", testCore, () -> {
             //region crafting
             node(crystallizer, () -> {
@@ -76,5 +76,5 @@ public class SnTechTree{
         });
         //endregion turrets
         //endregion blocks
-    }
+    }*/
 }
