@@ -8,7 +8,7 @@ import mindustry.world.Block;
 import sunset.content.blocks.SnEnvironment;
 
 public class RimeGenerator extends SnPlanetGenerator{
-    public RimeGenerator(){
+    /*public RimeGenerator(){
         arr = new Block[][]{
         {Blocks.ice, Blocks.ice, Blocks.ice, Blocks.ice, SnEnvironment.glacier1, SnEnvironment.glacier1, SnEnvironment.glacier1, SnEnvironment.glacier1, SnEnvironment.glacier1, Blocks.snow, Blocks.snow, Blocks.snow, Blocks.snow, Blocks.snow},
         {Blocks.ice, Blocks.ice, Blocks.ice, Blocks.ice, SnEnvironment.glacier2, SnEnvironment.glacier2, SnEnvironment.glacier2, SnEnvironment.glacier3, Blocks.snow, Blocks.snow, Blocks.snow},
@@ -45,5 +45,5 @@ public class RimeGenerator extends SnPlanetGenerator{
         if(Simplex.noise3d(seed, 3, 0.5f, scl, sector.tile.v.x + 1, sector.tile.v.y, sector.tile.v.z) * nmag + poles > 0.55f * addscl){
             ores.add(SnEnvironment.oreColdent);
         }
-    }
+    }*/
 }
