@@ -11,7 +11,7 @@ import sunset.graphics.SnPal;
 import static sunset.utils.ArtLBulletUtils.createLength;
 
 public class ArtilleryLightningBulletType extends BulletType {
-    public int lightNumber = 1;
+    public final int lightNumber = 1;
     public static Color lColor = SnPal.chainLaser;
     public static float effectLifetime = 50;
 
