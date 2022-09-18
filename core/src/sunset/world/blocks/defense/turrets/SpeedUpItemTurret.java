@@ -13,7 +13,7 @@ import sunset.utils.*;
 /**
  * Describes a multi-barreled turret.
  */
-public class MultiBarrelItemTurret extends ItemTurret{
+public class SpeedUpItemTurret extends ItemTurret{
 
     // reload acceleration multiplier
     public float maxReloadMultiplier = 0.3f;
@@ -21,7 +21,7 @@ public class MultiBarrelItemTurret extends ItemTurret{
     public float speedupPerShot = 0.01f;
     public float slowReloadTime = 100f;
 
-    public MultiBarrelItemTurret(String name){
+    public SpeedUpItemTurret(String name){
         super(name);
         UtilsKt.TODO("WAITING FOR PULL REQUEST(LOOK AT " + ShootMultiBarrel.class.getName() + ")");
     }
@@ -29,19 +29,19 @@ public class MultiBarrelItemTurret extends ItemTurret{
     @Override
     public void setBars(){
         super.setBars();
-        SnVars.settings.registerReloadBarBlock(this, (MultiBarrelTurretBuild entity) -> new Bar(
+        SnVars.settings.registerReloadBarBlock(this, (SpeedUpItemTurretBuild entity) -> new Bar(
         () -> Core.bundle.format("bar.sunset-reload", Utils.stringsFixed(Mathf.clamp(entity.reloadCounter / reload) * 100f)),
         () -> entity.team.color,
         () -> Mathf.clamp(entity.reloadCounter / reload)
         ));
-        addBar("sunset-speedup", (MultiBarrelTurretBuild entity) -> new Bar(
+        addBar("sunset-speedup", (SpeedUpItemTurretBuild entity) -> new Bar(
         () -> Core.bundle.format("bar.sunset-speedup", Utils.stringsFixed(Mathf.clamp(entity.speedupScl / maxReloadMultiplier) * 100f)),
         () -> entity.team.color,
         () -> Mathf.clamp(entity.speedupScl / maxReloadMultiplier)
         ));
     }
 
-    public class MultiBarrelTurretBuild extends ItemTurretBuild{
+    public class SpeedUpItemTurretBuild extends ItemTurretBuild{
         public float speedupScl = 0f;
         public float slowDownReload = 0f;
 
@@ -55,16 +55,8 @@ public class MultiBarrelItemTurret extends ItemTurret{
 
         @Override
         protected void shoot(BulletType type){
-
             slowDownReload = slowReloadTime;
             speedupScl = Math.min(speedupScl + speedupPerShot, maxReloadMultiplier);
-
-
         }
-/*
-        @Override
-        protected void ejectEffects(){
-            //effects in shoot()
-        }*/
     }
 }

@@ -17,7 +17,7 @@ import sunset.world.meta.SnStat;
 
 public class MinigunTurret extends ItemTurret {
     public float inaccuracyUp = 0f;
-    public float maxShootTime = 120f;
+    public float overheatTime = 120f;
     public AStats aStats = new AStats();
     public boolean debug = false, reloadBar = true;
 
@@ -30,9 +30,9 @@ public class MinigunTurret extends ItemTurret {
     public void setBars() {
         super.setBars();
         addBar("sunset-heat", (MinigunTurret.MinigunTurretBuild entity) -> new Bar(
-        () -> Core.bundle.format("bar.sunset-heat", Utils.stringsFixed(Mathf.clamp(entity.totalShootingTime / maxShootTime) * 100f)),
+        () -> Core.bundle.format("bar.sunset-heat", Utils.stringsFixed(Mathf.clamp(entity.totalShootingTime / overheatTime) * 100f)),
         () -> entity.team.color,
-        () -> Mathf.clamp(entity.totalShootingTime / maxShootTime)
+        () -> Mathf.clamp(entity.totalShootingTime / overheatTime)
         ));
         if (reloadBar) {
             SnVars.settings.registerReloadBarBlock(this, (ItemTurretBuild entity) -> new Bar(
@@ -47,7 +47,7 @@ public class MinigunTurret extends ItemTurret {
     public void setStats() {
         super.setStats();
         aStats.add(Stat.inaccuracy, inaccuracyUp, StatUnit.degrees);
-        aStats.add(SnStat.overheatTime, maxShootTime / Time.toSeconds, StatUnit.seconds);
+        aStats.add(SnStat.overheatTime, overheatTime / Time.toSeconds, StatUnit.seconds);
     }
 
     public class MinigunTurretBuild extends ItemTurretBuild{
@@ -64,7 +64,7 @@ public class MinigunTurret extends ItemTurret {
             this.isShoot = canShoot;
             super.updateShooting();
             if(!canShoot || isShoot) return;
-            if (totalShootingTime < maxShootTime) {
+            if (totalShootingTime < overheatTime) {
                 if (liquids.currentAmount() == 0) totalShootingTime += Time.delta / 0.1f;
                 else totalShootingTime += Time.delta / liquids.current().heatCapacity;
             }
