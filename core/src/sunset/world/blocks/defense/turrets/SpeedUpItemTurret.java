@@ -23,7 +23,6 @@ public class SpeedUpItemTurret extends ItemTurret{
 
     public SpeedUpItemTurret(String name){
         super(name);
-        UtilsKt.TODO("WAITING FOR PULL REQUEST(LOOK AT " + ShootMultiBarrel.class.getName() + ")");
     }
 
     @Override

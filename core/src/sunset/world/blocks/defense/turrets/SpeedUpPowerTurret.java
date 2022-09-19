@@ -23,7 +23,6 @@ public class SpeedUpPowerTurret extends PowerTurret{
 
     public SpeedUpPowerTurret(String name){
         super(name);
-        UtilsKt.TODO("WAITING FOR PULL REQUEST(LOOK AT " + ShootMultiBarrel.class.getName() + ")");
     }
 
     @Override
