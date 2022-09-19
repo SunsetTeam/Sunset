@@ -41,8 +41,8 @@ public class SpeedUpPowerTurret extends PowerTurret{
     }
 
     public class SpeedUpPowerTurretBuild extends PowerTurretBuild{
-        public float speedupScl = 0f;
-        public float slowDownReload = 0f;
+        public float speedupScl = 1f;
+        public float slowDownReload = 1f;
 
         @Override
         public void updateTile(){
