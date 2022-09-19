@@ -54,7 +54,19 @@ public class SpeedUpItemTurret extends ItemTurret{
         }
 
         @Override
+        protected void updateShooting() {
+            if (reload >= reloadCounter) {
+                BulletType type = peekAmmo();
+                shoot(type);
+                reload = 0f;
+            } else {
+                reload += (1 + speedupScl) * delta() * peekAmmo().reloadMultiplier * baseReloadSpeed();
+            }
+        }
+
+        @Override
         protected void shoot(BulletType type){
+            super.shoot(type);
             slowDownReload = slowReloadTime;
             speedupScl = Math.min(speedupScl + speedupPerShot, maxReloadMultiplier);
         }

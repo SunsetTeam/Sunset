@@ -247,6 +247,7 @@ public class SnTurrets{
                 maxRange = 200;
                 hitEffect = SnFx.lbHit;
                 despawnEffect = Fx.none;
+                lightNumber = 4;
             }};
             size = 3;
             inaccuracy = 3f;
