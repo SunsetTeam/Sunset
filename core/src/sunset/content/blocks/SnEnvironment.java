@@ -25,6 +25,7 @@ public class SnEnvironment  {
     //floors
     chromakey,
     burheynaFloor, thermalBurheyna,
+    red, clearRed, crimson,
 
     greenStone, jadestone,
 
@@ -32,6 +33,8 @@ public class SnEnvironment  {
     greenStoneWall, jadestoneWall,
 
     yelliteWall, sayangWall, darkYelliteWall,
+
+    redWall, clearRedWall, crimsonWall,
     
     //breakable environment walls
     stagesWall,
@@ -125,6 +128,10 @@ public class SnEnvironment  {
             variants = 3;
             attributes.set(SnAttribute.burheyna, -0.1f);
         }};
+
+        red = new Floor("red-floor");
+        clearRed = new Floor("clear-red-floor");
+        crimson = new Floor("crimson");
         //endregion floors
         //region static walls
 
@@ -147,6 +154,10 @@ public class SnEnvironment  {
         darkYelliteWall = new StaticWall("dark-yellite-wall"){{
             variants = 2;
         }};
+
+        redWall = new StaticWall("red-floor-wall");
+        clearRedWall = new StaticWall("clear-red-floor-wall");
+        crimsonWall = new StaticWall("crimson-wall");
         //region breakable environment walls
         stagesWall = new BreakableEnvWall("stages-wall") {{
             variants = 1;
