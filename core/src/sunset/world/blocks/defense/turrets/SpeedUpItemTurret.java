@@ -18,7 +18,7 @@ public class SpeedUpItemTurret extends ItemTurret{
     // reload acceleration multiplier
     public float maxReloadMultiplier = 0.3f;
     // number of detonations per 1 shot
-    public float speedupPerShot = 0.01f;
+    public float shotSpeedUp = 0.01f;
     public float slowReloadTime = 100f;
 
     public SpeedUpItemTurret(String name){
@@ -34,22 +34,22 @@ public class SpeedUpItemTurret extends ItemTurret{
         () -> Mathf.clamp(entity.reloadCounter / reload)
         ));
         addBar("sunset-speedup", (SpeedUpItemTurretBuild entity) -> new Bar(
-        () -> Core.bundle.format("bar.sunset-speedup", Utils.stringsFixed(Mathf.clamp(entity.speedupScl / maxReloadMultiplier) * 100f)),
+        () -> Core.bundle.format("bar.sunset-speedup", Utils.stringsFixed(Mathf.clamp(entity.speedUp / maxReloadMultiplier) * 100f)),
         () -> entity.team.color,
-        () -> Mathf.clamp(entity.speedupScl / maxReloadMultiplier)
+        () -> Mathf.clamp(entity.speedUp / maxReloadMultiplier)
         ));
     }
 
     public class SpeedUpItemTurretBuild extends ItemTurretBuild{
-        public float speedupScl = 0f;
-        public float slowDownReload = 0f;
+        public float speedUp = 1f;
+        public float sReload = 1f;
 
         @Override
         public void updateTile(){
             super.updateTile();
-            if(slowDownReload >= 1f){
-                slowDownReload -= Time.delta;
-            }else speedupScl = Mathf.lerpDelta(speedupScl, 0f, 0.05f);
+            if(sReload >= 1f){
+                sReload -= Time.delta;
+            }else speedUp = Mathf.lerpDelta(speedUp, 0f, 0.05f);
         }
 
         @Override
@@ -59,15 +59,18 @@ public class SpeedUpItemTurret extends ItemTurret{
                 shoot(type);
                 reload = 0f;
             } else {
-                reload += (1 + speedupScl) * delta() * peekAmmo().reloadMultiplier * baseReloadSpeed();
+                reload += (1 + speedUp) * delta() * peekAmmo().reloadMultiplier * baseReloadSpeed();
             }
         }
 
         @Override
         protected void shoot(BulletType type){
             super.shoot(type);
-            slowDownReload = slowReloadTime;
-            speedupScl = Math.min(speedupScl + speedupPerShot, maxReloadMultiplier);
+            sReload = slowReloadTime;
+            if(speedUp < maxReloadMultiplier){
+                speedUp += shotSpeedUp;
+            }else speedUp = maxReloadMultiplier;
+         //   speedUp = Math.min(speedUp + speedUpPerShot, maxReloadMultiplier);
         }
     }
 }
