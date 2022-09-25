@@ -129,9 +129,15 @@ public class SnEnvironment  {
             attributes.set(SnAttribute.burheyna, -0.1f);
         }};
 
-        red = new Floor("red-floor");
-        clearRed = new Floor("clear-red-floor");
-        crimson = new Floor("crimson");
+        red = new Floor("red-floor") {{
+            variants = 3;
+        }};
+        clearRed = new Floor("clear-red-floor") {{
+            variants = 3;
+        }};
+        crimson = new Floor("crimson") {{
+            variants = 3;
+        }};
         //endregion floors
         //region static walls
 
@@ -155,9 +161,15 @@ public class SnEnvironment  {
             variants = 2;
         }};
 
-        redWall = new StaticWall("red-floor-wall");
-        clearRedWall = new StaticWall("clear-red-floor-wall");
-        crimsonWall = new StaticWall("crimson-wall");
+        redWall = new StaticWall("red-floor-wall") {{
+            variants = 2;
+        }};
+        clearRedWall = new StaticWall("clear-red-floor-wall") {{
+            variants = 2;
+        }};
+        crimsonWall = new StaticWall("crimson-wall") {{
+            variants = 2;
+        }};
         //region breakable environment walls
         stagesWall = new BreakableEnvWall("stages-wall") {{
             variants = 1;
