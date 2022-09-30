@@ -237,8 +237,9 @@ public class SnTurrets{
 
          */
 
-        artLightTurret = new ModPowerTurret("art-light-turret"){{
+        artLightTurret = new SpeedUpPowerTurret("art-light-turret"){{
             requirements(Category.turret, with(SnItems.fors, 150, SnItems.naturite, 100, SnItems.anzar, 75));
+
             shootType = new ArtilleryLightningBulletType(50f){{
                 hitShake = 3f;
                 lightning = 3;
@@ -247,20 +248,25 @@ public class SnTurrets{
                 hitEffect = SnFx.lbHit;
                 despawnEffect = Fx.none;
             }};
+            size = 3;
+            inaccuracy = 3f;
             shoot.shots = 1;
-            inaccuracy = 6f;
-            reload = 40f;
-            shootCone = 10f;
-            rotateSpeed = 6f;
+            reload = 60f;
+            shootCone = 19f;
+            rotateSpeed = 5f;
+            speedupPerShot = 0.15f;
+            maxReloadMultiplier = 0.4f;
             consumePower(3.5f);
             targetAir = true;
             range = 190f;
             shootEffect = Fx.lightningShoot;
             recoil = 1f;
-            size = 3;
-            health = 460;
+
             shootSound = Sounds.spark;
-            reloadBar = true;
+
+            shoot = new ShootAlternate(){{
+                spread = 5f;
+            }};
         }};
 
         zeus = new PayloadAmmoTurret("h-zeus"){{

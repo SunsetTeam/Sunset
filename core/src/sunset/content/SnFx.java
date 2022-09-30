@@ -533,34 +533,43 @@ public class SnFx {
         }
     }).layer(Layer.bullet - 1f),
 
-    forsStailerTrail = new Effect(30f, 78f, e -> {
-        color(SnPal.forsBulletBack, SnPal.forsBullet,  e.fin() * e.fin());
+    forsStailerTrail = new Effect(15, e -> {
+        color(SnPal.forsBulletBack, SnPal.forsBullet, e.fin() * e.fin());
+        stroke(0.5f + e.fout() * 1.5f);
+        rand.setSeed(e.id);
 
-        randLenVectors(e.id, 6, 1f + e.finpow() * 20, e.rotation + 180, 10f, (x, y) -> {
-            Fill.circle(e.x + x, e.y + y, 0.37f + e.fout() * 2f);
-            Fill.poly(e.x + x, e.y + y, 6, 4, Time.delta * 30);
-            Fill.square(e.x + x, e.y + y, 4, Time.delta * 10);
-        });
+        for(int i = 0; i < 3; i++){
+            float rot = e.rotation + rand.range(10f) + 180f;
+            v.trns(rot, rand.random(e.fin() * 20f));
+            Fill.poly(e.x + v.x, e.y + v.y, (int) rot, e.fout() * rand.random(2f, 7f) + 2f);
+            Fill.circle(e.x + v.x, e.y + v.y, e.fout() * rand.random(2f, 7f) + 3f);
+        }
     }),
 
-    eriusStailerTrail = new Effect(30f, 78f, e -> {
-        color(SnPal.eriusBulletBack, SnPal.eriusBullet,  e.fin() * e.fin());
+    eriusStailerTrail = new Effect(15, e -> {
+        color(SnPal.forsBulletBack, SnPal.forsBullet, e.fin() * e.fin());
+        stroke(0.5f + e.fout() * 1.5f);
+        rand.setSeed(e.id);
 
-        randLenVectors(e.id, 6, 1f + e.finpow() * 20, e.rotation + 180, 10f, (x, y) -> {
-            Fill.circle(e.x + x, e.y + y, 0.37f + e.fout() * 2f);
-            Fill.poly(e.x + x, e.y + y, 6, 4, Time.delta * 30);
-            Fill.square(e.x + x, e.y + y, 4, Time.delta * 10);
-        });
+        for(int i = 0; i < 3; i++){
+            float rot = e.rotation + rand.range(10f) + 180f;
+            v.trns(rot, rand.random(e.fin() * 20f));
+            Fill.poly(e.x + v.x, e.y + v.y, (int) rot, e.fout() * rand.random(2f, 7f) + 2f);
+            Fill.circle(e.x + v.x, e.y + v.y, e.fout() * rand.random(2f, 7f) + 3f);
+        }
     }),
 
-    anzarStailerTrail = new Effect(30f, 78f, e -> {
-        color(SnPal.anzarBulletBack, SnPal.anzarBullet,  e.fin() * e.fin());
+    anzarStailerTrail = new Effect(15, e -> {
+        color(SnPal.anzarBulletBack, SnPal.anzarBullet, e.fin() * e.fin());
+        stroke(0.5f + e.fout() * 1.5f);
+        rand.setSeed(e.id);
 
-        randLenVectors(e.id, 6, 1f + e.finpow() * 20, e.rotation + 180, 10f, (x, y) -> {
-            Fill.circle(e.x + x, e.y + y, 0.37f + e.fout() * 2f);
-            Fill.poly(e.x + x, e.y + y, 6, 4, Time.delta * 30);
-            Fill.square(e.x + x, e.y + y, 4, Time.delta * 10);
-        });
+        for(int i = 0; i < 3; i++){
+            float rot = e.rotation + rand.range(10f) + 180f;
+            v.trns(rot, rand.random(e.fin() * 20f));
+            Fill.poly(e.x + v.x, e.y + v.y, (int) rot, e.fout() * rand.random(2f, 7f) + 2f);
+            Fill.circle(e.x + v.x, e.y + v.y, e.fout() * rand.random(2f, 7f) + 3f);
+        }
     }),
 
     bigRocketTrail = new Effect(36f, 78f, e -> {
