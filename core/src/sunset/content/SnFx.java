@@ -35,6 +35,7 @@ import static mindustry.Vars.tilesize;
 
 public class SnFx {
     private static final Rand rand = new Rand();
+    public static final Vec2 v = new Vec2();
 
     public static final Effect
     //region unorganized
@@ -913,6 +914,16 @@ public class SnFx {
             }));
         }
     }),
+    thermalBubbles = new Effect(80f, e -> {
+        color(e.color, SnPal.thermalBuble, e.fin());
+
+        float length = 1f + e.finpow() * 4f;
+        rand.setSeed(e.id);
+        for(int i = 0; i < rand.random(1, 5); i++){
+            v.trns(rand.random(360f), rand.random(length));
+            Fill.circle(e.x + v.x, e.y + v.y, rand.random(0.08f, 0.3f) + e.fslope() * 0.8f);
+        }
+    }).layer(Layer.floor),
     nul=null;
     //endregion unused
 
