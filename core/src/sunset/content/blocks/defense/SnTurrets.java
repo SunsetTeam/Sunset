@@ -254,8 +254,8 @@ public class SnTurrets{
             reload = 60f;
             shootCone = 19f;
             rotateSpeed = 5f;
-            speedupPerShot = 0.15f;
-            maxReloadMultiplier = 0.4f;
+            shotSpeedUp = 0.05f;
+            maxReloadMultiplier = 1.5f;
             consumePower(3.5f);
             targetAir = true;
             range = 190f;

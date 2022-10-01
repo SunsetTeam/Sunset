@@ -41,8 +41,8 @@ public class SpeedUpItemTurret extends ItemTurret{
     }
 
     public class SpeedUpItemTurretBuild extends ItemTurretBuild{
-        public float speedUp = 1f;
-        public float sReload = 1f;
+        public float speedUp = 0f;
+        public float sReload = 0f;
 
         @Override
         public void updateTile(){
@@ -54,12 +54,12 @@ public class SpeedUpItemTurret extends ItemTurret{
 
         @Override
         protected void updateShooting() {
-            if (reload >= reloadCounter) {
+            if (reloadCounter >= reload) {
                 BulletType type = peekAmmo();
                 shoot(type);
-                reload = 0f;
+                reloadCounter = 0f;
             } else {
-                reload += (1 + speedUp) * delta() * peekAmmo().reloadMultiplier * baseReloadSpeed();
+                reloadCounter += (1 + speedUp) * delta() * peekAmmo().reloadMultiplier * baseReloadSpeed();
             }
         }
 
@@ -70,7 +70,7 @@ public class SpeedUpItemTurret extends ItemTurret{
             if(speedUp < maxReloadMultiplier){
                 speedUp += shotSpeedUp;
             }else speedUp = maxReloadMultiplier;
-         //   speedUp = Math.min(speedUp + speedUpPerShot, maxReloadMultiplier);
+            //   speedUp = Math.min(speedUp + speedUpPerShot, maxReloadMultiplier);
         }
     }
 }
