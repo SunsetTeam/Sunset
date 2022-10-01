@@ -76,6 +76,8 @@ public class SnPal {
     //gas
     giardGas = Color.valueOf("E17C7C"),
     //endregion status-effects
+    //liquid
+    thermalBuble = Color.valueOf("e84747"),
     //region planets
     azaria = Color.valueOf("5F0A0A"),
     azariaClouds = Color.valueOf("785C5C"),
