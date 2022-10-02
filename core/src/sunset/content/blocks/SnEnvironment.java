@@ -1,17 +1,14 @@
 package sunset.content.blocks;
 
 import arc.graphics.Color;
-import arc.util.Time;
 import mindustry.content.*;
 import mindustry.entities.Effect;
 import mindustry.graphics.CacheLayer;
 import mindustry.world.Block;
 import mindustry.world.blocks.environment.*;
-import mindustry.world.meta.Attribute;
 import sunset.content.SnAttribute;
 import sunset.content.SnItems;
 import sunset.content.SnLiquids;
-import sunset.content.SnStatusEffects;
 //import sunset.graphics.SnShaders;
 import sunset.graphics.*;
 import sunset.world.blocks.environment.*;
@@ -104,14 +101,12 @@ public class SnEnvironment  {
             drownTime = 180f;
             albedo = 0.5f;
         }};
-        thermalBurheyna = new Floor("burheyna-thermal-floor") {{
+        thermalBurheyna = new ThermalFloor("burheyna-thermal-floor", 0) {{
             speedMultiplier = 0.8f;
-            variants = 0;
             liquidDrop = SnLiquids.burheyna;
             liquidMultiplier = 1f;
             isLiquid = true;
             statusDuration = 120f;
-            cacheLayer = SnCacheLayer.burheyna;
             drownTime = 210f;
             albedo = 0.5f;
             attributes.set(SnAttribute.thermalBurheyna, 0.25f);
