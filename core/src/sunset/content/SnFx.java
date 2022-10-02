@@ -30,7 +30,9 @@ import sunset.utils.test.DrawFunc;
 import static arc.graphics.g2d.Draw.alpha;
 import static arc.graphics.g2d.Draw.color;
 import static arc.graphics.g2d.Lines.*;
+import static arc.math.Angles.angle;
 import static arc.math.Angles.randLenVectors;
+import static mindustry.Vars.maxBlockSize;
 import static mindustry.Vars.tilesize;
 
 public class SnFx {
@@ -923,14 +925,17 @@ public class SnFx {
             }));
         }
     }),
-    thermalBubbles = new Effect(80f, e -> {
+    thermalBubbles = new Effect(260f, e -> {
         color(e.color, SnPal.thermalBuble, e.fin());
-
-        float length = 1f + e.finpow() * 4f;
+        alpha(e.fslope()*2);
         rand.setSeed(e.id);
-        for(int i = 0; i < rand.random(1, 5); i++){
-            v.trns(rand.random(360f), rand.random(length));
-            Fill.circle(e.x + v.x, e.y + v.y, rand.random(0.08f, 0.3f) + e.fslope() * 0.8f);
+        for (int i = 0; i < rand.random(2, 6); i++) {
+            float
+            angle = rand.random(360f),
+            len = rand.random(1*4f/2f, 1*4f) * e.finpow(),
+            trnsx = e.x + Angles.trnsx(angle, len, rand.random(-(1*4f)/2f, 1*4f)),
+            trnsy = e.y + Angles.trnsy(angle, len, rand.random(-(1*4f)/2f, 1*4f));
+            Fill.circle(trnsx, trnsy,Interp.sine.apply(e.finpow() * 2f) * 0.8f);
         }
     }).layer(Layer.floor),
     nul=null;
