@@ -142,6 +142,7 @@ public class SnEnvironment  {
         darkYelliteWall = new StaticWall("dark-yellite-wall"){{
             variants = 2;
         }};
+        
         //region breakable environment walls
         stagesWall = new BreakableEnvWall("stages-wall") {{
             variants = 1;
