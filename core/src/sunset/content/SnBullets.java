@@ -236,7 +236,7 @@ public class SnBullets {
             splashDamage = damage / 2;
 
             trailColor = SnPal.eriusBullet;
-            trailEffect = SnFx.eriusStailerMissileHit;
+            trailEffect = SnFx.eriusStailerMissileTrail;
             trailRotation = true;
             trailInterval = 0.5f;
             despawnEffect = SnFx.eriusStailerMissileHit;
@@ -262,7 +262,7 @@ public class SnBullets {
             splashDamage = damage / 2;
 
             trailColor = SnPal.anzarBullet;
-            trailEffect = SnFx.anzarStailerMissileHit;
+            trailEffect = SnFx.anzarStailerMissileTrail;
             trailRotation = true;
             trailInterval = 0.5f;
             despawnEffect = SnFx.anzarStailerMissileHit;
