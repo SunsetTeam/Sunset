@@ -41,7 +41,7 @@ public class UnitTypeExt extends SnUnitType {
                 }
             }
         }
-        // We transfer the filling of information about the instrument to the instrument itself, if it supports
+        // We transfer the filling of information about the weapon to the weapon itself, if it supports this
         if (weapons.any()) {
             stats.remove(Stat.weapons);
             stats.add(Stat.weapons, SnStatValues.weaponListExt(this, weapons));
