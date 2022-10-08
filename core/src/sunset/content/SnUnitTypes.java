@@ -2,6 +2,7 @@ package sunset.content;
 
 import arc.graphics.*;
 import arc.math.Mathf;
+import arc.math.geom.Vec2;
 import arc.util.*;
 import mindustry.*;
 import mindustry.ai.types.*;
@@ -906,7 +907,7 @@ public class SnUnitTypes{
                 range = 310;
             }});
         }};
-        star = new UnitTypeExt("star"){{
+        star = new TailUnitType("star"){{
             health = 5800;
             hitSize = 55;
             speed = 2.7f;
@@ -929,32 +930,10 @@ public class SnUnitTypes{
 
             abilities.add(new OverdriveAbility(0.75f, 8 * 60, 13 * Vars.tilesize));
 
-            weapons.add(new WeaponExt("star-gun"){{
-                x = 0;
-                y = -12;
-                mirror = false;
-                rotate = true;
-                shootCone = 2f;
-                inaccuracy = 0f;
-                range = 380;
-                reload = 287f;
-                recoil = 3.5f;
-                bullet = SnBullets.starStunBullet;
-            }});
-            weapons.add(new ChainWeapon("galaxy-weak"){{
-                damageTick = 0f;
-                buildingBuff = 0f;
-                healTick = 6.5f;
-                maxChainLength = 3;
-                alternate = false;
-                mirror = true;
-                rotate = true;
-                x = 24;
-                shootCone = 2f;
-                range = 210;
-                draw = true;
-                laserLayer = Layer.flyingUnit;
-            }});
+            firstJoint = new Vec2(0, 41);
+            tail("star-tail3", 44, 75, 63);
+            tail("star-tail2", 72, 57, 31);
+            tail("star-tail1", 110, 82, 58);
         }};
         galaxy = new UnitTypeExt("galaxy"){{
             health = 20000;
