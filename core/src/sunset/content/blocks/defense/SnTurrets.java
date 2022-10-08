@@ -66,7 +66,6 @@ public class SnTurrets{
                     SnItems.fors, SnBullets.forsBullet,
                     SnItems.erius, SnBullets.eriusBullet
             );
-            shoot.shots = 3;
             shoot = new ShootSpread(3, 4f);
             size = 2;
             reload = 37f;
@@ -203,24 +202,27 @@ public class SnTurrets{
         artLightTurret = new SpeedUpPowerTurret("art-light-turret"){{
             requirements(Category.turret, with(SnItems.fors, 150, SnItems.naturite, 100, SnItems.anzar, 75));
 
-            shootType = new ArtilleryLightningBulletType(50f){{
+            shootType = new ArtilleryLightningBulletType(40f){{
                 hitShake = 3f;
                 lightning = 3;
-                lightningColor = SnPal.yellowTrailBack;
+                lightningColor = SnPal.anzarBullet;
                 maxRange = 200;
                 hitEffect = SnFx.lbHit;
                 despawnEffect = Fx.none;
+                collidesAir = false;
+                collidesGround = true;
             }};
             size = 3;
             inaccuracy = 3f;
             shoot.shots = 1;
-            reload = 60f;
+            reload = 80f;
             shootCone = 19f;
             rotateSpeed = 5f;
-            shotSpeedUp = 0.05f;
-            maxReloadMultiplier = 1.5f;
+            shotSpeedUp = 0.009f;
+            maxReloadMultiplier = 2.4f;
             consumePower(3.5f);
-            targetAir = true;
+            targetAir = false;
+            targetGround = true;
             range = 190f;
             shootEffect = Fx.lightningShoot;
             recoil = 1f;
@@ -230,6 +232,31 @@ public class SnTurrets{
             shoot = new ShootAlternate(){{
                 spread = 5f;
             }};
+        }};
+
+        stailer = new ModItemTurret("stailer"){{
+            requirements(Category.turret, with(SnItems.fors, 160f, SnItems.erius, 155f, SnItems.naturite, 30f));
+            ammo(
+                    SnItems.erius, SnBullets.eriusStailerAimMissile,
+                    SnItems.anzar, SnBullets.anzarStailerAimMissile
+            );
+            size = 3;
+            shoot = new ShootBarrel(){{
+                shotDelay = 3f;
+                shots = 10;
+            }};
+            velocityRnd = 0.15f;
+            reload = 50f;
+            shootCone = 35f;
+            rotateSpeed = 2f;
+            recoil = 1f;
+            shake = 2f;
+            range = 22 * Vars.tilesize;
+            inaccuracy = 25;
+            shootCone = 40;
+            targetGround = false;
+            targetAir = true;
+
         }};
 
         trigger = new ModPowerTurret("trigger"){{
@@ -242,28 +269,6 @@ public class SnTurrets{
             targetAir = true;
             shootType = SnBullets.overheatBullet;
             reloadBar = false;
-        }};
-
-        stailer = new ModItemTurret("stailer"){{
-            requirements(Category.turret, with(SnItems.fors, 160f, SnItems.erius, 155f, SnItems.naturite, 30f));
-            ammo(
-                    SnItems.fors, SnBullets.forsStailerAimMissile,
-                    SnItems.erius, SnBullets.eriusStailerAimMissile,
-                    SnItems.anzar, SnBullets.anzarStailerAimMissile
-            );
-            size = 3;
-            shoot.shots = 6;
-            velocityRnd = 0.15f;
-            reload = 30f;
-            shootCone = 35f;
-            rotateSpeed = 2f;
-            recoil = 1f;
-            shake = 2f;
-            range = 22 * Vars.tilesize;
-            inaccuracy = 25;
-            shootCone = 40;
-            targetGround = false;
-            targetAir = true;
         }};
 
         //endregion 3x3

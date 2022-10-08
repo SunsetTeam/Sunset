@@ -535,43 +535,49 @@ public class SnFx {
         }
     }).layer(Layer.bullet - 1f),
 
-    forsStailerTrail = new Effect(15, e -> {
-        color(SnPal.forsBulletBack, SnPal.forsBullet, e.fin() * e.fin());
+    eriusStailerMissileHit = new Effect(15, e -> {
+        color(SnPal.eriusBulletBack, SnPal.eriusBullet, e.fin() * e.fin());
         stroke(0.5f + e.fout() * 1.5f);
         rand.setSeed(e.id);
 
-        for(int i = 0; i < 3; i++){
-            float rot = e.rotation + rand.range(10f) + 180f;
-            v.trns(rot, rand.random(e.fin() * 20f));
-            Fill.poly(e.x + v.x, e.y + v.y, (int) rot, e.fout() * rand.random(2f, 7f) + 2f);
-            Fill.circle(e.x + v.x, e.y + v.y, e.fout() * rand.random(2f, 7f) + 3f);
-        }
+        randLenVectors(e.id, 3, 3 + 23 * e.fin(), e.rotation, 22, (x, y) -> {
+            Fill.circle(e.x + x, e.y + y, e.fout() * rand.random(1.5f, 3.2f));
+            Drawf.light(e.x + x, e.y + y, e.fout() * 4.5f, SnPal.eriusBullet, 0.7f);
+        });
     }),
 
-    eriusStailerTrail = new Effect(15, e -> {
-        color(SnPal.forsBulletBack, SnPal.forsBullet, e.fin() * e.fin());
-        stroke(0.5f + e.fout() * 1.5f);
-        rand.setSeed(e.id);
-
-        for(int i = 0; i < 3; i++){
-            float rot = e.rotation + rand.range(10f) + 180f;
-            v.trns(rot, rand.random(e.fin() * 20f));
-            Fill.poly(e.x + v.x, e.y + v.y, (int) rot, e.fout() * rand.random(2f, 7f) + 2f);
-            Fill.circle(e.x + v.x, e.y + v.y, e.fout() * rand.random(2f, 7f) + 3f);
-        }
-    }),
-
-    anzarStailerTrail = new Effect(15, e -> {
+    anzarStailerMissileHit = new Effect(15, e -> {
         color(SnPal.anzarBulletBack, SnPal.anzarBullet, e.fin() * e.fin());
         stroke(0.5f + e.fout() * 1.5f);
         rand.setSeed(e.id);
 
-        for(int i = 0; i < 3; i++){
-            float rot = e.rotation + rand.range(10f) + 180f;
-            v.trns(rot, rand.random(e.fin() * 20f));
-            Fill.poly(e.x + v.x, e.y + v.y, (int) rot, e.fout() * rand.random(2f, 7f) + 2f);
-            Fill.circle(e.x + v.x, e.y + v.y, e.fout() * rand.random(2f, 7f) + 3f);
-        }
+        randLenVectors(e.id, 3, 3 + 23 * e.fin(), e.rotation, 22, (x, y) -> {
+            Fill.circle(e.x + x, e.y + y, e.fout() * rand.random(1.5f, 3.2f));
+            Drawf.light(e.x + x, e.y + y, e.fout() * 4.5f, SnPal.forsBullet, 0.7f);
+        });
+    }),
+
+    eriusStailerMissileTrail = new Effect(15, e -> {
+        color(SnPal.forsBulletBack, SnPal.forsBullet, e.fin() * e.fin());
+        stroke(0.5f + e.fout() * 1.5f);
+        rand.setSeed(e.id);
+
+        randLenVectors(e.id, 5, 1.4f + e.finpow() * 20, e.rotation + 180, 10f, (x, y) -> {
+            Fill.poly(e.x, e.y, 5, e.fout() * rand.random(1.5f, 3f) + 1f);
+            Fill.circle(e.x + x, e.y + y, e.fout() * rand.random(1f, 2f) + 1f);
+            lineAngle(e.x + x, e.y + y, 40, e.fout() * rand.random(2f, 4f) + 1.5f);
+        });
+    }),
+
+    anzarStailerMissileTrail = new Effect(15, e -> {
+        color(SnPal.anzarBulletBack, SnPal.anzarBullet, e.fin() * e.fin());
+        stroke(0.5f + e.fout() * 1.5f);
+
+        randLenVectors(e.id, 5, 1.4f + e.finpow() * 20, e.rotation + 180, 10f, (x, y) -> {
+            Fill.poly(e.x, e.y, 5, e.fout() * rand.random(1.5f, 3f) + 1f);
+            Fill.circle(e.x + x, e.y + y, e.fout() * rand.random(1f, 2f) + 1f);
+            lineAngle(e.x + x, e.y + y, 40, e.fout() * rand.random(2f, 4f) + 1.5f);
+        });
     }),
 
     bigRocketTrail = new Effect(36f, 78f, e -> {
