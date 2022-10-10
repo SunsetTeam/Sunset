@@ -221,7 +221,7 @@ public class SnBullets {
         };
 
         //region missile
-        eriusStailerAimMissile = new AimBulletType(5.5f, 8f){{
+        eriusStailerAimMissile = new BasicBulletType(5.5f, 8f){{
             sprite = "missile";
             width = 7;
             height = 13;
@@ -247,7 +247,7 @@ public class SnBullets {
             backColor = SnPal.eriusBulletBack;
         }};
 
-        anzarStailerAimMissile = new AimBulletType(4f, 11f){{
+        anzarStailerAimMissile = new BasicBulletType(4f, 11f){{
             sprite = "missile";
             width = 7;
             height = 13;

@@ -33,23 +33,15 @@ import static mma.ModVars.fullName;
 public class SnTurrets{
     public static Block
     //2x2
-    sway, excellence, carbine, pulsation, reflection, discharge,
-
+    sway, excellence, carbine, pulsation, reflection,
     //3x3
-    major, artLightTurret, zeus, stailer, trigger, flower,
-
+    fulmina, stailer, trigger, flower,
     //4x4
-    shotgunTurret, admiral, aimus, flood, chain,
-    drr,
-
+    aimus, chain,
     //5x5
-    sniper, defibrillator,
-
     //6x6
     trident, radius,
-
     //7x7
-    halberd, pinwheel,
 
     //missile
     sunrise,//2x2
@@ -71,9 +63,9 @@ public class SnTurrets{
             reload = 37f;
             range = 19 * Vars.tilesize;
             recoil = 1.4f;
-            inaccuracy = 9f;
+            inaccuracy = 1f;
             rotateSpeed = 6f;
-            shootCone = 15f;
+            shootCone = 20f;
             shootSound = Sounds.shoot;
             ammoUseEffect = Fx.casing1;
             targetAir = true;
@@ -199,7 +191,32 @@ public class SnTurrets{
         }};
         //endregion 2x2
         //region 3x3
-        artLightTurret = new SpeedUpPowerTurret("art-light-turret"){{
+        stailer = new ModItemTurret("stailer"){{
+            requirements(Category.turret, with(SnItems.fors, 160f, SnItems.erius, 155f, SnItems.naturite, 30f));
+            ammo(
+                    SnItems.erius, SnBullets.eriusStailerAimMissile,
+                    SnItems.anzar, SnBullets.anzarStailerAimMissile
+            );
+            size = 3;
+            shoot = new ShootBarrel(){{
+                shotDelay = 3f;
+                shots = 10;
+            }};
+            velocityRnd = 0.15f;
+            reload = 50f;
+            shootCone = 35f;
+            rotateSpeed = 2f;
+            recoil = 1f;
+            shake = 2f;
+            range = 22 * Vars.tilesize;
+            inaccuracy = 25;
+            shootCone = 40;
+            targetGround = false;
+            targetAir = true;
+
+        }};
+
+        fulmina = new SpeedUpPowerTurret("fulmina"){{
             requirements(Category.turret, with(SnItems.fors, 150, SnItems.naturite, 100, SnItems.anzar, 75));
 
             shootType = new ArtilleryLightningBulletType(40f){{
@@ -232,31 +249,6 @@ public class SnTurrets{
             shoot = new ShootAlternate(){{
                 spread = 5f;
             }};
-        }};
-
-        stailer = new ModItemTurret("stailer"){{
-            requirements(Category.turret, with(SnItems.fors, 160f, SnItems.erius, 155f, SnItems.naturite, 30f));
-            ammo(
-                    SnItems.erius, SnBullets.eriusStailerAimMissile,
-                    SnItems.anzar, SnBullets.anzarStailerAimMissile
-            );
-            size = 3;
-            shoot = new ShootBarrel(){{
-                shotDelay = 3f;
-                shots = 10;
-            }};
-            velocityRnd = 0.15f;
-            reload = 50f;
-            shootCone = 35f;
-            rotateSpeed = 2f;
-            recoil = 1f;
-            shake = 2f;
-            range = 22 * Vars.tilesize;
-            inaccuracy = 25;
-            shootCone = 40;
-            targetGround = false;
-            targetAir = true;
-
         }};
 
         trigger = new ModPowerTurret("trigger"){{

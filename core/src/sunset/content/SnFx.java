@@ -535,7 +535,7 @@ public class SnFx {
         }
     }).layer(Layer.bullet - 1f),
 
-    eriusStailerMissileHit = new Effect(15, e -> {
+    eriusStailerMissileHit = new Effect(10, e -> {
         color(SnPal.eriusBulletBack, SnPal.eriusBullet, e.fin() * e.fin());
         stroke(0.5f + e.fout() * 1.5f);
         rand.setSeed(e.id);
@@ -546,7 +546,7 @@ public class SnFx {
         });
     }),
 
-    anzarStailerMissileHit = new Effect(15, e -> {
+    anzarStailerMissileHit = new Effect(10, e -> {
         color(SnPal.anzarBulletBack, SnPal.anzarBullet, e.fin() * e.fin());
         stroke(0.5f + e.fout() * 1.5f);
         rand.setSeed(e.id);
@@ -558,25 +558,28 @@ public class SnFx {
     }),
 
     eriusStailerMissileTrail = new Effect(15, e -> {
-        color(SnPal.forsBulletBack, SnPal.forsBullet, e.fin() * e.fin());
+        color(SnPal.eriusBulletBack, SnPal.eriusBullet, e.fin() * e.fin());
         stroke(0.5f + e.fout() * 1.5f);
         rand.setSeed(e.id);
 
-        randLenVectors(e.id, 5, 1.4f + e.finpow() * 20, e.rotation + 180, 10f, (x, y) -> {
-            Fill.poly(e.x, e.y, 5, e.fout() * rand.random(1.5f, 3f) + 1f);
-            Fill.circle(e.x + x, e.y + y, e.fout() * rand.random(1f, 2f) + 1f);
-            lineAngle(e.x + x, e.y + y, 40, e.fout() * rand.random(2f, 4f) + 1.5f);
+        randLenVectors(e.id, 5, 24f + e.finpow(), e.rotation + 180, 10f, (x, y) -> {
+            lineAngle(e.x + x, e.y + y, 150, e.fout());
+            lineAngle(e.x + x, e.y + y, 210, e.fout());
+            Fill.square(e.x + x, e.y + y, e.fout());
+            alpha(0.5f);
+            Fill.circle(e.x + x, e.y + y, e.fout());
         });
     }),
 
     anzarStailerMissileTrail = new Effect(15, e -> {
         color(SnPal.anzarBulletBack, SnPal.anzarBullet, e.fin() * e.fin());
-        stroke(0.5f + e.fout() * 1.5f);
 
-        randLenVectors(e.id, 5, 1.4f + e.finpow() * 20, e.rotation + 180, 10f, (x, y) -> {
-            Fill.poly(e.x, e.y, 5, e.fout() * rand.random(1.5f, 3f) + 1f);
-            Fill.circle(e.x + x, e.y + y, e.fout() * rand.random(1f, 2f) + 1f);
-            lineAngle(e.x + x, e.y + y, 40, e.fout() * rand.random(2f, 4f) + 1.5f);
+        randLenVectors(e.id, 5, 24f + e.finpow(), e.rotation + 180, 10f, (x, y) -> {
+            lineAngle(e.x + x, e.y + y, 150, e.fout());
+            lineAngle(e.x + x, e.y + y, 210, e.fout());
+            Fill.square(e.x + x, e.y + y, e.fout());
+            alpha(0.5f);
+            Fill.circle(e.x + x, e.y + y, e.fout());
         });
     }),
 
