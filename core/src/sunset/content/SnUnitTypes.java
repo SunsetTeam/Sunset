@@ -930,7 +930,7 @@ public class SnUnitTypes{
             abilities.add(new OverdriveAbility(0.75f, 8 * 60, 13 * Vars.tilesize));
 
             final float pixels = 32f / tilesize;
-            firstJoint = new Vec2(0, 41 / pixels);
+            physics.firstJoint = new Vec2(0, 41 / pixels);
             tail("star-tail1", 55 / pixels, 10 / pixels, 58 / pixels);
             tail("star-tail2", 36 / pixels, 7 / pixels, 31 / pixels);
             tail("star-tail3", 22 / pixels, 6 / pixels, 63 / pixels);

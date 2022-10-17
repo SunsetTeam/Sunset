@@ -111,7 +111,7 @@ public class Laser{
     public void updateTile(){
         charge = build.laser.out;
         onStaticWall = false;
-        target=null;
+        target = null;
         if(!enabled || charge <= 0f){
 //            charge=0f;
             return;
@@ -143,14 +143,12 @@ public class Laser{
         if(target instanceof LaserBuild b && b.block().inputsLaser){
             setTargetLenses(b.laser);
             b.laser.in += charge;
-        }
-        else{
-            LaserModule lm = SnVars.logic.hybridLaserBlockLogic.laserModule(target.buildOn());
+        }else{
+            LaserModule lm = target != null  ? SnVars.logic.hybridLaserBlockLogic.laserModule(target.buildOn()) : null;
             if(lm != null){
                 setTargetLenses(lm);
                 lm.in += charge;
-            }
-            else{
+            }else{
                 getEndOffset(Tmp.v2);
                 hitEffectAt(end.x - Tmp.v2.x, end.y - Tmp.v2.y);
                 if(target != null){
