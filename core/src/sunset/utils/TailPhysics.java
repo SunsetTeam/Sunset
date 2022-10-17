@@ -5,13 +5,14 @@ import arc.func.*;
 import arc.graphics.g2d.*;
 import arc.math.*;
 import arc.math.geom.*;
+import arc.struct.*;
 import arc.util.*;
 import mindustry.*;
 
 import java.util.*;
 
 public class TailPhysics{
-    public ArrayList<TailSector> tails = new ArrayList<>();
+    public Seq<TailSector> tails = new Seq<>();
 
     private void set(TailJoint[] joints, int i, float x, float y){
         if(joints[i] == null) joints[i] = new TailJoint(x, y);
@@ -21,11 +22,11 @@ public class TailPhysics{
     public TailJoint[] ensureJoints(TailJoint[] joints, float x, float y, float rotation, boolean init){
 
         if(joints == null || init){
-            if(joints == null) joints = new TailJoint[tails.size() + 2];
+            if(joints == null) joints = new TailJoint[tails.size + 2];
             set(joints, 0, x, y);
             float sin = Mathf.sin(rotation / Mathf.radDeg), cos = Mathf.cos(rotation / Mathf.radDeg), len = firstJoint.len();
             set(joints, 0, x, y);
-            for(int i = 0; i < tails.size(); i++){
+            for(int i = 0; i < tails.size; i++){
                 TailSector tail = tails.get(i);
                 set(joints, i + 1, x + cos * len, y + sin * len);
                 len += tail.length;
@@ -73,9 +74,9 @@ public class TailPhysics{
     }
 
     public void eachJointWithAngle(TailJoint[] joints, Cons2<Integer,Float> consumer){
-        for(int i = tails.size() - 1; i >= 0; i--){
+        for(int i = tails.size - 1; i >= 0; i--){
             float angle = Mathf.atan2(joints[i + 2].x - joints[i + 1].x, joints[i + 2].y - joints[i + 1].y) + Mathf.PI / 2;
-            consumer.get(i,angle);
+            consumer.get(i,angle*Mathf.radiansToDegrees);
         }
     }
 
@@ -102,16 +103,16 @@ public class TailPhysics{
             //float sin = Mathf.sin(angle), cos = Mathf.cos(angle);
             float w = texture.width / 32f * Vars.tilesize, h = texture.height / 32f * Vars.tilesize;
 
-            tmp.set(-joint.x, -joint.y).rotateRad(angle);
+            tmp.set(-joint.x, -joint.y).rotate(angle);
             float x1 = tmp.x, y1 = tmp.y;
 
-            tmp.set(-joint.x, -joint.y - h).rotateRad(angle);
+            tmp.set(-joint.x, -joint.y - h).rotate(angle);
             float x2 = tmp.x, y2 = tmp.y;
 
-            tmp.set(-joint.x + w, -joint.y - h).rotateRad(angle);
+            tmp.set(-joint.x + w, -joint.y - h).rotate(angle);
             float x3 = tmp.x, y3 = tmp.y;
 
-            tmp.set(-joint.x + w, -joint.y).rotateRad(angle);
+            tmp.set(-joint.x + w, -joint.y).rotate(angle);
             float x4 = tmp.x, y4 = tmp.y;
 
             Fill.quad(texture,

@@ -51,11 +51,10 @@ public class TailUnitType extends UnitTypeExt{
         jointsKey.set(unit,joints);
         float z = !unit.isAdded() ? Draw.z() : unit.elevation > 0.5f ? (lowAltitude ? Layer.flyingUnitLow : Layer.flyingUnit) : groundLayer + Mathf.clamp(hitSize / 4000f, 0, 0.01f);
         Draw.z(z - 0.01f);
-        for(int i = physics.tails.size() - 1; i >= 0; i--){
-            TailSector tail = physics.tails.get(i);
-            float angle = Mathf.atan2(joints[i + 2].x - joints[i + 1].x, joints[i + 2].y - joints[i + 1].y) + Mathf.PI / 2;
-            tail.draw(joints[i + 1], angle);
-        }
+        physics.eachJointWithAngle(joints,(index, angle)->{
+            //degrees!!!
+            physics.tails.get(index).draw(joints[index + 1], angle);//degrees!!!
+        });
         Draw.z(z);
 
         Draw.reset();
