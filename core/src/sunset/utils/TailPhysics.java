@@ -8,6 +8,7 @@ import arc.math.geom.*;
 import arc.struct.*;
 import arc.util.*;
 import mindustry.*;
+import mma.*;
 
 import java.util.*;
 
@@ -95,7 +96,7 @@ public class TailPhysics{
         }
 
         public void load(){
-            texture = Core.atlas.find("sunset-" + textureName);
+            texture = Core.atlas.find(ModVars.fullName(textureName));
         }
 
         public void draw(TailJoint at, float angle){
