@@ -1,4 +1,4 @@
-package monolith.planets;
+package sunset.maps.generators;
 
 import arc.math.*;
 import arc.util.*;
@@ -17,6 +17,7 @@ import mindustry.maps.generators.*;
 /** 
 	@author uujuju 
 	other updates will be made in monolith(mayme make in a separate mod ig)
+	not needed imports imported
 */
 
 public class ModularPlanetGenerator extends PlanetGenerator {
