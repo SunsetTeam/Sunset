@@ -117,7 +117,7 @@ public class Sunset extends MMAMod{
         }
         Events.on(ClientLoadEvent.class, e -> {
             Table t = new Table();
-            t.add(new Image(Core.atlas.find("sunset-logo")));
+            t.add(new Image(Core.atlas.find(ModVars.fullName("logo"))));
             t.pack();
             scene.add(t.visible(() -> state.isMenu()));
         });

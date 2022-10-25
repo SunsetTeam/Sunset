@@ -918,8 +918,7 @@ public class SnUnitTypes{
             circleTarget = false;
             range = 380;
 
-            engineOffset = 18f;
-            engineSize = 4f;
+            engineSize = 0f;
 
             itemCapacity = 100;
             //commandLimit = 6;
@@ -930,10 +929,11 @@ public class SnUnitTypes{
 
             abilities.add(new OverdriveAbility(0.75f, 8 * 60, 13 * Vars.tilesize));
 
-            firstJoint = new Vec2(0, 41);
-            tail("star-tail3", 44, 75, 63);
-            tail("star-tail2", 72, 57, 31);
-            tail("star-tail1", 110, 82, 58);
+            final float pixels = 32f / tilesize;
+            physics.firstJoint = new Vec2(0, 41 / pixels);
+            tail("star-tail1", 55 / pixels, 10 / pixels, 58 / pixels);
+            tail("star-tail2", 36 / pixels, 7 / pixels, 31 / pixels);
+            tail("star-tail3", 22 / pixels, 6 / pixels, 63 / pixels);
         }};
         galaxy = new UnitTypeExt("galaxy"){{
             health = 20000;

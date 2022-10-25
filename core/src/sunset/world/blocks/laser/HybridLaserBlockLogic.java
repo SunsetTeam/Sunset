@@ -55,18 +55,6 @@ public class HybridLaserBlockLogic implements AsyncProcess{
         });
     }
 
-    private void addBlock(@Nullable Building b){
-        if(b == null || blocksWithLasers[b.block().id]==null)
-            return;
-
-        hybridBuildings[b.tile.array()] = new LaserModule(b, blocksWithLasers[b.block().id]);
-
-    }
-
-    private void removeBlock(Building b){
-        hybridBuildings[b.tile.array()] = null;
-    }
-
     @Override
     public void init(){
         hybridBuildings = new LaserModule[Vars.world.width() * Vars.world.height()];
@@ -99,7 +87,20 @@ public class HybridLaserBlockLogic implements AsyncProcess{
         }
     }
 
+    private void addBlock(@Nullable Building b){
+        if(b == null || blocksWithLasers[b.block().id]==null)
+            return;
+
+        hybridBuildings[b.tile.array()] = new LaserModule(b, blocksWithLasers[b.block().id]);
+
+    }
+
+    private void removeBlock(@NotNull Building b){
+        hybridBuildings[b.tile.array()] = null;
+    }
+
     public LaserModule laserModule(Building b){
+        if (b==null)return null;
         return hybridBuildings[b.tile.array()];
     }
 }

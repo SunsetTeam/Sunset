@@ -18,11 +18,14 @@ public class SnShaders{
     public static RadarCircleLineShader radarCircleLine;
     public static SnSurfaceShader burheyna;
 
+    public static CustomProgressShader customProgressSprite;
     static{
         Shaders.class.getName();
     }
 
     public static void init(){
+        customProgressSprite = new CustomProgressShader();
+
         radarCircleLine=new RadarCircleLineShader();
         burheyna = new SnSurfaceShader("burheyna");
 //        arkycite = new SnSurfaceShader("arkycite");
@@ -51,6 +54,51 @@ public class SnShaders{
         return new Vec2().set(position).sub(cameraOffset).scl(vec2(displayScale));
     }
 
+    public static class CustomProgressShader extends SnLoadShader{
+        public TextureRegion maskRegion;
+        public int maskSize;
+        public float progress;
+        public TextureRegion region;
+
+        public CustomProgressShader(){
+            super("custom-progress", "default");
+        }
+
+        public CustomProgressShader set(TextureRegion maskRegion, int maskSize, float progress, TextureRegion toDrawRegion){
+            assert maskRegion.texture==toDrawRegion.texture;
+            this.maskRegion = maskRegion;
+            this.maskSize = maskSize;
+            this.progress = progress;
+            this.region = toDrawRegion;
+            return this;
+        }
+
+        @Override
+        public void bind(){
+            super.bind();
+
+//            region.texture.bind(0);
+//            setUniformi("u_texture", 0);
+//            maskRegion.texture.bind();
+//            setUniformi("u_texture_mask", 0);
+        }
+
+        @Override
+        public void apply(){
+            super.apply();
+            setUniformf("u_uv", region.u, region.v);
+            setUniformf("u_uv2", region.u2, region.v2);
+            setUniformf("u_uv_mask", maskRegion.u, maskRegion.v);
+            setUniformf("u_uv2_mask", maskRegion.u2, maskRegion.v2);
+            setUniformi("u_mask_progress", maskSize);
+            setUniformf("u_progress", progress);
+//            region.texture.bind(0);
+//            setUniformi("u_texture", 0);
+//            maskRegion.texture.bind(1);
+//            setUniformi("u_texture_mask", 0);
+        }
+
+    }
     public static class RadarCircleLineShader extends SnLoadShader{
         public final Color lightColor = new Color();
         private final Vec2 centerPosition = new Vec2();
