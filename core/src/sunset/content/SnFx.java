@@ -562,9 +562,15 @@ public class SnFx {
         stroke(0.5f + e.fout() * 1.5f);
         rand.setSeed(e.id);
 
-        randLenVectors(e.id, 5, 24f + e.finpow(), e.rotation + 180, 10f, (x, y) -> {
-            lineAngle(e.x + x, e.y + y, 150, e.fout());
-            lineAngle(e.x + x, e.y + y, 210, e.fout());
+        rand.setSeed(e.id);
+
+        for(int i = 0; i < 2; i++){
+            float rot = e.rotation + rand.range(15f) + 180f;
+            v.trns(rot, rand.random(e.fin() * 27f));
+            lineAngle(e.x + v.x, e.y + v.y, rot, e.fout() * rand.random(2f, 7f) + 1.5f);
+        }
+
+        randLenVectors(e.id, 5, 24f + e.finpow(), e.rotation + 180, 15f, (x, y) -> {
             Fill.square(e.x + x, e.y + y, e.fout());
             alpha(0.5f);
             Fill.circle(e.x + x, e.y + y, e.fout());
@@ -574,9 +580,13 @@ public class SnFx {
     anzarStailerMissileTrail = new Effect(15, e -> {
         color(SnPal.anzarBulletBack, SnPal.anzarBullet, e.fin() * e.fin());
 
-        randLenVectors(e.id, 5, 24f + e.finpow(), e.rotation + 180, 10f, (x, y) -> {
-            lineAngle(e.x + x, e.y + y, 150, e.fout());
-            lineAngle(e.x + x, e.y + y, 210, e.fout());
+        for(int i = 0; i < 2; i++){
+            float rot = e.rotation + rand.range(15f) + 180f;
+            v.trns(rot, rand.random(e.fin() * 27f));
+            lineAngle(e.x + v.x, e.y + v.y, rot, e.fout() * rand.random(2f, 7f) + 1.5f);
+        }
+
+        randLenVectors(e.id, 5, 24f + e.finpow(), e.rotation + 180, 15f, (x, y) -> {
             Fill.square(e.x + x, e.y + y, e.fout());
             alpha(0.5f);
             Fill.circle(e.x + x, e.y + y, e.fout());

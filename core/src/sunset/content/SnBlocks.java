@@ -56,75 +56,6 @@ public class SnBlocks implements Runnable{
         testBullet4;
 
         private static void loadBullets(){
-
-
-            testBullet0 = new BasicBulletType(1, 1){{
-                lifetime = 400f;
-                hitEffect = SnFx.unused1;
-                drag = -0.003f;
-                homingRange = 10f;
-                homingPower = 0.2f;
-                ammoMultiplier = 2;
-            }};
-            testBullet1 = new ArtilleryBulletType(5, 100){{
-                fragBullets = 6;
-                fragBullet = new LaserBulletType(50);
-                fragRandomSpread = 360;
-            }};
-            testBullet2 = new BasicBulletType(5, 50){{
-                fragBullets = 3;
-                fragRandomSpread = 45;
-                fragBullet = new BasicBulletType(5, 50){{
-                    fragBullets = 3;
-                    fragRandomSpread = 45;
-                    fragBullet = new BasicBulletType(5, 50){{
-                        fragBullets = 3;
-                        fragRandomSpread = 45;
-                        fragBullet = new BasicBulletType(5, 50){{
-                            fragBullets = 3;
-                            fragRandomSpread = 45;
-                            fragBullet = new BasicBulletType(5, 50){{
-                                fragBullets = 3;
-                                fragRandomSpread = 45;
-                                fragBullet = new BasicBulletType(5, 50){{
-                                    fragBullets = 3;
-                                    fragRandomSpread = 45;
-                                    fragBullet = new BasicBulletType(5, 50){{
-                                        fragBullets = 3;
-                                        fragRandomSpread = 45;
-                                        fragBullet = new BasicBulletType(5, 50){{
-                                            fragBullets = 3;
-                                            fragRandomSpread = 45;
-                                            fragBullet = new BasicBulletType(5, 50){{
-                                                fragBullets = 3;
-                                                fragRandomSpread = 45;
-                                                fragBullet = new BasicBulletType(5, 50){{
-                                                    fragBullets = 360;
-                                                    fragRandomSpread = 360;
-                                                    fragBullet = new LaserBulletType(100);
-                                                }};
-                                            }};
-                                        }};
-                                    }};
-                                }};
-                            }};
-                        }};
-                    }};
-                }};
-            }};
-            testBullet3 = new LightningContinuousLaserBulletType(40){{
-                length = 1140f;
-                width = 13f;
-                lightning = 7;
-                lightningLength = 20;
-                lightningDamage = 30f;
-                lifetime = 40f;
-                hitEffect = SnFx.unused2;
-                drag = -0.003f;
-                homingRange = 10f;
-                homingPower = 0.2f;
-            }};
-            testBullet4 = null;
         }
 
         public static void load(){
@@ -157,29 +88,6 @@ public class SnBlocks implements Runnable{
                 itemCapacity=40;
             }};
             //region testing
-            new ModItemTurret("test-turret"){{
-                requirements(Category.turret, with(Items.copper, 2));
-
-                ammo(
-                Items.copper, testBullet0,
-                Items.lead, testBullet1,
-                Items.metaglass, testBullet2,
-                Items.graphite, testBullet3,
-                Items.sand, testBullet4
-                );
-                health = 780;
-                size = 2;
-                reload = 24f;
-                range = 370f;
-                recoil = 0.3f;
-                inaccuracy = 1.1f;
-                rotateSpeed = 7f;
-                shootSound = Sounds.pew;
-                targetAir = true;
-                unlocked = true;
-                alwaysUnlocked = true;
-                hideDetails = false;
-            }};
             //endregion testing
             new MissileSiloCommander("launch-tower"){{
 
