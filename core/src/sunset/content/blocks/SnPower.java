@@ -64,7 +64,7 @@ public class SnPower{
             ambientSoundVolume = 0.06f;
 
             consumeLiquids(LiquidStack.with(
-            SnGas.gyner, 6f / 60f,
+            SnGas.zeher, 6f / 60f,
             SnLiquids.sayang, 3f / 60f
             ));
         }};

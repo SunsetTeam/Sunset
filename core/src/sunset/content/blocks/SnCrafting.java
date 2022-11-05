@@ -121,7 +121,7 @@ public class SnCrafting{
             ambientSoundVolume = 0.025f;
 
             consumeItem(SnItems.nedirium, 1);
-            consumeLiquids(new LiquidStack(SnGas.gyner, 6f / 60f), new LiquidStack(SnGas.arhelinium, 4f / 60f));
+            consumeLiquids(new LiquidStack(SnGas.zeher, 6f / 60f), new LiquidStack(SnGas.arhelinium, 4f / 60f));
             consumePower(4.6f);
         }};
         bioSynthesizer = new MultiCrafter("bio-synthesizer"){{
@@ -130,7 +130,7 @@ public class SnCrafting{
                     .output(new ItemStack(SnItems.yantai, 1), null)
                     .consume(ItemStack.with(SnItems.nedirium, 2), LiquidStack.with(SnLiquids.sayang, 12/60));
             Recipe.with().produceTime(1.3f * Time.toSeconds)
-                    .output(null, new LiquidStack(SnLiquids.nabunium, 12))
+                    .output(null, new LiquidStack(SnLiquids.voirum, 12))
                     .consume(ItemStack.with(SnItems.entirium, 1), LiquidStack.with(SnLiquids.sayang, 12/60, SnLiquids.messira, 12/60, SnGas.arhelinium, 12/60));
             Recipe.with().produceTime(1.2f * Time.toSeconds)
                     .output(new ItemStack(SnItems.entirium, 4), null)
@@ -166,7 +166,7 @@ public class SnCrafting{
             outputItem = new ItemStack(SnItems.zerinium, 1);
             craftTime = 37f;
             consumeItems(with(SnItems.zarium, 2, SnItems.planatrium, 3));
-            consumeLiquid(SnGas.gyner, 4f / 60f);
+            consumeLiquid(SnGas.zeher, 4f / 60f);
             consumePower(8f);
         }};
         //endregion standard

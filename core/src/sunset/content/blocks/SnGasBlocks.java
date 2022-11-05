@@ -133,7 +133,7 @@ public class SnGasBlocks{
             size = 4;
             attribute = SnAttribute.gas;
 
-            outputLiquid = new LiquidStack(SnGas.gyner, 9f);
+            outputLiquid = new LiquidStack(SnGas.zeher, 9f);
             hasItems = true;
             hasLiquids = true;
 //            hasLiquids = true;
