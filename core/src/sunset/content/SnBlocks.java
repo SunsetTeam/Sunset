@@ -68,6 +68,7 @@ public class SnBlocks implements Runnable{
 
         public static void load(){
             loadBullets();
+			/*
             new SnUnitFactory("ground-factory"){{
                 requirements(Category.units, with(Items.copper, 50, Items.lead, 120, Items.silicon, 80));
                 plans = Seq.with(
@@ -88,6 +89,7 @@ public class SnBlocks implements Runnable{
                 size = 3;
                 consumePower(1.2f);
             }};
+			
             new MagneticTurret("concent"){{
                 requirements(Category.turret, with(Items.copper, 2));
                 bulletType.speed=2f;

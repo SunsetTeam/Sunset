@@ -31,7 +31,7 @@ public class SnItems {
         naturite = new Item("naturite", Color.valueOf("f9f688")) {{
             cost = 1.8f;
         }};
-        zarium = new Item("anzar", Color.valueOf("feb380")) {{
+        zarium = new Item("zarium", Color.valueOf("feb380")) {{
             cost = 2f;
         }};
         azaliaBud = new Item("azalia-bud", Color.valueOf("a52f49")) {{
@@ -45,7 +45,7 @@ public class SnItems {
         nobium = new Item("nobium", Color.valueOf("fbffda")) {{
             cost = 5f;
         }};
-        lenothium = new Item("reneubite", Color.valueOf("b0fbff")) {{
+        lenothium = new Item("lenothium", Color.valueOf("b0fbff")) {{
             cost = 3.5f;
         }};
         yantai = new Item("yantai", Color.valueOf("ffed93")) {{
@@ -57,7 +57,7 @@ public class SnItems {
             explosiveness = 0.2f;
             radioactivity = 1f;
         }};
-        entarium = new Item("enojie", Color.valueOf("61f1aa")) {{
+        entarium = new Item("entarium", Color.valueOf("61f1aa")) {{
             cost = 6f;
             radioactivity = 0.8f;
             explosiveness = 0.01f;

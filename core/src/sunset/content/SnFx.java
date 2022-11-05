@@ -559,16 +559,16 @@ public class SnFx {
 
     fulminaLightningHit = new Effect(22, e -> {
         color(SnPal.anzarBulletBack);
-        Lines.circle(e.x, e.y, 14f * e.finpow() + 1);
+        Lines.circle(e.x, e.y, 15f * e.finpow() + 1);
 
         rand.setSeed(e.id);
         for(int i = 0; i < 6; i++) {
-            float len = rand.random(4f), rot = rand.range(20f) + e.rotation;
+            float len = rand.random(5f), rot = rand.range(34f) + e.rotation;
 
-            e.scaled(e.lifetime * rand.random(0.2f, 1f), b -> {
+            e.scaled(e.lifetime * rand.random(0.2f, 1.5f), b -> {
                 alpha(0.7f * b.fout());
                 v.trns(rot, len * b.finpow());
-                Fill.circle(e.x + v.x, e.y + v.y, 1.3f * b.fin() + 0.5f);
+                Fill.circle(e.x + v.x, e.y + v.y, 3f * b.fin() + 0.5f);
             });
         }
         Drawf.light(e.x, e.y, 20f, SnPal.anzarBulletBack, 0.6f * e.fout());
@@ -586,12 +586,10 @@ public class SnFx {
         }
 
         randLenVectors(e.id, 6, 18f + e.finpow(), e.rotation + 180, 7f, (x, y) -> {
-            alpha(0.6f);
             Fill.circle(e.x + x, e.y + y, e.fout());
         });
 
         randLenVectors(e.id, 10, 22f + e.finpow(), e.rotation + 180, 9f, (x, y) -> {
-            alpha(0.7f);
             Fill.square(e.x + x, e.y + y, e.fout());
         });
     }),
@@ -607,12 +605,10 @@ public class SnFx {
         }
 
         randLenVectors(e.id, 6, 18f + e.finpow(), e.rotation + 180, 7f, (x, y) -> {
-            alpha(0.6f);
             Fill.circle(e.x + x, e.y + y, e.fout());
         });
 
         randLenVectors(e.id, 10, 22f + e.finpow(), e.rotation + 180, 9f, (x, y) -> {
-            alpha(0.7f);
             Fill.square(e.x + x, e.y + y, e.fout());
         });
     }),
