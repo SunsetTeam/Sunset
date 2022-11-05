@@ -131,9 +131,9 @@ public class SnCrafting{
                     .consume(ItemStack.with(SnItems.nedirium, 2), LiquidStack.with(SnLiquids.sayang, 12/60));
             Recipe.with().produceTime(1.3f * Time.toSeconds)
                     .output(null, new LiquidStack(SnLiquids.voirum, 12))
-                    .consume(ItemStack.with(SnItems.entirium, 1), LiquidStack.with(SnLiquids.sayang, 12/60, SnLiquids.messira, 12/60, SnGas.arhelinium, 12/60));
+                    .consume(ItemStack.with(SnItems.entarium, 1), LiquidStack.with(SnLiquids.sayang, 12/60, SnLiquids.messira, 12/60, SnGas.arhelinium, 12/60));
             Recipe.with().produceTime(1.2f * Time.toSeconds)
-                    .output(new ItemStack(SnItems.entirium, 4), null)
+                    .output(new ItemStack(SnItems.entarium, 4), null)
                     .consume(null, LiquidStack.with(SnLiquids.burheyna, 12/60, SnGas.hyneris, 12/60));
             Recipe.with().produceTime(1.2f * Time.toSeconds)
                     .output(new ItemStack(SnItems.naturite, 2), null)
@@ -143,7 +143,7 @@ public class SnCrafting{
         enojieSynthesizer = new GenericCrafter("enojie-synthesizer"){{
             requirements(Category.crafting, with(SnItems.erius, 200, SnItems.nobium, 150, SnItems.fors, 145, SnItems.zarium, 130));
 
-            outputItem = new ItemStack(SnItems.entirium, 2);
+            outputItem = new ItemStack(SnItems.entarium, 2);
             craftTime = 58f;
             size = 4;
             hasPower = true;
@@ -156,7 +156,7 @@ public class SnCrafting{
         }};
 
         zeriniumZavod = new GenericCrafter("zerinium-zavod"){{
-            requirements(Category.crafting, with(SnItems.erius, 180, SnItems.nobium, 160, SnItems.zarium, 155, SnItems.entirium, 40));
+            requirements(Category.crafting, with(SnItems.erius, 180, SnItems.nobium, 160, SnItems.zarium, 155, SnItems.entarium, 40));
             size = 4;
             itemCapacity = 45;
             liquidCapacity = 40f;
