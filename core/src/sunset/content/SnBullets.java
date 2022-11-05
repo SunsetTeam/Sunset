@@ -221,24 +221,21 @@ public class SnBullets {
         };
 
         //region missile
-        eriusStailerAimMissile = new BasicBulletType(5.5f, 8f){{
+        eriusStailerAimMissile = new BasicBulletType(5f, 15f){{
             sprite = "missile";
-            width = 7;
+            width = 9;
             height = 13;
-            lifetime = 90;
-            maxRange = 180;
+            lifetime = 50;
             homingPower = 0.01f;
-            homingRange = 0;
-            drag = -0.02f;
-            weaveScale = 1;
-            weaveMag = 1;
+            homingRange = 20;
+            drag = -0.002f;
             splashDamageRadius = 7f;
             splashDamage = damage / 2;
 
             trailColor = SnPal.eriusBullet;
             trailEffect = SnFx.eriusStailerMissileTrail;
             trailRotation = true;
-            trailInterval = 0.5f;
+            trailInterval = 0.4f;
             despawnEffect = SnFx.eriusStailerMissileHit;
             collidesGround = false;
             collidesAir = true;
@@ -247,24 +244,21 @@ public class SnBullets {
             backColor = SnPal.eriusBulletBack;
         }};
 
-        anzarStailerAimMissile = new BasicBulletType(4f, 11f){{
+        anzarStailerAimMissile = new BasicBulletType(4f, 20f){{
             sprite = "missile";
-            width = 7;
+            width = 9;
             height = 13;
-            lifetime = 90;
-            maxRange = 180;
+            lifetime = 50;
             homingPower = 0.01f;
-            homingRange = 0;
-            drag = -0.02f;
-            weaveScale = 1;
-            weaveMag = 1;
+            homingRange = 20;
+            drag = -0.002f;
             splashDamageRadius = 6f;
             splashDamage = damage / 2;
 
             trailColor = SnPal.anzarBullet;
             trailEffect = SnFx.anzarStailerMissileTrail;
             trailRotation = true;
-            trailInterval = 0.5f;
+            trailInterval = 0.4f;
             despawnEffect = SnFx.anzarStailerMissileHit;
             collidesGround = false;
             collidesAir = true;

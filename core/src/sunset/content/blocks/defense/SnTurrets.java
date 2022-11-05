@@ -208,7 +208,7 @@ public class SnTurrets{
             rotateSpeed = 2f;
             recoil = 1f;
             shake = 2f;
-            range = 22 * Vars.tilesize;
+            range = 25 * Vars.tilesize;
             inaccuracy = 25;
             shootCone = 40;
             targetGround = false;
