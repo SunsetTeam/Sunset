@@ -252,7 +252,7 @@ public class SnTurrets{
         }};
 
         trigger = new ModPowerTurret("trigger"){{
-            requirements(Category.turret, with(Items.silicon, 275, Items.titanium, 125, SnItems.entirium, 45));
+            requirements(Category.turret, with(Items.silicon, 275, Items.titanium, 125, SnItems.entarium, 45));
             size = 3;
             consumePower(9f);
             range = 340f;
@@ -321,7 +321,7 @@ public class SnTurrets{
         //endregion 5x5
         //region 6x6
         trident = new ModPowerTurret("trident"){{
-            requirements(Category.turret, with(Items.copper, 1000, Items.lead, 810, Items.silicon, 790, Items.plastanium, 780, Items.surgeAlloy, 670, SnItems.entirium, 600, SnItems.nobium, 400, SnItems.planatrium, 370));
+            requirements(Category.turret, with(Items.copper, 1000, Items.lead, 810, Items.silicon, 790, Items.plastanium, 780, Items.surgeAlloy, 670, SnItems.entarium, 600, SnItems.nobium, 400, SnItems.planatrium, 370));
             health = 5400;
             range = 247f;
             size = 6;
@@ -428,7 +428,7 @@ public class SnTurrets{
             buildVisibility = BuildVisibility.shown;
         }};
         art = new MissileSiloTurret("art"){{
-            requirements(Category.turret, with(Items.copper, 1400, Items.lead, 1300, Items.plastanium, 1010, Items.silicon, 980, Items.graphite, 975, Items.surgeAlloy, 800, SnItems.entirium, 750));
+            requirements(Category.turret, with(Items.copper, 1400, Items.lead, 1300, Items.plastanium, 1010, Items.silicon, 980, Items.graphite, 975, Items.surgeAlloy, 800, SnItems.entarium, 750));
             launchEffect = SnFx.missileLaunchMedium;
             size = 5;
             itemCapacity = 2400;

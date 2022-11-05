@@ -55,7 +55,7 @@ public class SnWalls{
         //endregion
         //region AntiPierceWall
         enojiewall = new SnWall("enojie-wall"){{
-            requirements(Category.defense, with(SnItems.enojie, 6));
+            requirements(Category.defense, with(SnItems.entarium, 6));
             pierceMultiplier = 2;
             collidedDamageMultiplier = 0.85f;
             size = 1;
@@ -65,7 +65,7 @@ public class SnWalls{
             schematicPriority = 10;
         }};
         enojieWallLarge = new SnWall("enojie-wall-large"){{
-            requirements(Category.defense, with(SnItems.enojie, 24));
+            requirements(Category.defense, with(SnItems.entarium, 24));
             pierceMultiplier = 5;
             collidedDamageMultiplier = 0.7225f;
             size = 2;

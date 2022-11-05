@@ -11,7 +11,7 @@ public class SnItems {
     //raw
     fors, erius, nedirium, planatrium,
     //crafting
-    zarium, naturite, lenothium, nobium, azaliaBud, yantai, entirium, zerinium;
+    zarium, naturite, lenothium, nobium, azaliaBud, yantai, entarium, zerinium;
     //endregion azaria
     //other
     //flameid, coldent, testItem;
@@ -57,7 +57,7 @@ public class SnItems {
             explosiveness = 0.2f;
             radioactivity = 1f;
         }};
-        entirium = new Item("enojie", Color.valueOf("61f1aa")) {{
+        entarium = new Item("enojie", Color.valueOf("61f1aa")) {{
             cost = 6f;
             radioactivity = 0.8f;
             explosiveness = 0.01f;
