@@ -51,10 +51,6 @@ public class SnSoundControl{
 
     public void reload(){
 
-        snDarkMusic.addAll(SnMusics.acid_rain);
-        snAmbientMusic.addAll(SnMusics.storm, SnMusics.deceit, SnMusics.deceit);
-        snBossMusic.addAll(SnMusics.heavy_arsenal, SnMusics.cold_fire);
-
     }
 
     private static class MusicField{
