@@ -89,7 +89,7 @@ public class SnBlocks implements Runnable{
                 size = 3;
                 consumePower(1.2f);
             }};
-			
+		*/	
             new MagneticTurret("concent"){{
                 requirements(Category.turret, with(Items.copper, 2));
                 bulletType.speed=2f;
