@@ -535,7 +535,7 @@ public class SnFx {
         }
     }).layer(Layer.bullet - 1f),
 
-    eriusStailerMissileHit = new Effect(10, e -> {
+    eriusStailerMissileHit = new Effect(12, e -> {
         color(SnPal.eriusBulletBack, SnPal.eriusBullet, e.fin() * e.fin());
         stroke(0.5f + e.fout() * 1.5f);
         rand.setSeed(e.id);
@@ -546,7 +546,7 @@ public class SnFx {
         });
     }),
 
-    anzarStailerMissileHit = new Effect(10, e -> {
+    anzarStailerMissileHit = new Effect(12, e -> {
         color(SnPal.anzarBulletBack, SnPal.anzarBullet, e.fin() * e.fin());
         stroke(0.5f + e.fout() * 1.5f);
         rand.setSeed(e.id);
@@ -557,7 +557,24 @@ public class SnFx {
         });
     }),
 
-    eriusStailerMissileTrail = new Effect(15, e -> {
+    fulminaLightningHit = new Effect(22, e -> {
+        color(SnPal.anzarBulletBack);
+        Lines.circle(e.x, e.y, 14f * e.finpow() + 1);
+
+        rand.setSeed(e.id);
+        for(int i = 0; i < 6; i++) {
+            float len = rand.random(4f), rot = rand.range(20f) + e.rotation;
+
+            e.scaled(e.lifetime * rand.random(0.2f, 1f), b -> {
+                alpha(0.7f * b.fout());
+                v.trns(rot, len * b.finpow());
+                Fill.circle(e.x + v.x, e.y + v.y, 1.3f * b.fin() + 0.5f);
+            });
+        }
+        Drawf.light(e.x, e.y, 20f, SnPal.anzarBulletBack, 0.6f * e.fout());
+    }),
+
+    eriusStailerMissileTrail = new Effect(30, e -> {
         color(SnPal.eriusBulletBack, SnPal.eriusBullet, e.fin() * e.fin());
         stroke(0.5f + e.fout() * 1.5f);
         rand.setSeed(e.id);
@@ -579,7 +596,7 @@ public class SnFx {
         });
     }),
 
-    anzarStailerMissileTrail = new Effect(15, e -> {
+    anzarStailerMissileTrail = new Effect(30, e -> {
         color(SnPal.anzarBulletBack, SnPal.anzarBullet, e.fin() * e.fin());
         rand.setSeed(e.id);
 

@@ -106,53 +106,6 @@ object SnStatusEffects {
             }
 
         }
-        incineration = stackableStatusEffect("incineration") {
-            color = Color.valueOf("BD4E17")
-            stackEntries(
-                    stackEntry(health = 0.97f, speed = 0.97f),
-                    stackEntry(health = 0.96f, speed = 0.97f),
-                    stackEntry(health = 0.95f, speed = 0.97f),
-                    stackEntry(health = 0.94f, speed = 0.97f),
-                    stackEntry(health = 0.93f, speed = 0.98f),
-                    stackEntry(health = 0.92f, speed = 0.95f),
-                    stackEntry(health = 0.88f, speed = 0.95f),
-                    stackEntry(health = 0.86f, speed = 0.95f),
-                    stackEntry(health = 0.83f, speed = 0.974f),
-                    stackEntry(health = 0.80f, speed = 0.93f),
-                    stackEntry(health = 0.79f, speed = 0.93f),
-                    stackEntry(health = 0.75f, speed = 0.93f),
-                    stackEntry(health = 0.71f, speed = 0.93f),
-                    stackEntry(health = 0.67f, speed = 0.92f),
-                    stackEntry(health = 0.60f, speed = 0.92f),
-                    stackEntry(health = 0.55f, speed = 0.91f),
-                    stackEntry(health = 0.50f, speed = 0.91f),
-                    stackEntry(health = 0.39f, speed = 0.91f),
-                    stackEntry(health = 0.21f, speed = 0.90f),
-                    stackEntry(health = 0.11f, speed = 0.89f),
-                    stackEntry(health = 0.04f, speed = 0.85f),
-                    null
-            )
-            healthMultiplier = 0.97f
-            speedMultiplier = 0.97f
-            color = Color.black
-
-            var draw = true
-            stacksDrawer = StacksDrawer { unit, stackIndex ->
-                if (draw) return@StacksDrawer
-                Vars.renderer.effectBuffer.begin()
-                draw = true
-                unit.draw()
-                draw = false
-                Vars.renderer.effectBuffer.end()
-                Draw.z((if (unit.isFlying) Layer.flyingUnit else Layer.groundUnit) + 1)
-                Draw.color(color, (stackIndex + 1f) / maxStacks())
-                val wrap = Draw.wrap(Vars.renderer.effectBuffer.texture)
-                wrap.flip(false, true)
-                Draw.rect(wrap, Core.camera.position.x, Core.camera.position.y, Core.camera.width, Core.camera.height)
-                //Vars.renderer.effectBuffer.blit(Shaders.screenspace);
-                Draw.color()
-            }
-        }
         //endregion stackable
     }
 

@@ -5,7 +5,7 @@ import gas.type.Gas;
 import mindustry.content.StatusEffects;
 
 public class SnGas  {
-    public static Gas hyneris, gyner, arhelinium;
+    public static Gas hyneris, zeher, arhelinium;
 
     public static void load() {
         hyneris = new Gas("hyneris") {{
@@ -15,7 +15,7 @@ public class SnGas  {
             effect = StatusEffects.wet;
         }};
 
-        gyner = new Gas("gyner") {{
+        zeher = new Gas("zeher") {{
             color = Color.valueOf("d0e2ff");
             explosiveness = 0.1f;
             flammability = 0.1f;
@@ -24,7 +24,6 @@ public class SnGas  {
         }};
         arhelinium = new Gas("arhelinium") {{
            color = Color.valueOf("eea2f5");
-
         }};
     }
 }

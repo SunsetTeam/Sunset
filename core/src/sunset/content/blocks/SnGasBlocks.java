@@ -94,7 +94,7 @@ public class SnGasBlocks{
             range = 6;
         }};
         nobiumGasBridge = new GasBridge("nobium-gas-bridge"){{
-            requirements(Category.liquid, with(SnItems.anzar, 5, SnItems.erius, 15, SnItems.nobium, 7, SnItems.fors, 5f));
+            requirements(Category.liquid, with(SnItems.zarium, 5, SnItems.erius, 15, SnItems.nobium, 7, SnItems.fors, 5f));
             health = 110;
             range = 12;
             size = 1;

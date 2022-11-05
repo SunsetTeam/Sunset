@@ -11,7 +11,7 @@ public class SnItems {
     //raw
     fors, erius, nedirium, planatrium,
     //crafting
-    anzar, naturite,  reneubite, nobium, azaliaBud, yantai, enojie, zerinium;
+    zarium, naturite, lenothium, nobium, azaliaBud, yantai, entirium, zerinium;
     //endregion azaria
     //other
     //flameid, coldent, testItem;
@@ -20,7 +20,7 @@ public class SnItems {
 
     public static void load() {
         //region azaria
-        fors = new Item("fors", Color.valueOf("ed606e")) {{
+        fors = new Item("fors", Color.valueOf("d74354")) {{
             cost = 1.4f;
             hardness = 3;
         }};
@@ -28,41 +28,41 @@ public class SnItems {
             cost = 1.2f;
             hardness = 2;
         }};
-        naturite = new Item("naturite", Color.valueOf("dff988")) {{
+        naturite = new Item("naturite", Color.valueOf("f9f688")) {{
             cost = 1.8f;
         }};
-        anzar = new Item("anzar", Color.valueOf("feb380")) {{
+        zarium = new Item("anzar", Color.valueOf("feb380")) {{
             cost = 2f;
         }};
         azaliaBud = new Item("azalia-bud", Color.valueOf("a52f49")) {{
             cost = 4f;
             flammability = 0.6f;
         }};
-        nedirium = new Item("nedirium", Color.valueOf("e2ffd6")) {{
+        nedirium = new Item("nedirium", Color.valueOf("ffd6f2")) {{
             cost = 3f;
             hardness = 4;
         }};
-        nobium = new Item("nobium", Color.valueOf("e2fbee")) {{
+        nobium = new Item("nobium", Color.valueOf("fbffda")) {{
             cost = 5f;
         }};
-        reneubite = new Item("reneubite", Color.valueOf("b0fbff")) {{
+        lenothium = new Item("reneubite", Color.valueOf("b0fbff")) {{
             cost = 3.5f;
         }};
         yantai = new Item("yantai", Color.valueOf("ffed93")) {{
             cost = 4.3f;
         }};
-        planatrium = new Item("planatrium", Color.valueOf("b287ec")) {{
+        planatrium = new Item("planatrium", Color.valueOf("c997e2")) {{
             cost = 5f;
             hardness = 4;
             explosiveness = 0.2f;
             radioactivity = 1f;
         }};
-        enojie = new Item("enojie", Color.valueOf("99f2c7")) {{
+        entirium = new Item("enojie", Color.valueOf("61f1aa")) {{
             cost = 6f;
             radioactivity = 0.8f;
             explosiveness = 0.01f;
         }};
-        zerinium = new Item("zerinium", Color.valueOf("c1c4cb")) {{
+        zerinium = new Item("zerinium", Color.valueOf("c6d8d9")) {{
             cost = 5f;
         }};
         //endregion azaria

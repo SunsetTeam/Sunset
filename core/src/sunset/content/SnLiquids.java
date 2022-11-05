@@ -6,7 +6,7 @@ import mindustry.type.*;
 import sunset.type.*;
 
 public class SnLiquids{
-    public static Liquid burheyna, sayang, messira, nabunium;
+    public static Liquid burheyna, sayang, messira, voirum;
 
     //your stepfa
     public static void load(){
@@ -30,7 +30,7 @@ public class SnLiquids{
             heatCapacity = 0.5f;
             barColor = Color.valueOf("40e2c6");
         }};
-        nabunium = new Liquid("nabunium", Color.valueOf("70de73")){{
+        voirum = new Liquid("voirum", Color.valueOf("70de73")){{
             viscosity = 0.7f;
             explosiveness = 0.1f;
             heatCapacity = 0.5f;

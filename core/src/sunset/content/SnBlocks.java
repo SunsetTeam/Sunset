@@ -19,24 +19,29 @@ import static mindustry.type.ItemStack.with;
 
 public class SnBlocks implements Runnable{
     public Runnable[] list = {
-    SnPayloadBlocks::load,
-    SnProjectors::load,
-    SnTurrets::load,
+    SnCrafting::load,
     SnWalls::load,
+    SnProjectors::load,
+
+    SnDistribution::load,
+    SnLiquidBlocks::load,
+    SnGasBlocks::load,
+
+    SnPower::load,
+    SnLasers::load,
+    SnProduction::load,
 
     SnOtherBlocks::load,
-    SnDistribution::load,
-    SnEnvironment::load,
-    SnLiquidBlocks::load,
-    SnLogicBlocks::load,
-    SnPower::load,
-    SnCrafting::load,
-    SnProduction::load,
-    SnSandbox::load,
+
+    SnTurrets::load,
     SnUnitBlocks::load,
-    SnLasers::load,
-    SnGasBlocks::load,
+    SnPayloadBlocks::load,
+
+    SnSandbox::load,
     SnTests::load,
+    SnLogicBlocks::load,
+
+    SnEnvironment::load,
     };
 
     public static void load(){

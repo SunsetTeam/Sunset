@@ -32,7 +32,7 @@ public class SnCrafting{
 
             hasItems = true;
             itemCapacity = 15;
-            outputItem = new ItemStack(SnItems.anzar, 1);
+            outputItem = new ItemStack(SnItems.zarium, 1);
             craftTime = 36f;
             warmupSpeed = 0.009f;
             size = 2;
@@ -65,7 +65,7 @@ public class SnCrafting{
         }};
 
         nobiumCaster = new GenericCrafter("nobium-caster"){{
-            requirements(Category.crafting, with(SnItems.fors, 110, SnItems.erius, 95, SnItems.naturite, 80, SnItems.anzar, 65));
+            requirements(Category.crafting, with(SnItems.fors, 110, SnItems.erius, 95, SnItems.naturite, 80, SnItems.zarium, 65));
 
             outputItem = new ItemStack(SnItems.nobium, 3);
             craftEffect = Fx.pulverize;
@@ -87,7 +87,7 @@ public class SnCrafting{
         }};
 
         nobiumMagnetizer = new GenericCrafter("nobium-magnetizer"){{
-            requirements(Category.crafting, with(SnItems.fors, 190, SnItems.erius, 150, SnItems.anzar, 100, SnItems.nobium, 40));
+            requirements(Category.crafting, with(SnItems.fors, 190, SnItems.erius, 150, SnItems.zarium, 100, SnItems.nobium, 40));
 
             outputItem = new ItemStack(SnItems.nobium, 10);
             craftEffect = Fx.pulverize;
@@ -105,9 +105,9 @@ public class SnCrafting{
         }};
 
         collider = new GenericCrafter("collider"){{
-            requirements(Category.crafting, with(SnItems.fors, 105, SnItems.erius, 100, SnItems.anzar, 65));
+            requirements(Category.crafting, with(SnItems.fors, 105, SnItems.erius, 100, SnItems.zarium, 65));
 
-            outputItem = new ItemStack(SnItems.reneubite, 1);
+            outputItem = new ItemStack(SnItems.lenothium, 1);
             //craftEffect = SnFx.;
             //updateEffect = SnFx.;
             craftTime = 25f;
@@ -131,9 +131,9 @@ public class SnCrafting{
                     .consume(ItemStack.with(SnItems.nedirium, 2), LiquidStack.with(SnLiquids.sayang, 12/60));
             Recipe.with().produceTime(1.3f * Time.toSeconds)
                     .output(null, new LiquidStack(SnLiquids.nabunium, 12))
-                    .consume(ItemStack.with(SnItems.enojie, 1), LiquidStack.with(SnLiquids.sayang, 12/60, SnLiquids.messira, 12/60, SnGas.arhelinium, 12/60));
+                    .consume(ItemStack.with(SnItems.entirium, 1), LiquidStack.with(SnLiquids.sayang, 12/60, SnLiquids.messira, 12/60, SnGas.arhelinium, 12/60));
             Recipe.with().produceTime(1.2f * Time.toSeconds)
-                    .output(new ItemStack(SnItems.enojie, 4), null)
+                    .output(new ItemStack(SnItems.entirium, 4), null)
                     .consume(null, LiquidStack.with(SnLiquids.burheyna, 12/60, SnGas.hyneris, 12/60));
             Recipe.with().produceTime(1.2f * Time.toSeconds)
                     .output(new ItemStack(SnItems.naturite, 2), null)
@@ -141,9 +141,9 @@ public class SnCrafting{
         }};
 
         enojieSynthesizer = new GenericCrafter("enojie-synthesizer"){{
-            requirements(Category.crafting, with(SnItems.erius, 200, SnItems.nobium, 150, SnItems.fors, 145, SnItems.anzar, 130));
+            requirements(Category.crafting, with(SnItems.erius, 200, SnItems.nobium, 150, SnItems.fors, 145, SnItems.zarium, 130));
 
-            outputItem = new ItemStack(SnItems.enojie, 2);
+            outputItem = new ItemStack(SnItems.entirium, 2);
             craftTime = 58f;
             size = 4;
             hasPower = true;
@@ -156,7 +156,7 @@ public class SnCrafting{
         }};
 
         zeriniumZavod = new GenericCrafter("zerinium-zavod"){{
-            requirements(Category.crafting, with(SnItems.erius, 180, SnItems.nobium, 160, SnItems.anzar, 155, SnItems.enojie, 40));
+            requirements(Category.crafting, with(SnItems.erius, 180, SnItems.nobium, 160, SnItems.zarium, 155, SnItems.entirium, 40));
             size = 4;
             itemCapacity = 45;
             liquidCapacity = 40f;
@@ -165,7 +165,7 @@ public class SnCrafting{
 
             outputItem = new ItemStack(SnItems.zerinium, 1);
             craftTime = 37f;
-            consumeItems(with(SnItems.anzar, 2, SnItems.planatrium, 3));
+            consumeItems(with(SnItems.zarium, 2, SnItems.planatrium, 3));
             consumeLiquid(SnGas.gyner, 4f / 60f);
             consumePower(8f);
         }};

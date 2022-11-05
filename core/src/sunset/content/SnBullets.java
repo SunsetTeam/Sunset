@@ -40,7 +40,7 @@ public class SnBullets {
         forsBullet, forsBulletFrag, eriusBulletFrag, eriusBullet,
         sniperSurge,
         //missile
-        eriusStailerAimMissile, anzarStailerAimMissile, nobiumAimMissile, naturiteAimMissile, renubiteAimMissile,
+        eriusStailerMissile, anzarStailerMissile, nobiumAimMissile, naturiteAimMissile, renubiteAimMissile,
         //artillery
         //flak
         naturiteCircleBullet, anzarCircleBullet,
@@ -97,8 +97,8 @@ public class SnBullets {
             homingPower = 0.1f;
             homingRange = 6 * Vars.tilesize;
 
-            weaveMag = 3;
-            weaveScale = 3;
+            weaveMag = 2;
+            weaveScale = 2;
         }};
         eriusBulletFrag = new BasicBulletType(5f, 12, "bullet") {{
             width = 9f;
@@ -117,8 +117,8 @@ public class SnBullets {
             homingPower = 0.1f;
             homingRange = 6 * Vars.tilesize;
 
-            weaveMag = 3;
-            weaveScale = 3;
+            weaveMag = 2;
+            weaveScale = 2;
         }};
 
         forsBullet = new BasicBulletType(5f, 12, "bullet") {{
@@ -137,8 +137,8 @@ public class SnBullets {
             collidesGround = true;
             collidesAir = true;
 
-            weaveMag = 3;
-            weaveScale = 3;
+            weaveMag = 2;
+            weaveScale = 2;
 
             fragBullet = forsBulletFrag;
             fragBullets = 1;
@@ -161,8 +161,8 @@ public class SnBullets {
             collidesGround = true;
             collidesAir = true;
 
-            weaveMag = 3;
-            weaveScale = 3;
+            weaveMag = 2;
+            weaveScale = 2;
 
             fragBullet = eriusBulletFrag;
             fragBullets = 1;
@@ -221,7 +221,7 @@ public class SnBullets {
         };
 
         //region missile
-        eriusStailerAimMissile = new BasicBulletType(5f, 15f){{
+        eriusStailerMissile = new BasicBulletType(5f, 15f){{
             sprite = "missile";
             width = 9;
             height = 13;
@@ -244,7 +244,7 @@ public class SnBullets {
             backColor = SnPal.eriusBulletBack;
         }};
 
-        anzarStailerAimMissile = new BasicBulletType(4f, 20f){{
+        anzarStailerMissile = new BasicBulletType(4f, 20f){{
             sprite = "missile";
             width = 9;
             height = 13;

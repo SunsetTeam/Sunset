@@ -58,12 +58,12 @@ public class SnTurrets{
                     SnItems.fors, SnBullets.forsBullet,
                     SnItems.erius, SnBullets.eriusBullet
             );
-            shoot = new ShootSpread(3, 4f);
+            shoot = new ShootSpread(3, 6f);
             size = 2;
             reload = 37f;
             range = 19 * Vars.tilesize;
             recoil = 1.4f;
-            inaccuracy = 1f;
+            inaccuracy = 0.2f;
             rotateSpeed = 6f;
             shootCone = 20f;
             shootSound = Sounds.shoot;
@@ -136,7 +136,7 @@ public class SnTurrets{
             requirements(Category.turret, with(SnItems.fors, 85, SnItems.erius, 80, SnItems.naturite, 50));
             ammo(
             SnItems.naturite, SnBullets.naturiteCircleBullet,
-            SnItems.anzar, SnBullets.anzarCircleBullet
+            SnItems.zarium, SnBullets.anzarCircleBullet
             );
             health = 780;
             size = 2;
@@ -194,8 +194,8 @@ public class SnTurrets{
         stailer = new ModItemTurret("stailer"){{
             requirements(Category.turret, with(SnItems.fors, 160f, SnItems.erius, 155f, SnItems.naturite, 30f));
             ammo(
-                    SnItems.erius, SnBullets.eriusStailerAimMissile,
-                    SnItems.anzar, SnBullets.anzarStailerAimMissile
+                    SnItems.erius, SnBullets.eriusStailerMissile,
+                    SnItems.zarium, SnBullets.anzarStailerMissile
             );
             size = 3;
             shoot = new ShootBarrel(){{
@@ -217,14 +217,14 @@ public class SnTurrets{
         }};
 
         fulmina = new SpeedUpPowerTurret("fulmina"){{
-            requirements(Category.turret, with(SnItems.fors, 150, SnItems.naturite, 100, SnItems.anzar, 75));
+            requirements(Category.turret, with(SnItems.fors, 150, SnItems.naturite, 100, SnItems.zarium, 75));
 
             shootType = new ArtilleryLightningBulletType(40f){{
                 hitShake = 3f;
                 lightning = 3;
                 lightningColor = SnPal.anzarBullet;
                 maxRange = 200;
-                hitEffect = SnFx.lbHit;
+                hitEffect = SnFx.fulminaLightningHit;
                 despawnEffect = Fx.none;
                 collidesAir = false;
                 collidesGround = true;
@@ -252,7 +252,7 @@ public class SnTurrets{
         }};
 
         trigger = new ModPowerTurret("trigger"){{
-            requirements(Category.turret, with(Items.silicon, 275, Items.titanium, 125, SnItems.enojie, 45));
+            requirements(Category.turret, with(Items.silicon, 275, Items.titanium, 125, SnItems.entirium, 45));
             size = 3;
             consumePower(9f);
             range = 340f;
@@ -284,7 +284,7 @@ public class SnTurrets{
             ammo(
             SnItems.nobium, SnBullets.nobiumAimMissile,
             SnItems.naturite, SnBullets.naturiteAimMissile,
-            SnItems.reneubite, SnBullets.renubiteAimMissile
+            SnItems.lenothium, SnBullets.renubiteAimMissile
             );
             health = 3000;
             size = 4;
@@ -321,7 +321,7 @@ public class SnTurrets{
         //endregion 5x5
         //region 6x6
         trident = new ModPowerTurret("trident"){{
-            requirements(Category.turret, with(Items.copper, 1000, Items.lead, 810, Items.silicon, 790, Items.plastanium, 780, Items.surgeAlloy, 670, SnItems.enojie, 600, SnItems.nobium, 400, SnItems.planatrium, 370));
+            requirements(Category.turret, with(Items.copper, 1000, Items.lead, 810, Items.silicon, 790, Items.plastanium, 780, Items.surgeAlloy, 670, SnItems.entirium, 600, SnItems.nobium, 400, SnItems.planatrium, 370));
             health = 5400;
             range = 247f;
             size = 6;
@@ -428,7 +428,7 @@ public class SnTurrets{
             buildVisibility = BuildVisibility.shown;
         }};
         art = new MissileSiloTurret("art"){{
-            requirements(Category.turret, with(Items.copper, 1400, Items.lead, 1300, Items.plastanium, 1010, Items.silicon, 980, Items.graphite, 975, Items.surgeAlloy, 800, SnItems.enojie, 750));
+            requirements(Category.turret, with(Items.copper, 1400, Items.lead, 1300, Items.plastanium, 1010, Items.silicon, 980, Items.graphite, 975, Items.surgeAlloy, 800, SnItems.entirium, 750));
             launchEffect = SnFx.missileLaunchMedium;
             size = 5;
             itemCapacity = 2400;

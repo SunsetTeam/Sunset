@@ -52,7 +52,7 @@ public class SnPower{
         }};
 
         chemicalReactor = new ConsumeGenerator("chemical-reactor"){{
-            requirements(Category.power, with(SnItems.fors, 200, SnItems.erius, 190, SnItems.naturite, 140, SnItems.anzar, 110));
+            requirements(Category.power, with(SnItems.fors, 200, SnItems.erius, 190, SnItems.naturite, 140, SnItems.zarium, 110));
             size = 3;
             powerProduction = 13f;
 
