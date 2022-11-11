@@ -40,7 +40,7 @@ public class SnCrafting{
             drawer = new DrawMulti(new DrawDefault(), new DrawFlame(Color.valueOf("f9eca3")));
 
             consumeItems(with(SnItems.fors, 1, SnItems.naturite, 1));
-            consumePower(2f);
+            consumePower(1.3f);
         }};
 
         crystallizer = new AttributeCrafter("crystallizer"){{
@@ -61,7 +61,7 @@ public class SnCrafting{
             squareSprite = false;
 
             consumeLiquid(SnLiquids.burheyna, 3f / 60f);
-            consumePower(2.6f);
+            consumePower(0.8f);
         }};
 
         nobiumCaster = new GenericCrafter("nobium-caster"){{
@@ -83,7 +83,7 @@ public class SnCrafting{
             ambientSoundVolume = 0.025f;
 
             consumeItems(with(SnItems.fors, 3, SnItems.nedirium, 2, SnItems.erius, 1));
-            consumePower(4.3f);
+            consumePower(3f);
         }};
 
         nobiumMagnetizer = new GenericCrafter("nobium-magnetizer"){{
@@ -101,7 +101,7 @@ public class SnCrafting{
             ambientSoundVolume = 0.025f;
 
             consumeItems(with(SnItems.fors, 6, SnItems.nedirium, 5, SnItems.erius, 3));
-            consumePower(7f);
+            consumePower(5.5f);
         }};
 
         collider = new GenericCrafter("collider"){{
@@ -122,7 +122,7 @@ public class SnCrafting{
 
             consumeItem(SnItems.nedirium, 1);
             consumeLiquids(new LiquidStack(SnGas.zeher, 6f / 60f), new LiquidStack(SnGas.arhelinium, 4f / 60f));
-            consumePower(4.6f);
+            consumePower(3.6f);
         }};
         bioSynthesizer = new MultiCrafter("bio-synthesizer"){{
             size = 3;
@@ -152,7 +152,7 @@ public class SnCrafting{
             updateEffect = SnFx.enojieBurn;
 
             consumeItems(with(SnItems.nobium, 1, SnItems.planatrium, 2, SnItems.erius, 3));
-            consumePower(10f);
+            consumePower(7f);
         }};
 
         zeriniumZavod = new GenericCrafter("zerinium-zavod"){{
@@ -167,7 +167,7 @@ public class SnCrafting{
             craftTime = 37f;
             consumeItems(with(SnItems.zarium, 2, SnItems.planatrium, 3));
             consumeLiquid(SnGas.zeher, 4f / 60f);
-            consumePower(8f);
+            consumePower(7f);
         }};
         //endregion standard
         //region missile
