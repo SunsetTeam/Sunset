@@ -265,6 +265,7 @@ public class SnTurrets{
 
         //endregion 3x3
         //region 4x4
+        /*
         flower = new FlowerTurret("flower"){{
             requirements(Category.turret, with(SnItems.fors, 95, Items.graphite, 85, Items.lead, 70, SnItems.planatrium, 35));
             size = 4;
@@ -279,6 +280,8 @@ public class SnTurrets{
                 Items.coal, SnBullets.flowerMode2Bullet
             );
         }};
+        
+         */
         aimus = new ModItemTurret("aimus"){{
             requirements(Category.turret, with(Items.copper, 700, SnItems.fors, 570, Items.plastanium, 475, SnItems.nobium, 470));
             ammo(

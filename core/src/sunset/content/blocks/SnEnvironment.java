@@ -25,8 +25,12 @@ public class SnEnvironment  {
 
     greenStone, jadestone,
 
+    crydeStone, cruilStone, criaredStone, infernoStone,
+
     //static walls
     greenStoneWall, jadestoneWall,
+
+    crydeStoneWall, cruilStoneWall, criaredStoneWall, infernoStoneWall,
 
     yelliteWall, sayangWall, darkYelliteWall,
     
@@ -118,8 +122,24 @@ public class SnEnvironment  {
 
         jadestone = new Floor("jadestone") {{
             variants = 3;
-            attributes.set(SnAttribute.burheyna, -0.1f);
         }};
+
+        crydeStone = new Floor("cryde-stone") {{
+            variants = 4;
+        }};
+
+        cruilStone = new Floor("cruil-stone") {{
+            variants = 4;
+        }};
+
+        criaredStone = new Floor("criared-stone") {{
+            variants = 4;
+        }};
+
+        infernoStone = new Floor("inferno-stone") {{
+            variants = 3;
+        }};
+
         //endregion floors
         //region static walls
 
@@ -129,6 +149,22 @@ public class SnEnvironment  {
 
         jadestoneWall = new StaticWall("jadestone-wall") {{
             variants = 2;
+        }};
+
+        crydeStoneWall = new StaticWall("cryde-stone-wall") {{
+            variants = 4;
+        }};
+
+        cruilStoneWall = new StaticWall("cruil-stone-wall") {{
+            variants = 4;
+        }};
+
+        criaredStoneWall = new StaticWall("criared-stone-wall") {{
+            variants = 4;
+        }};
+
+        infernoStoneWall = new StaticWall("inferno-stone-wall") {{
+            variants = 3;
         }};
 
         yelliteWall = new StaticWall("yellite-wall"){{
