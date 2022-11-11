@@ -152,15 +152,15 @@ public class SnEnvironment  {
         }};
 
         crydeStoneWall = new StaticWall("cryde-stone-wall") {{
-            variants = 4;
+            variants = 3;
         }};
 
         cruilStoneWall = new StaticWall("cruil-stone-wall") {{
-            variants = 4;
+            variants = 3;
         }};
 
         criaredStoneWall = new StaticWall("criared-stone-wall") {{
-            variants = 4;
+            variants = 3;
         }};
 
         infernoStoneWall = new StaticWall("inferno-stone-wall") {{
