@@ -9,11 +9,11 @@ buildscript{
     ext{
         // v7
         mindustryPath = "com.github.Anuken.Mindustry"
-        mindustryVersionFull = 'v140.3'
+        mindustryVersionFull = 'v136.1'
 //        mindustryVersion = mindustryVersionFull.substring(0, 10)
         mindustryVersion = mindustryVersionFull
         testMindustryBuild = mindustryVersion //regular versions are prefixed with 'v' (eg. 'v135'), BE versions has no prefix (eg. '22823')
-        arcVersion = "v140.3"
+        arcVersion = "v136.1"
 //        arcVersion = "916c5a77"
 
 
@@ -25,11 +25,11 @@ buildscript{
 
         parserVersion = '3.22.1'
 
-        aciVersion = "f2176ceff62"
+        aciVersion = "45ad8cd8ed9"
 
 //        gasVersion = "27b10c13f7e"
 
-        modCoreVersion = "2c9d40ffba0"
+        modCoreVersion = "60285a04edb"
 
 
         kotlinVersion = "1.6.0"
