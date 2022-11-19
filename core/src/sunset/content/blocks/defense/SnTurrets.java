@@ -41,6 +41,8 @@ public class SnTurrets{
     //5x5
     //6x6
     trident, radius,
+
+    testStickyBomb,
     //7x7
 
     //missile
@@ -214,6 +216,38 @@ public class SnTurrets{
             targetGround = false;
             targetAir = true;
 
+        }};
+
+        testStickyBomb = new ModItemTurret("sticky-turret"){{
+            size = 3;
+            shoot.shots = 1;
+            reload = 70f;
+            rotateSpeed = 2f;
+            recoil = 1f;
+            shake = 2f;
+            range = 25 * Vars.tilesize;
+            inaccuracy = 0;
+            targetGround = true;
+            targetAir = true;
+            requirements(Category.turret, with(SnItems.fors, 160f, SnItems.erius, 155f, SnItems.naturite, 30f));
+            ammo(
+                    SnItems.erius, new StickyBulletType(4f, 10){{
+                        width = 7f;
+                        height = 14f;
+                        lifetime = 70f;
+                        backColor = SnPal.eriusBulletBack;
+                        frontColor = SnPal.eriusBullet;
+                        shootEffect = SnFx.eriusShootSmall;
+                        despawnEffect = SnFx.eriusSmallExplosion;
+                        trailLength = 3;
+                        trailWidth = 1.7f;
+                        trailColor = SnPal.eriusBulletBack;
+                        maxRange = 140;
+                        collidesGround = true;
+                        collidesAir = true;
+                        detonatoinTime = 100;
+                    }}
+            );
         }};
 
         fulmina = new SpeedUpPowerTurret("fulmina"){{
