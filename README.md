@@ -19,7 +19,7 @@ Sounds: King-Silicon\
 Maps: Saigo no-nozomi
 
 # Contributors
-None
+uujuju(Pressure system and Brazillian translation)
 
 # PC Build Guide
 
