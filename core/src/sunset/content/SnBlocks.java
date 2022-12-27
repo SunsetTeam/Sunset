@@ -26,6 +26,7 @@ public class SnBlocks implements Runnable{
     SnDistribution::load,
     SnLiquidBlocks::load,
     SnGasBlocks::load,
+    SnPressureBlocks::load,
 
     SnPower::load,
     SnLasers::load,
