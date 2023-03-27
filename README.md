@@ -1,3 +1,5 @@
+[![Discord](https://img.shields.io/discord/825801593466388520.svg?logo=discord&logoColor=white&logoWidth=20&labelColor=7289DA&label=Discord&color=17cf48)](https://discord.com/invite/M5pGCYDsVn)
+
 # Sunset, is a one of the biggest mod for Mindustry.
 ![icon](https://user-images.githubusercontent.com/81778048/127994157-6685149f-2437-4d28-8122-96ac39880966.png)
 
