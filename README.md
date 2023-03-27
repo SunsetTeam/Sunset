@@ -52,6 +52,3 @@ gradlew deploy  | ./gradlew deploy | ./gradlew deploy
 
 * 5.When compilation is end, your build will be in "build/libs"
 Download
-
-
-
