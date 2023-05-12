@@ -25,7 +25,6 @@ public class CopterUnitType extends SnUnitType implements ImageGenerator{
     public final Seq<Rotor> rotors = new Seq<>();
     public float unitFallRotateSpeed = 6f;
 
-
     public CopterUnitType(String name){
         super(name);
 
