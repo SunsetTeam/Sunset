@@ -1,8 +1,8 @@
 [![Discord](https://img.shields.io/discord/825801593466388520.svg?logo=discord&logoColor=white&logoWidth=20&labelColor=7289DA&label=Discord&color=17cf48)](https://discord.com/invite/M5pGCYDsVn)
-
+# The mod has been abandoned and will no longer be updated. But you can play in a more promising project
+[![Download](https://img.shields.io/github/v/release/HPL-Team/Project-HPL?color=6aa84f&include_prereleases&label=Project-HPL&logo=github&logoColor=white&style=for-the-badge)](https://github.com/HPL-Team/Project-HPL)
 # Sunset, is a one of the biggest mod for Mindustry.
 ![icon](https://user-images.githubusercontent.com/81778048/127994157-6685149f-2437-4d28-8122-96ac39880966.png)
-
 ## Planets
 ### Azaria
 First planet in Sunset. It has a lot of content units, turrets and more.
